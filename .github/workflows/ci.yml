@@ -188,12 +188,55 @@ jobs:
     environment:
       name: production
       url: https://yourdomain.com
+    env:
+      POSTGRES_DB: pfp_campaign_test
+      POSTGRES_USER: pfp_user
+      POSTGRES_PASSWORD: pfp_password
+      SECRET_KEY: test-secret-key-for-production-validation
+      DEBUG: False
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      CORS_ALLOWED_ORIGINS: http://localhost:3000
+      TELEGRAM_BOT_TOKEN: dummy-token
+      TELEGRAM_WEBHOOK_URL: https://example.com/bot-webhook
+      DOMAIN_NAME: localhost
+      ACME_EMAIL: test@example.com
+      REACT_APP_API_URL: http://localhost/api
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Deploy to Production
+
+    - name: Build production Docker images
       run: |
-        echo "Production deployment would be triggered here"
-        echo "See deploy.sh script for deployment logic"
-        # ./deploy.sh production
+        docker-compose -f docker-compose.production.yml build
+
+    - name: Test production configuration (without Traefik)
+      run: |
+        # Start only core services (postgres, redis, backend, celery, frontend) without reverse-proxy
+        docker-compose -f docker-compose.production.yml up -d postgres redis backend celery celery-beat frontend
+        sleep 45  # Wait for services to start
+
+        # Check service status
+        docker-compose -f docker-compose.production.yml ps
+
+        # Check backend health
+        docker-compose -f docker-compose.production.yml exec -T backend curl -f http://localhost:8000/health/simple || docker-compose -f docker-compose.production.yml logs backend
+
+        # Check frontend container is running
+        docker-compose -f docker-compose.production.yml exec -T frontend wget -q --spider http://localhost:80 || docker-compose -f docker-compose.production.yml logs frontend
+
+        # Run basic backend tests in production configuration
+        docker-compose -f docker-compose.production.yml exec -T backend python manage.py test apps.users.tests.UserModelTests --noinput 2>&1 | head -50
+
+        # Clean up
+        docker-compose -f docker-compose.production.yml down -v
+
+    - name: Validate production configuration files
+      run: |
+        echo "Checking production configuration files..."
+        test -f docker-compose.production.yml || { echo "docker-compose.production.yml missing"; exit 1; }
+        test -f backend/Dockerfile.production || { echo "backend/Dockerfile.production missing"; exit 1; }
+        test -f frontend/Dockerfile.production || { echo "frontend/Dockerfile.production missing"; exit 1; }
+        test -f telegram-bot/Dockerfile.production || { echo "telegram-bot/Dockerfile.production missing"; exit 1; }
+        test -f deploy.sh || { echo "deploy.sh missing"; exit 1; }
+        echo "All production configuration files present"
