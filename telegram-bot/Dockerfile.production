@@ -9,11 +9,12 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
-COPY requirements.txt .
+COPY telegram-bot/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy bot source code
-COPY . .
+# Copy bot source code and backend (needed for Django config module)
+COPY telegram-bot/ .
+COPY backend/ ./backend/
 
 # Final stage
 FROM python:3.11-slim

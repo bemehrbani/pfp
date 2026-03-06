@@ -59,6 +59,11 @@ TELEGRAM_USE_WEBHOOK = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Logging to file in production
-LOGGING['handlers']['file']['level'] = 'INFO'
-LOGGING['loggers']['django']['handlers'] = ['file']
-LOGGING['loggers']['apps']['handlers'] = ['file']
+LOGGING['handlers']['file'] = {
+    'class': 'logging.FileHandler',
+    'filename': os.path.join(BASE_DIR, 'logs', 'django.log'),
+    'formatter': 'simple',
+    'level': 'INFO',
+}
+LOGGING['loggers']['django']['handlers'] = ['file', 'console']
+LOGGING['loggers']['apps']['handlers'] = ['file', 'console']

@@ -121,8 +121,8 @@ services:
 
   telegram-bot:
     build:
-      context: ./telegram-bot
-      dockerfile: Dockerfile.production
+      context: .
+      dockerfile: telegram-bot/Dockerfile.production
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER:-pfp_user}:${POSTGRES_PASSWORD:-pfp_password}@postgres:5432/${POSTGRES_DB:-pfp_campaign}
       REDIS_URL: redis://redis:6379/0
