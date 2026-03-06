@@ -1,0 +1,32 @@
+##
+# PFP Campaign Manager — Stealth Mode (IP-only, no domain/SSL/Traefik)
+# Usage: docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml up -d --build
+##
+
+services:
+  backend:
+    ports:
+      - "8001:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.stealth
+      SECURE_SSL_REDIRECT: "False"
+    labels: []
+
+  celery:
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.stealth
+
+  celery-beat:
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.stealth
+
+  telegram-bot:
+    command: ["python", "bot.py", "--mode", "polling"]
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.stealth
+    labels: []
+
+  frontend:
+    ports:
+      - "8080:80"
+    labels: []

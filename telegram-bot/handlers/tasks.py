@@ -632,7 +632,7 @@ task_proof_conversation = ConversationHandler(
         AWAITING_TASK_PROOF: [
             MessageHandler(filters.TEXT & ~filters.COMMAND, receive_task_proof),
             MessageHandler(filters.PHOTO, receive_task_proof),
-            MessageHandler(filters.DOCUMENT, receive_task_proof),
+            MessageHandler(filters.Document.ALL, receive_task_proof),
         ],
         AWAITING_CONFIRMATION: [
             CallbackQueryHandler(proof_callback_handler, pattern='^proof_')

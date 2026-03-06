@@ -33,15 +33,10 @@ class PFPCampaignBot:
             raise ValueError("Telegram bot token not provided")
 
         # Initialize bot components
-        self.updater = None
-        self.dispatcher = None
-        self.job_queue = None
+        self.application = None
 
         # Setup Django integration
         self._setup_django()
-
-        # Initialize handlers
-        self._init_handlers()
 
     def _setup_django(self):
         """Set up Django environment for database access."""
@@ -52,6 +47,16 @@ class PFPCampaignBot:
             # Add project root to Python path so backend can be imported
             if project_root not in sys.path:
                 sys.path.insert(0, project_root)
+
+            # In Docker, backend is mounted at /app/backend — add it to path
+            docker_backend_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'backend')
+            if os.path.isdir(docker_backend_path) and docker_backend_path not in sys.path:
+                sys.path.insert(0, docker_backend_path)
+
+            # Also add <project_root>/backend for local development
+            local_backend_path = os.path.join(project_root, 'backend')
+            if os.path.isdir(local_backend_path) and local_backend_path not in sys.path:
+                sys.path.insert(0, local_backend_path)
 
             # Determine settings module based on environment
             settings_module = os.getenv('DJANGO_SETTINGS_MODULE', 'config.settings.development')
@@ -68,8 +73,8 @@ class PFPCampaignBot:
 
     def _init_handlers(self):
         """Initialize bot handlers."""
-        if not self.dispatcher:
-            logger.warning("Dispatcher not initialized. Handlers will be registered later.")
+        if not self.application:
+            logger.warning("Application not initialized. Handlers will be registered later.")
             return
 
         try:
@@ -95,37 +100,37 @@ class PFPCampaignBot:
             )
 
             # Register command handlers
-            self.dispatcher.add_handler(CommandHandler("start", start_command))
-            self.dispatcher.add_handler(CommandHandler("help", help_command))
-            self.dispatcher.add_handler(CommandHandler("campaigns", campaigns_command))
-            self.dispatcher.add_handler(CommandHandler("joincampaign", joincampaign_command))
-            self.dispatcher.add_handler(CommandHandler("tasks", tasks_command))
-            self.dispatcher.add_handler(CommandHandler("mytasks", mytasks_command))
-            self.dispatcher.add_handler(CommandHandler("claimtask", claimtask_command))
-            self.dispatcher.add_handler(CommandHandler("profile", profile_command))
-            self.dispatcher.add_handler(CommandHandler("updateprofile", updateprofile_command))
-            self.dispatcher.add_handler(CommandHandler("leaderboard", leaderboard_command))
+            self.application.add_handler(CommandHandler("start", start_command))
+            self.application.add_handler(CommandHandler("help", help_command))
+            self.application.add_handler(CommandHandler("campaigns", campaigns_command))
+            self.application.add_handler(CommandHandler("joincampaign", joincampaign_command))
+            self.application.add_handler(CommandHandler("tasks", tasks_command))
+            self.application.add_handler(CommandHandler("mytasks", mytasks_command))
+            self.application.add_handler(CommandHandler("claimtask", claimtask_command))
+            self.application.add_handler(CommandHandler("profile", profile_command))
+            self.application.add_handler(CommandHandler("updateprofile", updateprofile_command))
+            self.application.add_handler(CommandHandler("leaderboard", leaderboard_command))
 
             # Register callback query handlers
             for handler in campaign_handlers:
-                self.dispatcher.add_handler(handler)
+                self.application.add_handler(handler)
             for handler in task_handlers:
-                self.dispatcher.add_handler(handler)
+                self.application.add_handler(handler)
             for handler in leaderboard_handlers:
-                self.dispatcher.add_handler(handler)
+                self.application.add_handler(handler)
 
             # Register conversation handlers
-            self.dispatcher.add_handler(task_proof_conversation)
-            self.dispatcher.add_handler(registration_conversation)
+            self.application.add_handler(task_proof_conversation)
+            self.application.add_handler(registration_conversation)
 
             # Register message handlers
-            self.dispatcher.add_handler(text_message_handler)
-            self.dispatcher.add_handler(unknown_command_handler)
+            self.application.add_handler(text_message_handler)
+            self.application.add_handler(unknown_command_handler)
 
             # Add error handler
-            self.dispatcher.add_error_handler(self._error_handler)
+            self.application.add_error_handler(self._error_handler)
 
-            logger.info(f"Registered {len(self.dispatcher.handlers)} handlers successfully")
+            logger.info("Handlers registered successfully")
 
         except ImportError as e:
             logger.error(f"Failed to import handlers: {e}")
@@ -134,14 +139,14 @@ class PFPCampaignBot:
             logger.error(f"Failed to register handlers: {e}")
             raise
 
-    def _error_handler(self, update: object, context):
+    async def _error_handler(self, update: object, context):
         """Handle errors in bot handlers."""
         logger.error(f"Update {update} caused error {context.error}", exc_info=context.error)
 
         # Try to send error message to user
         try:
             if update and hasattr(update, 'effective_chat'):
-                context.bot.send_message(
+                await context.bot.send_message(
                     chat_id=update.effective_chat.id,
                     text="❌ *An error occurred.*\n\n"
                          "Our team has been notified. Please try again later.",
@@ -152,44 +157,36 @@ class PFPCampaignBot:
 
     def start_polling(self):
         """Start the bot in polling mode (for development)."""
-        from telegram.ext import Updater, CommandHandler
+        from telegram.ext import Application
 
-        self.updater = Updater(self.token)
-        self.dispatcher = self.updater.dispatcher
-        self.job_queue = self.updater.job_queue
+        self.application = Application.builder().token(self.token).build()
 
         # Initialize handlers
         self._init_handlers()
 
         logger.info("Starting bot in polling mode...")
-        self.updater.start_polling()
-        self.updater.idle()
+        self.application.run_polling()
 
     def start_webhook(self, webhook_url: str, port: int = 8443):
         """Start the bot in webhook mode (for production)."""
-        from telegram.ext import Updater, CommandHandler
+        from telegram.ext import Application
 
-        self.updater = Updater(self.token)
-        self.dispatcher = self.updater.dispatcher
-        self.job_queue = self.updater.job_queue
+        self.application = Application.builder().token(self.token).build()
 
         # Initialize handlers
         self._init_handlers()
 
-        # Set webhook
-        self.updater.start_webhook(
+        logger.info(f"Starting bot in webhook mode on port {port}...")
+        self.application.run_webhook(
             listen="0.0.0.0",
             port=port,
             url_path=self.token,
             webhook_url=f"{webhook_url}/{self.token}"
         )
-        logger.info(f"Webhook set to {webhook_url}/{self.token}")
-        self.updater.idle()
 
     def stop(self):
         """Stop the bot gracefully."""
-        if self.updater:
-            self.updater.stop()
+        if self.application:
             logger.info("Bot stopped")
 
 

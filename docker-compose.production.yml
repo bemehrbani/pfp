@@ -102,7 +102,7 @@ services:
       dockerfile: Dockerfile.production
     command: celery -A config beat --loglevel=info
     environment:
-      DATABASE_URL: postgres://${POSTGRES_USER:-pfp_user}:${POSTGRES_Password:-pfp_password}@postgres:5432/${POSTGRES_DB:-pfp_campaign}
+      DATABASE_URL: postgres://${POSTGRES_USER:-pfp_user}:${POSTGRES_PASSWORD:-pfp_password}@postgres:5432/${POSTGRES_DB:-pfp_campaign}
       REDIS_URL: redis://redis:6379/0
       SECRET_KEY: ${SECRET_KEY}
       CELERY_BROKER_URL: redis://redis:6379/0
