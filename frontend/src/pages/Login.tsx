@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import api from '../utils/axiosConfig';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -11,7 +11,7 @@ const LoginPage: React.FC = () => {
 
   const loginMutation = useMutation({
     mutationFn: async (credentials: { username: string; password: string }) => {
-      const response = await axios.post('/auth/login/', credentials);
+      const response = await api.post('/api/auth/login/', credentials);
       return response.data;
     },
     onSuccess: (data) => {

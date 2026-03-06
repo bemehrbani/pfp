@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with base URL
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8000',
+  baseURL: process.env.REACT_APP_API_URL || '',
 });
 
 // Request interceptor to add auth token
@@ -40,7 +40,7 @@ api.interceptors.response.use(
         }
 
         // Try to refresh the token
-        const response = await axios.post('/auth/refresh/', {
+        const response = await axios.post('/api/auth/token/refresh/', {
           refresh: refreshToken,
         });
 
