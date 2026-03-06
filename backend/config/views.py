@@ -6,6 +6,7 @@ from django.db import connection
 from redis import Redis
 from django.conf import settings
 import logging
+import os
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 
@@ -38,7 +39,8 @@ def health_check(request):
 
     # Redis check
     try:
-        redis_client = Redis.from_url(settings.REDIS_URL)
+        redis_url = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+        redis_client = Redis.from_url(redis_url)
         redis_client.ping()
         health_status['services']['redis'] = 'healthy'
     except Exception as e:
@@ -48,11 +50,11 @@ def health_check(request):
 
     # Celery check (basic - just check if we can connect to broker)
     try:
-        # Simple check - try to import Celery and get app
         from config.celery import app as celery_app
-        # Try to get the result backend connection
-        celery_app.backend.ensure_connection()
-        health_status['services']['celery'] = 'healthy'
+        # Ping active workers (returns None if no workers respond)
+        inspector = celery_app.control.inspect(timeout=2.0)
+        ping_result = inspector.ping()
+        health_status['services']['celery'] = 'healthy' if ping_result else 'no_workers'
     except Exception as e:
         logger.error(f"Celery health check failed: {e}")
         health_status['services']['celery'] = 'unhealthy'
