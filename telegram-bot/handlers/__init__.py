@@ -12,6 +12,7 @@ from .tasks import (
 )
 from .profile import profile_command, updateprofile_command
 from .leaderboard import leaderboard_command, leaderboard_callback_handler, leaderboard_handlers
+from .storms import storms_command, storminfo_command, storm_callback_handler, storm_handlers
 from .registration import (
     handle_text_message, handle_unknown_command,
     cancel_registration, registration_conversation,
@@ -31,11 +32,14 @@ __all__ = [
     'profile_command',
     'updateprofile_command',
     'leaderboard_command',
+    'storms_command',
+    'storminfo_command',
 
     # Callback handlers
     'campaign_callback_handler',
     'task_callback_handler',
     'leaderboard_callback_handler',
+    'storm_callback_handler',
 
     # Conversation handlers
     'task_proof_conversation',
@@ -50,6 +54,7 @@ __all__ = [
     'campaign_handlers',
     'task_handlers',
     'leaderboard_handlers',
+    'storm_handlers',
     'text_message_handler',
     'unknown_command_handler',
 ]

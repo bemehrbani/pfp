@@ -3,7 +3,7 @@ Serializers for Campaigns app.
 """
 from rest_framework import serializers
 from django.utils.translation import gettext_lazy as _
-from .models import Campaign, CampaignVolunteer, CampaignUpdate
+from .models import Campaign, CampaignVolunteer, CampaignUpdate, TwitterStorm, StormParticipant
 from apps.users.serializers import UserSerializer
 
 
@@ -106,3 +106,55 @@ class TwitterStormScheduleSerializer(serializers.Serializer):
         child=serializers.IntegerField(),
         required=False
     )
+
+
+class StormParticipantSerializer(serializers.ModelSerializer):
+    """Serializer for StormParticipant model."""
+    volunteer = UserSerializer(read_only=True)
+
+    class Meta:
+        model = StormParticipant
+        fields = (
+            'id', 'storm', 'volunteer', 'status',
+            'tweet_text', 'tweet_url', 'posted_at', 'created_at'
+        )
+        read_only_fields = ('id', 'storm', 'volunteer', 'created_at')
+
+
+class TwitterStormSerializer(serializers.ModelSerializer):
+    """Serializer for TwitterStorm model (read)."""
+    created_by = UserSerializer(read_only=True)
+    participants_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = TwitterStorm
+        fields = (
+            'id', 'campaign', 'created_by', 'title', 'description',
+            'scheduled_at', 'duration_minutes', 'status',
+            'tweet_templates', 'hashtags', 'mentions',
+            'notify_1h', 'notify_15m', 'notify_5m',
+            'participants_notified', 'tweets_posted',
+            'participants_count',
+            'activated_at', 'completed_at', 'created_at', 'updated_at'
+        )
+        read_only_fields = (
+            'id', 'created_by', 'status',
+            'participants_notified', 'tweets_posted',
+            'activated_at', 'completed_at', 'created_at', 'updated_at'
+        )
+
+    def get_participants_count(self, obj):
+        """Count storm participants."""
+        return obj.participants.count()
+
+
+class TwitterStormCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating/scheduling a TwitterStorm."""
+
+    class Meta:
+        model = TwitterStorm
+        fields = (
+            'title', 'description', 'scheduled_at', 'duration_minutes',
+            'tweet_templates', 'hashtags', 'mentions',
+            'notify_1h', 'notify_15m', 'notify_5m'
+        )

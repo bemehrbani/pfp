@@ -3,7 +3,7 @@ Admin configuration for Campaigns app.
 """
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from .models import Campaign, CampaignVolunteer, CampaignUpdate
+from .models import Campaign, CampaignVolunteer, CampaignUpdate, TwitterStorm, StormParticipant
 
 
 @admin.register(Campaign)
@@ -103,3 +103,63 @@ class CampaignUpdateAdmin(admin.ModelAdmin):
         if not obj.pk:
             obj.created_by = request.user
         super().save_model(request, obj, form, change)
+
+
+class StormParticipantInline(admin.TabularInline):
+    """Inline for viewing storm participants."""
+    model = StormParticipant
+    extra = 0
+    readonly_fields = ('volunteer', 'status', 'tweet_url', 'posted_at', 'created_at')
+
+
+@admin.register(TwitterStorm)
+class TwitterStormAdmin(admin.ModelAdmin):
+    """Admin interface for TwitterStorm model."""
+
+    list_display = (
+        'title', 'campaign', 'status', 'scheduled_at',
+        'participants_notified', 'tweets_posted', 'created_by'
+    )
+    list_filter = ('status', 'campaign', 'scheduled_at')
+    search_fields = ('title', 'description', 'campaign__name')
+    readonly_fields = (
+        'participants_notified', 'tweets_posted', 'celery_task_ids',
+        'activated_at', 'completed_at', 'created_at', 'updated_at'
+    )
+    inlines = [StormParticipantInline]
+
+    fieldsets = (
+        (None, {
+            'fields': ('campaign', 'title', 'description', 'created_by')
+        }),
+        (_('Schedule'), {
+            'fields': ('scheduled_at', 'duration_minutes', 'status')
+        }),
+        (_('Content'), {
+            'fields': ('tweet_templates', 'hashtags', 'mentions')
+        }),
+        (_('Notifications'), {
+            'fields': ('notify_1h', 'notify_15m', 'notify_5m')
+        }),
+        (_('Statistics'), {
+            'fields': (
+                'participants_notified', 'tweets_posted',
+                'celery_task_ids'
+            )
+        }),
+        (_('Timestamps'), {
+            'fields': ('activated_at', 'completed_at', 'created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def save_model(self, request, obj, form, change):
+        """Set created_by and schedule notifications on creation."""
+        if not obj.pk:
+            obj.created_by = request.user
+        super().save_model(request, obj, form, change)
+
+        # Auto-schedule notifications when storm is saved with scheduled status
+        if obj.status == TwitterStorm.Status.SCHEDULED:
+            from .tasks import schedule_storm_notifications
+            schedule_storm_notifications.delay(obj.id)

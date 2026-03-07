@@ -298,3 +298,189 @@ class CampaignUpdate(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class TwitterStorm(models.Model):
+    """
+    A scheduled Twitter Storm event within a campaign.
+
+    Represents a coordinated moment where all volunteers tweet simultaneously
+    to trend a hashtag. The Celery countdown pipeline sends T-60m, T-15m,
+    T-5m notifications and the T-zero "POST NOW" blast.
+    """
+    class Status(models.TextChoices):
+        DRAFT = 'draft', _('Draft')
+        SCHEDULED = 'scheduled', _('Scheduled')
+        COUNTDOWN = 'countdown', _('Countdown Active')
+        ACTIVE = 'active', _('Storm Active')
+        COMPLETED = 'completed', _('Completed')
+        CANCELLED = 'cancelled', _('Cancelled')
+
+    # Relationship
+    campaign = models.ForeignKey(
+        Campaign,
+        on_delete=models.CASCADE,
+        related_name='storms',
+        help_text=_('Campaign this storm belongs to')
+    )
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='created_storms',
+        help_text=_('Manager who scheduled this storm')
+    )
+
+    # Storm details
+    title = models.CharField(
+        max_length=200,
+        help_text=_('Storm title, e.g. "Operation Ceasefire Storm #1"')
+    )
+    description = models.TextField(
+        blank=True,
+        help_text=_('Description and context for volunteers')
+    )
+    scheduled_at = models.DateTimeField(
+        help_text=_('The T-zero moment — when everyone posts')
+    )
+    duration_minutes = models.IntegerField(
+        default=30,
+        help_text=_('Storm duration in minutes')
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.DRAFT,
+        help_text=_('Current storm status')
+    )
+
+    # Content templates — volunteers pick one or get one assigned
+    tweet_templates = models.JSONField(
+        default=list,
+        help_text=_('List of tweet template strings for volunteers')
+    )
+    hashtags = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text=_('Hashtags for this storm (overrides campaign defaults if set)')
+    )
+    mentions = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text=_('Target accounts to mention')
+    )
+
+    # Countdown notification settings
+    notify_1h = models.BooleanField(
+        default=True,
+        help_text=_('Send notification 1 hour before')
+    )
+    notify_15m = models.BooleanField(
+        default=True,
+        help_text=_('Send notification 15 minutes before')
+    )
+    notify_5m = models.BooleanField(
+        default=True,
+        help_text=_('Send notification 5 minutes before')
+    )
+
+    # Celery task IDs (to allow cancellation)
+    celery_task_ids = models.JSONField(
+        default=list,
+        blank=True,
+        help_text=_('Stored Celery task IDs for countdown notifications')
+    )
+
+    # Statistics (denormalized)
+    participants_notified = models.IntegerField(
+        default=0,
+        help_text=_('Number of volunteers notified')
+    )
+    tweets_posted = models.IntegerField(
+        default=0,
+        help_text=_('Number of confirmed tweets posted')
+    )
+
+    # Timestamps
+    activated_at = models.DateTimeField(null=True, blank=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _('Twitter Storm')
+        verbose_name_plural = _('Twitter Storms')
+        ordering = ['-scheduled_at']
+        indexes = [
+            models.Index(fields=['status']),
+            models.Index(fields=['scheduled_at']),
+            models.Index(fields=['campaign', 'status']),
+        ]
+
+    def __str__(self):
+        return f'{self.title} ({self.scheduled_at:%Y-%m-%d %H:%M} UTC)'
+
+    def get_hashtags(self):
+        """Return storm hashtags, falling back to campaign hashtags."""
+        return self.hashtags or self.campaign.twitter_hashtags
+
+    def get_mentions(self):
+        """Return storm mentions, falling back to campaign accounts."""
+        return self.mentions or self.campaign.twitter_accounts
+
+    def get_volunteer_chat_ids(self):
+        """Get Telegram chat IDs of all campaign volunteers."""
+        from apps.telegram.models import TelegramSession
+        volunteer_ids = CampaignVolunteer.objects.filter(
+            campaign=self.campaign,
+            status=CampaignVolunteer.Status.ACTIVE
+        ).values_list('volunteer_id', flat=True)
+        return list(
+            TelegramSession.objects.filter(
+                user_id__in=volunteer_ids
+            ).values_list('telegram_chat_id', flat=True)
+        )
+
+
+class StormParticipant(models.Model):
+    """
+    Tracks volunteer participation in a specific storm.
+    """
+    class Status(models.TextChoices):
+        NOTIFIED = 'notified', _('Notified')
+        READY = 'ready', _('Ready')
+        POSTED = 'posted', _('Posted')
+        VERIFIED = 'verified', _('Verified')
+
+    storm = models.ForeignKey(
+        TwitterStorm,
+        on_delete=models.CASCADE,
+        related_name='participants'
+    )
+    volunteer = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='storm_participations'
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.NOTIFIED
+    )
+    tweet_text = models.TextField(
+        blank=True,
+        help_text=_('The actual tweet text posted')
+    )
+    tweet_url = models.URLField(
+        blank=True,
+        help_text=_('URL of the posted tweet')
+    )
+    posted_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Storm Participant')
+        verbose_name_plural = _('Storm Participants')
+        unique_together = [('storm', 'volunteer')]
+
+    def __str__(self):
+        return f'{self.volunteer.username} in {self.storm.title}'
