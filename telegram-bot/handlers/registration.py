@@ -17,12 +17,48 @@ logger = logging.getLogger(__name__)
 async def handle_text_message(update: Update, context: CallbackContext):
     """
     Handle general text messages (non-commands).
-    Mainly used for registration flow.
+    Routes keyboard button taps and handles registration flow.
     """
     user = update.effective_user
     chat_id = update.effective_chat.id
+    text = update.message.text.strip()
 
-    logger.info(f"Text message from user {user.id} (@{user.username})")
+    logger.info(f"Text message from user {user.id} (@{user.username}): {text[:50]}")
+
+    # Route ReplyKeyboardMarkup button taps to command handlers
+    BUTTON_ROUTES = {
+        "📋 Browse Campaigns": "_route_campaigns",
+        "🎯 Available Tasks": "_route_tasks",
+        "📊 My Progress": "_route_profile",
+        "🏆 Leaderboard": "_route_leaderboard",
+        "ℹ️ Help": "_route_help",
+        "👤 Profile": "_route_profile",
+    }
+
+    if text in BUTTON_ROUTES:
+        route = BUTTON_ROUTES[text]
+        try:
+            if route == "_route_campaigns":
+                from handlers.campaigns import campaigns_command
+                return await campaigns_command(update, context)
+            elif route == "_route_tasks":
+                from handlers.tasks import tasks_command
+                return await tasks_command(update, context)
+            elif route == "_route_profile":
+                from handlers.profile import profile_command
+                return await profile_command(update, context)
+            elif route == "_route_leaderboard":
+                from handlers.leaderboard import leaderboard_command
+                return await leaderboard_command(update, context)
+            elif route == "_route_help":
+                from handlers.start import help_command
+                return await help_command(update, context)
+        except Exception as exc:
+            logger.error(f"Error routing button '{text}': {exc}")
+            await update.message.reply_text(
+                "❌ Something went wrong. Please try using the command directly.",
+            )
+            return
 
     # Get or create session
     session, created = await state_manager.get_or_create_session(update, context)
