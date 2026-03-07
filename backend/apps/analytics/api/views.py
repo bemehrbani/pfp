@@ -6,6 +6,8 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.utils import timezone
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from django.db.models import Count, Sum, Avg, Q
 from django.utils.translation import gettext_lazy as _
 from ..models import ActivityLog, AnalyticsSnapshot
@@ -18,6 +20,10 @@ class DashboardStatsView(APIView):
     """Get dashboard statistics for the current user."""
     permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="Get dashboard statistics for the current user",
+        responses={200: openapi.Response('Dashboard statistics including campaigns, tasks, points, and recent activity')}
+    )
     def get(self, request):
         user = request.user
         now = timezone.now()
@@ -116,6 +122,13 @@ class CampaignAnalyticsView(APIView):
     """Get analytics for a specific campaign."""
     permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="Get analytics for a specific campaign",
+        responses={
+            200: openapi.Response('Campaign analytics data'),
+            404: openapi.Response('Campaign not found'),
+        }
+    )
     def get(self, request, campaign_id):
         try:
             campaign = Campaign.objects.get(pk=campaign_id)
@@ -231,6 +244,10 @@ class SystemAnalyticsView(APIView):
     """Get system-wide analytics (admin only)."""
     permission_classes = [permissions.IsAdminUser]
 
+    @swagger_auto_schema(
+        operation_description="Get system-wide analytics (admin only)",
+        responses={200: openapi.Response('System analytics data including users, campaigns, tasks, and daily activity')}
+    )
     def get(self, request):
         # Time ranges
         now = timezone.now()

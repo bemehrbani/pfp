@@ -9,10 +9,17 @@ import logging
 import os
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 logger = logging.getLogger(__name__)
 
 
+@swagger_auto_schema(
+    method='get',
+    operation_description="Comprehensive health check — validates database, Redis, and Celery connectivity",
+    responses={200: openapi.Response('All systems healthy'), 503: openapi.Response('One or more systems unhealthy')}
+)
 @api_view(['GET'])
 @authentication_classes([])
 @permission_classes([])
@@ -73,6 +80,11 @@ def health_check(request):
     return Response(health_status)
 
 
+@swagger_auto_schema(
+    method='get',
+    operation_description="Simple health check for load balancers — returns 200 with minimal payload",
+    responses={200: openapi.Response('Service is alive')}
+)
 @api_view(['GET'])
 @authentication_classes([])
 @permission_classes([])

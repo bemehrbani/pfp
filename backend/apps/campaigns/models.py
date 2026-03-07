@@ -179,14 +179,15 @@ class Campaign(models.Model):
             super().save(*args, **kwargs)
             return
 
+        is_new = self.pk is None
+
         # Save first to get ID for many-to-many relationships
         super().save(*args, **kwargs)
 
-        # Update statistics after saving
-        self.update_statistics()
-
-        # Save statistics fields only
-        super().save(update_fields=['current_members', 'completed_activities', 'completed_twitter_posts'])
+        # Only update statistics on existing campaigns (not initial creation)
+        if not is_new:
+            self.update_statistics()
+            super().save(update_fields=['current_members', 'completed_activities', 'completed_twitter_posts'])
 
     def update_statistics(self):
         """Update denormalized statistics."""

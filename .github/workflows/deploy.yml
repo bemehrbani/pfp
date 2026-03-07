@@ -1,0 +1,94 @@
+name: Deploy to Production
+
+on:
+  workflow_run:
+    workflows: ["CI/CD Pipeline"]
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force deploy even if CI did not run'
+        required: false
+        default: 'false'
+
+jobs:
+  deploy:
+    name: Deploy to SkinScope Server
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
+    environment:
+      name: production
+      url: http://65.109.198.200:8080
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          SSH_CMD="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}"
+
+          echo "=== Capturing current state for rollback ==="
+          PREV_COMMIT=$($SSH_CMD "cd /opt/pfp && git rev-parse HEAD 2>/dev/null || echo 'none'")
+          echo "Previous commit: $PREV_COMMIT"
+
+          echo "=== Pulling latest code ==="
+          $SSH_CMD "cd /opt/pfp && git fetch origin main && git reset --hard origin/main"
+
+          echo "=== Rebuilding and restarting services ==="
+          $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml up -d --build --remove-orphans"
+
+          echo "=== Waiting for services to stabilize ==="
+          sleep 30
+
+          echo "=== Running migrations ==="
+          $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml exec -T backend python manage.py migrate --noinput"
+
+          echo "=== Collecting static files ==="
+          $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml exec -T backend python manage.py collectstatic --noinput"
+
+          echo "=== Health check ==="
+          HEALTH=$($SSH_CMD "curl -sf --max-time 10 http://localhost:8001/health/simple/ || echo 'FAILED'")
+          if [ "$HEALTH" = "FAILED" ]; then
+            echo "❌ Health check failed!"
+            if [ "$PREV_COMMIT" != "none" ]; then
+              echo "=== Rolling back to $PREV_COMMIT ==="
+              $SSH_CMD "cd /opt/pfp && git reset --hard $PREV_COMMIT && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml up -d --build"
+            fi
+            exit 1
+          fi
+
+          echo "✅ Deployment successful!"
+
+      - name: Verify deployment
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          SSH_CMD="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}"
+
+          echo "=== Service status ==="
+          $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml ps --format 'table {{.Name}}\t{{.Status}}'"
+
+          echo "=== Frontend check ==="
+          $SSH_CMD "curl -sf --max-time 5 http://localhost:8080 > /dev/null && echo '✅ Frontend OK' || echo '⚠️ Frontend unreachable'"
+
+          echo "=== Backend API check ==="
+          $SSH_CMD "curl -sf --max-time 5 http://localhost:8001/health/simple/ && echo ' ✅ Backend OK' || echo '⚠️ Backend unreachable'"
+
+          echo "=== Current commit ==="
+          $SSH_CMD "cd /opt/pfp && git log --oneline -1"

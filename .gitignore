@@ -163,3 +163,6 @@ frontend/.nuxt/
 
 # Windows
 Thumbs.db
+
+# Deploy keys (never commit private keys)
+infrastructure/deploy_key

@@ -9,12 +9,19 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from rest_framework import permissions, status
+from rest_framework import permissions, status, serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
-import telegram
-from telegram import Update
-from telegram.ext import Application, ContextTypes
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
+try:
+    import telegram
+    from telegram import Update
+    from telegram.ext import Application, ContextTypes
+    HAS_TELEGRAM = True
+except ImportError:
+    HAS_TELEGRAM = False
 
 logger = logging.getLogger(__name__)
 
@@ -55,8 +62,15 @@ class TelegramBotStatusView(APIView):
     """Get Telegram bot status and information."""
     permission_classes = [permissions.IsAdminUser]
 
+    @swagger_auto_schema(
+        operation_description="Get Telegram bot status and webhook info",
+        responses={200: openapi.Response('Bot status information')}
+    )
     def get(self, request):
         """Return bot status information."""
+        if not HAS_TELEGRAM:
+            return Response({'error': 'telegram package not installed'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
         bot_token = settings.TELEGRAM_BOT_TOKEN
 
         if not bot_token:
@@ -112,8 +126,15 @@ class SetTelegramWebhookView(APIView):
     """Set or update Telegram webhook URL."""
     permission_classes = [permissions.IsAdminUser]
 
+    @swagger_auto_schema(
+        operation_description="Set or update Telegram webhook URL",
+        responses={200: openapi.Response('Webhook set successfully')}
+    )
     def post(self, request):
         """Set webhook URL for Telegram bot."""
+        if not HAS_TELEGRAM:
+            return Response({'error': 'telegram package not installed'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
         bot_token = settings.TELEGRAM_BOT_TOKEN
         webhook_url = settings.TELEGRAM_WEBHOOK_URL
 
@@ -163,8 +184,15 @@ class DeleteTelegramWebhookView(APIView):
     """Delete Telegram webhook."""
     permission_classes = [permissions.IsAdminUser]
 
+    @swagger_auto_schema(
+        operation_description="Delete Telegram webhook (switch to polling mode)",
+        responses={200: openapi.Response('Webhook deleted successfully')}
+    )
     def post(self, request):
         """Delete webhook (switch to polling mode)."""
+        if not HAS_TELEGRAM:
+            return Response({'error': 'telegram package not installed'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
         bot_token = settings.TELEGRAM_BOT_TOKEN
 
         if not bot_token:
@@ -200,8 +228,23 @@ class SendTelegramMessageView(APIView):
     """Send message to Telegram user or chat (admin only)."""
     permission_classes = [permissions.IsAdminUser]
 
+    @swagger_auto_schema(
+        operation_description="Send message to a Telegram user or chat",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=['chat_id', 'message'],
+            properties={
+                'chat_id': openapi.Schema(type=openapi.TYPE_STRING, description='Telegram chat ID'),
+                'message': openapi.Schema(type=openapi.TYPE_STRING, description='Message text (HTML supported)'),
+            }
+        ),
+        responses={200: openapi.Response('Message sent successfully')}
+    )
     def post(self, request):
         """Send message to specified Telegram chat."""
+        if not HAS_TELEGRAM:
+            return Response({'error': 'telegram package not installed'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
         bot_token = settings.TELEGRAM_BOT_TOKEN
         chat_id = request.data.get('chat_id')
         message = request.data.get('message')

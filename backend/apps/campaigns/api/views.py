@@ -4,6 +4,8 @@ API views for Campaigns app.
 from rest_framework import generics, permissions, status, filters
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils.translation import gettext_lazy as _
 from ..models import Campaign, CampaignVolunteer, CampaignUpdate
@@ -57,6 +59,10 @@ class CampaignListView(generics.ListCreateAPIView):
             # Volunteers can only see campaigns they're part of
             return Campaign.objects.filter(volunteers=user)
 
+    def perform_create(self, serializer):
+        """Set created_by to the authenticated user."""
+        serializer.save(created_by=self.request.user)
+
 
 class CampaignDetailView(generics.RetrieveUpdateDestroyAPIView):
     """Retrieve, update or delete a campaign."""
@@ -75,6 +81,10 @@ class CampaignJoinView(APIView):
     """Allow a volunteer to join a campaign."""
     permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="Join a campaign as a volunteer",
+        responses={200: openapi.Response('Successfully joined'), 404: openapi.Response('Campaign not found')}
+    )
     def post(self, request, pk):
         try:
             campaign = Campaign.objects.get(pk=pk)
@@ -136,6 +146,10 @@ class CampaignStatsView(APIView):
     """Get campaign statistics."""
     permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="Get campaign statistics",
+        responses={200: openapi.Response('Campaign statistics'), 404: openapi.Response('Campaign not found')}
+    )
     def get(self, request, pk):
         try:
             campaign = Campaign.objects.get(pk=pk)

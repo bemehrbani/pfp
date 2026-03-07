@@ -4,6 +4,8 @@ API views for Tasks app.
 from rest_framework import generics, permissions, status, filters
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -174,6 +176,11 @@ class TaskCompletionView(APIView):
     """Mark a task assignment as completed."""
     permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="Submit proof and mark a task assignment as completed",
+        request_body=TaskCompletionSerializer,
+        responses={200: openapi.Response('Task completed'), 404: openapi.Response('Assignment not found')}
+    )
     def post(self, request, assignment_id):
         try:
             assignment = TaskAssignment.objects.get(
@@ -218,6 +225,11 @@ class TaskVerificationView(APIView):
     """Verify or reject a completed task."""
     permission_classes = [permissions.IsAuthenticated, IsAdminOrCampaignManager]
 
+    @swagger_auto_schema(
+        operation_description="Verify or reject a completed task assignment",
+        request_body=TaskVerificationSerializer,
+        responses={200: openapi.Response('Task verified/rejected'), 404: openapi.Response('Assignment not found')}
+    )
     def post(self, request, assignment_id):
         try:
             assignment = TaskAssignment.objects.get(id=assignment_id)
