@@ -5,6 +5,7 @@ Handles user registration flow and general text messages.
 import logging
 from telegram import Update
 from telegram.ext import CallbackContext, MessageHandler, filters, ConversationHandler
+from asgiref.sync import sync_to_async
 
 from utils.error_handling import error_handler
 from utils.state_management import state_manager
@@ -78,13 +79,18 @@ async def cancel_registration(update: Update, context: CallbackContext):
     """Cancel registration flow."""
     user = update.effective_user
 
-    try:
+    @sync_to_async
+    def _cancel_in_db():
         from apps.telegram.models import TelegramSession
-        session = TelegramSession.objects.get(telegram_id=user.id)
-        session.update_state(TelegramSession.State.IDLE)
-        session.temp_data = {}
-    except TelegramSession.DoesNotExist:
-        pass
+        try:
+            session = TelegramSession.objects.get(telegram_id=user.id)
+            session.update_state(TelegramSession.State.IDLE)
+            session.temp_data = {}
+            session.save(update_fields=['temp_data', 'updated_at'])
+        except TelegramSession.DoesNotExist:
+            pass
+
+    await _cancel_in_db()
 
     # Clear context data
     context.user_data.clear()

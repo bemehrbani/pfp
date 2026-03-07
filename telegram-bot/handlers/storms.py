@@ -3,29 +3,76 @@ Twitter Storm command handlers for Telegram bot.
 
 Provides /storms and /storminfo commands for volunteers to see
 upcoming storms, countdown, and storm details.
+
+All Django ORM calls wrapped with sync_to_async.
 """
 import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext, CallbackQueryHandler
-from django.contrib.auth import get_user_model
+from asgiref.sync import sync_to_async
 from django.utils import timezone
-from apps.campaigns.models import TwitterStorm, StormParticipant, CampaignVolunteer
-from apps.telegram.models import TelegramSession
 
 logger = logging.getLogger(__name__)
-User = get_user_model()
 
 
-def _get_session(update: Update):
-    """Get TelegramSession for the current user."""
-    telegram_user = update.effective_user
+# ── Async-safe DB helpers ──────────────────────────────────────────────
+
+@sync_to_async
+def _db_get_session(telegram_id):
+    from apps.telegram.models import TelegramSession
     try:
-        return TelegramSession.objects.get(telegram_id=telegram_user.id)
+        return TelegramSession.objects.select_related('user').get(telegram_id=telegram_id)
     except TelegramSession.DoesNotExist:
         return None
 
 
-def _format_countdown(storm: TwitterStorm) -> str:
+@sync_to_async
+def _db_get_user_storms(user):
+    from apps.campaigns.models import TwitterStorm, CampaignVolunteer
+
+    campaign_ids = list(
+        CampaignVolunteer.objects.filter(
+            volunteer=user,
+            status='active'
+        ).values_list('campaign_id', flat=True)
+    )
+
+    storms = list(
+        TwitterStorm.objects.filter(
+            campaign_id__in=campaign_ids,
+            status__in=['scheduled', 'countdown', 'active']
+        ).order_by('scheduled_at')[:5]
+    )
+    return storms
+
+
+@sync_to_async
+def _db_get_storm(storm_id):
+    from apps.campaigns.models import TwitterStorm
+    try:
+        return TwitterStorm.objects.get(id=storm_id)
+    except TwitterStorm.DoesNotExist:
+        return None
+
+
+@sync_to_async
+def _db_get_storm_participants_count(storm):
+    return storm.participants.count()
+
+
+@sync_to_async
+def _db_mark_ready(storm_id, user):
+    from apps.campaigns.models import StormParticipant
+    StormParticipant.objects.update_or_create(
+        storm_id=storm_id,
+        volunteer=user,
+        defaults={'status': 'ready'}
+    )
+
+
+# ── Formatting helpers ─────────────────────────────────────────────────
+
+def _format_countdown(storm) -> str:
     """Format time remaining until storm."""
     now = timezone.now()
     delta = storm.scheduled_at - now
@@ -45,28 +92,16 @@ def _format_countdown(storm: TwitterStorm) -> str:
         return f'{minutes}m'
 
 
+# ── Handlers ───────────────────────────────────────────────────────────
+
 async def storms_command(update: Update, context: CallbackContext):
     """Handle /storms command — list upcoming storms for user's campaigns."""
-    session = _get_session(update)
+    session = await _db_get_session(update.effective_user.id)
     if not session or not session.user:
-        await update.message.reply_text(
-            '❌ Please register first with /start'
-        )
+        await update.message.reply_text('❌ Please register first with /start')
         return
 
-    user = session.user
-
-    # Get campaigns the user belongs to
-    volunteer_campaign_ids = CampaignVolunteer.objects.filter(
-        volunteer=user,
-        status=CampaignVolunteer.Status.ACTIVE
-    ).values_list('campaign_id', flat=True)
-
-    # Get upcoming/active storms
-    storms = TwitterStorm.objects.filter(
-        campaign_id__in=volunteer_campaign_ids,
-        status__in=['scheduled', 'countdown', 'active']
-    ).order_by('scheduled_at')[:5]
+    storms = await _db_get_user_storms(session.user)
 
     if not storms:
         await update.message.reply_text(
@@ -118,13 +153,17 @@ async def storminfo_command(update: Update, context: CallbackContext):
 
     try:
         storm_id = int(context.args[0])
-        storm = TwitterStorm.objects.get(id=storm_id)
-    except (ValueError, TwitterStorm.DoesNotExist):
+    except ValueError:
+        await update.message.reply_text('❌ Invalid storm ID.')
+        return
+
+    storm = await _db_get_storm(storm_id)
+    if not storm:
         await update.message.reply_text('❌ Storm not found.')
         return
 
     countdown = _format_countdown(storm)
-    participants = storm.participants.count()
+    participants = await _db_get_storm_participants_count(storm)
     templates = storm.tweet_templates or []
     sample_tweet = templates[0] if templates else 'No tweet template set yet.'
 
@@ -156,9 +195,8 @@ async def storm_callback_handler(update: Update, context: CallbackContext):
 
     if data.startswith('storm_info_'):
         storm_id = int(data.replace('storm_info_', ''))
-        try:
-            storm = TwitterStorm.objects.get(id=storm_id)
-        except TwitterStorm.DoesNotExist:
+        storm = await _db_get_storm(storm_id)
+        if not storm:
             await query.edit_message_text('❌ Storm not found.')
             return
 
@@ -183,14 +221,10 @@ async def storm_callback_handler(update: Update, context: CallbackContext):
 
     elif data.startswith('storm_ready_'):
         storm_id = int(data.replace('storm_ready_', ''))
-        session = _get_session(update)
+        session = await _db_get_session(update.effective_user.id)
 
         if session and session.user:
-            StormParticipant.objects.update_or_create(
-                storm_id=storm_id,
-                volunteer=session.user,
-                defaults={'status': StormParticipant.Status.READY}
-            )
+            await _db_mark_ready(storm_id, session.user)
             await query.edit_message_text('✊ You\'re marked as READY! Stand by for the blast.')
         else:
             await query.edit_message_text('❌ Please register first with /start')

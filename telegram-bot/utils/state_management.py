@@ -1,13 +1,17 @@
 """
 State management utilities for Telegram bot conversations.
 Manages conversation states using TelegramSession model.
+
+All Django ORM calls are wrapped with sync_to_async for safe
+usage in python-telegram-bot's async handlers.
 """
 import logging
 from typing import Optional, Dict, Any
 from telegram import Update
 from telegram.ext import CallbackContext
+from asgiref.sync import sync_to_async
 
-from .django_integration import setup_django, create_or_update_telegram_session
+from .django_integration import setup_django
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +19,7 @@ logger = logging.getLogger(__name__)
 class ConversationStateManager:
     """
     Manages conversation states for Telegram bot using Django models.
+    All database operations are wrapped with sync_to_async.
     """
 
     def __init__(self):
@@ -23,176 +28,159 @@ class ConversationStateManager:
         self.TelegramSession = TelegramSession
 
     async def get_or_create_session(self, update: Update, context: CallbackContext):
-        """
-        Get or create Telegram session for the current user.
-
-        Args:
-            update: Telegram Update object
-            context: CallbackContext object
-
-        Returns:
-            Tuple of (TelegramSession object, created boolean)
-        """
+        """Get or create Telegram session for the current user."""
         user = update.effective_user
         chat_id = update.effective_chat.id
 
-        # Get or create session
-        session, created = create_or_update_telegram_session(
-            telegram_id=user.id,
-            telegram_username=user.username,
-            telegram_chat_id=chat_id
-        )
+        @sync_to_async
+        def _db_get_or_create(telegram_id, telegram_username, telegram_chat_id):
+            from apps.telegram.models import TelegramSession
+            from django.contrib.auth import get_user_model
+            User = get_user_model()
 
-        # Update last interaction
-        session.increment_message_count()
+            try:
+                session = TelegramSession.objects.select_related('user').get(
+                    telegram_id=telegram_id
+                )
+                session.telegram_username = telegram_username
+                session.telegram_chat_id = telegram_chat_id
+                session.save(update_fields=['telegram_username', 'telegram_chat_id', 'updated_at'])
+                session.increment_message_count()
+                return session, False
+            except TelegramSession.DoesNotExist:
+                db_user = None
+                try:
+                    db_user = User.objects.get(telegram_id=telegram_id)
+                except User.DoesNotExist:
+                    pass
 
-        return session, created
+                session = TelegramSession.objects.create(
+                    telegram_id=telegram_id,
+                    telegram_username=telegram_username,
+                    telegram_chat_id=telegram_chat_id,
+                    user=db_user
+                )
+                session.increment_message_count()
+                return session, True
+
+        return await _db_get_or_create(user.id, user.username, chat_id)
 
     async def update_state(self, session, new_state: str, state_data: Optional[Dict] = None):
-        """
-        Update conversation state for a session.
-
-        Args:
-            session: TelegramSession object
-            new_state: New state value
-            state_data: Optional data to store with the state
-        """
-        try:
+        """Update conversation state for a session."""
+        @sync_to_async
+        def _db_update_state():
             session.update_state(new_state, state_data)
+
+        try:
+            await _db_update_state()
             logger.debug(f"Updated state for session {session.id} to {new_state}")
-        except Exception as e:
-            logger.error(f"Failed to update state for session {session.id}: {e}")
+        except Exception as exc:
+            logger.error(f"Failed to update state for session {session.id}: {exc}")
             raise
 
     async def get_state(self, telegram_id: int) -> Optional[str]:
-        """
-        Get current conversation state for a user.
+        """Get current conversation state for a user."""
+        @sync_to_async
+        def _db_get():
+            try:
+                s = self.TelegramSession.objects.get(telegram_id=telegram_id)
+                return s.state
+            except self.TelegramSession.DoesNotExist:
+                return None
 
-        Args:
-            telegram_id: Telegram user ID
-
-        Returns:
-            Current state or None if session not found
-        """
         try:
-            session = self.TelegramSession.objects.get(telegram_id=telegram_id)
-            return session.state
-        except self.TelegramSession.DoesNotExist:
-            return None
-        except Exception as e:
-            logger.error(f"Failed to get state for telegram_id {telegram_id}: {e}")
+            return await _db_get()
+        except Exception as exc:
+            logger.error(f"Failed to get state for telegram_id {telegram_id}: {exc}")
             return None
 
     async def get_state_data(self, telegram_id: int) -> Dict[str, Any]:
-        """
-        Get state data for a user.
+        """Get state data for a user."""
+        @sync_to_async
+        def _db_get():
+            try:
+                s = self.TelegramSession.objects.get(telegram_id=telegram_id)
+                return s.state_data or {}
+            except self.TelegramSession.DoesNotExist:
+                return {}
 
-        Args:
-            telegram_id: Telegram user ID
-
-        Returns:
-            State data dictionary (empty dict if not found)
-        """
         try:
-            session = self.TelegramSession.objects.get(telegram_id=telegram_id)
-            return session.state_data or {}
-        except self.TelegramSession.DoesNotExist:
-            return {}
-        except Exception as e:
-            logger.error(f"Failed to get state data for telegram_id {telegram_id}: {e}")
+            return await _db_get()
+        except Exception as exc:
+            logger.error(f"Failed to get state data for telegram_id {telegram_id}: {exc}")
             return {}
 
     async def set_state_data(self, session, data: Dict[str, Any]):
-        """
-        Set state data for a session.
-
-        Args:
-            session: TelegramSession object
-            data: State data dictionary
-        """
-        try:
+        """Set state data for a session."""
+        @sync_to_async
+        def _db_save():
             session.state_data = data
             session.save(update_fields=['state_data', 'updated_at'])
+
+        try:
+            await _db_save()
             logger.debug(f"Updated state data for session {session.id}")
-        except Exception as e:
-            logger.error(f"Failed to set state data for session {session.id}: {e}")
+        except Exception as exc:
+            logger.error(f"Failed to set state data for session {session.id}: {exc}")
             raise
 
     async def get_temp_data(self, telegram_id: int) -> Dict[str, Any]:
-        """
-        Get temporary data for a user.
+        """Get temporary data for a user."""
+        @sync_to_async
+        def _db_get():
+            try:
+                s = self.TelegramSession.objects.get(telegram_id=telegram_id)
+                return s.temp_data or {}
+            except self.TelegramSession.DoesNotExist:
+                return {}
 
-        Args:
-            telegram_id: Telegram user ID
-
-        Returns:
-            Temporary data dictionary (empty dict if not found)
-        """
         try:
-            session = self.TelegramSession.objects.get(telegram_id=telegram_id)
-            return session.temp_data or {}
-        except self.TelegramSession.DoesNotExist:
-            return {}
-        except Exception as e:
-            logger.error(f"Failed to get temp data for telegram_id {telegram_id}: {e}")
+            return await _db_get()
+        except Exception as exc:
+            logger.error(f"Failed to get temp data for telegram_id {telegram_id}: {exc}")
             return {}
 
     async def set_temp_data(self, session, data: Dict[str, Any]):
-        """
-        Set temporary data for a session.
-
-        Args:
-            session: TelegramSession object
-            data: Temporary data dictionary
-        """
-        try:
+        """Set temporary data for a session."""
+        @sync_to_async
+        def _db_save():
             session.temp_data = data
             session.save(update_fields=['temp_data', 'updated_at'])
+
+        try:
+            await _db_save()
             logger.debug(f"Updated temp data for session {session.id}")
-        except Exception as e:
-            logger.error(f"Failed to set temp data for session {session.id}: {e}")
+        except Exception as exc:
+            logger.error(f"Failed to set temp data for session {session.id}: {exc}")
             raise
 
     async def clear_state(self, session):
-        """
-        Clear conversation state (set to IDLE).
-
-        Args:
-            session: TelegramSession object
-        """
-        try:
+        """Clear conversation state (set to IDLE)."""
+        @sync_to_async
+        def _db_clear():
             session.update_state(self.TelegramSession.State.IDLE)
+
+        try:
+            await _db_clear()
             logger.debug(f"Cleared state for session {session.id}")
-        except Exception as e:
-            logger.error(f"Failed to clear state for session {session.id}: {e}")
+        except Exception as exc:
+            logger.error(f"Failed to clear state for session {session.id}: {exc}")
             raise
 
     async def record_command(self, session, command: str):
-        """
-        Record usage of a command.
-
-        Args:
-            session: TelegramSession object
-            command: Command name (without slash)
-        """
-        try:
+        """Record usage of a command."""
+        @sync_to_async
+        def _db_record():
             session.record_command(command)
+
+        try:
+            await _db_record()
             logger.debug(f"Recorded command {command} for session {session.id}")
-        except Exception as e:
-            logger.error(f"Failed to record command {command} for session {session.id}: {e}")
+        except Exception as exc:
+            logger.error(f"Failed to record command {command} for session {session.id}: {exc}")
 
     async def handle_registration_flow(self, update: Update, context: CallbackContext, session):
-        """
-        Handle registration flow based on current state.
-
-        Args:
-            update: Telegram Update object
-            context: CallbackContext object
-            session: TelegramSession object
-
-        Returns:
-            Boolean indicating if registration is complete
-        """
+        """Handle registration flow based on current state."""
         from apps.telegram.models import TelegramSession
 
         if session.state == TelegramSession.State.AWAITING_EMAIL:
@@ -206,9 +194,6 @@ class ConversationStateManager:
 
     async def _handle_email_input(self, update: Update, context: CallbackContext, session):
         """Handle email input during registration."""
-        from django.contrib.auth import get_user_model
-        from apps.telegram.models import TelegramSession
-
         email = update.message.text.strip()
 
         # Validate email
@@ -220,8 +205,13 @@ class ConversationStateManager:
             return False
 
         # Check if email already exists
-        User = get_user_model()
-        if User.objects.filter(email=email).exists():
+        @sync_to_async
+        def _check_email(em):
+            from django.contrib.auth import get_user_model
+            User = get_user_model()
+            return User.objects.filter(email=em).exists()
+
+        if await _check_email(email):
             await update.message.reply_text(
                 "❌ This email is already registered.\n"
                 "Please use a different email or contact support."
@@ -229,8 +219,14 @@ class ConversationStateManager:
             return False
 
         # Store email in temp data and ask for name
-        session.temp_data['registration_email'] = email
-        session.update_state(TelegramSession.State.AWAITING_NAME)
+        @sync_to_async
+        def _save_email():
+            from apps.telegram.models import TelegramSession as TS
+            session.temp_data = session.temp_data or {}
+            session.temp_data['registration_email'] = email
+            session.update_state(TS.State.AWAITING_NAME)
+
+        await _save_email()
 
         await update.message.reply_text(
             "📝 Great! Now please enter your full name:"
@@ -239,9 +235,6 @@ class ConversationStateManager:
 
     async def _handle_name_input(self, update: Update, context: CallbackContext, session):
         """Handle name input during registration."""
-        from django.contrib.auth import get_user_model
-        from apps.telegram.models import TelegramSession
-
         name = update.message.text.strip()
 
         if len(name) < 2:
@@ -251,11 +244,16 @@ class ConversationStateManager:
             return False
 
         # Create user account
-        User = get_user_model()
-        try:
+        @sync_to_async
+        def _create_user():
+            from django.contrib.auth import get_user_model
+            from apps.telegram.models import TelegramSession as TS
+            User = get_user_model()
+
+            reg_email = (session.temp_data or {}).get('registration_email', '')
             user = User.objects.create_user(
-                username=session.temp_data['registration_email'].split('@')[0],
-                email=session.temp_data['registration_email'],
+                username=reg_email.split('@')[0] if reg_email else f'user_{session.telegram_id}',
+                email=reg_email,
                 first_name=name,
                 telegram_id=session.telegram_id,
                 telegram_username=session.telegram_username,
@@ -264,8 +262,13 @@ class ConversationStateManager:
 
             # Link user to session
             session.user = user
-            session.update_state(TelegramSession.State.IDLE)
+            session.update_state(TS.State.IDLE)
             session.temp_data = {}
+
+            return user
+
+        try:
+            user = await _create_user()
 
             await update.message.reply_text(
                 f"🎉 *Registration Complete!*\n\n"
@@ -283,8 +286,8 @@ class ConversationStateManager:
 
             return True
 
-        except Exception as e:
-            logger.error(f"Failed to create user: {e}")
+        except Exception as exc:
+            logger.error(f"Failed to create user: {exc}")
             await update.message.reply_text(
                 "❌ Failed to create account. Please try again or contact support."
             )
@@ -292,7 +295,6 @@ class ConversationStateManager:
 
     async def _handle_confirmation(self, update: Update, context: CallbackContext, session):
         """Handle confirmation step (placeholder for future use)."""
-        # This can be extended for various confirmation flows
         return False
 
 

@@ -4,7 +4,7 @@ Start command handler for Telegram bot.
 import logging
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import CallbackContext
-from django.contrib.auth import get_user_model
+from .db import get_user_by_telegram_id
 
 logger = logging.getLogger(__name__)
 
@@ -42,12 +42,11 @@ async def start_command(update: Update, context: CallbackContext):
         parse_mode='Markdown'
     )
 
-    # Check if user exists in database
-    User = get_user_model()
-    try:
-        db_user = User.objects.get(telegram_id=user.id)
+    # Check if user exists in database (async-safe)
+    db_user = await get_user_by_telegram_id(user.id)
+    if db_user:
         logger.info(f"Existing user {db_user.username} started bot")
-    except User.DoesNotExist:
+    else:
         # Start registration process
         await context.bot.send_message(
             chat_id=chat_id,
@@ -70,7 +69,8 @@ async def help_command(update: Update, context: CallbackContext):
         "/tasks - Show available tasks\n"
         "/mytasks - Show your assigned tasks\n"
         "/profile - Show your profile and points\n"
-        "/leaderboard - Show top volunteers\n\n"
+        "/leaderboard - Show top volunteers\n"
+        "/storms - Show upcoming Twitter storms\n\n"
         "*How to Participate:*\n"
         "1. Browse campaigns with /campaigns\n"
         "2. Join a campaign\n"

@@ -6,6 +6,7 @@ import logging
 import traceback
 from typing import Optional, Callable, Any
 from functools import wraps
+from asgiref.sync import sync_to_async
 from telegram import Update
 from telegram.ext import CallbackContext
 
@@ -97,7 +98,7 @@ async def handle_error(update: Update, context: CallbackContext, error: Exceptio
     # Log to Django if available
     if is_django_available():
         try:
-            log_error_to_django(update, error)
+            await sync_to_async(log_error_to_django)(update, error)
         except Exception as e:
             logger.error(f"Failed to log error to Django: {e}")
 
@@ -210,7 +211,7 @@ def require_registration(func: Callable) -> Callable:
         from .django_integration import get_user_by_telegram_id
 
         user = update.effective_user
-        db_user = get_user_by_telegram_id(user.id)
+        db_user = await sync_to_async(get_user_by_telegram_id)(user.id)
 
         if not db_user:
             raise UserNotRegisteredError(
