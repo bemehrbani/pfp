@@ -24,7 +24,8 @@ def campaign_created_or_updated(sender, instance, created, **kwargs):
         logger.info(f'Campaign created: {instance.name} (id: {instance.id})')
     else:
         # Check if status changed
-        if 'status' in instance._changed_fields:
+        changed_fields = getattr(instance, '_changed_fields', set())
+        if 'status' in changed_fields:
             ActivityLog.objects.create(
                 user=instance.created_by,
                 action_type=ActivityLog.ActionType.CAMPAIGN_UPDATE,

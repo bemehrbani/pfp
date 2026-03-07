@@ -24,7 +24,8 @@ def task_created_or_updated(sender, instance, created, **kwargs):
         logger.info(f'Task created: {instance.title} (id: {instance.id})')
     else:
         # Log important updates
-        if instance.is_active and 'is_active' in instance._changed_fields:
+        changed_fields = getattr(instance, '_changed_fields', set())
+        if instance.is_active and 'is_active' in changed_fields:
             ActivityLog.objects.create(
                 user=instance.created_by,
                 action_type=ActivityLog.ActionType.TASK_UPDATE,
@@ -48,7 +49,8 @@ def task_assignment_created_or_updated(sender, instance, created, **kwargs):
 
     else:
         # Check for status changes
-        if 'status' in instance._changed_fields:
+        changed_fields = getattr(instance, '_changed_fields', set())
+        if 'status' in changed_fields:
             # Map status to action type
             status_actions = {
                 TaskAssignment.Status.IN_PROGRESS: 'started',
