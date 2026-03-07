@@ -61,6 +61,16 @@ def _get_active_campaigns(exclude_user=None):
 
 
 @sync_to_async
+def _get_joined_campaign_ids(user):
+    """Get the set of campaign IDs that a user has joined."""
+    from apps.campaigns.models import CampaignVolunteer
+    return set(
+        CampaignVolunteer.objects.filter(
+            volunteer=user, status='active'
+        ).values_list('campaign_id', flat=True)
+    )
+
+@sync_to_async
 def _get_campaign(campaign_id):
     """Get a campaign by ID."""
     from apps.campaigns.models import Campaign
@@ -120,7 +130,8 @@ async def campaigns_command(update: Update, context: CallbackContext):
         )
         return
 
-    campaigns = await _get_active_campaigns(exclude_user=session.user)
+    # Show ALL active campaigns, not just unjoined ones
+    campaigns = await _get_active_campaigns()
 
     if not campaigns:
         await update.message.reply_text(
@@ -130,24 +141,36 @@ async def campaigns_command(update: Update, context: CallbackContext):
         )
         return
 
+    # Check which campaigns user already joined
+    joined_ids = await _get_joined_campaign_ids(session.user)
+
     message = "📋 *Available Campaigns*\n\n"
     keyboard = []
 
     for i, campaign in enumerate(campaigns, 1):
         task_count = await _get_task_count(campaign)
-        message += f"*{i}. {campaign.name}*\n"
+        is_joined = campaign.id in joined_ids
+        status_icon = "✅" if is_joined else "🔹"
+
+        message += f"*{i}. {status_icon} {campaign.name}*\n"
         message += f"   {campaign.short_description}\n"
         message += f"   👥 Members: {campaign.current_members}/{campaign.target_members}\n"
         message += f"   🎯 Tasks: {task_count} available\n\n"
 
-        keyboard.append([
-            InlineKeyboardButton(
-                f"Join: {campaign.name[:20]}...",
-                callback_data=f"campaign_join_{campaign.id}"
-            )
-        ])
-
-    message += "Click a button below to join a campaign."
+        if is_joined:
+            keyboard.append([
+                InlineKeyboardButton(
+                    f"📋 View Tasks: {campaign.name[:20]}...",
+                    callback_data=f"campaign_tasks_{campaign.id}"
+                )
+            ])
+        else:
+            keyboard.append([
+                InlineKeyboardButton(
+                    f"Join: {campaign.name[:20]}...",
+                    callback_data=f"campaign_join_{campaign.id}"
+                )
+            ])
 
     if len(campaigns) == 10:
         keyboard.append([
