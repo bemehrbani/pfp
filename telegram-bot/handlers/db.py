@@ -123,6 +123,7 @@ def create_task_assignment(task, user):
         return None
     return TaskAssignment.objects.create(
         task=task,
+        campaign=task.campaign,
         volunteer=user,
         status='in_progress'
     )
