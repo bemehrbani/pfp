@@ -5,6 +5,7 @@ import logging
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import CallbackContext
 from .db import get_user_by_telegram_id
+from utils.state_management import state_manager
 
 logger = logging.getLogger(__name__)
 
@@ -42,20 +43,24 @@ async def start_command(update: Update, context: CallbackContext):
         parse_mode='Markdown'
     )
 
-    # Check if user exists in database (async-safe)
+    # Get or create session (async-safe)
+    session, created = await state_manager.get_or_create_session(update, context)
+
+    # Check if user exists in database
     db_user = await get_user_by_telegram_id(user.id)
     if db_user:
         logger.info(f"Existing user {db_user.username} started bot")
     else:
-        # Start registration process
+        # Start registration — set session state in DB to AWAITING_EMAIL
+        from apps.telegram.models import TelegramSession
+        await state_manager.update_state(session, TelegramSession.State.AWAITING_EMAIL)
+
         await context.bot.send_message(
             chat_id=chat_id,
             text="It looks like you're new here! Let's get you registered.\n\n"
                  "Please send me your email address to continue."
         )
-        # Set conversation state
-        context.user_data['registration_state'] = 'awaiting_email'
-        logger.info(f"New user {user.id} started registration")
+        logger.info(f"New user {user.id} started registration — state set to AWAITING_EMAIL")
 
 
 async def help_command(update: Update, context: CallbackContext):
