@@ -128,6 +128,7 @@ def _db_validate_and_claim(user, task_id):
 
     assignment = TaskAssignment.objects.create(
         task=task,
+        campaign=task.campaign,
         volunteer=user,
         status='assigned'
     )
