@@ -266,6 +266,10 @@ async def campaign_callback_handler(update: Update, context: CallbackContext):
         campaign_id = int(callback_data.split('_')[-1])
         await handle_campaign_join(query, session, campaign_id)
 
+    elif callback_data.startswith('campaign_tasks_'):
+        campaign_id = int(callback_data.split('_')[-1])
+        await handle_campaign_view_tasks(query, session, campaign_id)
+
     elif callback_data.startswith('campaigns_page_'):
         page = int(callback_data.split('_')[-1])
         await handle_campaigns_pagination(query, session, page)
@@ -307,6 +311,56 @@ async def handle_campaign_join(query, session, campaign_id):
     )
 
 
+async def handle_campaign_view_tasks(query, session, campaign_id):
+    """Handle View Tasks button for a joined campaign."""
+    campaign = await _get_campaign(campaign_id)
+    if not campaign:
+        await query.edit_message_text(
+            "❌ This campaign is no longer available.",
+            parse_mode='Markdown'
+        )
+        return
+
+    @sync_to_async
+    def _get_campaign_tasks(cid):
+        from apps.tasks.models import Task
+        return list(Task.objects.filter(
+            campaign_id=cid, status='active'
+        ).order_by('-points')[:10])
+
+    tasks = await _get_campaign_tasks(campaign_id)
+
+    if not tasks:
+        await query.edit_message_text(
+            f"📭 No tasks available for *{campaign.name}* at the moment.",
+            parse_mode='Markdown'
+        )
+        return
+
+    message = f"🎯 *Tasks for {campaign.name}*\n\n"
+    keyboard = []
+
+    for i, task in enumerate(tasks, 1):
+        message += f"*{i}. {task.title}*\n"
+        message += f"   Points: {task.points}\n\n"
+
+        keyboard.append([
+            InlineKeyboardButton(
+                f"Claim: {task.title[:25]}...",
+                callback_data=f"task_claim_{task.id}"
+            )
+        ])
+
+    message += "Click a button to claim a task."
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await query.edit_message_text(
+        message,
+        reply_markup=reply_markup,
+        parse_mode='Markdown'
+    )
+
+
 async def handle_campaigns_pagination(query, session, page):
     """Handle pagination for campaigns list."""
     @sync_to_async
@@ -314,8 +368,6 @@ async def handle_campaigns_pagination(query, session, page):
         from apps.campaigns.models import Campaign
         return list(Campaign.objects.filter(
             status=Campaign.Status.ACTIVE
-        ).exclude(
-            volunteers__volunteer=user
         ).order_by('-created_at')[offset:offset+10])
 
     offset = page * 10
