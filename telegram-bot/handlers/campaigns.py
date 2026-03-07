@@ -56,7 +56,7 @@ def _get_active_campaigns(exclude_user=None):
     from apps.campaigns.models import Campaign
     qs = Campaign.objects.filter(status=Campaign.Status.ACTIVE)
     if exclude_user:
-        qs = qs.exclude(volunteers__volunteer=exclude_user)
+        qs = qs.exclude(volunteers=exclude_user)
     return list(qs.order_by('-created_at')[:10])
 
 

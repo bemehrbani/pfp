@@ -31,7 +31,18 @@ def _db_get_or_create_session(telegram_id, telegram_username, telegram_chat_id):
         session = TelegramSession.objects.select_related('user').get(telegram_id=telegram_id)
         session.telegram_username = telegram_username
         session.telegram_chat_id = telegram_chat_id
-        session.save(update_fields=['telegram_username', 'telegram_chat_id', 'updated_at'])
+        update_fields = ['telegram_username', 'telegram_chat_id', 'updated_at']
+
+        # Auto-repair: link orphaned session to existing user
+        if not session.user:
+            try:
+                db_user = User.objects.get(telegram_id=telegram_id)
+                session.user = db_user
+                update_fields.append('user')
+            except User.DoesNotExist:
+                pass
+
+        session.save(update_fields=update_fields)
         return session, False
     except TelegramSession.DoesNotExist:
         db_user = None
