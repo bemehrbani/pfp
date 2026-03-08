@@ -325,7 +325,7 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
     def _get_campaign_tasks(cid):
         from apps.tasks.models import Task
         return list(Task.objects.filter(
-            campaign_id=cid, status='active'
+            campaign_id=cid, is_active=True
         ).order_by('-points')[:10])
 
     tasks = await _get_campaign_tasks(campaign_id)
