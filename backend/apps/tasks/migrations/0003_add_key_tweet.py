@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('tasks', '0002_add_twitter_comment'),
+        ('tasks', '0002_initial'),
     ]
 
     operations = [
