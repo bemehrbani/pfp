@@ -169,6 +169,54 @@ class Task(models.Model):
         return max(0, self.max_assignments - self.current_assignments)
 
 
+class KeyTweet(models.Model):
+    """
+    A curated tweet from a key figure that volunteers should comment on.
+    Used primarily for twitter_comment tasks.
+    """
+    task = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+        related_name='key_tweets',
+        help_text=_('Task this key tweet belongs to')
+    )
+    tweet_url = models.URLField(
+        help_text=_('URL of the tweet to comment on')
+    )
+    author_name = models.CharField(
+        max_length=200,
+        help_text=_('Display name of the tweet author (e.g. "United Nations")')
+    )
+    author_handle = models.CharField(
+        max_length=100,
+        help_text=_('Twitter handle of the author (e.g. "@UN")')
+    )
+    description = models.TextField(
+        blank=True,
+        help_text=_('Brief description of the tweet content or why it matters')
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+        help_text=_('Display order (lower numbers shown first)')
+    )
+    is_active = models.BooleanField(
+        default=True,
+        help_text=_('Whether this key tweet is currently active')
+    )
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _('Key Tweet')
+        verbose_name_plural = _('Key Tweets')
+        ordering = ['order', '-created_at']
+
+    def __str__(self):
+        return f'{self.author_handle}: {self.tweet_url}'
+
+
 class TaskAssignment(models.Model):
     """
     Assignment of a task to a volunteer.

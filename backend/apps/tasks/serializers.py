@@ -3,15 +3,28 @@ Serializers for Tasks app.
 """
 from rest_framework import serializers
 from django.utils.translation import gettext_lazy as _
-from .models import Task, TaskAssignment
+from .models import Task, TaskAssignment, KeyTweet
 from apps.campaigns.serializers import CampaignSerializer
 from apps.users.serializers import UserSerializer
+
+
+class KeyTweetSerializer(serializers.ModelSerializer):
+    """Serializer for KeyTweet model."""
+    class Meta:
+        model = KeyTweet
+        fields = (
+            'id', 'tweet_url', 'author_name', 'author_handle',
+            'description', 'order', 'is_active',
+            'created_at', 'updated_at'
+        )
+        read_only_fields = ('id', 'created_at', 'updated_at')
 
 
 class TaskSerializer(serializers.ModelSerializer):
     """Serializer for Task model."""
     campaign = CampaignSerializer(read_only=True)
     created_by = UserSerializer(read_only=True)
+    key_tweets = KeyTweetSerializer(many=True, read_only=True)
     is_available = serializers.SerializerMethodField()
     available_slots = serializers.SerializerMethodField()
 
@@ -24,6 +37,7 @@ class TaskSerializer(serializers.ModelSerializer):
             'points', 'estimated_time',
             'max_assignments', 'current_assignments', 'completed_assignments',
             'target_url', 'hashtags', 'mentions', 'image_url',
+            'key_tweets',
             'is_active', 'is_verified', 'is_available',
             'available_from', 'available_until',
             'available_slots',
@@ -52,6 +66,8 @@ class TaskSerializer(serializers.ModelSerializer):
 
 class TaskCreateSerializer(serializers.ModelSerializer):
     """Serializer for creating tasks."""
+    key_tweets = KeyTweetSerializer(many=True, required=False)
+
     class Meta:
         model = Task
         fields = (
@@ -60,9 +76,21 @@ class TaskCreateSerializer(serializers.ModelSerializer):
             'campaign', 'points', 'estimated_time',
             'max_assignments', 'target_url',
             'hashtags', 'mentions', 'image_url',
+            'key_tweets',
             'is_active', 'is_verified',
             'available_from', 'available_until'
         )
+
+    def create(self, validated_data):
+        """Create task with nested key tweets."""
+        key_tweets_data = validated_data.pop('key_tweets', [])
+        request = self.context.get('request')
+        if request and request.user:
+            validated_data['created_by'] = request.user
+        task = Task.objects.create(**validated_data)
+        for tweet_data in key_tweets_data:
+            KeyTweet.objects.create(task=task, **tweet_data)
+        return task
 
 
 class TaskAssignmentSerializer(serializers.ModelSerializer):

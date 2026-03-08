@@ -11,8 +11,8 @@ const TasksPage: React.FC = () => {
       const url = filter === 'available'
         ? '/tasks/available/'
         : filter === 'my-tasks'
-        ? '/tasks/my-assignments/'
-        : '/tasks/';
+          ? '/tasks/my-assignments/'
+          : '/tasks/';
       const response = await api.get(url);
       return response.data;
     },
@@ -40,11 +40,10 @@ const TasksPage: React.FC = () => {
             <button
               key={tab}
               onClick={() => setFilter(tab)}
-              className={`px-4 py-2 rounded-md font-medium ${
-                filter === tab
+              className={`px-4 py-2 rounded-md font-medium ${filter === tab
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               {tab.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
             </button>
@@ -60,12 +59,12 @@ const TasksPage: React.FC = () => {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-gray-800">{task.title}</h3>
-                  <span className={`inline-block px-2 py-1 text-xs font-semibold rounded-full mt-2 ${
-                    task.task_type === 'twitter_post' ? 'bg-blue-100 text-blue-800' :
-                    task.task_type === 'twitter_retweet' ? 'bg-green-100 text-green-800' :
-                    task.task_type === 'telegram_share' ? 'bg-purple-100 text-purple-800' :
-                    'bg-gray-100 text-gray-800'
-                  }`}>
+                  <span className={`inline-block px-2 py-1 text-xs font-semibold rounded-full mt-2 ${task.task_type === 'twitter_post' ? 'bg-blue-100 text-blue-800' :
+                      task.task_type === 'twitter_retweet' ? 'bg-green-100 text-green-800' :
+                        task.task_type === 'twitter_comment' ? 'bg-orange-100 text-orange-800' :
+                          task.task_type === 'telegram_share' ? 'bg-purple-100 text-purple-800' :
+                            'bg-gray-100 text-gray-800'
+                    }`}>
                     {task.task_type.replace('_', ' ')}
                   </span>
                 </div>
@@ -116,8 +115,8 @@ const TasksPage: React.FC = () => {
             {filter === 'available'
               ? 'No tasks available at the moment. Check back later!'
               : filter === 'my-tasks'
-              ? 'You have no assigned tasks.'
-              : 'No tasks have been created yet.'}
+                ? 'You have no assigned tasks.'
+                : 'No tasks have been created yet.'}
           </p>
           {filter !== 'available' && (
             <button

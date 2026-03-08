@@ -18,11 +18,18 @@ export interface CampaignFormData {
   end_date: string;
 }
 
+export interface KeyTweetFormData {
+  tweet_url: string;
+  author_name: string;
+  author_handle: string;
+  description: string;
+}
+
 export interface TaskFormData {
   title: string;
   description: string;
   instructions: string;
-  task_type: 'twitter_post' | 'twitter_retweet' | 'twitter_like' | 'telegram_share' | 'telegram_invite' | 'content_creation' | 'research' | 'other';
+  task_type: 'twitter_post' | 'twitter_retweet' | 'twitter_comment' | 'twitter_like' | 'telegram_share' | 'telegram_invite' | 'content_creation' | 'research' | 'other';
   assignment_type: 'first_come' | 'manual' | 'automatic';
   campaign: number;
   points: number;
@@ -32,6 +39,7 @@ export interface TaskFormData {
   hashtags: string;
   mentions: string;
   image_url: string;
+  key_tweets?: KeyTweetFormData[];
   available_from: string;
   available_until: string;
 }

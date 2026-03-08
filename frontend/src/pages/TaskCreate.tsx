@@ -8,7 +8,7 @@ import FormTextarea from '../components/FormTextarea';
 import FormSelect from '../components/FormSelect';
 import FormDatePicker from '../components/FormDatePicker';
 import LoadingButton from '../components/LoadingButton';
-import { TaskFormData, ApiErrorResponse } from '../types/form';
+import { TaskFormData, KeyTweetFormData, ApiErrorResponse } from '../types/form';
 
 interface Campaign {
   id: number;
@@ -21,6 +21,7 @@ const TaskCreate: React.FC = () => {
   const queryClient = useQueryClient();
   const [apiError, setApiError] = useState<string>('');
   const [selectedCampaign, setSelectedCampaign] = useState<number | null>(null);
+  const [keyTweets, setKeyTweets] = useState<KeyTweetFormData[]>([]);
 
   // Fetch campaigns for dropdown
   const { data: campaigns, isLoading: isLoadingCampaigns } = useQuery({
@@ -74,6 +75,7 @@ const TaskCreate: React.FC = () => {
         mentions: data.mentions || '',
         target_url: data.target_url || '',
         image_url: data.image_url || '',
+        key_tweets: data.task_type === 'twitter_comment' ? keyTweets.filter(kt => kt.tweet_url) : [],
       };
 
       const response = await api.post('/tasks/', formattedData);
@@ -107,6 +109,7 @@ const TaskCreate: React.FC = () => {
   const taskTypeOptions = [
     { value: 'twitter_post', label: 'Twitter Post' },
     { value: 'twitter_retweet', label: 'Twitter Retweet' },
+    { value: 'twitter_comment', label: 'Twitter Comment' },
     { value: 'twitter_like', label: 'Twitter Like' },
     { value: 'telegram_share', label: 'Telegram Share' },
     { value: 'telegram_invite', label: 'Telegram Invite' },
@@ -114,6 +117,20 @@ const TaskCreate: React.FC = () => {
     { value: 'research', label: 'Research' },
     { value: 'other', label: 'Other' },
   ];
+
+  const addKeyTweet = () => {
+    setKeyTweets([...keyTweets, { tweet_url: '', author_name: '', author_handle: '', description: '' }]);
+  };
+
+  const removeKeyTweet = (index: number) => {
+    setKeyTweets(keyTweets.filter((_, i) => i !== index));
+  };
+
+  const updateKeyTweet = (index: number, field: keyof KeyTweetFormData, value: string) => {
+    const updated = [...keyTweets];
+    updated[index] = { ...updated[index], [field]: value };
+    setKeyTweets(updated);
+  };
 
   const assignmentTypeOptions = [
     { value: 'first_come', label: 'First Come, First Served' },
@@ -294,6 +311,79 @@ const TaskCreate: React.FC = () => {
               />
             </div>
           </div>
+
+          {/* Key Tweets Section (for twitter_comment) */}
+          {taskType === 'twitter_comment' && (
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4 pb-2 border-b">Key Tweets to Comment On</h2>
+              <p className="text-gray-600 mb-4 text-sm">Add tweets from key figures that volunteers should comment on.</p>
+
+              {keyTweets.map((kt, index) => (
+                <div key={index} className="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="font-medium text-gray-700">Tweet #{index + 1}</span>
+                    <button
+                      type="button"
+                      onClick={() => removeKeyTweet(index)}
+                      className="text-red-500 hover:text-red-700 text-sm font-medium"
+                    >
+                      ✕ Remove
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Tweet URL *</label>
+                      <input
+                        type="url"
+                        value={kt.tweet_url}
+                        onChange={(e) => updateKeyTweet(index, 'tweet_url', e.target.value)}
+                        placeholder="https://x.com/UN/status/123456789"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Author Name *</label>
+                      <input
+                        type="text"
+                        value={kt.author_name}
+                        onChange={(e) => updateKeyTweet(index, 'author_name', e.target.value)}
+                        placeholder="United Nations"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Author Handle *</label>
+                      <input
+                        type="text"
+                        value={kt.author_handle}
+                        onChange={(e) => updateKeyTweet(index, 'author_handle', e.target.value)}
+                        placeholder="@UN"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                      <input
+                        type="text"
+                        value={kt.description}
+                        onChange={(e) => updateKeyTweet(index, 'description', e.target.value)}
+                        placeholder="Brief description of the tweet content"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <button
+                type="button"
+                onClick={addKeyTweet}
+                className="w-full py-2 px-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
+              >
+                + Add Key Tweet
+              </button>
+            </div>
+          )}
 
           {/* Availability Section */}
           <div className="mb-8">

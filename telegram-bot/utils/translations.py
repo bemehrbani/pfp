@@ -256,6 +256,11 @@ TRANSLATIONS = {
         "fa": "🔗 *توییتی که باید روی آن نظر بدهید:*",
         "ar": "🔗 *التغريدة للتعليق عليها:*",
     },
+    "key_tweets_to_comment": {
+        "en": "Key tweets to comment on",
+        "fa": "توییت‌های کلیدی برای نظر دادن",
+        "ar": "تغريدات رئيسية للتعليق عليها",
+    },
     "comment_paste_reply_url": {
         "en": "✅ *When done, paste your reply/comment URL below*\n(e.g. https://x.com/yourname/status/123...)",
         "fa": "✅ *وقتی تمام شد، لینک پاسخ/نظر خود را در زیر بگذارید*\n(مثلاً https://x.com/yourname/status/123...)",

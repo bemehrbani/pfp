@@ -533,8 +533,22 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         msg = f"{t('task_started', lang)}\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
         msg += f"{t('tweet_what_to_do', lang)}\n{task.instructions}\n\n"
-        if task.target_url:
+
+        # Fetch key tweets from DB
+        key_tweets = await sync_to_async(
+            lambda: list(task.key_tweets.filter(is_active=True).order_by('order'))
+        )()
+
+        if key_tweets:
+            msg += f"🎯 *{t('key_tweets_to_comment', lang)}*\n\n"
+            for idx, kt in enumerate(key_tweets, 1):
+                msg += f"*{idx}.* {kt.author_name} ({kt.author_handle})\n"
+                if kt.description:
+                    msg += f"   _{kt.description}_\n"
+                msg += f"   🔗 {kt.tweet_url}\n\n"
+        elif task.target_url:
             msg += f"{t('comment_target_tweet', lang)}\n{task.target_url}\n\n"
+
         if task.hashtags:
             msg += f"{t('task_hashtags', lang)} {task.hashtags}\n\n"
         msg += f"{t('comment_paste_reply_url', lang)}\n\n"

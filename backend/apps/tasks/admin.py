@@ -3,12 +3,20 @@ Admin configuration for Tasks app.
 """
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from .models import Task, TaskAssignment
+from .models import Task, TaskAssignment, KeyTweet
+
+
+class KeyTweetInline(admin.TabularInline):
+    """Inline admin for managing key tweets within a task."""
+    model = KeyTweet
+    extra = 1
+    fields = ('tweet_url', 'author_name', 'author_handle', 'description', 'order', 'is_active')
 
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     """Admin interface for Task model."""
+    inlines = [KeyTweetInline]
 
     list_display = (
         'title', 'campaign', 'task_type', 'assignment_type',

@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PFP Bot Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-chat: #0e1621;
+            --bg-header: #17212b;
+            --bg-input: #17212b;
+            --bg-bot: #182533;
+            --bg-user: #2b5278;
+            --text-primary: #f5f5f5;
+            --text-secondary: #7b8ea0;
+            --accent: #5eb5f7;
+            --accent-hover: #73c1f9;
+            --border: #1e2c3a;
+            --inline-btn-bg: rgba(94, 181, 247, 0.12);
+            --inline-btn-text: #5eb5f7;
+            --keyboard-btn-bg: #2b3d4f;
+            --keyboard-btn-text: #e0e8ef;
+            --success: #50c878;
+            --warning: #f5a623;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #0a0f16;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .simulator-container {
+            width: 420px;
+            max-width: 100%;
+            height: 85vh;
+            max-height: 740px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border);
+        }
+
+        /* Header */
+        .chat-header {
+            background: var(--bg-header);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chat-header .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .chat-header .info {
+            flex: 1;
+        }
+
+        .chat-header .info .name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .chat-header .info .status {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 1px;
+        }
+
+        .chat-header .reset-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .chat-header .reset-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--accent);
+        }
+
+        /* Messages area */
+        .chat-messages {
+            flex: 1;
+            background: var(--bg-chat);
+            overflow-y: auto;
+            padding: 16px;
+            scroll-behavior: smooth;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Message bubbles */
+        .message {
+            max-width: 88%;
+            margin-bottom: 8px;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            margin-right: auto;
+        }
+
+        .message.user {
+            margin-left: auto;
+        }
+
+        .message .bubble {
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .message.bot .bubble {
+            background: var(--bg-bot);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user .bubble {
+            background: var(--bg-user);
+            border-bottom-right-radius: 4px;
+        }
+
+        .message .bubble strong {
+            font-weight: 600;
+        }
+
+        .message .bubble code {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: 'SF Mono', monospace;
+        }
+
+        .message .time {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 3px;
+            padding: 0 4px;
+        }
+
+        .message.user .time {
+            text-align: right;
+        }
+
+        /* Inline buttons (inside messages) */
+        .inline-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .inline-buttons .row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .inline-btn {
+            flex: 1;
+            padding: 9px 12px;
+            background: var(--inline-btn-bg);
+            border: none;
+            border-radius: 8px;
+            color: var(--inline-btn-text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .inline-btn:hover {
+            background: rgba(94, 181, 247, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .inline-btn:active {
+            transform: translateY(0);
+        }
+
+        .inline-btn.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Reply keyboard (bottom) */
+        .keyboard-area {
+            background: var(--bg-input);
+            border-top: 1px solid var(--border);
+            padding: 10px;
+        }
+
+        .keyboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .keyboard-btn {
+            padding: 12px 8px;
+            background: var(--keyboard-btn-bg);
+            border: none;
+            border-radius: 10px;
+            color: var(--keyboard-btn-text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .keyboard-btn:hover {
+            background: rgba(94, 181, 247, 0.18);
+            color: var(--accent);
+        }
+
+        .keyboard-btn.full-width {
+            grid-column: span 2;
+        }
+
+        /* Input area */
+        .input-area {
+            background: var(--bg-input);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-top: 1px solid var(--border);
+        }
+
+        .input-area input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 10px 16px;
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-area input:focus {
+            border-color: var(--accent);
+        }
+
+        .input-area input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .send-btn {
+            width: 38px;
+            height: 38px;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .send-btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.05);
+        }
+
+        .send-btn svg {
+            fill: #fff;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Step indicator */
+        .step-indicator {
+            background: var(--bg-header);
+            padding: 6px 18px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-align: center;
+            border-top: 1px solid var(--border);
+            letter-spacing: 0.3px;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 8px 14px;
+        }
+
+        .typing-indicator .dot {
+            width: 7px;
+            height: 7px;
+            background: var(--text-secondary);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-indicator .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+
+            30% {
+                transform: translateY(-5px);
+                opacity: 1;
+            }
+        }
+
+        /* Day divider */
+        .day-divider {
+            text-align: center;
+            margin: 12px 0;
+        }
+
+        .day-divider span {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-secondary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="simulator-container">
+        <div class="chat-header">
+            <div class="avatar">☮️</div>
+            <div class="info">
+                <div class="name">PFP Campaign Bot</div>
+                <div class="status">bot • online</div>
+            </div>
+            <button class="reset-btn" onclick="resetSimulator()">↺ Reset</button>
+        </div>
+
+        <div class="chat-messages" id="messages"></div>
+
+        <div id="keyboard-container"></div>
+
+        <div class="input-area">
+            <input type="text" id="msgInput" placeholder="Type a message..."
+                onkeypress="if(event.key==='Enter') sendUserMessage()">
+            <button class="send-btn" onclick="sendUserMessage()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="step-indicator" id="stepIndicator">Step 0 / 8 — Send /start to begin</div>
+    </div>
+
+    <script>
+        const messagesEl = document.getElementById('messages');
+        const keyboardEl = document.getElementById('keyboard-container');
+        const inputEl = document.getElementById('msgInput');
+        const stepEl = document.getElementById('stepIndicator');
+
+        let currentStep = 0;
+        const totalSteps = 8;
+
+        function scrollToBottom() {
+            setTimeout(() => messagesEl.scrollTop = messagesEl.scrollHeight, 50);
+        }
+
+        function getTime() {
+            return new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+        }
+
+        function addMessage(text, type = 'bot', inlineButtons = null) {
+            const msg = document.createElement('div');
+            msg.className = `message ${type}`;
+
+            // Convert markdown-like formatting
+            let html = text
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.+?)\*/g, '<strong>$1</strong>')
+                .replace(/`(.+?)`/g, '<code>$1</code>')
+                .replace(/\n/g, '<br>');
+
+            msg.innerHTML = `
+    <div class="bubble">${html}${inlineButtons ? renderInlineButtons(inlineButtons) : ''}</div>
+    <div class="time">${getTime()}</div>
+  `;
+
+            messagesEl.appendChild(msg);
+            scrollToBottom();
+            return msg;
+        }
+
+        function renderInlineButtons(buttons) {
+            let html = '<div class="inline-buttons">';
+            for (const row of buttons) {
+                html += '<div class="row">';
+                for (const btn of row) {
+                    html += `<button class="inline-btn" onclick="handleInlineClick('${btn.action}')">${btn.label}</button>`;
+                }
+                html += '</div>';
+            }
+            html += '</div>';
+            return html;
+        }
+
+        function showTyping() {
+            const el = document.createElement('div');
+            el.className = 'message bot';
+            el.id = 'typing';
+            el.innerHTML = `<div class="bubble"><div class="typing-indicator">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div></div>`;
+            messagesEl.appendChild(el);
+            scrollToBottom();
+        }
+
+        function removeTyping() {
+            const el = document.getElementById('typing');
+            if (el) el.remove();
+        }
+
+        function setKeyboard(buttons) {
+            if (!buttons || buttons.length === 0) {
+                keyboardEl.innerHTML = '';
+                return;
+            }
+            let html = '<div class="keyboard-area"><div class="keyboard-grid">';
+            for (const btn of buttons) {
+                const fw = btn.fullWidth ? ' full-width' : '';
+                html += `<button class="keyboard-btn${fw}" onclick="handleKeyboardClick('${btn.action}')">${btn.label}</button>`;
+            }
+            html += '</div></div>';
+            keyboardEl.innerHTML = html;
+        }
+
+        function updateStep(n, desc) {
+            currentStep = n;
+            stepEl.textContent = `Step ${n} / ${totalSteps} — ${desc}`;
+        }
+
+        // ─── Conversation Flow ─────────────────────────────────────────
+
+        function sendUserMessage() {
+            const text = inputEl.value.trim();
+            if (!text) return;
+            inputEl.value = '';
+
+            if (text === '/start' && currentStep === 0) {
+                addMessage('/start', 'user');
+                updateStep(1, 'Language picker shown');
+                showTyping();
+                setTimeout(() => {
+                    removeTyping();
+                    step1_languagePicker();
+                }, 800);
+            } else if (currentStep === 7 && (text.startsWith('https://x.com/') || text.startsWith('https://twitter.com/'))) {
+                addMessage(text, 'user');
+                updateStep(8, 'Proof submitted — complete!');
+                showTyping();
+                setTimeout(() => {
+                    removeTyping();
+                    step8_proofSubmitted(text);
+                }, 1200);
+            } else {
+                addMessage(text, 'user');
+                showTyping();
+                setTimeout(() => {
+                    removeTyping();
+                    addMessage("💡 Type /start or use the buttons to navigate the flow.");
+                }, 500);
+            }
+        }
+
+        function handleInlineClick(action) {
+            switch (action) {
+                case 'lang_en':
+                    addMessage('🇬🇧 English', 'user');
+                    updateStep(2, 'Welcome message shown');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step2_welcome(); }, 800);
+                    break;
+                case 'view_tasks_1':
+                    addMessage('📋 View Tasks', 'user');
+                    updateStep(4, 'Task list for campaign');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step4_taskList(); }, 800);
+                    break;
+                case 'task_claim_1':
+                    addMessage('🐦 Tweet for CeaseFireNow', 'user');
+                    updateStep(5, 'Task detail view');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step5_taskDetail('tweet'); }, 800);
+                    break;
+                case 'task_claim_2':
+                    addMessage('💬 Comment on key tweet', 'user');
+                    updateStep(5, 'Task detail view');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step5_taskDetail('comment'); }, 800);
+                    break;
+                case 'task_claim_3':
+                    addMessage('🔁 Retweet campaign content', 'user');
+                    updateStep(5, 'Task detail view');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step5_taskDetail('retweet'); }, 800);
+                    break;
+                case 'task_start_tweet':
+                    addMessage('✅ Start This Task', 'user');
+                    updateStep(6, 'Task guidance — tweet');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step6_tweetGuidance(); }, 1000);
+                    break;
+                case 'task_start_comment':
+                    addMessage('✅ Start This Task', 'user');
+                    updateStep(6, 'Task guidance — comment');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step6_commentGuidance(); }, 1000);
+                    break;
+                case 'task_start_retweet':
+                    addMessage('✅ Start This Task', 'user');
+                    updateStep(6, 'Task guidance — retweet');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step6_retweetGuidance(); }, 1000);
+                    break;
+                case 'confirm_submit':
+                    addMessage('✅ Confirm Submission', 'user');
+                    updateStep(8, 'Proof submitted — complete!');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step8_confirmed(); }, 1000);
+                    break;
+                case 'back_to_campaigns':
+                    addMessage('📋 Browse Campaigns', 'user');
+                    updateStep(3, 'Campaign list');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step3_campaignList(); }, 800);
+                    break;
+            }
+        }
+
+        function handleKeyboardClick(action) {
+            switch (action) {
+                case 'campaigns':
+                    addMessage('📋 Browse Campaigns', 'user');
+                    updateStep(3, 'Campaign list');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step3_campaignList(); }, 800);
+                    break;
+                case 'tasks':
+                    addMessage('🎯 Available Tasks', 'user');
+                    updateStep(4, 'Task list');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step4_taskList(); }, 800);
+                    break;
+                case 'progress':
+                    addMessage('📊 My Progress', 'user');
+                    showTyping();
+                    setTimeout(() => {
+                        removeTyping();
+                        addMessage("📊 *Your Progress*\n\n🏆 Points: 0\n✅ Completed: 0 tasks\n📋 Active: 0 tasks\n\nJoin a campaign and complete tasks to earn points!");
+                    }, 600);
+                    break;
+                case 'leaderboard':
+                    addMessage('🏆 Leaderboard', 'user');
+                    showTyping();
+                    setTimeout(() => {
+                        removeTyping();
+                        addMessage("🏆 *Top Volunteers*\n\n1. 🥇 Volunteer A — 250 pts\n2. 🥈 Volunteer B — 180 pts\n3. 🥉 Volunteer C — 120 pts\n\nKeep going to climb the ranks!");
+                    }, 600);
+                    break;
+                case 'help':
+                    addMessage('ℹ️ Help', 'user');
+                    showTyping();
+                    setTimeout(() => {
+                        removeTyping();
+                        addMessage("*People for Peace Campaign Manager - Help*\n\n*Available Commands:*\n/start - Start the bot\n/help - Show this help\n/language - Change language\n/campaigns - List campaigns\n/tasks - Show available tasks\n/mytasks - Show your tasks\n/profile - Your profile & points\n/leaderboard - Top volunteers\n/storms - Twitter storms\n\n*How to Participate:*\n1. Browse campaigns with /campaigns\n2. Join a campaign\n3. Claim tasks with /tasks\n4. Complete tasks and submit proof\n5. Earn points and climb the leaderboard!");
+                    }, 600);
+                    break;
+                case 'language':
+                    addMessage('🌍 Language', 'user');
+                    showTyping();
+                    setTimeout(() => { removeTyping(); step1_languagePicker(); }, 600);
+                    break;
+            }
+        }
+
+        // ─── Step Implementations ─────────────────────────────────────
+
+        function step1_languagePicker() {
+            addMessage('🌍 Choose your language:', 'bot', [
+                [
+                    { label: '🇬🇧 English', action: 'lang_en' },
+                    { label: '🇮🇷 فارسی', action: 'lang_en' },
+                    { label: '🇸🇦 العربية', action: 'lang_en' },
+                ]
+            ]);
+        }
+
+        function step2_welcome() {
+            addMessage("✅ Language set to *English*.");
+            setTimeout(() => {
+                addMessage(
+                    "👋 Welcome to *People for Peace Campaign Manager*!\n\n" +
+                    "I'm your assistant for participating in peace campaigns. " +
+                    "Here's what you can do:\n\n" +
+                    "• 📋 Browse available campaigns\n" +
+                    "• 🎯 Claim and complete tasks\n" +
+                    "• 📊 Track your progress and points\n" +
+                    "• 🤝 Collaborate with other volunteers\n\n" +
+                    "Use the menu below to get started!"
+                );
+                setKeyboard([
+                    { label: '📋 Browse Campaigns', action: 'campaigns' },
+                    { label: '🎯 Available Tasks', action: 'tasks' },
+                    { label: '📊 My Progress', action: 'progress' },
+                    { label: '🏆 Leaderboard', action: 'leaderboard' },
+                    { label: 'ℹ️ Help', action: 'help' },
+                    { label: '🌍 Language', action: 'language' },
+                ]);
+            }, 400);
+        }
+
+        function step3_campaignList() {
+            addMessage(
+                "📋 *Available Campaigns*\n\n" +
+                "━━━━━━━━━━━━━━━━━━━━\n\n" +
+                "🕊️ *#CeaseFireNow — Stop the War*\n\n" +
+                "Join the global movement demanding an immediate ceasefire. " +
+                "Use your voice on social media to amplify the call for peace.\n\n" +
+                "👥 Members: 42\n" +
+                "🎯 Tasks: 3 available\n" +
+                "✅ Joined",
+                'bot',
+                [
+                    [{ label: '📋 View Tasks', action: 'view_tasks_1' }]
+                ]
+            );
+        }
+
+        function step4_taskList() {
+            addMessage(
+                "🎯 *Tasks for #CeaseFireNow — Stop the War*\n\n" +
+                "Tap a task to see details and start.\n\n" +
+                "━━━━━━━━━━━━━━━━━━━━",
+                'bot',
+                [
+                    [{ label: '🐦 Tweet for CeaseFireNow — 25 pts • 5 min', action: 'task_claim_1' }],
+                    [{ label: '💬 Comment on key tweet — 20 pts • 5 min', action: 'task_claim_2' }],
+                    [{ label: '🔁 Retweet campaign content — 10 pts • 2 min', action: 'task_claim_3' }],
+                ]
+            );
+        }
+
+        function step5_taskDetail(type) {
+            if (type === 'tweet') {
+                addMessage(
+                    "🐦 *Tweet for CeaseFireNow*\n\n" +
+                    "📝 *Instructions:*\n" +
+                    "Post a tweet supporting the ceasefire movement. Use the suggested hashtags and mentions to maximize reach.\n\n" +
+                    "#️⃣ *Hashtags:* #CeaseFireNow #StopTheWar #PeopleForPeace\n" +
+                    "@ *Mentions:* @UN @POTUS\n\n" +
+                    "🏆 *Points:* 25\n" +
+                    "⏱ *Est:* 5 min\n" +
+                    "👥 *Slots:* 50 remaining",
+                    'bot',
+                    [[{ label: '✅ Start This Task', action: 'task_start_tweet' }]]
+                );
+            } else if (type === 'comment') {
+                addMessage(
+                    "💬 *Comment on key tweet*\n\n" +
+                    "📝 *Instructions:*\n" +
+                    "Reply to the following tweet with a thoughtful comment supporting peace and ceasefire. Be respectful and constructive.\n\n" +
+                    "🔗 *Link:* https://x.com/UN/status/123456789\n" +
+                    "#️⃣ *Hashtags:* #CeaseFireNow #PeaceNotWar\n\n" +
+                    "🏆 *Points:* 20\n" +
+                    "⏱ *Est:* 5 min\n" +
+                    "👥 *Slots:* 100 remaining",
+                    'bot',
+                    [[{ label: '✅ Start This Task', action: 'task_start_comment' }]]
+                );
+            } else if (type === 'retweet') {
+                addMessage(
+                    "🔁 *Retweet campaign content*\n\n" +
+                    "📝 *Instructions:*\n" +
+                    "Search for tweets with our campaign hashtags and retweet at least 3 impactful posts.\n\n" +
+                    "#️⃣ *Hashtags:* #CeaseFireNow #StopTheWar\n\n" +
+                    "🏆 *Points:* 10\n" +
+                    "⏱ *Est:* 2 min\n" +
+                    "👥 *Slots:* 200 remaining",
+                    'bot',
+                    [[{ label: '✅ Start This Task', action: 'task_start_retweet' }]]
+                );
+            }
+            updateStep(5, `Task detail — ${type}`);
+        }
+
+        function step6_tweetGuidance() {
+            addMessage(
+                "🚀 *Task Started!*\n\n" +
+                "🐦 *Tweet for CeaseFireNow*\n\n" +
+                "📝 *Pick a tweet or write your own:*\n\n" +
+                "*1.* `I stand for peace. Stop the war against Iran. Diplomacy over destruction. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
+                "*2.* `Enough is enough. The people of Iran deserve peace, not bombs. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
+                "*3.* `Peace is not weakness — it's strength. Stand with Iran. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
+                "*4.* `The world must choose diplomacy. War is never the answer. Protect innocent lives. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
+                "*5.* `Civilians are paying the price for political decisions. Demand a ceasefire now. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
+                "👉 Copy one, customize it & post on Twitter/X\n\n" +
+                "✅ *When done, paste your tweet URL below*\n(e.g. https://x.com/yourname/status/123...)\n\n" +
+                "Type /cancel to cancel."
+            );
+            setKeyboard([]);
+            updateStep(7, 'Waiting for proof URL');
+            inputEl.placeholder = 'Paste your tweet URL here...';
+        }
+
+        function step6_commentGuidance() {
+            addMessage(
+                "🚀 *Task Started!*\n\n" +
+                "💬 *Comment on key tweet*\n\n" +
+                "📝 *What to do:*\n" +
+                "Reply to one of the key tweets below with a thoughtful comment supporting peace and ceasefire. Be respectful and constructive.\n\n" +
+                "🎯 *Key tweets to comment on:*\n\n" +
+                "*1.* United Nations (@UN)\n" +
+                "   _Calling for an immediate ceasefire to protect civilian lives_\n" +
+                "   🔗 https://x.com/UN/status/1876543210987654321\n\n" +
+                "*2.* António Guterres (@antonioguterres)\n" +
+                "   _UN Secretary-General's statement on the humanitarian crisis_\n" +
+                "   🔗 https://x.com/antonioguterres/status/1876543210987654322\n\n" +
+                "*3.* Greta Thunberg (@GretaThunberg)\n" +
+                "   _Standing with the people affected by conflict_\n" +
+                "   🔗 https://x.com/GretaThunberg/status/1876543210987654323\n\n" +
+                "*4.* Human Rights Watch (@hrw)\n" +
+                "   _Documenting the impact of war on civilian infrastructure_\n" +
+                "   🔗 https://x.com/hrw/status/1876543210987654324\n\n" +
+                "#️⃣ *Hashtags:* #CeaseFireNow #PeaceNotWar\n\n" +
+                "✅ *When done, paste your reply/comment URL below*\n(e.g. https://x.com/yourname/status/123...)\n\n" +
+                "Type /cancel to cancel."
+            );
+            setKeyboard([]);
+            updateStep(7, 'Waiting for proof URL');
+            inputEl.placeholder = 'Paste your reply URL here...';
+        }
+
+        function step6_retweetGuidance() {
+            addMessage(
+                "🚀 *Task Started!*\n\n" +
+                "🔁 *Retweet campaign content*\n\n" +
+                "📝 *What to do:*\nSearch for tweets with #CeaseFireNow #StopTheWar and retweet at least 3.\n\n" +
+                "✅ *When done, paste your tweet URL below*\n(e.g. https://x.com/yourname/status/123...)\n\n" +
+                "Type /cancel to cancel."
+            );
+            setKeyboard([]);
+            updateStep(7, 'Waiting for proof URL');
+            inputEl.placeholder = 'Paste your retweet URL here...';
+        }
+
+        function step8_proofSubmitted(url) {
+            addMessage(
+                "📝 *Proof Submission Review*\n\n" +
+                "Please confirm your submission:\n\n" +
+                `🔗 ${url}`,
+                'bot',
+                [
+                    [
+                        { label: '✅ Confirm Submission', action: 'confirm_submit' },
+                        { label: '❌ Cancel', action: 'back_to_campaigns' },
+                    ]
+                ]
+            );
+        }
+
+        function step8_confirmed() {
+            addMessage(
+                "✅ *Proof Submitted Successfully!*\n\n" +
+                "*Task:* Tweet for CeaseFireNow\n" +
+                "*Status:* Pending Review\n" +
+                "*Points:* 25 (pending verification)\n\n" +
+                "Your proof has been submitted for review by the campaign manager.\n" +
+                "You'll be notified once it's verified and points are awarded."
+            );
+            inputEl.placeholder = 'Type a message...';
+            setKeyboard([
+                { label: '📋 Browse Campaigns', action: 'campaigns' },
+                { label: '🎯 Available Tasks', action: 'tasks' },
+                { label: '📊 My Progress', action: 'progress' },
+                { label: '🏆 Leaderboard', action: 'leaderboard' },
+                { label: 'ℹ️ Help', action: 'help' },
+                { label: '🌍 Language', action: 'language' },
+            ]);
+        }
+
+        function resetSimulator() {
+            messagesEl.innerHTML = '';
+            keyboardEl.innerHTML = '';
+            inputEl.placeholder = 'Type /start to begin...';
+            inputEl.value = '';
+            currentStep = 0;
+            updateStep(0, 'Send /start to begin');
+
+            const div = document.createElement('div');
+            div.className = 'day-divider';
+            div.innerHTML = '<span>Today</span>';
+            messagesEl.appendChild(div);
+        }
+
+        // Initialize
+        resetSimulator();
+    </script>
+</body>
+
+</html>
