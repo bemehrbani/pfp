@@ -9,6 +9,7 @@ from asgiref.sync import sync_to_async
 
 from utils.error_handling import error_handler
 from utils.state_management import state_manager
+from utils.translations import ALL_BUTTON_ROUTES
 
 logger = logging.getLogger(__name__)
 
@@ -25,18 +26,9 @@ async def handle_text_message(update: Update, context: CallbackContext):
 
     logger.info(f"Text message from user {user.id} (@{user.username}): {text[:50]}")
 
-    # Route ReplyKeyboardMarkup button taps to command handlers
-    BUTTON_ROUTES = {
-        "📋 Browse Campaigns": "_route_campaigns",
-        "🎯 Available Tasks": "_route_tasks",
-        "📊 My Progress": "_route_profile",
-        "🏆 Leaderboard": "_route_leaderboard",
-        "ℹ️ Help": "_route_help",
-        "👤 Profile": "_route_profile",
-    }
-
-    if text in BUTTON_ROUTES:
-        route = BUTTON_ROUTES[text]
+    # Route ReplyKeyboardMarkup button taps (works for all languages)
+    route = ALL_BUTTON_ROUTES.get(text)
+    if route:
         try:
             if route == "_route_campaigns":
                 from handlers.campaigns import campaigns_command
@@ -53,6 +45,9 @@ async def handle_text_message(update: Update, context: CallbackContext):
             elif route == "_route_help":
                 from handlers.start import help_command
                 return await help_command(update, context)
+            elif route == "_route_language":
+                from handlers.start import language_command
+                return await language_command(update, context)
         except Exception as exc:
             logger.error(f"Error routing button '{text}': {exc}")
             await update.message.reply_text(

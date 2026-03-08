@@ -83,7 +83,8 @@ class PFPCampaignBot:
             # Import handlers
             from handlers import (
                 # Command handlers
-                start_command, help_command,
+                start_command, help_command, language_command,
+                language_callback_handler,
                 campaigns_command, joincampaign_command,
                 tasks_command, mytasks_command, claimtask_command,
                 profile_command, updateprofile_command,
@@ -115,6 +116,13 @@ class PFPCampaignBot:
             self.application.add_handler(CommandHandler("leaderboard", leaderboard_command))
             self.application.add_handler(CommandHandler("storms", storms_command))
             self.application.add_handler(CommandHandler("storminfo", storminfo_command))
+            self.application.add_handler(CommandHandler("language", language_command))
+
+            # Register language callback handler (before other callback handlers)
+            from telegram.ext import CallbackQueryHandler
+            self.application.add_handler(
+                CallbackQueryHandler(language_callback_handler, pattern=r"^lang_")
+            )
 
             # Register callback query handlers
             for handler in campaign_handlers:

@@ -12,6 +12,7 @@ from telegram.ext import (
 from asgiref.sync import sync_to_async
 
 from utils.state_management import state_manager
+from utils.translations import t
 
 logger = logging.getLogger(__name__)
 
@@ -433,13 +434,15 @@ async def task_callback_handler(update: Update, context: CallbackContext):
 
 async def handle_task_detail(query, session, task_id):
     """Show full task details with description, instructions, and a Start button."""
+    lang = getattr(session, 'language', 'en') or 'en'
+
     if not session.user:
-        await query.edit_message_text("You need to register first. Use /start")
+        await query.edit_message_text(t('register_need_first', lang))
         return
 
     task = await _db_get_task(task_id)
     if not task:
-        await query.edit_message_text("❌ Task not found.", parse_mode='Markdown')
+        await query.edit_message_text(t('tasks_not_found', lang), parse_mode='Markdown')
         return
 
     type_icon = _get_task_type_icon(task.task_type)
@@ -447,22 +450,22 @@ async def handle_task_detail(query, session, task_id):
     # Build the detail message
     msg = f"{type_icon} *{task.title}*\n\n"
     msg += f"{task.description}\n\n"
-    msg += f"📝 *Instructions:*\n{task.instructions}\n\n"
+    msg += f"{t('task_instructions', lang)}\n{task.instructions}\n\n"
 
     # Show hashtags/mentions for Twitter tasks
     if task.hashtags:
-        msg += f"#️⃣ *Hashtags:* {task.hashtags}\n"
+        msg += f"{t('task_hashtags', lang)} {task.hashtags}\n"
     if task.mentions:
-        msg += f"@️ *Mentions:* {task.mentions}\n"
+        msg += f"{t('task_mentions', lang)} {task.mentions}\n"
     if task.target_url:
-        msg += f"🔗 *Link:* {task.target_url}\n"
+        msg += f"{t('task_link', lang)} {task.target_url}\n"
 
-    msg += f"\n🏆 *Points:* {task.points}  ⏱ *Est:* {task.estimated_time} min\n"
-    msg += f"👥 *Slots:* {task.max_assignments - task.current_assignments} remaining\n"
+    msg += f"\n{t('task_points', lang)} {task.points}  {t('task_est_time', lang)} {task.estimated_time} {t('task_min', lang)}\n"
+    msg += t('task_slots', lang).format(n=task.max_assignments - task.current_assignments) + "\n"
 
     keyboard = [[
         InlineKeyboardButton(
-            "✅ Start This Task",
+            t('btn_start_task', lang),
             callback_data=f"task_startclaim_{task.id}"
         )
     ]]
@@ -473,8 +476,10 @@ async def handle_task_detail(query, session, task_id):
 
 async def handle_task_start_and_guide(query, session, task_id, context):
     """Claim + start task and show guidance (sample tweet for Twitter tasks)."""
+    lang = getattr(session, 'language', 'en') or 'en'
+
     if not session.user:
-        await query.edit_message_text("You need to register first. Use /start")
+        await query.edit_message_text(t('register_need_first', lang))
         return
 
     assignment, error = await _db_validate_and_claim(session.user, task_id)
@@ -502,42 +507,41 @@ async def handle_task_start_and_guide(query, session, task_id, context):
     # Build guidance message based on task type
     if task.task_type in ('twitter_post', 'twitter_retweet'):
         samples = _get_sample_tweets(task)
-        msg = f"🚀 *Task Started!*\n\n"
+        msg = f"{t('task_started', lang)}\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
 
         if task.task_type == 'twitter_post':
-            msg += f"📝 *Pick a tweet or write your own:*\n\n"
+            msg += f"{t('tweet_pick_or_write', lang)}\n\n"
             for idx, tweet in enumerate(samples, 1):
                 msg += f"*{idx}.* `{tweet}`\n\n"
-            msg += f"👉 Copy one, customize it & post on Twitter/X\n\n"
+            msg += f"{t('tweet_copy_and_post', lang)}\n\n"
         elif task.task_type == 'twitter_retweet':
-            msg += f"📝 *What to do:*\n{samples[0]}\n\n"
+            msg += f"{t('tweet_what_to_do', lang)}\n{samples[0]}\n\n"
 
-        msg += f"✅ *When done, paste your tweet URL below*\n"
-        msg += f"(e.g. https://x.com/yourname/status/123...)\n\n"
-        msg += f"Type /cancel to cancel."
+        msg += f"{t('tweet_paste_url', lang)}\n\n"
+        msg += t('cancel_hint', lang)
 
     elif task.task_type == 'telegram_share':
-        msg = f"🚀 *Task Started!*\n\n"
+        msg = f"{t('task_started', lang)}\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
-        msg += f"📝 *What to do:*\n{task.instructions}\n\n"
-        msg += f"✅ *When done, paste the message link or send a screenshot*\n\n"
-        msg += f"Type /cancel to cancel."
+        msg += f"{t('tweet_what_to_do', lang)}\n{task.instructions}\n\n"
+        msg += f"{t('task_paste_proof', lang)}\n\n"
+        msg += t('cancel_hint', lang)
 
     elif task.task_type == 'telegram_invite':
-        msg = f"🚀 *Task Started!*\n\n"
+        msg = f"{t('task_started', lang)}\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
-        msg += f"📝 *What to do:*\n{task.instructions}\n\n"
-        msg += f"👉 Share this link: https://t.me/peopleforpeacebot\n\n"
-        msg += f"✅ *When done, send the username of the person you invited*\n\n"
-        msg += f"Type /cancel to cancel."
+        msg += f"{t('tweet_what_to_do', lang)}\n{task.instructions}\n\n"
+        msg += f"{t('task_share_bot_link', lang)}\n\n"
+        msg += f"{t('task_send_username', lang)}\n\n"
+        msg += t('cancel_hint', lang)
 
     else:  # content_creation, research, other
-        msg = f"🚀 *Task Started!*\n\n"
+        msg = f"{t('task_started', lang)}\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
-        msg += f"📝 *What to do:*\n{task.instructions}\n\n"
-        msg += f"✅ *When done, send your proof (text, link, or screenshot)*\n\n"
-        msg += f"Type /cancel to cancel."
+        msg += f"{t('tweet_what_to_do', lang)}\n{task.instructions}\n\n"
+        msg += f"{t('task_send_proof_generic', lang)}\n\n"
+        msg += t('cancel_hint', lang)
 
     await query.edit_message_text(msg, parse_mode='Markdown')
 

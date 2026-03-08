@@ -4,7 +4,7 @@ Exports all handler functions and handler lists.
 """
 
 # Import handler functions
-from .start import start_command, help_command
+from .start import start_command, help_command, language_command, language_callback_handler
 from .campaigns import campaigns_command, joincampaign_command, campaign_callback_handler, campaign_handlers
 from .tasks import (
     tasks_command, mytasks_command, claimtask_command,
@@ -40,6 +40,7 @@ __all__ = [
     'task_callback_handler',
     'leaderboard_callback_handler',
     'storm_callback_handler',
+    'language_callback_handler',
 
     # Conversation handlers
     'task_proof_conversation',

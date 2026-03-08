@@ -57,6 +57,19 @@ class TelegramSession(models.Model):
         help_text=_('Data associated with current state')
     )
 
+    # Language preference
+    class Language(models.TextChoices):
+        ENGLISH = 'en', _('English')
+        FARSI = 'fa', _('فارسی')
+        ARABIC = 'ar', _('العربية')
+
+    language = models.CharField(
+        max_length=2,
+        choices=Language.choices,
+        default=Language.ENGLISH,
+        help_text=_('Preferred UI language')
+    )
+
     # Temporary data storage
     temp_data = models.JSONField(
         default=dict,

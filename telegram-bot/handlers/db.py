@@ -36,6 +36,16 @@ def get_session(telegram_id):
 
 
 @db_sync
+def get_session_language(telegram_id):
+    """Get language preference for a telegram user. Returns 'en' as default."""
+    from apps.telegram.models import TelegramSession
+    try:
+        return TelegramSession.objects.values_list('language', flat=True).get(telegram_id=telegram_id)
+    except TelegramSession.DoesNotExist:
+        return 'en'
+
+
+@db_sync
 def get_user_by_telegram_id(telegram_id):
     """Get User by telegram_id field."""
     from django.contrib.auth import get_user_model
