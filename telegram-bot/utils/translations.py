@@ -89,9 +89,9 @@ TRANSLATIONS = {
 
     # ── Registration ─────────────────────────────────────────────────
     "register_new_user": {
-        "en": "It looks like you're new here! Let's get you registered.\n\nPlease send me your email address to continue.",
-        "fa": "به نظر می‌رسد شما تازه‌وارد هستید! بیایید ثبت‌نام کنیم.\n\nلطفاً آدرس ایمیل خود را ارسال کنید.",
-        "ar": "يبدو أنك جديد هنا! دعنا نسجلك.\n\nيرجى إرسال عنوان بريدك الإلكتروني للمتابعة.",
+        "en": "It looks like you're new here! Let's get you registered.\n\nPlease send me your full name to continue.",
+        "fa": "به نظر می‌رسد شما تازه‌وارد هستید! بیایید ثبت‌نام کنیم.\n\nلطفاً نام کامل خود را ارسال کنید.",
+        "ar": "يبدو أنك جديد هنا! دعنا نسجلك.\n\nيرجى إرسال اسمك الكامل للمتابعة.",
     },
     "register_need_first": {
         "en": "⚠️ You need to register first! Use /start to begin registration.",

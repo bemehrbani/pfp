@@ -194,54 +194,11 @@ class ConversationStateManager:
         """Handle registration flow based on current state."""
         from apps.telegram.models import TelegramSession
 
-        if session.state == TelegramSession.State.AWAITING_EMAIL:
-            return await self._handle_email_input(update, context, session)
-        elif session.state == TelegramSession.State.AWAITING_NAME:
+        if session.state == TelegramSession.State.AWAITING_NAME:
             return await self._handle_name_input(update, context, session)
         elif session.state == TelegramSession.State.AWAITING_CONFIRMATION:
             return await self._handle_confirmation(update, context, session)
 
-        return False
-
-    async def _handle_email_input(self, update: Update, context: CallbackContext, session):
-        """Handle email input during registration."""
-        email = update.message.text.strip()
-
-        # Validate email
-        if '@' not in email or '.' not in email.split('@')[-1]:
-            await update.message.reply_text(
-                "❌ Please enter a valid email address.\n"
-                "Example: user@example.com"
-            )
-            return False
-
-        # Check if email already exists
-        @sync_to_async
-        def _check_email(em):
-            from django.contrib.auth import get_user_model
-            User = get_user_model()
-            return User.objects.filter(email=em).exists()
-
-        if await _check_email(email):
-            await update.message.reply_text(
-                "❌ This email is already registered.\n"
-                "Please use a different email or contact support."
-            )
-            return False
-
-        # Store email in temp data and ask for name
-        @sync_to_async
-        def _save_email():
-            from apps.telegram.models import TelegramSession as TS
-            session.temp_data = session.temp_data or {}
-            session.temp_data['registration_email'] = email
-            session.update_state(TS.State.AWAITING_NAME)
-
-        await _save_email()
-
-        await update.message.reply_text(
-            "📝 Great! Now please enter your full name:"
-        )
         return False
 
     async def _handle_name_input(self, update: Update, context: CallbackContext, session):
@@ -254,17 +211,16 @@ class ConversationStateManager:
             )
             return False
 
-        # Create user account
+        # Create user account (no email needed — Telegram ID is the identifier)
         @sync_to_async
         def _create_user():
             from django.contrib.auth import get_user_model
             from apps.telegram.models import TelegramSession as TS
             User = get_user_model()
 
-            reg_email = (session.temp_data or {}).get('registration_email', '')
             user = User.objects.create_user(
-                username=reg_email.split('@')[0] if reg_email else f'user_{session.telegram_id}',
-                email=reg_email,
+                username=f'user_{session.telegram_id}',
+                email='',
                 first_name=name,
                 telegram_id=session.telegram_id,
                 telegram_username=session.telegram_username,
@@ -286,7 +242,7 @@ class ConversationStateManager:
                 f"🎉 *Registration Complete!*\n\n"
                 f"Welcome to People for Peace, {name}!\n\n"
                 f"*Your account details:*\n"
-                f"• Email: {user.email}\n"
+                f"• Name: {name}\n"
                 f"• Role: Volunteer\n"
                 f"• Telegram: @{session.telegram_username or 'Not set'}\n\n"
                 f"*Next steps:*\n"

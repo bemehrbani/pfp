@@ -109,9 +109,9 @@ async def _send_welcome(update: Update, context: CallbackContext, session, lang:
     if db_user:
         logger.info(f"Existing user {db_user.username} started bot (lang={lang})")
     else:
-        # Start registration
+        # Start registration — skip email, go straight to name
         from apps.telegram.models import TelegramSession
-        await state_manager.update_state(session, TelegramSession.State.AWAITING_EMAIL)
+        await state_manager.update_state(session, TelegramSession.State.AWAITING_NAME)
 
         await context.bot.send_message(
             chat_id=chat_id,

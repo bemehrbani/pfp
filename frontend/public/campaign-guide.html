@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕊️ راهنمای کمپین آتش‌بس فوری — People for Peace</title>
+    <meta name="description" content="راهنمای کامل کمپین آتش‌بس فوری. نحوه مشارکت، پیام‌های آماده، و لینک‌های مهم.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --surface-2: #232733;
+            --border: #2e3340;
+            --text: #e4e6ed;
+            --text-muted: #8b8fa3;
+            --accent: #4f8cff;
+            --accent-glow: rgba(79, 140, 255, .15);
+            --peace: #6bcb77;
+            --peace-glow: rgba(107, 203, 119, .12);
+            --red: #ff6b6b;
+            --yellow: #ffd93d;
+            --orange: #ff9f43;
+            --radius: 12px;
+            --font: 'Vazirmatn', system-ui, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 2;
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        /* ── Header ── */
+        .header {
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            background: rgba(15, 17, 23, .88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .header-brand .icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--peace), #2ecc71);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .header-brand span {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .toc-nav {
+            display: flex;
+            gap: .2rem;
+            flex-wrap: wrap
+        }
+
+        .toc-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: .78rem;
+            padding: .3rem .6rem;
+            border-radius: 8px;
+            transition: all .2s;
+            font-weight: 500;
+        }
+
+        .toc-nav a:hover {
+            color: var(--text);
+            background: var(--surface)
+        }
+
+        /* ── Layout ── */
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 5rem
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 3rem 0 2.5rem
+        }
+
+        .hero-dove {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block
+        }
+
+        .hero h1 {
+            font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: .75rem;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--peace), #2ecc71, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 520px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ── CTA Button ── */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .9rem 2rem;
+            background: linear-gradient(135deg, var(--peace), #2ecc71);
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: var(--font);
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform .15s, box-shadow .2s;
+            box-shadow: 0 6px 30px rgba(107, 203, 119, .3);
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 40px rgba(107, 203, 119, .4)
+        }
+
+        .cta-btn:active {
+            transform: scale(.98)
+        }
+
+        /* ── Stats Row ── */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .75rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem 1rem;
+            text-align: center;
+        }
+
+        .stat-card .num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--peace);
+            display: block;
+        }
+
+        .stat-card .label {
+            color: var(--text-muted);
+            font-size: .8rem;
+            margin-top: .2rem;
+        }
+
+        /* ── Section ── */
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: .75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .section-icon.green {
+            background: var(--peace-glow);
+            color: var(--peace)
+        }
+
+        .section-icon.blue {
+            background: var(--accent-glow);
+            color: var(--accent)
+        }
+
+        .section-icon.orange {
+            background: rgba(255, 159, 67, .12);
+            color: var(--orange)
+        }
+
+        .section-icon.yellow {
+            background: rgba(255, 217, 61, .12);
+            color: var(--yellow)
+        }
+
+        .section-icon.red {
+            background: rgba(255, 107, 107, .12);
+            color: var(--red)
+        }
+
+        .section-header h2 {
+            font-size: 1.25rem;
+            font-weight: 700
+        }
+
+        /* ── Cards ── */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: .75rem;
+        }
+
+        .card h3 {
+            font-size: .95rem;
+            font-weight: 600;
+            margin-bottom: .5rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        /* ── Steps ── */
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0
+        }
+
+        .steps li {
+            counter-increment: step;
+            position: relative;
+            padding-right: 2.5rem;
+            margin-bottom: .6rem;
+            font-size: .92rem;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            right: 0;
+            top: .25rem;
+            width: 22px;
+            height: 22px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .7rem;
+            font-weight: 700;
+        }
+
+        /* ── Message Box (copyable) ── */
+        .msg-box {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            margin: .75rem 0;
+            position: relative;
+            white-space: pre-wrap;
+            font-size: .88rem;
+            line-height: 2;
+            color: var(--text);
+            direction: rtl;
+            cursor: pointer;
+            transition: border-color .2s;
+        }
+
+        .msg-box:hover {
+            border-color: var(--accent)
+        }
+
+        .msg-box .copy-hint {
+            position: absolute;
+            top: .5rem;
+            left: .75rem;
+            font-size: .7rem;
+            color: var(--text-muted);
+            background: var(--surface);
+            padding: .15rem .5rem;
+            border-radius: 6px;
+            opacity: .7;
+            transition: all .2s;
+            pointer-events: none;
+        }
+
+        .msg-box:hover .copy-hint {
+            opacity: 1;
+            color: var(--accent)
+        }
+
+        .msg-box.copied {
+            border-color: var(--peace)
+        }
+
+        .msg-box.copied .copy-hint {
+            color: var(--peace);
+            opacity: 1
+        }
+
+        /* ── Link Box ── */
+        .link-box {
+            background: var(--peace-glow);
+            border: 1px solid rgba(107, 203, 119, .25);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .link-box .label {
+            font-size: .8rem;
+            color: var(--text-muted);
+            margin-bottom: .4rem;
+        }
+
+        .link-box a {
+            color: var(--peace);
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .link-box a:hover {
+            text-decoration: underline
+        }
+
+        /* ── Callout ── */
+        .callout {
+            background: var(--accent-glow);
+            border-right: 3px solid var(--accent);
+            border-radius: var(--radius) 0 0 var(--radius);
+            padding: .85rem 1.1rem;
+            font-size: .85rem;
+            color: var(--text);
+            margin: .75rem 0;
+        }
+
+        .callout.warn {
+            background: rgba(255, 159, 67, .1);
+            border-right-color: var(--orange);
+        }
+
+        /* ── Tag ── */
+        .tag {
+            display: inline-block;
+            padding: .15rem .5rem;
+            background: var(--accent-glow);
+            color: var(--accent);
+            border-radius: 6px;
+            font-size: .75rem;
+            font-weight: 600;
+            margin-left: .3rem;
+        }
+
+        .tag.green {
+            background: var(--peace-glow);
+            color: var(--peace)
+        }
+
+        /* ── Divider ── */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: .75rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .header-inner {
+                flex-direction: column;
+                gap: .6rem
+            }
+
+            .toc-nav {
+                justify-content: center
+            }
+
+            .container {
+                padding: 1.5rem 1rem 4rem
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: .5rem
+            }
+
+            .hero {
+                padding: 2rem 0 1.5rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="header-brand">
+                <div class="icon">🕊️</div>
+                <span>People for Peace</span>
+            </a>
+            <nav class="toc-nav">
+                <a href="#what">پلتفرم چیست؟</a>
+                <a href="#how">نحوه مشارکت</a>
+                <a href="#tasks">تسک‌ها</a>
+                <a href="#messages">پیام‌های آماده</a>
+                <a href="#storm">طوفان توییتری</a>
+                <a href="#faq">سؤالات</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- ═══ HERO ═══ -->
+        <section class="hero">
+            <span class="hero-dove">🕊️</span>
+            <h1><em>آتش‌بس فوری</em> — صدای ما را بشنوید</h1>
+            <p>یک پلتفرم مردمی برای هماهنگ کردن صدای هزاران نفر در شبکه‌های اجتماعی. با هم، پیام صلح را به گوش جهان
+                می‌رسانیم.</p>
+            <a href="https://t.me/peopleforpeacebot?start=campaign_16" class="cta-btn" target="_blank">
+                ✊ همین الان عضو شو
+            </a>
+        </section>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-card">
+                <span class="num">42+</span>
+                <span class="label">عضو فعال</span>
+            </div>
+            <div class="stat-card">
+                <span class="num">8</span>
+                <span class="label">تسک فعال</span>
+            </div>
+            <div class="stat-card">
+                <span class="num">🌩️ 3</span>
+                <span class="label">طوفان توییتری برنامه‌ریزی شده</span>
+            </div>
+        </div>
+
+        <!-- ═══ WHAT IS PFP ═══ -->
+        <section id="what" class="section">
+            <div class="section-header">
+                <div class="section-icon green">🌍</div>
+                <h2>پلتفرم People for Peace چیست؟</h2>
+            </div>
+            <div class="card">
+                <p>
+                    <strong>People for Peace (PFP)</strong> یک پلتفرم آنلاین برای سازماندهی کمپین‌های صلح‌طلبانه است. به
+                    جای شعار دادن، ما ابزاری ساختیم که مردم عادی بتونن با اقدامات ساده و هماهنگ — مثل توییت زدن، ریتوییت
+                    کردن، و اشتراک‌گذاری — صدای خودشون رو به گوش تصمیم‌گیران دنیا برسونن.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>⚙️ اجزای سیستم</h3>
+                <ol class="steps">
+                    <li><strong>ربات تلگرام</strong> — محل اصلی مشارکت داوطلبان. ثبت‌نام، عضویت در کمپین، دریافت تسک، و
+                        ارسال مدرک همه از طریق ربات انجام می‌شه.</li>
+                    <li><strong>داشبورد مدیریت</strong> — پنل وب برای مدیران کمپین. ایجاد تسک، بررسی مدارک، و مشاهده
+                        آمار.</li>
+                    <li><strong>سیستم امتیاز</strong> — هر تسکی که انجام بدید و تأیید بشه، امتیاز می‌گیرید. بالاترین
+                        امتیاز = بیشترین تأثیر.</li>
+                    <li><strong>طوفان توییتری</strong> — رویدادهای زمان‌بندی‌شده که همه با هم، در یک لحظه، توییت می‌زنیم
+                        تا هشتگ‌مون ترند بشه.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ═══ HOW TO JOIN ═══ -->
+        <section id="how" class="section">
+            <div class="section-header">
+                <div class="section-icon blue">🚀</div>
+                <h2>چطور عضو بشم؟</h2>
+            </div>
+
+            <div class="link-box">
+                <div class="label">🔗 لینک مستقیم عضویت در کمپین</div>
+                <a href="https://t.me/peopleforpeacebot?start=campaign_16"
+                    target="_blank">t.me/peopleforpeacebot?start=campaign_16</a>
+            </div>
+
+            <div class="card">
+                <h3>📱 مراحل عضویت (۳۰ ثانیه)</h3>
+                <ol class="steps">
+                    <li>روی لینک بالا کلیک کنید — ربات تلگرام باز می‌شه</li>
+                    <li>دکمه <strong>Start</strong> رو بزنید</li>
+                    <li>زبان فارسی رو انتخاب کنید</li>
+                    <li>اسمتون رو وارد کنید (ثبت‌نام تمام!)</li>
+                    <li>کمپین «آتش‌بس فوری» خودکار نمایش داده می‌شه — <strong>عضو شوید</strong></li>
+                    <li>حالا تسک‌های کمپین رو ببینید و شروع کنید ✅</li>
+                </ol>
+            </div>
+
+            <div class="callout">
+                <strong>💡 نکته:</strong> ربات به سه زبان فارسی، انگلیسی و عربی کار می‌کنه. می‌تونید زبان رو هر وقت عوض
+                کنید.
+            </div>
+        </section>
+
+        <!-- ═══ TASKS ═══ -->
+        <section id="tasks" class="section">
+            <div class="section-header">
+                <div class="section-icon orange">📋</div>
+                <h2>تسک‌ها چیست؟</h2>
+            </div>
+            <div class="card">
+                <p>تسک‌ها اقدامات مشخصی هستن که هر داوطلب می‌تونه انجام بده. هر تسک امتیاز داره و بعد از ارسال مدرک
+                    (لینک یا اسکرین‌شات)، مدیر تأییدش می‌کنه.</p>
+            </div>
+
+            <div class="card">
+                <h3>🐦 سطح ۱ — اقدامات سریع <span class="tag green">آسان</span></h3>
+                <ol class="steps">
+                    <li><strong>توییت با #CeaseFireNow</strong> — یه توییت اصیل با هشتگ بزنید و @UN و @POTUS رو تگ کنید
+                        <span class="tag">۲۵ امتیاز</span>
+                    </li>
+                    <li><strong>ریتوییت محتوای کمپین</strong> — حداقل ۳ پست رسمی کمپین رو ریتوییت کنید <span
+                            class="tag">۱۰ امتیاز</span></li>
+                    <li><strong>کامنت روی توییت کلیدی</strong> — زیر یکی از توییت‌های مهم، نظر حمایتی بنویسید <span
+                            class="tag">۲۰ امتیاز</span></li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>📢 سطح ۲ — رشد شبکه <span class="tag green">متوسط</span></h3>
+                <ol class="steps">
+                    <li><strong>اشتراک در گروه تلگرام</strong> — لینک کمپین رو در یک گروه مرتبط به اشتراک بذارید <span
+                            class="tag">۱۵ امتیاز</span></li>
+                    <li><strong>دعوت از یک دوست</strong> — لینک ربات رو برای یک نفر بفرستید که ثبت‌نام کنه <span
+                            class="tag">۲۰ امتیاز</span></li>
+                    <li><strong>اشتراک در اینستاگرام/تیک‌تاک</strong> — پیام کمپین رو در استوری یا پست بذارید <span
+                            class="tag">۱۵ امتیاز</span></li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>✍️ سطح ۳ — تعهد بالا <span class="tag green">پیشرفته</span></h3>
+                <ol class="steps">
+                    <li><strong>بیانیه شخصی صلح</strong> — یک متن ۲۰۰+ کلمه‌ای بنویسید درباره اینکه چرا آتش‌بس ضروریه
+                        <span class="tag">۳۰ امتیاز</span>
+                    </li>
+                    <li><strong>ویدئوی شخصی</strong> — یک ویدئوی ۳۰-۶۰ ثانیه‌ای ضبط کنید درباره موضع‌تون برای صلح <span
+                            class="tag">۴۰ امتیاز</span></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ═══ TWITTER STORM ═══ -->
+        <section id="storm" class="section">
+            <div class="section-header">
+                <div class="section-icon yellow">🌩️</div>
+                <h2>طوفان توییتری چیست؟</h2>
+            </div>
+            <div class="card">
+                <p>
+                    طوفان توییتری یک رویداد زمان‌بندی‌شده است که در آن همه داوطلبان <strong>همزمان</strong> توییت می‌زنن
+                    تا هشتگ کمپین رو ترند کنن. ربات بهتون اطلاع می‌ده و نمونه توییت‌های آماده ارائه می‌ده.
+                </p>
+            </div>
+            <div class="card">
+                <h3>📌 نحوه شرکت</h3>
+                <ol class="steps">
+                    <li>وارد ربات بشید و دستور <strong>/storms</strong> رو بزنید</li>
+                    <li>طوفان‌های آینده رو ببینید — زمان و هشتگ‌ها نمایش داده می‌شه</li>
+                    <li>دکمه <strong>«✊ آماده‌ام!»</strong> رو بزنید تا آمادگیتون ثبت بشه</li>
+                    <li>سر ساعت مشخص‌شده، توییت‌هاتون رو بفرستید</li>
+                    <li>لینک توییتتون رو به ربات بدید تا امتیاز بگیرید</li>
+                </ol>
+            </div>
+            <div class="callout">
+                <strong>🎯 هشتگ‌ها:</strong> #CeaseFireNow &nbsp; #StopWarOnIran &nbsp; #PeaceForIran<br>
+                <strong>🏷️ اکانت‌های هدف:</strong> @UN &nbsp; @POTUS &nbsp; @EU_Commission &nbsp; @amnesty
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ═══ READY MESSAGES ═══ -->
+        <section id="messages" class="section">
+            <div class="section-header">
+                <div class="section-icon red">📨</div>
+                <h2>پیام‌های آماده برای اشتراک‌گذاری</h2>
+            </div>
+            <div class="card">
+                <p>پیام‌های زیر آماده کپی هستن. روی هر کادر کلیک کنید تا متن کپی بشه. بعد توی گروه‌ها یا پیام شخصی
+                    بفرستید.</p>
+            </div>
+
+            <!-- MSG 1 -->
+            <div class="card">
+                <h3>📝 پیام ۱ — معرفی رسمی (برای گروه‌های تلگرام)</h3>
+                <div class="msg-box" onclick="copyMsg(this)">
+                    <span class="copy-hint">کلیک برای کپی 📋</span>🕊️ صلح، نه جنگ
+
+                    سلام دوستان عزیز،
+
+                    ما یه پلتفرم ساختیم برای هماهنگ کردن صدای مردم عادی در شبکه‌های اجتماعی. هدفمون اینه که با یک صدای
+                    واحد، پیام صلح و آتش‌بس رو به گوش جهان برسونیم.
+
+                    📌 چطور کار می‌کنه؟
+                    ۱. روی لینک زیر کلیک کنید
+                    ۲. توی ربات تلگرام ثبت‌نام کنید (۳۰ ثانیه)
+                    ۳. تسک‌های ساده‌ای مثل توییت زدن یا ریتوییت رو انجام بدید
+                    ۴. امتیاز بگیرید و تأثیرتون رو ببینید
+
+                    🔗 همین الان شروع کنید:
+                    https://t.me/peopleforpeacebot?start=campaign_16
+
+                    #CeaseFireNow #StopWarOnIran
+                </div>
+            </div>
+
+            <!-- MSG 2 -->
+            <div class="card">
+                <h3>⚡ پیام ۲ — کوتاه و تأثیرگذار</h3>
+                <div class="msg-box" onclick="copyMsg(this)">
+                    <span class="copy-hint">کلیک برای کپی 📋</span>🕊️ می‌خوای صدات به گوش دنیا برسه؟
+
+                    با یه کلیک عضو کمپین #CeaseFireNow بشو و با توییت‌ها و پیام‌هات صدای صلح رو بلندتر کن.
+
+                    ⏱ فقط ۲ دقیقه وقتت رو می‌گیره.
+
+                    👇 شروع کن:
+                    https://t.me/peopleforpeacebot?start=campaign_16
+                </div>
+            </div>
+
+            <!-- MSG 3 -->
+            <div class="card">
+                <h3>💬 پیام ۳ — پیام شخصی به دوست</h3>
+                <div class="msg-box" onclick="copyMsg(this)">
+                    <span class="copy-hint">کلیک برای کپی 📋</span>سلام 👋
+
+                    یه پروژه‌ای داریم که داره صدای مردم رو برای صلح هماهنگ می‌کنه. خیلی ساده‌ست — یه ربات تلگرامی هست که
+                    بهت تسک‌های کوچیک می‌ده (مثلاً یه توییت بزن یا یه پست رو ریتوییت کن) و با هم یه موج درست می‌کنیم.
+
+                    اگه دوست داری کمک کنی، این لینک رو بزن:
+                    https://t.me/peopleforpeacebot?start=campaign_16
+
+                    هر کاری بتونی بکنی — حتی یه توییت — کمک بزرگیه 🙏
+                </div>
+            </div>
+
+            <!-- MSG 4 -->
+            <div class="card">
+                <h3>🔴 پیام ۴ — لحن فعالیتی (برای گروه‌های سیاسی)</h3>
+                <div class="msg-box" onclick="copyMsg(this)">
+                    <span class="copy-hint">کلیک برای کپی 📋</span>🔴 آتش‌بس، همین الان
+
+                    جنگ ادامه داره و صدای مردم عادی گم شده. ما یه ابزار ساختیم که به جای شعار دادن، عمل‌گرایانه صدای ما
+                    رو هماهنگ کنه.
+
+                    📣 کمپین «آتش‌بس فوری» روی پلتفرم People for Peace:
+                    - توییت‌های هماهنگ با هشتگ #CeaseFireNow
+                    - تگ کردن @UN و @POTUS
+                    - طوفان توییتری (Twitter Storm) با زمان‌بندی مشخص
+
+                    هر نفر مهمه. عضو شو:
+                    https://t.me/peopleforpeacebot?start=campaign_16
+                </div>
+            </div>
+
+            <!-- MSG 5 -->
+            <div class="card">
+                <h3>🤝 پیام ۵ — جذب همکاران کلیدی</h3>
+                <div class="msg-box" onclick="copyMsg(this)">
+                    <span class="copy-hint">کلیک برای کپی 📋</span>سلام،
+
+                    یه کمپین صلح داریم روی تلگرام و توییتر. الان ۴۲ نفر عضویم و هدفمون ۲۰۰ نفره.
+
+                    دنبال چند نفر می‌گردم که بتونن:
+                    - روزی ۱۰ دقیقه وقت بذارن
+                    - خودشونم لینک رو بفرستن توی گروه‌هاشون
+                    - توی طوفان‌های توییتری شرکت کنن
+
+                    اگه حاضری کمک کنی، اول خودت ثبت‌نام کن:
+                    https://t.me/peopleforpeacebot?start=campaign_16
+
+                    بعدش بهت دسترسی بیشتر می‌دم 🙏
+                </div>
+            </div>
+
+            <!-- MSG 6 -->
+            <div class="card">
+                <h3>🌩️ پیام ۶ — اعلام طوفان توییتری</h3>
+                <div class="msg-box" onclick="copyMsg(this)">
+                    <span class="copy-hint">کلیک برای کپی 📋</span>🌩️ طوفان توییتری — فردا ساعت ۲۲:۳۰ به وقت ایران
+
+                    📋 مأموریت:
+                    - هشتگ: #CeaseFireNow #StopWarOnIran
+                    - تگ: @UN @POTUS @EU_Commission
+                    - مدت: ۱ ساعت
+
+                    📌 چطور شرکت کنم؟
+                    ۱. وارد ربات شو: https://t.me/peopleforpeacebot?start=campaign_16
+                    ۲. دستور /storms رو بزن
+                    ۳. دکمه «✊ آماده‌ام!» رو بزن
+                    ۴. سر ساعت توییت‌هات رو بفرست
+
+                    هر توییت یه قدم به سمت صلح 🕊️
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ FOR AFFILIATES ═══ -->
+        <section id="affiliates" class="section">
+            <div class="section-header">
+                <div class="section-icon blue">🤝</div>
+                <h2>راهنما برای همکاران و هم‌پیمانان</h2>
+            </div>
+            <div class="card">
+                <h3>🎯 اگر ادمین یک گروه هستید</h3>
+                <ol class="steps">
+                    <li>اول خودتان ثبت‌نام کنید تا تجربه کاربری را ببینید</li>
+                    <li><strong>پیام ۱</strong> (معرفی رسمی) را در گروه‌تان پین کنید</li>
+                    <li>چند روز بعد <strong>پیام ۲</strong> (کوتاه) را بفرستید به عنوان یادآوری</li>
+                    <li>قبل از هر طوفان توییتری، <strong>پیام ۶</strong> را بفرستید</li>
+                </ol>
+            </div>
+            <div class="card">
+                <h3>📊 اگر می‌خواهید ادمین کمپین شوید</h3>
+                <ol class="steps">
+                    <li>ثبت‌نام کنید و حداقل ۳ تسک را انجام بدید</li>
+                    <li>حداقل ۵ نفر جدید را دعوت کنید</li>
+                    <li>با مدیر کمپین تماس بگیرید برای دریافت دسترسی مدیریتی</li>
+                </ol>
+            </div>
+            <div class="callout warn">
+                <strong>⚠️ مهم:</strong> لطفاً پیام‌ها را بدون اسپم بفرستید. همیشه اول توضیح بدید چرا این کمپین مهمه بعد
+                لینک رو بذارید. اسپم کردن باعث بن شدن از گروه‌ها می‌شه.
+            </div>
+        </section>
+
+        <!-- ═══ FAQ ═══ -->
+        <section id="faq" class="section">
+            <div class="section-header">
+                <div class="section-icon green">❓</div>
+                <h2>سؤالات متداول</h2>
+            </div>
+            <div class="card">
+                <h3>آیا رایگانه؟</h3>
+                <p>بله، کاملاً رایگان. هیچ هزینه‌ای نداره.</p>
+            </div>
+            <div class="card">
+                <h3>آیا باید حتماً توییتر داشته باشم؟</h3>
+                <p>نه. تسک‌هایی برای تلگرام و اینستاگرام هم هست. اما توییتر بیشترین تأثیر رو داره.</p>
+            </div>
+            <div class="card">
+                <h3>چقدر وقت لازمه؟</h3>
+                <p>هر تسک بین ۲ تا ۱۵ دقیقه وقت می‌بره. حتی یک توییت هم کمک بزرگیه.</p>
+            </div>
+            <div class="card">
+                <h3>آیا اطلاعاتم امنه؟</h3>
+                <p>فقط اسم شما لازمه. هیچ اطلاعات حساسی گرفته نمی‌شه و از داده‌هاتون محافظت می‌شه.</p>
+            </div>
+            <div class="card">
+                <h3>امتیازها به چه دردی می‌خورن؟</h3>
+                <p>امتیازها نشون‌دهنده میزان تأثیر شماست. بالاترین امتیازها = فعال‌ترین داوطلبان. برای شناسایی و تقدیر
+                    استفاده می‌شن.</p>
+            </div>
+        </section>
+
+        <!-- ═══ FINAL CTA ═══ -->
+        <section style="text-align:center; padding: 2rem 0 1rem">
+            <p style="font-size:1.1rem; margin-bottom:1rem; font-weight:600">هر صدا مهمه. صدای خودت رو اضافه کن 🕊️</p>
+            <a href="https://t.me/peopleforpeacebot?start=campaign_16" class="cta-btn" target="_blank">
+                ✊ عضو کمپین شو
+            </a>
+        </section>
+
+        <footer class="footer">
+            People for Peace &middot; ۲۰۲۶ &middot; صلح، نه جنگ
+        </footer>
+    </main>
+
+    <script>
+        function copyMsg(el) {
+            // Get just the text without the copy hint
+            const hint = el.querySelector('.copy-hint');
+            const hintText = hint ? hint.textContent : '';
+            const fullText = el.textContent.replace(hintText, '').trim();
+
+            navigator.clipboard.writeText(fullText).then(() => {
+                el.classList.add('copied');
+                hint.textContent = '✅ کپی شد!';
+                setTimeout(() => {
+                    el.classList.remove('copied');
+                    hint.textContent = 'کلیک برای کپی 📋';
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = fullText;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                el.classList.add('copied');
+                hint.textContent = '✅ کپی شد!';
+                setTimeout(() => {
+                    el.classList.remove('copied');
+                    hint.textContent = 'کلیک برای کپی 📋';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>

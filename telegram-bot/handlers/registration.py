@@ -60,8 +60,7 @@ async def handle_text_message(update: Update, context: CallbackContext):
 
     # Check if user is in registration flow
     from apps.telegram.models import TelegramSession
-    if session.state in [TelegramSession.State.AWAITING_EMAIL,
-                         TelegramSession.State.AWAITING_NAME,
+    if session.state in [TelegramSession.State.AWAITING_NAME,
                          TelegramSession.State.AWAITING_CONFIRMATION]:
         # Handle registration flow
         registration_complete = await state_manager.handle_registration_flow(update, context, session)
