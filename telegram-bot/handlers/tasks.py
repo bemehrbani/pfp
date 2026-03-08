@@ -111,7 +111,7 @@ def _db_get_task(task_id):
 
 @sync_to_async
 def _db_validate_and_claim(user, task_id):
-    """Validate and claim task in a single sync block. Returns (assignment, error_msg)."""
+    """Validate, claim AND start task in one step. Returns (assignment, error_msg)."""
     from apps.tasks.models import Task, TaskAssignment
     from apps.campaigns.models import CampaignVolunteer
 
@@ -123,14 +123,15 @@ def _db_validate_and_claim(user, task_id):
     if not CampaignVolunteer.objects.filter(campaign=task.campaign, volunteer=user).exists():
         return None, "❌ You need to join this campaign first to claim its tasks."
 
-    if TaskAssignment.objects.filter(task=task, volunteer=user).exists():
-        return None, f"✅ You've already claimed *{task.title}*!"
+    existing = TaskAssignment.objects.filter(task=task, volunteer=user).first()
+    if existing:
+        return existing, None  # Return existing assignment (already claimed)
 
     assignment = TaskAssignment.objects.create(
         task=task,
         campaign=task.campaign,
         volunteer=user,
-        status='assigned'
+        status='in_progress'  # Skip 'assigned', go straight to 'in_progress'
     )
 
     return assignment, None
@@ -188,8 +189,16 @@ def _db_submit_proof(assignment_id, user, proof_type, proof_content):
             volunteer=user,
             status='in_progress'
         )
-        assignment.status = 'submitted'
-        assignment.save(update_fields=['status'])
+        assignment.status = 'completed'
+        # Save proof based on type
+        if proof_type == 'url':
+            assignment.proof_url = proof_content
+        elif proof_type == 'text':
+            assignment.proof_text = proof_content
+        update_fields = ['status', 'proof_url', 'proof_text', 'completed_at']
+        from django.utils import timezone
+        assignment.completed_at = timezone.now()
+        assignment.save(update_fields=update_fields)
         return assignment, None
     except TaskAssignment.DoesNotExist:
         return None, "Task assignment not found or already completed."
@@ -240,18 +249,19 @@ async def tasks_command(update: Update, context: CallbackContext):
     keyboard = []
 
     for i, task in enumerate(tasks, 1):
-        message += f"*{i}. {task.title}*\n"
+        type_icon = _get_task_type_icon(task.task_type)
+        message += f"*{i}. {type_icon} {task.title}*\n"
         message += f"   Campaign: {task.campaign.name}\n"
-        message += f"   Points: {task.points}\n\n"
+        message += f"   🏆 {task.points} pts  ⏱ {task.estimated_time} min\n\n"
 
         keyboard.append([
             InlineKeyboardButton(
-                f"Claim: {task.title[:20]}...",
+                f"{type_icon} {task.title[:30]}",
                 callback_data=f"task_claim_{task.id}"
             )
         ])
 
-    message += "Click a button below to claim a task."
+    message += "Tap a task to see details and start."
 
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(message, reply_markup=reply_markup, parse_mode='Markdown')
@@ -359,6 +369,47 @@ async def claimtask_command(update: Update, context: CallbackContext):
     )
 
 
+def _get_task_type_icon(task_type: str) -> str:
+    """Get emoji icon for task type."""
+    icons = {
+        'twitter_post': '🐦',
+        'twitter_retweet': '🔁',
+        'twitter_like': '❤️',
+        'telegram_share': '📢',
+        'telegram_invite': '👥',
+        'content_creation': '✍️',
+        'research': '🔍',
+        'other': '📌',
+    }
+    return icons.get(task_type, '📌')
+
+
+def _generate_sample_tweet(task) -> str:
+    """Generate a sample tweet for Twitter tasks."""
+    hashtags = task.hashtags.strip() if task.hashtags else ''
+    mentions = task.mentions.strip() if task.mentions else ''
+
+    # Build sample tweet based on task type
+    if task.task_type == 'twitter_post':
+        samples = [
+            f"I stand for peace. Stop the war against Iran. Diplomacy over destruction.",
+            f"Enough is enough. The people of Iran deserve peace, not bombs.",
+            f"Peace is not weakness — it's strength. Stand with Iran.",
+        ]
+        import random
+        base = random.choice(samples)
+        parts = [base]
+        if mentions:
+            parts.append(mentions)
+        if hashtags:
+            parts.append(hashtags)
+        return ' '.join(parts)
+    elif task.task_type == 'twitter_retweet':
+        return f"Search for tweets with {hashtags} and retweet at least 3."
+    else:
+        return ''
+
+
 async def task_callback_handler(update: Update, context: CallbackContext):
     """Handle callback queries for task actions."""
     query = update.callback_query
@@ -372,7 +423,7 @@ async def task_callback_handler(update: Update, context: CallbackContext):
 
     if callback_data.startswith('task_claim_'):
         task_id = int(callback_data.split('_')[-1])
-        await handle_task_claim(query, session, task_id)
+        await handle_task_detail(query, session, task_id)
     elif callback_data.startswith('task_start_'):
         assignment_id = int(callback_data.split('_')[-1])
         await handle_task_start(query, session, assignment_id)
@@ -381,10 +432,50 @@ async def task_callback_handler(update: Update, context: CallbackContext):
         await start_task_proof_submission(query, session, assignment_id, context)
 
 
-async def handle_task_claim(query, session, task_id):
-    """Handle task claim from inline button."""
+async def handle_task_detail(query, session, task_id):
+    """Show full task details with description, instructions, and a Start button."""
     if not session.user:
-        await query.edit_message_text("You need to register first.")
+        await query.edit_message_text("You need to register first. Use /start")
+        return
+
+    task = await _db_get_task(task_id)
+    if not task:
+        await query.edit_message_text("❌ Task not found.", parse_mode='Markdown')
+        return
+
+    type_icon = _get_task_type_icon(task.task_type)
+
+    # Build the detail message
+    msg = f"{type_icon} *{task.title}*\n\n"
+    msg += f"{task.description}\n\n"
+    msg += f"📝 *Instructions:*\n{task.instructions}\n\n"
+
+    # Show hashtags/mentions for Twitter tasks
+    if task.hashtags:
+        msg += f"#️⃣ *Hashtags:* {task.hashtags}\n"
+    if task.mentions:
+        msg += f"@️ *Mentions:* {task.mentions}\n"
+    if task.target_url:
+        msg += f"🔗 *Link:* {task.target_url}\n"
+
+    msg += f"\n🏆 *Points:* {task.points}  ⏱ *Est:* {task.estimated_time} min\n"
+    msg += f"👥 *Slots:* {task.max_assignments - task.current_assignments} remaining\n"
+
+    keyboard = [[
+        InlineKeyboardButton(
+            "✅ Start This Task",
+            callback_data=f"task_startclaim_{task.id}"
+        )
+    ]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    await query.edit_message_text(msg, reply_markup=reply_markup, parse_mode='Markdown')
+
+
+async def handle_task_start_and_guide(query, session, task_id, context):
+    """Claim + start task and show guidance (sample tweet for Twitter tasks)."""
+    if not session.user:
+        await query.edit_message_text("You need to register first. Use /start")
         return
 
     assignment, error = await _db_validate_and_claim(session.user, task_id)
@@ -393,18 +484,68 @@ async def handle_task_claim(query, session, task_id):
         return
 
     task = assignment.task
-    await query.edit_message_text(
-        f"✅ *Task Claimed Successfully!*\n\n"
-        f"*Task:* {task.title}\n"
-        f"*Campaign:* {task.campaign.name}\n"
-        f"*Points:* {task.points}\n\n"
-        f"Use `/mytasks` to start working on this task.",
-        parse_mode='Markdown'
+    type_icon = _get_task_type_icon(task.task_type)
+
+    # Set session state so we can receive proof as a plain message
+    context.user_data['proof_submission'] = {
+        'assignment_id': assignment.id,
+        'task_title': task.title,
+        'task_type': task.task_type
+    }
+
+    from apps.telegram.models import TelegramSession
+    await _db_update_session_state(
+        session,
+        TelegramSession.State.AWAITING_TASK_PROOF,
+        {'assignment_id': assignment.id}
     )
+
+    # Build guidance message based on task type
+    if task.task_type in ('twitter_post', 'twitter_retweet'):
+        sample = _generate_sample_tweet(task)
+        msg = f"🚀 *Task Started!*\n\n"
+        msg += f"{type_icon} *{task.title}*\n\n"
+
+        if task.task_type == 'twitter_post':
+            msg += f"📝 *Here's a sample tweet you can customize:*\n\n"
+            msg += f"```\n{sample}\n```\n\n"
+            msg += f"👉 Copy, customize & post it on Twitter/X\n\n"
+        elif task.task_type == 'twitter_retweet':
+            msg += f"📝 *What to do:*\n{sample}\n\n"
+
+        msg += f"✅ *When done, paste your tweet URL below*\n"
+        msg += f"(e.g. https://x.com/yourname/status/123...)\n\n"
+        msg += f"Type /cancel to cancel."
+
+    elif task.task_type == 'telegram_share':
+        msg = f"🚀 *Task Started!*\n\n"
+        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"📝 *What to do:*\n{task.instructions}\n\n"
+        msg += f"✅ *When done, paste the message link or send a screenshot*\n\n"
+        msg += f"Type /cancel to cancel."
+
+    elif task.task_type == 'telegram_invite':
+        msg = f"🚀 *Task Started!*\n\n"
+        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"📝 *What to do:*\n{task.instructions}\n\n"
+        msg += f"👉 Share this link: https://t.me/peopleforpeacebot\n\n"
+        msg += f"✅ *When done, send the username of the person you invited*\n\n"
+        msg += f"Type /cancel to cancel."
+
+    else:  # content_creation, research, other
+        msg = f"🚀 *Task Started!*\n\n"
+        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"📝 *What to do:*\n{task.instructions}\n\n"
+        msg += f"✅ *When done, send your proof (text, link, or screenshot)*\n\n"
+        msg += f"Type /cancel to cancel."
+
+    await query.edit_message_text(msg, parse_mode='Markdown')
+
+    return AWAITING_TASK_PROOF
 
 
 async def handle_task_start(query, session, assignment_id):
-    """Handle task start from inline button."""
+    """Handle task start from /mytasks inline button (legacy)."""
     if not session.user:
         await query.edit_message_text("You need to register first.")
         return
@@ -492,8 +633,14 @@ async def receive_task_proof(update: Update, context: CallbackContext):
 
     proof_content = ""
     if update.message.text:
-        proof_content = update.message.text
-        proof_type = "text"
+        text = update.message.text.strip()
+        # Check if it's a URL (Twitter/X proof)
+        if any(domain in text.lower() for domain in ['twitter.com/', 'x.com/', 't.me/', 'https://']):
+            proof_type = "url"
+            proof_content = text
+        else:
+            proof_type = "text"
+            proof_content = text
     elif update.message.photo:
         proof_content = "Photo proof submitted"
         proof_type = "photo"
@@ -628,9 +775,25 @@ async def cancel_conversation(update: Update, context: CallbackContext):
     return ConversationHandler.END
 
 
+async def start_task_from_detail(update: Update, context: CallbackContext):
+    """Entry point wrapper for ConversationHandler when starting a task from detail view."""
+    query = update.callback_query
+    await query.answer()
+
+    user = update.effective_user
+    chat_id = update.effective_chat.id
+    session, created = await _get_session(user, chat_id)
+
+    task_id = int(query.data.split('_')[-1])
+    return await handle_task_start_and_guide(query, session, task_id, context)
+
+
 # Conversation handler for task proof submission
 task_proof_conversation = ConversationHandler(
-    entry_points=[CallbackQueryHandler(start_task_proof_submission, pattern='^task_submit_')],
+    entry_points=[
+        CallbackQueryHandler(start_task_proof_submission, pattern='^task_submit_'),
+        CallbackQueryHandler(start_task_from_detail, pattern='^task_startclaim_'),
+    ],
     states={
         AWAITING_TASK_PROOF: [
             MessageHandler(filters.TEXT & ~filters.COMMAND, receive_task_proof),
@@ -647,7 +810,9 @@ task_proof_conversation = ConversationHandler(
 )
 
 # Handler registration
+# IMPORTANT: task_proof_conversation must come BEFORE task_callback_handler
+# so that task_startclaim_ is handled by the ConversationHandler first
 task_handlers = [
+    task_proof_conversation,
     CallbackQueryHandler(task_callback_handler, pattern='^task_'),
-    task_proof_conversation
 ]

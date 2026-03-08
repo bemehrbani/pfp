@@ -337,21 +337,29 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
         )
         return
 
+    # Task type icons
+    type_icons = {
+        'twitter_post': '🐦', 'twitter_retweet': '🔁', 'twitter_like': '❤️',
+        'telegram_share': '📢', 'telegram_invite': '👥',
+        'content_creation': '✍️', 'research': '🔍', 'other': '📌',
+    }
+
     message = f"🎯 *Tasks for {campaign.name}*\n\n"
     keyboard = []
 
     for i, task in enumerate(tasks, 1):
-        message += f"*{i}. {task.title}*\n"
-        message += f"   Points: {task.points}\n\n"
+        icon = type_icons.get(task.task_type, '📌')
+        message += f"*{i}. {icon} {task.title}*\n"
+        message += f"   🏆 {task.points} pts  ⏱ {task.estimated_time} min\n\n"
 
         keyboard.append([
             InlineKeyboardButton(
-                f"Claim: {task.title[:25]}...",
+                f"{icon} {task.title[:30]}",
                 callback_data=f"task_claim_{task.id}"
             )
         ])
 
-    message += "Click a button to claim a task."
+    message += "Tap a task to see details and start."
 
     reply_markup = InlineKeyboardMarkup(keyboard)
     await query.edit_message_text(
