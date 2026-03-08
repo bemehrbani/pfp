@@ -384,30 +384,29 @@ def _get_task_type_icon(task_type: str) -> str:
     return icons.get(task_type, '📌')
 
 
-def _generate_sample_tweet(task) -> str:
-    """Generate a sample tweet for Twitter tasks."""
+def _get_sample_tweets(task) -> list[str]:
+    """Get sample tweets for Twitter tasks. Returns list of ready-to-post tweets."""
     hashtags = task.hashtags.strip() if task.hashtags else ''
     mentions = task.mentions.strip() if task.mentions else ''
+    suffix_parts = []
+    if mentions:
+        suffix_parts.append(mentions)
+    if hashtags:
+        suffix_parts.append(hashtags)
+    suffix = ' '.join(suffix_parts)
 
-    # Build sample tweet based on task type
     if task.task_type == 'twitter_post':
-        samples = [
-            f"I stand for peace. Stop the war against Iran. Diplomacy over destruction.",
-            f"Enough is enough. The people of Iran deserve peace, not bombs.",
-            f"Peace is not weakness — it's strength. Stand with Iran.",
+        bases = [
+            "I stand for peace. Stop the war against Iran. Diplomacy over destruction.",
+            "Enough is enough. The people of Iran deserve peace, not bombs.",
+            "Peace is not weakness — it's strength. Stand with Iran.",
+            "The world must choose diplomacy. War is never the answer. Protect innocent lives.",
+            "Civilians are paying the price for political decisions. Demand a ceasefire now.",
         ]
-        import random
-        base = random.choice(samples)
-        parts = [base]
-        if mentions:
-            parts.append(mentions)
-        if hashtags:
-            parts.append(hashtags)
-        return ' '.join(parts)
+        return [f"{b} {suffix}".strip() for b in bases]
     elif task.task_type == 'twitter_retweet':
-        return f"Search for tweets with {hashtags} and retweet at least 3."
-    else:
-        return ''
+        return [f"Search for tweets with {hashtags} and retweet at least 3."]
+    return []
 
 
 async def task_callback_handler(update: Update, context: CallbackContext):
@@ -502,16 +501,17 @@ async def handle_task_start_and_guide(query, session, task_id, context):
 
     # Build guidance message based on task type
     if task.task_type in ('twitter_post', 'twitter_retweet'):
-        sample = _generate_sample_tweet(task)
+        samples = _get_sample_tweets(task)
         msg = f"🚀 *Task Started!*\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
 
         if task.task_type == 'twitter_post':
-            msg += f"📝 *Here's a sample tweet you can customize:*\n\n"
-            msg += f"```\n{sample}\n```\n\n"
-            msg += f"👉 Copy, customize & post it on Twitter/X\n\n"
+            msg += f"📝 *Pick a tweet or write your own:*\n\n"
+            for idx, tweet in enumerate(samples, 1):
+                msg += f"*{idx}.* `{tweet}`\n\n"
+            msg += f"👉 Copy one, customize it & post on Twitter/X\n\n"
         elif task.task_type == 'twitter_retweet':
-            msg += f"📝 *What to do:*\n{sample}\n\n"
+            msg += f"📝 *What to do:*\n{samples[0]}\n\n"
 
         msg += f"✅ *When done, paste your tweet URL below*\n"
         msg += f"(e.g. https://x.com/yourname/status/123...)\n\n"
