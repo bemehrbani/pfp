@@ -103,7 +103,7 @@ def get_available_tasks(campaign_ids):
     return list(Task.objects.filter(
         campaign_id__in=campaign_ids,
         status='active',
-        task_type__in=['twitter_post', 'twitter_retweet']
+        task_type__in=['twitter_post', 'twitter_retweet', 'twitter_comment']
     ).select_related('campaign'))
 
 

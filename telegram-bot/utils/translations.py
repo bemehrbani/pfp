@@ -251,6 +251,16 @@ TRANSLATIONS = {
         "fa": "📝 *چه کاری انجام دهید:*",
         "ar": "📝 *ما يجب فعله:*",
     },
+    "comment_target_tweet": {
+        "en": "🔗 *Tweet to comment on:*",
+        "fa": "🔗 *توییتی که باید روی آن نظر بدهید:*",
+        "ar": "🔗 *التغريدة للتعليق عليها:*",
+    },
+    "comment_paste_reply_url": {
+        "en": "✅ *When done, paste your reply/comment URL below*\n(e.g. https://x.com/yourname/status/123...)",
+        "fa": "✅ *وقتی تمام شد، لینک پاسخ/نظر خود را در زیر بگذارید*\n(مثلاً https://x.com/yourname/status/123...)",
+        "ar": "✅ *عند الانتهاء، الصق رابط ردك/تعليقك أدناه*\n(مثلاً https://x.com/yourname/status/123...)",
+    },
     "task_paste_proof": {
         "en": "✅ *When done, paste the message link or send a screenshot*",
         "fa": "✅ *وقتی تمام شد، لینک پیام یا اسکرین‌شات بفرستید*",

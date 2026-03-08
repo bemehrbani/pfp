@@ -382,6 +382,7 @@ def _get_task_type_icon(task_type: str) -> str:
     icons = {
         'twitter_post': '🐦',
         'twitter_retweet': '🔁',
+        'twitter_comment': '💬',
         'twitter_like': '❤️',
         'telegram_share': '📢',
         'telegram_invite': '👥',
@@ -526,6 +527,17 @@ async def handle_task_start_and_guide(query, session, task_id, context):
             msg += f"{t('tweet_what_to_do', lang)}\n{samples[0]}\n\n"
 
         msg += f"{t('tweet_paste_url', lang)}\n\n"
+        msg += t('cancel_hint', lang)
+
+    elif task.task_type == 'twitter_comment':
+        msg = f"{t('task_started', lang)}\n\n"
+        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"{t('tweet_what_to_do', lang)}\n{task.instructions}\n\n"
+        if task.target_url:
+            msg += f"{t('comment_target_tweet', lang)}\n{task.target_url}\n\n"
+        if task.hashtags:
+            msg += f"{t('task_hashtags', lang)} {task.hashtags}\n\n"
+        msg += f"{t('comment_paste_reply_url', lang)}\n\n"
         msg += t('cancel_hint', lang)
 
     elif task.task_type == 'telegram_share':

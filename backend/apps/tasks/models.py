@@ -17,6 +17,7 @@ class Task(models.Model):
     class TaskType(models.TextChoices):
         TWITTER_POST = 'twitter_post', _('Twitter Post')
         TWITTER_RETWEET = 'twitter_retweet', _('Twitter Retweet')
+        TWITTER_COMMENT = 'twitter_comment', _('Twitter Comment')
         TWITTER_LIKE = 'twitter_like', _('Twitter Like')
         TELEGRAM_SHARE = 'telegram_share', _('Telegram Share')
         TELEGRAM_INVITE = 'telegram_invite', _('Telegram Invite')
