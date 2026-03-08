@@ -124,7 +124,9 @@ def _db_validate_and_claim(user, task_id):
     if not CampaignVolunteer.objects.filter(campaign=task.campaign, volunteer=user).exists():
         return None, "❌ You need to join this campaign first to claim its tasks."
 
-    existing = TaskAssignment.objects.filter(task=task, volunteer=user).first()
+    existing = TaskAssignment.objects.filter(
+        task=task, volunteer=user
+    ).select_related('task', 'task__campaign').first()
     if existing:
         return existing, None  # Return existing assignment (already claimed)
 
@@ -134,6 +136,11 @@ def _db_validate_and_claim(user, task_id):
         volunteer=user,
         status='in_progress'  # Skip 'assigned', go straight to 'in_progress'
     )
+
+    # Refetch with select_related so task FK is cached for async access
+    assignment = TaskAssignment.objects.select_related(
+        'task', 'task__campaign'
+    ).get(id=assignment.id)
 
     return assignment, None
 
