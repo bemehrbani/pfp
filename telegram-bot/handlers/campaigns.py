@@ -329,8 +329,10 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
     @sync_to_async
     def _get_campaign_tasks(cid):
         from apps.tasks.models import Task
+        # Only show Twitter storm tasks for now — remove task_type filter to show all
         return list(Task.objects.filter(
-            campaign_id=cid, is_active=True
+            campaign_id=cid, is_active=True,
+            task_type__in=['twitter_post', 'twitter_retweet']
         ).order_by('-points')[:10])
 
     tasks = await _get_campaign_tasks(campaign_id)

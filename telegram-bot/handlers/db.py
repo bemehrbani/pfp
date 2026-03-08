@@ -99,9 +99,11 @@ def join_campaign(campaign, user):
 def get_available_tasks(campaign_ids):
     """Get available tasks for given campaign IDs."""
     from apps.tasks.models import Task
+    # Only show Twitter storm tasks for now — remove task_type filter to show all
     return list(Task.objects.filter(
         campaign_id__in=campaign_ids,
-        status='active'
+        status='active',
+        task_type__in=['twitter_post', 'twitter_retweet']
     ).select_related('campaign'))
 
 
