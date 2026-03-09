@@ -203,13 +203,23 @@ class ConversationStateManager:
 
     async def _handle_name_input(self, update: Update, context: CallbackContext, session):
         """Handle name input during registration."""
+        from utils.translations import t, get_keyboard_buttons
+        from telegram import ReplyKeyboardMarkup
+
         name = update.message.text.strip()
+        lang = getattr(session, 'language', 'en') or 'en'
 
         if len(name) < 2:
-            await update.message.reply_text(
-                "❌ Please enter a valid name (at least 2 characters)."
-            )
+            await update.message.reply_text(t('register_name_invalid', lang))
             return False
+
+        # Read deep-link campaign ID BEFORE clearing temp_data
+        @sync_to_async
+        def _read_deeplink():
+            session.refresh_from_db(fields=['temp_data'])
+            return (session.temp_data or {}).get('deeplink_campaign_id')
+
+        deeplink_campaign_id = await _read_deeplink()
 
         # Create user account (no email needed — Telegram ID is the identifier)
         @sync_to_async
@@ -238,28 +248,97 @@ class ConversationStateManager:
         try:
             user = await _create_user()
 
+            # Translated success message
             await update.message.reply_text(
-                f"🎉 *Registration Complete!*\n\n"
-                f"Welcome to People for Peace, {name}!\n\n"
-                f"*Your account details:*\n"
-                f"• Name: {name}\n"
-                f"• Role: Volunteer\n"
-                f"• Telegram: @{session.telegram_username or 'Not set'}\n\n"
-                f"*Next steps:*\n"
-                f"1. Use `/campaigns` to browse available campaigns\n"
-                f"2. Join a campaign to start earning points\n"
-                f"3. Use `/help` for a list of commands",
+                t('register_success', lang).format(name=name),
                 parse_mode='Markdown'
             )
+
+            # Re-send keyboard so the user has navigation buttons
+            keyboard = get_keyboard_buttons(lang)
+            reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+            await context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text="⬇️",
+                reply_markup=reply_markup,
+            )
+
+            # Auto-join campaign from deep-link (if present)
+            if deeplink_campaign_id:
+                await self._auto_join_campaign(
+                    update, context, session, user, deeplink_campaign_id, lang
+                )
 
             return True
 
         except Exception as exc:
             logger.error(f"Failed to create user: {exc}")
-            await update.message.reply_text(
-                "❌ Failed to create account. Please try again or contact support."
-            )
+            await update.message.reply_text(t('register_error', lang))
             return False
+
+    async def _auto_join_campaign(self, update, context, session, user, campaign_id, lang):
+        """Auto-join a campaign after registration and show its tasks."""
+        from utils.translations import t
+        from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+        from handlers.campaigns import (
+            _get_campaign, _is_volunteer, _join_campaign, _get_task_count
+        )
+
+        campaign = await _get_campaign(campaign_id)
+        if not campaign:
+            return
+
+        already_joined = await _is_volunteer(campaign, user)
+        if already_joined:
+            return
+
+        member_count = await _join_campaign(campaign, user)
+        task_count = await _get_task_count(campaign)
+
+        # Get tasks for inline buttons
+        @sync_to_async
+        def _get_tasks(cid):
+            from apps.tasks.models import Task
+            return list(Task.objects.filter(
+                campaign_id=cid, is_active=True,
+            ).order_by('-points')[:10])
+
+        tasks = await _get_tasks(campaign_id)
+
+        # Build message with task buttons
+        text = t('auto_joined_campaign', lang).format(
+            name=campaign.name,
+            description=campaign.short_description,
+            members=member_count,
+            target=campaign.target_members,
+            tasks=task_count,
+        )
+
+        keyboard = []
+        type_icons = {
+            'twitter_post': '🐦', 'twitter_retweet': '🔁', 'twitter_comment': '💬',
+            'twitter_like': '❤️', 'telegram_share': '📢', 'telegram_invite': '👥',
+            'content_creation': '✍️', 'other': '📌',
+        }
+        for task in tasks:
+            icon = type_icons.get(task.task_type, '📌')
+            keyboard.append([
+                InlineKeyboardButton(
+                    f"{icon} {task.title[:35]}",
+                    callback_data=f"task_claim_{task.id}"
+                )
+            ])
+
+        reply_markup = InlineKeyboardMarkup(keyboard) if keyboard else None
+
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=text,
+            reply_markup=reply_markup,
+            parse_mode='Markdown'
+        )
+
+        logger.info(f"Auto-joined user {user.username} to campaign {campaign_id}")
 
     async def _handle_confirmation(self, update: Update, context: CallbackContext, session):
         """Handle confirmation step (placeholder for future use)."""

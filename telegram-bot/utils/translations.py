@@ -98,6 +98,61 @@ TRANSLATIONS = {
         "fa": "⚠️ ابتدا باید ثبت‌نام کنید! از /start استفاده کنید.",
         "ar": "⚠️ يجب عليك التسجيل أولاً! استخدم /start لبدء التسجيل.",
     },
+    "register_for_campaign": {
+        "en": "You're joining *{name}*! 🕊️\n\nPlease send me your full name to register.",
+        "fa": "شما دارید به *{name}* می‌پیوندید! 🕊️\n\nلطفاً نام کامل خود را ارسال کنید.",
+        "ar": "أنت تنضم إلى *{name}*! 🕊️\n\nيرجى إرسال اسمك الكامل للتسجيل.",
+    },
+    "register_name_invalid": {
+        "en": "❌ Please enter a valid name (at least 2 characters).",
+        "fa": "❌ لطفاً یک نام معتبر وارد کنید (حداقل ۲ حرف).",
+        "ar": "❌ يرجى إدخال اسم صالح (حرفان على الأقل).",
+    },
+    "register_success": {
+        "en": (
+            "🎉 *Registration Complete!*\n\n"
+            "Welcome to People for Peace, {name}! ✌️\n\n"
+            "You're all set. Let me show you available campaigns..."
+        ),
+        "fa": (
+            "🎉 *ثبت‌نام کامل شد!*\n\n"
+            "به مردم برای صلح خوش آمدید، {name}! ✌️\n\n"
+            "همه چیز آماده‌ست. بذار کمپین‌ها رو بهت نشون بدم..."
+        ),
+        "ar": (
+            "🎉 *اكتمل التسجيل!*\n\n"
+            "مرحباً في الناس من أجل السلام، {name}! ✌️\n\n"
+            "كل شيء جاهز. دعني أعرض لك الحملات المتاحة..."
+        ),
+    },
+    "register_error": {
+        "en": "❌ Failed to create account. Please try again with /start.",
+        "fa": "❌ ساخت حساب ناموفق بود. لطفاً با /start دوباره امتحان کنید.",
+        "ar": "❌ فشل إنشاء الحساب. يرجى المحاولة مرة أخرى باستخدام /start.",
+    },
+    "auto_joined_campaign": {
+        "en": (
+            "🎉 *You've joined {name}!*\n\n"
+            "{description}\n\n"
+            "👥 Members: {members}/{target}\n"
+            "🎯 Tasks: {tasks} available\n\n"
+            "Tap a task below to get started!"
+        ),
+        "fa": (
+            "🎉 *شما به {name} پیوستید!*\n\n"
+            "{description}\n\n"
+            "👥 اعضا: {members}/{target}\n"
+            "🎯 وظایف: {tasks} موجود\n\n"
+            "روی یک وظیفه بزنید تا شروع کنید!"
+        ),
+        "ar": (
+            "🎉 *لقد انضممت إلى {name}!*\n\n"
+            "{description}\n\n"
+            "👥 الأعضاء: {members}/{target}\n"
+            "🎯 المهام: {tasks} متاح\n\n"
+            "اضغط على مهمة أدناه للبدء!"
+        ),
+    },
 
     # ── Campaigns ─────────────────────────────────────────────────────
     "campaigns_title": {
