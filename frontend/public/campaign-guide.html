@@ -100,6 +100,31 @@
             flex-wrap: wrap
         }
 
+        .lang-toggle {
+            display: flex;
+            gap: 4px;
+            margin-left: 8px;
+        }
+
+        .lang-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 3px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: .78rem;
+            font-family: var(--font);
+            transition: all .2s;
+        }
+
+        .lang-toggle-btn:hover,
+        .lang-toggle-btn.active {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
         .toc-nav a {
             color: var(--text-muted);
             text-decoration: none;
@@ -481,13 +506,18 @@
                 <span>People for Peace</span>
             </a>
             <nav class="toc-nav">
-                <a href="#what">پلتفرم چیست؟</a>
-                <a href="#how">نحوه مشارکت</a>
-                <a href="#tasks">تسک‌ها</a>
-                <a href="#messages">پیام‌های آماده</a>
-                <a href="#storm">طوفان توییتری</a>
-                <a href="#faq">سؤالات</a>
+                <a href="#what" data-i18n="nav_what">پلتفرم چیست؟</a>
+                <a href="#how" data-i18n="nav_how">نحوه مشارکت</a>
+                <a href="#tasks" data-i18n="nav_tasks">تسک‌ها</a>
+                <a href="#messages" data-i18n="nav_messages">پیام‌های آماده</a>
+                <a href="#storm" data-i18n="nav_storm">طوفان توییتری</a>
+                <a href="#faq" data-i18n="nav_faq">سؤالات</a>
             </nav>
+            <div class="lang-toggle">
+                <button class="lang-toggle-btn active" data-lang="fa" onclick="setGuideLang('fa')">فا</button>
+                <button class="lang-toggle-btn" data-lang="en" onclick="setGuideLang('en')">EN</button>
+                <button class="lang-toggle-btn" data-lang="ar" onclick="setGuideLang('ar')">عر</button>
+            </div>
         </div>
     </header>
 
@@ -496,10 +526,13 @@
         <!-- ═══ HERO ═══ -->
         <section class="hero">
             <span class="hero-dove">🕊️</span>
-            <h1><em>آتش‌بس فوری</em> — صدای ما را بشنوید</h1>
-            <p>یک پلتفرم مردمی برای هماهنگ کردن صدای هزاران نفر در شبکه‌های اجتماعی. با هم، پیام صلح را به گوش جهان
+            <h1><em data-i18n="hero_h1_em">آتش‌بس فوری</em><span data-i18n="hero_h1_rest"> — صدای ما را بشنوید</span>
+            </h1>
+            <p data-i18n="hero_p">یک پلتفرم مردمی برای هماهنگ کردن صدای هزاران نفر در شبکه‌های اجتماعی. با هم، پیام صلح
+                را به گوش جهان
                 می‌رسانیم.</p>
-            <a href="https://t.me/peopleforpeacebot?start=campaign_16" class="cta-btn" target="_blank">
+            <a href="https://t.me/peopleforpeacebot?start=campaign_16" class="cta-btn" target="_blank"
+                data-i18n="hero_cta">
                 ✊ همین الان عضو شو
             </a>
         </section>
@@ -508,15 +541,15 @@
         <div class="stats">
             <div class="stat-card">
                 <span class="num">42+</span>
-                <span class="label">عضو فعال</span>
+                <span class="label" data-i18n="stat1_label">عضو فعال</span>
             </div>
             <div class="stat-card">
                 <span class="num">8</span>
-                <span class="label">تسک فعال</span>
+                <span class="label" data-i18n="stat2_label">تسک فعال</span>
             </div>
             <div class="stat-card">
                 <span class="num">🌩️ 3</span>
-                <span class="label">طوفان توییتری برنامه‌ریزی شده</span>
+                <span class="label" data-i18n="stat3_label">طوفان توییتری برنامه‌ریزی شده</span>
             </div>
         </div>
 
@@ -524,10 +557,10 @@
         <section id="what" class="section">
             <div class="section-header">
                 <div class="section-icon green">🌍</div>
-                <h2>پلتفرم People for Peace چیست؟</h2>
+                <h2 data-i18n="what_title">پلتفرم People for Peace چیست؟</h2>
             </div>
             <div class="card">
-                <p>
+                <p data-i18n="what_desc">
                     <strong>People for Peace (PFP)</strong> یک پلتفرم آنلاین برای سازماندهی کمپین‌های صلح‌طلبانه است. به
                     جای شعار دادن، ما ابزاری ساختیم که مردم عادی بتونن با اقدامات ساده و هماهنگ — مثل توییت زدن، ریتوییت
                     کردن، و اشتراک‌گذاری — صدای خودشون رو به گوش تصمیم‌گیران دنیا برسونن.
@@ -535,15 +568,19 @@
             </div>
 
             <div class="card">
-                <h3>⚙️ اجزای سیستم</h3>
+                <h3 data-i18n="what_parts_title">⚙️ اجزای سیستم</h3>
                 <ol class="steps">
-                    <li><strong>ربات تلگرام</strong> — محل اصلی مشارکت داوطلبان. ثبت‌نام، عضویت در کمپین، دریافت تسک، و
+                    <li data-i18n="what_part1"><strong>ربات تلگرام</strong> — محل اصلی مشارکت داوطلبان. ثبت‌نام، عضویت
+                        در کمپین، دریافت تسک، و
                         ارسال مدرک همه از طریق ربات انجام می‌شه.</li>
-                    <li><strong>داشبورد مدیریت</strong> — پنل وب برای مدیران کمپین. ایجاد تسک، بررسی مدارک، و مشاهده
+                    <li data-i18n="what_part2"><strong>داشبورد مدیریت</strong> — پنل وب برای مدیران کمپین. ایجاد تسک،
+                        بررسی مدارک، و مشاهده
                         آمار.</li>
-                    <li><strong>سیستم امتیاز</strong> — هر تسکی که انجام بدید و تأیید بشه، امتیاز می‌گیرید. بالاترین
+                    <li data-i18n="what_part3"><strong>سیستم امتیاز</strong> — هر تسکی که انجام بدید و تأیید بشه، امتیاز
+                        می‌گیرید. بالاترین
                         امتیاز = بیشترین تأثیر.</li>
-                    <li><strong>طوفان توییتری</strong> — رویدادهای زمان‌بندی‌شده که همه با هم، در یک لحظه، توییت می‌زنیم
+                    <li data-i18n="what_part4"><strong>طوفان توییتری</strong> — رویدادهای زمان‌بندی‌شده که همه با هم، در
+                        یک لحظه، توییت می‌زنیم
                         تا هشتگ‌مون ترند بشه.</li>
                 </ol>
             </div>
@@ -553,28 +590,29 @@
         <section id="how" class="section">
             <div class="section-header">
                 <div class="section-icon blue">🚀</div>
-                <h2>چطور عضو بشم؟</h2>
+                <h2 data-i18n="how_title">چطور عضو بشم؟</h2>
             </div>
 
             <div class="link-box">
-                <div class="label">🔗 لینک مستقیم عضویت در کمپین</div>
+                <div class="label" data-i18n="how_link_label">🔗 لینک مستقیم عضویت در کمپین</div>
                 <a href="https://t.me/peopleforpeacebot?start=campaign_16"
                     target="_blank">t.me/peopleforpeacebot?start=campaign_16</a>
             </div>
 
             <div class="card">
-                <h3>📱 مراحل عضویت (۳۰ ثانیه)</h3>
+                <h3 data-i18n="how_steps_title">📱 مراحل عضویت (۳۰ ثانیه)</h3>
                 <ol class="steps">
-                    <li>روی لینک بالا کلیک کنید — ربات تلگرام باز می‌شه</li>
-                    <li>دکمه <strong>Start</strong> رو بزنید</li>
-                    <li>زبان فارسی رو انتخاب کنید</li>
-                    <li>اسمتون رو وارد کنید (ثبت‌نام تمام!)</li>
-                    <li>کمپین «آتش‌بس فوری» خودکار نمایش داده می‌شه — <strong>عضو شوید</strong></li>
-                    <li>حالا تسک‌های کمپین رو ببینید و شروع کنید ✅</li>
+                    <li data-i18n="how_step1">روی لینک بالا کلیک کنید — ربات تلگرام باز می‌شه</li>
+                    <li data-i18n="how_step2">دکمه <strong>Start</strong> رو بزنید</li>
+                    <li data-i18n="how_step3">زبان فارسی رو انتخاب کنید</li>
+                    <li data-i18n="how_step4">اسمتون رو وارد کنید (ثبت‌نام تمام!)</li>
+                    <li data-i18n="how_step5">کمپین «آتش‌بس فوری» خودکار نمایش داده می‌شه — <strong>عضو شوید</strong>
+                    </li>
+                    <li data-i18n="how_step6">حالا تسک‌های کمپین رو ببینید و شروع کنید ✅</li>
                 </ol>
             </div>
 
-            <div class="callout">
+            <div class="callout" data-i18n="how_note">
                 <strong>💡 نکته:</strong> ربات به سه زبان فارسی، انگلیسی و عربی کار می‌کنه. می‌تونید زبان رو هر وقت عوض
                 کنید.
             </div>
@@ -584,46 +622,49 @@
         <section id="tasks" class="section">
             <div class="section-header">
                 <div class="section-icon orange">📋</div>
-                <h2>تسک‌ها چیست؟</h2>
+                <h2 data-i18n="tasks_title">تسک‌ها چیست؟</h2>
             </div>
             <div class="card">
-                <p>تسک‌ها اقدامات مشخصی هستن که هر داوطلب می‌تونه انجام بده. هر تسک امتیاز داره و بعد از ارسال مدرک
+                <p data-i18n="tasks_desc">تسک‌ها اقدامات مشخصی هستن که هر داوطلب می‌تونه انجام بده. هر تسک امتیاز داره و
+                    بعد از ارسال مدرک
                     (لینک یا اسکرین‌شات)، مدیر تأییدش می‌کنه.</p>
             </div>
 
             <div class="card">
-                <h3>🐦 سطح ۱ — اقدامات سریع <span class="tag green">آسان</span></h3>
+                <h3 data-i18n="tasks_l1_title">🐦 سطح ۱ — اقدامات سریع <span class="tag green">آسان</span></h3>
                 <ol class="steps">
-                    <li><strong>توییت با #CeaseFireNow</strong> — یه توییت اصیل با هشتگ بزنید و @UN و @POTUS رو تگ کنید
+                    <li data-i18n="tasks_l1_1"><strong>توییت با #CeaseFireNow</strong> — یه توییت اصیل با هشتگ بزنید و
+                        @UN و @POTUS رو تگ کنید
                         <span class="tag">۲۵ امتیاز</span>
                     </li>
-                    <li><strong>ریتوییت محتوای کمپین</strong> — حداقل ۳ پست رسمی کمپین رو ریتوییت کنید <span
-                            class="tag">۱۰ امتیاز</span></li>
-                    <li><strong>کامنت روی توییت کلیدی</strong> — زیر یکی از توییت‌های مهم، نظر حمایتی بنویسید <span
-                            class="tag">۲۰ امتیاز</span></li>
+                    <li data-i18n="tasks_l1_2"><strong>ریتوییت محتوای کمپین</strong> — حداقل ۳ پست رسمی کمپین رو ریتوییت
+                        کنید <span class="tag">۱۰ امتیاز</span></li>
+                    <li data-i18n="tasks_l1_3"><strong>کامنت روی توییت کلیدی</strong> — زیر یکی از توییت‌های مهم، نظر
+                        حمایتی بنویسید <span class="tag">۲۰ امتیاز</span></li>
                 </ol>
             </div>
 
             <div class="card">
-                <h3>📢 سطح ۲ — رشد شبکه <span class="tag green">متوسط</span></h3>
+                <h3 data-i18n="tasks_l2_title">📢 سطح ۲ — رشد شبکه <span class="tag green">متوسط</span></h3>
                 <ol class="steps">
-                    <li><strong>اشتراک در گروه تلگرام</strong> — لینک کمپین رو در یک گروه مرتبط به اشتراک بذارید <span
-                            class="tag">۱۵ امتیاز</span></li>
-                    <li><strong>دعوت از یک دوست</strong> — لینک ربات رو برای یک نفر بفرستید که ثبت‌نام کنه <span
-                            class="tag">۲۰ امتیاز</span></li>
-                    <li><strong>اشتراک در اینستاگرام/تیک‌تاک</strong> — پیام کمپین رو در استوری یا پست بذارید <span
-                            class="tag">۱۵ امتیاز</span></li>
+                    <li data-i18n="tasks_l2_1"><strong>اشتراک در گروه تلگرام</strong> — لینک کمپین رو در یک گروه مرتبط
+                        به اشتراک بذارید <span class="tag">۱۵ امتیاز</span></li>
+                    <li data-i18n="tasks_l2_2"><strong>دعوت از یک دوست</strong> — لینک ربات رو برای یک نفر بفرستید که
+                        ثبت‌نام کنه <span class="tag">۲۰ امتیاز</span></li>
+                    <li data-i18n="tasks_l2_3"><strong>اشتراک در اینستاگرام/تیک‌تاک</strong> — پیام کمپین رو در استوری
+                        یا پست بذارید <span class="tag">۱۵ امتیاز</span></li>
                 </ol>
             </div>
 
             <div class="card">
-                <h3>✍️ سطح ۳ — تعهد بالا <span class="tag green">پیشرفته</span></h3>
+                <h3 data-i18n="tasks_l3_title">✍️ سطح ۳ — تعهد بالا <span class="tag green">پیشرفته</span></h3>
                 <ol class="steps">
-                    <li><strong>بیانیه شخصی صلح</strong> — یک متن ۲۰۰+ کلمه‌ای بنویسید درباره اینکه چرا آتش‌بس ضروریه
+                    <li data-i18n="tasks_l3_1"><strong>بیانیه شخصی صلح</strong> — یک متن ۲۰۰+ کلمه‌ای بنویسید درباره
+                        اینکه چرا آتش‌بس ضروریه
                         <span class="tag">۳۰ امتیاز</span>
                     </li>
-                    <li><strong>ویدئوی شخصی</strong> — یک ویدئوی ۳۰-۶۰ ثانیه‌ای ضبط کنید درباره موضع‌تون برای صلح <span
-                            class="tag">۴۰ امتیاز</span></li>
+                    <li data-i18n="tasks_l3_2"><strong>ویدئوی شخصی</strong> — یک ویدئوی ۳۰-۶۰ ثانیه‌ای ضبط کنید درباره
+                        موضع‌تون برای صلح <span class="tag">۴۰ امتیاز</span></li>
                 </ol>
             </div>
         </section>
@@ -632,25 +673,25 @@
         <section id="storm" class="section">
             <div class="section-header">
                 <div class="section-icon yellow">🌩️</div>
-                <h2>طوفان توییتری چیست؟</h2>
+                <h2 data-i18n="storm_title">طوفان توییتری چیست؟</h2>
             </div>
             <div class="card">
-                <p>
+                <p data-i18n="storm_desc">
                     طوفان توییتری یک رویداد زمان‌بندی‌شده است که در آن همه داوطلبان <strong>همزمان</strong> توییت می‌زنن
                     تا هشتگ کمپین رو ترند کنن. ربات بهتون اطلاع می‌ده و نمونه توییت‌های آماده ارائه می‌ده.
                 </p>
             </div>
             <div class="card">
-                <h3>📌 نحوه شرکت</h3>
+                <h3 data-i18n="storm_how_title">📌 نحوه شرکت</h3>
                 <ol class="steps">
-                    <li>وارد ربات بشید و دستور <strong>/storms</strong> رو بزنید</li>
-                    <li>طوفان‌های آینده رو ببینید — زمان و هشتگ‌ها نمایش داده می‌شه</li>
-                    <li>دکمه <strong>«✊ آماده‌ام!»</strong> رو بزنید تا آمادگیتون ثبت بشه</li>
-                    <li>سر ساعت مشخص‌شده، توییت‌هاتون رو بفرستید</li>
-                    <li>لینک توییتتون رو به ربات بدید تا امتیاز بگیرید</li>
+                    <li data-i18n="storm_step1">وارد ربات بشید و دستور <strong>/storms</strong> رو بزنید</li>
+                    <li data-i18n="storm_step2">طوفان‌های آینده رو ببینید — زمان و هشتگ‌ها نمایش داده می‌شه</li>
+                    <li data-i18n="storm_step3">دکمه <strong>«✊ آماده‌ام!»</strong> رو بزنید تا آمادگیتون ثبت بشه</li>
+                    <li data-i18n="storm_step4">سر ساعت مشخص‌شده، توییت‌هاتون رو بفرستید</li>
+                    <li data-i18n="storm_step5">لینک توییتتون رو به ربات بدید تا امتیاز بگیرید</li>
                 </ol>
             </div>
-            <div class="callout">
+            <div class="callout" data-i18n="storm_hashtags">
                 <strong>🎯 هشتگ‌ها:</strong> #CeaseFireNow &nbsp; #StopWarOnIran &nbsp; #PeaceForIran<br>
                 <strong>🏷️ اکانت‌های هدف:</strong> @UN &nbsp; @POTUS &nbsp; @EU_Commission &nbsp; @amnesty
             </div>
@@ -662,17 +703,18 @@
         <section id="messages" class="section">
             <div class="section-header">
                 <div class="section-icon red">📨</div>
-                <h2>پیام‌های آماده برای اشتراک‌گذاری</h2>
+                <h2 data-i18n="msg_title">پیام‌های آماده برای اشتراک‌گذاری</h2>
             </div>
             <div class="card">
-                <p>پیام‌های زیر آماده کپی هستن. روی هر کادر کلیک کنید تا متن کپی بشه. بعد توی گروه‌ها یا پیام شخصی
+                <p data-i18n="msg_desc">پیام‌های زیر آماده کپی هستن. روی هر کادر کلیک کنید تا متن کپی بشه. بعد توی
+                    گروه‌ها یا پیام شخصی
                     بفرستید.</p>
             </div>
 
             <!-- MSG 1 -->
             <div class="card">
-                <h3>📝 پیام ۱ — معرفی رسمی (برای گروه‌های تلگرام)</h3>
-                <div class="msg-box" onclick="copyMsg(this)">
+                <h3 data-i18n="msg1_title">📝 پیام ۱ — معرفی رسمی (برای گروه‌های تلگرام)</h3>
+                <div class="msg-box" onclick="copyMsg(this)" data-msg-key="msg1_text">
                     <span class="copy-hint">کلیک برای کپی 📋</span>🕊️ صلح، نه جنگ
 
                     سلام دوستان عزیز،
@@ -695,8 +737,8 @@
 
             <!-- MSG 2 -->
             <div class="card">
-                <h3>⚡ پیام ۲ — کوتاه و تأثیرگذار</h3>
-                <div class="msg-box" onclick="copyMsg(this)">
+                <h3 data-i18n="msg2_title">⚡ پیام ۲ — کوتاه و تأثیرگذار</h3>
+                <div class="msg-box" onclick="copyMsg(this)" data-msg-key="msg2_text">
                     <span class="copy-hint">کلیک برای کپی 📋</span>🕊️ می‌خوای صدات به گوش دنیا برسه؟
 
                     با یه کلیک عضو کمپین #CeaseFireNow بشو و با توییت‌ها و پیام‌هات صدای صلح رو بلندتر کن.
@@ -710,8 +752,8 @@
 
             <!-- MSG 3 -->
             <div class="card">
-                <h3>💬 پیام ۳ — پیام شخصی به دوست</h3>
-                <div class="msg-box" onclick="copyMsg(this)">
+                <h3 data-i18n="msg3_title">💬 پیام ۳ — پیام شخصی به دوست</h3>
+                <div class="msg-box" onclick="copyMsg(this)" data-msg-key="msg3_text">
                     <span class="copy-hint">کلیک برای کپی 📋</span>سلام 👋
 
                     یه پروژه‌ای داریم که داره صدای مردم رو برای صلح هماهنگ می‌کنه. خیلی ساده‌ست — یه ربات تلگرامی هست که
@@ -726,8 +768,8 @@
 
             <!-- MSG 4 -->
             <div class="card">
-                <h3>🔴 پیام ۴ — لحن فعالیتی (برای گروه‌های سیاسی)</h3>
-                <div class="msg-box" onclick="copyMsg(this)">
+                <h3 data-i18n="msg4_title">🔴 پیام ۴ — لحن فعالیتی (برای گروه‌های سیاسی)</h3>
+                <div class="msg-box" onclick="copyMsg(this)" data-msg-key="msg4_text">
                     <span class="copy-hint">کلیک برای کپی 📋</span>🔴 آتش‌بس، همین الان
 
                     جنگ ادامه داره و صدای مردم عادی گم شده. ما یه ابزار ساختیم که به جای شعار دادن، عمل‌گرایانه صدای ما
@@ -745,8 +787,8 @@
 
             <!-- MSG 5 -->
             <div class="card">
-                <h3>🤝 پیام ۵ — جذب همکاران کلیدی</h3>
-                <div class="msg-box" onclick="copyMsg(this)">
+                <h3 data-i18n="msg5_title">🤝 پیام ۵ — جذب همکاران کلیدی</h3>
+                <div class="msg-box" onclick="copyMsg(this)" data-msg-key="msg5_text">
                     <span class="copy-hint">کلیک برای کپی 📋</span>سلام،
 
                     یه کمپین صلح داریم روی تلگرام و توییتر. الان ۴۲ نفر عضویم و هدفمون ۲۰۰ نفره.
@@ -765,8 +807,8 @@
 
             <!-- MSG 6 -->
             <div class="card">
-                <h3>🌩️ پیام ۶ — اعلام طوفان توییتری</h3>
-                <div class="msg-box" onclick="copyMsg(this)">
+                <h3 data-i18n="msg6_title">🌩️ پیام ۶ — اعلام طوفان توییتری</h3>
+                <div class="msg-box" onclick="copyMsg(this)" data-msg-key="msg6_text">
                     <span class="copy-hint">کلیک برای کپی 📋</span>🌩️ طوفان توییتری — فردا ساعت ۲۲:۳۰ به وقت ایران
 
                     📋 مأموریت:
@@ -789,26 +831,27 @@
         <section id="affiliates" class="section">
             <div class="section-header">
                 <div class="section-icon blue">🤝</div>
-                <h2>راهنما برای همکاران و هم‌پیمانان</h2>
+                <h2 data-i18n="aff_title">راهنما برای همکاران و هم‌پیمانان</h2>
             </div>
             <div class="card">
-                <h3>🎯 اگر ادمین یک گروه هستید</h3>
+                <h3 data-i18n="aff_admin_title">🎯 اگر ادمین یک گروه هستید</h3>
                 <ol class="steps">
-                    <li>اول خودتان ثبت‌نام کنید تا تجربه کاربری را ببینید</li>
-                    <li><strong>پیام ۱</strong> (معرفی رسمی) را در گروه‌تان پین کنید</li>
-                    <li>چند روز بعد <strong>پیام ۲</strong> (کوتاه) را بفرستید به عنوان یادآوری</li>
-                    <li>قبل از هر طوفان توییتری، <strong>پیام ۶</strong> را بفرستید</li>
+                    <li data-i18n="aff_admin1">اول خودتان ثبت‌نام کنید تا تجربه کاربری را ببینید</li>
+                    <li data-i18n="aff_admin2"><strong>پیام ۱</strong> (معرفی رسمی) را در گروه‌تان پین کنید</li>
+                    <li data-i18n="aff_admin3">چند روز بعد <strong>پیام ۲</strong> (کوتاه) را بفرستید به عنوان یادآوری
+                    </li>
+                    <li data-i18n="aff_admin4">قبل از هر طوفان توییتری، <strong>پیام ۶</strong> را بفرستید</li>
                 </ol>
             </div>
             <div class="card">
-                <h3>📊 اگر می‌خواهید ادمین کمپین شوید</h3>
+                <h3 data-i18n="aff_mgr_title">📊 اگر می‌خواهید ادمین کمپین شوید</h3>
                 <ol class="steps">
-                    <li>ثبت‌نام کنید و حداقل ۳ تسک را انجام بدید</li>
-                    <li>حداقل ۵ نفر جدید را دعوت کنید</li>
-                    <li>با مدیر کمپین تماس بگیرید برای دریافت دسترسی مدیریتی</li>
+                    <li data-i18n="aff_mgr1">ثبت‌نام کنید و حداقل ۳ تسک را انجام بدید</li>
+                    <li data-i18n="aff_mgr2">حداقل ۵ نفر جدید را دعوت کنید</li>
+                    <li data-i18n="aff_mgr3">با مدیر کمپین تماس بگیرید برای دریافت دسترسی مدیریتی</li>
                 </ol>
             </div>
-            <div class="callout warn">
+            <div class="callout warn" data-i18n="aff_warn">
                 <strong>⚠️ مهم:</strong> لطفاً پیام‌ها را بدون اسپم بفرستید. همیشه اول توضیح بدید چرا این کمپین مهمه بعد
                 لینک رو بذارید. اسپم کردن باعث بن شدن از گروه‌ها می‌شه.
             </div>
@@ -818,40 +861,45 @@
         <section id="faq" class="section">
             <div class="section-header">
                 <div class="section-icon green">❓</div>
-                <h2>سؤالات متداول</h2>
+                <h2 data-i18n="faq_title">سؤالات متداول</h2>
             </div>
             <div class="card">
-                <h3>آیا رایگانه؟</h3>
-                <p>بله، کاملاً رایگان. هیچ هزینه‌ای نداره.</p>
+                <h3 data-i18n="faq1_q">آیا رایگانه؟</h3>
+                <p data-i18n="faq1_a">بله، کاملاً رایگان. هیچ هزینه‌ای نداره.</p>
             </div>
             <div class="card">
-                <h3>آیا باید حتماً توییتر داشته باشم؟</h3>
-                <p>نه. تسک‌هایی برای تلگرام و اینستاگرام هم هست. اما توییتر بیشترین تأثیر رو داره.</p>
+                <h3 data-i18n="faq2_q">آیا باید حتماً توییتر داشته باشم؟</h3>
+                <p data-i18n="faq2_a">نه. تسک‌هایی برای تلگرام و اینستاگرام هم هست. اما توییتر بیشترین تأثیر رو داره.
+                </p>
             </div>
             <div class="card">
-                <h3>چقدر وقت لازمه؟</h3>
-                <p>هر تسک بین ۲ تا ۱۵ دقیقه وقت می‌بره. حتی یک توییت هم کمک بزرگیه.</p>
+                <h3 data-i18n="faq3_q">چقدر وقت لازمه؟</h3>
+                <p data-i18n="faq3_a">هر تسک بین ۲ تا ۱۵ دقیقه وقت می‌بره. حتی یک توییت هم کمک بزرگیه.</p>
             </div>
             <div class="card">
-                <h3>آیا اطلاعاتم امنه؟</h3>
-                <p>فقط اسم شما لازمه. هیچ اطلاعات حساسی گرفته نمی‌شه و از داده‌هاتون محافظت می‌شه.</p>
+                <h3 data-i18n="faq4_q">آیا اطلاعاتم امنه؟</h3>
+                <p data-i18n="faq4_a">فقط اسم شما لازمه. هیچ اطلاعات حساسی گرفته نمی‌شه و از داده‌هاتون محافظت می‌شه.
+                </p>
             </div>
             <div class="card">
-                <h3>امتیازها به چه دردی می‌خورن؟</h3>
-                <p>امتیازها نشون‌دهنده میزان تأثیر شماست. بالاترین امتیازها = فعال‌ترین داوطلبان. برای شناسایی و تقدیر
+                <h3 data-i18n="faq5_q">امتیازها به چه دردی می‌خورن؟</h3>
+                <p data-i18n="faq5_a">امتیازها نشون‌دهنده میزان تأثیر شماست. بالاترین امتیازها = فعال‌ترین داوطلبان.
+                    برای شناسایی و تقدیر
                     استفاده می‌شن.</p>
             </div>
         </section>
 
         <!-- ═══ FINAL CTA ═══ -->
         <section style="text-align:center; padding: 2rem 0 1rem">
-            <p style="font-size:1.1rem; margin-bottom:1rem; font-weight:600">هر صدا مهمه. صدای خودت رو اضافه کن 🕊️</p>
-            <a href="https://t.me/peopleforpeacebot?start=campaign_16" class="cta-btn" target="_blank">
+            <p style="font-size:1.1rem; margin-bottom:1rem; font-weight:600" data-i18n="final_cta_text">هر صدا مهمه.
+                صدای خودت رو اضافه کن 🕊️</p>
+            <a href="https://t.me/peopleforpeacebot?start=campaign_16" class="cta-btn" target="_blank"
+                data-i18n="final_cta_btn">
                 ✊ عضو کمپین شو
             </a>
         </section>
 
-        <footer class="footer">
+        <footer class="footer" data-i18n="footer">
             People for Peace &middot; ۲۰۲۶ &middot; صلح، نه جنگ
         </footer>
     </main>
@@ -888,6 +936,17 @@
                 }, 2000);
             });
         }
+    </script>
+    <script src="campaign-guide-i18n.js"></script>
+    <script>
+        // Restore saved language
+        try {
+            const saved = localStorage.getItem('guide-lang');
+            if (saved && saved !== 'fa' && GUIDE_I18N[saved]) {
+                // Delay to let DOM settle
+                setTimeout(() => setGuideLang(saved), 100);
+            }
+        } catch (e) { }
     </script>
 </body>
 
