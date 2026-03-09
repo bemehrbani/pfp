@@ -26,4 +26,7 @@ urlpatterns = [
     # User-specific campaigns
     path('my-campaigns/', views.MyCampaignsView.as_view(), name='my_campaigns'),
     path('search/', views.CampaignSearchView.as_view(), name='campaign_search'),
+
+    # Public stats (no auth)
+    path('<int:pk>/public-stats/', views.PublicCampaignStatsView.as_view(), name='public_campaign_stats'),
 ]

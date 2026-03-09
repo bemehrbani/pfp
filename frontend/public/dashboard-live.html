@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0e17" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Campaign Dashboard — People for Peace</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        /* ─── DESIGN TOKENS ─── */
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a1f2e;
+            --bg-card-hover: #222842;
+            --text-primary: #f0ebe3;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-gold: #d4a853;
+            --accent-gold-dim: rgba(212, 168, 83, 0.15);
+            --accent-peace: #7cb68e;
+            --accent-peace-dim: rgba(124, 182, 142, 0.12);
+            --accent-blue: #60a5fa;
+            --accent-blue-dim: rgba(96, 165, 250, 0.12);
+            --accent-red: #c4564a;
+            --accent-red-dim: rgba(196, 86, 74, 0.12);
+            --accent-purple: #a78bfa;
+            --accent-purple-dim: rgba(167, 139, 250, 0.12);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Source Sans 3', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ─── RESET ─── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ─── LAYOUT ─── */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px 60px;
+        }
+
+        /* ─── HEADER ─── */
+        .dash-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .dash-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 900;
+            color: var(--text-primary);
+        }
+
+        .dash-header h1 span {
+            color: var(--accent-gold);
+        }
+
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.active {
+            background: var(--accent-peace-dim);
+            color: var(--accent-peace);
+        }
+
+        .status-badge.draft {
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+        }
+
+        .status-badge.paused {
+            background: var(--accent-red-dim);
+            color: var(--accent-red);
+        }
+
+        .status-badge .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .refresh-info {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        /* ─── STAT CARDS ─── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 22px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .stat-card.gold::before {
+            background: var(--accent-gold);
+        }
+
+        .stat-card.green::before {
+            background: var(--accent-peace);
+        }
+
+        .stat-card.blue::before {
+            background: var(--accent-blue);
+        }
+
+        .stat-card.purple::before {
+            background: var(--accent-purple);
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .stat-value.gold {
+            color: var(--accent-gold);
+        }
+
+        .stat-value.green {
+            color: var(--accent-peace);
+        }
+
+        .stat-value.blue {
+            color: var(--accent-blue);
+        }
+
+        .stat-value.purple {
+            color: var(--accent-purple);
+        }
+
+        .stat-sub {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* ─── PROGRESS BAR ─── */
+        .progress-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 28px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 14px;
+        }
+
+        .progress-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .progress-header span {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 14px;
+            background: var(--bg-secondary);
+            border-radius: 7px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 7px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-peace));
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* ─── TWO-COLUMN GRID ─── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ─── CARD PANEL ─── */
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 22px;
+        }
+
+        .panel h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel h3 .icon {
+            font-size: 1.1rem;
+        }
+
+        /* ─── LEADERBOARD ─── */
+        .leaderboard-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .leaderboard-row:last-child {
+            border-bottom: none;
+        }
+
+        .lb-rank {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .lb-rank.top-1 {
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+        }
+
+        .lb-rank.top-2 {
+            background: var(--accent-peace-dim);
+            color: var(--accent-peace);
+        }
+
+        .lb-rank.top-3 {
+            background: var(--accent-blue-dim);
+            color: var(--accent-blue);
+        }
+
+        .lb-name {
+            flex: 1;
+            font-weight: 500;
+            font-size: 0.92rem;
+        }
+
+        .lb-stats {
+            text-align: right;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+        }
+
+        .lb-stats .points {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .lb-stats .tasks {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        /* ─── ACTIVITY FEED ─── */
+        .activity-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-peace);
+            margin-top: 7px;
+            flex-shrink: 0;
+        }
+
+        .activity-text {
+            flex: 1;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        .activity-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            white-space: nowrap;
+        }
+
+        /* ─── TASK TYPE BARS ─── */
+        .task-type-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .task-type-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .tt-label {
+            width: 120px;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .tt-bar-track {
+            flex: 1;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .tt-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: var(--accent-blue);
+            transition: width 0.6s ease;
+        }
+
+        .tt-count {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            width: 50px;
+            text-align: right;
+        }
+
+        /* ─── STORM CARD ─── */
+        .storm-card {
+            background: linear-gradient(135deg, var(--accent-blue-dim), var(--accent-purple-dim));
+            border: 1px solid rgba(96, 165, 250, 0.15);
+            border-radius: var(--radius);
+            padding: 22px;
+            margin-bottom: 28px;
+        }
+
+        .storm-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .storm-countdown {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .storm-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .storm-hashtags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .storm-hashtag {
+            padding: 4px 10px;
+            border-radius: 14px;
+            background: var(--accent-blue-dim);
+            color: var(--accent-blue);
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        /* ─── LOADING / ERROR ─── */
+        .loading-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-subtle);
+            border-top-color: var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-state {
+            text-align: center;
+            color: var(--accent-red);
+            padding: 40px 20px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 20px 0;
+            font-size: 0.88rem;
+        }
+
+        /* ─── FOOTER ─── */
+        .dash-footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 20px;
+        }
+
+        .dash-footer a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
+
+        .dash-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .dash-footer .sep {
+            color: var(--text-muted);
+            margin: 0 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dash-header">
+            <h1>🕊️ Campaign <span>Live</span></h1>
+            <div class="header-meta">
+                <span class="status-badge active" id="statusBadge">
+                    <span class="pulse"></span>
+                    <span id="statusText">Loading...</span>
+                </span>
+                <span class="refresh-info" id="refreshInfo">updating...</span>
+            </div>
+        </header>
+
+        <!-- Loading state -->
+        <div id="loadingState" class="loading-state">
+            <div class="loading-spinner"></div>
+            <p style="color: var(--text-muted);">Fetching campaign data...</p>
+        </div>
+
+        <!-- Error state -->
+        <div id="errorState" class="error-state" style="display:none">
+            <p>⚠️ Could not load campaign data.</p>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Retrying in <span
+                    id="retryCount">30</span>s...</p>
+        </div>
+
+        <!-- Main dashboard content -->
+        <div id="dashContent" style="display:none">
+
+            <!-- Stat cards -->
+            <div class="stats-grid">
+                <div class="stat-card gold">
+                    <div class="stat-label">Volunteers</div>
+                    <div class="stat-value gold" id="memberCount">—</div>
+                    <div class="stat-sub">of <span id="memberTarget">—</span> target</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-label">Tasks Completed</div>
+                    <div class="stat-value green" id="tasksCompleted">—</div>
+                    <div class="stat-sub"><span id="verifyRate">—</span>% verification rate</div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-label">Points Awarded</div>
+                    <div class="stat-value blue" id="totalPoints">—</div>
+                    <div class="stat-sub">total across campaign</div>
+                </div>
+                <div class="stat-card purple">
+                    <div class="stat-label">Twitter Storms</div>
+                    <div class="stat-value purple" id="stormsCompleted">—</div>
+                    <div class="stat-sub"><span id="stormsUpcoming">0</span> upcoming</div>
+                </div>
+            </div>
+
+            <!-- Members progress -->
+            <div class="progress-section">
+                <div class="progress-header">
+                    <h3>📈 Member Progress</h3>
+                    <span id="progressPct">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Next storm card (hidden if no storm) -->
+            <div class="storm-card" id="stormCard" style="display:none">
+                <h3>⚡ Next Twitter Storm</h3>
+                <div class="storm-countdown" id="stormCountdown">—</div>
+                <div class="storm-meta" id="stormTitle">—</div>
+                <div class="storm-hashtags" id="stormHashtags"></div>
+            </div>
+
+            <!-- Two columns: leaderboard + activity -->
+            <div class="two-col">
+                <div class="panel">
+                    <h3><span class="icon">🏆</span> Top Volunteers</h3>
+                    <div id="leaderboard">
+                        <div class="empty-state">No data yet</div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3><span class="icon">📋</span> Recent Activity</h3>
+                    <div id="activityFeed">
+                        <div class="empty-state">No activity yet</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task types -->
+            <div class="panel" style="margin-bottom: 28px;">
+                <h3><span class="icon">📊</span> Task Distribution</h3>
+                <div id="taskTypes">
+                    <div class="empty-state">No tasks yet</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="dash-footer">
+            <a href="/">← Back to Home</a>
+            <span class="sep">·</span>
+            <a href="/campaign-guide.html">Campaign Guide</a>
+            <span class="sep">·</span>
+            <a href="https://t.me/peopleforpeacebot?start=campaign_16">Join Now ✊</a>
+        </footer>
+    </div>
+
+    <script>
+        /**
+         * Live Campaign Dashboard
+         * Auto-refreshes every 30 seconds from the public stats API.
+         */
+        const CAMPAIGN_ID = 16;
+        const API_URL = `/api/campaigns/${CAMPAIGN_ID}/public-stats/`;
+        const REFRESH_INTERVAL = 30_000;
+
+        let refreshTimer = null;
+        let stormTimer = null;
+        let nextStormDate = null;
+
+        // ─── DOM REFS ───
+        const $ = (id) => document.getElementById(id);
+
+        // ─── FETCH DATA ───
+        async function fetchStats() {
+            try {
+                const res = await fetch(API_URL);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                render(data);
+                $('loadingState').style.display = 'none';
+                $('errorState').style.display = 'none';
+                $('dashContent').style.display = 'block';
+            } catch (err) {
+                console.error('Dashboard fetch error:', err);
+                $('loadingState').style.display = 'none';
+                $('errorState').style.display = 'block';
+            }
+        }
+
+        // ─── RENDER ───
+        function render(data) {
+            // Status badge
+            const statusBadge = $('statusBadge');
+            const statusText = $('statusText');
+            statusBadge.className = `status-badge ${data.campaign.status}`;
+            statusText.textContent = data.campaign.status.toUpperCase();
+
+            // Stat cards
+            $('memberCount').textContent = data.members.current;
+            $('memberTarget').textContent = data.members.target;
+            $('tasksCompleted').textContent = data.tasks.completed_assignments;
+            $('verifyRate').textContent = data.tasks.verification_rate;
+            $('totalPoints').textContent = formatNumber(data.campaign.total_points_awarded);
+            $('stormsCompleted').textContent = data.storms.completed;
+            $('stormsUpcoming').textContent = data.storms.upcoming_count;
+
+            // Progress bar
+            const pct = data.members.percentage;
+            $('progressPct').textContent = `${pct}%`;
+            $('progressFill').style.width = `${pct}%`;
+
+            // Storm card
+            if (data.storms.next) {
+                $('stormCard').style.display = 'block';
+                $('stormTitle').textContent = data.storms.next.title;
+                nextStormDate = new Date(data.storms.next.scheduled_at);
+                updateStormCountdown();
+                if (stormTimer) clearInterval(stormTimer);
+                stormTimer = setInterval(updateStormCountdown, 1000);
+
+                const hashtagsEl = $('stormHashtags');
+                hashtagsEl.innerHTML = '';
+                if (data.storms.next.hashtags) {
+                    data.storms.next.hashtags.forEach(ht => {
+                        const span = document.createElement('span');
+                        span.className = 'storm-hashtag';
+                        span.textContent = ht.startsWith('#') ? ht : `#${ht}`;
+                        hashtagsEl.appendChild(span);
+                    });
+                }
+            } else {
+                $('stormCard').style.display = 'none';
+            }
+
+            // Leaderboard
+            const lbEl = $('leaderboard');
+            if (data.top_volunteers && data.top_volunteers.length > 0) {
+                lbEl.innerHTML = data.top_volunteers.map((v, i) => `
+                    <div class="leaderboard-row">
+                        <span class="lb-rank ${i < 3 ? 'top-' + (i + 1) : ''}">${i + 1}</span>
+                        <span class="lb-name">${escapeHtml(v.name)}</span>
+                        <span class="lb-stats">
+                            <span class="points">${v.points} pts</span><br>
+                            <span class="tasks">${v.tasks_completed} tasks</span>
+                        </span>
+                    </div>
+                `).join('');
+            } else {
+                lbEl.innerHTML = '<div class="empty-state">No volunteers with completed tasks yet</div>';
+            }
+
+            // Activity feed
+            const feedEl = $('activityFeed');
+            if (data.recent_activity && data.recent_activity.length > 0) {
+                feedEl.innerHTML = data.recent_activity.map(a => `
+                    <div class="activity-item">
+                        <span class="activity-dot"></span>
+                        <span class="activity-text">${escapeHtml(a.description || a.action)}</span>
+                        <span class="activity-time">${escapeHtml(a.time_ago)}</span>
+                    </div>
+                `).join('');
+            } else {
+                feedEl.innerHTML = '<div class="empty-state">No recent activity</div>';
+            }
+
+            // Task types
+            const ttEl = $('taskTypes');
+            if (data.task_types && data.task_types.length > 0) {
+                const maxCount = Math.max(...data.task_types.map(t => t.count));
+                ttEl.innerHTML = data.task_types.map(t => {
+                    const pct = maxCount > 0 ? (t.count / maxCount * 100) : 0;
+                    return `
+                        <div class="task-type-row">
+                            <span class="tt-label">${escapeHtml(t.name)}</span>
+                            <div class="tt-bar-track">
+                                <div class="tt-bar-fill" style="width: ${pct}%"></div>
+                            </div>
+                            <span class="tt-count">${t.completed}/${t.count}</span>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                ttEl.innerHTML = '<div class="empty-state">No tasks configured</div>';
+            }
+
+            // Refresh info
+            $('refreshInfo').textContent = `updated ${new Date().toLocaleTimeString()}`;
+        }
+
+        // ─── STORM COUNTDOWN ───
+        function updateStormCountdown() {
+            if (!nextStormDate) return;
+            const now = new Date();
+            const diff = nextStormDate - now;
+
+            if (diff <= 0) {
+                $('stormCountdown').textContent = '🔴 LIVE NOW';
+                $('stormCountdown').style.color = 'var(--accent-red)';
+                if (stormTimer) clearInterval(stormTimer);
+                return;
+            }
+
+            const hours = Math.floor(diff / 3600000);
+            const mins = Math.floor((diff % 3600000) / 60000);
+            const secs = Math.floor((diff % 60000) / 1000);
+
+            if (hours > 24) {
+                const days = Math.floor(hours / 24);
+                $('stormCountdown').textContent = `T-${days}d ${hours % 24}h`;
+            } else {
+                $('stormCountdown').textContent = `T-${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            }
+        }
+
+        // ─── HELPERS ───
+        function formatNumber(n) {
+            if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+            if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+            return String(n || 0);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ─── BOOT ───
+        fetchStats();
+        refreshTimer = setInterval(fetchStats, REFRESH_INTERVAL);
+
+        // Visibility API: pause refresh when tab is hidden
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                clearInterval(refreshTimer);
+            } else {
+                fetchStats();
+                refreshTimer = setInterval(fetchStats, REFRESH_INTERVAL);
+            }
+        });
+    </script>
+</body>
+
+</html>
