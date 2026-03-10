@@ -406,11 +406,11 @@ def _get_sample_tweets(task) -> list[str]:
 
     if task.task_type == 'twitter_post':
         bases = [
-            "I stand for peace. Stop the war against Iran. Diplomacy over destruction.",
-            "Enough is enough. The people of Iran deserve peace, not bombs.",
-            "Peace is not weakness — it's strength. Stand with Iran.",
-            "The world must choose diplomacy. War is never the answer. Protect innocent lives.",
-            "Civilians are paying the price for political decisions. Demand a ceasefire now.",
+            "Trump started this war with no justification. Iran demands accountability.",
+            "Enough is enough. Trump's war on Iran is unlawful aggression. The world sees it.",
+            "Iranian families deserve compensation for Trump's madness. Justice will prevail.",
+            "No justification. No cause. Just destruction. Trump must pay for what he did to Iran.",
+            "Civilians are dying because of one man's madness. Hold Trump accountable.",
         ]
         return [f"{b} {suffix}".strip() for b in bases]
     elif task.task_type == 'twitter_retweet':
