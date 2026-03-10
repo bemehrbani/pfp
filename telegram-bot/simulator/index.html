@@ -562,7 +562,7 @@
                     setTimeout(() => { removeTyping(); step4_taskList(); }, 800);
                     break;
                 case 'task_claim_1':
-                    addMessage('🐦 Tweet for CeaseFireNow', 'user');
+                    addMessage('🐦 Tweet for StopTrumpMadness', 'user');
                     updateStep(5, 'Task detail view');
                     showTyping();
                     setTimeout(() => { removeTyping(); step5_taskDetail('tweet'); }, 800);
@@ -698,9 +698,9 @@
             addMessage(
                 "📋 *Available Campaigns*\n\n" +
                 "━━━━━━━━━━━━━━━━━━━━\n\n" +
-                "🕊️ *#CeaseFireNow — Stop the War*\n\n" +
-                "Join the global movement demanding an immediate ceasefire. " +
-                "Use your voice on social media to amplify the call for peace.\n\n" +
+                "🔥 *#StopTrumpMadness — Hold Trump Accountable*\n\n" +
+                "Join the global movement demanding Trump stop his unlawful war on Iran. " +
+                "Use your voice on social media to demand accountability and justice.\n\n" +
                 "👥 Members: 42\n" +
                 "🎯 Tasks: 3 available\n" +
                 "✅ Joined",
@@ -713,12 +713,12 @@
 
         function step4_taskList() {
             addMessage(
-                "🎯 *Tasks for #CeaseFireNow — Stop the War*\n\n" +
+                "🎯 *Tasks for #StopTrumpMadness — Hold Trump Accountable*\n\n" +
                 "Tap a task to see details and start.\n\n" +
                 "━━━━━━━━━━━━━━━━━━━━",
                 'bot',
                 [
-                    [{ label: '🐦 Tweet for CeaseFireNow — 25 pts • 5 min', action: 'task_claim_1' }],
+                    [{ label: '🐦 Tweet for StopTrumpMadness — 25 pts • 5 min', action: 'task_claim_1' }],
                     [{ label: '💬 Comment on key tweet — 20 pts • 5 min', action: 'task_claim_2' }],
                     [{ label: '🔁 Retweet campaign content — 10 pts • 2 min', action: 'task_claim_3' }],
                 ]
@@ -728,11 +728,11 @@
         function step5_taskDetail(type) {
             if (type === 'tweet') {
                 addMessage(
-                    "🐦 *Tweet for CeaseFireNow*\n\n" +
+                    "🐦 *Tweet for StopTrumpMadness*\n\n" +
                     "📝 *Instructions:*\n" +
-                    "Post a tweet supporting the ceasefire movement. Use the suggested hashtags and mentions to maximize reach.\n\n" +
-                    "#️⃣ *Hashtags:* #CeaseFireNow #StopTheWar #PeopleForPeace\n" +
-                    "@ *Mentions:* @UN @POTUS\n\n" +
+                    "Post a tweet demanding Trump stop his unlawful war on Iran. Use the suggested hashtags and mentions to maximize reach.\n\n" +
+                    "#️⃣ *Hashtags:* #StopTrumpMadness #TrumpOwesIran #TrumpStopTheWar\n" +
+                    "@ *Mentions:* @realDonaldTrump @POTUS @WhiteHouse\n\n" +
                     "🏆 *Points:* 25\n" +
                     "⏱ *Est:* 5 min\n" +
                     "👥 *Slots:* 50 remaining",
@@ -745,7 +745,7 @@
                     "📝 *Instructions:*\n" +
                     "Reply to the following tweet with a thoughtful comment supporting peace and ceasefire. Be respectful and constructive.\n\n" +
                     "🔗 *Link:* https://x.com/UN/status/123456789\n" +
-                    "#️⃣ *Hashtags:* #CeaseFireNow #PeaceNotWar\n\n" +
+                    "#️⃣ *Hashtags:* #StopTrumpMadness #TrumpOwesIran\n\n" +
                     "🏆 *Points:* 20\n" +
                     "⏱ *Est:* 5 min\n" +
                     "👥 *Slots:* 100 remaining",
@@ -757,7 +757,7 @@
                     "🔁 *Retweet campaign content*\n\n" +
                     "📝 *Instructions:*\n" +
                     "Search for tweets with our campaign hashtags and retweet at least 3 impactful posts.\n\n" +
-                    "#️⃣ *Hashtags:* #CeaseFireNow #StopTheWar\n\n" +
+                    "#️⃣ *Hashtags:* #StopTrumpMadness #TrumpOwesIran\n\n" +
                     "🏆 *Points:* 10\n" +
                     "⏱ *Est:* 2 min\n" +
                     "👥 *Slots:* 200 remaining",
@@ -771,13 +771,13 @@
         function step6_tweetGuidance() {
             addMessage(
                 "🚀 *Task Started!*\n\n" +
-                "🐦 *Tweet for CeaseFireNow*\n\n" +
+                "🐦 *Tweet for StopTrumpMadness*\n\n" +
                 "📝 *Pick a tweet or write your own:*\n\n" +
-                "*1.* `I stand for peace. Stop the war against Iran. Diplomacy over destruction. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
-                "*2.* `Enough is enough. The people of Iran deserve peace, not bombs. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
-                "*3.* `Peace is not weakness — it's strength. Stand with Iran. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
-                "*4.* `The world must choose diplomacy. War is never the answer. Protect innocent lives. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
-                "*5.* `Civilians are paying the price for political decisions. Demand a ceasefire now. @UN @POTUS #CeaseFireNow #StopTheWar #PeopleForPeace`\n\n" +
+                "*1.* `Trump started this war with no justification. Iran demands accountability. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
+                "*2.* `Enough is enough. Trump’s war on Iran is unlawful aggression. The world sees it. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
+                "*3.* `Iranian families deserve compensation for Trump’s madness. Justice will prevail. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
+                "*4.* `No justification. No cause. Just destruction. Trump must pay for what he did to Iran. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
+                "*5.* `Civilians are dying because of one man’s madness. Hold Trump accountable. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
                 "👉 Copy one, customize it & post on Twitter/X\n\n" +
                 "✅ *When done, paste your tweet URL below*\n(e.g. https://x.com/yourname/status/123...)\n\n" +
                 "Type /cancel to cancel."
@@ -857,7 +857,7 @@
                 "*20.* Jewish Voice for Peace (@jvp)\n" +
                 "   _Jewish-led peace organization standing for justice_\n" +
                 "   🔗 https://x.com/jvp/status/1880000000000000020\n\n" +
-                "#️⃣ *Hashtags:* #CeaseFireNow #PeaceNotWar #StopWar\n\n" +
+                "#️⃣ *Hashtags:* #StopTrumpMadness #TrumpOwesIran\n\n" +
                 "✅ *When done, paste your reply/comment URL below*\n(e.g. https://x.com/yourname/status/123...)\n\n" +
                 "Type /cancel to cancel."
             );
@@ -870,7 +870,7 @@
             addMessage(
                 "🚀 *Task Started!*\n\n" +
                 "🔁 *Retweet campaign content*\n\n" +
-                "📝 *What to do:*\nSearch for tweets with #CeaseFireNow #StopTheWar and retweet at least 3.\n\n" +
+                "📝 *What to do:*\nSearch for tweets with #StopTrumpMadness #TrumpOwesIran and retweet at least 3.\n\n" +
                 "✅ *When done, paste your tweet URL below*\n(e.g. https://x.com/yourname/status/123...)\n\n" +
                 "Type /cancel to cancel."
             );
@@ -897,7 +897,7 @@
         function step8_confirmed() {
             addMessage(
                 "✅ *Proof Submitted Successfully!*\n\n" +
-                "*Task:* Tweet for CeaseFireNow\n" +
+                "*Task:* Tweet for StopTrumpMadness\n" +
                 "*Status:* Pending Review\n" +
                 "*Points:* 25 (pending verification)\n\n" +
                 "Your proof has been submitted for review by the campaign manager.\n" +
