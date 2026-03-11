@@ -155,6 +155,8 @@ services:
       dockerfile: Dockerfile.production
     environment:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
+    ports:
+      - "8080:80"
     volumes:
       - ./frontend/logs:/app/logs
     depends_on:
