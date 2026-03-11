@@ -8,6 +8,15 @@
     <meta name="description" content="In memory of a child lost in the Minab School airstrike — February 28, 2026." />
     <meta property="og:title" id="ogTitle" content="In Memoriam — Minab School" />
     <meta property="og:description" id="ogDesc" content="Remember their name. Read their story. Never forget." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" id="ogUrl" content="https://peopleforpeace.live/child.html" />
+    <meta property="og:image" id="ogImage" content="https://peopleforpeace.live/images/og-share-card.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" id="twitterTitle" content="In Memoriam — Minab School" />
+    <meta name="twitter:description" id="twitterDesc" content="Remember their name. Read their story. Never forget." />
+    <meta name="twitter:image" id="twitterImage" content="https://peopleforpeace.live/images/og-share-card.png" />
     <title id="pageTitle">In Memoriam — Minab School</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -190,15 +199,19 @@
         .share-bar {
             max-width: 600px; margin: 0 auto;
             padding: 0 20px 40px;
-            display: flex; justify-content: center; gap: 10px;
+            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
         }
         .share-btn {
-            padding: 10px 20px; border: 1px solid var(--border);
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 10px 18px; border: 1px solid var(--border);
             border-radius: 20px; background: var(--bg-card);
             color: var(--text2); font-size: .82rem; font-weight: 600;
-            cursor: pointer; transition: var(--t);
+            cursor: pointer; transition: var(--t); text-decoration: none;
         }
-        .share-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-d); }
+        .share-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-d); text-decoration: none; }
+        .share-btn.twitter:hover { border-color: #1da1f2; color: #1da1f2; }
+        .share-btn.telegram:hover { border-color: #0088cc; color: #0088cc; }
+        .share-btn.whatsapp:hover { border-color: #25d366; color: #25d366; }
 
         /* ─── Footer ─── */
         .memorial-footer {
@@ -322,9 +335,21 @@
 
             // Update page title and meta
             const displayName = (currentLang === 'fa' && child.nameFa) ? child.nameFa : child.name;
+            const childUrl = `https://peopleforpeace.live/child.html?id=${child.id}`;
+            const childDesc = `Remember ${child.name}. A child lost in the Minab School airstrike.`;
             document.getElementById('pageTitle').textContent = `${child.name} — In Memoriam`;
             document.getElementById('ogTitle').content = `${child.name} — Minab School Memorial`;
-            document.getElementById('ogDesc').content = `Remember ${child.name}. A child lost in the Minab School airstrike.`;
+            document.getElementById('ogDesc').content = childDesc;
+            document.getElementById('ogUrl').content = childUrl;
+            document.getElementById('twitterTitle').content = `${child.name} — Minab School Memorial`;
+            document.getElementById('twitterDesc').content = childDesc;
+            // Set child photo as OG image if available
+            if (child.photoGrid) {
+                const [, pr, pc] = child.photoGrid.match(/r(\d+)_c(\d+)/);
+                const childPhotoUrl = `https://peopleforpeace.live/images/children/child_r${pr}_c${pc}.jpg`;
+                document.getElementById('ogImage').content = childPhotoUrl;
+                document.getElementById('twitterImage').content = childPhotoUrl;
+            }
 
             // Photo
             let photoHtml = '';
@@ -409,8 +434,10 @@
                 ${storyHtml}
 
                 <div class="share-bar fade-in delay-4">
-                    <button class="share-btn" onclick="shareChild()">${t.shareBtn}</button>
-                    <button class="share-btn" onclick="copyLink()">${t.copyBtn}</button>
+                    <a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(`Remember ${child.name}. A child lost in the Minab School airstrike. #NeverForget #CeasefireNow`)}&url=${encodeURIComponent(`https://peopleforpeace.live/child.html?id=${child.id}`)}" target="_blank" rel="noopener">𝕏 Twitter</a>
+                    <a class="share-btn telegram" href="https://t.me/share/url?url=${encodeURIComponent(`https://peopleforpeace.live/child.html?id=${child.id}`)}&text=${encodeURIComponent(`Remember ${child.name}. #NeverForget #CeasefireNow`)}" target="_blank" rel="noopener">✈ Telegram</a>
+                    <a class="share-btn whatsapp" href="https://wa.me/?text=${encodeURIComponent(`Remember ${child.name}. A child lost in the Minab School airstrike. #NeverForget\nhttps://peopleforpeace.live/child.html?id=${child.id}`)}" target="_blank" rel="noopener">💬 WhatsApp</a>
+                    <button class="share-btn" onclick="copyLink()">📋 ${t.copyBtn}</button>
                 </div>
 
                 <nav class="child-nav fade-in delay-4">

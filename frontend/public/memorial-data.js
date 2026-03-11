@@ -196,7 +196,7 @@ const STORIES = [
         titleKey: "storyAminTitle",
         textKey: "storyAminText",
         icon: "🤲",
-        childIds: []
+        childIds: ["amin-ahmadzade"]
     },
     {
         id: "six-gymnasts",
