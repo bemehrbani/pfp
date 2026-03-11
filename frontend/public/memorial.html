@@ -830,6 +830,7 @@
         <a href="#children" class="nav-link" data-i18n="navFaces">Their Faces</a>
         <a href="#stories" class="nav-link" data-i18n="navStories">Stories</a>
         <a href="#investigation" class="nav-link" data-i18n="navInvestigation">Investigation</a>
+        <a href="/evidence.html" class="nav-link" data-i18n="navEvidence">Evidence</a>
         <a href="#act" class="nav-link" data-i18n="navAct">Act Now</a>
     </nav>
 
@@ -967,6 +968,11 @@
             renderStories();
         }
 
+        /* ─── Helpers ─── */
+        function getChildById(id) {
+            return CHILDREN.find(c => c.id === id) || null;
+        }
+
         /* ─── Children Grid ─── */
         function renderChildren() {
             const grid = document.getElementById('childrenGrid');
@@ -1023,7 +1029,31 @@
         /* ─── Stories ─── */
         function renderStories() {
             const grid = document.getElementById('storiesGrid');
-            grid.innerHTML = STORIES.map(s => `
+            grid.innerHTML = STORIES.map(s => {
+                // Build child faces strip if story has linked children
+                let facesHtml = '';
+                if (s.childIds && s.childIds.length > 0) {
+                    const faces = s.childIds.map(cid => {
+                        const child = getChildById(cid);
+                        if (!child) return '';
+                        const displayName = (currentLang === 'fa' && child.nameFa) ? child.nameFa : child.name;
+                        let thumb = '';
+                        if (child.photoGrid) {
+                            const file = `child_${child.photoGrid}.jpg`;
+                            thumb = `<img src="images/children/${file}" alt="${child.name}" style="width:40px;height:44px;border-radius:8px;object-fit:cover;border:2px solid ${child.gender === 'girl' ? 'var(--pink)' : 'var(--blue)'}">`;
+                        } else {
+                            thumb = `<span style="width:40px;height:44px;border-radius:8px;background:var(--bg2);display:inline-flex;align-items:center;justify-content:center;font-size:1.2rem">${child.gender === 'girl' ? '👧' : '👦'}</span>`;
+                        }
+                        return `<a href="child.html?id=${child.id}" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none" title="${child.name}">
+                            ${thumb}
+                            <span style="font-size:.65rem;color:var(--text2);max-width:50px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${displayName}</span>
+                        </a>`;
+                    }).filter(Boolean).join('');
+                    if (faces) {
+                        facesHtml = `<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">${faces}</div>`;
+                    }
+                }
+                return `
                 <div class="story-card fade-in">
                     <div class="story-header">
                         <span class="story-icon">${s.icon}</span>
@@ -1031,8 +1061,10 @@
                     </div>
                     <p class="story-text">${t(s.textKey)}</p>
                     ${s.quoteKey ? `<div class="story-quote">${t(s.quoteKey)}</div>` : ''}
+                    ${facesHtml}
                 </div>
-            `).join('');
+            `;
+            }).join('');
             // Trigger fade-in for new story cards
             requestAnimationFrame(() => {
                 document.querySelectorAll('.story-card.fade-in').forEach(el => {

@@ -731,6 +731,104 @@
         }
 
         /* ============================================================
+           FEATURED CHILDREN
+           ============================================================ */
+        .featured-children {
+            padding: 60px 24px;
+            background: linear-gradient(180deg, rgba(30,15,15,0.25) 0%, var(--bg-primary) 100%);
+        }
+
+        .featured-children-inner {
+            max-width: 880px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .featured-children-title {
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .featured-children-sub {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+        }
+
+        .featured-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .featured-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: transform var(--transition), opacity var(--transition);
+            width: 120px;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .featured-card img {
+            width: 100px;
+            height: 110px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 3px solid var(--accent-red);
+            box-shadow: 0 4px 20px rgba(196,86,74,0.25);
+            margin-bottom: 10px;
+        }
+
+        .featured-card .fc-name {
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .featured-card .fc-age {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .featured-cta {
+            display: inline-block;
+            padding: 14px 36px;
+            border: 1px solid var(--accent-red);
+            border-radius: var(--radius);
+            color: var(--accent-red);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transition);
+        }
+
+        .featured-cta:hover {
+            background: var(--accent-red-dim);
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 600px) {
+            .featured-grid {
+                gap: 12px;
+            }
+            .featured-card {
+                width: 90px;
+            }
+            .featured-card img {
+                width: 80px;
+                height: 88px;
+            }
+        }
+
+        /* ============================================================
            ANIMATIONS
            ============================================================ */
         @keyframes fadeInUp {
@@ -879,6 +977,16 @@
         </div>
     </section>
 
+    <!-- ====== FEATURED CHILDREN ====== -->
+    <section class="featured-children" id="faces">
+        <div class="featured-children-inner reveal">
+            <h2 class="featured-children-title display-font" data-i18n="faces_title">Remember Their Faces</h2>
+            <p class="featured-children-sub" data-i18n="faces_sub">Each face is a child who never came home from school.</p>
+            <div class="featured-grid" id="featuredGrid"></div>
+            <a href="/memorial.html" class="featured-cta" data-i18n="faces_cta">See All 98 Children →</a>
+        </div>
+    </section>
+
     <!-- ====== STATS BAR ====== -->
     <section class="stats-bar">
         <div class="stats-grid reveal">
@@ -987,6 +1095,8 @@
     <!-- ====== FOOTER ====== -->
     <footer class="footer">
         <div class="footer-links">
+            <a href="/memorial.html" data-i18n="footer_memorial">🕊️ Memorial</a>
+            <a href="/evidence.html" data-i18n="footer_evidence">📋 Evidence</a>
             <a href="https://t.me/peopleforpeacebot?start=campaign_16" data-i18n="footer_bot">🤖 Telegram Bot</a>
             <a href="/campaign-guide.html" data-i18n="footer_guide">📖 Guide</a>
             <a href="https://twitter.com/hashtag/StopTrumpMadness" target="_blank" data-i18n="footer_twitter">🐦
@@ -1012,6 +1122,11 @@
                 memorial_text: "On February 28, 2026, an airstrike hit the Shajareh Tayyebeh elementary school in Minab, Iran. 165 students and teachers — mostly girls aged 7 to 12 — never came home. Their empty desks are why we fight for peace.",
                 memorial_date: "Minab, Hormozgan — February 28, 2026",
                 memorial_pledge: "Every voice raised for ceasefire honors their memory.",
+                faces_title: "Remember Their Faces",
+                faces_sub: "Each face is a child who never came home from school.",
+                faces_cta: "See All 98 Children →",
+                footer_memorial: "🕊️ Memorial",
+                footer_evidence: "📋 Evidence",
                 stat_volunteers: "Volunteers",
                 stat_languages: "Languages Supported",
                 stat_hope: "Reasons for Peace",
@@ -1054,6 +1169,11 @@
                 memorial_text: "در ۱۰ اسفند ۱۴۰۴، حمله هوایی به مدرسه ابتدایی شجره طیبه در میناب، ایران، اصابت کرد. ۱۶۵ دانش‌آموز و معلم — بیشتر دختران ۷ تا ۱۲ ساله — دیگر به خانه بازنگشتند. نیمکت‌های خالی آنها دلیل مبارزه ما برای صلح است.",
                 memorial_date: "میناب، هرمزگان — ۱۰ اسفند ۱۴۰۴",
                 memorial_pledge: "هر صدایی که برای آتش‌بس بلند شود، یاد آنها را گرامی می‌دارد.",
+                faces_title: "چهره‌های آنها را به یاد بیاورید",
+                faces_sub: "هر چهره، کودکی است که از مدرسه به خانه بازنگشت.",
+                faces_cta: "مشاهده همه ۹۸ کودک ←",
+                footer_memorial: "🕊️ یادبود",
+                footer_evidence: "📋 مستندات",
                 stat_volunteers: "داوطلب",
                 stat_languages: "زبان پشتیبانی",
                 stat_hope: "دلیل برای صلح",
@@ -1096,6 +1216,11 @@
                 memorial_text: "في ٢٨ فبراير ٢٠٢٦، أصابت غارة جوية مدرسة شجرة الطيبة الابتدائية في ميناب، إيران. ١٦٥ طالباً ومعلماً — معظمهم فتيات تتراوح أعمارهن بين ٧ و١٢ — لم يعودوا إلى منازلهم. مقاعدهم الفارغة هي سبب نضالنا من أجل السلام.",
                 memorial_date: "ميناب، هرمزكان — ٢٨ فبراير ٢٠٢٦",
                 memorial_pledge: "كل صوت يُرفع من أجل وقف إطلاق النار يكرّم ذكراهم.",
+                faces_title: "تذكّر وجوههم",
+                faces_sub: "كل وجه هو طفل لم يعد من المدرسة إلى بيته.",
+                faces_cta: "شاهد جميع ٩٨ طفلاً ←",
+                footer_memorial: "🕊️ النصب التذكاري",
+                footer_evidence: "📋 الأدلة",
                 stat_volunteers: "متطوع",
                 stat_languages: "لغات مدعومة",
                 stat_hope: "أسباب للسلام",
@@ -1181,6 +1306,30 @@
                 if (saved && translations[saved]) setLang(saved);
             } catch (e) { }
         });
+    </script>
+
+    <!-- Memorial data for featured children -->
+    <script src="/memorial-data.js"></script>
+    <script>
+        (function() {
+            if (typeof CHILDREN === 'undefined') return;
+            const withPhotos = CHILDREN.filter(c => c.photoGrid);
+            // Shuffle and pick 5
+            const shuffled = withPhotos.sort(() => Math.random() - 0.5).slice(0, 5);
+            const grid = document.getElementById('featuredGrid');
+            if (!grid) return;
+            grid.innerHTML = shuffled.map(c => {
+                const file = `images/children/child_${c.photoGrid}.jpg`;
+                const lang = localStorage.getItem('pfp-lang') || 'en';
+                const displayName = (lang === 'fa' && c.nameFa) ? c.nameFa : c.name;
+                const ageText = c.age ? (lang === 'fa' ? `سن: ${c.age}` : `Age ${c.age}`) : '';
+                return `<a href="/child.html?id=${c.id}" class="featured-card">
+                    <img src="/${file}" alt="${c.name}" loading="lazy">
+                    <span class="fc-name">${displayName}</span>
+                    ${ageText ? `<span class="fc-age">${ageText}</span>` : ''}
+                </a>`;
+            }).join('');
+        })();
     </script>
 
 </body>

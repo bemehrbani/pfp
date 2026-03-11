@@ -166,44 +166,51 @@ const STORIES = [
         titleKey: "storyHamiTitle",
         textKey: "storyHamiText",
         quoteKey: "storyHamiQuote",
-        icon: "👩‍👦"
+        icon: "👩‍👦",
+        childIds: ["hami-sadeghi"]
     },
     {
         id: "sobhan-hananeh",
         titleKey: "storySobhanTitle",
         textKey: "storySobhanText",
-        icon: "📖"
+        icon: "📖",
+        childIds: ["sobhan-ahmadi", "hananeh-mehdikhah", "hanieh-ahmadi"]
     },
     {
         id: "adrina-pegah",
         titleKey: "storyAdrinaTitle",
         textKey: "storyAdrinaText",
-        icon: "🌸"
+        icon: "🌸",
+        childIds: []
     },
     {
         id: "schoolbag-father",
         titleKey: "storySchoolbagTitle",
         textKey: "storySchoolbagText",
         quoteKey: "storySchoolbagQuote",
-        icon: "🎒"
+        icon: "🎒",
+        childIds: []
     },
     {
         id: "amin-mahdieh",
         titleKey: "storyAminTitle",
         textKey: "storyAminText",
-        icon: "🤲"
+        icon: "🤲",
+        childIds: []
     },
     {
         id: "six-gymnasts",
         titleKey: "storyGymnastsTitle",
         textKey: "storyGymnastsText",
-        icon: "🤸"
+        icon: "🤸",
+        childIds: ["reza-habashian", "arina-arabkish", "athena-ahmadzadeh", "makan-nasiri", "arad-ahmadizadeh", "niyayesh-salehi", "sonar-salari", "mahdis-nazari"]
     },
     {
         id: "prayer-room",
         titleKey: "storyPrayerRoomTitle",
         textKey: "storyPrayerRoomText",
-        icon: "🕌"
+        icon: "🕌",
+        childIds: []
     }
 ];
 

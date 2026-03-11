@@ -438,21 +438,8 @@
 
         /* ─── Find related story ─── */
         function findRelatedStory(child) {
-            const nameLC = child.name.toLowerCase();
-            const storyMap = {
-                'hami-sadeghi': 'hami-neda',
-                'sobhan-ahmadi': 'sobhan-hananeh',
-                'hananeh-mehdikhah': 'sobhan-hananeh',
-                'hanieh-ahmadi': 'sobhan-hananeh',
-            };
-            const storyId = storyMap[child.id];
-            if (storyId) return STORIES.find(s => s.id === storyId);
-
-            // Gymnasts
-            const gymnasts = ['reza-habashian', 'arina-arabkish', 'athena-ahmadzadeh', 'makan-nasiri', 'arad-ahmadizadeh', 'niyayesh-salehi', 'sonar-salari', 'mahdis-nazari'];
-            if (gymnasts.includes(child.id)) return STORIES.find(s => s.id === 'six-gymnasts');
-
-            return null;
+            // Dynamic reverse-lookup: find any story whose childIds includes this child
+            return STORIES.find(s => s.childIds && s.childIds.includes(child.id)) || null;
         }
 
         /* ─── Share ─── */
