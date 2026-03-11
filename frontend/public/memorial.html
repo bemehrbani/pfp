@@ -970,20 +970,22 @@
         /* ─── Children Grid ─── */
         function renderChildren() {
             const grid = document.getElementById('childrenGrid');
-            const withPhotos = CHILDREN.filter(c => c.photo);
-            const withoutPhotos = CHILDREN.filter(c => !c.photo);
+            const withPhotos = CHILDREN.filter(c => c.photoGrid);
+            const withoutPhotos = CHILDREN.filter(c => !c.photoGrid);
 
             // Photo cards
-            grid.innerHTML = withPhotos.map(c => `
+            grid.innerHTML = withPhotos.map(c => {
+                const file = `child_${c.photoGrid}.jpg`;
+                return `
                 <a class="child-card fade-in ${c.gender || 'boy'}" href="child.html?id=${c.id}">
-                    <img class="child-photo" src="images/children/${c.photo}" alt="${c.name}" loading="lazy" />
+                    <img class="child-photo" src="images/children/${file}" alt="${c.name}" loading="lazy" />
                     <div class="child-info">
                         <div class="child-name-en">${c.name}</div>
                         ${c.nameFa ? `<div class="child-name-fa">${c.nameFa}</div>` : ''}
                         ${c.age ? `<span class="child-age">${t('ageLabel')}: ${c.age}</span>` : ''}
                     </div>
-                </a>
-            `).join('');
+                </a>`;
+            }).join('');
 
             // Also Remembered section
             const also = document.getElementById('alsoRemembered');

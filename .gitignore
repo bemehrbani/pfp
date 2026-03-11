@@ -166,3 +166,9 @@ Thumbs.db
 
 # Deploy keys (never commit private keys)
 infrastructure/deploy_key
+minab/
+typescript
+kanban.md
+frontend/public/memorial-data.js.bak
+frontend/public/photo-review.html
+frontend/public/photo_audit.html
