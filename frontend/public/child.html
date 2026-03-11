@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0e17" />
+    <meta name="description" content="In memory of a child lost in the Minab School airstrike — February 28, 2026." />
+    <meta property="og:title" id="ogTitle" content="In Memoriam — Minab School" />
+    <meta property="og:description" id="ogDesc" content="Remember their name. Read their story. Never forget." />
+    <title id="pageTitle">In Memoriam — Minab School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #0a0e17; --bg2: #111827; --bg-card: #1a1f2e;
+            --text: #f0ebe3; --text2: #9ca3af; --muted: #6b7280;
+            --gold: #d4a853; --gold-d: rgba(212,168,83,.15);
+            --red: #c4564a; --pink: #ff69b4; --blue: #6495ed;
+            --border: rgba(255,255,255,.06);
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'Source Sans 3', sans-serif;
+            --rtl: 'Vazirmatn', sans-serif;
+            --r: 12px; --t: .3s cubic-bezier(.4,0,.2,1)
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased }
+        body {
+            font-family: var(--sans); background: var(--bg);
+            color: var(--text); line-height: 1.7; overflow-x: hidden;
+            min-height: 100vh;
+        }
+        body[dir="rtl"] { font-family: var(--rtl) }
+        body[dir="rtl"] .serif { font-family: var(--rtl) }
+        a { color: var(--gold); text-decoration: none }
+        a:hover { text-decoration: underline }
+
+        /* ─── Lang Toggle ─── */
+        .lang-bar {
+            position: fixed; top: 16px; right: 16px; z-index: 100;
+            display: flex; gap: 4px;
+            background: rgba(10,14,23,.85); backdrop-filter: blur(12px);
+            border: 1px solid var(--border); border-radius: 20px; padding: 4px
+        }
+        .lang-btn {
+            padding: 6px 14px; border: none; border-radius: 16px;
+            background: transparent; color: var(--text2);
+            font-size: .8rem; font-weight: 600; cursor: pointer; transition: var(--t)
+        }
+        .lang-btn.active { background: var(--gold-d); color: var(--gold) }
+
+        /* ─── Back Nav ─── */
+        .back-nav {
+            position: fixed; top: 16px; left: 16px; z-index: 100;
+        }
+        .back-link {
+            display: flex; align-items: center; gap: 6px;
+            padding: 8px 16px; border-radius: 20px;
+            background: rgba(10,14,23,.85); backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            color: var(--text2); font-size: .82rem; font-weight: 600;
+            text-decoration: none; transition: var(--t);
+        }
+        .back-link:hover { color: var(--gold); border-color: var(--gold); text-decoration: none; }
+
+        /* ─── Hero Section ─── */
+        .child-hero {
+            display: flex; flex-direction: column; align-items: center;
+            padding: 100px 20px 50px; text-align: center;
+            position: relative;
+        }
+        .child-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, rgba(212,168,83,.06) 0%, transparent 60%);
+        }
+
+        .photo-frame {
+            position: relative; z-index: 2;
+            width: 200px; height: 220px;
+            border-radius: 16px; overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: 0 16px 48px rgba(0,0,0,.5);
+        }
+        .photo-frame.girl { border: 3px solid var(--pink); }
+        .photo-frame.boy { border: 3px solid var(--blue); }
+        .photo-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+        }
+        .no-photo-placeholder {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-card); font-size: 4rem; color: var(--muted);
+        }
+
+        .child-name {
+            font-family: var(--serif); font-size: clamp(1.6rem, 5vw, 2.4rem);
+            font-weight: 700; color: var(--text); z-index: 2;
+            margin-bottom: 4px;
+        }
+        .child-name-fa {
+            font-family: var(--rtl); font-size: 1.4rem;
+            color: var(--gold); direction: rtl; z-index: 2;
+            margin-bottom: 16px;
+        }
+        .gold-divider { width: 50px; height: 2px; background: var(--gold); margin: 0 auto 24px; z-index: 2; }
+
+        /* ─── Bio Card ─── */
+        .bio-section {
+            max-width: 600px; margin: 0 auto; padding: 0 20px 40px;
+        }
+        .bio-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 24px; position: relative;
+        }
+        .bio-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px; border-radius: var(--r) var(--r) 0 0;
+        }
+        .bio-card.girl::before { background: var(--pink); }
+        .bio-card.boy::before { background: var(--blue); }
+
+        .bio-row {
+            display: flex; justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: .9rem;
+        }
+        .bio-row:last-child { border-bottom: none; }
+        .bio-label { color: var(--muted); font-weight: 600; }
+        .bio-value { color: var(--text); text-align: right; }
+
+        /* ─── Story Section ─── */
+        .story-section {
+            max-width: 600px; margin: 0 auto; padding: 40px 20px;
+        }
+        .story-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 24px;
+        }
+        .story-icon { font-size: 2rem; margin-bottom: 12px; }
+        .story-title {
+            font-family: var(--serif); font-size: 1.2rem;
+            color: var(--gold); margin-bottom: 12px;
+        }
+        .story-text { font-size: .92rem; color: var(--text2); line-height: 1.8; }
+        .story-quote {
+            margin-top: 16px; padding: 12px 16px;
+            border-left: 3px solid var(--gold);
+            background: var(--gold-d); border-radius: 0 var(--r) var(--r) 0;
+            font-family: var(--serif); font-style: italic;
+            font-size: .9rem; color: var(--gold);
+        }
+        body[dir="rtl"] .story-quote {
+            border-left: none; border-right: 3px solid var(--gold);
+            border-radius: var(--r) 0 0 var(--r);
+        }
+
+        /* ─── Prev / Next Navigation ─── */
+        .child-nav {
+            max-width: 600px; margin: 0 auto;
+            padding: 20px 20px 40px;
+            display: flex; justify-content: space-between; gap: 12px;
+        }
+        .nav-card {
+            flex: 1; display: flex; align-items: center; gap: 10px;
+            padding: 12px 16px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); text-decoration: none;
+            color: var(--text); transition: var(--t);
+        }
+        .nav-card:hover {
+            border-color: var(--gold); background: var(--gold-d);
+            text-decoration: none;
+        }
+        .nav-card.next { flex-direction: row-reverse; text-align: right; }
+        body[dir="rtl"] .nav-card.prev { flex-direction: row-reverse; text-align: right; }
+        body[dir="rtl"] .nav-card.next { flex-direction: row; text-align: left; }
+        .nav-thumb {
+            width: 40px; height: 44px; border-radius: 8px;
+            object-fit: cover; flex-shrink: 0;
+        }
+        .nav-label { font-size: .72rem; color: var(--muted); }
+        .nav-name { font-size: .85rem; font-weight: 600; }
+
+        /* ─── Share Bar ─── */
+        .share-bar {
+            max-width: 600px; margin: 0 auto;
+            padding: 0 20px 40px;
+            display: flex; justify-content: center; gap: 10px;
+        }
+        .share-btn {
+            padding: 10px 20px; border: 1px solid var(--border);
+            border-radius: 20px; background: var(--bg-card);
+            color: var(--text2); font-size: .82rem; font-weight: 600;
+            cursor: pointer; transition: var(--t);
+        }
+        .share-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-d); }
+
+        /* ─── Footer ─── */
+        .memorial-footer {
+            text-align: center; padding: 40px 20px 60px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-quote-fa {
+            font-family: var(--rtl); font-size: 1.3rem;
+            color: var(--gold); margin-bottom: 4px; direction: rtl;
+        }
+        .footer-quote-en {
+            font-family: var(--serif); font-style: italic;
+            font-size: .95rem; color: var(--text2);
+        }
+
+        /* ─── 404 State ─── */
+        .not-found {
+            text-align: center; padding: 200px 20px;
+        }
+        .not-found h2 { font-family: var(--serif); font-size: 2rem; color: var(--gold); }
+        .not-found p { color: var(--text2); margin-top: 12px; }
+
+        /* ─── Fade-in ─── */
+        .fade-in { opacity: 0; transform: translateY(12px); animation: fadeUp .6s ease forwards; }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .delay-1 { animation-delay: .1s; }
+        .delay-2 { animation-delay: .2s; }
+        .delay-3 { animation-delay: .3s; }
+        .delay-4 { animation-delay: .4s; }
+    </style>
+</head>
+
+<body>
+    <!-- Language Toggle -->
+    <div class="lang-bar">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('fa')">فا</button>
+    </div>
+
+    <!-- Back Nav -->
+    <div class="back-nav">
+        <a href="children.html" class="back-link" id="backLink">← All Children</a>
+    </div>
+
+    <!-- Content (populated by JS) -->
+    <main id="mainContent"></main>
+
+    <script src="memorial-data.js"></script>
+    <script>
+        /* ─── Parse URL ─── */
+        const params = new URLSearchParams(window.location.search);
+        const childId = params.get('id');
+
+        let currentLang = localStorage.getItem('pfp-lang') || 'en';
+
+        const CHILD_I18N = {
+            en: {
+                backLink: '← All Children', ageLabel: 'Age', ageUnknown: 'Age unknown',
+                fatherLabel: "Father's Name", schoolLabel: 'School',
+                schoolName: 'Shajareh Tayyebeh Elementary School',
+                locationLabel: 'Location', location: 'Minab, Hormozgan Province, Iran',
+                dateLabel: 'Date', dateValue: 'February 28, 2026',
+                causeLabel: 'Cause', causeValue: 'U.S. military airstrike',
+                prevLabel: '← Previous', nextLabel: 'Next →',
+                shareBtn: '📤 Share', copyBtn: '📋 Copy Link', copied: 'Copied!',
+                notFoundTitle: 'Child Not Found',
+                notFoundText: 'This child could not be found. Please return to the memorial grid.',
+                footerFa: 'هرگز نمیرد آنکه دلش زنده شد به عشق',
+                footerEn: 'Those whose hearts are alive with love never die — Hafez',
+            },
+            fa: {
+                backLink: '→ همه کودکان', ageLabel: 'سن', ageUnknown: 'سن نامشخص',
+                fatherLabel: 'نام پدر', schoolLabel: 'مدرسه',
+                schoolName: 'دبستان شجره طیبه',
+                locationLabel: 'مکان', location: 'میناب، استان هرمزگان، ایران',
+                dateLabel: 'تاریخ', dateValue: '۹ اسفند ۱۴۰۴',
+                causeLabel: 'علت', causeValue: 'حمله هوایی ارتش آمریکا',
+                prevLabel: 'قبلی ←', nextLabel: '→ بعدی',
+                shareBtn: '📤 اشتراک‌گذاری', copyBtn: '📋 کپی لینک', copied: 'کپی شد!',
+                notFoundTitle: 'کودک یافت نشد',
+                notFoundText: 'این کودک یافت نشد. لطفاً به صفحه یادبود بازگردید.',
+                footerFa: 'هرگز نمیرد آنکه دلش زنده شد به عشق',
+                footerEn: 'ثبت است بر جریده عالم دوام ما — حافظ',
+            }
+        };
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('pfp-lang', lang);
+            const isRtl = lang === 'fa';
+            document.documentElement.lang = isRtl ? 'fa' : 'en';
+            document.body.dir = isRtl ? 'rtl' : 'ltr';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.trim() === (lang === 'fa' ? 'فا' : 'EN'));
+            });
+            renderPage();
+        }
+
+        function renderPage() {
+            const t = CHILD_I18N[currentLang] || CHILD_I18N.en;
+            const main = document.getElementById('mainContent');
+
+            // Back link
+            document.getElementById('backLink').textContent = t.backLink;
+
+            const child = getChildById(childId);
+
+            if (!child) {
+                main.innerHTML = `
+                    <div class="not-found fade-in">
+                        <h2>${t.notFoundTitle}</h2>
+                        <p>${t.notFoundText}</p>
+                        <p style="margin-top:20px"><a href="children.html">${t.backLink}</a></p>
+                    </div>
+                    <footer class="memorial-footer">
+                        <div class="footer-quote-fa">${t.footerFa}</div>
+                        <div class="footer-quote-en">${t.footerEn}</div>
+                    </footer>`;
+                return;
+            }
+
+            // Update page title and meta
+            const displayName = (currentLang === 'fa' && child.nameFa) ? child.nameFa : child.name;
+            document.getElementById('pageTitle').textContent = `${child.name} — In Memoriam`;
+            document.getElementById('ogTitle').content = `${child.name} — Minab School Memorial`;
+            document.getElementById('ogDesc').content = `Remember ${child.name}. A child lost in the Minab School airstrike.`;
+
+            // Photo
+            let photoHtml = '';
+            if (child.photoGrid) {
+                const [, r, c] = child.photoGrid.match(/r(\d+)_c(\d+)/);
+                const photoFile = `child_r${r}_c${c}.jpg`;
+                photoHtml = `<img src="images/children/${photoFile}" alt="${child.name}" />`;
+            } else {
+                const emoji = child.gender === 'girl' ? '👧' : '👦';
+                photoHtml = `<div class="no-photo-placeholder">${emoji}</div>`;
+            }
+
+            // Bio rows
+            const bioRows = [];
+            bioRows.push(`<div class="bio-row"><span class="bio-label">${t.ageLabel}</span><span class="bio-value">${child.age || t.ageUnknown}</span></div>`);
+            if (child.father) {
+                bioRows.push(`<div class="bio-row"><span class="bio-label">${t.fatherLabel}</span><span class="bio-value">${child.father}</span></div>`);
+            }
+            bioRows.push(`<div class="bio-row"><span class="bio-label">${t.schoolLabel}</span><span class="bio-value">${t.schoolName}</span></div>`);
+            bioRows.push(`<div class="bio-row"><span class="bio-label">${t.locationLabel}</span><span class="bio-value">${t.location}</span></div>`);
+            bioRows.push(`<div class="bio-row"><span class="bio-label">${t.dateLabel}</span><span class="bio-value">${t.dateValue}</span></div>`);
+            bioRows.push(`<div class="bio-row"><span class="bio-label">${t.causeLabel}</span><span class="bio-value">${t.causeValue}</span></div>`);
+            if (child.notes) {
+                bioRows.push(`<div class="bio-row"><span class="bio-label">Notes</span><span class="bio-value">${child.notes}</span></div>`);
+            }
+
+            // Related story
+            let storyHtml = '';
+            const relatedStory = findRelatedStory(child);
+            if (relatedStory) {
+                const i18n = MEMORIAL_I18N[currentLang] || MEMORIAL_I18N.en;
+                const title = i18n[relatedStory.titleKey] || '';
+                const text = i18n[relatedStory.textKey] || '';
+                const quote = relatedStory.quoteKey ? (i18n[relatedStory.quoteKey] || '') : '';
+                storyHtml = `
+                    <section class="story-section fade-in delay-3">
+                        <div class="story-card">
+                            <div class="story-icon">${relatedStory.icon}</div>
+                            <div class="story-title">${title}</div>
+                            <div class="story-text">${text}</div>
+                            ${quote ? `<div class="story-quote">${quote}</div>` : ''}
+                        </div>
+                    </section>`;
+            }
+
+            // Prev/Next nav
+            const withPhotos = CHILDREN.filter(c => c.photoGrid !== null).sort((a, b) => {
+                const [, ar, ac] = a.photoGrid.match(/r(\d+)_c(\d+)/);
+                const [, br, bc] = b.photoGrid.match(/r(\d+)_c(\d+)/);
+                return parseInt(ar) !== parseInt(br) ? parseInt(ar) - parseInt(br) : parseInt(ac) - parseInt(bc);
+            });
+            const allList = [...withPhotos, ...CHILDREN.filter(c => !c.photoGrid)];
+            const idx = allList.findIndex(c => c.id === child.id);
+            const prev = idx > 0 ? allList[idx - 1] : allList[allList.length - 1];
+            const next = idx < allList.length - 1 ? allList[idx + 1] : allList[0];
+
+            function navThumb(c) {
+                if (c.photoGrid) {
+                    const [, r2, c2] = c.photoGrid.match(/r(\d+)_c(\d+)/);
+                    return `<img class="nav-thumb" src="images/children/child_r${r2}_c${c2}.jpg" alt="${c.name}" />`;
+                }
+                return `<div class="nav-thumb" style="background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:1.2rem">${c.gender === 'girl' ? '👧' : '👦'}</div>`;
+            }
+            const prevName = (currentLang === 'fa' && prev.nameFa) ? prev.nameFa : prev.name;
+            const nextName = (currentLang === 'fa' && next.nameFa) ? next.nameFa : next.name;
+
+            main.innerHTML = `
+                <section class="child-hero">
+                    <div class="photo-frame ${child.gender} fade-in">${photoHtml}</div>
+                    <h1 class="child-name fade-in delay-1">${displayName}</h1>
+                    ${child.nameFa && currentLang === 'en' ? `<div class="child-name-fa fade-in delay-1">${child.nameFa}</div>` : ''}
+                    ${child.name && currentLang === 'fa' ? `<div class="child-name-fa fade-in delay-1" style="direction:ltr;font-family:var(--serif);color:var(--text2);font-size:1.1rem">${child.name}</div>` : ''}
+                    <div class="gold-divider fade-in delay-2"></div>
+                </section>
+
+                <section class="bio-section fade-in delay-2">
+                    <div class="bio-card ${child.gender}">
+                        ${bioRows.join('\n')}
+                    </div>
+                </section>
+
+                ${storyHtml}
+
+                <div class="share-bar fade-in delay-4">
+                    <button class="share-btn" onclick="shareChild()">${t.shareBtn}</button>
+                    <button class="share-btn" onclick="copyLink()">${t.copyBtn}</button>
+                </div>
+
+                <nav class="child-nav fade-in delay-4">
+                    <a href="child.html?id=${prev.id}" class="nav-card prev">
+                        ${navThumb(prev)}
+                        <div>
+                            <div class="nav-label">${t.prevLabel}</div>
+                            <div class="nav-name">${prevName}</div>
+                        </div>
+                    </a>
+                    <a href="child.html?id=${next.id}" class="nav-card next">
+                        ${navThumb(next)}
+                        <div>
+                            <div class="nav-label">${t.nextLabel}</div>
+                            <div class="nav-name">${nextName}</div>
+                        </div>
+                    </a>
+                </nav>
+
+                <footer class="memorial-footer">
+                    <div class="footer-quote-fa">${t.footerFa}</div>
+                    <div class="footer-quote-en">${t.footerEn}</div>
+                </footer>`;
+        }
+
+        /* ─── Find related story ─── */
+        function findRelatedStory(child) {
+            const nameLC = child.name.toLowerCase();
+            const storyMap = {
+                'hami-sadeghi': 'hami-neda',
+                'sobhan-ahmadi': 'sobhan-hananeh',
+                'hananeh-mehdikhah': 'sobhan-hananeh',
+                'hanieh-ahmadi': 'sobhan-hananeh',
+            };
+            const storyId = storyMap[child.id];
+            if (storyId) return STORIES.find(s => s.id === storyId);
+
+            // Gymnasts
+            const gymnasts = ['reza-habashian', 'arina-arabkish', 'athena-ahmadzadeh', 'makan-nasiri', 'arad-ahmadizadeh', 'niyayesh-salehi', 'sonar-salari', 'mahdis-nazari'];
+            if (gymnasts.includes(child.id)) return STORIES.find(s => s.id === 'six-gymnasts');
+
+            return null;
+        }
+
+        /* ─── Share ─── */
+        function shareChild() {
+            const child = getChildById(childId);
+            if (!child) return;
+            const url = window.location.href;
+            const text = `Remember ${child.name}. A child lost in the Minab School airstrike. #NeverForget #CeasefireNow`;
+            if (navigator.share) {
+                navigator.share({ title: child.name, text, url }).catch(() => {});
+            } else {
+                copyLink();
+            }
+        }
+
+        function copyLink() {
+            const t = CHILD_I18N[currentLang] || CHILD_I18N.en;
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const btns = document.querySelectorAll('.share-btn');
+                if (btns[1]) { btns[1].textContent = t.copied; setTimeout(() => { btns[1].textContent = t.copyBtn; }, 2000); }
+            });
+        }
+
+        /* ─── Init ─── */
+        if (!childId) {
+            window.location.href = 'children.html';
+        } else {
+            setLang(currentLang);
+        }
+    </script>
+</body>
+
+</html>

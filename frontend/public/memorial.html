@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0e17" />
+    <meta name="description"
+        content="In Memoriam — 168 children and teachers killed in the Minab School airstrike, February 28, 2026. See their faces. Read their stories. Never forget." />
+    <meta property="og:title" content="In Memoriam — Minab School" />
+    <meta property="og:description"
+        content="168 lives taken. See their faces. Read their stories. Join the call for peace." />
+    <title>In Memoriam — Minab School | People for Peace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg2: #111827;
+            --bg3: #0d1220;
+            --bg-card: #1a1f2e;
+            --bg-card-h: #222842;
+            --text: #f0ebe3;
+            --text2: #9ca3af;
+            --muted: #6b7280;
+            --gold: #d4a853;
+            --gold-d: rgba(212, 168, 83, .15);
+            --peace: #7cb68e;
+            --peace-d: rgba(124, 182, 142, .12);
+            --red: #c4564a;
+            --red-d: rgba(196, 86, 74, .12);
+            --blue: #60a5fa;
+            --border: rgba(255, 255, 255, .06);
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'Source Sans 3', sans-serif;
+            --rtl: 'Vazirmatn', sans-serif;
+            --r: 12px;
+            --t: .3s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden
+        }
+
+        body[dir="rtl"] {
+            font-family: var(--rtl)
+        }
+
+        body[dir="rtl"] .serif {
+            font-family: var(--rtl)
+        }
+
+        a {
+            color: var(--gold);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        /* ─── LANG TOGGLE ─── */
+        .lang-bar {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 100;
+            display: flex;
+            gap: 4px;
+            background: rgba(10, 14, 23, .85);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 4px
+        }
+
+        .lang-btn {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 16px;
+            background: transparent;
+            color: var(--text2);
+            font-size: .8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--t)
+        }
+
+        .lang-btn.active {
+            background: var(--gold-d);
+            color: var(--gold)
+        }
+
+        /* ─── STICKY NAV ─── */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 90;
+            background: rgba(10, 14, 23, .92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            padding: 8px 16px;
+            transition: var(--t)
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: var(--t);
+            white-space: nowrap
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--gold);
+            background: var(--gold-d);
+            text-decoration: none
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('images/memorial-candles.png') center/cover no-repeat;
+            opacity: .35
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(10, 14, 23, .4) 0%, rgba(10, 14, 23, .95) 100%)
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding: 40px 20px
+        }
+
+        .hero-number {
+            font-family: var(--serif);
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            text-shadow: 0 0 60px rgba(212, 168, 83, .3)
+        }
+
+        .hero-label {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
+            margin-top: 8px;
+            letter-spacing: 1px
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 24px auto
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text2);
+            margin-bottom: 8px
+        }
+
+        .hero-quote {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--gold);
+            opacity: .8;
+            margin-top: 16px
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounceDown 2s infinite;
+            color: var(--muted);
+            font-size: 1.5rem
+        }
+
+        @keyframes bounceDown {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0)
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(8px)
+            }
+        }
+
+        /* ─── SECTION ─── */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 70px 20px
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px
+        }
+
+        .section-sub {
+            text-align: center;
+            color: var(--text2);
+            font-size: .95rem;
+            margin-bottom: 40px
+        }
+
+        .divider {
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            margin: 16px auto 32px
+        }
+
+        /* ─── STATISTICS ─── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            max-width: 700px;
+            margin: 0 auto 40px
+        }
+
+        @media(max-width:600px) {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r)
+        }
+
+        .stat-num {
+            font-family: var(--serif);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1
+        }
+
+        .stat-lbl {
+            font-size: .78rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-top: 4px
+        }
+
+        /* ─── PHOTO GALLERY ─── */
+        .gallery-section {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 4px
+        }
+
+        @media(min-width:768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 6px
+            }
+        }
+
+        @media(min-width:1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(8, 1fr);
+                gap: 6px
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+            transition: var(--t);
+            background: #0d1220;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.06);
+            z-index: 2;
+            box-shadow: 0 8px 32px rgba(212, 168, 83, .15)
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--t)
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, .5) 0%, transparent 40%);
+            opacity: 0;
+            transition: var(--t);
+            display: flex;
+            align-items: flex-end;
+            padding: 8px;
+            pointer-events: none
+        }
+
+        .gallery-name {
+            color: #fff;
+            font-size: .7rem;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,.8);
+            line-height: 1.2;
+            width: 100%;
+            text-align: center
+        }
+
+        /* ─── POSTER ─── */
+        .poster-section {
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 20px
+        }
+
+        .poster-wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center
+        }
+
+        .poster-img {
+            width: 100%;
+            max-width: 900px;
+            border-radius: var(--r);
+            border: 2px solid rgba(212, 168, 83, .2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .5)
+        }
+
+        .poster-caption {
+            color: var(--muted);
+            font-size: .85rem;
+            margin-top: 16px;
+            font-style: italic
+        }
+
+        /* ─── NAMES GRID ─── */
+        .names-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px
+        }
+
+        .name-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            cursor: pointer;
+            transition: var(--t);
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .name-card:hover {
+            background: var(--bg-card-h);
+            transform: translateY(-3px);
+            border-color: rgba(212, 168, 83, .25);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .3)
+        }
+
+        .name-card .candle {
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+            display: block;
+            animation: flicker 3s infinite alternate
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            33% {
+                opacity: .85
+            }
+
+            66% {
+                opacity: .95
+            }
+        }
+
+        .name-card .name-en {
+            font-weight: 600;
+            font-size: .88rem;
+            line-height: 1.3
+        }
+
+        .name-card .name-fa {
+            font-family: var(--rtl);
+            color: var(--text2);
+            font-size: .82rem;
+            margin-top: 2px;
+            direction: rtl
+        }
+
+        .name-card .age-badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: .72rem;
+            background: var(--gold-d);
+            color: var(--gold)
+        }
+
+        .name-card .gender-icon {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-size: .7rem;
+            opacity: .5
+        }
+
+        body[dir="rtl"] .name-card .gender-icon {
+            right: auto;
+            left: 10px
+        }
+
+        /* ─── STORIES ─── */
+        .stories-section {
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .stories-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px
+        }
+
+        .story-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 28px 28px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--t)
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gold);
+            border-radius: 4px 0 0 4px
+        }
+
+        body[dir="rtl"] .story-card::before {
+            left: auto;
+            right: 0;
+            border-radius: 0 4px 4px 0
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px
+        }
+
+        .story-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0
+        }
+
+        .story-title {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1.3
+        }
+
+        .story-text {
+            color: var(--text2);
+            font-size: .92rem;
+            line-height: 1.8
+        }
+
+        .story-quote {
+            margin-top: 16px;
+            padding: 14px 18px;
+            background: rgba(212, 168, 83, .08);
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--gold);
+            font-size: .88rem;
+            line-height: 1.6;
+            position: relative
+        }
+
+        .story-quote::before {
+            content: '"';
+            position: absolute;
+            top: -8px;
+            left: 10px;
+            font-size: 3rem;
+            color: rgba(212, 168, 83, .2);
+            font-family: var(--serif);
+            line-height: 1
+        }
+
+        body[dir="rtl"] .story-quote::before {
+            left: auto;
+            right: 10px;
+            content: '"'
+        }
+
+        /* ─── MODAL ─── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .88);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(10px)
+        }
+
+        .modal-overlay.open {
+            display: flex
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            max-width: 480px;
+            width: 100%;
+            padding: 32px;
+            position: relative;
+            animation: fadeUp .3s ease;
+            max-height: 90vh;
+            overflow-y: auto
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1
+        }
+
+        .modal .candle-lg {
+            font-size: 2.5rem;
+            text-align: center;
+            display: block;
+            margin-bottom: 12px
+        }
+
+        .modal .m-name {
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.3
+        }
+
+        .modal .m-name-fa {
+            font-family: var(--rtl);
+            font-size: 1.3rem;
+            color: var(--text2);
+            text-align: center;
+            direction: rtl;
+            margin-top: 4px
+        }
+
+        .modal .m-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            margin: 16px auto
+        }
+
+        .modal .m-row {
+            display: flex;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: .88rem
+        }
+
+        .modal .m-label {
+            color: var(--muted);
+            min-width: 80px;
+            flex-shrink: 0
+        }
+
+        .modal .m-value {
+            color: var(--text)
+        }
+
+        .modal .m-notes {
+            background: var(--gold-d);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-top: 12px;
+            font-size: .82rem;
+            color: var(--gold)
+        }
+
+        .modal .m-share {
+            display: block;
+            width: 100%;
+            margin-top: 16px;
+            padding: 10px;
+            background: var(--gold-d);
+            color: var(--gold);
+            border: none;
+            border-radius: 8px;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--t)
+        }
+
+        .modal .m-share:hover {
+            background: rgba(212, 168, 83, .25)
+        }
+
+        /* ─── IMAGE MODAL ─── */
+        .img-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .95);
+            z-index: 300;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            cursor: pointer
+        }
+
+        .img-modal-overlay.open {
+            display: flex
+        }
+
+        .img-modal-overlay img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .5)
+        }
+
+        /* ─── UNIDENTIFIED ─── */
+        .unidentified-section {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .unidentified-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 24px
+        }
+
+        .unlit {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .9rem;
+            opacity: .35
+        }
+
+        /* ─── INVESTIGATION ─── */
+        .evidence-list {
+            max-width: 700px;
+            margin: 0 auto;
+            list-style: none
+        }
+
+        .evidence-list li {
+            display: flex;
+            gap: 14px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: .92rem
+        }
+
+        .evidence-list li:last-child {
+            border-bottom: none
+        }
+
+        .evidence-list .ev-icon {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            margin-top: 2px
+        }
+
+        .evidence-list .ev-text {
+            color: var(--text2)
+        }
+
+        .sources-note {
+            text-align: center;
+            color: var(--muted);
+            font-size: .78rem;
+            margin-top: 24px;
+            font-style: italic
+        }
+
+        /* ─── CTA ─── */
+        .cta-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, var(--bg), var(--bg2))
+        }
+
+        .cta-section h2 {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            margin-bottom: 12px
+        }
+
+        .cta-section p {
+            color: var(--text2);
+            margin-bottom: 32px;
+            font-size: 1.05rem
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--gold), #b8922e);
+            color: #0a0e17;
+            font-weight: 700;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: var(--t);
+            font-size: .95rem
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 168, 83, .3);
+            text-decoration: none
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid rgba(212, 168, 83, .3);
+            border-radius: 25px;
+            text-decoration: none;
+            transition: var(--t);
+            font-size: .95rem;
+            cursor: pointer
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold-d);
+            text-decoration: none
+        }
+
+        /* ─── ADULTS ─── */
+        .adults-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px
+        }
+
+        .adult-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 24px;
+            text-align: center;
+            min-width: 200px;
+            cursor: pointer;
+            transition: var(--t)
+        }
+
+        .adult-card:hover {
+            background: var(--bg-card-h);
+            transform: translateY(-2px);
+            border-color: rgba(212, 168, 83, .2)
+        }
+
+        .adult-card .name {
+            font-weight: 600;
+            font-size: .92rem
+        }
+
+        .adult-card .role {
+            color: var(--muted);
+            font-size: .82rem;
+            margin-top: 4px
+        }
+
+        /* ─── FOOTER ─── */
+        .memorial-footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border)
+        }
+
+        .memorial-footer .quote-fa {
+            font-family: var(--rtl);
+            font-size: 1.1rem;
+            color: var(--gold);
+            direction: rtl;
+            margin-bottom: 4px
+        }
+
+        .memorial-footer .quote-en {
+            font-size: .88rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 20px
+        }
+
+        .memorial-footer .footer-links a {
+            color: var(--gold);
+            margin: 0 12px;
+            font-size: .85rem
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media(max-width:600px) {
+            .sticky-nav {
+                gap: 2px;
+                padding: 6px 8px
+            }
+
+            .nav-link {
+                padding: 6px 10px;
+                font-size: .72rem
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+                gap: 4px
+            }
+
+            .names-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 8px
+            }
+
+            .story-card {
+                padding: 20px 20px 18px
+            }
+        }
+
+        /* ─── FADE IN ANIMATION ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .6s ease, transform .6s ease
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Language toggle -->
+    <div class="lang-bar">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+        <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-number serif" data-i18n="heroNumber">168</div>
+            <div class="hero-label" data-i18n="heroLabel">Lives Taken</div>
+            <div class="hero-divider"></div>
+            <div class="hero-sub" data-i18n="heroSub">Shajareh Tayyebeh Elementary School — February 28, 2026</div>
+            <div class="hero-quote" data-i18n="heroQuote">Their empty desks are why we fight for peace.</div>
+        </div>
+        <div class="hero-scroll">↓</div>
+    </section>
+
+    <!-- Sticky navigation -->
+    <nav class="sticky-nav" id="stickyNav">
+        <a href="#faces" class="nav-link" data-i18n="navFaces">Faces</a>
+        <a href="#names" class="nav-link" data-i18n="navNames">Names</a>
+        <a href="#stories" class="nav-link" data-i18n="navStories">Stories</a>
+        <a href="#investigation" class="nav-link" data-i18n="navInvestigation">Investigation</a>
+        <a href="#act" class="nav-link" data-i18n="navAct">Act Now</a>
+    </nav>
+
+    <!-- Statistics -->
+    <section class="section">
+        <h2 class="section-title" data-i18n="statsTitle">The Numbers</h2>
+        <div class="divider"></div>
+        <div class="stats-row">
+            <div class="stat-box fade-in">
+                <div class="stat-num">168</div>
+                <div class="stat-lbl" data-i18n="statKilled">Killed</div>
+            </div>
+            <div class="stat-box fade-in">
+                <div class="stat-num">110+</div>
+                <div class="stat-lbl" data-i18n="statInjured">Injured</div>
+            </div>
+            <div class="stat-box fade-in">
+                <div class="stat-num">110</div>
+                <div class="stat-lbl" data-i18n="statChildren">Children</div>
+            </div>
+            <div class="stat-box fade-in">
+                <div class="stat-num">26</div>
+                <div class="stat-lbl" data-i18n="statTeachers">Teachers</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="gallery-section section" id="faces">
+        <h2 class="section-title" data-i18n="galleryTitle">Their Faces</h2>
+        <p class="section-sub" data-i18n="gallerySub">98 identified children — click any face to read their story
+        </p>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <div style="text-align:center;padding:30px 0 0">
+            <a href="children.html" style="display:inline-block;padding:12px 28px;border-radius:24px;background:var(--gold-d);border:1px solid var(--gold);color:var(--gold);font-weight:600;font-size:.95rem;text-decoration:none;transition:var(--t)" onmouseover="this.style.background='rgba(212,168,83,.25)'" onmouseout="this.style.background='var(--gold-d)'" data-i18n-attr="textContent" data-i18n="seeAllCta">See All 98 Identified Children →</a>
+        </div>
+    </section>
+
+    <!-- Photo poster -->
+    <section class="poster-section">
+        <div class="poster-wrap">
+            <h2 class="section-title" data-i18n="posterTitle">Memorial Poster</h2>
+            <div class="divider"></div>
+            <img src="images/victims-poster.jpg"
+                alt="Memorial poster of all identified victims of the Minab school airstrike" class="poster-img"
+                loading="lazy" />
+            <p class="poster-caption" data-i18n="posterCaption">Official memorial poster — Martyrs of Shajareh Tayyebeh
+                Elementary School, Minab</p>
+        </div>
+    </section>
+
+    <!-- Named victims -->
+    <section class="section" id="names">
+        <h2 class="section-title" data-i18n="namesTitle">Their Names</h2>
+        <p class="section-sub" data-i18n="namesSub">117 identified children — click any name to read their story</p>
+        <div class="names-grid" id="namesGrid"></div>
+        <h3 style="text-align:center;margin-top:40px;font-size:1.1rem" data-i18n="adultsTitle">Staff & Teachers</h3>
+        <div class="adults-row" id="adultsRow"></div>
+    </section>
+
+    <!-- Unidentified -->
+    <section class="unidentified-section section">
+        <h2 class="section-title" data-i18n="unidentifiedTitle">The Unnamed</h2>
+        <div class="divider"></div>
+        <p style="text-align:center;color:var(--text2);max-width:600px;margin:0 auto" data-i18n="unidentifiedText">At
+            least 69 victims remain unidentified. Their bodies were too severely damaged for visual identification.
+            Families have provided DNA samples, waiting for answers that may never come.</p>
+        <div class="unidentified-grid" id="unlitCandles"></div>
+        <p style="text-align:center;color:var(--muted);font-size:.82rem;margin-top:12px;font-style:italic"
+            data-i18n="unidentifiedSub">Names we may never know</p>
+    </section>
+
+    <!-- Stories -->
+    <section class="stories-section section" id="stories">
+        <h2 class="section-title" data-i18n="storiesTitle">Their Stories</h2>
+        <p class="section-sub" data-i18n="storiesSub">So they are not forgotten in the clutter of war</p>
+        <div class="stories-grid" id="storiesGrid"></div>
+    </section>
+
+    <!-- Investigation -->
+    <section class="section" id="investigation">
+        <h2 class="section-title" data-i18n="investigationTitle">Who Fired the Missiles?</h2>
+        <p class="section-sub" data-i18n="investigationSub">An open-source intelligence investigation traced the origin
+            of fire</p>
+        <ul class="evidence-list">
+            <li><span class="ev-icon">🎯</span><span class="ev-text" data-i18n="evidenceWeapon">BGM-109 Tomahawk cruise
+                    missile — a U.S.-only weapon system</span></li>
+            <li><span class="ev-icon">🚢</span><span class="ev-text" data-i18n="evidenceShip">Launched from USS Abraham
+                    Lincoln Carrier Strike Group, Arabian Sea</span></li>
+            <li><span class="ev-icon">📏</span><span class="ev-text" data-i18n="evidenceDistance">~300-400 km south of
+                    Minab — well within Tomahawk's 1,600 km range</span></li>
+            <li><span class="ev-icon">🏫</span><span class="ev-text" data-i18n="evidenceTarget">School mistargeted using
+                    outdated 2013 intelligence — it had been a civilian school since 2016</span></li>
+            <li><span class="ev-icon">📄</span><span class="ev-text" data-i18n="evidenceDod">U.S. DoD preliminary
+                    assessment acknowledged "likely" responsibility</span></li>
+        </ul>
+        <p class="sources-note" data-i18n="sourcesNote">Sources: Al Jazeera, Human Rights Watch, NYT, CBC, NPR,
+            Bellingcat, Planet Labs satellite imagery</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="act">
+        <h2 data-i18n="ctaTitle">Don't Let Them Be Forgotten</h2>
+        <p data-i18n="ctaSub">Every voice raised for ceasefire honors their memory.</p>
+        <div class="cta-btns">
+            <a href="https://t.me/peopleforpeacebot?start=campaign_16" class="btn-primary" data-i18n="ctaJoin">✊ Join
+                the Campaign</a>
+            <button class="btn-secondary" onclick="shareMemorial()" data-i18n="ctaShare">📤 Share This Memorial</button>
+            <a href="/campaign-guide.html" class="btn-secondary" data-i18n="ctaGuide">📖 Campaign Guide</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="memorial-footer">
+        <p class="quote-fa" data-i18n="footerQuoteFa">هرگز نمیرد آنکه دلش زنده شد به عشق</p>
+        <p class="quote-en" data-i18n="footerQuoteEn">Those whose hearts are alive with love never die — Hafez</p>
+        <div class="footer-links">
+            <a href="/" data-i18n="backHome">← Back to Home</a>
+            <a href="/dashboard-live.html">Dashboard</a>
+            <a href="/campaign-guide.html">Campaign Guide</a>
+        </div>
+    </footer>
+
+    <!-- Name/Adult Modal -->
+    <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+        <div class="modal" id="modalContent"></div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div class="img-modal-overlay" id="imgModal" onclick="closeImgModal()">
+        <img id="imgModalImg" src="" alt="" />
+    </div>
+
+    <script src="memorial-data.js"></script>
+    <script>
+        let currentLang = localStorage.getItem('pfp-lang') || 'en';
+        const t = (key) => (MEMORIAL_I18N[currentLang] || MEMORIAL_I18N.en)[key] || key;
+
+        /* ─── Language ─── */
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('pfp-lang', lang);
+            const isRtl = lang === 'fa' || lang === 'ar';
+            document.documentElement.lang = lang;
+            document.body.dir = isRtl ? 'rtl' : 'ltr';
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === (lang === 'en' ? 'EN' : lang === 'fa' ? 'فارسی' : 'العربية')));
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const val = t(key);
+                if (val && val !== key) el.textContent = val;
+            });
+            document.title = t('pageTitle') + ' | People for Peace';
+            // Fix lang bar position for RTL
+            const bar = document.querySelector('.lang-bar');
+            if (isRtl) { bar.style.right = 'auto'; bar.style.left = '16px'; }
+            else { bar.style.left = 'auto'; bar.style.right = '16px'; }
+            // Re-render dynamic content
+            renderStories();
+        }
+
+        /* ─── Gallery ─── */
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = GALLERY_PHOTOS.map(p => `
+                <a class="gallery-item" href="child.html?id=${p.id}" style="text-decoration:none;color:inherit">
+                    <img src="images/children/${p.file}" alt="${p.name || 'Memorial photo'}" loading="lazy" />
+                    <div class="gallery-overlay">
+                        ${p.name ? `<span class="gallery-name">${p.name}</span>` : ''}
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        /* ─── Names ─── */
+        function renderNames() {
+            const grid = document.getElementById('namesGrid');
+            grid.innerHTML = CHILDREN.map(v => `
+                <a class="name-card" href="child.html?id=${v.id}" style="text-decoration:none;color:inherit">
+                    <span class="gender-icon">${v.gender === 'girl' ? '👧' : '👦'}</span>
+                    <span class="candle">🕯️</span>
+                    <span class="name-en">${v.name}</span>
+                    ${v.nameFa ? `<span class="name-fa">${v.nameFa}</span>` : ''}
+                    ${v.age ? `<span class="age-badge">${t('ageLabel')}: ${v.age}</span>` : ''}
+                </a>
+            `).join('');
+
+            const adultsRow = document.getElementById('adultsRow');
+            adultsRow.innerHTML = ADULTS.map(a => `
+                <div class="adult-card" onclick="openModal('${a.id}')">
+                    <span style="font-size:1.2rem">🕯️</span>
+                    <div class="name">${a.name}</div>
+                    <div style="font-family:var(--rtl);color:var(--text2);font-size:.82rem;direction:rtl">${a.nameFa}</div>
+                    <div class="role">${a.role}${a.age ? ` · ${t('ageLabel')}: ${a.age}` : ''}</div>
+                </div>
+            `).join('');
+
+            const unlitEl = document.getElementById('unlitCandles');
+            unlitEl.innerHTML = Array.from({ length: 69 }, () => '<span class="unlit">🕯️</span>').join('');
+        }
+
+        /* ─── Stories ─── */
+        function renderStories() {
+            const grid = document.getElementById('storiesGrid');
+            grid.innerHTML = STORIES.map(s => `
+                <div class="story-card fade-in">
+                    <div class="story-header">
+                        <span class="story-icon">${s.icon}</span>
+                        <h3 class="story-title">${t(s.titleKey)}</h3>
+                    </div>
+                    <p class="story-text">${t(s.textKey)}</p>
+                    ${s.quoteKey ? `<div class="story-quote">${t(s.quoteKey)}</div>` : ''}
+                </div>
+            `).join('');
+            // Trigger fade-in for new story cards
+            requestAnimationFrame(() => {
+                document.querySelectorAll('.story-card.fade-in').forEach(el => {
+                    if (isElementInViewport(el)) el.classList.add('visible');
+                });
+            });
+        }
+
+        /* ─── Modal ─── */
+        function openModal(id) {
+            const v = VICTIMS.find(x => x.id === id) || ADULTS.find(x => x.id === id);
+            if (!v) return;
+            const isAdult = ADULTS.includes(v);
+            const modal = document.getElementById('modalContent');
+            modal.innerHTML = `
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <span class="candle-lg">🕯️</span>
+                <div class="m-name">${v.name}</div>
+                <div class="m-name-fa">${v.nameFa}</div>
+                <div class="m-divider"></div>
+                <div class="m-row"><span class="m-label">${t('ageLabel')}</span><span class="m-value">${v.age || t('ageUnknown')}</span></div>
+                ${v.father ? `<div class="m-row"><span class="m-label">${t('fatherLabel')}</span><span class="m-value">${v.father}</span></div>` : ''}
+                ${isAdult ? `<div class="m-row"><span class="m-label">${t('roleLabel')}</span><span class="m-value">${v.role}</span></div>` : ''}
+                <div class="m-row"><span class="m-label">${t('schoolLabel')}</span><span class="m-value">${t('schoolName')}</span></div>
+                <div class="m-row"><span class="m-label">${t('locationLabel')}</span><span class="m-value">${t('location')}</span></div>
+                <div class="m-row"><span class="m-label">${t('dateLabel')}</span><span class="m-value">${t('dateValue')}</span></div>
+                <div class="m-row"><span class="m-label">${t('causeLabel')}</span><span class="m-value">${t('causeValue')}</span></div>
+                ${v.notes ? `<div class="m-notes">📝 ${v.notes}</div>` : ''}
+                <button class="m-share" onclick="shareVictim('${v.id}','${v.name}')">📤 ${t('ctaShare')}</button>
+            `;
+            document.getElementById('modal').classList.add('open');
+            history.replaceState(null, '', `#${v.id}`);
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('open');
+            history.replaceState(null, '', location.pathname);
+        }
+
+        /* ─── Image Lightbox ─── */
+        function openImgModal(src) {
+            const img = document.getElementById('imgModalImg');
+            img.src = src;
+            document.getElementById('imgModal').classList.add('open');
+        }
+
+        function closeImgModal() {
+            document.getElementById('imgModal').classList.remove('open');
+        }
+
+        /* ─── Sharing ─── */
+        function shareVictim(id, name) {
+            const url = `${location.origin}/memorial.html#${id}`;
+            if (navigator.share) {
+                navigator.share({ title: `In Memoriam — ${name}`, text: t('shareMsg'), url });
+            } else {
+                navigator.clipboard.writeText(url).then(() => {
+                    const btn = document.querySelector('.m-share');
+                    if (btn) { btn.textContent = `✅ ${t('copied')}`; setTimeout(() => btn.textContent = `📤 ${t('ctaShare')}`, 2000); }
+                });
+            }
+        }
+
+        function shareMemorial() {
+            const url = location.origin + '/memorial.html';
+            if (navigator.share) {
+                navigator.share({ title: t('pageTitle'), text: t('shareMsg'), url });
+            } else {
+                navigator.clipboard.writeText(url).then(() => alert(t('copied')));
+            }
+        }
+
+        /* ─── Scroll-Based Animations ─── */
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight - 80;
+        }
+
+        function handleScrollAnimations() {
+            document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+                if (isElementInViewport(el)) el.classList.add('visible');
+            });
+        }
+
+        /* ─── Active Nav Highlighting ─── */
+        function updateActiveNav() {
+            const sections = ['faces', 'names', 'stories', 'investigation', 'act'];
+            let active = sections[0];
+            for (const id of sections) {
+                const el = document.getElementById(id);
+                if (el && el.getBoundingClientRect().top <= 120) active = id;
+            }
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + active);
+            });
+        }
+
+        /* ─── Keyboard ─── */
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeImgModal();
+            }
+        });
+
+        /* ─── Scroll Listeners ─── */
+        let scrollTicking = false;
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                requestAnimationFrame(() => {
+                    handleScrollAnimations();
+                    updateActiveNav();
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
+        });
+
+        /* ─── Boot ─── */
+        renderGallery();
+        renderNames();
+        renderStories();
+        setLang(currentLang);
+        handleScrollAnimations();
+        if (location.hash) { const id = location.hash.slice(1); setTimeout(() => openModal(id), 500); }
+    </script>
+</body>
+
+</html>
