@@ -87,9 +87,10 @@ async def _handle_campaigns(query, lang: str):
 
 
 async def _handle_tasks(query, lang: str):
-    """Show available tasks."""
+    """Show available tasks with clickable buttons."""
     from asgiref.sync import sync_to_async
     from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+    from handlers.tasks import _get_task_type_icon
 
     @sync_to_async
     def _fetch_tasks():
@@ -111,15 +112,28 @@ async def _handle_tasks(query, lang: str):
         return
 
     text = t('checklist_title', lang).format(name='') + "\n\n"
+    keyboard = []
+
     for task in tasks:
+        type_icon = _get_task_type_icon(task.task_type)
         campaign_name = task.campaign.name if task.campaign else ""
-        text += f"• *{task.title}* ({campaign_name})\n"
+        text += f"• {type_icon} *{task.title}* ({campaign_name}) — 🏆 {task.points} pts\n"
+        keyboard.append([
+            InlineKeyboardButton(
+                f"{type_icon} {task.title[:30]}",
+                callback_data=f"task_claim_{task.id}"
+            )
+        ])
 
     text += "\n" + t('checklist_tap_start', lang)
 
+    keyboard.append([
+        InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
+    ])
+
     await query.message.reply_text(
         text,
-        reply_markup=get_back_to_menu_inline(lang),
+        reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode='Markdown',
     )
 
