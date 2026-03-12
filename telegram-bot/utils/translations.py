@@ -746,6 +746,11 @@ TRANSLATIONS = {
         "fa": "↩️ بازگشت به وظایف",
         "ar": "↩️ العودة إلى المهام",
     },
+    "btn_back_to_tasks": {
+        "en": "↩️ Back to Tasks",
+        "fa": "↩️ بازگشت به وظایف",
+        "ar": "↩️ العودة إلى المهام",
+    },
 
     # ── Task Detail (preview) ──────────────────────────────────────────
     "task_spots_remaining": {
