@@ -161,6 +161,7 @@ async def _handle_profile(query, update: Update, context: CallbackContext, lang:
 
 async def _handle_leaderboard(query, lang: str):
     """Show leaderboard summary."""
+    import html as html_mod
     from asgiref.sync import sync_to_async
 
     @sync_to_async
@@ -174,11 +175,11 @@ async def _handle_leaderboard(query, lang: str):
 
     top_users = await _fetch_top_users()
 
-    text = "🏆 *Leaderboard — Top 5*\n\n"
+    text = "🏆 <b>Leaderboard — Top 5</b>\n\n"
     medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣']
 
     for idx, user in enumerate(top_users):
-        name = user.get_full_name() or user.username
+        name = html_mod.escape(user.get_full_name() or user.username)
         points = getattr(user, 'total_points', 0) or 0
         text += f"{medals[idx]} {name} — {points} pts\n"
 
@@ -190,7 +191,7 @@ async def _handle_leaderboard(query, lang: str):
     await query.message.reply_text(
         text,
         reply_markup=get_back_to_menu_inline(lang),
-        parse_mode='Markdown',
+        parse_mode='HTML',
     )
 
 

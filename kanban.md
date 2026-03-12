@@ -1,97 +1,89 @@
-# PFP — Kanban Board
+# PFP Telegram Bot — Kanban Board
 
-> **Source of truth** for the People for Peace memorial website.
+> **Source of truth** for the People for Peace bot development.
 > Last updated: March 12, 2026
 
 ---
 
-## 🎯 Objective & Key Results (OKR)
+## 🎯 Current Objective
 
-**Objective**: Make the Minab School Memorial the definitive, shareable, multilingual resource documenting the lives lost — driving awareness and accountability.
+**Make the #StopTrumpMadness campaign fully operational via the Telegram bot.**
 
-| Key Result | Target | Current | Status |
-|------------|--------|---------|--------|
-| KR1: Children with complete profiles (photo + age + Farsi name) | 98 / 98 | ~15 / 98 | 🔴 |
-| KR2: Social shares (Twitter + Telegram + WhatsApp) in first 2 weeks | 500 | 0 (not launched) | ⚪ |
-| KR3: Unique visitors in first month of outreach | 5,000 | — | ⚪ |
-| KR4: Evidence page sources with article-specific links | 12 / 12 | 12 / 12 | ✅ |
-| KR5: Full Farsi translation of all pages | 100% | ~70% | 🟡 |
+Core flow: User starts → joins campaign → completes Twitter tasks (tweet, comment, retweet) → submits proof → earns points.
 
 ---
 
-## ✅ Done
+## 🐛 Known Bugs
 
-| # | Task | Delivered |
-|---|------|-----------|
-| 3.1 | OG share card image (1200×630) + `og:image` on all 4 pages | Mar 12 |
-| 3.5 | Twitter Card meta tags on all pages | Mar 12 |
-| 4.1 | Share buttons (𝕏, Telegram, WhatsApp) on child, memorial, evidence | Mar 12 |
-| 3.4 | Story → child profile linking (Amin & Mahdieh → amin-ahmadzade) | Mar 12 |
-| — | Dynamic OG image per child (shows child's photo when shared) | Mar 12 |
-| — | Article-specific URLs for all 12 media sources on evidence page | Mar 12 |
-| — | Children grid (98 photos, clickable → child profiles) | Mar 11 |
-| — | Featured children carousel on homepage (5 random) | Mar 11 |
-| — | Stories with child face thumbnails | Mar 11 |
-| — | Evidence page: timeline, OSINT, debunked claims, media sources | Mar 10 |
-| — | Individual child profile pages (`child.html`) | Mar 10 |
-| — | Cache-busting query strings on all static assets | Mar 11 |
-| — | Photo margin cleanup (101 photos processed) | Mar 10 |
-| — | Name-to-photo mapping verified (98 children) | Mar 10 |
+| # | Bug | Severity | Location | Status |
+|---|-----|----------|----------|--------|
+| B1 | **Leaderboard Markdown parse error** — em dash (`—`) in `*Leaderboard — Top 5*` causes Telegram `Can't parse entities` error | High | `menu.py:177` | Fix staged (switch to HTML parse mode) |
+| B2 | **Menu campaigns wrong filter** — was using `is_active=True` instead of `status=ACTIVE` | High | `menu.py:42` | ✅ Fixed in `d525ee8` |
+| B3 | **Menu leaderboard wrong field** — ordering by `points` instead of `total_points` | Medium | `menu.py:172` | ✅ Fixed in `d525ee8` |
+| B4 | **Menu profile shows 0 points** — uses `user.points` instead of `user.total_points` | Low | `menu.py:138` | TODO |
+| B5 | **E2E test task button selector grabs wrong buttons** — `.reply-markup button` in Step 8 clicks "Browse Campaigns" instead of a task button | Low | `test_live_telegram.py` | TODO (test improvement) |
+| B6 | **Menu "Available Tasks" simplified view** — shows task list text but no individual task action buttons (View Tasks flow needs to show per-task buttons) | Medium | `menu.py:86-121` | TODO |
 
 ---
 
-## 🔨 Sprint 1 — Data Completeness & Engagement
+## 🔥 Sprint — Core Interaction (Priority)
 
-> **Sprint goal**: Fill critical data gaps so every child with a photo has a complete, humanized profile. Add emotional engagement features.
+> **Goal**: A user can start the bot, join the campaign, claim a Twitter task, complete it, and submit proof.
 
-| # | Task | Impact | Effort | Status |
-|---|------|--------|--------|--------|
-| S1.1 | ~~**Fill 58 missing Farsi names**~~ | ✅ Done | — | `[x]` |
-| S1.2 | ~~**Fill missing ages**~~ — Displaying "Elementary school student" for unverified | ✅ Done | — | `[x]` |
-| S1.3 | ~~**Memorial candle / tribute**~~ — Light a candle + optional message (localStorage) | ✅ Done | — | `[x]` |
-| — | ~~**Bot Name Collection**~~ — Removed manual name collection in bot for 1-click registration | ✅ Done | — | `[x]` |
-| S1.4 | **Visitor counter** — Hit counter via backend API showing total views & tributes | Medium — social proof | S | `[ ]` |
-| S1.5 | **SEO structured data** — Schema.org `Person` + `Article` JSON-LD on child and evidence pages | Medium — Google discoverability | S | `[ ]` |
-| S1.6 | **Verify OG previews** — Twitter Card Validator & Facebook Debugger on production | Medium — ensures shares look right | XS | `[ ]` |
-
----
-
-## 📋 Backlog — Sprint 2+
-
-### Content Expansion
-| # | Task | Impact | Effort |
-|---|------|--------|--------|
-| B1 | More stories — teachers, first responders, parents' accounts | High | M |
-| B2 | Embed actual media in evidence — video clips, satellite images | High | M |
-| B3 | Interactive timeline — scrollable, animated, expandable cards | Medium | L |
-| B4 | Search / filter children — by name, age, gender on memorial grid | Low | S |
-
-### Multilingual
-| # | Task | Impact | Effort |
-|---|------|--------|--------|
-| B5 | Complete Farsi translation of evidence page — all detail cards | High | M |
-| B6 | Arabic translation — full Arabic support for all pages | Medium | L |
-
-### Platform
-| # | Task | Impact | Effort |
-|---|------|--------|--------|
-| B7 | PDF memorial report — downloadable "In Memoriam" for offline | Medium | L |
-| B8 | Email subscription — newsletter for campaign updates | Low | M |
-| B9 | User-submitted tributes — moderated visitor messages | Low | L |
+| # | Task | Handler | Status |
+|---|------|---------|--------|
+| C1 | `/start` → welcome + inline menu | `start.py`, `menu.py` | ✅ Working |
+| C2 | **Browse Campaigns** inline button → campaign list | `menu.py` → `_handle_campaigns` | ✅ Working |
+| C3 | **Join Campaign** via `/campaigns` → "Join" button | `campaigns.py` → `campaign_join_` callback | ✅ Working |
+| C4 | **View Campaign Tasks** after joining | `campaigns.py` → `campaign_tasks_` callback | ✅ Working |
+| C5 | **Task Detail** — tap task → description + "Start Task" button | `tasks.py` → `task_claim_` → `handle_task_detail` | ✅ Working |
+| C6 | **Start Task** — claim + guidance (sample tweets for Twitter tasks) | `tasks.py` → `task_startclaim_` → `handle_task_start_and_guide` | ✅ Working |
+| C7 | **Submit Proof** — user sends tweet URL → confirmation prompt | `tasks.py` → `receive_task_proof` (ConversationHandler) | ✅ Working |
+| C8 | **Confirm Proof** — "Confirm Submission" → success message | `tasks.py` → `proof_confirm_` → `confirm_proof_submission` | ✅ Working |
+| C9 | **E2E Test: Full core flow** — automated test covering C1-C8 | `test_live_telegram.py` | 🔨 In Progress |
+| C10 | **Fix B1** — deploy leaderboard HTML parse fix | `menu.py` | 🔨 Fix staged |
+| C11 | **Fix B6** — menu tasks view should show per-task action buttons | `menu.py` | TODO |
 
 ---
 
-## 📊 Data Health
+## ⏳ Deferred — Supporting Interactions
 
-| Metric | Count | % |
-|--------|-------|---|
-| Total children in data | 117 | — |
-| With photo | 98 | 84% |
-| With English name | 117 | 100% |
-| With Farsi name | 117 | 100% |
-| With known age | 15 | 13% |
-| Stories total | 7 | — |
-| Stories linked to child profiles | 4 | 57% |
+> These work but are lower priority. Will address after core flow is fully tested.
+
+| # | Feature | Status | Notes |
+|---|---------|--------|-------|
+| D1 | My Progress / Profile | ✅ Working (shows 0 points — B4) | Fix points field |
+| D2 | Leaderboard | 🔴 Bug B1 | Fix Markdown→HTML |
+| D3 | Help | ✅ Working | |
+| D4 | Language picker | ✅ Working | |
+| D5 | `/mytasks` — user's assigned tasks | ✅ Working | |
+| D6 | Invite task type | ✅ Handler exists | Test after core Twitter tasks |
+
+---
+
+## 📋 Backlog
+
+| # | Task | Priority |
+|---|------|----------|
+| BL1 | Deep-link auto-join (`/start campaign_16`) | Medium — improves onboarding |
+| BL2 | Task completion notification to campaign admin | Medium — review workflow |
+| BL3 | Points auto-award on proof approval | Medium — gamification |
+| BL4 | Campaign progress dashboard in bot | Low |
+| BL5 | Rate limiting / cooldown between tasks | Low |
+| BL6 | Photo proof download and storage | Low |
+
+---
+
+## 📊 Production Data
+
+| Metric | Value |
+|--------|-------|
+| Active campaigns | 1 (`#StopTrumpMadness`) |
+| Tasks in campaign | 6 (tweet, comment, retweet, content, invite, share) |
+| Campaign members | 2 / 100 target |
+| Bot username | `@peopleforpeacebot` |
+| Server | 65.109.198.200 |
+| Latest deploy | `d525ee8` (Mar 12) |
 
 ---
 
