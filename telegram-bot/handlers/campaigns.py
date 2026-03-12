@@ -175,7 +175,7 @@ async def campaigns_command(update: Update, context: CallbackContext):
 
         message += f"*{i}. {status_icon} {campaign.localized_name(lang)}*\n"
         message += f"   {campaign.localized_short_description(lang)}\n"
-        message += f"   {t('campaigns_members', lang)}: {campaign.current_members}/{campaign.target_members}\n"
+        message += f"   {t('campaigns_members', lang)}: {campaign.current_members}\n"
         message += f"   {t('campaigns_tasks_available', lang)}: {task_count} {t('campaigns_available', lang)}\n\n"
 
         if is_joined:
@@ -339,7 +339,7 @@ async def handle_campaign_detail(query, session, campaign_id):
     msg = f"📢 *{campaign.localized_name(lang)}*\n\n"
     msg += f"{campaign.localized_short_description(lang)}\n\n"
     msg += t('campaign_detail_volunteers', lang).format(
-        current=campaign.current_members, target=campaign.target_members
+        current=campaign.current_members
     ) + "\n"
     msg += t('campaign_detail_tasks', lang).format(count=task_count) + "\n"
 
@@ -550,7 +550,7 @@ async def handle_campaigns_pagination(query, session, page):
         task_count = await _get_task_count(campaign)
         message += f"*{i}. {campaign.localized_name(lang)}*\n"
         message += f"   {campaign.localized_short_description(lang)}\n"
-        message += f"   👥 Members: {campaign.current_members}/{campaign.target_members}\n"
+        message += f"   👥 Members: {campaign.current_members}\n"
         message += f"   🎯 Tasks: {task_count} available\n\n"
 
         keyboard.append([

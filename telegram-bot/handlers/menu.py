@@ -65,7 +65,7 @@ async def _handle_campaigns(query, lang: str):
         text += f"✊ *{campaign.localized_name(lang)}*\n"
         if desc:
             text += f"  {desc}\n"
-        text += f"  👥 {campaign.current_members}/{campaign.target_members} volunteers\n\n"
+        text += f"  👥 {campaign.current_members} volunteers\n\n"
         buttons.append([
             InlineKeyboardButton(
                 f"✊ {campaign.localized_name(lang)}",

@@ -381,7 +381,6 @@ class ConversationStateManager:
             name=campaign.localized_name(lang),
             description=campaign.localized_short_description(lang),
             members=member_count,
-            target=campaign.target_members,
             tasks=task_count,
         )
 

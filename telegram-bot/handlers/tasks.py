@@ -299,6 +299,178 @@ def _db_submit_proof(assignment_id, user, proof_type, proof_content):
         return None, "Task assignment not found or already completed."
 
 
+@sync_to_async
+def _db_get_campaign_channel_id(campaign_id):
+    """Get the Telegram channel ID for a campaign."""
+    from apps.campaigns.models import Campaign
+    try:
+        campaign = Campaign.objects.get(id=campaign_id)
+        return campaign.telegram_channel_id
+    except Campaign.DoesNotExist:
+        return None
+
+
+@sync_to_async
+def _db_get_campaign_group_id(campaign_id):
+    """Get the Telegram group ID for a campaign."""
+    from apps.campaigns.models import Campaign
+    try:
+        campaign = Campaign.objects.get(id=campaign_id)
+        return campaign.telegram_group_id
+    except Campaign.DoesNotExist:
+        return None
+
+
+async def _broadcast_task_completion(bot, campaign_id, task_title, task_type, points, proof_url=''):
+    """
+    Broadcast an anonymized task completion to the campaign's Telegram channel.
+    Fire-and-forget: errors are logged but never raised.
+    """
+    try:
+        channel_id = await _db_get_campaign_channel_id(campaign_id)
+        if not channel_id:
+            return
+
+        type_icons = {
+            'twitter_post': '🐦', 'twitter_retweet': '🔁', 'twitter_comment': '💬',
+            'twitter_like': '❤️', 'telegram_share': '📢', 'telegram_invite': '👥',
+            'content_creation': '✍️', 'petition': '✍️', 'mass_email': '📧',
+            'research': '🔍', 'other': '📌',
+        }
+        type_labels = {
+            'twitter_post': 'tweeted', 'twitter_retweet': 'retweeted',
+            'twitter_comment': 'commented on a tweet', 'twitter_like': 'liked a tweet',
+            'telegram_share': 'shared on Telegram', 'telegram_invite': 'invited a friend',
+            'content_creation': 'created content', 'petition': 'signed the petition',
+            'mass_email': 'sent emails', 'research': 'submitted research',
+            'other': 'completed a task',
+        }
+
+        icon = type_icons.get(task_type, '📌')
+        action = type_labels.get(task_type, 'completed a task')
+
+        text = f'{icon} <b>A volunteer just {action}!</b>\n'
+        text += '━━━━━━━━━━━━━━━━━━━\n'
+
+        if proof_url and proof_url.startswith('http'):
+            text += f'🔗 <a href="{proof_url}">View</a>\n'
+
+        text += f'🏆 +{points} points earned\n'
+
+        await bot.send_message(
+            chat_id=channel_id,
+            text=text,
+            parse_mode='HTML',
+            disable_web_page_preview=True
+        )
+        logger.info(f'Channel broadcast: task completion for campaign {campaign_id}')
+    except Exception as exc:
+        logger.warning(f'Channel broadcast failed for campaign {campaign_id}: {exc}')
+
+
+async def _broadcast_volunteer_joined(bot, campaign_id, member_count):
+    """
+    Broadcast an anonymized volunteer join to the campaign's Telegram channel.
+    Fire-and-forget.
+    """
+    try:
+        channel_id = await _db_get_campaign_channel_id(campaign_id)
+        if not channel_id:
+            return
+
+        text = (
+            f'👋 <b>A new volunteer joined!</b>\n'
+            f'━━━━━━━━━━━━━━━━━━━\n'
+            f'We are now <b>{member_count}</b> strong! ✊'
+        )
+
+        await bot.send_message(
+            chat_id=channel_id,
+            text=text,
+            parse_mode='HTML'
+        )
+        logger.info(f'Channel broadcast: volunteer joined campaign {campaign_id}')
+    except Exception as exc:
+        logger.warning(f'Channel broadcast (join) failed for campaign {campaign_id}: {exc}')
+
+
+@sync_to_async
+def _db_check_first_completion(user, campaign_id):
+    """Check if this is the user's first completed task AND group invite hasn't been sent."""
+    from apps.campaigns.models import CampaignVolunteer
+    from apps.tasks.models import TaskAssignment
+
+    try:
+        cv = CampaignVolunteer.objects.get(campaign_id=campaign_id, volunteer=user)
+    except CampaignVolunteer.DoesNotExist:
+        return False
+
+    if cv.group_invite_sent:
+        return False
+
+    # Count completed/verified tasks for this user in this campaign
+    completed_count = TaskAssignment.objects.filter(
+        volunteer=user,
+        task__campaign_id=campaign_id,
+        status__in=['completed', 'verified'],
+    ).count()
+
+    # First completion = exactly 1 (the one just submitted)
+    return completed_count == 1
+
+
+@sync_to_async
+def _db_mark_group_invite_sent(user, campaign_id):
+    """Mark that the group invite has been sent for this volunteer."""
+    from apps.campaigns.models import CampaignVolunteer
+    CampaignVolunteer.objects.filter(
+        campaign_id=campaign_id, volunteer=user
+    ).update(group_invite_sent=True)
+
+
+async def _send_gated_group_invite(bot, chat_id, campaign_id, user):
+    """
+    After first task completion, send a one-time invite link to the
+    campaign's coordination group.
+    """
+    try:
+        group_id = await _db_get_campaign_group_id(campaign_id)
+        if not group_id:
+            return
+
+        is_first = await _db_check_first_completion(user, campaign_id)
+        if not is_first:
+            return
+
+        # Create a one-time invite link
+        invite_link = await bot.create_chat_invite_link(
+            chat_id=group_id,
+            member_limit=1,
+            name=f'Volunteer invite',
+        )
+
+        text = (
+            '🎉 <b>You\'ve earned access to the inner circle!</b>\n'
+            '━━━━━━━━━━━━━━━━━━━\n'
+            'Your first task is done — welcome to the\n'
+            'coordination group! 🫡\n\n'
+            f'🔗 <a href="{invite_link.invite_link}">Join Coordination Group</a>\n\n'
+            '<i>This is a one-time invite link.</i>'
+        )
+
+        await bot.send_message(
+            chat_id=chat_id,
+            text=text,
+            parse_mode='HTML',
+            disable_web_page_preview=True,
+        )
+
+        await _db_mark_group_invite_sent(user, campaign_id)
+        logger.info(f'Gated group invite sent to user for campaign {campaign_id}')
+    except Exception as exc:
+        logger.warning(f'Gated group invite failed for campaign {campaign_id}: {exc}')
+
+
 # ── Handlers ───────────────────────────────────────────────────────────
 
 async def _get_session(user, chat_id):
@@ -1057,6 +1229,25 @@ async def confirm_proof_submission(query, session, assignment_id, context):
     campaign_id = None
     if assignment.task.campaign:
         campaign_id = assignment.task.campaign_id
+
+    # ── Channel Broadcast (fire-and-forget) ──
+    if campaign_id:
+        await _broadcast_task_completion(
+            bot=query._bot,
+            campaign_id=campaign_id,
+            task_title=assignment.task.title,
+            task_type=assignment.task.task_type,
+            points=assignment.task.points,
+            proof_url=proof_details.get('content', '') if proof_details.get('type') == 'url' else ''
+        )
+
+        # ── Gated Group Invite (first task only) ──
+        await _send_gated_group_invite(
+            bot=query._bot,
+            chat_id=query.message.chat_id,
+            campaign_id=campaign_id,
+            user=session.user,
+        )
 
     # ── Community Pulse (1C) ──────────────────────────────────
     pulse_msg = ""

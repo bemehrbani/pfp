@@ -361,7 +361,6 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
                 name=campaign.localized_name(lang),
                 description=campaign.localized_short_description(lang),
                 members=member_count,
-                target=campaign.target_members,
                 tasks=task_count,
             ),
             parse_mode='Markdown'

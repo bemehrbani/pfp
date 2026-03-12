@@ -121,22 +121,22 @@ TRANSLATIONS = {
         "en": (
             "🎉 *You've joined {name}!*\n\n"
             "{description}\n\n"
-            "👥 Members: {members}/{target}\n"
-            "🎯 Tasks: {tasks} available\n\n"
+            "👥 {members} volunteers joined\n"
+            "🎯 {tasks} tasks available\n\n"
             "Tap a task below to get started!"
         ),
         "fa": (
             "🎉 *شما به {name} پیوستید!*\n\n"
             "{description}\n\n"
-            "👥 اعضا: {members}/{target}\n"
-            "🎯 وظایف: {tasks} موجود\n\n"
+            "👥 {members} داوطلب پیوسته‌اند\n"
+            "🎯 {tasks} وظیفه موجود\n\n"
             "روی یک وظیفه بزنید تا شروع کنید!"
         ),
         "ar": (
             "🎉 *لقد انضممت إلى {name}!*\n\n"
             "{description}\n\n"
-            "👥 الأعضاء: {members}/{target}\n"
-            "🎯 المهام: {tasks} متاح\n\n"
+            "👥 {members} متطوع انضموا\n"
+            "🎯 {tasks} مهمة متاحة\n\n"
             "اضغط على مهمة أدناه للبدء!"
         ),
     },
@@ -470,9 +470,9 @@ TRANSLATIONS = {
 
     # ── Campaign Detail ────────────────────────────────────────────────
     "campaign_detail_volunteers": {
-        "en": "👥 {current}/{target} volunteers joined",
-        "fa": "👥 {current}/{target} داوطلب پیوسته‌اند",
-        "ar": "👥 {current}/{target} متطوع انضموا",
+        "en": "👥 {current} volunteers joined",
+        "fa": "👥 {current} داوطلب پیوسته‌اند",
+        "ar": "👥 {current} متطوع انضموا",
     },
     "campaign_detail_tasks": {
         "en": "🎯 {count} tasks available",
