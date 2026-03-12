@@ -16,6 +16,22 @@ from utils.translations import t
 
 logger = logging.getLogger(__name__)
 
+# ── Level titles for gamification ──────────────────────────────────────
+LEVEL_TITLES = {
+    1: '🕊️ Peace Seeker',
+    2: '✊ Voice of Justice',
+    3: '📢 Movement Builder',
+    4: '🔥 Campaign Warrior',
+    5: '🌍 Peace Champion',
+}
+
+
+def get_level_title(level: int) -> str:
+    """Return the activist rank name for a given level."""
+    if level >= 5:
+        return LEVEL_TITLES[5]
+    return LEVEL_TITLES.get(level, LEVEL_TITLES[1])
+
 # Conversation states for task completion
 AWAITING_TASK_PROOF = 1
 AWAITING_CONFIRMATION = 2
@@ -88,6 +104,77 @@ def _db_get_available_tasks(user):
         ).select_related('campaign').order_by('-points', 'created_at')[:10]
     )
     return tasks, True
+
+
+@sync_to_async
+def _db_get_user_task_status_map(user, campaign_id):
+    """Get a dict of {task_id: status} for a user in a campaign."""
+    from apps.tasks.models import TaskAssignment
+    assignments = TaskAssignment.objects.filter(
+        volunteer=user,
+        task__campaign_id=campaign_id,
+    ).values_list('task_id', 'status')
+    return dict(assignments)
+
+
+@sync_to_async
+def _db_get_campaign_pulse(campaign_id):
+    """Get community pulse stats for a campaign."""
+    from apps.tasks.models import TaskAssignment
+    from apps.campaigns.models import CampaignVolunteer
+    from django.utils import timezone
+    from datetime import timedelta
+
+    one_hour_ago = timezone.now() - timedelta(hours=1)
+
+    # Total completed tasks (all time)
+    total_completed = TaskAssignment.objects.filter(
+        task__campaign_id=campaign_id,
+        status__in=['completed', 'verified'],
+    ).count()
+
+    # Active in last hour
+    recent_active = TaskAssignment.objects.filter(
+        task__campaign_id=campaign_id,
+        status__in=['completed', 'verified'],
+        completed_at__gte=one_hour_ago,
+    ).values('volunteer').distinct().count()
+
+    # Total volunteers
+    total_volunteers = CampaignVolunteer.objects.filter(
+        campaign_id=campaign_id,
+        status='active',
+    ).count()
+
+    return {
+        'total_completed': total_completed,
+        'recent_active': recent_active,
+        'total_volunteers': total_volunteers,
+    }
+
+
+@sync_to_async
+def _db_get_user_rank(user, campaign_id):
+    """Get user's rank percentile within a campaign."""
+    from apps.campaigns.models import CampaignVolunteer
+
+    volunteers = list(
+        CampaignVolunteer.objects.filter(
+            campaign_id=campaign_id,
+            status='active',
+        ).order_by('-points_earned').values_list('volunteer_id', 'points_earned')
+    )
+    if not volunteers:
+        return None
+
+    total = len(volunteers)
+    rank = next(
+        (i + 1 for i, (vid, _) in enumerate(volunteers) if vid == user.id),
+        None
+    )
+    if rank is None:
+        return None
+    return max(1, int((1 - rank / total) * 100))
 
 
 @sync_to_async
@@ -448,7 +535,11 @@ def _get_sample_tweets(task) -> list[dict]:
 
 
 async def task_callback_handler(update: Update, context: CallbackContext):
-    """Handle callback queries for task actions."""
+    """Handle callback queries for task actions.
+    
+    Note: task_claim_ and task_startclaim_ are now handled by the
+    ConversationHandler (start_task_from_claim) so they never reach here.
+    """
     query = update.callback_query
     await query.answer()
 
@@ -458,10 +549,7 @@ async def task_callback_handler(update: Update, context: CallbackContext):
 
     callback_data = query.data
 
-    if callback_data.startswith('task_claim_'):
-        task_id = int(callback_data.split('_')[-1])
-        await handle_task_detail(query, session, task_id)
-    elif callback_data.startswith('task_start_'):
+    if callback_data.startswith('task_start_'):
         assignment_id = int(callback_data.split('_')[-1])
         await handle_task_start(query, session, assignment_id)
     elif callback_data.startswith('task_submit_'):
@@ -847,7 +935,7 @@ async def proof_callback_handler(update: Update, context: CallbackContext):
 
 
 async def confirm_proof_submission(query, session, assignment_id, context):
-    """Confirm and process proof submission."""
+    """Confirm and process proof submission with community pulse."""
     proof_details = context.user_data.get('proof_details', {})
     if not proof_details or proof_details.get('assignment_id') != assignment_id:
         await query.edit_message_text("Proof details not found. Please submit proof again.")
@@ -873,10 +961,25 @@ async def confirm_proof_submission(query, session, assignment_id, context):
     from apps.telegram.models import TelegramSession
     await _db_update_session_state(session, TelegramSession.State.IDLE)
 
-    # T4: Build "Next Task" button for post-proof navigation
-    campaign_id = context.user_data.get('proof_submission', {}).get('campaign_id')
-    if not campaign_id and assignment.task.campaign:
+    # Get campaign context
+    campaign_id = None
+    if assignment.task.campaign:
         campaign_id = assignment.task.campaign_id
+
+    # ── Community Pulse (1C) ──────────────────────────────────
+    pulse_msg = ""
+    if campaign_id:
+        pulse = await _db_get_campaign_pulse(campaign_id)
+        rank = await _db_get_user_rank(session.user, campaign_id)
+
+        pulse_msg += "\n───────────────────\n"
+        if pulse['recent_active'] > 0:
+            pulse_msg += f"🫂 {pulse['recent_active']} activists active in the last hour\n"
+        pulse_msg += f"🔥 {pulse['total_completed']} total actions this campaign\n"
+        pulse_msg += f"👥 {pulse['total_volunteers']} volunteers fighting together\n"
+        if rank is not None:
+            pulse_msg += f"📊 You're in the Top {rank}%!\n"
+        pulse_msg += "───────────────────\n"
 
     next_keyboard = []
     if campaign_id:
@@ -891,10 +994,10 @@ async def confirm_proof_submission(query, session, assignment_id, context):
     ])
 
     await query.edit_message_text(
-        f"✅ *Proof Submitted Successfully!*\n\n"
+        f"✅ *Proof Submitted!* +{assignment.task.points} pts\n\n"
         f"*Task:* {assignment.task.title}\n"
-        f"*Points:* +{assignment.task.points} pts (pending verification)\n\n"
-        f"Your proof is being reviewed. You'll be notified once verified!\n\n"
+        f"Your proof is being reviewed — you'll be notified once verified.\n"
+        f"{pulse_msg}\n"
         f"Ready to keep going? 👇",
         reply_markup=InlineKeyboardMarkup(next_keyboard),
         parse_mode='Markdown'
@@ -931,8 +1034,11 @@ async def cancel_conversation(update: Update, context: CallbackContext):
     return ConversationHandler.END
 
 
-async def start_task_from_detail(update: Update, context: CallbackContext):
-    """Entry point wrapper for ConversationHandler when starting a task from detail view."""
+async def start_task_from_claim(update: Update, context: CallbackContext):
+    """Entry point: user clicks a task from checklist → auto-claim + guided flow.
+    
+    Handles both task_claim_ (Phase 1: 2-click) and task_startclaim_ (legacy).
+    """
     query = update.callback_query
     await query.answer()
 
@@ -948,7 +1054,10 @@ async def start_task_from_detail(update: Update, context: CallbackContext):
 task_proof_conversation = ConversationHandler(
     entry_points=[
         CallbackQueryHandler(start_task_proof_submission, pattern='^task_submit_'),
-        CallbackQueryHandler(start_task_from_detail, pattern='^task_startclaim_'),
+        # 2-click flow: task_claim_ now enters ConversationHandler directly
+        CallbackQueryHandler(start_task_from_claim, pattern='^task_claim_'),
+        # Legacy entry point kept for compatibility
+        CallbackQueryHandler(start_task_from_claim, pattern='^task_startclaim_'),
     ],
     states={
         AWAITING_TASK_PROOF: [
@@ -967,7 +1076,7 @@ task_proof_conversation = ConversationHandler(
 
 # Handler registration
 # IMPORTANT: task_proof_conversation must come BEFORE task_callback_handler
-# so that task_startclaim_ is handled by the ConversationHandler first
+# so that task_claim_ and task_startclaim_ are handled by ConversationHandler
 task_handlers = [
     task_proof_conversation,
     CallbackQueryHandler(task_callback_handler, pattern='^task_'),

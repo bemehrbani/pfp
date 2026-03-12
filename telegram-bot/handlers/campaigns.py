@@ -373,7 +373,7 @@ async def handle_campaign_join(query, session, campaign_id):
 
 
 async def handle_campaign_view_tasks(query, session, campaign_id):
-    """Handle View Tasks button for a joined campaign."""
+    """Handle View Tasks — checklist-style with ✅/⬜ status and community pulse."""
     lang = getattr(session, 'language', 'en') or 'en'
 
     campaign = await _get_campaign(campaign_id)
@@ -387,7 +387,6 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
     @sync_to_async
     def _get_campaign_tasks(cid):
         from apps.tasks.models import Task
-        # Only show Twitter storm tasks for now — remove task_type filter to show all
         return list(Task.objects.filter(
             campaign_id=cid, is_active=True,
             task_type__in=['twitter_post', 'twitter_retweet', 'twitter_comment']
@@ -402,29 +401,79 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
         )
         return
 
+    # Get user's completion status for each task
+    from handlers.tasks import (
+        _db_get_user_task_status_map, _db_get_campaign_pulse, get_level_title
+    )
+    status_map = {}
+    if session.user:
+        status_map = await _db_get_user_task_status_map(session.user, campaign_id)
+
     # Task type icons
     type_icons = {
-        'twitter_post': '🐦', 'twitter_retweet': '🔁', 'twitter_like': '❤️',
-        'telegram_share': '📢', 'telegram_invite': '👥',
+        'twitter_post': '🐦', 'twitter_retweet': '🔁', 'twitter_comment': '💬',
+        'twitter_like': '❤️', 'telegram_share': '📢', 'telegram_invite': '👥',
         'content_creation': '✍️', 'research': '🔍', 'other': '📌',
     }
 
-    message = t('tasks_title', lang).format(name=campaign.name) + "\n\n"
+    # Count done/total
+    done_count = sum(
+        1 for task in tasks
+        if status_map.get(task.id) in ('completed', 'verified')
+    )
+    total_count = len(tasks)
+    user_points = sum(
+        task.points for task in tasks
+        if status_map.get(task.id) in ('completed', 'verified')
+    )
+
+    message = f"📋 *Your Tasks — {campaign.name}*\n\n"
     keyboard = []
 
-    for i, task in enumerate(tasks, 1):
+    for task in tasks:
         icon = type_icons.get(task.task_type, '📌')
-        message += f"*{i}. {icon} {task.title}*\n"
-        message += f"   🏆 {task.points} {t('task_pts', lang)}  ⏱ {task.estimated_time} {t('task_min', lang)}\n\n"
+        user_status = status_map.get(task.id)
+
+        # Status checkbox
+        if user_status in ('completed', 'verified'):
+            check = '✅'
+            label = f"✅ {task.title[:28]}"
+        elif user_status in ('assigned', 'in_progress'):
+            check = '🚧'
+            label = f"🚧 {task.title[:28]}"
+        else:
+            check = '⬜'
+            label = f"{icon} {task.title[:28]}"
+
+        message += f"{check} {icon} {task.title}  (+{task.points} pts)\n"
 
         keyboard.append([
             InlineKeyboardButton(
-                f"{icon} {task.title[:30]}",
+                label,
                 callback_data=f"task_claim_{task.id}"
             )
         ])
 
-    message += t('tasks_tap_to_start', lang)
+    # Personal progress bar
+    progress = int((done_count / total_count) * 10) if total_count else 0
+    bar = '█' * progress + '░' * (10 - progress)
+    message += f"\n━━━━━━━━━━━━━━━━━━━\n"
+    message += f"📊 {done_count}/{total_count} done · {user_points} pts earned\n"
+    message += f"[{bar}] {int(done_count / total_count * 100) if total_count else 0}%\n"
+
+    # Community pulse
+    pulse = await _db_get_campaign_pulse(campaign_id)
+    if pulse['total_completed'] > 0 or pulse['total_volunteers'] > 0:
+        message += f"\n🔥 {pulse['total_completed']} total actions by {pulse['total_volunteers']} volunteers"
+        if pulse['recent_active'] > 0:
+            message += f"\n🫂 {pulse['recent_active']} active in the last hour"
+    message += "\n"
+
+    message += "\nTap a task to start 👇"
+
+    keyboard.append([
+        InlineKeyboardButton("🏠 Main Menu", callback_data="menu_main")
+    ])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
     await query.edit_message_text(
