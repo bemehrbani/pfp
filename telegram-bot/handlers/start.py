@@ -27,10 +27,12 @@ def _db_set_session_language(session, language):
 
 
 @sync_to_async
-def _db_store_deeplink(session, campaign_id):
-    """Store deep-link campaign ID in session temp_data for post-registration auto-join."""
+def _db_store_deeplink(session, campaign_id, referrer_id=None):
+    """Store deep-link campaign ID and optional referrer in session temp_data."""
     session.temp_data = session.temp_data or {}
     session.temp_data['deeplink_campaign_id'] = campaign_id
+    if referrer_id:
+        session.temp_data['deeplink_referrer_id'] = referrer_id
     session.save(update_fields=['temp_data', 'updated_at'])
 
 
@@ -51,23 +53,31 @@ async def start_command(update: Update, context: CallbackContext):
 
     logger.info(f"Start command from user {user.id} (@{user.username})")
 
-    # Parse deep-link parameter (e.g. campaign_16 → campaign_id=16)
+    # Parse deep-link parameter (e.g. campaign_16 or campaign_16_ref_42)
     deeplink_campaign_id = None
+    deeplink_referrer_id = None
     if context.args:
         arg = context.args[0]
         if arg.startswith('campaign_'):
             try:
-                deeplink_campaign_id = int(arg.split('_', 1)[1])
-                logger.info(f"Deep-link campaign ID: {deeplink_campaign_id}")
+                # Handle campaign_16_ref_42 format
+                if '_ref_' in arg:
+                    parts = arg.split('_ref_')
+                    deeplink_campaign_id = int(parts[0].split('_', 1)[1])
+                    deeplink_referrer_id = int(parts[1])
+                    logger.info(f"Deep-link campaign={deeplink_campaign_id} referrer={deeplink_referrer_id}")
+                else:
+                    deeplink_campaign_id = int(arg.split('_', 1)[1])
+                    logger.info(f"Deep-link campaign ID: {deeplink_campaign_id}")
             except (ValueError, IndexError):
                 logger.warning(f"Invalid deep-link arg: {arg}")
 
     # Get or create session
     session, created = await state_manager.get_or_create_session(update, context)
 
-    # Store deep-link campaign ID in session for post-registration use
+    # Store deep-link campaign ID + referrer in session for post-registration use
     if deeplink_campaign_id:
-        await _db_store_deeplink(session, deeplink_campaign_id)
+        await _db_store_deeplink(session, deeplink_campaign_id, deeplink_referrer_id)
 
     if created:
         # New user — show language picker first
@@ -166,11 +176,20 @@ def _db_get_deeplink_campaign_id(session):
     return (session.temp_data or {}).get('deeplink_campaign_id')
 
 
+@sync_to_async
+def _db_get_deeplink_referrer_id(session):
+    """Read referrer user ID from session temp_data."""
+    session.refresh_from_db(fields=['temp_data'])
+    return (session.temp_data or {}).get('deeplink_referrer_id')
+
+
 async def _handle_deeplink_for_existing_user(context, session, db_user, lang, chat_id):
     """Auto-join campaign from deep-link for already-registered users."""
     deeplink_campaign_id = await _db_get_deeplink_campaign_id(session)
     if not deeplink_campaign_id:
         return
+
+    referrer_id = await _db_get_deeplink_referrer_id(session)
 
     from handlers.campaigns import (
         _get_campaign, _is_volunteer, _join_campaign,
@@ -190,8 +209,8 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
             parse_mode='Markdown'
         )
     else:
-        # Join and show tasks
-        member_count = await _join_campaign(campaign, db_user)
+        # Join and show tasks — pass referrer for credit
+        member_count = await _join_campaign(campaign, db_user, referrer_id=referrer_id)
         task_count = await _get_task_count(campaign)
         await context.bot.send_message(
             chat_id=chat_id,
@@ -205,6 +224,10 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
             parse_mode='Markdown'
         )
 
+        # Notify inviter
+        if referrer_id:
+            await _notify_referrer(context, referrer_id, db_user, campaign, lang)
+
     # Clear the deep-link from temp_data
     await _db_clear_deeplink(session)
 
@@ -212,9 +235,36 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
 @sync_to_async
 def _db_clear_deeplink(session):
     """Remove deep-link data from session."""
-    if session.temp_data and 'deeplink_campaign_id' in session.temp_data:
-        del session.temp_data['deeplink_campaign_id']
+    if session.temp_data:
+        session.temp_data.pop('deeplink_campaign_id', None)
+        session.temp_data.pop('deeplink_referrer_id', None)
         session.save(update_fields=['temp_data', 'updated_at'])
+
+
+async def _notify_referrer(context, referrer_id, new_user, campaign, lang):
+    """Send notification to the referrer that someone joined via their link."""
+    from apps.telegram.models import TelegramSession
+
+    @sync_to_async
+    def _get_referrer_chat_id(rid):
+        try:
+            return TelegramSession.objects.get(user_id=rid).telegram_chat_id
+        except TelegramSession.DoesNotExist:
+            return None
+
+    chat_id = await _get_referrer_chat_id(referrer_id)
+    if chat_id:
+        name = new_user.first_name or new_user.username or 'Someone'
+        try:
+            await context.bot.send_message(
+                chat_id=chat_id,
+                text=t('referral_credited', lang).format(
+                    name=name, campaign=campaign.name
+                ),
+                parse_mode='Markdown'
+            )
+        except Exception:
+            logger.warning(f"Could not notify referrer {referrer_id}")
 
 
 async def help_command(update: Update, context: CallbackContext):

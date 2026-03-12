@@ -777,6 +777,51 @@ TRANSLATIONS = {
         "fa": "🚀 بزن بریم!",
         "ar": "🚀 هيا بنا!",
     },
+
+    # ── Invite Link Feature ──────────────────────────────────
+    "btn_invite_friends": {
+        "en": "📨 Invite Friends",
+        "fa": "📨 دعوت دوستان",
+        "ar": "📨 دعوة الأصدقاء",
+    },
+    "btn_share_link": {
+        "en": "📤 Share via Telegram",
+        "fa": "📤 اشتراک‌گذاری در تلگرام",
+        "ar": "📤 مشاركة عبر تيليجرام",
+    },
+    "invite_message": {
+        "en": (
+            "📨 *Invite Friends to {name}*\n\n"
+            "Share this link with friends and family to join the campaign:\n\n"
+            "`{link}`\n\n"
+            "When someone joins through your link, you earn *+10 bonus points!* 🎁\n\n"
+            "Tap the button below to share directly 👇"
+        ),
+        "fa": (
+            "📨 *دعوت دوستان به {name}*\n\n"
+            "این لینک را با دوستان و خانواده به اشتراک بگذارید:\n\n"
+            "`{link}`\n\n"
+            "وقتی کسی از طریق لینک شما بپیوندد، *+۱۰ امتیاز ویژه* دریافت می‌کنید! 🎁\n\n"
+            "برای اشتراک‌گذاری مستقیم دکمه زیر را بزنید 👇"
+        ),
+        "ar": (
+            "📨 *دعوة الأصدقاء إلى {name}*\n\n"
+            "شارك هذا الرابط مع أصدقائك وعائلتك:\n\n"
+            "`{link}`\n\n"
+            "عندما ينضم شخص عبر رابطك، تحصل على *+١٠ نقاط إضافية!* 🎁\n\n"
+            "اضغط الزر أدناه للمشاركة مباشرة 👇"
+        ),
+    },
+    "invite_share_text": {
+        "en": "Join me in the \"{name}\" campaign for peace! ✌️",
+        "fa": "به کمپین «{name}» برای صلح بپیوندید! ✌️",
+        "ar": "انضم إليّ في حملة «{name}» من أجل السلام! ✌️",
+    },
+    "referral_credited": {
+        "en": "🎁 *+10 pts!* {name} just joined *{campaign}* through your invite link!",
+        "fa": "🎁 *+۱۰ امتیاز!* {name} از طریق لینک دعوت شما به *{campaign}* پیوست!",
+        "ar": "🎁 *+١٠ نقاط!* {name} انضم إلى *{campaign}* عبر رابط دعوتك!",
+    },
 }
 
 

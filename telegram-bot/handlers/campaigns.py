@@ -89,16 +89,34 @@ def _is_volunteer(campaign, user):
 
 
 @sync_to_async
-def _join_campaign(campaign, user):
-    """Join a campaign."""
+def _join_campaign(campaign, user, referrer_id=None):
+    """Join a campaign, optionally crediting a referrer."""
     from apps.campaigns.models import CampaignVolunteer
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+
+    # Resolve referrer
+    invited_by = None
+    if referrer_id:
+        try:
+            invited_by = User.objects.get(id=referrer_id)
+        except User.DoesNotExist:
+            pass
+
     CampaignVolunteer.objects.create(
         campaign=campaign,
         volunteer=user,
+        invited_by=invited_by,
         status='active'
     )
     campaign.current_members = campaign.volunteers.count()
     campaign.save(update_fields=['current_members'])
+
+    # Award bonus points to inviter
+    if invited_by:
+        invited_by.points += 10
+        invited_by.save(update_fields=['points'])
+
     return campaign.current_members
 
 
@@ -272,6 +290,10 @@ async def campaign_callback_handler(update: Update, context: CallbackContext):
     elif callback_data.startswith('campaign_tasks_'):
         campaign_id = int(callback_data.split('_')[-1])
         await handle_campaign_view_tasks(query, session, campaign_id)
+
+    elif callback_data.startswith('campaign_invite_'):
+        campaign_id = int(callback_data.split('_')[-1])
+        await handle_invite_link(query, session, campaign_id)
 
     elif callback_data.startswith('campaigns_page_'):
         page = int(callback_data.split('_')[-1])
@@ -480,6 +502,12 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
     message += "\n" + t('checklist_tap_start', lang)
 
     keyboard.append([
+        InlineKeyboardButton(
+            t('btn_invite_friends', lang),
+            callback_data=f"campaign_invite_{campaign_id}"
+        )
+    ])
+    keyboard.append([
         InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
     ])
 
@@ -546,6 +574,51 @@ async def handle_campaigns_pagination(query, session, page):
         message,
         reply_markup=reply_markup,
         parse_mode='Markdown'
+    )
+
+
+async def handle_invite_link(query, session, campaign_id):
+    """Generate a personalized invite link and show a share button."""
+    lang = getattr(session, 'language', 'en') or 'en'
+
+    campaign = await _get_campaign(campaign_id)
+    if not campaign:
+        await query.edit_message_text(
+            t('campaign_not_available', lang),
+            parse_mode='Markdown'
+        )
+        return
+
+    # Build personalized deep-link with referral
+    user_id = session.user.id if session.user else 0
+    invite_link = f"https://t.me/peopleforpeacebot?start=campaign_{campaign_id}_ref_{user_id}"
+
+    # Build a share URL that pre-fills Telegram's forward dialog
+    from urllib.parse import quote
+    share_text = t('invite_share_text', lang).format(
+        name=campaign.name, link=invite_link
+    )
+    share_url = f"https://t.me/share/url?url={quote(invite_link)}&text={quote(share_text)}"
+
+    keyboard = [
+        [InlineKeyboardButton(
+            t('btn_share_link', lang),
+            url=share_url
+        )],
+        [InlineKeyboardButton(
+            t('btn_back_to_tasks', lang),
+            callback_data=f"campaign_tasks_{campaign_id}"
+        )],
+        [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
+    ]
+
+    await query.edit_message_text(
+        t('invite_message', lang).format(
+            name=campaign.name, link=invite_link
+        ),
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode='Markdown',
+        disable_web_page_preview=True
     )
 
 

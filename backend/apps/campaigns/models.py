@@ -256,6 +256,14 @@ class CampaignVolunteer(models.Model):
 
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     volunteer = models.ForeignKey(User, on_delete=models.CASCADE)
+    invited_by = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='referrals',
+        help_text=_('User who invited this volunteer')
+    )
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
