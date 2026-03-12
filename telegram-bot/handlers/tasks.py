@@ -345,13 +345,13 @@ async def tasks_command(update: Update, context: CallbackContext):
 
     for i, task in enumerate(tasks, 1):
         type_icon = _get_task_type_icon(task.task_type)
-        message += f"*{i}. {type_icon} {task.title}*\n"
-        message += f"   Campaign: {task.campaign.name}\n"
+        message += f"*{i}. {type_icon} {task.localized_title(lang)}*\n"
+        message += f"   Campaign: {task.campaign.localized_name(lang)}\n"
         message += f"   🏆 {task.points} pts  ⏱ {task.estimated_time} min\n\n"
 
         keyboard.append([
             InlineKeyboardButton(
-                f"{type_icon} {task.title[:30]}",
+                f"{type_icon} {task.localized_title(lang)[:30]}",
                 callback_data=f"task_claim_{task.id}"
             )
         ])
@@ -393,22 +393,22 @@ async def mytasks_command(update: Update, context: CallbackContext):
 
     for i, assignment in enumerate(assignments, 1):
         status_emoji = "⏳" if assignment.status == 'assigned' else "🚧"
-        message += f"*{i}. {assignment.task.title}*\n"
+        message += f"*{i}. {assignment.task.localized_title(lang)}*\n"
         message += f"   {status_emoji} Status: {assignment.status}\n"
-        message += f"   Campaign: {assignment.task.campaign.name}\n"
+        message += f"   Campaign: {assignment.task.campaign.localized_name(lang)}\n"
         message += f"   Points: {assignment.task.points}\n\n"
 
         if assignment.status == 'assigned':
             keyboard.append([
                 InlineKeyboardButton(
-                    f"Start: {assignment.task.title[:15]}...",
+                    f"Start: {assignment.task.localized_title(lang)[:15]}...",
                     callback_data=f"task_start_{assignment.id}"
                 )
             ])
         elif assignment.status == 'in_progress':
             keyboard.append([
                 InlineKeyboardButton(
-                    f"Submit Proof: {assignment.task.title[:15]}...",
+                    f"Submit Proof: {assignment.task.localized_title(lang)[:15]}...",
                     callback_data=f"task_submit_{assignment.id}"
                 )
             ])
@@ -456,8 +456,8 @@ async def claimtask_command(update: Update, context: CallbackContext):
     task = assignment.task
     await update.message.reply_text(
         f"✅ *Task Claimed Successfully!*\n\n"
-        f"*Task:* {task.title}\n"
-        f"*Campaign:* {task.campaign.name}\n"
+        f"*Task:* {task.localized_title(lang)}\n"
+        f"*Campaign:* {task.campaign.localized_name(lang)}\n"
         f"*Points:* {task.points}\n\n"
         f"Use `/mytasks` to see your assigned tasks and start working on them.",
         parse_mode='Markdown'
@@ -609,8 +609,8 @@ async def handle_task_detail(query, session, task_id):
     campaign_id = task.campaign_id if task.campaign else None
 
     # Build a concise, scannable detail message
-    msg = f"{type_icon} *{task.title}*\n\n"
-    msg += f"{task.description}\n\n"
+    msg = f"{type_icon} *{task.localized_title(lang)}*\n\n"
+    msg += f"{task.localized_description(lang)}\n\n"
 
     msg += f"🏆 *{task.points} points*  ·  ⏱ ~{task.estimated_time} min\n"
     slots = task.max_assignments - task.current_assignments
@@ -668,7 +668,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
     # Set session state so we can receive proof as a plain message
     context.user_data['proof_submission'] = {
         'assignment_id': assignment.id,
-        'task_title': task.title,
+        'task_title': task.localized_title(lang),
         'task_type': task.task_type,
         'campaign_id': campaign_id,
     }
@@ -687,7 +687,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         samples = _get_sample_tweets(task)
 
         msg = t('task_started_title', lang) + "\n\n"
-        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
         msg += t('task_3_steps', lang) + "\n\n"
         msg += t('tweet_step1', lang) + "\n"
         msg += t('tweet_step2', lang) + "\n"
@@ -716,7 +716,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         search_url = f"https://twitter.com/search?q={quote(hashtags)}&f=live"
 
         msg = t('task_started_title', lang) + "\n\n"
-        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
         msg += t('task_3_steps', lang) + "\n\n"
         msg += t('retweet_step1', lang).format(hashtags=hashtags) + "\n"
         msg += t('retweet_step2', lang) + "\n"
@@ -735,7 +735,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
     # ── Twitter Comment: Reply intents with suggested comments ──
     elif task.task_type == 'twitter_comment':
         msg = t('task_started_title', lang) + "\n\n"
-        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
         msg += t('task_3_steps', lang) + "\n\n"
         msg += t('comment_step1', lang) + "\n"
         msg += t('comment_step2', lang) + "\n"
@@ -790,7 +790,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
     # ── Telegram Share ──
     elif task.task_type == 'telegram_share':
         msg = t('task_started_title', lang) + "\n\n"
-        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
         msg += f"{task.instructions}\n\n"
         msg += t('share_send_proof', lang) + "\n"
         msg += t('cancel_hint', lang)
@@ -798,7 +798,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
     # ── Telegram Invite ──
     elif task.task_type == 'telegram_invite':
         msg = t('task_started_title', lang) + "\n\n"
-        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
         msg += f"{task.instructions}\n\n"
         msg += t('invite_share_link', lang) + "\n\n"
         msg += t('invite_send_username', lang) + "\n"
@@ -808,7 +808,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
     elif task.task_type == 'petition':
         petition_url = task.target_url or task.instructions or ''
         msg = t('task_started_title', lang) + "\n\n"
-        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
         msg += t('task_3_steps', lang) + "\n\n"
         msg += t('task_petition_step1', lang) + "\n"
         msg += t('task_petition_step2', lang) + "\n"
@@ -828,7 +828,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
     # ── Mass Email: Copy template + confirm ──
     elif task.task_type == 'mass_email':
         msg = t('task_started_title', lang) + "\n\n"
-        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
         msg += t('task_mass_email_step1', lang) + "\n\n"
 
         # Show email template from task instructions
@@ -843,7 +843,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
     # ── Other task types ──
     else:
         msg = t('task_started_title', lang) + "\n\n"
-        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
         msg += f"{task.instructions}\n\n"
         msg += t('generic_send_proof', lang) + "\n"
         msg += t('cancel_hint', lang)
@@ -876,7 +876,7 @@ async def handle_task_start(query, session, assignment_id):
 
     await query.edit_message_text(
         f"🚧 *Task Started!*\n\n"
-        f"*Task:* {assignment.task.title}\n"
+        f"*Task:* {assignment.task.localized_title(lang)}\n"
         f"*Status:* In Progress\n\n"
         f"Once you complete the task, use `/mytasks` to submit proof.",
         parse_mode='Markdown'
@@ -899,7 +899,7 @@ async def start_task_proof_submission(query, session, assignment_id, context):
 
     context.user_data['proof_submission'] = {
         'assignment_id': assignment_id,
-        'task_title': assignment.task.title
+        'task_title': assignment.task.localized_title(lang)
     }
 
     from apps.telegram.models import TelegramSession
@@ -911,7 +911,7 @@ async def start_task_proof_submission(query, session, assignment_id, context):
 
     await query.edit_message_text(
         f"📤 *Submit Task Proof*\n\n"
-        f"*Task:* {assignment.task.title}\n\n"
+        f"*Task:* {assignment.task.localized_title(lang)}\n\n"
         f"Please provide proof of completion:\n"
         f"• Screenshot of your action\n"
         f"• Link to your content\n"
@@ -1087,7 +1087,7 @@ async def confirm_proof_submission(query, session, assignment_id, context):
 
     await query.edit_message_text(
         t('proof_submitted_short', lang).format(points=assignment.task.points) + "\n\n"
-        f"*{t('task_instructions', lang).replace('📝 ', '').replace('*', '')}* {assignment.task.title}\n"
+        f"*{t('task_instructions', lang).replace('📝 ', '').replace('*', '')}* {assignment.task.localized_title(lang)}\n"
         + t('proof_under_review', lang) + "\n"
         f"{pulse_msg}\n"
         + t('proof_keep_going', lang),

@@ -35,14 +35,70 @@ class Task(models.Model):
     # Basic information
     title = models.CharField(
         max_length=200,
-        help_text=_('Task title')
+        help_text=_('Task title (English)')
+    )
+    title_fa = models.CharField(
+        max_length=200,
+        blank=True,
+        default='',
+        help_text=_('Task title (Farsi)')
+    )
+    title_ar = models.CharField(
+        max_length=200,
+        blank=True,
+        default='',
+        help_text=_('Task title (Arabic)')
     )
     description = models.TextField(
-        help_text=_('Detailed task description')
+        help_text=_('Detailed task description (English)')
+    )
+    description_fa = models.TextField(
+        blank=True,
+        default='',
+        help_text=_('Detailed task description (Farsi)')
+    )
+    description_ar = models.TextField(
+        blank=True,
+        default='',
+        help_text=_('Detailed task description (Arabic)')
     )
     instructions = models.TextField(
         help_text=_('Step-by-step instructions for volunteers')
     )
+    instructions_fa = models.TextField(
+        blank=True,
+        default='',
+        help_text=_('Instructions (Farsi)')
+    )
+    instructions_ar = models.TextField(
+        blank=True,
+        default='',
+        help_text=_('Instructions (Arabic)')
+    )
+
+    def localized_title(self, lang: str = 'en') -> str:
+        """Return title in the requested language, falling back to English."""
+        if lang == 'fa' and self.title_fa:
+            return self.title_fa
+        if lang == 'ar' and self.title_ar:
+            return self.title_ar
+        return self.title
+
+    def localized_description(self, lang: str = 'en') -> str:
+        """Return description in the requested language, falling back to English."""
+        if lang == 'fa' and self.description_fa:
+            return self.description_fa
+        if lang == 'ar' and self.description_ar:
+            return self.description_ar
+        return self.description
+
+    def localized_instructions(self, lang: str = 'en') -> str:
+        """Return instructions in the requested language, falling back to English."""
+        if lang == 'fa' and self.instructions_fa:
+            return self.instructions_fa
+        if lang == 'ar' and self.instructions_ar:
+            return self.instructions_ar
+        return self.instructions
 
     # Task type and assignment
     task_type = models.CharField(

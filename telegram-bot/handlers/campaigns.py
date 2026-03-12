@@ -173,7 +173,7 @@ async def campaigns_command(update: Update, context: CallbackContext):
         is_joined = campaign.id in joined_ids
         status_icon = "✅" if is_joined else "🔹"
 
-        message += f"*{i}. {status_icon} {campaign.name}*\n"
+        message += f"*{i}. {status_icon} {campaign.localized_name(lang)}*\n"
         message += f"   {campaign.short_description}\n"
         message += f"   {t('campaigns_members', lang)}: {campaign.current_members}/{campaign.target_members}\n"
         message += f"   {t('campaigns_tasks_available', lang)}: {task_count} {t('campaigns_available', lang)}\n\n"
@@ -181,14 +181,14 @@ async def campaigns_command(update: Update, context: CallbackContext):
         if is_joined:
             keyboard.append([
                 InlineKeyboardButton(
-                    f"{t('btn_view_tasks', lang)}: {campaign.name[:20]}...",
+                    f"{t('btn_view_tasks', lang)}: {campaign.localized_name(lang)[:20]}...",
                     callback_data=f"campaign_tasks_{campaign.id}"
                 )
             ])
         else:
             keyboard.append([
                 InlineKeyboardButton(
-                    f"{t('btn_join', lang)}: {campaign.name[:20]}...",
+                    f"{t('btn_join', lang)}: {campaign.localized_name(lang)[:20]}...",
                     callback_data=f"campaign_join_{campaign.id}"
                 )
             ])
@@ -252,7 +252,7 @@ async def joincampaign_command(update: Update, context: CallbackContext):
     already_joined = await _is_volunteer(campaign, session.user)
     if already_joined:
         await update.message.reply_text(
-            f"✅ You're already a member of *{campaign.name}*!",
+            f"✅ You're already a member of *{campaign.localized_name(lang)}*!",
             parse_mode='Markdown'
         )
         return
@@ -260,7 +260,7 @@ async def joincampaign_command(update: Update, context: CallbackContext):
     member_count = await _join_campaign(campaign, session.user)
 
     await update.message.reply_text(
-        f"🎉 *Welcome to {campaign.name}!*\n\n"
+        f"🎉 *Welcome to {campaign.localized_name(lang)}!*\n\n"
         f"You've successfully joined the campaign.\n\n"
         f"*Next steps:*\n"
         f"1. Use `/tasks` to see available tasks\n"
@@ -321,7 +321,7 @@ async def handle_campaign_detail(query, session, campaign_id):
     is_member = await _is_volunteer(campaign, session.user) if session.user else False
     task_count = await _get_task_count(campaign)
 
-    msg = f"📢 *{campaign.name}*\n\n"
+    msg = f"📢 *{campaign.localized_name(lang)}*\n\n"
     msg += f"{campaign.description or campaign.short_description}\n\n"
     msg += t('campaign_detail_volunteers', lang).format(
         current=campaign.current_members, target=campaign.target_members
@@ -389,7 +389,7 @@ async def handle_campaign_join(query, session, campaign_id):
 
     await query.edit_message_text(
         t('campaign_join_welcome', lang).format(
-            name=campaign.name, count=member_count, tasks=task_count
+            name=campaign.localized_name(lang), count=member_count, tasks=task_count
         ),
         reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode='Markdown'
@@ -423,7 +423,7 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
 
     if not tasks:
         await query.edit_message_text(
-            t('tasks_none', lang).format(name=campaign.name),
+            t('tasks_none', lang).format(name=campaign.localized_name(lang)),
             parse_mode='Markdown'
         )
         return
@@ -454,7 +454,7 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
         if status_map.get(task.id) in ('completed', 'verified')
     )
 
-    message = t('checklist_title', lang).format(name=campaign.name) + "\n\n"
+    message = t('checklist_title', lang).format(name=campaign.localized_name(lang)) + "\n\n"
     keyboard = []
 
     for task in tasks:
@@ -464,15 +464,15 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
         # Status checkbox
         if user_status in ('completed', 'verified'):
             check = '✅'
-            label = f"✅ {task.title[:28]}"
+            label = f"✅ {task.localized_title(lang)[:28]}"
         elif user_status in ('assigned', 'in_progress'):
             check = '🚧'
-            label = f"🚧 {task.title[:28]}"
+            label = f"🚧 {task.localized_title(lang)[:28]}"
         else:
             check = '⬜'
-            label = f"{icon} {task.title[:28]}"
+            label = f"{icon} {task.localized_title(lang)[:28]}"
 
-        message += f"{check} {icon} {task.title}  (+{task.points} {t('task_pts', lang)})\n"
+        message += f"{check} {icon} {task.localized_title(lang)}  (+{task.points} {t('task_pts', lang)})\n"
 
         keyboard.append([
             InlineKeyboardButton(
@@ -525,14 +525,14 @@ async def handle_campaigns_pagination(query, session, page):
 
     for i, campaign in enumerate(campaigns, 1):
         task_count = await _get_task_count(campaign)
-        message += f"*{i}. {campaign.name}*\n"
+        message += f"*{i}. {campaign.localized_name(lang)}*\n"
         message += f"   {campaign.short_description}\n"
         message += f"   👥 Members: {campaign.current_members}/{campaign.target_members}\n"
         message += f"   🎯 Tasks: {task_count} available\n\n"
 
         keyboard.append([
             InlineKeyboardButton(
-                f"Join: {campaign.name[:20]}...",
+                f"Join: {campaign.localized_name(lang)[:20]}...",
                 callback_data=f"campaign_join_{campaign.id}"
             )
         ])
@@ -578,7 +578,7 @@ async def handle_invite_link(query, session, campaign_id):
     # Build a share URL that pre-fills Telegram's forward dialog
     from urllib.parse import quote
     share_text = t('invite_share_text', lang).format(
-        name=campaign.name, link=invite_link
+        name=campaign.localized_name(lang), link=invite_link
     )
     share_url = f"https://t.me/share/url?url={quote(invite_link)}&text={quote(share_text)}"
 
@@ -596,7 +596,7 @@ async def handle_invite_link(query, session, campaign_id):
 
     await query.edit_message_text(
         t('invite_message', lang).format(
-            name=campaign.name, link=invite_link
+            name=campaign.localized_name(lang), link=invite_link
         ),
         reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode='Markdown',
@@ -655,10 +655,10 @@ async def show_my_campaigns(query, session, lang: str):
     keyboard = []
 
     for campaign, task_count in joined:
-        text += f"✊ *{campaign.name}*  —  {task_count} {t('campaigns_tasks_label', lang)}\n"
+        text += f"✊ *{campaign.localized_name(lang)}*  —  {task_count} {t('campaigns_tasks_label', lang)}\n"
         keyboard.append([
             InlineKeyboardButton(
-                f"✊ {campaign.name}",
+                f"✊ {campaign.localized_name(lang)}",
                 callback_data=f"campaign_tasks_{campaign.id}"
             )
         ])
@@ -700,13 +700,13 @@ async def _handle_browse_campaigns(query, session, lang: str):
         desc = campaign.short_description or ''
         if desc:
             desc = desc[:60] + ('...' if len(desc) > 60 else '')
-        text += f"✊ *{campaign.name}*\n"
+        text += f"✊ *{campaign.localized_name(lang)}*\n"
         if desc:
             text += f"  {desc}\n"
         text += f"  👥 {campaign.current_members} volunteers • {task_count} tasks\n\n"
         keyboard.append([
             InlineKeyboardButton(
-                f"✊ {t('btn_join', lang)}: {campaign.name[:20]}",
+                f"✊ {t('btn_join', lang)}: {campaign.localized_name(lang)[:20]}",
                 callback_data=f"campaign_join_{campaign.id}"
             )
         ])

@@ -197,7 +197,7 @@ async def _show_campaigns_after_welcome(context, session, chat_id, lang):
             .order_by('-joined_at')
         )
         return [
-            (cv.campaign.id, cv.campaign.name, cv.campaign.tasks.filter(is_active=True).count())
+            (cv.campaign.id, cv.campaign.localized_name(lang), cv.campaign.tasks.filter(is_active=True).count())
             for cv in cvs
         ]
 
@@ -253,15 +253,15 @@ async def _show_campaigns_after_welcome(context, session, chat_id, lang):
 
             if user_status in ('completed', 'verified'):
                 check = '✅'
-                label = f"✅ {task.title[:28]}"
+                label = f"✅ {task.localized_title(lang)[:28]}"
             elif user_status in ('assigned', 'in_progress'):
                 check = '🚧'
-                label = f"🚧 {task.title[:28]}"
+                label = f"🚧 {task.localized_title(lang)[:28]}"
             else:
                 check = '⬜'
-                label = f"{icon} {task.title[:28]}"
+                label = f"{icon} {task.localized_title(lang)[:28]}"
 
-            message += f"{check} {icon} {task.title}  (+{task.points} {t('task_pts', lang)})\n"
+            message += f"{check} {icon} {task.localized_title(lang)}  (+{task.points} {t('task_pts', lang)})\n"
             keyboard.append([
                 InlineKeyboardButton(label, callback_data=f"task_claim_{task.id}")
             ])
@@ -348,7 +348,7 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
         # Already a member — just show tasks
         await context.bot.send_message(
             chat_id=chat_id,
-            text=t('campaign_joined_success', lang).format(name=campaign.name),
+            text=t('campaign_joined_success', lang).format(name=campaign.localized_name(lang)),
             parse_mode='Markdown'
         )
     else:
@@ -358,7 +358,7 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
         await context.bot.send_message(
             chat_id=chat_id,
             text=t('auto_joined_campaign', lang).format(
-                name=campaign.name,
+                name=campaign.localized_name(lang),
                 description=campaign.short_description,
                 members=member_count,
                 target=campaign.target_members,
@@ -402,7 +402,7 @@ async def _notify_referrer(context, referrer_id, new_user, campaign, lang):
             await context.bot.send_message(
                 chat_id=chat_id,
                 text=t('referral_credited', lang).format(
-                    name=name, campaign=campaign.name
+                    name=name, campaign=campaign.localized_name(lang)
                 ),
                 parse_mode='Markdown'
             )

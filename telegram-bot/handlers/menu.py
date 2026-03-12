@@ -62,13 +62,13 @@ async def _handle_campaigns(query, lang: str):
         desc = campaign.short_description or campaign.description or ''
         if desc:
             desc = desc[:80] + ('...' if len(desc) > 80 else '')
-        text += f"✊ *{campaign.name}*\n"
+        text += f"✊ *{campaign.localized_name(lang)}*\n"
         if desc:
             text += f"  {desc}\n"
         text += f"  👥 {campaign.current_members}/{campaign.target_members} volunteers\n\n"
         buttons.append([
             InlineKeyboardButton(
-                f"✊ {campaign.name}",
+                f"✊ {campaign.localized_name(lang)}",
                 callback_data=f"campaign_{campaign.id}"
             )
         ])
@@ -116,11 +116,11 @@ async def _handle_tasks(query, lang: str):
 
     for task in tasks:
         type_icon = _get_task_type_icon(task.task_type)
-        campaign_name = task.campaign.name if task.campaign else ""
-        text += f"• {type_icon} *{task.title}* ({campaign_name}) — 🏆 {task.points} pts\n"
+        campaign_name = task.campaign.localized_name(lang) if task.campaign else ""
+        text += f"• {type_icon} *{task.localized_title(lang)}* ({campaign_name}) — 🏆 {task.points} pts\n"
         keyboard.append([
             InlineKeyboardButton(
-                f"{type_icon} {task.title[:30]}",
+                f"{type_icon} {task.localized_title(lang)[:30]}",
                 callback_data=f"task_claim_{task.id}"
             )
         ])

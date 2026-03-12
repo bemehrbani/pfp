@@ -36,6 +36,14 @@ class TaskAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('title', 'description', 'instructions')
         }),
+        (_('Translations (Farsi / Arabic)'), {
+            'fields': (
+                'title_fa', 'title_ar',
+                'description_fa', 'description_ar',
+                'instructions_fa', 'instructions_ar',
+            ),
+            'classes': ('collapse',)
+        }),
         (_('Type & Assignment'), {
             'fields': ('task_type', 'assignment_type')
         }),

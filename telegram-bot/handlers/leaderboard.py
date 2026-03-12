@@ -242,7 +242,7 @@ async def show_campaign_filter_options(query, session):
     for cv in user_campaigns:
         keyboard.append([
             InlineKeyboardButton(
-                f"📋 {cv.campaign.name[:30]}",
+                f"📋 {cv.campaign.localized_name(lang)[:30]}",
                 callback_data=f"leaderboard_campaign_{cv.campaign.id}"
             )
         ])

@@ -28,6 +28,10 @@ class CampaignAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('name', 'description', 'short_description')
         }),
+        (_('Translations (Farsi / Arabic)'), {
+            'fields': ('name_fa', 'name_ar', 'short_description_fa', 'short_description_ar'),
+            'classes': ('collapse',)
+        }),
         (_('Type & Status'), {
             'fields': ('campaign_type', 'status')
         }),

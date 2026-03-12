@@ -27,15 +27,55 @@ class Campaign(models.Model):
     # Basic information
     name = models.CharField(
         max_length=200,
-        help_text=_('Campaign name')
+        help_text=_('Campaign name (English)')
+    )
+    name_fa = models.CharField(
+        max_length=200,
+        blank=True,
+        default='',
+        help_text=_('Campaign name (Farsi)')
+    )
+    name_ar = models.CharField(
+        max_length=200,
+        blank=True,
+        default='',
+        help_text=_('Campaign name (Arabic)')
     )
     description = models.TextField(
         help_text=_('Detailed description of the campaign')
     )
     short_description = models.CharField(
         max_length=500,
-        help_text=_('Short description for listings')
+        help_text=_('Short description for listings (English)')
     )
+    short_description_fa = models.CharField(
+        max_length=500,
+        blank=True,
+        default='',
+        help_text=_('Short description (Farsi)')
+    )
+    short_description_ar = models.CharField(
+        max_length=500,
+        blank=True,
+        default='',
+        help_text=_('Short description (Arabic)')
+    )
+
+    def localized_name(self, lang: str = 'en') -> str:
+        """Return name in the requested language, falling back to English."""
+        if lang == 'fa' and self.name_fa:
+            return self.name_fa
+        if lang == 'ar' and self.name_ar:
+            return self.name_ar
+        return self.name
+
+    def localized_short_description(self, lang: str = 'en') -> str:
+        """Return short description in the requested language, falling back to English."""
+        if lang == 'fa' and self.short_description_fa:
+            return self.short_description_fa
+        if lang == 'ar' and self.short_description_ar:
+            return self.short_description_ar
+        return self.short_description
 
     # Campaign type and status
     campaign_type = models.CharField(
