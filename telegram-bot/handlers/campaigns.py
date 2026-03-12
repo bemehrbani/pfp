@@ -174,7 +174,7 @@ async def campaigns_command(update: Update, context: CallbackContext):
         status_icon = "✅" if is_joined else "🔹"
 
         message += f"*{i}. {status_icon} {campaign.localized_name(lang)}*\n"
-        message += f"   {campaign.short_description}\n"
+        message += f"   {campaign.localized_short_description(lang)}\n"
         message += f"   {t('campaigns_members', lang)}: {campaign.current_members}/{campaign.target_members}\n"
         message += f"   {t('campaigns_tasks_available', lang)}: {task_count} {t('campaigns_available', lang)}\n\n"
 
@@ -337,7 +337,7 @@ async def handle_campaign_detail(query, session, campaign_id):
     task_count = await _get_task_count(campaign)
 
     msg = f"📢 *{campaign.localized_name(lang)}*\n\n"
-    msg += f"{campaign.description or campaign.short_description}\n\n"
+    msg += f"{campaign.localized_short_description(lang)}\n\n"
     msg += t('campaign_detail_volunteers', lang).format(
         current=campaign.current_members, target=campaign.target_members
     ) + "\n"
@@ -392,6 +392,14 @@ async def handle_campaign_join(query, session, campaign_id):
 
     member_count = await _join_campaign(campaign, session.user)
     task_count = await _get_task_count(campaign)
+
+    # ── Channel Broadcast (fire-and-forget) ──
+    from handlers.tasks import _broadcast_volunteer_joined
+    await _broadcast_volunteer_joined(
+        bot=query._bot,
+        campaign_id=campaign_id,
+        member_count=member_count
+    )
 
     keyboard = [[
         InlineKeyboardButton(
@@ -541,7 +549,7 @@ async def handle_campaigns_pagination(query, session, page):
     for i, campaign in enumerate(campaigns, 1):
         task_count = await _get_task_count(campaign)
         message += f"*{i}. {campaign.localized_name(lang)}*\n"
-        message += f"   {campaign.short_description}\n"
+        message += f"   {campaign.localized_short_description(lang)}\n"
         message += f"   👥 Members: {campaign.current_members}/{campaign.target_members}\n"
         message += f"   🎯 Tasks: {task_count} available\n\n"
 
@@ -822,7 +830,7 @@ async def _handle_browse_campaigns(query, session, lang: str):
 
     for campaign in campaigns:
         task_count = await _get_task_count(campaign)
-        desc = campaign.short_description or ''
+        desc = campaign.localized_short_description(lang)
         if desc:
             desc = desc[:60] + ('...' if len(desc) > 60 else '')
         text += f"✊ *{campaign.localized_name(lang)}*\n"

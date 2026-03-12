@@ -378,8 +378,8 @@ class ConversationStateManager:
 
         # Build message with task buttons
         text = t('auto_joined_campaign', lang).format(
-            name=campaign.name,
-            description=campaign.short_description,
+            name=campaign.localized_name(lang),
+            description=campaign.localized_short_description(lang),
             members=member_count,
             target=campaign.target_members,
             tasks=task_count,
@@ -395,7 +395,7 @@ class ConversationStateManager:
             icon = type_icons.get(task.task_type, '📌')
             keyboard.append([
                 InlineKeyboardButton(
-                    f"{icon} {task.title[:35]}",
+                    f"{icon} {task.localized_title(lang)[:35]}",
                     callback_data=f"task_claim_{task.id}"
                 )
             ])

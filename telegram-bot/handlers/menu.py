@@ -59,7 +59,7 @@ async def _handle_campaigns(query, lang: str):
     buttons = []
 
     for campaign in campaigns:
-        desc = campaign.short_description or campaign.description or ''
+        desc = campaign.localized_short_description(lang)
         if desc:
             desc = desc[:80] + ('...' if len(desc) > 80 else '')
         text += f"✊ *{campaign.localized_name(lang)}*\n"

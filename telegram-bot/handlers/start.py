@@ -359,7 +359,7 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
             chat_id=chat_id,
             text=t('auto_joined_campaign', lang).format(
                 name=campaign.localized_name(lang),
-                description=campaign.short_description,
+                description=campaign.localized_short_description(lang),
                 members=member_count,
                 target=campaign.target_members,
                 tasks=task_count,
