@@ -486,6 +486,22 @@ def _build_twitter_intent_url(tweet_text: str) -> str:
     return f"https://twitter.com/intent/tweet?text={quote(tweet_text)}"
 
 
+def _build_twitter_reply_intent_url(tweet_url: str, reply_text: str) -> str:
+    """Build a Twitter reply intent URL with pre-filled comment text.
+    
+    Uses twitter.com/intent/tweet?in_reply_to=TWEET_ID&text=COMMENT
+    so the user taps and Twitter opens with the reply ready to post.
+    """
+    import re
+    from urllib.parse import quote
+    match = re.search(r'/status/(\d+)', tweet_url)
+    if match:
+        tweet_id = match.group(1)
+        return f"https://twitter.com/intent/tweet?in_reply_to={tweet_id}&text={quote(reply_text)}"
+    # Fallback: just open the tweet URL
+    return tweet_url
+
+
 def _build_twitter_retweet_url(tweet_url: str) -> str:
     """Build a Twitter retweet intent URL from a tweet URL."""
     # Extract tweet ID from URL like https://x.com/user/status/12345
@@ -494,6 +510,23 @@ def _build_twitter_retweet_url(tweet_url: str) -> str:
     if match:
         return f"https://twitter.com/intent/retweet?tweet_id={match.group(1)}"
     return tweet_url
+
+
+def _get_sample_comments(task, author_handle: str = '') -> list[str]:
+    """Get suggested comment texts for Twitter comment tasks.
+    
+    Returns list of comment strings, each including hashtags.
+    """
+    hashtags = task.hashtags.strip() if task.hashtags else '#StopTrumpMadness'
+
+    comments = [
+        f"This matters! The world must hold Trump accountable for the destruction in Iran. {hashtags}",
+        f"Thank you for speaking truth. Innocent families are paying the price of Trump's madness. {hashtags}",
+        f"The evidence is overwhelming. Trump's war on Iran has no justification. {hashtags}",
+        f"We won't forget. Children, families, entire communities destroyed. {hashtags}",
+        f"This is why we stand together for peace. Stop the war. {hashtags}",
+    ]
+    return comments
 
 
 def _get_sample_tweets(task) -> list[dict]:
@@ -697,13 +730,13 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         msg += "\nWhen done, *paste a tweet URL below* 👇\n"
         msg += "Type /cancel to cancel."
 
-    # ── Twitter Comment: Link to key tweets ──
+    # ── Twitter Comment: Reply intents with suggested comments ──
     elif task.task_type == 'twitter_comment':
         msg = f"✅ *Task started!*\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
         msg += "Complete this task in 3 easy steps:\n\n"
-        msg += "*① Tap a tweet link* below to open it\n"
-        msg += "*② Reply with your comment* — use the hashtags if you can\n"
+        msg += "*① Pick a suggested reply* and tap the button\n"
+        msg += "*② Twitter opens with your reply ready* — just hit Post!\n"
         msg += "*③ Come back here* and paste your reply URL\n"
 
         # Fetch key tweets from DB
@@ -711,32 +744,44 @@ async def handle_task_start_and_guide(query, session, task_id, context):
             lambda: list(task.key_tweets.filter(is_active=True).order_by('order'))
         )()
 
+        sample_comments = _get_sample_comments(task)
+
         if key_tweets:
             msg += "\n───────────────────\n\n"
-            msg += "🎯 *Tweets to comment on:*\n\n"
+            msg += "🎯 *Pick a tweet to reply to:*\n\n"
+
             for idx, kt in enumerate(key_tweets, 1):
+                # Rotate through sample comments per key tweet
+                comment_text = sample_comments[(idx - 1) % len(sample_comments)]
+                reply_url = _build_twitter_reply_intent_url(kt.tweet_url, comment_text)
+
                 num_emoji = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'][idx - 1] if idx <= 5 else f"{idx}."
-                msg += f"{num_emoji} {kt.author_name} ({kt.author_handle})\n"
+                msg += f"{num_emoji} *{kt.author_name}* ({kt.author_handle})\n"
                 if kt.description:
                     msg += f"   _{kt.description}_\n"
+                msg += f"   💬 _{comment_text[:80]}{'...' if len(comment_text) > 80 else ''}_\n\n"
+
                 keyboard.append([
                     InlineKeyboardButton(
                         f"💬 Reply to {kt.author_handle}",
-                        url=kt.tweet_url
+                        url=reply_url
                     )
                 ])
-            msg += "\n───────────────────\n"
+
+            msg += "───────────────────\n"
+            msg += "\n✍️ Or write your own reply with the hashtags!\n"
         elif task.target_url:
-            msg += f"\n🔗 Tweet to comment on: {task.target_url}\n"
+            comment_text = sample_comments[0]
+            reply_url = _build_twitter_reply_intent_url(task.target_url, comment_text)
+            msg += f"\n🔗 Tweet to comment on:\n"
+            msg += f"💬 _{comment_text[:80]}_\n"
             keyboard.append([
                 InlineKeyboardButton(
-                    "💬 Open Tweet & Reply",
-                    url=task.target_url
+                    "💬 Reply with Suggested Comment",
+                    url=reply_url
                 )
             ])
 
-        if task.hashtags:
-            msg += f"\n# Use: {task.hashtags}\n"
         msg += "\nWhen done, *paste your reply URL below* 👇\n"
         msg += "Type /cancel to cancel."
 
@@ -764,6 +809,15 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         msg += f"{task.instructions}\n\n"
         msg += "When done, send your proof below 👇\n"
         msg += "Type /cancel to cancel."
+
+    # ── Back navigation on ALL task screens ──
+    if campaign_id:
+        keyboard.append([
+            InlineKeyboardButton(
+                "↩️ Back to Tasks",
+                callback_data=f"campaign_tasks_{campaign_id}"
+            )
+        ])
 
     reply_markup = InlineKeyboardMarkup(keyboard) if keyboard else None
     await query.edit_message_text(msg, reply_markup=reply_markup, parse_mode='Markdown')
