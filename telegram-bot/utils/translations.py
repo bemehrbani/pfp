@@ -19,16 +19,19 @@ TRANSLATIONS = {
     # ── Welcome & Start ──────────────────────────────────────────────
     "welcome": {
         "en": (
-            "✊ *People for Peace*\n\n"
-            "Choose a campaign below and start taking action!"
+            "🕊️ *People for Peace*\n\n"
+            "Choose a campaign below and start taking action!\n\n"
+            "📢 Follow updates: @people4peace"
         ),
         "fa": (
-            "✊ *مردم برای صلح*\n\n"
-            "یک کمپین انتخاب کنید و شروع کنید!"
+            "🕊️ *مردم برای صلح*\n\n"
+            "یک کمپین انتخاب کنید و شروع کنید!\n\n"
+            "📢 دنبال کنید: @people4peace"
         ),
         "ar": (
-            "✊ *الناس من أجل السلام*\n\n"
-            "اختر حملة أدناه وابدأ العمل!"
+            "🕊️ *الناس من أجل السلام*\n\n"
+            "اختر حملة أدناه وابدأ العمل!\n\n"
+            "📢 تابعنا: @people4peace"
         ),
     },
 
@@ -362,7 +365,9 @@ TRANSLATIONS = {
             "*Status:* Pending Review\n"
             "*Points:* {points} (pending verification)\n\n"
             "Your proof has been submitted for review by the campaign manager.\n"
-            "You'll be notified once it's verified and points are awarded."
+            "You'll be notified once it's verified and points are awarded.\n\n"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🕊️ People for Peace · peopleforpeace.live"
         ),
         "fa": (
             "✅ *مدرک با موفقیت ارسال شد!*\n\n"
@@ -370,7 +375,9 @@ TRANSLATIONS = {
             "*وضعیت:* در انتظار بررسی\n"
             "*امتیاز:* {points} (در انتظار تأیید)\n\n"
             "مدرک شما برای بررسی توسط مدیر کمپین ارسال شد.\n"
-            "پس از تأیید و اعطای امتیاز به شما اطلاع داده می‌شود."
+            "پس از تأیید و اعطای امتیاز به شما اطلاع داده می‌شود.\n\n"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🕊️ مردم برای صلح · peopleforpeace.live"
         ),
         "ar": (
             "✅ *تم تقديم الدليل بنجاح!*\n\n"
@@ -378,7 +385,9 @@ TRANSLATIONS = {
             "*الحالة:* قيد المراجعة\n"
             "*النقاط:* {points} (في انتظار التحقق)\n\n"
             "تم تقديم دليلك للمراجعة من قبل مدير الحملة.\n"
-            "سيتم إخطارك بمجرد التحقق ومنح النقاط."
+            "سيتم إخطارك بمجرد التحقق ومنح النقاط.\n\n"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🕊️ الناس من أجل السلام · peopleforpeace.live"
         ),
     },
     "proof_cancelled": {

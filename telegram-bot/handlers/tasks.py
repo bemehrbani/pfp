@@ -349,13 +349,17 @@ async def _broadcast_task_completion(bot, campaign_id, task_title, task_type, po
         icon = type_icons.get(task_type, '📌')
         action = type_labels.get(task_type, 'completed a task')
 
-        text = f'{icon} <b>A volunteer just {action}!</b>\n'
-        text += '━━━━━━━━━━━━━━━━━━━\n'
+        from utils.brand_constants import BRAND_HEADER_HTML, BRAND_SEPARATOR, BRAND_CTA_HTML
+
+        text = f'{BRAND_HEADER_HTML}\n'
+        text += f'{BRAND_SEPARATOR}\n'
+        text += f'{icon} <b>A volunteer just {action}!</b>\n'
 
         if proof_url and proof_url.startswith('http'):
             text += f'🔗 <a href="{proof_url}">View</a>\n'
 
         text += f'🏆 +{points} points earned\n'
+        text += f'\n{BRAND_CTA_HTML}'
 
         await bot.send_message(
             chat_id=channel_id,
@@ -378,10 +382,14 @@ async def _broadcast_volunteer_joined(bot, campaign_id, member_count):
         if not channel_id:
             return
 
+        from utils.brand_constants import BRAND_HEADER_HTML, BRAND_SEPARATOR, BRAND_CTA_HTML
+
         text = (
-            f'👋 <b>A new volunteer joined!</b>\n'
-            f'━━━━━━━━━━━━━━━━━━━\n'
-            f'We are now <b>{member_count}</b> strong! ✊'
+            f'{BRAND_HEADER_HTML}\n'
+            f'{BRAND_SEPARATOR}\n'
+            f'👋 <b>A new activist joined the movement!</b>\n'
+            f'We are now <b>{member_count}</b> strong! ✊\n'
+            f'\n{BRAND_CTA_HTML}'
         )
 
         await bot.send_message(

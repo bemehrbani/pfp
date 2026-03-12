@@ -138,8 +138,8 @@ class PFPCampaignBot:
             for handler in menu_handlers:
                 self.application.add_handler(handler)
 
-            # Register conversation handlers
-            self.application.add_handler(task_proof_conversation)
+            # Register conversation handler (registration only;
+            # task_proof_conversation is already in task_handlers)
             self.application.add_handler(registration_conversation)
 
             # Register message handlers
@@ -184,7 +184,12 @@ class PFPCampaignBot:
         self._init_handlers()
 
         logger.info("Starting bot in polling mode...")
-        self.application.run_polling()
+        self.application.run_polling(
+            allowed_updates=[
+                'message', 'callback_query', 'edited_message',
+                'channel_post', 'my_chat_member', 'chat_member'
+            ]
+        )
 
     def start_webhook(self, webhook_url: str, port: int = 8443):
         """Start the bot in webhook mode (for production)."""
