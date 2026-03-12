@@ -111,6 +111,7 @@ class Campaign(models.Model):
         User,
         related_name='volunteered_campaigns',
         through='CampaignVolunteer',
+        through_fields=('campaign', 'volunteer'),
         blank=True,
         help_text=_('Volunteers participating in this campaign')
     )
