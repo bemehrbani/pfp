@@ -95,7 +95,7 @@ async def _handle_tasks(query, lang: str):
     def _fetch_tasks():
         from apps.tasks.models import Task
         return list(
-            Task.objects.filter(is_active=True, status='open')
+            Task.objects.filter(is_active=True)
             .select_related('campaign')
             .order_by('-created_at')[:10]
         )
@@ -110,12 +110,12 @@ async def _handle_tasks(query, lang: str):
         )
         return
 
-    text = "🎯 *Available Tasks*\n\n"
+    text = t('checklist_title', lang).format(name='') + "\n\n"
     for task in tasks:
-        campaign_name = task.campaign.name if task.campaign else "General"
+        campaign_name = task.campaign.name if task.campaign else ""
         text += f"• *{task.title}* ({campaign_name})\n"
 
-    text += "\nUse /tasks for full details and to claim tasks."
+    text += "\n" + t('checklist_tap_start', lang)
 
     await query.message.reply_text(
         text,
