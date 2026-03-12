@@ -684,7 +684,6 @@ async def handle_invite_send(query, session, campaign_id, invite_lang, style):
             chat_id=query.message.chat_id,
             photo=photo_url,
             caption=caption,
-            parse_mode='Markdown'
         )
 
         # Follow up with instruction + back buttons
