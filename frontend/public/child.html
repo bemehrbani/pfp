@@ -241,6 +241,79 @@
         .delay-2 { animation-delay: .2s; }
         .delay-3 { animation-delay: .3s; }
         .delay-4 { animation-delay: .4s; }
+
+        /* ─── Candle Tribute Section ─── */
+        .tribute-section {
+            max-width: 560px; margin: 0 auto; padding: 0 20px;
+            text-align: center;
+        }
+        .tribute-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 32px 24px; position: relative;
+            overflow: hidden;
+        }
+        .tribute-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 30%, rgba(212,168,83,.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .candle-container {
+            display: flex; flex-direction: column; align-items: center;
+            margin-bottom: 20px;
+        }
+        .candle-flame {
+            font-size: 2.8rem; line-height: 1;
+            animation: flicker 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(255,165,0,.5));
+        }
+        @keyframes flicker {
+            0%, 100% { transform: scale(1) rotate(-1deg); opacity: 1; }
+            25% { transform: scale(1.05) rotate(1deg); opacity: .9; }
+            50% { transform: scale(.95) rotate(-2deg); opacity: 1; }
+            75% { transform: scale(1.02) rotate(0deg); opacity: .85; }
+        }
+        .candle-unlit { font-size: 2.2rem; opacity: .4; }
+        .light-candle-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; border: 1px solid var(--gold);
+            background: var(--gold-d); color: var(--gold);
+            border-radius: 24px; font-size: .95rem; font-weight: 600;
+            cursor: pointer; transition: var(--t); font-family: var(--sans);
+        }
+        .light-candle-btn:hover {
+            background: var(--gold); color: var(--bg);
+            box-shadow: 0 0 20px rgba(212,168,83,.3);
+        }
+        .tribute-count {
+            font-size: .85rem; color: var(--text2); margin-top: 12px;
+        }
+        .tribute-message {
+            margin-top: 16px; padding: 16px;
+            background: rgba(212,168,83,.06); border-radius: 8px;
+            border: 1px solid rgba(212,168,83,.15);
+        }
+        .tribute-message p {
+            font-family: var(--serif); font-style: italic;
+            color: var(--text); font-size: .95rem; line-height: 1.6;
+        }
+        .tribute-input-area {
+            margin-top: 16px; display: flex; flex-direction: column; gap: 10px;
+        }
+        .tribute-input {
+            width: 100%; padding: 10px 14px; border: 1px solid var(--border);
+            background: var(--bg2); color: var(--text); border-radius: 8px;
+            font-family: var(--sans); font-size: .9rem; resize: none;
+        }
+        .tribute-input:focus {
+            outline: none; border-color: var(--gold);
+        }
+        .tribute-submit {
+            align-self: flex-end; padding: 8px 20px;
+            border: none; background: var(--gold); color: var(--bg);
+            border-radius: 16px; font-size: .85rem; font-weight: 600;
+            cursor: pointer; transition: var(--t); font-family: var(--sans);
+        }
+        .tribute-submit:hover { opacity: .85; }
     </style>
 </head>
 
@@ -269,7 +342,7 @@
 
         const CHILD_I18N = {
             en: {
-                backLink: '← All Children', ageLabel: 'Age', ageUnknown: 'Age unknown',
+                backLink: '← All Children', ageLabel: 'Age', ageUnknown: 'Elementary school student',
                 fatherLabel: "Father's Name", schoolLabel: 'School',
                 schoolName: 'Shajareh Tayyebeh Elementary School',
                 locationLabel: 'Location', location: 'Minab, Hormozgan Province, Iran',
@@ -281,20 +354,30 @@
                 notFoundText: 'This child could not be found. Please return to the memorial grid.',
                 footerFa: 'هرگز نمیرد آنکه دلش زنده شد به عشق',
                 footerEn: 'Those whose hearts are alive with love never die — Hafez',
+                lightCandle: '🕯️ Light a Candle',
+                tributeCount: '{n} candles lit',
+                tributePlaceholder: 'Leave a short tribute (optional)...',
+                tributeSubmit: 'Send',
+                tributeThanks: 'Thank you for remembering.',
             },
             fa: {
-                backLink: '→ همه کودکان', ageLabel: 'سن', ageUnknown: 'سن نامشخص',
+                backLink: '→ همه کودکان', ageLabel: 'سن', ageUnknown: 'دانش‌آموز دبستان',
                 fatherLabel: 'نام پدر', schoolLabel: 'مدرسه',
                 schoolName: 'دبستان شجره طیبه',
                 locationLabel: 'مکان', location: 'میناب، استان هرمزگان، ایران',
                 dateLabel: 'تاریخ', dateValue: '۹ اسفند ۱۴۰۴',
                 causeLabel: 'علت', causeValue: 'حمله هوایی ارتش آمریکا',
-                prevLabel: 'قبلی ←', nextLabel: '→ بعدی',
+                prevLabel: '‏→ قبلی', nextLabel: 'بعدی ←‏',
                 shareBtn: '📤 اشتراک‌گذاری', copyBtn: '📋 کپی لینک', copied: 'کپی شد!',
                 notFoundTitle: 'کودک یافت نشد',
                 notFoundText: 'این کودک یافت نشد. لطفاً به صفحه یادبود بازگردید.',
                 footerFa: 'هرگز نمیرد آنکه دلش زنده شد به عشق',
-                footerEn: 'ثبت است بر جریده عالم دوام ما — حافظ',
+                footerEn: 'Those whose hearts are alive with love never die — Hafez',
+                lightCandle: '🕯️ روشن کردن شمع',
+                tributeCount: '{n} شمع روشن شده',
+                tributePlaceholder: 'یک پیام کوتاه بنویسید (اختیاری)...',
+                tributeSubmit: 'ارسال',
+                tributeThanks: 'سپاس از یادآوری شما.',
             }
         };
 
@@ -308,6 +391,7 @@
                 btn.classList.toggle('active', btn.textContent.trim() === (lang === 'fa' ? 'فا' : 'EN'));
             });
             renderPage();
+            renderTribute();
         }
 
         function renderPage() {
@@ -433,6 +517,8 @@
 
                 ${storyHtml}
 
+                <section class="tribute-section fade-in delay-3" id="tributeSection"></section>
+
                 <div class="share-bar fade-in delay-4">
                     <a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(`Remember ${child.name}. A child lost in the Minab School airstrike. #NeverForget #CeasefireNow`)}&url=${encodeURIComponent(`https://peopleforpeace.live/child.html?id=${child.id}`)}" target="_blank" rel="noopener">𝕏 Twitter</a>
                     <a class="share-btn telegram" href="https://t.me/share/url?url=${encodeURIComponent(`https://peopleforpeace.live/child.html?id=${child.id}`)}&text=${encodeURIComponent(`Remember ${child.name}. #NeverForget #CeasefireNow`)}" target="_blank" rel="noopener">✈ Telegram</a>
@@ -488,6 +574,65 @@
                 const btns = document.querySelectorAll('.share-btn');
                 if (btns[1]) { btns[1].textContent = t.copied; setTimeout(() => { btns[1].textContent = t.copyBtn; }, 2000); }
             });
+        }
+
+        /* ─── Candle Tribute Logic ─── */
+        function renderTribute() {
+            const t = CHILD_I18N[currentLang] || CHILD_I18N.en;
+            const section = document.getElementById('tributeSection');
+            if (!section) return;
+
+            const storageKey = `pfp-candle-${childId}`;
+            const countKey = 'pfp-candle-total';
+            const saved = JSON.parse(localStorage.getItem(storageKey) || 'null');
+            const totalCandles = parseInt(localStorage.getItem(countKey) || '0');
+
+            if (saved) {
+                // Already lit
+                section.innerHTML = `
+                    <div class="tribute-card">
+                        <div class="candle-container">
+                            <div class="candle-flame">🕯️</div>
+                        </div>
+                        ${saved.message ? `<div class="tribute-message"><p>"${saved.message}"</p></div>` : ''}
+                        <div class="tribute-count">${t.tributeThanks}<br>${t.tributeCount.replace('{n}', totalCandles)}</div>
+                    </div>`;
+            } else {
+                // Unlit state
+                section.innerHTML = `
+                    <div class="tribute-card">
+                        <div class="candle-container">
+                            <div class="candle-unlit">🕯️</div>
+                        </div>
+                        <button class="light-candle-btn" onclick="lightCandle()">${t.lightCandle}</button>
+                        <div class="tribute-input-area" id="tributeInput" style="display:none">
+                            <textarea class="tribute-input" id="tributeMsg" rows="2" maxlength="200" placeholder="${t.tributePlaceholder}"></textarea>
+                            <button class="tribute-submit" onclick="submitTribute()">${t.tributeSubmit}</button>
+                        </div>
+                        <div class="tribute-count">${totalCandles > 0 ? t.tributeCount.replace('{n}', totalCandles) : ''}</div>
+                    </div>`;
+            }
+        }
+
+        function lightCandle() {
+            const inputArea = document.getElementById('tributeInput');
+            if (inputArea) inputArea.style.display = 'flex';
+            // Swap the unlit candle for the lit one
+            const unlit = document.querySelector('.candle-unlit');
+            if (unlit) { unlit.className = 'candle-flame'; }
+            // Hide the button
+            const btn = document.querySelector('.light-candle-btn');
+            if (btn) btn.style.display = 'none';
+        }
+
+        function submitTribute() {
+            const msg = (document.getElementById('tributeMsg')?.value || '').trim().slice(0, 200);
+            const storageKey = `pfp-candle-${childId}`;
+            const countKey = 'pfp-candle-total';
+            const total = parseInt(localStorage.getItem(countKey) || '0') + 1;
+            localStorage.setItem(storageKey, JSON.stringify({ message: msg, date: new Date().toISOString() }));
+            localStorage.setItem(countKey, String(total));
+            renderTribute();
         }
 
         /* ─── Init ─── */
