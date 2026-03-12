@@ -54,18 +54,21 @@ async def _handle_campaigns(query, lang: str):
         )
         return
 
-    text = t('campaigns_title', lang) + "\n\n"
+    text = "📋 *Active Campaigns*\n\n"
+    text += "Choose a campaign to learn more and join:\n\n"
     buttons = []
 
     for campaign in campaigns:
-        text += f"• *{campaign.name}*\n"
-        if campaign.description:
-            desc = campaign.description[:80]
-            text += f"  {desc}{'...' if len(campaign.description) > 80 else ''}\n"
-        text += "\n"
+        desc = campaign.short_description or campaign.description or ''
+        if desc:
+            desc = desc[:80] + ('...' if len(desc) > 80 else '')
+        text += f"✊ *{campaign.name}*\n"
+        if desc:
+            text += f"  {desc}\n"
+        text += f"  👥 {campaign.current_members}/{campaign.target_members} volunteers\n\n"
         buttons.append([
             InlineKeyboardButton(
-                f"📋 {campaign.name}",
+                f"✊ {campaign.name}",
                 callback_data=f"campaign_{campaign.id}"
             )
         ])

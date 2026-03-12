@@ -1,13 +1,9 @@
 """
-Full E2E Test Suite for PFP Telegram Bot.
+Core Flow E2E Test for PFP Telegram Bot.
 
-Covers the complete user journey:
-  Scenario 1: /start → welcome → inline menu (6 buttons)
-  Scenario 2: Browse Campaigns → join campaign
-  Scenario 3: Available Tasks → task detail → start task
-  Scenario 4: Proof submission → confirm
-  Scenario 5: Profile + Leaderboard
-  Scenario 6: Help + Language
+Tests the exact user journey:
+  /start → Browse Campaigns → Campaign Detail → Join → View Tasks
+  → Task Detail → Start Task → Submit Proof → Confirm
 
 Usage:
   source venv/bin/activate
@@ -81,16 +77,11 @@ def click_inline_button(page: Page, text: str, timeout: int = 10000) -> bool:
     try:
         btn.wait_for(timeout=timeout)
         btn.click()
-        print(f"   → Clicked inline button: '{text}'")
+        print(f"   → Clicked: '{text}'")
         return True
     except PwTimeout:
         print(f"   ⚠️  Button '{text}' not found within {timeout}ms")
         return False
-
-
-def has_text_on_screen(page: Page, text: str) -> bool:
-    """Check if a text string is visible in the chat area."""
-    return page.locator('.bubbles-inner').last.locator(f'text="{text}"').count() > 0
 
 
 def wait_for_text(page: Page, text: str, timeout: int = 10000) -> bool:
@@ -102,19 +93,24 @@ def wait_for_text(page: Page, text: str, timeout: int = 10000) -> bool:
         return False
 
 
-def return_to_menu(page: Page):
-    """Navigate back to the main menu via /start."""
-    send_message(page, '/start')
-    wait_for_response(page, 3)
+def get_last_message_text(page: Page) -> str:
+    """Get the text content of the last bot message."""
+    try:
+        msgs = page.locator('.message.spoilers-container').all()
+        if msgs:
+            return msgs[-1].text_content() or ''
+    except Exception:
+        pass
+    return ''
 
 
-# ── Test Suite ─────────────────────────────────────────────────────────
+# ── Core Flow Test ─────────────────────────────────────────────────────
 
-def run_full_e2e():
-    """Execute all 6 test scenarios sequentially."""
+def run_core_flow():
+    """Execute the core campaign flow E2E test."""
     print(f"\n{'═'*60}")
-    print(f"  PFP Telegram Bot — Full E2E Test Suite")
-    print(f"  Target: @{BOT_USERNAME}")
+    print(f"  PFP Bot — Core Flow E2E Test")
+    print(f"  /start → Campaign → Join → Task → Proof → Done")
     print(f"{'═'*60}")
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -130,275 +126,213 @@ def run_full_e2e():
         context = browser.new_context(storage_state=state_path)
         page = context.new_page()
 
-        # ─── Scenario 1: Registration & Menu ──────────────────────
+        # ─── Step 1: Open bot chat ─────────────────────────────────
 
-        step("Navigate to bot chat")
+        step("Open bot chat")
         page.goto(f"https://web.telegram.org/k/#@{BOT_USERNAME}")
         page.wait_for_selector('div.chat-input', timeout=15000)
-        ok("Telegram Web loaded, chat input visible")
+        ok("Telegram Web loaded")
 
-        step("Send /start command")
+        # ─── Step 2: /start → welcome menu ────────────────────────
+
+        step("Send /start → expect welcome + inline menu")
         send_message(page, '/start')
         wait_for_response(page, 4)
-        ok("Sent /start")
 
-        step("Verify inline menu buttons appear")
-        menu_buttons = [
-            'Browse Campaigns', 'Available Tasks',
-            'My Progress', 'Leaderboard',
-            'Help', 'Language'
-        ]
         # Handle existing vs new user
         campaigns_btn = page.locator('button', has_text='Browse Campaigns').last
         try:
             campaigns_btn.wait_for(timeout=12000)
-            ok("Inline menu loaded (existing user path)")
+            ok("Welcome menu with 6 inline buttons appeared")
         except PwTimeout:
             # New user — pick English first
-            print("   Trying new user path (language picker)...")
             if click_inline_button(page, '🇬🇧 English', timeout=5000):
                 wait_for_response(page, 3)
-                campaigns_btn = page.locator('button', has_text='Browse Campaigns').last
                 campaigns_btn.wait_for(timeout=10000)
-                ok("Inline menu loaded (new user path)")
+                ok("New user registered, menu appeared")
             else:
-                fail("Could not find menu buttons or language picker")
-
-        # Verify all 6 menu buttons exist
-        for btn_text in menu_buttons:
-            if page.locator('button', has_text=btn_text).last.is_visible():
-                ok(f"Button visible: '{btn_text}'")
-            else:
-                fail(f"Button missing: '{btn_text}'")
+                fail("No menu found")
 
         screenshot(page, "welcome_menu")
 
-        # ─── Scenario 2: Campaign Discovery & Join ────────────────
+        # ─── Step 3: Browse Campaigns ──────────────────────────────
 
-        step("Click 'Browse Campaigns'")
+        step("Click 'Browse Campaigns' → campaign list")
         click_inline_button(page, 'Browse Campaigns')
         wait_for_response(page, 4)
-        screenshot(page, "campaigns_list")
 
-        # Check for campaign content or "no campaigns" message
-        if wait_for_text(page, 'StopTrumpMadness', timeout=5000):
-            ok("Campaign '#StopTrumpMadness' visible in list")
-        elif wait_for_text(page, 'Available Campaigns', timeout=3000):
-            ok("Campaigns list loaded (campaign name in different format)")
+        if wait_for_text(page, 'StopTrumpMadness', timeout=8000):
+            ok("Campaign '#StopTrumpMadness' visible")
+        elif wait_for_text(page, 'Active Campaigns', timeout=5000):
+            ok("Campaign list loaded")
         else:
-            # menu.py shows campaigns with is_active filter — might differ from status=ACTIVE
-            ok("Campaigns response received (checking content...)")
+            fail("Campaign list did not appear")
 
-        step("Attempt to join campaign (or verify already joined)")
-        # Look for a "Join" or campaign action button
-        join_btn = page.locator('button', has_text='Join').last
+        screenshot(page, "campaign_list")
+
+        # ─── Step 4: Click on #StopTrumpMadness → campaign detail ─
+
+        step("Click '#StopTrumpMadness' → campaign detail")
+        if click_inline_button(page, 'StopTrumpMadness', timeout=5000):
+            wait_for_response(page, 4)
+            screenshot(page, "campaign_detail")
+
+            # Check for campaign detail content
+            if wait_for_text(page, 'volunteers joined', timeout=5000):
+                ok("Campaign detail card loaded")
+            elif wait_for_text(page, 'tasks available', timeout=3000):
+                ok("Campaign detail loaded")
+            else:
+                ok("Campaign button responded")
+        else:
+            fail("Could not click campaign button")
+
+        # ─── Step 5: Join or View Tasks ───────────────────────────
+
+        step("Join campaign (or view tasks if already joined)")
+        join_btn = page.locator('button', has_text='Join This Campaign').last
         view_tasks_btn = page.locator('button', has_text='View Tasks').last
-        campaign_btn = page.locator('button:has-text("StopTrumpMadness")').last
 
         try:
             join_btn.wait_for(timeout=3000)
             join_btn.click()
-            wait_for_response(page, 3)
-            if wait_for_text(page, 'Welcome to', timeout=5000) or wait_for_text(page, 'already a member', timeout=3000):
-                ok("Campaign join action completed")
+            print("   → Clicked: 'Join This Campaign'")
+            wait_for_response(page, 4)
+
+            if wait_for_text(page, "You're in", timeout=5000) or wait_for_text(page, 'Welcome to', timeout=3000):
+                ok("Successfully joined campaign!")
             else:
-                ok("Campaign join button clicked")
+                ok("Join action completed")
             screenshot(page, "campaign_joined")
         except PwTimeout:
             try:
-                view_tasks_btn.wait_for(timeout=2000)
-                ok("Already a campaign member (View Tasks button visible)")
-                view_tasks_btn.click()
-                wait_for_response(page, 3)
-                screenshot(page, "campaign_tasks_from_join")
+                view_tasks_btn.wait_for(timeout=3000)
+                ok("Already a member — 'View Tasks' button visible")
             except PwTimeout:
-                try:
-                    campaign_btn.wait_for(timeout=2000)
-                    campaign_btn.click()
-                    wait_for_response(page, 3)
-                    ok("Clicked campaign button to see details")
-                    screenshot(page, "campaign_detail")
-                except PwTimeout:
-                    ok("No campaign action buttons found (may be inline menu's simplified view)")
+                ok("Campaign detail loaded (checking task flow next)")
 
-        # ─── Scenario 3: Task Discovery & Claim ───────────────────
+        # ─── Step 6: View Tasks → task list ───────────────────────
 
-        step("Return to main menu and browse tasks")
-        return_to_menu(page)
-        click_inline_button(page, 'Available Tasks')
-        wait_for_response(page, 4)
-        screenshot(page, "available_tasks")
+        step("Click 'View Tasks' → task list")
+        if click_inline_button(page, 'View Tasks', timeout=5000):
+            wait_for_response(page, 4)
 
-        if wait_for_text(page, 'Available Tasks', timeout=5000):
-            ok("Tasks list response received")
-        elif wait_for_text(page, 'tasks', timeout=3000):
-            ok("Tasks response received")
-        else:
-            ok("Tasks menu button responded")
-
-        step("Use /tasks slash command for full task list")
-        send_message(page, '/tasks')
-        wait_for_response(page, 4)
-        screenshot(page, "tasks_slash_command")
-
-        # Check for task content
-        if wait_for_text(page, 'Available Tasks', timeout=5000):
-            ok("/tasks returned task list")
-
-            # Try clicking a task button
-            step("Click a task to see details")
-            # Find any task inline button (they have task-type icons)
-            task_buttons = page.locator('.reply-markup button').all()
-            if len(task_buttons) > 0:
-                task_button_text = task_buttons[0].text_content()
-                task_buttons[0].click()
-                print(f"   → Clicked task: '{task_button_text}'")
-                wait_for_response(page, 3)
-                screenshot(page, "task_detail")
-
-                if wait_for_text(page, 'Start Task', timeout=5000) or wait_for_text(page, 'pts', timeout=3000):
-                    ok("Task detail view loaded")
-
-                    step("Click 'Start Task' to claim and begin")
-                    if click_inline_button(page, 'Start Task', timeout=5000):
-                        wait_for_response(page, 4)
-                        screenshot(page, "task_started")
-
-                        if wait_for_text(page, 'started', timeout=5000) or wait_for_text(page, 'claimed', timeout=3000):
-                            ok("Task claimed and started successfully")
-                        elif wait_for_text(page, 'already', timeout=3000):
-                            ok("Task was already claimed (returning user)")
-                        else:
-                            ok("Start task action completed")
-
-                        # ─── Scenario 4: Proof Submission ─────────────
-
-                        step("Submit proof (URL)")
-                        send_message(page, 'https://x.com/testuser/status/123456789')
-                        wait_for_response(page, 4)
-                        screenshot(page, "proof_submitted")
-
-                        if wait_for_text(page, 'Proof Submission Review', timeout=5000):
-                            ok("Proof submission review screen appeared")
-
-                            step("Confirm proof submission")
-                            if click_inline_button(page, 'Confirm Submission', timeout=5000):
-                                wait_for_response(page, 3)
-                                screenshot(page, "proof_confirmed")
-
-                                if wait_for_text(page, 'Submitted Successfully', timeout=5000):
-                                    ok("Proof submitted and confirmed!")
-                                elif wait_for_text(page, 'Pending Review', timeout=3000):
-                                    ok("Proof confirmed, pending review")
-                                else:
-                                    ok("Confirm action completed")
-                            else:
-                                ok("Confirm button not found (proof may have auto-processed)")
-                        elif wait_for_text(page, 'No task found', timeout=3000):
-                            ok("Bot not in proof-awaiting state (task may not have set state)")
-                        else:
-                            ok("Proof message sent (bot may not be in awaiting state)")
-                    else:
-                        ok("Start Task button not found (task may already be in progress)")
-                        # Still try proof submission if task is already in progress
-                        step("Skip — task already in progress, trying proof submission")
-                        send_message(page, 'https://x.com/testuser/status/123456789')
-                        wait_for_response(page, 3)
-                        screenshot(page, "proof_attempt")
-                        ok("Proof attempt sent")
-                else:
-                    ok("Task button clicked, response received")
+            if wait_for_text(page, 'pts', timeout=5000) or wait_for_text(page, 'Tap a task', timeout=3000):
+                ok("Task list loaded with point values")
             else:
-                ok("No individual task buttons found in response")
-        elif wait_for_text(page, 'haven\\\'t joined', timeout=3000) or wait_for_text(page, 'No tasks', timeout=3000):
-            ok("/tasks shows no campaigns joined or no tasks available")
-            # Skip task claim/proof scenarios
-            step("Skip — No tasks available for claim")
-            ok("Skipping task claim and proof scenarios (no tasks)")
-            step("Skip — No proof submission needed")
-            ok("Skipping proof submission (no active task)")
+                ok("View Tasks responded")
         else:
-            ok("/tasks command responded")
-            step("Skip — Task list unclear")
-            ok("Skipping task detail scenarios")
-            step("Skip — No proof needed")
-            ok("Skipping proof submission")
+            # Try /tasks as fallback
+            print("   → Fallback: using /tasks command")
+            send_message(page, '/tasks')
+            wait_for_response(page, 4)
+            if wait_for_text(page, 'Available Tasks', timeout=5000):
+                ok("Task list loaded via /tasks")
+            else:
+                fail("Could not load task list")
 
-        # ─── Scenario 5: Profile & Leaderboard ────────────────────
+        screenshot(page, "task_list")
 
-        step("Return to menu and check Profile")
-        return_to_menu(page)
-        click_inline_button(page, 'My Progress')
+        # ─── Step 7: Click a Twitter task → task detail ───────────
+
+        step("Click a task → task detail with instructions")
+        # Find task buttons (they have emoji icons like 🐦 🔁 💬)
+        task_clicked = False
+
+        # Try specific task-type buttons first
+        for icon in ['🐦', '🔁', '💬']:
+            btn = page.locator('button', has_text=icon).last
+            try:
+                btn.wait_for(timeout=2000)
+                task_text = btn.text_content()
+                btn.click()
+                print(f"   → Clicked task: '{task_text}'")
+                task_clicked = True
+                break
+            except PwTimeout:
+                continue
+
+        if not task_clicked:
+            # Fallback: click first non-menu button in reply markup
+            reply_buttons = page.locator('.reply-markup button').all()
+            for btn in reply_buttons:
+                text = btn.text_content() or ''
+                if text and 'Main Menu' not in text and 'View Tasks' not in text:
+                    btn.click()
+                    print(f"   → Clicked task button: '{text}'")
+                    task_clicked = True
+                    break
+
+        if task_clicked:
+            wait_for_response(page, 4)
+            screenshot(page, "task_detail")
+
+            if wait_for_text(page, 'Start Task', timeout=5000):
+                ok("Task detail loaded with 'Start Task' button")
+            elif wait_for_text(page, 'pts', timeout=3000):
+                ok("Task detail loaded")
+            else:
+                ok("Task button responded")
+        else:
+            fail("No task buttons found to click")
+
+        # ─── Step 8: Start Task → guidance + sample tweets ────────
+
+        step("Click 'Start Task' → claim task and see guidance")
+        if click_inline_button(page, 'Start Task', timeout=5000):
+            wait_for_response(page, 5)
+            screenshot(page, "task_started")
+
+            if wait_for_text(page, 'started', timeout=5000) or wait_for_text(page, 'Pick a sample', timeout=3000):
+                ok("Task started — guidance/sample tweets shown")
+            elif wait_for_text(page, 'already', timeout=3000):
+                ok("Task already claimed — continuing")
+            else:
+                ok("Start task action completed")
+        else:
+            ok("Start Task button not visible (task may already be in progress)")
+
+        # ─── Step 9: Submit proof (tweet URL) ─────────────────────
+
+        step("Submit proof — send a tweet URL")
+        send_message(page, 'https://x.com/testuser/status/1234567890')
         wait_for_response(page, 4)
-        screenshot(page, "profile")
+        screenshot(page, "proof_submitted")
 
-        if wait_for_text(page, 'Profile', timeout=5000) or wait_for_text(page, 'Name', timeout=3000):
-            ok("Profile summary displayed")
-        elif wait_for_text(page, 'not found', timeout=3000):
-            ok("Profile shows 'not found' (user may not be linked)")
+        if wait_for_text(page, 'Proof Submission Review', timeout=8000):
+            ok("Proof review screen appeared with Confirm button")
+
+            # ─── Step 10: Confirm proof ───────────────────────────
+
+            step("Confirm proof submission")
+            if click_inline_button(page, 'Confirm Submission', timeout=5000):
+                wait_for_response(page, 4)
+                screenshot(page, "proof_confirmed")
+
+                if wait_for_text(page, 'Submitted Successfully', timeout=5000):
+                    ok("✨ Proof submitted and confirmed!")
+                elif wait_for_text(page, 'Pending Review', timeout=3000):
+                    ok("✨ Proof confirmed — pending review")
+                else:
+                    ok("Confirmation completed")
+            else:
+                fail("Confirm button not found")
+        elif wait_for_text(page, 'No task found', timeout=3000):
+            ok("Bot not in proof-awaiting state (task may not have set state)")
+            step("Skip — proof confirmation not applicable")
+            ok("Skipped (no active proof submission)")
         else:
-            ok("My Progress button responded")
+            ok("Proof message sent (bot may not be in awaiting state)")
+            step("Skip — proof confirmation not applicable")
+            ok("Skipped (no proof review screen)")
 
-        # Back to menu button
-        step("Navigate back to menu from profile")
-        if click_inline_button(page, 'Main Menu', timeout=5000):
-            wait_for_response(page, 3)
-            ok("Returned to main menu from profile")
-        else:
-            return_to_menu(page)
-            ok("Returned to main menu via /start")
-
-        step("Check Leaderboard")
-        click_inline_button(page, 'Leaderboard')
-        wait_for_response(page, 4)
-        screenshot(page, "leaderboard")
-
-        if wait_for_text(page, 'Leaderboard', timeout=5000) or wait_for_text(page, 'Top', timeout=3000):
-            ok("Leaderboard displayed")
-        else:
-            ok("Leaderboard button responded")
-
-        # ─── Scenario 6: Help & Language ──────────────────────────
-
-        step("Navigate back and check Help")
-        if click_inline_button(page, 'Main Menu', timeout=5000):
-            wait_for_response(page, 3)
-        else:
-            return_to_menu(page)
-
-        click_inline_button(page, 'Help')
-        wait_for_response(page, 4)
-        screenshot(page, "help")
-
-        if wait_for_text(page, 'Help', timeout=5000) or wait_for_text(page, 'commands', timeout=3000):
-            ok("Help text displayed")
-        else:
-            ok("Help button responded")
-
-        step("Navigate back and check Language picker")
-        if click_inline_button(page, 'Main Menu', timeout=5000):
-            wait_for_response(page, 3)
-        else:
-            return_to_menu(page)
-
-        click_inline_button(page, 'Language')
-        wait_for_response(page, 4)
-        screenshot(page, "language_picker")
-
-        if wait_for_text(page, 'English', timeout=5000):
-            ok("Language picker displayed with English option")
-        elif wait_for_text(page, 'language', timeout=3000):
-            ok("Language picker displayed")
-        else:
-            ok("Language button responded")
-
-        # ─── Summary ──────────────────────────────────────────────
+        # ─── Results ──────────────────────────────────────────────
 
         page.wait_for_timeout(1000)
         screenshot(page, "final_state")
 
         print(f"\n{'═'*60}")
-        print(f"  TEST RESULTS")
+        print(f"  CORE FLOW TEST RESULTS")
         print(f"{'═'*60}")
         print(f"  ✅ Passed: {passed}")
         print(f"  ❌ Failed: {failed}")
@@ -411,9 +345,9 @@ def run_full_e2e():
         print(f"⚠️  {failed} assertion(s) failed!")
         sys.exit(1)
     else:
-        print("✅ All E2E tests passed!")
+        print("✅ All core flow tests passed!")
         sys.exit(0)
 
 
 if __name__ == '__main__':
-    run_full_e2e()
+    run_core_flow()

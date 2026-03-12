@@ -277,6 +277,61 @@ async def campaign_callback_handler(update: Update, context: CallbackContext):
         page = int(callback_data.split('_')[-1])
         await handle_campaigns_pagination(query, session, page)
 
+    else:
+        # Handle campaign_{id} — campaign detail view from menu
+        parts = callback_data.split('_')
+        if len(parts) == 2 and parts[0] == 'campaign' and parts[1].isdigit():
+            campaign_id = int(parts[1])
+            await handle_campaign_detail(query, session, campaign_id)
+
+
+async def handle_campaign_detail(query, session, campaign_id):
+    """Show campaign detail card with Join or View Tasks button."""
+    campaign = await _get_campaign(campaign_id)
+    if not campaign:
+        await query.edit_message_text(
+            "❌ This campaign is no longer available.",
+            parse_mode='Markdown'
+        )
+        return
+
+    is_member = await _is_volunteer(campaign, session.user) if session.user else False
+    task_count = await _get_task_count(campaign)
+
+    msg = f"📢 *{campaign.name}*\n\n"
+    msg += f"{campaign.description or campaign.short_description}\n\n"
+    msg += f"👥 {campaign.current_members}/{campaign.target_members} volunteers joined\n"
+    msg += f"🎯 {task_count} tasks available\n"
+
+    keyboard = []
+    if is_member:
+        msg += f"\n✅ *You're in this campaign!*\n"
+        msg += "Tap below to see your tasks and start making an impact.\n"
+        keyboard.append([
+            InlineKeyboardButton(
+                "🎯 View Tasks",
+                callback_data=f"campaign_tasks_{campaign_id}"
+            )
+        ])
+    else:
+        msg += f"\nReady to make a difference? Join and start completing tasks.\n"
+        keyboard.append([
+            InlineKeyboardButton(
+                "✊ Join This Campaign",
+                callback_data=f"campaign_join_{campaign_id}"
+            )
+        ])
+
+    keyboard.append([
+        InlineKeyboardButton("🏠 Main Menu", callback_data="menu_main")
+    ])
+
+    await query.edit_message_text(
+        msg,
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode='Markdown'
+    )
+
 
 async def handle_campaign_join(query, session, campaign_id):
     """Handle campaign join from inline button."""
@@ -290,26 +345,29 @@ async def handle_campaign_join(query, session, campaign_id):
 
     already_joined = await _is_volunteer(campaign, session.user)
     if already_joined:
-        await query.edit_message_text(
-            f"✅ You're already a member of *{campaign.name}*!",
-            parse_mode='Markdown'
-        )
+        # Show tasks directly if already joined
+        await handle_campaign_view_tasks(query, session, campaign_id)
         return
 
     member_count = await _join_campaign(campaign, session.user)
     task_count = await _get_task_count(campaign)
 
+    keyboard = [[
+        InlineKeyboardButton(
+            "🎯 View Tasks",
+            callback_data=f"campaign_tasks_{campaign_id}"
+        )
+    ], [
+        InlineKeyboardButton("🏠 Main Menu", callback_data="menu_main")
+    ]]
+
     await query.edit_message_text(
-        f"🎉 *Welcome to {campaign.name}!*\n\n"
-        f"You've successfully joined the campaign.\n\n"
-        f"*Campaign Details:*\n"
-        f"• {campaign.short_description}\n"
-        f"• 👥 Members: {member_count}/{campaign.target_members}\n"
-        f"• 🎯 Tasks: {task_count} available\n\n"
-        f"*Next steps:*\n"
-        f"1. Use `/tasks` to see available tasks\n"
-        f"2. Claim tasks with `/claimtask <task_id>`\n"
-        f"3. Complete tasks and earn points!",
+        f"🎉 *You're in! Welcome to {campaign.name}*\n\n"
+        f"You've joined {member_count} other volunteers in this campaign.\n\n"
+        f"There are *{task_count} tasks* waiting for you — tweets to post, "
+        f"content to share, and voices to amplify.\n\n"
+        f"Tap *View Tasks* below to pick your first task and start earning points! 👇",
+        reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode='Markdown'
     )
 
