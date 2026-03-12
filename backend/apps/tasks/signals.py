@@ -10,6 +10,44 @@ from apps.analytics.models import ActivityLog
 
 logger = logging.getLogger(__name__)
 
+# Milestone thresholds to trigger channel broadcasts
+MILESTONE_THRESHOLDS = [10, 25, 50, 75, 100]
+
+
+def _check_and_broadcast_milestone(assignment):
+    """
+    Check if a task completion crosses a milestone threshold for the campaign.
+    Uses Django cache to prevent duplicate broadcasts.
+    """
+    from django.core.cache import cache
+
+    campaign = assignment.task.campaign
+    if not campaign or not campaign.target_activities:
+        return
+
+    current = campaign.completed_activities + 1  # +1 for the one just completed
+    target = campaign.target_activities
+    percentage = int((current / target) * 100)
+
+    for threshold in MILESTONE_THRESHOLDS:
+        if percentage >= threshold:
+            cache_key = f'milestone_{campaign.id}_{threshold}'
+            if cache.get(cache_key):
+                continue  # Already broadcasted this milestone
+
+            # Mark milestone as broadcasted (24h TTL)
+            cache.set(cache_key, True, timeout=86400)
+
+            from apps.campaigns.tasks import broadcast_milestone
+            broadcast_milestone.delay(
+                campaign_id=campaign.id,
+                metric='activities',
+                current=current,
+                target=target,
+                percentage=threshold,
+            )
+            logger.info(f'Milestone {threshold}% triggered for campaign {campaign.id}')
+
 
 @receiver(post_save, sender=Task)
 def task_created_or_updated(sender, instance, created, **kwargs):
@@ -89,6 +127,10 @@ def task_assignment_created_or_updated(sender, instance, created, **kwargs):
             # Update campaign statistics when task is verified
             if instance.status == TaskAssignment.Status.VERIFIED:
                 instance.campaign.update_statistics()
+
+            # ── Milestone detection on completion ──
+            if instance.status in (TaskAssignment.Status.COMPLETED, TaskAssignment.Status.VERIFIED):
+                _check_and_broadcast_milestone(instance)
 
 
 @receiver(post_save, sender=TaskAssignment)

@@ -313,6 +313,10 @@ class CampaignVolunteer(models.Model):
     joined_at = models.DateTimeField(auto_now_add=True)
     last_active = models.DateTimeField(auto_now=True)
     points_earned = models.IntegerField(default=0)
+    group_invite_sent = models.BooleanField(
+        default=False,
+        help_text=_('Whether this volunteer has been sent a coordination group invite')
+    )
 
     class Meta:
         unique_together = [('campaign', 'volunteer')]
@@ -347,6 +351,66 @@ class CampaignUpdate(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ChannelPost(models.Model):
+    """
+    Tracks every message posted to a campaign's Telegram channel.
+    Enables content recycling — older high-value posts can be reshared.
+    """
+    class ContentType(models.TextChoices):
+        TASK_COMPLETION = 'task_completion', _('Task Completion')
+        VOLUNTEER_JOINED = 'volunteer_joined', _('Volunteer Joined')
+        MILESTONE = 'milestone', _('Milestone')
+        DIGEST = 'digest', _('Daily Digest')
+        CAMPAIGN_UPDATE = 'campaign_update', _('Campaign Update')
+        RECYCLE = 'recycle', _('Recycled Post')
+
+    campaign = models.ForeignKey(
+        Campaign,
+        on_delete=models.CASCADE,
+        related_name='channel_posts'
+    )
+    content_type = models.CharField(
+        max_length=30,
+        choices=ContentType.choices,
+        help_text=_('Type of channel post')
+    )
+    message_text = models.TextField(
+        help_text=_('The message text that was posted')
+    )
+    proof_url = models.URLField(
+        blank=True,
+        default='',
+        help_text=_('Proof URL if task completion type')
+    )
+    telegram_message_id = models.BigIntegerField(
+        null=True,
+        blank=True,
+        help_text=_('Telegram message ID for tracking reposts')
+    )
+    repost_count = models.IntegerField(
+        default=0,
+        help_text=_('Number of times this post has been recycled')
+    )
+    last_reposted_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text=_('Last time this post was reshared')
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Channel Post')
+        verbose_name_plural = _('Channel Posts')
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['campaign', 'content_type']),
+            models.Index(fields=['campaign', 'last_reposted_at']),
+        ]
+
+    def __str__(self):
+        return f'{self.get_content_type_display()} — {self.campaign.name} ({self.created_at:%Y-%m-%d %H:%M})'
 
 
 class TwitterStorm(models.Model):

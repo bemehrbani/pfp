@@ -169,6 +169,20 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 
+# Celery Beat periodic tasks
+from celery.schedules import crontab  # noqa: E402
+
+CELERY_BEAT_SCHEDULE = {
+    'recycle-content-every-8h': {
+        'task': 'campaigns.recycle_channel_content',
+        'schedule': crontab(hour='8,16,0', minute=0),
+    },
+    'daily-campaign-digest': {
+        'task': 'campaigns.send_daily_digest',
+        'schedule': crontab(hour=21, minute=0),
+    },
+}
+
 # Telegram Bot settings
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '')
 TELEGRAM_WEBHOOK_URL = os.environ.get('TELEGRAM_WEBHOOK_URL', '')

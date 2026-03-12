@@ -97,10 +97,26 @@ class CampaignVolunteerAdmin(admin.ModelAdmin):
 class CampaignUpdateAdmin(admin.ModelAdmin):
     """Admin interface for CampaignUpdate model."""
 
-    list_display = ('title', 'campaign', 'created_by', 'is_pinned', 'created_at')
-    list_filter = ('is_pinned', 'campaign', 'created_at')
+    list_display = ('title', 'campaign', 'created_by', 'is_pinned', 'sent_to_telegram', 'created_at')
+    list_filter = ('is_pinned', 'sent_to_telegram', 'campaign', 'created_at')
     search_fields = ('title', 'content', 'campaign__name')
     readonly_fields = ('created_at', 'updated_at')
+    actions = ['push_to_channel']
+
+    @admin.action(description=_('Push selected updates to Telegram Channel'))
+    def push_to_channel(self, request, queryset):
+        """Push selected CampaignUpdates to their campaign's Telegram channel."""
+        from .tasks import broadcast_campaign_update
+
+        count = 0
+        for update in queryset.filter(sent_to_telegram=False):
+            broadcast_campaign_update.delay(update.id)
+            count += 1
+
+        self.message_user(
+            request,
+            _(f'{count} update(s) queued for Telegram channel broadcast.')
+        )
 
     def save_model(self, request, obj, form, change):
         """Set created_by if not set."""

@@ -14,6 +14,7 @@ from datetime import timedelta
 import requests
 from celery import shared_task
 from django.conf import settings
+from django.db import models
 from django.utils import timezone
 
 logger = logging.getLogger(__name__)
@@ -290,3 +291,281 @@ def collect_storm_results(storm_id: int):
         _send_telegram_message(chat_id, text)
 
     logger.info(f'Storm {storm_id}: COMPLETED — {posted_count} tweets posted')
+
+
+# ── Channel Broadcasting Tasks ────────────────────────────────────────
+
+@shared_task(name='campaigns.broadcast_task_completion')
+def broadcast_task_completion(campaign_id: int, task_title: str, task_type: str, points: int, proof_url: str = ''):
+    """
+    Broadcast an anonymized task completion to the campaign's Telegram channel.
+
+    Posts: "A volunteer just tweeted for #IstandwithIran! 🐦"
+    """
+    from apps.campaigns.models import Campaign
+
+    try:
+        campaign = Campaign.objects.get(id=campaign_id)
+    except Campaign.DoesNotExist:
+        logger.error(f'Campaign {campaign_id} not found for broadcast')
+        return
+
+    channel_id = campaign.telegram_channel_id
+    if not channel_id:
+        return
+
+    # Task type icons
+    type_icons = {
+        'twitter_post': '🐦', 'twitter_retweet': '🔁', 'twitter_comment': '💬',
+        'twitter_like': '❤️', 'telegram_share': '📢', 'telegram_invite': '👥',
+        'content_creation': '✍️', 'petition': '✍️', 'mass_email': '📧',
+        'research': '🔍', 'other': '📌',
+    }
+    type_labels = {
+        'twitter_post': 'tweeted', 'twitter_retweet': 'retweeted',
+        'twitter_comment': 'commented on a tweet', 'twitter_like': 'liked a tweet',
+        'telegram_share': 'shared on Telegram', 'telegram_invite': 'invited a friend',
+        'content_creation': 'created content', 'petition': 'signed the petition',
+        'mass_email': 'sent emails', 'research': 'submitted research',
+        'other': 'completed a task',
+    }
+
+    icon = type_icons.get(task_type, '📌')
+    action = type_labels.get(task_type, 'completed a task')
+
+    # Campaign progress
+    total_completed = campaign.completed_activities
+    total_target = campaign.target_activities or '∞'
+    hashtags = campaign.twitter_hashtags or ''
+
+    text = (
+        f'🕊️ <b>People for Peace</b>\n'
+        f'━━━━━━━━━━━━━━━━━━━\n'
+        f'{icon} <b>A volunteer just {action}!</b>\n'
+    )
+
+    if proof_url and proof_url.startswith('http'):
+        text += f'🔗 <a href="{proof_url}">View</a>\n'
+
+    text += f'🏆 +{points} points earned\n'
+    text += f'📊 Progress: {total_completed}/{total_target} activities\n'
+
+    if hashtags:
+        text += f'💬 {hashtags}\n'
+
+    text += f'\n✊ Join: @peopleforpeacebot'
+
+    _send_telegram_message(channel_id, text)
+    logger.info(f'Channel broadcast: task completion for campaign {campaign_id}')
+
+
+@shared_task(name='campaigns.broadcast_volunteer_joined')
+def broadcast_volunteer_joined(campaign_id: int):
+    """
+    Broadcast an anonymized volunteer join to the campaign's Telegram channel.
+    """
+    from apps.campaigns.models import Campaign
+
+    try:
+        campaign = Campaign.objects.get(id=campaign_id)
+    except Campaign.DoesNotExist:
+        logger.error(f'Campaign {campaign_id} not found for broadcast')
+        return
+
+    channel_id = campaign.telegram_channel_id
+    if not channel_id:
+        return
+
+    count = campaign.current_members
+    target = campaign.target_members or '∞'
+
+    text = (
+        f'🕊️ <b>People for Peace</b>\n'
+        f'━━━━━━━━━━━━━━━━━━━\n'
+        f'👋 <b>A new activist joined the movement!</b>\n'
+        f'We are now <b>{count}</b> strong! (Target: {target})\n'
+        f'\n✊ Join: @peopleforpeacebot'
+    )
+
+    _send_telegram_message(channel_id, text)
+    logger.info(f'Channel broadcast: volunteer joined campaign {campaign_id} (now {count})')
+
+
+@shared_task(name='campaigns.broadcast_campaign_update')
+def broadcast_campaign_update(update_id: int):
+    """
+    Push a CampaignUpdate to the campaign's Telegram channel.
+    Called from Django admin action.
+    """
+    from apps.campaigns.models import CampaignUpdate
+
+    try:
+        campaign_update = CampaignUpdate.objects.select_related('campaign').get(id=update_id)
+    except CampaignUpdate.DoesNotExist:
+        logger.error(f'CampaignUpdate {update_id} not found')
+        return
+
+    channel_id = campaign_update.campaign.telegram_channel_id
+    if not channel_id:
+        logger.warning(f'Campaign {campaign_update.campaign.id} has no channel_id')
+        return
+
+    text = (
+        f'🕊️ <b>People for Peace</b>\n'
+        f'━━━━━━━━━━━━━━━━━━━\n'
+        f'📢 <b>{campaign_update.title}</b>\n\n'
+        f'{campaign_update.content}\n'
+        f'\n✊ Join: @peopleforpeacebot'
+    )
+
+    if _send_telegram_message(channel_id, text):
+        campaign_update.sent_to_telegram = True
+        campaign_update.save(update_fields=['sent_to_telegram'])
+
+    logger.info(f'Channel broadcast: campaign update "{campaign_update.title}"')
+
+
+@shared_task(name='campaigns.broadcast_milestone')
+def broadcast_milestone(campaign_id: int, metric: str, current: int, target: int, percentage: int):
+    """
+    Broadcast a milestone achievement to the campaign's Telegram channel.
+
+    metric: 'activities', 'members', 'twitter_posts'
+    """
+    from apps.campaigns.models import Campaign
+
+    try:
+        campaign = Campaign.objects.get(id=campaign_id)
+    except Campaign.DoesNotExist:
+        return
+
+    channel_id = campaign.telegram_channel_id
+    if not channel_id:
+        return
+
+    metric_labels = {
+        'activities': '🎯 activities',
+        'members': '👥 volunteer',
+        'twitter_posts': '🐦 tweet',
+    }
+    label = metric_labels.get(metric, metric)
+
+    text = (
+        f'🕊️ <b>People for Peace</b>\n'
+        f'━━━━━━━━━━━━━━━━━━━\n'
+        f'🎉 <b>MILESTONE REACHED!</b>\n\n'
+        f'{percentage}% of our {label} goal!\n'
+        f'<b>{current}/{target}</b>\n\n'
+        f'Keep going! Every action counts! ✊\n'
+        f'\n✊ Join: @peopleforpeacebot'
+    )
+
+    _send_telegram_message(channel_id, text)
+    logger.info(f'Channel broadcast: milestone {percentage}% for {metric} in campaign {campaign_id}')
+
+
+def _store_channel_post(campaign_id: int, content_type: str, message_text: str, proof_url: str = ''):
+    """Store a channel post record for recycling."""
+    from apps.campaigns.models import ChannelPost
+    ChannelPost.objects.create(
+        campaign_id=campaign_id,
+        content_type=content_type,
+        message_text=message_text,
+        proof_url=proof_url,
+    )
+
+
+@shared_task(name='campaigns.recycle_channel_content')
+def recycle_channel_content():
+    """
+    Reshare older high-value channel posts every 8 hours.
+    Picks a random task_completion post that hasn't been reposted in 48h.
+    """
+    from apps.campaigns.models import Campaign, ChannelPost
+
+    cutoff = timezone.now() - timedelta(hours=48)
+
+    active_campaigns = Campaign.objects.filter(
+        status=Campaign.Status.ACTIVE
+    ).exclude(telegram_channel_id='').exclude(telegram_channel_id__isnull=True)
+
+    for campaign in active_campaigns:
+        # Find posts eligible for recycling
+        eligible_posts = ChannelPost.objects.filter(
+            campaign=campaign,
+            content_type='task_completion',
+        ).filter(
+            models.Q(last_reposted_at__isnull=True) | models.Q(last_reposted_at__lt=cutoff)
+        ).order_by('?')[:1]
+
+        post = eligible_posts.first()
+        if not post:
+            continue
+
+        text = (
+            f'🔄 <b>Flashback</b>\n'
+            f'━━━━━━━━━━━━━━━━━━━\n'
+            f'{post.message_text}\n'
+            f'\n✊ <b>{campaign.name}</b>'
+        )
+
+        if _send_telegram_message(campaign.telegram_channel_id, text):
+            post.repost_count += 1
+            post.last_reposted_at = timezone.now()
+            post.save(update_fields=['repost_count', 'last_reposted_at'])
+            logger.info(f'Recycled post {post.id} for campaign {campaign.id}')
+
+
+@shared_task(name='campaigns.send_daily_digest')
+def send_daily_digest():
+    """
+    Post a daily campaign summary to each active campaign's Telegram channel.
+    Runs at 21:00 UTC daily via Celery Beat.
+    """
+    from apps.campaigns.models import Campaign, CampaignVolunteer
+    from apps.tasks.models import TaskAssignment
+
+    today_start = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+
+    active_campaigns = Campaign.objects.filter(
+        status=Campaign.Status.ACTIVE
+    ).exclude(telegram_channel_id='').exclude(telegram_channel_id__isnull=True)
+
+    for campaign in active_campaigns:
+        # Today's statistics
+        today_completions = TaskAssignment.objects.filter(
+            task__campaign=campaign,
+            status__in=['completed', 'verified'],
+            completed_at__gte=today_start
+        ).count()
+
+        today_new_volunteers = CampaignVolunteer.objects.filter(
+            campaign=campaign,
+            joined_at__gte=today_start
+        ).count()
+
+        total_volunteers = campaign.current_members
+        total_completed = campaign.completed_activities
+        total_target = campaign.target_activities or '∞'
+
+        # Progress bar (10 segments)
+        if campaign.target_activities and campaign.target_activities > 0:
+            filled = min(10, int((total_completed / campaign.target_activities) * 10))
+        else:
+            filled = 0
+        bar = '█' * filled + '░' * (10 - filled)
+
+        text = (
+            f'📊 <b>Daily Report</b>\n'
+            f'━━━━━━━━━━━━━━━━━━━\n'
+            f'🎯 Tasks completed today: <b>{today_completions}</b>\n'
+            f'👋 New volunteers today: <b>{today_new_volunteers}</b>\n'
+            f'👥 Total team: <b>{total_volunteers}</b>\n'
+            f'\n'
+            f'📈 Progress: [{bar}] {total_completed}/{total_target}\n'
+            f'\n✊ <b>{campaign.name}</b>'
+        )
+
+        if _send_telegram_message(campaign.telegram_channel_id, text):
+            _store_channel_post(campaign.id, 'digest', text)
+            logger.info(f'Daily digest sent for campaign {campaign.id}')

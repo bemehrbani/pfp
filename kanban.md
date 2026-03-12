@@ -24,9 +24,9 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 | T3 | **Guided 3-step flow** | "① Pick tweet → ② Post → ③ Paste URL" | S | ✅ `3b3f583` |
 | T4 | **"Next Task" after proof** | 🎯 "Do Another Task" button after confirmation | XS | ✅ `3b3f583` |
 | T5 | **Back navigation** | "↩️ Back to Tasks" button on detail/guidance | XS | ✅ `3b3f583` |
-| G1 | **2-click flow** | Skip task detail — claim+guide on first tap | S | 🚧 |
-| G2 | **Task checklist** | ✅/⬜/🚧 status per user + progress bar | S | 🚧 |
-| G3 | **Community pulse** | "27 activists active · 847 total actions" after proof | XS | 🚧 |
+| G1 | **2-click flow** | Skip task detail — claim+guide on first tap | S | ✅ `1639f67` |
+| G2 | **Task checklist** | ✅/⬜/🚧 status per user + progress bar | S | ✅ `1639f67` |
+| G3 | **Community pulse** | "27 activists active · 847 total actions" after proof | XS | ✅ `1639f67` |
 
 ---
 
