@@ -150,6 +150,12 @@ async def _send_welcome(update: Update, context: CallbackContext, session, lang:
         logger.info(f"Existing user {db_user.username} started bot (lang={lang})")
         # Existing user with deep-link → auto-join the campaign
         await _handle_deeplink_for_existing_user(context, session, db_user, lang, chat_id)
+        # Show joined campaigns task-first (skip if deep-link already handled it)
+        deeplink_campaign_id = await _db_get_deeplink_campaign_id(session)
+        if not deeplink_campaign_id:
+            from handlers.campaigns import show_my_campaigns
+            # Create a lightweight query-like object for show_my_campaigns
+            await _show_campaigns_after_welcome(context, session, chat_id, lang)
     else:
         # Start registration — immediately create the user!
         logger.info(f"New user {user.id} auto-registering (lang={lang})")
@@ -167,6 +173,143 @@ async def _send_welcome(update: Update, context: CallbackContext, session, lang:
         
         # Complete automatic registration
         await state_manager.register_user_automatically(update, context, session, lang)
+
+
+async def _show_campaigns_after_welcome(context, session, chat_id, lang):
+    """Show joined campaigns as a follow-up message after welcome.
+
+    This is a lightweight wrapper that uses show_my_campaigns logic
+    but sends via context.bot.send_message (not inline edit).
+    """
+    from asgiref.sync import sync_to_async
+    from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+
+    if not session.user:
+        return
+
+    @sync_to_async
+    def _get_joined(user):
+        from apps.campaigns.models import CampaignVolunteer
+        cvs = (
+            CampaignVolunteer.objects
+            .filter(volunteer=user, status='active')
+            .select_related('campaign')
+            .order_by('-joined_at')
+        )
+        return [
+            (cv.campaign.id, cv.campaign.name, cv.campaign.tasks.filter(is_active=True).count())
+            for cv in cvs
+        ]
+
+    joined = await _get_joined(session.user)
+
+    if len(joined) == 0:
+        # No campaigns — nothing to show, menu is enough
+        return
+
+    if len(joined) == 1:
+        # Single campaign — show task checklist
+        campaign_id, campaign_name, _ = joined[0]
+        from handlers.campaigns import _get_campaign
+        campaign = await _get_campaign(campaign_id)
+        if not campaign:
+            return
+
+        # We need to create a pseudo-query for handle_campaign_view_tasks
+        # Instead, just send a redirect message
+        from handlers.campaigns import handle_campaign_view_tasks
+        from handlers.tasks import _db_get_user_task_status_map
+
+        @sync_to_async
+        def _get_tasks(cid):
+            from apps.tasks.models import Task
+            return list(Task.objects.filter(
+                campaign_id=cid, is_active=True,
+                task_type__in=[
+                    'twitter_post', 'twitter_retweet', 'twitter_comment',
+                    'petition', 'mass_email',
+                ]
+            ).order_by('-points')[:10])
+
+        tasks = await _get_tasks(campaign_id)
+        if not tasks:
+            return
+
+        status_map = await _db_get_user_task_status_map(session.user, campaign_id)
+
+        type_icons = {
+            'twitter_post': '🐦', 'twitter_retweet': '🔁', 'twitter_comment': '💬',
+            'twitter_like': '❤️', 'telegram_share': '📢', 'telegram_invite': '👥',
+            'content_creation': '✍️', 'research': '🔍', 'other': '📌',
+            'petition': '✍️', 'mass_email': '📧',
+        }
+
+        message = t('checklist_title', lang).format(name=campaign_name) + "\n\n"
+        keyboard = []
+
+        for task in tasks:
+            icon = type_icons.get(task.task_type, '📌')
+            user_status = status_map.get(task.id)
+
+            if user_status in ('completed', 'verified'):
+                check = '✅'
+                label = f"✅ {task.title[:28]}"
+            elif user_status in ('assigned', 'in_progress'):
+                check = '🚧'
+                label = f"🚧 {task.title[:28]}"
+            else:
+                check = '⬜'
+                label = f"{icon} {task.title[:28]}"
+
+            message += f"{check} {icon} {task.title}  (+{task.points} {t('task_pts', lang)})\n"
+            keyboard.append([
+                InlineKeyboardButton(label, callback_data=f"task_claim_{task.id}")
+            ])
+
+        message += "\n" + t('checklist_tap_start', lang)
+
+        keyboard.append([
+            InlineKeyboardButton(
+                t('btn_invite_friends', lang),
+                callback_data=f"campaign_invite_{campaign_id}"
+            )
+        ])
+        keyboard.append([
+            InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
+        ])
+
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text=message,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown'
+        )
+        return
+
+    # 2+ campaigns — show picker
+    text = t('my_campaigns_title', lang) + "\n\n"
+    keyboard = []
+
+    for campaign_id, campaign_name, task_count in joined:
+        text += f"✊ *{campaign_name}*  —  {task_count} {t('campaigns_tasks_label', lang)}\n"
+        keyboard.append([
+            InlineKeyboardButton(
+                f"✊ {campaign_name}",
+                callback_data=f"campaign_tasks_{campaign_id}"
+            )
+        ])
+
+    text += "\n" + t('my_campaigns_tap', lang)
+    keyboard.append([
+        InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
+    ])
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text=text,
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode='Markdown'
+    )
 
 
 @sync_to_async

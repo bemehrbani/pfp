@@ -474,6 +474,8 @@ def _get_task_type_icon(task_type: str) -> str:
         'telegram_share': '📢',
         'telegram_invite': '👥',
         'content_creation': '✍️',
+        'petition': '✍️',
+        'mass_email': '📧',
         'research': '🔍',
         'other': '📌',
     }
@@ -800,6 +802,42 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         msg += f"{task.instructions}\n\n"
         msg += t('invite_share_link', lang) + "\n\n"
         msg += t('invite_send_username', lang) + "\n"
+        msg += t('cancel_hint', lang)
+
+    # ── Petition: Guided sign flow ──
+    elif task.task_type == 'petition':
+        petition_url = task.target_url or task.instructions or ''
+        msg = t('task_started_title', lang) + "\n\n"
+        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += t('task_3_steps', lang) + "\n\n"
+        msg += t('task_petition_step1', lang) + "\n"
+        msg += t('task_petition_step2', lang) + "\n"
+        msg += t('task_petition_step3', lang) + "\n"
+
+        if petition_url and petition_url.startswith('http'):
+            keyboard.append([
+                InlineKeyboardButton(
+                    t('btn_open_petition', lang),
+                    url=petition_url
+                )
+            ])
+
+        msg += "\n" + t('generic_send_proof', lang) + "\n"
+        msg += t('cancel_hint', lang)
+
+    # ── Mass Email: Copy template + confirm ──
+    elif task.task_type == 'mass_email':
+        msg = t('task_started_title', lang) + "\n\n"
+        msg += f"{type_icon} *{task.title}*\n\n"
+        msg += t('task_mass_email_step1', lang) + "\n\n"
+
+        # Show email template from task instructions
+        if task.instructions:
+            msg += f"\n───────────────────\n"
+            msg += f"`{task.instructions[:800]}`\n"
+            msg += f"───────────────────\n\n"
+
+        msg += t('task_mass_email_step2', lang) + "\n"
         msg += t('cancel_hint', lang)
 
     # ── Other task types ──

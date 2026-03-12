@@ -22,6 +22,8 @@ class Task(models.Model):
         TELEGRAM_SHARE = 'telegram_share', _('Telegram Share')
         TELEGRAM_INVITE = 'telegram_invite', _('Telegram Invite')
         CONTENT_CREATION = 'content_creation', _('Content Creation')
+        PETITION = 'petition', _('Petition')
+        MASS_EMAIL = 'mass_email', _('Mass Email')
         RESEARCH = 'research', _('Research')
         OTHER = 'other', _('Other')
 

@@ -413,7 +413,10 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
         from apps.tasks.models import Task
         return list(Task.objects.filter(
             campaign_id=cid, is_active=True,
-            task_type__in=['twitter_post', 'twitter_retweet', 'twitter_comment']
+            task_type__in=[
+                'twitter_post', 'twitter_retweet', 'twitter_comment',
+                'petition', 'mass_email',
+            ]
         ).order_by('-points')[:10])
 
     tasks = await _get_campaign_tasks(campaign_id)
@@ -477,27 +480,6 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
                 callback_data=f"task_claim_{task.id}"
             )
         ])
-
-    # Personal progress bar
-    progress = int((done_count / total_count) * 10) if total_count else 0
-    bar = '█' * progress + '░' * (10 - progress)
-    message += f"\n━━━━━━━━━━━━━━━━━━━\n"
-    message += t('checklist_progress', lang).format(
-        done=done_count, total=total_count, points=user_points
-    ) + "\n"
-    message += f"[{bar}] {int(done_count / total_count * 100) if total_count else 0}%\n"
-
-    # Community pulse
-    pulse = await _db_get_campaign_pulse(campaign_id)
-    if pulse['total_completed'] > 0 or pulse['total_volunteers'] > 0:
-        message += "\n" + t('pulse_actions_by', lang).format(
-            actions=pulse['total_completed'], volunteers=pulse['total_volunteers']
-        )
-        if pulse['recent_active'] > 0:
-            message += "\n" + t('pulse_active_short', lang).format(
-                count=pulse['recent_active']
-            )
-    message += "\n"
 
     message += "\n" + t('checklist_tap_start', lang)
 
@@ -624,6 +606,120 @@ async def handle_invite_link(query, session, campaign_id):
 
 # Exported session helper for other handlers
 get_or_create_session = _get_or_create_session
+
+
+async def show_my_campaigns(query, session, lang: str):
+    """Show user's joined campaigns. Task-first flow.
+
+    - 0 joined → fall through to browse all campaigns
+    - 1 joined → show that campaign's task checklist directly
+    - 2+ joined → show campaign picker with task counts
+    """
+    from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+
+    if not session.user:
+        from utils.translations import get_back_to_menu_inline
+        await query.message.reply_text(
+            t('register_need_first', lang),
+            reply_markup=get_back_to_menu_inline(lang),
+            parse_mode='Markdown',
+        )
+        return
+
+    @sync_to_async
+    def _get_joined_campaigns(user):
+        from apps.campaigns.models import CampaignVolunteer
+        cvs = (
+            CampaignVolunteer.objects
+            .filter(volunteer=user, status='active')
+            .select_related('campaign')
+            .order_by('-joined_at')
+        )
+        return [(cv.campaign, cv.campaign.tasks.filter(is_active=True).count()) for cv in cvs]
+
+    joined = await _get_joined_campaigns(session.user)
+
+    if len(joined) == 0:
+        # No campaigns joined — show browse list (existing behavior)
+        await _handle_browse_campaigns(query, session, lang)
+        return
+
+    if len(joined) == 1:
+        # Single campaign — go straight to task checklist
+        campaign, _ = joined[0]
+        await handle_campaign_view_tasks(query, session, campaign.id)
+        return
+
+    # 2+ campaigns — show picker
+    text = t('my_campaigns_title', lang) + "\n\n"
+    keyboard = []
+
+    for campaign, task_count in joined:
+        text += f"✊ *{campaign.name}*  —  {task_count} {t('campaigns_tasks_label', lang)}\n"
+        keyboard.append([
+            InlineKeyboardButton(
+                f"✊ {campaign.name}",
+                callback_data=f"campaign_tasks_{campaign.id}"
+            )
+        ])
+
+    text += "\n" + t('my_campaigns_tap', lang)
+
+    from utils.translations import get_back_to_menu_inline
+    keyboard.append([
+        InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
+    ])
+
+    await query.message.reply_text(
+        text,
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode='Markdown',
+    )
+
+
+async def _handle_browse_campaigns(query, session, lang: str):
+    """Show all active campaigns for users who haven't joined any yet."""
+    from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+
+    campaigns = await _get_active_campaigns()
+
+    if not campaigns:
+        from utils.translations import get_back_to_menu_inline
+        await query.message.reply_text(
+            t('campaigns_none', lang),
+            reply_markup=get_back_to_menu_inline(lang),
+            parse_mode='Markdown',
+        )
+        return
+
+    text = t('campaigns_title', lang) + "\n\n"
+    keyboard = []
+
+    for campaign in campaigns:
+        task_count = await _get_task_count(campaign)
+        desc = campaign.short_description or ''
+        if desc:
+            desc = desc[:60] + ('...' if len(desc) > 60 else '')
+        text += f"✊ *{campaign.name}*\n"
+        if desc:
+            text += f"  {desc}\n"
+        text += f"  👥 {campaign.current_members} volunteers • {task_count} tasks\n\n"
+        keyboard.append([
+            InlineKeyboardButton(
+                f"✊ {t('btn_join', lang)}: {campaign.name[:20]}",
+                callback_data=f"campaign_join_{campaign.id}"
+            )
+        ])
+
+    keyboard.append([
+        InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
+    ])
+
+    await query.message.reply_text(
+        text,
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode='Markdown',
+    )
 
 
 # Handler registration

@@ -19,34 +19,16 @@ TRANSLATIONS = {
     # ── Welcome & Start ──────────────────────────────────────────────
     "welcome": {
         "en": (
-            "👋 Welcome to *People for Peace Campaign Manager*!\n\n"
-            "I'm your assistant for participating in peace campaigns. "
-            "Here's what you can do:\n\n"
-            "• 📋 Browse available campaigns\n"
-            "• 🎯 Claim and complete tasks\n"
-            "• 📊 Track your progress and points\n"
-            "• 🤝 Collaborate with other volunteers\n\n"
-            "Use the menu below to get started!"
+            "✊ *People for Peace*\n\n"
+            "Choose a campaign below and start taking action!"
         ),
         "fa": (
-            "👋 به *مدیریت کمپین مردم برای صلح* خوش آمدید!\n\n"
-            "من دستیار شما برای شرکت در کمپین‌های صلح هستم. "
-            "کارهایی که می‌توانید انجام دهید:\n\n"
-            "• 📋 مرور کمپین‌های فعال\n"
-            "• 🎯 انتخاب و انجام وظایف\n"
-            "• 📊 پیگیری پیشرفت و امتیازات\n"
-            "• 🤝 همکاری با سایر داوطلبان\n\n"
-            "از منوی زیر شروع کنید!"
+            "✊ *مردم برای صلح*\n\n"
+            "یک کمپین انتخاب کنید و شروع کنید!"
         ),
         "ar": (
-            "👋 مرحباً بكم في *مدير حملات الناس من أجل السلام*!\n\n"
-            "أنا مساعدك للمشاركة في حملات السلام. "
-            "إليك ما يمكنك فعله:\n\n"
-            "• 📋 تصفح الحملات المتاحة\n"
-            "• 🎯 المطالبة بالمهام وإكمالها\n"
-            "• 📊 تتبع تقدمك ونقاطك\n"
-            "• 🤝 التعاون مع المتطوعين الآخرين\n\n"
-            "استخدم القائمة أدناه للبدء!"
+            "✊ *الناس من أجل السلام*\n\n"
+            "اختر حملة أدناه وابدأ العمل!"
         ),
     },
 
@@ -55,6 +37,11 @@ TRANSLATIONS = {
         "en": "📋 Browse Campaigns",
         "fa": "📋 مرور کمپین‌ها",
         "ar": "📋 تصفح الحملات",
+    },
+    "btn_my_campaigns": {
+        "en": "✊ My Campaigns",
+        "fa": "✊ کمپین‌های من",
+        "ar": "✊ حملاتي",
     },
     "btn_tasks": {
         "en": "🎯 Available Tasks",
@@ -789,6 +776,71 @@ TRANSLATIONS = {
         "fa": "📤 اشتراک‌گذاری در تلگرام",
         "ar": "📤 مشاركة عبر تيليجرام",
     },
+
+    # ── My Campaigns (simplified flow) ────────────────────────
+    "my_campaigns_title": {
+        "en": "✊ *Your Campaigns*",
+        "fa": "✊ *کمپین‌های شما*",
+        "ar": "✊ *حملاتك*",
+    },
+    "my_campaigns_tap": {
+        "en": "Tap a campaign to see its tasks 👇",
+        "fa": "روی یک کمپین بزنید تا وظایفش را ببینید 👇",
+        "ar": "اضغط على حملة لرؤية مهامها 👇",
+    },
+    "campaigns_tasks_label": {
+        "en": "tasks",
+        "fa": "وظیفه",
+        "ar": "مهام",
+    },
+
+    # ── New Task Types (Petition & Mass Email) ────────────────
+    "task_petition_title": {
+        "en": "✍️ Sign the Petition",
+        "fa": "✍️ امضای طومار",
+        "ar": "✍️ وقّع العريضة",
+    },
+    "task_petition_step1": {
+        "en": "Tap the link below to open the petition page:",
+        "fa": "روی لینک زیر بزنید تا صفحه طومار باز شود:",
+        "ar": "اضغط على الرابط أدناه لفتح صفحة العريضة:",
+    },
+    "task_petition_step2": {
+        "en": "Sign the petition with your name and email.",
+        "fa": "طومار را با نام و ایمیل خود امضا کنید.",
+        "ar": "وقّع العريضة باسمك وبريدك الإلكتروني.",
+    },
+    "task_petition_step3": {
+        "en": "Come back here and send a screenshot as proof ✅",
+        "fa": "برگردید اینجا و اسکرین‌شات را به عنوان مدرک بفرستید ✅",
+        "ar": "عُد هنا وأرسل لقطة شاشة كدليل ✅",
+    },
+    "btn_open_petition": {
+        "en": "✍️ Open Petition",
+        "fa": "✍️ باز کردن طومار",
+        "ar": "✍️ فتح العريضة",
+    },
+    "task_mass_email_title": {
+        "en": "📧 Send Mass Email",
+        "fa": "📧 ارسال ایمیل گروهی",
+        "ar": "📧 إرسال بريد جماعي",
+    },
+    "task_mass_email_step1": {
+        "en": "Copy the email template below and send it to the listed organizations.",
+        "fa": "متن ایمیل زیر را کپی کنید و به سازمان‌های لیست شده بفرستید.",
+        "ar": "انسخ نموذج البريد أدناه وأرسله إلى المنظمات المدرجة.",
+    },
+    "task_mass_email_step2": {
+        "en": "Come back here and confirm you've sent the emails ✅",
+        "fa": "برگردید اینجا و تأیید کنید که ایمیل‌ها را فرستاده‌اید ✅",
+        "ar": "عُد هنا وأكّد أنك أرسلت الرسائل ✅",
+    },
+    "btn_copy_email": {
+        "en": "📋 Copy Email Template",
+        "fa": "📋 کپی متن ایمیل",
+        "ar": "📋 نسخ نموذج البريد",
+    },
+
     "invite_message": {
         "en": (
             "📨 *Invite Friends to {name}*\n\n"
@@ -832,20 +884,24 @@ def t(key: str, lang: str = 'en') -> str:
 
 
 def get_main_menu_inline(lang: str = 'en'):
-    """Get the main menu as InlineKeyboardMarkup (glass buttons under messages)."""
+    """Get the simplified main menu as InlineKeyboardMarkup.
+
+    Layout (4 buttons):
+      ✊ My Campaigns
+      📨 Invite Friends
+      🌍 Language  |  ℹ️ Help
+    """
     from telegram import InlineKeyboardButton, InlineKeyboardMarkup
     keyboard = [
         [
-            InlineKeyboardButton(t('btn_campaigns', lang), callback_data='menu_campaigns'),
-            InlineKeyboardButton(t('btn_tasks', lang), callback_data='menu_tasks'),
+            InlineKeyboardButton(t('btn_my_campaigns', lang), callback_data='menu_campaigns'),
         ],
         [
-            InlineKeyboardButton(t('btn_progress', lang), callback_data='menu_profile'),
-            InlineKeyboardButton(t('btn_leaderboard', lang), callback_data='menu_leaderboard'),
+            InlineKeyboardButton(t('btn_invite_friends', lang), callback_data='menu_invite'),
         ],
         [
-            InlineKeyboardButton(t('btn_help', lang), callback_data='menu_help'),
             InlineKeyboardButton(t('btn_language', lang), callback_data='menu_language'),
+            InlineKeyboardButton(t('btn_help', lang), callback_data='menu_help'),
         ],
     ]
     return InlineKeyboardMarkup(keyboard)
@@ -863,9 +919,9 @@ def get_back_to_menu_inline(lang: str = 'en'):
 def get_keyboard_buttons(lang: str = 'en') -> list[list[str]]:
     """Get the main ReplyKeyboard buttons in the given language."""
     return [
-        [t('btn_campaigns', lang), t('btn_tasks', lang)],
-        [t('btn_progress', lang), t('btn_leaderboard', lang)],
-        [t('btn_help', lang), t('btn_language', lang)],
+        [t('btn_my_campaigns', lang)],
+        [t('btn_invite_friends', lang)],
+        [t('btn_language', lang), t('btn_help', lang)],
     ]
 
 
@@ -873,12 +929,14 @@ def get_button_routes(lang: str = 'en') -> dict[str, str]:
     """Get button text → route mapping for the given language."""
     return {
         t('btn_campaigns', lang): '_route_campaigns',
+        t('btn_my_campaigns', lang): '_route_campaigns',
         t('btn_tasks', lang): '_route_tasks',
         t('btn_progress', lang): '_route_profile',
         t('btn_leaderboard', lang): '_route_leaderboard',
         t('btn_help', lang): '_route_help',
         t('btn_profile', lang): '_route_profile',
         t('btn_language', lang): '_route_language',
+        t('btn_invite_friends', lang): '_route_invite',
     }
 
 

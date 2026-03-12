@@ -221,6 +221,43 @@ async def _handle_help(query, lang: str):
     )
 
 
+async def _handle_invite(query, session, lang: str):
+    """Show invite link for user's first joined campaign."""
+    from asgiref.sync import sync_to_async
+
+    @sync_to_async
+    def _get_first_joined_campaign(user):
+        from apps.campaigns.models import CampaignVolunteer
+        cv = (
+            CampaignVolunteer.objects
+            .filter(volunteer=user, status='active')
+            .select_related('campaign')
+            .first()
+        )
+        return cv.campaign if cv else None
+
+    if not session.user:
+        await query.message.reply_text(
+            t('register_need_first', lang),
+            reply_markup=get_back_to_menu_inline(lang),
+            parse_mode='Markdown',
+        )
+        return
+
+    campaign = await _get_first_joined_campaign(session.user)
+    if not campaign:
+        await query.message.reply_text(
+            t('campaigns_none', lang),
+            reply_markup=get_back_to_menu_inline(lang),
+            parse_mode='Markdown',
+        )
+        return
+
+    # Delegate to existing invite handler
+    from handlers.campaigns import handle_invite_link
+    await handle_invite_link(query, session, campaign.id)
+
+
 async def menu_callback_handler(update: Update, context: CallbackContext):
     """Route inline menu button presses to the appropriate handlers."""
     query = update.callback_query
@@ -236,19 +273,19 @@ async def menu_callback_handler(update: Update, context: CallbackContext):
             parse_mode='Markdown',
         )
     elif action == 'menu_campaigns':
-        await _handle_campaigns(query, lang)
+        # Show user's joined campaigns (task-first flow)
+        session, _ = await state_manager.get_or_create_session(update, context)
+        from handlers.campaigns import show_my_campaigns
+        await show_my_campaigns(query, session, lang)
     elif action == 'menu_tasks':
         await _handle_tasks(query, lang)
-    elif action == 'menu_profile':
-        await _handle_profile(query, update, context, lang)
-    elif action == 'menu_leaderboard':
-        await _handle_leaderboard(query, lang)
+    elif action == 'menu_invite':
+        # Show invite for user's first joined campaign
+        session, _ = await state_manager.get_or_create_session(update, context)
+        await _handle_invite(query, session, lang)
     elif action == 'menu_help':
         await _handle_help(query, lang)
     elif action == 'menu_language':
-        # Re-use the existing language picker (it uses InlineKeyboardMarkup already)
-        from handlers.start import language_command
-        # language_command sends InlineKeyboard via context.bot, works with callback queries
         await query.message.reply_text(
             t('language_prompt', lang),
             reply_markup=_get_language_keyboard(),
