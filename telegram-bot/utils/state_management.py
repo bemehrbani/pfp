@@ -201,6 +201,79 @@ class ConversationStateManager:
 
         return False
 
+    async def register_user_automatically(self, update: Update, context: CallbackContext, session, lang: str):
+        """Automatically register user using their Telegram name."""
+        from utils.translations import t
+        from telegram import ReplyKeyboardMarkup
+        
+        user_info = update.effective_user
+        first_name = user_info.first_name or ''
+        last_name = user_info.last_name or ''
+        full_name = f"{first_name} {last_name}".strip() or "Volunteer"
+
+        # Read deep-link campaign ID
+        @sync_to_async
+        def _read_deeplink():
+            session.refresh_from_db(fields=['temp_data'])
+            return (session.temp_data or {}).get('deeplink_campaign_id')
+
+        deeplink_campaign_id = await _read_deeplink()
+
+        # Create user account
+        @sync_to_async
+        def _create_user():
+            from django.contrib.auth import get_user_model
+            from apps.telegram.models import TelegramSession as TS
+            User = get_user_model()
+
+            user = User.objects.create_user(
+                username=f'user_{session.telegram_id}',
+                email='',
+                first_name=full_name,
+                telegram_id=session.telegram_id,
+                telegram_username=session.telegram_username,
+                role='volunteer'
+            )
+
+            # Link user to session and persist ALL fields in one save
+            session.user = user
+            session.state = TS.State.IDLE
+            session.temp_data = {}
+            session.save(update_fields=['user', 'state', 'temp_data', 'state_data', 'updated_at'])
+
+            return user
+
+        try:
+            user = await _create_user()
+
+            # Translated success message
+            await update.message.reply_text(
+                t('register_success', lang).format(name=first_name or full_name),
+                parse_mode='Markdown'
+            )
+
+            # Re-send keyboard so the user has navigation buttons
+            keyboard = get_keyboard_buttons(lang)
+            reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+            await context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text="⬇️",
+                reply_markup=reply_markup,
+            )
+
+            # Auto-join campaign from deep-link (if present)
+            if deeplink_campaign_id:
+                await self._auto_join_campaign(
+                    update, context, session, user, deeplink_campaign_id, lang
+                )
+
+            return True
+
+        except Exception as exc:
+            logger.error(f"Failed to create user automatically: {exc}")
+            await update.message.reply_text(t('register_error', lang))
+            return False
+
     async def _handle_name_input(self, update: Update, context: CallbackContext, session):
         """Handle name input during registration."""
         from utils.translations import t, get_keyboard_buttons

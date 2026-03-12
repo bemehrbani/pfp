@@ -144,11 +144,10 @@ async def _send_welcome(update: Update, context: CallbackContext, session, lang:
         # Existing user with deep-link → auto-join the campaign
         await _handle_deeplink_for_existing_user(context, session, db_user, lang, chat_id)
     else:
-        # Start registration — skip email, go straight to name
-        from apps.telegram.models import TelegramSession
-        await state_manager.update_state(session, TelegramSession.State.AWAITING_NAME)
-
-        # Personalized prompt if coming from deep-link
+        # Start registration — immediately create the user!
+        logger.info(f"New user {user.id} auto-registering (lang={lang})")
+        
+        # Personalized prompt if coming from deep-link just to mention the campaign
         deeplink_campaign_id = await _db_get_deeplink_campaign_id(session)
         if deeplink_campaign_id:
             campaign_name = await _db_get_campaign_name(deeplink_campaign_id)
@@ -158,15 +157,9 @@ async def _send_welcome(update: Update, context: CallbackContext, session, lang:
                     text=t('register_for_campaign', lang).format(name=campaign_name),
                     parse_mode='Markdown'
                 )
-                logger.info(f"New user {user.id} registering for campaign {deeplink_campaign_id} (lang={lang})")
-                return
-
-        # Generic registration prompt (no deep-link)
-        await context.bot.send_message(
-            chat_id=chat_id,
-            text=t('register_new_user', lang)
-        )
-        logger.info(f"New user {user.id} started registration (lang={lang})")
+        
+        # Complete automatic registration
+        await state_manager.register_user_automatically(update, context, session, lang)
 
 
 @sync_to_async
