@@ -39,7 +39,7 @@ async def _handle_campaigns(query, lang: str):
     def _fetch_campaigns():
         from apps.campaigns.models import Campaign
         return list(
-            Campaign.objects.filter(is_active=True)
+            Campaign.objects.filter(status=Campaign.Status.ACTIVE)
             .select_related()
             .order_by('-created_at')[:10]
         )
@@ -169,7 +169,7 @@ async def _handle_leaderboard(query, lang: str):
         User = get_user_model()
         return list(
             User.objects.filter(is_active=True)
-            .order_by('-points')[:5]
+            .order_by('-total_points')[:5]
         )
 
     top_users = await _fetch_top_users()
@@ -179,7 +179,7 @@ async def _handle_leaderboard(query, lang: str):
 
     for idx, user in enumerate(top_users):
         name = user.get_full_name() or user.username
-        points = getattr(user, 'points', 0)
+        points = getattr(user, 'total_points', 0) or 0
         text += f"{medals[idx]} {name} — {points} pts\n"
 
     if not top_users:
