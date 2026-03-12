@@ -613,22 +613,22 @@ async def handle_task_detail(query, session, task_id):
     msg += f"🏆 *{task.points} points*  ·  ⏱ ~{task.estimated_time} min\n"
     slots = task.max_assignments - task.current_assignments
     if slots > 0:
-        msg += f"📊 {slots} spots remaining\n"
+        msg += t('task_spots_remaining', lang).format(n=slots) + "\n"
     msg += "\n"
 
     # For Twitter tasks, give a preview of what they'll do
     if task.task_type == 'twitter_post':
-        msg += "You'll pick a ready-made tweet and post it on Twitter — takes about 1 minute!\n"
+        msg += t('task_tweet_desc', lang) + "\n"
     elif task.task_type == 'twitter_retweet':
-        msg += "You'll retweet key campaign tweets to amplify the message.\n"
+        msg += t('task_retweet_desc', lang) + "\n"
     elif task.task_type == 'twitter_comment':
-        msg += "You'll reply to key tweets to add your voice to the conversation.\n"
+        msg += t('task_comment_desc', lang) + "\n"
 
-    msg += "\nTap *Start Task* to begin 👇"
+    msg += "\n" + t('btn_start_action', lang)
 
     keyboard = [[
         InlineKeyboardButton(
-            "🚀 Start Task",
+            t('btn_start_action', lang),
             callback_data=f"task_startclaim_{task.id}"
         )
     ]]
@@ -637,7 +637,7 @@ async def handle_task_detail(query, session, task_id):
     if campaign_id:
         keyboard.append([
             InlineKeyboardButton(
-                "↩️ Back to Tasks",
+                t('btn_back_tasks', lang),
                 callback_data=f"campaign_tasks_{campaign_id}"
             )
         ])
@@ -684,12 +684,12 @@ async def handle_task_start_and_guide(query, session, task_id, context):
     if task.task_type == 'twitter_post':
         samples = _get_sample_tweets(task)
 
-        msg = f"✅ *Task started!*\n\n"
+        msg = t('task_started_title', lang) + "\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
-        msg += "Complete this task in 3 easy steps:\n\n"
-        msg += "*① Pick a tweet* below and tap *📲 Post This Tweet*\n"
-        msg += "*② Twitter will open* with your tweet ready — just hit Post!\n"
-        msg += "*③ Come back here* and paste your tweet URL\n"
+        msg += t('task_3_steps', lang) + "\n\n"
+        msg += t('tweet_step1', lang) + "\n"
+        msg += t('tweet_step2', lang) + "\n"
+        msg += t('tweet_step3', lang) + "\n"
         msg += "\n───────────────────\n\n"
 
         for idx, sample in enumerate(samples, 1):
@@ -697,15 +697,15 @@ async def handle_task_start_and_guide(query, session, task_id, context):
             msg += f"{num_emoji} \"{sample['text'][:120]}{'...' if len(sample['text']) > 120 else ''}\"\n\n"
             keyboard.append([
                 InlineKeyboardButton(
-                    f"📲 Post Tweet #{idx}",
+                    t('btn_post_tweet', lang).format(n=idx),
                     url=sample['intent_url']
                 )
             ])
 
         msg += "───────────────────\n\n"
-        msg += "✍️ Or write your own tweet using the campaign hashtags.\n\n"
-        msg += "When done, *paste your tweet URL below* 👇\n"
-        msg += "Type /cancel to cancel."
+        msg += t('tweet_or_write_own', lang) + "\n\n"
+        msg += t('tweet_paste_url_below', lang) + "\n"
+        msg += t('cancel_hint', lang)
 
     # ── Twitter Retweet: Link to search ──
     elif task.task_type == 'twitter_retweet':
@@ -713,31 +713,31 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         from urllib.parse import quote
         search_url = f"https://twitter.com/search?q={quote(hashtags)}&f=live"
 
-        msg = f"✅ *Task started!*\n\n"
+        msg = t('task_started_title', lang) + "\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
-        msg += "Complete this task in 3 easy steps:\n\n"
-        msg += f"*① Tap the button* below to find {hashtags} tweets\n"
-        msg += "*② Retweet at least 3* tweets you agree with\n"
-        msg += "*③ Come back here* and paste any tweet URL as proof\n"
+        msg += t('task_3_steps', lang) + "\n\n"
+        msg += t('retweet_step1', lang).format(hashtags=hashtags) + "\n"
+        msg += t('retweet_step2', lang) + "\n"
+        msg += t('retweet_step3', lang) + "\n"
 
         keyboard.append([
             InlineKeyboardButton(
-                f"🔍 Find {hashtags} Tweets",
+                t('btn_find_tweets', lang).format(hashtags=hashtags),
                 url=search_url
             )
         ])
 
-        msg += "\nWhen done, *paste a tweet URL below* 👇\n"
-        msg += "Type /cancel to cancel."
+        msg += "\n" + t('retweet_paste_proof', lang) + "\n"
+        msg += t('cancel_hint', lang)
 
     # ── Twitter Comment: Reply intents with suggested comments ──
     elif task.task_type == 'twitter_comment':
-        msg = f"✅ *Task started!*\n\n"
+        msg = t('task_started_title', lang) + "\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
-        msg += "Complete this task in 3 easy steps:\n\n"
-        msg += "*① Pick a suggested reply* and tap the button\n"
-        msg += "*② Twitter opens with your reply ready* — just hit Post!\n"
-        msg += "*③ Come back here* and paste your reply URL\n"
+        msg += t('task_3_steps', lang) + "\n\n"
+        msg += t('comment_step1', lang) + "\n"
+        msg += t('comment_step2', lang) + "\n"
+        msg += t('comment_step3', lang) + "\n"
 
         # Fetch key tweets from DB
         key_tweets = await sync_to_async(
@@ -748,7 +748,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
 
         if key_tweets:
             msg += "\n───────────────────\n\n"
-            msg += "🎯 *Pick a tweet to reply to:*\n\n"
+            msg += t('comment_pick_tweet', lang) + "\n\n"
 
             for idx, kt in enumerate(key_tweets, 1):
                 # Rotate through sample comments per key tweet
@@ -763,58 +763,58 @@ async def handle_task_start_and_guide(query, session, task_id, context):
 
                 keyboard.append([
                     InlineKeyboardButton(
-                        f"💬 Reply to {kt.author_handle}",
+                        t('btn_reply_to', lang).format(handle=kt.author_handle),
                         url=reply_url
                     )
                 ])
 
             msg += "───────────────────\n"
-            msg += "\n✍️ Or write your own reply with the hashtags!\n"
+            msg += "\n" + t('comment_or_write_own', lang) + "\n"
         elif task.target_url:
             comment_text = sample_comments[0]
             reply_url = _build_twitter_reply_intent_url(task.target_url, comment_text)
-            msg += f"\n🔗 Tweet to comment on:\n"
+            msg += f"\n🔗 {t('comment_target_tweet', lang)}\n"
             msg += f"💬 _{comment_text[:80]}_\n"
             keyboard.append([
                 InlineKeyboardButton(
-                    "💬 Reply with Suggested Comment",
+                    t('btn_reply_suggested', lang),
                     url=reply_url
                 )
             ])
 
-        msg += "\nWhen done, *paste your reply URL below* 👇\n"
-        msg += "Type /cancel to cancel."
+        msg += "\n" + t('comment_paste_reply', lang) + "\n"
+        msg += t('cancel_hint', lang)
 
     # ── Telegram Share ──
     elif task.task_type == 'telegram_share':
-        msg = f"✅ *Task started!*\n\n"
+        msg = t('task_started_title', lang) + "\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
         msg += f"{task.instructions}\n\n"
-        msg += "When done, send proof (link or screenshot) below 👇\n"
-        msg += "Type /cancel to cancel."
+        msg += t('share_send_proof', lang) + "\n"
+        msg += t('cancel_hint', lang)
 
     # ── Telegram Invite ──
     elif task.task_type == 'telegram_invite':
-        msg = f"✅ *Task started!*\n\n"
+        msg = t('task_started_title', lang) + "\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
         msg += f"{task.instructions}\n\n"
-        msg += "Share the bot link: https://t.me/peopleforpeacebot\n\n"
-        msg += "When done, send the username of who you invited 👇\n"
-        msg += "Type /cancel to cancel."
+        msg += t('invite_share_link', lang) + "\n\n"
+        msg += t('invite_send_username', lang) + "\n"
+        msg += t('cancel_hint', lang)
 
     # ── Other task types ──
     else:
-        msg = f"✅ *Task started!*\n\n"
+        msg = t('task_started_title', lang) + "\n\n"
         msg += f"{type_icon} *{task.title}*\n\n"
         msg += f"{task.instructions}\n\n"
-        msg += "When done, send your proof below 👇\n"
-        msg += "Type /cancel to cancel."
+        msg += t('generic_send_proof', lang) + "\n"
+        msg += t('cancel_hint', lang)
 
     # ── Back navigation on ALL task screens ──
     if campaign_id:
         keyboard.append([
             InlineKeyboardButton(
-                "↩️ Back to Tasks",
+                t('btn_back_tasks', lang),
                 callback_data=f"campaign_tasks_{campaign_id}"
             )
         ])
@@ -1028,31 +1028,31 @@ async def confirm_proof_submission(query, session, assignment_id, context):
 
         pulse_msg += "\n───────────────────\n"
         if pulse['recent_active'] > 0:
-            pulse_msg += f"🫂 {pulse['recent_active']} activists active in the last hour\n"
-        pulse_msg += f"🔥 {pulse['total_completed']} total actions this campaign\n"
-        pulse_msg += f"👥 {pulse['total_volunteers']} volunteers fighting together\n"
+            pulse_msg += t('pulse_active_hour', lang).format(count=pulse['recent_active']) + "\n"
+        pulse_msg += t('pulse_total_actions', lang).format(count=pulse['total_completed']) + "\n"
+        pulse_msg += t('pulse_volunteers', lang).format(count=pulse['total_volunteers']) + "\n"
         if rank is not None:
-            pulse_msg += f"📊 You're in the Top {rank}%!\n"
+            pulse_msg += t('pulse_rank', lang).format(rank=rank) + "\n"
         pulse_msg += "───────────────────\n"
 
     next_keyboard = []
     if campaign_id:
         next_keyboard.append([
             InlineKeyboardButton(
-                "🎯 Do Another Task",
+                t('btn_do_another', lang),
                 callback_data=f"campaign_tasks_{campaign_id}"
             )
         ])
     next_keyboard.append([
-        InlineKeyboardButton("🏠 Main Menu", callback_data="menu_main")
+        InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
     ])
 
     await query.edit_message_text(
-        f"✅ *Proof Submitted!* +{assignment.task.points} pts\n\n"
-        f"*Task:* {assignment.task.title}\n"
-        f"Your proof is being reviewed — you'll be notified once verified.\n"
+        t('proof_submitted_short', lang).format(points=assignment.task.points) + "\n\n"
+        f"*{t('task_instructions', lang).replace('📝 ', '').replace('*', '')}* {assignment.task.title}\n"
+        + t('proof_under_review', lang) + "\n"
         f"{pulse_msg}\n"
-        f"Ready to keep going? 👇",
+        + t('proof_keep_going', lang),
         reply_markup=InlineKeyboardMarkup(next_keyboard),
         parse_mode='Markdown'
     )

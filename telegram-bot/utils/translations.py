@@ -480,6 +480,303 @@ TRANSLATIONS = {
         "fa": "📭 هنوز عضو هیچ کمپینی نشده‌اید.\nاز `/campaigns` برای مرور و عضویت استفاده کنید.",
         "ar": "📭 لم تنضم إلى أي حملة بعد.\nاستخدم `/campaigns` لتصفح الحملات المتاحة والانضمام إليها.",
     },
+
+    # ── Campaign Detail ────────────────────────────────────────────────
+    "campaign_detail_volunteers": {
+        "en": "👥 {current}/{target} volunteers joined",
+        "fa": "👥 {current}/{target} داوطلب پیوسته‌اند",
+        "ar": "👥 {current}/{target} متطوع انضموا",
+    },
+    "campaign_detail_tasks": {
+        "en": "🎯 {count} tasks available",
+        "fa": "🎯 {count} وظیفه موجود",
+        "ar": "🎯 {count} مهمة متاحة",
+    },
+    "campaign_already_in": {
+        "en": "✅ *You're in this campaign!*",
+        "fa": "✅ *شما عضو این کمپین هستید!*",
+        "ar": "✅ *أنت في هذه الحملة!*",
+    },
+    "campaign_tap_tasks": {
+        "en": "Tap below to see your tasks and start making an impact.",
+        "fa": "برای دیدن وظایف و شروع تأثیرگذاری، دکمه زیر را بزنید.",
+        "ar": "اضغط أدناه لرؤية مهامك والبدء في إحداث تأثير.",
+    },
+    "campaign_ready_join": {
+        "en": "Ready to make a difference? Join and start completing tasks.",
+        "fa": "آماده‌اید تفاوت ایجاد کنید؟ عضو شوید و وظایف را شروع کنید.",
+        "ar": "مستعد لإحداث فرق؟ انضم وابدأ بإكمال المهام.",
+    },
+    "btn_view_tasks_icon": {
+        "en": "🎯 View Tasks",
+        "fa": "🎯 مشاهده وظایف",
+        "ar": "🎯 عرض المهام",
+    },
+    "btn_join_campaign": {
+        "en": "✊ Join This Campaign",
+        "fa": "✊ عضویت در این کمپین",
+        "ar": "✊ انضم لهذه الحملة",
+    },
+    "btn_main_menu": {
+        "en": "🏠 Main Menu",
+        "fa": "🏠 منوی اصلی",
+        "ar": "🏠 القائمة الرئيسية",
+    },
+
+    # ── Campaign Join ──────────────────────────────────────────────────
+    "campaign_join_welcome": {
+        "en": (
+            "🎉 *You're in! Welcome to {name}*\n\n"
+            "You've joined {count} other volunteers in this campaign.\n\n"
+            "There are *{tasks} tasks* waiting for you — tweets to post, "
+            "content to share, and voices to amplify.\n\n"
+            "Tap *View Tasks* below to pick your first task and start earning points! 👇"
+        ),
+        "fa": (
+            "🎉 *عضو شدید! به {name} خوش آمدید*\n\n"
+            "شما به {count} داوطلب دیگر در این کمپین پیوستید.\n\n"
+            "*{tasks} وظیفه* در انتظار شماست — توییت‌هایی برای ارسال، "
+            "محتوا برای اشتراک‌گذاری و صداهایی برای تقویت.\n\n"
+            "برای انتخاب اولین وظیفه و کسب امتیاز، *مشاهده وظایف* را بزنید! 👇"
+        ),
+        "ar": (
+            "🎉 *انضممت! مرحباً في {name}*\n\n"
+            "انضممت إلى {count} متطوع آخر في هذه الحملة.\n\n"
+            "هناك *{tasks} مهمة* في انتظارك — تغريدات للنشر، "
+            "محتوى للمشاركة، وأصوات لتضخيمها.\n\n"
+            "اضغط *عرض المهام* أدناه لاختيار أول مهمة والبدء بكسب النقاط! 👇"
+        ),
+    },
+
+    # ── Task Checklist View ────────────────────────────────────────────
+    "checklist_title": {
+        "en": "📋 *Your Tasks — {name}*",
+        "fa": "📋 *وظایف شما — {name}*",
+        "ar": "📋 *مهامك — {name}*",
+    },
+    "checklist_progress": {
+        "en": "📊 {done}/{total} done · {points} pts earned",
+        "fa": "📊 {done}/{total} انجام شده · {points} امتیاز کسب شده",
+        "ar": "📊 {done}/{total} مكتمل · {points} نقطة مكتسبة",
+    },
+    "checklist_tap_start": {
+        "en": "Tap a task to start 👇",
+        "fa": "یک وظیفه را بزنید تا شروع کنید 👇",
+        "ar": "اضغط على مهمة للبدء 👇",
+    },
+
+    # ── Community Pulse ────────────────────────────────────────────────
+    "pulse_active_hour": {
+        "en": "🫂 {count} activists active in the last hour",
+        "fa": "🫂 {count} فعال در یک ساعت گذشته",
+        "ar": "🫂 {count} ناشط نشط في الساعة الأخيرة",
+    },
+    "pulse_total_actions": {
+        "en": "🔥 {count} total actions this campaign",
+        "fa": "🔥 {count} اقدام کل در این کمپین",
+        "ar": "🔥 {count} إجراء إجمالي في هذه الحملة",
+    },
+    "pulse_volunteers": {
+        "en": "👥 {count} volunteers fighting together",
+        "fa": "👥 {count} داوطلب در کنار هم مبارزه می‌کنند",
+        "ar": "👥 {count} متطوع يقاتلون معاً",
+    },
+    "pulse_rank": {
+        "en": "📊 You're in the Top {rank}%!",
+        "fa": "📊 شما در {rank}% برتر هستید!",
+        "ar": "📊 أنت في أفضل {rank}%!",
+    },
+    "pulse_actions_by": {
+        "en": "🔥 {actions} total actions by {volunteers} volunteers",
+        "fa": "🔥 {actions} اقدام توسط {volunteers} داوطلب",
+        "ar": "🔥 {actions} إجراء من {volunteers} متطوع",
+    },
+    "pulse_active_short": {
+        "en": "🫂 {count} active in the last hour",
+        "fa": "🫂 {count} فعال در ساعت اخیر",
+        "ar": "🫂 {count} نشط في الساعة الأخيرة",
+    },
+
+    # ── Task Guidance Flow ─────────────────────────────────────────────
+    "task_started_title": {
+        "en": "✅ *Task started!*",
+        "fa": "✅ *وظیفه شروع شد!*",
+        "ar": "✅ *بدأت المهمة!*",
+    },
+    "task_3_steps": {
+        "en": "Complete this task in 3 easy steps:",
+        "fa": "این وظیفه را در ۳ مرحله آسان انجام دهید:",
+        "ar": "أكمل هذه المهمة في 3 خطوات سهلة:",
+    },
+    "tweet_step1": {
+        "en": "*① Pick a tweet* below and tap *📲 Post This Tweet*",
+        "fa": "*① یک توییت* از پایین انتخاب کنید و *📲 ارسال این توییت* را بزنید",
+        "ar": "*① اختر تغريدة* أدناه واضغط *📲 انشر هذه التغريدة*",
+    },
+    "tweet_step2": {
+        "en": "*② Twitter will open* with your tweet ready — just hit Post!",
+        "fa": "*② توییتر باز می‌شود* با توییت آماده — فقط ارسال را بزنید!",
+        "ar": "*② سيفتح تويتر* مع تغريدتك جاهزة — فقط اضغط نشر!",
+    },
+    "tweet_step3": {
+        "en": "*③ Come back here* and paste your tweet URL",
+        "fa": "*③ به اینجا برگردید* و لینک توییت خود را بگذارید",
+        "ar": "*③ عد إلى هنا* والصق رابط تغريدتك",
+    },
+    "tweet_or_write_own": {
+        "en": "✍️ Or write your own tweet using the campaign hashtags.",
+        "fa": "✍️ یا توییت خود را با هشتگ‌های کمپین بنویسید.",
+        "ar": "✍️ أو اكتب تغريدتك الخاصة باستخدام هاشتاغات الحملة.",
+    },
+    "tweet_paste_url_below": {
+        "en": "When done, *paste your tweet URL below* 👇",
+        "fa": "وقتی تمام شد، *لینک توییت را در زیر بگذارید* 👇",
+        "ar": "عند الانتهاء، *الصق رابط تغريدتك أدناه* 👇",
+    },
+    "retweet_step1": {
+        "en": "*① Tap the button* below to find {hashtags} tweets",
+        "fa": "*① دکمه زیر را بزنید* تا توییت‌های {hashtags} را پیدا کنید",
+        "ar": "*① اضغط الزر* أدناه للعثور على تغريدات {hashtags}",
+    },
+    "retweet_step2": {
+        "en": "*② Retweet at least 3* tweets you agree with",
+        "fa": "*② حداقل ۳ توییت* که با آن‌ها موافقید را ریتوییت کنید",
+        "ar": "*② أعد تغريد 3 على الأقل* من التغريدات التي توافق عليها",
+    },
+    "retweet_step3": {
+        "en": "*③ Come back here* and paste any tweet URL as proof",
+        "fa": "*③ به اینجا برگردید* و لینک هر توییت را به عنوان مدرک بگذارید",
+        "ar": "*③ عد إلى هنا* والصق أي رابط تغريدة كدليل",
+    },
+    "retweet_paste_proof": {
+        "en": "When done, *paste a tweet URL below* 👇",
+        "fa": "وقتی تمام شد، *لینک یک توییت را در زیر بگذارید* 👇",
+        "ar": "عند الانتهاء، *الصق رابط تغريدة أدناه* 👇",
+    },
+    "btn_find_tweets": {
+        "en": "🔍 Find {hashtags} Tweets",
+        "fa": "🔍 یافتن توییت‌های {hashtags}",
+        "ar": "🔍 ابحث عن تغريدات {hashtags}",
+    },
+    "comment_step1": {
+        "en": "*① Pick a suggested reply* and tap the button",
+        "fa": "*① یک پاسخ پیشنهادی* را انتخاب کنید و دکمه را بزنید",
+        "ar": "*① اختر رداً مقترحاً* واضغط الزر",
+    },
+    "comment_step2": {
+        "en": "*② Twitter opens with your reply ready* — just hit Post!",
+        "fa": "*② توییتر با پاسخ آماده باز می‌شود* — فقط ارسال را بزنید!",
+        "ar": "*② سيفتح تويتر مع ردك جاهزاً* — فقط اضغط نشر!",
+    },
+    "comment_step3": {
+        "en": "*③ Come back here* and paste your reply URL",
+        "fa": "*③ به اینجا برگردید* و لینک پاسخ خود را بگذارید",
+        "ar": "*③ عد إلى هنا* والصق رابط ردك",
+    },
+    "comment_pick_tweet": {
+        "en": "🎯 *Pick a tweet to reply to:*",
+        "fa": "🎯 *یک توییت برای پاسخ دادن انتخاب کنید:*",
+        "ar": "🎯 *اختر تغريدة للرد عليها:*",
+    },
+    "comment_or_write_own": {
+        "en": "✍️ Or write your own reply with the hashtags!",
+        "fa": "✍️ یا پاسخ خودتان را با هشتگ‌ها بنویسید!",
+        "ar": "✍️ أو اكتب ردك الخاص مع الهاشتاغات!",
+    },
+    "comment_paste_reply": {
+        "en": "When done, *paste your reply URL below* 👇",
+        "fa": "وقتی تمام شد، *لینک پاسخ را در زیر بگذارید* 👇",
+        "ar": "عند الانتهاء، *الصق رابط ردك أدناه* 👇",
+    },
+    "btn_reply_to": {
+        "en": "💬 Reply to {handle}",
+        "fa": "💬 پاسخ به {handle}",
+        "ar": "💬 رد على {handle}",
+    },
+    "btn_reply_suggested": {
+        "en": "💬 Reply with Suggested Comment",
+        "fa": "💬 پاسخ با نظر پیشنهادی",
+        "ar": "💬 رد بتعليق مقترح",
+    },
+    "share_send_proof": {
+        "en": "When done, send proof (link or screenshot) below 👇",
+        "fa": "وقتی تمام شد، مدرک (لینک یا اسکرین‌شات) را در زیر بفرستید 👇",
+        "ar": "عند الانتهاء، أرسل الدليل (رابط أو لقطة شاشة) أدناه 👇",
+    },
+    "invite_share_link": {
+        "en": "Share the bot link: https://t.me/peopleforpeacebot",
+        "fa": "لینک ربات را به اشتراک بگذارید: https://t.me/peopleforpeacebot",
+        "ar": "شارك رابط البوت: https://t.me/peopleforpeacebot",
+    },
+    "invite_send_username": {
+        "en": "When done, send the username of who you invited 👇",
+        "fa": "وقتی تمام شد، نام کاربری شخصی که دعوت کردید را بفرستید 👇",
+        "ar": "عند الانتهاء، أرسل اسم المستخدم للشخص الذي دعوته 👇",
+    },
+    "generic_send_proof": {
+        "en": "When done, send your proof below 👇",
+        "fa": "وقتی تمام شد، مدرک خود را در زیر بفرستید 👇",
+        "ar": "عند الانتهاء، أرسل دليلك أدناه 👇",
+    },
+    "btn_post_tweet": {
+        "en": "📲 Post Tweet #{n}",
+        "fa": "📲 ارسال توییت #{n}",
+        "ar": "📲 انشر التغريدة #{n}",
+    },
+
+    # ── Proof Submission (updated) ─────────────────────────────────────
+    "proof_submitted_short": {
+        "en": "✅ *Proof Submitted!* +{points} pts",
+        "fa": "✅ *مدرک ارسال شد!* +{points} امتیاز",
+        "ar": "✅ *تم تقديم الدليل!* +{points} نقطة",
+    },
+    "proof_under_review": {
+        "en": "Your proof is being reviewed — you'll be notified once verified.",
+        "fa": "مدرک شما در حال بررسی است — پس از تأیید به شما اطلاع داده می‌شود.",
+        "ar": "يتم مراجعة دليلك — سيتم إخطارك بمجرد التحقق.",
+    },
+    "proof_keep_going": {
+        "en": "Ready to keep going? 👇",
+        "fa": "آماده ادامه هستید? 👇",
+        "ar": "مستعد للاستمرار؟ 👇",
+    },
+    "btn_do_another": {
+        "en": "🎯 Do Another Task",
+        "fa": "🎯 انجام وظیفه دیگر",
+        "ar": "🎯 قم بمهمة أخرى",
+    },
+    "btn_back_tasks": {
+        "en": "↩️ Back to Tasks",
+        "fa": "↩️ بازگشت به وظایف",
+        "ar": "↩️ العودة إلى المهام",
+    },
+
+    # ── Task Detail (preview) ──────────────────────────────────────────
+    "task_spots_remaining": {
+        "en": "📊 {n} spots remaining",
+        "fa": "📊 {n} جای باقیمانده",
+        "ar": "📊 {n} مكان متبقي",
+    },
+    "task_tweet_desc": {
+        "en": "You'll pick a ready-made tweet and post it on Twitter — takes about 1 minute!",
+        "fa": "شما یک توییت آماده انتخاب می‌کنید و در توییتر ارسال می‌کنید — حدود ۱ دقیقه وقت می‌گیرد!",
+        "ar": "ستختار تغريدة جاهزة وتنشرها على تويتر — تستغرق حوالي دقيقة واحدة!",
+    },
+    "task_retweet_desc": {
+        "en": "You'll retweet key campaign tweets to amplify the message.",
+        "fa": "توییت‌های کلیدی کمپین را ریتوییت می‌کنید تا پیام تقویت شود.",
+        "ar": "ستعيد تغريد التغريدات الرئيسية للحملة لتضخيم الرسالة.",
+    },
+    "task_comment_desc": {
+        "en": "You'll reply to key tweets to add your voice to the conversation.",
+        "fa": "به توییت‌های کلیدی پاسخ می‌دهید تا صدای خود را به گفتگو اضافه کنید.",
+        "ar": "سترد على التغريدات الرئيسية لإضافة صوتك إلى المحادثة.",
+    },
+    "btn_start_action": {
+        "en": "🚀 Let's Go!",
+        "fa": "🚀 بزن بریم!",
+        "ar": "🚀 هيا بنا!",
+    },
 }
 
 

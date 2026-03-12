@@ -287,10 +287,11 @@ async def campaign_callback_handler(update: Update, context: CallbackContext):
 
 async def handle_campaign_detail(query, session, campaign_id):
     """Show campaign detail card with Join or View Tasks button."""
+    lang = getattr(session, 'language', 'en') or 'en'
     campaign = await _get_campaign(campaign_id)
     if not campaign:
         await query.edit_message_text(
-            "❌ This campaign is no longer available.",
+            t('campaign_not_available', lang),
             parse_mode='Markdown'
         )
         return
@@ -300,30 +301,32 @@ async def handle_campaign_detail(query, session, campaign_id):
 
     msg = f"📢 *{campaign.name}*\n\n"
     msg += f"{campaign.description or campaign.short_description}\n\n"
-    msg += f"👥 {campaign.current_members}/{campaign.target_members} volunteers joined\n"
-    msg += f"🎯 {task_count} tasks available\n"
+    msg += t('campaign_detail_volunteers', lang).format(
+        current=campaign.current_members, target=campaign.target_members
+    ) + "\n"
+    msg += t('campaign_detail_tasks', lang).format(count=task_count) + "\n"
 
     keyboard = []
     if is_member:
-        msg += f"\n✅ *You're in this campaign!*\n"
-        msg += "Tap below to see your tasks and start making an impact.\n"
+        msg += f"\n{t('campaign_already_in', lang)}\n"
+        msg += t('campaign_tap_tasks', lang) + "\n"
         keyboard.append([
             InlineKeyboardButton(
-                "🎯 View Tasks",
+                t('btn_view_tasks_icon', lang),
                 callback_data=f"campaign_tasks_{campaign_id}"
             )
         ])
     else:
-        msg += f"\nReady to make a difference? Join and start completing tasks.\n"
+        msg += f"\n{t('campaign_ready_join', lang)}\n"
         keyboard.append([
             InlineKeyboardButton(
-                "✊ Join This Campaign",
+                t('btn_join_campaign', lang),
                 callback_data=f"campaign_join_{campaign_id}"
             )
         ])
 
     keyboard.append([
-        InlineKeyboardButton("🏠 Main Menu", callback_data="menu_main")
+        InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
     ])
 
     await query.edit_message_text(
@@ -335,10 +338,11 @@ async def handle_campaign_detail(query, session, campaign_id):
 
 async def handle_campaign_join(query, session, campaign_id):
     """Handle campaign join from inline button."""
+    lang = getattr(session, 'language', 'en') or 'en'
     campaign = await _get_campaign(campaign_id)
     if not campaign:
         await query.edit_message_text(
-            "❌ This campaign is no longer available.",
+            t('campaign_not_available', lang),
             parse_mode='Markdown'
         )
         return
@@ -354,19 +358,17 @@ async def handle_campaign_join(query, session, campaign_id):
 
     keyboard = [[
         InlineKeyboardButton(
-            "🎯 View Tasks",
+            t('btn_view_tasks_icon', lang),
             callback_data=f"campaign_tasks_{campaign_id}"
         )
     ], [
-        InlineKeyboardButton("🏠 Main Menu", callback_data="menu_main")
+        InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
     ]]
 
     await query.edit_message_text(
-        f"🎉 *You're in! Welcome to {campaign.name}*\n\n"
-        f"You've joined {member_count} other volunteers in this campaign.\n\n"
-        f"There are *{task_count} tasks* waiting for you — tweets to post, "
-        f"content to share, and voices to amplify.\n\n"
-        f"Tap *View Tasks* below to pick your first task and start earning points! 👇",
+        t('campaign_join_welcome', lang).format(
+            name=campaign.name, count=member_count, tasks=task_count
+        ),
         reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode='Markdown'
     )
@@ -427,7 +429,7 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
         if status_map.get(task.id) in ('completed', 'verified')
     )
 
-    message = f"📋 *Your Tasks — {campaign.name}*\n\n"
+    message = t('checklist_title', lang).format(name=campaign.name) + "\n\n"
     keyboard = []
 
     for task in tasks:
@@ -445,7 +447,7 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
             check = '⬜'
             label = f"{icon} {task.title[:28]}"
 
-        message += f"{check} {icon} {task.title}  (+{task.points} pts)\n"
+        message += f"{check} {icon} {task.title}  (+{task.points} {t('task_pts', lang)})\n"
 
         keyboard.append([
             InlineKeyboardButton(
@@ -458,21 +460,27 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
     progress = int((done_count / total_count) * 10) if total_count else 0
     bar = '█' * progress + '░' * (10 - progress)
     message += f"\n━━━━━━━━━━━━━━━━━━━\n"
-    message += f"📊 {done_count}/{total_count} done · {user_points} pts earned\n"
+    message += t('checklist_progress', lang).format(
+        done=done_count, total=total_count, points=user_points
+    ) + "\n"
     message += f"[{bar}] {int(done_count / total_count * 100) if total_count else 0}%\n"
 
     # Community pulse
     pulse = await _db_get_campaign_pulse(campaign_id)
     if pulse['total_completed'] > 0 or pulse['total_volunteers'] > 0:
-        message += f"\n🔥 {pulse['total_completed']} total actions by {pulse['total_volunteers']} volunteers"
+        message += "\n" + t('pulse_actions_by', lang).format(
+            actions=pulse['total_completed'], volunteers=pulse['total_volunteers']
+        )
         if pulse['recent_active'] > 0:
-            message += f"\n🫂 {pulse['recent_active']} active in the last hour"
+            message += "\n" + t('pulse_active_short', lang).format(
+                count=pulse['recent_active']
+            )
     message += "\n"
 
-    message += "\nTap a task to start 👇"
+    message += "\n" + t('checklist_tap_start', lang)
 
     keyboard.append([
-        InlineKeyboardButton("🏠 Main Menu", callback_data="menu_main")
+        InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
     ])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
