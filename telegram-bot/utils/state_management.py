@@ -252,13 +252,12 @@ class ConversationStateManager:
                 parse_mode='Markdown'
             )
 
-            # Re-send keyboard so the user has navigation buttons
-            keyboard = get_keyboard_buttons(lang)
-            reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+            # Re-send inline menu so the user has navigation buttons
+            from utils.translations import get_main_menu_inline
             await context.bot.send_message(
                 chat_id=update.effective_chat.id,
                 text="⬇️",
-                reply_markup=reply_markup,
+                reply_markup=get_main_menu_inline(lang),
             )
 
             # Auto-join campaign from deep-link (if present)
@@ -327,13 +326,12 @@ class ConversationStateManager:
                 parse_mode='Markdown'
             )
 
-            # Re-send keyboard so the user has navigation buttons
-            keyboard = get_keyboard_buttons(lang)
-            reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+            # Re-send inline menu so the user has navigation buttons
+            from utils.translations import get_main_menu_inline
             await context.bot.send_message(
                 chat_id=update.effective_chat.id,
                 text="⬇️",
-                reply_markup=reply_markup,
+                reply_markup=get_main_menu_inline(lang),
             )
 
             # Auto-join campaign from deep-link (if present)

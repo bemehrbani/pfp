@@ -93,13 +93,15 @@ class PFPCampaignBot:
                 # Callback handlers
                 campaign_callback_handler, task_callback_handler, leaderboard_callback_handler,
                 storm_callback_handler,
+                # Menu callback handler
+                menu_callback_handler,
                 # Conversation handlers
                 task_proof_conversation, registration_conversation,
                 # Message handlers
                 handle_text_message, handle_unknown_command,
                 # Handler lists
                 campaign_handlers, task_handlers, leaderboard_handlers,
-                storm_handlers,
+                storm_handlers, menu_handlers,
                 text_message_handler, unknown_command_handler
             )
 
@@ -132,6 +134,8 @@ class PFPCampaignBot:
             for handler in leaderboard_handlers:
                 self.application.add_handler(handler)
             for handler in storm_handlers:
+                self.application.add_handler(handler)
+            for handler in menu_handlers:
                 self.application.add_handler(handler)
 
             # Register conversation handlers

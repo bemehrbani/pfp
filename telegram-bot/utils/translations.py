@@ -489,6 +489,35 @@ def t(key: str, lang: str = 'en') -> str:
     return entry.get(lang, entry.get('en', key))
 
 
+def get_main_menu_inline(lang: str = 'en'):
+    """Get the main menu as InlineKeyboardMarkup (glass buttons under messages)."""
+    from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+    keyboard = [
+        [
+            InlineKeyboardButton(t('btn_campaigns', lang), callback_data='menu_campaigns'),
+            InlineKeyboardButton(t('btn_tasks', lang), callback_data='menu_tasks'),
+        ],
+        [
+            InlineKeyboardButton(t('btn_progress', lang), callback_data='menu_profile'),
+            InlineKeyboardButton(t('btn_leaderboard', lang), callback_data='menu_leaderboard'),
+        ],
+        [
+            InlineKeyboardButton(t('btn_help', lang), callback_data='menu_help'),
+            InlineKeyboardButton(t('btn_language', lang), callback_data='menu_language'),
+        ],
+    ]
+    return InlineKeyboardMarkup(keyboard)
+
+
+def get_back_to_menu_inline(lang: str = 'en'):
+    """Get a single 'Back to Menu' inline button."""
+    from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+    label = {'en': '🏠 Main Menu', 'fa': '🏠 منوی اصلی', 'ar': '🏠 القائمة الرئيسية'}
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton(label.get(lang, label['en']), callback_data='menu_main')]
+    ])
+
+
 def get_keyboard_buttons(lang: str = 'en') -> list[list[str]]:
     """Get the main ReplyKeyboard buttons in the given language."""
     return [

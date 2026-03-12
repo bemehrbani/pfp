@@ -2,12 +2,12 @@
 Start command handler for Telegram bot.
 """
 import logging
-from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
 from asgiref.sync import sync_to_async
 from .db import get_user_by_telegram_id
 from utils.state_management import state_manager
-from utils.translations import t, get_keyboard_buttons
+from utils.translations import t, get_keyboard_buttons, get_main_menu_inline
 
 logger = logging.getLogger(__name__)
 
@@ -122,17 +122,14 @@ async def language_callback_handler(update: Update, context: CallbackContext):
 
 
 async def _send_welcome(update: Update, context: CallbackContext, session, lang: str):
-    """Send welcome message and keyboard in the user's language."""
+    """Send welcome message with inline menu buttons."""
     chat_id = update.effective_chat.id
 
-    # Create keyboard in user's language
-    keyboard = get_keyboard_buttons(lang)
-    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
-
+    # Remove any old persistent keyboard, then send inline menu
     await context.bot.send_message(
         chat_id=chat_id,
         text=t('welcome', lang),
-        reply_markup=reply_markup,
+        reply_markup=get_main_menu_inline(lang),
         parse_mode='Markdown'
     )
 
