@@ -7,6 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('campaigns', '0001_initial'),
+        ('campaigns', '0002_initial'),
     ]
 
     operations = [
