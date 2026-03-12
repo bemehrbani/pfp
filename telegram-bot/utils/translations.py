@@ -874,6 +874,96 @@ TRANSLATIONS = {
         "fa": "🎁 *+۱۰ امتیاز!* {name} از طریق لینک دعوت شما به *{campaign}* پیوست!",
         "ar": "🎁 *+١٠ نقاط!* {name} انضم إلى *{campaign}* عبر رابط دعوتك!",
     },
+
+    # ── Invite Flow: Language & Style Picker ──
+    "invite_pick_language": {
+        "en": "📨 *Invite Friends*\n\nChoose the language for your invite message:",
+        "fa": "📨 *دعوت دوستان*\n\nزبان پیام دعوت خود را انتخاب کنید:",
+        "ar": "📨 *دعوة الأصدقاء*\n\nاختر لغة رسالة الدعوة:",
+    },
+    "invite_pick_style": {
+        "en": (
+            "📨 *Choose a message to share:*\n\n"
+            "🕯 *Memorial* — Children of Minab\n"
+            "_Sends a photo with emotional message_\n\n"
+            "✊ *Campaign* — Join the movement\n"
+            "_Sends a text invite with action CTA_"
+        ),
+        "fa": (
+            "📨 *یک پیام برای اشتراک‌گذاری انتخاب کنید:*\n\n"
+            "🕯 *یادبود* — کودکان میناب\n"
+            "_عکس با پیام احساسی ارسال می‌شود_\n\n"
+            "✊ *کمپین* — به جنبش بپیوندید\n"
+            "_پیام متنی با دعوت به اقدام ارسال می‌شود_"
+        ),
+        "ar": (
+            "📨 *اختر رسالة للمشاركة:*\n\n"
+            "🕯 *النصب التذكاري* — أطفال ميناب\n"
+            "_يُرسل صورة مع رسالة مؤثرة_\n\n"
+            "✊ *الحملة* — انضم للحركة\n"
+            "_يُرسل دعوة نصية مع دعوة للتحرك_"
+        ),
+    },
+    "invite_memorial_caption": {
+        "en": (
+            "🕯 168 children killed. One school. One morning.\n\n"
+            "See their faces. Read their names.\n"
+            "👉 https://peopleforpeace.live/memorial.html\n\n"
+            "Don't scroll past — act.\n"
+            "Join us: {link}"
+        ),
+        "fa": (
+            "🕯 ۱۶۸ کودک کشته شدند. یک مدرسه. یک صبح.\n\n"
+            "چهره‌هایشان را ببینید. نام‌هایشان را بخوانید.\n"
+            "👉 https://peopleforpeace.live/memorial.html\n\n"
+            "بی‌تفاوت رد نشوید — اقدام کنید.\n"
+            "به ما بپیوندید: {link}"
+        ),
+        "ar": (
+            "🕯 ١٦٨ طفلاً قُتلوا. مدرسة واحدة. صباح واحد.\n\n"
+            "انظروا إلى وجوههم. اقرأوا أسماءهم.\n"
+            "👉 https://peopleforpeace.live/memorial.html\n\n"
+            "لا تمرّوا مرور الكرام — تحرّكوا.\n"
+            "انضموا إلينا: {link}"
+        ),
+    },
+    "invite_memorial_sent": {
+        "en": "✅ *Photo message ready!*\n\nForward the message above 👆 to your friends and contacts.\n\nEvery share helps grow the movement. 🕯",
+        "fa": "✅ *پیام عکسی آماده است!*\n\nپیام بالا 👆 را برای دوستان و مخاطبانتان فوروارد کنید.\n\nهر اشتراک‌گذاری به رشد جنبش کمک می‌کند. 🕯",
+        "ar": "✅ *رسالة الصورة جاهزة!*\n\nأعد توجيه الرسالة أعلاه 👆 لأصدقائك ومعارفك.\n\nكل مشاركة تساعد في نمو الحركة. 🕯",
+    },
+    "invite_campaign_text": {
+        "en": (
+            "✊ Civilians are dying. Governments are silent. We are not.\n\n"
+            "Join {name} — sign petitions, amplify voices, hold leaders accountable.\n\n"
+            "Every action counts. 2 minutes: {link}"
+        ),
+        "fa": (
+            "✊ غیرنظامیان کشته می‌شوند. دولت‌ها ساکتند. ما نیستیم.\n\n"
+            "به {name} بپیوندید — طومار امضا کنید، صداها را بلند کنید.\n\n"
+            "هر اقدامی مهم است. ۲ دقیقه: {link}"
+        ),
+        "ar": (
+            "✊ المدنيون يُقتلون. الحكومات صامتة. نحن لسنا كذلك.\n\n"
+            "انضموا إلى {name} — وقّعوا العرائض، ضخّموا الأصوات.\n\n"
+            "كل فعل مهم. دقيقتان: {link}"
+        ),
+    },
+    "btn_memorial_style": {
+        "en": "🕯 Memorial — Children of Minab",
+        "fa": "🕯 یادبود — کودکان میناب",
+        "ar": "🕯 النصب التذكاري — أطفال ميناب",
+    },
+    "btn_campaign_style": {
+        "en": "✊ Campaign — Join the Movement",
+        "fa": "✊ کمپین — به جنبش بپیوندید",
+        "ar": "✊ الحملة — انضم للحركة",
+    },
+    "btn_change_language": {
+        "en": "🌍 Change Language",
+        "fa": "🌍 تغییر زبان",
+        "ar": "🌍 تغيير اللغة",
+    },
 }
 
 

@@ -295,6 +295,21 @@ async def campaign_callback_handler(update: Update, context: CallbackContext):
         campaign_id = int(callback_data.split('_')[-1])
         await handle_invite_link(query, session, campaign_id)
 
+    elif callback_data.startswith('invite_style_'):
+        # invite_style_{campaign_id}_{lang}
+        parts = callback_data.split('_')
+        campaign_id = int(parts[2])
+        invite_lang = parts[3]
+        await handle_invite_style_picker(query, session, campaign_id, invite_lang)
+
+    elif callback_data.startswith('invite_send_'):
+        # invite_send_{campaign_id}_{lang}_{style}
+        parts = callback_data.split('_')
+        campaign_id = int(parts[2])
+        invite_lang = parts[3]
+        style = parts[4]
+        await handle_invite_send(query, session, campaign_id, invite_lang, style)
+
     elif callback_data.startswith('campaigns_page_'):
         page = int(callback_data.split('_')[-1])
         await handle_campaigns_pagination(query, session, page)
@@ -560,7 +575,78 @@ async def handle_campaigns_pagination(query, session, page):
 
 
 async def handle_invite_link(query, session, campaign_id):
-    """Generate a personalized invite link and show a share button."""
+    """Legacy entry point — redirect to language picker."""
+    await handle_invite_language_picker(query, session, campaign_id)
+
+
+async def handle_invite_language_picker(query, session, campaign_id):
+    """Step 1: Let the volunteer choose the language for their invite message."""
+    lang = getattr(session, 'language', 'en') or 'en'
+
+    campaign = await _get_campaign(campaign_id)
+    if not campaign:
+        await query.edit_message_text(
+            t('campaign_not_available', lang),
+            parse_mode='Markdown'
+        )
+        return
+
+    keyboard = [
+        [InlineKeyboardButton(
+            "🇬🇧 English",
+            callback_data=f"invite_style_{campaign_id}_en"
+        )],
+        [InlineKeyboardButton(
+            "🇮🇷 فارسی",
+            callback_data=f"invite_style_{campaign_id}_fa"
+        )],
+        [InlineKeyboardButton(
+            "🇸🇦 العربية",
+            callback_data=f"invite_style_{campaign_id}_ar"
+        )],
+        [InlineKeyboardButton(
+            t('btn_back_to_tasks', lang),
+            callback_data=f"campaign_tasks_{campaign_id}"
+        )],
+        [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
+    ]
+
+    await query.edit_message_text(
+        t('invite_pick_language', lang),
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode='Markdown'
+    )
+
+
+async def handle_invite_style_picker(query, session, campaign_id, invite_lang):
+    """Step 2: Let the volunteer choose memorial (photo) or campaign (text) style."""
+    lang = getattr(session, 'language', 'en') or 'en'
+
+    keyboard = [
+        [InlineKeyboardButton(
+            t('btn_memorial_style', lang),
+            callback_data=f"invite_send_{campaign_id}_{invite_lang}_memorial"
+        )],
+        [InlineKeyboardButton(
+            t('btn_campaign_style', lang),
+            callback_data=f"invite_send_{campaign_id}_{invite_lang}_campaign"
+        )],
+        [InlineKeyboardButton(
+            t('btn_change_language', lang),
+            callback_data=f"campaign_invite_{campaign_id}"
+        )],
+        [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
+    ]
+
+    await query.edit_message_text(
+        t('invite_pick_style', lang),
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode='Markdown'
+    )
+
+
+async def handle_invite_send(query, session, campaign_id, invite_lang, style):
+    """Step 3: Send the invite — photo for memorial, share-link for campaign."""
     lang = getattr(session, 'language', 'en') or 'en'
 
     campaign = await _get_campaign(campaign_id)
@@ -575,33 +661,72 @@ async def handle_invite_link(query, session, campaign_id):
     user_id = session.user.id if session.user else 0
     invite_link = f"https://t.me/peopleforpeacebot?start=campaign_{campaign_id}_ref_{user_id}"
 
-    # Build a share URL that pre-fills Telegram's forward dialog
-    from urllib.parse import quote
-    share_text = t('invite_share_text', lang).format(
-        name=campaign.localized_name(lang), link=invite_link
-    )
-    share_url = f"https://t.me/share/url?url={quote(invite_link)}&text={quote(share_text)}"
+    if style == 'memorial':
+        # Send photo with emotional caption — volunteer then forwards it
+        caption = t('invite_memorial_caption', invite_lang).format(link=invite_link)
+        photo_url = "https://peopleforpeace.live/images/og-share-card.png"
 
-    keyboard = [
-        [InlineKeyboardButton(
-            t('btn_share_link', lang),
-            url=share_url
-        )],
-        [InlineKeyboardButton(
-            t('btn_back_to_tasks', lang),
-            callback_data=f"campaign_tasks_{campaign_id}"
-        )],
-        [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
-    ]
+        # Delete the inline message first, then send photo as new message
+        try:
+            await query.delete_message()
+        except Exception:
+            pass
 
-    await query.edit_message_text(
-        t('invite_message', lang).format(
-            name=campaign.localized_name(lang), link=invite_link
-        ),
-        reply_markup=InlineKeyboardMarkup(keyboard),
-        parse_mode='Markdown',
-        disable_web_page_preview=True
-    )
+        await query.get_bot().send_photo(
+            chat_id=query.message.chat_id,
+            photo=photo_url,
+            caption=caption,
+            parse_mode='Markdown'
+        )
+
+        # Follow up with instruction + back buttons
+        keyboard = [
+            [InlineKeyboardButton(
+                t('btn_back_to_tasks', lang),
+                callback_data=f"campaign_tasks_{campaign_id}"
+            )],
+            [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
+        ]
+
+        await query.get_bot().send_message(
+            chat_id=query.message.chat_id,
+            text=t('invite_memorial_sent', lang),
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown'
+        )
+
+    else:
+        # Campaign style: open Telegram's share dialog with text
+        from urllib.parse import quote
+        share_text = t('invite_campaign_text', invite_lang).format(
+            name=campaign.localized_name(invite_lang), link=invite_link
+        )
+        share_url = f"https://t.me/share/url?url={quote(invite_link)}&text={quote(share_text)}"
+
+        keyboard = [
+            [InlineKeyboardButton(
+                t('btn_share_link', lang),
+                url=share_url
+            )],
+            [InlineKeyboardButton(
+                t('btn_change_language', lang),
+                callback_data=f"campaign_invite_{campaign_id}"
+            )],
+            [InlineKeyboardButton(
+                t('btn_back_to_tasks', lang),
+                callback_data=f"campaign_tasks_{campaign_id}"
+            )],
+            [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
+        ]
+
+        await query.edit_message_text(
+            t('invite_message', lang).format(
+                name=campaign.localized_name(lang), link=invite_link
+            ),
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown',
+            disable_web_page_preview=True
+        )
 
 
 # Exported session helper for other handlers
@@ -724,5 +849,5 @@ async def _handle_browse_campaigns(query, session, lang: str):
 
 # Handler registration
 campaign_handlers = [
-    CallbackQueryHandler(campaign_callback_handler, pattern='^campaign_')
+    CallbackQueryHandler(campaign_callback_handler, pattern='^(campaign_|invite_style_|invite_send_)')
 ]
