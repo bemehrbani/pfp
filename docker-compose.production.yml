@@ -130,8 +130,10 @@ services:
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
       DJANGO_API_URL: http://backend:8000/api
       DJANGO_SETTINGS_MODULE: config.settings.production
+      VIDEO_ASSETS_DIR: /app/assets/videos
     volumes:
       - ./telegram-bot/logs:/app/logs
+      - ./minab/music:/app/assets/videos:ro
     depends_on:
       postgres:
         condition: service_healthy

@@ -16,11 +16,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY telegram-bot/ .
 COPY backend/ ./backend/
 
-# Copy video assets for invite feature (first-send fallback)
-COPY minab/music/100_faces_FINAL_V3.mp4 ./assets/videos/
-COPY minab/music/100_faces_FARSI_V1.mp4 ./assets/videos/
-COPY minab/music/100_faces_ARABIC_V1.mp4 ./assets/videos/
-
 # Final stage
 FROM python:3.11-slim
 
