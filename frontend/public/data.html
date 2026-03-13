@@ -116,11 +116,11 @@
         <div class="card">
             <h2>🔗 JSON API</h2>
             <p>Fetch all children's data programmatically. Returns names (English + Farsi), age, gender, photo URLs, and profile page links.</p>
-            <code>GET https://peopleforpeace.live/api/children.json</code>
+            <code>GET https://peopleforpeace.live/children.json</code>
             <p style="font-size:.8rem;color:var(--muted);">No authentication required. CORS enabled. Updated periodically.</p>
             <div class="btns">
-                <a class="btn btn-gold" href="/api/children.json" target="_blank">📥 View JSON</a>
-                <a class="btn btn-outline" href="/api/children.json" download="minab_children.json">⬇ Download JSON</a>
+                <a class="btn btn-gold" href="/children.json" target="_blank">📥 View JSON</a>
+                <a class="btn btn-outline" href="/children.json" download="minab_children.json">⬇ Download JSON</a>
             </div>
         </div>
 
@@ -157,12 +157,12 @@
         <div class="card">
             <h2>💻 Usage Examples</h2>
             <p>JavaScript:</p>
-            <code>const res = await fetch('https://peopleforpeace.live/api/children.json');<br>
+            <code>const res = await fetch('https://peopleforpeace.live/children.json');<br>
 const data = await res.json();<br>
 data.children.forEach(c => console.log(c.name, c.nameFa));</code>
             <p>Python:</p>
             <code>import requests<br>
-data = requests.get('https://peopleforpeace.live/api/children.json').json()<br>
+data = requests.get('https://peopleforpeace.live/children.json').json()<br>
 for child in data['children']:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;print(child['name'], child['nameFa'])</code>
         </div>
@@ -185,7 +185,7 @@ for child in data['children']:<br>
 
     <script>
         // Fetch and populate stats
-        fetch('/api/children.json')
+        fetch('/children.json')
             .then(r => r.json())
             .then(data => {
                 document.getElementById('childCount').textContent = data.totalIdentified;
@@ -199,7 +199,7 @@ for child in data['children']:<br>
             });
 
         function downloadCSV() {
-            fetch('/api/children.json')
+            fetch('/children.json')
                 .then(r => r.json())
                 .then(data => {
                     const rows = [['Name', 'Name (Farsi)', 'Age', 'Gender', 'Has Photo', 'Photo URL', 'Profile URL']];
