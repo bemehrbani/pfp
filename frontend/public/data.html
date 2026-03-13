@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0e17">
+    <title>Open Data — Minab School Children | People for Peace</title>
+    <meta name="description"
+        content="Open access to verified names, photos, and stories of the 168 children killed in the Minab School airstrike. For researchers, journalists, and advocates.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&family=Vazirmatn:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg2: #111827;
+            --bg-card: #1a1f2e;
+            --text: #f0ebe3;
+            --text2: #9ca3af;
+            --muted: #6b7280;
+            --gold: #d4a853;
+            --gold-d: rgba(212, 168, 83, .15);
+            --border: rgba(255, 255, 255, .06);
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'Source Sans 3', sans-serif;
+            --r: 12px;
+            --t: .3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+        h1 { font-family: var(--serif); font-size: clamp(1.5rem, 4vw, 2.2rem); text-align: center; margin-bottom: 8px; }
+        .subtitle { text-align: center; color: var(--text2); margin-bottom: 40px; }
+        .divider { width: 50px; height: 2px; background: var(--gold); margin: 16px auto 32px; }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .card h2 { font-size: 1.1rem; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .card p { color: var(--text2); font-size: .92rem; margin-bottom: 12px; }
+        .card code {
+            display: block;
+            background: rgba(0,0,0,.3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-size: .82rem;
+            color: #60a5fa;
+            word-break: break-all;
+            margin: 8px 0;
+        }
+
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+        .stat { text-align: center; padding: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); }
+        .stat .num { font-family: var(--serif); font-size: 2rem; font-weight: 900; color: var(--gold); }
+        .stat .lbl { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 24px; border-radius: 25px;
+            text-decoration: none; font-weight: 600; font-size: .9rem;
+            transition: var(--t); margin: 4px;
+        }
+        .btn-gold { background: linear-gradient(135deg, var(--gold), #b8922e); color: #0a0e17; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,168,83,.3); }
+        .btn-outline { background: transparent; color: var(--gold); border: 1px solid rgba(212,168,83,.3); }
+        .btn-outline:hover { background: var(--gold-d); }
+
+        .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .85rem; }
+        th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--gold); font-weight: 600; }
+        td { color: var(--text2); }
+
+        .footer { text-align: center; padding: 32px; color: var(--muted); font-size: .8rem; border-top: 1px solid var(--border); margin-top: 40px; }
+        .footer a { color: var(--gold); }
+
+        @media (max-width: 600px) {
+            .stats-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📊 Open Data — Minab School</h1>
+        <p class="subtitle">Verified names, photos, and stories — free for researchers, journalists, and advocates</p>
+        <div class="divider"></div>
+
+        <div class="stats-row">
+            <div class="stat">
+                <div class="num" id="childCount">—</div>
+                <div class="lbl">Children Identified</div>
+            </div>
+            <div class="stat">
+                <div class="num" id="photoCount">—</div>
+                <div class="lbl">With Photos</div>
+            </div>
+            <div class="stat">
+                <div class="num" id="adultCount">—</div>
+                <div class="lbl">Staff / Teachers</div>
+            </div>
+        </div>
+
+        <!-- JSON API -->
+        <div class="card">
+            <h2>🔗 JSON API</h2>
+            <p>Fetch all children's data programmatically. Returns names (English + Farsi), age, gender, photo URLs, and profile page links.</p>
+            <code>GET https://peopleforpeace.live/api/children.json</code>
+            <p style="font-size:.8rem;color:var(--muted);">No authentication required. CORS enabled. Updated periodically.</p>
+            <div class="btns">
+                <a class="btn btn-gold" href="/api/children.json" target="_blank">📥 View JSON</a>
+                <a class="btn btn-outline" href="/api/children.json" download="minab_children.json">⬇ Download JSON</a>
+            </div>
+        </div>
+
+        <!-- Response Schema -->
+        <div class="card">
+            <h2>📋 Response Schema</h2>
+            <table>
+                <thead>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>id</td><td>string</td><td>Unique slug (e.g. "zeynab-bahrami")</td></tr>
+                    <tr><td>name</td><td>string</td><td>Full name in English</td></tr>
+                    <tr><td>nameFa</td><td>string</td><td>Full name in Farsi (Persian)</td></tr>
+                    <tr><td>age</td><td>number|null</td><td>Age at time of death (if known)</td></tr>
+                    <tr><td>gender</td><td>"boy"|"girl"</td><td>Gender</td></tr>
+                    <tr><td>hasPhoto</td><td>boolean</td><td>Whether a photo is available</td></tr>
+                    <tr><td>photoUrl</td><td>string|null</td><td>Direct URL to the child's photo</td></tr>
+                    <tr><td>profileUrl</td><td>string</td><td>URL to the child's memorial page</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- CSV Download -->
+        <div class="card">
+            <h2>📄 CSV Download</h2>
+            <p>Download a spreadsheet-ready CSV file with all identified children's information.</p>
+            <div class="btns">
+                <button class="btn btn-gold" onclick="downloadCSV()">📥 Download CSV</button>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="card">
+            <h2>💻 Usage Examples</h2>
+            <p>JavaScript:</p>
+            <code>const res = await fetch('https://peopleforpeace.live/api/children.json');<br>
+const data = await res.json();<br>
+data.children.forEach(c => console.log(c.name, c.nameFa));</code>
+            <p>Python:</p>
+            <code>import requests<br>
+data = requests.get('https://peopleforpeace.live/api/children.json').json()<br>
+for child in data['children']:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(child['name'], child['nameFa'])</code>
+        </div>
+
+        <!-- License -->
+        <div class="card">
+            <h2>⚖️ License & Attribution</h2>
+            <p>This data is provided free under a <strong>Creative Commons CC-BY 4.0</strong> license for educational, awareness, and humanitarian purposes.</p>
+            <p>When using this data, please credit: <strong>People for Peace — peopleforpeace.live</strong></p>
+            <p style="font-size:.8rem;color:var(--muted);">Sources: Minab Governor's Office, Middle East Eye, Iran Gymnastics Federation, Human Rights Watch</p>
+        </div>
+
+        <div class="footer">
+            <a href="/memorial.html">← Memorial Page</a> &nbsp;·&nbsp;
+            <a href="/">Home</a> &nbsp;·&nbsp;
+            <a href="https://t.me/peopleforpeacebot">Telegram Bot</a>
+            <p style="margin-top:12px;">People for Peace · 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // Fetch and populate stats
+        fetch('/api/children.json')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('childCount').textContent = data.totalIdentified;
+                document.getElementById('photoCount').textContent = data.withPhotos;
+                document.getElementById('adultCount').textContent = data.adults;
+            })
+            .catch(() => {
+                document.getElementById('childCount').textContent = '117';
+                document.getElementById('photoCount').textContent = '98';
+                document.getElementById('adultCount').textContent = '3';
+            });
+
+        function downloadCSV() {
+            fetch('/api/children.json')
+                .then(r => r.json())
+                .then(data => {
+                    const rows = [['Name', 'Name (Farsi)', 'Age', 'Gender', 'Has Photo', 'Photo URL', 'Profile URL']];
+                    data.children.forEach(c => {
+                        rows.push([
+                            c.name,
+                            c.nameFa,
+                            c.age || '',
+                            c.gender,
+                            c.hasPhoto ? 'Yes' : 'No',
+                            c.photoUrl || '',
+                            c.profileUrl,
+                        ]);
+                    });
+                    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+                    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'minab_children.csv';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1204 @@
+{
+  "title": "100 Faces of Peace — Minab School Memorial",
+  "description": "168 children and teachers killed in the Minab School airstrike, February 28, 2026.",
+  "totalIdentified": 117,
+  "withPhotos": 98,
+  "adults": 3,
+  "children": [
+    {
+      "id": "zeynab-bahrami",
+      "name": "Zeynab Bahrami",
+      "nameFa": "زینب بهرامی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c00.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=zeynab-bahrami"
+    },
+    {
+      "id": "baran-ghasemy",
+      "name": "Baran Ghasemy",
+      "nameFa": "باران قاسمی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c01.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=baran-ghasemy"
+    },
+    {
+      "id": "niyayesh-salehi",
+      "name": "Niyayesh Salehi",
+      "nameFa": "نیایش صالحی",
+      "age": 9,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c02.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=niyayesh-salehi"
+    },
+    {
+      "id": "helma-ghasemy",
+      "name": "Helma Ghasemy",
+      "nameFa": "حلما قاسمی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c03.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=helma-ghasemy"
+    },
+    {
+      "id": "nazanin-zahra-behroozi",
+      "name": "Nazanin Zahra Behroozi",
+      "nameFa": "نازنین‌زهرا بهروزی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c04.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=nazanin-zahra-behroozi"
+    },
+    {
+      "id": "zahra-bahrami",
+      "name": "Zahra Bahrami",
+      "nameFa": "زهرا بهرامی",
+      "age": 7,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c05.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=zahra-bahrami"
+    },
+    {
+      "id": "samira-malahi",
+      "name": "Samira Malahi",
+      "nameFa": "سمیرا ملاحی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c09.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=samira-malahi"
+    },
+    {
+      "id": "arina-arabkish",
+      "name": "Arina ArabKish",
+      "nameFa": "آرینا عرب‌کیش",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c10.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=arina-arabkish"
+    },
+    {
+      "id": "zahra-soleimani",
+      "name": "Zahra Soleimani",
+      "nameFa": "زهرا سلیمانی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c11.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=zahra-soleimani"
+    },
+    {
+      "id": "mahna-bahrami",
+      "name": "Mahna Bahrami",
+      "nameFa": "مهنا بهرامی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c12.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mahna-bahrami"
+    },
+    {
+      "id": "fatemeh-dorazehi",
+      "name": "Fatemeh Dorazehi",
+      "nameFa": "فاطمه دورازهی",
+      "age": 10,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c13.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=fatemeh-dorazehi"
+    },
+    {
+      "id": "masoumeh-nazari",
+      "name": "Masoumeh Nazari",
+      "nameFa": "معصومه نظری",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r00_c14.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=masoumeh-nazari"
+    },
+    {
+      "id": "reyhaneh-zakeri",
+      "name": "Reyhaneh Zakeri",
+      "nameFa": "ریحانه ذاکری",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c00.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=reyhaneh-zakeri"
+    },
+    {
+      "id": "athena-ahmadzadeh",
+      "name": "Athena Ahmadzadeh",
+      "nameFa": "آتنا احمدزاده",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c01.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=athena-ahmadzadeh"
+    },
+    {
+      "id": "maryam-pazarak",
+      "name": "Maryam Pazarak",
+      "nameFa": "مریم پازارک",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c02.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=maryam-pazarak"
+    },
+    {
+      "id": "athareh-zarei",
+      "name": "Athareh Zarei",
+      "nameFa": "اطهره زارعی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c03.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=athareh-zarei"
+    },
+    {
+      "id": "zahra-sharafi",
+      "name": "Zahra Sharafi",
+      "nameFa": "زهرا شرفی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c05.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=zahra-sharafi"
+    },
+    {
+      "id": "khadijeh-darvishi",
+      "name": "Khadijeh Darvishi",
+      "nameFa": "خدیجه درویشی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c06.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=khadijeh-darvishi"
+    },
+    {
+      "id": "asra-zakeri",
+      "name": "Asra Zakeri",
+      "nameFa": "اسرا ذاکری",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c07.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=asra-zakeri"
+    },
+    {
+      "id": "nadia-shahmiri",
+      "name": "Nadia Shahmiri",
+      "nameFa": "نادیا شاهمیری",
+      "age": 9,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c08.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=nadia-shahmiri"
+    },
+    {
+      "id": "sonar-salari",
+      "name": "Sonar Salari",
+      "nameFa": "سونار سالاری",
+      "age": 9,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c09.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=sonar-salari"
+    },
+    {
+      "id": "zeinab-makizadeh",
+      "name": "Zeinab Makizadeh",
+      "nameFa": "زینب مکی‌زاده",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c10.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=zeinab-makizadeh"
+    },
+    {
+      "id": "zoha-pasand",
+      "name": "Zoha Pasand",
+      "nameFa": "زهرا پسند",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c11.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=zoha-pasand"
+    },
+    {
+      "id": "zahra-ansari",
+      "name": "Zahra Ansari",
+      "nameFa": "زهرا انصاری",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c12.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=zahra-ansari"
+    },
+    {
+      "id": "liyana-mohammadi",
+      "name": "Liyana Mohammadi",
+      "nameFa": "لیانا محمدی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c13.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=liyana-mohammadi"
+    },
+    {
+      "id": "fatemeh-zahra-karimi",
+      "name": "Fatemeh Zahra Karimi",
+      "nameFa": "فاطمه‌زهرا کریمی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r01_c14.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=fatemeh-zahra-karimi"
+    },
+    {
+      "id": "parsa-mokhtarinasab",
+      "name": "Parsa Mokhtarinasab",
+      "nameFa": "پارسا مختاری‌نسب",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c00.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=parsa-mokhtarinasab"
+    },
+    {
+      "id": "makan-nasiri",
+      "name": "Makan Nasiri",
+      "nameFa": "ماکان نصیری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c01.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=makan-nasiri"
+    },
+    {
+      "id": "amirmohammad-boostani",
+      "name": "Amirmohammad Boostani",
+      "nameFa": "امیرمحمد بوستانی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c02.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amirmohammad-boostani"
+    },
+    {
+      "id": "amirmohammad-ghasemi",
+      "name": "Amirmohammad Ghasemi",
+      "nameFa": "امیرمحمد قاسمی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c03.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amirmohammad-ghasemi"
+    },
+    {
+      "id": "reza-habashian",
+      "name": "Reza Habashian",
+      "nameFa": "رضا حبشیان",
+      "age": 7,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c04.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=reza-habashian"
+    },
+    {
+      "id": "ali-zarei-gholam",
+      "name": "Ali Zarei Gholam",
+      "nameFa": "علی زارعی غلام",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c05.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=ali-zarei-gholam"
+    },
+    {
+      "id": "fatemeh-rahdar",
+      "name": "Fatemeh Rahdar",
+      "nameFa": "فاطمه رهدار",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c06.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=fatemeh-rahdar"
+    },
+    {
+      "id": "asma-zakeri",
+      "name": "Asma Zakeri",
+      "nameFa": "اسما ذاکری",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c07.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=asma-zakeri"
+    },
+    {
+      "id": "setayesh-alihoseini",
+      "name": "Setayesh Alihoseini",
+      "nameFa": "ستایش علی‌حسینی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c08.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=setayesh-alihoseini"
+    },
+    {
+      "id": "salma-zakeri",
+      "name": "Salma Zakeri",
+      "nameFa": "سلما ذاکری",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c09.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=salma-zakeri"
+    },
+    {
+      "id": "athena-chamaninejad",
+      "name": "Athena Chamaninejad",
+      "nameFa": "آتنا چمنی‌نژاد",
+      "age": 6,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c10.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=athena-chamaninejad"
+    },
+    {
+      "id": "farimah-fakhari",
+      "name": "Farimah Fakhari",
+      "nameFa": "فریما فخاری",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c11.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=farimah-fakhari"
+    },
+    {
+      "id": "hananeh-mehdikhah",
+      "name": "Hananeh Mehdikhah",
+      "nameFa": "حنانه مهدیخواه",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c12.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=hananeh-mehdikhah"
+    },
+    {
+      "id": "hanieh-ahmadi",
+      "name": "Hanieh Ahmadi",
+      "nameFa": "هانیه احمدی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c13.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=hanieh-ahmadi"
+    },
+    {
+      "id": "raha-zareie",
+      "name": "Raha Zareie",
+      "nameFa": "رها زارعی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r02_c14.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=raha-zareie"
+    },
+    {
+      "id": "sobhan-ahmadi",
+      "name": "Sobhan Ahmadi",
+      "nameFa": "سبحان احمدی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c00.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=sobhan-ahmadi"
+    },
+    {
+      "id": "mahdi-delavari",
+      "name": "Mahdi Delavari",
+      "nameFa": "مهدی دلاوری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c01.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mahdi-delavari"
+    },
+    {
+      "id": "mohammadtaha-jafari",
+      "name": "Mohammadtaha Jafari",
+      "nameFa": "محمدطه جعفری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c02.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammadtaha-jafari"
+    },
+    {
+      "id": "mohammadtaha-malahi",
+      "name": "Mohammadtaha Malahi",
+      "nameFa": "محمدطه ملاحی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c03.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammadtaha-malahi"
+    },
+    {
+      "id": "amirhossein-jafari",
+      "name": "Amirhossein Jafari",
+      "nameFa": "امیرحسین جعفری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c04.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amirhossein-jafari"
+    },
+    {
+      "id": "mohammad-hatam-raeisi",
+      "name": "Mohammad Hatam Raeisi",
+      "nameFa": "محمد حاتم رئیسی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c05.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-hatam-raeisi"
+    },
+    {
+      "id": "hossein-rahsepar",
+      "name": "Hossein Rahsepar",
+      "nameFa": "حسین ره‌سپار",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c06.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=hossein-rahsepar"
+    },
+    {
+      "id": "mohammad-abadizadeh",
+      "name": "Mohammad Abadizadeh",
+      "nameFa": "محمد آبادی‌زاده",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c07.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-abadizadeh"
+    },
+    {
+      "id": "sina-zakeri",
+      "name": "Sina Zakeri",
+      "nameFa": "سینا ذاکری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c08.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=sina-zakeri"
+    },
+    {
+      "id": "ali-asghar-zaeri",
+      "name": "Ali Asghar Zaeri",
+      "nameFa": "علی‌اصغر زاعری",
+      "age": 8,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c09.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=ali-asghar-zaeri"
+    },
+    {
+      "id": "alireza-zarei",
+      "name": "Alireza Zarei",
+      "nameFa": "علیرضا زارعی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c10.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=alireza-zarei"
+    },
+    {
+      "id": "mohammadsadegh-gholami",
+      "name": "Mohammadsadegh Gholami",
+      "nameFa": "محمدصادق غلامی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c11.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammadsadegh-gholami"
+    },
+    {
+      "id": "saleh-abbasi",
+      "name": "Saleh Abbasi",
+      "nameFa": "صالح عباسی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c12.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=saleh-abbasi"
+    },
+    {
+      "id": "mohammad-loghmani",
+      "name": "Mohammad Loghmani",
+      "nameFa": "محمد لقمانی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c13.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-loghmani"
+    },
+    {
+      "id": "hani-paritaghinejhad",
+      "name": "Hani Paritaghinejhad",
+      "nameFa": "هانی پریتاغی‌نژاد",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r03_c14.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=hani-paritaghinejhad"
+    },
+    {
+      "id": "sepehr-karimi",
+      "name": "Sepehr Karimi",
+      "nameFa": "سپهر کریمی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c00.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=sepehr-karimi"
+    },
+    {
+      "id": "arya-bahadori",
+      "name": "Arya Bahadori",
+      "nameFa": "آریا بهادری",
+      "age": 9,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c01.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=arya-bahadori"
+    },
+    {
+      "id": "parham-ranjbari",
+      "name": "Parham Ranjbari",
+      "nameFa": "پرهام رنجبری",
+      "age": 9,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c02.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=parham-ranjbari"
+    },
+    {
+      "id": "mohammad-sadra-zarei",
+      "name": "Mohammad Sadra Zarei",
+      "nameFa": "محمد صدرا زارعی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c03.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-sadra-zarei"
+    },
+    {
+      "id": "ali-akbar-karyanipak",
+      "name": "Ali Akbar Karyanipak",
+      "nameFa": "علی‌اکبر کاریانی‌پاک",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c04.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=ali-akbar-karyanipak"
+    },
+    {
+      "id": "mohammad-reza-shahsavari",
+      "name": "Mohammad Reza Shahsavari",
+      "nameFa": "محمدرضا شهسواری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c05.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-reza-shahsavari"
+    },
+    {
+      "id": "amirali-jadavi",
+      "name": "Amirali Jadavi",
+      "nameFa": "امیرعلی جدوی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c06.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amirali-jadavi"
+    },
+    {
+      "id": "moien-zeinali",
+      "name": "Moien Zeinali",
+      "nameFa": "معین زینلی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c07.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=moien-zeinali"
+    },
+    {
+      "id": "mohammad-raofinia",
+      "name": "Mohammad Raofinia",
+      "nameFa": "محمد رئوفی‌نیا",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c08.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-raofinia"
+    },
+    {
+      "id": "aliasghar-foroozafar",
+      "name": "Aliasghar Foroozafar",
+      "nameFa": "علی‌اصغر فروزافر",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c09.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=aliasghar-foroozafar"
+    },
+    {
+      "id": "arad-ahmadizadeh",
+      "name": "Arad Ahmadizadeh",
+      "nameFa": "آراد احمدی‌زاده",
+      "age": 8,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c10.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=arad-ahmadizadeh"
+    },
+    {
+      "id": "soheil-chamalipour",
+      "name": "Soheil Chamalipour",
+      "nameFa": "سهیل چملی‌پور",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c11.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=soheil-chamalipour"
+    },
+    {
+      "id": "mohammad-jamali",
+      "name": "Mohammad Jamali",
+      "nameFa": "محمد جمالی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c12.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-jamali"
+    },
+    {
+      "id": "alireza-shahrjoo",
+      "name": "Alireza Shahrjoo",
+      "nameFa": "علیرضا شهرجو",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c13.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=alireza-shahrjoo"
+    },
+    {
+      "id": "reza-barani",
+      "name": "Reza Barani",
+      "nameFa": "رضا بارانی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r04_c14.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=reza-barani"
+    },
+    {
+      "id": "javad-sartakzade",
+      "name": "Javad Sartakzade",
+      "nameFa": "جواد سرتک‌زاده",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c00.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=javad-sartakzade"
+    },
+    {
+      "id": "saman-karimzadeh",
+      "name": "Saman Karimzadeh",
+      "nameFa": "سامان کریم‌زاده",
+      "age": 7,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c01.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=saman-karimzadeh"
+    },
+    {
+      "id": "mohammad-ali-karyanipak",
+      "name": "Mohammad Ali Karyanipak",
+      "nameFa": "محمدعلی کاریانی‌پاک",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c02.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-ali-karyanipak"
+    },
+    {
+      "id": "amir-mohammadi",
+      "name": "Amir Mohammadi",
+      "nameFa": "امیر محمدی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c03.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amir-mohammadi"
+    },
+    {
+      "id": "masiha-salari",
+      "name": "Masiha Salari",
+      "nameFa": "مسیحا سالاری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c04.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=masiha-salari"
+    },
+    {
+      "id": "ali-salari",
+      "name": "Ali Salari",
+      "nameFa": "علی سالاری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c05.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=ali-salari"
+    },
+    {
+      "id": "ehsan-saleminia",
+      "name": "Ehsan Saleminia",
+      "nameFa": "احسان سالمی‌نیا",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c06.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=ehsan-saleminia"
+    },
+    {
+      "id": "sorena-hosseinpour",
+      "name": "Sorena Hosseinpour",
+      "nameFa": "سورنا حسین‌پور",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c07.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=sorena-hosseinpour"
+    },
+    {
+      "id": "amin-ahmadzade",
+      "name": "Amin Ahmadzade",
+      "nameFa": "امین احمدزاده",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c08.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amin-ahmadzade"
+    },
+    {
+      "id": "homayoon-zeinali",
+      "name": "Homayoon Zeinali",
+      "nameFa": "همایون زینلی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c09.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=homayoon-zeinali"
+    },
+    {
+      "id": "heidar-salehi",
+      "name": "Heidar Salehi",
+      "nameFa": "حیدر صالحی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c10.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=heidar-salehi"
+    },
+    {
+      "id": "mohammad-shahdoosti",
+      "name": "Mohammad Shahdoosti",
+      "nameFa": "محمد شاهدوستی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c11.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-shahdoosti"
+    },
+    {
+      "id": "amirali-boostani",
+      "name": "Amirali Boostani",
+      "nameFa": "امیرعلی بوستانی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c12.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amirali-boostani"
+    },
+    {
+      "id": "reza-ranjbar",
+      "name": "Reza Ranjbar",
+      "nameFa": "رضا رنجبر",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c13.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=reza-ranjbar"
+    },
+    {
+      "id": "amirmohammad-bagheri",
+      "name": "Amirmohammad Bagheri",
+      "nameFa": "امیرمحمد باقری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r05_c14.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amirmohammad-bagheri"
+    },
+    {
+      "id": "danial-faghirdoost",
+      "name": "Danial Faghirdoost",
+      "nameFa": "دانیال فقیردوست",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c03.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=danial-faghirdoost"
+    },
+    {
+      "id": "hami-sadeghi",
+      "name": "Hami Sadeghi",
+      "nameFa": "هامی صادقی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c04.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=hami-sadeghi"
+    },
+    {
+      "id": "mohammadmahdi-jangichi",
+      "name": "Mohammadmahdi Jangichi",
+      "nameFa": "محمدمهدی جنگیچی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c05.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammadmahdi-jangichi"
+    },
+    {
+      "id": "sobhan-shahdadi",
+      "name": "Sobhan Shahdadi",
+      "nameFa": "سبحان شهدادی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c06.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=sobhan-shahdadi"
+    },
+    {
+      "id": "benyamin-jangjoo",
+      "name": "Benyamin Jangjoo",
+      "nameFa": "بنیامین جنگجو",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c07.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=benyamin-jangjoo"
+    },
+    {
+      "id": "mohammadayan-bahrami",
+      "name": "Mohammadayan Bahrami",
+      "nameFa": "محمدآیان بهرامی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c08.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammadayan-bahrami"
+    },
+    {
+      "id": "amirghasem-zaeri",
+      "name": "Amirghasem Zaeri",
+      "nameFa": "امیرقاسم زاعری",
+      "age": 7,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c09.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amirghasem-zaeri"
+    },
+    {
+      "id": "mahdi-salari",
+      "name": "Mahdi Salari",
+      "nameFa": "مهدی سالاری",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c10.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mahdi-salari"
+    },
+    {
+      "id": "amirali-kamali",
+      "name": "Amirali Kamali",
+      "nameFa": "امیرعلی کمالی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c11.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amirali-kamali"
+    },
+    {
+      "id": "arsha-mirani",
+      "name": "Arsha Mirani",
+      "nameFa": "آرشا میرانی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c12.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=arsha-mirani"
+    },
+    {
+      "id": "hamed-parasheghnejad",
+      "name": "Hamed Par'asheghnejad",
+      "nameFa": "حامد پرعاشق‌نژاد",
+      "age": 7,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c13.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=hamed-parasheghnejad"
+    },
+    {
+      "id": "arash-golazin",
+      "name": "Arash Golazin",
+      "nameFa": "آرش گلآذین",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": true,
+      "photoUrl": "https://peopleforpeace.live/images/children/child_r06_c14.jpg",
+      "profileUrl": "https://peopleforpeace.live/child.html?id=arash-golazin"
+    },
+    {
+      "id": "hana-dehghani",
+      "name": "Hana Dehghani",
+      "nameFa": "هانا دهقانی",
+      "age": 8,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=hana-dehghani"
+    },
+    {
+      "id": "ahmad-soltani",
+      "name": "Ahmad Soltani",
+      "nameFa": "احمد سلطانی",
+      "age": 8,
+      "gender": "boy",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=ahmad-soltani"
+    },
+    {
+      "id": "mahdis-nazari",
+      "name": "Mahdis Nazari",
+      "nameFa": "مهدیس نظری",
+      "age": 7,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mahdis-nazari"
+    },
+    {
+      "id": "fatemeh-shahdadi",
+      "name": "Fatemeh Shahdadi",
+      "nameFa": "فاطمه شهدادی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=fatemeh-shahdadi"
+    },
+    {
+      "id": "mahmoud-gholamiyani",
+      "name": "Mahmoud Gholamiyani",
+      "nameFa": "محمود غلامیانی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mahmoud-gholamiyani"
+    },
+    {
+      "id": "amirhossein-rasouli",
+      "name": "Amirhossein Rasouli Soleimani",
+      "nameFa": "امیرحسین رسولی سلیمانی",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=amirhossein-rasouli"
+    },
+    {
+      "id": "zahra-behrouzi",
+      "name": "Zahra Behrouzi",
+      "nameFa": "زهرا بهروزی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=zahra-behrouzi"
+    },
+    {
+      "id": "asna-raeisi",
+      "name": "Asna Raeisi",
+      "nameFa": "آسنا رئیسی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=asna-raeisi"
+    },
+    {
+      "id": "mandana-salari",
+      "name": "Mandana Salari",
+      "nameFa": "ماندانا سالاری",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mandana-salari"
+    },
+    {
+      "id": "sara-shayesteh",
+      "name": "Sara Shayesteh",
+      "nameFa": "سارا شایسته",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=sara-shayesteh"
+    },
+    {
+      "id": "fatemeh-taherifard",
+      "name": "Fatemeh Taherifard",
+      "nameFa": "فاطمه طاهری‌فرد",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=fatemeh-taherifard"
+    },
+    {
+      "id": "fatemeh-fadavi",
+      "name": "Fatemeh Fadavi",
+      "nameFa": "فاطمه فدوی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=fatemeh-fadavi"
+    },
+    {
+      "id": "mohana-zarei",
+      "name": "Mohana Zarei",
+      "nameFa": "محنا زارعی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohana-zarei"
+    },
+    {
+      "id": "samira-basardeh",
+      "name": "Samira Basardeh",
+      "nameFa": "سمیرا بسرده",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=samira-basardeh"
+    },
+    {
+      "id": "roghayeh-karimi",
+      "name": "Roghayeh Karimi",
+      "nameFa": "رقیه کریمی",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=roghayeh-karimi"
+    },
+    {
+      "id": "marziyeh-bashirifar",
+      "name": "Marziyeh Bashirifar",
+      "nameFa": "مرضیه بشیری‌فر",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=marziyeh-bashirifar"
+    },
+    {
+      "id": "mohammad-mahdi-chegininia",
+      "name": "Mohammad Mahdi Chegininia",
+      "nameFa": "محمدمهدی چگینی‌نیا",
+      "age": null,
+      "gender": "boy",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=mohammad-mahdi-chegininia"
+    },
+    {
+      "id": "fereshteh-sangarzadeh",
+      "name": "Fereshteh Sangarzadeh",
+      "nameFa": "فرشته سنگرزاده",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=fereshteh-sangarzadeh"
+    },
+    {
+      "id": "fatemeh-yazdanpanah",
+      "name": "Fatemeh Yazdanpanah",
+      "nameFa": "فاطمه یزدان‌پناه",
+      "age": null,
+      "gender": "girl",
+      "hasPhoto": false,
+      "photoUrl": null,
+      "profileUrl": "https://peopleforpeace.live/child.html?id=fatemeh-yazdanpanah"
+    }
+  ],
+  "teachers": [
+    {
+      "id": "neda-solhizadeh",
+      "name": "Neda Solhizadeh",
+      "nameFa": "ندا صلحی‌زاده",
+      "age": null,
+      "role": "Teacher"
+    },
+    {
+      "id": "fatemeh-salari-staff",
+      "name": "Fatemeh Salari",
+      "nameFa": "فاطمه سالاری",
+      "age": 34,
+      "role": "Teacher / Staff"
+    },
+    {
+      "id": "school-principal",
+      "name": "School Principal",
+      "nameFa": "مدیر مدرسه",
+      "age": null,
+      "role": "Principal"
+    }
+  ],
+  "source": "https://peopleforpeace.live/memorial.html",
+  "license": "This data is made available for educational, awareness, and humanitarian purposes."
+}
