@@ -1088,37 +1088,29 @@ async def handle_task_start_and_guide(query, session, task_id, context):
             )
         ])
 
-        # Send a random Minab child photo for inspiration
+        # Send a random Minab child photo for inspiration (from public API)
         try:
-            import json
-            import os
             import random
-            children_json = os.environ.get(
-                'CHILDREN_JSON_PATH',
-                '/app/assets/children/children_mapping.json'
-            )
-            children_photos_dir = os.environ.get(
-                'CHILDREN_PHOTOS_DIR',
-                '/app/assets/children/photos'
-            )
-            if os.path.exists(children_json):
-                with open(children_json, 'r', encoding='utf-8') as f:
-                    children = json.load(f)
+            import httpx
+            resp = httpx.get('https://peopleforpeace.live/children.json', timeout=5)
+            if resp.status_code == 200:
+                data = resp.json()
+                children = data.get('children', data) if isinstance(data, dict) else data
                 if children:
                     child = random.choice(children)
-                    child_name = child.get('name_en', child.get('name', 'A child of Minab'))
-                    child_photo_file = child.get('photo', '')
-                    child_photo_path = os.path.join(
-                        children_photos_dir, child_photo_file
-                    ) if child_photo_file else ''
-                    if child_photo_path and os.path.exists(child_photo_path):
+                    child_name = child.get('name', child.get('name_en', 'A child of Minab'))
+                    photo_url = child.get('photoUrl', child.get('photo', ''))
+                    if photo_url:
+                        if not photo_url.startswith('http'):
+                            photo_url = f'https://peopleforpeace.live{photo_url}'
                         caption = t('content_child_inspiration', lang).format(
                             name=child_name
                         )
                         await query.get_bot().send_photo(
                             chat_id=query.message.chat_id,
-                            photo=open(child_photo_path, 'rb'),
+                            photo=photo_url,
                             caption=caption,
+                            parse_mode='Markdown',
                         )
         except Exception as lib_err:
             logger.warning(f'Content library error: {lib_err}')
