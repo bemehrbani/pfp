@@ -2,11 +2,15 @@
 Dashboard authentication handler.
 Generates OTP codes for campaign managers to log into the web dashboard.
 """
+import json
 import logging
+import os
 import secrets
 from asgiref.sync import sync_to_async
 from telegram import Update
 from telegram.ext import CallbackContext
+
+import redis
 
 from utils.django_integration import setup_django
 from utils.state_management import state_manager
@@ -15,6 +19,14 @@ from utils.translations import t
 logger = logging.getLogger(__name__)
 
 setup_django()
+
+# Direct Redis connection (shared with Django's cache on the same Redis instance)
+_redis_client = redis.Redis.from_url(
+    os.environ.get('REDIS_URL', 'redis://redis:6379/1'),
+    decode_responses=True
+)
+
+OTP_TTL_SECONDS = 300  # 5 minutes
 
 
 def _generate_otp() -> str:
@@ -29,7 +41,6 @@ async def dashboard_command(update: Update, context: CallbackContext) -> None:
     @sync_to_async
     def _get_user_and_generate_otp():
         from django.contrib.auth import get_user_model
-        from django.core.cache import cache
 
         User = get_user_model()
 
@@ -45,13 +56,14 @@ async def dashboard_command(update: Update, context: CallbackContext) -> None:
         if user.role not in ('admin', 'campaign_manager'):
             return user, None, 'not_authorized'
 
-        # Generate OTP and store in Redis cache (5 min TTL)
+        # Generate OTP and store in Redis (5 min TTL)
         otp_code = _generate_otp()
         cache_key = f"otp:{user.telegram_id}"
-        cache.set(cache_key, {
-            'code': otp_code,
-            'user_id': user.pk,
-        }, timeout=300)
+        _redis_client.setex(
+            cache_key,
+            OTP_TTL_SECONDS,
+            json.dumps({'code': otp_code, 'user_id': user.pk})
+        )
 
         # Determine display name for login
         login_name = user.telegram_username or f"user_{user.telegram_id}"
