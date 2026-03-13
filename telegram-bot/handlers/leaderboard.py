@@ -29,13 +29,13 @@ def _get_leaderboard_data(campaign_filter=None, current_user=None):
         ).values_list('volunteer_id', flat=True)
         users = users.filter(id__in=campaign_user_ids)
 
-    users = users.order_by('-total_points', 'date_joined')
+    users = users.order_by('-points', 'date_joined')
     top_users = list(users[:10])
     total_users = users.count()
 
     current_user_rank = None
     if current_user and current_user.id not in [u.id for u in top_users]:
-        current_user_rank = users.filter(total_points__gt=(current_user.total_points or 0)).count() + 1
+        current_user_rank = users.filter(points__gt=(current_user.points or 0)).count() + 1
 
     return {
         'top_users': top_users,
@@ -146,18 +146,18 @@ def create_leaderboard_message(data, campaign_filter, current_user):
         elif i == 3:
             medal = "🥉 "
 
-        points = getattr(user, 'total_points', 0) or 0
+        completed = getattr(user, 'points', 0) or 0
 
         if current_user and user.id == current_user.id:
             message += f"*{i}. {medal}YOU - {user.first_name}*\n"
         else:
             message += f"{i}. {medal}{user.first_name}\n"
 
-        message += f"   📊 {points} points\n\n"
+        message += f"   📊 {completed} tasks completed\n\n"
 
     if current_user_rank:
         message += f"*Your Rank:* #{current_user_rank}\n"
-        message += f"*Your Points:* {getattr(current_user, 'total_points', 0) or 0}\n\n"
+        message += f"*Your Points:* {getattr(current_user, 'points', 0) or 0}\n\n"
 
     message += "\n_Leaderboard updates in real-time._"
 

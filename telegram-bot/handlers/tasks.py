@@ -311,6 +311,17 @@ def _db_get_campaign_channel_id(campaign_id):
 
 
 @sync_to_async
+def _db_get_assignment_campaign_id(assignment_id):
+    """Get campaign_id from a TaskAssignment (sync-safe FK access)."""
+    from apps.tasks.models import TaskAssignment
+    try:
+        ta = TaskAssignment.objects.select_related('task').get(id=assignment_id)
+        return ta.task.campaign_id
+    except TaskAssignment.DoesNotExist:
+        return None
+
+
+@sync_to_async
 def _db_get_campaign_group_id(campaign_id):
     """Get the Telegram group ID for a campaign."""
     from apps.campaigns.models import Campaign
@@ -521,6 +532,7 @@ async def tasks_command(update: Update, context: CallbackContext):
 
     message = "🎯 *Available Tasks*\n\n"
     keyboard = []
+    lang = getattr(session, 'language', 'en') or 'en'
 
     for i, task in enumerate(tasks, 1):
         type_icon = _get_task_type_icon(task.task_type)
@@ -1235,10 +1247,8 @@ async def confirm_proof_submission(query, session, assignment_id, context):
     from apps.telegram.models import TelegramSession
     await _db_update_session_state(session, TelegramSession.State.IDLE)
 
-    # Get campaign context
-    campaign_id = None
-    if assignment.task.campaign:
-        campaign_id = assignment.task.campaign_id
+    # Get campaign context (sync-safe)
+    campaign_id = await _db_get_assignment_campaign_id(assignment.id)
 
     # ── Channel Broadcast (fire-and-forget) ──
     if campaign_id:

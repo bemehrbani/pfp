@@ -991,6 +991,11 @@ TRANSLATIONS = {
         "fa": "🌍 تغییر زبان",
         "ar": "🌍 تغيير اللغة",
     },
+    "language_prompt": {
+        "en": "🌍 Choose your language:",
+        "fa": "🌍 زبان خود را انتخاب کنید:",
+        "ar": "🌍 اختر لغتك:",
+    },
 }
 
 
