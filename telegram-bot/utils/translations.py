@@ -868,23 +868,26 @@ TRANSLATIONS = {
     "invite_message": {
         "en": (
             "📨 *Invite Friends to {name}*\n\n"
+            "_{description}_\n\n"
             "Share this link with friends and family to join the campaign:\n\n"
             "`{link}`\n\n"
-            "When someone joins through your link, you earn *+10 bonus points!* 🎁\n\n"
+            "Every person who joins makes a difference ✊\n\n"
             "Tap the button below to share directly 👇"
         ),
         "fa": (
             "📨 *دعوت دوستان به {name}*\n\n"
+            "_{description}_\n\n"
             "این لینک را با دوستان و خانواده به اشتراک بگذارید:\n\n"
             "`{link}`\n\n"
-            "وقتی کسی از طریق لینک شما بپیوندد، *+۱۰ امتیاز ویژه* دریافت می‌کنید! 🎁\n\n"
+            "هر نفری که بپیوندد، تأثیرگذار است ✊\n\n"
             "برای اشتراک‌گذاری مستقیم دکمه زیر را بزنید 👇"
         ),
         "ar": (
             "📨 *دعوة الأصدقاء إلى {name}*\n\n"
+            "_{description}_\n\n"
             "شارك هذا الرابط مع أصدقائك وعائلتك:\n\n"
             "`{link}`\n\n"
-            "عندما ينضم شخص عبر رابطك، تحصل على *+١٠ نقاط إضافية!* 🎁\n\n"
+            "كل شخص ينضم يُحدث فرقاً ✊\n\n"
             "اضغط الزر أدناه للمشاركة مباشرة 👇"
         ),
     },
@@ -894,9 +897,9 @@ TRANSLATIONS = {
         "ar": "انضم إليّ في حملة «{name}» من أجل السلام! ✌️",
     },
     "referral_credited": {
-        "en": "🎁 *+10 pts!* {name} just joined *{campaign}* through your invite link!",
-        "fa": "🎁 *+۱۰ امتیاز!* {name} از طریق لینک دعوت شما به *{campaign}* پیوست!",
-        "ar": "🎁 *+١٠ نقاط!* {name} انضم إلى *{campaign}* عبر رابط دعوتك!",
+        "en": "🎁 *Great!* {name} just joined *{campaign}* through your invite link! Welcome them! 🤝",
+        "fa": "🎁 *عالی!* {name} از طریق لینک دعوت شما به *{campaign}* پیوست! خوش‌آمدشان بگویید! 🤝",
+        "ar": "🎁 *رائع!* {name} انضم إلى *{campaign}* عبر رابط دعوتك! رحّبوا بهم! 🤝",
     },
 
     # ── Invite Flow: Language & Style Picker ──
@@ -958,19 +961,19 @@ TRANSLATIONS = {
     },
     "invite_campaign_text": {
         "en": (
-            "✊ Civilians are dying. Governments are silent. We are not.\n\n"
+            "✊ {description}\n\n"
             "Join {name} — sign petitions, amplify voices, hold leaders accountable.\n\n"
-            "Every action counts. 2 minutes: {link}"
+            "Every action counts. 2 minutes can change something: {link}"
         ),
         "fa": (
-            "✊ غیرنظامیان کشته می‌شوند. دولت‌ها ساکتند. ما نیستیم.\n\n"
+            "✊ {description}\n\n"
             "به {name} بپیوندید — طومار امضا کنید، صداها را بلند کنید.\n\n"
-            "هر اقدامی مهم است. ۲ دقیقه: {link}"
+            "هر اقدامی مهم است. ۲ دقیقه می‌تونه چیزی رو تغییر بده: {link}"
         ),
         "ar": (
-            "✊ المدنيون يُقتلون. الحكومات صامتة. نحن لسنا كذلك.\n\n"
+            "✊ {description}\n\n"
             "انضموا إلى {name} — وقّعوا العرائض، ضخّموا الأصوات.\n\n"
-            "كل فعل مهم. دقيقتان: {link}"
+            "كل فعل مهم. دقيقتان يمكن أن تغيّرا شيئاً: {link}"
         ),
     },
     "btn_memorial_style": {

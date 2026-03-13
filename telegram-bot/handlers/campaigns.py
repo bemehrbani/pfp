@@ -702,7 +702,9 @@ async def handle_invite_send(query, session, campaign_id, invite_lang, style):
         # Campaign style: open Telegram's share dialog with text
         from urllib.parse import quote
         share_text = t('invite_campaign_text', invite_lang).format(
-            name=campaign.localized_name(invite_lang), link=invite_link
+            name=campaign.localized_name(invite_lang),
+            description=campaign.localized_short_description(invite_lang),
+            link=invite_link
         )
         share_url = f"https://t.me/share/url?url={quote(invite_link)}&text={quote(share_text)}"
 
@@ -724,7 +726,9 @@ async def handle_invite_send(query, session, campaign_id, invite_lang, style):
 
         await query.edit_message_text(
             t('invite_message', lang).format(
-                name=campaign.localized_name(lang), link=invite_link
+                name=campaign.localized_name(lang),
+                description=campaign.localized_short_description(lang),
+                link=invite_link
             ),
             reply_markup=InlineKeyboardMarkup(keyboard),
             parse_mode='Markdown',
