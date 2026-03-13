@@ -88,6 +88,28 @@ TRANSLATIONS = {
         "fa": "⚠️ ابتدا باید ثبت‌نام کنید! از /start استفاده کنید.",
         "ar": "⚠️ يجب عليك التسجيل أولاً! استخدم /start لبدء التسجيل.",
     },
+    "dashboard_not_authorized": {
+        "en": "🔒 Dashboard access is for campaign managers and admins only.\n\nContact an admin if you need access.",
+        "fa": "🔒 دسترسی به داشبورد فقط برای مدیران کمپین و ادمین‌ها است.\n\nاگر نیاز به دسترسی دارید با ادمین تماس بگیرید.",
+        "ar": "🔒 الوصول إلى لوحة التحكم مخصص لمديري الحملات والمسؤولين فقط.\n\nتواصل مع المسؤول إذا كنت بحاجة إلى وصول.",
+    },
+    "dashboard_otp_sent": {
+        "en": "🔐 *Dashboard Login Code*\n\n"
+              "Your one-time code: `{code}`\n\n"
+              "👤 Username: `{username}`\n"
+              "⏱ Expires in 5 minutes\n\n"
+              "Go to [peopleforpeace.live/dashboard](https://peopleforpeace.live/dashboard) and enter your username and this code to log in.",
+        "fa": "🔐 *کد ورود به داشبورد*\n\n"
+              "کد یک‌بار مصرف شما: `{code}`\n\n"
+              "👤 نام کاربری: `{username}`\n"
+              "⏱ انقضا در ۵ دقیقه\n\n"
+              "به [peopleforpeace.live/dashboard](https://peopleforpeace.live/dashboard) بروید و نام کاربری و کد را وارد کنید.",
+        "ar": "🔐 *رمز الدخول إلى لوحة التحكم*\n\n"
+              "رمزك لمرة واحدة: `{code}`\n\n"
+              "👤 اسم المستخدم: `{username}`\n"
+              "⏱ ينتهي في 5 دقائق\n\n"
+              "اذهب إلى [peopleforpeace.live/dashboard](https://peopleforpeace.live/dashboard) وأدخل اسم المستخدم والرمز لتسجيل الدخول.",
+    },
     "register_for_campaign": {
         "en": "You're joining *{name}*! 🕊️\n\nPlease send me your full name to register.",
         "fa": "شما دارید به *{name}* می‌پیوندید! 🕊️\n\nلطفاً نام کامل خود را ارسال کنید.",
