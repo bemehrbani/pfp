@@ -35,7 +35,7 @@ api.interceptors.response.use(
           // No refresh token, redirect to login
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
-          window.location.href = '/';
+          window.location.href = '/dashboard/login';
           return Promise.reject(error);
         }
 
@@ -54,7 +54,7 @@ api.interceptors.response.use(
         // Refresh failed, redirect to login
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-        window.location.href = '/';
+        window.location.href = '/dashboard/login';
         return Promise.reject(refreshError);
       }
     }

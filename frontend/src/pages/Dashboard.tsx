@@ -7,7 +7,7 @@ const DashboardPage: React.FC = () => {
   const { data: stats, isLoading } = useQuery({
     queryKey: ['dashboard-stats'],
     queryFn: async () => {
-      const response = await api.get('/analytics/dashboard-stats/');
+      const response = await api.get('/api/analytics/dashboard-stats/');
       return response.data;
     },
   });

@@ -13,6 +13,7 @@ const AnalyticsPage = React.lazy(() => import('./pages/Analytics'));
 // Components
 const Navigation = React.lazy(() => import('./components/Navigation'));
 const LoadingSpinner = React.lazy(() => import('./components/LoadingSpinner'));
+const ProtectedRoute = React.lazy(() => import('./components/ProtectedRoute'));
 
 function App() {
   return (
@@ -21,13 +22,13 @@ function App() {
         <Navigation />
         <main className="container mx-auto px-4 py-8">
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/campaigns" element={<CampaignsPage />} />
-            <Route path="/campaigns/create" element={<CampaignCreatePage />} />
-            <Route path="/tasks" element={<TasksPage />} />
-            <Route path="/tasks/create" element={<TaskCreatePage />} />
-            <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+            <Route path="/campaigns" element={<ProtectedRoute><CampaignsPage /></ProtectedRoute>} />
+            <Route path="/campaigns/create" element={<ProtectedRoute><CampaignCreatePage /></ProtectedRoute>} />
+            <Route path="/tasks" element={<ProtectedRoute><TasksPage /></ProtectedRoute>} />
+            <Route path="/tasks/create" element={<ProtectedRoute><TaskCreatePage /></ProtectedRoute>} />
+            <Route path="/analytics" element={<ProtectedRoute><AnalyticsPage /></ProtectedRoute>} />
           </Routes>
         </main>
       </React.Suspense>

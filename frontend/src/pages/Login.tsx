@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
     onSuccess: (data) => {
       localStorage.setItem('access_token', data.access);
       localStorage.setItem('refresh_token', data.refresh);
-      navigate('/dashboard');
+      navigate('/');
     },
     onError: (error: any) => {
       setError(error.response?.data?.detail || 'Login failed');

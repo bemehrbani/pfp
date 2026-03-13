@@ -720,21 +720,78 @@ TRANSLATIONS = {
         "ar": "📲 انشر التغريدة #{n}",
     },
 
-    # ── Proof Submission (updated) ─────────────────────────────────────
+    # ── Proof Submission (auto-verified) ─────────────────────────────────
     "proof_submitted_short": {
-        "en": "✅ *Proof Submitted!*",
-        "fa": "✅ *مدرک ارسال شد!*",
-        "ar": "✅ *تم تقديم الدليل!*",
+        "en": "✅ *Task Completed!*",
+        "fa": "✅ *وظیفه انجام شد!*",
+        "ar": "✅ *تم إنجاز المهمة!*",
     },
-    "proof_under_review": {
-        "en": "Your proof is being reviewed — you'll be notified once verified.",
-        "fa": "مدرک شما در حال بررسی است — پس از تأیید به شما اطلاع داده می‌شود.",
-        "ar": "يتم مراجعة دليلك — سيتم إخطارك بمجرد التحقق.",
+    "proof_auto_completed": {
+        "en": "Thank you for your action — every step makes a difference 🕊",
+        "fa": "ممنون از اقدام شما — هر قدمی تأثیرگذار است 🕊",
+        "ar": "شكراً لتحركك — كل خطوة تُحدث فرقاً 🕊",
     },
     "proof_keep_going": {
         "en": "Ready to keep going? 👇",
         "fa": "آماده ادامه هستید? 👇",
         "ar": "مستعد للاستمرار؟ 👇",
+    },
+
+    # ── Twitter Like ──────────────────────────────────────────────────
+    "like_instructions": {
+        "en": "❤️ *Like these tweets to boost their reach!*\n\nTap each button to open the tweet, then like it.",
+        "fa": "❤️ *این توییت‌ها را لایک کنید تا بازدیدشان بالا برود!*\n\nروی هر دکمه بزنید و توییت را لایک کنید.",
+        "ar": "❤️ *أعجب بهذه التغريدات لزيادة وصولها!*\n\nاضغط كل زر لفتح التغريدة ثم أعجب بها.",
+    },
+    "btn_like_tweet": {
+        "en": "❤️ Like {handle}",
+        "fa": "❤️ لایک {handle}",
+        "ar": "❤️ إعجاب {handle}",
+    },
+    "like_send_done": {
+        "en": "👉 When done, send *done* to confirm.",
+        "fa": "👉 بعد از اتمام، بنویسید *done* برای تأیید.",
+        "ar": "👉 عند الانتهاء، أرسل *done* للتأكيد.",
+    },
+
+    # ── Content Creation ──────────────────────────────────────────────
+    "content_creation_instructions": {
+        "en": (
+            "✍️ *Create content for the movement!*\n\n"
+            "1️⃣ Browse the Content Library for inspiration\n"
+            "2️⃣ Create a story, post, or reel (in any language)\n"
+            "3️⃣ Share the content on your social media\n"
+            "4️⃣ Send us a screenshot or link as proof"
+        ),
+        "fa": (
+            "✍️ *برای جنبش محتوا بسازید!*\n\n"
+            "1️⃣ کتابخانه محتوا را برای الهام‌گرفتن مرور کنید\n"
+            "2️⃣ یک استوری، پست یا ریل بسازید (به هر زبانی)\n"
+            "3️⃣ محتوا را در شبکه‌های اجتماعی خود به اشتراک بگذارید\n"
+            "4️⃣ اسکرین‌شات یا لینک را به عنوان مدرک ارسال کنید"
+        ),
+        "ar": (
+            "✍️ *أنشئ محتوى للحركة!*\n\n"
+            "1️⃣ تصفح مكتبة المحتوى للإلهام\n"
+            "2️⃣ أنشئ قصة أو منشور أو ريل (بأي لغة)\n"
+            "3️⃣ شارك المحتوى على وسائل التواصل الاجتماعي\n"
+            "4️⃣ أرسل لنا لقطة شاشة أو رابط كدليل"
+        ),
+    },
+    "btn_content_library": {
+        "en": "📚 Content Library — Minab Children",
+        "fa": "📚 کتابخانه محتوا — کودکان میناب",
+        "ar": "📚 مكتبة المحتوى — أطفال ميناب",
+    },
+    "content_creation_proof": {
+        "en": "📸 Send your content (photo, video, or link) below 👇",
+        "fa": "📸 محتوای خود را ارسال کنید (عکس، ویدیو یا لینک) 👇",
+        "ar": "📸 أرسل محتواك (صورة أو فيديو أو رابط) أدناه 👇",
+    },
+    "content_child_inspiration": {
+        "en": "🕯 *{name}* — one of the 100 children of Minab. Create content in their memory.",
+        "fa": "🕯 *{name}* — یکی از ۱۰۰ کودک میناب. برای یادبودشان محتوا بسازید.",
+        "ar": "🕯 *{name}* — أحد أطفال ميناب المئة. أنشئ محتوى لذكراهم.",
     },
     "btn_do_another": {
         "en": "🎯 Do Another Task",

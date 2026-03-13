@@ -50,7 +50,7 @@ const CampaignCreate: React.FC = () => {
         twitter_storm_schedule: data.twitter_storm_schedule ? JSON.parse(data.twitter_storm_schedule) : null,
       };
 
-      const response = await api.post('/campaigns/', formattedData);
+      const response = await api.post('/api/campaigns/', formattedData);
       return response.data;
     },
     onSuccess: () => {

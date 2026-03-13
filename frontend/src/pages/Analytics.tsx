@@ -6,7 +6,7 @@ const AnalyticsPage: React.FC = () => {
   const { data: analytics, isLoading } = useQuery({
     queryKey: ['analytics'],
     queryFn: async () => {
-      const response = await api.get('/analytics/');
+      const response = await api.get('/api/analytics/');
       return response.data;
     },
   });

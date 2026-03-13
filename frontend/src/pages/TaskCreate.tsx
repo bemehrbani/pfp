@@ -27,7 +27,7 @@ const TaskCreate: React.FC = () => {
   const { data: campaigns, isLoading: isLoadingCampaigns } = useQuery({
     queryKey: ['campaigns'],
     queryFn: async () => {
-      const response = await api.get('/campaigns/');
+      const response = await api.get('/api/campaigns/');
       return response.data.results as Campaign[];
     },
   });
@@ -78,7 +78,7 @@ const TaskCreate: React.FC = () => {
         key_tweets: data.task_type === 'twitter_comment' ? keyTweets.filter(kt => kt.tweet_url) : [],
       };
 
-      const response = await api.post('/tasks/', formattedData);
+      const response = await api.post('/api/tasks/', formattedData);
       return response.data;
     },
     onSuccess: () => {

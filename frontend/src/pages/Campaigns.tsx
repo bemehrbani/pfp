@@ -7,7 +7,7 @@ const CampaignsPage: React.FC = () => {
   const { data: campaigns, isLoading } = useQuery({
     queryKey: ['campaigns'],
     queryFn: async () => {
-      const response = await api.get('/campaigns/');
+      const response = await api.get('/api/campaigns/');
       return response.data;
     },
   });

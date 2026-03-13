@@ -24,8 +24,6 @@ class Task(models.Model):
         CONTENT_CREATION = 'content_creation', _('Content Creation')
         PETITION = 'petition', _('Petition')
         MASS_EMAIL = 'mass_email', _('Mass Email')
-        RESEARCH = 'research', _('Research')
-        OTHER = 'other', _('Other')
 
     class AssignmentType(models.TextChoices):
         FIRST_COME = 'first_come', _('First Come, First Served')

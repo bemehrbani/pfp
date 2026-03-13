@@ -9,10 +9,10 @@ const TasksPage: React.FC = () => {
     queryKey: ['tasks', filter],
     queryFn: async () => {
       const url = filter === 'available'
-        ? '/tasks/available/'
+        ? '/api/tasks/available/'
         : filter === 'my-tasks'
-          ? '/tasks/my-assignments/'
-          : '/tasks/';
+          ? '/api/tasks/my-assignments/'
+          : '/api/tasks/';
       const response = await api.get(url);
       return response.data;
     },

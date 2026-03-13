@@ -13,7 +13,7 @@ const Navigation: React.FC = () => {
       const token = localStorage.getItem('access_token');
       if (!token) return null;
       try {
-        const response = await api.get('/auth/profile/');
+        const response = await api.get('/api/auth/profile/');
         return response.data;
       } catch (error) {
         localStorage.removeItem('access_token');
@@ -26,7 +26,7 @@ const Navigation: React.FC = () => {
   const handleLogout = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
-    navigate('/');
+    navigate('/login');
   };
 
   // Don't show navigation on login page
@@ -43,7 +43,7 @@ const Navigation: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/dashboard" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-blue-600 rounded-full"></div>
               <span className="text-xl font-bold text-gray-800">People for Peace</span>
             </Link>
@@ -51,7 +51,7 @@ const Navigation: React.FC = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 font-medium">
+            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium">
               Dashboard
             </Link>
             <Link to="/campaigns" className="text-gray-700 hover:text-blue-600 font-medium">
@@ -130,7 +130,7 @@ const Navigation: React.FC = () => {
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="space-y-2">
               <Link
-                to="/dashboard"
+                to="/"
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >

@@ -277,6 +277,7 @@ def _db_update_session_state(session, state, data=None):
 
 @sync_to_async
 def _db_submit_proof(assignment_id, user, proof_type, proof_content):
+    """Submit proof and auto-verify (self-disclosure — no admin review)."""
     from apps.tasks.models import TaskAssignment
     try:
         assignment = TaskAssignment.objects.select_related('task').get(
@@ -284,15 +285,18 @@ def _db_submit_proof(assignment_id, user, proof_type, proof_content):
             volunteer=user,
             status='in_progress'
         )
-        assignment.status = 'completed'
+        from django.utils import timezone
+        now = timezone.now()
+        # Auto-verify: skip 'completed' → go straight to 'verified'
+        assignment.status = 'verified'
+        assignment.completed_at = now
+        assignment.verified_at = now
         # Save proof based on type
         if proof_type == 'url':
             assignment.proof_url = proof_content
         elif proof_type == 'text':
             assignment.proof_text = proof_content
-        update_fields = ['status', 'proof_url', 'proof_text', 'completed_at']
-        from django.utils import timezone
-        assignment.completed_at = timezone.now()
+        update_fields = ['status', 'proof_url', 'proof_text', 'completed_at', 'verified_at']
         assignment.save(update_fields=update_fields)
         return assignment, None
     except TaskAssignment.DoesNotExist:
@@ -667,8 +671,6 @@ def _get_task_type_icon(task_type: str) -> str:
         'content_creation': '✍️',
         'petition': '✍️',
         'mass_email': '📧',
-        'research': '🔍',
-        'other': '📌',
     }
     return icons.get(task_type, '📌')
 
@@ -978,6 +980,42 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         msg += "\n" + t('comment_paste_reply', lang) + "\n"
         msg += t('cancel_hint', lang)
 
+    # ── Twitter Like: Direct links to tweets for liking ──
+    elif task.task_type == 'twitter_like':
+        key_tweets = await sync_to_async(
+            lambda: list(task.key_tweets.filter(is_active=True).order_by('order'))
+        )()
+
+        msg = t('task_started_title', lang) + "\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
+        msg += t('like_instructions', lang) + "\n\n"
+
+        if key_tweets:
+            msg += "───────────────────\n\n"
+            for idx, kt in enumerate(key_tweets, 1):
+                num_emoji = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'][idx - 1] if idx <= 5 else f"{idx}."
+                msg += f"{num_emoji} *{kt.author_name}* ({kt.author_handle})\n"
+                if kt.description:
+                    msg += f"   _{kt.description}_\n"
+                msg += "\n"
+                keyboard.append([
+                    InlineKeyboardButton(
+                        t('btn_like_tweet', lang).format(handle=kt.author_handle),
+                        url=kt.tweet_url
+                    )
+                ])
+            msg += "───────────────────\n"
+        elif task.target_url:
+            keyboard.append([
+                InlineKeyboardButton(
+                    t('btn_like_tweet', lang).format(handle=''),
+                    url=task.target_url
+                )
+            ])
+
+        msg += "\n" + t('like_send_done', lang) + "\n"
+        msg += t('cancel_hint', lang)
+
     # ── Telegram Share ──
     elif task.task_type == 'telegram_share':
         msg = t('task_started_title', lang) + "\n\n"
@@ -1029,6 +1067,63 @@ async def handle_task_start_and_guide(query, session, task_id, context):
             msg += f"───────────────────\n\n"
 
         msg += t('task_mass_email_step2', lang) + "\n"
+        msg += t('cancel_hint', lang)
+
+    # ── Content Creation: Guided flow with content library ──
+    elif task.task_type == 'content_creation':
+        msg = t('task_started_title', lang) + "\n\n"
+        msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
+        msg += t('content_creation_instructions', lang) + "\n\n"
+
+        if task.instructions:
+            msg += f"───────────────────\n"
+            msg += f"_{task.instructions[:500]}_\n"
+            msg += f"───────────────────\n\n"
+
+        # Content Library button
+        keyboard.append([
+            InlineKeyboardButton(
+                t('btn_content_library', lang),
+                url='https://peopleforpeace.live/memorial.html'
+            )
+        ])
+
+        # Send a random Minab child photo for inspiration
+        try:
+            import json
+            import os
+            import random
+            children_json = os.environ.get(
+                'CHILDREN_JSON_PATH',
+                '/app/assets/children/children_mapping.json'
+            )
+            children_photos_dir = os.environ.get(
+                'CHILDREN_PHOTOS_DIR',
+                '/app/assets/children/photos'
+            )
+            if os.path.exists(children_json):
+                with open(children_json, 'r', encoding='utf-8') as f:
+                    children = json.load(f)
+                if children:
+                    child = random.choice(children)
+                    child_name = child.get('name_en', child.get('name', 'A child of Minab'))
+                    child_photo_file = child.get('photo', '')
+                    child_photo_path = os.path.join(
+                        children_photos_dir, child_photo_file
+                    ) if child_photo_file else ''
+                    if child_photo_path and os.path.exists(child_photo_path):
+                        caption = t('content_child_inspiration', lang).format(
+                            name=child_name
+                        )
+                        await query.get_bot().send_photo(
+                            chat_id=query.message.chat_id,
+                            photo=open(child_photo_path, 'rb'),
+                            caption=caption,
+                        )
+        except Exception as lib_err:
+            logger.warning(f'Content library error: {lib_err}')
+
+        msg += t('content_creation_proof', lang) + "\n"
         msg += t('cancel_hint', lang)
 
     # ── Other task types ──
@@ -1118,13 +1213,15 @@ async def start_task_proof_submission(query, session, assignment_id, context):
 
 
 async def receive_task_proof(update: Update, context: CallbackContext):
-    """Receive task proof from user."""
+    """Receive task proof and auto-complete (self-disclosure — no confirm step)."""
     user = update.effective_user
 
     session = await _db_get_session_by_telegram_id(user.id)
     if not session:
         await update.message.reply_text("Session not found. Please start over with /start.")
         return ConversationHandler.END
+
+    lang = getattr(session, 'language', 'en') or 'en'
 
     proof_data = context.user_data.get('proof_submission')
     if not proof_data:
@@ -1135,6 +1232,7 @@ async def receive_task_proof(update: Update, context: CallbackContext):
 
     assignment_id = proof_data['assignment_id']
     task_title = proof_data['task_title']
+    campaign_id = proof_data.get('campaign_id')
 
     assignment = await _db_get_in_progress_assignment(assignment_id, session.user)
     if not assignment:
@@ -1143,10 +1241,10 @@ async def receive_task_proof(update: Update, context: CallbackContext):
         await _db_update_session_state(session, TelegramSession.State.IDLE)
         return ConversationHandler.END
 
+    # Parse proof content
     proof_content = ""
     if update.message.text:
         text = update.message.text.strip()
-        # Check if it's a URL (Twitter/X proof)
         if any(domain in text.lower() for domain in ['twitter.com/', 'x.com/', 't.me/', 'https://']):
             proof_type = "url"
             proof_content = text
@@ -1163,38 +1261,84 @@ async def receive_task_proof(update: Update, context: CallbackContext):
         await update.message.reply_text("Please send proof as text, photo, or document.")
         return AWAITING_TASK_PROOF
 
-    context.user_data['proof_details'] = {
-        'content': proof_content,
-        'type': proof_type,
-        'assignment_id': assignment_id
-    }
+    # Auto-complete: submit proof + verify instantly
+    assignment, error = await _db_submit_proof(
+        assignment_id, session.user, proof_type, proof_content
+    )
+    if error:
+        await update.message.reply_text(error)
+        from apps.telegram.models import TelegramSession
+        await _db_update_session_state(session, TelegramSession.State.IDLE)
+        return ConversationHandler.END
+
+    # Clean up context
+    context.user_data.pop('proof_submission', None)
+    context.user_data.pop('proof_details', None)
 
     from apps.telegram.models import TelegramSession
-    await _db_update_session_state(
-        session,
-        TelegramSession.State.AWAITING_CONFIRMATION,
-        {'proof_type': proof_type}
-    )
+    await _db_update_session_state(session, TelegramSession.State.IDLE)
 
-    keyboard = [
-        [
-            InlineKeyboardButton("✅ Confirm Submission", callback_data=f"proof_confirm_{assignment_id}"),
-            InlineKeyboardButton("❌ Cancel", callback_data="proof_cancel")
-        ]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
+    # Get campaign context (sync-safe)
+    if not campaign_id:
+        campaign_id = await _db_get_assignment_campaign_id(assignment.id)
+
+    # Channel broadcast (fire-and-forget)
+    if campaign_id:
+        await _broadcast_task_completion(
+            bot=update.get_bot(),
+            campaign_id=campaign_id,
+            task_title=assignment.task.title,
+            task_type=assignment.task.task_type,
+            proof_url=proof_content if proof_type == 'url' else ''
+        )
+
+        # Gated group invite (first task only)
+        await _send_gated_group_invite(
+            bot=update.get_bot(),
+            chat_id=update.effective_chat.id,
+            campaign_id=campaign_id,
+            user=session.user,
+        )
+
+    # Community pulse
+    pulse_msg = ""
+    if campaign_id:
+        pulse = await _db_get_campaign_pulse(campaign_id)
+        rank = await _db_get_user_rank(session.user, campaign_id)
+
+        pulse_msg += "\n───────────────────\n"
+        if pulse['recent_active'] > 0:
+            pulse_msg += t('pulse_active_hour', lang).format(count=pulse['recent_active']) + "\n"
+        pulse_msg += t('pulse_total_actions', lang).format(count=pulse['total_completed']) + "\n"
+        pulse_msg += t('pulse_volunteers', lang).format(count=pulse['total_volunteers']) + "\n"
+        if rank is not None:
+            pulse_msg += t('pulse_rank', lang).format(rank=rank) + "\n"
+        pulse_msg += "───────────────────\n"
+
+    # Build completion message
+    next_keyboard = []
+    if campaign_id:
+        next_keyboard.append([
+            InlineKeyboardButton(
+                t('btn_do_another', lang),
+                callback_data=f"campaign_tasks_{campaign_id}"
+            )
+        ])
+    next_keyboard.append([
+        InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
+    ])
 
     await update.message.reply_text(
-        f"📝 *Proof Submission Review*\n\n"
-        f"*Task:* {task_title}\n"
-        f"*Proof Type:* {proof_type}\n"
-        f"*Proof Content:* {proof_content[:100]}...\n\n"
-        f"Please confirm your submission:",
-        reply_markup=reply_markup,
+        t('proof_submitted_short', lang) + "\n\n"
+        f"*{task_title}*\n"
+        + t('proof_auto_completed', lang) + "\n"
+        f"{pulse_msg}\n"
+        + t('proof_keep_going', lang),
+        reply_markup=InlineKeyboardMarkup(next_keyboard),
         parse_mode='Markdown'
     )
 
-    return AWAITING_CONFIRMATION
+    return ConversationHandler.END
 
 
 async def proof_callback_handler(update: Update, context: CallbackContext):
@@ -1297,8 +1441,8 @@ async def confirm_proof_submission(query, session, assignment_id, context):
 
     await query.edit_message_text(
         t('proof_submitted_short', lang) + "\n\n"
-        f"*{t('task_instructions', lang).replace('📝 ', '').replace('*', '')}* {assignment.task.localized_title(lang)}\n"
-        + t('proof_under_review', lang) + "\n"
+        f"*{assignment.task.localized_title(lang)}*\n"
+        + t('proof_auto_completed', lang) + "\n"
         f"{pulse_msg}\n"
         + t('proof_keep_going', lang),
         reply_markup=InlineKeyboardMarkup(next_keyboard),
@@ -1371,9 +1515,7 @@ task_proof_conversation = ConversationHandler(
             CallbackQueryHandler(start_task_from_claim, pattern='^task_claim_'),
             CallbackQueryHandler(start_task_from_claim, pattern='^task_startclaim_'),
         ],
-        AWAITING_CONFIRMATION: [
-            CallbackQueryHandler(proof_callback_handler, pattern='^proof_')
-        ],
+        # AWAITING_CONFIRMATION removed: auto-verification skips confirm step
     },
     fallbacks=[
         CommandHandler('cancel', cancel_conversation)
