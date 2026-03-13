@@ -623,13 +623,17 @@ async def handle_invite_language_picker(query, session, campaign_id):
 
 
 async def handle_invite_style_picker(query, session, campaign_id, invite_lang):
-    """Step 2: Let the volunteer choose memorial (photo) or campaign (text) style."""
+    """Step 2: Let the volunteer choose memorial (photo), video, or campaign (text) style."""
     lang = getattr(session, 'language', 'en') or 'en'
 
     keyboard = [
         [InlineKeyboardButton(
             t('btn_memorial_style', lang),
             callback_data=f"invite_send_{campaign_id}_{invite_lang}_memorial"
+        )],
+        [InlineKeyboardButton(
+            t('btn_video_style', lang),
+            callback_data=f"invite_send_{campaign_id}_{invite_lang}_video"
         )],
         [InlineKeyboardButton(
             t('btn_campaign_style', lang),
@@ -694,6 +698,82 @@ async def handle_invite_send(query, session, campaign_id, invite_lang, style):
         await query.get_bot().send_message(
             chat_id=query.message.chat_id,
             text=t('invite_memorial_sent', lang),
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown'
+        )
+
+    elif style == 'video':
+        # Send 100 Faces lyric video with invite caption
+        caption = t('invite_video_caption', invite_lang).format(link=invite_link)
+
+        # Check for cached file_id
+        file_id_field = f'video_file_id_{invite_lang}'
+        cached_file_id = getattr(campaign, file_id_field, '') or ''
+
+        # Delete the inline message first
+        try:
+            await query.delete_message()
+        except Exception:
+            pass
+
+        if cached_file_id:
+            # Fast path: reuse cached file_id (no re-upload)
+            sent_msg = await query.get_bot().send_video(
+                chat_id=query.message.chat_id,
+                video=cached_file_id,
+                caption=caption,
+                supports_streaming=True,
+            )
+        else:
+            # First time: upload from disk and cache the file_id
+            import pathlib
+            import os
+            video_files = {
+                'en': '100_faces_FINAL_V3.mp4',
+                'fa': '100_faces_FARSI_V1.mp4',
+                'ar': '100_faces_ARABIC_V1.mp4',
+            }
+            assets_dir = os.environ.get('VIDEO_ASSETS_DIR', '/app/assets/videos')
+            video_path = pathlib.Path(assets_dir) / video_files.get(invite_lang, video_files['en'])
+
+            if not video_path.exists():
+                await query.get_bot().send_message(
+                    chat_id=query.message.chat_id,
+                    text="❌ Video file not found. Please contact the admin.",
+                )
+                return
+
+            sent_msg = await query.get_bot().send_video(
+                chat_id=query.message.chat_id,
+                video=open(video_path, 'rb'),
+                caption=caption,
+                supports_streaming=True,
+            )
+
+            # Cache the file_id for future sends
+            if sent_msg.video:
+                new_file_id = sent_msg.video.file_id
+
+                @sync_to_async
+                def _save_file_id(cid, field, fid):
+                    from apps.campaigns.models import Campaign as CampaignModel
+                    CampaignModel.objects.filter(id=cid).update(**{field: fid})
+
+                await _save_file_id(campaign_id, file_id_field, new_file_id)
+                logger.info(f'Cached video file_id for {invite_lang} on campaign {campaign_id}')
+
+        # Follow up with instruction + back buttons
+        keyboard = [
+            [InlineKeyboardButton(
+                t('btn_back_to_tasks', lang),
+                callback_data=f"campaign_tasks_{campaign_id}"
+            )],
+            [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
+        ]
+
+        await query.get_bot().send_message(
+            chat_id=query.message.chat_id,
+            text=t('invite_video_sent', lang),
             reply_markup=InlineKeyboardMarkup(keyboard),
             parse_mode='Markdown'
         )

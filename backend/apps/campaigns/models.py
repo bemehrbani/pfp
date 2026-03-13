@@ -196,6 +196,26 @@ class Campaign(models.Model):
         help_text=_('Total points awarded in this campaign')
     )
 
+    # Video file_ids (Telegram caching — set once, reused forever)
+    video_file_id_en = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        help_text=_('Telegram file_id for English 100 Faces video')
+    )
+    video_file_id_fa = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        help_text=_('Telegram file_id for Farsi 100 Faces video')
+    )
+    video_file_id_ar = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        help_text=_('Telegram file_id for Arabic 100 Faces video')
+    )
+
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
