@@ -758,6 +758,16 @@ TRANSLATIONS = {
         "fa": "📊 {n} جای باقیمانده",
         "ar": "📊 {n} مكان متبقي",
     },
+    "task_instructions_title": {
+        "en": "Instructions",
+        "fa": "دستورالعمل",
+        "ar": "التعليمات",
+    },
+    "task_duration": {
+        "en": "Duration",
+        "fa": "مدت زمان",
+        "ar": "المدة",
+    },
     "task_tweet_desc": {
         "en": "You'll pick a ready-made tweet and post it on Twitter — takes about 1 minute!",
         "fa": "شما یک توییت آماده انتخاب می‌کنید و در توییتر ارسال می‌کنید — حدود ۱ دقیقه وقت می‌گیرد!",

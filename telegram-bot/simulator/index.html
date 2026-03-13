@@ -435,7 +435,7 @@
         const stepEl = document.getElementById('stepIndicator');
 
         let currentStep = 0;
-        const totalSteps = 8;
+        const totalSteps = 9;
 
         function scrollToBottom() {
             setTimeout(() => messagesEl.scrollTop = messagesEl.scrollHeight, 50);
@@ -449,11 +449,11 @@
             const msg = document.createElement('div');
             msg.className = `message ${type}`;
 
-            // Convert markdown-like formatting
             let html = text
                 .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
                 .replace(/\*(.+?)\*/g, '<strong>$1</strong>')
                 .replace(/`(.+?)`/g, '<code>$1</code>')
+                .replace(/\\n/g, '<br>')
                 .replace(/\n/g, '<br>');
 
             msg.innerHTML = `
@@ -471,7 +471,8 @@
             for (const row of buttons) {
                 html += '<div class="row">';
                 for (const btn of row) {
-                    html += `<button class="inline-btn" onclick="handleInlineClick('${btn.action}')">${btn.label}</button>`;
+                    const escapedAction = btn.action.replace(/'/g, "\\'");
+                    html += `<button class="inline-btn" onclick="handleInlineClick('${escapedAction}')">${btn.label}</button>`;
                 }
                 html += '</div>';
             }
@@ -514,6 +515,24 @@
             stepEl.textContent = `Step ${n} / ${totalSteps} — ${desc}`;
         }
 
+        // ─── Task Data (mirrors production DB) ────────────────────────
+
+        const TASKS = [
+            { id: 9, type: 'twitter_comment', icon: '\u{1F4AC}', title: "Comment on Key Tweets Against Trump's War", desc: 'Reply to key tweets by world leaders and organizations demanding Trump be held accountable.', instructions: '1. Pick a key tweet from the list\n2. Write a direct, impactful reply\n3. Post your reply and paste the URL below', time: 5 },
+            { id: 10, type: 'twitter_comment', icon: '\u{1F4AC}', title: 'Comment on Key Tweets Against Iran', desc: 'Find and reply to tweets spreading misinformation against Iran, countering them with facts.', instructions: '1. Search for tweets spreading misinformation\n2. Reply with facts and evidence\n3. Paste your reply URL below', time: 10 },
+            { id: 11, type: 'twitter_post', icon: '\u{1F426}', title: 'Tweet with #IstandwithIran', desc: 'Post a tweet with campaign hashtags to amplify the message of solidarity with Iran.', instructions: '1. Choose or write a tweet\n2. Include #IstandwithIran and #StopTrumpMadness\n3. Post it and paste your tweet URL below', time: 5 },
+            { id: 12, type: 'twitter_retweet', icon: '\u{1F501}', title: 'Retweet Campaign Content', desc: 'Retweet at least 3 impactful posts with our campaign hashtags to spread the message.', instructions: '1. Search Twitter for #StopTrumpMadness\n2. Retweet at least 3 posts\n3. Paste a screenshot or URL below', time: 2 },
+            { id: 13, type: 'petition', icon: '\u270D\uFE0F', title: 'Sign the Petition', desc: 'Sign the international petition demanding Trump be held accountable and Iran receives reparations.', instructions: '1. Open the petition link\n2. Fill in your name and email\n3. Submit and take a screenshot as proof', time: 15 },
+            { id: 14, type: 'mass_email', icon: '\u{1F4E7}', title: 'Mass Emails to Organizations', desc: 'Send pre-written emails to key organizations, influencers, and media outlets demanding action.', instructions: '1. Copy the email template\n2. Send to the listed organizations\n3. Take a screenshot of sent emails as proof', time: 30 },
+            { id: 8, type: 'content_creation', icon: '\u270D\uFE0F', title: 'Write a Personal Peace Statement', desc: 'Write a personal statement about why peace matters to you and share it on social media.', instructions: '1. Write 2-3 paragraphs about peace\n2. Share on your social media of choice\n3. Paste the URL below', time: 15 },
+            { id: 7, type: 'telegram_invite', icon: '\u{1F465}', title: 'Invite a Volunteer to Join', desc: 'Invite at least one friend or family member to join the People for Peace campaign.', instructions: '1. Share the bot link with someone\n2. Help them join the campaign\n3. Tell us their username below', time: 15 },
+            { id: 6, type: 'telegram_share', icon: '\u{1F4E2}', title: 'Share Peace Message on Telegram', desc: 'Share one of our pre-written peace messages in your Telegram groups or channels.', instructions: '1. Pick a message from the list\n2. Share it in 3+ Telegram groups\n3. Take a screenshot as proof', time: 15 },
+            { id: 5, type: 'twitter_retweet', icon: '\u{1F501}', title: 'Retweet Campaign Content (Alt)', desc: 'Search for and retweet campaign hashtag content to increase visibility.', instructions: '1. Search for #TrumpOwesIran tweets\n2. Retweet at least 3 impactful ones\n3. Paste any retweet URL below', time: 15 },
+            { id: 4, type: 'twitter_post', icon: '\u{1F426}', title: 'Tweet for StopTrumpMadness', desc: 'Post a powerful tweet demanding Trump stop his unlawful war on Iran.', instructions: '1. Choose a ready-made tweet or write your own\n2. Include @realDonaldTrump @POTUS @WhiteHouse\n3. Use #StopTrumpMadness #TrumpOwesIran\n4. Post and paste your tweet URL below', time: 5 },
+        ];
+
+        let activeTaskId = null;
+
         // ─── Conversation Flow ─────────────────────────────────────────
 
         function sendUserMessage() {
@@ -525,133 +544,105 @@
                 addMessage('/start', 'user');
                 updateStep(1, 'Language picker shown');
                 showTyping();
-                setTimeout(() => {
-                    removeTyping();
-                    step1_languagePicker();
-                }, 800);
-            } else if (currentStep === 7 && (text.startsWith('https://x.com/') || text.startsWith('https://twitter.com/'))) {
+                setTimeout(() => { removeTyping(); step1_languagePicker(); }, 800);
+            } else if (currentStep === 7 && (text.startsWith('https://x.com/') || text.startsWith('https://twitter.com/') || text.length > 10)) {
                 addMessage(text, 'user');
-                updateStep(8, 'Proof submitted — complete!');
+                updateStep(8, 'Proof submitted');
                 showTyping();
-                setTimeout(() => {
-                    removeTyping();
-                    step8_proofSubmitted(text);
-                }, 1200);
+                setTimeout(() => { removeTyping(); step8_proofSubmitted(text); }, 1200);
             } else {
                 addMessage(text, 'user');
                 showTyping();
                 setTimeout(() => {
                     removeTyping();
-                    addMessage("💡 Type /start or use the buttons to navigate the flow.");
+                    addMessage("Type /start or use the buttons to navigate the flow.");
                 }, 500);
             }
         }
 
         function handleInlineClick(action) {
-            switch (action) {
-                case 'lang_en':
-                    addMessage('🇬🇧 English', 'user');
-                    updateStep(2, 'Welcome message shown');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step2_welcome(); }, 800);
-                    break;
-                case 'view_tasks_1':
-                    addMessage('📋 View Tasks', 'user');
-                    updateStep(4, 'Task list for campaign');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step4_taskList(); }, 800);
-                    break;
-                case 'task_claim_1':
-                    addMessage('🐦 Tweet for StopTrumpMadness', 'user');
-                    updateStep(5, 'Task detail view');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step5_taskDetail('tweet'); }, 800);
-                    break;
-                case 'task_claim_2':
-                    addMessage('💬 Comment on key tweet', 'user');
-                    updateStep(5, 'Task detail view');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step5_taskDetail('comment'); }, 800);
-                    break;
-                case 'task_claim_3':
-                    addMessage('🔁 Retweet campaign content', 'user');
-                    updateStep(5, 'Task detail view');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step5_taskDetail('retweet'); }, 800);
-                    break;
-                case 'task_start_tweet':
-                    addMessage('✅ Start This Task', 'user');
-                    updateStep(6, 'Task guidance — tweet');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step6_tweetGuidance(); }, 1000);
-                    break;
-                case 'task_start_comment':
-                    addMessage('✅ Start This Task', 'user');
-                    updateStep(6, 'Task guidance — comment');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step6_commentGuidance(); }, 1000);
-                    break;
-                case 'task_start_retweet':
-                    addMessage('✅ Start This Task', 'user');
-                    updateStep(6, 'Task guidance — retweet');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step6_retweetGuidance(); }, 1000);
-                    break;
-                case 'confirm_submit':
-                    addMessage('✅ Confirm Submission', 'user');
-                    updateStep(8, 'Proof submitted — complete!');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step8_confirmed(); }, 1000);
-                    break;
-                case 'back_to_campaigns':
-                    addMessage('📋 Browse Campaigns', 'user');
-                    updateStep(3, 'Campaign list');
-                    showTyping();
-                    setTimeout(() => { removeTyping(); step3_campaignList(); }, 800);
-                    break;
+            if (action === 'lang_en') {
+                addMessage('English', 'user');
+                updateStep(2, 'Welcome message shown');
+                showTyping();
+                setTimeout(() => { removeTyping(); step2_welcome(); }, 800);
+            } else if (action === 'view_tasks_1') {
+                addMessage('View Tasks', 'user');
+                updateStep(4, 'Task list for campaign');
+                showTyping();
+                setTimeout(() => { removeTyping(); step4_taskList(); }, 800);
+            } else if (action.startsWith('task_detail_')) {
+                const taskId = parseInt(action.split('_')[2]);
+                const task = TASKS.find(t => t.id === taskId);
+                addMessage(task ? task.title : 'Task', 'user');
+                updateStep(5, 'Task detail view');
+                showTyping();
+                setTimeout(() => { removeTyping(); step5_taskDetail(taskId); }, 800);
+            } else if (action.startsWith('task_start_')) {
+                const taskId = parseInt(action.split('_')[2]);
+                addMessage('Let\'s Go!', 'user');
+                updateStep(6, 'Task guidance');
+                activeTaskId = taskId;
+                showTyping();
+                setTimeout(() => { removeTyping(); step6_guidedFlow(taskId); }, 1000);
+            } else if (action === 'confirm_submit') {
+                addMessage('Confirm Submission', 'user');
+                updateStep(9, 'Complete!');
+                showTyping();
+                setTimeout(() => { removeTyping(); step8_confirmed(); }, 1000);
+            } else if (action === 'back_to_campaigns') {
+                addMessage('Browse Campaigns', 'user');
+                updateStep(3, 'Campaign list');
+                showTyping();
+                setTimeout(() => { removeTyping(); step3_campaignList(); }, 800);
+            } else if (action === 'back_to_tasks') {
+                addMessage('Back to Tasks', 'user');
+                updateStep(4, 'Task list');
+                showTyping();
+                setTimeout(() => { removeTyping(); step4_taskList(); }, 800);
             }
         }
 
         function handleKeyboardClick(action) {
             switch (action) {
                 case 'campaigns':
-                    addMessage('📋 Browse Campaigns', 'user');
+                    addMessage('Browse Campaigns', 'user');
                     updateStep(3, 'Campaign list');
                     showTyping();
                     setTimeout(() => { removeTyping(); step3_campaignList(); }, 800);
                     break;
                 case 'tasks':
-                    addMessage('🎯 Available Tasks', 'user');
+                    addMessage('Available Tasks', 'user');
                     updateStep(4, 'Task list');
                     showTyping();
                     setTimeout(() => { removeTyping(); step4_taskList(); }, 800);
                     break;
                 case 'progress':
-                    addMessage('📊 My Progress', 'user');
+                    addMessage('My Progress', 'user');
                     showTyping();
                     setTimeout(() => {
                         removeTyping();
-                        addMessage("📊 *Your Progress*\n\n🏆 Points: 0\n✅ Completed: 0 tasks\n📋 Active: 0 tasks\n\nJoin a campaign and complete tasks to earn points!");
+                        addMessage("*Your Progress*\n\n\u2705 Completed: 0 tasks\n\u{1F4CB} Active: 0 tasks\n\nJoin a campaign and complete tasks!");
                     }, 600);
                     break;
                 case 'leaderboard':
-                    addMessage('🏆 Leaderboard', 'user');
+                    addMessage('Leaderboard', 'user');
                     showTyping();
                     setTimeout(() => {
                         removeTyping();
-                        addMessage("🏆 *Top Volunteers*\n\n1. 🥇 Volunteer A — 250 pts\n2. 🥈 Volunteer B — 180 pts\n3. 🥉 Volunteer C — 120 pts\n\nKeep going to climb the ranks!");
+                        addMessage("*Top Volunteers*\n\n1. \u{1F947} Volunteer A\n2. \u{1F948} Volunteer B\n3. \u{1F949} Volunteer C\n\nKeep going to climb the ranks!");
                     }, 600);
                     break;
                 case 'help':
-                    addMessage('ℹ️ Help', 'user');
+                    addMessage('Help', 'user');
                     showTyping();
                     setTimeout(() => {
                         removeTyping();
-                        addMessage("*People for Peace Campaign Manager - Help*\n\n*Available Commands:*\n/start - Start the bot\n/help - Show this help\n/language - Change language\n/campaigns - List campaigns\n/tasks - Show available tasks\n/mytasks - Show your tasks\n/profile - Your profile & points\n/leaderboard - Top volunteers\n/storms - Twitter storms\n\n*How to Participate:*\n1. Browse campaigns with /campaigns\n2. Join a campaign\n3. Claim tasks with /tasks\n4. Complete tasks and submit proof\n5. Earn points and climb the leaderboard!");
+                        addMessage("*People for Peace — Help*\n\n*Commands:*\n/start - Start the bot\n/campaigns - List campaigns\n/tasks - Available tasks\n/mytasks - Your tasks\n/profile - Your profile\n/leaderboard - Top volunteers\n\n*How to Participate:*\n1. Browse campaigns\n2. Join a campaign\n3. Click a task to see details\n4. Start and complete tasks\n5. Submit proof");
                     }, 600);
                     break;
                 case 'language':
-                    addMessage('🌍 Language', 'user');
+                    addMessage('Language', 'user');
                     showTyping();
                     setTimeout(() => { removeTyping(); step1_languagePicker(); }, 600);
                     break;
@@ -661,234 +652,165 @@
         // ─── Step Implementations ─────────────────────────────────────
 
         function step1_languagePicker() {
-            addMessage('🌍 Choose your language:', 'bot', [
+            addMessage('Choose your language:', 'bot', [
                 [
-                    { label: '🇬🇧 English', action: 'lang_en' },
-                    { label: '🇮🇷 فارسی', action: 'lang_en' },
-                    { label: '🇸🇦 العربية', action: 'lang_en' },
+                    { label: 'English', action: 'lang_en' },
+                    { label: '\u0641\u0627\u0631\u0633\u06CC', action: 'lang_en' },
+                    { label: '\u0627\u0644\u0639\u0631\u0628\u064A\u0629', action: 'lang_en' },
                 ]
             ]);
         }
 
         function step2_welcome() {
-            addMessage("✅ Language set to *English*.");
+            addMessage("Language set to *English*.");
             setTimeout(() => {
                 addMessage(
-                    "👋 Welcome to *People for Peace Campaign Manager*!\n\n" +
-                    "I'm your assistant for participating in peace campaigns. " +
-                    "Here's what you can do:\n\n" +
-                    "• 📋 Browse available campaigns\n" +
-                    "• 🎯 Claim and complete tasks\n" +
-                    "• 📊 Track your progress and points\n" +
-                    "• 🤝 Collaborate with other volunteers\n\n" +
+                    "Welcome to *People for Peace Campaign Manager*!\n\n" +
+                    "I'm your assistant for participating in peace campaigns.\n\n" +
+                    "\u2022 Browse available campaigns\n" +
+                    "\u2022 Claim and complete tasks\n" +
+                    "\u2022 Track your progress\n" +
+                    "\u2022 Collaborate with other volunteers\n\n" +
                     "Use the menu below to get started!"
                 );
                 setKeyboard([
-                    { label: '📋 Browse Campaigns', action: 'campaigns' },
-                    { label: '🎯 Available Tasks', action: 'tasks' },
-                    { label: '📊 My Progress', action: 'progress' },
-                    { label: '🏆 Leaderboard', action: 'leaderboard' },
-                    { label: 'ℹ️ Help', action: 'help' },
-                    { label: '🌍 Language', action: 'language' },
+                    { label: 'Browse Campaigns', action: 'campaigns' },
+                    { label: 'Available Tasks', action: 'tasks' },
+                    { label: 'My Progress', action: 'progress' },
+                    { label: 'Leaderboard', action: 'leaderboard' },
+                    { label: 'Help', action: 'help' },
+                    { label: 'Language', action: 'language' },
                 ]);
             }, 400);
         }
 
         function step3_campaignList() {
             addMessage(
-                "📋 *Available Campaigns*\n\n" +
-                "━━━━━━━━━━━━━━━━━━━━\n\n" +
-                "🔥 *#StopTrumpMadness — Hold Trump Accountable*\n\n" +
-                "Join the global movement demanding Trump stop his unlawful war on Iran. " +
-                "Use your voice on social media to demand accountability and justice.\n\n" +
-                "👥 Members: 42\n" +
-                "🎯 Tasks: 3 available\n" +
-                "✅ Joined",
+                "*Available Campaigns*\n\n" +
+                "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n" +
+                "*#StopTrumpMadness \u2014 Hold Trump Accountable*\n\n" +
+                "Join the global movement demanding Trump stop his unlawful war on Iran.\n\n" +
+                "Members: 42\n" +
+                "Tasks: " + TASKS.length + " available\n" +
+                "Joined",
                 'bot',
                 [
-                    [{ label: '📋 View Tasks', action: 'view_tasks_1' }]
+                    [{ label: 'View Tasks', action: 'view_tasks_1' }]
                 ]
             );
         }
 
         function step4_taskList() {
+            const buttons = TASKS.map(task => ([{
+                label: `${task.icon} ${task.title.length > 28 ? task.title.substring(0, 28) + '...' : task.title} \u2014 \u23F1 ${task.time} min`,
+                action: `task_detail_${task.id}`
+            }]));
+
             addMessage(
-                "🎯 *Tasks for #StopTrumpMadness — Hold Trump Accountable*\n\n" +
-                "Tap a task to see details and start.\n\n" +
-                "━━━━━━━━━━━━━━━━━━━━",
+                "*Tasks for #StopTrumpMadness*\n\n" +
+                "Tap a task to see details.\n\n" +
+                "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+                'bot',
+                buttons
+            );
+        }
+
+        function step5_taskDetail(taskId) {
+            const task = TASKS.find(t => t.id === taskId);
+            if (!task) return;
+
+            addMessage(
+                `${task.icon} *${task.title}*\n\n` +
+                `${task.desc}\n\n` +
+                `\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\n` +
+                `*Instructions*\n` +
+                `${task.instructions}\n\n` +
+                `\u23F1 *Duration:* ${task.time} min\n` +
+                `500 spots remaining`,
                 'bot',
                 [
-                    [{ label: '🐦 Tweet for StopTrumpMadness — 25 pts • 5 min', action: 'task_claim_1' }],
-                    [{ label: '💬 Comment on key tweet — 20 pts • 5 min', action: 'task_claim_2' }],
-                    [{ label: '🔁 Retweet campaign content — 10 pts • 2 min', action: 'task_claim_3' }],
+                    [{ label: "Let's Go!", action: `task_start_${task.id}` }],
+                    [{ label: 'Back to Tasks', action: 'back_to_tasks' }]
                 ]
             );
+            updateStep(5, `Task detail \u2014 ${task.title.substring(0, 25)}`);
         }
 
-        function step5_taskDetail(type) {
-            if (type === 'tweet') {
+        function step6_guidedFlow(taskId) {
+            const task = TASKS.find(t => t.id === taskId);
+            if (!task) return;
+
+            if (task.type === 'twitter_post') {
                 addMessage(
-                    "🐦 *Tweet for StopTrumpMadness*\n\n" +
-                    "📝 *Instructions:*\n" +
-                    "Post a tweet demanding Trump stop his unlawful war on Iran. Use the suggested hashtags and mentions to maximize reach.\n\n" +
-                    "#️⃣ *Hashtags:* #StopTrumpMadness #TrumpOwesIran #TrumpStopTheWar\n" +
-                    "@ *Mentions:* @realDonaldTrump @POTUS @WhiteHouse\n\n" +
-                    "🏆 *Points:* 25\n" +
-                    "⏱ *Est:* 5 min\n" +
-                    "👥 *Slots:* 50 remaining",
-                    'bot',
-                    [[{ label: '✅ Start This Task', action: 'task_start_tweet' }]]
+                    "*Task Started!*\n\n" +
+                    `${task.icon} *${task.title}*\n\n` +
+                    "*3 easy steps:*\n\n" +
+                    "1. Pick a tweet or write your own\n" +
+                    "2. Post it on Twitter/X\n" +
+                    "3. Paste the URL here\n\n" +
+                    "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\n" +
+                    "1. \"Trump started this war with no justification. Iran demands accountability. #StopTrumpMadness\"\n\n" +
+                    "2. \"Enough is enough. Trump's war on Iran is unlawful aggression. #StopTrumpMadness\"\n\n" +
+                    "3. \"Iranian families deserve compensation for Trump's madness. Justice will prevail. #StopTrumpMadness\"\n\n" +
+                    "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\n" +
+                    "*When done, paste your tweet URL below*\n" +
+                    "(e.g. https://x.com/yourname/status/123...)\n\n" +
+                    "Type /cancel to cancel."
                 );
-            } else if (type === 'comment') {
+            } else if (task.type === 'twitter_retweet') {
                 addMessage(
-                    "💬 *Comment on key tweet*\n\n" +
-                    "📝 *Instructions:*\n" +
-                    "Reply to the following tweet with a thoughtful comment supporting peace and ceasefire. Be respectful and constructive.\n\n" +
-                    "🔗 *Link:* https://x.com/UN/status/123456789\n" +
-                    "#️⃣ *Hashtags:* #StopTrumpMadness #TrumpOwesIran\n\n" +
-                    "🏆 *Points:* 20\n" +
-                    "⏱ *Est:* 5 min\n" +
-                    "👥 *Slots:* 100 remaining",
-                    'bot',
-                    [[{ label: '✅ Start This Task', action: 'task_start_comment' }]]
+                    "*Task Started!*\n\n" +
+                    `${task.icon} *${task.title}*\n\n` +
+                    "*3 easy steps:*\n\n" +
+                    "1. Search for #StopTrumpMadness tweets\n" +
+                    "2. Retweet at least 3 impactful posts\n" +
+                    "3. Paste a URL or screenshot below\n\n" +
+                    "*When done, paste your link below*\n\n" +
+                    "Type /cancel to cancel."
                 );
-            } else if (type === 'retweet') {
+            } else if (task.type === 'twitter_comment') {
                 addMessage(
-                    "🔁 *Retweet campaign content*\n\n" +
-                    "📝 *Instructions:*\n" +
-                    "Search for tweets with our campaign hashtags and retweet at least 3 impactful posts.\n\n" +
-                    "#️⃣ *Hashtags:* #StopTrumpMadness #TrumpOwesIran\n\n" +
-                    "🏆 *Points:* 10\n" +
-                    "⏱ *Est:* 2 min\n" +
-                    "👥 *Slots:* 200 remaining",
-                    'bot',
-                    [[{ label: '✅ Start This Task', action: 'task_start_retweet' }]]
+                    "*Task Started!*\n\n" +
+                    `${task.icon} *${task.title}*\n\n` +
+                    "*3 easy steps:*\n\n" +
+                    "1. Pick a key tweet to reply to\n" +
+                    "2. Write a thoughtful, impactful reply\n" +
+                    "3. Paste your reply URL below\n\n" +
+                    "*Key tweets to comment on:*\n\n" +
+                    "1. *United Nations* (@UN)\n" +
+                    "2. *UNHCR* (@Refugees)\n" +
+                    "3. *UNICEF* (@UNICEF)\n" +
+                    "4. *Ant\u00F3nio Guterres* (@antonioguterres)\n" +
+                    "5. *Al Jazeera English* (@AJEnglish)\n\n" +
+                    "*When done, paste your reply URL below*\n\n" +
+                    "Type /cancel to cancel."
+                );
+            } else {
+                addMessage(
+                    "*Task Started!*\n\n" +
+                    `${task.icon} *${task.title}*\n\n` +
+                    `*Instructions:*\n${task.instructions}\n\n` +
+                    "*When done, send your proof below*\n" +
+                    "(URL, screenshot, or description)\n\n" +
+                    "Type /cancel to cancel."
                 );
             }
-            updateStep(5, `Task detail — ${type}`);
-        }
 
-        function step6_tweetGuidance() {
-            addMessage(
-                "🚀 *Task Started!*\n\n" +
-                "🐦 *Tweet for StopTrumpMadness*\n\n" +
-                "📝 *Pick a tweet or write your own:*\n\n" +
-                "*1.* `Trump started this war with no justification. Iran demands accountability. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
-                "*2.* `Enough is enough. Trump’s war on Iran is unlawful aggression. The world sees it. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
-                "*3.* `Iranian families deserve compensation for Trump’s madness. Justice will prevail. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
-                "*4.* `No justification. No cause. Just destruction. Trump must pay for what he did to Iran. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
-                "*5.* `Civilians are dying because of one man’s madness. Hold Trump accountable. @realDonaldTrump @POTUS #StopTrumpMadness #TrumpOwesIran`\n\n" +
-                "👉 Copy one, customize it & post on Twitter/X\n\n" +
-                "✅ *When done, paste your tweet URL below*\n(e.g. https://x.com/yourname/status/123...)\n\n" +
-                "Type /cancel to cancel."
-            );
             setKeyboard([]);
-            updateStep(7, 'Waiting for proof URL');
-            inputEl.placeholder = 'Paste your tweet URL here...';
-        }
-
-        function step6_commentGuidance() {
-            addMessage(
-                "🚀 *Task Started!*\n\n" +
-                "💬 *Comment on Key Tweets Against Trump's War*\n\n" +
-                "📝 *What to do:*\n" +
-                "Reply to one of the key tweets below demanding Trump be held accountable for his war on Iran. Be direct and impactful.\n\n" +
-                "🎯 *Key tweets to comment on:*\n\n" +
-                "━━━ 🏛️ *Tier 1 — Highest Impact* ━━━\n\n" +
-                "*1.* United Nations (@UN)\n" +
-                "   _UN calls for end to Trump-backed aggression — demand accountability_\n" +
-                "   🔗 https://x.com/UN/status/1880000000000000001\n\n" +
-                "*2.* UNHCR (@Refugees)\n" +
-                "   _Calling for protection of displaced populations and access to humanitarian aid_\n" +
-                "   🔗 https://x.com/Refugees/status/1880000000000000002\n\n" +
-                "*3.* UNICEF (@UNICEF)\n" +
-                "   _Children are dying because of Trump's madness — UNICEF demands protection_\n" +
-                "   🔗 https://x.com/UNICEF/status/1880000000000000003\n\n" +
-                "*4.* António Guterres (@antonioguterres)\n" +
-                "   _UN Secretary-General condemns US aggression — hold Trump accountable_\n" +
-                "   🔗 https://x.com/antonioguterres/status/1880000000000000004\n\n" +
-                "*5.* Al Jazeera English (@AJEnglish)\n" +
-                "   _In-depth coverage of the humanitarian crisis — amplify the truth_\n" +
-                "   🔗 https://x.com/AJEnglish/status/1880000000000000005\n\n" +
-                "━━━ 🌍 *Tier 2 — High Impact* ━━━\n\n" +
-                "*6.* Human Rights Watch (@hrw)\n" +
-                "   _Documenting human rights violations and calling for accountability_\n" +
-                "   🔗 https://x.com/hrw/status/1880000000000000006\n\n" +
-                "*7.* Amnesty International (@amnesty)\n" +
-                "   _Amnesty International: Trump's war on Iran violates international law_\n" +
-                "   🔗 https://x.com/amnesty/status/1880000000000000007\n\n" +
-                "*8.* UNRWA (@UNRWA)\n" +
-                "   _UNRWA provides aid despite Trump's destruction — justice for Iran_\n" +
-                "   🔗 https://x.com/UNRWA/status/1880000000000000008\n\n" +
-                "*9.* UN Human Rights (@UNHumanRights)\n" +
-                "   _High Commissioner Türk calls for immediate de-escalation_\n" +
-                "   🔗 https://x.com/UNHumanRights/status/1880000000000000009\n\n" +
-                "*10.* MSF (@MSF)\n" +
-                "   _MSF reports overwhelming casualties from Trump's unlawful strikes_\n" +
-                "   🔗 https://x.com/MSF/status/1880000000000000010\n\n" +
-                "*11.* ICRC (@ICRC)\n" +
-                "   _Humanitarian law applies to all parties. Civilians are never targets._\n" +
-                "   🔗 https://x.com/ICRC/status/1880000000000000011\n\n" +
-                "*12.* Greta Thunberg (@GretaThunberg)\n" +
-                "   _Climate justice is inseparable from human rights. Stand for peace._\n" +
-                "   🔗 https://x.com/GretaThunberg/status/1880000000000000012\n\n" +
-                "*13.* Rep. AOC (@AOC)\n" +
-                "   _AOC demands Trump be held accountable for war crimes against Iran_\n" +
-                "   🔗 https://x.com/AOC/status/1880000000000000013\n\n" +
-                "━━━ 🎯 *Tier 3 — Strategic Impact* ━━━\n\n" +
-                "*14.* Francesca Albanese (@FranceskAlbs)\n" +
-                "   _UN Special Rapporteur: International law is clear._\n" +
-                "   🔗 https://x.com/FranceskAlbs/status/1880000000000000014\n\n" +
-                "*15.* Craig Mokhiber (@CraigMokhiber)\n" +
-                "   _Former UN human rights director speaking truth_\n" +
-                "   🔗 https://x.com/CraigMokhiber/status/1880000000000000015\n\n" +
-                "*16.* IRIN News (@IRINnews)\n" +
-                "   _UN-backed conflict journalism documenting the crisis_\n" +
-                "   🔗 https://x.com/IRINnews/status/1880000000000000016\n\n" +
-                "*17.* Euro-Med Monitor (@EuroMedHR)\n" +
-                "   _Field documentation of civilian casualties_\n" +
-                "   🔗 https://x.com/EuroMedHR/status/1880000000000000017\n\n" +
-                "*18.* Defense for Children (@DCIPalestine)\n" +
-                "   _Defending children's rights in conflict_\n" +
-                "   🔗 https://x.com/DCIPalestine/status/1880000000000000018\n\n" +
-                "*19.* B'Tselem (@btselem)\n" +
-                "   _Israeli human rights org — credible cross-community voice_\n" +
-                "   🔗 https://x.com/btselem/status/1880000000000000019\n\n" +
-                "*20.* Jewish Voice for Peace (@jvp)\n" +
-                "   _Jewish-led peace organization standing for justice_\n" +
-                "   🔗 https://x.com/jvp/status/1880000000000000020\n\n" +
-                "#️⃣ *Hashtags:* #StopTrumpMadness #TrumpOwesIran\n\n" +
-                "✅ *When done, paste your reply/comment URL below*\n(e.g. https://x.com/yourname/status/123...)\n\n" +
-                "Type /cancel to cancel."
-            );
-            setKeyboard([]);
-            updateStep(7, 'Waiting for proof URL');
-            inputEl.placeholder = 'Paste your reply URL here...';
-        }
-
-        function step6_retweetGuidance() {
-            addMessage(
-                "🚀 *Task Started!*\n\n" +
-                "🔁 *Retweet campaign content*\n\n" +
-                "📝 *What to do:*\nSearch for tweets with #StopTrumpMadness #TrumpOwesIran and retweet at least 3.\n\n" +
-                "✅ *When done, paste your tweet URL below*\n(e.g. https://x.com/yourname/status/123...)\n\n" +
-                "Type /cancel to cancel."
-            );
-            setKeyboard([]);
-            updateStep(7, 'Waiting for proof URL');
-            inputEl.placeholder = 'Paste your retweet URL here...';
+            updateStep(7, 'Waiting for proof');
+            inputEl.placeholder = 'Paste your proof URL here...';
         }
 
         function step8_proofSubmitted(url) {
             addMessage(
-                "📝 *Proof Submission Review*\n\n" +
+                "*Proof Submission Review*\n\n" +
                 "Please confirm your submission:\n\n" +
-                `🔗 ${url}`,
+                url,
                 'bot',
                 [
                     [
-                        { label: '✅ Confirm Submission', action: 'confirm_submit' },
-                        { label: '❌ Cancel', action: 'back_to_campaigns' },
+                        { label: 'Confirm Submission', action: 'confirm_submit' },
+                        { label: 'Cancel', action: 'back_to_campaigns' },
                     ]
                 ]
             );
@@ -896,21 +818,19 @@
 
         function step8_confirmed() {
             addMessage(
-                "✅ *Proof Submitted Successfully!*\n\n" +
-                "*Task:* Tweet for StopTrumpMadness\n" +
-                "*Status:* Pending Review\n" +
-                "*Points:* 25 (pending verification)\n\n" +
+                "*Proof Submitted Successfully!*\n\n" +
+                "*Status:* Pending Review\n\n" +
                 "Your proof has been submitted for review by the campaign manager.\n" +
-                "You'll be notified once it's verified and points are awarded."
+                "You'll be notified once it's verified. Great work!"
             );
             inputEl.placeholder = 'Type a message...';
             setKeyboard([
-                { label: '📋 Browse Campaigns', action: 'campaigns' },
-                { label: '🎯 Available Tasks', action: 'tasks' },
-                { label: '📊 My Progress', action: 'progress' },
-                { label: '🏆 Leaderboard', action: 'leaderboard' },
-                { label: 'ℹ️ Help', action: 'help' },
-                { label: '🌍 Language', action: 'language' },
+                { label: 'Browse Campaigns', action: 'campaigns' },
+                { label: 'Available Tasks', action: 'tasks' },
+                { label: 'My Progress', action: 'progress' },
+                { label: 'Leaderboard', action: 'leaderboard' },
+                { label: 'Help', action: 'help' },
+                { label: 'Language', action: 'language' },
             ]);
         }
 
@@ -920,6 +840,7 @@
             inputEl.placeholder = 'Type /start to begin...';
             inputEl.value = '';
             currentStep = 0;
+            activeTaskId = null;
             updateStep(0, 'Send /start to begin');
 
             const div = document.createElement('div');

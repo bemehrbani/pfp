@@ -527,7 +527,7 @@ async def tasks_command(update: Update, context: CallbackContext):
         type_icon = _get_task_type_icon(task.task_type)
         message += f"*{i}. {type_icon} {task.localized_title(lang)}*\n"
         message += f"   Campaign: {task.campaign.localized_name(lang)}\n"
-        message += f"   🏆 {task.points} pts  ⏱ {task.estimated_time} min\n\n"
+        message += f"   ⏱ {task.estimated_time} min\n\n"
 
         keyboard.append([
             InlineKeyboardButton(
@@ -764,7 +764,10 @@ async def task_callback_handler(update: Update, context: CallbackContext):
 
     callback_data = query.data
 
-    if callback_data.startswith('task_start_'):
+    if callback_data.startswith('task_detail_'):
+        task_id = int(callback_data.split('_')[-1])
+        await handle_task_detail(query, session, task_id)
+    elif callback_data.startswith('task_start_'):
         assignment_id = int(callback_data.split('_')[-1])
         await handle_task_start(query, session, assignment_id)
     elif callback_data.startswith('task_submit_'):
@@ -773,7 +776,7 @@ async def task_callback_handler(update: Update, context: CallbackContext):
 
 
 async def handle_task_detail(query, session, task_id):
-    """Show task details with a clear call-to-action and back navigation."""
+    """Show task details with full instructions, duration, and a Start button."""
     lang = getattr(session, 'language', 'en') or 'en'
 
     if not session.user:
@@ -788,25 +791,22 @@ async def handle_task_detail(query, session, task_id):
     type_icon = _get_task_type_icon(task.task_type)
     campaign_id = task.campaign_id if task.campaign else None
 
-    # Build a concise, scannable detail message
+    # Build a rich detail message
     msg = f"{type_icon} *{task.localized_title(lang)}*\n\n"
     msg += f"{task.localized_description(lang)}\n\n"
+    msg += "───────────────────\n"
 
-    msg += f"🏆 *{task.points} points*  ·  ⏱ ~{task.estimated_time} min\n"
+    # Show instructions
+    instructions = task.localized_instructions(lang)
+    if instructions:
+        msg += f"\n📝 *{t('task_instructions_title', lang)}*\n"
+        msg += f"{instructions}\n\n"
+
+    # Duration and slots
+    msg += f"⏱ *{t('task_duration', lang)}:* {task.estimated_time} min\n"
     slots = task.max_assignments - task.current_assignments
     if slots > 0:
         msg += t('task_spots_remaining', lang).format(n=slots) + "\n"
-    msg += "\n"
-
-    # For Twitter tasks, give a preview of what they'll do
-    if task.task_type == 'twitter_post':
-        msg += t('task_tweet_desc', lang) + "\n"
-    elif task.task_type == 'twitter_retweet':
-        msg += t('task_retweet_desc', lang) + "\n"
-    elif task.task_type == 'twitter_comment':
-        msg += t('task_comment_desc', lang) + "\n"
-
-    msg += "\n" + t('btn_start_action', lang)
 
     keyboard = [[
         InlineKeyboardButton(
@@ -815,7 +815,7 @@ async def handle_task_detail(query, session, task_id):
         )
     ]]
 
-    # T5: Back navigation
+    # Back navigation
     if campaign_id:
         keyboard.append([
             InlineKeyboardButton(

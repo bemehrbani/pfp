@@ -440,7 +440,7 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
                 'twitter_post', 'twitter_retweet', 'twitter_comment',
                 'petition', 'mass_email',
             ]
-        ).order_by('-points')[:10])
+        ).order_by('estimated_time')[:10])
 
     tasks = await _get_campaign_tasks(campaign_id)
 
@@ -472,10 +472,6 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
         if status_map.get(task.id) in ('completed', 'verified')
     )
     total_count = len(tasks)
-    user_points = sum(
-        task.points for task in tasks
-        if status_map.get(task.id) in ('completed', 'verified')
-    )
 
     message = t('checklist_title', lang).format(name=campaign.localized_name(lang)) + "\n\n"
     keyboard = []
@@ -495,12 +491,12 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
             check = '⬜'
             label = f"{icon} {task.localized_title(lang)[:28]}"
 
-        message += f"{check} {icon} {task.localized_title(lang)}  (+{task.points} {t('task_pts', lang)})\n"
+        message += f"{check} {icon} {task.localized_title(lang)}  (⏱ {task.estimated_time} min)\n"
 
         keyboard.append([
             InlineKeyboardButton(
                 label,
-                callback_data=f"task_claim_{task.id}"
+                callback_data=f"task_detail_{task.id}"
             )
         ])
 
