@@ -28,27 +28,27 @@ BOT_DESCRIPTIONS = {
     "en": (
         "People for Peace — Campaign Manager\n\n"
         "Join peace-building campaigns, complete tasks, "
-        "earn points, and amplify voices for justice.\n\n"
+        "and amplify voices for justice.\n\n"
         "🕊️ Together for Justice, Together for Peace"
     ),
     "fa": (
         "مردم برای صلح — مدیریت کمپین\n\n"
-        "به کمپین‌های صلح‌سازی بپیوندید، وظایف را انجام دهید، "
-        "امتیاز کسب کنید و صدای عدالت را تقویت کنید.\n\n"
+        "به کمپین‌های صلح‌سازی بپیوندید، وظایف را انجام دهید "
+        "و صدای عدالت را تقویت کنید.\n\n"
         "🕊️ با هم برای عدالت، با هم برای صلح"
     ),
     "ar": (
         "الناس من أجل السلام — مدير الحملات\n\n"
         "انضم إلى حملات بناء السلام، أكمل المهام، "
-        "اكسب النقاط، وضخّم الأصوات من أجل العدالة.\n\n"
+        "وضخّم الأصوات من أجل العدالة.\n\n"
         "🕊️ معاً من أجل العدالة، معاً من أجل السلام"
     ),
 }
 
 BOT_SHORT_DESCRIPTIONS = {
-    "en": "Join peace campaigns, complete tasks & earn points 🕊️",
-    "fa": "به کمپین‌های صلح بپیوندید، وظایف انجام دهید و امتیاز کسب کنید 🕊️",
-    "ar": "انضم لحملات السلام، أكمل المهام واكسب النقاط 🕊️",
+    "en": "Join peace campaigns & complete tasks for justice 🕊️",
+    "fa": "به کمپین‌های صلح بپیوندید و وظایف را انجام دهید 🕊️",
+    "ar": "انضم لحملات السلام وأكمل المهام من أجل العدالة 🕊️",
 }
 
 # ── Channel / Group Descriptions ──────────────────────────────

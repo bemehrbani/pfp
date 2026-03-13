@@ -722,9 +722,9 @@ TRANSLATIONS = {
 
     # ── Proof Submission (updated) ─────────────────────────────────────
     "proof_submitted_short": {
-        "en": "✅ *Proof Submitted!* +{points} pts",
-        "fa": "✅ *مدرک ارسال شد!* +{points} امتیاز",
-        "ar": "✅ *تم تقديم الدليل!* +{points} نقطة",
+        "en": "✅ *Proof Submitted!*",
+        "fa": "✅ *مدرک ارسال شد!*",
+        "ar": "✅ *تم تقديم الدليل!*",
     },
     "proof_under_review": {
         "en": "Your proof is being reviewed — you'll be notified once verified.",

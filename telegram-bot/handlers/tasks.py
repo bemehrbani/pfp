@@ -321,7 +321,7 @@ def _db_get_campaign_group_id(campaign_id):
         return None
 
 
-async def _broadcast_task_completion(bot, campaign_id, task_title, task_type, points, proof_url=''):
+async def _broadcast_task_completion(bot, campaign_id, task_title, task_type, proof_url=''):
     """
     Broadcast an anonymized task completion to the campaign's Telegram channel.
     Fire-and-forget: errors are logged but never raised.
@@ -358,7 +358,6 @@ async def _broadcast_task_completion(bot, campaign_id, task_title, task_type, po
         if proof_url and proof_url.startswith('http'):
             text += f'🔗 <a href="{proof_url}">View</a>\n'
 
-        text += f'🏆 +{points} points earned\n'
         text += f'\n{BRAND_CTA_HTML}'
 
         await bot.send_message(
@@ -576,7 +575,7 @@ async def mytasks_command(update: Update, context: CallbackContext):
         message += f"*{i}. {assignment.task.localized_title(lang)}*\n"
         message += f"   {status_emoji} Status: {assignment.status}\n"
         message += f"   Campaign: {assignment.task.campaign.localized_name(lang)}\n"
-        message += f"   Points: {assignment.task.points}\n\n"
+        message += "\n"
 
         if assignment.status == 'assigned':
             keyboard.append([
@@ -638,7 +637,7 @@ async def claimtask_command(update: Update, context: CallbackContext):
         f"✅ *Task Claimed Successfully!*\n\n"
         f"*Task:* {task.localized_title(lang)}\n"
         f"*Campaign:* {task.campaign.localized_name(lang)}\n"
-        f"*Points:* {task.points}\n\n"
+
         f"Use `/mytasks` to see your assigned tasks and start working on them.",
         parse_mode='Markdown'
     )
@@ -1045,6 +1044,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
 
 async def handle_task_start(query, session, assignment_id):
     """Handle task start from /mytasks inline button (legacy)."""
+    lang = getattr(session, 'language', 'en') or 'en'
     if not session.user:
         await query.edit_message_text("You need to register first.")
         return
@@ -1065,6 +1065,7 @@ async def handle_task_start(query, session, assignment_id):
 
 async def start_task_proof_submission(query, session, assignment_id, context):
     """Start the task proof submission conversation."""
+    lang = getattr(session, 'language', 'en') or 'en'
     if not session.user:
         await query.edit_message_text("You need to register first.")
         return
@@ -1208,6 +1209,7 @@ async def proof_callback_handler(update: Update, context: CallbackContext):
 
 async def confirm_proof_submission(query, session, assignment_id, context):
     """Confirm and process proof submission with community pulse."""
+    lang = getattr(session, 'language', 'en') or 'en'
     proof_details = context.user_data.get('proof_details', {})
     if not proof_details or proof_details.get('assignment_id') != assignment_id:
         await query.edit_message_text("Proof details not found. Please submit proof again.")
@@ -1245,7 +1247,6 @@ async def confirm_proof_submission(query, session, assignment_id, context):
             campaign_id=campaign_id,
             task_title=assignment.task.title,
             task_type=assignment.task.task_type,
-            points=assignment.task.points,
             proof_url=proof_details.get('content', '') if proof_details.get('type') == 'url' else ''
         )
 
@@ -1285,7 +1286,7 @@ async def confirm_proof_submission(query, session, assignment_id, context):
     ])
 
     await query.edit_message_text(
-        t('proof_submitted_short', lang).format(points=assignment.task.points) + "\n\n"
+        t('proof_submitted_short', lang) + "\n\n"
         f"*{t('task_instructions', lang).replace('📝 ', '').replace('*', '')}* {assignment.task.localized_title(lang)}\n"
         + t('proof_under_review', lang) + "\n"
         f"{pulse_msg}\n"
@@ -1297,6 +1298,7 @@ async def confirm_proof_submission(query, session, assignment_id, context):
 
 async def cancel_proof_submission(query, session):
     """Cancel proof submission."""
+    lang = getattr(session, 'language', 'en') or 'en'
     from apps.telegram.models import TelegramSession
     await _db_update_session_state(session, TelegramSession.State.IDLE)
     await query.edit_message_text(
@@ -1355,6 +1357,9 @@ task_proof_conversation = ConversationHandler(
             MessageHandler(filters.TEXT & ~filters.COMMAND, receive_task_proof),
             MessageHandler(filters.PHOTO, receive_task_proof),
             MessageHandler(filters.Document.ALL, receive_task_proof),
+            # Allow re-entering a different task or navigating back without breaking conversation
+            CallbackQueryHandler(start_task_from_claim, pattern='^task_claim_'),
+            CallbackQueryHandler(start_task_from_claim, pattern='^task_startclaim_'),
         ],
         AWAITING_CONFIRMATION: [
             CallbackQueryHandler(proof_callback_handler, pattern='^proof_')

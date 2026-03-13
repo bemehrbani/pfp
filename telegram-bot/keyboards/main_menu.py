@@ -46,7 +46,7 @@ def tasks_menu_keyboard(tasks):
     for task in tasks:
         keyboard.append([
             InlineKeyboardButton(
-                f"{task['emoji']} {task['title']} ({task['points']} pts)",
+                f"{task['emoji']} {task['title']}",
                 callback_data=f'task_{task["id"]}'
             )
         ])

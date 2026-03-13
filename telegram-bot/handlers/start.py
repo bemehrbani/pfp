@@ -261,7 +261,7 @@ async def _show_campaigns_after_welcome(context, session, chat_id, lang):
                 check = '⬜'
                 label = f"{icon} {task.localized_title(lang)[:28]}"
 
-            message += f"{check} {icon} {task.localized_title(lang)}  (+{task.points} {t('task_pts', lang)})\n"
+            message += f"{check} {icon} {task.localized_title(lang)}\n"
             keyboard.append([
                 InlineKeyboardButton(label, callback_data=f"task_claim_{task.id}")
             ])

@@ -117,7 +117,7 @@ async def _handle_tasks(query, lang: str):
     for task in tasks:
         type_icon = _get_task_type_icon(task.task_type)
         campaign_name = task.campaign.localized_name(lang) if task.campaign else ""
-        text += f"• {type_icon} *{task.localized_title(lang)}* ({campaign_name}) — 🏆 {task.points} pts\n"
+        text += f"• {type_icon} *{task.localized_title(lang)}* ({campaign_name})\n"
         keyboard.append([
             InlineKeyboardButton(
                 f"{type_icon} {task.localized_title(lang)[:30]}",

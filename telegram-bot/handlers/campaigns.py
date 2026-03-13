@@ -265,7 +265,7 @@ async def joincampaign_command(update: Update, context: CallbackContext):
         f"*Next steps:*\n"
         f"1. Use `/tasks` to see available tasks\n"
         f"2. Claim tasks with `/claimtask <task_id>`\n"
-        f"3. Complete tasks and earn points!\n\n"
+        f"3. Complete tasks and make an impact!\n\n"
         f"Check `/help` for more commands.",
         parse_mode='Markdown'
     )

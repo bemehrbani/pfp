@@ -61,17 +61,14 @@ async def profile_command(update: Update, context: CallbackContext):
         f"• Level: {db_user.level}\n\n"
     )
 
-    profile_message += (
-        f"*Points & Progress:*\n"
-        f"• Total Points: {db_user.total_points}\n\n"
-    )
+
 
     profile_message += (
         f"*Task Statistics:*\n"
         f"• Total Tasks: {task_stats['total_tasks'] or 0}\n"
         f"• Completed: {task_stats['completed_tasks'] or 0}\n"
         f"• Pending Review: {task_stats['pending_tasks'] or 0}\n"
-        f"• Points Earned: {task_stats['total_points'] or 0}\n\n"
+
     )
 
     profile_message += (
@@ -89,7 +86,7 @@ async def profile_command(update: Update, context: CallbackContext):
     if completed == 0:
         profile_message += "🌟 *Get started by joining a campaign with `/campaigns`!*"
     elif completed < 5:
-        profile_message += "🚀 *Great start! Keep going to earn more points!*"
+        profile_message += "🚀 *Great start! Keep going!*"
     elif completed < 20:
         profile_message += "🔥 *You're making great progress! Keep it up!*"
     else:

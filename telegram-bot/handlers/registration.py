@@ -87,7 +87,7 @@ async def handle_text_message(update: Update, context: CallbackContext):
         "• Use `/campaigns` to browse available campaigns\n"
         "• Use `/tasks` to see available tasks\n"
         "• Use `/mytasks` to view your assigned tasks\n"
-        "• Use `/profile` to see your profile and points\n"
+        "• Use `/profile` to see your profile\n"
         "• Use `/leaderboard` to see top volunteers\n"
         "• Use `/help` for a full list of commands\n\n"
         "Or simply use the menu buttons if they're visible!",
