@@ -247,8 +247,9 @@ class ConversationStateManager:
             user = await _create_user()
 
             # Translated success message
-            await update.message.reply_text(
-                t('register_success', lang).format(name=first_name or full_name),
+            await context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text=t('register_success', lang).format(name=first_name or full_name),
                 parse_mode='Markdown'
             )
 
@@ -270,7 +271,10 @@ class ConversationStateManager:
 
         except Exception as exc:
             logger.error(f"Failed to create user automatically: {exc}")
-            await update.message.reply_text(t('register_error', lang))
+            await context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text=t('register_error', lang)
+            )
             return False
 
     async def _handle_name_input(self, update: Update, context: CallbackContext, session):

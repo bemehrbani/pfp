@@ -913,6 +913,8 @@ TRANSLATIONS = {
             "📨 *Choose a message to share:*\n\n"
             "🕯 *Memorial* — Children of Minab\n"
             "_Sends a photo with emotional message_\n\n"
+            "🎬 *Video* — 100 Faces of Peace\n"
+            "_Sends the lyric video in chosen language_\n\n"
             "✊ *Campaign* — Join the movement\n"
             "_Sends a text invite with action CTA_"
         ),
@@ -920,6 +922,8 @@ TRANSLATIONS = {
             "📨 *یک پیام برای اشتراک‌گذاری انتخاب کنید:*\n\n"
             "🕯 *یادبود* — کودکان میناب\n"
             "_عکس با پیام احساسی ارسال می‌شود_\n\n"
+            "🎬 *ویدیو* — صد چهره‌ی صلح\n"
+            "_ویدیوی موزیک به زبان انتخابی ارسال می‌شود_\n\n"
             "✊ *کمپین* — به جنبش بپیوندید\n"
             "_پیام متنی با دعوت به اقدام ارسال می‌شود_"
         ),
@@ -927,6 +931,8 @@ TRANSLATIONS = {
             "📨 *اختر رسالة للمشاركة:*\n\n"
             "🕯 *النصب التذكاري* — أطفال ميناب\n"
             "_يُرسل صورة مع رسالة مؤثرة_\n\n"
+            "🎬 *فيديو* — مئة وجه للسلام\n"
+            "_يُرسل الفيديو الموسيقي باللغة المختارة_\n\n"
             "✊ *الحملة* — انضم للحركة\n"
             "_يُرسل دعوة نصية مع دعوة للتحرك_"
         ),
@@ -985,6 +991,65 @@ TRANSLATIONS = {
         "en": "✊ Campaign — Join the Movement",
         "fa": "✊ کمپین — به جنبش بپیوندید",
         "ar": "✊ الحملة — انضم للحركة",
+    },
+    "help": {
+        "en": "ℹ️ *Help — People for Peace Bot*\n\n"
+              "Available commands:\n"
+              "/start — Main menu\n"
+              "/tasks — View available tasks\n"
+              "/leaderboard — See top volunteers\n"
+              "/language — Change language\n"
+              "/help — Show this help\n\n"
+              "💡 Join a campaign and complete tasks to make an impact\\!",
+        "fa": "ℹ️ *راهنما — ربات مردم برای صلح*\n\n"
+              "دستورات موجود:\n"
+              "/start — منوی اصلی\n"
+              "/tasks — مشاهده وظایف\n"
+              "/leaderboard — جدول امتیازات\n"
+              "/language — تغییر زبان\n"
+              "/help — نمایش راهنما\n\n"
+              "💡 به یک کمپین بپیوندید و با انجام وظایف تأثیرگذار باشید\\!",
+        "ar": "ℹ️ *المساعدة — بوت الناس من أجل السلام*\n\n"
+              "الأوامر المتاحة:\n"
+              "/start — القائمة الرئيسية\n"
+              "/tasks — عرض المهام\n"
+              "/leaderboard — لوحة المتصدرين\n"
+              "/language — تغيير اللغة\n"
+              "/help — عرض المساعدة\n\n"
+              "💡 انضم إلى حملة وأكمل المهام لإحداث تأثير\\!",
+    },
+    "btn_video_style": {
+        "en": "🎬 Video — 100 Faces of Peace",
+        "fa": "🎬 ویدیو — صد چهره‌ی صلح",
+        "ar": "🎬 فيديو — مئة وجه للسلام",
+    },
+    "invite_video_caption": {
+        "en": (
+            "🎬 100 Faces of Peace\n\n"
+            "100 children. 100 dreams. 1 school destroyed.\n"
+            "Their faces tell the story words cannot.\n\n"
+            "🕊 Watch. Share. Stand with them.\n"
+            "👉 Join us: {link}"
+        ),
+        "fa": (
+            "🎬 صد چهره‌ی صلح\n\n"
+            "صد بچه. صد آرزو. یک مدرسه ویران شده.\n"
+            "چهره‌هایشان داستانی می‌گویند که کلمات نمی‌توانند.\n\n"
+            "🕊 ببینید. به اشتراک بگذارید. کنارشان بایستید.\n"
+            "👉 به ما بپیوندید: {link}"
+        ),
+        "ar": (
+            "🎬 مئة وجه للسلام\n\n"
+            "مئة طفل. مئة حلم. مدرسة واحدة دُمّرت.\n"
+            "وجوههم تحكي ما تعجز عنه الكلمات.\n\n"
+            "🕊 شاهدوا. شاركوا. قفوا معهم.\n"
+            "👉 انضموا إلينا: {link}"
+        ),
+    },
+    "invite_video_sent": {
+        "en": "✅ *Video ready!*\n\nForward the video above 👆 to your friends and groups.\n\nLet them see the faces. Let them hear the names. 🕊",
+        "fa": "✅ *ویدیو آماده است!*\n\nویدیوی بالا 👆 را برای دوستان و گروه‌هایتان فوروارد کنید.\n\nبگذارید چهره‌ها را ببینند. بگذارید نام‌ها را بشنوند. 🕊",
+        "ar": "✅ *الفيديو جاهز!*\n\nأعد توجيه الفيديو أعلاه 👆 لأصدقائك ومجموعاتك.\n\nدعهم يرون الوجوه. دعهم يسمعون الأسماء. 🕊",
     },
     "btn_change_language": {
         "en": "🌍 Change Language",
