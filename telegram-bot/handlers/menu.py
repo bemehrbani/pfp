@@ -139,7 +139,7 @@ async def _handle_tasks(query, lang: str):
 
 
 async def _handle_profile(query, update: Update, context: CallbackContext, lang: str):
-    """Show user profile summary."""
+    """Show user profile summary with invite stats."""
     from asgiref.sync import sync_to_async
 
     session, _ = await state_manager.get_or_create_session(update, context)
@@ -150,9 +150,21 @@ async def _handle_profile(query, update: Update, context: CallbackContext, lang:
         user = s.user
         if not user:
             return None
+        from apps.campaigns.models import CampaignVolunteer
+        referrals = list(
+            CampaignVolunteer.objects
+            .filter(invited_by=user)
+            .select_related('volunteer')
+            .order_by('-joined_at')[:20]
+        )
+        referral_names = [
+            cv.volunteer.get_full_name() or cv.volunteer.username or '?'
+            for cv in referrals
+        ]
         return {
             'name': user.get_full_name() or user.username,
-            'points': getattr(user, 'points', 0),
+            'invite_count': len(referral_names),
+            'invite_names': referral_names,
         }
 
     profile = await _read_profile(session)
@@ -163,12 +175,15 @@ async def _handle_profile(query, update: Update, context: CallbackContext, lang:
         )
         return
 
-    text = (
-        f"👤 *Your Profile*\n\n"
-        f"• Name: {profile['name']}\n"
-        f"• Points: {profile['points']} ⭐\n\n"
-        f"Use /profile for full details."
-    )
+    text = f"👤 *{profile['name']}*\n\n"
+
+    if profile['invite_count'] > 0:
+        text += t('invite_stats_list', lang).format(count=profile['invite_count']) + "\n"
+        for name in profile['invite_names']:
+            text += f"  👤 {name}\n"
+    else:
+        text += t('invite_stats_zero', lang)
+
     await query.message.reply_text(
         text,
         reply_markup=get_back_to_menu_inline(lang),

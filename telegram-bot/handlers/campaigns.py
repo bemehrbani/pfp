@@ -653,6 +653,13 @@ async def handle_invite_style_picker(query, session, campaign_id, invite_lang):
     )
 
 
+@sync_to_async
+def _get_invite_count(user):
+    """Get count of people who joined via this user's invite links."""
+    from apps.campaigns.models import CampaignVolunteer
+    return CampaignVolunteer.objects.filter(invited_by=user).count()
+
+
 async def handle_invite_send(query, session, campaign_id, invite_lang, style):
     """Step 3: Send the invite — photo for memorial, share-link for campaign."""
     lang = getattr(session, 'language', 'en') or 'en'
@@ -695,9 +702,14 @@ async def handle_invite_send(query, session, campaign_id, invite_lang, style):
             [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
         ]
 
+        invite_count = await _get_invite_count(session.user) if session.user else 0
+        followup_text = t('invite_memorial_sent', lang)
+        if invite_count > 0:
+            followup_text += "\n\n" + t('invite_stats_followup', lang).format(count=invite_count)
+
         await query.get_bot().send_message(
             chat_id=query.message.chat_id,
-            text=t('invite_memorial_sent', lang),
+            text=followup_text,
             reply_markup=InlineKeyboardMarkup(keyboard),
             parse_mode='Markdown'
         )
@@ -771,9 +783,14 @@ async def handle_invite_send(query, session, campaign_id, invite_lang, style):
             [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
         ]
 
+        invite_count = await _get_invite_count(session.user) if session.user else 0
+        followup_text = t('invite_video_sent', lang)
+        if invite_count > 0:
+            followup_text += "\n\n" + t('invite_stats_followup', lang).format(count=invite_count)
+
         await query.get_bot().send_message(
             chat_id=query.message.chat_id,
-            text=t('invite_video_sent', lang),
+            text=followup_text,
             reply_markup=InlineKeyboardMarkup(keyboard),
             parse_mode='Markdown'
         )
