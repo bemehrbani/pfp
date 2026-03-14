@@ -11,7 +11,7 @@ PFP is a **Campaign Manager Platform** for coordinating peace-building campaigns
 
 ### Two Main Components
 
-1. **Web Portal (React + Django)**: Admin dashboard at `http://<server-ip>:8080` for managing campaigns, tasks, analytics, and users.
+1. **Web Portal (React + Django)**: Admin dashboard at `http://65.109.198.200:8001/admin/login/?next=/admin/` for managing campaigns, tasks, analytics, and users.
 2. **Telegram Bot (`@peopleforpeacebot`)**: Volunteer-facing interface for joining campaigns, claiming tasks, submitting proof, and earning points.
    - Direct link: `https://t.me/peopleforpeacebot`
 
@@ -78,6 +78,15 @@ PFP/
 │   ├── postgres/                # DB configs
 │   ├── monitoring/              # System monitoring
 │   └── scripts/                 # Deployment scripts
+├── e2e-report/                  # Playwright E2E test HTML report & screenshots
+│   ├── index.html               # Styled dark-theme report
+│   └── media/                   # Captured screenshots
+├── minab/                       # Justice for Minab campaign assets
+├── justiceForMinab/             # Minab campaign docs & action plan
+├── TESTING.md                   # Comprehensive test suite documentation
+├── test_playwright.py           # Playwright smoke test for dashboard
+├── kanban.md                    # Development task board
+├── campaign.md                  # Campaign & content task board
 ├── docker-compose.yml           # Dev environment (6 services)
 ├── docker-compose.production.yml
 ├── Makefile                     # Dev shortcuts

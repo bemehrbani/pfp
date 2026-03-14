@@ -15,10 +15,14 @@ cd /Users/mahdifarimani/Documents/PFP && GIT_SSH_COMMAND="ssh -i /Users/mahdifar
 ```
 
 The post-receive hook automatically:
+- **💾 Takes a pre-deploy database backup** (keeps last 5 in `backups/pre-deploy/`)
 - Checks out code to `/opt/pfp`
 - Rebuilds Docker containers
 - Runs migrations
 - Performs a health check
+
+> **Automated backups** run every 12 hours (2 AM and 2 PM UTC) via cron.
+> Backup retention: 7 daily, 4 weekly, 12 monthly in `infrastructure/postgres/backups/`.
 
 ## Manual SSH Access
 
