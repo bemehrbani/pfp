@@ -88,10 +88,9 @@ class PFPCampaignBot:
                 campaigns_command, joincampaign_command,
                 tasks_command, mytasks_command, claimtask_command,
                 profile_command, updateprofile_command,
-                leaderboard_command,
                 storms_command, storminfo_command,
                 # Callback handlers
-                campaign_callback_handler, task_callback_handler, leaderboard_callback_handler,
+                campaign_callback_handler, task_callback_handler,
                 storm_callback_handler,
                 # Menu callback handler
                 menu_callback_handler,
@@ -100,7 +99,7 @@ class PFPCampaignBot:
                 # Message handlers
                 handle_text_message, handle_unknown_command,
                 # Handler lists
-                campaign_handlers, task_handlers, leaderboard_handlers,
+                campaign_handlers, task_handlers,
                 storm_handlers, menu_handlers,
                 text_message_handler, unknown_command_handler
             )
@@ -118,7 +117,7 @@ class PFPCampaignBot:
             self.application.add_handler(CommandHandler("claimtask", claimtask_command))
             self.application.add_handler(CommandHandler("profile", profile_command))
             self.application.add_handler(CommandHandler("updateprofile", updateprofile_command))
-            self.application.add_handler(CommandHandler("leaderboard", leaderboard_command))
+
             self.application.add_handler(CommandHandler("storms", storms_command))
             self.application.add_handler(CommandHandler("storminfo", storminfo_command))
             self.application.add_handler(CommandHandler("language", language_command))
@@ -135,8 +134,7 @@ class PFPCampaignBot:
                 self.application.add_handler(handler)
             for handler in task_handlers:
                 self.application.add_handler(handler)
-            for handler in leaderboard_handlers:
-                self.application.add_handler(handler)
+
             for handler in storm_handlers:
                 self.application.add_handler(handler)
             for handler in menu_handlers:

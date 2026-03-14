@@ -56,11 +56,7 @@ TRANSLATIONS = {
         "fa": "📊 پیشرفت من",
         "ar": "📊 تقدمي",
     },
-    "btn_leaderboard": {
-        "en": "🏆 Leaderboard",
-        "fa": "🏆 جدول امتیازات",
-        "ar": "🏆 لوحة المتصدرين",
-    },
+
     "btn_help": {
         "en": "ℹ️ Help",
         "fa": "ℹ️ راهنما",
@@ -429,15 +425,14 @@ TRANSLATIONS = {
             "/campaigns - List available campaigns\n"
             "/tasks - Show available tasks\n"
             "/mytasks - Show your assigned tasks\n"
-            "/profile - Show your profile and points\n"
-            "/leaderboard - Show top volunteers\n"
+            "/profile - Show your profile\n"
             "/storms - Show upcoming Twitter storms\n\n"
             "*How to Participate:*\n"
             "1. Browse campaigns with /campaigns\n"
             "2. Join a campaign\n"
             "3. Claim tasks with /tasks\n"
             "4. Complete tasks and submit proof\n"
-            "5. Earn points and climb the leaderboard!\n\n"
+            "5. Complete tasks and make an impact!\n\n"
             "Need more help? Contact your campaign manager."
         ),
         "fa": (
@@ -449,15 +444,14 @@ TRANSLATIONS = {
             "/campaigns - لیست کمپین‌های موجود\n"
             "/tasks - نمایش وظایف موجود\n"
             "/mytasks - نمایش وظایف شما\n"
-            "/profile - نمایش پروفایل و امتیازات\n"
-            "/leaderboard - نمایش داوطلبان برتر\n"
+            "/profile - نمایش پروفایل\n"
             "/storms - نمایش طوفان‌های توییتری\n\n"
             "*نحوه مشارکت:*\n"
             "۱. کمپین‌ها را با /campaigns مرور کنید\n"
             "۲. به یک کمپین بپیوندید\n"
             "۳. وظایف را با /tasks انتخاب کنید\n"
             "۴. وظایف را انجام دهید و مدرک ارسال کنید\n"
-            "۵. امتیاز کسب کنید و در جدول بالا بروید!\n\n"
+            "۵. وظایف را انجام دهید و تأثیرگذار باشید!\n\n"
             "نیاز به کمک بیشتر دارید؟ با مدیر کمپین تماس بگیرید."
         ),
         "ar": (
@@ -469,15 +463,14 @@ TRANSLATIONS = {
             "/campaigns - عرض الحملات المتاحة\n"
             "/tasks - عرض المهام المتاحة\n"
             "/mytasks - عرض مهامك المعينة\n"
-            "/profile - عرض ملفك الشخصي ونقاطك\n"
-            "/leaderboard - عرض أفضل المتطوعين\n"
+            "/profile - عرض ملفك الشخصي\n"
             "/storms - عرض عواصف تويتر القادمة\n\n"
             "*كيفية المشاركة:*\n"
             "١. تصفح الحملات مع /campaigns\n"
             "٢. انضم إلى حملة\n"
             "٣. طالب بالمهام مع /tasks\n"
             "٤. أكمل المهام وقدم دليلاً\n"
-            "٥. اكسب نقاطاً وتسلق لوحة المتصدرين!\n\n"
+            "٥. أكمل المهام وأحدث تأثيراً!\n\n"
             "تحتاج مزيداً من المساعدة؟ تواصل مع مدير حملتك."
         ),
     },
@@ -1076,7 +1069,6 @@ TRANSLATIONS = {
               "Available commands:\n"
               "/start — Main menu\n"
               "/tasks — View available tasks\n"
-              "/leaderboard — See top volunteers\n"
               "/language — Change language\n"
               "/help — Show this help\n\n"
               "💡 Join a campaign and complete tasks to make an impact\\!",
@@ -1084,7 +1076,6 @@ TRANSLATIONS = {
               "دستورات موجود:\n"
               "/start — منوی اصلی\n"
               "/tasks — مشاهده وظایف\n"
-              "/leaderboard — جدول امتیازات\n"
               "/language — تغییر زبان\n"
               "/help — نمایش راهنما\n\n"
               "💡 به یک کمپین بپیوندید و با انجام وظایف تأثیرگذار باشید\\!",
@@ -1092,7 +1083,6 @@ TRANSLATIONS = {
               "الأوامر المتاحة:\n"
               "/start — القائمة الرئيسية\n"
               "/tasks — عرض المهام\n"
-              "/leaderboard — لوحة المتصدرين\n"
               "/language — تغيير اللغة\n"
               "/help — عرض المساعدة\n\n"
               "💡 انضم إلى حملة وأكمل المهام لإحداث تأثير\\!",
@@ -1213,7 +1203,7 @@ def get_button_routes(lang: str = 'en') -> dict[str, str]:
         t('btn_my_campaigns', lang): '_route_campaigns',
         t('btn_tasks', lang): '_route_tasks',
         t('btn_progress', lang): '_route_profile',
-        t('btn_leaderboard', lang): '_route_leaderboard',
+
         t('btn_help', lang): '_route_help',
         t('btn_profile', lang): '_route_profile',
         t('btn_language', lang): '_route_language',

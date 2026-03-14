@@ -191,40 +191,6 @@ async def _handle_profile(query, update: Update, context: CallbackContext, lang:
     )
 
 
-async def _handle_leaderboard(query, lang: str):
-    """Show leaderboard summary."""
-    import html as html_mod
-    from asgiref.sync import sync_to_async
-
-    @sync_to_async
-    def _fetch_top_users():
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-        return list(
-            User.objects.filter(is_active=True)
-            .order_by('-total_points')[:5]
-        )
-
-    top_users = await _fetch_top_users()
-
-    text = "🏆 <b>Leaderboard — Top 5</b>\n\n"
-    medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣']
-
-    for idx, user in enumerate(top_users):
-        name = html_mod.escape(user.get_full_name() or user.username)
-        points = getattr(user, 'total_points', 0) or 0
-        text += f"{medals[idx]} {name} — {points} pts\n"
-
-    if not top_users:
-        text += "No volunteers yet. Be the first!\n"
-
-    text += "\nUse /leaderboard for the full ranking."
-
-    await query.message.reply_text(
-        text,
-        reply_markup=get_back_to_menu_inline(lang),
-        parse_mode='HTML',
-    )
 
 
 async def _handle_help(query, lang: str):

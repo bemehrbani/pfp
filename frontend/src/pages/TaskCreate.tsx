@@ -232,17 +232,6 @@ const TaskCreate: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <FormInput
-                label="Points Awarded"
-                name="points"
-                type="number"
-                placeholder="10"
-                register={register}
-                error={errors.points}
-                required
-                helpText="Points volunteers earn for completion"
-              />
-
-              <FormInput
                 label="Estimated Time (minutes)"
                 name="estimated_time"
                 type="number"

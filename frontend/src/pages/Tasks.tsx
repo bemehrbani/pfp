@@ -68,10 +68,7 @@ const TasksPage: React.FC = () => {
                     {task.task_type.replace('_', ' ')}
                   </span>
                 </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold text-yellow-600">{task.points}</p>
-                  <p className="text-sm text-gray-500">points</p>
-                </div>
+
               </div>
 
               <p className="text-gray-600 mb-4">{task.description?.substring(0, 100)}...</p>

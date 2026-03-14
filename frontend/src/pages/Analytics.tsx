@@ -52,13 +52,6 @@ const AnalyticsPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">Total Points</h3>
-          <p className="text-3xl font-bold text-purple-600">{analytics?.total_points_awarded || 0}</p>
-          <p className="text-gray-500 text-sm mt-2">
-            Avg. {analytics?.avg_points_per_user || 0} per volunteer
-          </p>
-        </div>
       </div>
 
       {/* Charts Grid */}

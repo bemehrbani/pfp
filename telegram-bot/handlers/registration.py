@@ -39,9 +39,7 @@ async def handle_text_message(update: Update, context: CallbackContext):
             elif route == "_route_profile":
                 from handlers.profile import profile_command
                 return await profile_command(update, context)
-            elif route == "_route_leaderboard":
-                from handlers.leaderboard import leaderboard_command
-                return await leaderboard_command(update, context)
+
             elif route == "_route_help":
                 from handlers.start import help_command
                 return await help_command(update, context)
@@ -88,7 +86,7 @@ async def handle_text_message(update: Update, context: CallbackContext):
         "• Use `/tasks` to see available tasks\n"
         "• Use `/mytasks` to view your assigned tasks\n"
         "• Use `/profile` to see your profile\n"
-        "• Use `/leaderboard` to see top volunteers\n"
+
         "• Use `/help` for a full list of commands\n\n"
         "Or simply use the menu buttons if they're visible!",
         parse_mode='Markdown'

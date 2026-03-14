@@ -11,7 +11,7 @@ from .tasks import (
     task_callback_handler, task_proof_conversation, task_handlers
 )
 from .profile import profile_command, updateprofile_command
-from .leaderboard import leaderboard_command, leaderboard_callback_handler, leaderboard_handlers
+
 from .storms import storms_command, storminfo_command, storm_callback_handler, storm_handlers
 from .menu import menu_callback_handler, menu_handlers
 from .registration import (
@@ -32,14 +32,14 @@ __all__ = [
     'claimtask_command',
     'profile_command',
     'updateprofile_command',
-    'leaderboard_command',
+
     'storms_command',
     'storminfo_command',
 
     # Callback handlers
     'campaign_callback_handler',
     'task_callback_handler',
-    'leaderboard_callback_handler',
+
     'storm_callback_handler',
     'language_callback_handler',
 
@@ -55,7 +55,7 @@ __all__ = [
     # Handler lists for registration
     'campaign_handlers',
     'task_handlers',
-    'leaderboard_handlers',
+
     'storm_handlers',
     'menu_callback_handler',
     'menu_handlers',

@@ -46,12 +46,6 @@ const DashboardPage: React.FC = () => {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">Points Earned</h3>
-          <p className="text-3xl font-bold text-yellow-600">{stats?.points_earned || 0}</p>
-          <p className="text-gray-500 text-sm mt-2">Keep up the good work!</p>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">Volunteers</h3>
           <p className="text-3xl font-bold text-purple-600">{stats?.total_volunteers || 0}</p>
           <p className="text-gray-500 text-sm mt-2">Active this month</p>
