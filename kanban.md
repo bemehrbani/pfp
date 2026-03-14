@@ -27,6 +27,11 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 | G1 | **2-click flow** | Skip task detail — claim+guide on first tap | S | ✅ `1639f67` |
 | G2 | **Task checklist** | ✅/⬜/🚧 status per user + progress bar | S | ✅ `1639f67` |
 | G3 | **Community pulse** | "27 activists active · 847 total actions" after proof | XS | ✅ `1639f67` |
+| E1 | **Copy E2E Report Media** | Copy Suite 7-11 WebPs and PNGs to `e2e-report/media/` | XS | ⬜ TODO |
+| E2 | **Update E2E HTML Report** | Add Suite 7-11 markup and video sections to `index.html` | S | ⬜ TODO |
+| E3 | **Update E2E Documentation** | Log final suite outcomes in `walkthrough.md` and `task.md` | XS | ⬜ TODO |
+| L1 | **Deploy Leaderboard/Points Removal** | Commit, push, deploy, and verify the removal of leaderboard and points UI | S | TODO |
+| OG1 | **Page-specific OG images** | Memorial, evidence, landing OG cards + data.html OG tags added | XS | ✅ |
 
 ---
 
@@ -65,11 +70,13 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 |---|---------|----------|-------|
 | T6 | Fix profile points (B4) | Low | `menu.py:138` |
 | T7 | Deploy leaderboard HTML fix (B1) | Low | Already staged |
-| D1 | Deep-link auto-join (`/start campaign_16`) | Medium | Onboarding improvement |
+| D0 | **Fix Duplicate Migrations (Data Loss Prevention)** | High | ✅ **Fixed**: Formal merge migration deployed to production. |
+| D2 | Deep-link auto-join (`/start campaign_16`) | Medium | Onboarding improvement |
 | D2 | Task completion notification to admin | Medium | Review workflow |
 | D3 | Points auto-award on proof approval | Medium | Gamification |
 | D4 | Invite task type testing | Low | After Twitter tasks stable |
 | D5 | Campaign progress dashboard | Low | |
+| D6 | Publish Platform Guide for Campaign Managers | Medium | **Options**: 1) Password-protected page on main site, 2) Behind campaign manager login wall. Needs technical decision. |
 
 ---
 
