@@ -606,9 +606,21 @@ TRANSLATIONS = {
 
     # ── Task Checklist View ────────────────────────────────────────────
     "checklist_title": {
-        "en": "📋 *Your Tasks — {name}*",
-        "fa": "📋 *وظایف شما — {name}*",
-        "ar": "📋 *مهامك — {name}*",
+        "en": (
+            "📋 *Your Tasks — {name}*\n\n"
+            "🕯 168 children. One school. We demand justice.\n"
+            "Every action here amplifies their story."
+        ),
+        "fa": (
+            "📋 *وظایف شما — {name}*\n\n"
+            "🕯 ۱۶۸ کودک. یک مدرسه. ما خواهان عدالتیم.\n"
+            "هر اقدام شما صدای آن‌ها را بلندتر می‌کند."
+        ),
+        "ar": (
+            "📋 *مهامك — {name}*\n\n"
+            "🕯 ١٦٨ طفلاً. مدرسة واحدة. نطالب بالعدالة.\n"
+            "كل عمل هنا يضخّم قصتهم."
+        ),
     },
     "checklist_progress": {
         "en": "📊 {done}/{total} done · {points} pts earned",
@@ -616,7 +628,7 @@ TRANSLATIONS = {
         "ar": "📊 {done}/{total} مكتمل · {points} نقطة مكتسبة",
     },
     "checklist_tap_start": {
-        "en": "Tap a task to start 👇",
+        "en": "Tap a task to get started 👇",
         "fa": "یک وظیفه را بزنید تا شروع کنید 👇",
         "ar": "اضغط على مهمة للبدء 👇",
     },
