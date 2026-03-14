@@ -362,6 +362,7 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
                 description=campaign.localized_short_description(lang),
                 members=member_count,
                 tasks=task_count,
+                hashtags=campaign.twitter_hashtags.replace(',', ' ') if campaign.twitter_hashtags else '',
             ),
             parse_mode='Markdown'
         )

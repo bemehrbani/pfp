@@ -45,8 +45,66 @@
 | **Evidence** | https://peopleforpeace.live/evidence.html | Fact sheet: OSINT, media sources, debunked claims |
 | **Data** | https://peopleforpeace.live/data.html | Verified names and data for the 100 children |
 | **Bot** | https://t.me/peopleforpeacebot | Telegram campaign bot |
-| **Bot Deep-link** | https://t.me/peopleforpeacebot?start=campaign_16 | Auto-join Minab campaign |
+| **Bot Deep-link** | https://t.me/peopleforpeacebot?start=campaign_18 | Auto-join Minab campaign |
 | **Channel** | https://t.me/people4peace | Telegram updates channel |
+
+---
+
+## 🚀 Campaign UX Epic — First Impression & Resource Discovery
+
+> Goal: When a user joins via deep-link, they should feel the weight of the cause and have immediate access to all campaign resources.
+
+### What's Missing Today
+- Auto-join message is generic — no cause context, no links, no hashtags
+- Campaign detail view has no resource links
+- Task checklist has no "About" button to revisit campaign info
+- Invite share message is a bare bot link with no emotional context
+
+### Tasks
+
+| # | Task | Status | Impact |
+|---|------|--------|--------|
+| E1 | **Rich auto-join message** — Add cause context, resource links (memorial/evidence/data/channel), hashtags | 🔲 | ⭐⭐⭐ |
+| E2 | **Enriched campaign detail** — Add resource links + full description | 🔲 | ⭐⭐ |
+| E3 | **Enriched join welcome** — Same resource block as E1 | 🔲 | ⭐⭐ |
+| E4 | **"About Campaign" button** on task checklist → shows full context | 🔲 | ⭐ |
+| E5 | **Campaign description update** — Emotional narrative on production | 🔲 | ⭐⭐⭐ |
+| E6 | **Resource link translation keys** — Centralized i18n for all links | 🔲 | ⭐⭐ |
+| E7 | **Richer invite share** — Include cause context + hashtags in invite message | 🔲 | ⭐⭐ |
+
+### Resource Links to Surface
+
+| Resource | URL | Label |
+|----------|-----|-------|
+| Memorial | https://peopleforpeace.live | 🕯 Memorial Page |
+| Evidence | https://peopleforpeace.live/evidence.html | 📄 Evidence & Facts |
+| Data | https://peopleforpeace.live/data.html | 📊 Verified Data |
+| Channel | https://t.me/people4peace | 📢 Follow Updates |
+
+### Proposed Auto-Join Message (EN)
+
+```
+🎉 *You've joined Justice for Minab Children!*
+
+On Feb 28, 2026, 168 children aged 7-12 were killed  
+in a strike on their school in Minab, Iran.
+
+We demand justice. Your voice matters.
+
+👥 X volunteers joined · 🎯 Y tasks available
+
+━━━━━━━━━━━━━━━━━━━
+🔗 *Resources:*
+🕯 Memorial Page — peopleforpeace.live
+📄 Evidence & Facts — peopleforpeace.live/evidence.html
+📊 Verified Data — peopleforpeace.live/data.html
+📢 Follow Updates — @people4peace
+━━━━━━━━━━━━━━━━━━━
+
+#️⃣ #JusticeForMinab #168Children #MinabSchoolMassacre
+
+Tap a task below to get started! 👇
+```
 
 ---
 

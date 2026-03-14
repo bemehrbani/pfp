@@ -295,6 +295,10 @@ async def campaign_callback_handler(update: Update, context: CallbackContext):
         campaign_id = int(callback_data.split('_')[-1])
         await handle_invite_link(query, session, campaign_id)
 
+    elif callback_data.startswith('campaign_about_'):
+        campaign_id = int(callback_data.split('_')[-1])
+        await handle_campaign_about(query, session, campaign_id)
+
     elif callback_data.startswith('invite_style_'):
         # invite_style_{campaign_id}_{lang}
         parts = callback_data.split('_')
@@ -343,6 +347,22 @@ async def handle_campaign_detail(query, session, campaign_id):
     ) + "\n"
     msg += t('campaign_detail_tasks', lang).format(count=task_count) + "\n"
 
+    # Resource links
+    resource_labels = {'en': 'Resources', 'fa': 'منابع', 'ar': 'الموارد'}
+    memorial_labels = {'en': 'Memorial', 'fa': 'یادبود', 'ar': 'التذكار'}
+    evidence_labels = {'en': 'Evidence', 'fa': 'شواهد', 'ar': 'أدلة'}
+    follow_labels = {'en': 'Follow', 'fa': 'دنبال کنید', 'ar': 'تابعنا'}
+
+    msg += "\n━━━━━━━━━━━━━━━━━━━\n"
+    msg += f"🔗 *{resource_labels.get(lang, 'Resources')}:*\n"
+    msg += f"🕯 [{memorial_labels.get(lang, 'Memorial')}](https://peopleforpeace.live)\n"
+    msg += f"📄 [{evidence_labels.get(lang, 'Evidence')}](https://peopleforpeace.live/evidence.html)\n"
+    msg += f"📢 {follow_labels.get(lang, 'Follow')}: @people4peace\n"
+    msg += "━━━━━━━━━━━━━━━━━━━\n"
+
+    if campaign.twitter_hashtags:
+        msg += "\n#️⃣ " + campaign.twitter_hashtags.replace(',', ' ') + "\n"
+
     keyboard = []
     if is_member:
         msg += f"\n{t('campaign_already_in', lang)}\n"
@@ -365,6 +385,47 @@ async def handle_campaign_detail(query, session, campaign_id):
     keyboard.append([
         InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
     ])
+
+    await query.edit_message_text(
+        msg,
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode='Markdown'
+    )
+
+
+async def handle_campaign_about(query, session, campaign_id):
+    """Show full campaign info with description, resource links, and hashtags."""
+    lang = getattr(session, 'language', 'en') or 'en'
+    campaign = await _get_campaign(campaign_id)
+    if not campaign:
+        await query.edit_message_text(
+            t('campaign_not_available', lang),
+            parse_mode='Markdown'
+        )
+        return
+
+    task_count = await _get_task_count(campaign)
+    hashtags = campaign.twitter_hashtags.replace(',', ' ') if campaign.twitter_hashtags else ''
+
+    msg = t('campaign_about', lang).format(
+        name=campaign.localized_name(lang),
+        description=campaign.description or campaign.localized_short_description(lang),
+        members=campaign.current_members,
+        tasks=task_count,
+        hashtags=hashtags,
+    )
+
+    keyboard = [
+        [InlineKeyboardButton(
+            t('btn_view_tasks_icon', lang),
+            callback_data=f"campaign_tasks_{campaign_id}"
+        )],
+        [InlineKeyboardButton(
+            t('btn_invite_friends', lang),
+            callback_data=f"campaign_invite_{campaign_id}"
+        )],
+        [InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")]
+    ]
 
     await query.edit_message_text(
         msg,
@@ -502,6 +563,12 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
 
     message += "\n" + t('checklist_tap_start', lang)
 
+    keyboard.append([
+        InlineKeyboardButton(
+            t('btn_about_campaign', lang),
+            callback_data=f"campaign_about_{campaign_id}"
+        )
+    ])
     keyboard.append([
         InlineKeyboardButton(
             t('btn_invite_friends', lang),

@@ -144,21 +144,45 @@ TRANSLATIONS = {
             "{description}\n\n"
             "👥 {members} volunteers joined\n"
             "🎯 {tasks} tasks available\n\n"
-            "Tap a task below to get started!"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🔗 *Resources:*\n"
+            "🕯 [Memorial](https://peopleforpeace.live)\n"
+            "📄 [Evidence & Facts](https://peopleforpeace.live/evidence.html)\n"
+            "📊 [Verified Data](https://peopleforpeace.live/data.html)\n"
+            "📢 Follow: @people4peace\n"
+            "━━━━━━━━━━━━━━━━━━━\n\n"
+            "#️⃣ {hashtags}\n\n"
+            "Tap a task below to get started! 👇"
         ),
         "fa": (
             "🎉 *شما به {name} پیوستید!*\n\n"
             "{description}\n\n"
             "👥 {members} داوطلب پیوسته‌اند\n"
             "🎯 {tasks} وظیفه موجود\n\n"
-            "روی یک وظیفه بزنید تا شروع کنید!"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🔗 *منابع:*\n"
+            "🕯 [صفحه یادبود](https://peopleforpeace.live)\n"
+            "📄 [شواهد و حقایق](https://peopleforpeace.live/evidence.html)\n"
+            "📊 [داده‌های تأییدشده](https://peopleforpeace.live/data.html)\n"
+            "📢 دنبال کنید: @people4peace\n"
+            "━━━━━━━━━━━━━━━━━━━\n\n"
+            "#️⃣ {hashtags}\n\n"
+            "یک وظیفه را بزنید تا شروع کنید! 👇"
         ),
         "ar": (
             "🎉 *لقد انضممت إلى {name}!*\n\n"
             "{description}\n\n"
             "👥 {members} متطوع انضموا\n"
             "🎯 {tasks} مهمة متاحة\n\n"
-            "اضغط على مهمة أدناه للبدء!"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🔗 *الموارد:*\n"
+            "🕯 [صفحة التذكار](https://peopleforpeace.live)\n"
+            "📄 [أدلة وحقائق](https://peopleforpeace.live/evidence.html)\n"
+            "📊 [بيانات موثقة](https://peopleforpeace.live/data.html)\n"
+            "📢 تابعنا: @people4peace\n"
+            "━━━━━━━━━━━━━━━━━━━\n\n"
+            "#️⃣ {hashtags}\n\n"
+            "اضغط على مهمة للبدء! 👇"
         ),
     },
 
@@ -541,21 +565,42 @@ TRANSLATIONS = {
             "You've joined {count} other volunteers in this campaign.\n\n"
             "There are *{tasks} tasks* waiting for you — tweets to post, "
             "content to share, and voices to amplify.\n\n"
-            "Tap *View Tasks* below to pick your first task and start earning points! 👇"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🔗 *Resources:*\n"
+            "🕯 [Memorial](https://peopleforpeace.live)\n"
+            "📄 [Evidence & Facts](https://peopleforpeace.live/evidence.html)\n"
+            "📊 [Verified Data](https://peopleforpeace.live/data.html)\n"
+            "📢 Follow: @people4peace\n"
+            "━━━━━━━━━━━━━━━━━━━\n\n"
+            "Tap *View Tasks* below to pick your first task! 👇"
         ),
         "fa": (
             "🎉 *عضو شدید! به {name} خوش آمدید*\n\n"
             "شما به {count} داوطلب دیگر در این کمپین پیوستید.\n\n"
             "*{tasks} وظیفه* در انتظار شماست — توییت‌هایی برای ارسال، "
             "محتوا برای اشتراک‌گذاری و صداهایی برای تقویت.\n\n"
-            "برای انتخاب اولین وظیفه و کسب امتیاز، *مشاهده وظایف* را بزنید! 👇"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🔗 *منابع:*\n"
+            "🕯 [صفحه یادبود](https://peopleforpeace.live)\n"
+            "📄 [شواهد و حقایق](https://peopleforpeace.live/evidence.html)\n"
+            "📊 [داده‌های تأییدشده](https://peopleforpeace.live/data.html)\n"
+            "📢 دنبال کنید: @people4peace\n"
+            "━━━━━━━━━━━━━━━━━━━\n\n"
+            "برای انتخاب اولین وظیفه، *مشاهده وظایف* را بزنید! 👇"
         ),
         "ar": (
             "🎉 *انضممت! مرحباً في {name}*\n\n"
             "انضممت إلى {count} متطوع آخر في هذه الحملة.\n\n"
             "هناك *{tasks} مهمة* في انتظارك — تغريدات للنشر، "
             "محتوى للمشاركة، وأصوات لتضخيمها.\n\n"
-            "اضغط *عرض المهام* أدناه لاختيار أول مهمة والبدء بكسب النقاط! 👇"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🔗 *الموارد:*\n"
+            "🕯 [صفحة التذكار](https://peopleforpeace.live)\n"
+            "📄 [أدلة وحقائق](https://peopleforpeace.live/evidence.html)\n"
+            "📊 [بيانات موثقة](https://peopleforpeace.live/data.html)\n"
+            "📢 تابعنا: @people4peace\n"
+            "━━━━━━━━━━━━━━━━━━━\n\n"
+            "اضغط *عرض المهام* أدناه لاختيار أول مهمة! 👇"
         ),
     },
 
@@ -1015,21 +1060,24 @@ TRANSLATIONS = {
             "See their faces. Read their names.\n"
             "👉 https://peopleforpeace.live/memorial.html\n\n"
             "Don't scroll past — act.\n"
-            "Join us: {link}"
+            "Join us: {link}\n\n"
+            "#JusticeForMinab #168Children #MinabSchoolMassacre"
         ),
         "fa": (
             "🕯 ۱۶۸ کودک کشته شدند. یک مدرسه. یک صبح.\n\n"
             "چهره‌هایشان را ببینید. نام‌هایشان را بخوانید.\n"
             "👉 https://peopleforpeace.live/memorial.html\n\n"
             "بی‌تفاوت رد نشوید — اقدام کنید.\n"
-            "به ما بپیوندید: {link}"
+            "به ما بپیوندید: {link}\n\n"
+            "#JusticeForMinab #168Children #عدالت_برای_میناب"
         ),
         "ar": (
             "🕯 ١٦٨ طفلاً قُتلوا. مدرسة واحدة. صباح واحد.\n\n"
             "انظروا إلى وجوههم. اقرأوا أسماءهم.\n"
             "👉 https://peopleforpeace.live/memorial.html\n\n"
             "لا تمرّوا مرور الكرام — تحرّكوا.\n"
-            "انضموا إلينا: {link}"
+            "انضموا إلينا: {link}\n\n"
+            "#JusticeForMinab #168Children #العدالة_لأطفال_ميناب"
         ),
     },
     "invite_memorial_sent": {
@@ -1144,6 +1192,57 @@ TRANSLATIONS = {
         "en": "🌍 Choose your language:",
         "fa": "🌍 زبان خود را انتخاب کنید:",
         "ar": "🌍 اختر لغتك:",
+    },
+
+    # ── Campaign About / Info ────────────────────────────────────
+    "btn_about_campaign": {
+        "en": "ℹ️ About This Campaign",
+        "fa": "ℹ️ درباره این کمپین",
+        "ar": "ℹ️ عن هذه الحملة",
+    },
+    "campaign_about": {
+        "en": (
+            "ℹ️ *About {name}*\n\n"
+            "{description}\n\n"
+            "👥 {members} volunteers joined\n"
+            "🎯 {tasks} tasks available\n\n"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🔗 *Resources:*\n"
+            "🕯 [Memorial](https://peopleforpeace.live)\n"
+            "📄 [Evidence & Facts](https://peopleforpeace.live/evidence.html)\n"
+            "📊 [Verified Data](https://peopleforpeace.live/data.html)\n"
+            "📢 Follow: @people4peace\n"
+            "━━━━━━━━━━━━━━━━━━━\n\n"
+            "#️⃣ {hashtags}"
+        ),
+        "fa": (
+            "ℹ️ *درباره {name}*\n\n"
+            "{description}\n\n"
+            "👥 {members} داوطلب پیوسته‌اند\n"
+            "🎯 {tasks} وظیفه موجود\n\n"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🔗 *منابع:*\n"
+            "🕯 [صفحه یادبود](https://peopleforpeace.live)\n"
+            "📄 [شواهد و حقایق](https://peopleforpeace.live/evidence.html)\n"
+            "📊 [داده‌های تأییدشده](https://peopleforpeace.live/data.html)\n"
+            "📢 دنبال کنید: @people4peace\n"
+            "━━━━━━━━━━━━━━━━━━━\n\n"
+            "#️⃣ {hashtags}"
+        ),
+        "ar": (
+            "ℹ️ *عن {name}*\n\n"
+            "{description}\n\n"
+            "👥 {members} متطوع انضموا\n"
+            "🎯 {tasks} مهمة متاحة\n\n"
+            "━━━━━━━━━━━━━━━━━━━\n"
+            "🔗 *الموارد:*\n"
+            "🕯 [صفحة التذكار](https://peopleforpeace.live)\n"
+            "📄 [أدلة وحقائق](https://peopleforpeace.live/evidence.html)\n"
+            "📊 [بيانات موثقة](https://peopleforpeace.live/data.html)\n"
+            "📢 تابعنا: @people4peace\n"
+            "━━━━━━━━━━━━━━━━━━━\n\n"
+            "#️⃣ {hashtags}"
+        ),
     },
 }
 
