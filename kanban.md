@@ -44,6 +44,7 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 | B3 | Menu leaderboard wrong field (`points` → `total_points`) | Medium | ✅ Fixed |
 | B4 | Profile shows 0 points (`user.points` → `user.total_points`) | Low | TODO |
 | B6 | Menu "Available Tasks" no per-task buttons | Medium | Deferred |
+| B7 | **Channel broadcasts silent fail** — `telegram_channel_id` NULL on production campaigns; all broadcasts silently return | High | ✅ Fixed (warning logs + `resolve_channel_id` command) |
 
 ---
 

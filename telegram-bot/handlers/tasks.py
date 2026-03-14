@@ -344,6 +344,7 @@ async def _broadcast_task_completion(bot, campaign_id, task_title, task_type, pr
     try:
         channel_id = await _db_get_campaign_channel_id(campaign_id)
         if not channel_id:
+            logger.warning(f'No telegram_channel_id set for campaign {campaign_id} — skipping task completion broadcast')
             return
 
         type_icons = {
@@ -394,6 +395,7 @@ async def _broadcast_volunteer_joined(bot, campaign_id, member_count):
     try:
         channel_id = await _db_get_campaign_channel_id(campaign_id)
         if not channel_id:
+            logger.warning(f'No telegram_channel_id set for campaign {campaign_id} — skipping volunteer join broadcast')
             return
 
         from utils.brand_constants import BRAND_HEADER_HTML, BRAND_SEPARATOR, BRAND_CTA_HTML

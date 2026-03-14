@@ -312,6 +312,7 @@ def broadcast_task_completion(campaign_id: int, task_title: str, task_type: str,
 
     channel_id = campaign.telegram_channel_id
     if not channel_id:
+        logger.warning(f'No telegram_channel_id set for campaign {campaign_id} — skipping task completion broadcast')
         return
 
     # Task type icons
@@ -374,6 +375,7 @@ def broadcast_volunteer_joined(campaign_id: int):
 
     channel_id = campaign.telegram_channel_id
     if not channel_id:
+        logger.warning(f'No telegram_channel_id set for campaign {campaign_id} — skipping volunteer join broadcast')
         return
 
     count = campaign.current_members
@@ -441,6 +443,7 @@ def broadcast_milestone(campaign_id: int, metric: str, current: int, target: int
 
     channel_id = campaign.telegram_channel_id
     if not channel_id:
+        logger.warning(f'No telegram_channel_id set for campaign {campaign_id} — skipping milestone broadcast')
         return
 
     metric_labels = {
