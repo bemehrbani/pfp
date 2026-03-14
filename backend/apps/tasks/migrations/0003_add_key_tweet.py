@@ -7,8 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tasks', '0002_add_twitter_comment'),
-        ('tasks', '0002_initial'),
+        ('tasks', '0002_merge_0002_add_twitter_comment_0002_initial'),
     ]
 
     operations = [
