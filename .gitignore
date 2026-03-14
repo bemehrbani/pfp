@@ -172,3 +172,27 @@ kanban.md
 frontend/public/memorial-data.js.bak
 frontend/public/photo-review.html
 frontend/public/photo_audit.html
+
+# Test artifacts & reports
+tests/screenshots/
+tests/videos/
+tests/results/
+test_screenshots/
+test_screenshots_core/
+test_videos/
+test_videos_core/
+test_results*.json
+e2e-report/
+
+# Debug artifacts
+debug_*.png
+
+# Temporary / one-off scripts
+align_campaign_db.py
+inspect_db.py
+telegram-bot/save_session.py
+telegram-bot/telegram_session.json
+telegram-bot/prototype.html
+
+# Misc
+Misc Archive/
