@@ -499,7 +499,7 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
             campaign_id=cid, is_active=True,
             task_type__in=[
                 'twitter_post', 'twitter_retweet', 'twitter_comment',
-                'petition', 'mass_email',
+                'content_creation', 'petition', 'mass_email',
             ]
         ).order_by('estimated_time')[:10])
 

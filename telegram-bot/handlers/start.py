@@ -227,7 +227,7 @@ async def _show_campaigns_after_welcome(context, session, chat_id, lang):
                 campaign_id=cid, is_active=True,
                 task_type__in=[
                     'twitter_post', 'twitter_retweet', 'twitter_comment',
-                    'petition', 'mass_email',
+                    'content_creation', 'petition', 'mass_email',
                 ]
             ).order_by('-points')[:10])
 
