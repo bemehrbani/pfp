@@ -44,6 +44,7 @@
 | **Memorial** | https://peopleforpeace.live/memorial.html | Interactive photo mosaic of 100 children |
 | **Evidence** | https://peopleforpeace.live/evidence.html | Fact sheet: OSINT, media sources, debunked claims |
 | **Data** | https://peopleforpeace.live/data.html | Verified names and data for the 100 children |
+| **Amplify** | https://peopleforpeace.live/amplify.html | Curated library of 33+ investigative reports + RT templates |
 | **Bot** | https://t.me/peopleforpeacebot | Telegram campaign bot |
 | **Bot Deep-link** | https://t.me/peopleforpeacebot?start=campaign_18 | Auto-join Minab campaign |
 | **Channel** | https://t.me/people4peace | Telegram updates channel |
@@ -64,13 +65,13 @@
 
 | # | Task | Status | Impact |
 |---|------|--------|--------|
-| E1 | **Rich auto-join message** — Add cause context, resource links (memorial/evidence/data/channel), hashtags | 🔲 | ⭐⭐⭐ |
-| E2 | **Enriched campaign detail** — Add resource links + full description | 🔲 | ⭐⭐ |
-| E3 | **Enriched join welcome** — Same resource block as E1 | 🔲 | ⭐⭐ |
-| E4 | **"About Campaign" button** on task checklist → shows full context | 🔲 | ⭐ |
-| E5 | **Campaign description update** — Emotional narrative on production | 🔲 | ⭐⭐⭐ |
-| E6 | **Resource link translation keys** — Centralized i18n for all links | 🔲 | ⭐⭐ |
-| E7 | **Richer invite share** — Include cause context + hashtags in invite message | 🔲 | ⭐⭐ |
+| E1 | **Rich auto-join message** — Add cause context, resource links (memorial/evidence/data/channel), hashtags | ✅ | ⭐⭐⭐ |
+| E2 | **Enriched campaign detail** — Add resource links + full description | ✅ | ⭐⭐ |
+| E3 | **Enriched join welcome** — Same resource block as E1 | ✅ | ⭐⭐ |
+| E4 | **"About Campaign" button** on task checklist → shows full context | ✅ | ⭐ |
+| E5 | **Campaign description update** — Emotional narrative on production | ✅ | ⭐⭐⭐ |
+| E6 | **Resource link translation keys** — Centralized i18n for all links | ✅ | ⭐⭐ |
+| E7 | **Richer invite share** — Include cause context + hashtags in invite message | ✅ | ⭐⭐ |
 
 ### Resource Links to Surface
 
@@ -108,7 +109,108 @@ Tap a task below to get started! 👇
 
 ---
 
+## 📝 Task Content Quality Epic — Production-Ready Tasks
+
+> Goal: Every task should have clear, actionable instructions with real links, specific targets, and emotional context so a first-time volunteer knows exactly what to do.
+
+### Quality Standards
+- **Title:** Action-oriented verb + specific outcome
+- **Description:** Why this matters (1-2 sentences connecting to the cause)
+- **Instructions:** Numbered steps with real URLs, search queries, or targets
+- **Trilingual:** EN/FA/AR — natural, not machine-translated
+- **Points/Time:** Realistic estimates
+
+### Current Issues
+- Instructions say "search for..." without giving specific links or search queries
+- No target accounts/tweets for comment tasks
+- "Content library" referenced but doesn't exist yet
+- Descriptions are generic — don't connect action to impact
+
+---
+
+### T1: Share a Child's Story (ID 15 · `twitter_post`)
+
+| Field | Current | Improve |
+|-------|---------|---------|
+| Description | "Post a spotlight card..." | ✅ Good — add memorial link |
+| Instructions | "Download from content library" | ❌ No library exists! Add memorial URL + sample tweet |
+| Points/Time | 10pts / 5min | ✅ OK |
+
+**Subtasks:**
+- [ ] T1.1: Add memorial page link to instructions (`peopleforpeace.live/memorial.html`)
+- [ ] T1.2: Add sample tweet text with hashtags
+- [ ] T1.3: Add instruction to screenshot child from memorial page
+- [ ] T1.4: Update FA translation
+
+---
+
+### T2: Amplify Investigative Reports (ID 16 · `twitter_retweet`)
+
+| Field | Current | Improve |
+|-------|---------|---------|
+| Description | "Retweet NYT, BBC..." | ✅ Good — add "why" context |
+| Instructions | "Search for reports..." | ❌ No search links! Add Twitter search URL |
+| Points/Time | 10pts / 3min | ✅ OK |
+
+**Subtasks:**
+- [ ] T2.1: Add Twitter/X search link for `#MinabSchoolMassacre` or `Minab school`
+- [ ] T2.2: List 3-5 specific report tweet URLs (BBC, NYT, WaPo, etc.)
+- [ ] T2.3: Add evidence page link (`peopleforpeace.live/evidence.html`)
+- [ ] T2.4: Update FA translation
+
+---
+
+### T3: Comment on Key Tweets (ID 17 · `twitter_comment`)
+
+| Field | Current | Improve |
+|-------|---------|---------|
+| Description | "Reply to US officials..." | ✅ Good |
+| Instructions | "Reply to ICC, UN, HRW..." | ❌ No specific accounts or tweet links |
+| Points/Time | 10pts / 5min | ✅ OK |
+
+**Subtasks:**
+- [x] T3.1: List 5+ target accounts (@IntlCrimCourt, @UNHumanRights, @hraborz, @StateDept, etc.)
+- [x] T3.2: Provide 2-3 sample reply templates (factual, respectful)
+- [x] T3.3: Add link to evidence page for fact-checking before commenting
+- [x] T3.4: Update FA translation
+
+---
+
+### T4: Create Original Content (ID 21 · `content_creation`)
+
+| Field | Current | Improve |
+|-------|---------|---------|
+| Description | "Create video, art, poem..." | ✅ Good |
+| Instructions | "Use content library..." | ❌ No library link! Add ideas + resources |
+| Points/Time | 10pts / 30min | ⚠️ Points too low for 30min effort |
+
+**Subtasks:**
+- [ ] T4.1: Add memorial + evidence URLs as source material
+- [ ] T4.2: Add 3-4 content ideas (thread, poem, comparison graphic, short video)
+- [ ] T4.3: Increase points to 25-50 (highest effort task)
+- [ ] T4.4: Update FA translation
+
+---
+
+### T5: Sign the Petition (ID 24 · `petition`)
+
+| Field | Current | Improve |
+|-------|---------|---------|
+| Description | Detailed, good quality | ✅ Good |
+| Instructions | Numbered steps with link | ✅ Good |
+| Points/Time | 10pts / 5min | ⚠️ Time could be 2min |
+
+**Subtasks:**
+- [ ] T5.1: Reduce estimated time to 2 min
+- [ ] T5.2: Add AR (Arabic) translations
+- [ ] T5.3: Add context linking petition to Minab specifically
+
 ## ✅ Completed (Recent)
+- [x] **Campaign UX Epic (E1-E7):** All 7 UX improvements deployed — rich messages, about button, resource links, enriched invites.
+- [x] **Amplify Page:** Curated library of 33+ investigative reports live at amplify.html.
+- [x] **Petition Task (ID 24):** New petition task created and active in bot.
+- [x] **Content Creation Whitelist:** `content_creation` task type now visible in bot checklist.
+- [x] **T3 Content Update:** "Comment on Key Tweets" — improved with search URLs, target accounts, sample replies.
 - [x] **Strategy:** Developed comprehensive 4-phase action plan and top-3 focused strategy for Minab accountability.
 - [x] **Research:** Comprehensive legal research into 10 possible pathways for prosecuting Trump for the Minab strike.
 - [x] **Data Gathering:** Extracted and split 100 children's photos from the Minab memorial image.

@@ -912,10 +912,26 @@ async def handle_task_start_and_guide(query, session, task_id, context):
 
         msg = t('task_started_title', lang) + "\n\n"
         msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
+
+        # Show enriched description so volunteers see full context
+        description = task.localized_description(lang)
+        if description:
+            msg += f"{description}\n\n"
+            msg += "───────────────────\n\n"
+
         msg += t('task_3_steps', lang) + "\n\n"
         msg += t('retweet_step1', lang).format(hashtags=hashtags) + "\n"
         msg += t('retweet_step2', lang) + "\n"
         msg += t('retweet_step3', lang) + "\n"
+
+        # Resource library link (e.g. amplify.html) if target_url is set
+        if task.target_url:
+            keyboard.append([
+                InlineKeyboardButton(
+                    "📚 View Report Library",
+                    url=task.target_url
+                )
+            ])
 
         keyboard.append([
             InlineKeyboardButton(

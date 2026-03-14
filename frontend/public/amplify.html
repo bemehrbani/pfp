@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0e17" />
+    <meta name="description"
+        content="Amplify the truth — A curated library of 30+ investigative reports about the Minab School airstrike. Retweet, share, and demand justice." />
+    <meta property="og:title" content="Amplify — Investigative Reports on Minab" />
+    <meta property="og:description" content="30+ investigative reports proving the Minab school was a civilian target struck by US Tomahawk missiles." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://peopleforpeace.live/amplify.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Amplify — Investigative Reports on Minab" />
+    <meta name="twitter:description" content="30+ investigative reports proving the Minab school was a civilian target. Retweet, share, demand justice." />
+    <title>Amplify — Investigative Reports | People for Peace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg2: #111827;
+            --bg3: #1a1f2e;
+            --text: #f0ebe3;
+            --text2: #9ca3af;
+            --text3: #6b7280;
+            --gold: #d4a853;
+            --red: #c4564a;
+            --red-dim: rgba(196, 86, 74, 0.12);
+            --blue: #4a90d9;
+            --blue-dim: rgba(74, 144, 217, 0.12);
+            --green: #7cb68e;
+            --green-dim: rgba(124, 182, 142, 0.12);
+            --orange: #e8943a;
+            --orange-dim: rgba(232, 148, 58, 0.12);
+            --purple: #9b8ec4;
+            --purple-dim: rgba(155, 142, 196, 0.12);
+            --border: rgba(255, 255, 255, 0.06);
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Source Sans 3', sans-serif;
+            --font-rtl: 'Vazirmatn', sans-serif;
+            --radius: 12px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        a { color: var(--gold); text-decoration: none; transition: color var(--transition); }
+        a:hover { color: var(--text); }
+
+        /* ─── Nav ─── */
+        .nav {
+            position: sticky; top: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 32px;
+            background: rgba(10, 14, 23, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text); }
+        .nav-links { display: flex; gap: 6px; }
+        .nav-links a { font-size: 0.85rem; color: var(--text2); padding: 6px 14px; border-radius: 8px; transition: all var(--transition); }
+        .nav-links a:hover { background: var(--bg3); color: var(--text); }
+
+        /* ─── Hero ─── */
+        .hero {
+            padding: 100px 24px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(74,144,217,0.08) 0%, var(--bg) 100%);
+        }
+        .hero-label { font-size: 0.85rem; color: var(--blue); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
+        .hero h1 { font-family: var(--font-display); font-size: 2.8rem; font-weight: 900; line-height: 1.2; margin-bottom: 16px; }
+        .hero-sub { max-width: 700px; margin: 0 auto; color: var(--text2); font-size: 1.1rem; }
+        .hero-stats { display: flex; justify-content: center; gap: 40px; margin-top: 32px; flex-wrap: wrap; }
+        .hero-stat { text-align: center; }
+        .hero-stat-num { font-size: 2rem; font-weight: 900; font-family: var(--font-display); }
+        .hero-stat-label { font-size: 0.8rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* ─── Section ─── */
+        .section { max-width: 860px; margin: 0 auto; padding: 60px 24px; }
+        .section-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+        .section-subtitle { color: var(--text3); font-size: 0.9rem; margin-bottom: 28px; }
+
+        /* ─── Report Cards ─── */
+        .report-grid { display: grid; gap: 16px; }
+        .report-card {
+            background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 20px 24px; transition: all var(--transition); display: flex; gap: 16px; align-items: flex-start;
+        }
+        .report-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .report-num { font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; color: var(--text3); min-width: 30px; line-height: 1.3; }
+        .report-body { flex: 1; }
+        .report-outlet { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 4px; }
+        .report-title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; line-height: 1.4; }
+        .report-title a { color: var(--text); }
+        .report-title a:hover { color: var(--gold); }
+        .report-desc { color: var(--text2); font-size: 0.88rem; line-height: 1.5; margin-bottom: 10px; }
+        .report-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag { display: inline-block; font-size: 0.68rem; padding: 2px 10px; border-radius: 20px; font-weight: 600; }
+        .tag-investigation { background: var(--red-dim); color: var(--red); }
+        .tag-osint { background: var(--blue-dim); color: var(--blue); }
+        .tag-legal { background: var(--purple-dim); color: var(--purple); }
+        .tag-official { background: var(--orange-dim); color: var(--orange); }
+        .tag-media { background: rgba(212,168,83,0.12); color: var(--gold); }
+
+        /* ─── Tier Label ─── */
+        .tier-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+            padding: 4px 14px; border-radius: 20px; margin-bottom: 20px;
+        }
+        .tier-1 { background: var(--red-dim); color: var(--red); }
+        .tier-2 { background: var(--orange-dim); color: var(--orange); }
+        .tier-3 { background: rgba(212,168,83,0.12); color: var(--gold); }
+        .tier-4 { background: var(--blue-dim); color: var(--blue); }
+
+        /* ─── Tweet Templates ─── */
+        .tweet-card {
+            background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 20px 24px; margin-bottom: 14px; position: relative;
+        }
+        .tweet-card:hover { border-color: rgba(255,255,255,0.1); }
+        .tweet-source { font-size: 0.75rem; color: var(--blue); font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.08em; }
+        .tweet-text { color: var(--text); font-size: 0.92rem; line-height: 1.6; white-space: pre-line; }
+        .tweet-text .hashtag { color: var(--blue); }
+        .tweet-text .mention { color: var(--gold); }
+        .copy-btn {
+            position: absolute; top: 14px; right: 14px;
+            background: var(--bg3); border: 1px solid var(--border); color: var(--text2);
+            padding: 4px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem;
+            transition: all var(--transition);
+        }
+        .copy-btn:hover { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+        .copy-btn.copied { background: var(--green); color: var(--bg); border-color: var(--green); }
+
+        /* ─── CTA ─── */
+        .cta-section { text-align: center; padding: 60px 24px 80px; }
+        .cta-btn {
+            display: inline-block; padding: 16px 40px; border: 1px solid var(--blue);
+            border-radius: var(--radius); color: var(--blue); font-weight: 600; font-size: 1rem;
+            transition: all var(--transition); margin: 6px;
+        }
+        .cta-btn:hover { background: var(--blue-dim); color: var(--text); }
+        .cta-btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+        .cta-btn.primary:hover { background: #a8443a; }
+
+        /* ─── Footer ─── */
+        .footer { padding: 40px 24px; border-top: 1px solid var(--border); text-align: center; }
+        .footer a { color: var(--text3); margin: 0 14px; font-size: 0.85rem; }
+        .footer a:hover { color: var(--gold); }
+        .footer-copy { margin-top: 16px; font-size: 0.8rem; color: var(--text3); }
+
+        /* ─── Fade In ─── */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.2rem; }
+            .nav { padding: 10px 16px; }
+            .nav-links { display: none; }
+            .hero-stats { gap: 24px; }
+            .report-card { flex-direction: column; gap: 8px; }
+            .report-num { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ====== NAV ====== -->
+    <nav class="nav">
+        <a href="/" class="nav-logo display-font">☮ People for Peace</a>
+        <div class="nav-links">
+            <a href="/memorial.html">Memorial</a>
+            <a href="/evidence.html">Evidence</a>
+            <a href="/data.html">Data</a>
+            <a href="/">Home</a>
+        </div>
+    </nav>
+
+    <!-- ====== HERO ====== -->
+    <section class="hero">
+        <div class="fade-in">
+            <div class="hero-label">Campaign Resource</div>
+            <h1 class="display-font">Amplify the Truth</h1>
+            <p class="hero-sub">A curated library of investigative reports proving the Minab school was a civilian target struck by US Tomahawk missiles. Retweet. Share. Demand justice.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-num" style="color:var(--red);">33+</div>
+                    <div class="hero-stat-label">Reports</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" style="color:var(--gold);">168</div>
+                    <div class="hero-stat-label">Children Killed</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" style="color:var(--blue);">7</div>
+                    <div class="hero-stat-label">RT Templates</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== TIER 1 ====== -->
+    <section class="section fade-in">
+        <span class="tier-badge tier-1">🔴 Tier 1 — Highest Priority</span>
+        <h2 class="section-title">Major Investigations</h2>
+        <p class="section-subtitle">Deep, original investigations with exclusive evidence. Retweet these first.</p>
+        <div class="report-grid">
+
+            <div class="report-card">
+                <div class="report-num">01</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">The New York Times</div>
+                    <div class="report-title"><a href="https://www.nytimes.com/2026/03/11/us/politics/iran-school-missile-strike.html" target="_blank" rel="noopener">U.S. at Fault in Strike on School in Iran, Preliminary Inquiry Says</a></div>
+                    <div class="report-desc">Verified footage; confirmed US Central Command used outdated DIA data; first to report preliminary US military findings of responsibility. At least 175 killed.</div>
+                    <div class="report-tags"><span class="tag tag-investigation">Visual Investigation</span><span class="tag tag-osint">Satellite Imagery</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">02</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">BBC Verify</div>
+                    <div class="report-title"><a href="https://www.bbc.com/news/articles/c1l7rvqq51eo" target="_blank" rel="noopener">BBC Verify: Minab school hit by multiple missiles — satellite analysis</a></div>
+                    <div class="report-desc">Satellite-based analysis confirmed triple-tap strike (3 distinct missiles). Geolocated cruise missile footage. Identified munition as US Tomahawk.</div>
+                    <div class="report-tags"><span class="tag tag-osint">OSINT</span><span class="tag tag-osint">Munitions ID</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">03</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">The Washington Post</div>
+                    <div class="report-title"><a href="https://www.washingtonpost.com/national-security/2026/03/13/pentagon-investigation-minab-school/" target="_blank" rel="noopener">Pentagon opens formal investigation into Minab school strike</a></div>
+                    <div class="report-desc">School confirmed on US target list. Satellite evidence shows school walled off from IRGC compound since 2016. Questions about AI-enabled targeting raised.</div>
+                    <div class="report-tags"><span class="tag tag-investigation">Exclusive</span><span class="tag tag-media">AI Targeting</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">04</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">CBC News</div>
+                    <div class="report-title"><a href="https://www.cbc.ca/news/world/iran-school-bombing-investigation-1.7114994" target="_blank" rel="noopener">Who bombed a girls' school in Iran? A visual investigation</a></div>
+                    <div class="report-desc">Satellite imagery + social media footage confirmed precision airstrike. School was independent civilian facility for 10+ years. Faulty intelligence confirmed.</div>
+                    <div class="report-tags"><span class="tag tag-investigation">Visual Investigation</span><span class="tag tag-osint">Satellite</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">05</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">Al Jazeera</div>
+                    <div class="report-title"><a href="https://www.aljazeera.com/news/2026/2/28/death-toll-in-israeli-strike-on-southern-iran-school-rises-to-165" target="_blank" rel="noopener">Al Jazeera investigation: Iran girls' school targeting likely 'deliberate'</a></div>
+                    <div class="report-desc">Concluded school was "likely deliberate" target. Definitively proved school separated from military installations for 10+ years. Detailed triple-tap analysis.</div>
+                    <div class="report-tags"><span class="tag tag-investigation">Digital Investigation</span><span class="tag tag-investigation">Deliberate Targeting</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">06</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">Bellingcat</div>
+                    <div class="report-title"><a href="https://www.bellingcat.com/news/2026/03/08/video-shows-us-tomahawk-missile-strike-next-to-girls-school-in-iran/" target="_blank" rel="noopener">Video Shows US Tomahawk Missile Strike Next to Girls' School in Iran</a></div>
+                    <div class="report-desc">Trevor Ball geolocated video footage near strike site. Positively identified munition as US-made Tomahawk cruise missile. Directly contradicted Trump.</div>
+                    <div class="report-tags"><span class="tag tag-osint">OSINT Verified</span><span class="tag tag-osint">Geolocation</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">07</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">NPR</div>
+                    <div class="report-title"><a href="https://www.npr.org/2026/03/08/nx-s1-5739395/iran-school-airstrike-tomahawk-missile-trump" target="_blank" rel="noopener">Video appears to show U.S. cruise missile striking Iranian school compound</a></div>
+                    <div class="report-desc">First to report precision strike with outdated intelligence. Historical satellite imagery shows separation wall built 2013–2016. School was former IRGC facility.</div>
+                    <div class="report-tags"><span class="tag tag-investigation">Intelligence Failure</span><span class="tag tag-osint">Satellite</span></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====== TIER 2 ====== -->
+    <section class="section fade-in">
+        <span class="tier-badge tier-2">🟠 Tier 2 — Analysis & Legal</span>
+        <h2 class="section-title">Investigative Analysis & Legal Reports</h2>
+        <p class="section-subtitle">Expert analysis, legal frameworks, and systemic accountability reporting.</p>
+        <div class="report-grid">
+
+            <div class="report-card">
+                <div class="report-num">08</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">ProPublica</div>
+                    <div class="report-title"><a href="https://www.propublica.org/article/pentagon-civilian-harm-mitigation-dismantled-minab" target="_blank" rel="noopener">How the Pentagon dismantled civilian harm prevention before Minab</a></div>
+                    <div class="report-desc">Trump admin dissolved CHMR program. Secretary Hegseth prioritized "lethality" over protection. Former officials said program could have prevented tragedy.</div>
+                    <div class="report-tags"><span class="tag tag-investigation">Systemic Failure</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">09</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">New Lines Institute</div>
+                    <div class="report-title"><a href="https://newlinesinstitute.org/iran/the-legal-implications-of-targeting-a-girls-elementary-school-in-iran/" target="_blank" rel="noopener">The Legal Implications of Targeting a Girls' Elementary School in Iran</a></div>
+                    <div class="report-desc">Strike violated principles of distinction, proportionality, and military necessity under IHL. Children are entitled to special protection.</div>
+                    <div class="report-tags"><span class="tag tag-legal">Legal Analysis</span><span class="tag tag-legal">IHL</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">10</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">Human Rights Watch</div>
+                    <div class="report-title"><a href="https://www.hrw.org/news/2026/03/07/us/israel-investigate-iran-school-attack-as-a-war-crime" target="_blank" rel="noopener">US/Israel: Investigate Iran School Attack as a War Crime</a></div>
+                    <div class="report-desc">Called for full independent investigation. Verified videos, photos, and satellite imagery. Confirmed school separated from IRGC compound since 2016.</div>
+                    <div class="report-tags"><span class="tag tag-legal">War Crime</span><span class="tag tag-official">HRW</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">11</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">DAWN</div>
+                    <div class="report-title"><a href="https://dawnmena.org/us-and-israel-apparent-war-crimes-in-iran-and-lebanon-demand-action/" target="_blank" rel="noopener">Apparent War Crimes in Iran — Article 12(3) ICC Petition</a></div>
+                    <div class="report-desc">Coalition of 100+ world leaders and Nobel laureates petitioned ICC. Urging Iran to invoke Article 12(3) of the Rome Statute for jurisdiction.</div>
+                    <div class="report-tags"><span class="tag tag-legal">ICC Petition</span><span class="tag tag-legal">Article 12(3)</span></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====== TIER 3 ====== -->
+    <section class="section fade-in">
+        <span class="tier-badge tier-3">🟡 Tier 3 — Official Statements</span>
+        <h2 class="section-title">Institutional Reports & Statements</h2>
+        <p class="section-subtitle">Official condemnations, UN statements, and political accountability.</p>
+        <div class="report-grid">
+
+            <div class="report-card">
+                <div class="report-num">12</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">OHCHR — UN Human Rights</div>
+                    <div class="report-title"><a href="https://www.ohchr.org/en/press-releases/2026/03/iran-un-experts-condemn-strike-girls-school-minab" target="_blank" rel="noopener">UN experts condemn strike on girls' school in Minab</a></div>
+                    <div class="report-desc">Called for urgent, independent investigation. Schools are protected civilian objects under IHL.</div>
+                    <div class="report-tags"><span class="tag tag-official">UN Statement</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">13</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">UNESCO</div>
+                    <div class="report-title"><a href="https://www.unesco.org/en/articles/unesco-condemns-attack-school-iran-minab" target="_blank" rel="noopener">UNESCO condemns Minab school bombing as "grave violation"</a></div>
+                    <div class="report-desc">"Grave violation of humanitarian law." Educational institutions and their occupants are protected under international law.</div>
+                    <div class="report-tags"><span class="tag tag-official">UNESCO</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">14</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">US Senate</div>
+                    <div class="report-title"><a href="https://www.vanhollen.senate.gov/news/press-releases/senators-demand-investigation-iran-minab-school" target="_blank" rel="noopener">46 US Senators demand investigation into Minab school strike</a></div>
+                    <div class="report-desc">Demanded answers: Did US forces do this? What role did AI play? Why wasn't civilian harm prevention followed? Led by Van Hollen, Kaine, Warren, Schumer.</div>
+                    <div class="report-tags"><span class="tag tag-official">Senate</span><span class="tag tag-legal">Accountability</span></div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-num">15</div>
+                <div class="report-body">
+                    <div class="report-outlet" style="color:var(--text2);">Amnesty International</div>
+                    <div class="report-title"><a href="https://www.amnesty.org/en/latest/news/2026/03/iran-minab-school-strike/" target="_blank" rel="noopener">"Absolute violation of international law"</a></div>
+                    <div class="report-desc">Attributed responsibility to the United States. Called for full investigation and accountability.</div>
+                    <div class="report-tags"><span class="tag tag-legal">IHL Violation</span></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====== TWEET TEMPLATES ====== -->
+    <section class="section fade-in">
+        <h2 class="section-title"><span style="font-size:1.4rem;">✍️</span> Ready-to-Tweet Templates</h2>
+        <p class="section-subtitle">Copy, paste, and post. Each template is paired with a key report for maximum impact.</p>
+
+        <div class="tweet-card">
+            <button class="copy-btn" onclick="copyTweet(this)">Copy</button>
+            <div class="tweet-source">NYT Visual Investigation</div>
+            <div class="tweet-text">🔍 NYT Visual Investigation confirms: US Central Command used outdated DIA data to target a girls' school in Minab. 168 children killed because of a "targeting error."
+
+This is not an error. This is negligence. This is a war crime.
+
+<span class="hashtag">#JusticeForMinab</span> <span class="hashtag">#168Children</span></div>
+        </div>
+
+        <div class="tweet-card">
+            <button class="copy-btn" onclick="copyTweet(this)">Copy</button>
+            <div class="tweet-source">Bellingcat OSINT</div>
+            <div class="tweet-text">🛰 Bellingcat has geolocated and positively identified the munition as a US-made Tomahawk cruise missile.
+
+Trump said Iran did it. The OSINT evidence says otherwise.
+
+RT to amplify the truth. <span class="hashtag">#JusticeForMinab</span> <span class="hashtag">#MinabSchoolMassacre</span></div>
+        </div>
+
+        <div class="tweet-card">
+            <button class="copy-btn" onclick="copyTweet(this)">Copy</button>
+            <div class="tweet-source">BBC Verify — Triple-Tap</div>
+            <div class="tweet-text">⚠️ BBC Verify confirms: Not one, not two, but THREE missiles hit the Shajareh Tayyebeh school in Minab.
+
+A "triple-tap" — designed to maximize casualties. On a school full of 7-year-old girls.
+
+<span class="hashtag">#JusticeForMinab</span> <span class="hashtag">#168Children</span> <span class="mention">@IntlCrimCourt</span></div>
+        </div>
+
+        <div class="tweet-card">
+            <button class="copy-btn" onclick="copyTweet(this)">Copy</button>
+            <div class="tweet-source">Al Jazeera — "Deliberate"</div>
+            <div class="tweet-text">📺 Al Jazeera investigation concludes: the Minab school targeting was likely "deliberate."
+
+The school had been separated from any military installation for over a decade.
+
+There is no excuse. <span class="hashtag">#JusticeForMinab</span> <span class="hashtag">#ICCForMinab</span></div>
+        </div>
+
+        <div class="tweet-card">
+            <button class="copy-btn" onclick="copyTweet(this)">Copy</button>
+            <div class="tweet-source">ProPublica — Systemic Failure</div>
+            <div class="tweet-text">🔴 ProPublica: Trump officials dismantled the US military's civilian harm prevention program BEFORE the Minab strike.
+
+168 children paid the price.
+
+This was not just a mistake — it was predictable. <span class="hashtag">#JusticeForMinab</span></div>
+        </div>
+
+        <div class="tweet-card">
+            <button class="copy-btn" onclick="copyTweet(this)">Copy</button>
+            <div class="tweet-source">HRW — War Crime</div>
+            <div class="tweet-text">⚖️ Human Rights Watch has called for the Minab school strike to be investigated as a WAR CRIME.
+
+168 children. A girls' school. Tomahawk missiles.
+
+Justice must be served. <span class="hashtag">#JusticeForMinab</span> <span class="hashtag">#ICCForMinab</span></div>
+        </div>
+
+        <div class="tweet-card">
+            <button class="copy-btn" onclick="copyTweet(this)">Copy</button>
+            <div class="tweet-source">US Senators</div>
+            <div class="tweet-text">🇺🇸 46 US Senators have demanded answers from Secretary Hegseth:
+
+— Did US forces carry out this strike?
+— What role did AI play in targeting?
+— Why wasn't civilian harm prevention followed?
+
+Accountability starts at home. <span class="hashtag">#JusticeForMinab</span></div>
+        </div>
+
+    </section>
+
+    <!-- ====== CTA ====== -->
+    <section class="cta-section fade-in">
+        <p style="color:var(--text2);margin-bottom:24px;font-size:1rem;">Every retweet keeps the pressure on. Every share makes it harder to forget.</p>
+        <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
+            <a style="display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:1px solid #1da1f2;border-radius:20px;color:#1da1f2;font-size:.85rem;font-weight:600;transition:all .3s ease" href="https://twitter.com/intent/tweet?text=30%2B%20investigative%20reports%20prove%20the%20Minab%20school%20was%20a%20civilian%20target.%20%23JusticeForMinab%20%23168Children&url=https%3A%2F%2Fpeopleforpeace.live%2Famplify.html" target="_blank" rel="noopener">𝕏 Share on X</a>
+            <a style="display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:1px solid #0088cc;border-radius:20px;color:#0088cc;font-size:.85rem;font-weight:600;transition:all .3s ease" href="https://t.me/share/url?url=https%3A%2F%2Fpeopleforpeace.live%2Famplify.html&text=30%2B%20investigative%20reports%20on%20the%20Minab%20school%20strike." target="_blank" rel="noopener">✈ Telegram</a>
+            <a style="display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:1px solid #25d366;border-radius:20px;color:#25d366;font-size:.85rem;font-weight:600;transition:all .3s ease" href="https://wa.me/?text=30%2B%20investigative%20reports%20on%20the%20Minab%20school%20strike.%0Ahttps%3A%2F%2Fpeopleforpeace.live%2Famplify.html" target="_blank" rel="noopener">💬 WhatsApp</a>
+        </div>
+        <a href="/evidence.html" class="cta-btn">📄 Evidence & Facts →</a>
+        <a href="/memorial.html" class="cta-btn primary">🕊️ See the Memorial →</a>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div>
+            <a href="/">Home</a>
+            <a href="/memorial.html">Memorial</a>
+            <a href="/evidence.html">Evidence</a>
+            <a href="/data.html">Data</a>
+            <a href="https://t.me/peopleforpeacebot?start=campaign_18">Join Campaign</a>
+        </div>
+        <p class="footer-copy">People for Peace · 2026</p>
+    </footer>
+
+    <!-- ====== INTERACTIVITY ====== -->
+    <script>
+        /** Copy tweet text to clipboard */
+        function copyTweet(btn) {
+            const card = btn.closest('.tweet-card');
+            const textEl = card.querySelector('.tweet-text');
+            const text = textEl.textContent.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = '✓ Copied';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        /** Scroll fade-in */
+        function handleFadeIn() {
+            document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 60) el.classList.add('visible');
+            });
+        }
+
+        window.addEventListener('scroll', () => requestAnimationFrame(handleFadeIn));
+        document.addEventListener('DOMContentLoaded', handleFadeIn);
+    </script>
+
+</body>
+</html>

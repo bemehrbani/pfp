@@ -1,7 +1,7 @@
 # PFP Telegram Bot — Kanban Board
 
 > **Source of truth** for the People for Peace bot development.
-> Last updated: March 12, 2026
+> Last updated: March 14, 2026
 
 ---
 
@@ -32,6 +32,9 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 | E3 | **Update E2E Documentation** | Log final suite outcomes in `walkthrough.md` and `task.md` | XS | ⬜ TODO |
 | L1 | **Deploy Leaderboard/Points Removal** | Commit, push, deploy, and verify the removal of leaderboard and points UI | S | TODO |
 | OG1 | **Page-specific OG images** | Memorial, evidence, landing OG cards + data.html OG tags added | XS | ✅ |
+| V1 | **Show description in retweet flow** | `twitter_retweet` handler now shows `localized_description()` above 3-step instructions | XS | ✅ |
+| V2 | **Resource link button after accept** | Adds `📚 View Report Library` button (uses `target_url`) in retweet guided flow | XS | ✅ |
+| V3 | **Update Task #16 Admin fields** | Set `instructions` + `target_url` in Django Admin for Amplify Investigative Reports | XS | ✅ |
 
 ---
 
@@ -71,8 +74,8 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 |---|---------|----------|-------|
 | T6 | Fix profile points (B4) | Low | `menu.py:138` |
 | T7 | Deploy leaderboard HTML fix (B1) | Low | Already staged |
-| D0 | **Fix Duplicate Migrations (Data Loss Prevention)** | High | ✅ **Fixed**: Formal merge migration deployed to production. |
-| D2 | Deep-link auto-join (`/start campaign_16`) | Medium | Onboarding improvement |
+| D0 | **Fix Duplicate Migrations (Data Loss Prevention)** | High | ✅ Fixed |
+| D2 | Deep-link auto-join (`/start campaign_18`) | Medium | ✅ Implemented & deployed |
 | D2 | Task completion notification to admin | Medium | Review workflow |
 | D3 | Points auto-award on proof approval | Medium | Gamification |
 | D4 | Invite task type testing | Low | After Twitter tasks stable |
@@ -85,12 +88,12 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 
 | Metric | Value |
 |--------|-------|
-| Active campaigns | 1 (`#StopTrumpMadness`) |
-| Tasks in campaign | 6 (tweet, comment, retweet + 3 more) |
-| Campaign members | 3 / 100 target |
+| Active campaigns | 1 (`Justice for Minab Children`) |
+| Tasks in campaign | 5 (tweet post, retweet, comment, content creation, petition) |
+| Campaign members | growing |
 | Bot username | `@peopleforpeacebot` |
 | Server | 65.109.198.200 |
-| Latest deploy | `3b3f583` (Mar 12) |
+| Latest deploy | `dd9fbca` (Mar 14) |
 
 ---
 
