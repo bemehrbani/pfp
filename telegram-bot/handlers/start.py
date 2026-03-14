@@ -270,6 +270,12 @@ async def _show_campaigns_after_welcome(context, session, chat_id, lang):
 
         keyboard.append([
             InlineKeyboardButton(
+                t('btn_about_campaign', lang),
+                callback_data=f"campaign_about_{campaign_id}"
+            )
+        ])
+        keyboard.append([
+            InlineKeyboardButton(
                 t('btn_invite_friends', lang),
                 callback_data=f"campaign_invite_{campaign_id}"
             )
