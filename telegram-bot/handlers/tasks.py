@@ -36,6 +36,174 @@ def get_level_title(level: int) -> str:
 AWAITING_TASK_PROOF = 1
 AWAITING_CONFIRMATION = 2
 
+# ── Featured children for "Share a Child's Story" task ─────────────────
+# Each child links to a documented story on the memorial page.
+FEATURED_CHILDREN = [
+    {
+        'id': 'hami-sadeghi',
+        'name': 'Hami Sadeghi',
+        'name_fa': 'حامی صادقی',
+        'icon': '👩‍👦',
+        'label_en': 'Hami — killed with his teacher mother',
+        'label_fa': 'حامی — کنار مادر معلمش کشته شد',
+        'photo_url': 'https://peopleforpeace.live/images/children/child_r06_c04.jpg',
+        'profile_url': 'https://peopleforpeace.live/child.html?id=hami-sadeghi',
+        'caption_en': (
+            '🕯 *Hami Sadeghi, 11*\n\n'
+            'Hami was killed alongside his mother Neda Solhizadeh — a teacher at the school. '
+            'They went to class together that morning. Neither came back. His 10-year-old sister Nila '
+            'has become the witness: _"My brother and my mother went to school together that morning '
+            'and neither came back."_\n\n'
+            'See his story: https://peopleforpeace.live/child.html?id=hami-sadeghi'
+        ),
+        'caption_fa': (
+            '🕯 *حامی صادقی، ۱۱ ساله*\n\n'
+            'حامی در کنار مادرش ندا صلحی‌زاده — معلم مدرسه — کشته شد. '
+            'صبح آن روز با هم به مدرسه رفتند. هیچکدام برنگشتند. نیلا، خواهر ۱۰ ساله‌اش شاهد '
+            'این فاجعه شده است.\n\n'
+            'داستانش: https://peopleforpeace.live/child.html?id=hami-sadeghi'
+        ),
+        'tweet_en': (
+            'Hami Sadeghi, 11, was killed alongside his mother Neda — a teacher at the school. '
+            'They went to class together that morning. Neither came back.\n\n'
+            'See his face: https://peopleforpeace.live/child.html?id=hami-sadeghi'
+        ),
+        'tweet_fa': (
+            'حامی صادقی، ۱۱ ساله، کنار مادرش ندا — معلم مدرسه — کشته شد. '
+            'صبح آن روز با هم به مدرسه رفتند. هیچکدام برنگشتند.\n\n'
+            'https://peopleforpeace.live/child.html?id=hami-sadeghi'
+        ),
+    },
+    {
+        'id': 'sobhan-ahmadi',
+        'name': 'Sobhan Ahmadi',
+        'name_fa': 'سبحان احمدی',
+        'icon': '📖',
+        'label_en': 'Sobhan — identified by his textbook',
+        'label_fa': 'سبحان — از روی کتاب درسی شناسایی شد',
+        'photo_url': 'https://peopleforpeace.live/images/children/child_r03_c00.jpg',
+        'profile_url': 'https://peopleforpeace.live/child.html?id=sobhan-ahmadi',
+        'caption_en': (
+            '🕯 *Sobhan Ahmadi*\n\n'
+            'Sobhan\'s body was so severely damaged that he could only be identified by the textbook '
+            'he was clutching — with his name written on it. His sister Hananeh died beside him.\n\n'
+            'See his story: https://peopleforpeace.live/child.html?id=sobhan-ahmadi'
+        ),
+        'caption_fa': (
+            '🕯 *سبحان احمدی*\n\n'
+            'جسد سبحان آنقدر آسیب دیده بود که تنها از روی کتاب درسی که در دستش فشرده بود '
+            'و نامش روی آن نوشته شده بود شناسایی شد. خواهرش حنانه هم کنارش کشته شد.\n\n'
+            'داستانش: https://peopleforpeace.live/child.html?id=sobhan-ahmadi'
+        ),
+        'tweet_en': (
+            'Sobhan Ahmadi\'s body was so damaged he could only be identified by the textbook '
+            'he was clutching — with his name written on it. His sister Hananeh died beside him.\n\n'
+            'See his face: https://peopleforpeace.live/child.html?id=sobhan-ahmadi'
+        ),
+        'tweet_fa': (
+            'سبحان احمدی فقط از روی کتاب درسی که در دستش بود شناسایی شد. '
+            'خواهرش حنانه هم کنارش کشته شد.\n\n'
+            'https://peopleforpeace.live/child.html?id=sobhan-ahmadi'
+        ),
+    },
+    {
+        'id': 'niyayesh-salehi',
+        'name': 'Niyayesh Salehi',
+        'name_fa': 'نیایش صالحی',
+        'icon': '🤸',
+        'label_en': 'Niyayesh, 9 — skateboarder & gymnast',
+        'label_fa': 'نیایش، ۹ ساله — اسکیت‌بورد باز',
+        'photo_url': 'https://peopleforpeace.live/images/children/child_r00_c02.jpg',
+        'profile_url': 'https://peopleforpeace.live/child.html?id=niyayesh-salehi',
+        'caption_en': (
+            '🕯 *Niyayesh Salehi, 9*\n\n'
+            'A skateboarder and one of six young gymnasts killed when a US cruise missile '
+            'hit her school in Minab on Feb 28. The Iranian Gymnastics Federation mourned her.\n\n'
+            'See her story: https://peopleforpeace.live/child.html?id=niyayesh-salehi'
+        ),
+        'caption_fa': (
+            '🕯 *نیایش صالحی، ۹ ساله*\n\n'
+            'اسکیت‌بورد باز و یکی از شش ژیمناست جوانی که با اصابت موشک کروز آمریکا '
+            'به مدرسه‌اش در میناب کشته شد. فدراسیون ژیمناستیک ایران برایش عزاداری کرد.\n\n'
+            'داستانش: https://peopleforpeace.live/child.html?id=niyayesh-salehi'
+        ),
+        'tweet_en': (
+            'Niyayesh Salehi was 9. A skateboarder. One of six young gymnasts killed when '
+            'a US cruise missile hit her school in Minab on Feb 28.\n\n'
+            'See her face: https://peopleforpeace.live/child.html?id=niyayesh-salehi'
+        ),
+        'tweet_fa': (
+            'نیایش صالحی ۹ ساله بود. اسکیت‌بورد باز. یکی از شش ژیمناست جوان '
+            'که در حمله موشکی آمریکا به مدرسه‌اش کشته شد.\n\n'
+            'https://peopleforpeace.live/child.html?id=niyayesh-salehi'
+        ),
+    },
+    {
+        'id': 'amin-ahmadzade',
+        'name': 'Amin Ahmadzade',
+        'name_fa': 'امین احمدزاده',
+        'icon': '🤲',
+        'label_en': 'Amin — recognized only by a hand',
+        'label_fa': 'امین — فقط از روی دستش شناسایی شد',
+        'photo_url': 'https://peopleforpeace.live/images/children/child_r05_c08.jpg',
+        'profile_url': 'https://peopleforpeace.live/child.html?id=amin-ahmadzade',
+        'caption_en': (
+            '🕯 *Amin Ahmadzade*\n\n'
+            'A mother could only identify her child Amin by his hand. The rest of his body '
+            'was too severely damaged for visual recognition. 168 children died in one airstrike.\n\n'
+            'See his story: https://peopleforpeace.live/child.html?id=amin-ahmadzade'
+        ),
+        'caption_fa': (
+            '🕯 *امین احمدزاده*\n\n'
+            'مادری فقط توانست فرزندش امین را از روی دستش شناسایی کند. '
+            'بقیه بدن آنقدر آسیب دیده بود که شناسایی ظاهری ممکن نبود.\n\n'
+            'داستانش: https://peopleforpeace.live/child.html?id=amin-ahmadzade'
+        ),
+        'tweet_en': (
+            'A mother could only identify her child Amin by his hand. The rest of his body '
+            'was too severely damaged. 168 children died in one airstrike.\n\n'
+            'See his face: https://peopleforpeace.live/child.html?id=amin-ahmadzade'
+        ),
+        'tweet_fa': (
+            'مادری فقط از روی دست فرزندش امین شناختش. بقیه بدن شناسایی نمی‌شد. '
+            '۱۶۸ کودک در یک حمله کشته شدند.\n\n'
+            'https://peopleforpeace.live/child.html?id=amin-ahmadzade'
+        ),
+    },
+    {
+        'id': 'reza-habashian',
+        'name': 'Reza Habashian',
+        'name_fa': 'رضا حبشیان',
+        'icon': '🤸',
+        'label_en': 'Reza, 7 — young gymnast',
+        'label_fa': 'رضا، ۷ ساله — ژیمناست جوان',
+        'photo_url': 'https://peopleforpeace.live/images/children/child_r02_c04.jpg',
+        'profile_url': 'https://peopleforpeace.live/child.html?id=reza-habashian',
+        'caption_en': (
+            '🕯 *Reza Habashian, 7*\n\n'
+            'A young gymnast mourned by Iran\'s Gymnastics Federation. He was in class when '
+            'a Tomahawk cruise missile struck his school. 168 children were killed.\n\n'
+            'See his story: https://peopleforpeace.live/child.html?id=reza-habashian'
+        ),
+        'caption_fa': (
+            '🕯 *رضا حبشیان، ۷ ساله*\n\n'
+            'ژیمناست جوانی که فدراسیون ژیمناستیک ایران برایش عزاداری کرد. '
+            'در کلاس درس بود که موشک تاماهاوک به مدرسه‌اش اصابت کرد.\n\n'
+            'داستانش: https://peopleforpeace.live/child.html?id=reza-habashian'
+        ),
+        'tweet_en': (
+            'Reza Habashian was 7. A gymnast mourned by Iran\'s federation. He was in class '
+            'when a Tomahawk missile struck his school. 168 children killed.\n\n'
+            'See his face: https://peopleforpeace.live/child.html?id=reza-habashian'
+        ),
+        'tweet_fa': (
+            'رضا حبشیان ۷ ساله بود. ژیمناست. در کلاس درس بود که موشک تاماهاوک به مدرسه‌اش '
+            'اصابت کرد. ۱۶۸ کودک کشته شدند.\n\n'
+            'https://peopleforpeace.live/child.html?id=reza-habashian'
+        ),
+    },
+]
+
 
 # ── Async-safe DB helpers ──────────────────────────────────────────────
 
@@ -742,15 +910,15 @@ def _get_sample_tweets(task) -> list[dict]:
 
     if task.task_type == 'twitter_post':
         bases = [
-            "Trump started this war with no justification. Iran demands accountability.",
-            "Enough is enough. Trump's war on Iran is unlawful aggression. The world sees it.",
-            "Iranian families deserve compensation for Trump's madness. Justice will prevail.",
-            "No justification. No cause. Just destruction. Trump must pay for what he did to Iran.",
-            "Civilians are dying because of one man's madness. Hold Trump accountable.",
+            "Hami Sadeghi, 11, was killed alongside his mother Neda — a teacher at the school. They went to class together that morning. Neither came back.\n\nSee his face: https://peopleforpeace.live/child.html?id=hami-sadeghi",
+            "Sobhan Ahmadi's body was so damaged he could only be identified by the textbook he was clutching — with his name written on it. His sister Hananeh died beside him.\n\nSee his face: https://peopleforpeace.live/child.html?id=sobhan-ahmadi",
+            "Niyayesh Salehi was 9. A skateboarder. One of six young gymnasts killed when a US cruise missile hit her school in Minab on Feb 28.\n\nSee her face: https://peopleforpeace.live/child.html?id=niyayesh-salehi",
+            "A mother could only identify her child Amin by his hand. The rest of his body was too severely damaged. 168 children died in one airstrike.\n\nSee his face: https://peopleforpeace.live/child.html?id=amin-ahmadzade",
+            "Reza Habashian was 7. A gymnast mourned by Iran's federation. He was in class when a Tomahawk missile struck his school. 168 children killed.\n\nSee his face: https://peopleforpeace.live/child.html?id=reza-habashian",
         ]
         tweets = []
         for base in bases:
-            full_text = f"{base} {suffix}".strip()
+            full_text = f"{base}\n\n{suffix}".strip()
             tweets.append({
                 'text': full_text,
                 'intent_url': _build_twitter_intent_url(full_text),
@@ -877,31 +1045,39 @@ async def handle_task_start_and_guide(query, session, task_id, context):
 
     keyboard = []
 
-    # ── Twitter Post: Guided 3-step flow with intent links ──
+    # ── Twitter Post: Interactive child selection ──
     if task.task_type == 'twitter_post':
-        samples = _get_sample_tweets(task)
-
         msg = t('task_started_title', lang) + "\n\n"
         msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
-        msg += t('task_3_steps', lang) + "\n\n"
-        msg += t('tweet_step1', lang) + "\n"
-        msg += t('tweet_step2', lang) + "\n"
-        msg += t('tweet_step3', lang) + "\n"
-        msg += "\n───────────────────\n\n"
 
-        for idx, sample in enumerate(samples, 1):
-            num_emoji = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'][idx - 1] if idx <= 5 else f"{idx}."
-            msg += f"{num_emoji} \"{sample['text'][:120]}{'...' if len(sample['text']) > 120 else ''}\"\n\n"
+        if lang == 'fa':
+            msg += "هر کودکی نامی دارد. یکی را انتخاب کنید — عکس و توییت آماده دریافت خواهید کرد.\n\n"
+        else:
+            msg += "Every child has a name. Choose one below — you'll see their photo and a ready-to-post tweet.\n\n"
+
+        # Show featured children as selection buttons
+        for idx, child in enumerate(FEATURED_CHILDREN):
+            label = child['label_fa'] if lang == 'fa' else child['label_en']
             keyboard.append([
                 InlineKeyboardButton(
-                    t('btn_post_tweet', lang).format(n=idx),
-                    url=sample['intent_url']
+                    f"{child['icon']} {label}",
+                    callback_data=f"child_story_{idx}_{assignment.id}"
                 )
             ])
 
-        msg += "───────────────────\n\n"
-        msg += t('tweet_or_write_own', lang) + "\n\n"
-        msg += t('tweet_paste_url_below', lang) + "\n"
+        # Memorial link for browsing all children
+        if task.target_url:
+            keyboard.append([
+                InlineKeyboardButton(
+                    "🕯 View Full Memorial" if lang != 'fa' else "🕯 یادبود کامل",
+                    url=task.target_url
+                )
+            ])
+
+        if lang == 'fa':
+            msg += "پس از انتخاب و توییت، لینک توییت خود را اینجا بفرستید.\n"
+        else:
+            msg += "After tweeting, paste your tweet URL here as proof.\n"
         msg += t('cancel_hint', lang)
 
     # ── Twitter Retweet: Link to search ──
@@ -1472,6 +1648,155 @@ async def cancel_proof_submission(query, session):
     )
 
 
+async def handle_child_story_selection(update: Update, context: CallbackContext):
+    """Handle child selection for 'Share a Child's Story' task.
+
+    Sends the child's photo + story caption + ready-to-post tweet intent button.
+    """
+    query = update.callback_query
+    await query.answer()
+
+    # Parse callback: child_story_{idx}_{assignment_id}
+    parts = query.data.split('_')
+    # child_story_0_42 → idx=0, assignment_id=42
+    try:
+        child_idx = int(parts[2])
+        assignment_id = int(parts[3])
+    except (IndexError, ValueError):
+        logger.warning(f'Invalid child_story callback: {query.data}')
+        return AWAITING_TASK_PROOF
+
+    if child_idx < 0 or child_idx >= len(FEATURED_CHILDREN):
+        logger.warning(f'Child index out of range: {child_idx}')
+        return AWAITING_TASK_PROOF
+
+    child = FEATURED_CHILDREN[child_idx]
+
+    # Determine language
+    session = await _db_get_session_by_telegram_id(query.from_user.id)
+    lang = getattr(session, 'language', 'en') or 'en'
+
+    # Pick caption and tweet based on language
+    caption = child['caption_fa'] if lang == 'fa' else child['caption_en']
+    tweet_text = child['tweet_fa'] if lang == 'fa' else child['tweet_en']
+
+    # Add hashtags from the task if available
+    proof_data = context.user_data.get('proof_submission', {})
+    if proof_data.get('assignment_id') == assignment_id:
+        from apps.tasks.models import TaskAssignment
+        try:
+            assignment = await sync_to_async(
+                lambda: TaskAssignment.objects.select_related('task').get(id=assignment_id)
+            )()
+            hashtags = assignment.task.hashtags.strip() if assignment.task.hashtags else '#JusticeForMinabChildren'
+            tweet_text = f"{tweet_text}\n\n{hashtags}"
+        except Exception:
+            tweet_text = f"{tweet_text}\n\n#JusticeForMinabChildren"
+    else:
+        tweet_text = f"{tweet_text}\n\n#JusticeForMinabChildren"
+
+    tweet_intent_url = _build_twitter_intent_url(tweet_text)
+
+    # Build keyboard
+    keyboard = []
+
+    # Primary action: Post tweet
+    if lang == 'fa':
+        keyboard.append([InlineKeyboardButton("📤 توییت بزنید", url=tweet_intent_url)])
+        keyboard.append([InlineKeyboardButton("🕯 پروفایل کودک", url=child['profile_url'])])
+        keyboard.append([
+            InlineKeyboardButton(
+                "🔄 انتخاب دیگر",
+                callback_data=f"child_story_back_{assignment_id}"
+            )
+        ])
+    else:
+        keyboard.append([InlineKeyboardButton("📤 Post This Tweet", url=tweet_intent_url)])
+        keyboard.append([InlineKeyboardButton("🕯 See Their Profile", url=child['profile_url'])])
+        keyboard.append([
+            InlineKeyboardButton(
+                "🔄 Choose Another Child",
+                callback_data=f"child_story_back_{assignment_id}"
+            )
+        ])
+
+    # Add proof hint at the bottom of caption
+    if lang == 'fa':
+        caption += '\n\n───────────────────\n💡 _عکس بالا را ذخیره کنید و به توییت پیوست کنید. پس از توییت، لینک آن را اینجا بفرستید._'
+    else:
+        caption += '\n\n───────────────────\n💡 _Save the photo above and attach it to your tweet. After tweeting, paste the tweet URL here._'
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    # Send child's photo with caption
+    try:
+        await query.get_bot().send_photo(
+            chat_id=query.message.chat_id,
+            photo=child['photo_url'],
+            caption=caption,
+            parse_mode='Markdown',
+            reply_markup=reply_markup,
+        )
+    except Exception as photo_err:
+        logger.warning(f'Failed to send child photo: {photo_err}')
+        # Fallback: send as text message without photo
+        await query.get_bot().send_message(
+            chat_id=query.message.chat_id,
+            text=caption,
+            parse_mode='Markdown',
+            reply_markup=reply_markup,
+        )
+
+    return AWAITING_TASK_PROOF
+
+
+async def handle_child_story_back(update: Update, context: CallbackContext):
+    """Handle 'Choose Another Child' button — re-show the child selection menu."""
+    query = update.callback_query
+    await query.answer()
+
+    # Parse callback: child_story_back_{assignment_id}
+    parts = query.data.split('_')
+    try:
+        assignment_id = int(parts[3])
+    except (IndexError, ValueError):
+        logger.warning(f'Invalid child_story_back callback: {query.data}')
+        return AWAITING_TASK_PROOF
+
+    session = await _db_get_session_by_telegram_id(query.from_user.id)
+    lang = getattr(session, 'language', 'en') or 'en'
+
+    if lang == 'fa':
+        msg = "🕯 *داستان کودکان میناب*\n\nیکی از کودکان زیر را انتخاب کنید:\n\n"
+    else:
+        msg = "🕯 *Children of Minab*\n\nChoose a child to share their story:\n\n"
+
+    keyboard = []
+    for idx, child in enumerate(FEATURED_CHILDREN):
+        label = child['label_fa'] if lang == 'fa' else child['label_en']
+        keyboard.append([
+            InlineKeyboardButton(
+                f"{child['icon']} {label}",
+                callback_data=f"child_story_{idx}_{assignment_id}"
+            )
+        ])
+
+    if lang == 'fa':
+        msg += "پس از انتخاب و توییت، لینک توییت خود را اینجا بفرستید.\n"
+    else:
+        msg += "After tweeting, paste your tweet URL here as proof.\n"
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await query.get_bot().send_message(
+        chat_id=query.message.chat_id,
+        text=msg,
+        parse_mode='Markdown',
+        reply_markup=reply_markup,
+    )
+
+    return AWAITING_TASK_PROOF
+
+
 async def cancel_conversation(update: Update, context: CallbackContext):
     """Cancel any ongoing conversation."""
     user = update.effective_user
@@ -1521,6 +1846,9 @@ task_proof_conversation = ConversationHandler(
             MessageHandler(filters.TEXT & ~filters.COMMAND, receive_task_proof),
             MessageHandler(filters.PHOTO, receive_task_proof),
             MessageHandler(filters.Document.ALL, receive_task_proof),
+            # Child story navigation for twitter_post ("Share a Child's Story")
+            CallbackQueryHandler(handle_child_story_back, pattern='^child_story_back_'),
+            CallbackQueryHandler(handle_child_story_selection, pattern='^child_story_'),
             # Allow re-entering a different task or navigating back without breaking conversation
             CallbackQueryHandler(start_task_from_claim, pattern='^task_claim_'),
             CallbackQueryHandler(start_task_from_claim, pattern='^task_startclaim_'),
