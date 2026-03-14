@@ -32,8 +32,8 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 | E3 | **Update E2E Documentation** | Log final suite outcomes in `walkthrough.md` and `task.md` | XS | ⬜ TODO |
 | L1 | **Deploy Leaderboard/Points Removal** | Commit, push, deploy, and verify the removal of leaderboard and points UI | S | TODO |
 | OG1 | **Page-specific OG images** | Memorial, evidence, landing OG cards + data.html OG tags added | XS | ✅ |
-| V1 | **Show description in retweet flow** | `twitter_retweet` handler now shows `localized_description()` above 3-step instructions | XS | ✅ |
-| V2 | **Resource link button after accept** | Adds `📚 View Report Library` button (uses `target_url`) in retweet guided flow | XS | ✅ |
+| V1 | **Show description in retweet flow** | `twitter_retweet` handler now shows `localized_description()` above 3-step instructions | XS | ✅ `35313a2` |
+| V2 | **Resource link button after accept** | Adds `📚 View Report Library` button (uses `target_url`) in retweet guided flow | XS | ✅ `35313a2` |
 | V3 | **Update Task #16 Admin fields** | Set `instructions` + `target_url` in Django Admin for Amplify Investigative Reports | XS | ✅ |
 
 ---
@@ -93,7 +93,7 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 | Campaign members | growing |
 | Bot username | `@peopleforpeacebot` |
 | Server | 65.109.198.200 |
-| Latest deploy | `dd9fbca` (Mar 14) |
+| Latest deploy | `35313a2` (Mar 14) |
 
 ---
 
