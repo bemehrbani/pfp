@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Finland vs Netherlands — NGO Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --red-accent: #8b2232;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 920px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; }
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+.article {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+.article-header {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeUp 0.6s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.article-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+.article-header h1 .accent { color: var(--gold); }
+.article-header .purpose {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 16px;
+}
+.gold-rule { width: 80px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin: 24px auto; border: none; }
+.toc {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.toc ol { list-style: none; counter-reset: toc; }
+.toc li { counter-increment: toc; margin-bottom: 6px; }
+.toc li::before { content: counter(toc, decimal-leading-zero) "."; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-right: 8px; }
+.toc a { color: var(--text-secondary); text-decoration: none; font-size: 15px; transition: color 0.2s; }
+.toc a:hover { color: var(--gold); }
+.section { margin-bottom: 56px; scroll-margin-top: 60px; }
+.section h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(201,168,76,0.1); }
+.section h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--gold-light); margin: 28px 0 12px; }
+.section p, .section li { font-size: 16px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
+.section ul, .section ol { padding-left: 24px; margin-bottom: 16px; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+thead th { text-align: left; padding: 12px 16px; background: var(--bg-card); color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid rgba(201,168,76,0.2); }
+tbody td { padding: 12px 16px; border-bottom: 1px solid rgba(201,168,76,0.06); color: var(--text-secondary); vertical-align: top; }
+tbody tr:hover { background: rgba(201,168,76,0.03); }
+tbody td:first-child { color: var(--text-primary); font-weight: 500; }
+tbody td strong { color: var(--white); }
+
+/* Score cells */
+.score-win { color: #86efac; font-weight: 700; }
+.score-lose { color: var(--text-muted); }
+.score-tie { color: var(--gold-light); font-weight: 500; }
+
+/* Recommendation box */
+.recommendation {
+  background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.02));
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 14px;
+  padding: 32px;
+  margin: 32px 0;
+  position: relative;
+  overflow: hidden;
+}
+.recommendation::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+.recommendation h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+}
+.recommendation p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+/* Checklist */
+.checklist {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+.checklist-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.checklist ol { padding-left: 20px; }
+.checklist li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.checklist li strong { color: var(--text-primary); }
+
+.alert { padding: 20px 24px; border-radius: 10px; margin: 24px 0; border-left: 4px solid; font-size: 15px; line-height: 1.6; }
+.alert-tip { background: rgba(34,197,94,0.06); border-color: #22c55e; color: var(--text-secondary); }
+.alert-tip strong { color: #86efac; }
+.alert-important { background: rgba(59,130,246,0.06); border-color: #3b82f6; color: var(--text-secondary); }
+.alert-important strong { color: #93c5fd; }
+.alert-note { background: rgba(201,168,76,0.06); border-color: var(--gold); color: var(--text-secondary); }
+.alert-note strong { color: var(--gold-light); }
+
+/* Dual cards */
+.dual-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
+}
+.dual-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.dual-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.dual-card.finland::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+.dual-card.netherlands::before { background: linear-gradient(90deg, #f97316, #fbbf24); }
+.dual-card h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+.dual-card p { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+
+.article-footer { text-align: center; padding: 32px; border-top: 1px solid rgba(201,168,76,0.08); font-size: 13px; color: var(--text-muted); }
+.article-footer a { color: var(--gold); text-decoration: none; }
+@media (max-width: 768px) { .topbar { padding: 10px 16px; } .article { padding: 32px 20px 60px; } .dual-cards { grid-template-columns: 1fr; } }
+@media print {
+  .topbar { display: none; }
+  body { background: white; color: #1a1a1a; }
+  body::before, body::after { display: none; }
+  .article { max-width: 100%; }
+  .section h2 { color: #1a1a1a; border-color: #ddd; }
+  .section h3 { color: #333; }
+  .section p, .section li, tbody td { color: #444; }
+  thead th { background: #f4f4f4; color: #333; }
+  .recommendation { border-color: #ccc; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">Comparative Analysis</span>
+  <a onclick="window.print()" style="cursor:pointer;">Print / PDF ↓</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span style="font-size:56px; display:block; margin-bottom:20px;">⚖️</span>
+    <h1>Finland vs Netherlands<br><span class="accent">Comparative Analysis</span></h1>
+    <hr class="gold-rule">
+    <div class="purpose"><strong>Decision Framework:</strong> Which jurisdiction is optimal for establishing an NGO focused on legal research and documentation for international justice cases?</div>
+  </header>
+
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#scoring">Scoring Summary</a></li>
+      <li><a href="#strategic">Strategic Analysis</a></li>
+      <li><a href="#recommendation">Recommendation</a></li>
+      <li><a href="#dual-entity">Dual-Entity Strategy</a></li>
+      <li><a href="#checklist-nl">Netherlands Setup Checklist</a></li>
+      <li><a href="#checklist-fi">Finland Setup Checklist</a></li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Scoring -->
+  <section class="section" id="scoring">
+    <h2>1. Scoring Summary</h2>
+    <p>Each factor scored from 1 (poor) to 5 (excellent). The <span class="score-win">winner</span> is highlighted per category.</p>
+    <table>
+      <thead>
+        <tr><th>Factor</th><th>🇫🇮 Finland</th><th>🇳🇱 Netherlands</th><th>Winner</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Setup cost</td>
+          <td class="score-win"><strong>5/5</strong> — €55</td>
+          <td class="score-lose">3/5 — €500–€1,500</td>
+          <td>🇫🇮</td>
+        </tr>
+        <tr>
+          <td>Setup speed</td>
+          <td class="score-win"><strong>5/5</strong> — 2 days</td>
+          <td class="score-lose">3/5 — 1–3 weeks</td>
+          <td>🇫🇮</td>
+        </tr>
+        <tr>
+          <td>Residency requirement</td>
+          <td class="score-lose">3/5 — Chair must reside in FI</td>
+          <td class="score-win"><strong>5/5</strong> — No requirement</td>
+          <td>🇳🇱</td>
+        </tr>
+        <tr>
+          <td>Tax-exempt status</td>
+          <td class="score-tie">4/5 — Case-by-case</td>
+          <td class="score-win"><strong>5/5</strong> — Structured ANBI</td>
+          <td>🇳🇱</td>
+        </tr>
+        <tr>
+          <td>ICC / ICJ access</td>
+          <td class="score-lose">2/5 — Remote</td>
+          <td class="score-win"><strong>5/5</strong> — Home of ICC/ICJ</td>
+          <td>🇳🇱</td>
+        </tr>
+        <tr>
+          <td>International law ecosystem</td>
+          <td class="score-lose">3/5 — Growing</td>
+          <td class="score-win"><strong>5/5</strong> — Global hub</td>
+          <td>🇳🇱</td>
+        </tr>
+        <tr>
+          <td>Government HR funding</td>
+          <td class="score-win"><strong>5/5</strong> — Stable MFA grants</td>
+          <td class="score-lose">3/5 — Facing 2026 cuts</td>
+          <td>🇫🇮</td>
+        </tr>
+        <tr>
+          <td>Universal jurisdiction</td>
+          <td class="score-tie">4/5 — Supported</td>
+          <td class="score-tie">4/5 — Supported</td>
+          <td>Tie</td>
+        </tr>
+        <tr>
+          <td>Rule of law index</td>
+          <td class="score-win"><strong>5/5</strong> — Top 3 globally</td>
+          <td class="score-tie">5/5 — Top 5 globally</td>
+          <td>Tie</td>
+        </tr>
+        <tr>
+          <td>International credibility</td>
+          <td class="score-tie">4/5</td>
+          <td class="score-win"><strong>5/5</strong></td>
+          <td>🇳🇱</td>
+        </tr>
+        <tr style="background: rgba(201,168,76,0.06); font-weight: 700;">
+          <td style="color: var(--gold-light);">TOTAL</td>
+          <td>40 / 50</td>
+          <td style="color: var(--gold-light);"><strong>43 / 50</strong></td>
+          <td>🇳🇱</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 2: Strategic -->
+  <section class="section" id="strategic">
+    <h2>2. Strategic Analysis</h2>
+    <div class="dual-cards">
+      <div class="dual-card finland">
+        <h3>🇫🇮 Finland Strengths</h3>
+        <ul>
+          <li>Fastest and cheapest setup in the EU</li>
+          <li>Strongest rule of law rankings globally</li>
+          <li>Reliable MFA funding for human rights NGOs, unaffected by political shifts</li>
+          <li>Democratic, member-based governance (association model)</li>
+          <li>EU-compliant legal framework</li>
+        </ul>
+      </div>
+      <div class="dual-card netherlands">
+        <h3>🇳🇱 Netherlands Strengths</h3>
+        <ul>
+          <li><strong>Home to ICC and ICJ</strong> — physical proximity to the courts that matter</li>
+          <li>2,500+ justice NGOs already operating from The Hague</li>
+          <li>No residency requirement for directors</li>
+          <li>ANBI status provides structured tax benefits + donor deductibility</li>
+          <li>Brand credibility — "The Hague" is synonymous with international justice</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Recommendation -->
+  <section class="section" id="recommendation">
+    <h2>3. Recommendation</h2>
+    <div class="recommendation">
+      <h3>🏆 Primary Entity: Netherlands (Stichting)</h3>
+      <p>For an NGO whose core mission is <strong>legal research and documentation for international court proceedings</strong>, the Netherlands is the optimal jurisdiction. The proximity to ICC/ICJ, the established justice ecosystem, ANBI tax benefits, and no residency requirement create the strongest foundation for this work.</p>
+      <p>The Hague isn't just a convenient location — it's the <strong>center of gravity for international justice</strong>. Being physically present means:</p>
+      <ul style="padding-left: 24px;">
+        <li>Direct engagement with the ICC Office of the Prosecutor</li>
+        <li>Access to international law experts and counsel</li>
+        <li>Networking with peer organizations (TRIAL International, Global Rights Compliance, PAX)</li>
+        <li>Participation in Assembly of States Parties meetings</li>
+        <li>Media visibility in the default city for international justice coverage</li>
+      </ul>
+    </div>
+    <div class="alert alert-tip"><strong>Dual-entity strategy:</strong> Consider establishing in <strong>both</strong> jurisdictions — Netherlands as the primary legal entity for international court engagement, and Finland as a secondary entity for stable MFA research funding and EU-wide advocacy.</div>
+  </section>
+
+  <!-- Section 4: Dual Entity -->
+  <section class="section" id="dual-entity">
+    <h2>4. Dual-Entity Strategy</h2>
+    <p>The optimal approach may combine both jurisdictions:</p>
+    <table>
+      <thead><tr><th>Role</th><th>🇳🇱 Netherlands Stichting</th><th>🇫🇮 Finland Association</th></tr></thead>
+      <tbody>
+        <tr><td>Primary function</td><td><strong>ICC/ICJ engagement, legal filings</strong></td><td><strong>Research, documentation, advocacy</strong></td></tr>
+        <tr><td>Brand positioning</td><td>"The Hague" credibility</td><td>"Finland" rule-of-law credibility</td></tr>
+        <tr><td>Funding focus</td><td>EU grants, private foundations</td><td>Finnish MFA grants (stable)</td></tr>
+        <tr><td>Governance</td><td>Board-only (nimble)</td><td>Member-based (inclusive)</td></tr>
+        <tr><td>Setup order</td><td><strong>First — priority</strong></td><td>Second — after NL is running</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 5: NL Checklist -->
+  <section class="section" id="checklist-nl">
+    <h2>5. Netherlands Setup Checklist</h2>
+    <div class="checklist">
+      <div class="checklist-title">🇳🇱 Stichting — Action Items</div>
+      <ol>
+        <li><strong>Find a Dutch notary</strong> experienced with international NGOs (The Hague preferred)</li>
+        <li><strong>Draft Articles of Association</strong> — purpose: legal research, evidence documentation, international advocacy for victims of armed conflict</li>
+        <li><strong>Secure Dutch registered address</strong> — virtual office (€100–€300/yr) or partner organization</li>
+        <li><strong>Identify 3 board members</strong> — no residency requirement</li>
+        <li><strong>Execute notarial deed</strong> (€500–€1,500) → KVK registration (2–3 days)</li>
+        <li><strong>Apply for ANBI status</strong> with Belastingdienst immediately after registration</li>
+        <li><strong>Open bank account</strong> — ABN AMRO or ING; prepare comprehensive KYC package</li>
+        <li><strong>Publish required ANBI information</strong> on website (statutes, policy plan, board members)</li>
+        <li><strong>Join The Hague Justice Portal</strong> and connect with Coalition for the ICC</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Section 6: FI Checklist -->
+  <section class="section" id="checklist-fi">
+    <h2>6. Finland Setup Checklist</h2>
+    <div class="checklist">
+      <div class="checklist-title">🇫🇮 Association — Action Items</div>
+      <ol>
+        <li><strong>Identify Finnish-resident chairperson</strong> (or apply for PRH exemption)</li>
+        <li><strong>Find 3+ founders</strong> (natural persons 15+ or legal entities)</li>
+        <li><strong>Draft association rules (säännöt)</strong> in Finnish — legal translation service</li>
+        <li><strong>Hold founding meeting</strong> → adopt rules, elect board, sign charter</li>
+        <li><strong>Register with PRH</strong> — €55 online / €110 paper (2 working days)</li>
+        <li><strong>Open bank account</strong> — OP, Nordea, or S-Pankki</li>
+        <li><strong>Apply for MFA funding</strong> in next grant cycle</li>
+        <li><strong>Build partnership</strong> with FHRA (Finnish Human Rights Association) and ECCHR</li>
+      </ol>
+    </div>
+  </section>
+</article>
+
+<footer class="article-footer">
+  Comparative analysis compiled: March 14, 2026 · For the Justice for Minab Children Campaign legal team<br>
+  <a href="docs.html">← Back to Documents</a> · <a href="ngo-finland.html">Finland Report</a> · <a href="ngo-netherlands.html">Netherlands Report</a>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

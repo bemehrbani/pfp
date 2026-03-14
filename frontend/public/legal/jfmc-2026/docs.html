@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Legal Documents — Justice for Minab Children</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --red-accent: #8b2232;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Header */
+.portal-header {
+  position: relative;
+  z-index: 1;
+  padding: 60px 40px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+  animation: fadeUp 0.6s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.portal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.portal-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.portal-header h1 .accent { color: var(--gold); }
+.portal-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+.gold-rule {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 0 auto;
+  border: none;
+}
+.session-info {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+.session-info a {
+  color: var(--gold);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Document Cards */
+.docs-grid {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 40px 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.doc-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 14px;
+  padding: 36px 32px 32px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.6s ease both;
+}
+.doc-card:nth-child(1) { animation-delay: 0.1s; }
+.doc-card:nth-child(2) { animation-delay: 0.2s; }
+.doc-card:nth-child(3) { animation-delay: 0.3s; }
+.doc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  transition: opacity 0.3s;
+}
+.doc-card:nth-child(1)::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+.doc-card:nth-child(2)::before { background: linear-gradient(90deg, #f97316, #fbbf24); }
+.doc-card:nth-child(3)::before { background: linear-gradient(90deg, #22c55e, var(--gold)); }
+.doc-card:hover {
+  border-color: rgba(201,168,76,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.doc-flag {
+  font-size: 42px;
+  margin-bottom: 16px;
+  display: block;
+}
+.doc-card h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.doc-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+.doc-meta {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(201,168,76,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.doc-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(201,168,76,0.1);
+  color: var(--gold);
+}
+.doc-arrow {
+  color: var(--gold);
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+.doc-card:hover .doc-arrow { transform: translateX(4px); }
+
+/* Footer */
+.portal-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 32px 40px 48px;
+  border-top: 1px solid rgba(201,168,76,0.06);
+}
+.portal-footer p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.portal-footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .portal-header { padding: 40px 20px 32px; }
+  .docs-grid { padding: 16px 20px 40px; grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="portal-header">
+  <div class="portal-badge">☮ People For Peace · Legal</div>
+  <h1>Justice for <span class="accent">Minab Children</span></h1>
+  <p class="portal-subtitle">Legal research, documentation, and strategic analysis for the establishment of a dedicated non-profit organization.</p>
+  <hr class="gold-rule">
+  <div class="session-info">
+    Restricted access · <a onclick="logout()">Sign out</a>
+  </div>
+</header>
+
+<section class="docs-grid">
+  <a href="ngo-finland.html" class="doc-card">
+    <span class="doc-flag">🇫🇮</span>
+    <h2>NGO Establishment in Finland</h2>
+    <p>Comprehensive research on forming a registered association (yhdistys/ry) in Finland — legal framework, PRH registration, tax exemptions, MFA funding, and universal jurisdiction framework.</p>
+    <div class="doc-meta">
+      <span class="doc-tag">Research</span>
+      <span class="doc-arrow">→</span>
+    </div>
+  </a>
+  <a href="ngo-netherlands.html" class="doc-card">
+    <span class="doc-flag">🇳🇱</span>
+    <h2>NGO Establishment in Netherlands</h2>
+    <p>Complete guide to creating a stichting (foundation) in the Netherlands — KVK registration, ANBI tax status, The Hague ICC/ICJ proximity, and the Dutch justice ecosystem.</p>
+    <div class="doc-meta">
+      <span class="doc-tag">Research</span>
+      <span class="doc-arrow">→</span>
+    </div>
+  </a>
+  <a href="ngo-comparison.html" class="doc-card">
+    <span class="doc-flag">⚖️</span>
+    <h2>Finland vs Netherlands — Comparison</h2>
+    <p>Head-to-head scoring matrix, strategic analysis, and recommendation for choosing the optimal jurisdiction for the NGO. Includes dual-entity strategy option.</p>
+    <div class="doc-meta">
+      <span class="doc-tag">Analysis</span>
+      <span class="doc-arrow">→</span>
+    </div>
+  </a>
+</section>
+
+<footer class="portal-footer">
+  <p>These documents are confidential and shared exclusively with the legal team.<br>
+  Last updated: March 14, 2026 · <a href="https://peopleforpeace.live">peopleforpeace.live</a></p>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+function logout() {
+  sessionStorage.removeItem('pfp_legal_token');
+  sessionStorage.removeItem('pfp_legal_ts');
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

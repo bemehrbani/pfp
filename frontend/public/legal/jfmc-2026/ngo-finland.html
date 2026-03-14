@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>NGO in Finland — Legal Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --red-accent: #8b2232;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 860px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top bar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; }
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Article */
+.article {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+.article-header {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeUp 0.6s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.article-flag { font-size: 56px; display: block; margin-bottom: 20px; }
+.article-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+.article-header .purpose {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 16px;
+}
+.gold-rule {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 24px auto;
+  border: none;
+}
+
+/* TOC */
+.toc {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+.toc-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.toc ol {
+  list-style: none;
+  counter-reset: toc;
+}
+.toc li {
+  counter-increment: toc;
+  margin-bottom: 6px;
+}
+.toc li::before {
+  content: counter(toc, decimal-leading-zero) ".";
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-right: 8px;
+}
+.toc a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+.toc a:hover { color: var(--gold); }
+
+/* Sections */
+.section { margin-bottom: 56px; scroll-margin-top: 60px; }
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin: 28px 0 12px;
+}
+.section p, .section li {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.section ul, .section ol {
+  padding-left: 24px;
+  margin-bottom: 16px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 15px;
+}
+thead th {
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(201,168,76,0.2);
+}
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(201,168,76,0.06);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+tbody tr:hover { background: rgba(201,168,76,0.03); }
+tbody td:first-child { color: var(--text-primary); font-weight: 500; }
+tbody td strong { color: var(--white); }
+
+/* Alert boxes */
+.alert {
+  padding: 20px 24px;
+  border-radius: 10px;
+  margin: 24px 0;
+  border-left: 4px solid;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.alert-tip {
+  background: rgba(34,197,94,0.06);
+  border-color: #22c55e;
+  color: var(--text-secondary);
+}
+.alert-tip strong { color: #86efac; }
+.alert-important {
+  background: rgba(59,130,246,0.06);
+  border-color: #3b82f6;
+  color: var(--text-secondary);
+}
+.alert-important strong { color: #93c5fd; }
+.alert-note {
+  background: rgba(201,168,76,0.06);
+  border-color: var(--gold);
+  color: var(--text-secondary);
+}
+.alert-note strong { color: var(--gold-light); }
+.alert-warning {
+  background: rgba(220,38,38,0.06);
+  border-color: #dc2626;
+  color: var(--text-secondary);
+}
+.alert-warning strong { color: #fca5a5; }
+
+/* Footer */
+.article-footer {
+  text-align: center;
+  padding: 32px;
+  border-top: 1px solid rgba(201,168,76,0.08);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.article-footer a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .topbar { padding: 10px 16px; }
+  .article { padding: 32px 20px 60px; }
+}
+
+@media print {
+  .topbar { display: none; }
+  body { background: white; color: #1a1a1a; }
+  body::before, body::after { display: none; }
+  .article { max-width: 100%; }
+  .section h2 { color: #1a1a1a; border-color: #ddd; }
+  .section h3 { color: #333; }
+  .section p, .section li, tbody td { color: #444; }
+  thead th { background: #f4f4f4; color: #333; }
+  .alert { border-left-width: 3px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">Finland · NGO Research</span>
+  <a href="ngo-comparison.html">View Comparison →</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span class="article-flag">🇫🇮</span>
+    <h1>Establishing a Non-Profit NGO in Finland</h1>
+    <hr class="gold-rule">
+    <div class="purpose"><strong>Purpose:</strong> Legal research and documentation for the Justice for Minab Children campaign, building a case for a future international court of justice proceeding.</div>
+  </header>
+
+  <!-- Table of Contents -->
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#entity-types">Entity Types — Association vs Foundation</a></li>
+      <li><a href="#legal-framework">Legal Framework</a></li>
+      <li><a href="#formation">Formation Requirements</a></li>
+      <li><a href="#tax">Tax Status — Non-Profit Exemption</a></li>
+      <li><a href="#funding">Funding Opportunities</a></li>
+      <li><a href="#banking">Banking &amp; Operations</a></li>
+      <li><a href="#precedents">Finnish Precedent Organizations</a></li>
+      <li><a href="#jurisdiction">Universal Jurisdiction in Finland</a></li>
+      <li><a href="#advantages">Strategic Advantages</a></li>
+      <li><a href="#challenges">Potential Challenges</a></li>
+      <li><a href="#costs">Estimated Setup Costs &amp; Timeline</a></li>
+      <li><a href="#next-steps">Recommended Next Steps</a></li>
+    </ol>
+  </nav>
+
+  <!-- Section 1 -->
+  <section class="section" id="entity-types">
+    <h2>1. Entity Types — Association vs Foundation</h2>
+    <p>Finland offers two main non-profit legal forms. For this mission, a <strong>Registered Association (yhdistys / ry)</strong> is strongly recommended over a Foundation.</p>
+    <table>
+      <thead><tr><th>Criteria</th><th>Association (Yhdistys / ry)</th><th>Foundation (Säätiö)</th></tr></thead>
+      <tbody>
+        <tr><td>Minimum capital</td><td>None</td><td>€50,000 (recommended €1M+)</td></tr>
+        <tr><td>Registration fee</td><td>€55 online / €110 paper</td><td>€920–€1,680</td></tr>
+        <tr><td>Processing time</td><td>~2 working days (online)</td><td>Longer, more complex review</td></tr>
+        <tr><td>Members</td><td>Yes — open membership</td><td>No members</td></tr>
+        <tr><td>Governance</td><td>Democratic, member-led</td><td>Board-only, rigid purpose</td></tr>
+        <tr><td>Flexibility</td><td>High — purpose can evolve</td><td>Low — purpose is fixed</td></tr>
+        <tr><td>Best for</td><td><strong>Advocacy, research, campaigns</strong></td><td>Grant-making, endowments</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-tip"><strong>Recommendation:</strong> A Registered Association (ry) is the right choice — low cost, fast setup, democratic governance, and full flexibility for legal research, advocacy, and public engagement.</div>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="section" id="legal-framework">
+    <h2>2. Legal Framework</h2>
+    <ul>
+      <li><strong>Governing law:</strong> Associations Act (Yhdistyslaki 503/1989, as amended)</li>
+      <li><strong>Registration authority:</strong> Finnish Patent and Registration Office (PRH) — prh.fi</li>
+      <li><strong>Constitutional protection:</strong> Freedom of association is guaranteed under Section 13(2) of the Finnish Constitution and reinforced by ICCPR and ECHR</li>
+      <li><strong>Landscape:</strong> Finland has 123,000+ registered associations with 15M+ total memberships in a country of 5.5M people — one of the highest civic participation rates globally</li>
+    </ul>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="section" id="formation">
+    <h2>3. Formation Requirements</h2>
+    <h3>3.1 Founders</h3>
+    <ul>
+      <li><strong>Minimum 3 founders</strong> (natural persons aged 15+ or legal entities)</li>
+      <li>Foreigners <strong>can</strong> be founders and board members</li>
+      <li><strong>Chairperson must reside in Finland</strong> (or obtain PRH exemption)</li>
+    </ul>
+    <h3>3.2 Founding Meeting</h3>
+    <p>The founders convene and:</p>
+    <ol>
+      <li>Adopt the association's <strong>rules (säännöt)</strong></li>
+      <li>Elect the <strong>board of directors</strong></li>
+      <li>Sign the <strong>founding charter (perustamiskirja)</strong></li>
+      <li>Approve the registration application</li>
+    </ol>
+    <h3>3.3 Rules (Säännöt) — Required Content</h3>
+    <p>Must be in <strong>Finnish or Swedish</strong> (bilingual version acceptable for international members):</p>
+    <table>
+      <thead><tr><th>Item</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Name</td><td>Must be unique. Suffix "ry" added upon registration</td></tr>
+        <tr><td>Domicile</td><td>A municipality in Finland</td></tr>
+        <tr><td>Purpose</td><td>Non-profit, lawful, specific</td></tr>
+        <tr><td>Membership</td><td>Conditions for joining and fees (if any)</td></tr>
+        <tr><td>Board</td><td>Minimum: chairperson (18+) + 2 members (15+)</td></tr>
+        <tr><td>Accounting period</td><td>Fiscal year definition</td></tr>
+        <tr><td>Meeting procedures</td><td>How to convene, notice period</td></tr>
+        <tr><td>Dissolution clause</td><td>Assets must go to a similar non-profit purpose</td></tr>
+      </tbody>
+    </table>
+    <h3>3.4 Registration with PRH</h3>
+    <table>
+      <thead><tr><th>Step</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Method</td><td>Online (recommended) or paper</td></tr>
+        <tr><td>Cost</td><td><strong>€55</strong> online / €110 paper</td></tr>
+        <tr><td>Processing</td><td>~2 working days (online)</td></tr>
+        <tr><td>ID requirement</td><td>Signer needs Finnish personal ID + bank/mobile ID for online filing</td></tr>
+        <tr><td>Documents</td><td>Rules, founding charter, board details, minutes</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-important"><strong>Important:</strong> Online filing requires Finnish personal identity codes and Finnish e-ID (bank credentials or mobile certificate). If all founders are foreign, paper filing (€110) or a Finnish resident co-founder is needed.</div>
+  </section>
+
+  <!-- Section 4 -->
+  <section class="section" id="tax">
+    <h2>4. Tax Status — Non-Profit Exemption</h2>
+    <p>To qualify as <em>yleishyödyllinen yhteisö</em> (public-benefit entity) under Finnish tax law:</p>
+    <ol>
+      <li><strong>Operates exclusively for the public good</strong> (material, intellectual, moral, or societal)</li>
+      <li><strong>Activities are not limited to a closed group</strong> — must benefit the broader public</li>
+      <li><strong>No financial benefit to participants</strong> — no dividends, profit-sharing, or excessive salaries</li>
+    </ol>
+    <h3>Tax-Exempt Income (if qualified)</h3>
+    <ul>
+      <li>Membership fees</li>
+      <li>Donations and grants</li>
+      <li>Dividends and interest income</li>
+      <li>Subsidies for non-profit activities</li>
+      <li>Most capital gains</li>
+    </ul>
+    <h3>Taxable Income</h3>
+    <ul>
+      <li>Business activity income → <strong>20% corporate tax</strong></li>
+      <li>Certain real estate income</li>
+    </ul>
+    <div class="alert alert-note"><strong>Note:</strong> An NGO focused on legal research and human rights documentation clearly fits the public-benefit criteria. The Finnish Tax Administration (Vero) assesses this on a case-by-case basis.</div>
+  </section>
+
+  <!-- Section 5 -->
+  <section class="section" id="funding">
+    <h2>5. Funding Opportunities</h2>
+    <h3>5.1 Ministry for Foreign Affairs (MFA)</h3>
+    <ul>
+      <li><strong>Grants for human rights NGOs</strong> — both Finnish and international</li>
+      <li>Thematic priorities: human rights, gender equality, democracy, accountability</li>
+      <li>In 2024, €10M awarded to 9 INGOs for human rights work (2025–2026)</li>
+      <li>Multi-annual funding for CSOs in development cooperation</li>
+    </ul>
+    <h3>5.2 STEA (Funding Centre for Social Welfare &amp; Health)</h3>
+    <p>Primarily domestic social welfare — possible if framed around community support for affected diaspora families.</p>
+    <h3>5.3 EU Funding</h3>
+    <p>European Commission grants for human rights, justice, and rule of law programs. Horizon Europe for research-oriented projects.</p>
+    <h3>5.4 Private &amp; Foundation Grants</h3>
+    <ul>
+      <li>KIOS Foundation — funds human rights projects</li>
+      <li>Open Society Foundations</li>
+      <li>Sigrid Jusélius Foundation</li>
+    </ul>
+  </section>
+
+  <!-- Section 6 -->
+  <section class="section" id="banking">
+    <h2>6. Banking &amp; Operations</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Bank account</td><td>Required for operations; Finnish banks (OP, Nordea, S-Pankki)</td></tr>
+        <tr><td>Documents needed</td><td>Association registration extract, board minutes, ID of signatories</td></tr>
+        <tr><td>Language</td><td>Documents accepted in Finnish, Swedish, or English</td></tr>
+        <tr><td>Foreign members</td><td>Allowed; passport copies must be bank-verified if no Finnish SSN</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-warning"><strong>Warning:</strong> Opening a bank account can be slow for associations with primarily foreign board members. Some banks require in-person visits. Start the banking process immediately after registration.</div>
+  </section>
+
+  <!-- Section 7 -->
+  <section class="section" id="precedents">
+    <h2>7. Finnish Precedent Organizations</h2>
+    <table>
+      <thead><tr><th>Organization</th><th>Type</th><th>Relevance</th></tr></thead>
+      <tbody>
+        <tr><td><strong>FHRA</strong></td><td>Association</td><td>ICC communications, legal documentation</td></tr>
+        <tr><td><strong>KIOS Foundation</strong></td><td>Foundation</td><td>Funds human rights projects, capacity building</td></tr>
+        <tr><td><strong>Ihmisoikeusliitto</strong></td><td>Association</td><td>Monitoring, education, advocacy; FIDH member</td></tr>
+        <tr><td><strong>Finnish NHRI</strong></td><td>Government</td><td>"A status" NHRI, oversees Finland's HR compliance</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 8 -->
+  <section class="section" id="jurisdiction">
+    <h2>8. Universal Jurisdiction in Finland</h2>
+    <p>Finland's legal system <strong>supports universal jurisdiction</strong> for international crimes:</p>
+    <ul>
+      <li>National courts can investigate and prosecute <strong>genocide, crimes against humanity, war crimes, and torture</strong> committed abroad</li>
+      <li>Finnish Criminal Code Chapter 1 provides for extraterritorial jurisdiction</li>
+      <li>Finland actively supports the ICC and advocates for universal acknowledgment of ICJ jurisdiction</li>
+    </ul>
+    <div class="alert alert-tip"><strong>Strategic value:</strong> A Finnish-based NGO can not only prepare documentation but potentially support Finnish prosecutors in exercising universal jurisdiction over the Minab school attack.</div>
+  </section>
+
+  <!-- Section 9 -->
+  <section class="section" id="advantages">
+    <h2>9. Strategic Advantages of Finland</h2>
+    <table>
+      <thead><tr><th>Advantage</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Low cost &amp; fast</strong></td><td>€55 registration, 2-day processing</td></tr>
+        <tr><td><strong>Strong rule of law</strong></td><td>Consistently ranked #1–3 globally</td></tr>
+        <tr><td><strong>EU membership</strong></td><td>Access to EU grants and legal frameworks</td></tr>
+        <tr><td><strong>Universal jurisdiction</strong></td><td>Finnish courts can prosecute international crimes</td></tr>
+        <tr><td><strong>Human rights leadership</strong></td><td>Active foreign policy; strong NGO ecosystem</td></tr>
+        <tr><td><strong>High credibility</strong></td><td>Finnish institutions trusted globally</td></tr>
+        <tr><td><strong>MFA funding</strong></td><td>Direct government grants for human rights NGOs</td></tr>
+        <tr><td><strong>Civic culture</strong></td><td>123,000+ associations — deep civil society participation</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 10 -->
+  <section class="section" id="challenges">
+    <h2>10. Potential Challenges</h2>
+    <table>
+      <thead><tr><th>Challenge</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Chairperson must reside in Finland</td><td>Appoint a Finnish-resident co-founder or apply for PRH exemption</td></tr>
+        <tr><td>Rules must be in Finnish/Swedish</td><td>Use legal translation service; operational docs can be in English</td></tr>
+        <tr><td>Online filing needs Finnish e-ID</td><td>Use paper filing (€110) or a Finnish-resident signer</td></tr>
+        <tr><td>Banking delays for foreign boards</td><td>Start process early; prepare all KYC documents in advance</td></tr>
+        <tr><td>Limited proximity to ICC/ICJ</td><td>Complement with Netherlands presence</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 11 -->
+  <section class="section" id="costs">
+    <h2>11. Estimated Setup Costs &amp; Timeline</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Cost</th><th>Timeframe</th></tr></thead>
+      <tbody>
+        <tr><td>Registration (PRH online)</td><td>€55</td><td>2 working days</td></tr>
+        <tr><td>Legal translation of rules</td><td>€200–€500</td><td>3–5 days</td></tr>
+        <tr><td>Legal consultation (optional)</td><td>€500–€2,000</td><td>1 week</td></tr>
+        <tr><td>Bank account opening</td><td>Free–€50</td><td>1–4 weeks</td></tr>
+        <tr><td><strong>Total estimated</strong></td><td><strong>€255–€2,605</strong></td><td><strong>2–6 weeks</strong></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 12 -->
+  <section class="section" id="next-steps">
+    <h2>12. Recommended Next Steps</h2>
+    <ol>
+      <li><strong>Identify a Finnish-resident chairperson</strong> — critical for registration</li>
+      <li><strong>Draft the association's purpose statement</strong> — focused on legal research, evidence documentation, and international advocacy</li>
+      <li><strong>Prepare rules (säännöt) in Finnish</strong> — use a legal service or bilingual drafter</li>
+      <li><strong>Convene founding meeting</strong> (can be virtual with 3+ founders)</li>
+      <li><strong>File registration</strong> with PRH</li>
+      <li><strong>Open bank account</strong> immediately after registration</li>
+      <li><strong>Apply for MFA funding</strong> in next grant cycle</li>
+      <li><strong>Begin legal research partnership</strong> with FHRA, ECCHR, and other organizations</li>
+    </ol>
+  </section>
+</article>
+
+<footer class="article-footer">
+  Research compiled: March 14, 2026 · Sources: PRH, Vero.fi, Finnish MFA, ICNL, Open Society Justice Initiative, ECCHR<br>
+  <a href="docs.html">← Back to Documents</a>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

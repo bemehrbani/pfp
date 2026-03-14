@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>NGO in Netherlands — Legal Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --red-accent: #8b2232;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 860px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; }
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+.article {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+.article-header {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeUp 0.6s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.article-flag { font-size: 56px; display: block; margin-bottom: 20px; }
+.article-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+.article-header .purpose {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 16px;
+}
+.gold-rule { width: 80px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin: 24px auto; border: none; }
+.toc {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.toc ol { list-style: none; counter-reset: toc; }
+.toc li { counter-increment: toc; margin-bottom: 6px; }
+.toc li::before { content: counter(toc, decimal-leading-zero) "."; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-right: 8px; }
+.toc a { color: var(--text-secondary); text-decoration: none; font-size: 15px; transition: color 0.2s; }
+.toc a:hover { color: var(--gold); }
+.section { margin-bottom: 56px; scroll-margin-top: 60px; }
+.section h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(201,168,76,0.1); }
+.section h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--gold-light); margin: 28px 0 12px; }
+.section p, .section li { font-size: 16px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
+.section ul, .section ol { padding-left: 24px; margin-bottom: 16px; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+thead th { text-align: left; padding: 12px 16px; background: var(--bg-card); color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid rgba(201,168,76,0.2); }
+tbody td { padding: 12px 16px; border-bottom: 1px solid rgba(201,168,76,0.06); color: var(--text-secondary); vertical-align: top; }
+tbody tr:hover { background: rgba(201,168,76,0.03); }
+tbody td:first-child { color: var(--text-primary); font-weight: 500; }
+tbody td strong { color: var(--white); }
+.alert { padding: 20px 24px; border-radius: 10px; margin: 24px 0; border-left: 4px solid; font-size: 15px; line-height: 1.6; }
+.alert-tip { background: rgba(34,197,94,0.06); border-color: #22c55e; color: var(--text-secondary); }
+.alert-tip strong { color: #86efac; }
+.alert-important { background: rgba(59,130,246,0.06); border-color: #3b82f6; color: var(--text-secondary); }
+.alert-important strong { color: #93c5fd; }
+.alert-note { background: rgba(201,168,76,0.06); border-color: var(--gold); color: var(--text-secondary); }
+.alert-note strong { color: var(--gold-light); }
+.alert-warning { background: rgba(220,38,38,0.06); border-color: #dc2626; color: var(--text-secondary); }
+.alert-warning strong { color: #fca5a5; }
+.article-footer { text-align: center; padding: 32px; border-top: 1px solid rgba(201,168,76,0.08); font-size: 13px; color: var(--text-muted); }
+.article-footer a { color: var(--gold); text-decoration: none; }
+@media (max-width: 768px) { .topbar { padding: 10px 16px; } .article { padding: 32px 20px 60px; } }
+@media print {
+  .topbar { display: none; }
+  body { background: white; color: #1a1a1a; }
+  body::before, body::after { display: none; }
+  .article { max-width: 100%; }
+  .section h2 { color: #1a1a1a; border-color: #ddd; }
+  .section h3 { color: #333; }
+  .section p, .section li, tbody td { color: #444; }
+  thead th { background: #f4f4f4; color: #333; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">Netherlands · NGO Research</span>
+  <a href="ngo-comparison.html">View Comparison →</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span class="article-flag">🇳🇱</span>
+    <h1>Establishing a Non-Profit NGO in the Netherlands</h1>
+    <hr class="gold-rule">
+    <div class="purpose"><strong>Purpose:</strong> Legal research and documentation for the Justice for Minab Children campaign, building a case for a future international court of justice proceeding.</div>
+  </header>
+
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#entity-types">Entity Types — Stichting vs Vereniging</a></li>
+      <li><a href="#legal-framework">Legal Framework</a></li>
+      <li><a href="#formation">Formation Requirements</a></li>
+      <li><a href="#anbi">ANBI Status (Tax Exemption)</a></li>
+      <li><a href="#funding">Funding Opportunities</a></li>
+      <li><a href="#banking">Banking &amp; Operations</a></li>
+      <li><a href="#hague">The Hague — Strategic Proximity</a></li>
+      <li><a href="#precedents">Dutch Precedent Organizations</a></li>
+      <li><a href="#advantages">Strategic Advantages</a></li>
+      <li><a href="#challenges">Potential Challenges</a></li>
+      <li><a href="#costs">Estimated Setup Costs &amp; Timeline</a></li>
+      <li><a href="#next-steps">Recommended Next Steps</a></li>
+    </ol>
+  </nav>
+
+  <section class="section" id="entity-types">
+    <h2>1. Entity Types — Stichting vs Vereniging</h2>
+    <p>The Netherlands offers two main non-profit legal forms. For this mission, a <strong>Stichting (Foundation)</strong> is strongly recommended.</p>
+    <table>
+      <thead><tr><th>Criteria</th><th>Stichting (Foundation)</th><th>Vereniging (Association)</th></tr></thead>
+      <tbody>
+        <tr><td>Members</td><td>No members — board-only</td><td>Membership-based, democratic</td></tr>
+        <tr><td>Establishment</td><td>Notarial deed required</td><td>Notarial deed (for full legal capacity)</td></tr>
+        <tr><td>Min. directors</td><td>1 (recommended 3+)</td><td>2 members minimum</td></tr>
+        <tr><td>Min. capital</td><td>None required</td><td>None required</td></tr>
+        <tr><td>Registration cost</td><td>€500–€1,500 (notary fees)</td><td>Similar notary costs</td></tr>
+        <tr><td>Governance</td><td><strong>Board-driven, streamlined</strong></td><td>Member general meeting has ultimate authority</td></tr>
+        <tr><td>Best for</td><td><strong>NGOs, charities, legal research</strong></td><td>Sports clubs, community groups</td></tr>
+        <tr><td>ANBI eligibility</td><td>Yes — standard path</td><td>Yes, but less common</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-tip"><strong>Recommendation:</strong> A Stichting is the best fit — centralized board governance, no membership overhead, and the standard Dutch legal form for international human rights NGOs.</div>
+  </section>
+
+  <section class="section" id="legal-framework">
+    <h2>2. Legal Framework</h2>
+    <ul>
+      <li><strong>Governing law:</strong> Book 2 of the Dutch Civil Code (Burgerlijk Wetboek)</li>
+      <li><strong>Registration authority:</strong> Chamber of Commerce (KVK) — kvk.nl</li>
+      <li><strong>Tax body:</strong> Belastingdienst (Dutch Tax Administration)</li>
+      <li><strong>Key distinction:</strong> The Hague is the <strong>International City of Peace and Justice</strong>, home to ICC, ICJ, Permanent Court of Arbitration, Eurojust, and hundreds of international justice NGOs</li>
+    </ul>
+  </section>
+
+  <section class="section" id="formation">
+    <h2>3. Formation Requirements</h2>
+    <h3>3.1 Directors</h3>
+    <ul>
+      <li><strong>Minimum 1 director</strong> (recommended: 3+ for ANBI and credibility)</li>
+      <li>Directors <strong>can be of any nationality</strong> — no residency requirement</li>
+      <li>No membership structure — board has full authority</li>
+    </ul>
+    <h3>3.2 Notarial Deed of Incorporation</h3>
+    <p>A Dutch civil-law notary (<strong>notaris</strong>) must draft and execute the deed, including:</p>
+    <ul>
+      <li><strong>Articles of Association</strong> (statuten) — must be in Dutch</li>
+      <li>Purpose clause</li>
+      <li>Board composition and powers</li>
+      <li>Dissolution clause (assets must transfer to another ANBI)</li>
+    </ul>
+    <h3>3.3 Required Documents</h3>
+    <table>
+      <thead><tr><th>Document</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Passport/EU ID</td><td>For all directors and UBOs</td></tr>
+        <tr><td>Proof of address</td><td>Utility bill or bank statement for each director</td></tr>
+        <tr><td>Deed of Incorporation</td><td>Prepared by Dutch notary</td></tr>
+        <tr><td>Dutch office address</td><td>Physical or virtual registered address in NL</td></tr>
+        <tr><td>UBO registration</td><td>Mandatory in KVK register</td></tr>
+      </tbody>
+    </table>
+    <h3>3.4 KVK Registration</h3>
+    <ul>
+      <li>Notary typically handles this</li>
+      <li>Processing: <strong>2–3 working days</strong></li>
+      <li>Foundation receives KVK number and is automatically notified to the Belastingdienst</li>
+      <li>VAT number issued within ~2 weeks if needed</li>
+    </ul>
+  </section>
+
+  <section class="section" id="anbi">
+    <h2>4. ANBI Status (Tax Exemption)</h2>
+    <p><strong>ANBI</strong> = Algemeen Nut Beogende Instelling (Public Benefit Organisation). This is the Dutch equivalent of tax-exempt non-profit status.</p>
+    <h3>Requirements</h3>
+    <ol>
+      <li><strong>90%+ activities</strong> must serve the public interest</li>
+      <li><strong>No profit motive</strong> — surplus must be used for mission</li>
+      <li><strong>Board independence</strong> — no single person can control assets</li>
+      <li><strong>Directors' pay</strong> — must not be excessive</li>
+      <li><strong>Financial transparency</strong> — annual report, policy plan, clear accounting</li>
+      <li><strong>Anti-hoarding</strong> — must use assets for public benefit</li>
+      <li><strong>Dissolution clause</strong> — remaining assets must go to another ANBI</li>
+      <li><strong>Publication requirement</strong> — statutes, policy plan, annual report, board members on website</li>
+    </ol>
+    <h3>Benefits</h3>
+    <table>
+      <thead><tr><th>Benefit</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gift/inheritance tax exempt</strong></td><td>Foundation pays no tax on donations</td></tr>
+        <tr><td><strong>Donor deductibility</strong></td><td>Donors can deduct gifts from income/corporate tax</td></tr>
+        <tr><td><strong>Volunteer deductions</strong></td><td>Volunteer work can qualify as in-kind donation</td></tr>
+        <tr><td><strong>Credibility</strong></td><td>ANBI status is a recognized quality mark internationally</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-note"><strong>Note:</strong> Human rights legal research clearly qualifies for ANBI status. Application is straightforward through the Belastingdienst ANBI team.</div>
+  </section>
+
+  <section class="section" id="funding">
+    <h2>5. Funding Opportunities</h2>
+    <h3>5.1 Dutch Ministry of Foreign Affairs — Human Rights Fund</h3>
+    <ul>
+      <li>Dedicated fund for human rights protection and promotion globally</li>
+      <li>Distributed via embassies, competitive grant calls, and international contributions</li>
+      <li>Priority areas: human rights defenders, freedom of expression, equal rights</li>
+      <li>Applications in English</li>
+    </ul>
+    <div class="alert alert-warning"><strong>Warning:</strong> The Dutch government announced significant cuts to civil society funding starting 2026 with a "Netherlands-first" approach. Factor this into long-term planning.</div>
+    <h3>5.2 EU Funding</h3>
+    <p>European Commission programs for justice, rule of law, and human rights.</p>
+    <h3>5.3 Private &amp; International Foundations</h3>
+    <ul>
+      <li>Open Society Foundations, Oak Foundation, Sigrid Rausing Trust</li>
+      <li>Nationale Postcode Loterij — major human rights donor</li>
+      <li>Mama Cash, Hivos, and other Dutch-based human rights funders</li>
+    </ul>
+  </section>
+
+  <section class="section" id="banking">
+    <h2>6. Banking &amp; Operations</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Banks</td><td>ABN AMRO, ING, Rabobank</td></tr>
+        <tr><td>Documents</td><td>KVK extract, Articles of Association, director IDs, business plan</td></tr>
+        <tr><td>Foreign directors</td><td>Allowed — enhanced KYC/CDD due diligence</td></tr>
+        <tr><td>Processing</td><td>1–4 weeks (potentially 3–6 weeks for foreign-owned)</td></tr>
+        <tr><td>Dutch address</td><td>Required for bank account opening</td></tr>
+        <tr><td>Language</td><td>Articles in Dutch; operational docs in English</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-important"><strong>Important:</strong> Dutch banks apply strict AML scrutiny for stichtingen with foreign directors. Prepare a comprehensive business plan, source-of-funds documentation, and evidence of Dutch "economic substance."</div>
+  </section>
+
+  <section class="section" id="hague">
+    <h2>7. The Hague — Strategic Proximity to International Justice</h2>
+    <p>This is the Netherlands' <strong>most powerful advantage</strong> for this mission.</p>
+    <table>
+      <thead><tr><th>Institution</th><th>Location</th><th>Relevance</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ICC</strong></td><td>The Hague</td><td>Direct jurisdiction over war crimes, crimes against humanity</td></tr>
+        <tr><td><strong>ICJ</strong></td><td>Peace Palace</td><td>State-to-state disputes, advisory opinions</td></tr>
+        <tr><td><strong>Permanent Court of Arbitration</strong></td><td>Peace Palace</td><td>Alternative dispute resolution</td></tr>
+        <tr><td><strong>Eurojust</strong></td><td>The Hague</td><td>EU judicial cooperation for serious crime</td></tr>
+        <tr><td><strong>Coalition for the ICC</strong></td><td>The Hague</td><td>2,500+ NGO network supporting ICC</td></tr>
+        <tr><td><strong>T.M.C. Asser Institute</strong></td><td>The Hague</td><td>International law research and education</td></tr>
+      </tbody>
+    </table>
+    <h3>What Proximity Enables</h3>
+    <ul>
+      <li><strong>Direct engagement with ICC Office of the Prosecutor</strong> — NGOs can submit evidence</li>
+      <li><strong>Access to international law experts</strong> — largest concentration globally</li>
+      <li><strong>Networking</strong> with The Hague Justice Portal and academic institutions</li>
+      <li><strong>Easy attendance</strong> at ICC hearings, Assembly of States Parties meetings</li>
+      <li><strong>Media visibility</strong> — The Hague is the default city for international justice coverage</li>
+    </ul>
+  </section>
+
+  <section class="section" id="precedents">
+    <h2>8. Dutch Precedent Organizations</h2>
+    <table>
+      <thead><tr><th>Organization</th><th>Type</th><th>Relevance</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TRIAL International</strong></td><td>Stichting</td><td>Universal jurisdiction cases, legal documentation</td></tr>
+        <tr><td><strong>Global Rights Compliance</strong></td><td>Foundation</td><td>International humanitarian law investigations</td></tr>
+        <tr><td><strong>PAX</strong></td><td>Foundation</td><td>Peace and human rights, documentation for accountability</td></tr>
+        <tr><td><strong>Netherlands Helsinki Committee</strong></td><td>Stichting</td><td>Human rights monitoring, rule of law</td></tr>
+        <tr><td><strong>ICTJ</strong></td><td>NGO (Hague office)</td><td>Post-conflict accountability expertise</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="advantages">
+    <h2>9. Strategic Advantages of the Netherlands</h2>
+    <table>
+      <thead><tr><th>Advantage</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ICC/ICJ proximity</strong></td><td>Physical access to the world's primary international courts</td></tr>
+        <tr><td><strong>No residency requirement</strong></td><td>Directors can be of any nationality, anywhere</td></tr>
+        <tr><td><strong>ANBI tax status</strong></td><td>Strong tax exemption + donor deductibility</td></tr>
+        <tr><td><strong>International law hub</strong></td><td>Largest concentration of justice orgs globally</td></tr>
+        <tr><td><strong>English-friendly</strong></td><td>Operational language can be English</td></tr>
+        <tr><td><strong>EU membership</strong></td><td>Access to EU grants and legal frameworks</td></tr>
+        <tr><td><strong>No minimum capital</strong></td><td>Zero founding capital required</td></tr>
+        <tr><td><strong>Established ecosystem</strong></td><td>Strong infrastructure for human rights organizations</td></tr>
+        <tr><td><strong>Donor credibility</strong></td><td>NL-based NGOs trusted by international funders</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="challenges">
+    <h2>10. Potential Challenges</h2>
+    <table>
+      <thead><tr><th>Challenge</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Notary required</td><td>€500–€1,500 upfront; cannot self-register</td></tr>
+        <tr><td>Articles must be in Dutch</td><td>Notary handles translation; operational docs in English</td></tr>
+        <tr><td>Banking delays</td><td>Enhanced KYC for foreign directors; start immediately</td></tr>
+        <tr><td>2026 funding cuts</td><td>Diversify to EU, private foundations, and crowdfunding</td></tr>
+        <tr><td>No democratic structure</td><td>Stichting has no members — less community engagement</td></tr>
+        <tr><td>AML scrutiny</td><td>Prepare thorough source-of-funds documentation</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="costs">
+    <h2>11. Estimated Setup Costs &amp; Timeline</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Cost</th><th>Timeframe</th></tr></thead>
+      <tbody>
+        <tr><td>Notary deed + KVK</td><td>€500–€1,500</td><td>1–3 weeks</td></tr>
+        <tr><td>Virtual office address</td><td>€100–€300/year</td><td>Immediate</td></tr>
+        <tr><td>ANBI status application</td><td>Free</td><td>4–12 weeks processing</td></tr>
+        <tr><td>Bank account opening</td><td>Free–€50</td><td>1–6 weeks</td></tr>
+        <tr><td><strong>Total estimated</strong></td><td><strong>€600–€1,850</strong></td><td><strong>3–8 weeks</strong></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="next-steps">
+    <h2>12. Recommended Next Steps</h2>
+    <ol>
+      <li><strong>Select a Dutch notary</strong> experienced with international NGOs</li>
+      <li><strong>Draft articles of association</strong> — purpose focused on legal research and accountability</li>
+      <li><strong>Secure a Dutch registered address</strong> — virtual office or partner organization</li>
+      <li><strong>Apply for ANBI status</strong> immediately after KVK registration</li>
+      <li><strong>Open bank account</strong> — prepare all KYC/AML documentation in advance</li>
+      <li><strong>Connect with The Hague justice community</strong> — Coalition for the ICC, T.M.C. Asser Institute</li>
+      <li><strong>Apply for Dutch MFA Human Rights Fund</strong> grants (while still available)</li>
+    </ol>
+  </section>
+</article>
+
+<footer class="article-footer">
+  Research compiled: March 14, 2026 · Sources: KVK, Belastingdienst, Dutch MFA, Business.gov.nl, ICC, Coalition for the ICC<br>
+  <a href="docs.html">← Back to Documents</a>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
