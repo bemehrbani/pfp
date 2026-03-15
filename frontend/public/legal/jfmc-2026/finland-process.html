@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Finland Registration Process — Legal Campaign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --red-accent: #8b2232;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 860px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top bar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; cursor: pointer; }
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+
+/* Article */
+.article {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+.article-header {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeUp 0.6s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.article-flag { font-size: 56px; display: block; margin-bottom: 20px; }
+.article-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+.article-header h1 .accent { color: var(--gold); }
+.gold-rule {
+  width: 60px;
+  border: none;
+  border-top: 3px solid var(--gold);
+  margin: 20px auto;
+}
+.purpose {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Sections */
+.section { margin-bottom: 48px; }
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--white);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+  margin-bottom: 20px;
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin: 24px 0 12px;
+}
+.section p, .section li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.section ul, .section ol { padding-left: 24px; }
+.section li { margin-bottom: 6px; }
+.section strong { color: var(--text-primary); }
+
+/* Step cards */
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.step-card:hover { border-color: rgba(201,168,76,0.25); }
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+}
+.step-card.step-1::before { background: #3b82f6; }
+.step-card.step-2::before { background: #8b5cf6; }
+.step-card.step-3::before { background: #22c55e; }
+.step-card.step-4::before { background: #f59e0b; }
+.step-card.step-5::before { background: #ec4899; }
+.step-card.step-6::before { background: #0891b2; }
+.step-card.step-7::before { background: var(--gold); }
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.step-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.step-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.step-meta-item {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.04);
+  color: var(--text-muted);
+}
+.step-meta-item.highlight { background: var(--gold-dim); color: var(--gold); }
+.step-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+.step-body ul { list-style: none; padding: 0; }
+.step-body li { padding: 4px 0 4px 20px; position: relative; }
+.step-body li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+/* Checklist */
+.checklist {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+.checklist-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+}
+.checklist ul { list-style: none; padding: 0; }
+.checklist li {
+  padding: 8px 0 8px 28px;
+  position: relative;
+  font-size: 14px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 14px;
+}
+thead th {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: left;
+  padding: 10px 14px;
+  background: rgba(201,168,76,0.06);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+tbody tr:hover td { background: rgba(201,168,76,0.03); }
+
+/* Alerts */
+.alert {
+  padding: 16px 20px;
+  border-left: 4px solid;
+  border-radius: 0 8px 8px 0;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.alert-tip { background: rgba(34,197,94,0.06); border-color: #22c55e; color: var(--text-secondary); }
+.alert-tip strong { color: #86efac; }
+.alert-important { background: rgba(59,130,246,0.06); border-color: #3b82f6; color: var(--text-secondary); }
+.alert-important strong { color: #93c5fd; }
+.alert-warning { background: rgba(220,38,38,0.06); border-color: #dc2626; color: var(--text-secondary); }
+.alert-warning strong { color: #fca5a5; }
+
+/* Timeline summary */
+.timeline-summary {
+  background: var(--bg-card);
+  border: 2px solid rgba(201,168,76,0.15);
+  border-radius: 14px;
+  padding: 28px;
+  margin: 32px 0;
+}
+.timeline-summary h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.timeline-row:last-child { border-bottom: none; }
+.timeline-week {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  flex-shrink: 0;
+  width: 80px;
+}
+.timeline-task { font-size: 14px; color: var(--text-secondary); flex: 1; }
+.timeline-who {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* Footer */
+.article-footer {
+  text-align: center;
+  padding: 32px;
+  border-top: 1px solid rgba(201,168,76,0.08);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.article-footer a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .topbar { padding: 10px 16px; }
+  .article { padding: 32px 20px 60px; }
+  .step-meta { flex-direction: column; gap: 8px; }
+}
+@media print {
+  .topbar { display: none; }
+  body { background: white; color: #1a1a1a; }
+  body::before, body::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">Finland · Registration Process</span>
+  <a href="ngo-finland.html">Full Research →</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span class="article-flag">🇫🇮</span>
+    <h1>Finland Registration <span class="accent">Process</span></h1>
+    <hr class="gold-rule">
+    <div class="purpose"><strong>Entity:</strong> Registered Association (rekisteröity yhdistys / ry)<br><strong>Name:</strong> People for Peace & Justice ry<br><strong>Decision:</strong> Finland chosen as primary jurisdiction — faster, cheaper, chairperson already resident.</div>
+  </header>
+
+  <!-- Overview -->
+  <section class="section">
+    <h2>Registration at a Glance</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Entity type</strong></td><td>Registered Association (yhdistys / ry)</td></tr>
+        <tr><td><strong>Governing law</strong></td><td>Associations Act (Yhdistyslaki 503/1989)</td></tr>
+        <tr><td><strong>Registration authority</strong></td><td>Finnish Patent and Registration Office (PRH) — <a href="https://prh.fi" style="color:var(--gold);">prh.fi</a></td></tr>
+        <tr><td><strong>Minimum founders</strong></td><td>3 natural persons (aged 15+)</td></tr>
+        <tr><td><strong>Chairperson</strong></td><td>Must be 18+ and resident in Finland → <strong>Mahdi Farimani</strong></td></tr>
+        <tr><td><strong>Registration cost</strong></td><td><strong>€55</strong> online / €110 paper</td></tr>
+        <tr><td><strong>Processing time</strong></td><td>~2 business days (online)</td></tr>
+        <tr><td><strong>Rules language</strong></td><td>Finnish or Swedish (bilingual OK for appendix)</td></tr>
+        <tr><td><strong>Domicile</strong></td><td>Helsinki</td></tr>
+        <tr><td><strong>Total estimated cost</strong></td><td>€55–€200 (registration + translation)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Steps -->
+  <section class="section">
+    <h2>Step-by-Step Process</h2>
+
+    <div class="step-card step-1">
+      <div class="step-num">Step 1</div>
+      <div class="step-title">Draft Association Rules (Säännöt)</div>
+      <div class="step-meta">
+        <span class="step-meta-item">📝 Mahdi + Zahra</span>
+        <span class="step-meta-item highlight">Required in Finnish</span>
+      </div>
+      <div class="step-body">
+        <p>The rules (säännöt) must include all of the following:</p>
+        <ul>
+          <li><strong>Name:</strong> People for Peace & Justice ry</li>
+          <li><strong>Domicile:</strong> Helsinki (Kotipaikka: Helsinki)</li>
+          <li><strong>Purpose:</strong> Non-profit legal research and advocacy for justice</li>
+          <li><strong>Membership conditions:</strong> How to join, fees (if any)</li>
+          <li><strong>Board composition:</strong> Chairperson + minimum 2 members</li>
+          <li><strong>Accounting period:</strong> Calendar year (Jan 1 – Dec 31)</li>
+          <li><strong>Meeting procedures:</strong> Annual meeting timing, notice period</li>
+          <li><strong>Dissolution clause:</strong> Assets go to a similar non-profit purpose</li>
+        </ul>
+        <div class="alert alert-important"><strong>Key:</strong> Rules must be in Finnish or Swedish. Draft in English first, then get professional translation to Finnish (~€100–€150). PRH provides a <a href="https://www.prh.fi/en/yhdistysrekisteri/perustaminen/saannot.html" style="color:var(--gold);">model rules template</a> you can adapt.</div>
+      </div>
+    </div>
+
+    <div class="step-card step-2">
+      <div class="step-num">Step 2</div>
+      <div class="step-title">Confirm 3 Founders & Board</div>
+      <div class="step-meta">
+        <span class="step-meta-item">👥 Zahra + Mahdi</span>
+        <span class="step-meta-item">Minimum 3 founders</span>
+      </div>
+      <div class="step-body">
+        <ul>
+          <li><strong>Founder 1 (Chairperson):</strong> Mahdi Farimani — Helsinki, Finland ✓</li>
+          <li><strong>Founder 2:</strong> Zahra Azhar — Netherlands (board member)</li>
+          <li><strong>Founder 3:</strong> TBD — need one more person (any nationality)</li>
+        </ul>
+        <p style="margin-top: 12px;">Each founder needs: full name, date of birth, nationality, and address. No passport copies needed for registration — just data.</p>
+        <div class="alert alert-tip"><strong>Note:</strong> Foreigners can be founders and board members. Only the chairperson must reside in Finland.</div>
+      </div>
+    </div>
+
+    <div class="step-card step-3">
+      <div class="step-num">Step 3</div>
+      <div class="step-title">Hold Founding Meeting</div>
+      <div class="step-meta">
+        <span class="step-meta-item">📋 All 3 founders</span>
+        <span class="step-meta-item">Can be virtual</span>
+      </div>
+      <div class="step-body">
+        <p>The founding meeting must:</p>
+        <ul>
+          <li>Adopt the association rules (säännöt)</li>
+          <li>Elect the board of directors (chairperson + 2 members)</li>
+          <li>Sign the founding charter (perustamiskirja)</li>
+          <li>Approve the PRH registration application</li>
+          <li>Document everything in minutes (pöytäkirja)</li>
+        </ul>
+        <div class="alert alert-important"><strong>Founding charter</strong> must be signed by all founders. If meeting is virtual, use electronic signatures or send physical documents for ink signatures.</div>
+      </div>
+    </div>
+
+    <div class="step-card step-4">
+      <div class="step-num">Step 4</div>
+      <div class="step-title">Register with PRH</div>
+      <div class="step-meta">
+        <span class="step-meta-item">🇫🇮 Mahdi</span>
+        <span class="step-meta-item highlight">€55 · ~2 days</span>
+      </div>
+      <div class="step-body">
+        <ul>
+          <li>File online at <strong>prh.fi</strong> (requires Finnish bank ID / mobile certificate)</li>
+          <li>Upload: rules, founding charter, board details, minutes</li>
+          <li>Pay €55 registration fee online</li>
+          <li>PRH reviews and adds to Register of Associations</li>
+          <li>Receive <strong>association register extract</strong> = your proof of existence</li>
+        </ul>
+        <div class="alert alert-warning"><strong>ID requirement:</strong> Online filing requires Finnish personal identity code + Finnish e-ID (bank credentials). Mahdi handles this as the Finnish-resident chairperson.</div>
+      </div>
+    </div>
+
+    <div class="step-card step-5">
+      <div class="step-num">Step 5</div>
+      <div class="step-title">Open Bank Account</div>
+      <div class="step-meta">
+        <span class="step-meta-item">🏦 Mahdi</span>
+        <span class="step-meta-item">1–2 weeks</span>
+      </div>
+      <div class="step-body">
+        <ul>
+          <li>Visit Finnish bank (OP, Nordea, or S-Pankki) with registration extract</li>
+          <li>Documents: association register extract, board minutes, chairperson's ID</li>
+          <li>Association needs its own separate account — personal accounts won't work</li>
+          <li>Set up online banking for the association</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-card step-6">
+      <div class="step-num">Step 6</div>
+      <div class="step-title">Apply for Tax-Exempt Status</div>
+      <div class="step-meta">
+        <span class="step-meta-item">📊 Mahdi</span>
+        <span class="step-meta-item">Vero (Tax Admin)</span>
+      </div>
+      <div class="step-body">
+        <p>Apply to Finnish Tax Administration (Vero) for <strong>yleishyödyllinen yhteisö</strong> (public-benefit entity) status:</p>
+        <ul>
+          <li>Operates exclusively for the public good</li>
+          <li>Activities benefit the broader public (not a closed group)</li>
+          <li>No financial benefit to members or board</li>
+        </ul>
+        <p style="margin-top: 12px;">Tax-exempt income includes: donations, grants, membership fees, dividends. Business income taxed at 20%.</p>
+        <div class="alert alert-tip"><strong>Fit:</strong> An NGO focused on legal research and human rights documentation clearly meets public-benefit criteria.</div>
+      </div>
+    </div>
+
+    <div class="step-card step-7">
+      <div class="step-num">Step 7</div>
+      <div class="step-title">Launch Operations</div>
+      <div class="step-meta">
+        <span class="step-meta-item">🚀 Mahdi + Zahra</span>
+        <span class="step-meta-item">Ongoing</span>
+      </div>
+      <div class="step-body">
+        <ul>
+          <li>Publish association info on campaign website</li>
+          <li>Set up bookkeeping (simple cash accounting OK for small associations)</li>
+          <li>Begin membership recruitment</li>
+          <li>Apply for MFA / KIOS Foundation grants</li>
+          <li>Contact Coalition for the ICC about membership</li>
+          <li>Prepare for ASP 25 observer accreditation (deadline ~Sep 2026)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <div class="timeline-summary">
+    <h3>🗓️ Realistic Timeline</h3>
+    <div class="timeline-row">
+      <span class="timeline-week">WEEK 1</span>
+      <span class="timeline-task">Draft rules in English → get Finnish translation</span>
+      <span class="timeline-who">Mahdi + Zahra</span>
+    </div>
+    <div class="timeline-row">
+      <span class="timeline-week">WEEK 1</span>
+      <span class="timeline-task">Confirm 3rd founder</span>
+      <span class="timeline-who">Zahra</span>
+    </div>
+    <div class="timeline-row">
+      <span class="timeline-week">WEEK 2</span>
+      <span class="timeline-task">Hold founding meeting (virtual OK)</span>
+      <span class="timeline-who">All founders</span>
+    </div>
+    <div class="timeline-row">
+      <span class="timeline-week">WEEK 2</span>
+      <span class="timeline-task">Register with PRH online (€55)</span>
+      <span class="timeline-who">Mahdi</span>
+    </div>
+    <div class="timeline-row">
+      <span class="timeline-week">WEEK 3</span>
+      <span class="timeline-task">Open bank account with registration extract</span>
+      <span class="timeline-who">Mahdi</span>
+    </div>
+    <div class="timeline-row">
+      <span class="timeline-week">WEEK 3–4</span>
+      <span class="timeline-task">Apply for tax-exempt status at Vero</span>
+      <span class="timeline-who">Mahdi</span>
+    </div>
+    <div class="timeline-row">
+      <span class="timeline-week">WEEK 4+</span>
+      <span class="timeline-task">Launch operations, publish website, begin outreach</span>
+      <span class="timeline-who">Mahdi + Zahra</span>
+    </div>
+  </div>
+
+  <!-- Cost breakdown -->
+  <section class="section">
+    <h2>Cost Breakdown</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Cost</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>PRH registration (online)</td><td><strong>€55</strong></td><td>One-time</td></tr>
+        <tr><td>Rules translation (EN → FI)</td><td>~€100–€150</td><td>Professional translator</td></tr>
+        <tr><td>Bank account opening</td><td>€0</td><td>Free at most banks</td></tr>
+        <tr><td>Tax-exempt application</td><td>€0</td><td>No fee</td></tr>
+        <tr><td>Notary</td><td>€0</td><td><strong>Not required</strong> (unlike NL)</td></tr>
+        <tr><td><strong>Total</strong></td><td><strong>€55–€200</strong></td><td>vs €500–€1,500 for NL Stichting</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Founding meeting checklist -->
+  <section class="section">
+    <h2>Pre-Registration Checklist</h2>
+    <div class="checklist">
+      <div class="checklist-title">Before the Founding Meeting</div>
+      <ul>
+        <li>Rules (säännöt) drafted in English and translated to Finnish</li>
+        <li>Association name confirmed unique (check at prh.fi)</li>
+        <li>3 founders identified with full details (name, DOB, nationality, address)</li>
+        <li>Chairperson confirmed as Finnish resident (Mahdi ✓)</li>
+        <li>Board composition agreed (chairperson + 2 members minimum)</li>
+        <li>Accounting period decided (recommend calendar year)</li>
+      </ul>
+    </div>
+    <div class="checklist">
+      <div class="checklist-title">At the Founding Meeting</div>
+      <ul>
+        <li>Rules adopted by all founders</li>
+        <li>Board elected: chairperson, secretary, treasurer (or combined)</li>
+        <li>Founding charter (perustamiskirja) signed by all founders</li>
+        <li>Minutes recorded (pöytäkirja)</li>
+        <li>Decision to register with PRH approved</li>
+      </ul>
+    </div>
+    <div class="checklist">
+      <div class="checklist-title">After Registration</div>
+      <ul>
+        <li>Receive PRH registration extract</li>
+        <li>Open association bank account</li>
+        <li>File for tax-exempt status with Vero</li>
+        <li>Publish association info on website</li>
+        <li>Set up simple bookkeeping</li>
+        <li>Apply for CICC membership</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Comparison note -->
+  <section class="section">
+    <h2>Why Finland over Netherlands?</h2>
+    <table>
+      <thead><tr><th>Factor</th><th>Finland (ry)</th><th>Netherlands (Stichting)</th></tr></thead>
+      <tbody>
+        <tr><td>Registration cost</td><td><strong>€55</strong></td><td>€500–€1,500 (notary required)</td></tr>
+        <tr><td>Processing time</td><td><strong>~2 days</strong></td><td>1–4 weeks</td></tr>
+        <tr><td>Notary required</td><td><strong>No</strong></td><td>Yes (mandatory)</td></tr>
+        <tr><td>Chairperson on-site</td><td>✓ (Mahdi in Helsinki)</td><td>Need Dutch resident board member</td></tr>
+        <tr><td>Language barrier</td><td>Rules in Finnish</td><td>Deed in Dutch</td></tr>
+        <tr><td>Tax-exempt status</td><td>Public-benefit (Vero)</td><td>ANBI (Belastingdienst)</td></tr>
+        <tr><td>Flexibility</td><td>High — purpose can evolve</td><td>Fixed in notarial deed</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-tip"><strong>Decision (Mar 15, 2026):</strong> Finland chosen as primary entity. Netherlands remains as potential future secondary entity for ICC/The Hague proximity.</div>
+  </section>
+
+</article>
+
+<footer class="article-footer">
+  <a href="docs.html">← Documents</a> · <a href="tasks.html">Task Board</a> · <a href="ngo-finland.html">Full Finland Research</a>
+  <br>Last updated: March 15, 2026
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
+</CodeContent>
+<parameter name="Complexity">5
