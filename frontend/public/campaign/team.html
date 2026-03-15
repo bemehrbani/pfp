@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Team & Roles — Campaign Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg-deep:#0a0e1a;--bg-primary:#0f172a;--bg-card:#1e293b;--blue:#3b82f6;--blue-light:#60a5fa;--gold:#c9a84c;--gold-light:#e8d48b;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--violet:#8b5cf6;--pink:#ec4899;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--white:#fff;--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text-primary);-webkit-font-smoothing:antialiased;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(59,130,246,.03) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(201,168,76,.04) 0%,transparent 50%);pointer-events:none}
+
+.topbar{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 32px;background:rgba(10,14,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(59,130,246,.08)}
+.topbar a{color:var(--blue-light);text-decoration:none;font-size:14px;cursor:pointer}
+.topbar-title{font-family:var(--font-display);font-size:14px;color:var(--text-muted)}
+
+.page-header{position:relative;z-index:1;padding:40px 32px 16px;max-width:960px;margin:0 auto;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.page-header h1{font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:900;color:var(--white);margin-bottom:8px}
+.page-header h1 .accent{color:var(--blue-light)}
+.page-header .subtitle{font-size:16px;color:var(--text-secondary);line-height:1.5}
+
+.content{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:24px 32px 60px}
+
+/* Section headers */
+.section-title{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--white);margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(59,130,246,.15)}
+.section-title:first-child{margin-top:0}
+
+/* Current Team */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px}
+.team-card{background:var(--bg-card);border:1px solid rgba(59,130,246,.1);border-radius:12px;padding:24px;display:flex;gap:16px;align-items:flex-start}
+.team-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.team-info h3{font-size:16px;font-weight:600;color:var(--white);margin-bottom:4px}
+.team-role{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--blue-light);margin-bottom:6px}
+.team-info p{font-size:13px;color:var(--text-muted);line-height:1.4}
+
+/* Open Roles */
+.roles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:32px}
+.role-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:24px;position:relative;overflow:hidden}
+.role-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.role-card.must::before{background:linear-gradient(90deg,var(--red),#fb923c)}
+.role-card.nice::before{background:linear-gradient(90deg,var(--violet),#a78bfa)}
+.role-priority{display:inline-flex;padding:3px 10px;border-radius:99px;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.must .role-priority{background:rgba(239,68,68,.12);color:#fca5a5}
+.nice .role-priority{background:rgba(139,92,246,.12);color:#c4b5fd}
+.role-card h3{font-size:18px;font-weight:600;color:var(--white);margin-bottom:8px}
+.role-card p{font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px}
+.role-skills{display:flex;flex-wrap:wrap;gap:6px}
+.role-skill{font-size:11px;padding:3px 10px;border-radius:99px;background:rgba(59,130,246,.08);color:var(--text-muted);border:1px solid rgba(59,130,246,.1)}
+
+/* Recruitment Post */
+.recruit-card{background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(139,92,246,.04));border:1px solid rgba(59,130,246,.15);border-radius:14px;padding:32px;margin-bottom:32px}
+.recruit-card h3{font-family:var(--font-display);font-size:20px;color:var(--white);margin-bottom:12px}
+.recruit-card .post-body{background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:20px;font-size:14px;color:var(--text-secondary);line-height:1.7;white-space:pre-wrap;margin-top:12px;max-height:400px;overflow-y:auto}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 20px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);border-radius:8px;color:var(--blue-light);font-size:13px;cursor:pointer;margin-top:12px;font-family:var(--font-body);transition:background .2s}
+.copy-btn:hover{background:rgba(59,130,246,.2)}
+
+.page-footer{position:relative;z-index:1;text-align:center;padding:24px 32px;font-size:13px;color:var(--text-muted);border-top:1px solid rgba(59,130,246,.06)}
+.page-footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:640px){.topbar{padding:10px 16px}.page-header,.content{padding-left:16px;padding-right:16px}.team-grid,.roles-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="hub.html">← Back to Team Hub</a>
+  <span class="topbar-title">Team & Roles</span>
+  <a onclick="window.print()">Print ↓</a>
+</nav>
+
+<header class="page-header">
+  <h1>👥 Team & <span class="accent">Roles</span></h1>
+  <p class="subtitle">Current team, open positions we need to fill, and the recruitment post for sharing in groups and chats.</p>
+</header>
+
+<main class="content">
+
+<!-- Current Team -->
+<h2 class="section-title">Current Team</h2>
+<div class="team-grid">
+  <div class="team-card">
+    <div class="team-avatar" style="background:rgba(59,130,246,.15)">👨‍💻</div>
+    <div class="team-info">
+      <h3>Mahdi</h3>
+      <div class="team-role">Founder & Lead Dev</div>
+      <p>Architecture, bot development, website, strategy, campaign design</p>
+    </div>
+  </div>
+  <div class="team-card">
+    <div class="team-avatar" style="background:rgba(34,197,94,.15)">🧑‍🤝‍🧑</div>
+    <div class="team-info">
+      <h3>Alireza</h3>
+      <div class="team-role">First Volunteer</div>
+      <p>User feedback, QA testing, TG group outreach, early advocacy</p>
+    </div>
+  </div>
+</div>
+
+<!-- Must-Have Roles -->
+<h2 class="section-title">🔴 Must-Have Roles (4 positions)</h2>
+<div class="roles-grid">
+  <div class="role-card must">
+    <span class="role-priority">Must Have</span>
+    <h3>Community Manager</h3>
+    <p>Manage Telegram groups, onboard new volunteers, answer questions, keep the community engaged and motivated. First point of contact for new joiners.</p>
+    <div class="role-skills">
+      <span class="role-skill">Telegram</span>
+      <span class="role-skill">Community</span>
+      <span class="role-skill">EN/FA</span>
+      <span class="role-skill">~5h/week</span>
+    </div>
+  </div>
+  <div class="role-card must">
+    <span class="role-priority">Must Have</span>
+    <h3>Social Media Coordinator</h3>
+    <p>Plan and schedule Twitter/Instagram posts, coordinate Twitter Storms, manage campaign hashtags, and track engagement metrics.</p>
+    <div class="role-skills">
+      <span class="role-skill">Twitter/X</span>
+      <span class="role-skill">Content</span>
+      <span class="role-skill">Strategy</span>
+      <span class="role-skill">~5h/week</span>
+    </div>
+  </div>
+  <div class="role-card must">
+    <span class="role-priority">Must Have</span>
+    <h3>Content Writer</h3>
+    <p>Write campaign messages, volunteer briefings, task descriptions, and social media posts. Must write emotional but factual content about the Minab children.</p>
+    <div class="role-skills">
+      <span class="role-skill">Writing</span>
+      <span class="role-skill">EN or FA</span>
+      <span class="role-skill">Storytelling</span>
+      <span class="role-skill">~4h/week</span>
+    </div>
+  </div>
+  <div class="role-card must">
+    <span class="role-priority">Must Have</span>
+    <h3>QA Tester</h3>
+    <p>Test the bot flow regularly, find bugs and UX friction, submit structured feedback using the QA script. No coding needed — just attention to detail.</p>
+    <div class="role-skills">
+      <span class="role-skill">Testing</span>
+      <span class="role-skill">Detail-oriented</span>
+      <span class="role-skill">Telegram</span>
+      <span class="role-skill">~2h/week</span>
+    </div>
+  </div>
+</div>
+
+<!-- Nice-to-Have Roles -->
+<h2 class="section-title">🟣 Nice-to-Have Roles (5 positions)</h2>
+<div class="roles-grid">
+  <div class="role-card nice">
+    <span class="role-priority">Nice to Have</span>
+    <h3>Graphic Designer</h3>
+    <p>Create campaign visuals, infographics, and social media graphics. Help build the visual identity of the movement.</p>
+    <div class="role-skills">
+      <span class="role-skill">Design</span>
+      <span class="role-skill">Canva/Figma</span>
+      <span class="role-skill">~3h/week</span>
+    </div>
+  </div>
+  <div class="role-card nice">
+    <span class="role-priority">Nice to Have</span>
+    <h3>Video Editor</h3>
+    <p>Create short campaign videos, social media clips, and awareness content. Turn raw footage and images into compelling stories.</p>
+    <div class="role-skills">
+      <span class="role-skill">Video</span>
+      <span class="role-skill">After Effects</span>
+      <span class="role-skill">~3h/week</span>
+    </div>
+  </div>
+  <div class="role-card nice">
+    <span class="role-priority">Nice to Have</span>
+    <h3>Arabic Translator</h3>
+    <p>Translate bot messages, campaign content, and outreach materials to Arabic. Help reach Arabic-speaking communities.</p>
+    <div class="role-skills">
+      <span class="role-skill">Arabic</span>
+      <span class="role-skill">Translation</span>
+      <span class="role-skill">~2h/week</span>
+    </div>
+  </div>
+  <div class="role-card nice">
+    <span class="role-priority">Nice to Have</span>
+    <h3>Outreach Specialist</h3>
+    <p>Contact NGOs, human rights organizations, journalists, and influencers. Build partnerships and amplify our reach.</p>
+    <div class="role-skills">
+      <span class="role-skill">Networking</span>
+      <span class="role-skill">Email</span>
+      <span class="role-skill">~3h/week</span>
+    </div>
+  </div>
+  <div class="role-card nice">
+    <span class="role-priority">Nice to Have</span>
+    <h3>Legal Advisor</h3>
+    <p>Provide guidance on legal aspects of the campaign — documentation standards, evidence preservation, advocacy best practices.</p>
+    <div class="role-skills">
+      <span class="role-skill">International Law</span>
+      <span class="role-skill">Human Rights</span>
+      <span class="role-skill">Ad hoc</span>
+    </div>
+  </div>
+</div>
+
+<!-- Recruitment Post -->
+<div class="recruit-card">
+  <h3>📋 Ready-to-Share Recruitment Post</h3>
+  <p style="font-size:14px;color:var(--text-muted)">Copy and share this in Telegram groups, WhatsApp chats, or social media to recruit team members.</p>
+  <div class="post-body" id="recruitPost">☮️ **People For Peace — We Need You**
+
+We're building a volunteer-powered movement to demand justice for 168 children killed in the Minab school attack (Feb 28, 2026).
+
+🤖 Our tools: a Telegram bot that makes it easy for anyone to help in 2-5 minutes — tweet, share, sign petitions, create art.
+
+🌐 Website: peopleforpeace.live
+
+We're looking for volunteers to fill these roles:
+
+🔴 **Must-Have:**
+• Community Manager (Telegram groups, ~5h/week)
+• Social Media Coordinator (Twitter/IG, ~5h/week)  
+• Content Writer (EN or FA, ~4h/week)
+• QA Tester (Bot testing, ~2h/week)
+
+🟣 **Nice-to-Have:**
+• Graphic Designer
+• Video Editor
+• Arabic Translator
+• Outreach Specialist
+• Legal Advisor
+
+No experience needed for most roles — just dedication to the cause.
+
+📩 To join: Start the bot → t.me/peopleforpeacebot
+Or DM @mahdifarimani on Telegram.
+
+#JusticeForMinabChildren #PeopleForPeace</div>
+  <button class="copy-btn" onclick="copyPost()">📋 Copy to Clipboard</button>
+</div>
+
+</main>
+
+<footer class="page-footer">
+  <p>Internal team document — <a href="hub.html">Back to Team Hub</a> · <a href="https://peopleforpeace.live">peopleforpeace.live</a></p>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_campaign_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+
+function copyPost() {
+  const text = document.getElementById('recruitPost').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = '📋 Copy to Clipboard'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>

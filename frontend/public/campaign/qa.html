@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>QA Test Script — Campaign Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --blue: #3b82f6;
+  --blue-light: #60a5fa;
+  --green: #22c55e;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(59,130,246,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(34,197,94,0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Topbar */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 32px;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(59,130,246,0.08);
+}
+.topbar a { color: var(--blue-light); text-decoration: none; font-size: 14px; cursor: pointer; }
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+
+/* Header */
+.page-header {
+  position: relative; z-index: 1;
+  padding: 40px 32px 16px;
+  max-width: 900px; margin: 0 auto;
+  animation: fadeUp 0.5s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.page-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 900; color: var(--white);
+  margin-bottom: 8px;
+}
+.page-header h1 .accent { color: var(--blue-light); }
+.page-header .subtitle {
+  font-size: 16px; color: var(--text-secondary);
+  margin-bottom: 8px; line-height: 1.5;
+}
+.meta-bar {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  font-size: 13px; color: var(--text-muted);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(59,130,246,0.08);
+}
+.meta-bar span { display: flex; align-items: center; gap: 6px; }
+
+/* Content */
+.content {
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto;
+  padding: 32px;
+}
+
+/* Test Case Section */
+.tc-section {
+  margin-bottom: 48px;
+}
+.tc-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(59,130,246,0.15);
+}
+.tc-number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(59,130,246,0.12);
+  color: var(--blue-light);
+  flex-shrink: 0;
+}
+.tc-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+/* Test table */
+.test-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.test-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.test-table td {
+  padding: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.test-table tr:hover td { background: rgba(59,130,246,0.03); }
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--blue-light);
+  white-space: nowrap;
+}
+.td-action { min-width: 200px; }
+.td-expected { min-width: 180px; font-size: 13px; color: var(--text-muted); }
+
+/* Key questions */
+.key-questions {
+  background: var(--bg-card);
+  border: 1px solid rgba(59,130,246,0.08);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+.key-questions h4 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  margin-bottom: 12px;
+}
+.key-questions ul {
+  list-style: none;
+}
+.key-questions li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 4px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.key-questions li::before {
+  content: '?';
+  position: absolute;
+  left: 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--yellow);
+}
+
+/* Context block */
+.context-block {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 40px;
+}
+.context-block h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+}
+.context-block ul { list-style: none; }
+.context-block li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding: 4px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.context-block li::before {
+  content: '•';
+  position: absolute;
+  left: 4px;
+  color: var(--gold);
+}
+
+/* Feedback form */
+.feedback-section {
+  background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,197,94,0.04));
+  border: 1px solid rgba(59,130,246,0.15);
+  border-radius: 14px;
+  padding: 32px;
+  margin-top: 48px;
+}
+.feedback-section h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.feedback-section .subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.feedback-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.feedback-item {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 16px;
+}
+.feedback-item.full-width { grid-column: 1 / -1; }
+.feedback-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.feedback-item textarea, .feedback-item input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  line-height: 1.6;
+}
+.feedback-item textarea { min-height: 80px; }
+.feedback-item input { padding: 4px 0; }
+
+/* Footer */
+.page-footer {
+  position: relative; z-index: 1;
+  text-align: center;
+  padding: 32px;
+  font-size: 13px; color: var(--text-muted);
+  border-top: 1px solid rgba(59,130,246,0.06);
+}
+.page-footer a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 640px) {
+  .topbar { padding: 10px 16px; }
+  .page-header, .content { padding-left: 16px; padding-right: 16px; }
+  .test-table { display: block; overflow-x: auto; }
+  .feedback-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="hub.html">← Back to Team Hub</a>
+  <span class="topbar-title">QA Test Script</span>
+  <a onclick="window.print()">Print / PDF ↓</a>
+</nav>
+
+<header class="page-header">
+  <h1>🧪 QA <span class="accent">Test Script</span></h1>
+  <p class="subtitle">Follow each test case in order. Record pass/fail, notes, and screenshots. Estimated time: ~30 minutes.</p>
+  <div class="meta-bar">
+    <span>🤖 <a href="https://t.me/peopleforpeacebot?start=campaign_18" style="color:var(--blue-light);text-decoration:none;">Open Bot</a></span>
+    <span>⏱ ~30 min</span>
+    <span>📋 8 test cases</span>
+    <span>📅 Last updated: Mar 15, 2026</span>
+  </div>
+</header>
+
+<main class="content">
+
+<!-- Context -->
+<div class="context-block">
+  <h3>ℹ️ Context for the Tester</h3>
+  <ul>
+    <li>This bot helps volunteers support the <strong>Justice for Minab Children</strong> campaign</li>
+    <li>168 children were killed in a school attack — we're building awareness and demanding accountability</li>
+    <li>The bot gives volunteers small tasks (2-5 min each): tweet, retweet, sign petition, create art</li>
+    <li>Our target audience: Iranian diaspora, international activists, artists</li>
+    <li>Many users are <strong>Telegram-native</strong> (no active Twitter) — that's why we added the Telegram forwarding path</li>
+    <li>Biggest challenge: making the flow clear enough that a first-time volunteer can complete a task without asking anyone for help</li>
+  </ul>
+</div>
+
+<!-- TC1 -->
+<section class="tc-section">
+  <div class="tc-header">
+    <span class="tc-number">TC1</span>
+    <span class="tc-title">First Contact & Onboarding</span>
+  </div>
+  <table class="test-table">
+    <thead><tr><th>Step</th><th>Action</th><th>Expected</th></tr></thead>
+    <tbody>
+      <tr><td class="step-num">1.1</td><td class="td-action">Open <a href="https://t.me/peopleforpeacebot?start=campaign_18" style="color:var(--blue-light);">this link</a></td><td class="td-expected">Bot opens in Telegram</td></tr>
+      <tr><td class="step-num">1.2</td><td>Tap <strong>Start</strong></td><td class="td-expected">Bot sends welcome message</td></tr>
+      <tr><td class="step-num">1.3</td><td>Read the welcome message</td><td class="td-expected">Should explain: what happened, what we're doing, how you help</td></tr>
+      <tr><td class="step-num">1.4</td><td>Enter your name when asked</td><td class="td-expected">Bot confirms name, shows campaign card</td></tr>
+      <tr><td class="step-num">1.5</td><td>Tap <strong>Join</strong> on the campaign card</td><td class="td-expected">Auto-join, show campaign info with resources</td></tr>
+    </tbody>
+  </table>
+  <div class="key-questions">
+    <h4>Key Questions</h4>
+    <ul>
+      <li>Did you understand the cause within 10 seconds?</li>
+      <li>Did you know what to do next?</li>
+      <li>Was anything confusing or unclear?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TC2 -->
+<section class="tc-section">
+  <div class="tc-header">
+    <span class="tc-number">TC2</span>
+    <span class="tc-title">Task List & Priority</span>
+  </div>
+  <table class="test-table">
+    <thead><tr><th>Step</th><th>Action</th><th>Expected</th></tr></thead>
+    <tbody>
+      <tr><td class="step-num">2.1</td><td>View the task list after joining</td><td class="td-expected">Tasks sorted easiest first</td></tr>
+      <tr><td class="step-num">2.2</td><td>Check the first task</td><td class="td-expected">Should have ⭐ badge — "Start Here" task</td></tr>
+      <tr><td class="step-num">2.3</td><td>Read task names</td><td class="td-expected">Clear, not truncated mid-word</td></tr>
+      <tr><td class="step-num">2.4</td><td>Check time/points display</td><td class="td-expected">Each task shows ⏱ X min · Y pts</td></tr>
+    </tbody>
+  </table>
+  <div class="key-questions">
+    <h4>Key Questions</h4>
+    <ul>
+      <li>Is it obvious which task to start with?</li>
+      <li>Do the task names make sense without clicking into them?</li>
+      <li>Does the list feel overwhelming or manageable?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TC3 -->
+<section class="tc-section">
+  <div class="tc-header">
+    <span class="tc-number">TC3</span>
+    <span class="tc-title">Sign the Petition (Easiest Task)</span>
+  </div>
+  <table class="test-table">
+    <thead><tr><th>Step</th><th>Action</th><th>Expected</th></tr></thead>
+    <tbody>
+      <tr><td class="step-num">3.1</td><td>Tap the petition task</td><td class="td-expected">Show instructions + petition link</td></tr>
+      <tr><td class="step-num">3.2</td><td>Open the petition link</td><td class="td-expected">Goes to ECCHR petition page</td></tr>
+      <tr><td class="step-num">3.3</td><td>Sign the petition</td><td class="td-expected">Petition form should work</td></tr>
+      <tr><td class="step-num">3.4</td><td>Come back to bot</td><td class="td-expected">Bot should be waiting for proof</td></tr>
+      <tr><td class="step-num">3.5</td><td>Send proof (screenshot or URL)</td><td class="td-expected">Bot confirms + offers next task</td></tr>
+    </tbody>
+  </table>
+  <div class="key-questions">
+    <h4>Key Questions</h4>
+    <ul>
+      <li>Was it clear what "proof" means?</li>
+      <li>Did the bot guide you through it?</li>
+      <li>How long did the whole thing take?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TC4 -->
+<section class="tc-section">
+  <div class="tc-header">
+    <span class="tc-number">TC4</span>
+    <span class="tc-title">Amplify Reports (Dual-Path)</span>
+  </div>
+  <table class="test-table">
+    <thead><tr><th>Step</th><th>Action</th><th>Expected</th></tr></thead>
+    <tbody>
+      <tr><td class="step-num">4.1</td><td>Start the Amplify task</td><td class="td-expected">Shows Option A (Twitter) AND Option B (Telegram)</td></tr>
+      <tr><td class="step-num">4.2</td><td><strong>Path A:</strong> Tap "Find Tweets"</td><td class="td-expected">Opens Twitter search with hashtags</td></tr>
+      <tr><td class="step-num">4.3</td><td><strong>Path B:</strong> Tap "Get Forwardable Message"</td><td class="td-expected">Bot sends clean, forwardable message</td></tr>
+      <tr><td class="step-num">4.4</td><td>Try forwarding that message</td><td class="td-expected">Forwards cleanly (no broken formatting)</td></tr>
+      <tr><td class="step-num">4.5</td><td>Send proof (screenshot or "done")</td><td class="td-expected">Bot should accept it</td></tr>
+    </tbody>
+  </table>
+  <div class="key-questions">
+    <h4>Key Questions</h4>
+    <ul>
+      <li>Was the dual-path choice clear?</li>
+      <li>Did the forwardable message look good when forwarded?</li>
+      <li>Would you actually forward it to a real group?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TC5 -->
+<section class="tc-section">
+  <div class="tc-header">
+    <span class="tc-number">TC5</span>
+    <span class="tc-title">Share a Child's Story (Twitter Post)</span>
+  </div>
+  <table class="test-table">
+    <thead><tr><th>Step</th><th>Action</th><th>Expected</th></tr></thead>
+    <tbody>
+      <tr><td class="step-num">5.1</td><td>Start the "Share a Child's Story" task</td><td class="td-expected">Shows child picker or story options</td></tr>
+      <tr><td class="step-num">5.2</td><td>Pick a child</td><td class="td-expected">Bot sends photo + story + ready tweet</td></tr>
+      <tr><td class="step-num">5.3</td><td>Tap tweet intent link</td><td class="td-expected">Opens Twitter with pre-filled tweet</td></tr>
+      <tr><td class="step-num">5.4</td><td>Come back and paste tweet URL</td><td class="td-expected">Bot should confirm</td></tr>
+    </tbody>
+  </table>
+  <div class="key-questions">
+    <h4>Key Questions</h4>
+    <ul>
+      <li>Was the child's story emotionally impactful?</li>
+      <li>Did the tweet link work correctly?</li>
+      <li>Would you actually post this on your real Twitter?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TC6 -->
+<section class="tc-section">
+  <div class="tc-header">
+    <span class="tc-number">TC6</span>
+    <span class="tc-title">Content Creation (Artist Task)</span>
+  </div>
+  <table class="test-table">
+    <thead><tr><th>Step</th><th>Action</th><th>Expected</th></tr></thead>
+    <tbody>
+      <tr><td class="step-num">6.1</td><td>Start content creation task</td><td class="td-expected">Shows instructions with content ideas</td></tr>
+      <tr><td class="step-num">6.2</td><td>Check resource links</td><td class="td-expected">Memorial + Evidence buttons work</td></tr>
+      <tr><td class="step-num">6.3</td><td>Read the content ideas</td><td class="td-expected">Lists: illustration, poem, video, photo collage, music</td></tr>
+    </tbody>
+  </table>
+  <div class="key-questions">
+    <h4>Key Questions</h4>
+    <ul>
+      <li>Are the instructions inspiring or daunting?</li>
+      <li>Would an artist know what to create?</li>
+      <li>Is 30 min realistic?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TC7 -->
+<section class="tc-section">
+  <div class="tc-header">
+    <span class="tc-number">TC7</span>
+    <span class="tc-title">Navigation & Recovery</span>
+  </div>
+  <table class="test-table">
+    <thead><tr><th>Step</th><th>Action</th><th>Expected</th></tr></thead>
+    <tbody>
+      <tr><td class="step-num">7.1</td><td>Try /cancel mid-task</td><td class="td-expected">Should cancel current task</td></tr>
+      <tr><td class="step-num">7.2</td><td>Try /tasks from anywhere</td><td class="td-expected">Should show task list</td></tr>
+      <tr><td class="step-num">7.3</td><td>Try /start again</td><td class="td-expected">Should not create duplicate account</td></tr>
+      <tr><td class="step-num">7.4</td><td>Try the menu button (☰)</td><td class="td-expected">Shows available commands</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- TC8 -->
+<section class="tc-section">
+  <div class="tc-header">
+    <span class="tc-number">TC8</span>
+    <span class="tc-title">Language (Farsi)</span>
+  </div>
+  <table class="test-table">
+    <thead><tr><th>Step</th><th>Action</th><th>Expected</th></tr></thead>
+    <tbody>
+      <tr><td class="step-num">8.1</td><td>Change language to Farsi</td><td class="td-expected">All messages switch to FA</td></tr>
+      <tr><td class="step-num">8.2</td><td>Repeat TC1-TC3 in Farsi</td><td class="td-expected">Natural text, not machine-translated</td></tr>
+      <tr><td class="step-num">8.3</td><td>Check RTL rendering</td><td class="td-expected">Text renders correctly right-to-left</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Feedback Form -->
+<section class="feedback-section">
+  <h3>📝 Feedback Summary</h3>
+  <p class="subtitle">Fill this out after completing all test cases. Send to the campaign lead when done.</p>
+
+  <div class="feedback-grid">
+    <div class="feedback-item">
+      <div class="feedback-label">Time to Complete</div>
+      <input type="text" placeholder="___ minutes">
+    </div>
+    <div class="feedback-item">
+      <div class="feedback-label">Overall Impression (1-5 ⭐)</div>
+      <input type="text" placeholder="⭐⭐⭐⭐⭐">
+    </div>
+    <div class="feedback-item">
+      <div class="feedback-label">Would You Recommend?</div>
+      <input type="text" placeholder="Yes / No / Maybe">
+    </div>
+    <div class="feedback-item">
+      <div class="feedback-label">Would You Forward the Message?</div>
+      <input type="text" placeholder="Yes / No / Maybe">
+    </div>
+    <div class="feedback-item full-width">
+      <div class="feedback-label">Top 3 Friction Points</div>
+      <textarea placeholder="1.&#10;2.&#10;3."></textarea>
+    </div>
+    <div class="feedback-item full-width">
+      <div class="feedback-label">Top 3 Things That Worked Well</div>
+      <textarea placeholder="1.&#10;2.&#10;3."></textarea>
+    </div>
+    <div class="feedback-item full-width">
+      <div class="feedback-label">Bugs Found</div>
+      <textarea placeholder="Describe any bugs encountered..."></textarea>
+    </div>
+    <div class="feedback-item full-width">
+      <div class="feedback-label">Improvement Suggestions</div>
+      <textarea placeholder="What would make this better?"></textarea>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="page-footer">
+  <p>Internal QA document — <a href="hub.html">Back to Team Hub</a> · <a href="https://peopleforpeace.live">peopleforpeace.live</a></p>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_campaign_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

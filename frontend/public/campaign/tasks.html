@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Campaign Task Board — People For Peace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg-deep:#0a0e1a;--bg-primary:#0f172a;--bg-card:#1e293b;--bg-card-hover:#273548;--blue:#3b82f6;--blue-light:#60a5fa;--gold:#c9a84c;--gold-light:#e8d48b;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--white:#fff;--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace;--col-backlog:#64748b;--col-progress:#3b82f6;--col-review:#f59e0b;--col-done:#22c55e}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text-primary);-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:auto}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(59,130,246,.03) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(201,168,76,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
+.topbar{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 32px;background:rgba(10,14,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(59,130,246,.08)}
+.topbar a{color:var(--blue-light);text-decoration:none;font-size:14px;cursor:pointer}
+.topbar-title{font-family:var(--font-display);font-size:14px;color:var(--text-muted)}
+.page-header{position:relative;z-index:1;padding:40px 32px 24px;max-width:1400px;margin:0 auto;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.page-header h1{font-family:var(--font-display);font-size:clamp(24px,3vw,36px);font-weight:900;color:var(--white);margin-bottom:6px}
+.page-header h1 .accent{color:var(--blue-light)}
+.page-header .subtitle{font-size:15px;color:var(--text-secondary);margin-bottom:20px}
+
+/* Epic nav tabs */
+.epic-nav{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 32px 24px;display:flex;gap:8px;flex-wrap:wrap}
+.epic-tab{padding:8px 16px;border:1px solid rgba(255,255,255,.06);border-radius:99px;font-size:13px;color:var(--text-muted);background:transparent;cursor:pointer;transition:all .2s;font-family:var(--font-body)}
+.epic-tab:hover{border-color:rgba(59,130,246,.3);color:var(--text-secondary)}
+.epic-tab.active{border-color:var(--blue);color:var(--blue-light);background:rgba(59,130,246,.08)}
+.epic-count{font-family:var(--font-mono);font-size:11px;margin-left:4px;opacity:.6}
+
+/* Epic section */
+.epic-section{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 32px 40px;display:none}
+.epic-section.active{display:block}
+.epic-header{margin-bottom:20px;padding:20px 24px;background:var(--bg-card);border:1px solid rgba(59,130,246,.1);border-radius:12px}
+.epic-header h2{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px}
+.epic-header p{font-size:14px;color:var(--text-secondary);line-height:1.6}
+
+/* Task grid */
+.task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.task-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:20px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.task-card:hover{border-color:rgba(59,130,246,.2);transform:translateY(-2px)}
+.task-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.task-card.status-done::before{background:var(--col-done)}
+.task-card.status-progress::before{background:var(--col-progress)}
+.task-card.status-todo::before{background:var(--col-backlog)}
+.task-card.status-done{opacity:.6}
+.task-id{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px}
+.task-title{font-size:16px;font-weight:600;color:var(--white);margin-bottom:8px;line-height:1.3}
+.task-card.status-done .task-title{text-decoration:line-through;opacity:.7}
+.task-desc{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:12px}
+.task-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.task-effort{font-family:var(--font-mono);font-size:11px;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.04);color:var(--text-muted)}
+.task-status{font-family:var(--font-mono);font-size:11px;padding:3px 10px;border-radius:99px}
+.status-badge-done{background:rgba(34,197,94,.12);color:#86efac}
+.status-badge-todo{background:rgba(100,116,139,.12);color:var(--text-muted)}
+.status-badge-progress{background:rgba(59,130,246,.12);color:#93c5fd}
+.status-badge-deferred{background:rgba(249,115,22,.12);color:#fdba74}
+.status-badge-fixed{background:rgba(34,197,94,.12);color:#86efac}
+
+/* Known Bugs */
+.bugs-section{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 32px 40px}
+.bugs-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--white);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.bug-table{width:100%;border-collapse:collapse}
+.bug-table th{text-align:left;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
+.bug-table td{padding:10px 12px;font-size:14px;color:var(--text-secondary);border-bottom:1px solid rgba(255,255,255,.03)}
+.sev-high{color:#f87171;font-weight:600}
+.sev-medium{color:#fbbf24}
+.sev-low{color:var(--text-muted)}
+
+.page-footer{position:relative;z-index:1;text-align:center;padding:24px 32px 48px;border-top:1px solid rgba(59,130,246,.06);font-size:13px;color:var(--text-muted)}
+.page-footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:768px){.topbar{padding:10px 16px}.page-header,.epic-nav,.epic-section,.bugs-section{padding-left:16px;padding-right:16px}.task-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="hub.html">← Back to Team Hub</a>
+  <span class="topbar-title">Campaign Task Board</span>
+  <a onclick="window.print()">Print / PDF ↓</a>
+</nav>
+
+<header class="page-header">
+  <h1>Campaign <span class="accent">Task Board</span></h1>
+  <p class="subtitle">All epics, sprints, and known bugs for the Justice for Minab Children campaign · Updated March 15, 2026</p>
+</header>
+
+<!-- Epic Navigation -->
+<nav class="epic-nav">
+  <button class="epic-tab active" onclick="showEpic('sprint')">🔥 Sprint<span class="epic-count">10</span></button>
+  <button class="epic-tab" onclick="showEpic('dashboard')">📢 Dashboard<span class="epic-count">9</span></button>
+  <button class="epic-tab" onclick="showEpic('art')">🎨 Art for Peace<span class="epic-count">8</span></button>
+  <button class="epic-tab" onclick="showEpic('onboarding')">👋 Onboarding<span class="epic-count">5</span></button>
+  <button class="epic-tab" onclick="showEpic('amplify')">📢 Dual-Path<span class="epic-count">5</span></button>
+  <button class="epic-tab" onclick="showEpic('bugs')">🐛 Bugs<span class="epic-count">6</span></button>
+  <button class="epic-tab" onclick="showEpic('deferred')">⏳ Deferred<span class="epic-count">7</span></button>
+</nav>
+
+<!-- Sprint -->
+<section id="epic-sprint" class="epic-section active">
+  <div class="epic-header">
+    <h2>🔥 Gamified Activist UX Sprint</h2>
+    <p>Activists can see, do, and feel the impact of each task — with social proof and progress tracking. Twitter tasks as easy as possible for non-technical users.</p>
+  </div>
+  <div class="task-grid">
+    <div class="task-card status-done"><div class="task-id">T1</div><div class="task-title">1-tap tweet deep links</div><div class="task-desc">twitter.com/intent/tweet?text=... buttons</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">T2</div><div class="task-title">Sample tweets as buttons</div><div class="task-desc">Numbered visual list + "📲 Post This Tweet" per tweet</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">T3</div><div class="task-title">Guided 3-step flow</div><div class="task-desc">"① Pick tweet → ② Post → ③ Paste URL"</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">T4</div><div class="task-title">"Next Task" after proof</div><div class="task-desc">🎯 "Do Another Task" button after confirmation</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">T5</div><div class="task-title">Back navigation</div><div class="task-desc">"↩️ Back to Tasks" button on detail/guidance</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">G1</div><div class="task-title">2-click flow</div><div class="task-desc">Skip task detail — claim + guide on first tap</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">G2</div><div class="task-title">Task checklist</div><div class="task-desc">✅/⬜/🚧 status per user + progress bar</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">G3</div><div class="task-title">Community pulse</div><div class="task-desc">"27 activists active · 847 total actions" after proof</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">V4</div><div class="task-title">Interactive child picker (T1)</div><div class="task-desc">Volunteer picks child → bot sends photo + ready tweet + 1-tap intent link</div><div class="task-footer"><span class="task-effort">M</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">L1</div><div class="task-title">Deploy leaderboard removal</div><div class="task-desc">Commit, push, deploy, and verify removal of leaderboard and points UI</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-todo">⬜ TODO</span></div></div>
+  </div>
+</section>
+
+<!-- Dashboard -->
+<section id="epic-dashboard" class="epic-section">
+  <div class="epic-header">
+    <h2>📢 Pinned Campaign Dashboard</h2>
+    <p>Auto-updating dashboard message in @people4peace channel. Shows OKR progress, tasks, and join button. Edited in-place every hour via Celery Beat.</p>
+  </div>
+  <div class="task-grid">
+    <div class="task-card status-done"><div class="task-id">P1</div><div class="task-title">Add pinned_dashboard_message_id</div><div class="task-desc">New BigIntegerField on Campaign model</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">P2</div><div class="task-title">compose_dashboard_message()</div><div class="task-desc">Pure function: campaign + stats → branded HTML + keyboard</div><div class="task-footer"><span class="task-effort">M</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">P3</div><div class="task-title">/post_dashboard command</div><div class="task-desc">Admin-only: compose → send → pin → save ID</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">P4</div><div class="task-title">/refresh_dashboard command</div><div class="task-desc">Manual re-compose + edit_message_text</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">P5</div><div class="task-title">Celery Beat periodic task</div><div class="task-desc">update_campaign_dashboards every 60 min</div><div class="task-footer"><span class="task-effort">M</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">P7</div><div class="task-title">Progress bar rendering</div><div class="task-desc">Unicode █░ chars, reusable across bot</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">P8</div><div class="task-title">Deploy & verify</div><div class="task-desc">Production, /post_dashboard, pinned, auto-refresh</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">P9</div><div class="task-title">Bot profile improvements</div><div class="task-desc">Botpic, About text, Description, 8 slash commands</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+  </div>
+</section>
+
+<!-- Art for Peace -->
+<section id="epic-art" class="epic-section">
+  <div class="epic-header">
+    <h2>🎨 Art for Peace (Content Creation Viral Loop)</h2>
+    <p>Artists create → Submit via bot → Gallery + Channel post → Volunteers share on X → New visitors → New artists & volunteers → Repeat</p>
+  </div>
+  <div class="task-grid">
+    <div class="task-card status-todo"><div class="task-id">A1</div><div class="task-title">Improve T4 task</div><div class="task-desc">Update instructions, points (10→30), gallery link + content ideas in Admin</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-todo">⬜ TODO</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">A2</div><div class="task-title">Build gallery.html</div><div class="task-desc">Masonry grid, artist credit, share-on-X buttons, "Create Your Own" CTA</div><div class="task-footer"><span class="task-effort">M</span><span class="task-status status-badge-todo">⬜ TODO</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">A3</div><div class="task-title">Bot artwork submission flow</div><div class="task-desc">Credit prompt → media upload → save model → channel post → confirm</div><div class="task-footer"><span class="task-effort">M</span><span class="task-status status-badge-todo">⬜ TODO</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">A4</div><div class="task-title">ArtworkSubmission model</div><div class="task-desc">New model: media file ID, artist info, credit flag, publish state</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-todo">⬜ TODO</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">A5</div><div class="task-title">Admin gallery commands</div><div class="task-desc">/gallery_list, /gallery_remove — moderation</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-todo">⬜ TODO</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">A6</div><div class="task-title">Artist outreach email</div><div class="task-desc">Template for NFT artist network, cause context + submission guide</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-todo">⬜ TODO</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">A7</div><div class="task-title">Update translations</div><div class="task-desc">Credit prompt, submission success, gallery button labels (EN/FA/AR)</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-todo">⬜ TODO</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">A8</div><div class="task-title">Deploy & verify</div><div class="task-desc">Push, migrate, test full loop: submit → channel → gallery</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-todo">⬜ TODO</span></div></div>
+  </div>
+</section>
+
+<!-- Onboarding -->
+<section id="epic-onboarding" class="epic-section">
+  <div class="epic-header">
+    <h2>👋 Volunteer Onboarding Improvements</h2>
+    <p>Based on Alireza's feedback — task list is overwhelming, volunteers don't know what to do first. Make the bot immediately actionable for new joiners.</p>
+  </div>
+  <div class="task-grid">
+    <div class="task-card status-done"><div class="task-id">V1</div><div class="task-title">Task priority ordering</div><div class="task-desc">Sort by estimated_time (easiest first) instead of -points</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">V2</div><div class="task-title">⭐ Start Here badge</div><div class="task-desc">Badge on easiest task + "Sorted by easiest first" subtitle</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">V3</div><div class="task-title">Fix child count</div><div class="task-desc">100 → 168 in EN/FA/AR onboarding messages</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">V4</div><div class="task-title">Shareable volunteer briefing</div><div class="task-desc">EN/FA forwarding-ready briefing for early volunteers</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">V5</div><div class="task-title">Deploy & verify</div><div class="task-desc">Production: task list ordering + badge + briefing</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+  </div>
+</section>
+
+<!-- Dual-Path Amplify -->
+<section id="epic-amplify" class="epic-section">
+  <div class="epic-header">
+    <h2>📢 Dual-Path Amplify (Twitter + Telegram Forward)</h2>
+    <p>Many volunteers don't have active Twitter. Added Telegram forwarding path: volunteers tap "Get Message" → forward to groups → send screenshot as proof.</p>
+  </div>
+  <div class="task-grid">
+    <div class="task-card status-done"><div class="task-id">F1</div><div class="task-title">Platform choice UI</div><div class="task-desc">Option A (Twitter) / Option B (Telegram Forward)</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">F2</div><div class="task-title">Forwardable messages</div><div class="task-desc">Clean report summaries EN/FA, 2 variants each, no broken formatting</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">F3</div><div class="task-title">Forward proof</div><div class="task-desc">Accept screenshot or "done" as proof alongside tweet URLs</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-done"><div class="task-id">F4</div><div class="task-title">Translations</div><div class="task-desc">10 new translation keys for dual-path flow (EN/FA/AR)</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">F5</div><div class="task-title">Deploy & verify</div><div class="task-desc">Push to production, test both paths end-to-end</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-done">✅ Done</span></div></div>
+  </div>
+</section>
+
+<!-- Bugs -->
+<section id="epic-bugs" class="epic-section">
+  <div class="epic-header">
+    <h2>🐛 Known Bugs</h2>
+    <p>Tracked issues across the campaign bot and website.</p>
+  </div>
+  <table class="bug-table" style="margin:0 0 20px;">
+    <thead><tr><th>#</th><th>Bug</th><th>Severity</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td style="font-family:var(--font-mono);color:var(--text-muted)">B1</td><td>Leaderboard Markdown parse error (em dash)</td><td class="sev-high">High</td><td><span class="task-status status-badge-progress">Fix staged</span></td></tr>
+      <tr><td style="font-family:var(--font-mono);color:var(--text-muted)">B2</td><td>Menu campaigns wrong filter (is_active → status=ACTIVE)</td><td class="sev-high">High</td><td><span class="task-status status-badge-done">✅ Fixed</span></td></tr>
+      <tr><td style="font-family:var(--font-mono);color:var(--text-muted)">B3</td><td>Menu leaderboard wrong field (points → total_points)</td><td class="sev-medium">Medium</td><td><span class="task-status status-badge-done">✅ Fixed</span></td></tr>
+      <tr><td style="font-family:var(--font-mono);color:var(--text-muted)">B4</td><td>Profile shows 0 points (user.points → user.total_points)</td><td class="sev-low">Low</td><td><span class="task-status status-badge-todo">TODO</span></td></tr>
+      <tr><td style="font-family:var(--font-mono);color:var(--text-muted)">B6</td><td>Menu "Available Tasks" no per-task buttons</td><td class="sev-medium">Medium</td><td><span class="task-status status-badge-deferred">Deferred</span></td></tr>
+      <tr><td style="font-family:var(--font-mono);color:var(--text-muted)">B7</td><td>Channel broadcasts silent fail — telegram_channel_id NULL</td><td class="sev-high">High</td><td><span class="task-status status-badge-done">✅ Fixed</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Deferred -->
+<section id="epic-deferred" class="epic-section">
+  <div class="epic-header">
+    <h2>⏳ Deferred Items</h2>
+    <p>Features and improvements deprioritized for now but tracked for future sprints.</p>
+  </div>
+  <div class="task-grid">
+    <div class="task-card status-todo"><div class="task-id">T6</div><div class="task-title">Fix profile points (B4)</div><div class="task-desc">menu.py:138 — user.points → user.total_points</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-deferred">Low</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">T7</div><div class="task-title">Deploy leaderboard HTML fix (B1)</div><div class="task-desc">Already staged, just deploy</div><div class="task-footer"><span class="task-effort">XS</span><span class="task-status status-badge-deferred">Low</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">D2</div><div class="task-title">Task completion notification to admin</div><div class="task-desc">Review workflow for admin alerts</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-deferred">Medium</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">D3</div><div class="task-title">Points auto-award on proof approval</div><div class="task-desc">Gamification: auto-award after admin approves</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-deferred">Medium</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">D4</div><div class="task-title">Invite task type testing</div><div class="task-desc">Test after Twitter tasks stable</div><div class="task-footer"><span class="task-effort">S</span><span class="task-status status-badge-deferred">Low</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">D5</div><div class="task-title">Campaign progress dashboard</div><div class="task-desc">Public-facing progress visualization</div><div class="task-footer"><span class="task-effort">M</span><span class="task-status status-badge-deferred">Low</span></div></div>
+    <div class="task-card status-todo"><div class="task-id">D6</div><div class="task-title">Campaign Manager Guide</div><div class="task-desc">Password-protected page on main site or behind login wall</div><div class="task-footer"><span class="task-effort">M</span><span class="task-status status-badge-deferred">Medium</span></div></div>
+  </div>
+</section>
+
+<footer class="page-footer">
+  <p>Campaign task board — <a href="hub.html">Back to Team Hub</a> · Effort: XS (<1h) · S (1-3h) · M (3-8h) · L (1-2d)</p>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_campaign_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+
+function showEpic(id) {
+  document.querySelectorAll('.epic-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.epic-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('epic-' + id).classList.add('active');
+  event.target.closest('.epic-tab').classList.add('active');
+}
+</script>
+</body>
+</html>

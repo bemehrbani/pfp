@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Platform Guide — Campaign Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg-deep:#0a0e1a;--bg-primary:#0f172a;--bg-card:#1e293b;--bg-card-hover:#273548;--blue:#3b82f6;--blue-light:#60a5fa;--gold:#c9a84c;--gold-light:#e8d48b;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--white:#fff;--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text-primary);-webkit-font-smoothing:antialiased;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(59,130,246,.03) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(201,168,76,.04) 0%,transparent 50%);pointer-events:none}
+
+.topbar{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 32px;background:rgba(10,14,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(59,130,246,.08)}
+.topbar a{color:var(--blue-light);text-decoration:none;font-size:14px;cursor:pointer}
+.topbar-title{font-family:var(--font-display);font-size:14px;color:var(--text-muted)}
+
+.page-header{position:relative;z-index:1;padding:40px 32px 16px;max-width:900px;margin:0 auto;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.page-header h1{font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:900;color:var(--white);margin-bottom:8px}
+.page-header h1 .accent{color:var(--blue-light)}
+.page-header .subtitle{font-size:16px;color:var(--text-secondary);line-height:1.5;margin-bottom:12px}
+
+.content{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:16px 32px 60px}
+
+/* TOC */
+.toc{background:var(--bg-card);border:1px solid rgba(59,130,246,.1);border-radius:12px;padding:20px 28px;margin-bottom:40px}
+.toc h3{font-family:var(--font-display);font-size:16px;color:var(--gold-light);margin-bottom:12px}
+.toc ol{list-style:none;counter-reset:toc}
+.toc li{counter-increment:toc}
+.toc li::before{content:counter(toc) '.';font-family:var(--font-mono);color:var(--text-muted);margin-right:8px;font-size:12px}
+.toc a{color:var(--blue-light);text-decoration:none;font-size:14px;line-height:2}
+.toc a:hover{text-decoration:underline}
+
+/* Sections */
+.guide-section{margin-bottom:48px}
+.guide-section h2{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--white);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid rgba(59,130,246,.15)}
+.guide-section h3{font-size:18px;font-weight:600;color:var(--blue-light);margin:24px 0 12px}
+.guide-section p,.guide-section li{font-size:15px;color:var(--text-secondary);line-height:1.7}
+.guide-section ul,.guide-section ol{padding-left:20px;margin-bottom:16px}
+.guide-section li{margin-bottom:6px}
+
+code{font-family:var(--font-mono);font-size:13px;padding:2px 8px;background:rgba(59,130,246,.08);border-radius:4px;color:var(--blue-light)}
+.code-block{display:block;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:16px 20px;font-family:var(--font-mono);font-size:13px;color:var(--text-secondary);line-height:1.6;overflow-x:auto;margin:12px 0 20px;white-space:pre}
+
+.info-box{background:var(--bg-card);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:16px 20px;margin:16px 0;font-size:14px;color:var(--text-secondary)}
+.info-box.warn{border-left-color:var(--yellow)}
+.info-box.danger{border-left-color:var(--red)}
+.info-box strong{color:var(--white)}
+
+.cmd-table{width:100%;border-collapse:collapse;margin:12px 0 20px}
+.cmd-table th{text-align:left;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
+.cmd-table td{padding:10px 12px;font-size:14px;color:var(--text-secondary);border-bottom:1px solid rgba(255,255,255,.03)}
+.cmd-table code{background:rgba(59,130,246,.08);padding:2px 6px;border-radius:4px;font-size:13px}
+
+.page-footer{position:relative;z-index:1;text-align:center;padding:24px 32px;font-size:13px;color:var(--text-muted);border-top:1px solid rgba(59,130,246,.06)}
+.page-footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:640px){.topbar{padding:10px 16px}.page-header,.content{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="hub.html">← Back to Team Hub</a>
+  <span class="topbar-title">Platform Guide</span>
+  <a onclick="window.print()">Print ↓</a>
+</nav>
+
+<header class="page-header">
+  <h1>📖 Platform <span class="accent">Guide</span></h1>
+  <p class="subtitle">How the PFP campaign platform works — bot architecture, task types, deployment, and how to contribute.</p>
+</header>
+
+<main class="content">
+
+<!-- TOC -->
+<nav class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#overview">Platform Overview</a></li>
+    <li><a href="#architecture">Architecture & Tech Stack</a></li>
+    <li><a href="#bot-commands">Bot Commands</a></li>
+    <li><a href="#task-types">Task Types & Flow</a></li>
+    <li><a href="#translations">Translation System</a></li>
+    <li><a href="#admin">Admin & Moderation</a></li>
+    <li><a href="#deployment">Deployment Pipeline</a></li>
+    <li><a href="#troubleshooting">Common Issues</a></li>
+  </ol>
+</nav>
+
+<!-- 1. Overview -->
+<section id="overview" class="guide-section">
+  <h2>1. Platform Overview</h2>
+  <p>The <strong>People for Peace (PFP)</strong> platform enables volunteers worldwide to take micro-actions for the Justice for Minab Children campaign. The platform consists of:</p>
+  <ul>
+    <li><strong>Telegram Bot</strong> (<a href="https://t.me/peopleforpeacebot" style="color:var(--blue-light)">@peopleforpeacebot</a>) — primary volunteer interface</li>
+    <li><strong>Telegram Channel</strong> (<a href="https://t.me/people4peace" style="color:var(--blue-light)">@people4peace</a>) — public campaign updates & dashboard</li>
+    <li><strong>Website</strong> (<a href="https://peopleforpeace.live" style="color:var(--blue-light)">peopleforpeace.live</a>) — memorial, evidence, gallery, legal docs</li>
+    <li><strong>Django Admin</strong> — backend for managing campaigns, tasks, volunteers, and proofs</li>
+  </ul>
+</section>
+
+<!-- 2. Architecture -->
+<section id="architecture" class="guide-section">
+  <h2>2. Architecture & Tech Stack</h2>
+  <h3>Backend</h3>
+  <ul>
+    <li><strong>Python / Django</strong> — core framework</li>
+    <li><strong>python-telegram-bot</strong> — Telegram Bot API integration (polling mode in dev, webhook in prod)</li>
+    <li><strong>PostgreSQL</strong> — primary database</li>
+    <li><strong>Celery + Redis</strong> — background tasks (dashboard refresh every 60 min)</li>
+  </ul>
+  <h3>Frontend (Static)</h3>
+  <ul>
+    <li><strong>Vanilla HTML/CSS/JS</strong> — all pages are static files served from Nginx</li>
+    <li>Dark theme with <code>Playfair Display</code> + <code>DM Sans</code> fonts</li>
+    <li>No JavaScript framework — keeps pages fast and simple</li>
+  </ul>
+  <h3>Infrastructure</h3>
+  <ul>
+    <li><strong>VPS (SkinScope Server)</strong> — Ubuntu, hosts both Django and static files</li>
+    <li><strong>Nginx</strong> — reverse proxy + static file serving</li>
+    <li><strong>Supervisor</strong> — process management for Django, Celery worker, Celery Beat</li>
+    <li><strong>Let's Encrypt</strong> — SSL for peopleforpeace.live</li>
+  </ul>
+  <div class="code-block">peopleforpeace.live/
+├── index.html          # Landing page
+├── memorial.html       # Children's memorial
+├── evidence.html       # Investigative reports
+├── amplify.html        # Report sharing page
+├── gallery.html        # Art submissions (planned)
+├── legal/              # Legal docs portal
+│   └── jfmc-2026/      # Case-specific
+└── campaign/           # This team portal
+    ├── index.html      # Password gate
+    ├── hub.html        # Hub page
+    ├── qa.html         # QA test script
+    ├── tasks.html      # Kanban board
+    ├── guide.html      # This file
+    ├── strategy.html   # Growth strategy
+    └── team.html       # Team & roles</div>
+</section>
+
+<!-- 3. Bot Commands -->
+<section id="bot-commands" class="guide-section">
+  <h2>3. Bot Commands</h2>
+  <table class="cmd-table">
+    <thead><tr><th>Command</th><th>Access</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>/start</code></td><td>Public</td><td>Begin onboarding or return to main menu</td></tr>
+      <tr><td><code>/tasks</code></td><td>Public</td><td>Show available tasks for current campaign</td></tr>
+      <tr><td><code>/profile</code></td><td>Public</td><td>View your volunteer profile and stats</td></tr>
+      <tr><td><code>/language</code></td><td>Public</td><td>Change interface language (EN/FA/AR)</td></tr>
+      <tr><td><code>/cancel</code></td><td>Public</td><td>Cancel current active task</td></tr>
+      <tr><td><code>/campaigns</code></td><td>Public</td><td>View all active campaigns</td></tr>
+      <tr><td><code>/status</code></td><td>Public</td><td>Campaign progress stats</td></tr>
+      <tr><td><code>/help</code></td><td>Public</td><td>Show help information</td></tr>
+      <tr><td><code>/post_dashboard</code></td><td>Admin</td><td>Post and pin campaign dashboard to channel</td></tr>
+      <tr><td><code>/refresh_dashboard</code></td><td>Admin</td><td>Force refresh the pinned dashboard</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 4. Task Types -->
+<section id="task-types" class="guide-section">
+  <h2>4. Task Types & Flow</h2>
+  <p>Each task follows a standard cycle: <strong>Browse → Claim → Guidance → Proof → Confirm → Next</strong></p>
+
+  <h3>Current Active Tasks</h3>
+  <table class="cmd-table">
+    <thead><tr><th>ID</th><th>Task</th><th>Type</th><th>Time</th><th>Points</th></tr></thead>
+    <tbody>
+      <tr><td>T1</td><td>Share a Child's Story</td><td>Twitter Post</td><td>3 min</td><td>6 pts</td></tr>
+      <tr><td>T2</td><td>Amplify Investigative Reports</td><td>Twitter RT / TG Forward</td><td>2 min</td><td>5 pts</td></tr>
+      <tr><td>T3</td><td>Demand Justice Tweet</td><td>Twitter Post</td><td>3 min</td><td>6 pts</td></tr>
+      <tr><td>T4</td><td>Art for Peace</td><td>Content Creation</td><td>30 min</td><td>10→30 pts</td></tr>
+      <tr><td>T5</td><td>Sign the Petition</td><td>External Action</td><td>2 min</td><td>3 pts</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Proof Types Accepted</h3>
+  <ul>
+    <li><strong>Tweet URL</strong> — twitter.com/*/status/* or x.com/*/status/*</li>
+    <li><strong>Screenshot</strong> — photo upload (for Telegram forwards or petition signing)</li>
+    <li><strong>"done"</strong> — text confirmation for simple tasks</li>
+  </ul>
+
+  <div class="info-box warn">
+    <strong>Dual-Path Note:</strong> The Amplify task (T2) supports both Twitter and Telegram. If a volunteer has no Twitter, they can get a forwardable message and share via Telegram groups instead.
+  </div>
+</section>
+
+<!-- 5. Translations -->
+<section id="translations" class="guide-section">
+  <h2>5. Translation System</h2>
+  <p>All user-facing text lives in <code>telegram-bot/utils/translations.py</code> as a Python dictionary (<code>TRANSLATIONS</code>). Three supported languages:</p>
+  <ul>
+    <li><strong>EN</strong> — English (default)</li>
+    <li><strong>FA</strong> — Farsi (فارسی) — right-to-left</li>
+    <li><strong>AR</strong> — Arabic (العربية) — partial, falls back to EN</li>
+  </ul>
+  <h3>Adding a New Translation Key</h3>
+  <div class="code-block"># In translations.py → TRANSLATIONS dict
+"new_key": {
+    "en": "English text here",
+    "fa": "متن فارسی اینجا",
+    "ar": "نص عربي هنا"
+},</div>
+  <div class="info-box">
+    <strong>RTL Note:</strong> Telegram handles RTL rendering automatically based on the script used. No special markup needed for Farsi/Arabic messages.
+  </div>
+</section>
+
+<!-- 6. Admin -->
+<section id="admin" class="guide-section">
+  <h2>6. Admin & Moderation</h2>
+  <p>Django Admin is available at <code>/admin/</code> on the backend. Key models:</p>
+  <ul>
+    <li><strong>Campaign</strong> — title, description, status, channel ID, dashboard message ID</li>
+    <li><strong>Task</strong> — belongs to campaign, type, instructions, time estimate, points</li>
+    <li><strong>Volunteer / TelegramUser</strong> — auto-created on /start, tracks joined campaigns</li>
+    <li><strong>TaskCompletion</strong> — proof text/media, status (pending/approved/rejected)</li>
+  </ul>
+  <h3>Proof Review Workflow</h3>
+  <ol>
+    <li>Volunteer submits proof → status = <strong>pending</strong></li>
+    <li>Admin reviews in Django Admin → approve or reject</li>
+    <li>Points awarded on approval (future: auto-award on approve)</li>
+  </ol>
+</section>
+
+<!-- 7. Deployment -->
+<section id="deployment" class="guide-section">
+  <h2>7. Deployment Pipeline</h2>
+  <h3>Backend (Bot + API)</h3>
+  <div class="code-block"># SSH into server
+ssh your-user@server
+
+# Pull latest code
+cd /path/to/pfp && git pull
+
+# Restart services
+sudo supervisorctl restart pfp-bot pfp-celery pfp-beat
+
+# Check status
+sudo supervisorctl status</div>
+
+  <h3>Frontend (Static Files)</h3>
+  <div class="code-block"># Frontend files are served directly by Nginx
+# After editing, just push to the server:
+scp -r frontend/public/* user@server:/var/www/peopleforpeace.live/
+
+# Or if using git on the server:
+cd /var/www/peopleforpeace.live && git pull</div>
+
+  <div class="info-box danger">
+    <strong>⚠️ Important:</strong> Always test locally before deploying. Use the Telegram test bot for development. Never deploy untested code to the production bot.
+  </div>
+</section>
+
+<!-- 8. Troubleshooting -->
+<section id="troubleshooting" class="guide-section">
+  <h2>8. Common Issues</h2>
+  <table class="cmd-table">
+    <thead><tr><th>Problem</th><th>Likely Cause</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td>Bot not responding</td><td>Supervisor process died</td><td><code>sudo supervisorctl restart pfp-bot</code></td></tr>
+      <tr><td>Dashboard not updating</td><td>Celery beat stopped</td><td><code>sudo supervisorctl restart pfp-beat</code></td></tr>
+      <tr><td>Missing translations</td><td>Key not in TRANSLATIONS dict</td><td>Add key to <code>translations.py</code>, fallback is EN</td></tr>
+      <tr><td>Channel post fails</td><td>telegram_channel_id NULL</td><td>Set channel ID in Django Admin → Campaign</td></tr>
+      <tr><td>Static files 404</td><td>Nginx config / file path</td><td>Check <code>/etc/nginx/sites-enabled/</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer class="page-footer">
+  <p>Internal platform documentation — <a href="hub.html">Back to Team Hub</a> · <a href="https://peopleforpeace.live">peopleforpeace.live</a></p>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_campaign_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

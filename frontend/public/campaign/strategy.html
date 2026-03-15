@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Growth Strategy — Campaign Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg-deep:#0a0e1a;--bg-primary:#0f172a;--bg-card:#1e293b;--blue:#3b82f6;--blue-light:#60a5fa;--gold:#c9a84c;--gold-light:#e8d48b;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--white:#fff;--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text-primary);-webkit-font-smoothing:antialiased;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(59,130,246,.03) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(201,168,76,.04) 0%,transparent 50%);pointer-events:none}
+
+.topbar{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 32px;background:rgba(10,14,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(59,130,246,.08)}
+.topbar a{color:var(--blue-light);text-decoration:none;font-size:14px;cursor:pointer}
+.topbar-title{font-family:var(--font-display);font-size:14px;color:var(--text-muted)}
+
+.page-header{position:relative;z-index:1;padding:40px 32px 16px;max-width:960px;margin:0 auto;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.page-header h1{font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:900;color:var(--white);margin-bottom:8px}
+.page-header h1 .accent{color:var(--blue-light)}
+.page-header .subtitle{font-size:16px;color:var(--text-secondary);line-height:1.5}
+
+.content{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:24px 32px 60px}
+
+/* Phase cards */
+.phase-card{background:var(--bg-card);border:1px solid rgba(59,130,246,.1);border-radius:14px;padding:32px;margin-bottom:28px;position:relative;overflow:hidden}
+.phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.phase-card.p1::before{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.phase-card.p2::before{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.phase-card.p3::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.phase-card.p4::before{background:linear-gradient(90deg,#ec4899,#f472b6)}
+.phase-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:99px;font-family:var(--font-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.p1 .phase-tag{background:rgba(34,197,94,.1);color:#86efac}
+.p2 .phase-tag{background:rgba(59,130,246,.1);color:#93c5fd}
+.p3 .phase-tag{background:rgba(245,158,11,.1);color:#fde68a}
+.p4 .phase-tag{background:rgba(236,72,153,.1);color:#f9a8d4}
+.phase-card h2{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--white);margin-bottom:8px}
+.phase-timeline{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);margin-bottom:16px;letter-spacing:1px}
+.phase-card p{font-size:15px;color:var(--text-secondary);line-height:1.7;margin-bottom:16px}
+
+.action-list{list-style:none;margin-bottom:16px}
+.action-list li{font-size:14px;color:var(--text-secondary);line-height:1.7;padding:6px 0;padding-left:28px;position:relative}
+.action-list li::before{content:'';position:absolute;left:0;top:12px;width:16px;height:16px;border-radius:4px;border:1px solid rgba(255,255,255,.15)}
+.action-list li.done::before{background:var(--green);border-color:var(--green)}
+.action-list li.done::after{content:'✓';position:absolute;left:3px;top:10px;font-size:11px;color:var(--white);font-weight:700}
+.action-list li.done{color:var(--text-muted);text-decoration:line-through}
+
+.metrics-row{display:flex;gap:12px;flex-wrap:wrap}
+.metric{flex:1;min-width:120px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.1);border-radius:10px;padding:16px;text-align:center}
+.metric-value{font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--white);margin-bottom:4px}
+.metric-label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+
+/* Timeline */
+.timeline-section{background:var(--bg-card);border:1px solid rgba(201,168,76,.1);border-radius:14px;padding:28px 32px;margin-top:32px}
+.timeline-section h3{font-family:var(--font-display);font-size:20px;color:var(--gold-light);margin-bottom:20px}
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:rgba(201,168,76,.2)}
+.tl-item{position:relative;margin-bottom:20px;padding-left:24px}
+.tl-item::before{content:'';position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid var(--gold);background:var(--bg-card)}
+.tl-item.active::before{background:var(--gold);box-shadow:0 0 8px rgba(201,168,76,.4)}
+.tl-date{font-family:var(--font-mono);font-size:12px;color:var(--gold);letter-spacing:1px;margin-bottom:4px}
+.tl-text{font-size:14px;color:var(--text-secondary);line-height:1.5}
+
+.page-footer{position:relative;z-index:1;text-align:center;padding:24px 32px;font-size:13px;color:var(--text-muted);border-top:1px solid rgba(59,130,246,.06)}
+.page-footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:640px){.topbar{padding:10px 16px}.page-header,.content{padding-left:16px;padding-right:16px}.metrics-row{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="hub.html">← Back to Team Hub</a>
+  <span class="topbar-title">Growth Strategy</span>
+  <a onclick="window.print()">Print ↓</a>
+</nav>
+
+<header class="page-header">
+  <h1>🎯 Growth <span class="accent">Strategy</span></h1>
+  <p class="subtitle">4-phase volunteer growth playbook for the Justice for Minab Children campaign. From artist outreach to a sustained advocacy movement.</p>
+</header>
+
+<main class="content">
+
+<!-- Metrics -->
+<div class="metrics-row" style="margin-bottom:32px">
+  <div class="metric"><div class="metric-value">174</div><div class="metric-label">Artist Contacts</div></div>
+  <div class="metric"><div class="metric-value">50+</div><div class="metric-label">TG Groups</div></div>
+  <div class="metric"><div class="metric-value">Mar 28</div><div class="metric-label">Twitter Storm</div></div>
+  <div class="metric"><div class="metric-value">100</div><div class="metric-label">Target Volunteers</div></div>
+</div>
+
+<!-- Phase 1 -->
+<div class="phase-card p1">
+  <span class="phase-tag">Phase 1</span>
+  <h2>Artist Outreach Network</h2>
+  <div class="phase-timeline">Week 1-2 · March 15-28</div>
+  <p>Leverage our database of 174 Iranian artists for the "Art for Peace" viral loop. Artists create → submit via bot → gallery & channel → volunteers share → new visitors → more artists.</p>
+  <ul class="action-list">
+    <li>Prepare personalized email template for 20 priority artists</li>
+    <li>Send Phase 1 emails (20 artists with personal connection)</li>
+    <li>Prepare bulk email for remaining 154 artists</li>
+    <li>Send bulk outreach after Phase 1 response analysis</li>
+    <li>Build gallery.html page for submitted artworks</li>
+    <li>Create submission flow in bot</li>
+  </ul>
+</div>
+
+<!-- Phase 2 -->
+<div class="phase-card p2">
+  <span class="phase-tag">Phase 2</span>
+  <h2>Telegram Group Seeding</h2>
+  <div class="phase-timeline">Week 1-2 · March 15-28</div>
+  <p>Identify and join 50+ Iranian diaspora, human rights, and activist Telegram groups. Share campaign briefings and bot deep links using the volunteer briefing templates.</p>
+  <ul class="action-list">
+    <li>Map top 50 Telegram groups (Iranian diaspora, human rights, activism)</li>
+    <li>Prepare group-specific introduction messages</li>
+    <li>Send briefings to top 10 most active groups</li>
+    <li>Monitor join rates and optimize messaging</li>
+    <li>Expand to remaining 40 groups</li>
+  </ul>
+</div>
+
+<!-- Phase 3 -->
+<div class="phase-card p3">
+  <span class="phase-tag">Phase 3</span>
+  <h2>March 28 Twitter Storm</h2>
+  <div class="phase-timeline">March 28 (Deadline Day)</div>
+  <p>Coordinated Twitter storm on the 1-month mark of the Minab school attack. Goal: trend #JusticeForMinabChildren globally. Volunteers use the bot to get pre-written tweets and post simultaneously.</p>
+  <ul class="action-list">
+    <li>Create Twitter Storm briefing message for channel</li>
+    <li>Prepare 10-15 ready-to-post tweets with statistics</li>
+    <li>Schedule 3 Telegram reminders (1 week, 1 day, 1 hour before)</li>
+    <li>Coordinate posting window (peak US+EU timezone: 2PM UTC)</li>
+    <li>Track hashtag performance in real-time</li>
+    <li>Post results celebration message to channel</li>
+  </ul>
+</div>
+
+<!-- Phase 4 -->
+<div class="phase-card p4">
+  <span class="phase-tag">Phase 4</span>
+  <h2>Micro-Influencer Outreach</h2>
+  <div class="phase-timeline">Week 3-4 · March 29 - April 15</div>
+  <p>After the Twitter Storm creates momentum, leverage the results to DM micro-influencers (1K-100K followers) in human rights and Iranian diaspora spaces. Show them the movement is real and growing.</p>
+  <ul class="action-list">
+    <li>Compile list of 50 micro-influencers on Twitter/Instagram</li>
+    <li>Prepare personalized DM templates with campaign metrics</li>
+    <li>Send outreach in batches of 10</li>
+    <li>Follow up with non-responders after 3 days</li>
+    <li>Convert interested influencers to campaign ambassadors</li>
+  </ul>
+</div>
+
+<!-- Timeline -->
+<div class="timeline-section">
+  <h3>📅 Key Dates</h3>
+  <div class="timeline">
+    <div class="tl-item active"><div class="tl-date">Mar 15 — Now</div><div class="tl-text">Launch team portal, begin artist outreach Phase 1, QA the bot flow</div></div>
+    <div class="tl-item"><div class="tl-date">Mar 18</div><div class="tl-text">First batch of artist emails sent, begin TG group seeding</div></div>
+    <div class="tl-item"><div class="tl-date">Mar 22</div><div class="tl-text">Gallery.html live, artist submissions open, dual-path deployed</div></div>
+    <div class="tl-item"><div class="tl-date">Mar 25</div><div class="tl-text">Twitter Storm briefing posted to channel, reminder scheduled</div></div>
+    <div class="tl-item"><div class="tl-date">Mar 28</div><div class="tl-text">🔥 Twitter Storm Day — 1 month mark of Minab school attack</div></div>
+    <div class="tl-item"><div class="tl-date">Apr 1-15</div><div class="tl-text">Micro-influencer outreach using Twitter Storm results as proof</div></div>
+  </div>
+</div>
+
+</main>
+
+<footer class="page-footer">
+  <p>Internal strategy document — <a href="hub.html">Back to Team Hub</a> · <a href="https://peopleforpeace.live">peopleforpeace.live</a></p>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_campaign_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

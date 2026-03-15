@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Team Hub — Justice for Minab Children</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --blue-accent: #3b82f6;
+  --blue-light: #60a5fa;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(59,130,246,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.portal-header {
+  position: relative;
+  z-index: 1;
+  padding: 60px 40px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+  animation: fadeUp 0.6s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.portal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue-light);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.portal-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.portal-header h1 .accent { color: var(--blue-light); }
+.portal-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+.gold-rule {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-accent), transparent);
+  margin: 0 auto;
+  border: none;
+}
+.session-info {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+.session-info a {
+  color: var(--blue-light);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Quick links bar */
+.quick-links {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 32px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.quick-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 99px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.quick-link:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,168,76,0.05);
+}
+
+/* Document Cards */
+.docs-grid {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 40px 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.doc-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(59,130,246,0.1);
+  border-radius: 14px;
+  padding: 36px 32px 32px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.6s ease both;
+}
+.doc-card:nth-child(1) { animation-delay: 0.1s; }
+.doc-card:nth-child(2) { animation-delay: 0.2s; }
+.doc-card:nth-child(3) { animation-delay: 0.3s; }
+.doc-card:nth-child(4) { animation-delay: 0.4s; }
+.doc-card:nth-child(5) { animation-delay: 0.5s; }
+.doc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  transition: opacity 0.3s;
+}
+.doc-card:nth-child(1)::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.doc-card:nth-child(2)::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.doc-card:nth-child(3)::before { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.doc-card:nth-child(4)::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.doc-card:nth-child(5)::before { background: linear-gradient(90deg, #ec4899, #f472b6); }
+.doc-card:hover {
+  border-color: rgba(59,130,246,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.doc-flag {
+  font-size: 42px;
+  margin-bottom: 16px;
+  display: block;
+}
+.doc-card h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.doc-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+.doc-meta {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(59,130,246,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.doc-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(59,130,246,0.1);
+  color: var(--blue-light);
+}
+.doc-arrow {
+  color: var(--blue-light);
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+.doc-card:hover .doc-arrow { transform: translateX(4px); }
+
+/* Footer */
+.portal-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 32px 40px 48px;
+  border-top: 1px solid rgba(59,130,246,0.06);
+}
+.portal-footer p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.portal-footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .portal-header { padding: 40px 20px 32px; }
+  .docs-grid { padding: 16px 20px 40px; grid-template-columns: 1fr; }
+  .quick-links { padding: 0 20px 24px; }
+}
+</style>
+</head>
+<body>
+
+<header class="portal-header">
+  <div class="portal-badge">☮ People For Peace · Team</div>
+  <h1>Campaign <span class="accent">Team Hub</span></h1>
+  <p class="portal-subtitle">Internal tools, task tracking, guides, and QA resources for the Justice for Minab Children campaign.</p>
+  <hr class="gold-rule">
+  <div class="session-info">
+    Team access · <a onclick="logout()">Sign out</a>
+  </div>
+</header>
+
+<nav class="quick-links">
+  <a href="https://t.me/peopleforpeacebot?start=campaign_18" class="quick-link" target="_blank">🤖 Bot</a>
+  <a href="https://t.me/people4peace" class="quick-link" target="_blank">📢 Channel</a>
+  <a href="https://peopleforpeace.live" class="quick-link" target="_blank">🌐 Website</a>
+  <a href="https://peopleforpeace.live/memorial.html" class="quick-link" target="_blank">🕯 Memorial</a>
+  <a href="https://peopleforpeace.live/evidence.html" class="quick-link" target="_blank">📄 Evidence</a>
+  <a href="https://peopleforpeace.live/amplify.html" class="quick-link" target="_blank">📣 Amplify Reports</a>
+  <a href="/legal/jfmc-2026/" class="quick-link">⚖️ Legal Portal</a>
+</nav>
+
+<section class="docs-grid">
+  <a href="tasks.html" class="doc-card">
+    <span class="doc-flag">📋</span>
+    <h2>Campaign Kanban Board</h2>
+    <p>Full task board with all campaign epics, sprint tasks, known bugs, and deferred items. Track progress on volunteer onboarding, dual-path amplify, Art for Peace, and more.</p>
+    <div class="doc-meta">
+      <span class="doc-tag">Tracker</span>
+      <span class="doc-arrow">→</span>
+    </div>
+  </a>
+  <a href="qa.html" class="doc-card">
+    <span class="doc-flag">🧪</span>
+    <h2>QA Test Script</h2>
+    <p>Structured test script covering 8 test cases: onboarding, task list, petition, dual-path amplify, child stories, content creation, navigation, and Farsi language. Fill in results and submit feedback.</p>
+    <div class="doc-meta">
+      <span class="doc-tag">Quality</span>
+      <span class="doc-arrow">→</span>
+    </div>
+  </a>
+  <a href="guide.html" class="doc-card">
+    <span class="doc-flag">📖</span>
+    <h2>Platform Guide</h2>
+    <p>How the campaign platform works: bot commands, task types, proof submission, translation system, Django Admin, and deployment pipeline. Essential reading for team members.</p>
+    <div class="doc-meta">
+      <span class="doc-tag">Guide</span>
+      <span class="doc-arrow">→</span>
+    </div>
+  </a>
+  <a href="strategy.html" class="doc-card">
+    <span class="doc-flag">🎯</span>
+    <h2>Growth Strategy</h2>
+    <p>4-phase growth playbook: artist outreach (174 contacts), Telegram group seeding, micro-influencer DMs, and the Mar 28 Twitter Storm. Includes templates and timelines.</p>
+    <div class="doc-meta">
+      <span class="doc-tag">Strategy</span>
+      <span class="doc-arrow">→</span>
+    </div>
+  </a>
+  <a href="team.html" class="doc-card">
+    <span class="doc-flag">👥</span>
+    <h2>Team & Roles</h2>
+    <p>Current team roster, open roles (4 must-have, 5 nice-to-have), recruitment post, and volunteer briefings in English and Farsi.</p>
+    <div class="doc-meta">
+      <span class="doc-tag">Team</span>
+      <span class="doc-arrow">→</span>
+    </div>
+  </a>
+</section>
+
+<footer class="portal-footer">
+  <p>Internal team portal — do not share access credentials publicly.<br>
+  Last updated: March 15, 2026 · <a href="https://peopleforpeace.live">peopleforpeace.live</a></p>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_campaign_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+function logout() {
+  sessionStorage.removeItem('pfp_campaign_token');
+  sessionStorage.removeItem('pfp_campaign_ts');
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
