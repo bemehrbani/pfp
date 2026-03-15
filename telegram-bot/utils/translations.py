@@ -20,18 +20,21 @@ TRANSLATIONS = {
     "welcome": {
         "en": (
             "🕊️ *People for Peace*\n\n"
-            "Choose a campaign below and start taking action!\n\n"
-            "📢 Follow updates: @people4peace"
+            "We're a volunteer network taking digital action for justice and peace.\n\n"
+            "🤲 Every small action matters — a tweet, a signature, a share.\n\n"
+            "Let's get started 👇"
         ),
         "fa": (
             "🕊️ *مردم برای صلح*\n\n"
-            "یک کمپین انتخاب کنید و شروع کنید!\n\n"
-            "📢 دنبال کنید: @people4peace"
+            "ما یک شبکه داوطلب هستیم که برای عدالت و صلح اقدام دیجیتال انجام می‌دیم.\n\n"
+            "🤲 هر اقدام کوچک مهمه — یک توییت، یک امضا، یک اشتراک‌گذاری.\n\n"
+            "بزن بریم 👇"
         ),
         "ar": (
             "🕊️ *الناس من أجل السلام*\n\n"
-            "اختر حملة أدناه وابدأ العمل!\n\n"
-            "📢 تابعنا: @people4peace"
+            "نحن شبكة متطوعين نتخذ إجراءات رقمية من أجل العدالة والسلام.\n\n"
+            "🤲 كل فعل صغير مهم — تغريدة، توقيع، مشاركة.\n\n"
+            "لنبدأ 👇"
         ),
     },
 
@@ -141,47 +144,62 @@ TRANSLATIONS = {
     "auto_joined_campaign": {
         "en": (
             "🎉 *You've joined {name}!*\n\n"
-            "{description}\n\n"
-            "👥 {members} volunteers joined\n"
-            "🎯 {tasks} tasks available\n\n"
+            "📅 *What happened:*\n"
+            "On Feb 28, 2026, a school in Minab, Iran was bombed.\n"
+            "168 children were killed.\n\n"
+            "📋 *What we're doing:*\n"
+            "We've identified names and photos of 100 children, "
+            "built an online memorial, collected investigative reports, "
+            "and launched an international petition.\n\n"
+            "🤲 *How you help:*\n"
+            "Complete simple tasks below — tweet a child's story, "
+            "sign a petition, or amplify reports. Each takes ~2 min.\n\n"
+            "👥 {members} volunteers · 🎯 {tasks} tasks\n\n"
             "━━━━━━━━━━━━━━━━━━━\n"
-            "🔗 *Resources:*\n"
-            "🕯 [Memorial](https://peopleforpeace.live)\n"
-            "📄 [Evidence & Facts](https://peopleforpeace.live/evidence.html)\n"
-            "📊 [Verified Data](https://peopleforpeace.live/data.html)\n"
-            "📢 Follow: @people4peace\n"
+            "🕯 [Memorial](https://peopleforpeace.live/memorial.html)\n"
+            "📄 [Evidence](https://peopleforpeace.live/evidence.html)\n"
+            "📢 @people4peace\n"
             "━━━━━━━━━━━━━━━━━━━\n\n"
-            "#️⃣ {hashtags}\n\n"
             "Tap a task below to get started! 👇"
         ),
         "fa": (
             "🎉 *شما به {name} پیوستید!*\n\n"
-            "{description}\n\n"
-            "👥 {members} داوطلب پیوسته‌اند\n"
-            "🎯 {tasks} وظیفه موجود\n\n"
+            "📅 *چه اتفاقی افتاد:*\n"
+            "۹ اسفند ۱۴۰۴ — مدرسه‌ای در میناب بمباران شد.\n"
+            "۱۶۸ کودک جان باختند.\n\n"
+            "📋 *ما چیکار کردیم:*\n"
+            "اسم و عکس ۱۰۰ کودک رو شناسایی کردیم، "
+            "یادبود آنلاین ساختیم، گزارش‌های تحقیقی جمع کردیم "
+            "و طومار بین‌المللی راه انداختیم.\n\n"
+            "🤲 *شما چطور کمک می‌کنید:*\n"
+            "وظایف ساده زیر رو انجام بدید — داستان یک کودک رو توییت کنید، "
+            "طومار امضا کنید، یا گزارش‌ها رو تقویت کنید. هرکدوم ~۲ دقیقه.\n\n"
+            "👥 {members} داوطلب · 🎯 {tasks} وظیفه\n\n"
             "━━━━━━━━━━━━━━━━━━━\n"
-            "🔗 *منابع:*\n"
-            "🕯 [صفحه یادبود](https://peopleforpeace.live)\n"
-            "📄 [شواهد و حقایق](https://peopleforpeace.live/evidence.html)\n"
-            "📊 [داده‌های تأییدشده](https://peopleforpeace.live/data.html)\n"
-            "📢 دنبال کنید: @people4peace\n"
+            "🕯 [یادبود](https://peopleforpeace.live/memorial.html)\n"
+            "📄 [شواهد](https://peopleforpeace.live/evidence.html)\n"
+            "📢 @people4peace\n"
             "━━━━━━━━━━━━━━━━━━━\n\n"
-            "#️⃣ {hashtags}\n\n"
-            "یک وظیفه را بزنید تا شروع کنید! 👇"
+            "یک وظیفه رو بزنید تا شروع کنید! 👇"
         ),
         "ar": (
             "🎉 *لقد انضممت إلى {name}!*\n\n"
-            "{description}\n\n"
-            "👥 {members} متطوع انضموا\n"
-            "🎯 {tasks} مهمة متاحة\n\n"
+            "📅 *ماذا حدث:*\n"
+            "في ٢٨ فبراير ٢٠٢٦، قُصفت مدرسة في ميناب، إيران.\n"
+            "قُتل ١٦٨ طفلاً.\n\n"
+            "📋 *ماذا نفعل:*\n"
+            "حددنا أسماء وصور ١٠٠ طفل، "
+            "أنشأنا نصباً تذكارياً رقمياً، جمعنا تقارير تحقيقية، "
+            "وأطلقنا عريضة دولية.\n\n"
+            "🤲 *كيف تساعد:*\n"
+            "أكمل المهام البسيطة أدناه — غرّد بقصة طفل، "
+            "وقّع عريضة، أو ضخّم التقارير. كل مهمة ~دقيقتان.\n\n"
+            "👥 {members} متطوع · 🎯 {tasks} مهمة\n\n"
             "━━━━━━━━━━━━━━━━━━━\n"
-            "🔗 *الموارد:*\n"
-            "🕯 [صفحة التذكار](https://peopleforpeace.live)\n"
-            "📄 [أدلة وحقائق](https://peopleforpeace.live/evidence.html)\n"
-            "📊 [بيانات موثقة](https://peopleforpeace.live/data.html)\n"
-            "📢 تابعنا: @people4peace\n"
+            "🕯 [التذكار](https://peopleforpeace.live/memorial.html)\n"
+            "📄 [أدلة](https://peopleforpeace.live/evidence.html)\n"
+            "📢 @people4peace\n"
             "━━━━━━━━━━━━━━━━━━━\n\n"
-            "#️⃣ {hashtags}\n\n"
             "اضغط على مهمة للبدء! 👇"
         ),
     },
@@ -1068,28 +1086,37 @@ TRANSLATIONS = {
     },
     "invite_memorial_caption": {
         "en": (
-            "🕯 168 children killed. One school. One morning.\n\n"
-            "See their faces. Read their names.\n"
-            "👉 https://peopleforpeace.live/memorial.html\n\n"
-            "Don't scroll past — act.\n"
-            "Join us: {link}\n\n"
-            "#JusticeForMinab #168Children #MinabSchoolMassacre"
+            "🕯 168 children were killed in the Minab school attack.\n\n"
+            "Their names have been identified. Their photos collected.\n"
+            "We're keeping their case alive.\n\n"
+            "🤲 You can help — just 2 minutes:\n"
+            "• Tweet their story\n"
+            "• Sign a petition\n"
+            "• Share their names\n\n"
+            "👉 Start here: {link}\n\n"
+            "#JusticeForMinab #MinabSchoolMassacre"
         ),
         "fa": (
-            "🕯 ۱۶۸ کودک کشته شدند. یک مدرسه. یک صبح.\n\n"
-            "چهره‌هایشان را ببینید. نام‌هایشان را بخوانید.\n"
-            "👉 https://peopleforpeace.live/memorial.html\n\n"
-            "بی‌تفاوت رد نشوید — اقدام کنید.\n"
-            "به ما بپیوندید: {link}\n\n"
-            "#JusticeForMinab #168Children #عدالت_برای_میناب"
+            "🕯 ۱۶۸ کودک در حمله به مدرسه میناب کشته شدند.\n\n"
+            "نام‌هایشان مشخص شده. عکس‌هایشان جمع‌آوری شده.\n"
+            "ما داریم پرونده‌شان رو زنده نگه می‌داریم.\n\n"
+            "🤲 شما هم می‌تونید کمک کنید — فقط ۲ دقیقه:\n"
+            "• یک توییت بزنید\n"
+            "• یک طومار امضا کنید\n"
+            "• داستانشان رو به اشتراک بذارید\n\n"
+            "👉 شروع کنید: {link}\n\n"
+            "#JusticeForMinab #عدالت_برای_میناب"
         ),
         "ar": (
-            "🕯 ١٦٨ طفلاً قُتلوا. مدرسة واحدة. صباح واحد.\n\n"
-            "انظروا إلى وجوههم. اقرأوا أسماءهم.\n"
-            "👉 https://peopleforpeace.live/memorial.html\n\n"
-            "لا تمرّوا مرور الكرام — تحرّكوا.\n"
-            "انضموا إلينا: {link}\n\n"
-            "#JusticeForMinab #168Children #العدالة_لأطفال_ميناب"
+            "🕯 ١٦٨ طفلاً قُتلوا في الهجوم على مدرسة ميناب.\n\n"
+            "تم التعرّف على أسمائهم. جُمعت صورهم.\n"
+            "نحن نحافظ على قضيتهم حيّة.\n\n"
+            "🤲 يمكنك المساعدة — دقيقتان فقط:\n"
+            "• غرّد بقصتهم\n"
+            "• وقّع عريضة\n"
+            "• شارك أسماءهم\n\n"
+            "👉 ابدأ هنا: {link}\n\n"
+            "#JusticeForMinab #العدالة_لأطفال_ميناب"
         ),
     },
     "invite_memorial_sent": {
@@ -1099,19 +1126,31 @@ TRANSLATIONS = {
     },
     "invite_campaign_text": {
         "en": (
-            "✊ {description}\n\n"
-            "Join {name} — sign petitions, amplify voices, hold leaders accountable.\n\n"
-            "Every action counts. 2 minutes can change something: {link}"
+            "✊ *{name}*\n\n"
+            "We're a volunteer group working for accountability "
+            "regarding the Minab school attack.\n\n"
+            "So far we've built:\n"
+            "📋 Petitions  •  🐦 Tweet campaigns  •  ✍️ Original content\n\n"
+            "You can help with just 2 minutes:\n"
+            "👉 {link}"
         ),
         "fa": (
-            "✊ {description}\n\n"
-            "به {name} بپیوندید — طومار امضا کنید، صداها را بلند کنید.\n\n"
-            "هر اقدامی مهم است. ۲ دقیقه می‌تونه چیزی رو تغییر بده: {link}"
+            "✊ *{name}*\n\n"
+            "ما یک گروه داوطلب هستیم که برای پاسخگویی "
+            "درباره حمله به مدرسه میناب تلاش می‌کنیم.\n\n"
+            "تا الان:\n"
+            "📋 طومار  •  🐦 توییت  •  ✍️ محتوا\n\n"
+            "با ۲ دقیقه وقت می‌تونید کمک کنید:\n"
+            "👉 {link}"
         ),
         "ar": (
-            "✊ {description}\n\n"
-            "انضموا إلى {name} — وقّعوا العرائض، ضخّموا الأصوات.\n\n"
-            "كل فعل مهم. دقيقتان يمكن أن تغيّرا شيئاً: {link}"
+            "✊ *{name}*\n\n"
+            "نحن مجموعة متطوعين نعمل من أجل المحاسبة "
+            "بشأن الهجوم على مدرسة ميناب.\n\n"
+            "حتى الآن:\n"
+            "📋 عرائض  •  🐦 حملات تغريد  •  ✍️ محتوى أصلي\n\n"
+            "يمكنك المساعدة بدقيقتين فقط:\n"
+            "👉 {link}"
         ),
     },
     "btn_memorial_style": {
@@ -1154,25 +1193,31 @@ TRANSLATIONS = {
     },
     "invite_video_caption": {
         "en": (
-            "🎬 100 Faces of Peace\n\n"
-            "100 children. 100 dreams. 1 school destroyed.\n"
-            "Their faces tell the story words cannot.\n\n"
-            "🕊 Watch. Share. Stand with them.\n"
-            "👉 Join us: {link}"
+            "🎬 Memorial video — Children of Minab\n\n"
+            "This video shows the faces of 100 children killed "
+            "in the attack on their school.\n"
+            "We've collected every name and every story.\n\n"
+            "Watch, and if you want to help:\n"
+            "👉 {link}\n\n"
+            "Just 2 minutes. A tweet or a signature."
         ),
         "fa": (
-            "🎬 صد چهره‌ی صلح\n\n"
-            "صد بچه. صد آرزو. یک مدرسه ویران شده.\n"
-            "چهره‌هایشان داستانی می‌گویند که کلمات نمی‌توانند.\n\n"
-            "🕊 ببینید. به اشتراک بگذارید. کنارشان بایستید.\n"
-            "👉 به ما بپیوندید: {link}"
+            "🎬 ویدیوی یادبود کودکان میناب\n\n"
+            "این ویدیو چهره‌ی ۱۰۰ کودکی رو نشون می‌ده "
+            "که تو حمله به مدرسه‌شون کشته شدند.\n"
+            "ما اسم و داستان تک‌تکشون رو جمع کردیم.\n\n"
+            "ببینید و اگه دلتون خواست کمک کنید:\n"
+            "👉 {link}\n\n"
+            "فقط ۲ دقیقه. یک توییت یا یک امضا."
         ),
         "ar": (
-            "🎬 مئة وجه للسلام\n\n"
-            "مئة طفل. مئة حلم. مدرسة واحدة دُمّرت.\n"
-            "وجوههم تحكي ما تعجز عنه الكلمات.\n\n"
-            "🕊 شاهدوا. شاركوا. قفوا معهم.\n"
-            "👉 انضموا إلينا: {link}"
+            "🎬 فيديو تذكاري — أطفال ميناب\n\n"
+            "يعرض هذا الفيديو وجوه ١٠٠ طفل قُتلوا "
+            "في الهجوم على مدرستهم.\n"
+            "جمعنا كل اسم وكل قصة.\n\n"
+            "شاهدوا، وإذا أردتم المساعدة:\n"
+            "👉 {link}\n\n"
+            "دقيقتان فقط. تغريدة أو توقيع."
         ),
     },
     "invite_video_sent": {

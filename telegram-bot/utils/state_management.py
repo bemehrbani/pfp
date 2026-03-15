@@ -383,7 +383,6 @@ class ConversationStateManager:
         # Build message with task buttons
         text = t('auto_joined_campaign', lang).format(
             name=campaign.localized_name(lang),
-            description=campaign.localized_short_description(lang),
             members=member_count,
             tasks=task_count,
         )

@@ -365,10 +365,8 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
             chat_id=chat_id,
             text=t('auto_joined_campaign', lang).format(
                 name=campaign.localized_name(lang),
-                description=campaign.localized_short_description(lang),
                 members=member_count,
                 tasks=task_count,
-                hashtags=campaign.twitter_hashtags.replace(',', ' ') if campaign.twitter_hashtags else '',
             ),
             parse_mode='Markdown'
         )
