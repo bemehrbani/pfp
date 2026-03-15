@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Benchmark Research — Accountability NGOs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a; --bg-primary: #0f172a; --bg-card: #1e293b;
+  --gold: #c9a84c; --gold-light: #e8d48b; --gold-dim: rgba(201,168,76,0.15);
+  --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b; --white: #ffffff;
+  --accent-blue: #60a5fa; --accent-green: #34d399; --accent-red: #f87171; --accent-purple: #a78bfa;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 900px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg-deep); color: var(--text-primary); -webkit-font-smoothing: antialiased; line-height: 1.7; }
+body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%); pointer-events: none; z-index: 0; }
+body::after { content: ''; position: fixed; inset: 0; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+
+.topbar { position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 12px 32px; background: rgba(10,14,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.08); }
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; transition: opacity 0.2s; }
+.topbar a:hover { opacity: 0.8; }
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+
+.article { position: relative; z-index: 1; max-width: var(--max-width); margin: 0 auto; padding: 48px 32px 80px; }
+.article-header { text-align: center; margin-bottom: 56px; animation: fadeUp 0.6s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.article-flag { font-size: 56px; display: block; margin-bottom: 20px; }
+.article-header h1 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 900; color: var(--white); margin-bottom: 12px; line-height: 1.15; }
+.article-header .purpose { display: inline-block; padding: 10px 20px; background: var(--bg-card); border: 1px solid rgba(201,168,76,0.15); border-radius: 8px; font-size: 15px; color: var(--text-secondary); line-height: 1.5; margin-top: 16px; max-width: 640px; }
+.gold-rule { width: 80px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin: 24px auto; border: none; }
+
+/* TOC */
+.toc { background: var(--bg-card); border: 1px solid rgba(201,168,76,0.1); border-radius: 12px; padding: 24px 28px; margin-bottom: 48px; animation: fadeUp 0.6s ease 0.1s both; }
+.toc h3 { font-family: var(--font-display); font-size: 16px; color: var(--gold-light); margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.toc ol { padding-left: 20px; columns: 2; column-gap: 32px; }
+.toc li { padding: 4px 0; font-size: 14px; break-inside: avoid; }
+.toc a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+.toc a:hover { color: var(--gold); }
+
+.section { margin-bottom: 56px; scroll-margin-top: 60px; }
+.section h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(201,168,76,0.1); }
+.section h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--gold-light); margin: 28px 0 12px; }
+.section p, .section li { font-size: 16px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
+.section ul, .section ol { padding-left: 24px; margin-bottom: 16px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+thead th { text-align: left; padding: 12px 16px; background: var(--bg-card); color: var(--gold); font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid rgba(201,168,76,0.2); }
+tbody td { padding: 12px 16px; border-bottom: 1px solid rgba(201,168,76,0.06); color: var(--text-secondary); vertical-align: top; }
+tbody tr:hover { background: rgba(201,168,76,0.03); }
+tbody td:first-child { color: var(--text-primary); font-weight: 500; }
+tbody td strong { color: var(--white); }
+
+/* Alerts */
+.alert { padding: 20px 24px; border-radius: 10px; margin: 24px 0; border-left: 4px solid; font-size: 15px; line-height: 1.6; }
+.alert-important { background: rgba(201,168,76,0.06); border-color: var(--gold); color: var(--text-secondary); }
+.alert-important strong { color: var(--gold-light); }
+.alert-tip { background: rgba(34,197,94,0.06); border-color: #22c55e; color: var(--text-secondary); }
+.alert-tip strong { color: #86efac; }
+.alert-note { background: rgba(96,165,250,0.06); border-color: var(--accent-blue); color: var(--text-secondary); }
+.alert-note strong { color: var(--accent-blue); }
+
+/* Org benchmark cards */
+.bench-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+  margin: 20px 0;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.bench-card:hover { border-color: rgba(201,168,76,0.25); transform: translateY(-1px); }
+.bench-card h3 { margin-top: 0; font-size: 22px; }
+.bench-card .card-number {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--gold-dim); color: var(--gold); font-family: var(--font-mono);
+  font-size: 13px; font-weight: 700; margin-right: 8px;
+}
+.bench-card .org-meta {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;
+}
+.bench-card .org-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+  background: rgba(201,168,76,0.08); color: var(--text-muted);
+}
+.bench-card .detail-grid {
+  display: grid; grid-template-columns: 140px 1fr; gap: 6px 16px;
+  margin: 16px 0; font-size: 14px;
+}
+.bench-card .detail-label { color: var(--text-muted); font-weight: 500; }
+.bench-card .detail-value { color: var(--text-secondary); }
+.bench-card .lesson {
+  background: rgba(201,168,76,0.04);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 8px; padding: 16px 20px; margin-top: 16px;
+  font-size: 14px; line-height: 1.6;
+}
+.bench-card .lesson .lesson-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+}
+.bench-card .lesson p { margin: 0; font-size: 14px; }
+
+/* Growth arc */
+.growth-arc {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px; margin: 24px 0;
+}
+.growth-step {
+  background: var(--bg-card); border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 10px; padding: 20px; text-align: center;
+  transition: border-color 0.3s;
+}
+.growth-step:hover { border-color: rgba(201,168,76,0.2); }
+.growth-step .step-period {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+}
+.growth-step .step-label { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+/* Validation table */
+.validation-table tbody td:nth-child(2) { color: var(--accent-green); font-size: 14px; }
+
+/* Patterns list */
+.pattern-list { list-style: none; padding: 0; counter-reset: pattern; }
+.pattern-list li {
+  counter-increment: pattern; padding: 12px 0 12px 48px; position: relative;
+  border-bottom: 1px solid rgba(201,168,76,0.04);
+}
+.pattern-list li::before {
+  content: counter(pattern); position: absolute; left: 0; top: 12px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--gold-dim); color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+}
+
+/* Iran ecosystem */
+.eco-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px; margin: 20px 0;
+}
+.eco-item {
+  background: var(--bg-card); border: 1px solid rgba(201,168,76,0.06);
+  border-radius: 8px; padding: 16px 20px;
+}
+.eco-item h4 { font-size: 15px; color: var(--white); margin-bottom: 4px; font-family: var(--font-display); }
+.eco-item .eco-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+.eco-item .eco-rel { font-size: 13px; color: var(--accent-blue); }
+
+.article-footer { text-align: center; padding: 32px; border-top: 1px solid rgba(201,168,76,0.08); font-size: 13px; color: var(--text-muted); }
+.article-footer a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .topbar { padding: 10px 16px; }
+  .article { padding: 32px 20px 60px; }
+  .toc ol { columns: 1; }
+  .bench-card .detail-grid { grid-template-columns: 1fr; }
+  .growth-arc { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  .topbar { display: none; }
+  body { background: white; color: #1a1a1a; }
+  body::before, body::after { display: none; }
+  .article { max-width: 100%; }
+  .section h2 { color: #1a1a1a; }
+  .bench-card { border-color: #ddd; background: #f9f9f9; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">Benchmark Research</span>
+  <a href="peer-orgs.html">Peer Orgs →</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span class="article-flag">🔬</span>
+    <h1>Benchmark Research: <em style="color:var(--gold);">Accountability NGOs</em></h1>
+    <hr class="gold-rule">
+    <div class="purpose">Non-profit organizations established for research and case-building around humanitarian disasters&nbsp;— models, founding stories, and lessons for People for Peace &amp; Justice ry</div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#context">Your Position in Context</a></li>
+      <li><a href="#tier1">Tier 1 — Direct Benchmarks</a></li>
+      <li><a href="#tier2">Tier 2 — Structural Models</a></li>
+      <li><a href="#iran">Iran Accountability Ecosystem</a></li>
+      <li><a href="#patterns">Key Patterns</a></li>
+      <li><a href="#growth">The Typical Growth Arc</a></li>
+      <li><a href="#recommendations">Recommendations for PFP</a></li>
+      <li><a href="#validation">Approach Validation</a></li>
+    </ol>
+  </nav>
+
+  <!-- Context -->
+  <section id="context" class="section">
+    <h2>Your Position in Context</h2>
+    <p>Based on the current legal framework, <strong>People for Peace &amp; Justice ry</strong> is:</p>
+    <ul>
+      <li>A <strong>small, newly-formed</strong> registered association in Finland</li>
+      <li>Focused on <strong>legal research, evidence documentation, and case-building</strong> for a specific humanitarian disaster</li>
+      <li>Aiming to hold a <strong>state institution accountable</strong> through international justice mechanisms (ICC, ICJ, universal jurisdiction)</li>
+      <li>Starting with <strong>3 founders</strong>, minimal budget, and a digital-first approach</li>
+    </ul>
+    <div class="alert alert-note">
+      <strong>Good news:</strong> This profile is not unusual — several of the most impactful accountability organizations started in exactly this way.
+    </div>
+  </section>
+
+  <!-- Tier 1 -->
+  <section id="tier1" class="section">
+    <h2>Tier 1 — Direct Benchmarks</h2>
+    <p>These organizations match PFP's profile most closely: founded by small groups of activists to document and build legal cases around specific humanitarian crises.</p>
+
+    <!-- TRIAL -->
+    <div class="bench-card">
+      <h3><span class="card-number">1</span> TRIAL International</h3>
+      <div class="org-meta">
+        <span class="org-tag">Swiss NGO · Geneva</span>
+        <span class="org-tag">Est. 2002</span>
+        <span class="org-tag">⭐⭐⭐⭐⭐</span>
+      </div>
+      <div class="detail-grid">
+        <span class="detail-label">Founded by</span>
+        <span class="detail-value">20 human rights activists, lawyers, and torture victims</span>
+        <span class="detail-label">Origin trigger</span>
+        <span class="detail-value">The Pinochet arrest precedent (1998)&nbsp;— wanted to bring similar cases in Switzerland</span>
+        <span class="detail-label">First 5 years</span>
+        <span class="detail-value"><strong style="color:var(--accent-red);">No budget, no staff</strong>&nbsp;— all volunteer work</span>
+        <span class="detail-label">Turning point</span>
+        <span class="detail-value">2007: First funding, first staff hired, first field office (Sarajevo)</span>
+        <span class="detail-label">Now</span>
+        <span class="detail-value">Major international justice NGO with cases at ICC, UN treaty bodies, and national courts</span>
+      </div>
+      <p><strong>What they did early:</strong> Launched a multilingual website ("Trial Watch"), published legal manuals on using Swiss law against impunity, filed criminal complaints in Swiss courts under universal jurisdiction, organized conferences.</p>
+      <div class="lesson">
+        <div class="lesson-label">Key Lesson for PFP</div>
+        <p>TRIAL operated for <strong>5 years on zero budget</strong> with only volunteer activists. Their growth proves that the research and documentation phase can be bootstrapped before external funding arrives.</p>
+      </div>
+    </div>
+
+    <!-- CIJA -->
+    <div class="bench-card">
+      <h3><span class="card-number">2</span> Commission for International Justice &amp; Accountability (CIJA)</h3>
+      <div class="org-meta">
+        <span class="org-tag">Non-profit NGO</span>
+        <span class="org-tag">Est. 2011</span>
+        <span class="org-tag">⭐⭐⭐⭐⭐</span>
+      </div>
+      <div class="detail-grid">
+        <span class="detail-label">Founded by</span>
+        <span class="detail-value">Dr. William Wiley (former war crimes investigator)</span>
+        <span class="detail-label">Origin trigger</span>
+        <span class="detail-value">Syrian civil war&nbsp;— urgent need to preserve evidence before it was lost</span>
+        <span class="detail-label">Core method</span>
+        <span class="detail-value">Deploying investigators into conflict zones to collect regime documents</span>
+        <span class="detail-label">Evidence</span>
+        <span class="detail-value">1.2 million+ internal Syrian government documents; 5,500+ witness interviews</span>
+        <span class="detail-label">Impact</span>
+        <span class="detail-value">Evidence used to convict Eyad Al-Gharib and Anwar Ruslan in Germany (crimes against humanity)</span>
+      </div>
+      <div class="lesson">
+        <div class="lesson-label">Key Lesson for PFP</div>
+        <p>CIJA was <strong>purpose-built for one specific conflict</strong> (Syria). They developed prosecution-grade evidence-gathering that national courts later relied on. PFP's focus on the Minab case follows the same model. Now supports prosecutions in 16 countries.</p>
+      </div>
+    </div>
+
+    <!-- ABC -->
+    <div class="bench-card" style="border-color: rgba(201,168,76,0.25);">
+      <h3><span class="card-number">3</span> Abdorrahman Boroumand Center (ABC)</h3>
+      <div class="org-meta">
+        <span class="org-tag">US 501(c)(3) · Washington DC</span>
+        <span class="org-tag">Est. 2001</span>
+        <span class="org-tag" style="background: rgba(201,168,76,0.2); color: var(--gold);">★ CLOSEST PARALLEL</span>
+      </div>
+      <div class="detail-grid">
+        <span class="detail-label">Founded by</span>
+        <span class="detail-value">Ladan &amp; Roya Boroumand (sisters of an assassinated Iranian activist)</span>
+        <span class="detail-label">Origin trigger</span>
+        <span class="detail-value">1991 assassination of Dr. Abdorrahman Boroumand by Iranian state agents in Paris</span>
+        <span class="detail-label">Started as</span>
+        <span class="detail-value"><strong style="color:var(--accent-red);">Home office</strong> in Washington DC</span>
+        <span class="detail-label">Core project</span>
+        <span class="detail-value">"Omid" database&nbsp;— 27,000+ profiles of individuals whose right to life was violated by Iran</span>
+        <span class="detail-label">Method</span>
+        <span class="detail-value">Rigorous "do no harm" verification: first-hand testimonies, eyewitness accounts, official records, cross-referenced</span>
+      </div>
+      <p><strong>What PFP should study:</strong> Multi-language accessibility (Farsi + English), remain independent and apolitical, pure documentation focus that became the definitive resource for researchers, courts, and media.</p>
+      <div class="lesson">
+        <div class="lesson-label">Key Lesson for PFP</div>
+        <p>This is the <strong>closest parallel</strong>&nbsp;— a small, diaspora-founded non-profit focused specifically on documenting Iranian state violence. Their Omid database became a definitive resource. PFP's documentation of the 168+ Minab victims follows the exact same approach.</p>
+      </div>
+    </div>
+
+    <!-- SNHR -->
+    <div class="bench-card">
+      <h3><span class="card-number">4</span> Syrian Network for Human Rights (SNHR)</h3>
+      <div class="org-meta">
+        <span class="org-tag">Independent Non-profit</span>
+        <span class="org-tag">Est. 2011</span>
+        <span class="org-tag">⭐⭐⭐⭐</span>
+      </div>
+      <div class="detail-grid">
+        <span class="detail-label">Founded by</span>
+        <span class="detail-value">Fadel Abdul Ghany</span>
+        <span class="detail-label">Origin trigger</span>
+        <span class="detail-value">Syrian uprising&nbsp;— immediate need to document government violence</span>
+        <span class="detail-label">Core method</span>
+        <span class="detail-value">Real-time violation documentation; named victim databases</span>
+        <span class="detail-label">Impact</span>
+        <span class="detail-value">Became primary data source for UN investigations, media, and courts</span>
+      </div>
+      <div class="lesson">
+        <div class="lesson-label">Key Lesson for PFP</div>
+        <p>Started as a small documentation effort during an active crisis, grew into <strong>the authoritative source</strong> that international bodies relied upon. Their named-victim approach mirrors PFP's "name every child" strategy.</p>
+      </div>
+    </div>
+
+    <!-- Syrian Archive -->
+    <div class="bench-card">
+      <h3><span class="card-number">5</span> Syrian Archive</h3>
+      <div class="org-meta">
+        <span class="org-tag">Non-profit Collective</span>
+        <span class="org-tag">Est. 2011</span>
+        <span class="org-tag">⭐⭐⭐⭐</span>
+      </div>
+      <div class="detail-grid">
+        <span class="detail-label">Founded by</span>
+        <span class="detail-value">A collective of Syrian human rights activists</span>
+        <span class="detail-label">Core method</span>
+        <span class="detail-value">Curating and preserving visual documentation (video, photos) of violations</span>
+        <span class="detail-label">Impact</span>
+        <span class="detail-value">Evidence-based tool for reporting, advocacy, and court-admissible evidence</span>
+      </div>
+      <div class="lesson">
+        <div class="lesson-label">Key Lesson for PFP</div>
+        <p>Pioneered <strong>digital/social media evidence archiving</strong> for legal accountability&nbsp;— directly applicable to PFP's satellite imagery and media preservation strategy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tier 2 -->
+  <section id="tier2" class="section">
+    <h2>Tier 2 — Structural Models</h2>
+    <p>Larger organizations that started similarly and can serve as growth models.</p>
+
+    <!-- GRC -->
+    <div class="bench-card">
+      <h3><span class="card-number">6</span> Global Rights Compliance (GRC)</h3>
+      <div class="org-meta">
+        <span class="org-tag">Stichting · The Hague</span>
+        <span class="org-tag">Est. 2013</span>
+        <span class="org-tag">⭐⭐⭐⭐⭐</span>
+      </div>
+      <div class="detail-grid">
+        <span class="detail-label">Founded by</span>
+        <span class="detail-value">Wayne Jordash QC &amp; Scott Martin</span>
+        <span class="detail-label">Focus</span>
+        <span class="detail-value">International criminal, humanitarian, and human rights law in conflict zones</span>
+        <span class="detail-label">Operations</span>
+        <span class="detail-value">Syria, Iraq, Ukraine, Yemen</span>
+        <span class="detail-label">Divisions</span>
+        <span class="detail-value">Starvation &amp; Humanitarian Crisis Division · Gender &amp; Child Justice Division</span>
+      </div>
+      <div class="lesson">
+        <div class="lesson-label">Key Lesson for PFP</div>
+        <p>GRC is essentially <strong>what PFP could become</strong>&nbsp;— a small Hague-based foundation that grew into a full-service international legal practice. Their Stichting structure is the exact model for PFP's planned Netherlands secondary entity.</p>
+      </div>
+    </div>
+
+    <!-- PHR -->
+    <div class="bench-card">
+      <h3><span class="card-number">7</span> Physicians for Human Rights (PHR)</h3>
+      <div class="org-meta">
+        <span class="org-tag">US Non-profit</span>
+        <span class="org-tag">Est. 1986</span>
+        <span class="org-tag">⭐⭐⭐⭐</span>
+      </div>
+      <div class="detail-grid">
+        <span class="detail-label">Founded by</span>
+        <span class="detail-value">5 physicians</span>
+        <span class="detail-label">Innovation</span>
+        <span class="detail-value">Using forensic science as evidence for human rights accountability</span>
+        <span class="detail-label">Achievements</span>
+        <span class="detail-value">Chemical weapons in Iraq, mass graves in Bosnia &amp; Rwanda, ICC tribunal evidence</span>
+        <span class="detail-label">Recognition</span>
+        <span class="detail-value">Nobel Peace Prize co-recipient (1997)</span>
+      </div>
+      <div class="lesson">
+        <div class="lesson-label">Key Lesson for PFP</div>
+        <p>PHR proved that <strong>specialized expertise</strong> applied to human rights documentation creates evidence courts cannot dismiss. PFP's equivalent could be digital forensics (satellite imagery analysis, social media verification).</p>
+      </div>
+    </div>
+
+    <!-- HANA -->
+    <div class="bench-card">
+      <h3><span class="card-number">8</span> HANA Human Rights Organization</h3>
+      <div class="org-meta">
+        <span class="org-tag">Iran-focused</span>
+        <span class="org-tag">⭐⭐⭐⭐</span>
+      </div>
+      <div class="detail-grid">
+        <span class="detail-label">Focus</span>
+        <span class="detail-value">Documenting Iranian state violence against children specifically</span>
+        <span class="detail-label">Key work</span>
+        <span class="detail-value">Confirmed identities of <strong style="color:var(--accent-red);">148 children killed</strong> during 2022 protests</span>
+        <span class="detail-label">Method</span>
+        <span class="detail-value">Document analysis, multi-source verification, forensic-grade identification</span>
+      </div>
+      <div class="lesson">
+        <div class="lesson-label">Key Lesson for PFP</div>
+        <p>HANA is doing for the 2022 protests what PFP is doing for Minab&nbsp;— <strong>identifying and naming each child victim individually</strong>. Potential partner organization.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Iran Ecosystem -->
+  <section id="iran" class="section">
+    <h2>Iran Accountability Ecosystem</h2>
+    <p>Organizations forming the landscape PFP operates within:</p>
+    <div class="eco-grid">
+      <div class="eco-item">
+        <h4>HRANA</h4>
+        <div class="eco-desc">Human Rights Activists in Iran</div>
+        <div class="eco-rel">Source data, real-time documentation, partnership</div>
+      </div>
+      <div class="eco-item">
+        <h4>CHRI</h4>
+        <div class="eco-desc">Center for Human Rights in Iran</div>
+        <div class="eco-rel">Research, advocacy, media amplification</div>
+      </div>
+      <div class="eco-item">
+        <h4>DAWN</h4>
+        <div class="eco-desc">Democracy for the Arab World Now</div>
+        <div class="eco-rel">Policy advocacy — already advocating for Article 12(3)</div>
+      </div>
+      <div class="eco-item">
+        <h4>Amnesty International</h4>
+        <div class="eco-desc">Documented 44+ children killed by Iran (2022)</div>
+        <div class="eco-rel">Evidence standards model, verification partner</div>
+      </div>
+      <div class="eco-item">
+        <h4>Human Rights Watch</h4>
+        <div class="eco-desc">Independent investigations &amp; media pressure</div>
+        <div class="eco-rel">Verification partner, amplification</div>
+      </div>
+      <div class="eco-item">
+        <h4>ABC (Boroumand Center)</h4>
+        <div class="eco-desc">27,000+ victim profiles documented</div>
+        <div class="eco-rel">Methodological model &amp; Iran documentation peer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patterns -->
+  <section id="patterns" class="section">
+    <h2>Key Patterns Across All Benchmarks</h2>
+    <p>What successful accountability NGOs have in common:</p>
+    <ul class="pattern-list">
+      <li><strong style="color:var(--white);">Started by a few passionate individuals</strong><br>TRIAL (20 activists), ABC (2 sisters), CIJA (1 investigator), PHR (5 doctors)</li>
+      <li><strong style="color:var(--white);">Bootstrapped for years</strong><br>TRIAL had no budget for 5 years; ABC started from a home office</li>
+      <li><strong style="color:var(--white);">Focused on documentation first, litigation later</strong><br>Evidence preservation is always Phase 1</li>
+      <li><strong style="color:var(--white);">Named every victim</strong><br>ABC's Omid database (27,000+), SNHR's victim lists, HANA's 148 children</li>
+      <li><strong style="color:var(--white);">Built to court-admissible standards</strong><br>CIJA's methodology is explicitly prosecution-grade</li>
+      <li><strong style="color:var(--white);">Leveraged digital tools early</strong><br>Syrian Archive, SNHR, PFP's Telegram bot approach</li>
+      <li><strong style="color:var(--white);">Remained independent and apolitical</strong><br>Credibility depends on not being aligned with any state</li>
+      <li><strong style="color:var(--white);">Engaged international legal mechanisms</strong><br>ICC, ICJ, universal jurisdiction, UN treaty bodies</li>
+      <li><strong style="color:var(--white);">Grew through partnerships</strong><br>CICC membership, ECCHR collaboration, joint filings</li>
+    </ul>
+  </section>
+
+  <!-- Growth Arc -->
+  <section id="growth" class="section">
+    <h2>The Typical Growth Arc</h2>
+    <div class="growth-arc">
+      <div class="growth-step" style="border-color: rgba(201,168,76,0.3);">
+        <div class="step-period">Year 0–1</div>
+        <div class="step-label">Found org → Document everything → Build evidence archive</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-period">Year 1–2</div>
+        <div class="step-label">First partnerships → Join coalitions (CICC) → File first complaints</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-period">Year 2–5</div>
+        <div class="step-label">Secure first funding → Hire staff → Expand operations</div>
+      </div>
+      <div class="growth-step">
+        <div class="step-period">Year 5+</div>
+        <div class="step-label">Become authoritative source → Courts cite evidence → Scale impact</div>
+      </div>
+    </div>
+    <div class="alert alert-tip">
+      <strong>PFP is at Year 0.</strong> The benchmarks show this is the critical evidence-preservation phase. The organizations that succeeded did so because they started documenting immediately, even before having formal structure, funding, or staff.
+    </div>
+  </section>
+
+  <!-- Recommendations -->
+  <section id="recommendations" class="section">
+    <h2>Recommendations for PFP</h2>
+
+    <h3>🔴 Immediate (Month 1–3)</h3>
+    <table>
+      <thead><tr><th>#</th><th>Action</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Build a victim database (names, photos, stories, verified facts) for all 168+ Minab victims</td><td>ABC's Omid database</td></tr>
+        <tr><td><strong>2</strong></td><td>Ensure all evidence meets prosecution-grade standards (chain of custody, authentication, secure multi-jurisdiction storage)</td><td>CIJA methodology</td></tr>
+        <tr><td><strong>3</strong></td><td>File first criminal complaints under universal jurisdiction (Germany as priority)</td><td>TRIAL's founding approach</td></tr>
+      </tbody>
+    </table>
+
+    <h3>🟡 Short-term (Month 3–12)</h3>
+    <table>
+      <thead><tr><th>#</th><th>Action</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td><strong>4</strong></td><td>Join CICC — every benchmark org in the accountability space is a member</td><td>Universal precedent</td></tr>
+        <tr><td><strong>5</strong></td><td>Contact HANA and ABC — closest peers in the Iran accountability space</td><td>Partnership model</td></tr>
+        <tr><td><strong>6</strong></td><td>Apply for ASP 25 observer status (Dec 2026, New York)</td><td>Already in timeline</td></tr>
+      </tbody>
+    </table>
+
+    <h3>🔵 Medium-term (Year 1–3)</h3>
+    <table>
+      <thead><tr><th>#</th><th>Action</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td><strong>7</strong></td><td>Seek first funding — target foundations that funded TRIAL and ABC (Sigrid Rausing Trust, Oak Foundation, Open Society)</td><td>TRIAL growth arc</td></tr>
+        <tr><td><strong>8</strong></td><td>Establish Netherlands secondary entity (Stichting) for ICC proximity</td><td>GRC structure</td></tr>
+        <tr><td><strong>9</strong></td><td>Publish first legal analysis report to establish PFP as a research organization</td><td>GRC, PHR model</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Validation -->
+  <section id="validation" class="section">
+    <h2>Approach Validation</h2>
+    <p>How PFP's current activities map to proven organizational models:</p>
+    <table class="validation-table">
+      <thead><tr><th>PFP Activity</th><th>Benchmark Validation</th></tr></thead>
+      <tbody>
+        <tr><td>Finland registration (ry)</td><td>TRIAL started in Switzerland; location near founders matters more than ICC proximity initially</td></tr>
+        <tr><td>Netherlands secondary entity</td><td>GRC (Stichting in The Hague)&nbsp;— validated model</td></tr>
+        <tr><td>Named victim documentation</td><td>ABC (27,000 profiles), SNHR, HANA (148 children)&nbsp;— standard practice</td></tr>
+        <tr><td>Digital-first platform</td><td>Syrian Archive, SNHR&nbsp;— digital documentation is now the norm</td></tr>
+        <tr><td>ICC engagement via CICC</td><td>Every benchmark org uses this pathway</td></tr>
+        <tr><td>Universal jurisdiction strategy</td><td>TRIAL's founding mission; CIJA's evidence → German convictions</td></tr>
+        <tr><td>Volunteer-driven start</td><td>TRIAL operated 5 years with volunteers only</td></tr>
+        <tr><td>Broad mission clause</td><td>GRC started conflict-specific, expanded to multiple theaters</td></tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-important">
+      <strong>Conclusion:</strong> PFP's current approach — small team, Finland registration, evidence-first strategy, ICC engagement pipeline — is <strong>well-aligned with how the most successful accountability organizations began</strong>. The key differentiator will be execution quality, particularly the rigor of evidence documentation.
+    </div>
+  </section>
+
+</article>
+
+<footer class="article-footer">
+  Research compiled: March 15, 2026 · 8 organizations benchmarked · 6 Iran ecosystem orgs mapped<br>
+  <a href="docs.html">← Documents</a> · <a href="peer-orgs.html">Peer Orgs</a> · <a href="tasks.html">Task Board</a>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
