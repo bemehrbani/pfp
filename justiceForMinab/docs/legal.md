@@ -14,7 +14,7 @@
 |------|------|----------|-----------------|
 | Mahdi Farimani | Campaign Lead / Chairperson | Finland | PRH registration, strategy, tech, Finnish operations |
 | Zahra Azhar | Legal Lead / Board Member | Netherlands | International legal advice, board member, NL liaison |
-| TBD | Board Member / Founder 3 | Any country | Third founder required for registration |
+| Ali Akbar Siapoush | Board Member / Founder 3 | Netherlands | Board member, legal support |
 
 ---
 
@@ -22,7 +22,7 @@
 
 ### O1: Establish Finland Association (ry)
 - **KR1:** Rules (säännöt) drafted and translated to Finnish
-- **KR2:** 3 founders confirmed and founding meeting held
+- **KR2:** 3 founders confirmed ✓ (Mahdi, Zahra, Ali Akbar) & founding meeting scheduled
 - **KR3:** PRH registration complete (€55, ~2 days)
 - **KR4:** Bank account opened at Finnish bank
 
@@ -43,7 +43,7 @@
 ### 📋 Backlog
 - [ ] **[Mahdi]** Draft association rules in English
 - [ ] **[Mahdi]** Get rules translated to Finnish (professional translator)
-- [ ] **[Zahra]** Identify and confirm 3rd founder
+- [x] **[Zahra]** Identify and confirm 3rd founder — Ali Akbar Siapoush ✓
 - [ ] **[All]** Hold founding meeting (virtual OK)
 - [ ] **[Mahdi]** Register with PRH online (€55)
 - [ ] **[Mahdi]** Open association bank account (OP/Nordea)
@@ -65,7 +65,7 @@
 - [x] **[Mahdi]** Research ANBI policy plan template — see `anbi-plan.html`
 - [x] **[Mahdi]** Map peer organizations — see `peer-orgs.html`
 - [x] **[Mahdi]** Research ASP observer process — see `asp-guide.html`
-- [x] **[Mahdi]** Foundation name selected: People for Peace & Justice
+- [x] **[Zahra]** 3rd founder confirmed: Ali Akbar Siapoush
 
 ---
 
