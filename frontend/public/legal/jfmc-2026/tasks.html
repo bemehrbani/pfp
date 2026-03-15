@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Task Board — Legal Campaign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --red-accent: #8b2232;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Status colors */
+  --col-backlog: #64748b;
+  --col-progress: #3b82f6;
+  --col-review: #f59e0b;
+  --col-done: #22c55e;
+
+  /* Avatar colors */
+  --avatar-mahdi: #6366f1;
+  --avatar-zahra: #ec4899;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: auto;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top bar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; cursor: pointer; }
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+
+/* Page header */
+.page-header {
+  position: relative;
+  z-index: 1;
+  padding: 40px 32px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeUp 0.5s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.page-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.page-header h1 .accent { color: var(--gold); }
+.page-header .subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* OKR Section */
+.okr-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 24px;
+}
+.okr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+}
+.okr-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.okr-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+.okr-card h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+.kr-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.kr-bullet {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 5px;
+  background: var(--text-muted);
+}
+.kr-bullet.done { background: var(--col-done); }
+.kr-bullet.in-progress { background: var(--col-progress); }
+
+/* Team bar */
+.team-bar {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 24px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.team-member {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 99px;
+  padding: 6px 16px 6px 6px;
+}
+.team-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: white;
+}
+.avatar-mahdi { background: var(--avatar-mahdi); }
+.avatar-zahra { background: var(--avatar-zahra); }
+.team-name { font-size: 13px; color: var(--text-secondary); }
+.team-role { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
+.progress-bar-wrap {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.progress-label { font-size: 12px; color: var(--text-muted); font-family: var(--font-mono); }
+.progress-bar {
+  width: 160px;
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--gold), var(--col-done));
+  transition: width 0.5s ease;
+}
+
+/* Kanban Board */
+.kanban {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  min-height: 400px;
+}
+.kanban-col {
+  background: rgba(15,23,42,0.6);
+  border: 1px solid rgba(201,168,76,0.06);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.col-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid;
+}
+.col-header.backlog { border-color: var(--col-backlog); }
+.col-header.progress { border-color: var(--col-progress); }
+.col-header.review { border-color: var(--col-review); }
+.col-header.done { border-color: var(--col-done); }
+.col-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.col-header.backlog .col-dot { background: var(--col-backlog); }
+.col-header.progress .col-dot { background: var(--col-progress); }
+.col-header.review .col-dot { background: var(--col-review); }
+.col-header.done .col-dot { background: var(--col-done); }
+.col-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex: 1;
+}
+.col-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+/* Task cards */
+.task-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 10px;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: default;
+}
+.task-card:hover {
+  border-color: rgba(201,168,76,0.2);
+  transform: translateY(-1px);
+}
+.task-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.task-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.task-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.task-assignee {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 10px;
+  color: white;
+}
+.task-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+.tag-legal { background: rgba(236,72,153,0.12); color: #f472b6; }
+.tag-admin { background: rgba(99,102,241,0.12); color: #a5b4fc; }
+.tag-research { background: rgba(34,197,94,0.12); color: #86efac; }
+.tag-strategy { background: rgba(201,168,76,0.12); color: var(--gold-light); }
+.tag-tech { background: rgba(59,130,246,0.12); color: #93c5fd; }
+.tag-finance { background: rgba(249,115,22,0.12); color: #fdba74; }
+
+/* Critical path */
+.critical-path {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 24px;
+}
+.cp-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.cp-steps {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.cp-step {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.cp-node {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 10px;
+  padding: 12px 16px;
+  min-width: 140px;
+  text-align: center;
+}
+.cp-node.is-done { border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.06); }
+.cp-node.is-active { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.06); box-shadow: 0 0 16px rgba(59,130,246,0.08); }
+.cp-node-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.cp-node-title { font-size: 12px; color: var(--text-primary); font-weight: 500; line-height: 1.3; }
+.cp-node-who { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
+.cp-arrow {
+  color: var(--text-muted);
+  font-size: 18px;
+  padding: 0 6px;
+  flex-shrink: 0;
+}
+
+/* Notes section */
+.notes-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 48px;
+}
+.notes-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.note-entry {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.note-date {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-top: 2px;
+}
+
+.page-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 24px 32px 48px;
+  border-top: 1px solid rgba(201,168,76,0.06);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.page-footer a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 1024px) {
+  .kanban { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .topbar { padding: 10px 16px; }
+  .page-header, .okr-section, .team-bar, .kanban, .critical-path, .notes-section { padding-left: 16px; padding-right: 16px; }
+  .kanban { grid-template-columns: 1fr; }
+  .okr-grid { grid-template-columns: 1fr; }
+  .progress-bar-wrap { margin-left: 0; width: 100%; }
+  .team-bar { flex-direction: column; align-items: stretch; }
+}
+@media print {
+  body { background: white; color: #1a1a1a; }
+  body::before, body::after { display: none; }
+  .topbar { display: none; }
+  .kanban { grid-template-columns: repeat(2, 1fr); }
+  .task-card { border-color: #ddd; }
+  .col-header { border-color: #ccc !important; }
+  .task-title { color: #1a1a1a; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">Task Board</span>
+  <a onclick="window.print()">Print / PDF ↓</a>
+</nav>
+
+<header class="page-header">
+  <h1>Legal Campaign <span class="accent">Task Board</span></h1>
+  <p class="subtitle">NGO establishment progress — Netherlands Stichting (primary) · Updated March 15, 2026</p>
+</header>
+
+<!-- Team -->
+<section class="team-bar">
+  <div class="team-member">
+    <div class="team-avatar avatar-mahdi">MF</div>
+    <div>
+      <div class="team-name">Mahdi Farimani</div>
+      <div class="team-role">Campaign Lead · Finland</div>
+    </div>
+  </div>
+  <div class="team-member">
+    <div class="team-avatar avatar-zahra">ZA</div>
+    <div>
+      <div class="team-name">Zahra Azhar</div>
+      <div class="team-role">Legal Lead · Netherlands</div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <span class="progress-label">4 / 17 tasks</span>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 24%;"></div>
+    </div>
+    <span class="progress-label">24%</span>
+  </div>
+</section>
+
+<!-- OKRs -->
+<section class="okr-section">
+  <div class="okr-grid">
+    <div class="okr-card">
+      <h3>O1 — Establish Netherlands Stichting</h3>
+      <div class="kr-item"><div class="kr-bullet"></div>KR1: Notarial deed executed & KVK registration complete</div>
+      <div class="kr-item"><div class="kr-bullet"></div>KR2: ANBI tax-exempt status application submitted</div>
+      <div class="kr-item"><div class="kr-bullet"></div>KR3: Dutch bank account opened and operational</div>
+      <div class="kr-item"><div class="kr-bullet"></div>KR4: ANBI-required info published on website</div>
+    </div>
+    <div class="okr-card">
+      <h3>O2 — Build Legal Foundation</h3>
+      <div class="kr-item"><div class="kr-bullet in-progress"></div>KR1: Articles of Association drafted</div>
+      <div class="kr-item"><div class="kr-bullet in-progress"></div>KR2: 3 board members identified & confirmed</div>
+      <div class="kr-item"><div class="kr-bullet in-progress"></div>KR3: Registered Dutch address secured</div>
+    </div>
+    <div class="okr-card">
+      <h3>O3 — Engage Justice Ecosystem</h3>
+      <div class="kr-item"><div class="kr-bullet"></div>KR1: Joined The Hague Justice Portal</div>
+      <div class="kr-item"><div class="kr-bullet"></div>KR2: Initial contact with Coalition for the ICC</div>
+      <div class="kr-item"><div class="kr-bullet"></div>KR3: Mapped peer organizations for partnership</div>
+    </div>
+  </div>
+</section>
+
+<!-- Kanban Board -->
+<section class="kanban">
+
+  <!-- Backlog -->
+  <div class="kanban-col">
+    <div class="col-header backlog">
+      <div class="col-dot"></div>
+      <span class="col-title">Backlog</span>
+      <span class="col-count">7</span>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Research ANBI policy plan template</div>
+      <div class="task-desc">Find Dutch ANBI beleidsplan template and requirements for international NGOs</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-research">Research</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Draft NGO website content</div>
+      <div class="task-desc">Create ANBI-compliant website pages: statutes, policy plan, board info, annual reports</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-tech">Tech</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Get notary fee quotes</div>
+      <div class="task-desc">Contact 2–3 notary firms in The Hague specializing in international NGOs for quotes</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-zahra">ZA</div>
+        <span class="task-tag tag-legal">Legal</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Prepare KYC documentation</div>
+      <div class="task-desc">Compile ID copies, proof of address, source of funds for Dutch bank account opening</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-finance">Finance</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Design NGO logo & identity</div>
+      <div class="task-desc">Visual identity for the Stichting — logo, color palette, letterhead</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-strategy">Strategy</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Map peer organizations</div>
+      <div class="task-desc">Identify and research TRIAL International, Global Rights Compliance, PAX for partnership</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-zahra">ZA</div>
+        <span class="task-tag tag-research">Research</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Research Assembly of States Parties</div>
+      <div class="task-desc">Find ASP meeting schedule and NGO observer participation process</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-zahra">ZA</div>
+        <span class="task-tag tag-research">Research</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- In Progress -->
+  <div class="kanban-col">
+    <div class="col-header progress">
+      <div class="col-dot"></div>
+      <span class="col-title">In Progress</span>
+      <span class="col-count">3</span>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Identify & confirm board members</div>
+      <div class="task-desc">Need 3 board members for the Stichting — no residency requirement</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-zahra">ZA</div>
+        <span class="task-tag tag-legal">Legal</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Draft mission & purpose clause</div>
+      <div class="task-desc">Core purpose statement for Articles of Association: legal research, evidence documentation, international advocacy</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-strategy">Strategy</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Research registered address options</div>
+      <div class="task-desc">Virtual office or partner org in The Hague — budget €100–€300/yr</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-zahra">ZA</div>
+        <span class="task-tag tag-admin">Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- In Review -->
+  <div class="kanban-col">
+    <div class="col-header review">
+      <div class="col-dot"></div>
+      <span class="col-title">In Review</span>
+      <span class="col-count">3</span>
+    </div>
+    <div class="task-card">
+      <div class="task-title">NGO Finland research report</div>
+      <div class="task-desc">Comprehensive analysis of registered association (yhdistys/ry) formation process</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-research">Research</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">NGO Netherlands research report</div>
+      <div class="task-desc">Complete guide to stichting formation — KVK, ANBI, The Hague ecosystem</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-research">Research</span>
+      </div>
+    </div>
+    <div class="task-card">
+      <div class="task-title">Comparative analysis & recommendation</div>
+      <div class="task-desc">Scoring matrix (FI 40/50 vs NL 43/50) — Netherlands recommended as primary entity</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-strategy">Strategy</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Done -->
+  <div class="kanban-col">
+    <div class="col-header done">
+      <div class="col-dot"></div>
+      <span class="col-title">Done</span>
+      <span class="col-count">4</span>
+    </div>
+    <div class="task-card" style="opacity: 0.7;">
+      <div class="task-title" style="text-decoration: line-through;">Research NGO formation — Finland</div>
+      <div class="task-desc">12-section deep-dive including entity types, PRH registration, tax status, MFA funding</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-research">Research</span>
+      </div>
+    </div>
+    <div class="task-card" style="opacity: 0.7;">
+      <div class="task-title" style="text-decoration: line-through;">Research NGO formation — Netherlands</div>
+      <div class="task-desc">Full stichting guide: KVK, ANBI, ICC/ICJ proximity, Dutch legal framework</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-research">Research</span>
+      </div>
+    </div>
+    <div class="task-card" style="opacity: 0.7;">
+      <div class="task-title" style="text-decoration: line-through;">Create comparative analysis</div>
+      <div class="task-desc">Head-to-head scoring, dual-entity strategy, setup checklists</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-strategy">Strategy</span>
+      </div>
+    </div>
+    <div class="task-card" style="opacity: 0.7;">
+      <div class="task-title" style="text-decoration: line-through;">Set up legal docs portal</div>
+      <div class="task-desc">Password-protected portal deployed at /legal/jfmc-2026/</div>
+      <div class="task-meta">
+        <div class="task-assignee avatar-mahdi">MF</div>
+        <span class="task-tag tag-tech">Tech</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Critical Path -->
+<section class="critical-path">
+  <h2 class="cp-title">Netherlands Stichting — <span style="color: var(--gold);">Critical Path</span></h2>
+  <div class="cp-steps">
+    <div class="cp-step">
+      <div class="cp-node is-active">
+        <div class="cp-node-num">Step 1</div>
+        <div class="cp-node-title">Draft Articles of Association</div>
+        <div class="cp-node-who">Mahdi + Zahra</div>
+      </div>
+    </div>
+    <div class="cp-step"><span class="cp-arrow">→</span></div>
+    <div class="cp-step">
+      <div class="cp-node is-active">
+        <div class="cp-node-num">Step 2</div>
+        <div class="cp-node-title">Secure Registered Address</div>
+        <div class="cp-node-who">Zahra</div>
+      </div>
+    </div>
+    <div class="cp-step"><span class="cp-arrow">→</span></div>
+    <div class="cp-step">
+      <div class="cp-node is-active">
+        <div class="cp-node-num">Step 3</div>
+        <div class="cp-node-title">Confirm Board Members</div>
+        <div class="cp-node-who">Zahra + Mahdi</div>
+      </div>
+    </div>
+    <div class="cp-step"><span class="cp-arrow">→</span></div>
+    <div class="cp-step">
+      <div class="cp-node">
+        <div class="cp-node-num">Step 4</div>
+        <div class="cp-node-title">Find Notary & Execute Deed</div>
+        <div class="cp-node-who">Zahra</div>
+      </div>
+    </div>
+    <div class="cp-step"><span class="cp-arrow">→</span></div>
+    <div class="cp-step">
+      <div class="cp-node">
+        <div class="cp-node-num">Step 5</div>
+        <div class="cp-node-title">KVK Registration</div>
+        <div class="cp-node-who">Zahra</div>
+      </div>
+    </div>
+    <div class="cp-step"><span class="cp-arrow">→</span></div>
+    <div class="cp-step">
+      <div class="cp-node">
+        <div class="cp-node-num">Step 6</div>
+        <div class="cp-node-title">Apply for ANBI Status</div>
+        <div class="cp-node-who">Zahra</div>
+      </div>
+    </div>
+    <div class="cp-step"><span class="cp-arrow">→</span></div>
+    <div class="cp-step">
+      <div class="cp-node">
+        <div class="cp-node-num">Step 7</div>
+        <div class="cp-node-title">Open Bank Account</div>
+        <div class="cp-node-who">Zahra</div>
+      </div>
+    </div>
+    <div class="cp-step"><span class="cp-arrow">→</span></div>
+    <div class="cp-step">
+      <div class="cp-node">
+        <div class="cp-node-num">Step 8</div>
+        <div class="cp-node-title">Publish ANBI Info</div>
+        <div class="cp-node-who">Mahdi</div>
+      </div>
+    </div>
+    <div class="cp-step"><span class="cp-arrow">→</span></div>
+    <div class="cp-step">
+      <div class="cp-node">
+        <div class="cp-node-num">Step 9</div>
+        <div class="cp-node-title">Join Hague Justice Portal</div>
+        <div class="cp-node-who">Zahra</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Notes -->
+<section class="notes-section">
+  <h2 class="notes-title">Decisions & Notes</h2>
+  <div class="note-entry">
+    <span class="note-date">2026-03-15</span>
+    <span>Zahra Azhar confirmed as legal lead for NL operations — international legal practitioner based in Netherlands</span>
+  </div>
+  <div class="note-entry">
+    <span class="note-date">2026-03-14</span>
+    <span>Comparative analysis recommends Netherlands (43/50) over Finland (40/50) as primary jurisdiction</span>
+  </div>
+  <div class="note-entry">
+    <span class="note-date">2026-03-14</span>
+    <span>Dual-entity strategy recommended — NL Stichting first, Finland Association second</span>
+  </div>
+  <div class="note-entry">
+    <span class="note-date">2026-03-14</span>
+    <span>Legal docs portal deployed at peopleforpeace.live/legal/jfmc-2026/</span>
+  </div>
+</section>
+
+<footer class="page-footer">
+  Last updated: March 15, 2026 · For the Justice for Minab Children legal team<br>
+  <a href="docs.html">← Documents</a> · <a href="ngo-comparison.html">Comparison Report</a> · <a href="ngo-finland.html">Finland</a> · <a href="ngo-netherlands.html">Netherlands</a>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

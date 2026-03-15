@@ -143,6 +143,7 @@ body::after {
 .doc-card:nth-child(1) { animation-delay: 0.1s; }
 .doc-card:nth-child(2) { animation-delay: 0.2s; }
 .doc-card:nth-child(3) { animation-delay: 0.3s; }
+.doc-card:nth-child(4) { animation-delay: 0.4s; }
 .doc-card::before {
   content: '';
   position: absolute;
@@ -153,6 +154,7 @@ body::after {
 .doc-card:nth-child(1)::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
 .doc-card:nth-child(2)::before { background: linear-gradient(90deg, #f97316, #fbbf24); }
 .doc-card:nth-child(3)::before { background: linear-gradient(90deg, #22c55e, var(--gold)); }
+.doc-card:nth-child(4)::before { background: linear-gradient(90deg, #8b5cf6, #c084fc); }
 .doc-card:hover {
   border-color: rgba(201,168,76,0.3);
   transform: translateY(-4px);
@@ -263,6 +265,15 @@ body::after {
     <p>Head-to-head scoring matrix, strategic analysis, and recommendation for choosing the optimal jurisdiction for the NGO. Includes dual-entity strategy option.</p>
     <div class="doc-meta">
       <span class="doc-tag">Analysis</span>
+      <span class="doc-arrow">→</span>
+    </div>
+  </a>
+  <a href="tasks.html" class="doc-card">
+    <span class="doc-flag">📋</span>
+    <h2>Task Board & Progress</h2>
+    <p>Kanban-style task tracker with team assignments, OKRs, critical path for NGO establishment, and decision log. Updated manually by the legal team.</p>
+    <div class="doc-meta">
+      <span class="doc-tag">Tracker</span>
       <span class="doc-arrow">→</span>
     </div>
   </a>
