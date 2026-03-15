@@ -744,6 +744,52 @@ TRANSLATIONS = {
         "fa": "🔍 یافتن توییت‌های {hashtags}",
         "ar": "🔍 ابحث عن تغريدات {hashtags}",
     },
+    # ── Dual-Path Amplify ──────────────────────────────────────────────
+    "amplify_choose_platform": {
+        "en": "📣 *Choose how to amplify:*",
+        "fa": "📣 *روش تقویت را انتخاب کنید:*",
+        "ar": "📣 *اختر طريقة التضخيم:*",
+    },
+    "amplify_twitter_path": {
+        "en": "🐦 *Option A — Twitter:*",
+        "fa": "🐦 *گزینه الف — توییتر:*",
+        "ar": "🐦 *الخيار أ — تويتر:*",
+    },
+    "amplify_telegram_path": {
+        "en": "📢 *Option B — Forward on Telegram:*",
+        "fa": "📢 *گزینه ب — فوروارد در تلگرام:*",
+        "ar": "📢 *الخيار ب — إعادة توجيه عبر تيليجرام:*",
+    },
+    "amplify_tg_step1": {
+        "en": "*① Tap 'Get Message'* below to receive a ready-to-forward message",
+        "fa": "*① دکمه 'دریافت پیام'* رو بزنید تا یک پیام آماده برای فوروارد دریافت کنید",
+        "ar": "*① اضغط 'استلام رسالة'* لتلقي رسالة جاهزة للتوجيه",
+    },
+    "amplify_tg_step2": {
+        "en": "*② Forward it* to 3+ groups or contacts",
+        "fa": "*② فوروارد کنید* به ۳ گروه یا مخاطب یا بیشتر",
+        "ar": "*② أعد توجيهها* إلى ٣+ مجموعات أو جهات اتصال",
+    },
+    "amplify_tg_step3": {
+        "en": "*③ Come back* and send a screenshot or type 'done'",
+        "fa": "*③ برگردید* و اسکرین‌شات بفرستید یا بنویسید 'done'",
+        "ar": "*③ عد* وأرسل لقطة شاشة أو اكتب 'done'",
+    },
+    "btn_get_forward_msg": {
+        "en": "📢 Get Forwardable Message",
+        "fa": "📢 دریافت پیام آماده فوروارد",
+        "ar": "📢 استلام رسالة جاهزة",
+    },
+    "amplify_proof_hint": {
+        "en": "When done, *paste a tweet URL* or *send a screenshot* of your forwards 👇",
+        "fa": "وقتی تمام شد، *لینک توییت* یا *اسکرین‌شات فوروارد* رو بفرستید 👇",
+        "ar": "عند الانتهاء، *الصق رابط تغريدة* أو *أرسل لقطة شاشة* للتوجيهات 👇",
+    },
+    "amplify_forward_instruction": {
+        "en": "⬆️ Forward the message above to 3+ Telegram groups or contacts, then send a screenshot here as proof.",
+        "fa": "⬆️ پیام بالا رو به ۳ گروه یا مخاطب فوروارد کنید، بعد اسکرین‌شات رو اینجا بفرستید.",
+        "ar": "⬆️ أعد توجيه الرسالة أعلاه إلى ٣+ مجموعات أو جهات اتصال، ثم أرسل لقطة شاشة كدليل.",
+    },
     "comment_step1": {
         "en": "*① Pick a suggested reply* and tap the button",
         "fa": "*① یک پاسخ پیشنهادی* را انتخاب کنید و دکمه را بزنید",

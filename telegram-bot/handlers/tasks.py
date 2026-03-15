@@ -961,6 +961,82 @@ async def task_callback_handler(update: Update, context: CallbackContext):
     elif callback_data.startswith('task_submit_'):
         assignment_id = int(callback_data.split('_')[-1])
         await start_task_proof_submission(query, session, assignment_id, context)
+    elif callback_data.startswith('amplify_forward_'):
+        assignment_id = int(callback_data.split('_')[-1])
+        await handle_amplify_forward(query, session, assignment_id)
+
+
+async def handle_amplify_forward(query, session, assignment_id):
+    """Send a clean, forwardable Telegram message for the Amplify task."""
+    lang = getattr(session, 'language', 'en') or 'en'
+
+    assignment = await _db_get_assignment(assignment_id)
+    if not assignment:
+        await query.answer("Task not found", show_alert=True)
+        return
+
+    task = assignment.task
+    hashtags = task.hashtags.strip() if task.hashtags else '#JusticeForMinab'
+
+    # Build forwardable messages — one per report
+    forward_messages = {
+        'en': [
+            (
+                "🚨 INVESTIGATION: NYT Visual Investigation confirms "
+                "US Tomahawk cruise missiles struck a school in Minab, Iran "
+                "on Feb 28, 2026. 168 children killed.\n\n"
+                "📰 Full report library: peopleforpeace.live/amplify.html\n"
+                "🕯 Memorial: peopleforpeace.live/memorial.html\n\n"
+                f"{hashtags} #168Children\n\n"
+                "Forward this. Be their voice."
+            ),
+            (
+                "🚨 168 children were killed when their school in Minab, Iran "
+                "was hit by US cruise missiles. BBC, NYT, Bellingcat, and HRW "
+                "all confirmed it was a civilian target.\n\n"
+                "📰 Evidence: peopleforpeace.live/evidence.html\n"
+                "🕯 Their faces: peopleforpeace.live/memorial.html\n\n"
+                f"{hashtags} #168Children\n\n"
+                "2 minutes of your time. Forward this to 3 groups."
+            ),
+        ],
+        'fa': [
+            (
+                "🚨 تحقیق: NYT، BBC و بلینگکت تأیید کردند که "
+                "موشک‌های کروز آمریکا مدرسه‌ای در میناب، ایران را "
+                "در ۹ اسفند ۱۴۰۴ هدف قرار دادند. ۱۶۸ کودک کشته شدند.\n\n"
+                "📰 گزارش‌ها: peopleforpeace.live/amplify.html\n"
+                "🕯 یادبود: peopleforpeace.live/memorial.html\n\n"
+                f"{hashtags} #168Children\n\n"
+                "فوروارد کنید. صدای آن‌ها باشید."
+            ),
+            (
+                "🚨 ۱۶۸ کودک وقتی مدرسه‌شون در میناب با موشک کروز آمریکایی "
+                "بمباران شد کشته شدند. BBC، NYT، بلینگکت و HRW همه تأیید "
+                "کردند که هدف غیرنظامی بوده.\n\n"
+                "📰 مدارک: peopleforpeace.live/evidence.html\n"
+                "🕯 چهره‌هاشون: peopleforpeace.live/memorial.html\n\n"
+                f"{hashtags} #168Children\n\n"
+                "۲ دقیقه وقتتو بذار. به ۳ گروه فوروارد کن."
+            ),
+        ],
+    }
+
+    messages = forward_messages.get(lang, forward_messages['en'])
+    import random
+    chosen = random.choice(messages)
+
+    # Answer the callback
+    await query.answer()
+
+    # Send as a plain message (no parse_mode, no buttons) so it's cleanly forwardable
+    chat_id = query.message.chat_id
+    await query.message.chat.send_message(chosen)
+
+    # Follow up with instruction
+    await query.message.chat.send_message(
+        t('amplify_forward_instruction', lang)
+    )
 
 
 async def handle_task_detail(query, session, task_id):
@@ -1100,12 +1176,22 @@ async def handle_task_start_and_guide(query, session, task_id, context):
             msg += f"{description}\n\n"
             msg += "───────────────────\n\n"
 
-        msg += t('task_3_steps', lang) + "\n\n"
+        # Dual-path: Twitter OR Telegram
+        msg += t('amplify_choose_platform', lang) + "\n\n"
+
+        # Twitter path
+        msg += t('amplify_twitter_path', lang) + "\n"
         msg += t('retweet_step1', lang).format(hashtags=hashtags) + "\n"
         msg += t('retweet_step2', lang) + "\n"
-        msg += t('retweet_step3', lang) + "\n"
+        msg += t('retweet_step3', lang) + "\n\n"
 
-        # Resource library link (e.g. amplify.html) if target_url is set
+        # Telegram path
+        msg += t('amplify_telegram_path', lang) + "\n"
+        msg += t('amplify_tg_step1', lang) + "\n"
+        msg += t('amplify_tg_step2', lang) + "\n"
+        msg += t('amplify_tg_step3', lang) + "\n"
+
+        # Resource library link
         if task.target_url:
             keyboard.append([
                 InlineKeyboardButton(
@@ -1114,6 +1200,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
                 )
             ])
 
+        # Twitter button
         keyboard.append([
             InlineKeyboardButton(
                 t('btn_find_tweets', lang).format(hashtags=hashtags),
@@ -1121,7 +1208,15 @@ async def handle_task_start_and_guide(query, session, task_id, context):
             )
         ])
 
-        msg += "\n" + t('retweet_paste_proof', lang) + "\n"
+        # Telegram forward button — triggers forwardable message
+        keyboard.append([
+            InlineKeyboardButton(
+                t('btn_get_forward_msg', lang),
+                callback_data=f"amplify_forward_{assignment.id}"
+            )
+        ])
+
+        msg += "\n" + t('amplify_proof_hint', lang) + "\n"
         msg += t('cancel_hint', lang)
 
     # ── Twitter Comment: Reply intents with suggested comments ──

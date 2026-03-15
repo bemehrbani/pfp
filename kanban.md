@@ -147,7 +147,24 @@ Artists create → Submit via bot → Gallery + Channel post → Volunteers shar
 | V2 | **⭐ Start Here badge** | Add ⭐ badge to the first (easiest) task in the list + subtitle "Sorted by easiest first — start from the top!" | XS | ✅ Done |
 | V3 | **Fix child count** | Update 100 → 168 in EN/FA/AR onboarding messages. Add task priority guidance to campaign join message. | XS | ✅ Done |
 | V4 | **Shareable volunteer briefing** | Create EN/FA forwarding-ready briefing for Alireza and early volunteers to share with contacts. | S | ✅ Done |
-| V5 | **Deploy & verify** | Push to production, test full task list ordering + badge + briefing. | S | ⬜ TODO |
+| V5 | **Deploy & verify** | Push to production, test full task list ordering + badge + briefing. | S | ✅ Done |
+
+---
+
+## 📢 Epic — Dual-Path Amplify (Alireza Feedback #2)
+
+> **Goal**: Many volunteers don't have active Twitter. Add a Telegram forwarding path so volunteers can amplify reports by forwarding messages to groups/contacts instead of retweeting.
+
+### Tasks
+
+| # | Task | Description | Effort | Status |
+|---|------|-------------|--------|--------|
+| F1 | **Platform choice UI** | Add "Option A — Twitter" and "Option B — Forward on Telegram" to the Amplify task flow. | S | ✅ Done |
+| F2 | **Forwardable messages** | Send clean, forwardable report summaries (EN/FA, 2 variants each) with no formatting that breaks on forward. | S | ✅ Done |
+| F3 | **Forward proof** | Accept screenshot or "done" as proof alongside tweet URLs. | XS | ✅ Done |
+| F4 | **Translations** | Add 10 new translation keys for dual-path flow (EN/FA/AR). | S | ✅ Done |
+| F5 | **Deploy & verify** | Push to production, test both paths. | S | ⬜ TODO |
+
 
 ## 🐛 Known Bugs
 
