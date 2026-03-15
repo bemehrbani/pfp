@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Mission & Purpose Clause — People for Peace & Justice</title>
+<title>Association Rules (Säännöt) — People for Peace & Justice ry</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
@@ -21,6 +21,8 @@
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   --white: #ffffff;
+  --accent-blue: #60a5fa;
+  --accent-green: #34d399;
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'DM Sans', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -56,27 +58,18 @@ body::after {
 }
 
 .topbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
   padding: 12px 32px;
   background: rgba(10,14,26,0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(201,168,76,0.08);
 }
 .topbar a { color: var(--gold); text-decoration: none; font-size: 14px; }
-.topbar-title {
-  font-family: var(--font-display);
-  font-size: 14px;
-  color: var(--text-muted);
-}
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
 
 .article {
-  position: relative;
-  z-index: 1;
+  position: relative; z-index: 1;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 48px 32px 80px;
@@ -100,70 +93,49 @@ body::after {
   line-height: 1.15;
 }
 .article-header .purpose {
-  display: inline-block;
-  padding: 10px 20px;
-  background: var(--bg-card);
-  border: 1px solid rgba(201,168,76,0.15);
-  border-radius: 8px;
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-top: 16px;
+  display: inline-block; padding: 10px 20px;
+  background: var(--bg-card); border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px; font-size: 15px;
+  color: var(--text-secondary); line-height: 1.5; margin-top: 16px;
 }
 .gold-rule {
-  width: 80px;
-  height: 2px;
+  width: 80px; height: 2px;
   background: linear-gradient(90deg, var(--gold), transparent);
-  margin: 24px auto;
-  border: none;
+  margin: 24px auto; border: none;
 }
 
-/* Status badge */
+/* Status badges */
 .status-badge {
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
+  display: inline-block; padding: 6px 16px; border-radius: 20px;
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;
 }
 .status-draft {
-  background: rgba(251,191,36,0.12);
-  color: #fbbf24;
+  background: rgba(251,191,36,0.12); color: #fbbf24;
   border: 1px solid rgba(251,191,36,0.25);
+}
+.status-active {
+  background: rgba(34,197,94,0.12); color: #22c55e;
+  border: 1px solid rgba(34,197,94,0.25);
 }
 
 .section { margin-bottom: 56px; scroll-margin-top: 60px; }
 .section h2 {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 16px;
-  padding-bottom: 12px;
+  font-family: var(--font-display); font-size: 28px; font-weight: 700;
+  color: var(--white); margin-bottom: 16px; padding-bottom: 12px;
   border-bottom: 1px solid rgba(201,168,76,0.1);
 }
 .section h3 {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--gold-light);
-  margin: 28px 0 12px;
+  font-family: var(--font-display); font-size: 20px; font-weight: 700;
+  color: var(--gold-light); margin: 28px 0 12px;
 }
 .section p, .section li {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  margin-bottom: 12px;
+  font-size: 16px; line-height: 1.7;
+  color: var(--text-secondary); margin-bottom: 12px;
 }
-.section ul, .section ol {
-  padding-left: 24px;
-  margin-bottom: 16px;
-}
+.section ul, .section ol { padding-left: 24px; margin-bottom: 16px; }
 
-/* Dutch clause box */
+/* Clause boxes */
 .clause-box {
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.15);
@@ -172,105 +144,104 @@ body::after {
   margin: 24px 0;
 }
 .clause-box .clause-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
 }
-.clause-box ol {
-  padding-left: 20px;
-}
+.clause-box ol { padding-left: 20px; }
 .clause-box li {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
+  font-size: 15px; line-height: 1.7;
+  color: var(--text-secondary); margin-bottom: 10px;
+}
+
+/* Archive box */
+.archive-box {
+  background: rgba(100,116,139,0.06);
+  border: 1px solid rgba(100,116,139,0.12);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 24px 0;
+  opacity: 0.7;
+}
+.archive-box .archive-label {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.archive-box .archive-label::before {
+  content: '📦'; font-size: 14px;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 15px;
+  width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px;
 }
 thead th {
-  text-align: left;
-  padding: 12px 16px;
-  background: var(--bg-card);
-  color: var(--gold);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  text-align: left; padding: 12px 16px;
+  background: var(--bg-card); color: var(--gold);
+  font-weight: 700; font-size: 13px;
+  letter-spacing: 1px; text-transform: uppercase;
   border-bottom: 2px solid rgba(201,168,76,0.2);
 }
 tbody td {
   padding: 12px 16px;
   border-bottom: 1px solid rgba(201,168,76,0.06);
-  color: var(--text-secondary);
-  vertical-align: top;
+  color: var(--text-secondary); vertical-align: top;
 }
 tbody tr:hover { background: rgba(201,168,76,0.03); }
 tbody td:first-child { color: var(--text-primary); font-weight: 500; }
 tbody td strong { color: var(--white); }
 
 .alert {
-  padding: 20px 24px;
-  border-radius: 10px;
-  margin: 24px 0;
-  border-left: 4px solid;
-  font-size: 15px;
-  line-height: 1.6;
+  padding: 20px 24px; border-radius: 10px; margin: 24px 0;
+  border-left: 4px solid; font-size: 15px; line-height: 1.6;
 }
-.alert-tip {
-  background: rgba(34,197,94,0.06);
-  border-color: #22c55e;
-  color: var(--text-secondary);
-}
+.alert-tip { background: rgba(34,197,94,0.06); border-color: #22c55e; color: var(--text-secondary); }
 .alert-tip strong { color: #86efac; }
-.alert-important {
-  background: rgba(59,130,246,0.06);
-  border-color: #3b82f6;
-  color: var(--text-secondary);
-}
+.alert-important { background: rgba(59,130,246,0.06); border-color: #3b82f6; color: var(--text-secondary); }
 .alert-important strong { color: #93c5fd; }
-.alert-note {
-  background: rgba(201,168,76,0.06);
-  border-color: var(--gold);
-  color: var(--text-secondary);
-}
+.alert-note { background: rgba(201,168,76,0.06); border-color: var(--gold); color: var(--text-secondary); }
 .alert-note strong { color: var(--gold-light); }
-.alert-warning {
-  background: rgba(220,38,38,0.06);
-  border-color: #dc2626;
-  color: var(--text-secondary);
-}
+.alert-warning { background: rgba(220,38,38,0.06); border-color: #dc2626; color: var(--text-secondary); }
 .alert-warning strong { color: #fca5a5; }
 
 /* Checklist */
 .checklist { list-style: none; padding-left: 0; }
 .checklist li {
-  padding: 8px 0;
-  padding-left: 28px;
-  position: relative;
+  padding: 8px 0 8px 28px; position: relative;
   border-bottom: 1px solid rgba(201,168,76,0.05);
 }
 .checklist li::before {
-  content: '☐';
-  position: absolute;
-  left: 0;
-  color: var(--text-muted);
-  font-size: 16px;
+  content: '☐'; position: absolute; left: 0;
+  color: var(--text-muted); font-size: 16px;
 }
+.checklist li.done::before { content: '☑'; color: var(--accent-green); }
+.checklist li.done { text-decoration: line-through; opacity: 0.7; }
+
+/* Rule sections */
+.rule-section {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 16px 0;
+  transition: border-color 0.3s;
+}
+.rule-section:hover { border-color: rgba(201,168,76,0.2); }
+.rule-section h4 {
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  color: var(--white); margin-bottom: 8px;
+}
+.rule-section .rule-num {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+}
+.rule-section p { font-size: 14px; margin-bottom: 8px; }
 
 .article-footer {
-  text-align: center;
-  padding: 32px;
+  text-align: center; padding: 32px;
   border-top: 1px solid rgba(201,168,76,0.08);
-  font-size: 13px;
-  color: var(--text-muted);
+  font-size: 13px; color: var(--text-muted);
 }
 .article-footer a { color: var(--gold); text-decoration: none; }
 
@@ -296,113 +267,192 @@ tbody td strong { color: var(--white); }
 
 <nav class="topbar">
   <a href="docs.html">← Back to Documents</a>
-  <span class="topbar-title">Mission & Purpose</span>
-  <a href="anbi-plan.html">ANBI Plan →</a>
+  <span class="topbar-title">Association Rules (Säännöt)</span>
+  <a href="finland-process.html">Registration Process →</a>
 </nav>
 
 <article class="article">
   <header class="article-header">
-    <span class="article-flag">⚖️</span>
-    <h1>Mission &amp; Purpose Clause</h1>
+    <span class="article-flag">🇫🇮</span>
+    <h1>Association Rules <em style="color:var(--gold);">(Säännöt)</em></h1>
     <hr class="gold-rule">
-    <span class="status-badge status-draft">Draft — Pending Review</span>
-    <div class="purpose"><strong>Foundation:</strong> Stichting People for Peace &amp; Justice (Stichting Volk voor Vrede en Gerechtigheid)<br><strong>For:</strong> Articles of Association (Statuten) — to be translated into Dutch by notary</div>
+    <span class="status-badge status-draft">Draft — English First, Finnish Translation Pending</span>
+    <div class="purpose"><strong>Association:</strong> People for Peace &amp; Justice ry<br><strong>Entity type:</strong> Registered Association (rekisteröity yhdistys) — Finland<br><strong>Registration:</strong> PRH (Patent and Registration Office)</div>
   </header>
 
-  <!-- English Purpose -->
-  <section class="section">
-    <h2>Artikel 2: Doel — English Draft</h2>
-    <p>The foundation's purpose is to advance international justice and accountability for human rights violations against children and civilians, with particular focus on state violence, through:</p>
-    <ol>
-      <li><strong>Legal research and documentation</strong> of human rights violations, war crimes, and crimes against humanity, with emphasis on evidence-gathering methodologies that meet international legal standards.</li>
-      <li><strong>Advocacy and public awareness</strong> campaigns to inform the international community, governments, and judicial bodies about documented violations and the need for accountability.</li>
-      <li><strong>Support for victims and affected communities</strong> by facilitating access to legal remedies, connecting victims with legal representation, and coordinating with international judicial mechanisms.</li>
-      <li><strong>Engagement with international justice institutions</strong> including but not limited to the International Criminal Court (ICC), the International Court of Justice (ICJ), and UN treaty bodies.</li>
-      <li><strong>Knowledge sharing and capacity building</strong> through publications, educational programs, and partnerships with peer organizations in the international justice ecosystem.</li>
-      <li><strong>All other lawful means</strong> directly or indirectly conducive to the realization of the foundation's objectives.</li>
-    </ol>
-    <div class="alert alert-tip"><strong>Scope Design:</strong> Intentionally broad to allow work on multiple cases beyond the initial Minab case, engagement with any judicial body, and partnership flexibility — avoiding costly notarial deed amendments later.</div>
-  </section>
+  <div class="alert alert-important"><strong>Finnish legal requirement:</strong> The säännöt (rules) must be filed with PRH in <strong>Finnish or Swedish</strong>. This English draft is the working version — a professional translation to Finnish is required before registration.</div>
 
-  <!-- Dutch Translation -->
+  <!-- § 1 — Name & Domicile -->
   <section class="section">
-    <h2>Doelstelling — Dutch Translation</h2>
+    <h2>§ 1–2: Name, Domicile &amp; Purpose</h2>
+
+    <div class="rule-section">
+      <div class="rule-num">§ 1 — Name and Domicile</div>
+      <h4>People for Peace &amp; Justice ry</h4>
+      <p>The name of the association is <strong>People for Peace &amp; Justice ry</strong>.</p>
+      <p>The association's domicile is <strong>Helsinki, Finland</strong>.</p>
+    </div>
+
+    <div class="rule-section">
+      <div class="rule-num">§ 2 — Purpose (Tarkoitus)</div>
+      <h4>Mission &amp; Purpose Clause</h4>
+      <p style="color:var(--text-secondary);">The association's purpose is to advance international justice and accountability for human rights violations against children and civilians, with particular focus on state violence.</p>
+      <p style="color:var(--text-secondary);">The association fulfills its purpose by:</p>
+    </div>
+
     <div class="clause-box">
-      <div class="clause-label">Artikel 2: Doel</div>
-      <p style="color:var(--text-secondary);margin-bottom:16px;">De stichting heeft ten doel:</p>
+      <div class="clause-label">§ 2 — Purpose Activities (English Draft)</div>
       <ol>
-        <li>Het bevorderen van internationale gerechtigheid en verantwoording voor schendingen van mensenrechten tegen kinderen en burgers, met bijzondere aandacht voor staatsgeweld.</li>
-        <li>Het verrichten van juridisch onderzoek naar en het documenteren van mensenrechtenschendingen, oorlogsmisdaden en misdaden tegen de menselijkheid.</li>
-        <li>Het voeren van campagnes en het beïnvloeden van beleid ter bevordering van bewustwording en verantwoording bij de internationale gemeenschap.</li>
-        <li>Het ondersteunen van slachtoffers en getroffen gemeenschappen bij de toegang tot rechtsmiddelen.</li>
-        <li>Het samenwerken met internationale gerechtshoven en justitiële mechanismen, waaronder het Internationaal Strafhof (ICC), het Internationaal Gerechtshof (ICJ) en VN-verdragsorganen.</li>
-        <li>Alle overige wettige middelen die direct of indirect bevorderlijk kunnen zijn voor de verwezenlijking van het doel van de stichting.</li>
+        <li><strong>Legal research and documentation</strong> of human rights violations, war crimes, and crimes against humanity, with emphasis on evidence-gathering methodologies that meet international legal standards.</li>
+        <li><strong>Advocacy and public awareness</strong> campaigns to inform the international community, governments, and judicial bodies about documented violations and the need for accountability.</li>
+        <li><strong>Support for victims and affected communities</strong> by facilitating access to legal remedies, connecting victims with legal representation, and coordinating with international judicial mechanisms.</li>
+        <li><strong>Engagement with international justice institutions</strong> including but not limited to the International Criminal Court (ICC), the International Court of Justice (ICJ), and UN treaty bodies.</li>
+        <li><strong>Knowledge sharing and capacity building</strong> through publications, educational programs, and partnerships with peer organizations in the international justice ecosystem.</li>
+        <li><strong>Diaspora engagement and community empowerment</strong> by connecting affected diaspora communities with documentation, legal, and advocacy resources.</li>
+        <li><strong>All other lawful means</strong> directly or indirectly conducive to the realization of the association's objectives.</li>
       </ol>
     </div>
-    <div class="alert alert-note"><strong>Note:</strong> The final notarial deed will be in Dutch. This translation serves as the basis — the notary will refine the legal language.</div>
+    <div class="alert alert-tip"><strong>Scope Design:</strong> Intentionally broad to allow work on multiple cases beyond the initial Minab case, engagement with any judicial body, and partnership flexibility — avoiding costly rule amendments later.</div>
   </section>
 
-  <!-- Assets -->
+  <!-- § 3–4 — Membership & Fees -->
   <section class="section">
-    <h2>Artikel 3: Vermogen (Assets)</h2>
-    <p>The foundation shall acquire its assets through:</p>
-    <ul>
-      <li>Donations, gifts, and grants</li>
-      <li>Subsidies from governmental and non-governmental bodies</li>
-      <li>Inheritances and bequests</li>
-      <li>Income from the foundation's own activities</li>
-      <li>All other lawful acquisitions</li>
-    </ul>
+    <h2>§ 3–5: Membership, Fees &amp; Board</h2>
+
+    <div class="rule-section">
+      <div class="rule-num">§ 3 — Membership (Jäsenyys)</div>
+      <h4>Open Membership</h4>
+      <p>Any natural person or legal entity that accepts the association's purpose may apply for membership. The board decides on accepting new members.</p>
+      <p>A member may resign at any time by written notice to the board. The board may expel a member who acts against the association's purpose or fails to pay membership fees.</p>
+    </div>
+
+    <div class="rule-section">
+      <div class="rule-num">§ 4 — Membership Fee (Jäsenmaksu)</div>
+      <h4>Annual Fees</h4>
+      <p>Members pay an annual membership fee determined by the annual meeting. The fee may be set to <strong>€0</strong> (zero) for the founding period.</p>
+    </div>
+
+    <div class="rule-section">
+      <div class="rule-num">§ 5 — Board (Hallitus)</div>
+      <h4>Board Composition</h4>
+      <p>The association's affairs are managed by a board consisting of a <strong>chairperson</strong> and <strong>2–6 other members</strong> elected at the annual meeting.</p>
+      <p>The board's term is one calendar year. The board selects from among its members a <strong>vice-chairperson, secretary, and treasurer</strong> (roles may be combined).</p>
+      <table>
+        <thead><tr><th>Role</th><th>Person</th><th>Location</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Chairperson</strong></td><td>Mahdi Farimani</td><td>Finland 🇫🇮</td></tr>
+          <tr><td><strong>Board Member</strong></td><td>Zahra Azhar</td><td>Netherlands 🇳🇱</td></tr>
+          <tr><td><strong>Board Member</strong></td><td>Ali Akbar Siapoush</td><td>Netherlands 🇳🇱</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
-  <!-- ANBI Compatibility -->
+  <!-- § 6–8 — Meetings & Signing -->
   <section class="section">
-    <h2>ANBI Compatibility Check</h2>
-    <p>The purpose clause serves the <strong>algemeen nut</strong> (general interest) — required for ANBI tax-exempt status:</p>
+    <h2>§ 6–8: Meetings, Fiscal Year &amp; Signing Rights</h2>
+
+    <div class="rule-section">
+      <div class="rule-num">§ 6 — Annual Meeting (Vuosikokous)</div>
+      <h4>Annual General Meeting</h4>
+      <p>The association's annual meeting is held each year by the end of <strong>March</strong>. At the annual meeting:</p>
+      <ul>
+        <li>The board's annual report and financial statements are presented</li>
+        <li>Financial statements are adopted and the board is discharged</li>
+        <li>The membership fee for the next year is decided</li>
+        <li>The chairperson and board members are elected</li>
+        <li>An auditor (or operations inspector) is elected</li>
+      </ul>
+    </div>
+
+    <div class="rule-section">
+      <div class="rule-num">§ 7 — Fiscal Year (Tilikausi)</div>
+      <h4>Calendar Year</h4>
+      <p>The association's fiscal year is the <strong>calendar year</strong> (1 January – 31 December).</p>
+    </div>
+
+    <div class="rule-section">
+      <div class="rule-num">§ 8 — Signing Rights (Nimenkirjoitusoikeus)</div>
+      <h4>Representation</h4>
+      <p>The association's name is signed by the <strong>chairperson alone</strong>, or by <strong>two board members together</strong>.</p>
+    </div>
+  </section>
+
+  <!-- § 9 — Dissolution -->
+  <section class="section">
+    <h2>§ 9: Dissolution &amp; Assets</h2>
+
+    <div class="rule-section">
+      <div class="rule-num">§ 9 — Dissolution (Purkaminen)</div>
+      <h4>Asset Distribution</h4>
+      <p>If the association is dissolved, its remaining assets shall be used for a purpose that aligns with the association's objectives, as decided by the final meeting. Assets shall be directed to a <strong>registered non-profit organization</strong> operating in the international justice field.</p>
+      <div class="alert alert-note"><strong>Tax-exempt requirement:</strong> This clause satisfies Vero's requirement that assets of a yleishyödyllinen yhteisö (public-benefit entity) cannot be distributed to members upon dissolution.</div>
+    </div>
+  </section>
+
+  <!-- Finnish Tax-Exempt Compatibility -->
+  <section class="section">
+    <h2>Vero Tax-Exempt Compatibility</h2>
+    <p>Check against requirements for <strong>yleishyödyllinen yhteisö</strong> (public-benefit entity) status:</p>
     <table>
       <thead><tr><th>Criterion</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>Human rights purpose</td><td>✅ Core mission</td></tr>
-        <tr><td>International justice</td><td>✅ Primary focus</td></tr>
-        <tr><td>Public awareness / education</td><td>✅ Activity pillar #2 & #5</td></tr>
-        <tr><td>No private benefit</td><td>✅ No profit distribution</td></tr>
-        <tr><td>Open to public benefit</td><td>✅ Not limited to members</td></tr>
+        <tr><td>Operates exclusively for public benefit</td><td style="color:#22c55e;">✅ Core mission</td></tr>
+        <tr><td>Activities not limited to a closed group</td><td style="color:#22c55e;">✅ Open membership</td></tr>
+        <tr><td>Does not distribute dividends/profits</td><td style="color:#22c55e;">✅ Non-profit by design</td></tr>
+        <tr><td>Dissolution clause → assets to public-benefit use</td><td style="color:#22c55e;">✅ § 9 clause</td></tr>
+        <tr><td>No disproportionate compensation to board</td><td style="color:#22c55e;">✅ Volunteer board</td></tr>
       </tbody>
     </table>
-    <div class="alert alert-tip"><strong>Result:</strong> The purpose clause fully satisfies ANBI general-interest requirements.</div>
+    <div class="alert alert-tip"><strong>Result:</strong> The rules fully satisfy Vero requirements for yleishyödyllinen yhteisö status.</div>
   </section>
 
   <!-- Board Checklist -->
   <section class="section">
-    <h2>Board Review Checklist</h2>
-    <p>Confirm all items before sending to the notary:</p>
+    <h2>Founding Checklist</h2>
+    <p>Confirm all items before founding meeting and PRH registration:</p>
     <ul class="checklist">
-      <li>All board members agree on the mission scope</li>
-      <li>Purpose is broad enough for future case expansion</li>
-      <li>Dutch translation accurately reflects English intent</li>
-      <li>No activities that could jeopardize ANBI status</li>
-      <li>Foundation name finalized and available in KVK register</li>
-      <li>Registered address confirmed</li>
-      <li>3 board members identified with passport details</li>
+      <li class="done">All 3 founders confirmed (Mahdi, Zahra, Ali Akbar)</li>
+      <li class="done">Purpose clause drafted in English</li>
+      <li class="done">Association name selected: People for Peace & Justice ry</li>
+      <li>Rules translated to Finnish by professional translator</li>
+      <li>Founding meeting held (virtual OK) — all founders sign</li>
+      <li>Rules filed with PRH online (€55)</li>
+      <li>Chairperson has Finnish bank ID for PRH submission</li>
+      <li>Bank account opened at Finnish bank</li>
+      <li>Vero tax-exempt application submitted</li>
     </ul>
   </section>
 
-  <!-- Name -->
+  <!-- Association Name -->
   <section class="section">
-    <h2>Foundation Name</h2>
+    <h2>Association Name</h2>
     <table>
-      <thead><tr><th>English</th><th>Dutch</th><th>Status</th></tr></thead>
+      <thead><tr><th>English</th><th>Finnish Suffix</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td><strong>People for Peace &amp; Justice</strong></td><td><strong>Stichting Volk voor Vrede en Gerechtigheid</strong></td><td style="color:#22c55e;">✅ Selected</td></tr>
+        <tr><td><strong>People for Peace &amp; Justice</strong></td><td><strong>ry</strong> (rekisteröity yhdistys)</td><td style="color:#22c55e;">✅ Selected</td></tr>
       </tbody>
     </table>
-    <div class="alert alert-important"><strong>Next step:</strong> The notary will search the KVK register to confirm no naming conflicts exist before proceeding with the deed.</div>
+    <div class="alert alert-important"><strong>Note:</strong> PRH will verify the name doesn't conflict with existing registered associations. The "ry" suffix is added automatically upon registration.</div>
   </section>
+
+  <!-- Archived: Previous NL Versions -->
+  <section class="section">
+    <h2>📦 Archive — Previous Netherlands Drafts</h2>
+    <div class="archive-box">
+      <div class="archive-label">Previously drafted for NL Stichting — superseded by Finnish ry</div>
+      <p style="color:var(--text-muted); font-size:14px; margin-bottom: 8px;"><strong>Dutch translation (Artikel 2: Doel)</strong> — The stichting version with Dutch legal language. No longer needed since we're registering in Finland, not the Netherlands.</p>
+      <p style="color:var(--text-muted); font-size:14px; margin-bottom: 8px;"><strong>ANBI compatibility check</strong> — Dutch tax-exempt framework. Replaced by Vero yleishyödyllinen yhteisö check above.</p>
+      <p style="color:var(--text-muted); font-size:14px;"><strong>KVK registration references</strong> — Dutch Chamber of Commerce process. Replaced by PRH (Finland) process.</p>
+    </div>
+    <p style="font-size:13px; color:var(--text-muted);">The NL drafts are retained in the <a href="docs.html" style="color:var(--gold);">document archive</a> for future reference if a Netherlands secondary entity is established.</p>
+  </section>
+
 </article>
 
 <footer class="article-footer">
-  Draft: March 15, 2026 · For review by board members and notary<br>
-  <a href="docs.html">← Documents</a> · <a href="anbi-plan.html">ANBI Plan</a> · <a href="tasks.html">Task Board</a>
+  Draft: March 15, 2026 · For review by board members before founding meeting<br>
+  <a href="docs.html">← Documents</a> · <a href="finland-process.html">Registration Process</a> · <a href="tasks.html">Task Board</a>
 </footer>
 
 <script>
