@@ -106,6 +106,9 @@ class PFPCampaignBot:
 
             # Import dashboard auth handler
             from handlers.dashboard_auth import dashboard_command
+            from handlers.dashboard_channel import (
+                post_dashboard_command, refresh_dashboard_command,
+            )
 
             # Register command handlers
             self.application.add_handler(CommandHandler("start", start_command))
@@ -122,6 +125,8 @@ class PFPCampaignBot:
             self.application.add_handler(CommandHandler("storminfo", storminfo_command))
             self.application.add_handler(CommandHandler("language", language_command))
             self.application.add_handler(CommandHandler("dashboard", dashboard_command))
+            self.application.add_handler(CommandHandler("post_dashboard", post_dashboard_command))
+            self.application.add_handler(CommandHandler("refresh_dashboard", refresh_dashboard_command))
 
             # Register language callback handler (before other callback handlers)
             from telegram.ext import CallbackQueryHandler

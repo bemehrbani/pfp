@@ -181,6 +181,10 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'campaigns.send_daily_digest',
         'schedule': crontab(hour=21, minute=0),
     },
+    'refresh-pinned-dashboards-hourly': {
+        'task': 'campaigns.update_campaign_dashboards',
+        'schedule': crontab(minute=0),  # Every hour, on the hour
+    },
 }
 
 # Telegram Bot settings

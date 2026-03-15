@@ -216,6 +216,13 @@ class Campaign(models.Model):
         help_text=_('Telegram file_id for Arabic 100 Faces video')
     )
 
+    # Pinned dashboard message (for hourly auto-refresh)
+    pinned_dashboard_message_id = models.BigIntegerField(
+        null=True,
+        blank=True,
+        help_text=_('Telegram message ID of the pinned campaign dashboard in the channel')
+    )
+
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

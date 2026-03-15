@@ -1,7 +1,7 @@
 # PFP Telegram Bot — Kanban Board
 
 > **Source of truth** for the People for Peace bot development.
-> Last updated: March 14, 2026
+> Last updated: March 15, 2026
 
 ---
 
@@ -35,6 +35,77 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 | V1 | **Show description in retweet flow** | `twitter_retweet` handler now shows `localized_description()` above 3-step instructions | XS | ✅ `35313a2` |
 | V2 | **Resource link button after accept** | Adds `📚 View Report Library` button (uses `target_url`) in retweet guided flow | XS | ✅ `35313a2` |
 | V3 | **Update Task #16 Admin fields** | Set `instructions` + `target_url` in Django Admin for Amplify Investigative Reports | XS | ✅ |
+| V4 | **T1 interactive child picker** | Volunteer picks child → bot sends photo + ready tweet + 1-tap intent link | M | ✅ `cfcc777` |
+
+---
+
+## 📢 Epic — Pinned Campaign Dashboard Message
+
+> **Goal**: Send a rich, auto-updating "campaign dashboard" message to the `@people4peace` Telegram channel. The message shows the campaign definition, objectives, key results with live statistics, available tasks, and a **Join** button. It gets **pinned** and **edited in-place every hour** with the latest data — so the channel always has a single, up-to-date campaign overview.
+
+### Architecture
+
+- **Compose**: Build a branded HTML message using `brand_constants.py` and live data from `Campaign` model + `_db_get_campaign_pulse()`.
+- **Post & Pin**: Send the message via the bot, pin it, and persist the `telegram_message_id` to the `Campaign` model (new field: `pinned_dashboard_message_id`).
+- **Auto-refresh**: A Celery Beat periodic task runs every hour, re-queries stats, and calls `bot.edit_message_text()` on the stored message ID.
+- **Manual trigger**: Admin command `/refresh_dashboard` to force an immediate update.
+
+### Message Content Layout
+
+```
+🕊️ People for Peace
+━━━━━━━━━━━━━━━━━━━
+
+📢 Justice for Minab Children
+
+On Feb 28, 2026, 168 children aged 7-12 were killed
+in a US cruise missile strike on their school in Minab, Iran.
+We demand accountability. Your voice matters.
+
+━━━━━━━━━━━━━━━━━━━
+📊 Objectives & Key Results
+━━━━━━━━━━━━━━━━━━━
+
+🎯 Volunteers:  ██████████░  45/100
+📝 Actions:     ████░░░░░░░  87/500
+🐦 Tweets:      ███░░░░░░░░  34/200
+
+📈 Overall progress: 33%
+
+━━━━━━━━━━━━━━━━━━━
+🎯 Available Tasks
+━━━━━━━━━━━━━━━━━━━
+
+🐦 Share a Child's Story  (5 min)
+🔁 Amplify Investigative Reports  (3 min)
+💬 Comment on Key Tweets  (5 min)
+✍️ Create Original Content  (30 min)
+✍️ Sign the Petition  (2 min)
+
+━━━━━━━━━━━━━━━━━━━
+🔗 Resources
+🕯 Memorial — peopleforpeace.live
+📄 Evidence — peopleforpeace.live/evidence.html
+📊 Data — peopleforpeace.live/data.html
+
+🕊️ People for Peace · peopleforpeace.live
+🔄 Last updated: 12:00 PM · Mar 15, 2026
+```
+
+[➕ Join the Campaign]  ← InlineKeyboardButton (deep-link)
+
+### Tasks
+
+| # | Task | Description | Effort | Status |
+|---|------|-------------|--------|--------|
+| P1 | **Add `pinned_dashboard_message_id` field** | New `BigIntegerField` on `Campaign` model to store the Telegram message ID of the pinned dashboard. Migration required. | XS | ✅ Done |
+| P2 | **`compose_dashboard_message()` helper** | Pure function that takes a campaign + pulse stats and returns `(html_text, inline_keyboard)`. Builds branded HTML with OKR progress bars (Unicode block chars), task list, resource links, timestamp, and a "Join" deep-link button. Lives in `telegram-bot/utils/dashboard.py`. | M | ✅ Done |
+| P3 | **`/post_dashboard` admin command** | Bot command (admin-only) that calls `compose_dashboard_message()`, sends it to the channel, pins it, and saves the `telegram_message_id` back to `Campaign.pinned_dashboard_message_id`. | S | ✅ Done |
+| P4 | **`/refresh_dashboard` admin command** | Bot command (admin-only) that re-composes and calls `bot.edit_message_text()` on the stored pinned message. Useful for manual refresh after content changes. | XS | ✅ Done |
+| P5 | **Celery Beat periodic task** | Register `update_campaign_dashboards` in Celery Beat schedule (every 60 min). The task instantiates a Bot client, loads active campaigns with a `pinned_dashboard_message_id`, re-composes, and edits each message. | M | ✅ Done |
+| ~~P6~~ | ~~**Bilingual support (EN/FA)**~~ | ~~Dropped — English-only per campaign decision.~~ | — | ⏭ Skipped |
+| P7 | **Progress bar rendering** | Unicode progress bar util (`█░` chars) that takes `(current, target)` and returns a 10-char visual bar + percentage. Reusable across bot messages. | XS | ✅ Done |
+| P8 | **Deploy & verify** | Deploy to production, run `/post_dashboard` in bot, verify message appears in `@people4peace`, pin it, then wait 1 hour to confirm auto-refresh edits the message. | S | ⬜ TODO |
 
 ---
 
@@ -93,7 +164,7 @@ Core flow: User starts → joins campaign → picks a tweet → 1-tap posts on T
 | Campaign members | growing |
 | Bot username | `@peopleforpeacebot` |
 | Server | 65.109.198.200 |
-| Latest deploy | `35313a2` (Mar 14) |
+| Latest deploy | `cfcc777` (Mar 15) |
 
 ---
 

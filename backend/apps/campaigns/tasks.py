@@ -572,3 +572,162 @@ def send_daily_digest():
         if _send_telegram_message(campaign.telegram_channel_id, text):
             _store_channel_post(campaign.id, 'digest', text)
             logger.info(f'Daily digest sent for campaign {campaign.id}')
+
+
+# ── Pinned Dashboard Refresh Task ─────────────────────────────────────
+
+@shared_task(name='campaigns.update_campaign_dashboards')
+def update_campaign_dashboards():
+    """
+    Hourly task: edit the pinned campaign dashboard in-place with fresh stats.
+
+    Uses the raw Telegram HTTP API (editMessageText) since Celery tasks
+    don't have access to the python-telegram-bot Application instance.
+    """
+    from apps.campaigns.models import Campaign
+
+    active_campaigns = Campaign.objects.filter(
+        status=Campaign.Status.ACTIVE,
+        pinned_dashboard_message_id__isnull=False,
+    ).exclude(telegram_channel_id__isnull=True)
+
+    token = getattr(settings, 'TELEGRAM_BOT_TOKEN', '')
+    if not token:
+        logger.error('TELEGRAM_BOT_TOKEN not configured — cannot refresh dashboards')
+        return
+
+    for campaign in active_campaigns:
+        try:
+            _refresh_single_dashboard(campaign, token)
+            logger.info(f'Dashboard refreshed for campaign {campaign.id}')
+        except Exception as exc:
+            logger.error(f'Dashboard refresh failed for campaign {campaign.id}: {exc}')
+
+
+def _render_progress_bar_celery(current: int, target: int, width: int = 10) -> str:
+    """Render a Unicode progress bar (Celery-side, no bot dependencies)."""
+    if target <= 0:
+        return '░' * width + f'  {current}/—'
+    ratio = min(current / target, 1.0)
+    filled = round(ratio * width)
+    empty = width - filled
+    return '█' * filled + '░' * empty + f'  {current}/{target}'
+
+
+def _esc_html(text: str) -> str:
+    """Escape HTML special characters."""
+    return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+
+def _refresh_single_dashboard(campaign, token: str):
+    """Compose and edit the pinned dashboard for one campaign."""
+    from apps.tasks.models import Task, TaskAssignment
+    from datetime import datetime, timezone as tz
+
+    now = datetime.now(tz.utc)
+    timestamp = now.strftime('%I:%M %p · %b %d, %Y')
+
+    # ── Gather stats ──
+    total_completed = TaskAssignment.objects.filter(
+        task__campaign=campaign,
+        status__in=['completed', 'verified'],
+    ).count()
+
+    tasks = list(Task.objects.filter(
+        campaign=campaign, is_active=True,
+        task_type__in=[
+            'twitter_post', 'twitter_retweet', 'twitter_comment',
+            'content_creation', 'petition', 'mass_email',
+        ],
+    ).order_by('estimated_time')[:10])
+
+    type_icons = {
+        'twitter_post': '🐦', 'twitter_retweet': '🔁',
+        'twitter_comment': '💬', 'content_creation': '✍️',
+        'petition': '✍️', 'mass_email': '📧',
+        'research': '🔍', 'other': '📌',
+    }
+
+    # ── Compose HTML ──
+    vbar = _render_progress_bar_celery(campaign.current_members, campaign.target_members)
+    abar = _render_progress_bar_celery(total_completed, campaign.target_activities)
+    tbar = _render_progress_bar_celery(campaign.completed_twitter_posts, campaign.target_twitter_posts)
+
+    progress = campaign.progress_percentage()
+
+    lines = [
+        '🕊️ <b>People for Peace</b>',
+        '━━━━━━━━━━━━━━━━━━━',
+        '',
+        f'📢 <b>{_esc_html(campaign.name)}</b>',
+        '',
+        _esc_html(campaign.short_description),
+        '',
+        '━━━━━━━━━━━━━━━━━━━',
+        '📊 <b>Objectives &amp; Key Results</b>',
+        '━━━━━━━━━━━━━━━━━━━',
+        '',
+        f'🎯 Volunteers:  <code>{vbar}</code>',
+        f'📝 Actions:     <code>{abar}</code>',
+        f'🐦 Tweets:      <code>{tbar}</code>',
+        '',
+        f'📈 Overall progress: <b>{progress:.0f}%</b>',
+        '',
+        '━━━━━━━━━━━━━━━━━━━',
+        '🎯 <b>Available Tasks</b>',
+        '━━━━━━━━━━━━━━━━━━━',
+        '',
+    ]
+
+    for task in tasks:
+        icon = type_icons.get(task.task_type, '📌')
+        lines.append(f'{icon} {_esc_html(task.title)}  ({task.estimated_time} min)')
+
+    lines.extend([
+        '',
+        '━━━━━━━━━━━━━━━━━━━',
+        '🔗 <b>Resources</b>',
+        '🕯 <a href="https://peopleforpeace.live">Memorial</a>'
+        ' · 📄 <a href="https://peopleforpeace.live/evidence.html">Evidence</a>'
+        ' · 📊 <a href="https://peopleforpeace.live/data.html">Data</a>',
+        '',
+        '🕊️ <b>People for Peace</b> · <a href="https://peopleforpeace.live">peopleforpeace.live</a>',
+        f'🔄 Last updated: {timestamp}',
+    ])
+
+    html_text = '\n'.join(lines)
+
+    # ── Edit via HTTP API ──
+    deep_link = f'https://t.me/peopleforpeacebot?start=campaign_{campaign.id}'
+    inline_keyboard = {
+        'inline_keyboard': [[{
+            'text': '➕ Join the Campaign',
+            'url': deep_link,
+        }]]
+    }
+
+    response = requests.post(
+        f'https://api.telegram.org/bot{token}/editMessageText',
+        json={
+            'chat_id': campaign.telegram_channel_id,
+            'message_id': campaign.pinned_dashboard_message_id,
+            'text': html_text,
+            'parse_mode': 'HTML',
+            'disable_web_page_preview': True,
+            'reply_markup': inline_keyboard,
+        },
+        timeout=15,
+    )
+
+    if response.status_code != 200:
+        resp_data = {}
+        try:
+            resp_data = response.json()
+        except Exception:
+            pass
+        # "message is not modified" is fine — nothing changed since last refresh
+        if 'message is not modified' in resp_data.get('description', ''):
+            logger.info(f'Dashboard for campaign {campaign.id}: no changes to update')
+        else:
+            logger.warning(f'editMessageText failed for campaign {campaign.id}: {response.text}')
+
