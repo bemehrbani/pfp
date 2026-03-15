@@ -135,6 +135,20 @@ Artists create → Submit via bot → Gallery + Channel post → Volunteers shar
 
 ---
 
+## 👋 Epic — Volunteer Onboarding Improvements (Alireza Feedback)
+
+> **Goal**: Based on real user feedback — task list is overwhelming without prioritization, and volunteers don't understand what to do first. Makes the bot immediately actionable for new joiners.
+
+### Tasks
+
+| # | Task | Description | Effort | Status |
+|---|------|-------------|--------|--------|
+| V1 | **Task priority ordering** | Sort tasks by `estimated_time` (easiest first) instead of `-points` (hardest first). Fastest action appears at top. | XS | ✅ Done |
+| V2 | **⭐ Start Here badge** | Add ⭐ badge to the first (easiest) task in the list + subtitle "Sorted by easiest first — start from the top!" | XS | ✅ Done |
+| V3 | **Fix child count** | Update 100 → 168 in EN/FA/AR onboarding messages. Add task priority guidance to campaign join message. | XS | ✅ Done |
+| V4 | **Shareable volunteer briefing** | Create EN/FA forwarding-ready briefing for Alireza and early volunteers to share with contacts. | S | ✅ Done |
+| V5 | **Deploy & verify** | Push to production, test full task list ordering + badge + briefing. | S | ⬜ TODO |
+
 ## 🐛 Known Bugs
 
 | # | Bug | Severity | Status |

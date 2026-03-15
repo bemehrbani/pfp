@@ -148,7 +148,7 @@ TRANSLATIONS = {
             "On Feb 28, 2026, a school in Minab, Iran was bombed.\n"
             "168 children were killed.\n\n"
             "📋 *What we're doing:*\n"
-            "We've identified names and photos of 100 children, "
+            "We've identified names and photos of 168 children, "
             "built an online memorial, collected investigative reports, "
             "and launched an international petition.\n\n"
             "🤲 *How you help:*\n"
@@ -160,7 +160,7 @@ TRANSLATIONS = {
             "📄 [Evidence](https://peopleforpeace.live/evidence.html)\n"
             "📢 @people4peace\n"
             "━━━━━━━━━━━━━━━━━━━\n\n"
-            "Tap a task below to get started! 👇"
+            "⭐ Tasks are sorted by easiest first — start from the top! 👇"
         ),
         "fa": (
             "🎉 *شما به {name} پیوستید!*\n\n"
@@ -168,7 +168,7 @@ TRANSLATIONS = {
             "۹ اسفند ۱۴۰۴ — مدرسه‌ای در میناب بمباران شد.\n"
             "۱۶۸ کودک جان باختند.\n\n"
             "📋 *ما چیکار کردیم:*\n"
-            "اسم و عکس ۱۰۰ کودک رو شناسایی کردیم، "
+            "اسم و عکس ۱۶۸ کودک رو شناسایی کردیم، "
             "یادبود آنلاین ساختیم، گزارش‌های تحقیقی جمع کردیم "
             "و طومار بین‌المللی راه انداختیم.\n\n"
             "🤲 *شما چطور کمک می‌کنید:*\n"
@@ -180,7 +180,7 @@ TRANSLATIONS = {
             "📄 [شواهد](https://peopleforpeace.live/evidence.html)\n"
             "📢 @people4peace\n"
             "━━━━━━━━━━━━━━━━━━━\n\n"
-            "یک وظیفه رو بزنید تا شروع کنید! 👇"
+            "⭐ وظایف از آسان‌ترین مرتب شدن — از بالا شروع کنید! 👇"
         ),
         "ar": (
             "🎉 *لقد انضممت إلى {name}!*\n\n"
@@ -188,7 +188,7 @@ TRANSLATIONS = {
             "في ٢٨ فبراير ٢٠٢٦، قُصفت مدرسة في ميناب، إيران.\n"
             "قُتل ١٦٨ طفلاً.\n\n"
             "📋 *ماذا نفعل:*\n"
-            "حددنا أسماء وصور ١٠٠ طفل، "
+            "حددنا أسماء وصور ١٦٨ طفل، "
             "أنشأنا نصباً تذكارياً رقمياً، جمعنا تقارير تحقيقية، "
             "وأطلقنا عريضة دولية.\n\n"
             "🤲 *كيف تساعد:*\n"

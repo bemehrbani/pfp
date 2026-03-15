@@ -269,7 +269,7 @@ def _db_get_available_tasks(user):
             campaign_id__in=campaign_ids,
         ).exclude(
             assignments__volunteer=user
-        ).select_related('campaign').order_by('-points', 'created_at')[:10]
+        ).select_related('campaign').order_by('estimated_time', 'points')[:10]
     )
     return tasks, True
 
@@ -704,24 +704,29 @@ async def tasks_command(update: Update, context: CallbackContext):
         )
         return
 
-    message = "🎯 *Available Tasks*\n\n"
+    message = "🎯 *Available Tasks*\n"
+    message += "_Sorted by easiest first — start from the top!_\n\n"
     keyboard = []
     lang = getattr(session, 'language', 'en') or 'en'
 
     for i, task in enumerate(tasks, 1):
         type_icon = _get_task_type_icon(task.task_type)
-        message += f"*{i}. {type_icon} {task.localized_title(lang)}*\n"
-        message += f"   Campaign: {task.campaign.localized_name(lang)}\n"
-        message += f"   ⏱ {task.estimated_time} min\n\n"
+        # Mark the first (easiest) task as "Start Here"
+        start_badge = "⭐ " if i == 1 else ""
+        message += f"*{i}. {start_badge}{type_icon} {task.localized_title(lang)}*\n"
+        message += f"   ⏱ {task.estimated_time} min · {task.points} pts\n\n"
 
+        btn_label = f"{type_icon} {task.localized_title(lang)[:28]}"
+        if i == 1:
+            btn_label = f"⭐ {task.localized_title(lang)[:26]}"
         keyboard.append([
             InlineKeyboardButton(
-                f"{type_icon} {task.localized_title(lang)[:30]}",
+                btn_label,
                 callback_data=f"task_claim_{task.id}"
             )
         ])
 
-    message += "Tap a task to see details and start."
+    message += "_Tap a task to see details and start._"
 
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(message, reply_markup=reply_markup, parse_mode='Markdown')
