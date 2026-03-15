@@ -246,21 +246,6 @@ class ConversationStateManager:
         try:
             user = await _create_user()
 
-            # Translated success message
-            await context.bot.send_message(
-                chat_id=update.effective_chat.id,
-                text=t('register_success', lang).format(name=first_name or full_name),
-                parse_mode='Markdown'
-            )
-
-            # Re-send inline menu so the user has navigation buttons
-            from utils.translations import get_main_menu_inline
-            await context.bot.send_message(
-                chat_id=update.effective_chat.id,
-                text="⬇️",
-                reply_markup=get_main_menu_inline(lang),
-            )
-
             # Auto-join campaign from deep-link (if present)
             if deeplink_campaign_id:
                 await self._auto_join_campaign(
@@ -391,7 +376,8 @@ class ConversationStateManager:
         type_icons = {
             'twitter_post': '🐦', 'twitter_retweet': '🔁', 'twitter_comment': '💬',
             'twitter_like': '❤️', 'telegram_share': '📢', 'telegram_invite': '👥',
-            'content_creation': '✍️', 'other': '📌',
+            'content_creation': '✍️', 'petition': '✍️', 'mass_email': '📧',
+            'other': '📌',
         }
         for task in tasks:
             icon = type_icons.get(task.task_type, '📌')
@@ -402,7 +388,18 @@ class ConversationStateManager:
                 )
             ])
 
-        reply_markup = InlineKeyboardMarkup(keyboard) if keyboard else None
+        # Add invite + main menu buttons
+        keyboard.append([
+            InlineKeyboardButton(
+                t('btn_invite_friends', lang),
+                callback_data=f"campaign_invite_{campaign_id}"
+            )
+        ])
+        keyboard.append([
+            InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
+        ])
+
+        reply_markup = InlineKeyboardMarkup(keyboard)
 
         await context.bot.send_message(
             chat_id=update.effective_chat.id,

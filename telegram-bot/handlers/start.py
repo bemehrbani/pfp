@@ -159,18 +159,7 @@ async def _send_welcome(update: Update, context: CallbackContext, session, lang:
     else:
         # Start registration — immediately create the user!
         logger.info(f"New user {user.id} auto-registering (lang={lang})")
-        
-        # Personalized prompt if coming from deep-link just to mention the campaign
-        deeplink_campaign_id = await _db_get_deeplink_campaign_id(session)
-        if deeplink_campaign_id:
-            campaign_name = await _db_get_campaign_name(deeplink_campaign_id)
-            if campaign_name:
-                await context.bot.send_message(
-                    chat_id=chat_id,
-                    text=t('register_for_campaign', lang).format(name=campaign_name),
-                    parse_mode='Markdown'
-                )
-        
+
         # Complete automatic registration
         await state_manager.register_user_automatically(update, context, session, lang)
 
