@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Peer Organizations — Justice Ecosystem Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a; --bg-primary: #0f172a; --bg-card: #1e293b;
+  --gold: #c9a84c; --gold-light: #e8d48b; --gold-dim: rgba(201,168,76,0.15);
+  --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b; --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 860px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg-deep); color: var(--text-primary); -webkit-font-smoothing: antialiased; line-height: 1.7; }
+body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%); pointer-events: none; z-index: 0; }
+body::after { content: ''; position: fixed; inset: 0; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+.topbar { position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 12px 32px; background: rgba(10,14,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.08); }
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; }
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+.article { position: relative; z-index: 1; max-width: var(--max-width); margin: 0 auto; padding: 48px 32px 80px; }
+.article-header { text-align: center; margin-bottom: 48px; animation: fadeUp 0.6s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.article-flag { font-size: 56px; display: block; margin-bottom: 20px; }
+.article-header h1 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 900; color: var(--white); margin-bottom: 12px; line-height: 1.15; }
+.article-header .purpose { display: inline-block; padding: 10px 20px; background: var(--bg-card); border: 1px solid rgba(201,168,76,0.15); border-radius: 8px; font-size: 15px; color: var(--text-secondary); line-height: 1.5; margin-top: 16px; }
+.gold-rule { width: 80px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin: 24px auto; border: none; }
+.section { margin-bottom: 56px; scroll-margin-top: 60px; }
+.section h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(201,168,76,0.1); }
+.section h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--gold-light); margin: 28px 0 12px; }
+.section p, .section li { font-size: 16px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
+.section ul, .section ol { padding-left: 24px; margin-bottom: 16px; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+thead th { text-align: left; padding: 12px 16px; background: var(--bg-card); color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid rgba(201,168,76,0.2); }
+tbody td { padding: 12px 16px; border-bottom: 1px solid rgba(201,168,76,0.06); color: var(--text-secondary); vertical-align: top; }
+tbody tr:hover { background: rgba(201,168,76,0.03); }
+tbody td:first-child { color: var(--text-primary); font-weight: 500; }
+tbody td strong { color: var(--white); }
+.alert { padding: 20px 24px; border-radius: 10px; margin: 24px 0; border-left: 4px solid; font-size: 15px; line-height: 1.6; }
+.alert-tip { background: rgba(34,197,94,0.06); border-color: #22c55e; color: var(--text-secondary); }
+.alert-tip strong { color: #86efac; }
+.alert-warning { background: rgba(220,38,38,0.06); border-color: #dc2626; color: var(--text-secondary); }
+.alert-warning strong { color: #fca5a5; }
+.alert-note { background: rgba(201,168,76,0.06); border-color: var(--gold); color: var(--text-secondary); }
+.alert-note strong { color: var(--gold-light); }
+
+/* Org cards */
+.org-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 20px 0;
+  transition: border-color 0.3s;
+}
+.org-card:hover { border-color: rgba(201,168,76,0.25); }
+.org-card h3 { margin-top: 0; }
+.org-card .org-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.org-card .org-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(201,168,76,0.08);
+  color: var(--text-muted);
+}
+.org-card .org-stars {
+  color: var(--gold);
+  font-size: 14px;
+}
+.org-card .org-action {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(201,168,76,0.06);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.org-card .org-action strong { color: var(--gold-light); }
+
+.article-footer { text-align: center; padding: 32px; border-top: 1px solid rgba(201,168,76,0.08); font-size: 13px; color: var(--text-muted); }
+.article-footer a { color: var(--gold); text-decoration: none; }
+@media (max-width: 768px) { .topbar { padding: 10px 16px; } .article { padding: 32px 20px 60px; } }
+@media print { .topbar { display: none; } body { background: white; color: #1a1a1a; } body::before, body::after { display: none; } .article { max-width: 100%; } .section h2 { color: #1a1a1a; } .org-card { border-color: #ddd; background: #f9f9f9; } }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">Peer Organizations</span>
+  <a href="asp-guide.html">ASP Guide →</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span class="article-flag">🌐</span>
+    <h1>Peer Organizations &amp; <em style="color:var(--gold);">Justice Ecosystem</em></h1>
+    <hr class="gold-rule">
+    <div class="purpose">Organizations for partnership, coalition, and learning · Focus on The Hague / Netherlands</div>
+  </header>
+
+  <!-- Tier 1 -->
+  <section class="section">
+    <h2>Tier 1 — Direct Peers</h2>
+    <p>Organizations directly aligned with international justice and accountability work.</p>
+
+    <div class="org-card">
+      <h3>Global Rights Compliance (GRC)</h3>
+      <div class="org-meta">
+        <span class="org-tag">Stichting · The Hague</span>
+        <span class="org-tag">Est. 2013</span>
+        <span class="org-stars">⭐⭐⭐⭐⭐</span>
+      </div>
+      <p>International law foundation promoting accountability and strengthening justice systems. Provides specialized legal expertise in conflict-affected regions.</p>
+      <div class="org-action"><strong>Action:</strong> Study their governance model; reach out for mentorship and partnership after KVK registration.</div>
+    </div>
+
+    <div class="org-card">
+      <h3>TRIAL International</h3>
+      <div class="org-meta">
+        <span class="org-tag">NGO · Geneva (global ops)</span>
+        <span class="org-stars">⭐⭐⭐⭐⭐</span>
+      </div>
+      <p>Fighting impunity for international crimes — genocide, crimes against humanity, war crimes. Provides legal assistance, litigates cases, develops local capacities.</p>
+      <div class="org-action"><strong>Action:</strong> Study their victim support model; explore case collaboration on evidence-gathering.</div>
+    </div>
+
+    <div class="org-card">
+      <h3>Justice &amp; Peace Netherlands</h3>
+      <div class="org-meta">
+        <span class="org-tag">Stichting · The Hague</span>
+        <span class="org-stars">⭐⭐⭐⭐</span>
+      </div>
+      <p>Human rights protection, peacebuilding, and advocacy. Established Dutch peer with strong advocacy model.</p>
+      <div class="org-action"><strong>Action:</strong> Contact for coalition-building and potential board advisor recommendations.</div>
+    </div>
+  </section>
+
+  <!-- Tier 2 -->
+  <section class="section">
+    <h2>Tier 2 — Coalition Partners</h2>
+
+    <div class="org-card">
+      <h3>Coalition for the ICC (CICC)</h3>
+      <div class="org-meta">
+        <span class="org-tag">Coalition · The Hague</span>
+        <span class="org-stars">⭐⭐⭐⭐⭐</span>
+      </div>
+      <p>Civil society coordination for ICC engagement. Gateway to ASP observer status and ICC engagement.</p>
+      <div class="org-action"><strong>Action:</strong> Apply for membership immediately after KVK registration. Key pipeline to ASP participation.</div>
+    </div>
+
+    <div class="org-card">
+      <h3>PAX</h3>
+      <div class="org-meta">
+        <span class="org-tag">Stichting · Utrecht / The Hague</span>
+        <span class="org-stars">⭐⭐⭐⭐</span>
+      </div>
+      <p>Largest Dutch peace organization. Dedicated to protecting civilians, ending armed conflict, and building inclusive peace.</p>
+      <div class="org-action"><strong>Action:</strong> Join advocacy network; attend public events for visibility and NL government connections.</div>
+    </div>
+
+    <div class="org-card">
+      <h3>International Justice Mission (IJM) Netherlands</h3>
+      <div class="org-meta">
+        <span class="org-tag">Stichting · The Hague</span>
+        <span class="org-stars">⭐⭐⭐</span>
+      </div>
+      <p>Combating slavery, trafficking, and violence. Different focus but same legal structure and fundraising model.</p>
+      <div class="org-action"><strong>Action:</strong> Study their ANBI compliance model and Dutch fundraising approach.</div>
+    </div>
+  </section>
+
+  <!-- Tier 3 -->
+  <section class="section">
+    <h2>Tier 3 — Ecosystem &amp; Infrastructure</h2>
+
+    <div class="org-card">
+      <h3>The Hague Humanity Hub</h3>
+      <div class="org-meta">
+        <span class="org-tag">Co-working Hub · The Hague</span>
+        <span class="org-stars">⭐⭐⭐⭐</span>
+      </div>
+      <p>Houses 50+ peace and justice organizations. Physical presence, networking, credibility.</p>
+      <div class="org-action"><strong>Action:</strong> Apply for membership / desk space when operational.</div>
+    </div>
+
+    <div class="org-card">
+      <h3>The Hague International Centre</h3>
+      <div class="org-meta">
+        <span class="org-tag">Municipal Support · The Hague</span>
+        <span class="org-stars">⭐⭐⭐⭐</span>
+      </div>
+      <p>Helps international organizations settle in The Hague. Practical support for registration, networking.</p>
+      <div class="org-action"><strong>Action:</strong> Contact for newcomer support and introductions to ecosystem.</div>
+    </div>
+  </section>
+
+  <!-- Important Note -->
+  <section class="section">
+    <h2>Note: The Hague Justice Portal</h2>
+    <div class="alert alert-warning"><strong>Defunct:</strong> The Hague Justice Portal (launched 2006) was <strong>closed in ~2013</strong> by The Hague Academic Coalition due to funding reallocation. It is no longer an active organization.</div>
+    <p>OKR updated to target alternative engagement paths:</p>
+    <ul>
+      <li><strong>Coalition for the ICC</strong> — active, directly relevant</li>
+      <li><strong>Humanity Hub</strong> — physical presence in justice ecosystem</li>
+      <li><strong>Hague International Centre</strong> — practical newcomer support</li>
+    </ul>
+  </section>
+
+  <!-- Priority Matrix -->
+  <section class="section">
+    <h2>Partnership Priority Matrix</h2>
+    <table>
+      <thead><tr><th>Organization</th><th>Priority</th><th>Timeline</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Coalition for the ICC</strong></td><td>🔴 High</td><td>Q2 2026</td><td>Apply for membership after KVK</td></tr>
+        <tr><td><strong>Global Rights Compliance</strong></td><td>🔴 High</td><td>Q3 2026</td><td>Introductory meeting</td></tr>
+        <tr><td><strong>TRIAL International</strong></td><td>🔴 High</td><td>Q4 2026</td><td>Case collaboration discussion</td></tr>
+        <tr><td><strong>Justice &amp; Peace NL</strong></td><td>🟡 Medium</td><td>Q3 2026</td><td>Networking, exploration call</td></tr>
+        <tr><td><strong>Humanity Hub</strong></td><td>🟡 Medium</td><td>Q3 2026</td><td>Apply for desk/membership</td></tr>
+        <tr><td><strong>PAX</strong></td><td>🟡 Medium</td><td>Q4 2026</td><td>Join advocacy coalition</td></tr>
+        <tr><td><strong>Hague Intl Centre</strong></td><td>🟢 Low</td><td>Q2 2026</td><td>Initial registration</td></tr>
+        <tr><td><strong>IJM Netherlands</strong></td><td>🟢 Low</td><td>Q3 2026</td><td>Study ANBI/fundraising model</td></tr>
+      </tbody>
+    </table>
+  </section>
+</article>
+
+<footer class="article-footer">
+  Research compiled: March 15, 2026 · 8 organizations mapped across 3 tiers<br>
+  <a href="docs.html">← Documents</a> · <a href="asp-guide.html">ASP Guide</a> · <a href="tasks.html">Task Board</a>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

@@ -1274,11 +1274,17 @@ async def handle_task_start_and_guide(query, session, task_id, context):
             msg += f"_{task.instructions[:500]}_\n"
             msg += f"───────────────────\n\n"
 
-        # Content Library button
+        # Memorial + Evidence buttons for inspiration
         keyboard.append([
             InlineKeyboardButton(
                 t('btn_content_library', lang),
                 url='https://peopleforpeace.live/memorial.html'
+            )
+        ])
+        keyboard.append([
+            InlineKeyboardButton(
+                t('btn_evidence_reports', lang),
+                url='https://peopleforpeace.live/evidence.html'
             )
         ])
 

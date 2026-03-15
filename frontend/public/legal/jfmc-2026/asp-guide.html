@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ICC Assembly of States Parties — Observer Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a; --bg-primary: #0f172a; --bg-card: #1e293b;
+  --gold: #c9a84c; --gold-light: #e8d48b; --gold-dim: rgba(201,168,76,0.15);
+  --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b; --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 860px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg-deep); color: var(--text-primary); -webkit-font-smoothing: antialiased; line-height: 1.7; }
+body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%); pointer-events: none; z-index: 0; }
+body::after { content: ''; position: fixed; inset: 0; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+.topbar { position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 12px 32px; background: rgba(10,14,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.08); }
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; }
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+.article { position: relative; z-index: 1; max-width: var(--max-width); margin: 0 auto; padding: 48px 32px 80px; }
+.article-header { text-align: center; margin-bottom: 48px; animation: fadeUp 0.6s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.article-flag { font-size: 56px; display: block; margin-bottom: 20px; }
+.article-header h1 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 900; color: var(--white); margin-bottom: 12px; line-height: 1.15; }
+.article-header .purpose { display: inline-block; padding: 10px 20px; background: var(--bg-card); border: 1px solid rgba(201,168,76,0.15); border-radius: 8px; font-size: 15px; color: var(--text-secondary); line-height: 1.5; margin-top: 16px; }
+.gold-rule { width: 80px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin: 24px auto; border: none; }
+.toc { background: var(--bg-card); border: 1px solid rgba(201,168,76,0.1); border-radius: 12px; padding: 24px 28px; margin-bottom: 48px; }
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.toc ol { list-style: none; counter-reset: toc; }
+.toc li { counter-increment: toc; margin-bottom: 6px; }
+.toc li::before { content: counter(toc, decimal-leading-zero) "."; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-right: 8px; }
+.toc a { color: var(--text-secondary); text-decoration: none; font-size: 15px; transition: color 0.2s; }
+.toc a:hover { color: var(--gold); }
+.section { margin-bottom: 56px; scroll-margin-top: 60px; }
+.section h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(201,168,76,0.1); }
+.section h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--gold-light); margin: 28px 0 12px; }
+.section p, .section li { font-size: 16px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
+.section ul, .section ol { padding-left: 24px; margin-bottom: 16px; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+thead th { text-align: left; padding: 12px 16px; background: var(--bg-card); color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid rgba(201,168,76,0.2); }
+tbody td { padding: 12px 16px; border-bottom: 1px solid rgba(201,168,76,0.06); color: var(--text-secondary); vertical-align: top; }
+tbody tr:hover { background: rgba(201,168,76,0.03); }
+tbody td:first-child { color: var(--text-primary); font-weight: 500; }
+tbody td strong { color: var(--white); }
+.alert { padding: 20px 24px; border-radius: 10px; margin: 24px 0; border-left: 4px solid; font-size: 15px; line-height: 1.6; }
+.alert-tip { background: rgba(34,197,94,0.06); border-color: #22c55e; color: var(--text-secondary); }
+.alert-tip strong { color: #86efac; }
+.alert-important { background: rgba(59,130,246,0.06); border-color: #3b82f6; color: var(--text-secondary); }
+.alert-important strong { color: #93c5fd; }
+.alert-note { background: rgba(201,168,76,0.06); border-color: var(--gold); color: var(--text-secondary); }
+.alert-note strong { color: var(--gold-light); }
+
+/* Phase cards */
+.phase-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 20px 0;
+}
+.phase-card h3 { margin-top: 0; }
+.phase-card .phase-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.phase-card ul { list-style: none; padding-left: 0; }
+.phase-card li {
+  padding: 6px 0 6px 24px;
+  position: relative;
+  border-bottom: 1px solid rgba(201,168,76,0.04);
+}
+.phase-card li::before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+/* Countdown */
+.countdown-box {
+  background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(139,34,50,0.06));
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  margin: 32px 0;
+}
+.countdown-box .countdown-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.countdown-box .countdown-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--white);
+}
+.countdown-box .countdown-detail {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.article-footer { text-align: center; padding: 32px; border-top: 1px solid rgba(201,168,76,0.08); font-size: 13px; color: var(--text-muted); }
+.article-footer a { color: var(--gold); text-decoration: none; }
+@media (max-width: 768px) { .topbar { padding: 10px 16px; } .article { padding: 32px 20px 60px; } }
+@media print { .topbar { display: none; } body { background: white; color: #1a1a1a; } body::before, body::after { display: none; } .article { max-width: 100%; } .section h2 { color: #1a1a1a; } .phase-card { border-color: #ddd; background: #f9f9f9; } }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">ASP Observer Guide</span>
+  <a href="tasks.html">Task Board →</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span class="article-flag">🏛️</span>
+    <h1>ICC Assembly of States Parties <em style="color:var(--gold);">Observer Guide</em></h1>
+    <hr class="gold-rule">
+    <div class="purpose"><strong>Goal:</strong> Secure NGO observer accreditation for ASP 25<br><strong>Next session:</strong> December 7–17, 2026 · New York</div>
+  </header>
+
+  <div class="countdown-box">
+    <div class="countdown-label">Next Session</div>
+    <div class="countdown-title">ASP 25 — December 7–17, 2026</div>
+    <div class="countdown-detail">New York · Election of 6 ICC Judges</div>
+  </div>
+
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#what">What is the ASP?</a></li>
+      <li><a href="#sessions">Upcoming Sessions</a></li>
+      <li><a href="#accreditation">Observer Accreditation Process</a></li>
+      <li><a href="#strategy">Participation Strategy</a></li>
+      <li><a href="#budget">Budget Estimate</a></li>
+      <li><a href="#contacts">Key Contacts</a></li>
+    </ol>
+  </nav>
+
+  <section class="section" id="what">
+    <h2>1. What is the ASP?</h2>
+    <p>The Assembly of States Parties is the management oversight and legislative body of the International Criminal Court. It meets annually (typically December) and is the primary venue where NGOs can:</p>
+    <ul>
+      <li>Make statements during the <strong>General Debate</strong></li>
+      <li>Host <strong>side events</strong></li>
+      <li>Network with <strong>state delegations</strong></li>
+      <li>Advocate for ICC investigations and cases</li>
+    </ul>
+  </section>
+
+  <section class="section" id="sessions">
+    <h2>2. Upcoming Sessions</h2>
+    <table>
+      <thead><tr><th>Session</th><th>Date</th><th>Location</th><th>Key Agenda</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ASP 25</strong></td><td>Dec 7–17, 2026</td><td>New York</td><td>Election of 6 ICC judges</td></tr>
+        <tr><td>ASP 26</td><td>Dec 2027 (TBD)</td><td>The Hague (likely)</td><td>TBD</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="accreditation">
+    <h2>3. Observer Accreditation Process</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+      <li>✅ Legally registered organization (KVK registration is sufficient)</li>
+      <li>✅ Demonstrated work in international criminal justice / human rights</li>
+      <li>✅ Non-profit status documentation</li>
+      <li>✅ Organization website with mission, activities, and contact info</li>
+    </ul>
+
+    <h3>Application Steps</h3>
+    <ol>
+      <li><strong>Contact the Coalition for the ICC (CICC)</strong> — they coordinate civil society participation and maintain a database of accredited NGOs. First-time organizations typically go through CICC.</li>
+      <li><strong>Submit to the ASP Secretariat:</strong>
+        <ul>
+          <li>Letter of application signed by the head of the organization</li>
+          <li>Description of organization's identity, aims, objectives</li>
+          <li>Proof of legal status (KVK excerpt)</li>
+          <li>Summary of activities relevant to ICC/international justice</li>
+          <li>List of representatives who will attend</li>
+        </ul>
+      </li>
+      <li><strong>Deadline:</strong> Typically 2–3 months before the session</li>
+    </ol>
+
+    <div class="alert alert-important"><strong>For ASP 25 (Dec 2026):</strong> Submit accreditation application by <strong>September 2026</strong> at the latest.</div>
+
+    <h3>What Accredited NGOs Can Do</h3>
+    <ul>
+      <li>Attend plenary sessions as observers</li>
+      <li>Make oral/written statements during General Debate</li>
+      <li>Organize side events (requires separate application)</li>
+      <li>Access to official documents</li>
+      <li>Network in the margins with delegations</li>
+    </ul>
+  </section>
+
+  <section class="section" id="strategy">
+    <h2>4. Participation Strategy</h2>
+
+    <div class="phase-card">
+      <div class="phase-label">Phase 1 — Preparation (Q2–Q3 2026)</div>
+      <ul>
+        <li>Register the Stichting at KVK</li>
+        <li>Join Coalition for the ICC</li>
+        <li>Prepare Minab case documentation summary</li>
+        <li>Identify 1–2 representatives to attend (Zahra + Mahdi)</li>
+      </ul>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-label">Phase 2 — Application (September 2026)</div>
+      <ul>
+        <li>Submit observer accreditation application</li>
+        <li>Prepare written statement for General Debate</li>
+        <li>Apply for side event slot (if ready)</li>
+      </ul>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-label">Phase 3 — Attendance (December 2026)</div>
+      <ul>
+        <li>Attend General Debate sessions</li>
+        <li>Deliver statement on accountability for violence against children</li>
+        <li>Network with like-minded delegations and NGOs</li>
+        <li>Document contacts and follow-up opportunities</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="budget">
+    <h2>5. Budget Estimate (ASP 25 — New York)</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Estimate</th></tr></thead>
+      <tbody>
+        <tr><td>Flights (2 persons)</td><td>€1,200 – €2,000</td></tr>
+        <tr><td>Accommodation (10 nights)</td><td>€2,000 – €3,500</td></tr>
+        <tr><td>Per diem &amp; transport</td><td>€500 – €800</td></tr>
+        <tr><td>Materials (printed statements, cards)</td><td>€100 – €200</td></tr>
+        <tr><td><strong>Total estimated</strong></td><td><strong>€3,800 – €6,500</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-tip"><strong>Tip:</strong> Some organizations offer travel grants for first-time ASP participants. CICC may be able to connect with sponsors.</div>
+  </section>
+
+  <section class="section" id="contacts">
+    <h2>6. Key Contacts</h2>
+    <table>
+      <thead><tr><th>Organization</th><th>Role</th><th>Link</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Coalition for the ICC</strong></td><td>Civil society coordinator</td><td>coalitionfortheicc.org</td></tr>
+        <tr><td><strong>ASP Secretariat</strong></td><td>Official accreditation</td><td>asp.icc-cpi.int</td></tr>
+        <tr><td><strong>Amnesty International NL</strong></td><td>Potential ally</td><td>amnesty.nl</td></tr>
+        <tr><td><strong>Human Rights Watch</strong></td><td>Potential ally</td><td>hrw.org</td></tr>
+      </tbody>
+    </table>
+  </section>
+</article>
+
+<footer class="article-footer">
+  Research compiled: March 15, 2026 · Sources: Coalition for the ICC, ICC Official, AllAfrica<br>
+  <a href="docs.html">← Documents</a> · <a href="peer-orgs.html">Peer Organizations</a> · <a href="tasks.html">Task Board</a>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

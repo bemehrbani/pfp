@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Mission & Purpose Clause — People for Peace & Justice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --red-accent: #8b2232;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 860px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; }
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.article {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+.article-header {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeUp 0.6s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.article-flag { font-size: 56px; display: block; margin-bottom: 20px; }
+.article-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+.article-header .purpose {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 16px;
+}
+.gold-rule {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 24px auto;
+  border: none;
+}
+
+/* Status badge */
+.status-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.status-draft {
+  background: rgba(251,191,36,0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(251,191,36,0.25);
+}
+
+.section { margin-bottom: 56px; scroll-margin-top: 60px; }
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin: 28px 0 12px;
+}
+.section p, .section li {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.section ul, .section ol {
+  padding-left: 24px;
+  margin-bottom: 16px;
+}
+
+/* Dutch clause box */
+.clause-box {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+.clause-box .clause-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.clause-box ol {
+  padding-left: 20px;
+}
+.clause-box li {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 15px;
+}
+thead th {
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(201,168,76,0.2);
+}
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(201,168,76,0.06);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+tbody tr:hover { background: rgba(201,168,76,0.03); }
+tbody td:first-child { color: var(--text-primary); font-weight: 500; }
+tbody td strong { color: var(--white); }
+
+.alert {
+  padding: 20px 24px;
+  border-radius: 10px;
+  margin: 24px 0;
+  border-left: 4px solid;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.alert-tip {
+  background: rgba(34,197,94,0.06);
+  border-color: #22c55e;
+  color: var(--text-secondary);
+}
+.alert-tip strong { color: #86efac; }
+.alert-important {
+  background: rgba(59,130,246,0.06);
+  border-color: #3b82f6;
+  color: var(--text-secondary);
+}
+.alert-important strong { color: #93c5fd; }
+.alert-note {
+  background: rgba(201,168,76,0.06);
+  border-color: var(--gold);
+  color: var(--text-secondary);
+}
+.alert-note strong { color: var(--gold-light); }
+.alert-warning {
+  background: rgba(220,38,38,0.06);
+  border-color: #dc2626;
+  color: var(--text-secondary);
+}
+.alert-warning strong { color: #fca5a5; }
+
+/* Checklist */
+.checklist { list-style: none; padding-left: 0; }
+.checklist li {
+  padding: 8px 0;
+  padding-left: 28px;
+  position: relative;
+  border-bottom: 1px solid rgba(201,168,76,0.05);
+}
+.checklist li::before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.article-footer {
+  text-align: center;
+  padding: 32px;
+  border-top: 1px solid rgba(201,168,76,0.08);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.article-footer a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .topbar { padding: 10px 16px; }
+  .article { padding: 32px 20px 60px; }
+}
+
+@media print {
+  .topbar { display: none; }
+  body { background: white; color: #1a1a1a; }
+  body::before, body::after { display: none; }
+  .article { max-width: 100%; }
+  .section h2 { color: #1a1a1a; border-color: #ddd; }
+  .section h3 { color: #333; }
+  .section p, .section li, tbody td { color: #444; }
+  thead th { background: #f4f4f4; color: #333; }
+  .clause-box { border-color: #ddd; background: #f9f9f9; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">Mission & Purpose</span>
+  <a href="anbi-plan.html">ANBI Plan →</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span class="article-flag">⚖️</span>
+    <h1>Mission &amp; Purpose Clause</h1>
+    <hr class="gold-rule">
+    <span class="status-badge status-draft">Draft — Pending Review</span>
+    <div class="purpose"><strong>Foundation:</strong> Stichting People for Peace &amp; Justice (Stichting Volk voor Vrede en Gerechtigheid)<br><strong>For:</strong> Articles of Association (Statuten) — to be translated into Dutch by notary</div>
+  </header>
+
+  <!-- English Purpose -->
+  <section class="section">
+    <h2>Artikel 2: Doel — English Draft</h2>
+    <p>The foundation's purpose is to advance international justice and accountability for human rights violations against children and civilians, with particular focus on state violence, through:</p>
+    <ol>
+      <li><strong>Legal research and documentation</strong> of human rights violations, war crimes, and crimes against humanity, with emphasis on evidence-gathering methodologies that meet international legal standards.</li>
+      <li><strong>Advocacy and public awareness</strong> campaigns to inform the international community, governments, and judicial bodies about documented violations and the need for accountability.</li>
+      <li><strong>Support for victims and affected communities</strong> by facilitating access to legal remedies, connecting victims with legal representation, and coordinating with international judicial mechanisms.</li>
+      <li><strong>Engagement with international justice institutions</strong> including but not limited to the International Criminal Court (ICC), the International Court of Justice (ICJ), and UN treaty bodies.</li>
+      <li><strong>Knowledge sharing and capacity building</strong> through publications, educational programs, and partnerships with peer organizations in the international justice ecosystem.</li>
+      <li><strong>All other lawful means</strong> directly or indirectly conducive to the realization of the foundation's objectives.</li>
+    </ol>
+    <div class="alert alert-tip"><strong>Scope Design:</strong> Intentionally broad to allow work on multiple cases beyond the initial Minab case, engagement with any judicial body, and partnership flexibility — avoiding costly notarial deed amendments later.</div>
+  </section>
+
+  <!-- Dutch Translation -->
+  <section class="section">
+    <h2>Doelstelling — Dutch Translation</h2>
+    <div class="clause-box">
+      <div class="clause-label">Artikel 2: Doel</div>
+      <p style="color:var(--text-secondary);margin-bottom:16px;">De stichting heeft ten doel:</p>
+      <ol>
+        <li>Het bevorderen van internationale gerechtigheid en verantwoording voor schendingen van mensenrechten tegen kinderen en burgers, met bijzondere aandacht voor staatsgeweld.</li>
+        <li>Het verrichten van juridisch onderzoek naar en het documenteren van mensenrechtenschendingen, oorlogsmisdaden en misdaden tegen de menselijkheid.</li>
+        <li>Het voeren van campagnes en het beïnvloeden van beleid ter bevordering van bewustwording en verantwoording bij de internationale gemeenschap.</li>
+        <li>Het ondersteunen van slachtoffers en getroffen gemeenschappen bij de toegang tot rechtsmiddelen.</li>
+        <li>Het samenwerken met internationale gerechtshoven en justitiële mechanismen, waaronder het Internationaal Strafhof (ICC), het Internationaal Gerechtshof (ICJ) en VN-verdragsorganen.</li>
+        <li>Alle overige wettige middelen die direct of indirect bevorderlijk kunnen zijn voor de verwezenlijking van het doel van de stichting.</li>
+      </ol>
+    </div>
+    <div class="alert alert-note"><strong>Note:</strong> The final notarial deed will be in Dutch. This translation serves as the basis — the notary will refine the legal language.</div>
+  </section>
+
+  <!-- Assets -->
+  <section class="section">
+    <h2>Artikel 3: Vermogen (Assets)</h2>
+    <p>The foundation shall acquire its assets through:</p>
+    <ul>
+      <li>Donations, gifts, and grants</li>
+      <li>Subsidies from governmental and non-governmental bodies</li>
+      <li>Inheritances and bequests</li>
+      <li>Income from the foundation's own activities</li>
+      <li>All other lawful acquisitions</li>
+    </ul>
+  </section>
+
+  <!-- ANBI Compatibility -->
+  <section class="section">
+    <h2>ANBI Compatibility Check</h2>
+    <p>The purpose clause serves the <strong>algemeen nut</strong> (general interest) — required for ANBI tax-exempt status:</p>
+    <table>
+      <thead><tr><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Human rights purpose</td><td>✅ Core mission</td></tr>
+        <tr><td>International justice</td><td>✅ Primary focus</td></tr>
+        <tr><td>Public awareness / education</td><td>✅ Activity pillar #2 & #5</td></tr>
+        <tr><td>No private benefit</td><td>✅ No profit distribution</td></tr>
+        <tr><td>Open to public benefit</td><td>✅ Not limited to members</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-tip"><strong>Result:</strong> The purpose clause fully satisfies ANBI general-interest requirements.</div>
+  </section>
+
+  <!-- Board Checklist -->
+  <section class="section">
+    <h2>Board Review Checklist</h2>
+    <p>Confirm all items before sending to the notary:</p>
+    <ul class="checklist">
+      <li>All board members agree on the mission scope</li>
+      <li>Purpose is broad enough for future case expansion</li>
+      <li>Dutch translation accurately reflects English intent</li>
+      <li>No activities that could jeopardize ANBI status</li>
+      <li>Foundation name finalized and available in KVK register</li>
+      <li>Registered address confirmed</li>
+      <li>3 board members identified with passport details</li>
+    </ul>
+  </section>
+
+  <!-- Name -->
+  <section class="section">
+    <h2>Foundation Name</h2>
+    <table>
+      <thead><tr><th>English</th><th>Dutch</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>People for Peace &amp; Justice</strong></td><td><strong>Stichting Volk voor Vrede en Gerechtigheid</strong></td><td style="color:#22c55e;">✅ Selected</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-important"><strong>Next step:</strong> The notary will search the KVK register to confirm no naming conflicts exist before proceeding with the deed.</div>
+  </section>
+</article>
+
+<footer class="article-footer">
+  Draft: March 15, 2026 · For review by board members and notary<br>
+  <a href="docs.html">← Documents</a> · <a href="anbi-plan.html">ANBI Plan</a> · <a href="tasks.html">Task Board</a>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

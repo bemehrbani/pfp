@@ -847,41 +847,73 @@ TRANSLATIONS = {
     # ── Content Creation ──────────────────────────────────────────────
     "content_creation_instructions": {
         "en": (
-            "✍️ *Create content for the movement!*\n\n"
-            "1️⃣ Browse the Content Library for inspiration\n"
-            "2️⃣ Create a story, post, or reel (in any language)\n"
-            "3️⃣ Share the content on your social media\n"
-            "4️⃣ Send us a screenshot or link as proof"
+            "🎨 *Create Art for Peace*\n\n"
+            "168 children were killed in the Minab school attack. "
+            "Your art can tell their story to the world.\n\n"
+            "*What you can create:*\n"
+            "🖌 Illustration or digital art\n"
+            "📝 Poem or spoken word\n"
+            "🎬 Short video or animation\n"
+            "📷 Photo collage or photo art\n"
+            "🎵 Music or sound piece\n\n"
+            "*Steps:*\n"
+            "1️⃣ Browse the Memorial for inspiration\n"
+            "2️⃣ Create your piece (any language, any medium)\n"
+            "3️⃣ Share on your social media with #JusticeForMinab\n"
+            "4️⃣ Send it here as proof (photo, video, or link)"
         ),
         "fa": (
-            "✍️ *برای جنبش محتوا بسازید!*\n\n"
-            "1️⃣ کتابخانه محتوا را برای الهام‌گرفتن مرور کنید\n"
-            "2️⃣ یک استوری، پست یا ریل بسازید (به هر زبانی)\n"
-            "3️⃣ محتوا را در شبکه‌های اجتماعی خود به اشتراک بگذارید\n"
-            "4️⃣ اسکرین‌شات یا لینک را به عنوان مدرک ارسال کنید"
+            "🎨 *هنر برای صلح*\n\n"
+            "۱۶۸ کودک در حمله به مدرسه میناب کشته شدند. "
+            "هنر شما می‌تواند داستان آن‌ها را به جهان بگوید.\n\n"
+            "*چه چیزی می‌توانید بسازید:*\n"
+            "🖌 تصویرسازی یا هنر دیجیتال\n"
+            "📝 شعر یا متن ادبی\n"
+            "🎬 ویدیو یا انیمیشن کوتاه\n"
+            "📷 کلاژ عکس یا فتوآرت\n"
+            "🎵 موسیقی یا قطعه صوتی\n\n"
+            "*مراحل:*\n"
+            "1️⃣ یادبود را برای الهام مرور کنید\n"
+            "2️⃣ اثر خود را بسازید (هر زبان، هر فرمت)\n"
+            "3️⃣ در شبکه‌های اجتماعی با #JusticeForMinab به اشتراک بگذارید\n"
+            "4️⃣ به عنوان مدرک اینجا ارسال کنید (عکس، ویدیو یا لینک)"
         ),
         "ar": (
-            "✍️ *أنشئ محتوى للحركة!*\n\n"
-            "1️⃣ تصفح مكتبة المحتوى للإلهام\n"
-            "2️⃣ أنشئ قصة أو منشور أو ريل (بأي لغة)\n"
-            "3️⃣ شارك المحتوى على وسائل التواصل الاجتماعي\n"
-            "4️⃣ أرسل لنا لقطة شاشة أو رابط كدليل"
+            "🎨 *فن من أجل السلام*\n\n"
+            "قُتل ١٦٨ طفلاً في هجوم مدرسة ميناب. "
+            "فنك يمكن أن يروي قصتهم للعالم.\n\n"
+            "*ما يمكنك إنشاؤه:*\n"
+            "🖌 رسم توضيحي أو فن رقمي\n"
+            "📝 شعر أو كلمة مسموعة\n"
+            "🎬 فيديو قصير أو رسوم متحركة\n"
+            "📷 كولاج صور أو فن فوتوغرافي\n"
+            "🎵 موسيقى أو قطعة صوتية\n\n"
+            "*الخطوات:*\n"
+            "1️⃣ تصفح النصب التذكاري للإلهام\n"
+            "2️⃣ أنشئ عملك (أي لغة، أي وسيلة)\n"
+            "3️⃣ شارك على وسائل التواصل مع #JusticeForMinab\n"
+            "4️⃣ أرسله هنا كدليل (صورة أو فيديو أو رابط)"
         ),
     },
     "btn_content_library": {
-        "en": "📚 Content Library — Minab Children",
-        "fa": "📚 کتابخانه محتوا — کودکان میناب",
-        "ar": "📚 مكتبة المحتوى — أطفال ميناب",
+        "en": "🕯 Memorial — Minab Children",
+        "fa": "🕯 یادبود — کودکان میناب",
+        "ar": "🕯 النصب التذكاري — أطفال ميناب",
+    },
+    "btn_evidence_reports": {
+        "en": "📰 Evidence & Reports",
+        "fa": "📰 مدارک و گزارش‌ها",
+        "ar": "📰 الأدلة والتقارير",
     },
     "content_creation_proof": {
-        "en": "📸 Send your content (photo, video, or link) below 👇",
-        "fa": "📸 محتوای خود را ارسال کنید (عکس، ویدیو یا لینک) 👇",
-        "ar": "📸 أرسل محتواك (صورة أو فيديو أو رابط) أدناه 👇",
+        "en": "📤 Send your art below — photo, video, or link to your post 👇",
+        "fa": "📤 هنر خود را ارسال کنید — عکس، ویدیو، یا لینک 👇",
+        "ar": "📤 أرسل فنك أدناه — صورة أو فيديو أو رابط 👇",
     },
     "content_child_inspiration": {
-        "en": "🕯 *{name}* — one of the 100 children of Minab. Create content in their memory.",
-        "fa": "🕯 *{name}* — یکی از ۱۰۰ کودک میناب. برای یادبودشان محتوا بسازید.",
-        "ar": "🕯 *{name}* — أحد أطفال ميناب المئة. أنشئ محتوى لذكراهم.",
+        "en": "🕯 *{name}* — one of the 168 children of Minab. Let their memory inspire your art.",
+        "fa": "🕯 *{name}* — یکی از ۱۶۸ کودک میناب. بگذارید یاد آن‌ها الهام‌بخش هنر شما باشد.",
+        "ar": "🕯 *{name}* — أحد أطفال ميناب الـ ١٦٨. دع ذكراهم تلهم فنك.",
     },
     "btn_do_another": {
         "en": "🎯 Do Another Task",

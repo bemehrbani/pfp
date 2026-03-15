@@ -105,7 +105,33 @@ We demand accountability. Your voice matters.
 | P5 | **Celery Beat periodic task** | Register `update_campaign_dashboards` in Celery Beat schedule (every 60 min). The task instantiates a Bot client, loads active campaigns with a `pinned_dashboard_message_id`, re-composes, and edits each message. | M | ✅ Done |
 | ~~P6~~ | ~~**Bilingual support (EN/FA)**~~ | ~~Dropped — English-only per campaign decision.~~ | — | ⏭ Skipped |
 | P7 | **Progress bar rendering** | Unicode progress bar util (`█░` chars) that takes `(current, target)` and returns a 10-char visual bar + percentage. Reusable across bot messages. | XS | ✅ Done |
-| P8 | **Deploy & verify** | Deploy to production, run `/post_dashboard` in bot, verify message appears in `@people4peace`, pin it, then wait 1 hour to confirm auto-refresh edits the message. | S | ⬜ TODO |
+| P8 | **Deploy & verify** | Deploy to production, run `/post_dashboard` in bot, verify message appears in `@people4peace`, pin it, then wait 1 hour to confirm auto-refresh edits the message. | S | ✅ Done `e198dc3` |
+| P9 | **Bot profile improvements** | Updated BotFather settings: new botpic (dove avatar), improved About text, structured Description with task list, registered 8 slash commands. | XS | ✅ Done |
+
+---
+
+## 🎨 Epic — Art for Peace (Content Creation Viral Loop)
+
+> **Goal**: Turn content creation into a viral flywheel — artists create for the cause, art is showcased on a gallery page, volunteers share it on Twitter, and new artists/volunteers join. Leverages existing NFT artist network.
+
+### The Flywheel
+
+```
+Artists create → Submit via bot → Gallery + Channel post → Volunteers share on X → New visitors → New artists & volunteers → Repeat
+```
+
+### Tasks
+
+| # | Task | Description | Effort | Status |
+|---|------|-------------|--------|--------|
+| A1 | **Improve T4 task** | Update instructions, points (10→30), add gallery link + content ideas. Django Admin fields. | XS | ⬜ TODO |
+| A2 | **Build `gallery.html`** | Showcase page matching `amplify.html` design. Masonry grid, artist credit, share-on-X buttons, "Create Your Own" CTA. | M | ⬜ TODO |
+| A3 | **Bot artwork submission flow** | Credit prompt (named/anon) → media upload → save `ArtworkSubmission` → channel post → artist confirmation. | M | ⬜ TODO |
+| A4 | **`ArtworkSubmission` model + migration** | New model in `tasks/models.py`: media file ID, artist info, credit flag, publish state, channel message ID. | S | ⬜ TODO |
+| A5 | **Admin gallery commands** | `/gallery_list`, `/gallery_remove <id>` — admin bot commands for moderation-after. | XS | ⬜ TODO |
+| A6 | **Artist outreach email** | Template email for NFT artist network. Cause context + how to submit + two credit options. | XS | ⬜ TODO |
+| A7 | **Update translations** | New keys: credit prompt, submission success, gallery button labels (EN/FA/AR). | S | ⬜ TODO |
+| A8 | **Deploy & verify** | Push, migrate, test full loop: submit art → channel post → gallery page. | S | ⬜ TODO |
 
 ---
 
@@ -164,7 +190,7 @@ We demand accountability. Your voice matters.
 | Campaign members | growing |
 | Bot username | `@peopleforpeacebot` |
 | Server | 65.109.198.200 |
-| Latest deploy | `cfcc777` (Mar 15) |
+| Latest deploy | `e198dc3` (Mar 15 — pinned dashboard + bot profile) |
 
 ---
 

@@ -132,15 +132,15 @@ Tap a task below to get started! 👇
 
 | Field | Current | Improve |
 |-------|---------|---------|
-| Description | "Post a spotlight card..." | ✅ Good — add memorial link |
-| Instructions | "Download from content library" | ❌ No library exists! Add memorial URL + sample tweet |
+| Description | "Post a spotlight card..." | ✅ Updated — interactive child picker with memorial links |
+| Instructions | "Download from content library" | ✅ Updated — step-by-step with memorial URL |
 | Points/Time | 10pts / 5min | ✅ OK |
 
 **Subtasks:**
-- [ ] T1.1: Add memorial page link to instructions (`peopleforpeace.live/memorial.html`)
-- [ ] T1.2: Add sample tweet text with hashtags
-- [ ] T1.3: Add instruction to screenshot child from memorial page
-- [ ] T1.4: Update FA translation
+- [x] T1.1: Add memorial page link to instructions (`peopleforpeace.live/memorial.html`)
+- [x] T1.2: Interactive child picker — volunteer picks child, bot sends photo + ready tweet
+- [x] T1.3: 5 featured children with documented stories (Hami, Sobhan, Niyayesh, Amin, Reza)
+- [x] T1.4: Update FA translation (captions, tweets, buttons all bilingual)
 
 ---
 
@@ -153,10 +153,10 @@ Tap a task below to get started! 👇
 | Points/Time | 10pts / 3min | ✅ OK |
 
 **Subtasks:**
-- [ ] T2.1: Add Twitter/X search link for `#MinabSchoolMassacre` or `Minab school`
-- [ ] T2.2: List 3-5 specific report tweet URLs (BBC, NYT, WaPo, etc.)
-- [ ] T2.3: Add evidence page link (`peopleforpeace.live/evidence.html`)
-- [ ] T2.4: Update FA translation
+- [x] T2.1: Add Twitter/X search link for `#MinabSchoolMassacre` or `Minab school`
+- [x] T2.2: List 3-5 specific report tweet URLs (BBC, NYT, WaPo, etc.)
+- [x] T2.3: Add evidence page link (`peopleforpeace.live/evidence.html`)
+- [ ] T2.4: Update FA translation (still generic)
 
 ---
 
@@ -206,10 +206,14 @@ Tap a task below to get started! 👇
 - [ ] T5.3: Add context linking petition to Minab specifically
 
 ## ✅ Completed (Recent)
+- [x] **Pinned Campaign Dashboard:** Auto-updating dashboard message in `@people4peace` channel with OKR progress bars, task list, and join button. Hourly Celery Beat refresh. Deploy `e198dc3`.
+- [x] **Bot Profile Improvements:** Updated botpic (dove avatar), About text, Description with task breakdown + resource links, registered 8 slash commands in BotFather.
 - [x] **Campaign UX Epic (E1-E7):** All 7 UX improvements deployed — rich messages, about button, resource links, enriched invites.
 - [x] **Amplify Page:** Curated library of 33+ investigative reports live at amplify.html.
 - [x] **Petition Task (ID 24):** New petition task created and active in bot.
 - [x] **Content Creation Whitelist:** `content_creation` task type now visible in bot checklist.
+- [x] **T1 Content Update:** "Share a Child's Story" — interactive child picker with photo delivery, tweet intents, bilingual support. Deploy `cfcc777`.
+- [x] **T2 Content Update:** "Amplify Investigative Reports" — enriched with specific sources, amplify.html link, and report library button.
 - [x] **T3 Content Update:** "Comment on Key Tweets" — improved with search URLs, target accounts, sample replies.
 - [x] **Strategy:** Developed comprehensive 4-phase action plan and top-3 focused strategy for Minab accountability.
 - [x] **Research:** Comprehensive legal research into 10 possible pathways for prosecuting Trump for the Minab strike.

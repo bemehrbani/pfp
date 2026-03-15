@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ANBI Policy Plan — People for Peace & Justice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 860px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 32px;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.topbar a { color: var(--gold); text-decoration: none; font-size: 14px; }
+.topbar-title { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+.article {
+  position: relative; z-index: 1;
+  max-width: var(--max-width); margin: 0 auto; padding: 48px 32px 80px;
+}
+.article-header { text-align: center; margin-bottom: 48px; animation: fadeUp 0.6s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.article-flag { font-size: 56px; display: block; margin-bottom: 20px; }
+.article-header h1 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 900; color: var(--white); margin-bottom: 12px; line-height: 1.15; }
+.article-header .purpose { display: inline-block; padding: 10px 20px; background: var(--bg-card); border: 1px solid rgba(201,168,76,0.15); border-radius: 8px; font-size: 15px; color: var(--text-secondary); line-height: 1.5; margin-top: 16px; }
+.gold-rule { width: 80px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin: 24px auto; border: none; }
+.toc { background: var(--bg-card); border: 1px solid rgba(201,168,76,0.1); border-radius: 12px; padding: 24px 28px; margin-bottom: 48px; }
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.toc ol { list-style: none; counter-reset: toc; }
+.toc li { counter-increment: toc; margin-bottom: 6px; }
+.toc li::before { content: counter(toc, decimal-leading-zero) "."; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-right: 8px; }
+.toc a { color: var(--text-secondary); text-decoration: none; font-size: 15px; transition: color 0.2s; }
+.toc a:hover { color: var(--gold); }
+.section { margin-bottom: 56px; scroll-margin-top: 60px; }
+.section h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(201,168,76,0.1); }
+.section h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--gold-light); margin: 28px 0 12px; }
+.section p, .section li { font-size: 16px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
+.section ul, .section ol { padding-left: 24px; margin-bottom: 16px; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+thead th { text-align: left; padding: 12px 16px; background: var(--bg-card); color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid rgba(201,168,76,0.2); }
+tbody td { padding: 12px 16px; border-bottom: 1px solid rgba(201,168,76,0.06); color: var(--text-secondary); vertical-align: top; }
+tbody tr:hover { background: rgba(201,168,76,0.03); }
+tbody td:first-child { color: var(--text-primary); font-weight: 500; }
+tbody td strong { color: var(--white); }
+.alert { padding: 20px 24px; border-radius: 10px; margin: 24px 0; border-left: 4px solid; font-size: 15px; line-height: 1.6; }
+.alert-tip { background: rgba(34,197,94,0.06); border-color: #22c55e; color: var(--text-secondary); }
+.alert-tip strong { color: #86efac; }
+.alert-important { background: rgba(59,130,246,0.06); border-color: #3b82f6; color: var(--text-secondary); }
+.alert-important strong { color: #93c5fd; }
+.alert-note { background: rgba(201,168,76,0.06); border-color: var(--gold); color: var(--text-secondary); }
+.alert-note strong { color: var(--gold-light); }
+.alert-warning { background: rgba(220,38,38,0.06); border-color: #dc2626; color: var(--text-secondary); }
+.alert-warning strong { color: #fca5a5; }
+
+/* Template code block */
+.template-block {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 24px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+.template-block .heading { color: var(--gold); font-weight: 700; }
+.template-block .sub { color: var(--gold-light); }
+
+.article-footer { text-align: center; padding: 32px; border-top: 1px solid rgba(201,168,76,0.08); font-size: 13px; color: var(--text-muted); }
+.article-footer a { color: var(--gold); text-decoration: none; }
+@media (max-width: 768px) { .topbar { padding: 10px 16px; } .article { padding: 32px 20px 60px; } }
+@media print { .topbar { display: none; } body { background: white; color: #1a1a1a; } body::before, body::after { display: none; } .article { max-width: 100%; } .section h2 { color: #1a1a1a; } .section h3 { color: #333; } .section p, .section li, tbody td { color: #444; } thead th { background: #f4f4f4; color: #333; } }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">ANBI Policy Plan</span>
+  <a href="peer-orgs.html">Peer Organizations →</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span class="article-flag">📋</span>
+    <h1>ANBI Policy Plan <em style="color:var(--gold);">(Beleidsplan)</em></h1>
+    <hr class="gold-rule">
+    <div class="purpose"><strong>Template &amp; Requirements</strong> for Stichting People for Peace &amp; Justice<br>Per Belastingdienst (Dutch Tax Authority) regulations · Updated for 2026</div>
+  </header>
+
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#what">What is a Beleidsplan?</a></li>
+      <li><a href="#elements">Required Elements</a></li>
+      <li><a href="#anti-hoarding">Anti-Hoarding Rule (2025/2026)</a></li>
+      <li><a href="#timeline">Activity Timeline</a></li>
+      <li><a href="#website">Website Publication Requirements</a></li>
+      <li><a href="#template">Template Outline</a></li>
+      <li><a href="#actions">Action Items</a></li>
+    </ol>
+  </nav>
+
+  <section class="section" id="what">
+    <h2>1. What is a Beleidsplan?</h2>
+    <p>Every Dutch ANBI (Algemeen Nut Beogende Instelling) must maintain a current policy plan. The Belastingdienst uses it to verify that the organization genuinely serves the general interest and manages its assets responsibly.</p>
+    <div class="alert alert-warning"><strong>New for 2026:</strong> The Wet Transparantie Maatschappelijke Organisaties (Wtmo), effective <strong>January 1, 2026</strong>, requires stichtingen to submit financial data to the KVK. This enables stricter oversight of reserves and spending.</div>
+  </section>
+
+  <section class="section" id="elements">
+    <h2>2. Required Elements</h2>
+
+    <h3>2.1 Objectives & Activities</h3>
+    <ul>
+      <li>Legal research and documentation of human rights violations</li>
+      <li>Evidence-gathering for international judicial proceedings</li>
+      <li>Public advocacy campaigns (social media, press, political lobbying)</li>
+      <li>Partnerships with ICC, ICJ-adjacent organizations</li>
+      <li>Victim support coordination</li>
+      <li>Publications and educational materials</li>
+    </ul>
+
+    <h3>2.2 Income Generation</h3>
+    <ul>
+      <li>Individual donations (online, campaigns)</li>
+      <li>Grant applications (EU, UN, Dutch gov't via MFA)</li>
+      <li>Institutional partnerships</li>
+      <li>Crowdfunding campaigns</li>
+      <li>Pro-bono legal services (received, not charged)</li>
+    </ul>
+
+    <h3>2.3 Expenditure Plan</h3>
+    <table>
+      <thead><tr><th>Category</th><th>Est. %</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Legal research &amp; documentation</td><td><strong>40%</strong></td><td>Case files, expert consultations, translations</td></tr>
+        <tr><td>Advocacy &amp; campaigns</td><td><strong>25%</strong></td><td>Media, web, social media, events</td></tr>
+        <tr><td>Operations</td><td><strong>20%</strong></td><td>Address, bank, insurance, admin</td></tr>
+        <tr><td>Partnerships &amp; travel</td><td><strong>10%</strong></td><td>Conferences, ICC/ASP engagement</td></tr>
+        <tr><td>Reserve (continuity)</td><td><strong>5%</strong></td><td>Emergency buffer</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="anti-hoarding">
+    <h2>3. Anti-Hoarding Rule — New 2025/2026</h2>
+    <div class="alert alert-warning"><strong>Critical:</strong> The foundation cannot retain more assets than reasonably necessary for continuity.</div>
+    <ul>
+      <li><strong>Maximum continuity reserve:</strong> 1.5× annual operating costs</li>
+      <li><strong>All reserves must be justified</strong> in writing in the policy plan</li>
+      <li><strong>Earmarked funds</strong> (doelvermogen) for specific projects are allowed but must have clear timelines</li>
+      <li>Belastingdienst will scrutinize foundations holding excessive cash</li>
+    </ul>
+  </section>
+
+  <section class="section" id="timeline">
+    <h2>4. Activity Timeline</h2>
+    <table>
+      <thead><tr><th>Quarter</th><th>Planned Activities</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Q2 2026</strong></td><td>Stichting formation, board confirmation, KVK registration</td></tr>
+        <tr><td><strong>Q3 2026</strong></td><td>ANBI application, bank account, website ANBI page</td></tr>
+        <tr><td><strong>Q4 2026</strong></td><td>First case documentation work, ASP 25 observer application</td></tr>
+        <tr><td><strong>Q1 2027</strong></td><td>First publication, grant applications</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="website">
+    <h2>5. Website Publication Requirements</h2>
+    <p>ANBI requires the following to be publicly available on the foundation's website:</p>
+    <table>
+      <thead><tr><th>#</th><th>Required Content</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Name of the foundation</td><td>✅ People for Peace &amp; Justice</td></tr>
+        <tr><td>2</td><td>RSIN / fiscal number</td><td>⏳ After KVK registration</td></tr>
+        <tr><td>3</td><td>Contact details</td><td>⏳ After registered address</td></tr>
+        <tr><td>4</td><td>Purpose and mission</td><td>✅ Mission clause drafted</td></tr>
+        <tr><td>5</td><td>Policy plan summary</td><td>⏳ This document</td></tr>
+        <tr><td>6</td><td>Board composition &amp; functions</td><td>⏳ After board confirmed</td></tr>
+        <tr><td>7</td><td>Remuneration policy</td><td>✅ No compensation for board</td></tr>
+        <tr><td>8</td><td>Annual financial report</td><td>⏳ After first fiscal year</td></tr>
+        <tr><td>9</td><td>Annual activity report</td><td>⏳ After first fiscal year</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-note"><strong>Note:</strong> Board members of an ANBI cannot receive compensation beyond reasonable expense reimbursement.</div>
+  </section>
+
+  <section class="section" id="template">
+    <h2>6. Template Outline</h2>
+    <div class="template-block"><span class="heading">BELEIDSPLAN</span>
+<span class="sub">Stichting People for Peace & Justice</span>
+<span class="sub">Period: 2026–2029</span>
+
+<span class="heading">1. INLEIDING</span> (Introduction)
+   Foundation background and context
+   Justice for Minab Children campaign
+
+<span class="heading">2. DOELSTELLING</span> (Mission & Purpose)
+   As per Article 2 of the Statuten
+
+<span class="heading">3. WERKZAAMHEDEN</span> (Activities)
+   Research · Advocacy · Partnerships · Victim support
+
+<span class="heading">4. ORGANISATIESTRUCTUUR</span> (Organization)
+   Board composition · No remuneration · Volunteers
+
+<span class="heading">5. WERVINGSBELEID</span> (Fundraising)
+   Donation sources · Grant applications · Cost ratios
+
+<span class="heading">6. FINANCIEEL BEHEER</span> (Financial Management)
+   Budget · Reserve policy (max 1.5×) · Expenditure
+
+<span class="heading">7. BESTEDINGSBELEID</span> (Spending Policy)
+   Resource allocation · Decision-making process
+
+<span class="heading">8. BIJLAGEN</span> (Appendices)
+   Board details · Budget spreadsheet · Founding deed</div>
+  </section>
+
+  <section class="section" id="actions">
+    <h2>7. Action Items</h2>
+    <table>
+      <thead><tr><th>Task</th><th>Assigned</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Fill in template with foundation-specific details</td><td>Mahdi</td><td>⏳ Next</td></tr>
+        <tr><td>Review Dutch legal accuracy</td><td>Zahra</td><td>⏳ Pending</td></tr>
+        <tr><td>Create ANBI-compliant website pages</td><td>Mahdi</td><td>⏳ After KVK</td></tr>
+        <tr><td>Submit to Belastingdienst</td><td>Zahra</td><td>⏳ After KVK</td></tr>
+      </tbody>
+    </table>
+  </section>
+</article>
+
+<footer class="article-footer">
+  Research compiled: March 15, 2026 · Sources: Belastingdienst.nl, ANBI-portaal.nl, RSM Global, PwC NL<br>
+  <a href="docs.html">← Documents</a> · <a href="mission-purpose.html">Mission Clause</a> · <a href="tasks.html">Task Board</a>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
