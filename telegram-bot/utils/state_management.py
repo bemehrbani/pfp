@@ -355,6 +355,14 @@ class ConversationStateManager:
         member_count = await _join_campaign(campaign, user)
         task_count = await _get_task_count(campaign)
 
+        # Channel broadcast (fire-and-forget)
+        from handlers.tasks import _broadcast_volunteer_joined
+        await _broadcast_volunteer_joined(
+            bot=context.bot,
+            campaign_id=campaign_id,
+            member_count=member_count
+        )
+
         # Get tasks for inline buttons
         @sync_to_async
         def _get_tasks(cid):

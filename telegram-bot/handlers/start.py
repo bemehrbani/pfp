@@ -350,6 +350,15 @@ async def _handle_deeplink_for_existing_user(context, session, db_user, lang, ch
         # Join and show tasks — pass referrer for credit
         member_count = await _join_campaign(campaign, db_user, referrer_id=referrer_id)
         task_count = await _get_task_count(campaign)
+
+        # Channel broadcast (fire-and-forget)
+        from handlers.tasks import _broadcast_volunteer_joined
+        await _broadcast_volunteer_joined(
+            bot=context.bot,
+            campaign_id=deeplink_campaign_id,
+            member_count=member_count
+        )
+
         await context.bot.send_message(
             chat_id=chat_id,
             text=t('auto_joined_campaign', lang).format(
