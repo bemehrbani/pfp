@@ -831,9 +831,9 @@ TRANSLATIONS = {
         "ar": "💬 رد بتعليق مقترح",
     },
     "share_send_proof": {
-        "en": "When done, send proof (link or screenshot) below 👇",
-        "fa": "وقتی تمام شد، مدرک (لینک یا اسکرین‌شات) را در زیر بفرستید 👇",
-        "ar": "عند الانتهاء، أرسل الدليل (رابط أو لقطة شاشة) أدناه 👇",
+        "en": "When done, send proof (link, screenshot, or Instagram post/story screenshot) below 👇",
+        "fa": "وقتی تمام شد، مدرک (لینک، اسکرین‌شات، یا اسکرین‌شات پست/استوری اینستاگرام) را در زیر بفرستید 👇",
+        "ar": "عند الانتهاء، أرسل الدليل (رابط، لقطة شاشة، أو لقطة شاشة لمنشور/ستوري إنستاغرام) أدناه 👇",
     },
     "invite_share_link": {
         "en": "Share our channel: https://t.me/people4peace",
@@ -900,13 +900,14 @@ TRANSLATIONS = {
             "• Write a Twitter thread about what happened on Feb 28\n"
             "• Create a poem or tribute for the 168 children\n"
             "• Make a before/after graphic of the school\n"
-            "• Record a 60-second video message for peace\n\n"
+            "• Record a 60-second video message for peace\n"
+            "• Post on Instagram (feed or story) with the hashtags below\n\n"
             "📚 *Resources for inspiration:*\n"
             "🕯 Memorial: peopleforpeace.live/memorial.html\n"
             "📰 Evidence: peopleforpeace.live/evidence.html\n"
             "📖 Amplify reports: peopleforpeace.live/amplify.html\n\n"
             "📤 *How to share:*\n"
-            "Post on Twitter/X and paste the tweet URL here, "
+            "Post on Twitter/X or Instagram and paste the URL or send a screenshot here, "
             "or send your content directly in this chat."
         ),
         "fa": (
@@ -917,13 +918,14 @@ TRANSLATIONS = {
             "• یک رشته توییت درباره اتفاقات ۹ اسفند بنویسید\n"
             "• یک شعر یا یادبود برای ۱۶۸ کودک بنویسید\n"
             "• یک گرافیک قبل/بعد از مدرسه بسازید\n"
-            "• یک پیام ویدیویی ۶۰ ثانیه‌ای برای صلح ضبط کنید\n\n"
+            "• یک پیام ویدیویی ۶۰ ثانیه‌ای برای صلح ضبط کنید\n"
+            "• در اینستاگرام (فید یا استوری) با هشتگ‌های زیر پست کنید\n\n"
             "📚 *منابع الهام‌بخش:*\n"
             "🕯 یادبود: peopleforpeace.live/memorial.html\n"
             "📰 مدارک: peopleforpeace.live/evidence.html\n"
             "📖 گزارش‌ها: peopleforpeace.live/amplify.html\n\n"
             "📤 *نحوه اشتراک‌گذاری:*\n"
-            "در توییتر/ایکس پست کنید و لینک توییت را اینجا بفرستید، "
+            "در توییتر/ایکس یا اینستاگرام پست کنید و لینک یا اسکرین‌شات را اینجا بفرستید، "
             "یا محتوایتان را مستقیماً در این چت بفرستید."
         ),
         "ar": (
@@ -934,13 +936,14 @@ TRANSLATIONS = {
             "• اكتب سلسلة تغريدات عن ما حدث في ٢٨ فبراير\n"
             "• أنشئ قصيدة أو تكريماً لـ ١٦٨ طفلاً\n"
             "• اصنع رسماً بيانياً قبل/بعد للمدرسة\n"
-            "• سجّل رسالة فيديو ٠٦ ثانية من أجل السلام\n\n"
+            "• سجّل رسالة فيديو ٦٠ ثانية من أجل السلام\n"
+            "• انشر على إنستاغرام (منشور أو ستوري) مع الهاشتاغات أدناه\n\n"
             "📚 *موارد للإلهام:*\n"
             "🕯 التذكار: peopleforpeace.live/memorial.html\n"
             "📰 الأدلة: peopleforpeace.live/evidence.html\n"
             "📖 التقارير: peopleforpeace.live/amplify.html\n\n"
             "📤 *كيفية المشاركة:*\n"
-            "انشر على تويتر/X والصق رابط التغريدة هنا، "
+            "انشر على تويتر/X أو إنستاغرام والصق الرابط أو أرسل لقطة شاشة هنا، "
             "أو أرسل محتواك مباشرةً في هذه المحادثة."
         ),
     },
@@ -1123,6 +1126,192 @@ TRANSLATIONS = {
         "en": "Join me in the \"{name}\" campaign for peace! ✌️",
         "fa": "به کمپین «{name}» برای صلح بپیوندید! ✌️",
         "ar": "انضم إليّ في حملة «{name}» من أجل السلام! ✌️",
+    },
+
+    # ── Twitter Storm (Mar 28) ──────────────────────────────────
+    "twitter_storm_briefing": {
+        "en": (
+            "🔥 <b>March 28 Twitter Storm — One Month Since Minab</b>\n\n"
+            "On February 28, an airstrike hit a school in Minab, Iran — "
+            "killing 168 children. One month later, the world is moving on.\n\n"
+            "<b>We won't let that happen.</b>\n\n"
+            "📅 <b>When:</b> March 28, 1 PM UTC\n"
+            "(🇺🇸 8 AM ET · 🇪🇺 2 PM CET · 🇮🇷 4:30 PM IRST)\n\n"
+            "📣 <b>How to participate:</b>\n"
+            "• Use the bot for ready-made tweets — just tap and post\n"
+            "• Or write your own using the hashtags below\n"
+            "• Retweet and reply to amplify each other\n\n"
+            "#️⃣ <b>Hashtags:</b>\n"
+            "<code>#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar</code>\n\n"
+            "🤖 Start → @peopleforpeacebot\n"
+            "📢 Channel → @people4peace"
+        ),
+        "fa": (
+            "🔥 <b>طوفان توییتری ۲۸ مارس — یک ماه پس از میناب</b>\n\n"
+            "۹ اسفند، یک حمله هوایی به مدرسه‌ای در میناب، ایران — "
+            "۱۶۸ کودک را کشت. یک ماه بعد، دنیا دارد فراموش می‌کند.\n\n"
+            "<b>ما اجازه نمی‌دهیم.</b>\n\n"
+            "📅 <b>زمان:</b> ۲۸ مارس، ساعت ۱ ظهر UTC\n"
+            "(🇮🇷 ۴:۳۰ عصر ایران · 🇪🇺 ۲ ظهر اروپا · 🇺🇸 ۸ صبح آمریکا)\n\n"
+            "📣 <b>نحوه شرکت:</b>\n"
+            "• از ربات توییت‌های آماده بگیرید — فقط بزنید و پست کنید\n"
+            "• یا خودتان با هشتگ‌های زیر بنویسید\n"
+            "• ریتوییت و ریپلای کنید تا همدیگر را تقویت کنید\n\n"
+            "#️⃣ <b>هشتگ‌ها:</b>\n"
+            "<code>#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar</code>\n\n"
+            "🤖 شروع → @peopleforpeacebot\n"
+            "📢 کانال → @people4peace"
+        ),
+        "ar": (
+            "🔥 <b>عاصفة تويتر ٢٨ مارس — شهر منذ ميناب</b>\n\n"
+            "في ٢٨ فبراير، ضربت غارة جوية مدرسة في ميناب، إيران — "
+            "قتلت ١٦٨ طفلاً. بعد شهر، العالم ينسى.\n\n"
+            "<b>لن نسمح بذلك.</b>\n\n"
+            "📅 <b>الموعد:</b> ٢٨ مارس، الساعة ١ ظهراً UTC\n"
+            "(🇺🇸 ٨ صباحاً ET · 🇪🇺 ٢ ظهراً CET)\n\n"
+            "📣 <b>كيف تشارك:</b>\n"
+            "• استخدم البوت للحصول على تغريدات جاهزة — اضغط وانشر\n"
+            "• أو اكتب تغريدتك باستخدام الهاشتاغات أدناه\n"
+            "• أعد التغريد والرد لتضخيم بعضكم البعض\n\n"
+            "#️⃣ <b>الهاشتاغات:</b>\n"
+            "<code>#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar</code>\n\n"
+            "🤖 ابدأ → @peopleforpeacebot\n"
+            "📢 القناة → @people4peace"
+        ),
+    },
+    "twitter_storm_title": {
+        "en": "🔥 March 28 Twitter Storm",
+        "fa": "🔥 طوفان توییتری ۲۸ مارس",
+        "ar": "🔥 عاصفة تويتر ٢٨ مارس",
+    },
+    "twitter_storm_pick_tweet": {
+        "en": (
+            "🐦 Here's a tweet you can post right now!\n\n"
+            "Copy the text below and paste it on Twitter/X:\n\n"
+        ),
+        "fa": (
+            "🐦 یک توییت آماده برای ارسال!\n\n"
+            "متن زیر را کپی کنید و در توییتر/X بگذارید:\n\n"
+        ),
+        "ar": (
+            "🐦 إليك تغريدة يمكنك نشرها الآن!\n\n"
+            "انسخ النص أدناه والصقه في تويتر/X:\n\n"
+        ),
+    },
+    "twitter_storm_next_tweet": {
+        "en": "Want another tweet? Tap below 👇",
+        "fa": "توییت دیگه می‌خوای؟ دکمه زیر رو بزن 👇",
+        "ar": "تريد تغريدة أخرى؟ اضغط أدناه 👇",
+    },
+    "twitter_storm_hashtags": {
+        "en": "#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar",
+        "fa": "#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar",
+        "ar": "#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar",
+    },
+    "twitter_storm_countdown": {
+        "en": "⏰ {days} days until the Twitter Storm!",
+        "fa": "⏰ {days} روز تا طوفان توییتری!",
+        "ar": "⏰ {days} يوم حتى عاصفة تويتر!",
+    },
+    "twitter_storm_reminder_1w": {
+        "en": (
+            "📢 <b>One Week Until the Twitter Storm!</b>\n\n"
+            "March 28 · 1 PM UTC\n"
+            "One month since Minab. 168 children.\n\n"
+            "Prepare your tweets, rally your network, and let's make noise together.\n\n"
+            "🤖 Get ready-made tweets: @peopleforpeacebot\n"
+            "#JusticeForMinabChildren #OneMonthMinab"
+        ),
+        "fa": (
+            "📢 <b>یک هفته تا طوفان توییتری!</b>\n\n"
+            "۲۸ مارس · ساعت ۱ ظهر UTC\n"
+            "یک ماه از میناب. ۱۶۸ کودک.\n\n"
+            "توییت‌هایتان رو آماده کنید، شبکه‌تان رو بسیج کنید و با هم صدا بشیم.\n\n"
+            "🤖 توییت‌های آماده: @peopleforpeacebot\n"
+            "#عدالت_برای_کودکان_میناب #یک_ماه_میناب"
+        ),
+        "ar": (
+            "📢 <b>أسبوع واحد حتى عاصفة تويتر!</b>\n\n"
+            "٢٨ مارس · الساعة ١ ظهراً UTC\n"
+            "شهر من ميناب. ١٦٨ طفلاً.\n\n"
+            "جهّز تغريداتك، اجمع شبكتك، ولنُحدث ضجة معاً.\n\n"
+            "🤖 احصل على تغريدات جاهزة: @peopleforpeacebot\n"
+            "#العدالة_لأطفال_ميناب #شهر_من_ميناب"
+        ),
+    },
+    "twitter_storm_reminder_1d": {
+        "en": (
+            "🚨 <b>TOMORROW: Twitter Storm!</b>\n\n"
+            "March 28 · 1 PM UTC\n\n"
+            "168 children. One month. Zero accountability.\n"
+            "Tomorrow we change that.\n\n"
+            "Set your alarm. Prepare your tweets.\n"
+            "🤖 @peopleforpeacebot has 12 ready-to-post tweets.\n\n"
+            "#JusticeForMinabChildren #OneMonthMinab"
+        ),
+        "fa": (
+            "🚨 <b>فردا: طوفان توییتری!</b>\n\n"
+            "۲۸ مارس · ساعت ۱ ظهر UTC\n\n"
+            "۱۶۸ کودک. یک ماه. صفر پاسخگویی.\n"
+            "فردا این رو تغییر می‌دهیم.\n\n"
+            "آلارم بذارید. توییت‌هایتان رو آماده کنید.\n"
+            "🤖 @peopleforpeacebot ۱۲ توییت آماده دارد.\n\n"
+            "#عدالت_برای_کودکان_میناب #یک_ماه_میناب"
+        ),
+        "ar": (
+            "🚨 <b>غداً: عاصفة تويتر!</b>\n\n"
+            "٢٨ مارس · الساعة ١ ظهراً UTC\n\n"
+            "١٦٨ طفلاً. شهر. صفر محاسبة.\n"
+            "غداً نغيّر ذلك.\n\n"
+            "اضبط المنبه. جهّز تغريداتك.\n"
+            "🤖 @peopleforpeacebot لديه ١٢ تغريدة جاهزة.\n\n"
+            "#العدالة_لأطفال_ميناب #شهر_من_ميناب"
+        ),
+    },
+    "twitter_storm_reminder_1h": {
+        "en": (
+            "⚡ <b>IT'S TIME! Twitter Storm is LIVE!</b>\n\n"
+            "Go go go! 🚀\n\n"
+            "Tweet NOW. Retweet everything. Tag everyone.\n"
+            "168 children deserve to be heard.\n\n"
+            "🤖 Get tweets: @peopleforpeacebot\n"
+            "#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar"
+        ),
+        "fa": (
+            "⚡ <b>وقتشه! طوفان توییتری شروع شد!</b>\n\n"
+            "بزن بریم! 🚀\n\n"
+            "الان توییت بزنید. همه رو ریتوییت کنید. همه رو تگ کنید.\n"
+            "۱۶۸ کودک حق دارند شنیده شوند.\n\n"
+            "🤖 توییت بگیرید: @peopleforpeacebot\n"
+            "#عدالت_برای_کودکان_میناب #یک_ماه_میناب #۱۶۸کودک #جنگ_را_متوقف_کنید"
+        ),
+        "ar": (
+            "⚡ <b>حان الوقت! عاصفة تويتر بدأت!</b>\n\n"
+            "يلا يلا! 🚀\n\n"
+            "غرّد الآن. أعد تغريد كل شيء. أشر إلى الجميع.\n"
+            "١٦٨ طفلاً يستحقون أن يُسمعوا.\n\n"
+            "🤖 احصل على تغريدات: @peopleforpeacebot\n"
+            "#العدالة_لأطفال_ميناب #شهر_من_ميناب #١٦٨طفلاً #أوقفوا_الحرب"
+        ),
+    },
+
+    # ── Sharing Hashtags ──────────────────────────────────────────
+    "sharing_hashtags": {
+        "en": (
+            "📋 <b>Use these hashtags:</b>\n"
+            "<code>#JusticeForMinabChildren #MinabSchool #168Children "
+            "#HandsOffIran #IStandWithIran #StopTheWar</code>"
+        ),
+        "fa": (
+            "📋 <b>از این هشتگ‌ها استفاده کنید:</b>\n"
+            "<code>#JusticeForMinabChildren #MinabSchool #168Children "
+            "#HandsOffIran #IStandWithIran #StopTheWar</code>"
+        ),
+        "ar": (
+            "📋 <b>استخدم هذه الهاشتاغات:</b>\n"
+            "<code>#JusticeForMinabChildren #MinabSchool #168Children "
+            "#HandsOffIran #IStandWithIran #StopTheWar</code>"
+        ),
     },
     "referral_credited": {
         "en": "🎁 *Great!* {name} just joined *{campaign}* through your invite link! Welcome them! 🤝",

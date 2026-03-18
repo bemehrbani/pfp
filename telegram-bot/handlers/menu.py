@@ -272,6 +272,9 @@ async def menu_callback_handler(update: Update, context: CallbackContext):
             reply_markup=_get_language_keyboard(),
             parse_mode='Markdown',
         )
+    elif action == 'menu_storm':
+        from handlers.storm import storm_command
+        await storm_command(update, context)
     else:
         logger.warning(f"Unknown menu action: {action}")
 

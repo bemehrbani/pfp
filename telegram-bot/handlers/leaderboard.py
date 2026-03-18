@@ -100,13 +100,13 @@ async def leaderboard_command(update: Update, context: CallbackContext):
             if not campaign_filter:
                 await update.message.reply_text(
                     "❌ Invalid campaign ID.\n"
-                    "Use `/campaigns` to see available campaigns.",
-                    parse_mode='Markdown'
+                    "Use /campaigns to see available campaigns.",
+                    parse_mode='HTML'
                 )
                 return
         except ValueError:
             await update.message.reply_text(
-                "❌ Invalid campaign ID.", parse_mode='Markdown'
+                "❌ Invalid campaign ID.", parse_mode='HTML'
             )
             return
 
@@ -120,7 +120,7 @@ async def leaderboard_command(update: Update, context: CallbackContext):
     await update.message.reply_text(
         message,
         reply_markup=reply_markup,
-        parse_mode='Markdown'
+        parse_mode='HTML'
     )
 
 
@@ -131,11 +131,11 @@ def create_leaderboard_message(data, campaign_filter, current_user):
     total_users = data['total_users']
 
     if campaign_filter:
-        message = f"🏆 *Leaderboard - {campaign_filter.name}*\n\n"
+        message = f"🏆 <b>Leaderboard — {campaign_filter.name}</b>\n\n"
     else:
-        message = "🏆 *Global Leaderboard*\n\n"
+        message = "🏆 <b>Global Leaderboard</b>\n\n"
 
-    message += f"*Top Volunteers (out of {total_users} total)*\n\n"
+    message += f"<b>Top Volunteers (out of {total_users} total)</b>\n\n"
 
     for i, user in enumerate(top_users, 1):
         medal = ""
@@ -149,17 +149,17 @@ def create_leaderboard_message(data, campaign_filter, current_user):
         completed = getattr(user, 'points', 0) or 0
 
         if current_user and user.id == current_user.id:
-            message += f"*{i}. {medal}YOU - {user.first_name}*\n"
+            message += f"<b>{i}. {medal}YOU — {user.first_name}</b>\n"
         else:
             message += f"{i}. {medal}{user.first_name}\n"
 
         message += f"   📊 {completed} tasks completed\n\n"
 
     if current_user_rank:
-        message += f"*Your Rank:* #{current_user_rank}\n"
-        message += f"*Your Points:* {getattr(current_user, 'points', 0) or 0}\n\n"
+        message += f"<b>Your Rank:</b> #{current_user_rank}\n"
+        message += f"<b>Your Points:</b> {getattr(current_user, 'points', 0) or 0}\n\n"
 
-    message += "\n_Leaderboard updates in real-time._"
+    message += "\n<i>Leaderboard updates in real-time.</i>"
 
     return message
 
@@ -222,7 +222,7 @@ async def show_global_leaderboard(query, session):
     await query.edit_message_text(
         message,
         reply_markup=reply_markup,
-        parse_mode='Markdown'
+        parse_mode='HTML'
     )
 
 
@@ -233,8 +233,8 @@ async def show_campaign_filter_options(query, session):
     if not user_campaigns:
         await query.edit_message_text(
             "📭 You haven't joined any campaigns yet.\n"
-            "Use `/campaigns` to browse and join available campaigns.",
-            parse_mode='Markdown'
+            "Use /campaigns to browse and join available campaigns.",
+            parse_mode='HTML'
         )
         return
 
@@ -242,7 +242,7 @@ async def show_campaign_filter_options(query, session):
     for cv in user_campaigns:
         keyboard.append([
             InlineKeyboardButton(
-                f"📋 {cv.campaign.localized_name(lang)[:30]}",
+                f"📋 {cv.campaign.name[:30]}",
                 callback_data=f"leaderboard_campaign_{cv.campaign.id}"
             )
         ])
@@ -254,10 +254,10 @@ async def show_campaign_filter_options(query, session):
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await query.edit_message_text(
-        "📋 *Select a Campaign*\n\n"
+        "📋 <b>Select a Campaign</b>\n\n"
         "Choose a campaign to see its leaderboard:",
         reply_markup=reply_markup,
-        parse_mode='Markdown'
+        parse_mode='HTML'
     )
 
 
@@ -272,7 +272,7 @@ async def show_campaign_leaderboard(query, session, campaign_id):
     if not campaign:
         await query.edit_message_text(
             "❌ Campaign not found or is no longer active.",
-            parse_mode='Markdown'
+            parse_mode='HTML'
         )
         return
 
@@ -284,7 +284,7 @@ async def show_campaign_leaderboard(query, session, campaign_id):
     await query.edit_message_text(
         message,
         reply_markup=reply_markup,
-        parse_mode='Markdown'
+        parse_mode='HTML'
     )
 
 

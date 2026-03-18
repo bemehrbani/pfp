@@ -504,16 +504,33 @@ def _db_get_campaign_group_id(campaign_id):
         return None
 
 
-async def _broadcast_task_completion(bot, campaign_id, task_title, task_type, proof_url=''):
+@sync_to_async
+def _db_get_share_preference(user_id):
+    """Check if user opted in to share completions in channel."""
+    from apps.telegram.models import TelegramSession
+    try:
+        session = TelegramSession.objects.get(user_id=user_id)
+        return (session.temp_data or {}).get('share_in_channel', True)
+    except TelegramSession.DoesNotExist:
+        return True
+
+
+async def _broadcast_task_completion(bot, campaign_id, task_title, task_type, proof_url='', user_id=None):
     """
     Broadcast an anonymized task completion to the campaign's Telegram channel.
-    Fire-and-forget: errors are logged but never raised.
+    Respects user share preference. Fire-and-forget: errors are logged but never raised.
     """
     try:
         channel_id = await _db_get_campaign_channel_id(campaign_id)
         if not channel_id:
             logger.warning(f'No telegram_channel_id set for campaign {campaign_id} — skipping task completion broadcast')
             return
+
+        if user_id:
+            share_enabled = await _db_get_share_preference(user_id)
+            if not share_enabled:
+                logger.info(f'User {user_id} opted out of channel sharing')
+                return
 
         type_icons = {
             'twitter_post': '🐦', 'twitter_retweet': '🔁', 'twitter_comment': '💬',
@@ -1176,7 +1193,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         if lang == 'fa':
             msg += "پس از انتخاب و توییت، لینک توییت خود را اینجا بفرستید.\n"
         else:
-            msg += "After tweeting, paste your tweet URL here as proof.\n"
+            msg += "After tweeting, paste your tweet URL (or Instagram post link) here as proof.\n"
         msg += t('cancel_hint', lang)
 
     # ── Twitter Retweet: Link to search ──
@@ -1399,6 +1416,7 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         msg += "• Record a 60-second voice/video message\n\n"
         msg += "📤 *How to share:*\n"
         msg += "• Post on Twitter/X and paste the tweet URL here\n"
+        msg += "• Or post on Instagram and paste the link here\n"
         msg += "• Or send your text/image directly in this chat\n"
 
         if task.instructions:
@@ -1569,7 +1587,7 @@ async def receive_task_proof(update: Update, context: CallbackContext):
     proof_content = ""
     if update.message.text:
         text = update.message.text.strip()
-        if any(domain in text.lower() for domain in ['twitter.com/', 'x.com/', 't.me/', 'https://']):
+        if any(domain in text.lower() for domain in ['twitter.com/', 'x.com/', 't.me/', 'instagram.com/', 'https://']):
             proof_type = "url"
             proof_content = text
         else:
@@ -1613,7 +1631,8 @@ async def receive_task_proof(update: Update, context: CallbackContext):
             campaign_id=campaign_id,
             task_title=assignment.task.title,
             task_type=assignment.task.task_type,
-            proof_url=proof_content if proof_type == 'url' else ''
+            proof_url=proof_content if proof_type == 'url' else '',
+            user_id=assignment.volunteer_id,
         )
 
         # Gated group invite (first task only)
@@ -1725,7 +1744,8 @@ async def confirm_proof_submission(query, session, assignment_id, context):
             campaign_id=campaign_id,
             task_title=assignment.task.title,
             task_type=assignment.task.task_type,
-            proof_url=proof_details.get('content', '') if proof_details.get('type') == 'url' else ''
+            proof_url=proof_details.get('content', '') if proof_details.get('type') == 'url' else '',
+            user_id=assignment.volunteer_id,
         )
 
         # ── Gated Group Invite (first task only) ──

@@ -101,6 +101,8 @@ class PFPCampaignBot:
                 # Handler lists
                 campaign_handlers, task_handlers,
                 storm_handlers, menu_handlers,
+                # Storm tweet handlers (storm.py — /storm command)
+                storm_tweet_handlers,
                 text_message_handler, unknown_command_handler
             )
 
@@ -141,6 +143,8 @@ class PFPCampaignBot:
                 self.application.add_handler(handler)
 
             for handler in storm_handlers:
+                self.application.add_handler(handler)
+            for handler in storm_tweet_handlers:
                 self.application.add_handler(handler)
             for handler in menu_handlers:
                 self.application.add_handler(handler)
