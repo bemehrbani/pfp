@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Operations — Campaign Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg-deep:#0a0e1a;--bg-primary:#0f172a;--bg-card:#1e293b;--bg-card-hover:#273548;--blue:#3b82f6;--blue-light:#60a5fa;--gold:#c9a84c;--gold-light:#e8d48b;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--white:#fff;--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text-primary);-webkit-font-smoothing:antialiased;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(59,130,246,.03) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(201,168,76,.04) 0%,transparent 50%);pointer-events:none}
+
+.topbar{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 32px;background:rgba(10,14,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(59,130,246,.08)}
+.topbar a{color:var(--blue-light);text-decoration:none;font-size:14px;cursor:pointer}
+.topbar-title{font-family:var(--font-display);font-size:14px;color:var(--text-muted)}
+
+.page-header{position:relative;z-index:1;padding:40px 32px 16px;max-width:900px;margin:0 auto;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.page-header h1{font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:900;color:var(--white);margin-bottom:8px}
+.page-header h1 .accent{color:var(--blue-light)}
+.page-header .subtitle{font-size:16px;color:var(--text-secondary);line-height:1.5;margin-bottom:12px}
+
+.content{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:16px 32px 60px}
+
+/* TOC */
+.toc{background:var(--bg-card);border:1px solid rgba(59,130,246,.1);border-radius:12px;padding:20px 28px;margin-bottom:40px}
+.toc h3{font-family:var(--font-display);font-size:16px;color:var(--gold-light);margin-bottom:12px}
+.toc ol{list-style:none;counter-reset:toc}
+.toc li{counter-increment:toc}
+.toc li::before{content:counter(toc) '.';font-family:var(--font-mono);color:var(--text-muted);margin-right:8px;font-size:12px}
+.toc a{color:var(--blue-light);text-decoration:none;font-size:14px;line-height:2}
+.toc a:hover{text-decoration:underline}
+
+/* Sections */
+.guide-section{margin-bottom:48px}
+.guide-section h2{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--white);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid rgba(59,130,246,.15)}
+.guide-section h3{font-size:18px;font-weight:600;color:var(--blue-light);margin:24px 0 12px}
+.guide-section p,.guide-section li{font-size:15px;color:var(--text-secondary);line-height:1.7}
+.guide-section ul,.guide-section ol{padding-left:20px;margin-bottom:16px}
+.guide-section li{margin-bottom:6px}
+
+code{font-family:var(--font-mono);font-size:13px;padding:2px 8px;background:rgba(59,130,246,.08);border-radius:4px;color:var(--blue-light)}
+.code-block{display:block;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:16px 20px;font-family:var(--font-mono);font-size:13px;color:var(--text-secondary);line-height:1.6;overflow-x:auto;margin:12px 0 20px;white-space:pre}
+
+.info-box{background:var(--bg-card);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:16px 20px;margin:16px 0;font-size:14px;color:var(--text-secondary)}
+.info-box.warn{border-left-color:var(--yellow)}
+.info-box.danger{border-left-color:var(--red)}
+.info-box.success{border-left-color:var(--green)}
+.info-box strong{color:var(--white)}
+
+.cmd-table{width:100%;border-collapse:collapse;margin:12px 0 20px}
+.cmd-table th{text-align:left;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
+.cmd-table td{padding:10px 12px;font-size:14px;color:var(--text-secondary);border-bottom:1px solid rgba(255,255,255,.03)}
+.cmd-table code{background:rgba(59,130,246,.08);padding:2px 6px;border-radius:4px;font-size:13px}
+
+/* Steps */
+.step-card{background:var(--bg-card);border:1px solid rgba(59,130,246,.1);border-radius:12px;padding:24px;margin:16px 0}
+.step-card .step-num{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.step-card h4{font-size:16px;font-weight:600;color:var(--white);margin-bottom:8px}
+.step-card p,.step-card li{font-size:14px;color:var(--text-secondary);line-height:1.6}
+.step-card img{max-width:100%;border-radius:8px;margin:12px 0;border:1px solid rgba(255,255,255,.06)}
+.step-card ol,.step-card ul{padding-left:20px;margin-top:8px}
+.step-card li{margin-bottom:4px}
+
+.page-footer{position:relative;z-index:1;text-align:center;padding:24px 32px;font-size:13px;color:var(--text-muted);border-top:1px solid rgba(59,130,246,.06)}
+.page-footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:640px){.topbar{padding:10px 16px}.page-header,.content{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="hub.html">← Back to Team Hub</a>
+  <span class="topbar-title">Admin Operations</span>
+  <a onclick="window.print()">Print ↓</a>
+</nav>
+
+<header class="page-header">
+  <h1>🔧 Admin <span class="accent">Operations</span></h1>
+  <p class="subtitle">Step-by-step guides for managing the PFP platform — Django Admin, tweet targets, proof review, bot commands, and troubleshooting.</p>
+</header>
+
+<main class="content">
+
+<!-- TOC -->
+<nav class="toc">
+  <h3>Quick Reference</h3>
+  <ol>
+    <li><a href="#login">Django Admin Login</a></li>
+    <li><a href="#tweet-targets">Managing Tweet Comment Targets</a></li>
+    <li><a href="#proof-review">Reviewing Volunteer Proofs</a></li>
+    <li><a href="#tasks">Managing Tasks</a></li>
+    <li><a href="#bot-commands">Admin Bot Commands</a></li>
+    <li><a href="#docker">Docker & Logs</a></li>
+  </ol>
+</nav>
+
+<!-- 1. Django Admin Login -->
+<section id="login" class="guide-section">
+  <h2>1. Django Admin Login</h2>
+  <p>The Django Admin interface is the primary backend tool for managing campaigns, tasks, volunteers, and proofs.</p>
+
+  <div class="step-card">
+    <div class="step-num">Step 1</div>
+    <h4>Open the Admin Panel</h4>
+    <p>Navigate to:</p>
+    <div class="code-block">https://peopleforpeace.live/admin/</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">Step 2</div>
+    <h4>Log In</h4>
+    <p>Use the admin credentials provided by the project lead. After login, you'll see the admin dashboard with sections for:</p>
+    <ul>
+      <li><strong>Campaigns</strong> — Campaign settings, volunteer lists</li>
+      <li><strong>Tasks</strong> — Task definitions, key tweets, task assignments</li>
+      <li><strong>Telegram</strong> — Telegram users and settings</li>
+      <li><strong>Analytics</strong> — User actions, activity tracking</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <strong>Tip:</strong> Bookmark the admin URL. If you can't log in, ask the project lead to create an account via <code>python manage.py createsuperuser</code>.
+  </div>
+</section>
+
+<!-- 2. Managing Tweet Targets -->
+<section id="tweet-targets" class="guide-section">
+  <h2>2. Managing Tweet Comment Targets</h2>
+  <p>The bot shows volunteers specific tweets to comment on. These are stored as <strong>Key Tweets</strong> linked to the "Comment on Key Tweets" task.</p>
+
+  <div class="info-box warn">
+    <strong>⚠️ Why this matters:</strong> If the target accounts are inactive (no recent tweets) or the tweet URLs are broken, volunteers see dead links and can't complete their task.
+  </div>
+
+  <h3>Finding Active Tweets to Target</h3>
+  <p>Search Twitter/X for recent tweets about Minab or Iran children using these queries:</p>
+  <div class="code-block">#JusticeForMinabChildren
+#168Children
+Minab school airstrike
+Iran children war crime</div>
+  <p>Look for tweets from <strong>journalists, NGOs, or accounts with 1K+ followers</strong> that have recent activity (within the last 24–48 hours).</p>
+
+  <h3>Updating Key Tweets in Admin</h3>
+
+  <div class="step-card">
+    <div class="step-num">Step 1 — Open Key Tweets</div>
+    <h4>Navigate to Tasks → Key Tweets</h4>
+    <p>In Django Admin, click <strong>Tasks</strong> in the sidebar, then <strong>Key tweets</strong>.</p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">Step 2 — Deactivate Old Tweets</div>
+    <h4>Uncheck "Is Active" on stale entries</h4>
+    <ol>
+      <li>Find entries where the tweet is old or the account is inactive</li>
+      <li>Click on the entry</li>
+      <li>Uncheck <strong>Is Active</strong></li>
+      <li>Click <strong>Save</strong></li>
+    </ol>
+    <p>Alternatively, select multiple entries → Action: <strong>"Mark as inactive"</strong></p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">Step 3 — Add New Tweet Targets</div>
+    <h4>Click "Add Key Tweet" and fill in the fields</h4>
+    <table class="cmd-table">
+      <thead><tr><th>Field</th><th>What to Enter</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Task</strong></td><td>Select the twitter_comment task</td><td>"Comment on Key Tweets"</td></tr>
+        <tr><td><strong>Tweet URL</strong></td><td>Full URL of the tweet</td><td><code>https://x.com/KenRoth/status/123...</code></td></tr>
+        <tr><td><strong>Author Name</strong></td><td>Display name</td><td>Ken Roth</td></tr>
+        <tr><td><strong>Author Handle</strong></td><td>@handle</td><td>@KenRoth</td></tr>
+        <tr><td><strong>Description</strong></td><td>Why this tweet matters (1 line)</td><td>Former HRW director calling for accountability</td></tr>
+        <tr><td><strong>Order</strong></td><td>Display position (0 = first)</td><td>0</td></tr>
+        <tr><td><strong>Is Active</strong></td><td>✅ Check this box</td><td>✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Recommended Target Accounts</h3>
+  <table class="cmd-table">
+    <thead><tr><th>Handle</th><th>Name</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><code>@KenRoth</code></td><td>Ken Roth</td><td>Former HRW director, active on Iran</td></tr>
+      <tr><td><code>@mbaborak</code></td><td>Masih Alinejad</td><td>Iranian journalist, large following</td></tr>
+      <tr><td><code>@christaborger</code></td><td>Christa Borger</td><td>NYT war correspondent</td></tr>
+      <tr><td><code>@Iran_policy</code></td><td>Iran Policy</td><td>Policy think tank, regular Iran content</td></tr>
+      <tr><td><code>@IranIntl</code></td><td>Iran International</td><td>Major Persian-language news outlet</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box success">
+    <strong>✅ Best Practice:</strong> Update tweet targets at least once per week. Rotate 3–5 fresh tweets each time. Always verify the tweet URL loads before adding it.
+  </div>
+</section>
+
+<!-- 3. Proof Review -->
+<section id="proof-review" class="guide-section">
+  <h2>3. Reviewing Volunteer Proofs</h2>
+  <p>When volunteers complete tasks, they submit proof (tweet URL, screenshot, or text). These need to be reviewed.</p>
+
+  <div class="step-card">
+    <div class="step-num">Step 1</div>
+    <h4>Open Task Assignments</h4>
+    <p>In Django Admin → <strong>Tasks</strong> → <strong>Task assignments</strong>. Filter by <strong>Status = pending</strong> to see unreviewed proofs.</p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">Step 2</div>
+    <h4>Review Each Proof</h4>
+    <ol>
+      <li>Click on a pending assignment</li>
+      <li>Check the <strong>proof_text</strong> field (contains the tweet URL or message)</li>
+      <li>If they submitted a screenshot, check <strong>proof_image</strong></li>
+      <li>Open the tweet URL in a browser to verify it exists and matches the task</li>
+    </ol>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">Step 3</div>
+    <h4>Approve or Reject</h4>
+    <p>Change the <strong>Status</strong> field:</p>
+    <ul>
+      <li><strong>verified</strong> — Proof is valid, task is complete</li>
+      <li><strong>rejected</strong> — Proof doesn't meet requirements</li>
+    </ul>
+    <p>Click <strong>Save</strong>.</p>
+  </div>
+
+  <div class="info-box warn">
+    <strong>Review Criteria:</strong>
+    <ul style="margin-top:8px">
+      <li>✅ Tweet URL works and links to a real post</li>
+      <li>✅ Content is relevant to the campaign (mentions Minab, children, peace)</li>
+      <li>✅ Not a retweet of their own testing tweet</li>
+      <li>❌ Reject if URL is broken, content is unrelated, or clearly fake</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4. Managing Tasks -->
+<section id="tasks" class="guide-section">
+  <h2>4. Managing Tasks</h2>
+
+  <h3>Editing a Task</h3>
+  <p>Django Admin → <strong>Tasks</strong> → <strong>Tasks</strong> → Click on the task to edit.</p>
+  <p>Key fields:</p>
+  <table class="cmd-table">
+    <thead><tr><th>Field</th><th>What It Does</th></tr></thead>
+    <tbody>
+      <tr><td><code>title</code> / <code>title_fa</code> / <code>title_ar</code></td><td>Task name in each language</td></tr>
+      <tr><td><code>description</code></td><td>Detailed instructions (EN/FA/AR)</td></tr>
+      <tr><td><code>task_type</code></td><td>Type: twitter_post, twitter_comment, content_creation, etc.</td></tr>
+      <tr><td><code>target_url</code></td><td>Default URL for the task (e.g., petition link)</td></tr>
+      <tr><td><code>is_active</code></td><td>Toggle to show/hide task from volunteers</td></tr>
+      <tr><td><code>order</code></td><td>Display order in the task list (lower = higher)</td></tr>
+      <tr><td><code>points</code></td><td>Points awarded on completion</td></tr>
+      <tr><td><code>estimated_time</code></td><td>Time estimate shown to volunteers</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <strong>Tip:</strong> To temporarily hide a task without deleting it, uncheck <strong>Is Active</strong>. The task and all its assignments will remain in the database.
+  </div>
+</section>
+
+<!-- 5. Bot Commands -->
+<section id="bot-commands" class="guide-section">
+  <h2>5. Admin Bot Commands</h2>
+  <p>These commands only work for users whose Telegram ID is in the <code>BOT_ADMIN_IDS</code> environment variable.</p>
+
+  <table class="cmd-table">
+    <thead><tr><th>Command</th><th>What It Does</th></tr></thead>
+    <tbody>
+      <tr><td><code>/post_dashboard</code></td><td>Post the campaign dashboard to the channel and pin it</td></tr>
+      <tr><td><code>/refresh_dashboard</code></td><td>Force-update the pinned dashboard message</td></tr>
+      <tr><td><code>/send_reminder 1d</code></td><td>Send a storm reminder (1w / 1d / 1h)</td></tr>
+      <tr><td><code>/storm</code></td><td>Start the Twitter Storm tweet-serving flow</td></tr>
+      <tr><td><code>/leaderboard</code></td><td>Show the top volunteers leaderboard</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Testing Bot Commands</h3>
+  <p>To test admin commands, send them directly to the bot in a private chat. They won't be visible to other users.</p>
+
+  <div class="info-box warn">
+    <strong>⚠️ Admin Access:</strong> To add a new admin, their Telegram user ID must be added to <code>BOT_ADMIN_IDS</code> in the server's <code>.env</code> file, then the bot container must be restarted.
+  </div>
+</section>
+
+<!-- 6. Docker & Logs -->
+<section id="docker" class="guide-section">
+  <h2>6. Docker & Logs</h2>
+  <p>The platform runs as Docker containers on the server. Here are common maintenance commands.</p>
+
+  <h3>Checking Service Status</h3>
+  <div class="code-block">ssh user@65.109.198.200
+cd /opt/pfp
+docker compose ps</div>
+
+  <h3>Viewing Logs</h3>
+  <div class="code-block"># Bot logs (last 100 lines, follow)
+docker compose logs -f --tail=100 telegram-bot
+
+# Backend API logs
+docker compose logs -f --tail=100 backend
+
+# All services
+docker compose logs -f --tail=50</div>
+
+  <h3>Restarting Services</h3>
+  <div class="code-block"># Restart just the bot
+docker compose restart telegram-bot
+
+# Restart everything
+docker compose down && docker compose up -d
+
+# Full rebuild (after code changes)
+docker compose up --build -d</div>
+
+  <table class="cmd-table">
+    <thead><tr><th>Problem</th><th>What to Check</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td>Bot not responding</td><td><code>docker compose logs telegram-bot</code></td><td><code>docker compose restart telegram-bot</code></td></tr>
+      <tr><td>Dashboard not updating</td><td><code>docker compose logs celery-beat</code></td><td><code>docker compose restart celery-beat</code></td></tr>
+      <tr><td>Tasks not loading</td><td><code>docker compose logs backend</code></td><td><code>docker compose restart backend</code></td></tr>
+      <tr><td>Database error</td><td>Check migrations</td><td><code>docker compose exec backend python manage.py migrate</code></td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box danger">
+    <strong>⚠️ Never run</strong> <code>docker compose down -v</code> — the <code>-v</code> flag deletes database volumes. Always use <code>docker compose down</code> (without <code>-v</code>) followed by <code>docker compose up -d</code>.
+  </div>
+</section>
+
+</main>
+
+<footer class="page-footer">
+  <p>Internal admin guide — <a href="hub.html">Back to Team Hub</a> · <a href="https://peopleforpeace.live">peopleforpeace.live</a><br>
+  Last updated: March 18, 2026</p>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_campaign_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
