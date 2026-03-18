@@ -311,6 +311,30 @@ class Campaign(models.Model):
     def is_twitter_storm(self):
         return self.campaign_type in [self.CampaignType.TWITTER_STORM, self.CampaignType.HYBRID]
 
+    def get_volunteer_chat_ids(self):
+        """Get Telegram chat IDs of all active campaign volunteers."""
+        from apps.telegram.models import TelegramSession
+        volunteer_ids = CampaignVolunteer.objects.filter(
+            campaign=self, status=CampaignVolunteer.Status.ACTIVE
+        ).values_list('volunteer_id', flat=True)
+        return list(
+            TelegramSession.objects.filter(
+                user_id__in=volunteer_ids
+            ).values_list('telegram_chat_id', flat=True)
+        )
+
+    def get_volunteer_sessions(self):
+        """Get (telegram_chat_id, language) for all active volunteers."""
+        from apps.telegram.models import TelegramSession
+        volunteer_ids = CampaignVolunteer.objects.filter(
+            campaign=self, status=CampaignVolunteer.Status.ACTIVE
+        ).values_list('volunteer_id', flat=True)
+        return list(
+            TelegramSession.objects.filter(
+                user_id__in=volunteer_ids
+            ).values('telegram_chat_id', 'language')
+        )
+
 
 class CampaignVolunteer(models.Model):
     """
@@ -569,16 +593,7 @@ class TwitterStorm(models.Model):
 
     def get_volunteer_chat_ids(self):
         """Get Telegram chat IDs of all campaign volunteers."""
-        from apps.telegram.models import TelegramSession
-        volunteer_ids = CampaignVolunteer.objects.filter(
-            campaign=self.campaign,
-            status=CampaignVolunteer.Status.ACTIVE
-        ).values_list('volunteer_id', flat=True)
-        return list(
-            TelegramSession.objects.filter(
-                user_id__in=volunteer_ids
-            ).values_list('telegram_chat_id', flat=True)
-        )
+        return self.campaign.get_volunteer_chat_ids()
 
 
 class StormParticipant(models.Model):

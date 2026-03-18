@@ -15,6 +15,7 @@ from .profile import profile_command, updateprofile_command
 from .storms import storms_command, storminfo_command, storm_callback_handler, storm_handlers
 from .storm import storm_command as storm_tweet_command, storm_tweet_handlers
 from .menu import menu_callback_handler, menu_handlers
+from .tweet_targets import tweet_target_handlers
 from .registration import (
     handle_text_message, handle_unknown_command,
     cancel_registration, registration_conversation,
@@ -62,6 +63,7 @@ __all__ = [
     'storm_tweet_handlers',
     'menu_callback_handler',
     'menu_handlers',
+    'tweet_target_handlers',
     'text_message_handler',
     'unknown_command_handler',
 ]

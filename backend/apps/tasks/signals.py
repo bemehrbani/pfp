@@ -51,7 +51,7 @@ def _check_and_broadcast_milestone(assignment):
 
 @receiver(post_save, sender=Task)
 def task_created_or_updated(sender, instance, created, **kwargs):
-    """Log task creation and updates."""
+    """Log task creation, updates, and notify volunteers of new tasks."""
     if created:
         ActivityLog.objects.create(
             user=instance.created_by,
@@ -60,6 +60,12 @@ def task_created_or_updated(sender, instance, created, **kwargs):
             content_object=instance
         )
         logger.info(f'Task created: {instance.title} (id: {instance.id})')
+
+        # Notify campaign volunteers about the new task (async via Celery)
+        if instance.is_active:
+            from apps.campaigns.tasks import notify_new_task
+            notify_new_task.delay(task_id=instance.id)
+            logger.info(f'Queued push notification for new task: {instance.title}')
     else:
         # Log important updates
         changed_fields = getattr(instance, '_changed_fields', set())

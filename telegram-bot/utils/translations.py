@@ -1318,6 +1318,33 @@ TRANSLATIONS = {
             "#HandsOffIran #IStandWithIran #StopTheWar</code>"
         ),
     },
+
+    # ── Task Notifications ────────────────────────────────────────
+    "new_task_notification": {
+        "en": (
+            "📬 <b>New Task Available!</b>\n\n"
+            "{icon} <b>{title}</b>\n"
+            "⭐ {points} points · ⏱ {time} min\n\n"
+            "Tap below to start 👇"
+        ),
+        "fa": (
+            "📬 <b>تسک جدید موجود است!</b>\n\n"
+            "{icon} <b>{title}</b>\n"
+            "⭐ {points} امتیاز · ⏱ {time} دقیقه\n\n"
+            "برای شروع دکمه زیر رو بزنید 👇"
+        ),
+        "ar": (
+            "📬 <b>مهمة جديدة متاحة!</b>\n\n"
+            "{icon} <b>{title}</b>\n"
+            "⭐ {points} نقطة · ⏱ {time} دقيقة\n\n"
+            "اضغط أدناه للبدء 👇"
+        ),
+    },
+    "new_task_channel_broadcast": {
+        "en": "📬 New task: <b>{title}</b> ({points} pts) — Start → @peopleforpeacebot",
+        "fa": "📬 تسک جدید: <b>{title}</b> ({points} امتیاز) — شروع → @peopleforpeacebot",
+        "ar": "📬 مهمة جديدة: <b>{title}</b> ({points} نقطة) — ابدأ → @peopleforpeacebot",
+    },
     "referral_credited": {
         "en": "🎁 *Great!* {name} just joined *{campaign}* through your invite link! Welcome them! 🤝",
         "fa": "🎁 *عالی!* {name} از طریق لینک دعوت شما به *{campaign}* پیوست! خوش‌آمدشان بگویید! 🤝",

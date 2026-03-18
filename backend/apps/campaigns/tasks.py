@@ -467,6 +467,154 @@ def broadcast_milestone(campaign_id: int, metric: str, current: int, target: int
     logger.info(f'Channel broadcast: milestone {percentage}% for {metric} in campaign {campaign_id}')
 
 
+# ── Push Notifications for New Tasks ──────────────────────────────────
+
+# Notification message templates per language (matches translations.py keys)
+_NEW_TASK_TEMPLATES = {
+    'en': (
+        '📬 <b>New Task Available!</b>\n\n'
+        '{icon} <b>{title}</b>\n'
+        '⭐ {points} points · ⏱ {time} min\n\n'
+        'Tap below to start 👇'
+    ),
+    'fa': (
+        '📬 <b>تسک جدید موجود است!</b>\n\n'
+        '{icon} <b>{title}</b>\n'
+        '⭐ {points} امتیاز · ⏱ {time} دقیقه\n\n'
+        'برای شروع دکمه زیر رو بزنید 👇'
+    ),
+    'ar': (
+        '📬 <b>مهمة جديدة متاحة!</b>\n\n'
+        '{icon} <b>{title}</b>\n'
+        '⭐ {points} نقطة · ⏱ {time} دقيقة\n\n'
+        'اضغط أدناه للبدء 👇'
+    ),
+}
+
+_TASK_TYPE_ICONS = {
+    'twitter_post': '🐦', 'twitter_retweet': '🔁',
+    'twitter_comment': '💬', 'twitter_like': '❤️',
+    'telegram_share': '📢', 'telegram_invite': '👥',
+    'content_creation': '✍️', 'petition': '✍️',
+    'mass_email': '📧', 'research': '🔍', 'other': '📌',
+}
+
+
+def _send_telegram_message_with_button(
+    chat_id: int, text: str, button_text: str, button_url: str, parse_mode: str = 'HTML',
+) -> bool:
+    """Send a Telegram message with a single inline-keyboard button."""
+    token = getattr(settings, 'TELEGRAM_BOT_TOKEN', '')
+    if not token:
+        logger.error('TELEGRAM_BOT_TOKEN not configured')
+        return False
+
+    try:
+        response = requests.post(
+            TELEGRAM_API_URL.format(token=token),
+            json={
+                'chat_id': chat_id,
+                'text': text,
+                'parse_mode': parse_mode,
+                'disable_web_page_preview': True,
+                'reply_markup': {
+                    'inline_keyboard': [[{
+                        'text': button_text,
+                        'url': button_url,
+                    }]]
+                },
+            },
+            timeout=10,
+        )
+        if response.status_code != 200:
+            logger.warning(f'Telegram API error for chat {chat_id}: {response.text}')
+            return False
+        return True
+    except requests.RequestException as exc:
+        logger.error(f'Failed to send message to {chat_id}: {exc}')
+        return False
+
+
+@shared_task(name='campaigns.notify_new_task')
+def notify_new_task(task_id: int):
+    """
+    Send push notification to all campaign volunteers about a new task.
+
+    Each volunteer receives a localized message with a deep-link button
+    to start the task directly in the bot.
+    """
+    from apps.tasks.models import Task
+    from django.core.cache import cache
+
+    # De-duplicate: prevent re-sends if the signal fires multiple times
+    cache_key = f'new_task_notified_{task_id}'
+    if cache.get(cache_key):
+        logger.info(f'Task {task_id} already notified — skipping')
+        return
+    cache.set(cache_key, True, timeout=3600)
+
+    try:
+        task = Task.objects.select_related('campaign').get(id=task_id)
+    except Task.DoesNotExist:
+        logger.error(f'Task {task_id} not found for notification')
+        return
+
+    if not task.is_active:
+        logger.info(f'Task {task_id} is inactive — no notification')
+        return
+
+    campaign = task.campaign
+    sessions = campaign.get_volunteer_sessions()
+    icon = _TASK_TYPE_ICONS.get(task.task_type, '📌')
+
+    # Deep-link URL: opens bot → navigates to campaign tasks
+    deep_link = f'https://t.me/peopleforpeacebot?start=campaign_{campaign.id}'
+
+    # Button text per language
+    button_labels = {
+        'en': '▶️ Start Now',
+        'fa': '▶️ شروع',
+        'ar': '▶️ ابدأ الآن',
+    }
+
+    sent_count = 0
+    for session in sessions:
+        lang = session.get('language', 'en') or 'en'
+        if lang not in _NEW_TASK_TEMPLATES:
+            lang = 'en'
+
+        title = task.localized_title(lang)
+        template = _NEW_TASK_TEMPLATES[lang]
+        text = template.format(
+            icon=icon,
+            title=title,
+            points=task.points,
+            time=task.estimated_time,
+        )
+        button_text = button_labels.get(lang, button_labels['en'])
+
+        if _send_telegram_message_with_button(
+            chat_id=session['telegram_chat_id'],
+            text=text,
+            button_text=button_text,
+            button_url=deep_link,
+        ):
+            sent_count += 1
+
+    logger.info(f'New task notification sent to {sent_count}/{len(sessions)} volunteers for task {task_id}')
+
+    # Also broadcast to the campaign's Telegram channel
+    channel_id = campaign.telegram_channel_id
+    if channel_id:
+        channel_text = (
+            f'📬 New task: <b>{task.title}</b> '
+            f'({task.points} pts · {task.estimated_time} min)\n\n'
+            f'✊ Start → @peopleforpeacebot'
+        )
+        _send_telegram_message(channel_id, channel_text)
+        logger.info(f'Channel broadcast: new task for campaign {campaign.id}')
+
+
 def _store_channel_post(campaign_id: int, content_type: str, message_text: str, proof_url: str = ''):
     """Store a channel post record for recycling."""
     from apps.campaigns.models import ChannelPost

@@ -112,6 +112,9 @@ class PFPCampaignBot:
                 post_dashboard_command, refresh_dashboard_command,
             )
 
+            # Import tweet target handlers
+            from handlers.tweet_targets import tweet_target_handlers
+
             # Register command handlers
             self.application.add_handler(CommandHandler("start", start_command))
             self.application.add_handler(CommandHandler("help", help_command))
@@ -149,6 +152,10 @@ class PFPCampaignBot:
             for handler in menu_handlers:
                 self.application.add_handler(handler)
 
+            # Register tweet target handlers (discovery + admin commands)
+            for handler in tweet_target_handlers:
+                self.application.add_handler(handler)
+
             # Register conversation handler (registration only;
             # task_proof_conversation is already in task_handlers)
             self.application.add_handler(registration_conversation)
@@ -160,6 +167,9 @@ class PFPCampaignBot:
             # Add error handler
             self.application.add_error_handler(self._error_handler)
 
+            # Schedule tweet discovery every 6 hours
+            self._schedule_tweet_discovery()
+
             logger.info("Handlers registered successfully")
 
         except ImportError as e:
@@ -168,6 +178,48 @@ class PFPCampaignBot:
         except Exception as e:
             logger.error(f"Failed to register handlers: {e}")
             raise
+
+    def _schedule_tweet_discovery(self):
+        """Schedule automated tweet discovery every 6 hours."""
+        import os
+        if os.getenv('TWEET_DISCOVERY_ENABLED', 'true').lower() != 'true':
+            logger.info("Tweet discovery disabled via env — skipping scheduler")
+            return
+
+        if not self.application.job_queue:
+            logger.warning("JobQueue not available — skipping tweet discovery scheduler")
+            return
+
+        self.application.job_queue.run_repeating(
+            self._run_tweet_discovery,
+            interval=6 * 3600,   # Every 6 hours
+            first=300,            # First run 5 min after startup
+            name='tweet_discovery',
+        )
+        logger.info("Scheduled tweet discovery every 6 hours (first run in 5 min)")
+
+    @staticmethod
+    async def _run_tweet_discovery(context):
+        """JobQueue callback: discover tweets and post to channel."""
+        from services.tweet_discovery import discover_top_tweets, format_channel_message
+
+        result = await discover_top_tweets(count=20)
+
+        if result.get('status') == 'success' and result.get('tweets'):
+            channel_id = os.getenv('TWEET_CHANNEL_ID', '@people4peace')
+            channel_msg = format_channel_message(result['tweets'])
+            try:
+                await context.bot.send_message(
+                    chat_id=channel_id,
+                    text=channel_msg,
+                    parse_mode='HTML',
+                    disable_web_page_preview=True,
+                )
+                logger.info(f"Posted {len(result['tweets'])} tweet targets to {channel_id}")
+            except Exception as exc:
+                logger.error(f"Scheduled tweet discovery channel post failed: {exc}")
+        else:
+            logger.warning(f"Scheduled discovery result: {result.get('status')} — {result.get('message', '')}")
 
     async def _error_handler(self, update: object, context):
         """Handle errors in bot handlers."""
