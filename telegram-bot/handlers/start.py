@@ -162,17 +162,10 @@ async def _send_welcome(update: Update, context: CallbackContext, session, lang:
     if db_user:
         progress = await _get_user_progress(db_user)
         if progress['total_tasks'] > 0:
-            from handlers.tasks import get_level_title
-
             welcome_back = f"👋 *Welcome back, {db_user.first_name or 'activist'}!*\n\n"
-            welcome_back += "📊 *Your Progress:*\n"
             welcome_back += f"✅ {progress['completed']} tasks completed\n"
             if progress['in_progress'] > 0:
                 welcome_back += f"🚧 {progress['in_progress']} in progress\n"
-            welcome_back += f"⭐ {progress['points']} points earned\n"
-
-            level = db_user.level or 1
-            welcome_back += f"🏅 Rank: {get_level_title(level)}\n"
             welcome_back += "\n───────────────────\n"
 
             await context.bot.send_message(

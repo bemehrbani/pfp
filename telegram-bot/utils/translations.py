@@ -75,6 +75,11 @@ TRANSLATIONS = {
         "fa": "🌍 زبان",
         "ar": "🌍 اللغة",
     },
+    "btn_storm": {
+        "en": "🔥 Twitter Storm",
+        "fa": "🔥 طوفان توییتری",
+        "ar": "🔥 عاصفة تويتر",
+    },
 
     # ── Registration ─────────────────────────────────────────────────
     "register_new_user": {
@@ -1581,11 +1586,12 @@ def t(key: str, lang: str = 'en') -> str:
 
 
 def get_main_menu_inline(lang: str = 'en'):
-    """Get the simplified main menu as InlineKeyboardMarkup.
+    """Get the main menu as InlineKeyboardMarkup.
 
-    Layout (4 buttons):
+    Layout (5 buttons):
       ✊ My Campaigns
-      📨 Invite Friends
+      📢 Share Channel
+      🔥 Twitter Storm
       🌍 Language  |  ℹ️ Help
     """
     from telegram import InlineKeyboardButton, InlineKeyboardMarkup
@@ -1595,6 +1601,9 @@ def get_main_menu_inline(lang: str = 'en'):
         ],
         [
             InlineKeyboardButton(t('btn_invite_friends', lang), callback_data='menu_invite'),
+        ],
+        [
+            InlineKeyboardButton(t('btn_storm', lang), callback_data='menu_storm'),
         ],
         [
             InlineKeyboardButton(t('btn_language', lang), callback_data='menu_language'),
