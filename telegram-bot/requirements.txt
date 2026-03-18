@@ -1,5 +1,5 @@
 # Telegram Bot Dependencies
-python-telegram-bot==20.7
+python-telegram-bot[job-queue]==20.7
 aiohttp==3.9.3
 Django==4.2.10
 djangorestframework==3.14.0
