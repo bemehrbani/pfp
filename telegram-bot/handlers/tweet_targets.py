@@ -46,6 +46,34 @@ def _is_admin(user_id: int) -> bool:
 
 
 # ─────────────────────────────────────────────────────────────────
+# /tweet_help — Show all tweet management commands
+# ─────────────────────────────────────────────────────────────────
+
+async def cmd_tweet_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Show all tweet management commands."""
+    if not _is_admin(update.effective_user.id):
+        return
+
+    await update.message.reply_text(
+        "<b>🎯 Tweet Management Commands</b>\n\n"
+        "<b>Discovery & Approval:</b>\n"
+        "  /discover_tweets — Find tweets & approve\n"
+        "  /tweet_targets — List active targets\n"
+        "  /clear_tweets — Deactivate all targets\n\n"
+        "<b>Manual Additions:</b>\n"
+        "  /add_tweet &lt;url&gt; — Add a specific tweet\n"
+        "  /find_tweets — Paste multiple URLs\n\n"
+        "<b>Account Monitoring:</b>\n"
+        "  /add_account @handle — Monitor account\n"
+        "  /remove_account @handle — Stop monitoring\n"
+        "  /list_accounts — See all monitored accounts\n\n"
+        "<b>Help:</b>\n"
+        "  /tweet_help — Show this message",
+        parse_mode='HTML',
+    )
+
+
+# ─────────────────────────────────────────────────────────────────
 # /discover_tweets — Preview + Approval flow
 # ─────────────────────────────────────────────────────────────────
 
@@ -702,6 +730,7 @@ add_account_handler = CommandHandler('add_account', cmd_add_account)
 remove_account_handler = CommandHandler('remove_account', cmd_remove_account)
 list_accounts_handler = CommandHandler('list_accounts', cmd_list_accounts)
 add_tweet_handler = CommandHandler('add_tweet', cmd_add_tweet)
+tweet_help_handler = CommandHandler('tweet_help', cmd_tweet_help)
 
 # Callback handler for approval buttons
 approval_callback_handler = CallbackQueryHandler(
@@ -719,5 +748,6 @@ tweet_target_handlers = [
     remove_account_handler,
     list_accounts_handler,
     add_tweet_handler,
+    tweet_help_handler,
     approval_callback_handler,
 ]
