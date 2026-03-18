@@ -131,6 +131,10 @@ services:
       DJANGO_API_URL: http://backend:8000/api
       DJANGO_SETTINGS_MODULE: config.settings.production
       VIDEO_ASSETS_DIR: /app/assets/videos
+      BOT_ADMIN_IDS: ${BOT_ADMIN_IDS:-}
+      TWEET_DISCOVERY_ENABLED: ${TWEET_DISCOVERY_ENABLED:-true}
+      TWEET_CHANNEL_ID: ${TWEET_CHANNEL_ID:-@people4peace}
+      APIFY_TOKEN: ${APIFY_TOKEN:-}
     volumes:
       - ./telegram-bot/logs:/app/logs
       - ./minab/music:/app/assets/videos:ro
