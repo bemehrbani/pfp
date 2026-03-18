@@ -138,6 +138,7 @@ services:
     volumes:
       - ./telegram-bot/logs:/app/logs
       - ./minab/music:/app/assets/videos:ro
+      - ./telegram-bot/data:/app/data
     depends_on:
       postgres:
         condition: service_healthy
