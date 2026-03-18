@@ -200,26 +200,9 @@ class PFPCampaignBot:
 
     @staticmethod
     async def _run_tweet_discovery(context):
-        """JobQueue callback: discover tweets and post to channel."""
-        from services.tweet_discovery import discover_top_tweets, format_channel_message
-
-        result = await discover_top_tweets(count=20)
-
-        if result.get('status') == 'success' and result.get('tweets'):
-            channel_id = os.getenv('TWEET_CHANNEL_ID', '@people4peace')
-            channel_msg = format_channel_message(result['tweets'])
-            try:
-                await context.bot.send_message(
-                    chat_id=channel_id,
-                    text=channel_msg,
-                    parse_mode='HTML',
-                    disable_web_page_preview=True,
-                )
-                logger.info(f"Posted {len(result['tweets'])} tweet targets to {channel_id}")
-            except Exception as exc:
-                logger.error(f"Scheduled tweet discovery channel post failed: {exc}")
-        else:
-            logger.warning(f"Scheduled discovery result: {result.get('status')} — {result.get('message', '')}")
+        """JobQueue callback: send preview to admins for approval."""
+        from handlers.tweet_targets import send_scheduled_preview
+        await send_scheduled_preview(context)
 
     async def _error_handler(self, update: object, context):
         """Handle errors in bot handlers."""

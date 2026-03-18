@@ -77,21 +77,15 @@ def _normalize_tweet_url(url: str) -> str:
     return ''
 
 
-async def discover_top_tweets(count: int = 20) -> Dict:
+async def preview_tweets(count: int = 20) -> Dict:
     """
-    Main discovery function. Finds, scores, and rotates tweet targets.
+    Fetch, score, and rank tweets WITHOUT writing to the database.
 
-    Steps:
-        1. Fetch tweets from Nitter RSS (primary) or Apify (fallback)
-        2. Deduplicate by URL
-        3. Filter out tweets used in the last 7 days
-        4. Score and rank
-        5. Deactivate old KeyTweet records
-        6. Create new KeyTweet records
-        7. Return summary for channel posting
+    This is the first stage of the approval flow. Returns candidates
+    for the admin to review before committing.
 
     Returns:
-        Dict with status, source, counts, and tweet list
+        Dict with status, source, and ranked tweet candidates
     """
     # Check kill switch
     if os.getenv('TWEET_DISCOVERY_ENABLED', 'true').lower() != 'true':
@@ -160,14 +154,42 @@ async def discover_top_tweets(count: int = 20) -> Dict:
             'message': 'No new tweets after filtering recent duplicates',
         }
 
-    # ── 7. Deactivate old KeyTweet records ──
+    logger.info(f"Preview ready: {len(top)} candidates from {source}")
+    return {
+        'status': 'success',
+        'source': source,
+        'tweets': top,
+    }
+
+
+async def commit_tweets(tweets: List[Dict]) -> Dict:
+    """
+    Commit approved tweets as KeyTweet records (stage 2 of approval flow).
+
+    Deactivates old targets and creates new ones from the approved list.
+
+    Args:
+        tweets: List of tweet dicts approved by the admin
+
+    Returns:
+        Dict with deactivated/created counts
+    """
+    from apps.tasks.models import Task, KeyTweet
+
+    task = await sync_to_async(
+        lambda: Task.objects.filter(task_type='twitter_comment', is_active=True).first()
+    )()
+
+    if not task:
+        return {'status': 'error', 'message': 'No active twitter_comment task'}
+
+    # Deactivate old targets
     deactivated = await sync_to_async(
         lambda: KeyTweet.objects.filter(task=task, is_active=True).update(is_active=False)
     )()
 
-    # ── 8. Create new KeyTweet records ──
-    created_tweets: List[Dict] = []
-    for order_idx, tweet in enumerate(top):
+    # Create new KeyTweet records
+    for order_idx, tweet in enumerate(tweets):
         await sync_to_async(KeyTweet.objects.create)(
             task=task,
             tweet_url=tweet['url'],
@@ -177,20 +199,31 @@ async def discover_top_tweets(count: int = 20) -> Dict:
             order=order_idx,
             is_active=True,
         )
-        created_tweets.append(tweet)
 
     logger.info(
-        f"Discovery complete: deactivated {deactivated}, "
-        f"created {len(created_tweets)} from {source}"
+        f"Committed {len(tweets)} tweets (deactivated {deactivated} old)"
     )
 
     return {
         'status': 'success',
-        'source': source,
         'deactivated': deactivated,
-        'created': len(created_tweets),
-        'tweets': created_tweets,
+        'created': len(tweets),
+        'tweets': tweets,
     }
+
+
+async def discover_top_tweets(count: int = 20) -> Dict:
+    """
+    Full pipeline: preview + commit in one call (for backward compat).
+    Used only by the auto-scheduler when no admin is available.
+    """
+    result = await preview_tweets(count=count)
+    if result.get('status') != 'success':
+        return result
+
+    commit_result = await commit_tweets(result['tweets'])
+    commit_result['source'] = result.get('source', 'unknown')
+    return commit_result
 
 
 def format_channel_message(tweets: List[Dict]) -> str:
