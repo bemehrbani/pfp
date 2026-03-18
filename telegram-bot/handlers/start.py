@@ -37,6 +37,22 @@ def _db_store_deeplink(session, campaign_id, referrer_id=None):
 
 
 @sync_to_async
+def _get_user_progress(db_user):
+    """Aggregate task completion stats for a user across all campaigns."""
+    from apps.tasks.models import TaskAssignment
+    from django.db.models import Count, Q, Sum
+
+    stats = TaskAssignment.objects.filter(volunteer=db_user).aggregate(
+        completed=Count('id', filter=Q(status__in=['completed', 'verified'])),
+        in_progress=Count('id', filter=Q(status='in_progress')),
+        total_tasks=Count('id'),
+        points=Sum('task__points', filter=Q(status__in=['completed', 'verified'])),
+    )
+    stats['points'] = stats['points'] or 0
+    return stats
+
+
+@sync_to_async
 def _db_get_campaign_name(campaign_id):
     """Get campaign name by ID (for personalized registration prompt)."""
     from apps.campaigns.models import Campaign
@@ -132,20 +148,48 @@ async def language_callback_handler(update: Update, context: CallbackContext):
 
 
 async def _send_welcome(update: Update, context: CallbackContext, session, lang: str):
-    """Send welcome message with inline menu buttons."""
-    chat_id = update.effective_chat.id
+    """Send welcome message with inline menu buttons.
 
-    # Remove any old persistent keyboard, then send inline menu
+    For returning users with task progress, sends a personalized
+    "Welcome back" summary before the standard menu.  New users
+    (or those with zero tasks) see the normal welcome flow only.
+    """
+    chat_id = update.effective_chat.id
+    user = update.effective_user
+    db_user = await get_user_by_telegram_id(user.id)
+
+    # ── Returning-user progress summary (Issue #16) ──────────────
+    if db_user:
+        progress = await _get_user_progress(db_user)
+        if progress['total_tasks'] > 0:
+            from handlers.tasks import get_level_title
+
+            welcome_back = f"👋 *Welcome back, {db_user.first_name or 'activist'}!*\n\n"
+            welcome_back += "📊 *Your Progress:*\n"
+            welcome_back += f"✅ {progress['completed']} tasks completed\n"
+            if progress['in_progress'] > 0:
+                welcome_back += f"🚧 {progress['in_progress']} in progress\n"
+            welcome_back += f"⭐ {progress['points']} points earned\n"
+
+            level = db_user.level or 1
+            welcome_back += f"🏅 Rank: {get_level_title(level)}\n"
+            welcome_back += "\n───────────────────\n"
+
+            await context.bot.send_message(
+                chat_id=chat_id,
+                text=welcome_back,
+                parse_mode='Markdown',
+            )
+
+    # ── Standard welcome + inline menu ───────────────────────────
     await context.bot.send_message(
         chat_id=chat_id,
         text=t('welcome', lang),
         reply_markup=get_main_menu_inline(lang),
-        parse_mode='Markdown'
+        parse_mode='Markdown',
     )
 
-    # Check if user needs registration
-    user = update.effective_user
-    db_user = await get_user_by_telegram_id(user.id)
+    # ── Post-welcome routing ─────────────────────────────────────
     if db_user:
         logger.info(f"Existing user {db_user.username} started bot (lang={lang})")
         # Existing user with deep-link → auto-join the campaign
@@ -236,6 +280,7 @@ async def _show_campaigns_after_welcome(context, session, chat_id, lang):
         message = t('checklist_title', lang).format(name=campaign_name) + "\n\n"
         keyboard = []
 
+        first_uncompleted_found = False
         for task in tasks:
             icon = type_icons.get(task.task_type, '📌')
             user_status = status_map.get(task.id)
@@ -247,7 +292,11 @@ async def _show_campaigns_after_welcome(context, session, chat_id, lang):
                 check = '🚧'
                 label = f"🚧 {task.localized_title(lang)[:28]}"
             else:
-                check = '⬜'
+                if not first_uncompleted_found:
+                    check = '👉'  # "Continue here" indicator
+                    first_uncompleted_found = True
+                else:
+                    check = '⬜'
                 label = f"{icon} {task.localized_title(lang)[:28]}"
 
             message += f"{check} {icon} {task.localized_title(lang)}\n"

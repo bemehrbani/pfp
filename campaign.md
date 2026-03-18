@@ -36,6 +36,27 @@
 
 ---
 
+## 🚀 Growth & Outreach Strategy
+
+### Artist Network Outreach (174 contacts)
+> 174 international artists from the Art for Life Helsinki exhibition. Emails, artwork names, and profiles available in `minab/Art for peace/Art For Life_ Exhibition in Helsinki, Finland Submission Report.xlsx`. Templates in `justiceForMinab/docs/artist_outreach.md`.
+
+- [ ] **Phase 1:** Send 20 personalized emails to Iranian artists (highest emotional connection)
+- [ ] **Phase 2:** Send bulk email to remaining 154 artists
+- [ ] **Phase 3:** Follow up with engaged artists for deeper involvement
+
+### Telegram Group Seeding
+- [ ] Post in 10-15 Iranian diaspora and activist Telegram groups (EN/FA templates ready)
+- [ ] Follow up with personal DMs to engaged responders
+
+### Micro-Influencer Outreach
+- [ ] DM 20-30 activist accounts on X/Twitter (1K-50K followers targeting human rights, Iranian diaspora, Middle East journalists)
+
+### Mar 28 Twitter Storm Prep
+- [ ] Create storm briefing message for @people4peace channel
+- [ ] Prepare 5-10 key tweets with hashtags
+- [ ] Schedule pre-storm reminder 24h before
+
 ## 🌐 Live Assets (Published URLs)
 
 | Page | URL | Purpose |
@@ -48,6 +69,9 @@
 | **Bot** | https://t.me/peopleforpeacebot | Telegram campaign bot |
 | **Bot Deep-link** | https://t.me/peopleforpeacebot?start=campaign_18 | Auto-join Minab campaign |
 | **Channel** | https://t.me/people4peace | Telegram updates channel |
+| **Team Portal** | https://peopleforpeace.live/campaign/ | Password-protected internal hub |
+| **QA Script** | https://peopleforpeace.live/campaign/qa.html | Structured bot test script |
+| **Legal Portal** | https://peopleforpeace.live/legal/jfmc-2026/ | Password-protected legal docs |
 
 ---
 
@@ -206,6 +230,9 @@ Tap a task below to get started! 👇
 - [ ] T5.3: Add context linking petition to Minab specifically
 
 ## ✅ Completed (Recent)
+- [x] **Internal Team Portal (Mar 16):** 7-page password-protected portal at `/campaign/` — hub, kanban, QA script, platform guide, growth strategy, team & roles. Deploy `34356c9`.
+- [x] **QA Test Script:** 8 structured test cases covering full bot flow, deployed as HTML page + markdown.
+- [x] **QA Onboarding:** Naime onboarded as QA tester with structured script and portal access.
 - [x] **Pinned Campaign Dashboard:** Auto-updating dashboard message in `@people4peace` channel with OKR progress bars, task list, and join button. Hourly Celery Beat refresh. Deploy `e198dc3`.
 - [x] **Bot Profile Improvements:** Updated botpic (dove avatar), About text, Description with task breakdown + resource links, registered 8 slash commands in BotFather.
 - [x] **Campaign UX Epic (E1-E7):** All 7 UX improvements deployed — rich messages, about button, resource links, enriched invites.

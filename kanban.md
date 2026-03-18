@@ -1,7 +1,8 @@
 # PFP Telegram Bot — Kanban Board
 
-> **Source of truth** for the People for Peace bot development.
-> Last updated: March 15, 2026
+> ⚠️ **This file is now an archive.** The single source of truth is [GitHub Issues](https://github.com/bemehrbani/pfp/issues).
+> Migrated to GitHub Issues on March 18, 2026. All open tasks are tracked there with milestones and labels.
+> Last updated: March 18, 2026
 
 ---
 
@@ -163,8 +164,26 @@ Artists create → Submit via bot → Gallery + Channel post → Volunteers shar
 | F2 | **Forwardable messages** | Send clean, forwardable report summaries (EN/FA, 2 variants each) with no formatting that breaks on forward. | S | ✅ Done |
 | F3 | **Forward proof** | Accept screenshot or "done" as proof alongside tweet URLs. | XS | ✅ Done |
 | F4 | **Translations** | Add 10 new translation keys for dual-path flow (EN/FA/AR). | S | ✅ Done |
-| F5 | **Deploy & verify** | Push to production, test both paths. | S | ⬜ TODO |
+| F5 | **Deploy & verify** | Push to production, test both paths. | S | ✅ Done `34356c9` |
 
+---
+
+## 🏢 Epic — Internal Team Portal
+
+> **Goal**: Password-protected internal hub at `/campaign/` for team members and engaged volunteers. Mirrors the legal portal structure with a blue accent theme.
+
+| # | Task | Description | Effort | Status |
+|---|------|-------------|--------|---------|
+| I1 | **Password gate** | SHA-256 hash check + `sessionStorage` (same password as legal, different session key) | XS | ✅ Done |
+| I2 | **Team hub page** | Card grid linking to all portal sections + quick links to bot, channel, website | S | ✅ Done |
+| I3 | **QA test script page** | 8 structured test cases rendered as HTML + feedback form | M | ✅ Done |
+| I4 | **Kanban board page** | Tabbed epic navigation, task cards with status badges | M | ✅ Done |
+| I5 | **Platform guide page** | Architecture, bot commands, task types, translations, deployment | M | ✅ Done |
+| I6 | **Growth strategy page** | 4-phase playbook with metrics, checklists, and timeline | S | ✅ Done |
+| I7 | **Team & roles page** | Current team + 9 open positions + copyable recruitment post | S | ✅ Done |
+| I8 | **Deploy & verify** | Push all 7 pages to production, verify live | S | ✅ Done `34356c9` |
+
+---
 
 ## 🐛 Known Bugs
 
@@ -208,7 +227,7 @@ Artists create → Submit via bot → Gallery + Channel post → Volunteers shar
 | D3 | Points auto-award on proof approval | Medium | Gamification |
 | D4 | Invite task type testing | Low | After Twitter tasks stable |
 | D5 | Campaign progress dashboard | Low | |
-| D6 | Publish Platform Guide for Campaign Managers | Medium | **Options**: 1) Password-protected page on main site, 2) Behind campaign manager login wall. Needs technical decision. |
+| D6 | ~~Publish Platform Guide for Campaign Managers~~ | Medium | ✅ Done — published in team portal at `/campaign/guide.html` |
 
 ---
 
@@ -221,7 +240,7 @@ Artists create → Submit via bot → Gallery + Channel post → Volunteers shar
 | Campaign members | growing |
 | Bot username | `@peopleforpeacebot` |
 | Server | 65.109.198.200 |
-| Latest deploy | `e198dc3` (Mar 15 — pinned dashboard + bot profile) |
+| Latest deploy | `34356c9` (Mar 16 — internal team portal + QA script) |
 
 ---
 

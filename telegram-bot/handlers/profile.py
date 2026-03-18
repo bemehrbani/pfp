@@ -21,9 +21,9 @@ def _get_profile_stats(db_user):
 
     task_stats = TaskAssignment.objects.filter(volunteer=db_user).aggregate(
         total_tasks=Count('id'),
-        completed_tasks=Count('id', filter=Q(status='completed')),
+        completed_tasks=Count('id', filter=Q(status__in=['completed', 'verified'])),
         pending_tasks=Count('id', filter=Q(status='submitted')),
-        total_points=Sum('task__points', filter=Q(status='completed'))
+        total_points=Sum('task__points', filter=Q(status__in=['completed', 'verified']))
     )
 
     campaign_stats = CampaignVolunteer.objects.filter(volunteer=db_user).aggregate(

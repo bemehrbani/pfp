@@ -318,6 +318,10 @@ async def campaign_callback_handler(update: Update, context: CallbackContext):
         page = int(callback_data.split('_')[-1])
         await handle_campaigns_pagination(query, session, page)
 
+    elif callback_data.startswith('campaign_share_toggle_'):
+        campaign_id = int(callback_data.split('_')[-1])
+        await handle_share_toggle(query, session, campaign_id)
+
     else:
         # Handle campaign_{id} — campaign detail view from menu
         parts = callback_data.split('_')
@@ -537,6 +541,7 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
     message = t('checklist_title', lang).format(name=campaign.localized_name(lang)) + "\n\n"
     keyboard = []
 
+    first_uncompleted_found = False
     for task in tasks:
         icon = type_icons.get(task.task_type, '📌')
         user_status = status_map.get(task.id)
@@ -549,7 +554,11 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
             check = '🚧'
             label = f"🚧 {task.localized_title(lang)[:28]}"
         else:
-            check = '⬜'
+            if not first_uncompleted_found:
+                check = '👉'  # "Continue here" indicator
+                first_uncompleted_found = True
+            else:
+                check = '⬜'
             label = f"{icon} {task.localized_title(lang)[:28]}"
 
         message += f"{check} {icon} {task.localized_title(lang)}  (⏱ {task.estimated_time} min)\n"
@@ -575,6 +584,17 @@ async def handle_campaign_view_tasks(query, session, campaign_id):
             callback_data=f"campaign_invite_{campaign_id}"
         )
     ])
+
+    # Share toggle button (Issue #17)
+    share_enabled = await _get_share_preference(session, campaign_id)
+    share_label = "📢 Share My Work: ON" if share_enabled else "📢 Share My Work: OFF"
+    keyboard.append([
+        InlineKeyboardButton(
+            share_label,
+            callback_data=f"campaign_share_toggle_{campaign_id}"
+        )
+    ])
+
     keyboard.append([
         InlineKeyboardButton(t('btn_main_menu', lang), callback_data="menu_main")
     ])
@@ -903,6 +923,44 @@ async def handle_invite_send(query, session, campaign_id, invite_lang, style):
 # Exported session helper for other handlers
 get_or_create_session = _get_or_create_session
 
+
+# ── Issue #17: Share-preference helpers ────────────────────────────────
+
+@sync_to_async
+def _get_share_preference(session, campaign_id):
+    """Read the share-my-work preference from TelegramSession.temp_data.
+
+    Returns True (opt-in) or False (opt-out, default).
+    """
+    session.refresh_from_db(fields=['temp_data'])
+    prefs = (session.temp_data or {}).get('share_prefs', {})
+    return prefs.get(str(campaign_id), False)
+
+
+@sync_to_async
+def _set_share_preference(session, campaign_id, enabled: bool):
+    """Persist the share-my-work preference in TelegramSession.temp_data."""
+    session.temp_data = session.temp_data or {}
+    share_prefs = session.temp_data.get('share_prefs', {})
+    share_prefs[str(campaign_id)] = enabled
+    session.temp_data['share_prefs'] = share_prefs
+    session.save(update_fields=['temp_data', 'updated_at'])
+
+
+async def handle_share_toggle(query, session, campaign_id):
+    """Toggle whether the user's completed tasks are shared in the channel."""
+    current = await _get_share_preference(session, campaign_id)
+    new_value = not current
+    await _set_share_preference(session, campaign_id, new_value)
+
+    state_label = "ON ✅" if new_value else "OFF"
+    await query.answer(
+        f"📢 Share My Work is now {state_label}",
+        show_alert=False,
+    )
+
+    # Re-render the task checklist so the button label reflects the new state
+    await handle_campaign_view_tasks(query, session, campaign_id)
 
 async def show_my_campaigns(query, session, lang: str):
     """Show user's joined campaigns. Task-first flow.

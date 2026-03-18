@@ -966,6 +966,24 @@ async def task_callback_handler(update: Update, context: CallbackContext):
         await handle_amplify_forward(query, session, assignment_id)
 
 
+async def _handle_amplify_forward_in_conversation(update: Update, context: CallbackContext):
+    """ConversationHandler wrapper for amplify_forward_ callback.
+
+    Extracts assignment_id, gets session, delegates to handle_amplify_forward,
+    then returns AWAITING_TASK_PROOF so the user stays in the proof flow.
+    """
+    query = update.callback_query
+    await query.answer()
+
+    user = update.effective_user
+    chat_id = update.effective_chat.id
+    session, _ = await _get_session(user, chat_id)
+
+    assignment_id = int(query.data.split('_')[-1])
+    await handle_amplify_forward(query, session, assignment_id)
+    return AWAITING_TASK_PROOF
+
+
 async def handle_amplify_forward(query, session, assignment_id):
     """Send a clean, forwardable Telegram message for the Amplify task."""
     lang = getattr(session, 'language', 'en') or 'en'
@@ -1337,6 +1355,11 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         msg += t('task_petition_step2', lang) + "\n"
         msg += t('task_petition_step3', lang) + "\n"
 
+        msg += "\n💡 *What counts as proof:*\n"
+        msg += "• Screenshot of signed petition page\n"
+        msg += "• Confirmation email text\n"
+        msg += "• Just type 'done' if no screenshot possible\n"
+
         if petition_url and petition_url.startswith('http'):
             keyboard.append([
                 InlineKeyboardButton(
@@ -1368,6 +1391,15 @@ async def handle_task_start_and_guide(query, session, task_id, context):
         msg = t('task_started_title', lang) + "\n\n"
         msg += f"{type_icon} *{task.localized_title(lang)}*\n\n"
         msg += t('content_creation_instructions', lang) + "\n\n"
+
+        msg += "💡 *Content Ideas:*\n"
+        msg += "• Write a Twitter thread about the Minab school attack\n"
+        msg += "• Create a short poem or tribute for the children\n"
+        msg += "• Make a comparison graphic showing the school before/after\n"
+        msg += "• Record a 60-second voice/video message\n\n"
+        msg += "📤 *How to share:*\n"
+        msg += "• Post on Twitter/X and paste the tweet URL here\n"
+        msg += "• Or send your text/image directly in this chat\n"
 
         if task.instructions:
             msg += f"───────────────────\n"
@@ -1955,6 +1987,8 @@ task_proof_conversation = ConversationHandler(
             # Child story navigation for twitter_post ("Share a Child's Story")
             CallbackQueryHandler(handle_child_story_back, pattern='^child_story_back_'),
             CallbackQueryHandler(handle_child_story_selection, pattern='^child_story_'),
+            # Amplify forward button (Issue #14)
+            CallbackQueryHandler(_handle_amplify_forward_in_conversation, pattern='^amplify_forward_'),
             # Allow re-entering a different task or navigating back without breaking conversation
             CallbackQueryHandler(start_task_from_claim, pattern='^task_claim_'),
             CallbackQueryHandler(start_task_from_claim, pattern='^task_startclaim_'),
