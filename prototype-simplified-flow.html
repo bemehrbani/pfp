@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PFP Simplified Flow — Prototype</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ════════════════════════════════════════════════════════
+           DESIGN TOKENS
+           ════════════════════════════════════════════════════════ */
+        :root {
+            --tg-bg:        #0e1621;
+            --tg-panel:     #17212b;
+            --tg-header:    #242f3d;
+            --tg-msg-in:    #182533;
+            --tg-msg-out:   #2b5278;
+            --tg-blue:      #3390ec;
+            --tg-blue-light:#64b5f6;
+            --tg-green:     #4caf50;
+            --tg-orange:    #ff9800;
+            --tg-red:       #f44336;
+            --tg-text:      #f5f5f5;
+            --tg-text-dim:  #8b9bab;
+            --tg-text-link: #6ab2f2;
+            --tg-border:    rgba(255,255,255,0.06);
+            --tg-radius:    12px;
+            --font-main:    'Noto Sans', 'Noto Sans Arabic', system-ui, sans-serif;
+        }
+
+        /* ════════════════════════════════════════════════════════
+           RESET & BASE
+           ════════════════════════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { height: 100%; }
+
+        body {
+            font-family: var(--font-main);
+            background: #0a0f18;
+            color: var(--tg-text);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* ════════════════════════════════════════════════════════
+           TOP BANNER
+           ════════════════════════════════════════════════════════ */
+        .top-banner {
+            width: 100%;
+            background: linear-gradient(135deg, #1a2a3a 0%, #0e1621 100%);
+            border-bottom: 1px solid var(--tg-border);
+            padding: 20px 20px 16px;
+            text-align: center;
+        }
+        .top-banner h1 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .top-banner h1 span {
+            display: inline-block;
+            background: var(--tg-orange);
+            color: #000;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 99px;
+            margin-left: 6px;
+            vertical-align: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .top-banner p {
+            font-size: 12px;
+            color: var(--tg-text-dim);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        .top-banner .reset-btn {
+            margin-top: 10px;
+            padding: 6px 20px;
+            background: rgba(255,255,255,0.06);
+            color: var(--tg-text-dim);
+            border: 1px solid var(--tg-border);
+            border-radius: 99px;
+            font-family: inherit;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .top-banner .reset-btn:hover {
+            color: var(--tg-text);
+            border-color: var(--tg-blue);
+        }
+
+        /* ════════════════════════════════════════════════════════
+           PHONE FRAME
+           ════════════════════════════════════════════════════════ */
+        .phone {
+            width: 100%;
+            max-width: 420px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--tg-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 500px) {
+            .phone {
+                margin: 24px auto;
+                border-radius: 20px;
+                max-height: 780px;
+                box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px var(--tg-border);
+            }
+        }
+
+        /* ── Chat header ── */
+        .chat-hdr {
+            background: var(--tg-header);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            border-bottom: 1px solid var(--tg-border);
+        }
+        .chat-hdr .back {
+            color: var(--tg-blue);
+            font-size: 20px;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .chat-hdr .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5b9bd5, #3390ec);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .chat-hdr .info { flex: 1; min-width: 0; }
+        .chat-hdr .name { font-size: 14px; font-weight: 600; }
+        .chat-hdr .status { font-size: 11px; color: var(--tg-text-dim); }
+
+        /* ── Messages Area ── */
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            scroll-behavior: smooth;
+            /* telegram-style subtle pattern */
+            background-color: var(--tg-bg);
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(51,144,236,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(76,175,80,0.02) 0%, transparent 50%);
+        }
+
+        /* ── Message bubbles ── */
+        .bubble {
+            max-width: 88%;
+            padding: 8px 12px;
+            border-radius: var(--tg-radius);
+            font-size: 14px;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(8px) scale(0.98);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            word-wrap: break-word;
+        }
+        .bubble.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .bubble-in {
+            background: var(--tg-msg-in);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .bubble-out {
+            background: var(--tg-msg-out);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .bubble b, .bubble strong { color: var(--tg-text); }
+        .bubble a { color: var(--tg-text-link); text-decoration: none; }
+        .bubble a:hover { text-decoration: underline; }
+        .bubble .sep {
+            display: block;
+            color: var(--tg-text-dim);
+            opacity: 0.4;
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin: 5px 0;
+            user-select: none;
+        }
+        .bubble .tag {
+            color: var(--tg-text-link);
+            font-weight: 500;
+        }
+        .bubble .dim { color: var(--tg-text-dim); font-size: 13px; }
+        .bubble .emoji-big { font-size: 26px; display: block; margin-bottom: 4px; }
+        .bubble .time {
+            float: right;
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+            margin: 4px 0 -2px 12px;
+        }
+        .bubble.rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* ── Inline keyboard (buttons below bubble) ── */
+        .kbd {
+            max-width: 88%;
+            align-self: flex-start;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-top: -2px;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .kbd.show { opacity: 1; transform: translateY(0); }
+
+        .kbd-row { display: flex; gap: 3px; }
+
+        .kbd-btn {
+            flex: 1;
+            padding: 9px 8px;
+            background: rgba(51,144,236,0.08);
+            border: 1px solid rgba(51,144,236,0.2);
+            border-radius: 8px;
+            color: var(--tg-text-link);
+            font-family: var(--font-main);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .kbd-btn:hover { background: rgba(51,144,236,0.15); border-color: var(--tg-blue); }
+        .kbd-btn:active { transform: scale(0.97); }
+        .kbd-btn.green {
+            color: var(--tg-green);
+            border-color: rgba(76,175,80,0.2);
+            background: rgba(76,175,80,0.08);
+        }
+        .kbd-btn.green:hover { background: rgba(76,175,80,0.15); border-color: var(--tg-green); }
+        .kbd-btn.orange {
+            color: var(--tg-orange);
+            border-color: rgba(255,152,0,0.2);
+            background: rgba(255,152,0,0.08);
+        }
+        .kbd-btn.orange:hover { background: rgba(255,152,0,0.15); border-color: var(--tg-orange); }
+        .kbd-btn.accent {
+            background: rgba(51,144,236,0.15);
+            border-color: rgba(51,144,236,0.35);
+        }
+        .kbd-btn[disabled] {
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* ── Typing indicator ── */
+        .typing {
+            align-self: flex-start;
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: var(--tg-msg-in);
+            border-radius: var(--tg-radius);
+            border-bottom-left-radius: 4px;
+        }
+        .typing i {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--tg-text-dim);
+            animation: bounce 1.2s infinite;
+        }
+        .typing i:nth-child(2) { animation-delay: 0.15s; }
+        .typing i:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes bounce {
+            0%,60%,100% { transform: translateY(0); opacity: 0.3; }
+            30% { transform: translateY(-5px); opacity: 1; }
+        }
+
+        /* ── Date separator ── */
+        .date-sep {
+            align-self: center;
+            background: rgba(0,0,0,0.3);
+            color: var(--tg-text-dim);
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 99px;
+            margin: 4px 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .date-sep.show { opacity: 1; }
+
+        /* ── Input bar (cosmetic) ── */
+        .input-bar {
+            flex-shrink: 0;
+            background: var(--tg-panel);
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-top: 1px solid var(--tg-border);
+        }
+        .input-bar .field {
+            flex: 1;
+            background: var(--tg-bg);
+            border: 1px solid var(--tg-border);
+            border-radius: 20px;
+            padding: 8px 14px;
+            color: var(--tg-text-dim);
+            font-size: 13px;
+            font-family: var(--font-main);
+        }
+        .input-bar .send-icon {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: var(--tg-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .input-bar .send-icon svg { fill: #fff; width: 18px; height: 18px; }
+
+        /* ── Notification toast ── */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--tg-green);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 200;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Banner ── -->
+<div class="top-banner">
+    <h1>🕊️ PFP Simplified Flow <span>Prototype</span></h1>
+    <p>Interactive mockup of the proposed single-task experience based on Naime's feedback. Tap the buttons to walk through the flow.</p>
+    <button class="reset-btn" onclick="restart()">↺ Restart</button>
+</div>
+
+<!-- ── Phone ── -->
+<div class="phone">
+    <div class="chat-hdr">
+        <div class="back">‹</div>
+        <div class="avatar">🕊️</div>
+        <div class="info">
+            <div class="name">People for Peace Bot</div>
+            <div class="status" id="bot-status">online</div>
+        </div>
+    </div>
+    <div class="messages" id="chat"></div>
+    <div class="input-bar">
+        <div class="field">Message</div>
+        <div class="send-icon">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// FLOW ENGINE
+// ═══════════════════════════════════════════════════════════════════
+const $ = id => document.getElementById(id);
+const chat = $('chat');
+let queue = [];
+let processing = false;
+const DELAY = 500;
+
+function showToast(text) {
+    const t = $('toast');
+    t.textContent = text;
+    t.classList.add('visible');
+    setTimeout(() => t.classList.remove('visible'), 2200);
+}
+
+function scrollDown() {
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function addTyping() {
+    const el = document.createElement('div');
+    el.className = 'typing';
+    el.id = 'typing';
+    el.innerHTML = '<i></i><i></i><i></i>';
+    chat.appendChild(el);
+    scrollDown();
+    return el;
+}
+
+function removeTyping() {
+    const t = $('typing');
+    if (t) t.remove();
+}
+
+function addDateSep(text) {
+    const el = document.createElement('div');
+    el.className = 'date-sep';
+    el.textContent = text;
+    chat.appendChild(el);
+    requestAnimationFrame(() => el.classList.add('show'));
+}
+
+function addBubble(html, type = 'in', opts = {}) {
+    return new Promise(resolve => {
+        const isBot = type === 'in';
+        if (isBot) {
+            addTyping();
+            $('bot-status').textContent = 'typing…';
+        }
+
+        const delay = isBot ? DELAY + Math.random() * 400 : 100;
+
+        setTimeout(() => {
+            removeTyping();
+            if (isBot) $('bot-status').textContent = 'online';
+
+            const el = document.createElement('div');
+            el.className = `bubble bubble-${type}` + (opts.rtl ? ' rtl' : '');
+            el.innerHTML = html;
+            chat.appendChild(el);
+
+            requestAnimationFrame(() => {
+                el.classList.add('show');
+                scrollDown();
+            });
+
+            setTimeout(resolve, 150);
+        }, delay);
+    });
+}
+
+function addButtons(rows) {
+    return new Promise(resolve => {
+        const wrap = document.createElement('div');
+        wrap.className = 'kbd';
+
+        rows.forEach(row => {
+            const rowEl = document.createElement('div');
+            rowEl.className = 'kbd-row';
+
+            row.forEach(btn => {
+                const b = document.createElement('button');
+                b.className = 'kbd-btn' + (btn.cls ? ' ' + btn.cls : '');
+                b.textContent = btn.text;
+                b.addEventListener('click', () => {
+                    // Disable all buttons in this keyboard
+                    wrap.querySelectorAll('.kbd-btn').forEach(x => x.disabled = true);
+
+                    if (btn.action) {
+                        btn.action();
+                    }
+                });
+                rowEl.appendChild(b);
+            });
+
+            wrap.appendChild(rowEl);
+        });
+
+        chat.appendChild(wrap);
+        requestAnimationFrame(() => {
+            wrap.classList.add('show');
+            scrollDown();
+        });
+
+        resolve();
+    });
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+// SCREENS
+// ═══════════════════════════════════════════════════════════════════
+
+async function screen_welcome() {
+    addDateSep('Today');
+
+    await addBubble(`
+        <span class="emoji-big">🎉</span>
+        <b>You've joined the Justice for Minab Children campaign!</b>
+        <span class="sep">━━━━━━━━━━━━━━━━━━</span>
+        🕯 We honor 168 children killed in the Minab school strike. Their memory drives us forward.
+        <br><br>
+        <b>Your mission is simple:</b><br>
+        💬 Comment on key posts with our hashtags — <b>that's it.</b>
+        <br><br>
+        <span class="tag">#JusticeForMinab&ensp;#MinabSchoolMassacre</span>
+        <span class="time">11:32</span>
+    `);
+
+    await addButtons([
+        [{ text: '🚀 Start My Task!', cls: 'accent', action: screen_platform }]
+    ]);
+}
+
+async function screen_platform() {
+    await addBubble('🚀 Start My Task!', 'out');
+
+    await addBubble(`
+        <b>📱 Pick your platform</b>
+        <br><br>
+        Where would you like to leave your comment?
+        <span class="time">11:32</span>
+    `);
+
+    await addButtons([
+        [
+            { text: '𝕏 Twitter', action: screen_twitter_targets },
+            { text: '📸 Instagram', action: screen_instagram_targets }
+        ],
+        [{ text: '📢 Telegram (Forward)', action: screen_telegram_forward }]
+    ]);
+}
+
+// ──────────────────────────────────────────────────────────
+// TWITTER PATH
+// ──────────────────────────────────────────────────────────
+async function screen_twitter_targets() {
+    await addBubble('𝕏 Twitter', 'out');
+
+    await addBubble(`
+        <b>🎯 Comment on these accounts</b>
+        <br><br>
+        Find a recent post from any account below and leave a comment:
+        <br><br>
+        1. <a href="#">@IntlCrimCourt</a> — Intl. Criminal Court<br>
+        2. <a href="#">@UNHumanRights</a> — UN Human Rights<br>
+        3. <a href="#">@StateDept</a> — US State Department<br>
+        4. <a href="#">@amnesty</a> — Amnesty International<br>
+        5. <a href="#">@KenRoth</a> — Ken Roth (HRW)
+        <span class="time">11:33</span>
+    `);
+
+    await addButtons([
+        [{ text: '📋 Get Ready-Made Comment (EN)', cls: 'accent', action: screen_twitter_comment_en }],
+        [{ text: '📋 دریافت متن آماده (فارسی)', action: screen_twitter_comment_fa }]
+    ]);
+}
+
+async function screen_twitter_comment_en() {
+    await addBubble('📋 Get Ready-Made Comment (EN)', 'out');
+
+    await addBubble(`
+        <b>📋 Copy this comment:</b>
+        <br><br>
+        <em>168 children aged 7-12 were killed in a US cruise missile strike on their school in Minab, Iran, Feb 28, 2026.</em>
+        <br><br>
+        <em>Where is accountability? The world must see.</em>
+        <br><br>
+        <em>Evidence: peopleforpeace.live/justice.html</em>
+        <br><br>
+        <span class="tag">#JusticeForMinab #MinabSchoolMassacre #IStandWithIran</span>
+        <br><br>
+        <span class="dim">👆 Long-press → Copy → Paste as comment</span>
+        <span class="time">11:33</span>
+    `);
+
+    await addButtons([
+        [{ text: '✅ Done — I Commented!', cls: 'green', action: screen_completion }],
+        [{ text: '📋 فارسی / Farsi Version', action: screen_twitter_comment_fa }]
+    ]);
+}
+
+async function screen_twitter_comment_fa() {
+    await addBubble('📋 دریافت متن فارسی', 'out');
+
+    await addBubble(`
+        <b>📋 این متن را کپی کنید:</b>
+        <br><br>
+        <em>«۱۶۸ کودک ۷ تا ۱۲ ساله در حمله موشک‌های کروز آمریکا به مدرسه‌شان در میناب، ایران، در ۲۸ فوریه ۲۰۲۶ کشته شدند.</em>
+        <br><br>
+        <em>مسئولیت‌پذیری کجاست؟ جهان باید ببیند.</em>
+        <br><br>
+        <em>شواهد: peopleforpeace.live/justice.html»</em>
+        <br><br>
+        <span class="tag">#JusticeForMinab #MinabSchoolMassacre</span>
+        <br><br>
+        <span class="dim">👆 متن را نگه دارید → کپی → در کامنت پیست کنید</span>
+        <span class="time">11:33</span>
+    `, 'in', { rtl: true });
+
+    await addButtons([
+        [{ text: '✅ انجام دادم — کامنت گذاشتم!', cls: 'green', action: screen_completion }],
+        [{ text: '📋 English Version', action: screen_twitter_comment_en }]
+    ]);
+}
+
+// ──────────────────────────────────────────────────────────
+// INSTAGRAM PATH
+// ──────────────────────────────────────────────────────────
+async function screen_instagram_targets() {
+    await addBubble('📸 Instagram', 'out');
+
+    await addBubble(`
+        <b>🎯 Comment on these Instagram pages</b>
+        <br><br>
+        Go to any of these accounts, find a recent post, and paste your comment:
+        <br><br>
+        1. <a href="#">@unitednations</a> — United Nations<br>
+        2. <a href="#">@amnesty</a> — Amnesty International<br>
+        3. <a href="#">@bbcnews</a> — BBC News<br>
+        4. <a href="#">@cikiranofficial</a> — CIKIR Iran<br>
+        5. <a href="#">@humanrightscampaign</a> — HRC
+        <br><br>
+        <span class="dim">💡 Open Instagram → Search the account → Find a recent post → Comment!</span>
+        <span class="time">11:33</span>
+    `);
+
+    await addButtons([
+        [{ text: '📋 Get Ready-Made Comment (EN)', cls: 'accent', action: screen_ig_comment_en }],
+        [{ text: '📋 دریافت متن آماده (فارسی)', action: screen_ig_comment_fa }]
+    ]);
+}
+
+async function screen_ig_comment_en() {
+    await addBubble('📋 Get Ready-Made Comment', 'out');
+
+    await addBubble(`
+        <b>📋 Copy this comment for Instagram:</b>
+        <br><br>
+        <em>168 children killed in their school in Minab, Iran. Feb 28, 2026. No accountability. No investigation. The world must see and act. 🕯️</em>
+        <br><br>
+        <span class="tag">#JusticeForMinab #MinabSchoolMassacre #168Children #IStandWithIran</span>
+        <br><br>
+        <span class="dim">👆 Copy → Open Instagram → Paste as comment</span>
+        <span class="time">11:33</span>
+    `);
+
+    await addButtons([
+        [{ text: '✅ Done — I Commented!', cls: 'green', action: screen_completion }]
+    ]);
+}
+
+async function screen_ig_comment_fa() {
+    await addBubble('📋 دریافت متن فارسی', 'out');
+
+    await addBubble(`
+        <b>📋 این متن را کپی و در اینستاگرام کامنت بگذارید:</b>
+        <br><br>
+        <em>«۱۶۸ کودک در مدرسه‌شان در میناب، ایران کشته شدند. ۲۸ فوریه ۲۰۲۶. بدون مسئولیت‌پذیری. بدون تحقیق. جهان باید ببیند و عمل کند. 🕯️»</em>
+        <br><br>
+        <span class="tag">#JusticeForMinab #MinabSchoolMassacre #168Children</span>
+        <span class="time">11:33</span>
+    `, 'in', { rtl: true });
+
+    await addButtons([
+        [{ text: '✅ انجام دادم!', cls: 'green', action: screen_completion }]
+    ]);
+}
+
+// ──────────────────────────────────────────────────────────
+// TELEGRAM FORWARD PATH
+// ──────────────────────────────────────────────────────────
+async function screen_telegram_forward() {
+    await addBubble('📢 Telegram (Forward)', 'out');
+
+    await addBubble(`
+        <b>📤 Forward-ready message</b>
+        <br><br>
+        Forward the message below to your Telegram groups, channels, and contacts.
+        <br><br>
+        <span class="dim">The more people see it, the stronger our voice. 🕊️</span>
+        <span class="time">11:33</span>
+    `);
+
+    // Simulated "forwardable" message
+    await addBubble(`
+        🕯️ <b>168 Children. One School. Minab, Iran.</b>
+        <br><br>
+        On Feb 28, 2026, US cruise missiles struck a primary school during class hours. 168 children aged 7-12 were killed.
+        <br><br>
+        No international investigation. No accountability.
+        <br><br>
+        📎 <b>Evidence:</b> <a href="#">peopleforpeace.live/justice.html</a>
+        📢 <b>Join:</b> <a href="#">@people4peace</a>
+        <br><br>
+        <span class="tag">#JusticeForMinab #MinabSchoolMassacre #168Children</span>
+        <span class="time">11:34</span>
+    `);
+
+    await addBubble(`
+        🕯️ <b>۱۶۸ کودک. یک مدرسه. میناب، ایران.</b>
+        <br><br>
+        ۲۸ فوریه ۲۰۲۶، موشک‌های کروز آمریکا یک دبستان را در زمان کلاس هدف قرار دادند. ۱۶۸ کودک ۷ تا ۱۲ ساله کشته شدند.
+        <br><br>
+        هیچ تحقیق بین‌المللی. هیچ مسئولیت‌پذیری.
+        <br><br>
+        📎 <b>شواهد:</b> <a href="#">peopleforpeace.live/justice.html</a>
+        📢 <b>عضویت:</b> <a href="#">@people4peace</a>
+        <br><br>
+        <span class="tag">#JusticeForMinab #MinabSchoolMassacre</span>
+        <span class="time">11:34</span>
+    `, 'in', { rtl: true });
+
+    await addButtons([
+        [{ text: '✅ Forwarded!', cls: 'green', action: screen_completion }]
+    ]);
+}
+
+// ──────────────────────────────────────────────────────────
+// COMPLETION & ESCALATION
+// ──────────────────────────────────────────────────────────
+async function screen_completion() {
+    await addBubble('✅ Done!', 'out');
+
+    await addBubble(`
+        <span class="emoji-big">🎉</span>
+        <b>Thank you, activist!</b>
+        <br><br>
+        Your voice matters. Every comment amplifies the call for justice for the 168 children of Minab.
+        <br><br>
+        <span class="dim">👥 23 volunteers active · 1,247 actions taken worldwide</span>
+        <span class="sep">━━━━━━━━━━━━━━━━━━</span>
+        <b>Want to do more?</b> 👇
+        <span class="time">11:35</span>
+    `);
+
+    await addButtons([
+        [{ text: '🔄 Comment on Another Platform', action: screen_platform }],
+        [{ text: '📤 Submit a Credible Account/Text', cls: 'orange', action: screen_submit }],
+        [{ text: '✍️ I\'m Ready to Create Content!', cls: 'green', action: screen_creator }],
+        [{ text: '👥 Invite a Friend', action: screen_invite }]
+    ]);
+}
+
+// ──────────────────────────────────────────────────────────
+// SUBMIT CONTENT/ACCOUNTS
+// ──────────────────────────────────────────────────────────
+async function screen_submit() {
+    await addBubble('📤 Submit a Credible Account/Text', 'out');
+
+    await addBubble(`
+        <b>📥 Submit Content to the Campaign</b>
+        <br><br>
+        Do you know a credible account, tweet, article, or comment text that should be in our list?
+        <br><br>
+        Send it right here — our admin team will review it and add it to the campaign!
+        <br><br>
+        <span class="dim">Just type or paste the link/text below 👇</span>
+        <span class="time">11:35</span>
+    `);
+
+    // Simulate user typing a submission
+    await addBubble(`
+        <b>همچنین فارسی:</b>
+        <br><br>
+        اگر حساب کاربری، توییت، مقاله یا متن کامنت معتبری می‌شناسید، اینجا ارسال کنید! تیم ما بررسی و به لیست اضافه می‌کند.
+        <span class="time">11:35</span>
+    `, 'in', { rtl: true });
+
+    await addButtons([
+        [{ text: '📎 Example: Submit @hraborz account', action: screen_submit_confirm }],
+        [{ text: '↩️ Back', action: screen_completion }]
+    ]);
+}
+
+async function screen_submit_confirm() {
+    await addBubble('@hraborz — This is a great human rights activist account with verified info about Iran', 'out');
+
+    await addBubble(`
+        <b>✅ Submission Received!</b>
+        <br><br>
+        Thank you! Our admin team will review <b>@hraborz</b> and add it to the target list if approved.
+        <br><br>
+        <span class="dim">You'll be notified when it's added. 🕊️</span>
+        <span class="time">11:36</span>
+    `);
+
+    showToast('✅ Submitted to admin for review');
+
+    await addButtons([
+        [{ text: '📤 Submit Another', action: screen_submit }],
+        [{ text: '🏠 Back to Options', action: screen_completion }]
+    ]);
+}
+
+// ──────────────────────────────────────────────────────────
+// CONTENT CREATOR OPT-IN
+// ──────────────────────────────────────────────────────────
+async function screen_creator() {
+    await addBubble('✍️ I\'m Ready to Create Content!', 'out');
+
+    await addBubble(`
+        <span class="emoji-big">🌟</span>
+        <b>Welcome to the Creator Circle!</b>
+        <br><br>
+        You've been registered as a content creator. An admin will reach out with:
+        <br><br>
+        📌 Content briefs & topics<br>
+        🖼️ Images & verified data<br>
+        📅 Coordination channels
+        <br><br>
+        <span class="sep">━━━━━━━━━━━━━━━━━━</span>
+        <b>Resources for creators:</b>
+        <br>
+        🕯️ <a href="#">Memorial — peopleforpeace.live</a><br>
+        📄 <a href="#">Evidence & Facts</a><br>
+        📊 <a href="#">Verified Timeline</a>
+        <br><br>
+        <span class="dim">Thank you for going the extra mile! 🕊️</span>
+        <span class="time">11:36</span>
+    `);
+
+    showToast('🌟 Registered as content creator');
+
+    await addButtons([
+        [{ text: '🏠 Back to Options', action: screen_completion }]
+    ]);
+}
+
+// ──────────────────────────────────────────────────────────
+// INVITE
+// ──────────────────────────────────────────────────────────
+async function screen_invite() {
+    await addBubble('👥 Invite a Friend', 'out');
+
+    await addBubble(`
+        <b>👥 Share this link with friends:</b>
+        <br><br>
+        <a href="#">https://t.me/people4peace_bot?start=invite_abc123</a>
+        <br><br>
+        When they join through your link, both of you strengthen the movement.
+        <br><br>
+        <span class="dim">The more voices, the louder the call for justice. 🕊️</span>
+        <span class="time">11:36</span>
+    `);
+
+    showToast('🔗 Invite link ready to share');
+
+    await addButtons([
+        [{ text: '🏠 Back to Options', action: screen_completion }]
+    ]);
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════
+function restart() {
+    chat.innerHTML = '';
+    screen_welcome();
+}
+
+restart();
+</script>
+</body>
+</html>
