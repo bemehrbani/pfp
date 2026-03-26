@@ -287,8 +287,8 @@ async def simp_handle_escalation(update: Update, context: ContextTypes.DEFAULT_T
         # Using context.user_data to track state for receiving the message
         context.user_data['escalation_state'] = 'waiting_for_submission'
     elif action == "creator":
-        text = t('simplified_escalation_creator', lang)
-        context.user_data['escalation_state'] = None
+        text = t('simplified_escalation_creator_prompt', lang)
+        context.user_data['escalation_state'] = 'waiting_for_creator_info'
     elif action == "invite":
         context.user_data['escalation_state'] = None
         # Send video directly and return early
@@ -343,13 +343,43 @@ async def simp_handle_escalation(update: Update, context: ContextTypes.DEFAULT_T
     )
 
 async def handle_user_submission(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Catches text messages from users in the escalation flow."""
-    if context.user_data.get('escalation_state') == 'waiting_for_submission':
+    """Catches text messages from users in the escalation flow and forwards them."""
+    state = context.user_data.get('escalation_state')
+    
+    if state in ['waiting_for_submission', 'waiting_for_creator_info']:
         session, _ = await state_manager.get_or_create_session(update, context)
         lang = getattr(session, 'language', 'en') or 'en'
-        # In a real app, save to models.UserSubmission
+        
+        # Determine specific text based on state
+        if state == 'waiting_for_submission':
+            success_msg = "✅ Received! Thank you for your submission. Our team will review it shortly."
+            tag = "Account/Text Submission"
+        else:
+            success_msg = t('simplified_escalation_creator', lang)
+            tag = "Creator Portfolio Submission"
+
+        # Forward to admin group
+        from handlers.tasks import _db_get_campaign_group_id
+        campaign_id = 1 # Assuming default primary campaign for now
+        group_id = await _db_get_campaign_group_id(campaign_id)
+        
+        if group_id:
+            try:
+                username = update.message.from_user.username or update.message.from_user.first_name
+                forward_text = f"🆕 *New {tag}*\n👤 From: @{username}\n📝 Message:\n{update.message.text}"
+                await context.bot.send_message(
+                    chat_id=group_id,
+                    text=forward_text,
+                    parse_mode='Markdown'
+                )
+            except Exception as e:
+                import logging
+                logging.error(f"Failed to forward submission to admin group: {e}")
+
+        # In a real app context, also save to models.UserSubmission here
+        
         await update.message.reply_text(
-            "✅ Received! Thank you for your submission. Our team will review it shortly.",
+            success_msg,
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🏠 Main Flow", callback_data="simp_done")]])
         )
         context.user_data['escalation_state'] = None
