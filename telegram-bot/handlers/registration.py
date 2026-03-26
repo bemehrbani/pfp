@@ -19,7 +19,12 @@ async def handle_text_message(update: Update, context: CallbackContext):
     """
     Handle general text messages (non-commands).
     Routes keyboard button taps and handles registration flow.
+    Only active in private chats — group messages are silently ignored.
     """
+    # Ignore group/supergroup messages to avoid noisy fallback replies
+    if update.effective_chat.type != 'private':
+        return
+
     user = update.effective_user
     chat_id = update.effective_chat.id
     text = update.message.text.strip()
@@ -95,7 +100,10 @@ async def handle_text_message(update: Update, context: CallbackContext):
 
 @error_handler
 async def handle_unknown_command(update: Update, context: CallbackContext):
-    """Handle unknown commands."""
+    """Handle unknown commands. Only responds in private chats."""
+    if update.effective_chat.type != 'private':
+        return
+
     await update.message.reply_text(
         "❓ *Unknown command.*\n\n"
         "Use `/help` to see all available commands.",
