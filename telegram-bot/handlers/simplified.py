@@ -16,37 +16,41 @@ TARGETS = 2
 COMMENT = 3
 ESCALATION = 4
 
-# --- Target Data (Hardcoded for prototype parity) ---
-TWITTER_TARGETS = [
-    {
-        "name": "UNICEF Iran",
-        "url": "https://x.com/UNICEF_IRAN/status/1897290076295536768",
-        "description": "Demand official investigation"
-    },
-    {
-        "name": "Amnesty Iran",
-        "url": "https://x.com/AmnestyIran/status/1897354972106363294",
-        "description": "Amplify local reports"
-    },
-    {
-        "name": "Human Rights Watch",
-        "url": "https://x.com/hrw/status/1897371994018046039",
-        "description": "Call for international action"
-    }
-]
+from apps.tasks.models import Task
+from django.db.models import Q
 
-INSTAGRAM_TARGETS = [
-    {
-        "name": "UNICEF Iran",
-        "url": "https://www.instagram.com/unicef_iran/p/123456789/",
-        "description": "Demand official investigation"
-    },
-    {
-        "name": "Amnesty Iran",
-        "url": "https://www.instagram.com/amnestyiran/p/123456789/",
-        "description": "Amplify local reports"
-    }
-]
+@sync_to_async
+def _get_platform_targets(platform: str, lang: str = 'en'):
+    """Fetch active target descriptions and URLs from DB."""
+    # Fetch active tasks mapped to an active campaign
+    base_qs = Task.objects.filter(is_active=True, campaign__status='active')
+    
+    tasks = []
+    if platform == 'twitter':
+        tasks = base_qs.filter(
+            Q(target_url__icontains='twitter.com') | 
+            Q(target_url__icontains='x.com') |
+            Q(task_type__startswith='twitter_')
+        ).exclude(target_url='')
+    elif platform == 'insta':
+        tasks = base_qs.filter(target_url__icontains='instagram.com').exclude(target_url='')
+        
+    results = []
+    # Limit to 5 so we don't overflow the keyboard
+    for t in tasks.order_by('-created_at')[:5]:
+        results.append({
+            "id": t.id,
+            "name": t.localized_title(lang),
+            "url": t.target_url
+        })
+    return results
+
+@sync_to_async
+def _get_task_url(task_id: int):
+    try:
+        return Task.objects.get(id=task_id).target_url
+    except Task.DoesNotExist:
+        return ""
 
 
 async def process_start_simplified(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -132,15 +136,16 @@ async def simp_handle_platform(update: Update, context: ContextTypes.DEFAULT_TYP
     
     keyboard = []
     
+    targets_data = await _get_platform_targets(platform, lang)
+    
     if platform == "twitter":
         text = t('simplified_twitter_targets', lang)
-        for i, target in enumerate(TWITTER_TARGETS):
-            # Pass index in callback data to reference target later
-            keyboard.append([InlineKeyboardButton(f"🎯 {target['name']}", callback_data=f"simp_target_twitter_{i}")])
+        for target in targets_data:
+            keyboard.append([InlineKeyboardButton(f"🎯 {target['name']}", callback_data=f"simp_target_twitter_{target['id']}")])
     elif platform == "insta":
-        text = t('simplified_instagram_targets', lang) # Assuming fallback or similar text
-        for i, target in enumerate(INSTAGRAM_TARGETS):
-            keyboard.append([InlineKeyboardButton(f"📸 {target['name']}", callback_data=f"simp_target_insta_{i}")])
+        text = t('simplified_instagram_targets', lang)
+        for target in targets_data:
+            keyboard.append([InlineKeyboardButton(f"📸 {target['name']}", callback_data=f"simp_target_insta_{target['id']}")])
         
     keyboard.append([InlineKeyboardButton("🔙 Back", callback_data="simp_start_task")])
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -162,25 +167,21 @@ async def simp_handle_target(update: Update, context: ContextTypes.DEFAULT_TYPE)
     lang = getattr(session, 'language', 'en') or 'en'
     
     # Parse which platform and target was clicked
-    # Callback: simp_target_twitter_0
+    # Callback: simp_target_twitter_5
     parts = query.data.split('_')
     platform = parts[-2]
-    target_idx = int(parts[-1])
+    task_id = int(parts[-1])
     
     # Default to English comment view
     text = t('simplified_comment_en', lang)
     
     # Check if target URL exists before trying to access it
-    url = ""
-    if platform == "twitter" and target_idx < len(TWITTER_TARGETS):
-         url = TWITTER_TARGETS[target_idx]["url"]
-    elif platform == "insta" and target_idx < len(INSTAGRAM_TARGETS):
-         url = INSTAGRAM_TARGETS[target_idx]["url"]
+    url = await _get_task_url(task_id)
     
     keyboard = [
         [
-            InlineKeyboardButton(t('simplified_btn_get_en', lang), callback_data=f"simp_comment_en_{platform}_{target_idx}"),
-            InlineKeyboardButton(t('simplified_btn_get_fa', lang), callback_data=f"simp_comment_fa_{platform}_{target_idx}")
+            InlineKeyboardButton(t('simplified_btn_get_en', lang), callback_data=f"simp_comment_en_{platform}_{task_id}"),
+            InlineKeyboardButton(t('simplified_btn_get_fa', lang), callback_data=f"simp_comment_fa_{platform}_{task_id}")
         ],
         [InlineKeyboardButton("💬 Go to Post", url=url)] if url else [],
         [InlineKeyboardButton(t('simplified_btn_done', lang), callback_data="simp_done")],
@@ -205,26 +206,22 @@ async def simp_handle_comment_lang(update: Update, context: ContextTypes.DEFAULT
     session, _ = await state_manager.get_or_create_session(update, context)
     lang = getattr(session, 'language', 'en') or 'en'
     parts = query.data.split('_')
-    # simp_comment_fa_twitter_0
+    # simp_comment_fa_twitter_5
     comment_lang = parts[2]
     platform = parts[3]
-    target_idx = int(parts[4])
+    task_id = int(parts[4])
     
     if comment_lang == "fa":
         text = t('simplified_comment_fa', lang)
     else:
         text = t('simplified_comment_en', lang)
         
-    url = ""
-    if platform == "twitter" and target_idx < len(TWITTER_TARGETS):
-         url = TWITTER_TARGETS[target_idx]["url"]
-    elif platform == "insta" and target_idx < len(INSTAGRAM_TARGETS):
-         url = INSTAGRAM_TARGETS[target_idx]["url"]
+    url = await _get_task_url(task_id)
          
     keyboard = [
         [
-            InlineKeyboardButton(t('simplified_btn_get_en', lang), callback_data=f"simp_comment_en_{platform}_{target_idx}"),
-            InlineKeyboardButton(t('simplified_btn_get_fa', lang), callback_data=f"simp_comment_fa_{platform}_{target_idx}")
+            InlineKeyboardButton(t('simplified_btn_get_en', lang), callback_data=f"simp_comment_en_{platform}_{task_id}"),
+            InlineKeyboardButton(t('simplified_btn_get_fa', lang), callback_data=f"simp_comment_fa_{platform}_{task_id}")
         ],
         [InlineKeyboardButton("💬 Go to Post", url=url)] if url else [],
         [InlineKeyboardButton(t('simplified_btn_done', lang), callback_data="simp_done")],
