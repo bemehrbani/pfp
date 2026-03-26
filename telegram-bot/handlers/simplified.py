@@ -361,7 +361,7 @@ async def handle_user_submission(update: Update, context: ContextTypes.DEFAULT_T
         
         @sync_to_async
         def _get_active_group_id():
-            c = Campaign.objects.filter(is_active=True).first()
+            c = Campaign.objects.filter(status='active').first()
             return c.telegram_group_id if c else None
             
         group_id = await _get_active_group_id()
