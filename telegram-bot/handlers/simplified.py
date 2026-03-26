@@ -93,6 +93,34 @@ async def simp_handle_start_task(update: Update, context: ContextTypes.DEFAULT_T
         parse_mode='Markdown'
     )
 
+async def simp_handle_restart(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Deletes the current message (e.g. video) and sends the platform picker."""
+    query = update.callback_query
+    await query.answer()
+    
+    try:
+        await query.delete_message()
+    except Exception:
+        pass
+        
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
+    
+    keyboard = [
+        [InlineKeyboardButton(t('simplified_btn_twitter', lang), callback_data="simp_plat_twitter")],
+        [InlineKeyboardButton(t('simplified_btn_instagram', lang), callback_data="simp_plat_insta")],
+        [InlineKeyboardButton(t('simplified_btn_creator', lang), callback_data="simp_escalate_creator")],
+        [InlineKeyboardButton(t('simplified_btn_invite', lang), callback_data="simp_escalate_invite")],
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    await query.get_bot().send_message(
+        chat_id=query.message.chat_id,
+        text=t('simplified_platform_picker', lang),
+        reply_markup=reply_markup,
+        parse_mode='Markdown'
+    )
+
 async def simp_handle_platform(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Shows targets for the selected platform."""
     query = update.callback_query
@@ -286,7 +314,7 @@ async def simp_handle_escalation(update: Update, context: ContextTypes.DEFAULT_T
         assets_dir = os.environ.get('VIDEO_ASSETS_DIR', '/app/assets/videos')
         video_path = pathlib.Path(assets_dir) / video_files.get(lang, video_files['en'])
 
-        keyboard = [[InlineKeyboardButton("🔙 Back to Main Menu", callback_data="simp_start_task")]]
+        keyboard = [[InlineKeyboardButton("🔙 Back to Main Menu", callback_data="simp_restart")]]
         
         if not video_path.exists():
             await query.get_bot().send_message(
@@ -330,6 +358,7 @@ async def handle_user_submission(update: Update, context: ContextTypes.DEFAULT_T
 # --- Handlers Export ---
 simplified_handlers = [
     CallbackQueryHandler(simp_handle_start_task, pattern=r"^simp_start_task$"),
+    CallbackQueryHandler(simp_handle_restart, pattern=r"^simp_restart$"),
     CallbackQueryHandler(simp_handle_platform, pattern=r"^simp_plat_"),
     CallbackQueryHandler(simp_handle_target, pattern=r"^simp_target_"),
     CallbackQueryHandler(simp_handle_comment_lang, pattern=r"^simp_comment_"),
