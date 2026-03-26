@@ -356,9 +356,15 @@ async def handle_user_submission(update: Update, context: ContextTypes.DEFAULT_T
             tag = "Creator Portfolio Submission"
 
         # Forward to admin group
-        from handlers.tasks import _db_get_campaign_group_id
-        campaign_id = 1 # Assuming default primary campaign for now
-        group_id = await _db_get_campaign_group_id(campaign_id)
+        from asgiref.sync import sync_to_async
+        from apps.campaigns.models import Campaign
+        
+        @sync_to_async
+        def _get_active_group_id():
+            c = Campaign.objects.filter(is_active=True).first()
+            return c.telegram_group_id if c else None
+            
+        group_id = await _get_active_group_id()
         
         if group_id:
             try:
