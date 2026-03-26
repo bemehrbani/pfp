@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Current Bot Flow — Full Mockup Walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --blue-accent: #3b82f6;
+  --blue-light: #60a5fa;
+  --green: #22c55e;
+  --orange: #f59e0b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(59,130,246,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ── Header ── */
+.page-header {
+  position: relative;
+  z-index: 1;
+  padding: 48px 40px 36px;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeUp 0.6s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blue-light);
+  font-size: 13px;
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--gold); }
+.page-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #10b981;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.page-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.page-header h1 .accent { color: var(--blue-light); }
+.page-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 700px;
+}
+.page-meta {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ── Content ── */
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+}
+
+/* Section */
+.section {
+  margin-bottom: 48px;
+  animation: fadeUp 0.6s ease both;
+}
+.section:nth-child(2) { animation-delay: 0.1s; }
+.section:nth-child(3) { animation-delay: 0.2s; }
+.section:nth-child(4) { animation-delay: 0.3s; }
+
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.section h2 .num {
+  color: var(--blue-light);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+.section p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* Screenshot cards */
+.ss-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(59,130,246,0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 20px 0;
+  transition: border-color 0.3s;
+}
+.ss-card:hover { border-color: rgba(59,130,246,0.25); }
+.ss-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ss-card .ss-caption {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid rgba(59,130,246,0.08);
+}
+.ss-card .ss-caption .ss-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(59,130,246,0.12);
+  color: var(--blue-light);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+.ss-card .ss-caption .ss-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.ss-card .ss-caption .ss-text b { color: var(--text-primary); }
+
+/* Table */
+.req-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 14px;
+}
+.req-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: rgba(59,130,246,0.08);
+  color: var(--blue-light);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid rgba(59,130,246,0.15);
+}
+.req-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(59,130,246,0.06);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.req-table td:first-child { color: var(--text-primary); font-weight: 500; min-width: 140px; }
+.req-table tr:last-child td { border-bottom: none; }
+
+/* Checklist */
+.checklist {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 8px;
+  margin: 16px 0;
+}
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  background: rgba(34,197,94,0.04);
+  border: 1px solid rgba(34,197,94,0.1);
+  border-radius: 8px;
+}
+.checklist .ck { color: var(--green); font-size: 16px; }
+
+/* CTA */
+.cta-box {
+  background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(16,185,129,0.08));
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: 14px;
+  padding: 32px;
+  text-align: center;
+  margin: 40px 0 20px;
+}
+.cta-box h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--white);
+  margin: 0 0 12px;
+}
+.cta-box p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(59,130,246,0.3);
+}
+
+/* Separator */
+.sep { border: none; border-top: 1px solid rgba(59,130,246,0.08); margin: 0 0 20px; }
+
+/* Farsi section */
+.rtl-section {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Noto Sans Arabic', var(--font-body);
+}
+.rtl-section h2, .rtl-section h3 { font-family: 'Noto Sans Arabic', var(--font-display); }
+.rtl-section .num { margin-right: 0; margin-left: 8px; }
+
+/* Footer */
+.page-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 24px 40px 48px;
+  border-top: 1px solid rgba(59,130,246,0.06);
+}
+.page-footer p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.page-footer a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .page-header { padding: 32px 20px 24px; }
+  .content { padding: 0 20px 40px; }
+  .cta-box { padding: 24px 20px; }
+  .page-meta { flex-direction: column; gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <a href="hub.html" class="back-link">← Back to Team Hub</a>
+  <div class="page-badge">🗺️ Interactive Map</div>
+  <h1>Current Bot <span class="accent">Architecture</span></h1>
+  <p class="page-desc">
+    A complete visual map and interactive mockup 100% synced with the live PFP Telegram bot logic. This documents the current state of navigation, checklists, menus, and onboarding.
+  </p>
+  <div class="page-meta">
+    <span>📅 March 26, 2026</span>
+    <span>🔗 Based on source code (2000+ lines mapped)</span>
+    <span>⏱️ 26 unique screens mapped</span>
+  </div>
+</header>
+
+<main class="content">
+
+  <!-- ── Objective ── -->
+  <section class="section">
+    <h2><span class="num">01</span>Objective</h2>
+    <p>To establish a precise, interactive baseline of the PFP bot's current UX. We audited the backend source code (`handlers/start.py`, `handlers/tasks.py`, `handlers/menu.py` etc.) and replicated it in a front-end HTML mockup for rapid design iteration and team review.</p>
+  </section>
+
+  <hr class="sep">
+
+  <!-- ── Alignment Corrections ── -->
+  <section class="section">
+    <h2><span class="num">02</span>Alignment Corrections &amp; Discrepancies</h2>
+    <p>We ran a side-by-side visual audit against the live bot and fixed the following layout / logic disparities in the mockup to ensure 100% parity:</p>
+
+    <table class="req-table">
+      <thead>
+        <tr><th>Area</th><th>Was (v1)</th><th>Live Bot Truth (v2 Fixed)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Main menu</td>
+          <td><code>My Campaigns</code>, <code>Profile</code>, <code>Storm</code>, <code>Help</code>, <code>Language</code></td>
+          <td><code>My Campaigns</code>, <code>Share Channel</code>, <code>Twitter Storm</code>, <code>Language | Help</code></td>
+        </tr>
+        <tr>
+          <td>Welcome Message</td>
+          <td>Generic registration text</td>
+          <td><code>👋 Welcome back, Name!</code> + <code>✅ X completed / 🚧 X in progress</code></td>
+        </tr>
+        <tr>
+          <td>Checklist Emojis</td>
+          <td>All <code>⬜</code> (uncompleted)</td>
+          <td><code>✅</code> done, <code>🚧</code> in-progress, <code>👉</code> next uncompleted, <code>⬜</code> rest</td>
+        </tr>
+        <tr>
+          <td>Task Priority Order</td>
+          <td>Alphabetical</td>
+          <td>Sorted by points: Content (30) → Email (20) → Story/Invite (15) → Petition/Comment/Amplify (10) → Like (5)</td>
+        </tr>
+        <tr>
+          <td>Checklist Filter</td>
+          <td>All 8 task types shown</td>
+          <td>Only 6 types auto-listed. Invite/Share shown differently.</td>
+        </tr>
+        <tr>
+          <td>Share Channel</td>
+          <td>Missing entirely</td>
+          <td>Full path: Language picker → Style picker → Ready-to-forward message</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="sep">
+
+  <!-- ── Screenshots ── -->
+  <section class="section">
+    <h2><span class="num">03</span>Visual Audit &amp; Screens</h2>
+    <p>Select screens generated during the mapping process and verification against the live server.</p>
+
+    <div class="ss-card">
+      <img src="assets/current/mockup-vs-live.webp" alt="Live bot vs Mockup verification" loading="lazy">
+      <div class="ss-caption">
+        <span class="ss-num">1</span>
+        <span class="ss-text"><b>Live Bot Verification.</b> The mockup (right) perfectly matches the logical flow, button layout, and terminology of the live production bot (left).</span>
+      </div>
+    </div>
+
+    <div class="ss-card">
+      <img src="assets/current/01-checklist.png" alt="Main Action Checklist">
+      <div class="ss-caption">
+        <span class="ss-num">2</span>
+        <span class="ss-text"><b>Action Checklist.</b> Demonstrating correct emoji indicators (done, in-progress, next), task pointing, and the updated persistent menu.</span>
+      </div>
+    </div>
+
+    <div class="ss-card">
+      <img src="assets/current/02-share-channel.png" alt="Share Channel Flow">
+      <div class="ss-caption">
+        <span class="ss-num">3</span>
+        <span class="ss-text"><b>Share Channel Feature.</b> Full replication of the multi-style channel sharing options.</span>
+      </div>
+    </div>
+    
+    <div class="ss-card">
+      <img src="assets/current/04-campaign-detail.png" alt="Campaign List and Detail">
+      <div class="ss-caption">
+        <span class="ss-num">4</span>
+        <span class="ss-text"><b>Campaign List &amp; Detail.</b> The UI for browsing active campaigns and viewing individual campaign scoreboards and descriptions.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <hr class="sep">
+
+  <!-- ── Screens Inventory ── -->
+  <section class="section">
+    <h2><span class="num">04</span>Screen Inventory</h2>
+    <p>The interactive mockup contains 26 interconnected screens replicating the Django backend states:</p>
+    <ul class="checklist">
+      <li><span class="ck">✓</span> /start (New User)</li>
+      <li><span class="ck">✓</span> /start (Returning User)</li>
+      <li><span class="ck">✓</span> Language Selection</li>
+      <li><span class="ck">✓</span> Main Menu</li>
+      <li><span class="ck">✓</span> Campaign List</li>
+      <li><span class="ck">✓</span> Campaign Detail</li>
+      <li><span class="ck">✓</span> Core Checklist View</li>
+      <li><span class="ck">✓</span> Task: Content Creation</li>
+      <li><span class="ck">✓</span> Task: Mass Email</li>
+      <li><span class="ck">✓</span> Task: Share Story</li>
+      <li><span class="ck">✓</span> Task: Invite Friends</li>
+      <li><span class="ck">✓</span> Task: Sign Petition</li>
+      <li><span class="ck">✓</span> Task: Twitter Comment</li>
+      <li><span class="ck">✓</span> Task: Amplify Reports</li>
+      <li><span class="ck">✓</span> Share Channel (Select Language)</li>
+      <li><span class="ck">✓</span> Share Channel (Select Format)</li>
+      <li><span class="ck">✓</span> Share Channel (Result MSG)</li>
+      <li><span class="ck">✓</span> Twitter Storm Dashboard</li>
+      <li><span class="ck">✓</span> Action Verification Fake Delay</li>
+    </ul>
+  </section>
+
+  <!-- ── CTA ── -->
+  <div class="cta-box">
+    <h3>🔍 Explore the Full Architecture</h3>
+    <p>Click through the 26-screen map to understand how tasks are distributed today.</p>
+    <a href="/current-bot-mockup.html" class="cta-btn" target="_blank">🕹️ Launch Interactive Mockup</a>
+  </div>
+
+</main>
+
+<footer class="page-footer">
+  <p>Internal team document — do not share access credentials publicly.<br>
+  Last updated: March 26, 2026 · <a href="https://peopleforpeace.live">peopleforpeace.live</a></p>
+</footer>
+
+<script>
+const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+if (sessionStorage.getItem('pfp_campaign_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PFP Bot — Current Flow Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --tg-bg: #17212b; --tg-chat-bg: #0e1621; --tg-bubble-in: #182533;
+  --tg-bubble-out: #2b5278; --tg-text: #e4ecf2; --tg-link: #6ab2f2;
+  --tg-hint: #708499; --tg-btn: #5288c1; --tg-btn-text: #fff;
+  --tg-divider: #1d2a38; --tg-green: #4fae4e; --tg-orange: #e5a953;
+  --tg-header: #1e2c3a; --tg-red: #e05d5d;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:#0a0f14; color:var(--tg-text); min-height:100vh; display:flex; justify-content:center; padding:16px 0; }
+.app { width:400px; max-width:100%; }
+.phone { background:var(--tg-bg); border-radius:20px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,.5); min-height:700px; display:flex; flex-direction:column; }
+.header { background:var(--tg-header); padding:14px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--tg-divider); }
+.header .avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#5288c1,#8b5cf6); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.header .info { flex:1; }
+.header .info .name { font-size:14px; font-weight:600; }
+.header .info .status { font-size:11px; color:var(--tg-hint); }
+.header .back-btn { cursor:pointer; font-size:18px; opacity:.7; }
+.header .back-btn:hover { opacity:1; }
+.chat { flex:1; overflow-y:auto; padding:12px 10px; display:flex; flex-direction:column; gap:8px; background:var(--tg-chat-bg); }
+.msg { max-width:90%; padding:10px 12px; border-radius:12px; font-size:13px; line-height:1.5; animation:fadeIn .3s; word-wrap:break-word; }
+.msg.bot { background:var(--tg-bubble-in); align-self:flex-start; border-bottom-left-radius:4px; }
+.msg.user { background:var(--tg-bubble-out); align-self:flex-end; border-bottom-right-radius:4px; }
+.msg b, .msg strong { font-weight:600; }
+.msg .divider { border-top:1px solid rgba(255,255,255,.1); margin:8px 0; }
+.msg a { color:var(--tg-link); text-decoration:none; }
+.btn-group { display:flex; flex-direction:column; gap:4px; margin-top:6px; }
+.btn-row { display:flex; gap:4px; }
+.ibtn { background:rgba(82,136,193,.15); color:var(--tg-link); border:none; padding:8px 10px; border-radius:8px; font-size:12.5px; cursor:pointer; flex:1; text-align:center; transition:background .2s; font-family:inherit; }
+.ibtn:hover { background:rgba(82,136,193,.3); }
+.ibtn.primary { background:var(--tg-btn); color:var(--tg-btn-text); }
+.ibtn.primary:hover { background:#4a7ab3; }
+.ibtn.success { background:rgba(79,174,78,.2); color:#6fcf6f; }
+.ibtn.url-btn::after { content:' ↗'; font-size:10px; }
+.screen { display:none; flex-direction:column; height:100%; min-height:700px; }
+.screen.active { display:flex; }
+.badge { display:inline-block; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:600; }
+.badge.done { background:rgba(79,174,78,.2); color:#6fcf6f; }
+.pulse { background:rgba(255,255,255,.03); border-radius:8px; padding:8px; margin:6px 0; font-size:12px; }
+.pulse div { margin:2px 0; }
+.photo-card { width:100%; border-radius:8px; overflow:hidden; margin:6px 0; }
+.photo-card .caption { padding:8px; font-size:12px; background:rgba(0,0,0,.3); }
+.nav-hint { background:var(--tg-header); padding:10px 16px; text-align:center; font-size:11px; color:var(--tg-hint); border-top:1px solid var(--tg-divider); cursor:pointer; }
+.nav-hint:hover { color:var(--tg-link); }
+.flow-panel { background:var(--tg-header); border-radius:16px; margin-top:16px; padding:16px; overflow:hidden; }
+.flow-panel h3 { font-size:14px; margin-bottom:10px; color:var(--tg-link); }
+.flow-node { display:flex; align-items:center; gap:8px; padding:6px 10px; margin:2px 0; border-radius:8px; font-size:12px; cursor:pointer; transition:background .2s; }
+.flow-node:hover { background:rgba(82,136,193,.15); }
+.flow-node.active { background:rgba(82,136,193,.25); border-left:3px solid var(--tg-link); }
+.flow-node .dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.flow-node .dot.blue { background:var(--tg-link); }
+.flow-node .dot.green { background:var(--tg-green); }
+.flow-node .dot.orange { background:var(--tg-orange); }
+.flow-node .dot.red { background:var(--tg-red); }
+.flow-section { margin:8px 0 4px; font-size:11px; color:var(--tg-hint); text-transform:uppercase; letter-spacing:.5px; }
+.chat::-webkit-scrollbar { width:4px; }
+.chat::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1); border-radius:2px; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+.top-bar { background:#0a0f14; padding:12px 16px 8px; display:flex; justify-content:space-between; align-items:center; }
+.top-bar h2 { font-size:16px; color:var(--tg-text); }
+.top-bar .lang-toggle { font-size:11px; color:var(--tg-hint); cursor:pointer; padding:4px 8px; border:1px solid var(--tg-divider); border-radius:6px; }
+/* Diff badge for discrepancy tracking */
+.diff-note { font-size:10px; color:var(--tg-orange); background:rgba(229,169,83,.1); padding:2px 6px; border-radius:3px; margin-left:4px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top-bar">
+    <h2>🕊️ PFP Bot — Current Flow</h2>
+    <span class="lang-toggle" onclick="toggleLang()">🇬🇧 EN</span>
+  </div>
+
+  <div class="phone">
+    <!-- S0: Language Picker (first-time only) -->
+    <div class="screen active" id="s-lang">
+      <div class="header">
+        <div class="avatar">🕊️</div>
+        <div class="info"><div class="name">People 4 Peace</div><div class="status">bot</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          <b>🌍 Choose your language:</b>
+          <div class="btn-group">
+            <div class="btn-row">
+              <button class="ibtn" onclick="go('s-welcome')">🇬🇧 English</button>
+              <button class="ibtn" onclick="go('s-welcome')">🇮🇷 فارسی</button>
+              <button class="ibtn" onclick="go('s-welcome')">🇸🇦 العربية</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S1: /start for RETURNING user (what screenshot shows) -->
+    <div class="screen" id="s-welcome">
+      <div class="header">
+        <div class="avatar">🕊️</div>
+        <div class="info"><div class="name">People 4 Peace</div><div class="status">bot</div></div>
+      </div>
+      <div class="chat">
+        <!-- User command -->
+        <div class="msg user">/start</div>
+
+        <!-- Welcome back summary (returning user, Issue #16) -->
+        <div class="msg bot">
+          👋 <b>Welcome back, Sarah Johnson!</b><br><br>
+          ✅ 0 tasks completed<br>
+          🚧 3 in progress<br>
+          <div class="divider"></div>
+        </div>
+
+        <!-- Standard welcome + inline menu (always shown) -->
+        <div class="msg bot">
+          🕊️ <b>People for Peace</b><br><br>
+          We honor the 168 children of Minab. Their memory is our call to action — to stop this war and fight for peace.<br><br>
+          What would you like to do?
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-my-campaigns')">✊ My Campaigns</button>
+            <button class="ibtn" onclick="go('s-share-channel')">📢 Share Channel</button>
+            <button class="ibtn" onclick="go('s-storm')">🔥 Twitter Storm</button>
+            <div class="btn-row">
+              <button class="ibtn" onclick="go('s-lang')">🌍 Language</button>
+              <button class="ibtn" onclick="go('s-help')">ℹ️ Help</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auto-show: single campaign → task checklist (sorted by -points) -->
+        <div class="msg bot">
+          ✊ <b>Justice for Minab Children — Action Checklist</b><br><br>
+          Honor the children. Fight for peace.<br><br>
+          ✅ ✍️ Create Original Content for Minab<br>
+          ✅ ✍️ Sign the Petition: Protect Civilians in Iran<br>
+          👉 📣 Amplify Investigative Reports<br>
+          ⬜ 💬 Comment on Key Tweets<br>
+          ⬜ 🐦 Share a Child's Story<br><br>
+          Tap a task to get started 👇
+          <div class="btn-group">
+            <button class="ibtn success">✅ Create Original Content for Minab</button>
+            <button class="ibtn success">✅ Sign the Petition: Protect C…</button>
+            <button class="ibtn primary" onclick="go('s-task-retweet')">📣 Amplify Investigative Reports</button>
+            <button class="ibtn" onclick="go('s-task-comment')">💬 Comment on Key Tweets</button>
+            <button class="ibtn" onclick="go('s-task-tweet')">🐦 Share a Child's Story</button>
+          </div>
+        </div>
+      </div>
+      <div class="nav-hint" onclick="go('s-menu')">🏠 Main Menu</div>
+    </div>
+
+    <!-- S1b: New user /start flow -->
+    <div class="screen" id="s-welcome-new">
+      <div class="header">
+        <div class="avatar">🕊️</div>
+        <div class="info"><div class="name">People 4 Peace</div><div class="status">bot</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg user">/start</div>
+        <div class="msg bot">✅ Language set to <b>English</b>.</div>
+        <div class="msg bot">🎉 Welcome! You've been automatically registered as <b>@username</b>.</div>
+        <div class="msg bot">
+          🕊️ <b>People for Peace</b><br><br>
+          We honor the 168 children of Minab. Their memory is our call to action — to stop this war and fight for peace.<br><br>
+          What would you like to do?
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-my-campaigns')">✊ My Campaigns</button>
+            <button class="ibtn" onclick="go('s-share-channel')">📢 Share Channel</button>
+            <button class="ibtn" onclick="go('s-storm')">🔥 Twitter Storm</button>
+            <div class="btn-row">
+              <button class="ibtn" onclick="go('s-lang')">🌍 Language</button>
+              <button class="ibtn" onclick="go('s-help')">ℹ️ Help</button>
+            </div>
+          </div>
+        </div>
+        <!-- Deep-link auto-join → shows campaign detail + tasks -->
+        <div class="msg bot">
+          🎉 <b>You've joined Justice for Minab Children!</b><br><br>
+          📅 <b>What happened:</b> On Feb 28, 2026, a school in Minab, Iran was bombed. 168 children were killed.<br><br>
+          📋 <b>What we're doing:</b> We honor their memory and fight for peace.<br><br>
+          👥 47 volunteers · 🎯 5 tasks
+          <div class="divider"></div>
+          🕯 <a href="#">Memorial</a> · 📄 <a href="#">Evidence</a> · 📢 @people4peace
+          <div class="btn-group">
+            <button class="ibtn primary" onclick="go('s-welcome')">✊ View Tasks</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2: Main Menu (same as welcome but as standalone) -->
+    <div class="screen" id="s-menu">
+      <div class="header">
+        <div class="avatar">🕊️</div>
+        <div class="info"><div class="name">People 4 Peace</div><div class="status">bot</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          🕊️ <b>People for Peace</b><br><br>
+          We honor the 168 children of Minab. Their memory is our call to action — to stop this war and fight for peace.<br><br>
+          What would you like to do?
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-my-campaigns')">✊ My Campaigns</button>
+            <button class="ibtn" onclick="go('s-share-channel')">📢 Share Channel</button>
+            <button class="ibtn" onclick="go('s-storm')">🔥 Twitter Storm</button>
+            <div class="btn-row">
+              <button class="ibtn" onclick="go('s-lang')">🌍 Language</button>
+              <button class="ibtn" onclick="go('s-help')">ℹ️ Help</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2b: My Campaigns (campaigns list)  -->
+    <div class="screen" id="s-my-campaigns">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-menu')">‹</span>
+        <div class="avatar">✊</div>
+        <div class="info"><div class="name">My Campaigns</div><div class="status">Active campaigns</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          📋 <b>Active Campaigns</b><br><br>
+          Choose a campaign to learn more and join:<br><br>
+          ✊ <b>Justice for Minab Children</b><br>
+          &nbsp;&nbsp;We fight. We never forget.<br>
+          &nbsp;&nbsp;👥 47 volunteers<br>
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-campaign-detail')">✊ Justice for Minab Children</button>
+            <button class="ibtn" onclick="go('s-menu')">🏠 Main Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2c: Campaign Detail -->
+    <div class="screen" id="s-campaign-detail">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-my-campaigns')">‹</span>
+        <div class="avatar">📢</div>
+        <div class="info"><div class="name">Campaign Detail</div><div class="status">Info & join</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          📢 <b>Justice for Minab Children</b><br><br>
+          We fight to bring justice for the 168 children killed in the Minab school attack. We never forget.<br><br>
+          👥 47 volunteers<br>
+          🎯 5 tasks<br>
+          <div class="divider"></div>
+          🔗 <b>Resources:</b><br>
+          🕯 <a href="#">Memorial</a><br>
+          📄 <a href="#">Evidence</a><br>
+          📢 Follow: @people4peace<br>
+          <div class="divider"></div>
+          ✅ You're a member!<br>
+          Tap below to see tasks 👇
+          <div class="btn-group">
+            <button class="ibtn primary" onclick="go('s-welcome')">✊ View Tasks</button>
+            <button class="ibtn" onclick="go('s-menu')">🏠 Main Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2d: Share Channel / Invite -->
+    <div class="screen" id="s-share-channel">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-menu')">‹</span>
+        <div class="avatar">📢</div>
+        <div class="info"><div class="name">Share Channel</div><div class="status">Invite friends</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          📢 <b>Spread the Word!</b><br><br>
+          Share our channel with friends. The more people join, the stronger we become! 💪<br><br>
+          Choose a language for the invite message:
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-invite-style')">🇬🇧 English</button>
+            <button class="ibtn" onclick="go('s-invite-style')">🇮🇷 فارسی</button>
+            <button class="ibtn" onclick="go('s-invite-style')">🇸🇦 العربية</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2e: Invite Style Picker -->
+    <div class="screen" id="s-invite-style">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-share-channel')">‹</span>
+        <div class="avatar">📤</div>
+        <div class="info"><div class="name">Invite Style</div><div class="status">Pick a style</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          ✍️ <b>Choose an invite style:</b>
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-invite-msg')">📢 Standard</button>
+            <button class="ibtn" onclick="go('s-invite-msg')">💔 Emotional</button>
+            <button class="ibtn" onclick="go('s-invite-msg')">📊 Data-driven</button>
+            <button class="ibtn" onclick="go('s-share-channel')">↩️ Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2f: Invite Message Ready -->
+    <div class="screen" id="s-invite-msg">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-invite-style')">‹</span>
+        <div class="avatar">📤</div>
+        <div class="info"><div class="name">Share</div><div class="status">Ready to forward</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          🕊️ Join People for Peace — a community fighting for justice for the 168 children killed in the Minab school attack.<br><br>
+          ✊ Every voice matters. Every action counts.<br><br>
+          👉 Start here: https://t.me/PFP_bot?start=join_1
+          <div class="btn-group">
+            <button class="ibtn primary url-btn">📤 Share via Telegram</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S3: Twitter Post — Child Selection -->
+    <div class="screen" id="s-task-tweet">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-welcome')">‹</span>
+        <div class="avatar">🐦</div>
+        <div class="info"><div class="name">Share a Child's Story</div><div class="status">15 pts · 2 min</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          ✅ <b>Task started!</b><br><br>
+          🐦 <b>Share a Child's Story</b><br><br>
+          Every child has a name. Choose one below — you'll see their photo and a ready-to-post tweet.<br><br>
+          After tweeting, paste your tweet URL here as proof.<br>
+          <span style="color:var(--tg-hint)">Type /cancel to cancel.</span>
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-child-detail')">👩‍👦 Hami — killed with his teacher mother</button>
+            <button class="ibtn" onclick="go('s-child-detail')">📖 Sobhan — identified by his textbook</button>
+            <button class="ibtn" onclick="go('s-child-detail')">🤸 Niyayesh, 9 — skateboarder & gymnast</button>
+            <button class="ibtn" onclick="go('s-child-detail')">🤲 Amin — recognized only by a hand</button>
+            <button class="ibtn" onclick="go('s-child-detail')">🤸 Reza, 7 — young gymnast</button>
+            <button class="ibtn url-btn">🕯 View Full Memorial</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S3b: Child Detail + Tweet Intent -->
+    <div class="screen" id="s-child-detail">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-task-tweet')">‹</span>
+        <div class="avatar">🕯</div>
+        <div class="info"><div class="name">Hami Sadeghi</div><div class="status">Share their story</div></div>
+      </div>
+      <div class="chat">
+        <div class="photo-card">
+          <div style="width:100%;height:140px;background:linear-gradient(135deg,#1a2a3a,#2a3a4a);display:flex;align-items:center;justify-content:center;font-size:48px;">🕯</div>
+          <div class="caption">
+            🕯 <b>Hami Sadeghi, 11</b><br><br>
+            Hami was killed alongside his mother Neda Solhizadeh — a teacher at the school. They went to class together that morning. Neither came back.<br><br>
+            <div class="divider"></div>
+            💡 <i>Save the photo above and attach it to your tweet. After tweeting, paste the tweet URL here.</i>
+          </div>
+        </div>
+        <div class="msg bot" style="padding:4px 0;background:transparent;">
+          <div class="btn-group">
+            <button class="ibtn primary url-btn" onclick="go('s-proof-submit')">📤 Post This Tweet</button>
+            <button class="ibtn url-btn">🕯 See Their Profile</button>
+            <button class="ibtn" onclick="go('s-task-tweet')">🔄 Choose Another Child</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S4: Twitter Comment Task -->
+    <div class="screen" id="s-task-comment">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-welcome')">‹</span>
+        <div class="avatar">💬</div>
+        <div class="info"><div class="name">Comment on Key Tweets</div><div class="status">10 pts · 2 min</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          ✅ <b>Task started!</b><br><br>
+          💬 <b>Comment on Key Tweets</b><br><br>
+          Complete this task in 3 easy steps:<br><br>
+          <b>① Pick a suggested reply</b> and tap the button<br>
+          <b>② Twitter will open</b> with your reply ready — just hit Post!<br>
+          <b>③ Come back here</b> and paste your reply URL<br>
+          <div class="divider"></div>
+          🎯 <b>Pick a tweet to reply to:</b><br><br>
+          1️⃣ <b>@NYTimes</b> (Investigation Report)<br>
+          &nbsp;&nbsp;💬 <i>This matters! The world must hold Trump...</i><br><br>
+          2️⃣ <b>@BBCWorld</b> (Breaking Coverage)<br>
+          &nbsp;&nbsp;💬 <i>Thank you for speaking truth. Innocent families...</i><br><br>
+          3️⃣ <b>@HRW</b> (Human Rights Watch)<br>
+          &nbsp;&nbsp;💬 <i>The evidence is overwhelming. Trump's war...</i><br>
+          <div class="divider"></div>
+          ✍️ Or write your own reply using the campaign hashtags.<br><br>
+          When done, <b>paste your reply URL below</b> 👇<br>
+          <span style="color:var(--tg-hint)">Type /cancel to cancel.</span>
+          <div class="btn-group">
+            <button class="ibtn url-btn" onclick="go('s-proof-submit')">↩️ Reply to @NYTimes</button>
+            <button class="ibtn url-btn" onclick="go('s-proof-submit')">↩️ Reply to @BBCWorld</button>
+            <button class="ibtn url-btn" onclick="go('s-proof-submit')">↩️ Reply to @HRW</button>
+            <button class="ibtn" onclick="go('s-welcome')">← Back to Tasks</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S5: Amplify/Retweet (Dual-Path) -->
+    <div class="screen" id="s-task-retweet">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-welcome')">‹</span>
+        <div class="avatar">📣</div>
+        <div class="info"><div class="name">Amplify Investigative Reports</div><div class="status">10 pts · 3 min</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          ✅ <b>Task started!</b><br><br>
+          📣 <b>Amplify Investigative Reports</b><br><br>
+          📣 <b>Choose how to amplify:</b><br><br>
+          🐦 <b>Option A — Twitter:</b><br>
+          <b>①</b> Tap the button below to find #StopTrumpMadness tweets<br>
+          <b>②</b> Retweet at least 3 tweets you agree with<br>
+          <b>③</b> Come back here and paste any tweet URL as proof<br><br>
+          📢 <b>Option B — Forward on Telegram:</b><br>
+          <b>①</b> Tap 'Get Message' to receive a ready-to-forward message<br>
+          <b>②</b> Forward it to 3+ groups or contacts<br>
+          <b>③</b> Come back and send a screenshot or type 'done'<br><br>
+          When done, <b>paste a tweet URL</b> or <b>send a screenshot</b> 👇<br>
+          <span style="color:var(--tg-hint)">Type /cancel to cancel.</span>
+          <div class="btn-group">
+            <button class="ibtn url-btn">📚 View Report Library</button>
+            <button class="ibtn url-btn">🔍 Find #StopTrumpMadness Tweets</button>
+            <button class="ibtn primary" onclick="go('s-amplify-forward')">📢 Get Forwardable Message</button>
+            <button class="ibtn" onclick="go('s-welcome')">← Back to Tasks</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S5b: Amplify Forward Message -->
+    <div class="screen" id="s-amplify-forward">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-task-retweet')">‹</span>
+        <div class="avatar">📢</div>
+        <div class="info"><div class="name">Forwardable Message</div><div class="status">Forward to 3+ groups</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          🚨 INVESTIGATION: NYT Visual Investigation confirms US Tomahawk cruise missiles struck a school in Minab, Iran on Feb 28, 2026. 168 children killed.<br><br>
+          📰 Full report library: peopleforpeace.live/amplify.html<br>
+          🕯 Memorial: peopleforpeace.live/memorial.html<br><br>
+          #JusticeForMinab #168Children<br><br>
+          Forward this. Be their voice.
+        </div>
+        <div class="msg bot">
+          ⬆️ Forward the message above to 3+ Telegram groups or contacts, then send a screenshot here as proof.
+        </div>
+        <div class="msg user" onclick="go('s-proof-submit')">
+          <i style="color:#aaa">[Tap to simulate sending proof]</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- S6: Like Key Tweets -->
+    <div class="screen" id="s-task-like">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-welcome')">‹</span>
+        <div class="avatar">❤️</div>
+        <div class="info"><div class="name">Like Key Tweets</div><div class="status">5 pts · 1 min</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          ✅ <b>Task started!</b><br><br>
+          ❤️ <b>Like Key Tweets</b><br><br>
+          Like these important tweets to boost their visibility:<br>
+          <div class="divider"></div>
+          1️⃣ <b>@NYTimes</b> (Investigation Report)<br>
+          2️⃣ <b>@BBCWorld</b> (Breaking Coverage)<br>
+          3️⃣ <b>@Bellingcat</b> (Visual Evidence)<br>
+          <div class="divider"></div>
+          When done, type <b>"done"</b> or send a screenshot 👇<br>
+          <span style="color:var(--tg-hint)">Type /cancel to cancel.</span>
+          <div class="btn-group">
+            <button class="ibtn url-btn">❤️ Like @NYTimes tweet</button>
+            <button class="ibtn url-btn">❤️ Like @BBCWorld tweet</button>
+            <button class="ibtn url-btn">❤️ Like @Bellingcat tweet</button>
+            <button class="ibtn" onclick="go('s-proof-submit')">✅ I liked them — done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S7: Petition -->
+    <div class="screen" id="s-task-petition">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-welcome')">‹</span>
+        <div class="avatar">✍️</div>
+        <div class="info"><div class="name">Sign the Petition</div><div class="status">10 pts · 2 min</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          ✅ <b>Task started!</b><br><br>
+          ✍️ <b>Sign the Petition: Protect Civilians in Iran</b><br><br>
+          Complete this task in 3 easy steps:<br><br>
+          <b>①</b> Tap below to open the petition<br>
+          <b>②</b> Fill in your name and email, then sign<br>
+          <b>③</b> Come back and confirm<br><br>
+          💡 <b>What counts as proof:</b><br>
+          • Screenshot of signed petition page<br>
+          • Confirmation email text<br>
+          • Just type 'done' if no screenshot possible<br><br>
+          Send your proof below 👇<br>
+          <span style="color:var(--tg-hint)">Type /cancel to cancel.</span>
+          <div class="btn-group">
+            <button class="ibtn primary url-btn">✍️ Open Petition</button>
+            <button class="ibtn" onclick="go('s-proof-submit')">✅ I signed it — done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S8: Mass Email -->
+    <div class="screen" id="s-task-email">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-welcome')">‹</span>
+        <div class="avatar">📧</div>
+        <div class="info"><div class="name">Email Representatives</div><div class="status">20 pts · 5 min</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          ✅ <b>Task started!</b><br><br>
+          📧 <b>Email Representatives</b><br><br>
+          Copy the email template below and send it to your representatives:<br>
+          <div class="divider"></div>
+          <code style="font-size:11px;display:block;padding:6px;background:rgba(0,0,0,.2);border-radius:4px;">Subject: Urgent Action Required on Iran School Attack<br><br>Dear [Representative],<br><br>On February 28, 2026, a US cruise missile struck a school in Minab, killing 168 children...</code>
+          <div class="divider"></div>
+          When done, type <b>'done'</b> or send a screenshot 👇<br>
+          <span style="color:var(--tg-hint)">Type /cancel to cancel.</span>
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-proof-submit')">✅ I sent it — done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S9: Content Creation -->
+    <div class="screen" id="s-task-content">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-welcome')">‹</span>
+        <div class="avatar">🎨</div>
+        <div class="info"><div class="name">Create Original Content</div><div class="status">30 pts · 10 min</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          ✅ <b>Task started!</b><br><br>
+          🎨 <b>Create Original Content for Minab</b><br><br>
+          💡 <b>Content Ideas:</b><br>
+          • Write a Twitter thread about the Minab school attack<br>
+          • Create a short poem or tribute for the children<br>
+          • Make a comparison graphic<br>
+          • Record a 60-second voice/video message<br><br>
+          📤 <b>How to share:</b><br>
+          • Post on Twitter/X and paste the tweet URL here<br>
+          • Or post on Instagram and paste the link here<br>
+          • Or send your text/image directly in this chat<br><br>
+          Send your proof below 👇<br>
+          <span style="color:var(--tg-hint)">Type /cancel to cancel.</span>
+          <div class="btn-group">
+            <button class="ibtn url-btn">📚 Content Library</button>
+            <button class="ibtn url-btn">📰 Evidence Reports</button>
+            <button class="ibtn" onclick="go('s-proof-submit')">Send proof →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S10: Telegram Invite (task, not "Share Channel") -->
+    <div class="screen" id="s-task-invite">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-welcome')">‹</span>
+        <div class="avatar">👥</div>
+        <div class="info"><div class="name">Invite a Friend</div><div class="status">15 pts · 2 min</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          ✅ <b>Task started!</b><br><br>
+          👥 <b>Invite a Friend</b><br><br>
+          👉 Share this link: https://t.me/PFP_bot<br><br>
+          ✅ <b>When done, send the username of the person you invited</b><br>
+          <span style="color:var(--tg-hint)">Type /cancel to cancel.</span>
+        </div>
+        <div class="msg user" onclick="go('s-proof-submit')">@friend_username</div>
+      </div>
+    </div>
+
+    <!-- S11: Proof Submitted + Pulse -->
+    <div class="screen" id="s-proof-submit">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-welcome')">‹</span>
+        <div class="avatar">✅</div>
+        <div class="info"><div class="name">Task Complete!</div><div class="status">auto-verified</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg user">https://x.com/user/status/123456789</div>
+        <div class="msg bot">
+          ✅ <b>Done — thank you!</b> ✊<br><br>
+          <b>Amplify Investigative Reports</b><br>
+          🏅 Auto-verified ✅<br>
+          <div class="pulse">
+            🫂 3 activists active in the last hour<br>
+            🔥 24 total actions this campaign<br>
+            👥 47 volunteers fighting together<br>
+            📊 You're in the Top 15%!
+          </div>
+          Every action makes a difference. Keep going! 🕊️
+          <div class="btn-group">
+            <button class="ibtn primary" onclick="go('s-welcome')">🎯 Do Another Task</button>
+            <button class="ibtn" onclick="go('s-menu')">🏠 Main Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S12: Storm -->
+    <div class="screen" id="s-storm">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-menu')">‹</span>
+        <div class="avatar">🔥</div>
+        <div class="info"><div class="name">Twitter Storm</div><div class="status">Coordinated action</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          🔥 <b>Twitter Storm Briefing</b><br><br>
+          We're organizing a coordinated Twitter action to amplify voices for the children of Minab.<br><br>
+          📅 March 28, 2026 · 🕐 1:00 PM UTC
+          <div class="btn-group">
+            <button class="ibtn primary" onclick="go('s-storm-tweet')">🐦 Get a Tweet</button>
+            <button class="ibtn" onclick="go('s-storm-hashtags')">📋 Copy Hashtags</button>
+            <button class="ibtn" onclick="go('s-storm-info')">📆 When & How</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S12b: Storm Tweet -->
+    <div class="screen" id="s-storm-tweet">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-storm')">‹</span>
+        <div class="avatar">🐦</div>
+        <div class="info"><div class="name">Your Tweet</div><div class="status">Copy & post</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          🐦 <b>Your Tweet</b><br><br>
+          <code style="font-size:11px;display:block;padding:6px;background:rgba(0,0,0,.2);border-radius:4px;">168 children were killed when their school in Minab was hit by US cruise missiles. The world must know. #JusticeForMinab #168Children #StopTrumpMadness</code><br><br>
+          👉 Copy the text above, open Twitter/X, and post it!
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-storm-tweet')">🔄 Get Another</button>
+            <button class="ibtn" onclick="go('s-storm')">↩️ Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S12c: Storm Hashtags -->
+    <div class="screen" id="s-storm-hashtags">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-storm')">‹</span>
+        <div class="avatar">📋</div>
+        <div class="info"><div class="name">Campaign Hashtags</div><div class="status">Copy & use</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          📋 <b>Copy These Hashtags</b><br><br>
+          <code style="font-size:11px;display:block;padding:6px;background:rgba(0,0,0,.2);border-radius:4px;">#JusticeForMinab #168Children #StopTrumpMadness #PeopleForPeace</code><br><br>
+          👉 Add these to your tweet for maximum reach!
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-storm-tweet')">🐦 Get a Tweet</button>
+            <button class="ibtn" onclick="go('s-storm')">↩️ Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S12d: Storm Info -->
+    <div class="screen" id="s-storm-info">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-storm')">‹</span>
+        <div class="avatar">📆</div>
+        <div class="info"><div class="name">When & How</div><div class="status">Storm details</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          📆 <b>Twitter Storm — When & How</b><br><br>
+          📅 <b>Date:</b> March 28, 2026<br>
+          🕐 <b>Time:</b> 1:00 PM UTC<br>
+          ⏱ <b>Duration:</b> 1 hour<br>
+          <div class="divider"></div>
+          <b>How to participate:</b><br>
+          1️⃣ Get a tweet from the bot<br>
+          2️⃣ Post it on Twitter/X at the scheduled time<br>
+          3️⃣ Use ALL the hashtags for maximum impact<br>
+          4️⃣ Like & retweet other participants' tweets
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-storm-tweet')">🐦 Get a Tweet</button>
+            <button class="ibtn" onclick="go('s-storm')">↩️ Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S13: Profile (accessible via /profile command) -->
+    <div class="screen" id="s-profile">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-menu')">‹</span>
+        <div class="avatar">👤</div>
+        <div class="info"><div class="name">Your Profile</div><div class="status">Stats & info</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          👤 <b>Your Profile</b><br><br>
+          <b>Basic Information:</b><br>
+          • Name: Sarah Johnson<br>
+          • Telegram: @sarahjohnson<br>
+          • Role: Volunteer · Level 1<br><br>
+          <b>Task Statistics:</b><br>
+          • Total: 5 · Completed: 2 · In Progress: 3<br><br>
+          <b>Campaign Participation:</b><br>
+          • Active Campaigns: 1<br><br>
+          <b>Member Since:</b> March 15, 2026
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-menu')">🏠 Main Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S14: Help -->
+    <div class="screen" id="s-help">
+      <div class="header">
+        <span class="back-btn" onclick="go('s-menu')">‹</span>
+        <div class="avatar">ℹ️</div>
+        <div class="info"><div class="name">Help</div><div class="status">Commands & info</div></div>
+      </div>
+      <div class="chat">
+        <div class="msg bot">
+          <b>People for Peace — Help</b><br><br>
+          <b>Available Commands:</b><br>
+          /start — Start the bot<br>
+          /help — This help message<br>
+          /language — Change language<br>
+          /campaigns — List campaigns<br>
+          /tasks — Available tasks<br>
+          /mytasks — Your assigned tasks<br>
+          /profile — Your profile<br>
+          /storm — Twitter Storm<br><br>
+          <b>How to Participate:</b><br>
+          1. Join a campaign<br>
+          2. Claim tasks from the checklist<br>
+          3. Complete and submit proof<br>
+          4. Make an impact! ✊
+          <div class="btn-group">
+            <button class="ibtn" onclick="go('s-menu')">🏠 Main Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow Map Panel -->
+  <div class="flow-panel">
+    <h3>📍 Flow Map — Tap to Navigate</h3>
+    <div class="flow-section">Entry & Navigation</div>
+    <div class="flow-node active" onclick="go('s-lang')"><div class="dot blue"></div> 🌍 Language Picker</div>
+    <div class="flow-node" onclick="go('s-welcome')"><div class="dot blue"></div> /start (Returning User)</div>
+    <div class="flow-node" onclick="go('s-welcome-new')"><div class="dot blue"></div> /start (New User + Deep-Link)</div>
+    <div class="flow-node" onclick="go('s-menu')"><div class="dot blue"></div> Main Menu</div>
+    <div class="flow-node" onclick="go('s-my-campaigns')"><div class="dot blue"></div> ✊ My Campaigns (List)</div>
+    <div class="flow-node" onclick="go('s-campaign-detail')"><div class="dot blue"></div> → Campaign Detail</div>
+    <div class="flow-node" onclick="go('s-share-channel')"><div class="dot blue"></div> 📢 Share Channel</div>
+    <div class="flow-node" onclick="go('s-invite-style')"><div class="dot blue"></div> → Invite Style Picker</div>
+    <div class="flow-node" onclick="go('s-invite-msg')"><div class="dot blue"></div> → Invite Message</div>
+
+    <div class="flow-section">Task Flows (sorted by points ↓)</div>
+    <div class="flow-node" onclick="go('s-task-content')"><div class="dot green"></div> 🎨 Content Creation (30pts)</div>
+    <div class="flow-node" onclick="go('s-task-email')"><div class="dot green"></div> 📧 Email Reps (20pts)</div>
+    <div class="flow-node" onclick="go('s-task-tweet')"><div class="dot green"></div> 🐦 Share a Child's Story (15pts)</div>
+    <div class="flow-node" onclick="go('s-child-detail')"><div class="dot green"></div> → Child Detail + Tweet Intent</div>
+    <div class="flow-node" onclick="go('s-task-petition')"><div class="dot green"></div> ✍️ Sign the Petition (10pts)</div>
+    <div class="flow-node" onclick="go('s-task-comment')"><div class="dot green"></div> 💬 Comment on Key Tweets (10pts)</div>
+    <div class="flow-node" onclick="go('s-task-retweet')"><div class="dot green"></div> 📣 Amplify Reports (10pts)</div>
+    <div class="flow-node" onclick="go('s-amplify-forward')"><div class="dot green"></div> → Forwardable Message</div>
+    <div class="flow-node" onclick="go('s-task-like')"><div class="dot green"></div> ❤️ Like Key Tweets (5pts)</div>
+    <div class="flow-node" onclick="go('s-task-invite')"><div class="dot green"></div> 👥 Invite a Friend (15pts)</div>
+
+    <div class="flow-section">Completion</div>
+    <div class="flow-node" onclick="go('s-proof-submit')"><div class="dot orange"></div> ✅ Proof Submitted + Pulse</div>
+
+    <div class="flow-section">Twitter Storm</div>
+    <div class="flow-node" onclick="go('s-storm')"><div class="dot red"></div> 🔥 Storm Briefing</div>
+    <div class="flow-node" onclick="go('s-storm-tweet')"><div class="dot red"></div> → Get a Tweet</div>
+    <div class="flow-node" onclick="go('s-storm-hashtags')"><div class="dot red"></div> → Copy Hashtags</div>
+    <div class="flow-node" onclick="go('s-storm-info')"><div class="dot red"></div> → When & How</div>
+
+    <div class="flow-section">Other</div>
+    <div class="flow-node" onclick="go('s-profile')"><div class="dot blue"></div> 👤 Profile (/profile cmd)</div>
+    <div class="flow-node" onclick="go('s-help')"><div class="dot blue"></div> ℹ️ Help</div>
+  </div>
+
+  <div style="text-align:center;padding:16px;font-size:11px;color:var(--tg-hint);">
+    PFP Current Bot Flow Mockup · Aligned with live bot<br>
+    26 screens · Tasks sorted by points (highest first)
+  </div>
+</div>
+
+<script>
+function go(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.add('active');
+    const chat = target.querySelector('.chat');
+    if (chat) chat.scrollTop = 0;
+  }
+  document.querySelectorAll('.flow-node').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.flow-node').forEach(n => {
+    if (n.getAttribute('onclick') === `go('${id}')`) n.classList.add('active');
+  });
+}
+function toggleLang() {
+  const btn = document.querySelector('.lang-toggle');
+  btn.textContent = btn.textContent.includes('EN') ? '🇮🇷 FA' : '🇬🇧 EN';
+}
+</script>
+</body>
+</html>
