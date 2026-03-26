@@ -38,9 +38,9 @@ services:
     environment:
       DATABASE_URL: postgres://pfp_user:pfp_password@postgres:5432/pfp_campaign
       REDIS_URL: redis://redis:6379/0
-      SECRET_KEY: development-secret-key-change-in-production
-      DEBUG: "True"
-      ALLOWED_HOSTS: localhost,127.0.0.1,backend
+      SECRET_KEY: ${SECRET_KEY:-development-secret-key-change-in-production}
+      DEBUG: ${DEBUG:-True}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,backend}
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
     volumes:
