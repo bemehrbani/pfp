@@ -1,6 +1,7 @@
 import logging
 from asgiref.sync import sync_to_async
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.error import BadRequest
 from telegram.ext import ContextTypes, CommandHandler, CallbackQueryHandler, MessageHandler, filters
 
 from utils.state_management import state_manager
@@ -209,12 +210,18 @@ async def simp_handle_comment_lang(update: Update, context: ContextTypes.DEFAULT
     
     reply_markup = InlineKeyboardMarkup(keyboard)
     
-    await query.edit_message_text(
-        text=text,
-        reply_markup=reply_markup,
-        parse_mode='Markdown',
-        disable_web_page_preview=True
-    )
+    try:
+        await query.edit_message_text(
+            text=text,
+            reply_markup=reply_markup,
+            parse_mode='Markdown',
+            disable_web_page_preview=True
+        )
+    except BadRequest as e:
+        if "Message is not modified" in str(e):
+            pass  # User clicked the button for the currently displayed language
+        else:
+            raise
 
 
 async def simp_handle_done(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -272,7 +279,8 @@ async def simp_handle_escalation(update: Update, context: ContextTypes.DEFAULT_T
 async def handle_user_submission(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Catches text messages from users in the escalation flow."""
     if context.user_data.get('escalation_state') == 'waiting_for_submission':
-        lang = await _get_user_lang(update.effective_user.id)
+        session, _ = await state_manager.get_or_create_session(update, context)
+        lang = getattr(session, 'language', 'en') or 'en'
         # In a real app, save to models.UserSubmission
         await update.message.reply_text(
             "✅ Received! Thank you for your submission. Our team will review it shortly.",
