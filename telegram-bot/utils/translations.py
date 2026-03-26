@@ -1659,6 +1659,16 @@ TRANSLATIONS = {
         "fa": "📢 تلگرام",
         "ar": "📢 تليجرام",
     },
+    "simplified_btn_creator": {
+        "en": "✍️ Produce Content",
+        "fa": "✍️ آماده تولید محتوا هستم",
+        "ar": "✍️ إنتاج محتوى",
+    },
+    "simplified_btn_invite": {
+        "en": "👥 Invite a Friend",
+        "fa": "👥 دعوت از یک دوست",
+        "ar": "👥 دعوة صديق",
+    },
     "simplified_twitter_targets": {
         "en": (
             "𝕏 *Target Accounts*\n\n"
@@ -1676,47 +1686,41 @@ TRANSLATIONS = {
     "simplified_comment_en": {
         "en": (
             "📋 *Ready-Made Comment (EN)*\n\n"
-            "We must not look away. 168 children were killed in their classroom in Minab. "
-            "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre\n\n"
-            "👉 Tap the text above to copy it!\n\n"
-            "Click the button below when you've commented."
+            "`We must not look away. 168 children were killed in their classroom in Minab. "
+            "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre`\n\n"
+            "👉 Tap the text above to copy it!"
         ),
         "fa": (
             "📋 *کامنت آماده (انگلیسی)*\n\n"
-            "We must not look away. 168 children were killed in their classroom in Minab. "
-            "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre\n\n"
-            "👉 برای کپی کردن روی متن بالا ضربه بزنید!\n\n"
-            "بعد از کامنت گذاشتن روی دکمه زیر کلیک کنید."
+            "`We must not look away. 168 children were killed in their classroom in Minab. "
+            "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre`\n\n"
+            "👉 برای کپی کردن روی متن بالا ضربه بزنید!"
         ),
         "ar": (
             "📋 *تعليق جاهز (انجليزي)*\n\n"
-            "We must not look away. 168 children were killed in their classroom in Minab. "
-            "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre\n\n"
-            "👉 اضغط على النص أعلاه لنسخه!\n\n"
-            "انقر فوق الزر أدناه عند الانتهاء."
+            "`We must not look away. 168 children were killed in their classroom in Minab. "
+            "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre`\n\n"
+            "👉 اضغط على النص أعلاه لنسخه!"
         ),
     },
     "simplified_comment_fa": {
         "en": (
             "📋 *Ready-Made Comment (FA)*\n\n"
-            "ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
-            "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre\n\n"
-            "👉 Tap the text above to copy it!\n\n"
-            "Click the button below when you've commented."
+            "`ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
+            "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre`\n\n"
+            "👉 Tap the text above to copy it!"
         ),
         "fa": (
             "📋 *کامنت آماده (فارسی)*\n\n"
-            "ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
-            "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre\n\n"
-            "👉 برای کپی کردن روی متن بالا ضربه بزنید!\n\n"
-            "بعد از کامنت گذاشتن روی دکمه زیر کلیک کنید."
+            "`ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
+            "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre`\n\n"
+            "👉 برای کپی کردن روی متن بالا ضربه بزنید!"
         ),
         "ar": (
             "📋 *تعليق جاهز (فارسي)*\n\n"
-            "ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
-            "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre\n\n"
-            "👉 اضغط على النص أعلاه لنسخه!\n\n"
-            "انقر فوق الزر أدناه عند الانتهاء."
+            "`ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
+            "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre`\n\n"
+            "👉 اضغط على النص أعلاه لنسخه!"
         ),
     },
     "simplified_btn_get_en": {

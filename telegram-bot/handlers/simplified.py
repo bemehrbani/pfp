@@ -82,7 +82,8 @@ async def simp_handle_start_task(update: Update, context: ContextTypes.DEFAULT_T
     keyboard = [
         [InlineKeyboardButton(t('simplified_btn_twitter', lang), callback_data="simp_plat_twitter")],
         [InlineKeyboardButton(t('simplified_btn_instagram', lang), callback_data="simp_plat_insta")],
-        [InlineKeyboardButton(t('simplified_btn_telegram', lang), callback_data="simp_plat_telegram")],
+        [InlineKeyboardButton(t('simplified_btn_creator', lang), callback_data="simp_escalate_creator")],
+        [InlineKeyboardButton(t('simplified_btn_invite', lang), callback_data="simp_escalate_invite")],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     
@@ -112,12 +113,6 @@ async def simp_handle_platform(update: Update, context: ContextTypes.DEFAULT_TYP
         text = t('simplified_instagram_targets', lang) # Assuming fallback or similar text
         for i, target in enumerate(INSTAGRAM_TARGETS):
             keyboard.append([InlineKeyboardButton(f"📸 {target['name']}", callback_data=f"simp_target_insta_{i}")])
-    else:
-        # Telegram - maybe just link to a channel or show a message
-        await query.edit_message_text(
-            text="Telegram sharing is coming soon. Please choose Twitter or Instagram for now."
-        )
-        return
         
     keyboard.append([InlineKeyboardButton("🔙 Back", callback_data="simp_start_task")])
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -238,7 +233,7 @@ async def simp_handle_done(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         [InlineKeyboardButton(t('simplified_btn_another_platform', lang), callback_data="simp_start_task")],
         [InlineKeyboardButton(t('simplified_btn_submit_content', lang), callback_data="simp_escalate_submit")],
         [InlineKeyboardButton(t('simplified_btn_creator', lang), callback_data="simp_escalate_creator")],
-        [InlineKeyboardButton(t('simplified_btn_invite', lang), url="https://t.me/share/url?url=https://peopleforpeace.live&text=Join%20the%20movement")]
+        [InlineKeyboardButton(t('simplified_btn_invite', lang), callback_data="simp_escalate_invite")]
     ]
     
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -266,6 +261,49 @@ async def simp_handle_escalation(update: Update, context: ContextTypes.DEFAULT_T
     elif action == "creator":
         text = t('simplified_escalation_creator', lang)
         context.user_data['escalation_state'] = None
+    elif action == "invite":
+        context.user_data['escalation_state'] = None
+        # Send video directly and return early
+        import pathlib
+        import os
+        
+        user_id = session.user.id if session.user else 0
+        campaign_id = 1
+        invite_link = f"https://t.me/peopleforpeacebot?start=campaign_{campaign_id}_ref_{user_id}"
+        
+        caption = t('invite_video_caption', lang).format(link=invite_link)
+        
+        try:
+            await query.delete_message()
+        except Exception:
+            pass
+
+        video_files = {
+            'en': '100_faces_FINAL_V3.mp4',
+            'fa': '100_faces_FARSI_V1.mp4',
+            'ar': '100_faces_ARABIC_V1.mp4',
+        }
+        assets_dir = os.environ.get('VIDEO_ASSETS_DIR', '/app/assets/videos')
+        video_path = pathlib.Path(assets_dir) / video_files.get(lang, video_files['en'])
+
+        keyboard = [[InlineKeyboardButton("🔙 Back to Main Menu", callback_data="simp_start_task")]]
+        
+        if not video_path.exists():
+            await query.get_bot().send_message(
+                chat_id=query.message.chat_id,
+                text="❌ Video file not found. Please try again later.",
+                reply_markup=InlineKeyboardMarkup(keyboard)
+            )
+            return
+
+        await query.get_bot().send_video(
+            chat_id=query.message.chat_id,
+            video=open(video_path, 'rb'),
+            caption=caption,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            supports_streaming=True,
+        )
+        return
     
     keyboard = [[InlineKeyboardButton("🔙 Back", callback_data="simp_done")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
