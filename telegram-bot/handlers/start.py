@@ -148,57 +148,33 @@ async def language_callback_handler(update: Update, context: CallbackContext):
 
 
 async def _send_welcome(update: Update, context: CallbackContext, session, lang: str):
-    """Send welcome message with inline menu buttons.
-
-    For returning users with task progress, sends a personalized
-    "Welcome back" summary before the standard menu.  New users
-    (or those with zero tasks) see the normal welcome flow only.
-    """
+    """Send the simplified welcome message with the single CTA button."""
     chat_id = update.effective_chat.id
     user = update.effective_user
     db_user = await get_user_by_telegram_id(user.id)
 
-    # ── Returning-user progress summary (Issue #16) ──────────────
-    if db_user:
-        progress = await _get_user_progress(db_user)
-        if progress['total_tasks'] > 0:
-            welcome_back = f"👋 *Welcome back, {db_user.first_name or 'activist'}!*\n\n"
-            welcome_back += f"✅ {progress['completed']} tasks completed\n"
-            if progress['in_progress'] > 0:
-                welcome_back += f"🚧 {progress['in_progress']} in progress\n"
-            welcome_back += "\n───────────────────\n"
+    # Simplified Welcome
+    keyboard = [
+        [InlineKeyboardButton(t('simplified_btn_start', lang), callback_data="simp_start_task")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
 
-            await context.bot.send_message(
-                chat_id=chat_id,
-                text=welcome_back,
-                parse_mode='Markdown',
-            )
-
-    # ── Standard welcome + inline menu ───────────────────────────
     await context.bot.send_message(
         chat_id=chat_id,
-        text=t('welcome', lang),
-        reply_markup=get_main_menu_inline(lang),
+        text=t('simplified_welcome', lang),
+        reply_markup=reply_markup,
         parse_mode='Markdown',
     )
 
-    # ── Post-welcome routing ─────────────────────────────────────
-    if db_user:
-        logger.info(f"Existing user {db_user.username} started bot (lang={lang})")
-        # Existing user with deep-link → auto-join the campaign
-        await _handle_deeplink_for_existing_user(context, session, db_user, lang, chat_id)
-        # Show joined campaigns task-first (skip if deep-link already handled it)
-        deeplink_campaign_id = await _db_get_deeplink_campaign_id(session)
-        if not deeplink_campaign_id:
-            from handlers.campaigns import show_my_campaigns
-            # Create a lightweight query-like object for show_my_campaigns
-            await _show_campaigns_after_welcome(context, session, chat_id, lang)
-    else:
+    if not db_user:
         # Start registration — immediately create the user!
         logger.info(f"New user {user.id} auto-registering (lang={lang})")
-
         # Complete automatic registration
         await state_manager.register_user_automatically(update, context, session, lang)
+    else:
+        logger.info(f"Existing user {db_user.username} started bot (lang={lang})")
+        # Handle deep link if any
+        await _handle_deeplink_for_existing_user(context, session, db_user, lang, chat_id)
 
 
 async def _show_campaigns_after_welcome(context, session, chat_id, lang):

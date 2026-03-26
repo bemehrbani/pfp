@@ -1603,6 +1603,184 @@ TRANSLATIONS = {
             "#️⃣ {hashtags}"
         ),
     },
+    
+    # ── Simplified Flow ──────────────────────────────────────────────
+    "simplified_welcome": {
+        "en": (
+            "🕊️ *Justice for Minab*\n\n"
+            "On February 28, 2026, 168 children were killed in their school.\n"
+            "We are uniting to ensure their stories are heard and justice is served.\n\n"
+            "The mission is clear: Comment on key posts with our hashtags — that's it."
+        ),
+        "fa": (
+            "🕊️ *عدالت برای میناب*\n\n"
+            "در ۹ اسفند ۱۴۰۴، ۱۶۸ کودک در مدرسه خود کشته شدند.\n"
+            "ما متحد می‌شویم تا مطمئن شویم صدای آنها شنیده می‌شود و عدالت برقرار می‌گردد.\n\n"
+            "ماموریت روشن است: روی پست‌های هدف با هشتگ‌های ما کامنت بگذارید — همین."
+        ),
+        "ar": (
+            "🕊️ *العدالة لميناب*\n\n"
+            "في ٢٨ فبراير ٢٠٢٦، قُتل ١٦٨ طفلاً في مدرستهم.\n"
+            "نحن نتحد لضمان سماع قصصهم وتحقيق العدالة.\n\n"
+            "المهمة واضحة: التعليق على المنشورات الرئيسية مع الهاشتاجات الخاصة بنا — هذا كل شيء."
+        ),
+    },
+    "simplified_btn_start": {
+        "en": "Start My Task! 🚀",
+        "fa": "شروع کار من! 🚀",
+        "ar": "ابدأ مهمتي! 🚀",
+    },
+    "simplified_platform_picker": {
+        "en": (
+            "🎯 *Choose your battlefield*\n\n"
+            "Where would you like to post to make the most impact today?"
+        ),
+        "fa": (
+            "🎯 *پلتفرم خود را انتخاب کنید*\n\n"
+            "دوست دارید امروز کجا کامنت بگذارید تا بیشترین تاثیر را داشته باشید؟"
+        ),
+        "ar": (
+            "🎯 *اختر منصتك*\n\n"
+            "أين ترغب في النشر لإحداث أكبر تأثير اليوم؟"
+        ),
+    },
+    "simplified_btn_twitter": {
+        "en": "𝕏 Twitter",
+        "fa": "𝕏 توییتر",
+        "ar": "𝕏 تويتر",
+    },
+    "simplified_btn_instagram": {
+        "en": "📸 Instagram",
+        "fa": "📸 اینستاگرام",
+        "ar": "📸 إنستغرام",
+    },
+    "simplified_btn_telegram": {
+        "en": "📢 Telegram",
+        "fa": "📢 تلگرام",
+        "ar": "📢 تليجرام",
+    },
+    "simplified_twitter_targets": {
+        "en": (
+            "𝕏 *Target Accounts*\n\n"
+            "Select an account below to view a ready-made comment."
+        ),
+        "fa": (
+            "𝕏 *حساب‌های هدف*\n\n"
+            "یک حساب را برای مشاهده کامنت آماده انتخاب کنید."
+        ),
+        "ar": (
+            "𝕏 *الحسابات المستهدفة*\n\n"
+            "اختر حسابًا أدناه لعرض تعليق جاهز."
+        ),
+    },
+    "simplified_comment_en": {
+        "en": (
+            "📋 *Ready-Made Comment (EN)*\n\n"
+            "We must not look away. 168 children were killed in their classroom in Minab. "
+            "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre\n\n"
+            "👉 Tap the text above to copy it!\n\n"
+            "Click the button below when you've commented."
+        ),
+        "fa": (
+            "📋 *کامنت آماده (انگلیسی)*\n\n"
+            "We must not look away. 168 children were killed in their classroom in Minab. "
+            "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre\n\n"
+            "👉 برای کپی کردن روی متن بالا ضربه بزنید!\n\n"
+            "بعد از کامنت گذاشتن روی دکمه زیر کلیک کنید."
+        ),
+        "ar": (
+            "📋 *تعليق جاهز (انجليزي)*\n\n"
+            "We must not look away. 168 children were killed in their classroom in Minab. "
+            "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre\n\n"
+            "👉 اضغط على النص أعلاه لنسخه!\n\n"
+            "انقر فوق الزر أدناه عند الانتهاء."
+        ),
+    },
+    "simplified_comment_fa": {
+        "en": (
+            "📋 *Ready-Made Comment (FA)*\n\n"
+            "ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
+            "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre\n\n"
+            "👉 Tap the text above to copy it!\n\n"
+            "Click the button below when you've commented."
+        ),
+        "fa": (
+            "📋 *کامنت آماده (فارسی)*\n\n"
+            "ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
+            "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre\n\n"
+            "👉 برای کپی کردن روی متن بالا ضربه بزنید!\n\n"
+            "بعد از کامنت گذاشتن روی دکمه زیر کلیک کنید."
+        ),
+        "ar": (
+            "📋 *تعليق جاهز (فارسي)*\n\n"
+            "ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
+            "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre\n\n"
+            "👉 اضغط على النص أعلاه لنسخه!\n\n"
+            "انقر فوق الزر أدناه عند الانتهاء."
+        ),
+    },
+    "simplified_btn_get_en": {
+        "en": "🇺🇸 Get EN Comment",
+        "fa": "🇺🇸 دریافت کامنت انگلیسی",
+        "ar": "🇺🇸 الحصول على تعليق إنجليزي",
+    },
+    "simplified_btn_get_fa": {
+        "en": "🇮🇷 Get FA Comment",
+        "fa": "🇮🇷 دریافت کامنت فارسی",
+        "ar": "🇮🇷 الحصول على تعليق فارسي",
+    },
+    "simplified_btn_done": {
+        "en": "✅ Done! What's next?",
+        "fa": "✅ انجام شد! بعدی چیه؟",
+        "ar": "✅ تم! ماذا بعد؟",
+    },
+    "simplified_completion": {
+        "en": (
+            "🎉 *Thank you! You are making a difference.*\n\n"
+            "Your comment helps push this story to thousands more.\n\n"
+            "**Escalate your impact:** What would you like to do next?"
+        ),
+        "fa": (
+            "🎉 *ممنون! شما در حال تغییر دادن هستید.*\n\n"
+            "کامنت شما کمک می‌کند این داستان به هزاران نفر دیگر برسد.\n\n"
+            "**تاثیر خود را بیشتر کنید:** کار بعدی که می‌خواهید انجام دهید چیست؟"
+        ),
+        "ar": (
+            "🎉 *شكراً لك! أنت تصنع فرقاً.*\n\n"
+            "تعليقك يساعد في دفع هذه القصة لآلاف آخرين.\n\n"
+            "**قم بزيادة تأثيرك:** ماذا تريد أن تفعل بعد ذلك؟"
+        ),
+    },
+    "simplified_btn_another_platform": {
+        "en": "📱 Post on another platform",
+        "fa": "📱 پست روی پلتفرم دیگر",
+        "ar": "📱 النشر على منصة أخرى",
+    },
+    "simplified_btn_submit_content": {
+        "en": "📤 Submit Credible Account/Text",
+        "fa": "📤 ارسال حساب یا متن معتبر",
+        "ar": "📤 إرسال حساب أو نص موثوق",
+    },
+    "simplified_btn_creator": {
+        "en": "🎨 I'm ready to create content!",
+        "fa": "🎨 من آماده تولید محتوا هستم!",
+        "ar": "🎨 أنا مستعد لإنشاء محتوى!",
+    },
+    "simplified_btn_invite": {
+        "en": "👥 Invite a friend",
+        "fa": "👥 دعوت از یک دوست",
+        "ar": "👥 دعوة صديق",
+    },
+    "simplified_escalation_submit": {
+        "en": "Please send the link to the credible account or paste the text you would like to suggest.",
+        "fa": "لطفاً لینک حساب معتبر یا متنی که می‌خواهید پیشنهاد دهید را بفرستید.",
+        "ar": "يرجى إرسال رابط الحساب الموثوق أو لصق النص الذي ترغب في اقتراحه.",
+    },
+    "simplified_escalation_creator": {
+        "en": "Awesome! You have been added to the Creator Circle queue. An admin will contact you shortly.",
+        "fa": "عالی! شما به صفِ سازندگان محتوا اضافه شدید. به زودی یک ادمین با شما تماس می‌گیرد.",
+        "ar": "رائع! تمت إضافتك إلى قائمة منشئي المحتوى. سيتصل بك مسؤول قريبًا.",
+    },
 }
 
 

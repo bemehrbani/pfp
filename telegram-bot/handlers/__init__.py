@@ -21,6 +21,7 @@ from .registration import (
     cancel_registration, registration_conversation,
     text_message_handler, unknown_command_handler
 )
+from .simplified import simplified_handlers
 
 # Export handler functions
 __all__ = [
@@ -66,4 +67,5 @@ __all__ = [
     'tweet_target_handlers',
     'text_message_handler',
     'unknown_command_handler',
+    'simplified_handlers',
 ]

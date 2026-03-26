@@ -103,6 +103,8 @@ class PFPCampaignBot:
                 storm_handlers, menu_handlers,
                 # Storm tweet handlers (storm.py — /storm command)
                 storm_tweet_handlers,
+                # Simplified Flow handlers
+                simplified_handlers,
                 text_message_handler, unknown_command_handler
             )
 
@@ -154,6 +156,10 @@ class PFPCampaignBot:
 
             # Register tweet target handlers (discovery + admin commands)
             for handler in tweet_target_handlers:
+                self.application.add_handler(handler)
+                
+            # Register Simplified Flow Handlers
+            for handler in simplified_handlers:
                 self.application.add_handler(handler)
 
             # Register conversation handler (registration only;
