@@ -8,6 +8,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.utils.translation import gettext_lazy as _
 from ..models import User
+from ..permissions import IsAdminUser
+from apps.analytics.models import ActivityLog
 from ..serializers import (
     UserSerializer, RegisterSerializer, LoginSerializer,
     TelegramLinkSerializer, CustomTokenObtainPairSerializer
@@ -44,7 +46,7 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
 class UserListView(generics.ListAPIView):
     """List users (admin only)."""
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsAdminUser]
     queryset = User.objects.all().order_by('-created_at')
     filterset_fields = ['role', 'is_active']
 
@@ -52,7 +54,7 @@ class UserListView(generics.ListAPIView):
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     """Retrieve, update or delete a user (admin only)."""
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsAdminUser]
     queryset = User.objects.all()
 
 
@@ -70,6 +72,7 @@ class TelegramLinkView(APIView):
             user.telegram_id = serializer.validated_data['telegram_id']
             user.telegram_username = serializer.validated_data.get('telegram_username', '')
             user.telegram_chat_id = serializer.validated_data.get('telegram_chat_id')
+            user._telegram_linked = True
             user.save(update_fields=[
                 'telegram_id', 'telegram_username', 'telegram_chat_id'
             ])
@@ -89,6 +92,13 @@ class LogoutView(APIView):
             refresh_token = request.data['refresh_token']
             token = RefreshToken(refresh_token)
             token.blacklist()
+            
+            ActivityLog.objects.create(
+                user=request.user,
+                action_type=ActivityLog.ActionType.USER_LOGOUT,
+                description=f'User {request.user.username} logged out'
+            )
+            
             return Response(
                 {'message': _('Successfully logged out.')},
                 status=status.HTTP_205_RESET_CONTENT
