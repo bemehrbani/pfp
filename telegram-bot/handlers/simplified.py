@@ -3,7 +3,7 @@ from asgiref.sync import sync_to_async
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, CommandHandler, CallbackQueryHandler, MessageHandler, filters
 
-from handlers.registration import _get_user_lang
+from utils.state_management import state_manager
 from utils.translations import t
 
 logger = logging.getLogger(__name__)
@@ -53,7 +53,8 @@ async def process_start_simplified(update: Update, context: ContextTypes.DEFAULT
     Entry point for the unified single-task flow.
     Invoked directly from start.py when a registered user types /start.
     """
-    lang = await _get_user_lang(update.effective_user.id)
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
     
     welcome_text = t('simplified_welcome', lang)
     
@@ -74,7 +75,8 @@ async def simp_handle_start_task(update: Update, context: ContextTypes.DEFAULT_T
     query = update.callback_query
     await query.answer()
     
-    lang = await _get_user_lang(update.effective_user.id)
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
     
     keyboard = [
         [InlineKeyboardButton(t('simplified_btn_twitter', lang), callback_data="simp_plat_twitter")],
@@ -94,7 +96,8 @@ async def simp_handle_platform(update: Update, context: ContextTypes.DEFAULT_TYP
     query = update.callback_query
     await query.answer()
     
-    lang = await _get_user_lang(update.effective_user.id)
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
     platform = query.data.split('_')[-1]
     
     keyboard = []
@@ -131,7 +134,8 @@ async def simp_handle_target(update: Update, context: ContextTypes.DEFAULT_TYPE)
     query = update.callback_query
     await query.answer()
     
-    lang = await _get_user_lang(update.effective_user.id)
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
     
     # Parse which platform and target was clicked
     # Callback: simp_target_twitter_0
@@ -174,7 +178,8 @@ async def simp_handle_comment_lang(update: Update, context: ContextTypes.DEFAULT
     query = update.callback_query
     await query.answer()
     
-    lang = await _get_user_lang(update.effective_user.id)
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
     parts = query.data.split('_')
     # simp_comment_fa_twitter_0
     comment_lang = parts[2]
@@ -217,7 +222,8 @@ async def simp_handle_done(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     query = update.callback_query
     await query.answer()
     
-    lang = await _get_user_lang(update.effective_user.id)
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
     
     text = t('simplified_completion', lang)
     
@@ -242,7 +248,8 @@ async def simp_handle_escalation(update: Update, context: ContextTypes.DEFAULT_T
     query = update.callback_query
     await query.answer()
     
-    lang = await _get_user_lang(update.effective_user.id)
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
     action = query.data.split('_')[-1]
     
     if action == "submit":
