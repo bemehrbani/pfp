@@ -229,6 +229,21 @@ Tap a task below to get started! 👇
 - [ ] T5.2: Add AR (Arabic) translations
 - [ ] T5.3: Add context linking petition to Minab specifically
 
+---
+
+## 🌍 Website Narrative Update Epic — Aligning with Top 3 Strategy
+
+> Goal: Update the peopleforpeace.live landing page to reflect the evolved campaign narrative, shifting focus from just "Twitter bot tasks" to the comprehensive "Three Pillars of Justice" (Public Pressure, ICC Article 12(3), and Universal Jurisdiction).
+
+### Tasks
+
+| # | Task | Status | Impact |
+|---|------|--------|--------|
+| W1 | **Update Hero Subtitle** — Refocus on criminal prosecution and accountability | [ ] | ⭐⭐ |
+| W2 | **Redesign "How It Works"** — Replace 3 bot steps with "Three Pillars of Justice" | [ ] | ⭐⭐⭐ |
+| W3 | **Add Justice Portal Link** — Add prominent CTA linking to `/legal/jfmc-2026/` or `justice.html` | [ ] | ⭐⭐⭐ |
+| W4 | **Update Translations** — Add FA and AR translations for new pillar text | [ ] | ⭐⭐ |
+
 ## ✅ Completed (Recent)
 - [x] **Internal Team Portal (Mar 16):** 7-page password-protected portal at `/campaign/` — hub, kanban, QA script, platform guide, growth strategy, team & roles. Deploy `34356c9`.
 - [x] **QA Test Script:** 8 structured test cases covering full bot flow, deployed as HTML page + markdown.
