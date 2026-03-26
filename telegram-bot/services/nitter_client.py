@@ -59,8 +59,10 @@ DEFAULT_PRIORITY_ACCOUNTS = [
     'KenRoth',
     'mbaborak',
     'christaborger',
-    'Iran_policy',
-    'IranIntl',
+    'TritaParsi',
+    'SinaToossi',
+    'AssalRad',
+    'NIACouncil',
     'UNGeneva',
     'amnesty',
     'hrw',
@@ -74,7 +76,7 @@ DEFAULT_PRIORITY_ACCOUNTS = [
     'AJEnglish',
     'taborender',
     'PressTV',
-    'IranNewsUpdate',
+    'UNICEF',
     'JavadZarif',
 ]
 
