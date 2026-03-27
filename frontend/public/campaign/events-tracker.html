@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Events Tracker — Concept Mockup | PFP Team</title>
+    
+    <!-- Design Fonts: Bebas Neue for impact, Chivo for readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chivo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+
+    <style>
+        :root {
+            --c-bg: #0A0A0A;
+            --c-surface: #171717;
+            --c-surface-hover: #262626;
+            --c-text: #F3F4F6;
+            --c-text-muted: #9CA3AF;
+            --c-accent: #E11D48; /* Crimson / Protest Red */
+            --c-accent-secondary: #059669; /* Solidarity Green */
+            --c-border: #333333;
+            
+            --f-display: 'Bebas Neue', display;
+            --f-body: 'Chivo', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--f-body);
+            background-color: var(--c-bg);
+            color: var(--c-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- TOPBAR --- */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 32px;
+            background: rgba(10,10,10,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--c-border);
+        }
+        .topbar a {
+            color: var(--c-accent);
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .topbar-title {
+            font-family: var(--f-body);
+            font-size: 14px;
+            color: var(--c-text-muted);
+        }
+
+        /* --- HEADER & MANIFESTO --- */
+        .hero {
+            padding: 4rem 2rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--c-border);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, rgba(225, 29, 72, 0.15), transparent 50%);
+            z-index: -1;
+        }
+
+        .tagline {
+            color: var(--c-accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            border: 1px solid var(--c-accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        h1 {
+            font-family: var(--f-display);
+            font-size: clamp(4rem, 8vw, 8rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .manifesto {
+            max-width: 800px;
+            font-size: 1.25rem;
+            color: var(--c-text-muted);
+            font-weight: 300;
+        }
+
+        /* --- APP MOCKUP INTERFACE --- */
+        .app-container {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+            height: 75vh;
+            min-height: 600px;
+        }
+
+        @media (max-width: 900px) {
+            .app-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        /* Sidebar / List View */
+        .sidebar {
+            background-color: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--c-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-header h2 {
+            font-family: var(--f-display);
+            font-size: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .event-count {
+            background: var(--c-accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .event-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Custom Scrollbar */
+        .event-list::-webkit-scrollbar { width: 6px; }
+        .event-list::-webkit-scrollbar-track { background: transparent; }
+        .event-list::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 3px; }
+
+        .event-card {
+            background: var(--c-bg);
+            border: 1px solid var(--c-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; width: 4px; height: 100%;
+            background: var(--c-accent-secondary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+        }
+
+        .event-card:hover {
+            border-color: var(--c-text-muted);
+            transform: translateY(-2px);
+        }
+
+        .event-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .event-date {
+            font-size: 0.75rem;
+            color: var(--c-accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .event-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--c-text);
+        }
+
+        .event-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--c-text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .event-source {
+            font-size: 0.75rem;
+            background: rgba(255,255,255,0.05);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Map Area */
+        .map-wrapper {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            min-height: 400px;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* Dark mode filter for map tiles */
+            filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        }
+
+        /* Map Overlay UI */
+        .map-overlay {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--c-border);
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            z-index: 1000;
+            display: flex;
+            gap: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .overlay-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .status-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--c-accent-secondary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(5, 150, 105, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+        }
+
+        /* --- FEEDBACK SECTION --- */
+        .feedback-section {
+            background: var(--c-accent);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .feedback-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feedback-content h2 {
+            font-family: var(--f-display);
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .feedback-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            background: white;
+            color: var(--c-accent);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 900;
+            font-family: var(--f-body);
+            border-radius: 100px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Custom Leaflet Marker overrides */
+        .custom-div-icon {
+            background: transparent;
+            border: none;
+        }
+        .marker-pin {
+            width: 24px;
+            height: 24px;
+            background-color: var(--c-accent);
+            border: 3px solid var(--c-bg);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(225, 29, 72, 0.5);
+            transition: transform 0.2s ease;
+        }
+        .marker-pin:hover {
+            transform: scale(1.3);
+            background-color: white;
+            cursor: pointer;
+            z-index: 1000 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="topbar">
+        <a href="hub.html">← Back to Team Hub</a>
+        <span class="topbar-title">Events Tracker Concept</span>
+        <a onclick="window.print()">Print ↓</a>
+    </nav>
+
+    <header class="hero">
+        <span class="tagline">Internal Concept & PRD Visualized</span>
+        <h1>Project: Global Solidarity Hub</h1>
+        <p class="manifesto">
+            There are hundreds of Pro-Peace and Pro-Iran events happening globally, but supporters lack a centralized, map-driven directory. 
+            This epic introduces a unified Events Tracker across web and Telegram, crowdsourced by activists and populated by scrapers.
+            Below is a live mockup utilizing real event data gathered for the MVP (March - April 2026).
+        </p>
+    </header>
+
+    <main class="app-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Upcoming</h2>
+                <span class="event-count">10 Events</span>
+            </div>
+            <div class="event-list" id="eventList">
+                <!-- Events populated by JS -->
+            </div>
+        </aside>
+
+        <!-- Map -->
+        <section class="map-wrapper">
+            <div id="map"></div>
+            <div class="map-overlay">
+                <div class="overlay-item">
+                    <div class="status-dot"></div>
+                    LIVE MVP DATA
+                </div>
+                <div class="overlay-item" style="opacity: 0.7;">
+                    Map: Interactive Mockup
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <section class="feedback-section">
+        <div class="feedback-content">
+            <h2>Team Feedback Required</h2>
+            <p>We are aggregating data from <strong>CODEPINK</strong>, <strong>Palestine Solidarity Campaign</strong>, and <strong>ActionNetwork</strong>. What other specific Telegram channels, Instagram accounts, or platforms should we target for event scraping/ingestion?</p>
+            <button class="btn" onclick="alert('In a real app, this would open a form or Slack integration.')">Submit Source Suggestions</button>
+        </div>
+    </section>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script>
+        // Real MVP Data scraped for March 26 - April 5, 2026
+        const events = [
+            { title: "Cuba Reportback & Anti-Imperialism", date: "March 26, 2026 • 3:00 PM", location: "Washington, DC", lat: 38.915, lng: -77.025, source: "CODEPINK", desc: "Busboys and Poets" },
+            { title: "Friday Palestine Demonstration", date: "March 27, 2026", location: "Los Angeles, CA", lat: 34.052, lng: -118.243, source: "CODEPINK", desc: "Zionist Consulate" },
+            { title: "Gaza Protest", date: "March 27, 2026", location: "Basel, Switzerland", lat: 47.559, lng: 7.588, source: "Local Action", desc: "Barfüsserplatz" },
+            { title: "Together for Palestine March", date: "March 28, 2026 • 12:00 PM", location: "London, UK", lat: 51.501, lng: -0.174, source: "PSC", desc: "Exhibition Road" },
+            { title: "No War, No Imperialism! Rally", date: "March 28, 2026 • 12:00 PM", location: "San Jose, CA", lat: 37.338, lng: -121.886, source: "CODEPINK", desc: "St. James Park" },
+            { title: "Anti-War Protest / Peace Action", date: "March 28, 2026", location: "Boston, MA", lat: 42.355, lng: -71.066, source: "Mass Peace Action", desc: "Boston Common" },
+            { title: "March to Gaza Protest", date: "March 28, 2026", location: "Seattle, WA", lat: 47.615, lng: -122.319, source: "Local Action", desc: "Cal Anderson Park" },
+            { title: "Weekly Rally for Peace", date: "March 29, 2026 • 11:00 AM", location: "Redondo Beach, CA", lat: 33.870, lng: -118.358, source: "CODEPINK", desc: "Southbay Galleria" },
+            { title: "Anti-Imperialist Art Build", date: "April 4, 2026", location: "Los Angeles, CA", lat: 34.052, lng: -118.253, source: "CODEPINK", desc: "Gathering" },
+            { title: "Weekly Pro-Palestine Demo", date: "April 4, 2026", location: "Victoria, BC", lat: 48.428, lng: -123.365, source: "Local News", desc: "Legislature Lawn" }
+        ];
+
+        // Initialize Map
+        const map = L.map('map', {
+            zoomControl: false // Custom controls look better in mockups
+        }).setView([39.0, -45.0], 3);
+
+        // Minimalist Map Tiles (converted to dark via CSS filter)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap &copy; CARTO',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // Custom Marker Icon
+        const customIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: '<div class="marker-pin"></div>',
+            iconSize: [30, 42],
+            iconAnchor: [15, 42]
+        });
+
+        // Populate Sidebar & Map
+        const listContainer = document.getElementById('eventList');
+
+        events.forEach((ev, index) => {
+            // Add Marker
+            const marker = L.marker([ev.lat, ev.lng], {icon: customIcon}).addTo(map);
+            marker.bindPopup(`<b>${ev.title}</b><br>${ev.location}<br>${ev.source}`);
+
+            // Add Sidebar Card
+            const card = document.createElement('div');
+            card.className = 'event-card';
+            card.innerHTML = `
+                <span class="event-date">${ev.date}</span>
+                <h3 class="event-title">${ev.title}</h3>
+                <div class="event-meta">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    ${ev.location} • ${ev.desc}
+                </div>
+                <span class="event-source">Source: ${ev.source}</span>
+            `;
+            
+            // Interaction: Clicking card flies to marker
+            card.addEventListener('click', () => {
+                map.flyTo([ev.lat, ev.lng], 12, { duration: 1.5 });
+                marker.openPopup();
+                
+                // Reset card styles, highlight clicked
+                document.querySelectorAll('.event-card').forEach(c => c.style.borderColor = 'var(--c-border)');
+                card.style.borderColor = 'var(--c-accent)';
+            });
+
+            listContainer.appendChild(card);
+        });
+
+    </script>
+    <script>
+    const HASH = 'a563332e89ead5908b69274bb3266666b6387594c2c5e92038d83eafc07cfb81';
+    if (sessionStorage.getItem('pfp_campaign_token') !== HASH) {
+      window.location.href = 'index.html';
+    }
+    </script>
+</body>
+</html>
