@@ -242,12 +242,26 @@ class Campaign(models.Model):
 
     def save(self, *args, **kwargs):
         """Save campaign and update statistics."""
+        # Check if status changed
+        is_new = self.pk is None
+        old_status = None
+        
+        if not hasattr(self, '_changed_fields'):
+            self._changed_fields = set()
+            
+        if not is_new:
+            try:
+                old_campaign = Campaign.objects.get(pk=self.pk)
+                old_status = old_campaign.status
+                if old_status != self.status:
+                    self._changed_fields.add('status')
+            except Campaign.DoesNotExist:
+                pass
+                
         # If update_fields is specified, skip statistics update (just save)
         if 'update_fields' in kwargs:
             super().save(*args, **kwargs)
             return
-
-        is_new = self.pk is None
 
         # Save first to get ID for many-to-many relationships
         super().save(*args, **kwargs)

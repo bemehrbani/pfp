@@ -105,14 +105,14 @@ def task_assignment_created_or_updated(sender, instance, created, **kwargs):
 
             if instance.status in status_actions:
                 action = status_actions[instance.status]
-                if isinstance(action, str):
-                    # Simple string action
-                    description = f'Task "{instance.task.title}" {action} by {instance.volunteer.username}'
-                    action_type = ActivityLog.ActionType.TASK_UPDATE
-                else:
+                if action in ActivityLog.ActionType.values:
                     # Full action type enum
                     action_type = action
                     description = f'Task "{instance.task.title}" {instance.status} by {instance.volunteer.username}'
+                else:
+                    # Simple string action mapped to TASK_UPDATE
+                    action_type = ActivityLog.ActionType.TASK_UPDATE
+                    description = f'Task "{instance.task.title}" {action} by {instance.volunteer.username}'
 
                 # Log the activity
                 ActivityLog.objects.create(

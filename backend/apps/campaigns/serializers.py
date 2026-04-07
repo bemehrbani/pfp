@@ -56,6 +56,7 @@ class CampaignCreateSerializer(serializers.ModelSerializer):
             'target_members', 'target_activities', 'target_twitter_posts',
             'twitter_hashtags', 'twitter_accounts',
             'telegram_channel_id', 'telegram_group_id',
+            'managers',
             'start_date', 'end_date'
         )
 
@@ -85,7 +86,7 @@ class CampaignUpdateSerializer(serializers.ModelSerializer):
             'created_by', 'is_pinned', 'sent_to_telegram',
             'created_at', 'updated_at'
         )
-        read_only_fields = ('id', 'created_by', 'sent_to_telegram', 'created_at', 'updated_at')
+        read_only_fields = ('id', 'campaign', 'created_by', 'sent_to_telegram', 'created_at', 'updated_at')
 
 
 class CampaignStatsSerializer(serializers.Serializer):

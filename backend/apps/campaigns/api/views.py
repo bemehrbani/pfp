@@ -20,6 +20,7 @@ from ..serializers import (
     CampaignStatsSerializer
 )
 from apps.users.models import User
+from apps.users.permissions import IsAdminUser
 
 
 class IsAdminOrCampaignManager(permissions.BasePermission):
@@ -49,7 +50,7 @@ class CampaignListView(generics.ListCreateAPIView):
 
     def get_permissions(self):
         if self.request.method == 'POST':
-            return [permissions.IsAuthenticated(), permissions.IsAdminUser()]
+            return [permissions.IsAuthenticated(), IsAdminUser()]
         return [permissions.IsAuthenticated()]
 
     def get_queryset(self):

@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import Task, TaskAssignment, KeyTweet
 from apps.campaigns.serializers import CampaignSerializer
 from apps.users.serializers import UserSerializer
+from apps.users.models import User
 
 
 class KeyTweetSerializer(serializers.ModelSerializer):
@@ -121,6 +122,11 @@ class TaskAssignmentSerializer(serializers.ModelSerializer):
 
 class TaskAssignmentCreateSerializer(serializers.ModelSerializer):
     """Serializer for creating task assignments."""
+    volunteer = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        required=False
+    )
+
     class Meta:
         model = TaskAssignment
         fields = ('task', 'volunteer')
@@ -166,7 +172,7 @@ class AvailableTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = (
-            'id', 'title', 'short_description', 'task_type',
+            'id', 'title', 'description', 'task_type',
             'points', 'estimated_time',
             'campaign_name', 'available_slots'
         )

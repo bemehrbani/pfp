@@ -32,6 +32,13 @@ class IsAdminOrCampaignManager(permissions.BasePermission):
         return False
 
 
+class IsAdmin(permissions.BasePermission):
+    """Permission check for admin."""
+
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.is_admin()
+
+
 class TaskListView(generics.ListCreateAPIView):
     """List tasks or create a new task."""
     queryset = Task.objects.all()
@@ -48,7 +55,7 @@ class TaskListView(generics.ListCreateAPIView):
 
     def get_permissions(self):
         if self.request.method == 'POST':
-            return [permissions.IsAuthenticated(), permissions.IsAdminUser()]
+            return [permissions.IsAuthenticated(), IsAdmin()]
         return [permissions.IsAuthenticated()]
 
     def get_queryset(self):
@@ -106,7 +113,11 @@ class TaskAssignmentView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        data = request.data.copy() if hasattr(request.data, 'copy') else dict(request.data)
+        if 'volunteer' not in data:
+            data['volunteer'] = request.user.id
+
+        serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
 
         task = serializer.validated_data['task']

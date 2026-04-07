@@ -355,36 +355,39 @@ class TaskAPITests(APITestCase):
 
     def test_list_tasks_admin(self):
         """Test listing tasks as admin (should see all)."""
-        url = reverse('tasks:task-list')
+        url = reverse('tasks:task_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)  # Should see both tasks
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.data)
+        data = response.data.get('results', response.data) if isinstance(response.data, dict) else response.data
+        self.assertEqual(len(data), 2)  # Should see both tasks
 
     def test_list_tasks_manager(self):
         """Test listing tasks as campaign manager (should see managed campaign tasks)."""
-        url = reverse('tasks:task-list')
+        url = reverse('tasks:task_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.manager_token.access_token}')
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)  # Should only see task2
-        self.assertEqual(response.data[0]['title'], 'Manager Task')
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.data)
+        data = response.data.get('results', response.data) if isinstance(response.data, dict) else response.data
+        self.assertEqual(len(data), 1)  # Should only see task2
+        self.assertEqual(data[0]['title'], 'Manager Task')
 
     def test_list_tasks_volunteer(self):
         """Test listing tasks as volunteer (should see joined campaign tasks)."""
-        url = reverse('tasks:task-list')
+        url = reverse('tasks:task_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)  # Should only see task1
-        self.assertEqual(response.data[0]['title'], 'Admin Task')
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.data)
+        data = response.data.get('results', response.data) if isinstance(response.data, dict) else response.data
+        self.assertEqual(len(data), 1)  # Should only see task1
+        self.assertEqual(data[0]['title'], 'Admin Task')
 
     def test_create_task_admin(self):
         """Test creating a task as admin."""
-        url = reverse('tasks:task-list')
+        url = reverse('tasks:task_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         data = {
@@ -402,7 +405,7 @@ class TaskAPITests(APITestCase):
         }
 
         response = self.client.post(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED, response.data)
 
         # Check task was created
         task = Task.objects.get(title='New Task')
@@ -419,7 +422,7 @@ class TaskAPITests(APITestCase):
 
     def test_create_task_non_admin(self):
         """Test creating a task as non-admin (should fail)."""
-        url = reverse('tasks:task-list')
+        url = reverse('tasks:task_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.manager_token.access_token}')
 
         data = {
@@ -435,7 +438,7 @@ class TaskAPITests(APITestCase):
 
     def test_retrieve_task_detail_admin(self):
         """Test retrieving task detail as admin."""
-        url = reverse('tasks:task-detail', args=[self.task1.id])
+        url = reverse('tasks:task_detail', args=[self.task1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         response = self.client.get(url)
@@ -444,7 +447,7 @@ class TaskAPITests(APITestCase):
 
     def test_retrieve_task_detail_manager(self):
         """Test retrieving task detail as manager (should succeed for managed campaign task)."""
-        url = reverse('tasks:task-detail', args=[self.task2.id])
+        url = reverse('tasks:task_detail', args=[self.task2.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.manager_token.access_token}')
 
         response = self.client.get(url)
@@ -453,7 +456,7 @@ class TaskAPITests(APITestCase):
 
     def test_retrieve_task_detail_manager_unauthorized(self):
         """Test retrieving task detail as manager for unmanaged campaign task (should fail)."""
-        url = reverse('tasks:task-detail', args=[self.task1.id])
+        url = reverse('tasks:task_detail', args=[self.task1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.manager_token.access_token}')
 
         response = self.client.get(url)
@@ -461,7 +464,7 @@ class TaskAPITests(APITestCase):
 
     def test_update_task_admin(self):
         """Test updating a task as admin."""
-        url = reverse('tasks:task-detail', args=[self.task1.id])
+        url = reverse('tasks:task_detail', args=[self.task1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         data = {
@@ -480,7 +483,7 @@ class TaskAPITests(APITestCase):
 
     def test_delete_task_admin(self):
         """Test deleting a task as admin."""
-        url = reverse('tasks:task-detail', args=[self.task1.id])
+        url = reverse('tasks:task_detail', args=[self.task1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         response = self.client.delete(url)
@@ -491,30 +494,33 @@ class TaskAPITests(APITestCase):
 
     def test_available_tasks_volunteer(self):
         """Test listing available tasks for a volunteer."""
-        url = reverse('tasks:available-tasks')
+        url = reverse('tasks:available_tasks')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)  # Should see task1
-        self.assertEqual(response.data[0]['title'], 'Admin Task')
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.data)
+        data = response.data.get('results', response.data) if isinstance(response.data, dict) else response.data
+        self.assertEqual(len(data), 1)  # Should see task1
+        self.assertEqual(data[0]['title'], 'Admin Task')
 
     def test_available_tasks_non_volunteer(self):
         """Test listing available tasks as non-volunteer (should return empty)."""
-        url = reverse('tasks:available-tasks')
+        url = reverse('tasks:available_tasks')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 0)  # Admin is not a volunteer
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.data)
+        data = response.data.get('results', response.data) if isinstance(response.data, dict) else response.data
+        self.assertEqual(len(data), 0)  # Admin is not a volunteer
 
     def test_assign_task(self):
         """Test assigning a task to a volunteer."""
-        url = reverse('tasks:task-assign', args=[self.task1.id])
+        url = reverse('tasks:task_assign')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
 
-        response = self.client.post(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = {'task': self.task1.id}
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED, response.data)
 
         # Check assignment was created
         assignment = TaskAssignment.objects.get(task=self.task1, volunteer=self.volunteer)
@@ -535,12 +541,13 @@ class TaskAPITests(APITestCase):
     def test_assign_task_already_assigned(self):
         """Test assigning a task when already assigned."""
         # First assignment
-        url = reverse('tasks:task-assign', args=[self.task1.id])
+        url = reverse('tasks:task_assign')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
-        self.client.post(url)
+        data = {'task': self.task1.id}
+        self.client.post(url, data, format='json')
 
         # Try to assign again
-        response = self.client.post(url)
+        response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_assign_task_max_assignments_reached(self):
@@ -565,9 +572,10 @@ class TaskAPITests(APITestCase):
             )
 
         # Try to assign to our test volunteer
-        url = reverse('tasks:task-assign', args=[self.task1.id])
+        url = reverse('tasks:task_assign')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
-        response = self.client.post(url)
+        data = {'task': self.task1.id}
+        response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_complete_task(self):
@@ -580,7 +588,7 @@ class TaskAPITests(APITestCase):
             status=TaskAssignment.Status.ASSIGNED
         )
 
-        url = reverse('tasks:task-complete', args=[assignment.id])
+        url = reverse('tasks:task_complete', args=[assignment.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
 
         data = {
@@ -617,7 +625,7 @@ class TaskAPITests(APITestCase):
             proof_text='Completed task'
         )
 
-        url = reverse('tasks:task-verify', args=[assignment.id])
+        url = reverse('tasks:task_verify', args=[assignment.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         data = {
@@ -662,7 +670,7 @@ class TaskAPITests(APITestCase):
             proof_url='https://twitter.com/user/status/123456'
         )
 
-        url = reverse('tasks:task-verify', args=[assignment.id])
+        url = reverse('tasks:task_verify', args=[assignment.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         data = {
@@ -731,6 +739,10 @@ class TaskSignalTests(TestCase):
             description=f'Task "Signal Task" created for campaign "{self.campaign.name}"'
         ).first()
 
+        print("====== ACTIVITY LOGS ======")
+        for log in ActivityLog.objects.all():
+            print(log.action_type, log.description, log.user_id)
+        print("===========================")
         self.assertIsNotNone(activity_log)
 
     def test_task_updated_signal_activation(self):
@@ -760,6 +772,10 @@ class TaskSignalTests(TestCase):
             description=f'Task "Activation Test Task" activated'
         ).first()
 
+        print("====== ACTIVITY LOGS ======")
+        for log in ActivityLog.objects.all():
+            print(log.action_type, log.description, log.user_id)
+        print("===========================")
         self.assertIsNotNone(activity_log)
 
     def test_task_assignment_created_signal(self):
@@ -791,6 +807,10 @@ class TaskSignalTests(TestCase):
             description=f'Task "Assignment Test Task" assigned to {self.volunteer.username}'
         ).first()
 
+        print("====== ACTIVITY LOGS ======")
+        for log in ActivityLog.objects.all():
+            print(log.action_type, log.description, log.user_id)
+        print("===========================")
         self.assertIsNotNone(activity_log)
 
     def test_task_assignment_status_change_signal(self):
@@ -827,6 +847,10 @@ class TaskSignalTests(TestCase):
             description=f'Task "Status Change Task" completed by {self.volunteer.username}'
         ).first()
 
+        print("====== ACTIVITY LOGS ======")
+        for log in ActivityLog.objects.all():
+            print(log.action_type, log.description, log.user_id)
+        print("===========================")
         self.assertIsNotNone(activity_log)
 
         # Change status to VERIFIED - should trigger signal
@@ -842,4 +866,8 @@ class TaskSignalTests(TestCase):
             description=f'Task "Status Change Task" verified by {self.volunteer.username}'
         ).first()
 
+        print("====== ACTIVITY LOGS ======")
+        for log in ActivityLog.objects.all():
+            print(log.action_type, log.description, log.user_id)
+        print("===========================")
         self.assertIsNotNone(activity_log)

@@ -224,6 +224,24 @@ class Task(models.Model):
         """Calculate number of available slots."""
         return max(0, self.max_assignments - self.current_assignments)
 
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        old_is_active = None
+        
+        if not hasattr(self, '_changed_fields'):
+            self._changed_fields = set()
+            
+        if not is_new:
+            try:
+                old_instance = Task.objects.get(pk=self.pk)
+                old_is_active = old_instance.is_active
+                if old_is_active != self.is_active:
+                    self._changed_fields.add('is_active')
+            except Task.DoesNotExist:
+                pass
+                
+        super().save(*args, **kwargs)
+
 
 class KeyTweet(models.Model):
     """
@@ -374,9 +392,18 @@ class TaskAssignment(models.Model):
         """Update task statistics when assignment status changes."""
         is_new = self.pk is None
         old_status = None
+        
+        if not hasattr(self, '_changed_fields'):
+            self._changed_fields = set()
+            
         if not is_new:
-            old_instance = TaskAssignment.objects.get(pk=self.pk)
-            old_status = old_instance.status
+            try:
+                old_instance = TaskAssignment.objects.get(pk=self.pk)
+                old_status = old_instance.status
+                if old_status != self.status:
+                    self._changed_fields.add('status')
+            except TaskAssignment.DoesNotExist:
+                pass
 
         super().save(*args, **kwargs)
 

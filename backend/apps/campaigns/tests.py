@@ -170,12 +170,14 @@ class CampaignModelTests(TestCase):
             description='Test task description',
             task_type='social_media_post',
             points=10,
-            max_assignments=5
+            max_assignments=5,
+            created_by=self.admin_user
         )
 
         # Create a completed assignment
         assignment = TaskAssignment.objects.create(
             task=task,
+            campaign=self.campaign,
             volunteer=self.volunteer,
             status=TaskAssignment.Status.COMPLETED
         )
@@ -407,36 +409,36 @@ class CampaignAPITests(APITestCase):
 
     def test_list_campaigns_admin(self):
         """Test listing campaigns as admin (should see all)."""
-        url = reverse('campaigns:campaign-list')
+        url = reverse('campaigns:campaign_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)  # Should see both campaigns
+        self.assertEqual(len(response.data['results']), 2)  # Should see both campaigns
 
     def test_list_campaigns_manager(self):
         """Test listing campaigns as campaign manager (should see managed campaigns)."""
-        url = reverse('campaigns:campaign-list')
+        url = reverse('campaigns:campaign_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.manager_token.access_token}')
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)  # Should only see campaign2
-        self.assertEqual(response.data[0]['name'], 'Manager Campaign')
+        self.assertEqual(len(response.data['results']), 1)  # Should only see campaign2
+        self.assertEqual(response.data['results'][0]['name'], 'Manager Campaign')
 
     def test_list_campaigns_volunteer(self):
         """Test listing campaigns as volunteer (should see joined campaigns)."""
-        url = reverse('campaigns:campaign-list')
+        url = reverse('campaigns:campaign_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)  # Should only see campaign1
-        self.assertEqual(response.data[0]['name'], 'Admin Campaign')
+        self.assertEqual(len(response.data['results']), 1)  # Should only see campaign1
+        self.assertEqual(response.data['results'][0]['name'], 'Admin Campaign')
 
     def test_create_campaign_admin(self):
         """Test creating a campaign as admin."""
-        url = reverse('campaigns:campaign-list')
+        url = reverse('campaigns:campaign_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         data = {
@@ -468,7 +470,7 @@ class CampaignAPITests(APITestCase):
 
     def test_create_campaign_non_admin(self):
         """Test creating a campaign as non-admin (should fail)."""
-        url = reverse('campaigns:campaign-list')
+        url = reverse('campaigns:campaign_list')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.manager_token.access_token}')
 
         data = {
@@ -483,7 +485,7 @@ class CampaignAPITests(APITestCase):
 
     def test_retrieve_campaign_detail_admin(self):
         """Test retrieving campaign detail as admin."""
-        url = reverse('campaigns:campaign-detail', args=[self.campaign1.id])
+        url = reverse('campaigns:campaign_detail', args=[self.campaign1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         response = self.client.get(url)
@@ -492,7 +494,7 @@ class CampaignAPITests(APITestCase):
 
     def test_retrieve_campaign_detail_manager(self):
         """Test retrieving campaign detail as manager (should succeed for managed campaign)."""
-        url = reverse('campaigns:campaign-detail', args=[self.campaign2.id])
+        url = reverse('campaigns:campaign_detail', args=[self.campaign2.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.manager_token.access_token}')
 
         response = self.client.get(url)
@@ -501,7 +503,7 @@ class CampaignAPITests(APITestCase):
 
     def test_retrieve_campaign_detail_manager_unauthorized(self):
         """Test retrieving campaign detail as manager for unmanaged campaign (should fail)."""
-        url = reverse('campaigns:campaign-detail', args=[self.campaign1.id])
+        url = reverse('campaigns:campaign_detail', args=[self.campaign1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.manager_token.access_token}')
 
         response = self.client.get(url)
@@ -509,13 +511,13 @@ class CampaignAPITests(APITestCase):
 
     def test_update_campaign_admin(self):
         """Test updating a campaign as admin."""
-        url = reverse('campaigns:campaign-detail', args=[self.campaign1.id])
+        url = reverse('campaigns:campaign_detail', args=[self.campaign1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         data = {
             'name': 'Updated Campaign Name',
             'description': 'Updated description',
-            'status': Campaign.Status.ACTIVE
+            'status': Campaign.Status.COMPLETED
         }
 
         response = self.client.patch(url, data, format='json')
@@ -524,18 +526,18 @@ class CampaignAPITests(APITestCase):
         # Check campaign was updated
         self.campaign1.refresh_from_db()
         self.assertEqual(self.campaign1.name, 'Updated Campaign Name')
-        self.assertEqual(self.campaign1.status, Campaign.Status.ACTIVE)
+        self.assertEqual(self.campaign1.status, Campaign.Status.COMPLETED)
 
         # Check ActivityLog was created for status change
         self.assertTrue(ActivityLog.objects.filter(
             user=self.admin_user,
             action_type=ActivityLog.ActionType.CAMPAIGN_UPDATE,
-            description=f'Campaign "Updated Campaign Name" status changed to active'
+            description=f'Campaign "Updated Campaign Name" status changed to completed'
         ).exists())
 
     def test_delete_campaign_admin(self):
         """Test deleting a campaign as admin."""
-        url = reverse('campaigns:campaign-detail', args=[self.campaign1.id])
+        url = reverse('campaigns:campaign_detail', args=[self.campaign1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         response = self.client.delete(url)
@@ -546,7 +548,7 @@ class CampaignAPITests(APITestCase):
 
     def test_join_campaign(self):
         """Test joining a campaign as a volunteer."""
-        url = reverse('campaigns:campaign-join', args=[self.campaign2.id])
+        url = reverse('campaigns:campaign_join', args=[self.campaign2.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
 
         response = self.client.post(url)
@@ -571,7 +573,7 @@ class CampaignAPITests(APITestCase):
 
     def test_join_campaign_already_member(self):
         """Test joining a campaign when already a member."""
-        url = reverse('campaigns:campaign-join', args=[self.campaign1.id])
+        url = reverse('campaigns:campaign_join', args=[self.campaign1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
 
         response = self.client.post(url)
@@ -579,7 +581,7 @@ class CampaignAPITests(APITestCase):
 
     def test_join_campaign_not_found(self):
         """Test joining a non-existent campaign."""
-        url = reverse('campaigns:campaign-join', args=[999])
+        url = reverse('campaigns:campaign_join', args=[999])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
 
         response = self.client.post(url)
@@ -587,16 +589,16 @@ class CampaignAPITests(APITestCase):
 
     def test_campaign_stats(self):
         """Test retrieving campaign statistics."""
-        url = reverse('campaigns:campaign-stats', args=[self.campaign1.id])
+        url = reverse('campaigns:campaign_stats', args=[self.campaign1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Check response contains expected fields
-        self.assertIn('progress_percentage', response.data)
-        self.assertIn('current_members', response.data)
-        self.assertIn('completed_activities', response.data)
+        self.assertIn('completion_rate', response.data)
+        self.assertIn('total_volunteers', response.data)
+        self.assertIn('total_points_awarded', response.data)
 
     def test_campaign_updates_list(self):
         """Test listing campaign updates."""
@@ -615,16 +617,16 @@ class CampaignAPITests(APITestCase):
             is_pinned=True
         )
 
-        url = reverse('campaigns:campaign-update-list', args=[self.campaign1.id])
+        url = reverse('campaigns:campaign_updates', args=[self.campaign1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.volunteer_token.access_token}')
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+        self.assertEqual(len(response.data['results']), 2)
 
     def test_create_campaign_update(self):
         """Test creating a campaign update."""
-        url = reverse('campaigns:campaign-update-list', args=[self.campaign1.id])
+        url = reverse('campaigns:campaign_updates', args=[self.campaign1.id])
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         data = {
