@@ -6,7 +6,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+    if: github.actor == 'mahdifarimani' || github.triggering_actor == 'mahdifarimani'
     steps:
       - name: Deploy to Production Server
         uses: appleboy/ssh-action@master
