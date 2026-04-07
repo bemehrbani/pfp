@@ -200,5 +200,14 @@ make test          # Backend unit tests
 - **Check `kanban.md`** for current sprint status and known bugs before starting feature work.
 - **Check `TESTING.md`** for test suite conventions before writing tests.
 - **Check `ONBOARDING.md`** for user-facing flow descriptions.
-- **Never commit or push** without the user's explicit permission.
 - The `.env` file in the project root contains the **local dev** bot token. The telegram-bot service has its own `.env` file at `telegram-bot/.env`.
+
+---
+
+## Defined Workflows
+
+The `.agent/workflows/` directory contains standard operational playbooks specific to this repository. You can execute these workflows interactively by using their respective commands or requesting them.
+
+- **`/deploy`** ([`deploy.md`](file:///Users/mahdifarimani/Documents/PFP/.agent/workflows/deploy.md)): Pushes changes to the production Git remote, checks server drift against GitHub, displays current service health, and lists production credentials.
+- **`/test`** ([`test.md`](file:///Users/mahdifarimani/Documents/PFP/.agent/workflows/test.md)): Details how to comprehensively execute backend Django unit tests or the Telegram and Dashboard Playwright E2E suites.
+- **`/ci`** ([`ci.md`](file:///Users/mahdifarimani/Documents/PFP/.agent/workflows/ci.md)): Monitors the ongoing GitHub Actions CI/CD pipeline, retrieves run logs via GitHub CLI, and outlines troubleshooting steps for recurring failures.

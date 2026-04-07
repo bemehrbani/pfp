@@ -1,32 +1,26 @@
 name: Deploy to Production
 
 on:
-  workflow_run:
-    workflows: ["CI/CD Pipeline"]
-    branches: [main]
-    types: [completed]
   workflow_dispatch:
     inputs:
-      force:
-        description: 'Force deploy even if CI did not run'
-        required: false
-        default: 'false'
+      confirm:
+        description: 'Type DEPLOY to confirm production deployment'
+        required: true
 
 jobs:
   deploy:
     name: Deploy to SkinScope Server
     runs-on: ubuntu-latest
-    if: >
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' &&
-       github.event.workflow_run.head_branch == 'main')
+    if: github.event.inputs.confirm == 'DEPLOY'
     environment:
       name: production
-      url: http://65.109.198.200:8080
+      url: https://peopleforpeace.live
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up SSH
         run: |
@@ -45,6 +39,10 @@ jobs:
           echo "=== Capturing current state for rollback ==="
           PREV_COMMIT=$($SSH_CMD "cd /opt/pfp && git rev-parse HEAD 2>/dev/null || echo 'none'")
           echo "Previous commit: $PREV_COMMIT"
+          echo "PREV_COMMIT=$PREV_COMMIT" >> $GITHUB_ENV
+
+          echo "=== Pre-deploy database backup ==="
+          $SSH_CMD "cd /opt/pfp && set -a && source .env.production 2>/dev/null && set +a && mkdir -p infrastructure/postgres/backups/pre-deploy && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml exec -T postgres pg_dump -U pfp_user -d pfp_campaign --clean --if-exists --no-owner 2>/dev/null | gzip > infrastructure/postgres/backups/pre-deploy/pfp_pre_deploy_\$(date +%Y-%m-%d_%H%M%S).sql.gz && echo '✅ Backup created'"
 
           echo "=== Pulling latest code ==="
           $SSH_CMD "cd /opt/pfp && git fetch origin main && git reset --hard origin/main"
@@ -92,3 +90,17 @@ jobs:
 
           echo "=== Current commit ==="
           $SSH_CMD "cd /opt/pfp && git log --oneline -1"
+
+      - name: Notify Telegram
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_ADMIN_CHAT_ID }}
+        run: |
+          STATUS="${{ job.status == 'success' && '✅ Production deploy successful' || '❌ Production deploy FAILED (auto-rollback attempted)' }}"
+          COMMIT=$(git log --oneline -1)
+          ACTOR="${{ github.actor }}"
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d chat_id="${TELEGRAM_CHAT_ID}" \
+            -d text="${STATUS}%0A📌 ${COMMIT}%0A👤 ${ACTOR}%0A🔗 https://peopleforpeace.live" \
+            -d parse_mode=HTML || true

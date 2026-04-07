@@ -11,7 +11,7 @@ Tests cover:
 import json
 from datetime import datetime, timedelta
 from unittest.mock import patch, MagicMock
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils import timezone
@@ -267,6 +267,10 @@ class TelegramMessageLogModelTests(TestCase):
             self.assertIn(expected, indexes)
 
 
+@override_settings(
+    TELEGRAM_BOT_TOKEN='test_token_123',
+    TELEGRAM_WEBHOOK_URL='https://example.com'
+)
 class TelegramAPITests(APITestCase):
     """Test Telegram API endpoints."""
 
@@ -475,10 +479,11 @@ class TelegramAPITests(APITestCase):
         mock_bot.set_webhook.return_value = True
 
         # Mock settings
-        with patch.dict('django.conf.settings.__dict__', {
-            'TELEGRAM_BOT_TOKEN': 'test_token_123',
-            'TELEGRAM_WEBHOOK_URL': 'https://example.com'
-        }):
+        from django.test import override_settings
+        with override_settings(
+            TELEGRAM_BOT_TOKEN='test_token_123',
+            TELEGRAM_WEBHOOK_URL='https://example.com'
+        ):
             response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -504,10 +509,10 @@ class TelegramAPITests(APITestCase):
         mock_bot_class.return_value = mock_bot
         mock_bot.set_webhook.return_value = False
 
-        with patch.dict('django.conf.settings.__dict__', {
-            'TELEGRAM_BOT_TOKEN': 'test_token_123',
-            'TELEGRAM_WEBHOOK_URL': 'https://example.com'
-        }):
+        with override_settings(
+            TELEGRAM_BOT_TOKEN='test_token_123',
+            TELEGRAM_WEBHOOK_URL='https=//example.com'
+        ):
             response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -519,10 +524,10 @@ class TelegramAPITests(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
 
         # Mock settings without token
-        with patch.dict('django.conf.settings.__dict__', {
-            'TELEGRAM_BOT_TOKEN': None,
-            'TELEGRAM_WEBHOOK_URL': 'https://example.com'
-        }):
+        with override_settings(
+            TELEGRAM_BOT_TOKEN=None,
+            TELEGRAM_WEBHOOK_URL='https=//example.com'
+        ):
             response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -547,9 +552,9 @@ class TelegramAPITests(APITestCase):
         mock_bot_class.return_value = mock_bot
         mock_bot.delete_webhook.return_value = True
 
-        with patch.dict('django.conf.settings.__dict__', {
-            'TELEGRAM_BOT_TOKEN': 'test_token_123'
-        }):
+        with override_settings(
+            TELEGRAM_BOT_TOKEN='test_token_123'
+        ):
             response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -566,9 +571,9 @@ class TelegramAPITests(APITestCase):
         mock_bot_class.return_value = mock_bot
         mock_bot.delete_webhook.return_value = False
 
-        with patch.dict('django.conf.settings.__dict__', {
-            'TELEGRAM_BOT_TOKEN': 'test_token_123'
-        }):
+        with override_settings(
+            TELEGRAM_BOT_TOKEN='test_token_123'
+        ):
             response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -596,9 +601,9 @@ class TelegramAPITests(APITestCase):
             'message': 'Test message from admin'
         }
 
-        with patch.dict('django.conf.settings.__dict__', {
-            'TELEGRAM_BOT_TOKEN': 'test_token_123'
-        }):
+        with override_settings(
+            TELEGRAM_BOT_TOKEN='test_token_123'
+        ):
             response = self.client.post(url, data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -645,9 +650,9 @@ class TelegramAPITests(APITestCase):
             'message': 'Test message'
         }
 
-        with patch.dict('django.conf.settings.__dict__', {
-            'TELEGRAM_BOT_TOKEN': 'test_token_123'
-        }):
+        with override_settings(
+            TELEGRAM_BOT_TOKEN='test_token_123'
+        ):
             response = self.client.post(url, data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

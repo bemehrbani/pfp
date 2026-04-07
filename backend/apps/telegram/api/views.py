@@ -12,6 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import permissions, status, serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from apps.users.permissions import IsAdminUser
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
@@ -60,7 +61,7 @@ class TelegramWebhookView(View):
 
 class TelegramBotStatusView(APIView):
     """Get Telegram bot status and information."""
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsAdminUser]
 
     @swagger_auto_schema(
         operation_description="Get Telegram bot status and webhook info",
@@ -124,7 +125,7 @@ class TelegramBotStatusView(APIView):
 
 class SetTelegramWebhookView(APIView):
     """Set or update Telegram webhook URL."""
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsAdminUser]
 
     @swagger_auto_schema(
         operation_description="Set or update Telegram webhook URL",
@@ -182,7 +183,7 @@ class SetTelegramWebhookView(APIView):
 
 class DeleteTelegramWebhookView(APIView):
     """Delete Telegram webhook."""
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsAdminUser]
 
     @swagger_auto_schema(
         operation_description="Delete Telegram webhook (switch to polling mode)",
@@ -226,7 +227,7 @@ class DeleteTelegramWebhookView(APIView):
 
 class SendTelegramMessageView(APIView):
     """Send message to Telegram user or chat (admin only)."""
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsAdminUser]
 
     @swagger_auto_schema(
         operation_description="Send message to a Telegram user or chat",

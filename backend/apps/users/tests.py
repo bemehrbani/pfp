@@ -286,7 +286,8 @@ class UserAPITests(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)  # admin + volunteer
+        # Note: Pagination returns a dictionary with 'count', so we check count
+        self.assertEqual(response.data.get('count', len(response.data)), 2)  # admin + volunteer
 
     def test_user_detail_admin_only(self):
         """Test retrieving user detail (admin only)."""
