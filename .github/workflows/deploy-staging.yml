@@ -20,9 +20,10 @@ jobs:
             cd /opt/pfp-staging
             git pull origin dev
             
-            # Ensure .env.staging is used if available (fallback to copying from prod if it doesn't exist, though it should exist)
+            # Ensure .env.staging is used as .env and .env.production
             if [ -f .env.staging ]; then
                 cp .env.staging .env.production
+                cp .env.staging .env
             fi
             
             # Restart docker containers for staging
