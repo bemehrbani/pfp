@@ -282,10 +282,14 @@ def main():
         bot = PFPCampaignBot()
 
         if args.mode == 'webhook':
-            if not args.webhook_url:
+            webhook_url = args.webhook_url or os.getenv('TELEGRAM_WEBHOOK_URL')
+            if webhook_url == '${TELEGRAM_WEBHOOK_URL}':
+                webhook_url = os.getenv('TELEGRAM_WEBHOOK_URL')
+                
+            if not webhook_url:
                 logger.error("Webhook URL required for webhook mode")
                 return
-            bot.start_webhook(args.webhook_url, args.port)
+            bot.start_webhook(webhook_url, args.port)
         else:
             bot.start_polling()
 
