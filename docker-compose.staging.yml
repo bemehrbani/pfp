@@ -1,146 +1,45 @@
-version: '3.8'
+##
+# PFP Campaign Manager — Staging Mode (Isolated ports)
+# Usage: docker-compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build
+##
 
-# Staging environment - runs alongside production on the same server
-# Uses different ports, database, and volume names to avoid conflicts
-# Backend: 8011, Frontend: 8081, Postgres: 5433
+version: '3.8'
 
 services:
   postgres:
-    image: postgres:15-alpine
-    container_name: pfp-staging-postgres
-    environment:
-      POSTGRES_DB: pfp_campaign_staging
-      POSTGRES_USER: pfp_user
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pfp_password}
-    volumes:
-      - staging_postgres_data:/var/lib/postgresql/data
-    command: >
-      postgres
-      -c max_connections=50
-      -c shared_buffers=64MB
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pfp_user"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
-    networks:
-      - pfp-staging-network
+    ports:
+      - "5434:5432"
 
   redis:
-    image: redis:7-alpine
-    container_name: pfp-staging-redis
-    command: redis-server --appendonly yes --maxmemory 64mb --maxmemory-policy allkeys-lru
-    volumes:
-      - staging_redis_data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
-    networks:
-      - pfp-staging-network
+    ports:
+      - "6381:6379"
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.production
-    container_name: pfp-staging-backend
-    environment:
-      DATABASE_URL: postgres://pfp_user:${POSTGRES_PASSWORD:-pfp_password}@postgres:5432/pfp_campaign_staging
-      REDIS_URL: redis://redis:6379/0
-      SECRET_KEY: ${SECRET_KEY:-staging-secret-key-change-me}
-      DEBUG: "True"
-      ALLOWED_HOSTS: "*"
-      CORS_ALLOWED_ORIGINS: "http://localhost:8081,http://65.109.198.200:8081"
-      TELEGRAM_BOT_TOKEN: ${STAGING_TELEGRAM_BOT_TOKEN:-}
-      TELEGRAM_WEBHOOK_URL: ""
-      CELERY_BROKER_URL: redis://redis:6379/0
-      CELERY_RESULT_BACKEND: redis://redis:6379/0
-      DJANGO_SETTINGS_MODULE: config.settings.production
     ports:
-      - "8011:8000"
-    volumes:
-      - staging_static_volume:/app/static
-      - staging_media_volume:/app/media
-      - ./backend/logs:/app/logs
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - pfp-staging-network
-
-  celery:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.production
-    container_name: pfp-staging-celery
-    command: celery -A config worker --loglevel=info --concurrency=2
+      - "8002:8000"
     environment:
-      DATABASE_URL: postgres://pfp_user:${POSTGRES_PASSWORD:-pfp_password}@postgres:5432/pfp_campaign_staging
-      REDIS_URL: redis://redis:6379/0
-      SECRET_KEY: ${SECRET_KEY:-staging-secret-key-change-me}
-      CELERY_BROKER_URL: redis://redis:6379/0
-      CELERY_RESULT_BACKEND: redis://redis:6379/0
       DJANGO_SETTINGS_MODULE: config.settings.production
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - pfp-staging-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend-staging.rule=Host(`${DOMAIN_NAME}`) && (PathPrefix(`/api`) || PathPrefix(`/admin`) || PathPrefix(`/swagger`) || PathPrefix(`/redoc`) || PathPrefix(`/static`) || PathPrefix(`/media`) || PathPrefix(`/health`))"
+      - "traefik.http.routers.backend-staging.entrypoints=websecure"
+      - "traefik.http.routers.backend-staging.tls.certresolver=le"
+      - "traefik.http.services.backend-staging.loadbalancer.server.port=8000"
 
   telegram-bot:
-    build:
-      context: .
-      dockerfile: telegram-bot/Dockerfile.production
-    container_name: pfp-staging-telegram-bot
-    environment:
-      DATABASE_URL: postgres://pfp_user:${POSTGRES_PASSWORD:-pfp_password}@postgres:5432/pfp_campaign_staging
-      REDIS_URL: redis://redis:6379/0
-      SECRET_KEY: ${SECRET_KEY:-staging-secret-key-change-me}
-      TELEGRAM_BOT_TOKEN: ${STAGING_TELEGRAM_BOT_TOKEN:-}
-      DJANGO_API_URL: http://backend:8000/api
-      DJANGO_SETTINGS_MODULE: config.settings.production
-      TWEET_DISCOVERY_ENABLED: "false"
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      backend:
-        condition: service_started
-    restart: unless-stopped
-    networks:
-      - pfp-staging-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.telegram-bot-staging.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/bot-webhook`)"
+      - "traefik.http.routers.telegram-bot-staging.entrypoints=websecure"
+      - "traefik.http.routers.telegram-bot-staging.tls.certresolver=le"
+      - "traefik.http.services.telegram-bot-staging.loadbalancer.server.port=8443"
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.production
-    container_name: pfp-staging-frontend
-    environment:
-      REACT_APP_API_URL: http://65.109.198.200:8011/api
     ports:
-      - "8081:80"
-    depends_on:
-      - backend
-    restart: unless-stopped
-    networks:
-      - pfp-staging-network
+      - "8082:80"
 
 volumes:
-  staging_postgres_data:
-  staging_redis_data:
-  staging_static_volume:
-  staging_media_volume:
-
-networks:
-  pfp-staging-network:
-    driver: bridge
+  postgres_data:
+  redis_data:
+  static_volume:
+  media_volume:

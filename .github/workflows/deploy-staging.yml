@@ -1,97 +1,34 @@
-name: Deploy to Staging
+name: Deploy Staging
 
 on:
   push:
-    branches: [ dev ]
-  workflow_dispatch:
+    branches:
+      - dev
 
 jobs:
-  deploy-staging:
-    name: Deploy to Staging
+  deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
-    environment:
-      name: staging
-      url: http://65.109.198.200:8081
-
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Deploy to staging server
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-        run: |
-          SSH_CMD="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}"
-
-          echo "=== Deploying dev branch to staging ==="
-
-          # Ensure staging directory exists
-          $SSH_CMD "mkdir -p /opt/pfp-staging"
-
-          # Sync code to staging directory
-          rsync -az --delete \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
-            --exclude '.git' \
-            --exclude 'node_modules' \
-            --exclude '__pycache__' \
-            --exclude '*.pyc' \
-            ./ ${SSH_USER}@${SSH_HOST}:/opt/pfp-staging/
-
-          echo "=== Rebuilding staging containers ==="
-          $SSH_CMD "cd /opt/pfp-staging && docker compose -f docker-compose.staging.yml up -d --build --remove-orphans"
-
-          echo "=== Waiting for services ==="
-          sleep 20
-
-          echo "=== Running migrations ==="
-          $SSH_CMD "cd /opt/pfp-staging && docker compose -f docker-compose.staging.yml exec -T backend python manage.py migrate --noinput"
-
-          echo "=== Collecting static files ==="
-          $SSH_CMD "cd /opt/pfp-staging && docker compose -f docker-compose.staging.yml exec -T backend python manage.py collectstatic --noinput"
-
-          echo "=== Health check ==="
-          HEALTH=$($SSH_CMD "curl -sf --max-time 10 http://localhost:8011/health/simple/ || echo 'FAILED'")
-          if echo "$HEALTH" | grep -q "ok"; then
-            echo "✅ Staging health check passed"
-          else
-            echo "⚠️ Staging health check: $HEALTH"
-          fi
-
-      - name: Verify staging
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-        run: |
-          SSH_CMD="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}"
-
-          echo "=== Staging service status ==="
-          $SSH_CMD "cd /opt/pfp-staging && docker compose -f docker-compose.staging.yml ps --format 'table {{.Name}}\t{{.Status}}'"
-
-          echo "=== Backend check ==="
-          $SSH_CMD "curl -sf --max-time 5 http://localhost:8011/health/simple/ && echo ' ✅ Backend OK' || echo '⚠️ Backend unreachable'"
-
-          echo "=== Frontend check ==="
-          $SSH_CMD "curl -sf --max-time 5 http://localhost:8081 > /dev/null && echo '✅ Frontend OK' || echo '⚠️ Frontend unreachable'"
-
-      - name: Notify Telegram
-        if: always()
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.STAGING_TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_ADMIN_CHAT_ID }}
-        run: |
-          STATUS="${{ job.status == 'success' && '✅ Staging deploy successful' || '❌ Staging deploy FAILED' }}"
-          COMMIT=$(git log --oneline -1)
-          ACTOR="${{ github.actor }}"
-          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -d chat_id="${TELEGRAM_CHAT_ID}" \
-            -d text="${STATUS}%0A📌 ${COMMIT}%0A👤 ${ACTOR}%0A🔗 http://65.109.198.200:8081" \
-            -d parse_mode=HTML || true
+      - name: Deploy to Staging Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
+          script: |
+            cd /opt/pfp-staging
+            git pull origin dev
+            
+            # Ensure .env.staging is used if available (fallback to copying from prod if it doesn't exist, though it should exist)
+            if [ -f .env.staging ]; then
+                cp .env.staging .env.production
+            fi
+            
+            # Restart docker containers for staging
+            docker-compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build
+            
+            # Apply migrations
+            docker exec pfp-staging-backend-1 python manage.py migrate
+            docker exec pfp-staging-backend-1 python manage.py collectstatic --noinput
