@@ -240,9 +240,11 @@ class CampaignAnalyticsView(APIView):
             return 'just now'
 
 
+from apps.users.permissions import IsAdminUser
+
 class SystemAnalyticsView(APIView):
     """Get system-wide analytics (admin only)."""
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsAdminUser]
 
     @swagger_auto_schema(
         operation_description="Get system-wide analytics (admin only)",
