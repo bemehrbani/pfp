@@ -253,11 +253,12 @@ class PFPCampaignBot:
         self._init_handlers()
 
         logger.info(f"Starting bot in webhook mode on port {port}...")
+        clean_url = webhook_url.rstrip('/')
         self.application.run_webhook(
             listen="0.0.0.0",
             port=port,
             url_path=self.token,
-            webhook_url=f"{webhook_url}/{self.token}"
+            webhook_url=f"{clean_url}/{self.token}"
         )
 
     def stop(self):
