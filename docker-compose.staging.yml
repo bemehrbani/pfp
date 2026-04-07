@@ -27,6 +27,8 @@ services:
       - "traefik.http.services.backend-staging.loadbalancer.server.port=8000"
 
   telegram-bot:
+    ports:
+      - "127.0.0.1:8445:8443"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.telegram-bot-staging.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/bot-webhook`)"
