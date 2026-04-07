@@ -67,3 +67,5 @@ LOGGING['handlers']['file'] = {
 }
 LOGGING['loggers']['django']['handlers'] = ['file', 'console']
 LOGGING['loggers']['apps']['handlers'] = ['file', 'console']
+# Trust the X-Forwarded-Proto header from Nginx
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
