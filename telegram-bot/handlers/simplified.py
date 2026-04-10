@@ -1,4 +1,6 @@
 import logging
+import json
+import os
 from asgiref.sync import sync_to_async
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
@@ -18,6 +20,27 @@ ESCALATION = 4
 
 from apps.tasks.models import Task
 from django.db.models import Q
+
+
+def _get_protest_events():
+    """Load protest events from env JSON if provided.
+
+    Expected env format (PROTEST_EVENTS_JSON):
+    [
+      {"city":"Berlin","country":"Germany","date":"2026-04-12","time":"16:00","topic":"Iran & Palestine","details":"..."}
+    ]
+    """
+    raw = os.environ.get('PROTEST_EVENTS_JSON', '').strip()
+    if not raw:
+        return []
+    try:
+        data = json.loads(raw)
+        if isinstance(data, list):
+            return [e for e in data if isinstance(e, dict)]
+    except Exception:
+        logger.warning("Invalid PROTEST_EVENTS_JSON format")
+    return []
+
 
 @sync_to_async
 def _get_platform_targets(platform: str, lang: str = 'en'):
@@ -86,6 +109,7 @@ async def simp_handle_start_task(update: Update, context: ContextTypes.DEFAULT_T
     keyboard = [
         [InlineKeyboardButton(t('simplified_btn_twitter', lang), callback_data="simp_plat_twitter")],
         [InlineKeyboardButton(t('simplified_btn_instagram', lang), callback_data="simp_plat_insta")],
+        [InlineKeyboardButton(t('simplified_btn_protests', lang), callback_data="simp_protests_menu")],
         [InlineKeyboardButton(t('simplified_btn_creator', lang), callback_data="simp_escalate_creator")],
         [InlineKeyboardButton(t('simplified_btn_invite', lang), callback_data="simp_escalate_invite")],
     ]
@@ -113,6 +137,7 @@ async def simp_handle_restart(update: Update, context: ContextTypes.DEFAULT_TYPE
     keyboard = [
         [InlineKeyboardButton(t('simplified_btn_twitter', lang), callback_data="simp_plat_twitter")],
         [InlineKeyboardButton(t('simplified_btn_instagram', lang), callback_data="simp_plat_insta")],
+        [InlineKeyboardButton(t('simplified_btn_protests', lang), callback_data="simp_protests_menu")],
         [InlineKeyboardButton(t('simplified_btn_creator', lang), callback_data="simp_escalate_creator")],
         [InlineKeyboardButton(t('simplified_btn_invite', lang), callback_data="simp_escalate_invite")],
     ]
@@ -270,6 +295,73 @@ async def simp_handle_done(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     )
 
 
+async def simp_handle_protests(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Handle protests submenu: list events or submit a new notice."""
+    query = update.callback_query
+    await query.answer()
+
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
+
+    action = query.data
+
+    if action == "simp_protests_menu":
+        keyboard = [
+            [InlineKeyboardButton(t('simplified_btn_protests_list', lang), callback_data="simp_protests_list")],
+            [InlineKeyboardButton(t('simplified_btn_protests_share', lang), callback_data="simp_protests_submit")],
+            [InlineKeyboardButton("🔙 Back", callback_data="simp_start_task")],
+        ]
+        await query.edit_message_text(
+            text=t('simplified_protests_menu_title', lang),
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown',
+        )
+        return
+
+    if action == "simp_protests_list":
+        events = _get_protest_events()
+        if not events:
+            text = t('simplified_protests_list_empty', lang)
+        else:
+            lines = [t('simplified_protests_list_title', lang), ""]
+            for idx, e in enumerate(events, 1):
+                city = e.get('city', '-')
+                country = e.get('country', '-')
+                date = e.get('date', '-')
+                time_s = e.get('time', '-')
+                topic = e.get('topic', 'Iran & Palestine')
+                details = e.get('details', '')
+                lines.append(f"{idx}. {city}, {country}")
+                lines.append(f"   🗓 {date}  🕒 {time_s}")
+                lines.append(f"   ✊ {topic}")
+                if details:
+                    lines.append(f"   {details}")
+                lines.append("")
+            text = "\n".join(lines).strip()
+
+        keyboard = [
+            [InlineKeyboardButton(t('simplified_btn_protests_share', lang), callback_data="simp_protests_submit")],
+            [InlineKeyboardButton("🔙 Back", callback_data="simp_protests_menu")],
+        ]
+        await query.edit_message_text(
+            text=text,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown',
+            disable_web_page_preview=True,
+        )
+        return
+
+    if action == "simp_protests_submit":
+        context.user_data['escalation_state'] = 'waiting_for_protest_notice'
+        keyboard = [[InlineKeyboardButton("🔙 Back", callback_data="simp_protests_menu")]]
+        await query.edit_message_text(
+            text=t('simplified_protests_submit_prompt', lang),
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown',
+        )
+        return
+
+
 async def simp_handle_escalation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handles the choices from the escalation screen."""
     query = update.callback_query
@@ -343,7 +435,7 @@ async def handle_user_submission(update: Update, context: ContextTypes.DEFAULT_T
     """Catches text messages from users in the escalation flow and forwards them."""
     state = context.user_data.get('escalation_state')
     
-    if state in ['waiting_for_submission', 'waiting_for_creator_info']:
+    if state in ['waiting_for_submission', 'waiting_for_creator_info', 'waiting_for_protest_notice']:
         session, _ = await state_manager.get_or_create_session(update, context)
         lang = getattr(session, 'language', 'en') or 'en'
         
@@ -351,6 +443,9 @@ async def handle_user_submission(update: Update, context: ContextTypes.DEFAULT_T
         if state == 'waiting_for_submission':
             success_msg = "✅ Received! Thank you for your submission. Our team will review it shortly."
             tag = "Account/Text Submission"
+        elif state == 'waiting_for_protest_notice':
+            success_msg = t('simplified_protests_submit_success', lang)
+            tag = "Protest Notice Submission"
         else:
             success_msg = t('simplified_escalation_creator', lang)
             tag = "Creator Portfolio Submission"
@@ -394,6 +489,7 @@ async def handle_user_submission(update: Update, context: ContextTypes.DEFAULT_T
 simplified_handlers = [
     CallbackQueryHandler(simp_handle_start_task, pattern=r"^simp_start_task$"),
     CallbackQueryHandler(simp_handle_restart, pattern=r"^simp_restart$"),
+    CallbackQueryHandler(simp_handle_protests, pattern=r"^simp_protests_"),
     CallbackQueryHandler(simp_handle_platform, pattern=r"^simp_plat_"),
     CallbackQueryHandler(simp_handle_target, pattern=r"^simp_target_"),
     CallbackQueryHandler(simp_handle_comment_lang, pattern=r"^simp_comment_"),
