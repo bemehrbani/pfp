@@ -105,6 +105,7 @@ services:
       REDIS_URL: redis://redis:6379/0
       SECRET_KEY: development-secret-key-change-in-production
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      BOT_ADMIN_IDS: ${BOT_ADMIN_IDS:-}
       DJANGO_API_URL: http://backend:8000/api
       DJANGO_SETTINGS_MODULE: config.settings.development
     volumes:
