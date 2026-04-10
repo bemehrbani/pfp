@@ -1669,6 +1669,70 @@ TRANSLATIONS = {
         "fa": "👥 دعوت از یک دوست",
         "ar": "👥 دعوة صديق",
     },
+    "simplified_btn_protests": {
+        "en": "✊ Protests",
+        "fa": "✊ تظاهرات",
+        "ar": "✊ المظاهرات",
+    },
+    "simplified_protests_menu_title": {
+        "en": "✊ *Protests Menu*\n\nChoose an option:",
+        "fa": "✊ *منوی تظاهرات*\n\nیک گزینه را انتخاب کنید:",
+        "ar": "✊ *قائمة المظاهرات*\n\nاختر أحد الخيارات:",
+    },
+    "simplified_btn_protests_list": {
+        "en": "📍 Protest List",
+        "fa": "📍 اطلاع از تظاهرات",
+        "ar": "📍 قائمة المظاهرات",
+    },
+    "simplified_btn_protests_share": {
+        "en": "📣 Share a Protest",
+        "fa": "📣 به اشتراک گذاشتن یک تظاهرات",
+        "ar": "📣 مشاركة مظاهرة",
+    },
+    "simplified_protests_list_title": {
+        "en": "📍 *Active Protests for Iran & Palestine*",
+        "fa": "📍 *تظاهرات فعال برای ایران و فلسطین*",
+        "ar": "📍 *المظاهرات النشطة لأجل إيران وفلسطين*",
+    },
+    "simplified_protests_list_empty": {
+        "en": (
+            "📭 *No active protests listed right now.*\n\n"
+            "If you know about one, tap *Share a Protest* and send the notice."
+        ),
+        "fa": (
+            "📭 *فعلاً تظاهرات فعالی ثبت نشده است.*\n\n"
+            "اگر موردی می‌دانید، روی *به اشتراک گذاشتن یک تظاهرات* بزنید و اطلاعیه را ارسال کنید."
+        ),
+        "ar": (
+            "📭 *لا توجد مظاهرات نشطة مسجلة الآن.*\n\n"
+            "إذا كنت تعرف مظاهرة، اضغط *مشاركة مظاهرة* وأرسل الإعلان."
+        ),
+    },
+    "simplified_protests_submit_prompt": {
+        "en": (
+            "📣 *Share a Protest Notice*\n\n"
+            "Send city, country, date, time, and details.\n"
+            "Example:\n"
+            "`Berlin, Germany - 2026-04-12 - 16:00 - Rally for Iran & Palestine`"
+        ),
+        "fa": (
+            "📣 *ثبت اطلاعیه تظاهرات*\n\n"
+            "شهر، کشور، تاریخ، ساعت و توضیحات را بفرستید.\n"
+            "نمونه:\n"
+            "`Berlin, Germany - 2026-04-12 - 16:00 - Rally for Iran & Palestine`"
+        ),
+        "ar": (
+            "📣 *مشاركة إعلان مظاهرة*\n\n"
+            "أرسل المدينة، البلد، التاريخ، الوقت، والتفاصيل.\n"
+            "مثال:\n"
+            "`Berlin, Germany - 2026-04-12 - 16:00 - Rally for Iran & Palestine`"
+        ),
+    },
+    "simplified_protests_submit_success": {
+        "en": "✅ Protest notice received. Thank you, we will review and publish it.",
+        "fa": "✅ اطلاعیه تظاهرات دریافت شد. ممنون، بررسی و منتشر می‌کنیم.",
+        "ar": "✅ تم استلام إعلان المظاهرة. شكراً، سنراجعه وننشره.",
+    },
     "simplified_twitter_targets": {
         "en": (
             "𝕏 *Target Accounts*\n\n"
