@@ -32,3 +32,6 @@ jobs:
             # Apply migrations
             docker exec pfp-staging-backend-1 python manage.py migrate
             docker exec pfp-staging-backend-1 python manage.py collectstatic --noinput
+            
+            # Trigger initial fetch to populate the bot with fresh scrape data and clear legacies
+            docker exec pfp-staging-backend-1 python manage.py shell -c "from apps.campaigns.tasks import fetch_global_protests; fetch_global_protests()"
