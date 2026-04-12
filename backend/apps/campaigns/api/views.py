@@ -11,13 +11,13 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.db import models
 from django.db.models import Count, Sum, Q
-from ..models import Campaign, CampaignVolunteer, CampaignUpdate, TwitterStorm
+from ..models import Campaign, CampaignVolunteer, CampaignUpdate, TwitterStorm, ProtestEvent
 from apps.tasks.models import Task, TaskAssignment
 from apps.analytics.models import ActivityLog
 from ..serializers import (
     CampaignSerializer, CampaignCreateSerializer,
     CampaignVolunteerSerializer, CampaignUpdateSerializer,
-    CampaignStatsSerializer
+    CampaignStatsSerializer, ProtestEventSerializer
 )
 from apps.users.models import User
 from apps.users.permissions import IsAdminUser
@@ -396,3 +396,16 @@ class PublicCampaignStatsView(APIView):
         response = Response(data)
         response['Access-Control-Allow-Origin'] = '*'
         return response
+
+class ProtestEventListView(generics.ListAPIView):
+    """List verified upcoming protest events."""
+    serializer_class = ProtestEventSerializer
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
+    
+    def get_queryset(self):
+        """Return upcoming verified protests ordered by date."""
+        return ProtestEvent.objects.filter(
+            is_verified=True,
+            date_time__gte=timezone.now() - timezone.timedelta(days=1)
+        ).order_by('date_time')

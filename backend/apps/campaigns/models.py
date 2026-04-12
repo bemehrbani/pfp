@@ -653,3 +653,42 @@ class StormParticipant(models.Model):
 
     def __str__(self):
         return f'{self.volunteer.username} in {self.storm.title}'
+
+
+class ProtestEvent(models.Model):
+    """
+    Global protest events dynamically aggregated for Telegram Bot.
+    """
+    class Topic(models.TextChoices):
+        ANTI_WAR = 'anti_war', _('Anti-War')
+        PALESTINE = 'palestine', _('Pro-Palestine')
+        LEBANON = 'lebanon', _('Pro-Lebanon')
+        IRAN = 'iran', _('Pro-Iran')
+        PEACE = 'peace', _('Pro-Peace')
+        OTHER = 'other', _('Other')
+
+    title = models.CharField(max_length=255)
+    country = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    event_datetime = models.DateTimeField(null=True, blank=True)
+    topic = models.CharField(max_length=30, choices=Topic.choices, default=Topic.OTHER)
+    source_url = models.URLField(max_length=500, blank=True)
+    description = models.TextField(blank=True)
+    is_verified = models.BooleanField(
+        default=True,
+        help_text=_('If True, appears dynamically in the bot')
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _('Protest Event')
+        verbose_name_plural = _('Protest Events')
+        ordering = ['-event_datetime']
+        indexes = [
+            models.Index(fields=['event_datetime', 'is_verified']),
+        ]
+
+    def __str__(self):
+        return f"{self.title} ({self.get_topic_display()})"

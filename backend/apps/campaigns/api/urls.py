@@ -29,4 +29,7 @@ urlpatterns = [
 
     # Public stats (no auth)
     path('<int:pk>/public-stats/', views.PublicCampaignStatsView.as_view(), name='public_campaign_stats'),
+    
+    # Protest Events
+    path('protests/', views.ProtestEventListView.as_view(), name='protest_list'),
 ]

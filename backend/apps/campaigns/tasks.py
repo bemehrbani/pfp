@@ -879,3 +879,29 @@ def _refresh_single_dashboard(campaign, token: str):
         else:
             logger.warning(f'editMessageText failed for campaign {campaign.id}: {response.text}')
 
+@shared_task
+def fetch_global_protests():
+    """
+    Task to fetch global protests from various scrapers and save them to the database.
+    Runs periodically via Celery Beat.
+    """
+    from .scrapers.google_news_rss import GoogleNewsProtestScraper
+    from .scrapers.world_beyond_war import WorldBeyondWarScraper
+    
+    logger.info("Starting global protest fetch...")
+    
+    scrapers = [
+        GoogleNewsProtestScraper(),
+        WorldBeyondWarScraper()
+    ]
+    
+    total_new = 0
+    total_updated = 0
+    
+    for scraper in scrapers:
+        new_count, updated_count = scraper.fetch_and_save()
+        total_new += new_count
+        total_updated += updated_count
+        
+    logger.info(f"Finished global protest fetch. New: {total_new}, Updated: {total_updated}")
+    return {"new": total_new, "updated": total_updated}

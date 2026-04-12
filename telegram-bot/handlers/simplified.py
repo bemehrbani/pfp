@@ -22,24 +22,38 @@ from apps.tasks.models import Task
 from django.db.models import Q
 
 
+@sync_to_async
 def _get_protest_events():
-    """Load protest events from env JSON if provided.
-
-    Expected env format (PROTEST_EVENTS_JSON):
-    [
-      {"city":"Berlin","country":"Germany","date":"2026-04-12","time":"16:00","topic":"Iran & Palestine","details":"..."}
-    ]
-    """
-    raw = os.environ.get('PROTEST_EVENTS_JSON', '').strip()
-    if not raw:
-        return []
+    """Fetch verified upcoming global protests from the database."""
     try:
-        data = json.loads(raw)
-        if isinstance(data, list):
-            return [e for e in data if isinstance(e, dict)]
-    except Exception:
-        logger.warning("Invalid PROTEST_EVENTS_JSON format")
-    return []
+        from apps.campaigns.models import ProtestEvent
+        from django.utils import timezone
+        
+        events = ProtestEvent.objects.filter(
+            is_verified=True,
+            date_time__gte=timezone.now() - timezone.timedelta(days=1)
+        ).order_by('date_time')[:15]
+        
+        results = []
+        for e in events:
+            date_str = e.date_time.strftime('%Y-%m-%d') if e.date_time else '-'
+            time_str = e.date_time.strftime('%H:%M') if e.date_time else '-'
+            parts = [p.strip() for p in (e.location or '').split(',')]
+            city = parts[0] if parts else '-'
+            country = parts[-1] if len(parts) > 1 else ''
+            
+            results.append({
+                "city": city,
+                "country": country,
+                "date": date_str,
+                "time": time_str,
+                "topic": e.topic or 'Global Solidarity',
+                "details": str(e.title)
+            })
+        return results
+    except Exception as e:
+        logger.error(f"Error fetching protests from DB: {e}")
+        return []
 
 
 @sync_to_async
@@ -319,23 +333,25 @@ async def simp_handle_protests(update: Update, context: ContextTypes.DEFAULT_TYP
         return
 
     if action == "simp_protests_list":
-        events = _get_protest_events()
+        events = await _get_protest_events()
         if not events:
             text = t('simplified_protests_list_empty', lang)
         else:
             lines = [t('simplified_protests_list_title', lang), ""]
             for idx, e in enumerate(events, 1):
                 city = e.get('city', '-')
-                country = e.get('country', '-')
+                country = e.get('country', '')
                 date = e.get('date', '-')
                 time_s = e.get('time', '-')
                 topic = e.get('topic', 'Iran & Palestine')
                 details = e.get('details', '')
-                lines.append(f"{idx}. {city}, {country}")
+                
+                loc_str = f"{city}, {country}" if country else city
+                lines.append(f"{idx}. 📍 {loc_str}")
                 lines.append(f"   🗓 {date}  🕒 {time_s}")
                 lines.append(f"   ✊ {topic}")
                 if details:
-                    lines.append(f"   {details}")
+                    lines.append(f"   ℹ️ {details}")
                 lines.append("")
             text = "\n".join(lines).strip()
 

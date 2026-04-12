@@ -3,7 +3,7 @@ Admin configuration for Campaigns app.
 """
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from .models import Campaign, CampaignVolunteer, CampaignUpdate, TwitterStorm, StormParticipant
+from .models import Campaign, CampaignVolunteer, CampaignUpdate, TwitterStorm, StormParticipant, ProtestEvent
 
 
 @admin.register(Campaign)
@@ -183,3 +183,28 @@ class TwitterStormAdmin(admin.ModelAdmin):
         if obj.status == TwitterStorm.Status.SCHEDULED:
             from .tasks import schedule_storm_notifications
             schedule_storm_notifications.delay(obj.id)
+
+
+@admin.register(ProtestEvent)
+class ProtestEventAdmin(admin.ModelAdmin):
+    """Admin interface for Protest Events."""
+    list_display = ('title', 'topic', 'event_datetime', 'country', 'city', 'is_verified')
+    list_filter = ('topic', 'is_verified', 'event_datetime')
+    search_fields = ('title', 'country', 'city', 'description')
+    readonly_fields = ('created_at', 'updated_at')
+    
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'topic', 'description', 'source_url')
+        }),
+        (_('Location & Time'), {
+            'fields': ('country', 'city', 'event_datetime')
+        }),
+        (_('Moderation'), {
+            'fields': ('is_verified',)
+        }),
+        (_('Metadata'), {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )

@@ -185,6 +185,10 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'campaigns.update_campaign_dashboards',
         'schedule': crontab(minute=0),  # Every hour, on the hour
     },
+    'fetch-global-protests-every-12h': {
+        'task': 'campaigns.fetch_global_protests',
+        'schedule': crontab(hour='*/12', minute=0),
+    },
 }
 
 # Telegram Bot settings

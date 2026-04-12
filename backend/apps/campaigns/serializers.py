@@ -3,7 +3,7 @@ Serializers for Campaigns app.
 """
 from rest_framework import serializers
 from django.utils.translation import gettext_lazy as _
-from .models import Campaign, CampaignVolunteer, CampaignUpdate, TwitterStorm, StormParticipant
+from .models import Campaign, CampaignVolunteer, CampaignUpdate, TwitterStorm, StormParticipant, ProtestEvent
 from apps.users.serializers import UserSerializer
 
 
@@ -159,3 +159,9 @@ class TwitterStormCreateSerializer(serializers.ModelSerializer):
             'tweet_templates', 'hashtags', 'mentions',
             'notify_1h', 'notify_15m', 'notify_5m'
         )
+
+class ProtestEventSerializer(serializers.ModelSerializer):
+    """Serializer for ProtestEvent model."""
+    class Meta:
+        model = ProtestEvent
+        fields = '__all__'
