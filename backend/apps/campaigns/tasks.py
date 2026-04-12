@@ -885,7 +885,8 @@ def fetch_global_protests():
     Task to fetch global protests from various scrapers and save them to the database.
     Runs periodically via Celery Beat.
     """
-    from .scrapers.google_news_rss import scrape_google_news_events
+    from .scrapers.psc_uk import scrape_psc_events
+    from .scrapers.stopthewar_uk import scrape_stopthewar_events
     from .scrapers.world_beyond_war import scrape_wbw_events
     from .models import ProtestEvent
     
@@ -894,7 +895,7 @@ def fetch_global_protests():
     total_new = 0
     total_updated = 0
     
-    for scraper_func in [scrape_google_news_events, scrape_wbw_events]:
+    for scraper_func in [scrape_psc_events, scrape_stopthewar_events, scrape_wbw_events]:
         try:
             events = scraper_func()
             for event_data in events:
