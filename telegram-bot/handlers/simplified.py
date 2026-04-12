@@ -30,11 +30,10 @@ def _get_protest_events():
         from django.utils import timezone
         
         events = ProtestEvent.objects.filter(
-            Q(is_verified=True) & (
-                Q(event_datetime__gte=timezone.now() - timezone.timedelta(days=1)) | 
-                Q(event_datetime__isnull=True)
-            )
-        ).order_by('-id')[:15]
+            is_verified=True,
+            event_datetime__gte=timezone.now() - timezone.timedelta(days=1),
+            event_datetime__isnull=False,
+        ).exclude(city__exact='').exclude(source_url__exact='').exclude(source_url__isnull=True).order_by('event_datetime')[:15]
         
         results = []
         for e in events:
@@ -49,7 +48,8 @@ def _get_protest_events():
                 "date": date_str,
                 "time": time_str,
                 "topic": e.topic or 'Global Solidarity',
-                "details": str(e.title)
+                "details": str(e.title),
+                "url": str(e.source_url)
             })
         return results
     except Exception as e:
@@ -346,6 +346,7 @@ async def simp_handle_protests(update: Update, context: ContextTypes.DEFAULT_TYP
                 time_s = e.get('time', '-')
                 topic = e.get('topic', 'Iran & Palestine')
                 details = e.get('details', '')
+                url = e.get('url', '')
                 
                 loc_str = f"{city}, {country}" if country else city
                 lines.append(f"{idx}. 📍 {loc_str}")
@@ -353,6 +354,8 @@ async def simp_handle_protests(update: Update, context: ContextTypes.DEFAULT_TYP
                 lines.append(f"   ✊ {topic}")
                 if details:
                     lines.append(f"   ℹ️ {details}")
+                if url:
+                    lines.append(f"   🔗 [More Info]({url})")
                 lines.append("")
             text = "\n".join(lines).strip()
 

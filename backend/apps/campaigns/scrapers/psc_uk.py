@@ -42,11 +42,25 @@ def scrape_psc_events():
             meta_div = node.find('div', class_='em-item-meta')
             city = ""
             desc = "Sourced from Palestine Solidarity Campaign"
+            event_datetime = None
             
             if meta_div:
                 loc_icon = meta_div.find('span', class_='em-icon-location')
                 if loc_icon and loc_icon.parent:
                     city = loc_icon.parent.get_text(strip=True)
+                    
+                cal_icon = meta_div.find('span', class_='em-icon-calendar')
+                if cal_icon and cal_icon.parent:
+                    date_str = cal_icon.parent.get_text(strip=True)
+                    if date_str:
+                        from datetime import datetime
+                        from django.utils import timezone
+                        try:
+                            # PSC format: 14/04/2026
+                            nav_dt = datetime.strptime(date_str, "%d/%m/%Y")
+                            event_datetime = timezone.make_aware(nav_dt)
+                        except Exception as e:
+                            print(f"Error parsing PSC date {date_str}: {e}")
             
             # Map standard fields
             events.append({
@@ -55,6 +69,7 @@ def scrape_psc_events():
                 'topic': 'palestine',
                 'description': desc,
                 'city': city[:100] if city else "UK / Various",
+                'event_datetime': event_datetime,
             })
             
     except Exception as e:

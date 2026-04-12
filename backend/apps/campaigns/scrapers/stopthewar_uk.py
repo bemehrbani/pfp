@@ -25,6 +25,26 @@ def scrape_stopthewar_events():
             
             link = node.get('href', '')
             
+            # Extract date
+            date_div = node.find('div', class_='event__datetime')
+            date_str = date_div.get_text(" ", strip=True) if date_div else ""
+            
+            event_datetime = None
+            if date_str:
+                from datetime import datetime
+                from django.utils import timezone
+                # STW format is usually "11 Apr 26 11:00" or similar
+                try:
+                    # Strip extra spaces
+                    clean_str = " ".join(date_str.split())
+                    # Attempt manual parsing for common STW format: '%d %b %y %H:%M'
+                    # e.g. "11 Apr 26 11:00"
+                    if len(clean_str) > 10:
+                        nav_dt = datetime.strptime(clean_str, "%d %b %y %H:%M")
+                        event_datetime = timezone.make_aware(nav_dt)
+                except Exception as e:
+                    print(f"Error parsing date {date_str}: {e}")
+            
             # city is in div.event__city
             city_div = node.find('div', class_='event__city')
             city = city_div.get_text(strip=True) if city_div else "UK / Network"
@@ -39,6 +59,7 @@ def scrape_stopthewar_events():
                 'topic': topic,
                 'description': "Sourced from Stop the War Coalition UK",
                 'city': city[:100],
+                'event_datetime': event_datetime,
             })
             
     except Exception as e:

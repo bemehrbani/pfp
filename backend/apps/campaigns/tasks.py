@@ -882,13 +882,20 @@ def _refresh_single_dashboard(campaign, token: str):
 @shared_task
 def fetch_global_protests():
     """
-    Task to fetch global protests from various scrapers and save them to the database.
-    Runs periodically via Celery Beat.
+    Fetch upcoming global protests from targeted organizational APIs and scrapers.
+    Replaces the generic RSS aggregator to focus on high-quality, actionable events.
     """
+    from apps.campaigns.models import ProtestEvent
     from .scrapers.psc_uk import scrape_psc_events
     from .scrapers.stopthewar_uk import scrape_stopthewar_events
     from .scrapers.world_beyond_war import scrape_wbw_events
-    from .models import ProtestEvent
+    
+    # Run a one-time cleanup of all the legacy/noisy Google News events
+    try:
+        deleted_count, _ = ProtestEvent.objects.filter(source_url__icontains='news.google').delete()
+        logger.info(f"Cleaned up {deleted_count} legacy Google News events.")
+    except Exception as e:
+        logger.error(f"Error during legacy events cleanup: {e}")
     
     logger.info("Starting global protest fetch...")
     
