@@ -30,9 +30,11 @@ def _get_protest_events():
         from django.utils import timezone
         
         events = ProtestEvent.objects.filter(
-            is_verified=True,
-            event_datetime__gte=timezone.now() - timezone.timedelta(days=1)
-        ).order_by('event_datetime')[:15]
+            Q(is_verified=True) & (
+                Q(event_datetime__gte=timezone.now() - timezone.timedelta(days=1)) | 
+                Q(event_datetime__isnull=True)
+            )
+        ).order_by('-id')[:15]
         
         results = []
         for e in events:
