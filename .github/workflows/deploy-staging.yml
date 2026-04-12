@@ -27,7 +27,7 @@ jobs:
             fi
             
             # Restart docker containers for staging
-            docker-compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build
+            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build
             
             # Apply migrations
             docker exec pfp-staging-backend-1 python manage.py migrate

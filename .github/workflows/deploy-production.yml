@@ -20,7 +20,7 @@ jobs:
             
             # Restart docker containers for production
             # Preserves stealth mode explicitly if needed
-            docker-compose -f docker-compose.production.yml -f docker-compose.stealth.yml up -d --build
+            docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml up -d --build
             
             # Apply migrations
             docker exec pfp-backend-1 python manage.py migrate
