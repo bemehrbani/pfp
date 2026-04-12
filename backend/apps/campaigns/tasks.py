@@ -913,6 +913,7 @@ def fetch_global_protests():
                         'topic': event_data.get('topic', 'other'),
                         'description': event_data.get('description', ''),
                         'city': event_data.get('city', ''),
+                        'event_datetime': event_data.get('event_datetime'),
                         'is_verified': True
                     }
                 )
