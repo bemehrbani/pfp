@@ -31,16 +31,15 @@ def _get_protest_events():
         
         events = ProtestEvent.objects.filter(
             is_verified=True,
-            date_time__gte=timezone.now() - timezone.timedelta(days=1)
-        ).order_by('date_time')[:15]
+            event_datetime__gte=timezone.now() - timezone.timedelta(days=1)
+        ).order_by('event_datetime')[:15]
         
         results = []
         for e in events:
-            date_str = e.date_time.strftime('%Y-%m-%d') if e.date_time else '-'
-            time_str = e.date_time.strftime('%H:%M') if e.date_time else '-'
-            parts = [p.strip() for p in (e.location or '').split(',')]
-            city = parts[0] if parts else '-'
-            country = parts[-1] if len(parts) > 1 else ''
+            date_str = e.event_datetime.strftime('%Y-%m-%d') if e.event_datetime else '-'
+            time_str = e.event_datetime.strftime('%H:%M') if e.event_datetime else '-'
+            city = e.city or '-'
+            country = e.country or ''
             
             results.append({
                 "city": city,

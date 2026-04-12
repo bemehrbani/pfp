@@ -885,23 +885,35 @@ def fetch_global_protests():
     Task to fetch global protests from various scrapers and save them to the database.
     Runs periodically via Celery Beat.
     """
-    from .scrapers.google_news_rss import GoogleNewsProtestScraper
-    from .scrapers.world_beyond_war import WorldBeyondWarScraper
+    from .scrapers.google_news_rss import scrape_google_news_events
+    from .scrapers.world_beyond_war import scrape_wbw_events
+    from .models import ProtestEvent
     
     logger.info("Starting global protest fetch...")
-    
-    scrapers = [
-        GoogleNewsProtestScraper(),
-        WorldBeyondWarScraper()
-    ]
     
     total_new = 0
     total_updated = 0
     
-    for scraper in scrapers:
-        new_count, updated_count = scraper.fetch_and_save()
-        total_new += new_count
-        total_updated += updated_count
-        
+    for scraper_func in [scrape_google_news_events, scrape_wbw_events]:
+        try:
+            events = scraper_func()
+            for event_data in events:
+                _, created = ProtestEvent.objects.update_or_create(
+                    source_url=event_data.get('source_url', '')[:499],
+                    defaults={
+                        'title': event_data.get('title', '')[:250],
+                        'topic': event_data.get('topic', 'other'),
+                        'description': event_data.get('description', ''),
+                        'city': event_data.get('city', ''),
+                        'is_verified': True
+                    }
+                )
+                if created:
+                    total_new += 1
+                else:
+                    total_updated += 1
+        except Exception as e:
+            logger.error(f"Scraper error: {e}")
+            
     logger.info(f"Finished global protest fetch. New: {total_new}, Updated: {total_updated}")
     return {"new": total_new, "updated": total_updated}
