@@ -338,6 +338,10 @@ async def simp_handle_protests(update: Update, context: ContextTypes.DEFAULT_TYP
         if not events:
             text = t('simplified_protests_list_empty', lang)
         else:
+            def e_md(txt):
+                if not txt: return ""
+                return str(txt).replace('_', '\\_').replace('*', '\\*').replace('[', '\\[').replace(']', '\\]').replace('`', '\\`')
+
             lines = [t('simplified_protests_list_title', lang), ""]
             for idx, e in enumerate(events, 1):
                 city = e.get('city', '-')
@@ -349,11 +353,11 @@ async def simp_handle_protests(update: Update, context: ContextTypes.DEFAULT_TYP
                 url = e.get('url', '')
                 
                 loc_str = f"{city}, {country}" if country else city
-                lines.append(f"{idx}. 📍 {loc_str}")
-                lines.append(f"   🗓 {date}  🕒 {time_s}")
-                lines.append(f"   ✊ {topic}")
+                lines.append(f"{idx}. 📍 {e_md(loc_str)}")
+                lines.append(f"   🗓 {e_md(date)}  🕒 {e_md(time_s)}")
+                lines.append(f"   ✊ {e_md(topic)}")
                 if details:
-                    lines.append(f"   ℹ️ {details}")
+                    lines.append(f"   ℹ️ {e_md(details)}")
                 if url:
                     lines.append(f"   🔗 [More Info]({url})")
                 lines.append("")
