@@ -1654,6 +1654,31 @@ TRANSLATIONS = {
         "fa": "📸 اینستاگرام",
         "ar": "📸 إنستغرام",
     },
+    "simplified_instagram_menu_title": {
+        "en": "📸 *Instagram Menu*\n\nChoose an option:",
+        "fa": "📸 *منوی اینستاگرام*\n\nیک گزینه را انتخاب کنید:",
+        "ar": "📸 *قائمة إنستغرام*\n\nاختر أحد الخيارات:",
+    },
+    "simplified_btn_insta_support": {
+        "en": "📢 Support Posts and Activists",
+        "fa": "📢 حمایت از پست‌ها و فعالان",
+        "ar": "📢 ادعم المنشورات والناشطين",
+    },
+    "simplified_btn_insta_child": {
+        "en": "👧 Share a Child's Story",
+        "fa": "👧 داستان یک کودک را به اشتراک بگذارید",
+        "ar": "👧 شارك قصة طفل",
+    },
+    "simplified_insta_child_story": {
+        "en": "📸 *{name}*\n\nClick the image below to download, and copy the text to share it on your Instagram story.\n\n```text\n{caption}\n```\n",
+        "fa": "📸 *{name}*\n\nروی تصویر زیر کلیک کنید تا ذخیره شود و متن زیر را در استوری اینستاگرام خود کپی کنید.\n\n```text\n{caption}\n```\n",
+        "ar": "📸 *{name}*\n\nانقر على الصورة أدناه لحفظها ونسخ النص لمشاركتها على قصة إنستغرام الخاصة بك.\n\n```text\n{caption}\n```\n",
+    },
+    "simplified_insta_child_no_story": {
+        "en": "No child's story found at the moment. Please try again later.",
+        "fa": "در حال حاضر داستان کودکی یافت نشد. لطفا بعدا دوباره تلاش کنید.",
+        "ar": "لم يتم العثور على قصة طفل في الوقت الحالي. يرجى المحاولة مرة أخرى لاحقًا.",
+    },
     "simplified_btn_telegram": {
         "en": "📢 Telegram",
         "fa": "📢 تلگرام",

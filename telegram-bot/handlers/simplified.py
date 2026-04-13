@@ -182,12 +182,13 @@ async def simp_handle_platform(update: Update, context: ContextTypes.DEFAULT_TYP
         text = t('simplified_twitter_targets', lang)
         for target in targets_data:
             keyboard.append([InlineKeyboardButton(f"🎯 {target['name']}", callback_data=f"simp_target_twitter_{target['id']}")])
+        keyboard.append([InlineKeyboardButton("🔙 Back", callback_data="simp_start_task")])
     elif platform == "insta":
-        text = t('simplified_instagram_targets', lang)
-        for target in targets_data:
-            keyboard.append([InlineKeyboardButton(f"📸 {target['name']}", callback_data=f"simp_target_insta_{target['id']}")])
+        text = t('simplified_instagram_menu_title', lang)
+        keyboard.append([InlineKeyboardButton(t('simplified_btn_insta_support', lang), callback_data="simp_insta_support")])
+        keyboard.append([InlineKeyboardButton(t('simplified_btn_insta_child', lang), callback_data="simp_insta_child")])
+        keyboard.append([InlineKeyboardButton("🔙 Back", callback_data="simp_start_task")])
         
-    keyboard.append([InlineKeyboardButton("🔙 Back", callback_data="simp_start_task")])
     reply_markup = InlineKeyboardMarkup(keyboard)
     
     await query.edit_message_text(
@@ -197,6 +198,89 @@ async def simp_handle_platform(update: Update, context: ContextTypes.DEFAULT_TYP
         disable_web_page_preview=True
     )
 
+async def simp_handle_insta_support(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Shows Instagram target tasks (former default insta view)."""
+    query = update.callback_query
+    await query.answer()
+    
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
+    
+    keyboard = []
+    targets_data = await _get_platform_targets("insta", lang)
+    
+    text = t('simplified_instagram_targets', lang)
+    for target in targets_data:
+        keyboard.append([InlineKeyboardButton(f"📸 {target['name']}", callback_data=f"simp_target_insta_{target['id']}")])
+        
+    keyboard.append([InlineKeyboardButton("🔙 Back", callback_data="simp_plat_insta")])
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    await query.edit_message_text(
+        text=text,
+        reply_markup=reply_markup,
+        parse_mode='Markdown',
+        disable_web_page_preview=True
+    )
+
+async def simp_handle_insta_child(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Shows a random child story for Instagram sharing."""
+    query = update.callback_query
+    await query.answer()
+    
+    session, _ = await state_manager.get_or_create_session(update, context)
+    lang = getattr(session, 'language', 'en') or 'en'
+    
+    from handlers.tasks import FEATURED_CHILDREN
+    import random
+    
+    if not FEATURED_CHILDREN:
+        text = t('simplified_insta_child_no_story', lang)
+        keyboard = [[InlineKeyboardButton("🔙 Back", callback_data="simp_plat_insta")]]
+        await query.edit_message_text(
+            text=text,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown'
+        )
+        return
+        
+    child = random.choice(FEATURED_CHILDREN)
+    name = child['name_fa'] if lang == 'fa' else child['name']
+    caption_text = child['caption_fa'] if lang == 'fa' else child['caption_en']
+    
+    # We will format the text for copy-pasting to Instagram
+    final_caption = f"{caption_text}\n\n#JusticeForMinabChildren #StopTrumpMadness"
+    
+    # Provide the template text with code blocks
+    text = t('simplified_insta_child_story', lang).format(
+        name=name,
+        caption=final_caption
+    )
+    
+    keyboard = [
+        [InlineKeyboardButton("🔙 Back", callback_data="simp_plat_insta")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    try:
+        await query.get_bot().send_photo(
+            chat_id=query.message.chat_id,
+            photo=child['photo_url'],
+            caption=name
+        )
+        await query.edit_message_text(
+            text=text,
+            reply_markup=reply_markup,
+            parse_mode='Markdown',
+            disable_web_page_preview=True
+        )
+    except Exception as e:
+        await query.edit_message_text(
+            text=text,
+            reply_markup=reply_markup,
+            parse_mode='Markdown',
+            disable_web_page_preview=True
+        )
 
 async def simp_handle_target(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Shows the comment template and logic to switch languages."""
@@ -515,6 +599,8 @@ simplified_handlers = [
     CallbackQueryHandler(simp_handle_restart, pattern=r"^simp_restart$"),
     CallbackQueryHandler(simp_handle_protests, pattern=r"^simp_protests_"),
     CallbackQueryHandler(simp_handle_platform, pattern=r"^simp_plat_"),
+    CallbackQueryHandler(simp_handle_insta_support, pattern=r"^simp_insta_support$"),
+    CallbackQueryHandler(simp_handle_insta_child, pattern=r"^simp_insta_child$"),
     CallbackQueryHandler(simp_handle_target, pattern=r"^simp_target_"),
     CallbackQueryHandler(simp_handle_comment_lang, pattern=r"^simp_comment_"),
     CallbackQueryHandler(simp_handle_done, pattern=r"^simp_done$"),
