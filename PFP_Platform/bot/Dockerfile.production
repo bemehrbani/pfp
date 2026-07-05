@@ -15,6 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy bot source code and backend (needed for Django config module)
 COPY PFP_Platform/bot/ .
 COPY PFP_Platform/api/ ./backend/
+RUN mkdir -p /app/backend/logs /app/logs
 
 # Final stage
 FROM python:3.11-slim
