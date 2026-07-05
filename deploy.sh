@@ -51,14 +51,14 @@ fi
 
 # Create necessary directories
 echo "Creating necessary directories..."
-mkdir -p backend/logs backend/static backend/media
-mkdir -p frontend/logs
-mkdir -p telegram-bot/logs
-mkdir -p infrastructure/traefik/letsencrypt
-mkdir -p infrastructure/postgres/backups
+mkdir -p PFP_Platform/api/logs PFP_Platform/api/static PFP_Platform/api/media
+mkdir -p PFP_Platform/web/logs
+mkdir -p PFP_Platform/bot/logs
+mkdir -p PFP_Platform/infra/traefik/letsencrypt
+mkdir -p PFP_Platform/infra/postgres/backups
 
 # Set correct permissions for letsencrypt directory
-chmod 600 infrastructure/traefik/letsencrypt 2>/dev/null || true
+chmod 600 PFP_Platform/infra/traefik/letsencrypt 2>/dev/null || true
 
 # Pull latest images (if any)
 echo "Pulling latest base images..."

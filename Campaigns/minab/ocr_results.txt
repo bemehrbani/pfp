@@ -1,0 +1,4750 @@
+
+============================================================
+File: child_001.jpg (398x664)
+============================================================
+
+--- Region: bottom_30 (0,464)-(398,664) 398x200 ---
+  Preprocessing: otsu
+    psm8_fas: ین
+    psm8_ara: اده
+    psm8_fas+ara: اده
+    psm8_fas+ara+eng: 4
+    psm13: 4
+    psm10: 4
+
+  Preprocessing: adaptive
+    psm7_fas: 6
+    psm8_fas: 6
+    psm6_fas: ی قر
+و ام
+ِِِ_ بر تشه
+تن بل ق
+    psm7_ara: هه
+    psm8_ara: هه
+    psm6_ara: 2ك 5
+0 2 1 جا
+ل كم
+0 امات يوك 0
+    psm7_fas+ara: هه
+    psm8_fas+ara: هه
+    psm7_fas+ara+eng: هه
+    psm8_fas+ara+eng: هه
+    psm13: a i
+    psm10: a i
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: كث_ِ
+    psm8_fas: كث_ِ
+    psm7_ara: اا 0
+    psm8_ara: اا 0
+    psm7_fas+ara: اا 0
+    psm8_fas+ara: اا 0
+    psm7_fas+ara+eng: اا 0
+    psm8_fas+ara+eng: اا 0
+    psm13: Oo
+    psm10: Oo
+
+  Preprocessing: denoised_otsu
+    psm8_fas: پ 0"
+    psm8_ara: و
+    psm8_fas+ara: و
+    psm8_fas+ara+eng: و
+    psm13: eee
+    psm10: eee
+
+  Preprocessing: closed
+    psm8_fas: هن
+    psm8_ara: اده
+    psm8_fas+ara: هن
+    psm8_fas+ara+eng: هن
+    psm13: eet
+    psm10: eet
+
+
+--- Region: bottom_20 (0,531)-(398,664) 398x133 ---
+  Preprocessing: otsu
+    psm8_fas: رک 00
+    psm8_ara: 0
+    psm8_fas+ara: رک 00
+    psm8_fas+ara+eng: as
+    psm13: as
+    psm10: as
+
+  Preprocessing: adaptive
+    psm7_fas: _ٍِِ
+    psm8_fas: 2
+    psm6_fas: دس سک سا هی
+    psm7_ara: د ل
+    psm8_ara: السيطده
+    psm6_ara: 0 ا
+    psm7_fas+ara: د ل
+    psm8_fas+ara: 2
+    psm7_fas+ara+eng: د 248
+    psm8_fas+ara+eng: 2 se
+    psm13: Zee se
+    psm10: Zee se
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: «0
+    psm8_fas: «0
+    psm7_ara: اا ا
+    psm8_ara: اا ا
+    psm7_fas+ara: اا ا
+    psm8_fas+ara: اا ا
+    psm7_fas+ara+eng: اا ا
+    psm8_fas+ara+eng: اا ا
+    psm13: Oe
+    psm10: Oe
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ی
+    psm8_fas: رک <00
+    psm6_fas: ی
+    psm7_ara: ٠-3
+    psm8_ara: 0-3
+    psm6_ara: ٠-3
+    psm7_fas+ara: ی
+    psm8_fas+ara: رک <00
+    psm7_fas+ara+eng: Ra nh
+    psm8_fas+ara+eng: Ra ‏رک‎
+    psm13: ae
+    psm10: Ra nh
+
+  Preprocessing: closed
+    psm8_fas: ۲ ی
+    psm8_ara: 0
+    psm8_fas+ara: ۲ ی
+    psm8_fas+ara+eng: ee
+    psm13: ee
+    psm10: ee
+
+
+--- Region: bottom_10 (0,597)-(398,664) 398x67 ---
+  Preprocessing: otsu
+    psm8_fas: تا وج بط
+    psm8_ara: الا 00
+    psm8_fas+ara: تا وج بط
+    psm8_fas+ara+eng: تا وج بط
+    psm13: hm bee
+    psm10: : ye ep
+
+  Preprocessing: adaptive
+    psm7_fas: تا ی سار
+    psm8_fas: تا ی سار
+    psm6_fas: تا ی سار
+    psm7_ara: د
+    psm8_ara: د
+    psm6_ara: د
+    psm7_fas+ara: تا ی سار
+    psm8_fas+ara: تا ی سار
+    psm7_fas+ara+eng: تا ی ‎Gee‏ =
+    psm8_fas+ara+eng: تا ی ‎Gee‏ =
+    psm13: = Gee weg ae
+    psm10: = Gee weg ae
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۰
+    psm8_fas: ۰
+    psm7_ara: ا ا
+    psm8_ara: ا ا
+    psm7_fas+ara: ا ا
+    psm8_fas+ara: ا ا
+    psm7_fas+ara+eng: ا ا
+    psm8_fas+ara+eng: ا ا
+    psm13: BS
+    psm10: BS
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۳
+    psm8_fas: مر ها
+    psm6_fas: ۳
+    psm7_ara: ا ا
+    psm8_ara: ل الل
+    psm6_ara: ا ا
+    psm7_fas+ara: ا ا
+    psm8_fas+ara: مر ا
+    psm7_fas+ara+eng: ا ا
+    psm8_fas+ara+eng: & مر ا
+    psm13: wT, Oe
+    psm10: wow. &
+
+  Preprocessing: closed
+    psm8_fas: با وج یه .
+    psm8_ara: ال ال ا
+    psm8_fas+ara: با وج یه د
+    psm8_fas+ara+eng: ‎ee‏ وج یه د
+    psm13: sy wey
+    psm10: - eye ee
+
+
+--- Region: top_20 (0,0)-(398,132) 398x132 ---
+  Preprocessing: otsu
+    psm7_fas: ۴
+    psm8_fas: ۴
+    psm6_fas: ۴
+    psm7_ara: كع
+    psm8_ara: كع
+    psm6_ara: كع
+    psm7_fas+ara: ۴
+    psm8_fas+ara: ۴
+    psm7_fas+ara+eng: ۴
+    psm8_fas+ara+eng: ۴
+    psm13: ,.6hCUY
+    psm10: ,.6hCUY
+
+  Preprocessing: adaptive
+    psm7_fas: ۳
+    psm8_fas: ۱:۹
+    psm7_ara: ا"
+    psm8_ara: ا
+    psm7_fas+ara: ا"
+    psm8_fas+ara: ا"
+    psm7_fas+ara+eng: fen
+    psm8_fas+ara+eng: fen
+    psm13: fe
+    psm10: fen
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۳ .
+    psm8_fas: ۳ .
+    psm6_fas: ۳ .
+    psm7_ara: 1ه
+    psm8_ara: 1ه
+    psm6_ara: 1ه
+    psm7_fas+ara: ۳ .
+    psm8_fas+ara: ۳ .
+    psm7_fas+ara+eng: ۳ .
+    psm8_fas+ara+eng: ۳ .
+    psm13: ,.6hOCUY
+    psm10: ,.6hOCUY
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۴
+    psm8_fas: ۴
+    psm6_fas: ۴
+    psm7_ara: كمع
+    psm8_ara: كمع
+    psm6_ara: كمع
+    psm7_fas+ara: ۴
+    psm8_fas+ara: ۴
+    psm7_fas+ara+eng: ۴
+    psm8_fas+ara+eng: ۴
+    psm13: ,.6hCUY
+    psm10: ,.6hCUY
+
+  Preprocessing: closed
+    psm7_fas: ۳۴
+    psm8_fas: ۳۴
+    psm6_fas: ۳۴
+    psm7_ara: كع
+    psm8_ara: كع
+    psm6_ara: كع
+    psm7_fas+ara: ۳۴
+    psm8_fas+ara: ۳۴
+    psm7_fas+ara+eng: ۳۴
+    psm8_fas+ara+eng: ۳۴
+    psm13: ,.6hCUY
+    psm10: ,.6hCUY
+
+
+--- Region: top_10 (0,0)-(398,66) 398x66 ---
+  Preprocessing: otsu
+    psm7_fas: ۲۳
+    psm8_fas: ۲۳
+    psm6_fas: ۲۳
+    psm7_ara: 2 2#.
+    psm8_ara: 2 2#.
+    psm6_ara: 2 2#.
+    psm7_fas+ara: ۲۳ 2#.
+    psm8_fas+ara: ۲۳ 2#.
+    psm7_fas+ara+eng: ۲۳ 2#.
+    psm8_fas+ara+eng: ۲۳ 2#.
+    psm13: —_—
+    psm10: —_—
+
+  Preprocessing: adaptive
+    psm8_fas: ۲۳۰۰۰۰ ۰۰
+    psm6_fas: وا دی توا ی با کار
+    psm8_ara: ا ا ار 0
+    psm6_ara: اصع ةا دوجا وام با لل
+    psm8_fas+ara: ۲۳۰۰۰۰ ۰۰
+    psm8_fas+ara+eng: ۲۳۰۰۰۰ ۰۰
+    psm13: a ae
+    psm10: a
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱۳ ۵
+    psm8_fas: ۱۳ ۵
+    psm6_fas: ۱۳ ۵
+    psm7_ara: ظ# #2 2
+    psm8_ara: ظ# #2 2
+    psm6_ara: ظ# #2 2
+    psm7_fas+ara: ۱۳ ۵
+    psm8_fas+ara: ۱۳ ۵
+    psm7_fas+ara+eng: ۱۳ ۵
+    psm8_fas+ara+eng: ۱۳ ۵
+    psm13: —_— #83 © i
+    psm10: —_— #83 © i
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۲۳
+    psm8_fas: ۲۳
+    psm6_fas: ۲۳
+    psm7_ara: ا .2# 2
+    psm8_ara: ا .2# 2
+    psm6_ara: ا .2# 2
+    psm7_fas+ara: ا .2# ۲۳
+    psm8_fas+ara: ا .2# ۲۳
+    psm7_fas+ara+eng: ا .2# ۲۳
+    psm8_fas+ara+eng: ا .2# ۲۳
+    psm13: —_—
+    psm10: —_—
+
+  Preprocessing: closed
+    psm7_fas: ۲۳۳ ۵
+    psm8_fas: ۲۳۳ ۵
+    psm6_fas: ۲۳۳ ۵
+    psm7_ara: 0 ا #3 2
+    psm8_ara: 0 ا #3 2
+    psm6_ara: 0 ا #3 2
+    psm7_fas+ara: ۲۳۳ ۵ 0
+    psm8_fas+ara: ۲۳۳ ۵ 0
+    psm7_fas+ara+eng: — ۵ 0
+    psm8_fas+ara+eng: — ۵ 0
+    psm13: — #83 4
+    psm10: — #83 4
+
+
+--- Region: left_side (0,0)-(119,664) 119x664 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm6_fas: ۱
+۱
+۳
+۳
+    psm7_ara: /
+    psm8_ara: ؛
+    psm6_ara: ُ
+|
+0
+7
+    psm7_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm10: ’
+
+  Preprocessing: adaptive
+    psm6_fas: ز
+#
+    psm8_ara: :
+    psm6_ara: 0
+5
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ل
+    psm8_fas: ۱
+    psm6_fas: ل
+    psm7_ara: '
+    psm8_ara: ؛
+    psm6_ara: '
+    psm7_fas+ara: ل
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ل
+    psm8_fas+ara+eng: ۱
+    psm13: '
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: ‌
+    psm6_fas: ۱
+۲
+نی
+    psm7_ara: 1
+    psm8_ara: ؛
+    psm6_ara: /
+4
+_-
+    psm7_fas+ara: 1
+    psm8_fas+ara: 1
+    psm7_fas+ara+eng: 1
+    psm8_fas+ara+eng: 1
+    psm13: '
+    psm10: :
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: /
+۱
+۰
+۳
+    psm7_ara: ظ ظ
+    psm8_ara: ؛
+    psm6_ara: /
+|
+4
+ِ
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+
+--- Region: right_side (278,0)-(398,664) 120x664 ---
+  Preprocessing: otsu
+    psm8_fas: ۱
+    psm6_fas: ۱ [
+ِ
+کم
+۳
+    psm8_ara: ١
+    psm6_ara: ‎١‏ ل
+ِ
+اماس
+و
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: adaptive
+    psm8_fas: ۱
+    psm8_ara: ا
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm8_ara: ١
+    psm6_ara: ١
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: denoised_otsu
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm8_ara: ١
+    psm6_ara: ١
+    psm8_fas+ara: ١
+    psm8_fas+ara+eng: ١
+
+  Preprocessing: closed
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm8_ara: ١
+    psm6_ara: ١
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+
+--- Region: center_bottom (119,531)-(278,664) 159x133 ---
+  Preprocessing: otsu
+    psm8_fas: 9
+    psm8_ara: 59
+    psm8_fas+ara: 9
+    psm8_fas+ara+eng: 9
+    psm13: —
+    psm10: art
+
+  Preprocessing: adaptive
+    psm7_fas: 5 ِ
+    psm8_fas: ِِ
+    psm6_fas: 9
+تس ی
+    psm7_ara: ب 2
+    psm8_ara: ب
+    psm6_ara: ساك
+ا 0
+    psm7_fas+ara: ب 2
+    psm8_fas+ara: ب
+    psm7_fas+ara+eng: = =
+    psm8_fas+ara+eng: ب
+    psm13: —
+    psm10: —
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ‌
+    psm8_fas: ‌
+    psm7_ara: اا
+    psm8_ara: اا
+    psm7_fas+ara: اا
+    psm8_fas+ara: اا
+    psm7_fas+ara+eng: اا
+    psm8_fas+ara+eng: اا
+    psm13: a
+    psm10: a
+
+  Preprocessing: denoised_otsu
+    psm7_fas: 0
+    psm8_fas: 9
+    psm6_fas: م<
+    psm7_ara: 8
+    psm8_ara: د
+    psm6_ara: - 7
+    psm7_fas+ara: 8
+    psm8_fas+ara: 8
+    psm7_fas+ara+eng: 8
+    psm8_fas+ara+eng: 8
+    psm13: —
+    psm10: 4
+
+  Preprocessing: closed
+    psm7_fas: نس 5
+    psm8_fas: نس
+    psm6_fas: نس 5
+    psm7_ara: ا
+    psm8_ara: 597
+    psm6_ara: ا
+    psm7_fas+ara: نس 5
+    psm8_fas+ara: نس
+    psm7_fas+ara+eng: a
+    psm8_fas+ara+eng: نس
+    psm13: a
+    psm10: a
+
+
+============================================================
+File: child_002.jpg (398x664)
+============================================================
+
+--- Region: bottom_30 (0,464)-(398,664) 398x200 ---
+  Preprocessing: otsu
+    psm8_fas: ۶ ۰
+    psm8_ara: ” | 58
+    psm8_fas+ara: ۶ ۰ 8
+    psm8_fas+ara+eng: ۶ ۰ 8
+    psm13: PCS
+    psm10: -
+
+  Preprocessing: adaptive
+    psm8_fas: ب ی
+    psm6_fas: سس 1
+ق ۱
+    psm8_ara: ست ا
+    psm6_ara: للحسححصحين اا
+0 ةا
+    psm8_fas+ara: ست ا
+    psm8_fas+ara+eng: ‎bs‏ ا
+    psm13: A bs
+    psm10: A bs
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: 5 ٩
+    psm8_fas: نث_"
+    psm6_fas: ٩
+    psm7_ara: 0 9
+    psm8_ara: ال
+    psm6_ara: ؟
+    psm7_fas+ara: 5 ٩
+    psm8_fas+ara: 0
+    psm7_fas+ara+eng: 5 ٩
+    psm8_fas+ara+eng: 0
+    psm13: on
+    psm10: oy
+
+  Preprocessing: denoised_otsu
+    psm13: , CS
+
+  Preprocessing: closed
+    psm13: , CS
+
+
+--- Region: bottom_20 (0,531)-(398,664) 398x133 ---
+  Preprocessing: otsu
+    psm7_fas: ک ۲
+    psm8_fas: ک ۲
+    psm6_fas: ک ۲
+    psm7_ara: اه
+    psm8_ara: اه
+    psm6_ara: اه
+    psm7_fas+ara: ک اه
+    psm8_fas+ara: ک اه
+    psm7_fas+ara+eng: ک اه
+    psm8_fas+ara+eng: ک اه
+    psm13: is
+    psm10: is
+
+  Preprocessing: adaptive
+    psm8_fas: ی ۲
+    psm8_ara: -
+    psm8_fas+ara: ی ۲
+    psm8_fas+ara+eng: ae Ie
+    psm13: ae Ie
+    psm10: ae Ie
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: «0
+    psm7_ara: 1
+    psm8_ara: ا ا
+    psm6_ara: 1
+    psm8_fas+ara: 1
+    psm7_fas+ara+eng: A
+    psm8_fas+ara+eng: A
+    psm13: Oo
+    psm10: A
+
+  Preprocessing: denoised_otsu
+    psm7_fas: فا
+    psm8_fas: فا
+    psm7_ara: ذا
+    psm8_ara: ذا
+    psm7_fas+ara: فا
+    psm8_fas+ara: فا
+    psm7_fas+ara+eng: فا
+    psm8_fas+ara+eng: فا
+    psm13: » -
+    psm10: » -
+
+  Preprocessing: closed
+    psm7_fas: لک ذ؟
+    psm8_fas: لک ذ؟
+    psm6_fas: لک ذ؟
+    psm7_ara: ةر ده
+    psm8_ara: ةر ده
+    psm6_ara: ةر ده
+    psm7_fas+ara: لک ده
+    psm8_fas+ara: لک ده
+    psm7_fas+ara+eng: لک ده
+    psm8_fas+ara+eng: لک ده
+    psm13: . im
+    psm10: . im
+
+
+--- Region: bottom_10 (0,597)-(398,664) 398x67 ---
+  Preprocessing: otsu
+    psm7_fas: . 9۲
+    psm8_fas: . 9۲
+    psm7_ara: را ا
+    psm8_ara: را ا
+    psm7_fas+ara: . 9۲
+    psm8_fas+ara: . 9۲
+    psm7_fas+ara+eng: — i 4a
+    psm8_fas+ara+eng: — i 4a
+    psm13: — i 4a
+    psm10: — i 4a
+
+  Preprocessing: adaptive
+    psm8_fas: مر وی ار
+    psm8_ara: عااطي د اح ا ا
+    psm8_fas+ara: عااطي مر وی ار
+    psm8_fas+ara+eng: ‎eee ae‏ ار
+    psm13: re eee ae
+    psm10: re eee ae
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۰
+    psm8_fas: ۰
+    psm7_ara: ا ا
+    psm8_ara: ا ا
+    psm7_fas+ara: ا ا
+    psm8_fas+ara: ا ا
+    psm7_fas+ara+eng: ا ا
+    psm8_fas+ara+eng: ا ا
+    psm13: BS
+    psm10: BS
+
+  Preprocessing: denoised_otsu
+    psm7_fas: .. 1۲
+    psm8_fas: .. 1۲
+    psm7_ara: ا
+    psm8_ara: ا
+    psm7_fas+ara: .. 1۲
+    psm8_fas+ara: .. 1۲
+    psm7_fas+ara+eng: .. 1۲
+    psm8_fas+ara+eng: .. 1۲
+    psm13: —_— 7
+    psm10: —_— 7
+
+  Preprocessing: closed
+    psm7_fas: . ۹۲
+    psm8_fas: . ۹۲
+    psm7_ara: و ل ا"
+    psm8_ara: و ل ا"
+    psm7_fas+ara: . ۹۲
+    psm8_fas+ara: . ۹۲
+    psm7_fas+ara+eng: . ۹۲
+    psm8_fas+ara+eng: . ۹۲
+    psm13: —_ i
+    psm10: —_ i
+
+
+--- Region: top_20 (0,0)-(398,132) 398x132 ---
+  Preprocessing: otsu
+    psm7_fas: ۴ 1
+    psm8_fas: ۴ 1
+    psm6_fas: ۴ 1
+    psm7_ara: 3530|
+    psm8_ara: 3530|
+    psm6_ara: 3530|
+    psm7_fas+ara: ۴ 1
+    psm8_fas+ara: ۴ 1
+    psm7_fas+ara+eng: ۴ 1
+    psm8_fas+ara+eng: ۴ 1
+    psm13: yO
+    psm10: yO
+
+  Preprocessing: adaptive
+    psm8_fas: از
+    psm8_ara: اا
+    psm8_fas+ara: | از
+    psm8_fas+ara+eng: | از
+    psm13: Pn
+    psm10: Piel
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۳۴ . 1
+    psm8_fas: ۳۴ . 1
+    psm6_fas: ۳۴ . 1
+    psm7_ara: 30 1
+    psm8_ara: 30 1
+    psm6_ara: 30 1
+    psm7_fas+ara: ۳۴ . 1
+    psm8_fas+ara: ۳۴ . 1
+    psm7_fas+ara+eng: ۳۴ . 1
+    psm8_fas+ara+eng: ۳۴ . 1
+    psm13: yO
+    psm10: yO
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۴ 1
+    psm8_fas: ۴ 1
+    psm6_fas: ۴ 1
+    psm7_ara: 750 |
+    psm8_ara: 750 |
+    psm6_ara: 750 |
+    psm7_fas+ara: ۴ |
+    psm8_fas+ara: ۴ |
+    psm7_fas+ara+eng: ۴ |
+    psm8_fas+ara+eng: ۴ |
+    psm13: yO
+    psm10: yO
+
+  Preprocessing: closed
+    psm7_fas: ۴ 1
+    psm8_fas: ۴ 1
+    psm6_fas: ۴ 1
+    psm7_ara: 30/1
+    psm8_ara: 30/1
+    psm6_ara: 30/1
+    psm7_fas+ara: ۴ 1
+    psm8_fas+ara: ۴ 1
+    psm7_fas+ara+eng: ۴ 1
+    psm8_fas+ara+eng: ۴ 1
+    psm13: , OCS
+    psm10: , OCS
+
+
+--- Region: top_10 (0,0)-(398,66) 398x66 ---
+  Preprocessing: otsu
+    psm7_fas: 3
+    psm8_fas: ۲۲ ۰ ۵ ۳۵۳۵ ۳
+    psm6_fas: 3
+    psm7_ara: 00 0
+    psm8_ara: ااا 0
+    psm6_ara: 00 0
+    psm7_fas+ara: 3
+    psm8_fas+ara: ۲۲ ۰ ۵ ۳۵۳۵ ۳
+    psm7_fas+ara+eng: 3
+    psm8_fas+ara+eng: ۲۲ ۰ ۵ ۳۵۳۵ ۳
+    psm13: _-—  °#«|«=C°f
+    psm10: _-—  °#«|«=C°f
+
+  Preprocessing: adaptive
+    psm8_ara: ل ل ا
+    psm8_fas+ara: ا
+    psm8_fas+ara+eng: ‎Ean‏ ا
+    psm13: GON
+    psm10: BEETS Ean
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: 48 زا
+    psm8_fas: ۲ ۰ ۵
+    psm6_fas: 48 زا
+    psm7_ara: 00 0
+    psm8_ara: ااا 0
+    psm6_ara: 00 0
+    psm7_fas+ara: 00 48
+    psm8_fas+ara: ۲ ۰ ۵
+    psm7_fas+ara+eng: 4 48
+    psm8_fas+ara+eng: ۲ ۰ ۵
+    psm13: _-_ 4-7
+    psm10: _-_ 4-7
+
+  Preprocessing: denoised_otsu
+    psm7_fas: 1۹
+    psm8_fas: ۲۲ ۰
+    psm6_fas: 1۹
+    psm7_ara: 00 "1
+    psm8_ara: ااا 0
+    psm6_ara: 00 "1
+    psm7_fas+ara: 1۹
+    psm8_fas+ara: ۲۲ ۰
+    psm7_fas+ara+eng: 1۹
+    psm8_fas+ara+eng: ۲۲ ۰
+    psm13: _-  °«#«}3+3~«»S
+    psm10: _-  °«#«}3+3~«»S
+
+  Preprocessing: closed
+    psm7_fas: 5 1۹
+    psm8_fas: ۱ ۰
+    psm6_fas: 5 1۹
+    psm7_ara: 00 0
+    psm8_ara: ا ار 0
+    psm6_ara: 00 0
+    psm7_fas+ara: 00 1۹
+    psm8_fas+ara: ا ۰ ۱
+    psm7_fas+ara+eng: 4 _
+    psm8_fas+ara+eng: ا ۰ ۱
+    psm13: _-_  .4*&§
+    psm10: _-_  .4*&§
+
+
+--- Region: left_side (0,0)-(119,664) 119x664 ---
+  Preprocessing: otsu
+    psm7_fas: /
+    psm6_fas: /
+    psm7_ara: /
+    psm8_ara: ط
+    psm6_ara: /
+    psm7_fas+ara: /
+    psm7_fas+ara+eng: (
+
+  Preprocessing: adaptive
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: اه
+ک و
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ا
+0
+    psm7_fas+ara: ١
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: ١
+    psm8_fas+ara+eng: ١
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: /
+    psm6_fas: /
+    psm7_ara: /
+    psm6_ara: /
+    psm7_fas+ara: /
+    psm7_fas+ara+eng: (
+    psm10: (
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ,
+    psm6_fas: ,
+    psm7_ara: /
+    psm8_ara: ؛
+    psm6_ara: /
+    psm7_fas+ara: /
+    psm7_fas+ara+eng: ¢
+    psm10: ¢
+
+  Preprocessing: closed
+    psm7_ara: 4
+    psm8_ara: ١
+    psm6_ara: 4
+
+
+--- Region: right_side (278,0)-(398,664) 120x664 ---
+  Preprocessing: otsu
+    psm6_fas: ۹
+۷ +
+۹
+    psm8_ara: ١
+    psm6_ara: ١
+#2 ‏م‎
+‎.
+    psm13: ,
+    psm10: ’
+
+  Preprocessing: adaptive
+    psm6_fas: و و
+    psm7_ara: :
+    psm8_ara: :
+    psm6_ara: 1 1
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱
+    psm6_fas: ۳۳
+:
+    psm7_ara: ّْ
+    psm8_ara: ١
+    psm6_ara: -->
+-5
+    psm7_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+
+  Preprocessing: denoised_otsu
+    psm6_fas: ۹
+۰
+۱
+    psm8_ara: :
+    psm6_ara: ١
+2
+١
+    psm13: ,
+    psm10: ,
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm6_fas: ۹
+۰
+1
+    psm7_ara: /
+    psm8_ara: ١
+    psm6_ara: ١
+#2 4
+.
+    psm7_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm13: ,
+    psm10: i:
+
+
+--- Region: center_bottom (119,531)-(278,664) 159x133 ---
+  Preprocessing: otsu
+    psm8_fas: نت
+    psm8_ara: 0
+    psm8_fas+ara: نت
+    psm8_fas+ara+eng: نت
+    psm13: a
+    psm10: _—
+
+  Preprocessing: adaptive
+    psm8_fas: ۳
+    psm6_fas: 0
+/ 5
+    psm8_ara: ب
+    psm6_ara: 00
+/ .
+    psm8_fas+ara: ب
+    psm8_fas+ara+eng: bam
+    psm13: bam
+    psm10: bam
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ‌
+    psm8_fas: ‌
+    psm7_ara: اا
+    psm8_ara: اا
+    psm7_fas+ara: اا
+    psm8_fas+ara: اا
+    psm7_fas+ara+eng: اا
+    psm8_fas+ara+eng: اا
+    psm13: a
+    psm10: a
+
+  Preprocessing: denoised_otsu
+    psm7_fas: که
+    psm8_fas: ۱
+    psm6_fas: که
+    psm7_ara: 7
+    psm8_ara: 00
+    psm6_ara: 7
+    psm7_fas+ara: که
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: —
+    psm8_fas+ara+eng: ۱
+    psm13: —~
+    psm10: —
+
+  Preprocessing: closed
+    psm7_ara: 0-_
+    psm8_ara: 0-_
+    psm6_ara: 0-_
+    psm13: —
+    psm10: ae
+
+
+============================================================
+File: child_003.jpg (398x673)
+============================================================
+
+--- Region: bottom_30 (0,471)-(398,673) 398x202 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: | ١ ‏ار‎
+    psm8_ara: | ١ ‏ار‎
+    psm6_ara: | ١ ‏ار‎
+    psm7_fas+ara: | ١ ‏ار‎
+    psm8_fas+ara: | ١ ‏ار‎
+    psm7_fas+ara+eng: ار .|
+    psm8_fas+ara+eng: ار .|
+    psm13: |.
+    psm10: |.
+
+  Preprocessing: adaptive
+    psm7_fas: و7 ۳ ۱ ۱
+    psm8_fas: ۳
+    psm6_fas: ۱ فا ظ 1 اش 1
+    psm7_ara: 0 7 ظ ظ
+    psm8_ara: را
+    psm6_ara: ل وم 3 كت م
+    psm7_fas+ara: و7 ۳ ۱ ظ
+    psm8_fas+ara: ۳
+    psm7_fas+ara+eng: | ۱ ۳ VP
+    psm8_fas+ara+eng: ۳
+    psm13: oUF
+    psm10: oUF
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: تث_ِ
+    psm8_fas: تث_ِ
+    psm7_ara: ا
+    psm8_ara: ا
+    psm7_fas+ara: ا
+    psm8_fas+ara: ا
+    psm7_fas+ara+eng: ا
+    psm8_fas+ara+eng: ا
+    psm13: Oo
+    psm10: Oo
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: |.
+    psm6_fas: ۱
+    psm7_ara: ره |
+    psm8_ara: رم |
+    psm6_ara: ره |
+    psm7_fas+ara: ره |
+    psm8_fas+ara: ره |
+    psm7_fas+ara+eng: ره |
+    psm8_fas+ara+eng: ره |
+    psm13: | A
+    psm10: | A
+
+  Preprocessing: closed
+    psm8_fas: ۱
+    psm8_ara: تر |
+    psm8_fas+ara: تر |
+    psm8_fas+ara+eng: تر :|
+    psm13: |:
+    psm10: |:
+
+
+--- Region: bottom_20 (0,538)-(398,673) 398x135 ---
+  Preprocessing: otsu
+    psm7_fas: | ٩ ‏کم‎
+    psm8_fas: | ٩ ‏کم‎
+    psm6_fas: | ٩ ‏کم‎
+    psm7_ara: | ١ ‏سير‎
+    psm8_ara: | ١ ‏سير‎
+    psm6_ara: | ١ ‏سير‎
+    psm7_fas+ara: | ٩ ‏سير‎
+    psm8_fas+ara: | ٩ ‏سير‎
+    psm7_fas+ara+eng: wa
+    psm8_fas+ara+eng: wa
+    psm13: wa
+    psm10: wa
+
+  Preprocessing: adaptive
+    psm8_fas: ۱
+    psm8_ara: # ا
+    psm8_fas+ara: ۱ #
+    psm8_fas+ara+eng: ic ou
+    psm13: ic ou
+    psm10: ic ou
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: بكپصِ
+    psm8_fas: بكپصِ
+    psm7_ara: ا
+    psm8_ara: ا
+    psm7_fas+ara: ا
+    psm8_fas+ara: ا
+    psm7_fas+ara+eng: ا
+    psm8_fas+ara+eng: ا
+    psm13: ae
+    psm10: ae
+
+  Preprocessing: denoised_otsu
+    psm8_fas: ۱۳
+    psm8_ara: عر ' |
+    psm8_fas+ara: ۱۳
+    psm8_fas+ara+eng: ۱۳
+    psm13: hav/a
+    psm10: hav/a
+
+  Preprocessing: closed
+    psm8_fas: کم ۲ ۱
+    psm8_ara: | ١ ‏بير‎
+    psm8_fas+ara: بير ۲ |
+    psm8_fas+ara+eng: hws
+    psm13: hws
+    psm10: hws
+
+
+--- Region: bottom_10 (0,605)-(398,673) 398x68 ---
+  Preprocessing: otsu
+    psm7_fas: ۲ ٩ ‏یار‎ ۲ 7
+    psm8_fas: ۲ ٩ ‏یار‎ ۲ 7
+    psm6_fas: ۲ ٩ ‏یار‎ ۲ 7
+    psm7_ara: ل بجح 4 |
+    psm8_ara: ل بجح 4 |
+    psm6_ara: ل بجح 4 |
+    psm7_fas+ara: | ٩ ‏یار‎ ۲ 7
+    psm8_fas+ara: | ٩ ‏یار‎ ۲ 7
+    psm7_fas+ara+eng: | ٩ ‏یار‎ ۲ 7
+    psm8_fas+ara+eng: | ٩ ‏یار‎ ۲ 7
+    psm13: mate As
+    psm10: mate As
+
+  Preprocessing: adaptive
+    psm8_fas: دس
+    psm6_fas: بت و 91
+    psm8_ara: لل ا
+    psm6_ara: ١ك‏ عد 7
+    psm8_fas+ara: دس
+    psm8_fas+ara+eng: دس
+    psm13: ta) oe
+    psm10: ta) oe
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: اه
+    psm8_fas: اه
+    psm7_ara: ا
+    psm8_ara: ا
+    psm7_fas+ara: اه
+    psm8_fas+ara: اه
+    psm7_fas+ara+eng: اه
+    psm8_fas+ara+eng: اه
+    psm13: ee
+    psm10: ee
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ری با ا
+    psm8_fas: ری با ا
+    psm6_fas: ری با ا
+    psm7_ara: يري + |[
+    psm8_ara: يري + |[
+    psm6_ara: يري + |[
+    psm7_fas+ara: ری با |[
+    psm8_fas+ara: ری با |[
+    psm7_fas+ara+eng: ری با |[
+    psm8_fas+ara+eng: ری با |[
+    psm13: Bw *+/4.
+    psm10: Bw *+/4.
+
+  Preprocessing: closed
+    psm7_fas: 7 ۲ رای با ۱
+    psm8_fas: 7 ۲ رای با ۱
+    psm6_fas: 7 ۲ رای با ۱
+    psm7_ara: | مر ا |
+    psm8_ara: | مر ا |
+    psm6_ara: | مر ا |
+    psm7_fas+ara: 7 ۲ رای با |
+    psm8_fas+ara: 7 ۲ رای با |
+    psm7_fas+ara+eng: 7 ۲ رای با |
+    psm8_fas+ara+eng: 7 ۲ رای با |
+    psm13: rw’ /AS
+    psm10: rw’ /AS
+
+
+--- Region: top_20 (0,0)-(398,134) 398x134 ---
+  Preprocessing: otsu
+    psm8_fas: ۲۳۳
+    psm8_ara: 0020700-57
+    psm8_fas+ara: ۲۳۳
+    psm8_fas+ara+eng: ۲۳۳ NN
+    psm13: _” ~\
+    psm10: y NN
+
+  Preprocessing: adaptive
+    psm7_fas: ۳2 ا 3
+    psm8_fas: ۱/4
+    psm7_ara: م ا 3
+    psm8_ara: ارق
+    psm7_fas+ara: ۳2 ا 3
+    psm8_fas+ara: لحر ار
+    psm7_fas+ara+eng: 3 ‏ا‎ (ou
+    psm8_fas+ara+eng: =“
+    psm13: Lan,
+    psm10: =“
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ۳۹
+    psm8_ara: الدخم 2
+    psm8_fas+ara: ۳۹
+    psm8_fas+ara+eng: frm
+    psm13: ae
+    psm10: frm
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۴
+    psm8_fas: ۲۳۳
+    psm6_fas: ۴
+    psm7_ara: 7
+    psm8_ara: 0000
+    psm6_ara: 7
+    psm7_fas+ara: ۴
+    psm8_fas+ara: 7
+    psm7_fas+ara+eng: a>
+    psm8_fas+ara+eng: a>
+    psm13: —_ we
+    psm10: a>
+
+  Preprocessing: closed
+    psm8_fas: ۲۳۳
+    psm8_ara: اك 2
+    psm8_fas+ara: ۲۳۳
+    psm8_fas+ara+eng: ۲۳۳ UN
+    psm13: _ ~\e
+    psm10: yr UN
+
+
+--- Region: top_10 (0,0)-(398,67) 398x67 ---
+  Preprocessing: otsu
+    psm7_fas: ۱۳۳
+    psm8_fas: و ۰
+    psm6_fas: ۱۳۳
+    psm7_ara: لع
+    psm8_ara: ات 00000
+    psm6_ara: لع
+    psm7_fas+ara: لع
+    psm8_fas+ara: لع
+    psm7_fas+ara+eng: لع
+    psm8_fas+ara+eng: لع
+    psm13: ee
+    psm10: UC
+
+  Preprocessing: adaptive
+    psm7_fas: 7 ۳
+    psm8_fas: "۱
+    psm6_fas: ی ۳
+    psm7_ara: ا | 1
+    psm8_ara: ل 0
+    psm6_ara: يط 0000|
+    psm7_fas+ara: ا | 7
+    psm8_fas+ara: "۱ 0
+    psm7_fas+ara+eng: ا | 7
+    psm8_fas+ara+eng: "۱ 0
+    psm13: Se
+    psm10: Po Soe
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۳۳
+    psm8_fas: اپ ۰
+    psm6_fas: ۳۳
+    psm7_ara: 77:
+    psm8_ara: | 6ك 00000
+    psm6_ara: 77:
+    psm7_fas+ara: ۳۳
+    psm8_fas+ara: 77:
+    psm7_fas+ara+eng: ۳۳
+    psm8_fas+ara+eng: he
+    psm10: he
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ]۳۳ ٩
+    psm8_fas: م ۰
+    psm6_fas: ]۳۳ ٩
+    psm7_ara: 8 مم
+    psm8_ara: ا 0# 00000
+    psm6_ara: 8 مم
+    psm7_fas+ara: ]۳۳ ٩
+    psm8_fas+ara: 8 مم
+    psm7_fas+ara+eng: ]۳۳ ٩
+    psm8_fas+ara+eng: - 8
+    psm13: ee
+    psm10: - =
+
+  Preprocessing: closed
+    psm7_fas: ۱۳. ٩
+    psm8_fas: ما
+    psm6_fas: ۱۳. ٩
+    psm7_ara: 89 لسرم
+    psm8_ara: | #ث م 00000
+    psm6_ara: 89 لسرم
+    psm7_fas+ara: ‎٩‏ لسرم
+    psm8_fas+ara: 89 لسرم
+    psm7_fas+ara+eng: ‎٩‏ لسرم
+    psm8_fas+ara+eng: 89 لسرم
+    psm13: ee
+    psm10: -
+
+
+--- Region: left_side (0,0)-(119,673) 119x673 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm8_ara: |
+    psm6_ara: ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: adaptive
+    psm8_fas: ۱
+    psm7_ara: ١
+    psm8_ara: ١
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: /
+    psm8_fas: ۱
+    psm6_fas: /
+    psm7_ara: /
+    psm8_ara: ْ
+    psm6_ara: /
+    psm7_fas+ara: /
+    psm8_fas+ara: /
+    psm7_fas+ara+eng: /
+    psm8_fas+ara+eng: /
+    psm10: /
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: خْ
+    psm8_ara: |
+    psm6_ara: خْ
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: آ|
+    psm8_ara: |
+    psm6_ara: آ|
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+
+--- Region: right_side (278,0)-(398,673) 120x673 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm6_ara: ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: adaptive
+    psm7_fas: ۱
+    psm7_ara: ْ
+    psm8_ara: ِ
+    psm7_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm10: \
+
+  Preprocessing: denoised_otsu
+    psm8_fas: ۱
+    psm6_fas: /
+    psm6_ara: |
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+
+--- Region: center_bottom (119,538)-(278,673) 159x135 ---
+  Preprocessing: otsu
+    psm8_fas: ۸
+    psm8_ara: 0
+    psm8_fas+ara: ۸
+    psm8_fas+ara+eng: ۸
+    psm13: o
+    psm10: o
+
+  Preprocessing: adaptive
+    psm7_fas: زر
+    psm8_fas: زر
+    psm7_ara: 8
+    psm8_ara: 8
+    psm7_fas+ara: زر
+    psm8_fas+ara: زر
+    psm7_fas+ara+eng: زر
+    psm8_fas+ara+eng: زر
+    psm13: oe
+    psm10: oe
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۳"
+    psm8_fas: ۳"
+    psm7_ara: اا
+    psm8_ara: اا
+    psm7_fas+ara: ۳"
+    psm8_fas+ara: ۳"
+    psm7_fas+ara+eng: a
+    psm8_fas+ara+eng: a
+    psm13: a
+    psm10: a
+
+  Preprocessing: denoised_otsu
+    psm7_fas: 7
+    psm8_fas: 7
+    psm6_fas: ۷
+    psm7_ara: ١1
+    psm8_ara: ١1
+    psm6_ara: و
+    psm7_fas+ara: ١1
+    psm8_fas+ara: ١1
+    psm7_fas+ara+eng: Y
+    psm8_fas+ara+eng: Y
+    psm13: Y
+    psm10: Y
+
+  Preprocessing: closed
+    psm8_fas: و
+    psm8_ara: 0
+    psm8_fas+ara: و
+    psm8_fas+ara+eng: و
+    psm13: o
+    psm10: o
+
+
+============================================================
+File: child_004.jpg (398x664)
+============================================================
+
+--- Region: bottom_30 (0,464)-(398,664) 398x200 ---
+  Preprocessing: otsu
+    psm8_fas: اب ۱
+    psm8_ara: ا
+    psm8_fas+ara: دا
+    psm8_fas+ara+eng: دا
+    psm13: Ms all
+    psm10: A alll
+
+  Preprocessing: adaptive
+    psm8_fas: ۱
+    psm6_fas: ۱ 1 ت۲۱ از
+    psm8_ara: الاة
+    psm6_ara: 0 || 0 0 0
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱ |
+    psm13: Kee)
+    psm10: Kee |
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: 0
+    psm8_fas: 2"
+    psm6_fas: 0
+    psm7_ara: دا
+    psm8_ara: 00 4
+    psm6_ara: دا
+    psm7_fas+ara: دا
+    psm8_fas+ara: دا
+    psm7_fas+ara+eng: _
+    psm8_fas+ara+eng: _
+    psm13: a
+    psm10: _
+
+  Preprocessing: denoised_otsu
+    psm8_fas: ی
+    psm8_ara: 02
+    psm8_fas+ara: ا
+    psm8_fas+ara+eng: ا
+    psm13: Ms oi
+    psm10: Ms ofl
+
+  Preprocessing: closed
+    psm8_fas: اب
+    psm8_ara: 5-
+    psm8_fas+ara: اب
+    psm8_fas+ara+eng: اب
+    psm13: Mi alll
+    psm10: Mi alll
+
+
+--- Region: bottom_20 (0,531)-(398,664) 398x133 ---
+  Preprocessing: otsu
+    psm8_fas: ۴*7
+    psm8_ara: |
+    psm8_fas+ara: ۴*7
+    psm8_fas+ara+eng: Te ,
+    psm13: TEE
+    psm10: Te ,
+
+  Preprocessing: adaptive
+    psm8_fas: کی
+    psm8_ara: الساة
+    psm8_fas+ara: کی
+    psm8_fas+ara+eng: کی
+    psm13: a)
+    psm10: a
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: «0
+    psm8_fas: «0
+    psm7_ara: اا ا
+    psm8_ara: اا ا
+    psm7_fas+ara: اا ا
+    psm8_fas+ara: اا ا
+    psm7_fas+ara+eng: اا ا
+    psm8_fas+ara+eng: اا ا
+    psm13: Oe
+    psm10: Oe
+
+  Preprocessing: denoised_otsu
+    psm7_fas: کت ۱۱
+    psm8_fas: ۲
+    psm6_fas: کت ۱۱
+    psm7_ara: 0
+    psm8_ara: 0
+    psm6_ara: 0
+    psm7_fas+ara: کت ۱۱
+    psm8_fas+ara: ۲
+    psm7_fas+ara+eng: Tt
+    psm8_fas+ara+eng: ۲
+    psm13: we |
+    psm10: Tt
+
+  Preprocessing: closed
+    psm8_fas: ۴*7
+    psm8_ara: 0
+    psm8_fas+ara: ۴*7
+    psm8_fas+ara+eng: Te
+    psm13: TEE |
+    psm10: Te
+
+
+--- Region: bottom_10 (0,597)-(398,664) 398x67 ---
+  Preprocessing: otsu
+    psm7_fas: ٩8٩
+    psm8_fas: ۱
+    psm6_fas: ٩8٩
+    psm7_ara: و جيه 1
+    psm8_ara: لوك 02 001
+    psm6_ara: و جيه 1
+    psm7_fas+ara: و جيه ‎٩8٩‏
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ay ff
+    psm8_fas+ara+eng: ay ff
+    psm13: hr
+    psm10: ay ff
+
+  Preprocessing: adaptive
+    psm8_fas: ۳ ۵
+    psm8_ara: اك اانا
+    psm8_fas+ara: 0ك ران
+    psm8_fas+ara+eng: 0ك ران
+    psm13: RSS
+    psm10: fee
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۰
+    psm8_fas: ۰
+    psm7_ara: ا ا
+    psm8_ara: ا ا
+    psm7_fas+ara: ا ا
+    psm8_fas+ara: ا ا
+    psm7_fas+ara+eng: ا ا
+    psm8_fas+ara+eng: ا ا
+    psm13: BS
+    psm10: BS
+
+  Preprocessing: denoised_otsu
+    psm7_fas: 8
+    psm8_fas: ۱
+    psm6_fas: 8
+    psm7_ara: ١ "«# ‏و7‎
+    psm8_ara: 00 1 006
+    psm6_ara: ١ "«# ‏و7‎
+    psm7_fas+ara: و7 #«" 8
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ay f_
+    psm8_fas+ara+eng: ay f_
+    psm13: Gt f£
+    psm10: ay f_
+
+  Preprocessing: closed
+    psm7_fas: 8٩
+    psm8_fas: ۱ 5
+    psm6_fas: 8٩
+    psm7_ara: 4ك
+    psm8_ara: ا 0
+    psm6_ara: 4ك
+    psm7_fas+ara: 8٩
+    psm8_fas+ara: ۱ 5
+    psm7_fas+ara+eng: 8٩ «ff
+    psm8_fas+ara+eng: ay «ff
+    psm13: - 7} fee
+    psm10: ay «ff
+
+
+--- Region: top_20 (0,0)-(398,132) 398x132 ---
+  Preprocessing: otsu
+    psm8_fas: "7"
+    psm6_fas: "7"
+    psm8_ara: 0-8
+    psm6_ara: 0-8
+    psm8_fas+ara: "7"
+    psm8_fas+ara+eng: "7"
+    psm13: og
+    psm10: og
+
+  Preprocessing: adaptive
+    psm8_fas: ۱  ک‎
+    psm6_fas: تا 0 1۱۱
+    psm8_ara: دسا
+    psm6_ara: جاجع 1411 ند لأس لعزت وسار ررك 1 11 11
+    psm8_fas+ara: سدس
+    psm8_fas+ara+eng: سدس
+    psm13: ae
+    psm10: aa
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: "7"
+    psm8_ara: 0-1١
+    psm8_fas+ara: "7"
+    psm8_fas+ara+eng: "7"
+    psm13: |
+    psm10: |
+
+  Preprocessing: denoised_otsu
+    psm8_fas: "7"
+    psm6_fas: "7"
+    psm8_ara: 0-78
+    psm6_ara: 0-78
+    psm8_fas+ara: "7"
+    psm8_fas+ara+eng: "7"
+    psm13: og
+    psm10: og
+
+  Preprocessing: closed
+    psm8_fas: "7"
+    psm6_fas: "7"
+    psm8_ara: 0-01
+    psm6_ara: 0-01
+    psm8_fas+ara: "7"
+    psm8_fas+ara+eng: "7"
+    psm13: oo §
+    psm10: oo §
+
+
+--- Region: top_10 (0,0)-(398,66) 398x66 ---
+  Preprocessing: otsu
+    psm7_fas: 5
+    psm8_fas: ۰ 8
+    psm7_ara: كك
+    psm8_ara: َب 00000000000000
+    psm7_fas+ara: 5
+    psm8_fas+ara: كك
+    psm7_fas+ara+eng: 5
+    psm8_fas+ara+eng: كك
+    psm10: L
+
+  Preprocessing: adaptive
+    psm8_fas: ۳
+    psm6_fas: سا وت نز 9 ارف
+۳ ند ۳۹۹
+    psm8_ara: ا اا
+    psm6_ara: 1 ف اله لا
+0 "لأس علب 1 ا وله مل
+    psm8_fas+ara: ا
+    psm8_fas+ara+eng: ‎kre‏ ا
+    psm13: oS kre ae
+    psm10: a kre
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: 16 ا
+    psm8_fas: . . ........8٩
+    psm7_ara: ‎١‏ ا
+    psm8_ara: اا
+    psm7_fas+ara: ‎١‏ ا
+    psm8_fas+ara: اا
+    psm7_fas+ara+eng: | ,
+    psm8_fas+ara+eng: اا
+    psm13: _
+    psm10: _
+
+  Preprocessing: denoised_otsu
+    psm7_fas: 5
+    psm8_fas: ۰ 8
+    psm7_ara: كك
+    psm8_ara: ِّة: 20200000
+    psm7_fas+ara: 5
+    psm8_fas+ara: كك
+    psm7_fas+ara+eng: 5
+    psm8_fas+ara+eng: كك
+    psm13: i
+    psm10: L
+
+  Preprocessing: closed
+    psm7_fas: 15
+    psm8_fas: 8
+    psm7_ara: كك
+    psm8_ara: س0
+    psm7_fas+ara: 15
+    psm8_fas+ara: كك
+    psm7_fas+ara+eng: =
+    psm8_fas+ara+eng: =
+    psm10: =
+
+
+--- Region: left_side (0,0)-(119,664) 119x664 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: '
+    psm8_ara: ١
+    psm6_ara: '
+    psm7_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm10: ;
+
+  Preprocessing: adaptive
+    psm6_fas: ۱
+1 ۱ ۲
+۱۳۱۵
+    psm6_ara: د
+! ا 5
+5 ||1] ]| |
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۴
+    psm8_fas: ِ
+    psm6_fas: ۴
+    psm7_ara: ٍٍ
+    psm8_ara: 1
+    psm6_ara: ٍٍ
+    psm7_fas+ara: ۴
+    psm8_fas+ara: 5
+    psm7_fas+ara+eng: ۴
+    psm8_fas+ara+eng: 5
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: '
+    psm8_ara: ١
+    psm6_ara: '
+    psm7_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: '
+    psm8_ara: ١
+    psm6_ara: '
+    psm7_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+
+
+--- Region: right_side (278,0)-(398,664) 120x664 ---
+  Preprocessing: otsu
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm8_ara: ؛
+    psm6_ara: ا
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: adaptive
+    psm6_fas: ۲ ۱
+    psm7_ara: ْ
+    psm8_ara: إٍ
+    psm6_ara: ظ و
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm8_ara: |
+    psm6_ara: ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ١
+    psm10: ’
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+_
+    psm7_ara: :
+    psm8_ara: /
+    psm6_ara: ١
+١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: closed
+    psm8_fas: ۱
+    psm6_fas: ۱
+-‌
+    psm8_ara: /
+    psm6_ara: ٍ
+-
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+
+--- Region: center_bottom (119,531)-(278,664) 159x133 ---
+  Preprocessing: otsu
+    psm8_fas: کت
+    psm8_ara: ا
+    psm8_fas+ara: کت
+    psm8_fas+ara+eng: oul
+    psm13: al
+    psm10: oul
+
+  Preprocessing: adaptive
+    psm8_fas: ك
+    psm8_ara: 0
+    psm8_fas+ara: ك
+    psm8_fas+ara+eng: a
+    psm13: a
+    psm10: a
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ‌
+    psm8_fas: ‌
+    psm7_ara: اا
+    psm8_ara: اا
+    psm7_fas+ara: اا
+    psm8_fas+ara: اا
+    psm7_fas+ara+eng: اا
+    psm8_fas+ara+eng: اا
+    psm13: a
+    psm10: a
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ِِ
+    psm8_fas: ِِ
+    psm6_fas: بح
+۱
+    psm7_ara: 21
+    psm8_ara: 21
+    psm6_ara: سد
+‎١‏
+    psm7_fas+ara: 21
+    psm8_fas+ara: 21
+    psm7_fas+ara+eng: 21
+    psm8_fas+ara+eng: 21
+    psm13: a
+    psm10: at
+
+  Preprocessing: closed
+    psm7_fas: تن
+    psm8_fas: کت
+    psm6_fas: تن
+    psm7_ara: اد
+    psm8_ara: اد
+    psm6_ara: اد
+    psm7_fas+ara: تن
+    psm8_fas+ara: کت
+    psm7_fas+ara+eng: ol
+    psm8_fas+ara+eng: کت
+    psm13: ol
+    psm10: ol
+
+
+============================================================
+File: child_005.jpg (390x664)
+============================================================
+
+--- Region: bottom_30 (0,464)-(390,664) 390x200 ---
+  Preprocessing: otsu
+    psm8_fas: م2
+    psm6_fas: 0 3 ۳
+    psm8_ara: و د
+    psm6_ara: ”7 2 2 إل
+    psm8_fas+ara: و د
+    psm8_fas+ara+eng: و د
+    psm13: Vey
+    psm10: Vey
+
+  Preprocessing: adaptive
+    psm8_fas: 0
+    psm6_fas: 0 ی دق تا یر 2
+۱ ۵ سا ی
+۳ زار
+را ار
+ار
+1
+کش هر رازه ره تاه ای تن روز
+    psm8_ara: يو
+    psm6_ara: ااه ا 0
+اه مر ا
+0 ا ا ل
+ا
+0
+ا
+ا ا ل ا 1 1 1
+    psm8_fas+ara: يو
+    psm8_fas+ara+eng: يو
+    psm13: ey
+    psm10: ey
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ۳
+    psm6_fas: 0
+    psm8_ara: 0
+    psm6_ara: 0
+    psm8_fas+ara: 1
+    psm8_fas+ara+eng: >
+    psm13: 2.
+    psm10: >
+
+  Preprocessing: denoised_otsu
+    psm8_ara: ١< ‏و‎
+    psm13: oy
+    psm10: oy
+
+  Preprocessing: closed
+    psm8_fas: تک
+    psm6_fas: ف 1 3
+    psm8_ara: ١ك‎
+    psm6_ara: 0 5 7
+    psm8_fas+ara: تک
+    psm8_fas+ara+eng: تک
+    psm13: \oey
+    psm10: \oey
+
+
+--- Region: bottom_20 (0,531)-(390,664) 390x133 ---
+  Preprocessing: otsu
+    psm7_fas: ۹ ۳
+    psm8_fas: ۹ ۳
+    psm6_fas: ۹ ۳
+    psm7_ara: < +
+    psm8_ara: < +
+    psm6_ara: < +
+    psm7_fas+ara: < ۳
+    psm8_fas+ara: < ۳
+    psm7_fas+ara+eng: < 4
+    psm8_fas+ara+eng: < 4
+    psm13: we 4
+    psm10: we 4
+
+  Preprocessing: adaptive
+    psm8_fas: ۵
+    psm6_fas: رب ها ی ۱
+۱
+کش هر رازه ره تاه ای تن روز
+    psm8_ara: و ارتكي ‎١‏
+    psm6_ara: ا :م ع ري ا و 1
+ل ير
+ا ا ل ا 1 1 1
+    psm8_fas+ara: و ارتكي ۵
+    psm8_fas+ara+eng: 7
+    psm13: 7
+    psm10: 7
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: را
+    psm6_fas: رّ 7 تن
+وه دنه
+    psm8_ara: 0
+    psm6_ara: 7 ' شن
+0000000000
+    psm8_fas+ara: 02077
+    psm8_fas+ara+eng: 02077
+    psm13: a a
+    psm10: we
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۸ هت
+    psm8_fas: ۸ هت
+    psm6_fas: ۸ هت
+    psm7_ara: كلل © <
+    psm8_ara: كلل © <
+    psm6_ara: كلل © <
+    psm7_fas+ara: < © ۸
+    psm8_fas+ara: < © ۸
+    psm7_fas+ara+eng: oe ۸
+    psm8_fas+ara+eng: oe ۸
+    psm13: oe 4
+    psm10: oe 4
+
+  Preprocessing: closed
+    psm7_fas: 6 ۳
+    psm8_fas: 6 ۳
+    psm6_fas: 6 ۳
+    psm7_ara: 297
+    psm8_ara: 297
+    psm6_ara: 297
+    psm7_fas+ara: 297
+    psm8_fas+ara: 297
+    psm7_fas+ara+eng: 297
+    psm8_fas+ara+eng: 297
+    psm13: ww 4
+    psm10: ww 4
+
+
+--- Region: bottom_10 (0,597)-(390,664) 390x67 ---
+  Preprocessing: otsu
+    psm8_fas: ۳ ۰
+    psm8_ara: 5 كلةة 2
+    psm8_fas+ara: ۳ ۰
+    psm8_fas+ara+eng: ۳ ۰ «A
+    psm13: _— <-
+    psm10: _ — «A
+
+  Preprocessing: adaptive
+    psm8_fas: با
+    psm6_fas: کش هر رازه ره تاه ای تن روز
+    psm8_ara: ل
+    psm6_ara: ا ا ل ا 1 1 1
+    psm8_fas+ara: ل
+    psm8_fas+ara+eng: ل
+    psm13: ee
+    psm10: ee
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: س ۰
+    psm8_ara: ا ا 000
+    psm8_fas+ara: 1 2
+    psm8_fas+ara+eng: a 2
+    psm13: a a
+    psm10: a
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱ ۱
+    psm8_fas: ی
+    psm6_fas: <*
+    psm7_ara: < 2-5 7
+    psm8_ara: سي 2
+    psm6_ara: < 2-5 7
+    psm7_fas+ara: ۱ ۱
+    psm8_fas+ara: 7 ی
+    psm7_fas+ara+eng: ۱ ۱
+    psm8_fas+ara+eng: 7 ی
+    psm13: _— 4
+    psm10: a
+
+  Preprocessing: closed
+    psm8_fas: ای
+    psm8_ara: ية
+    psm8_fas+ara: ای
+    psm8_fas+ara+eng: “al
+    psm13: _— de
+    psm10: “al
+
+
+--- Region: top_20 (0,0)-(390,132) 390x132 ---
+  Preprocessing: otsu
+    psm8_fas: وم
+    psm8_ara: © عستو
+    psm8_fas+ara: © وم
+    psm8_fas+ara+eng: | ©
+    psm13: | |
+    psm10: | |
+
+  Preprocessing: adaptive
+    psm8_fas: ۳
+    psm6_fas: 1
+0 "٩
+۷
+    psm8_ara: ير
+    psm6_ara: ل 0
+ل
+ل ل ا
+    psm8_fas+ara: ۳
+    psm8_fas+ara+eng: ۳
+    psm13: Lo
+    psm10: Lo
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: کم
+    psm6_fas: و /
+    psm8_ara: لت
+    psm6_ara: تور 2
+    psm8_fas+ara: کم
+    psm8_fas+ara+eng: fF Xr
+    psm13: fF Xr
+    psm10: fF Xr
+
+  Preprocessing: denoised_otsu
+    psm8_fas: وم
+    psm8_ara: ه77
+    psm8_fas+ara: وم
+    psm8_fas+ara+eng: وم
+    psm13: | on
+    psm10: | on
+
+  Preprocessing: closed
+    psm8_fas: وم
+    psm8_ara: 7
+    psm8_fas+ara: وم
+    psm8_fas+ara+eng: | وم
+    psm13: l |
+    psm10: l |
+
+
+--- Region: top_10 (0,0)-(390,66) 390x66 ---
+  Preprocessing: otsu
+    psm8_fas: ات ۴
+    psm8_ara: ع ل
+    psm8_fas+ara: ات ۴
+    psm8_fas+ara+eng: ات ۴
+    psm13: fF .
+    psm10: fF .
+
+  Preprocessing: adaptive
+    psm8_fas: 2
+    psm6_fas: با
+۰ 2
+    psm8_ara: ار
+    psm6_ara: رت
+‎١‏ ل
+    psm8_fas+ara: 2
+    psm8_fas+ara+eng: Lo
+    psm13: Lo
+    psm10: Lo
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: 0
+    psm8_ara: ا لش 1
+    psm8_fas+ara: ا 0
+    psm8_fas+ara+eng: 0 \
+    psm13: fF .~ \
+    psm10: fF .~ \
+
+  Preprocessing: denoised_otsu
+    psm8_fas: شش ۴
+    psm8_ara: " اغا كن
+    psm8_fas+ara: " شش ۴
+    psm8_fas+ara+eng: " شش ۴
+    psm13: yF « Y
+    psm10: yF « Y
+
+  Preprocessing: closed
+    psm8_fas: انب 8
+    psm8_ara: ل ا كنم
+    psm8_fas+ara: انب 8
+    psm8_fas+ara+eng: fF ‏انب‎ \
+    psm13: fF .« \
+    psm10: fF .« \
+
+
+--- Region: left_side (0,0)-(117,664) 117x664 ---
+  Preprocessing: otsu
+    psm7_fas: ۸
+    psm7_ara: /
+    psm8_ara: ٍ
+    psm7_fas+ara: ۸
+    psm7_fas+ara+eng: ۸
+    psm13: ;
+
+  Preprocessing: adaptive
+    psm6_fas: 2 و
+مت
+۰۰ 909
+0
+رز
+    psm8_ara: :
+    psm6_ara: ا 0
+3 2-0
+ل
+ل
+ل ل 2
+    psm8_fas+ara: :
+    psm8_fas+ara+eng: :
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: 4
+    psm7_ara: /
+    psm8_ara: ْ
+    psm7_fas+ara: 4
+    psm7_fas+ara+eng: f
+
+  Preprocessing: denoised_otsu
+    psm8_fas: 1
+    psm6_fas: ی
+    psm7_ara: 2
+    psm8_ara: ه
+    psm6_ara: 6
+    psm8_fas+ara: 1
+    psm8_fas+ara+eng: 1
+    psm13: ;
+
+  Preprocessing: closed
+    psm6_fas: 4
+    psm7_ara: :
+    psm8_ara: ٍ
+    psm6_ara: 4
+
+
+--- Region: right_side (273,0)-(390,664) 117x664 ---
+  Preprocessing: otsu
+    psm8_fas: ۱
+    psm6_fas: و
+3 ی
+    psm7_ara: :
+    psm8_ara: ١
+    psm6_ara: 0
+2 3
+:
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: adaptive
+    psm6_fas: ۱ 0
+۰ 0
+ِِ
+9 1 ِِ
+اس
+3 1 و
+    psm8_ara: ١
+    psm6_ara: ا 0
+5 1
+0 00
+0 1 0
+ل
+3 2 0
+    psm8_fas+ara: ١
+    psm8_fas+ara+eng: ١
+    psm13: :
+    psm10: :
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ۱
+    psm7_ara: 3
+    psm8_ara: ١
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: denoised_otsu
+    psm8_fas: ۱
+    psm6_fas: 1
+    psm7_ara: :
+    psm8_ara: ١
+    psm6_ara: 3
+    psm8_fas+ara: :
+    psm8_fas+ara+eng: :
+
+  Preprocessing: closed
+    psm8_fas: ۱
+    psm6_fas: 1
+    psm7_ara: ١:
+    psm8_ara: ١
+    psm6_ara: 2
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+
+--- Region: center_bottom (117,531)-(273,664) 156x133 ---
+  Preprocessing: otsu
+    psm8_fas: ان
+    psm8_ara: --
+    psm8_fas+ara: ان
+    psm8_fas+ara+eng: ان
+    psm13: J
+    psm10: J
+
+  Preprocessing: adaptive
+    psm8_fas: ِِ
+    psm6_fas: 9
+ی
+۱
+    psm7_ara: !ِ 1 0
+    psm8_ara: 00
+    psm6_ara: يه
+الي
+ا
+    psm8_fas+ara: 00
+    psm8_fas+ara+eng: a
+    psm13: a
+    psm10: a
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: 0
+    psm8_ara: 21
+    psm8_fas+ara: 0
+    psm8_fas+ara+eng: ne
+    psm13: se
+    psm10: ne
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ف
+    psm8_fas: ف
+    psm6_fas: ف
+    psm7_ara: هه
+    psm8_ara: هه
+    psm6_ara: هه
+    psm7_fas+ara: هه
+    psm8_fas+ara: هه
+    psm7_fas+ara+eng: هه
+    psm8_fas+ara+eng: هه
+    psm13: J
+    psm10: J
+
+  Preprocessing: closed
+    psm8_fas: ان
+    psm8_ara: جه
+    psm8_fas+ara: ان
+    psm8_fas+ara+eng: ان
+    psm13: J
+    psm10: J
+
+
+============================================================
+File: child_006.jpg (390x673)
+============================================================
+
+--- Region: bottom_30 (0,471)-(390,673) 390x202 ---
+  Preprocessing: otsu
+    psm7_fas: ضض‌
+    psm8_fas: ضض‌
+    psm6_fas: ضض‌
+    psm7_ara: ١ ‏ور‎
+    psm8_ara: ١ ‏ور‎
+    psm6_ara: ١ ‏ور‎
+    psm7_fas+ara: ١ ‏ور‎
+    psm8_fas+ara: ١ ‏ور‎
+    psm7_fas+ara+eng: ١ ‏ور‎
+    psm8_fas+ara+eng: ١ ‏ور‎
+    psm13: .
+    psm10: pf
+
+  Preprocessing: adaptive
+    psm8_fas: ۳
+    psm6_fas: اد و ور ی اج سس ات چا 3۳
+    psm8_ara: 0
+    psm6_ara: عن ولخو كح اال لع ما ا و 1
+    psm8_fas+ara: ۳
+    psm8_fas+ara+eng: ۳
+    psm13: 1 Ae
+    psm10: 1 Ae
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۵
+    psm8_fas: ۵
+    psm6_fas: ۵
+    psm7_ara: ٠١ ‏حجث‎
+    psm8_ara: ٠١ ‏حجث‎
+    psm6_ara: ٠١ ‏حجث‎
+    psm7_fas+ara: ٠١ ‏حجث‎
+    psm8_fas+ara: ٠١ ‏حجث‎
+    psm7_fas+ara+eng: ٠١ ‏حجث‎
+    psm8_fas+ara+eng: ٠١ ‏حجث‎
+    psm13: .
+    psm10: .
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: «#۳۰
+    psm6_fas: «#۳۰
+    psm7_ara: ٠١ ‏حث‎
+    psm8_ara: ٠١ ‏حث‎
+    psm6_ara: ٠١ ‏حث‎
+    psm7_fas+ara: ۱
+    psm8_fas+ara: :
+    psm13: . >
+
+  Preprocessing: closed
+    psm7_fas: ضُ‌
+    psm8_fas: ضُ‌
+    psm6_fas: ضُ‌
+    psm7_ara: ١ ‏حير‎
+    psm8_ara: ١ ‏حير‎
+    psm6_ara: ١ ‏حير‎
+    psm7_fas+ara: ١ ‏حير‎
+    psm8_fas+ara: 5
+    psm7_fas+ara+eng: ١ ‏حير‎
+    psm8_fas+ara+eng: 5
+    psm13: .
+    psm10: aj
+
+
+--- Region: bottom_20 (0,538)-(390,673) 390x135 ---
+  Preprocessing: otsu
+    psm8_fas: <<
+    psm8_ara: << ‏ثم‎ ١
+    psm8_fas+ara: 1 ثث «
+    psm8_fas+ara+eng: « 2
+    psm13: »~ Ae
+    psm10: ~ 2
+
+  Preprocessing: adaptive
+    psm8_fas: 0
+    psm8_ara: ما
+    psm8_fas+ara: ما
+    psm8_fas+ara+eng: ‎ee‏ ما
+    psm13: ine ee
+    psm10: ine ee
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: #۴
+    psm8_fas: ل#
+    psm6_fas: #۴
+    psm7_ara: 1 ثم
+    psm8_ara: ( ثم <<
+    psm6_ara: 1 ثم
+    psm7_fas+ara: #۴ 1
+    psm8_fas+ara: 1 ثم
+    psm7_fas+ara+eng: . fe
+    psm8_fas+ara+eng: 1 ثم
+    psm13: »~ 2
+    psm10: . fe
+
+  Preprocessing: denoised_otsu
+    psm7_fas: <-
+    psm8_fas: ۸
+    psm6_fas: <-
+    psm7_ara: «١ ‏ثث‎ 2
+    psm8_ara: 01م <ا
+    psm6_ara: «١ ‏ثث‎ 2
+    psm7_fas+ara: «١ ‏ثث‎ 2
+    psm8_fas+ara: «١ ‏ثث‎ 2
+    psm7_fas+ara+eng: Ww
+    psm8_fas+ara+eng: Ww
+    psm13: »~ Ae
+    psm10: Ww
+
+  Preprocessing: closed
+    psm7_fas: ٩8
+    psm8_fas: <<
+    psm6_fas: ٩8
+    psm7_ara: ل ثم ‎١‏
+    psm8_ara: << ‏ثم‎ ١
+    psm6_ara: ل ثم ‎١‏
+    psm7_fas+ara: ٩8 ‏ل‎
+    psm8_fas+ara: ل ثم ‎١‏
+    psm7_fas+ara+eng: ٩8 ‏ل‎
+    psm8_fas+ara+eng: ل ثم ‎١‏
+    psm13: »~ A
+    psm10: » Ae
+
+
+--- Region: bottom_10 (0,605)-(390,673) 390x68 ---
+  Preprocessing: otsu
+    psm7_fas: ار
+    psm8_fas: #
+    psm6_fas: ار
+    psm7_ara: 3
+    psm8_ara: 00
+    psm6_ara: 3
+    psm7_fas+ara: ار
+    psm8_fas+ara: 3
+    psm7_fas+ara+eng: ار
+    psm8_fas+ara+eng: 3
+    psm13: a
+    psm10: .
+
+  Preprocessing: adaptive
+    psm7_fas: ی
+    psm8_fas: ی
+    psm7_ara: ا ل ا
+    psm8_ara: ا ل ا
+    psm7_fas+ara: ا ل ا
+    psm8_fas+ara: ا ل ا
+    psm7_fas+ara+eng: ا ل ا
+    psm8_fas+ara+eng: ا ل ا
+    psm13: Gs ee geri
+    psm10: Gs ee geri
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: "ّ
+    psm8_fas: #
+    psm6_fas: .
+    psm7_ara: |.
+    psm8_ara: ا 0#
+    psm6_ara: |.
+    psm7_fas+ara: |.
+    psm8_fas+ara: |.
+    psm7_fas+ara+eng: |.
+    psm8_fas+ara+eng: |.
+    psm13: a de
+    psm10: _
+
+  Preprocessing: denoised_otsu
+    psm7_fas: #۳
+    psm8_fas: .  #
+    psm6_fas: #۳
+    psm7_ara: ١1
+    psm8_ara: ا ا
+    psm6_ara: ١1
+    psm7_fas+ara: #۳
+    psm8_fas+ara: ١1
+    psm7_fas+ara+eng: #۳
+    psm8_fas+ara+eng: ١1
+    psm13: a de
+    psm10: . A
+
+  Preprocessing: closed
+    psm7_fas: یر _ نا
+    psm8_fas: ٩
+    psm6_fas: یر _ نا
+    psm7_ara: ١
+    psm8_ara: 0000#
+    psm6_ara: ١
+    psm7_fas+ara: یر _ نا
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: یر _ نا
+    psm8_fas+ara+eng: ١
+    psm13: a
+    psm10: .
+
+
+--- Region: top_20 (0,0)-(390,134) 390x134 ---
+  Preprocessing: otsu
+    psm7_fas: ۹
+    psm8_fas: فِِ
+    psm6_fas: ۹
+    psm7_ara: 5
+    psm8_ara: خخ 0
+    psm6_ara: 5
+    psm7_fas+ara: 5
+    psm8_fas+ara: 5
+    psm7_fas+ara+eng: 5
+    psm8_fas+ara+eng: 5
+    psm13: YY
+    psm10: 4
+
+  Preprocessing: adaptive
+    psm8_fas: ار
+    psm6_fas: ی مر ی مج یت
+    psm8_ara: اسه
+    psm6_ara: 23 الشقايلة . د م كوي رشقت
+    psm8_fas+ara: ار
+    psm8_fas+ara+eng: ee
+    psm13: aN
+    psm10: ee
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: "‌
+    psm8_fas: نآ
+    psm6_fas: "‌
+    psm7_ara: 001
+    psm8_ara: خا 00
+    psm6_ara: 001
+    psm7_fas+ara: 001
+    psm8_fas+ara: 001
+    psm7_fas+ara+eng: 001
+    psm8_fas+ara+eng: 001
+    psm13: LY
+    psm10: _
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۹
+    psm8_fas: فِ«
+    psm6_fas: ۹
+    psm7_ara: 5
+    psm8_ara: خخ 0
+    psm6_ara: 5
+    psm7_fas+ara: 5
+    psm8_fas+ara: 5
+    psm7_fas+ara+eng: 5
+    psm8_fas+ara+eng: 5
+    psm13: YY
+    psm10: 4
+
+  Preprocessing: closed
+    psm7_fas: ۰
+    psm8_fas: ف
+    psm6_fas: ۰
+    psm7_ara: 5
+    psm8_ara: 0
+    psm6_ara: 5
+    psm7_fas+ara: 5
+    psm8_fas+ara: 5
+    psm7_fas+ara+eng: 5
+    psm8_fas+ara+eng: 5
+    psm13: YY
+    psm10: 4
+
+
+--- Region: top_10 (0,0)-(390,67) 390x67 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: 08 و
+    psm6_fas: #6۹
+    psm7_ara: 0
+    psm8_ara: ا ا
+    psm6_ara: 0
+    psm7_fas+ara: ۱
+    psm8_fas+ara: 0
+    psm7_fas+ara+eng: ۱
+    psm13: a
+
+  Preprocessing: adaptive
+    psm8_fas: 0
+    psm8_ara: ل 0
+    psm8_fas+ara: ات 0
+    psm8_fas+ara+eng: ee ‏ات‎
+    psm13: ee ek oe
+    psm10: ee heh
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: #6۹
+    psm8_fas: 08 و
+    psm6_fas: #6۹
+    psm7_ara: 3:
+    psm8_ara: ا ااا
+    psm6_ara: 3:
+    psm7_fas+ara: #6۹
+    psm8_fas+ara: 3:
+    psm7_fas+ara+eng: #6۹
+    psm8_fas+ara+eng: 3:
+    psm13: a
+    psm10: .
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: 08 و
+    psm6_fas: #6۹
+    psm7_ara: 0
+    psm8_ara: ا ا
+    psm6_ara: 0
+    psm7_fas+ara: ۱
+    psm8_fas+ara: 0
+    psm7_fas+ara+eng: ۱
+    psm13: a
+
+  Preprocessing: closed
+    psm7_fas: #6۹
+    psm8_fas: 08
+    psm6_fas: #6۹
+    psm7_ara: ١
+    psm8_ara: ا
+    psm6_ara: ١
+    psm7_fas+ara: #6۹
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: #6۹
+    psm8_fas+ara+eng: _
+    psm13: a
+    psm10: _
+
+
+--- Region: left_side (0,0)-(117,673) 117x673 ---
+  Preprocessing: otsu
+    psm6_fas: ۲
+۹
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: :
+٠
+
+  Preprocessing: adaptive
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ا ی ووی ۳
+و 2۳
+ااا تن
+
+سر
+و
+    psm7_ara: ١
+    psm8_ara: ْ
+    psm6_ara: لبس اا اع رود تك
+ا ا ان
+ل
+
+1(
+أذ
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm6_fas: ۲
+۹
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ,
++
+
+  Preprocessing: denoised_otsu
+    psm6_fas: ۲
+۹
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: .:
+٠
+
+  Preprocessing: closed
+    psm6_fas: ۲
+۹
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: :
+2
+
+
+--- Region: right_side (273,0)-(390,673) 117x673 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: 1
+4
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: 1
+,
+    psm7_fas+ara: ١
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: ١
+    psm8_fas+ara+eng: ١
+    psm10: )
+
+  Preprocessing: adaptive
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: تزا
+    psm7_ara: )ُ
+    psm8_ara: )ُ
+    psm6_ara: 0
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: 1
+۰
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ١
+4
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+۰
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: 9
+4
+    psm7_fas+ara: ١
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: ١
+    psm8_fas+ara+eng: ١
+
+
+--- Region: center_bottom (117,538)-(273,673) 156x135 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: گر
+    psm6_fas: گر
+    psm7_ara: ل
+    psm8_ara: ل
+    psm6_ara: ل
+    psm7_fas+ara: ۱
+    psm8_fas+ara: گر
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: گر
+    psm13: y
+    psm10: y
+
+  Preprocessing: adaptive
+    psm8_fas: 0
+    psm6_fas: 0
+    psm8_ara: ال
+    psm6_ara: ال
+    psm8_fas+ara: ال
+    psm8_fas+ara+eng: ال
+    psm13: oe
+    psm10: oe
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۳
+    psm8_fas: ۳
+    psm6_fas: ۳
+    psm7_ara: ل
+    psm8_ara: ل
+    psm6_ara: ل
+    psm7_fas+ara: ۳
+    psm8_fas+ara: ۳
+    psm7_fas+ara+eng: ۳
+    psm8_fas+ara+eng: ۳
+    psm13: y
+    psm10: y
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۳
+    psm8_fas: ۳
+    psm6_fas: ۳
+    psm7_ara: 7
+    psm8_ara: 7
+    psm6_ara: 7
+    psm7_fas+ara: ۳
+    psm8_fas+ara: ۳
+    psm7_fas+ara+eng: ۳
+    psm8_fas+ara+eng: ۳
+    psm13: >
+    psm10: >
+
+  Preprocessing: closed
+    psm7_fas: گم
+    psm8_fas: گم
+    psm6_fas: گم
+    psm7_ara: 7
+    psm8_ara: 7
+    psm6_ara: 7
+    psm7_fas+ara: گم
+    psm8_fas+ara: گم
+    psm7_fas+ara+eng: گم
+    psm8_fas+ara+eng: گم
+    psm13: y
+    psm10: y
+
+
+============================================================
+File: child_007.jpg (398x664)
+============================================================
+
+--- Region: bottom_30 (0,464)-(398,664) 398x200 ---
+  Preprocessing: otsu
+    psm8_fas: فك
+    psm6_fas: ك«(9۹ِّ۳
+    psm8_ara: 2
+    psm6_ara: ‎١‏ ند
+    psm8_fas+ara: 2
+    psm8_fas+ara+eng: a
+    psm13: a
+    psm10: a
+
+  Preprocessing: adaptive
+    psm8_fas: ِآ :
+    psm6_fas: ۱ ۱ 1
+    psm8_ara: >
+    psm6_ara: نر 0 1 > الس
+    psm8_fas+ara: ِآ >
+    psm8_fas+ara+eng: a8 i
+    psm13: a8 i
+    psm10: a8 i
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ٩۱
+    psm8_ara: 1
+    psm8_fas+ara: ٩۱ /١
+    psm8_fas+ara+eng: ٩۱ /١
+    psm13: A ft
+    psm10: \ /}
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۳ ۳»
+    psm8_fas: فك
+    psm6_fas: ۳ | |...
+    psm7_ara: 1 0
+    psm8_ara: 2
+    psm6_ara: ‎١‏ لال
+    psm7_fas+ara: 1 0
+    psm8_fas+ara: 2
+    psm7_fas+ara+eng: 1 >
+    psm8_fas+ara+eng: 2
+    psm13: a
+    psm10: a
+
+  Preprocessing: closed
+    psm8_fas: فك
+    psm6_fas: َ«د9۹ِّ۳
+    psm8_ara: 2
+    psm6_ara: 27*00
+    psm8_fas+ara: 2
+    psm8_fas+ara+eng: a
+    psm13: a
+    psm10: a
+
+
+--- Region: bottom_20 (0,531)-(398,664) 398x133 ---
+  Preprocessing: otsu
+    psm7_fas: , ۱
+    psm8_fas: ۶ ۱
+    psm6_fas: 8 . دب "۳ ِِ"
+1 ی او ۰
+19 1
+    psm7_ara: / 60١ 4|
+    psm8_ara: 6١ 12
+    psm6_ara: 1 . بكر +
+2 . 00 .
+! 1
+    psm7_fas+ara: / ۱ 4|
+    psm8_fas+ara: ۶ ۱ 4|
+    psm7_fas+ara+eng: / AG
+    psm8_fas+ara+eng: ۶ fj
+    psm13: a\ (sk
+    psm10: eg fj
+
+  Preprocessing: adaptive
+    psm8_fas: ۵
+    psm8_ara: اه
+    psm8_fas+ara: ۵
+    psm8_fas+ara+eng: ۵
+    psm13: ee
+    psm10: ee
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ٩۷۱
+    psm8_ara: 11 7
+    psm8_fas+ara: ٩۷۱ 7
+    psm8_fas+ara+eng: ٩۷۱ 7
+    psm13: oN NOGEF
+    psm10: oN NOGEF
+
+  Preprocessing: denoised_otsu
+    psm8_fas: 8 ۱
+    psm8_ara: 0١
+    psm8_fas+ara: 0١
+    psm8_fas+ara+eng: 0١ (Ez
+    psm13: a\ (Ez
+    psm10: a\ (Ez
+
+  Preprocessing: closed
+    psm7_fas: ۶ ۱ 4
+    psm8_fas: ۶ ۱
+    psm6_fas: ۶ ۱ 4
+    psm7_ara: ١ 4|
+    psm8_ara: 6١ 4
+    psm6_ara: ١ 4|
+    psm7_fas+ara: ۶ ۱ 4
+    psm8_fas+ara: ۶ ۱ 4|
+    psm7_fas+ara+eng: BA 4
+    psm8_fas+ara+eng: BA 4|
+    psm13: a\ (a
+    psm10: BA ¢
+
+
+--- Region: bottom_10 (0,597)-(398,664) 398x67 ---
+  Preprocessing: otsu
+    psm8_fas: ۱۳
+    psm6_fas: : ۱ ۳ 3
+    psm8_ara: ل ك1 00
+    psm6_ara: 5 2-2 2
+    psm8_fas+ara: ۱۳ 53
+    psm8_fas+ara+eng: oe ed
+    psm13: Te
+    psm10: oe ed
+
+  Preprocessing: adaptive
+    psm8_fas: بخ
+    psm6_fas: ی ان ده
+    psm8_ara: لم
+    psm6_ara: ا ا
+    psm8_fas+ara: لم
+    psm8_fas+ara+eng: ‎a‏ لم
+    psm13: Rs a
+    psm10: Rs a
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ال ها
+    psm8_ara: وا ا ا 000
+    psm8_fas+ara: او ها
+    psm8_fas+ara+eng: او .4
+    psm13: a es oe
+    psm10: 4. +
+
+  Preprocessing: denoised_otsu
+    psm7_fas: 3 1
+    psm8_fas: ۳۳ ۷ "6
+    psm7_ara: 5 5 8 0
+    psm8_ara: الاح 2
+    psm7_fas+ara: 5 3 1
+    psm8_fas+ara: ۳۳ ۷ "6
+    psm7_fas+ara+eng: 5 3 1
+    psm8_fas+ara+eng: RS
+    psm13: me
+    psm10: RS
+
+  Preprocessing: closed
+    psm8_fas: ۳
+    psm8_ara: ل كا 00
+    psm8_fas+ara: ۳ 53
+    psm8_fas+ara+eng: ۳ 53
+    psm13: Se
+    psm10: Se oe
+
+
+--- Region: top_20 (0,0)-(398,132) 398x132 ---
+  Preprocessing: otsu
+    psm7_fas: دس ۲
+    psm8_fas: دس ۲
+    psm6_fas: دس ۲
+    psm7_ara: 7 ‏لل‎ ١
+    psm8_ara: 7 ‏لل‎ ١
+    psm6_ara: 7 ‏لل‎ ١
+    psm7_fas+ara: دس ۲
+    psm8_fas+ara: دس ۲
+    psm7_fas+ara+eng: دس ۲
+    psm8_fas+ara+eng: دس ۲
+    psm13: a
+    psm10: a
+
+  Preprocessing: adaptive
+    psm7_fas: |
+    psm8_fas: |
+    psm6_fas: << روز سکیا | ال
+    psm7_ara: ام ل
+    psm8_ara: ام ل
+    psm6_ara: لإر4 77ت 7حبتتتت عر زا هن ليقي | أن
+    psm7_fas+ara: ام |
+    psm8_fas+ara: ام |
+    psm7_fas+ara+eng: ==.
+    psm8_fas+ara+eng: ==.
+    psm13: ==.
+    psm10: ==.
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: دس ۲
+    psm8_fas: دس ۲
+    psm6_fas: دس ۲
+    psm7_ara: اد حمر [
+    psm8_ara: اد حمر [
+    psm6_ara: اد حمر [
+    psm7_fas+ara: دس ۲
+    psm8_fas+ara: دس ۲
+    psm7_fas+ara+eng: دس ۲
+    psm8_fas+ara+eng: دس ۲
+    psm13: | a
+    psm10: | a
+
+  Preprocessing: denoised_otsu
+    psm7_fas: دح ۲
+    psm8_fas: دح ۲
+    psm6_fas: دح ۲
+    psm7_ara: ا م 7
+    psm8_ara: ا م 7
+    psm6_ara: ا م 7
+    psm7_fas+ara: دح ۲
+    psm8_fas+ara: دح ۲
+    psm7_fas+ara+eng: دح ۲
+    psm8_fas+ara+eng: دح ۲
+    psm13: P~
+    psm10: P~
+
+  Preprocessing: closed
+    psm7_fas: دس ۲
+    psm8_fas: دس ۲
+    psm6_fas: دس ۲
+    psm7_ara: 0 ‏لل‎ ١
+    psm8_ara: 0 ‏لل‎ ١
+    psm6_ara: 0 ‏لل‎ ١
+    psm7_fas+ara: دس ۲
+    psm8_fas+ara: دس ۲
+    psm7_fas+ara+eng: ora
+    psm8_fas+ara+eng: ora
+    psm13: ora
+    psm10: ora
+
+
+--- Region: top_10 (0,0)-(398,66) 398x66 ---
+  Preprocessing: otsu
+    psm7_fas: ۳ 1
+    psm8_fas: د«پ۵۰۹ ۵ ۳۲
+    psm6_fas: ۳ 1
+    psm7_ara: 0# 1
+    psm8_ara: اام
+    psm6_ara: 0# 1
+    psm7_fas+ara: ۳ 1
+    psm8_fas+ara: اام
+    psm7_fas+ara+eng: ۳ 1
+    psm8_fas+ara+eng: اام
+    psm13: ee
+    psm10: ee
+
+  Preprocessing: adaptive
+    psm8_fas: ات
+    psm8_ara: ا ل 0
+    psm8_fas+ara: ات
+    psm8_fas+ara+eng: ات
+    psm13: ff erage
+    psm10: ff erage
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۷ ۵ . . . .
+    psm8_fas: ۷ ۵ . . . .
+    psm6_fas: ۷ ۵ . . . .
+    psm7_ara: ااا اال 0
+    psm8_ara: ااا اال 0
+    psm6_ara: ااا اال 0
+    psm7_fas+ara: ۷ ۵ . . . .
+    psm8_fas+ara: ۷ ۵ . . . .
+    psm7_fas+ara+eng: ۷ ۵ . . . .
+    psm8_fas+ara+eng: ۷ ۵ . . . .
+    psm13: ae
+    psm10: ae
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۳ 1
+    psm8_fas: د«پ۵۰۵9۵۰ ۵ "5۲
+    psm6_fas: ۳ 1
+    psm7_ara: 0# ١
+    psm8_ara: اام
+    psm6_ara: 0# ١
+    psm7_fas+ara: ۳ 1
+    psm8_fas+ara: اام
+    psm7_fas+ara+eng: ۳ 1
+    psm8_fas+ara+eng: اام
+    psm13: eee
+    psm10: eee
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm8_fas: («(۵«ح«۵«۵‌ "ت۳5
+    psm6_fas: ۱
+    psm7_ara: 0 ١
+    psm8_ara: اك
+    psm6_ara: 0 ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: اك
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: اك
+    psm13: eee
+    psm10: eee
+
+
+--- Region: left_side (0,0)-(119,664) 119x664 ---
+  Preprocessing: otsu
+    psm8_fas: ۱
+    psm6_fas: 0 ۱
+۳
+زار
+۳
+۳
+    psm7_ara: ْ
+    psm8_ara: ١
+    psm6_ara: ١ 7
+3
+3
+0
+:
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: adaptive
+    psm7_fas: ْ
+    psm8_fas: ۱
+    psm6_fas: و
+    psm7_ara: زْ
+    psm8_ara: :
+    psm6_ara: ا ‎١‏ ب
+    psm7_fas+ara: ْ
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ْ
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۲
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: 4
+    psm7_fas+ara: ١
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ١
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+
+--- Region: right_side (278,0)-(398,664) 120x664 ---
+  Preprocessing: otsu
+    psm8_fas: ۱
+    psm6_fas: ۰
+۲
+    psm8_ara: ١
+    psm6_ara: ١
+/
+    psm8_fas+ara: ١
+    psm8_fas+ara+eng: ١
+
+  Preprocessing: adaptive
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: 0 ۳
+    psm7_ara: ظ
+    psm8_ara: ظ
+    psm6_ara: 0 / 0
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ۱
+    psm6_fas: /
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: /
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۸,
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ى١‎
+/
+    psm7_fas+ara: ١
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: ١
+    psm8_fas+ara+eng: ١
+
+  Preprocessing: closed
+    psm8_fas: ۱
+    psm6_fas: ۰
+۲
+    psm8_ara: ١
+    psm6_ara: ى
+/
+    psm8_fas+ara: ١
+    psm8_fas+ara+eng: ١
+
+
+--- Region: center_bottom (119,531)-(278,664) 159x133 ---
+  Preprocessing: otsu
+    psm8_fas: ۷
+    psm8_ara: ١ ١
+    psm8_fas+ara: ۷ ١
+    psm8_fas+ara+eng: ۷ ١
+    psm13: Nf
+    psm10: Nf
+
+  Preprocessing: adaptive
+    psm8_fas: ۱
+    psm8_ara: د
+    psm8_fas+ara: د
+    psm8_fas+ara+eng: د
+    psm13: ms
+    psm10: ms
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ۱
+    psm8_ara: 1
+    psm8_fas+ara: 1
+    psm8_fas+ara+eng: 1
+    psm13: v
+    psm10: v
+
+  Preprocessing: denoised_otsu
+    psm8_fas: اِ ۱
+    psm8_ara: ١ )
+    psm8_fas+ara: ١ ‏اِ‎
+    psm8_fas+ara+eng: ١ ‏اِ‎
+    psm13: N
+    psm10: N
+
+  Preprocessing: closed
+    psm8_fas: اِ ۷
+    psm8_ara: ١ |
+    psm8_fas+ara: ١ |
+    psm8_fas+ara+eng: Nf
+    psm13: Nf
+    psm10: Nf
+
+
+============================================================
+File: child_008.jpg (398x664)
+============================================================
+
+--- Region: bottom_30 (0,464)-(398,664) 398x200 ---
+  Preprocessing: otsu
+    psm7_fas: ۳
+    psm8_fas: >
+    psm6_fas: ۳
+    psm7_ara: 8 اكير
+    psm8_ara: 42
+    psm6_ara: 8 اكير
+    psm7_fas+ara: ۳ 8
+    psm8_fas+ara: >
+    psm7_fas+ara+eng: ۳ 8
+    psm8_fas+ara+eng: >
+    psm13: a
+    psm10: -hlUC<i~«CS
+
+  Preprocessing: adaptive
+    psm8_fas: و ان
+    psm8_ara: م
+    psm8_fas+ara: و ان
+    psm8_fas+ara+eng: و ان
+    psm13: ads
+    psm10: ads
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: م6
+    psm8_ara: ل 1
+    psm8_fas+ara: م6
+    psm8_fas+ara+eng: as
+    psm13: as
+    psm10: as
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۴ >
+    psm8_fas: فك
+    psm6_fas: ۴ >
+    psm7_ara: 8 اكير
+    psm8_ara: 42
+    psm6_ara: 8 اكير
+    psm7_fas+ara: ۴ >
+    psm8_fas+ara: فك
+    psm7_fas+ara+eng: ۴ >
+    psm8_fas+ara+eng: فك
+    psm13: a
+    psm10: y-lCS~S
+
+  Preprocessing: closed
+    psm7_fas: ۳۴
+    psm8_fas: >
+    psm6_fas: ۳۴
+    psm7_ara: 08 اك
+    psm8_ara: 42
+    psm6_ara: 08 اك
+    psm7_fas+ara: ۳۴ 08
+    psm8_fas+ara: >
+    psm7_fas+ara+eng: ۳۴ 08
+    psm8_fas+ara+eng: >
+    psm13: a
+    psm10: -lUCS
+
+
+--- Region: bottom_20 (0,531)-(398,664) 398x133 ---
+  Preprocessing: otsu
+    psm8_fas: . 1
+    psm8_ara: 208227
+    psm8_fas+ara: . 1
+    psm8_fas+ara+eng: . 1
+    psm13: 6 OA
+    psm10: i
+
+  Preprocessing: adaptive
+    psm7_fas: 0 ۳
+    psm8_fas: من
+    psm7_ara: ا 03"
+    psm8_ara: ”م
+    psm7_fas+ara: 0 ۳
+    psm8_fas+ara: ”م
+    psm7_fas+ara+eng: Ca ۳
+    psm8_fas+ara+eng: ”م
+    psm13: Oe
+    psm10: Oe
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ۹
+    psm6_fas: ۱ ۹
+‌ 4...
+    psm8_ara: ل 6
+    psm6_ara: 00
+فس 6.522 ب
+    psm8_fas+ara: ل ۹
+    psm8_fas+ara+eng: a A
+    psm13: a A
+    psm10: a A
+
+  Preprocessing: denoised_otsu
+    psm7_fas: 8
+    psm8_fas: 8
+    psm6_fas: 8
+    psm7_ara: الم 1م
+    psm8_ara: الم 1م
+    psm6_ara: الم 1م
+    psm7_fas+ara: الم 1م
+    psm8_fas+ara: الم 1م
+    psm7_fas+ara+eng: SS ‏الم‎
+    psm8_fas+ara+eng: SS ‏الم‎
+    psm13: SS 6
+    psm10: SS 6
+
+  Preprocessing: closed
+    psm7_fas: 5
+    psm8_fas: شم
+    psm6_fas: 5
+    psm7_ara: ثم 65م
+    psm8_ara: ثم 6م
+    psm6_ara: ثم 65م
+    psm7_fas+ara: ثم 5
+    psm8_fas+ara: ثم 65م
+    psm7_fas+ara+eng: i
+    psm8_fas+ara+eng: ثم 65م
+    psm13: Py
+    psm10: i
+
+
+--- Region: bottom_10 (0,597)-(398,664) 398x67 ---
+  Preprocessing: otsu
+    psm7_fas: 1
+    psm8_fas: 65
+    psm7_ara: 0ظ
+    psm8_ara: | #ل شط 000
+    psm7_fas+ara: 1
+    psm8_fas+ara: 0ظ
+    psm7_fas+ara+eng: 1
+    psm8_fas+ara+eng: 0ظ
+    psm13: — ——eEe
+    psm10: ——
+
+  Preprocessing: adaptive
+    psm8_fas: ی
+    psm8_ara: 0 0
+    psm8_fas+ara: ی
+    psm8_fas+ara+eng: ‎ee‏ ی
+    psm13: ee, ee ee
+    psm10: ee, ee ee
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: 06
+    psm8_ara: ااا 00
+    psm8_fas+ara: 06
+    psm8_fas+ara+eng: 06 <7
+    psm13: ae
+    psm10: ._ <7
+
+  Preprocessing: denoised_otsu
+    psm13: ay
+
+  Preprocessing: closed
+    psm13: a ae
+
+
+--- Region: top_20 (0,0)-(398,132) 398x132 ---
+  Preprocessing: otsu
+    psm7_fas: ۲ .._ ۲
+    psm8_fas: ۲ .._ ۲
+    psm6_fas: ۲ .._ ۲
+    psm7_ara: سم
+    psm8_ara: سم
+    psm6_ara: سم
+    psm7_fas+ara: ۲ .._ ۲
+    psm8_fas+ara: ۲ .._ ۲
+    psm7_fas+ara+eng: ۲  ¥
+    psm8_fas+ara+eng: ۲  ¥
+    psm13: r  ¥
+    psm10: r  ¥
+
+  Preprocessing: adaptive
+    psm7_fas: تست |
+    psm8_fas: تست |
+    psm7_ara: حدر
+    psm8_ara: حدر
+    psm7_fas+ara: حدر
+    psm8_fas+ara: حدر
+    psm7_fas+ara+eng: حدر
+    psm8_fas+ara+eng: حدر
+    psm13: [aa
+    psm10: [ aa)
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۷ سس ۲
+    psm8_fas: ۷ سس ۲
+    psm6_fas: ۷ سس ۲
+    psm7_ara: 2# 6
+    psm8_ara: 2# 6
+    psm6_ara: 2# 6
+    psm7_fas+ara: ۷ سس ۲
+    psm8_fas+ara: ۷ سس ۲
+    psm7_fas+ara+eng: ۷ سس ۲
+    psm8_fas+ara+eng: ۷ سس ۲
+    psm13: , - ¥
+    psm10: , - ¥
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۲ . ۷
+    psm8_fas: ۲ . ۷
+    psm6_fas: ۲ . ۷
+    psm7_ara: دكار
+    psm8_ara: دكار
+    psm6_ara: دكار
+    psm7_fas+ara: دكار
+    psm8_fas+ara: دكار
+    psm7_fas+ara+eng: ry
+    psm8_fas+ara+eng: ry
+    psm13: ry
+    psm10: ry
+
+  Preprocessing: closed
+    psm7_fas: ۲ .. ۲
+    psm8_fas: ۲ .. ۲
+    psm6_fas: ۲ .. ۲
+    psm7_ara: 05
+    psm8_ara: 05
+    psm6_ara: 05
+    psm7_fas+ara: ۲ .. ۲
+    psm8_fas+ara: ۲ .. ۲
+    psm7_fas+ara+eng: ro
+    psm8_fas+ara+eng: ro
+    psm13: ro
+    psm10: ro
+
+
+--- Region: top_10 (0,0)-(398,66) 398x66 ---
+  Preprocessing: otsu
+    psm7_fas: "ّ #6۹
+    psm8_fas: ها
+    psm6_fas: "ّ #6۹
+    psm7_ara: 0 0
+    psm8_ara: 00
+    psm6_ara: 0 0
+    psm7_fas+ara: "ّ #6۹
+    psm8_fas+ara: ها
+    psm7_fas+ara+eng: J _
+    psm8_fas+ara+eng: - =
+    psm13: - =
+    psm10: - =
+
+  Preprocessing: adaptive
+    psm7_fas: ۲
+    psm8_fas: ۲
+    psm6_fas: ۲
+    psm7_ara: ا لخ '
+    psm8_ara: 0
+    psm6_ara: ا لخ '
+    psm7_fas+ara: ا لخ ۲
+    psm8_fas+ara: ا ۲
+    psm7_fas+ara+eng: genes.
+    psm8_fas+ara+eng: genes.
+    psm13: peer
+    psm10: genes.
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۳" #6۹
+    psm8_fas: ۲" ۰ ۰ ۰
+    psm6_fas: ۳" #6۹
+    psm7_ara: 0 0
+    psm8_ara: 00
+    psm6_ara: 0 0
+    psm7_fas+ara: ۳" #6۹
+    psm8_fas+ara: ۲" ۰ ۰ ۰
+    psm7_fas+ara+eng: - #6۹
+    psm8_fas+ara+eng: ۲" ۰ ۰ ۰
+    psm13: -— =e
+    psm10: -— =e
+
+  Preprocessing: denoised_otsu
+    psm7_fas: " #6۹
+    psm8_fas: ها
+    psm6_fas: " #6۹
+    psm7_ara: 0 0
+    psm8_ara: 02
+    psm6_ara: 0 0
+    psm7_fas+ara: " #6۹
+    psm8_fas+ara: ها
+    psm7_fas+ara+eng: J _
+    psm8_fas+ara+eng: ها
+    psm13: -  -
+    psm10: -  -
+
+  Preprocessing: closed
+    psm7_fas: "۳ 6۹
+    psm8_fas: ۲"
+    psm6_fas: "۳ 6۹
+    psm7_ara: 04 80
+    psm8_ara: 00000
+    psm6_ara: 04 80
+    psm7_fas+ara: "۳ 6۹
+    psm8_fas+ara: ۲"
+    psm7_fas+ara+eng: a _
+    psm8_fas+ara+eng: ۲"
+    psm13: - 8 8=8 SF
+    psm10: - 8 8=8 SF
+
+
+--- Region: left_side (0,0)-(119,664) 119x664 ---
+  Preprocessing: otsu
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm8_ara: ا
+    psm6_ara: ١
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: adaptive
+    psm8_fas: ۱
+    psm6_fas: ی رز
+۱۱
+    psm7_ara: :
+    psm8_ara: :
+    psm6_ara: 11د ,ل
+ا
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ْ
+    psm8_fas+ara: /
+    psm8_fas+ara+eng: (
+    psm10: (
+
+  Preprocessing: denoised_otsu
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm8_ara: ا
+    psm6_ara: ١
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: closed
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm8_ara: ا
+    psm6_ara: ١
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+
+--- Region: right_side (278,0)-(398,664) 120x664 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ظْ
+    psm8_ara: ِ
+    psm6_ara: ظْ
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm13: ,
+    psm10: )
+
+  Preprocessing: adaptive
+    psm8_fas: ۱
+    psm6_fas: 1
+۲ ٍ ۱
+    psm8_ara: ٍ
+    psm6_ara: د
+ظ 2 ٍ!
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ١
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ١
+    psm10: ’
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm7_ara: ظْ
+    psm8_ara: ِ
+    psm6_ara: ظْ
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm10: }
+
+  Preprocessing: closed
+    psm8_fas: ۱
+    psm6_fas: ۱
+    psm8_ara: ِ
+    psm6_ara: آ'
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+
+
+--- Region: center_bottom (119,531)-(278,664) 159x133 ---
+  Preprocessing: otsu
+    psm7_fas: ۵
+    psm8_fas: ۵
+    psm6_fas: ۵
+    psm7_ara: 7
+    psm8_ara: 7
+    psm6_ara: 7
+    psm7_fas+ara: 7
+    psm8_fas+ara: 7
+    psm7_fas+ara+eng: 7
+    psm8_fas+ara+eng: 7
+    psm13: wi
+    psm10: a
+
+  Preprocessing: adaptive
+    psm8_fas: _ِ
+    psm8_ara: 0
+    psm8_fas+ara: 0
+    psm8_fas+ara+eng: es
+    psm13: es
+    psm10: es
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ت۵۰
+    psm8_ara: اع
+    psm8_fas+ara: اع
+    psm8_fas+ara+eng: اع
+    psm13: _
+    psm10: _
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۰"
+    psm8_fas: ۰"
+    psm6_fas: ۰"
+    psm7_ara: اه
+    psm8_ara: اه
+    psm6_ara: اه
+    psm7_fas+ara: ۰"
+    psm8_fas+ara: ۰"
+    psm7_fas+ara+eng: wW
+    psm8_fas+ara+eng: wW
+    psm13: wW
+    psm10: wW
+
+  Preprocessing: closed
+    psm8_fas: ۵
+    psm8_ara: 7
+    psm8_fas+ara: 7
+    psm8_fas+ara+eng: 7
+    psm13: wi
+    psm10: wi
+
+
+============================================================
+File: child_009.jpg (398x664)
+============================================================
+
+--- Region: bottom_30 (0,464)-(398,664) 398x200 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: ۴َِِّ‌ِ
+    psm8_ara: ” 05
+    psm7_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm13: pC
+    psm10: ;
+
+  Preprocessing: adaptive
+    psm8_fas: ۱
+    psm8_ara: اس إإر
+    psm8_fas+ara: ۱
+    psm8_fas+ara+eng: ۱
+    psm13: D>
+    psm10: D>
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱ ۱
+    psm8_fas: ۳
+    psm6_fas: ۱ 1
+    psm7_ara: 0 1
+    psm8_ara: 4
+    psm6_ara: 0 0
+    psm7_fas+ara: ۱ 1
+    psm8_fas+ara: ۳
+    psm7_fas+ara+eng: ۱ 1
+    psm8_fas+ara+eng: |
+    psm13: eo
+    psm10: |
+
+  Preprocessing: denoised_otsu
+    psm13: pC
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm8_fas: كِ‌ّ۵ّ«ِ۴
+    psm8_ara: ” 05
+    psm7_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm13: pC
+    psm10: ;
+
+
+--- Region: bottom_20 (0,531)-(398,664) 398x133 ---
+  Preprocessing: otsu
+    psm13: ae
+
+  Preprocessing: adaptive
+    psm7_fas: ی
+    psm8_fas: ی
+    psm7_ara: > الام
+    psm8_ara: > الام
+    psm7_fas+ara: > الام
+    psm8_fas+ara: > الام
+    psm7_fas+ara+eng: ay >
+    psm8_fas+ara+eng: ay >
+    psm13: ay ee
+    psm10: ay ee
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ِ
+    psm8_fas: #۷
+    psm7_ara: ٠ 0
+    psm8_ara: #0
+    psm7_fas+ara: ٠ 0
+    psm8_fas+ara: #۷
+    psm7_fas+ara+eng: ٠ ~
+    psm8_fas+ara+eng: #۷
+    psm10: a,
+
+  Preprocessing: denoised_otsu
+    psm13: -
+
+  Preprocessing: closed
+    psm13: -
+
+
+--- Region: bottom_10 (0,597)-(398,664) 398x67 ---
+  Preprocessing: otsu
+    psm7_fas: ۱۲
+    psm8_fas: ۱۲
+    psm6_fas: ۱۲
+    psm7_ara: عو 0107|
+    psm8_ara: عو 0107|
+    psm6_ara: عو 0107|
+    psm7_fas+ara: عو ۱۲
+    psm8_fas+ara: عو ۱۲
+    psm7_fas+ara+eng: عو |
+    psm8_fas+ara+eng: عو |
+    psm13: | ie =
+    psm10: | ie =
+
+  Preprocessing: adaptive
+    psm8_fas: دا
+    psm6_fas: از ای و 5 ی
+    psm8_ara: مفاضاية لاا اكه
+    psm6_ara: صا دود 1 أ ف 3 > 1114م . ]م
+    psm8_fas+ara: مفاضاية دا
+    psm8_fas+ara+eng: i er ee
+    psm13: i er ee
+    psm10: i er ee
+
+  Preprocessing: enhanced_otsu
+    psm8_fas: ۲۰۸ ۳
+    psm8_ara: ا اام ل ا
+    psm8_fas+ara: و ۲۰۸
+    psm8_fas+ara+eng: و ۲۰۸
+    psm13: -) Je
+    psm10: -?. Je
+
+  Preprocessing: denoised_otsu
+    psm7_fas: م ۳ ۱
+    psm8_fas: م ۳ ۱
+    psm6_fas: م ۳ ۱
+    psm7_ara: وى ااام 1
+    psm8_ara: وى ااام 1
+    psm6_ara: وى ااام 1
+    psm7_fas+ara: م ۳ ۱
+    psm8_fas+ara: م ۳ ۱
+    psm7_fas+ara+eng: | iw ‏م‎
+    psm8_fas+ara+eng: | iw ‏م‎
+    psm13: | iw
+    psm10: | iw
+
+  Preprocessing: closed
+    psm7_fas: ۹۲۲
+    psm8_fas: ۹۲۲
+    psm6_fas: ۹۲۲
+    psm7_ara: 3ت #تاااا 01
+    psm8_ara: 3ت #تاااا 01
+    psm6_ara: 3ت #تاااا 01
+    psm7_fas+ara: 3ت #تاااا 01
+    psm8_fas+ara: 3ت #تاااا 01
+    psm7_fas+ara+eng: | Bie ‏3ت‎
+    psm8_fas+ara+eng: | Bie ‏3ت‎
+    psm13: | Bie
+    psm10: | Bie
+
+
+--- Region: top_20 (0,0)-(398,132) 398x132 ---
+  Preprocessing: otsu
+    psm7_fas: ۱ ا أ أ آسٍ«۳]
+    psm8_fas: یی
+    psm6_fas: 3
+ا أ أ آسٍ«۳]
+    psm7_ara: ‎١‏ 2525 خم
+    psm8_ara: ادا
+    psm6_ara: 5
+2525 خم
+    psm7_fas+ara: ‎١‏ 2525 خم
+    psm8_fas+ara: یی
+    psm7_fas+ara+eng: ‎١‏ 2525 خم
+    psm8_fas+ara+eng: یی
+    psm13: a
+    psm10: a
+
+  Preprocessing: adaptive
+    psm7_fas: ۰
+    psm8_fas: ۰
+    psm6_fas: وی خی اناد با
+وا کب 0 ۳
+هب ارت دح ی اس
+    psm7_ara: 0
+    psm8_ara: 0
+    psm6_ara: ل م
+ارو تلعفل رد اهمد لد ا اث ملام يا
+ا 5 الحخصخب 77 تت بلا ل
+    psm7_fas+ara: ۰
+    psm8_fas+ara: ۰
+    psm7_fas+ara+eng: ۰
+    psm8_fas+ara+eng: ۰
+    psm13: a,
+    psm10: a,
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: دك
+    psm8_fas: ۳۳۳۳
+    psm6_fas: 3
+۳۳ ۰
+    psm7_ara: )اد
+    psm8_ara: مدا
+    psm6_ara: 4
+“لني سسحثسُ_+_ 00م
+    psm7_fas+ara: دك
+    psm8_fas+ara: )اد
+    psm7_fas+ara+eng: دك
+    psm8_fas+ara+eng: a
+    psm13: ee
+    psm10: a
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۳ ٩ ۱
+    psm8_fas: مه
+    psm6_fas: 3
+۳ ٩
+    psm7_ara: ‎١‏ لجا
+    psm8_ara: اعد
+    psm6_ara: 5
+لجا
+    psm7_fas+ara: ۳ ٩ ١
+    psm8_fas+ara: مه
+    psm7_fas+ara+eng: ۳ ٩ ١
+    psm8_fas+ara+eng: مه
+    psm13: a
+    psm10: a
+
+  Preprocessing: closed
+    psm7_fas: ۱ ىا س۳]
+    psm8_fas: ۳۳۳۳۳۹
+    psm6_fas: 3
+ىا س۳]
+    psm7_ara: ‎١‏ اال
+    psm8_ara: علدا
+    psm6_ara: 5
+اال
+    psm7_fas+ara: ‎١‏ اال
+    psm8_fas+ara: اد
+    psm7_fas+ara+eng: ‎١‏ اال
+    psm8_fas+ara+eng: اد
+    psm13: a
+    psm10: a
+
+
+--- Region: top_10 (0,0)-(398,66) 398x66 ---
+  Preprocessing: otsu
+    psm7_fas: 3
+    psm8_fas: 7
+    psm6_fas: 3
+    psm7_ara: 5
+    psm8_ara: 0
+    psm6_ara: 5
+    psm7_fas+ara: 5
+    psm8_fas+ara: 5
+    psm7_fas+ara+eng: 5
+    psm8_fas+ara+eng: 5
+    psm13: re
+    psm10: a
+
+  Preprocessing: adaptive
+    psm8_fas: ار
+    psm6_fas: 9 ی ی و
+    psm8_ara: ا
+    psm6_ara: ا 0 ا ا 2
+    psm8_fas+ara: ار
+    psm8_fas+ara+eng: ار
+    psm13: eee eal
+    psm10: eee eal
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: 3
+    psm8_fas: گ
+    psm6_fas: 3
+    psm7_ara: 5
+    psm8_ara: 0
+    psm6_ara: 5
+    psm7_fas+ara: 3
+    psm8_fas+ara: 5
+    psm7_fas+ara+eng: 3
+    psm8_fas+ara+eng: 4
+    psm13: re
+    psm10: 4
+
+  Preprocessing: denoised_otsu
+    psm7_fas: 3
+    psm8_fas: 7
+    psm6_fas: 3
+    psm7_ara: 5
+    psm8_ara: 0
+    psm6_ara: 5
+    psm7_fas+ara: 5
+    psm8_fas+ara: 5
+    psm7_fas+ara+eng: 5
+    psm8_fas+ara+eng: 5
+    psm13: re
+    psm10: a
+
+  Preprocessing: closed
+    psm7_fas: 3
+    psm8_fas: 7
+    psm6_fas: 3
+    psm7_ara: 1
+    psm8_ara: 0
+    psm6_ara: 1
+    psm7_fas+ara: 1
+    psm8_fas+ara: 1
+    psm7_fas+ara+eng: 1
+    psm8_fas+ara+eng: 1
+    psm13: re
+    psm10: a
+
+
+--- Region: left_side (0,0)-(119,664) 119x664 ---
+  Preprocessing: otsu
+    psm6_fas: ۲
+    psm8_ara: ١
+    psm6_ara: 9
+
+  Preprocessing: adaptive
+    psm7_fas: :
+    psm8_fas: ۱
+    psm7_ara: ْ
+    psm8_ara: ْ
+    psm7_fas+ara: :
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: :
+    psm8_fas+ara+eng: ۱
+
+  Preprocessing: enhanced_otsu
+    psm6_fas: ۱
+    psm7_ara: '
+    psm8_ara: '
+    psm6_ara: 1
+
+  Preprocessing: denoised_otsu
+    psm6_fas: ۲
+    psm8_ara: :
+
+  Preprocessing: closed
+    psm8_ara: ٌ
+
+
+--- Region: right_side (278,0)-(398,664) 120x664 ---
+  Preprocessing: otsu
+    psm8_fas: :
+    psm7_ara: ١
+    psm8_ara: ١
+    psm8_fas+ara: ١
+    psm8_fas+ara+eng: ١
+
+  Preprocessing: adaptive
+    psm6_fas: ۱
+مت ارات قرش
+    psm7_ara: :
+    psm8_ara: :
+    psm6_ara: اث
+م 6د
+    psm13: ;
+    psm10: ;
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: 1
+    psm8_fas: :
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: 5
+    psm7_fas+ara: ١
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: ١
+    psm8_fas+ara+eng: ١
+
+  Preprocessing: denoised_otsu
+    psm7_fas: :
+    psm8_fas: :
+    psm6_fas: ۱
+    psm7_ara: ١
+    psm8_ara: ١
+    psm6_ara: ١
+    psm7_fas+ara: ١
+    psm8_fas+ara: ١
+    psm7_fas+ara+eng: ١
+    psm8_fas+ara+eng: ١
+    psm13: ,
+    psm10: ,
+
+  Preprocessing: closed
+    psm8_ara: ١
+    psm13: ,
+
+
+--- Region: center_bottom (119,531)-(278,664) 159x133 ---
+  Preprocessing: otsu
+    psm7_fas: وت
+    psm8_fas: وت
+    psm6_fas: وت
+    psm7_ara: ل
+    psm8_ara: ل
+    psm6_ara: ل
+    psm7_fas+ara: وت
+    psm8_fas+ara: وت
+    psm7_fas+ara+eng: of
+    psm8_fas+ara+eng: of
+    psm13: of
+    psm10: of
+
+  Preprocessing: adaptive
+    psm8_ara: 0
+    psm13: ar’
+    psm10: ar’
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ِ
+    psm8_fas: ك
+    psm6_fas: ۳
+    psm7_ara: -
+    psm8_ara: 0
+    psm6_ara: -
+    psm7_fas+ara: -
+    psm8_fas+ara: -
+    psm7_fas+ara+eng: ~
+    psm8_fas+ara+eng: ~
+    psm13: a
+    psm10: ~
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۳۳
+    psm8_fas: ۳۳
+    psm6_fas: ۳۳
+    psm7_ara: سم
+    psm8_ara: سم
+    psm6_ara: سم
+    psm7_fas+ara: ۳۳
+    psm8_fas+ara: ۳۳
+    psm7_fas+ara+eng: af
+    psm8_fas+ara+eng: af
+    psm13: af
+    psm10: af
+
+  Preprocessing: closed
+    psm8_fas: ۳
+    psm8_ara: ع
+    psm8_fas+ara: ۳
+    psm8_fas+ara+eng: af
+    psm13: af
+    psm10: af
+
+
+============================================================
+File: child_010.jpg (398x673)
+============================================================
+
+--- Region: bottom_30 (0,471)-(398,673) 398x202 ---
+  Preprocessing: otsu
+    psm7_fas: ص
+    psm8_fas: ۹«ثكث‎
+    psm6_fas: ص
+    psm7_ara: 202
+    psm8_ara: >
+    psm6_ara: رمر>
+    psm7_fas+ara: 202
+    psm8_fas+ara: 202
+    psm7_fas+ara+eng: 202
+    psm8_fas+ara+eng: 202
+    psm13: SP,
+    psm10: Sr,
+
+  Preprocessing: adaptive
+    psm8_fas: سا
+    psm6_fas: 0 ۳ 1 هام6 ۳
+    psm8_ara: ا
+    psm6_ara: ا 0 1 جب م
+    psm8_fas+ara: ا
+    psm8_fas+ara+eng: ا
+    psm13: .
+    psm10: .
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: «ثِپكس‎
+    psm8_fas: ۹«ث#پسض‎
+    psm6_fas: «ثِپكس‎
+    psm7_ara: رض >
+    psm8_ara: ر>
+    psm6_ara: رض >
+    psm7_fas+ara: رض >
+    psm8_fas+ara: رض >
+    psm7_fas+ara+eng: رض >
+    psm8_fas+ara+eng: رض >
+    psm13: Pr,
+    psm10: YJ
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ص‌
+    psm8_fas: سك«
+    psm6_fas: ص‌
+    psm7_ara: مر >
+    psm8_ara: مي>
+    psm6_ara: مر >
+    psm7_fas+ara: مر >
+    psm8_fas+ara: مر >
+    psm7_fas+ara+eng: مر >
+    psm8_fas+ara+eng: مر >
+    psm13: SP,
+    psm10: ,
+
+  Preprocessing: closed
+    psm7_fas: ص
+    psm8_fas: ف
+    psm6_fas: ص
+    psm7_ara: مر >
+    psm8_ara: ر>
+    psm6_ara: مر >
+    psm7_fas+ara: ص
+    psm8_fas+ara: ف
+    psm7_fas+ara+eng: ص
+    psm8_fas+ara+eng: ف
+    psm13: SP,
+    psm10: a,
+
+
+--- Region: bottom_20 (0,538)-(398,673) 398x135 ---
+  Preprocessing: otsu
+    psm7_fas: م۳"
+    psm8_fas: م ۳
+    psm6_fas: م۳"
+    psm7_ara: آصسض
+    psm8_ara: ص
+    psm6_ara: آصسض
+    psm7_fas+ara: م۳"
+    psm8_fas+ara: م ۳
+    psm7_fas+ara+eng: eee”
+    psm8_fas+ara+eng: eee”
+    psm13: Nee”
+    psm10: eee”
+
+  Preprocessing: adaptive
+    psm8_fas: ی
+    psm8_ara: الس
+    psm8_fas+ara: ی
+    psm8_fas+ara+eng: ی
+    psm13: See)
+    psm10: See)
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱ ۱
+    psm8_fas: ۹
+    psm6_fas: يس
+    psm7_ara: ١ ١
+    psm8_ara: صضصذدهة
+    psm6_ara: صضصة
+    psm7_fas+ara: ۱ ۱
+    psm8_fas+ara: ۹
+    psm7_fas+ara+eng: ۱ ۱
+    psm8_fas+ara+eng: ~~”
+    psm13: 4
+    psm10: ~~”
+
+  Preprocessing: denoised_otsu
+    psm7_fas: م۳"
+    psm8_fas: م ۳
+    psm6_fas: م۳"
+    psm7_ara: ص
+    psm8_ara: آصضص-ة
+    psm6_ara: ص
+    psm7_fas+ara: ص
+    psm8_fas+ara: م ص
+    psm7_fas+ara+eng: ص
+    psm8_fas+ara+eng: wee”
+    psm13: Nee”
+    psm10: wee”
+
+  Preprocessing: closed
+    psm7_fas: ی
+    psm8_fas: م ۳
+    psm6_fas: ی
+    psm7_ara: ص
+    psm8_ara: ص
+    psm6_ara: ص
+    psm7_fas+ara: ص
+    psm8_fas+ara: ص
+    psm7_fas+ara+eng: ص
+    psm8_fas+ara+eng: ص
+    psm13: we”
+    psm10: Nee”
+
+
+--- Region: bottom_10 (0,605)-(398,673) 398x68 ---
+  Preprocessing: otsu
+    psm7_fas: . 0
+    psm8_fas: 4
+    psm6_fas: . 0
+    psm7_ara: ض <<
+    psm8_ara: اي اا ”
+    psm6_ara: ض <<
+    psm7_fas+ara: ض 0 .
+    psm8_fas+ara: ض 4
+    psm7_fas+ara+eng: ll
+    psm8_fas+ara+eng: ll
+    psm13: a le
+    psm10: ll
+
+  Preprocessing: adaptive
+    psm8_fas: ۰
+    psm6_fas: سوت ۰
+    psm8_ara: اد جحت 101
+    psm6_ara: اله اتجكتك 1
+    psm8_fas+ara: اد جحت ۰
+    psm8_fas+ara+eng: اد جحت ۰
+    psm13: oe ae
+    psm10: oe ae
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱
+    psm8_fas: 60
+    psm6_fas: ات تا
+    psm7_ara: ١
+    psm8_ara: لَِ “8# 1
+    psm6_ara: هه 3
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ١
+    psm13: ia
+
+  Preprocessing: denoised_otsu
+    psm7_fas: نات سا
+    psm8_fas: 4
+    psm6_fas: نات سا
+    psm7_ara: ١ ‏سس‎
+    psm8_ara: أُأئذي03282220]9
+    psm6_ara: ١ ‏سس‎
+    psm7_fas+ara: سس سا
+    psm8_fas+ara: ١ ‏سس‎
+    psm7_fas+ara+eng: “ha
+    psm8_fas+ara+eng: “ha
+    psm13: aa
+    psm10: “ha
+
+  Preprocessing: closed
+    psm7_fas: ات تا
+    psm8_fas: 400
+    psm6_fas: ات تا
+    psm7_ara: ذا
+    psm8_ara: 00 219072700]
+    psm6_ara: ذا
+    psm7_fas+ara: ات تا
+    psm8_fas+ara: ذا
+    psm7_fas+ara+eng: ll
+    psm8_fas+ara+eng: ذا
+    psm13: — —s_
+    psm10: ll
+
+
+--- Region: top_20 (0,0)-(398,134) 398x134 ---
+  Preprocessing: otsu
+    psm7_fas: ۴
+    psm8_fas: ۴
+    psm6_fas: ۴
+    psm7_ara: 7 >
+    psm8_ara: 7 >
+    psm6_ara: 7 >
+    psm7_fas+ara: ۴ >
+    psm8_fas+ara: ۴ >
+    psm7_fas+ara+eng: ۴ >
+    psm8_fas+ara+eng: ۴ >
+    psm13: F.COté‘CN
+    psm10: F.COté‘CN
+
+  Preprocessing: adaptive
+    psm8_fas: آ ۱
+    psm8_ara: ار
+    psm8_fas+ara: آ ار
+    psm8_fas+ara+eng: foe
+    psm13: foe
+    psm10: foe
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۴۲
+    psm8_fas: ۴۲
+    psm6_fas: ۴۲
+    psm7_ara: 7 >
+    psm8_ara: 7 >
+    psm6_ara: 7 >
+    psm7_fas+ara: ۴۲ >
+    psm8_fas+ara: ۴۲ >
+    psm7_fas+ara+eng: ۴۲ >
+    psm8_fas+ara+eng: ۴۲ >
+    psm13: F.hOté‘<N
+    psm10: F.hOté‘<N
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۴
+    psm8_fas: ۴
+    psm6_fas: ۴
+    psm7_ara: 7 >
+    psm8_ara: 7 >
+    psm6_ara: 7 >
+    psm7_fas+ara: ۴ >
+    psm8_fas+ara: ۴ >
+    psm7_fas+ara+eng: ۴ >
+    psm8_fas+ara+eng: ۴ >
+    psm13: F.COté‘(N
+    psm10: F.COté‘(N
+
+  Preprocessing: closed
+    psm7_fas: ۴
+    psm8_fas: ۴
+    psm6_fas: ۴
+    psm7_ara: 7 >
+    psm8_ara: 7 >
+    psm6_ara: 7 >
+    psm7_fas+ara: ۴ >
+    psm8_fas+ara: ۴ >
+    psm7_fas+ara+eng: ۴ >
+    psm8_fas+ara+eng: ۴ >
+    psm13: FOté‘SN
+    psm10: FOté‘SN
+
+
+--- Region: top_10 (0,0)-(398,67) 398x67 ---
+  Preprocessing: otsu
+    psm7_fas: ۳
+    psm8_fas: ۳
+    psm6_fas: ۳
+    psm7_ara: د ا 22
+    psm8_ara: د ا 22
+    psm6_ara: د ا 22
+    psm7_fas+ara: د ا ۳
+    psm8_fas+ara: د ا ۳
+    psm7_fas+ara+eng: د ا ۳
+    psm8_fas+ara+eng: د ا ۳
+    psm13: - @&3 nn
+    psm10: - @&3 nn
+
+  Preprocessing: adaptive
+    psm8_fas: هن
+    psm8_ara: ا 6
+    psm8_fas+ara: ا 6
+    psm8_fas+ara+eng: ee
+    psm13: ee
+    psm10: ee
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۳ ۰ >
+    psm8_fas: ۳ ۰ >
+    psm6_fas: ۳ ۰ >
+    psm7_ara: د ا 2262
+    psm8_ara: د ا 2262
+    psm6_ara: د ا 2262
+    psm7_fas+ara: د ۰ ۳
+    psm8_fas+ara: د ۰ ۳
+    psm7_fas+ara+eng: د ۰ ۳
+    psm8_fas+ara+eng: د ۰ ۳
+    psm13: -
+    psm10: -
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۳
+    psm8_fas: ۳
+    psm6_fas: ۳
+    psm7_ara: د 1 22
+    psm8_ara: د 1 22
+    psm6_ara: د 1 22
+    psm7_fas+ara: د 1 ۳
+    psm8_fas+ara: د 1 ۳
+    psm7_fas+ara+eng: د 1 ۳
+    psm8_fas+ara+eng: د 1 ۳
+    psm13: - @&3 £5 nn
+    psm10: - @&3 £5 nn
+
+  Preprocessing: closed
+    psm7_fas: ۳ ۰ ۰
+    psm8_fas: ۳ ۰ ۰
+    psm6_fas: ۳ ۰ ۰
+    psm7_ara: 2 22 3
+    psm8_ara: 2 22 3
+    psm6_ara: 2 22 3
+    psm7_fas+ara: ۳ ۰ ۰
+    psm8_fas+ara: ۳ ۰ ۰
+    psm7_fas+ara+eng: ۳ ۰ ۰
+    psm8_fas+ara+eng: ۳ ۰ ۰
+    psm13: —-— i“
+    psm10: —-— i“
+
+
+--- Region: left_side (0,0)-(119,673) 119x673 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۲
+1
+    psm7_ara: ز(
+    psm8_ara: ز(
+    psm6_ara: /
+ى
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm13: '
+    psm10: '
+
+  Preprocessing: adaptive
+    psm6_fas: ۳
+۳ ابیت تاه
+    psm8_ara: ْ
+    psm6_ara: للا
+ال 0 سام
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: /
+۰
+    psm7_ara: |
+    psm8_ara: (
+    psm6_ara: /
+34
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm10: é,
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: /
+«
+    psm7_ara: '
+    psm8_ara: :
+    psm6_ara: /
+34
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm10: é.
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: /
+«
+    psm7_ara: '
+    psm8_ara: |
+    psm6_ara: /
+34
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm13: '
+    psm10: é'
+
+
+--- Region: right_side (278,0)-(398,673) 120x673 ---
+  Preprocessing: otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+‌
+    psm7_ara: :
+    psm8_ara: :
+    psm6_ara: ١
+,
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm13: :
+    psm10: ,
+
+  Preprocessing: adaptive
+    psm6_fas: ی مر
+کر
+تا
+9 ِ
+    psm7_ara: ا
+    psm8_ara: ١
+    psm6_ara: 2
+ا
+0
+
+3 ا 2
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+۳
+    psm7_ara: ١
+    psm8_ara: '
+    psm6_ara: ١
+2
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm10: ,
+
+  Preprocessing: denoised_otsu
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+‌
+    psm7_ara: :
+    psm8_ara: ص
+    psm6_ara: ١
+,
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm10: ,
+
+  Preprocessing: closed
+    psm7_fas: ۱
+    psm8_fas: ۱
+    psm6_fas: ۱
+۲
+    psm7_ara: ظ
+    psm8_ara: :
+    psm6_ara: ١
+,
+    psm7_fas+ara: ۱
+    psm8_fas+ara: ۱
+    psm7_fas+ara+eng: ۱
+    psm8_fas+ara+eng: ۱
+    psm10: ,
+
+
+--- Region: center_bottom (119,538)-(278,673) 159x135 ---
+  Preprocessing: otsu
+    psm7_fas: ابیت
+    psm8_fas: ب
+    psm6_fas: ابیت
+    psm7_ara: الود
+    psm8_ara: ب
+    psm6_ara: الود
+    psm7_fas+ara: ابیت
+    psm8_fas+ara: ب
+    psm7_fas+ara+eng: ابیت
+    psm8_fas+ara+eng: ب
+    psm13: —_
+    psm10: ena
+
+  Preprocessing: adaptive
+    psm8_fas: ین
+    psm6_fas: که
+    psm8_ara: عند
+    psm6_ara: سد ليه
+    psm8_fas+ara: عند
+    psm8_fas+ara+eng: =
+    psm13: =
+    psm10: =
+
+  Preprocessing: enhanced_otsu
+    psm7_fas: ابیت
+    psm8_fas: ب
+    psm6_fas: ابیت
+    psm7_ara: لبجو
+    psm8_ara: ب
+    psm6_ara: لبجو
+    psm7_fas+ara: ابیت
+    psm8_fas+ara: ب
+    psm7_fas+ara+eng: ابیت
+    psm8_fas+ara+eng: ب
+    psm13: —_
+    psm10: eal
+
+  Preprocessing: denoised_otsu
+    psm7_fas: اتیتا
+    psm8_fas: ب-
+    psm6_fas: اتیتا
+    psm7_ara: ددا
+    psm8_ara: ب
+    psm6_ara: ددا
+    psm7_fas+ara: ددا
+    psm8_fas+ara: ب-
+    psm7_fas+ara+eng: oat
+    psm8_fas+ara+eng: oat
+    psm13: —_
+    psm10: oat
+
+  Preprocessing: closed
+    psm7_fas: زیت
+    psm8_fas: ب-
+    psm6_fas: زیت
+    psm7_ara: 0
+    psm8_ara: ب
+    psm6_ara: 0
+    psm7_fas+ara: زیت
+    psm8_fas+ara: ب-
+    psm7_fas+ara+eng: زیت
+    psm8_fas+ara+eng: oneal
+    psm13: —_
+    psm10: oneal
+

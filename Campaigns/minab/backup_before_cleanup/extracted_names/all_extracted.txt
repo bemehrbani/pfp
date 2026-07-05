@@ -1,0 +1,129 @@
+index	text	status
+0	Vall =	name
+1	lt	not_name
+2	wi hy
+
+° B
+b
+:	not_name
+3	| حرصح |	name
+4	مطقوعطوظ8 حصمطادا/ا	name
+5	atemeh Derazetr	name
+6	lasoumenh Naza!	name
+7	inab Bahrami	name
+8	aran Ghasemy	name
+9	lyayesn Saleh	name
+10	طقكط6 جمراء لا	name
+11	Nazanin zahra
+Behroozi	name
+12	لطةعطةظة نأآأة72	name
+13	Samira Malanhi	name
+14	\rina Arabkist	name
+15	وإعروواكت/مى< عواواعه”	name
+16	Zahra Ansarifa	name
+17	ا ططلة طاولا جاه	name
+18	)1 2كا جأطوعمممرعخا	name
+19	اعماج 2 عمو الاع؟	name
+20	ona AhnmadZac	name
+21	aryam Bazara	name
+22	Athare Zareiee	name
+23	ayesh Alihosse	name
+24	Zahra Sharafi	name
+25	vadijeh Darvid	name
+26	Asra Zakeri	name
+27	-adia Shahmir	name
+28	Sanar Salari	name
+29	‘inab Makizade	name
+30	Zona Pasand	name
+31	mfclalarclaca
+Zakerikhah	name
+32	)3 مط لام دع[ م حت	name
+33	Raha Zareie |	name
+34	Parsa Mokhtar	name
+35	Makan Nasiti	name
+36	aaliaaatelarclaniaats
+Boostanl	name
+37	aaliaantelarclaniaats
+Ghasemy	name
+38	2ezZa Habashia	name
+39	li Zareie ghola	name
+40	لطنظ طعمطعغأة	name
+41	‘Asma Zakeri	name
+42	ayesh Alihosse	name
+43	اعكات7 دمطاأتك	name
+44	ا تمطةتط جمع6م	name
+45	تطعادط طحمطاء ةطح	name
+46	liasghar Zareie	name
+47	Sobhan Ahmai	name
+48	مازعاك« ‏ فماوامن	name
+49	lohammadtah
+Jafari	name
+50	ohammadtah.
+Malahi	name
+51	sirhossein J af	name
+52	yhammadhese
+Ralsi	name
+53	ossei nRa hsep	not_name
+54	Mohammad
+Abadizadeh	name
+55	Sina Za keri	name
+56	Saleh Abbasi	name
+57	اطع هما 30 مطامطةر	name
+58	Hani
+Paritaghinejhac	name
+59	Alireza Zareie	name
+60	hammadsade
+Gholami	name
+61	shammad Jan	name
+62	Aliasghar
+Foroozafar	name
+63	\lireza Shanrjc	name
+64	-Reza Barani	name
+65	مط أ تكا الاعمع5	name
+66	arya Bahadori	name
+67	wrham Ranjbat	name
+68	320530 مطاططةطم
+والزفاه كت تواعك	name
+69	\liakbar Keriar	name
+70	liohammadrez
+Shahsavaril	name
+71	Amirali Jadav	name
+72	moien Zeinali	name
+73	Mohammad
+Raofinia	name
+74	‘az Anhmadizac	name
+75	hheil Chamalipc	name
+76	mirali Boostan	name
+77	Reza Ranjbar	name
+78	لطاططلة طم طط ام
+ااعلاع 83	name
+79	vad Sartakzac	name
+80	aman Karamzé	name
+81	VMohammadali
+Keriani	name
+82	لاطصطةطماا ألم	name
+83	Masina Salari	name
+84	; Ali Salari .	name
+85	ا ماطعأت5 مطوكطا	name
+86	rena Hosseinpc	name
+87	min Ahmadzac	name
+88	mayoon Zeinée	name
+89	Heidar Salehi	name
+90	Mohammad
+Shahdoosti	name
+91	ybhan Shahda	name
+92	زع30ل طااماذلام:	name
+93	3023 مطاطاصطةطهم)|
+امطوءغطت8	name
+94	/23 لماعك تجلاع ‎١‏ أو	name
+95	2لطاصطةطهل/ا ١م‏	name
+96	nial Faghirdoc	name
+97	أماعء0ج؟ لوولسة	name
+98	hammadmah
+jangichi	not_name
+99	أمومةالا دادم	name
+100	Hamed
+-aritaghinejha	name
+101	Arash Golazir	name
+102	أمقاةك ألطواة	name
+103	Amirali Kam al	name

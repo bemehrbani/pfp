@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>گزارش حقوقی جامع — عدالت برای کودکان میناب</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   BASE & TOKENS
+   ═══════════════════════════════════════ */
+:root {
+  --navy: #0f172a;
+  --navy-light: #1e293b;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.12);
+  --red: #dc2626;
+  --red-dark: #8b2232;
+  --text: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  --bg-subtle: #f8fafc;
+  --white: #ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 15px; }
+
+body {
+  font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  direction: rtl;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════
+   PRINT STYLES
+   ═══════════════════════════════════════ */
+@media print {
+  body { background: white; }
+  .page-break { page-break-before: always; }
+  .no-print { display: none !important; }
+  .cover { page-break-after: always; }
+  table { page-break-inside: avoid; }
+  h2, h3 { page-break-after: avoid; }
+  @page {
+    size: A4;
+    margin: 20mm 22mm 24mm 22mm;
+  }
+}
+
+/* ═══════════════════════════════════════
+   PRINT BUTTON (screen only)
+   ═══════════════════════════════════════ */
+.print-btn {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 999;
+  padding: 12px 28px;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+  transition: transform 0.2s;
+}
+.print-btn:hover { transform: translateY(-2px); }
+
+@media print { .print-btn { display: none; } }
+
+/* ═══════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════ */
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* ═══════════════════════════════════════
+   COVER PAGE
+   ═══════════════════════════════════════ */
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  text-align: center;
+  padding: 60px 40px;
+}
+.cover-badge {
+  display: inline-block;
+  padding: 6px 24px;
+  border: 2px solid var(--gold);
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+}
+.cover h1 {
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover h1 span { color: var(--gold); }
+.cover-subtitle {
+  font-size: 20px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  max-width: 550px;
+  margin: 0 auto 40px;
+}
+.cover-rule {
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-dim));
+  border: none;
+  margin: 0 auto 40px;
+}
+.cover-meta {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 2;
+}
+.cover-meta strong { color: var(--text-secondary); }
+.cover-footer {
+  margin-top: 60px;
+  font-size: 22px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════
+   HEADINGS
+   ═══════════════════════════════════════ */
+h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 48px 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--gold);
+  display: inline-block;
+}
+h2 .num {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  background: var(--gold);
+  color: var(--white);
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+h3 {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 28px 0 10px;
+}
+h3::before {
+  content: '▎';
+  color: var(--gold);
+  margin-left: 8px;
+}
+h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 18px 0 6px;
+}
+
+/* ═══════════════════════════════════════
+   BODY TEXT
+   ═══════════════════════════════════════ */
+p { margin: 10px 0; }
+.lead {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 2;
+  margin: 16px 0;
+}
+
+/* ═══════════════════════════════════════
+   TABLES
+   ═══════════════════════════════════════ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 14px;
+}
+th {
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 700;
+  text-align: right;
+  padding: 12px 16px;
+}
+th:first-child { border-radius: 0 8px 0 0; }
+th:last-child { border-radius: 8px 0 0 0; }
+td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:nth-child(even) td { background: var(--bg-subtle); }
+td strong { color: var(--navy); }
+
+/* ═══════════════════════════════════════
+   CALLOUT BOXES
+   ═══════════════════════════════════════ */
+.callout {
+  padding: 18px 22px;
+  border-radius: 10px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.callout-warn {
+  background: #fef3c7;
+  border-right: 4px solid #f59e0b;
+  color: #92400e;
+}
+.callout-info {
+  background: #eff6ff;
+  border-right: 4px solid #3b82f6;
+  color: #1e40af;
+}
+.callout-danger {
+  background: #fef2f2;
+  border-right: 4px solid var(--red);
+  color: var(--red-dark);
+}
+.callout-success {
+  background: #f0fdf4;
+  border-right: 4px solid #22c55e;
+  color: #166534;
+}
+
+/* ═══════════════════════════════════════
+   PATHWAY CARDS
+   ═══════════════════════════════════════ */
+.pathway {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 20px 0;
+  position: relative;
+}
+.pathway::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 4px;
+  border-radius: 0 12px 12px 0;
+}
+.pathway.green::before { background: #22c55e; }
+.pathway.blue::before { background: #3b82f6; }
+.pathway.amber::before { background: #f59e0b; }
+.pathway-tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.pathway-tag.green { background: rgba(34,197,94,0.15); color: #16a34a; }
+.pathway-tag.blue { background: rgba(59,130,246,0.15); color: #2563eb; }
+.pathway-tag.amber { background: rgba(245,158,11,0.15); color: #d97706; }
+.pathway h3::before { display: none; }
+.pathway p, .pathway li { font-size: 14px; }
+.pathway ul { padding-right: 20px; margin: 8px 0; }
+.pathway li { margin: 4px 0; }
+
+/* ═══════════════════════════════════════
+   EVIDENCE GRID
+   ═══════════════════════════════════════ */
+.ev-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+.ev-card {
+  background: var(--bg-subtle);
+  border-right: 3px solid var(--gold);
+  padding: 18px 20px;
+  border-radius: 0 10px 10px 0;
+}
+.ev-card h4 { margin-top: 0; }
+.ev-card p { font-size: 13px; }
+
+/* ═══════════════════════════════════════
+   TIMELINE
+   ═══════════════════════════════════════ */
+.timeline {
+  position: relative;
+  padding-right: 36px;
+  margin: 24px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  right: 14px;
+  width: 3px;
+  background: linear-gradient(180deg, var(--red-dark), var(--gold), var(--gold-dim));
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  padding-bottom: 28px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  background: var(--gold);
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  right: -42px;
+  top: 5px;
+  box-shadow: 0 0 0 3px var(--gold-dim);
+}
+.tl-phase {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.tl-item h3 { margin-top: 0; font-size: 17px; }
+.tl-item h3::before { display: none; }
+.tl-item p { font-size: 14px; }
+.tl-item ul { padding-right: 20px; font-size: 14px; margin: 6px 0; }
+
+/* ═══════════════════════════════════════
+   STAT ROW
+   ═══════════════════════════════════════ */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+.stat-card {
+  text-align: center;
+  padding: 20px 12px;
+  background: var(--navy);
+  border-radius: 10px;
+  color: var(--white);
+}
+.stat-card .num {
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-card .num.red { color: var(--red); }
+.stat-card .num.gold { color: var(--gold); }
+.stat-card .lbl {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════
+   CHECKLIST
+   ═══════════════════════════════════════ */
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+.checklist li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.checklist li:last-child { border-bottom: none; }
+.check { color: #22c55e; font-weight: 700; flex-shrink: 0; }
+.uncheck { color: var(--text-muted); font-weight: 700; flex-shrink: 0; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+.report-footer {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 2px solid var(--gold-dim);
+}
+.report-footer .hafez {
+  font-size: 20px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.report-footer .org {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+</style>
+</head>
+<body>
+
+<!-- PRINT BUTTON -->
+<button class="print-btn no-print" onclick="window.print()">📄 ذخیره به‌عنوان PDF</button>
+
+<!-- ═══════════════════════════════════════
+     COVER PAGE
+     ═══════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-badge">⚖️ گزارش حقوقی جامع</div>
+  <h1>عدالت برای<br><span>کودکان میناب</span></h1>
+  <p class="cover-subtitle">
+    استراتژی حقوقی، مستندات، و نقشه راه پاسخگو کردن مسئولان حمله هوایی به دبستان شجره طیبه
+  </p>
+  <hr class="cover-rule">
+  <div class="cover-meta">
+    <strong>تهیه‌کننده:</strong> People for Peace & Justice ry<br>
+    <strong>تنظیم:</strong> مهدی فریمانی<br>
+    <strong>تاریخ:</strong> ۳۰ اسفند ۱۴۰۴ (۲۰ مارس ۲۰۲۶)<br>
+    <strong>محل:</strong> هلسینکی، فنلاند
+  </div>
+  <div class="cover-footer">
+    هرگز نمیرد آنکه دلش زنده شد به عشق — حافظ
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     CONTENT
+     ═══════════════════════════════════════ -->
+<div class="page">
+
+<!-- SECTION 1 -->
+<h2><span class="num">۱</span> مقدمه</h2>
+<p class="lead">
+  این گزارش، مروری جامع بر فعالیت‌های حقوقی کمپین «عدالت برای کودکان میناب» ارائه می‌دهد. هدف ما پاسخگو کردن مسئولان حمله هوایی به دبستان شجره طیبه در میناب است — حمله‌ای که جان <strong style="color: var(--red);">۱۶۸ نفر</strong> شامل <strong style="color: var(--red);">۱۰۸ کودک</strong> را گرفت.
+</p>
+<p>ما از طریق سه محور <strong>تحقیق</strong>، <strong>مستندسازی</strong>، و <strong>اقدام حقوقی بین‌المللی</strong> به دنبال تحقق عدالت هستیم. این گزارش شامل جزئیات حادثه، کارهای انجام‌شده، استراتژی حقوقی سه‌مسیره، چارچوب شواهد، نقشه راه، و نحوه مشارکت شماست.</p>
+
+<!-- SECTION 2 -->
+<h2 class="page-break"><span class="num">۲</span> حادثه: حقایق کلیدی</h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="num red">۱۶۸+</div><div class="lbl">جان‌باخته</div></div>
+  <div class="stat-card"><div class="num red">۱۰۸</div><div class="lbl">کودک</div></div>
+  <div class="stat-card"><div class="num gold">۱۰۰</div><div class="lbl">شناسایی‌شده</div></div>
+  <div class="stat-card"><div class="num gold">۳</div><div class="lbl">مسیر حقوقی</div></div>
+</div>
+
+<table>
+  <tr><th style="width:30%">موضوع</th><th>جزئیات</th></tr>
+  <tr><td><strong>تاریخ</strong></td><td>۱۰ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶) — روز اول جنگ آمریکا و ایران</td></tr>
+  <tr><td><strong>محل</strong></td><td>دبستان دخترانه شجره طیبه، میناب، هرمزگان</td></tr>
+  <tr><td><strong>تلفات</strong></td><td>۱۶۸ تا ۱۸۰ کشته (عمدتاً دختران ۷ تا ۱۲ ساله)، حدود ۹۵ مجروح</td></tr>
+  <tr><td><strong>مسئولیت</strong></td><td>تحقیقات اولیه ارتش آمریکا نتیجه‌گیری کرد که آمریکا احتمالاً مسئول بوده</td></tr>
+  <tr><td><strong>علت</strong></td><td>خطای هدف‌گیری — مدرسه به‌اشتباه جزء پایگاه نیروی دریایی سپاه شناسایی شده بود، بر اساس اطلاعات قدیمی سال ۲۰۱۳</td></tr>
+  <tr><td><strong>نوع سلاح</strong></td><td>موشک کروز تاماهاک BGM-109 شلیک‌شده از دریای عمان</td></tr>
+  <tr><td><strong>تأیید مستقل</strong></td><td>نیویورک تایمز · بی‌بی‌سی Verify · واشنگتن پست · بلینگکت · HRW</td></tr>
+</table>
+
+<div class="callout callout-danger">
+  ⚠️ <strong>یونسکو</strong> این حمله را «نقض فاحش حقوق بشردوستانه» طبقه‌بندی کرده و <strong>دیده‌بان حقوق بشر</strong> خواستار تحقیق به‌عنوان جنایت جنگی شده است. ساختمان از سال ۲۰۱۶ به مدرسه غیرنظامی تبدیل شده بود — یک دهه شکست اطلاعاتی.
+</div>
+
+<!-- SECTION 3 -->
+<h2 class="page-break"><span class="num">۳</span> کارهای انجام‌شده تا امروز</h2>
+
+<h3>مستندسازی و شناسایی قربانیان</h3>
+<ul class="checklist">
+  <li><span class="check">✓</span> شناسایی <strong>۱۰۰ کودک</strong> با نام، سن و عکس</li>
+  <li><span class="check">✓</span> ایجاد <strong>صفحه یادبود آنلاین</strong> با چهره تمام کودکان شناسایی‌شده<br><small style="color: var(--text-muted);">peopleforpeace.live/memorial.html</small></li>
+  <li><span class="check">✓</span> آرشیو جامع رسانه‌ای شامل گزارش‌های نیویورک تایمز، بی‌بی‌سی، و بلینگکت</li>
+  <li><span class="check">✓</span> تحلیل تصاویر ماهواره‌ای (قبل و بعد)</li>
+  <li><span class="check">✓</span> ردیابی ADS-B و بررسی اطلاعات اوپن‌سورس (OSINT)</li>
+</ul>
+
+<h3>تحقیقات حقوقی</h3>
+<ul class="checklist">
+  <li><span class="check">✓</span> تحقیق جامع درباره <strong>۱۰ مسیر حقوقی</strong> مختلف برای پاسخگو کردن مسئولان</li>
+  <li><span class="check">✓</span> تحلیل اساسنامه رم، کنوانسیون‌های ژنو، و حقوق بین‌الملل بشردوستانه عرفی</li>
+  <li><span class="check">✓</span> مطالعه پرونده‌های موفق بین‌المللی: انور رسلان (سوریه/آلمان)، المهدی (دیوان/مالی)</li>
+  <li><span class="check">✓</span> شناسایی و تحلیل <strong>۶ سازمان بین‌المللی شریک</strong> بالقوه</li>
+</ul>
+
+<h3>تأسیس نهاد حقوقی</h3>
+<div class="callout callout-success">
+  ✅ انجمن <strong>People for Peace & Justice ry</strong> — ثبت فنلاند (PRH) — اسناد آماده برای ثبت نهایی
+</div>
+<table>
+  <tr><th>مورد</th><th>وضعیت</th></tr>
+  <tr><td>اساسنامه انجمن (säännöt)</td><td><span class="check">✓</span> تنظیم شده به انگلیسی</td></tr>
+  <tr><td>صورت‌جلسه مجمع مؤسس</td><td><span class="check">✓</span> آماده</td></tr>
+  <tr><td>اعلامیه تأسیس</td><td><span class="check">✓</span> آماده</td></tr>
+  <tr><td>ترجمه فنلاندی اسناد</td><td><span class="uncheck">◻</span> در انتظار</td></tr>
+  <tr><td>ثبت در PRH</td><td><span class="uncheck">◻</span> در انتظار (هزینه: ۵۵ یورو)</td></tr>
+</table>
+
+<h3>هیئت مؤسسان</h3>
+<table>
+  <tr><th>نام</th><th>نقش</th><th>محل سکونت</th></tr>
+  <tr><td><strong>مهدی فریمانی</strong></td><td>رئیس هیئت مدیره</td><td>هلسینکی، فنلاند</td></tr>
+  <tr><td><strong>زهرا ازهر</strong></td><td>عضو هیئت مدیره</td><td>دن‌هاخ، هلند</td></tr>
+  <tr><td><strong>علی اکبر سیاپوش</strong></td><td>عضو هیئت مدیره</td><td>دن‌هاخ، هلند</td></tr>
+</table>
+
+<h3>زیرساخت فناوری و کمپین</h3>
+<ul class="checklist">
+  <li><span class="check">✓</span> وب‌سایت عمومی: <strong>peopleforpeace.live</strong></li>
+  <li><span class="check">✓</span> صفحه یادبود: <strong>peopleforpeace.live/memorial.html</strong></li>
+  <li><span class="check">✓</span> صفحه کمپین حقوقی: <strong>peopleforpeace.live/justice.html</strong></li>
+  <li><span class="check">✓</span> ربات تلگرام: <strong>@peopleforpeacebot</strong> — پلتفرم هماهنگی داوطلبان</li>
+  <li><span class="check">✓</span> ارائه حرفه‌ای ۱۲ اسلایدی برای جلسات با شرکا</li>
+</ul>
+
+<!-- SECTION 4 -->
+<h2 class="page-break"><span class="num">۴</span> استراتژی حقوقی: سه مسیر اصلی</h2>
+<p class="lead">ما استراتژی حقوقی خود را بر سه مسیر اصلی متمرکز کرده‌ایم که یکدیگر را تقویت می‌کنند. هر مسیر دیگری را تقویت می‌سازد: فشار عمومی اراده سیاسی ایجاد می‌کند، ICC شواهد تولید می‌کند، و تحقیقات آلمان کمپین‌ها را معتبر می‌سازد.</p>
+
+<!-- PATHWAY 1 -->
+<div class="pathway green">
+  <span class="pathway-tag green">مسیر اول</span>
+  <h3>فشار عمومی و جلب توجه جهانی</h3>
+  <p><strong>هدف:</strong> ایجاد اراده سیاسی لازم برای اقدام حقوقی</p>
+  <ul>
+    <li>کمپین‌های آگاهی‌بخشی #JusticeForMinab</li>
+    <li>طوفان‌های توییتری هماهنگ با زمان‌بندی استراتژیک</li>
+    <li>دادخواست به دیوان کیفری بین‌المللی و رهبران جهان</li>
+    <li>تقویت رسانه‌ای گزارش‌های تحقیقاتی</li>
+    <li>انتشار نام و چهره هر کودک — انسانی‌سازی قربانیان</li>
+  </ul>
+  <div class="callout callout-info" style="margin-top:12px;">
+    <strong>اهمیت:</strong> بدون فشار عمومی مستمر، هیچ دادستانی اقدام نخواهد کرد. این مسیر تمام مسیرهای دیگر را ممکن می‌سازد.
+  </div>
+</div>
+
+<!-- PATHWAY 2 -->
+<div class="pathway blue">
+  <span class="pathway-tag blue">مسیر دوم</span>
+  <h3>دیوان کیفری بین‌المللی (ICC) از طریق ماده ۱۲(۳)</h3>
+  <p><strong>هدف:</strong> پیگرد کیفری فردی مسئولان</p>
+  <p><strong>سازوکار:</strong> ایران (غیرعضو ICC) اعلامیه‌ای موقت تحت ماده ۱۲(۳) اساسنامه رم صادر می‌کند و صلاحیت دیوان را بر جنایات ارتکابی در خاک خود از ۲۸ فوریه ۲۰۲۶ می‌پذیرد.</p>
+  <ul>
+    <li><strong>سابقه:</strong> فلسطین (۲۰۱۴) و اوکراین (دو بار) با موفقیت از این سازوکار استفاده کرده‌اند</li>
+    <li><strong>اتهامات:</strong> جنایات جنگی تحت ماده ۸ — حمله عمدی به اهداف غیرنظامی (مدارس)</li>
+    <li><strong>هدف:</strong> مقامات ارشد نظامی آمریکا در زنجیره فرماندهی</li>
+    <li>می‌تواند به صدور حکم بازداشت منجر شود</li>
+  </ul>
+  <p style="margin-top:12px; font-size:13px; color:var(--text-muted);">
+    <strong>چالش‌ها:</strong> آمریکا عضو ICC نیست و فعالانه دیوان را تضعیف می‌کند. مسئله عنصر ذهنی (mens rea) و اجرای احکام.
+  </p>
+</div>
+
+<!-- PATHWAY 3 -->
+<div class="pathway amber">
+  <span class="pathway-tag amber">مسیر سوم</span>
+  <h3>صلاحیت جهانی (Universal Jurisdiction) — آلمان</h3>
+  <p><strong>هدف:</strong> شکایت کیفری در آلمان بدون نیاز به ارتباط سرزمینی</p>
+  <p><strong>سازوکار:</strong> شکایت کیفری تحت قانون مجازات جنایات بین‌المللی آلمان (Völkerstrafgesetzbuch)</p>
+  <ul>
+    <li><strong>سابقه:</strong> محاکمه موفق انور رسلان (مقام سوری) در آلمان به اتهام شکنجه</li>
+    <li><strong>مزیت:</strong> نیاز به همکاری ایران یا آمریکا نیست</li>
+    <li><strong>شریک کلیدی:</strong> مرکز اروپایی حقوق اساسی و حقوق بشر (ECCHR) در برلین</li>
+    <li>می‌تواند به محدودیت سفر برای افراد نام‌برده منجر شود</li>
+  </ul>
+  <div class="callout callout-warn" style="margin-top:12px;">
+    آلمان سابقه اثبات‌شده در پرونده‌های صلاحیت جهانی دارد. حتی اگر به محاکمه کامل نرسد، فشار حقوقی بسیار مؤثری ایجاد می‌کند.
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<h2 class="page-break"><span class="num">۵</span> چارچوب مستندات و شواهد</h2>
+<p class="lead">بسته شواهد ما برای پاسخگویی به استانداردهای حقوقی بین‌المللی طراحی شده و چهار دسته اصلی را پوشش می‌دهد:</p>
+
+<div class="ev-grid">
+  <div class="ev-card">
+    <h4>شواهد فیزیکی</h4>
+    <p>تصاویر ماهواره‌ای (قبل/بعد)، تحلیل قطعات سلاح، نقشه‌برداری الگوی انفجار، ارزیابی آسیب سازه‌ای</p>
+  </div>
+  <div class="ev-card">
+    <h4>شواهد دیجیتال</h4>
+    <p>مستندات رسانه‌های اجتماعی، داده‌های ردیابی پرواز (ADS-B)، آرشیو بیانیه‌های رسمی، تحلیل OSINT</p>
+  </div>
+  <div class="ev-card">
+    <h4>شواهد شفاهی</h4>
+    <p>شهادت بازماندگان، گزارش‌های امدادگران اولیه، مستندات پرسنل پزشکی، شهود محلی</p>
+  </div>
+  <div class="ev-card">
+    <h4>شواهد مکتوب</h4>
+    <p>فهرست ثبت‌نام مدرسه، مجوزهای ساختمانی، سوابق آموزش‌وپرورش، گزارش‌های ارزیابی اطلاعاتی</p>
+  </div>
+</div>
+
+<!-- SECTION 6 -->
+<h2><span class="num">۶</span> سازمان‌های بین‌المللی هدف</h2>
+<table>
+  <tr><th>سازمان</th><th>محل</th><th>تخصص</th></tr>
+  <tr><td><strong>ECCHR</strong></td><td>برلین</td><td>صلاحیت جهانی — تجربه پرونده‌های سوریه</td></tr>
+  <tr><td><strong>DAWN</strong></td><td>واشنگتن</td><td>حمایت از اعلامیه ماده ۱۲(۳) ICC</td></tr>
+  <tr><td><strong>CJA</strong></td><td>سان‌فرانسیسکو</td><td>دعاوی پاسخگویی بین‌المللی</td></tr>
+  <tr><td><strong>TRIAL International</strong></td><td>ژنو</td><td>پرونده‌های صلاحیت جهانی</td></tr>
+  <tr><td><strong>Human Rights Watch</strong></td><td>—</td><td>در حال تحقیق به‌عنوان جنایت جنگی</td></tr>
+  <tr><td><strong>Amnesty International</strong></td><td>—</td><td>حمایت جهانی و مستندسازی</td></tr>
+</table>
+
+<!-- SECTION 7 -->
+<h2 class="page-break"><span class="num">۷</span> نقشه راه: مراحل بعدی</h2>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-phase">فاز ۱ · الان (هفته‌های ۱-۲)</div>
+    <h3>تأسیس و بنیانگذاری</h3>
+    <ul>
+      <li>دریافت تأیید نهایی مؤسسان بر اساسنامه و اسناد ثبت</li>
+      <li>برگزاری جلسه مؤسسان (آنلاین)</li>
+      <li>تأیید بازرسان عملیاتی (Operations Inspectors)</li>
+      <li>ترجمه حرفه‌ای اساسنامه به فنلاندی</li>
+      <li>ثبت انجمن در PRH (هزینه: ۵۵ یورو)</li>
+    </ul>
+  </div>
+  <div class="tl-item">
+    <div class="tl-phase">فاز ۲ · ماه ۱ تا ۲</div>
+    <h3>جمع‌آوری شواهد و ارتباطات</h3>
+    <ul>
+      <li>تماس رسمی با ECCHR، DAWN، CJA</li>
+      <li>تدوین پروتکل مستندسازی شاهدان</li>
+      <li>ساخت بسته شواهد مطابق استانداردهای قابلیت پذیرش ICC</li>
+      <li>آغاز مذاکره برای مشاوره حقوقی pro bono</li>
+      <li>گسترش شبکه داوطلبان از طریق ربات تلگرام</li>
+    </ul>
+  </div>
+  <div class="tl-item">
+    <div class="tl-phase">فاز ۳ · ماه ۲ تا ۴</div>
+    <h3>اقدامات حقوقی</h3>
+    <ul>
+      <li>ارائه شکایت کیفری به دادستان کل آلمان (Generalbundesanwalt)</li>
+      <li>حمایت از ماده ۱۲(۳) با نمایندگان حقوقی ایران</li>
+      <li>دادخواست به شورای حقوق بشر سازمان ملل</li>
+      <li>آماده‌سازی مستندات برای ASP 25 (دسامبر ۲۰۲۶)</li>
+    </ul>
+  </div>
+  <div class="tl-item">
+    <div class="tl-phase">فاز ۴ · ماه ۴ تا ۱۲+</div>
+    <h3>فشار مستمر و پشتیبانی</h3>
+    <ul>
+      <li>پشتیبانی از دادستان‌ها با شواهد و شاهدان</li>
+      <li>کمپین‌های یادبود روزانه (۱۶۸ روز برای ۱۶۸ قربانی)</li>
+      <li>اقدامات هفتگی: ارسال ایمیل به نمایندگان کشورهای هم‌پیمان</li>
+      <li>طوفان‌های توییتری ماهانه هماهنگ با رویدادهای سازمان ملل</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 8 -->
+<h2 class="page-break"><span class="num">۸</span> چالش‌های حقوقی و پاسخ‌ها</h2>
+
+<h3>دفاع «اشتباه صادقانه»</h3>
+<p>ارتش آمریکا این حمله را «خطای هدف‌گیری» بر اساس اطلاعات قدیمی معرفی کرده — این یک استراتژی عمدی برای اجتناب از عنصر ذهنی (mens rea) مورد نیاز برای جنایت جنگی است.</p>
+<div class="callout callout-info">
+  <strong>پاسخ ما:</strong><br>
+  • سهل‌انگاری فاحش در عدم تأیید هدف (مدرسه‌ای پر از کودکان) یک «اشتباه صادقانه» نیست — <strong>بی‌احتیاطی جنایی</strong> است<br>
+  • اصل احتیاط در حقوق بشردوستانه بین‌المللی مهاجم را ملزم می‌کند «هر کار ممکن» را برای تأیید اهداف انجام دهد<br>
+  • ساختمان از سال ۲۰۱۶ به مدرسه تبدیل شده بود — یک دهه شکست اطلاعاتی
+</div>
+
+<h3>مصونیت رئیس دولت</h3>
+<table>
+  <tr><th>وضعیت</th><th>توضیح</th></tr>
+  <tr><td><strong>در دوران ریاست</strong></td><td>مصونیت شخصی در دادگاه‌های خارجی وجود دارد</td></tr>
+  <tr><td><strong>پس از ترک قدرت</strong></td><td>مصونیت برای جنایات بین‌المللی از بین می‌رود (سابقه پینوشه، حکم ICC درباره البشیر)</td></tr>
+  <tr><td><strong>استراتژی ما</strong></td><td>ساختن پرونده امروز — اجرای پیگرد پس از پایان دوره ریاست‌جمهوری</td></tr>
+</table>
+
+<h3>کارشکنی آمریکا</h3>
+<p>آمریکا سابقاً مقامات ICC را تحریم کرده و صلاحیت دیوان را رد کرده است.</p>
+<div class="callout callout-warn">
+  <strong>پاسخ:</strong> ایجاد ائتلاف بین‌المللی به حدی گسترده که مانع‌تراشی آمریکا هزینه دیپلماتیک بالایی داشته باشد.
+</div>
+
+<!-- SECTION 9 -->
+<h2><span class="num">۹</span> چگونه می‌توانید کمک کنید</h2>
+
+<h3>برای حقوق‌دانان</h3>
+<ul class="checklist">
+  <li><span style="color:var(--gold);">→</span> ارائه مشاوره حقوقی رایگان (pro bono)</li>
+  <li><span style="color:var(--gold);">→</span> پشتیبانی از بسته‌بندی شواهد ICC</li>
+  <li><span style="color:var(--gold);">→</span> مشاوره در مورد شکایات صلاحیت جهانی</li>
+  <li><span style="color:var(--gold);">→</span> اتصال ما به شبکه‌های حقوق بین‌الملل</li>
+</ul>
+
+<h3>برای سازمان‌ها</h3>
+<ul class="checklist">
+  <li><span style="color:var(--gold);">→</span> امضای مشترک بیانیه‌ها و دادخواست‌ها</li>
+  <li><span style="color:var(--gold);">→</span> تقویت از طریق شبکه‌هایتان</li>
+  <li><span style="color:var(--gold);">→</span> ارائه پشتوانه سازمانی برای اقدامات حقوقی</li>
+  <li><span style="color:var(--gold);">→</span> به اشتراک‌گذاری شواهد و اطلاعات</li>
+</ul>
+
+<h3>برای عدالت‌خواهان</h3>
+<ul class="checklist">
+  <li><span style="color:var(--gold);">→</span> پیوستن به شبکه داوطلبان PFP — <strong>@peopleforpeacebot</strong> در تلگرام</li>
+  <li><span style="color:var(--gold);">→</span> اشتراک‌گذاری در شبکه‌های اجتماعی</li>
+  <li><span style="color:var(--gold);">→</span> ارسال ایمیل به نمایندگان مجلس</li>
+  <li><span style="color:var(--gold);">→</span> کمک مالی برای هزینه‌های حقوقی</li>
+</ul>
+
+<!-- SECTION 10 -->
+<h2><span class="num">۱۰</span> لینک‌های مهم</h2>
+<table>
+  <tr><th>منبع</th><th>آدرس</th></tr>
+  <tr><td><strong>وب‌سایت</strong></td><td>peopleforpeace.live</td></tr>
+  <tr><td><strong>صفحه یادبود کودکان</strong></td><td>peopleforpeace.live/memorial.html</td></tr>
+  <tr><td><strong>صفحه کمپین حقوقی</strong></td><td>peopleforpeace.live/justice.html</td></tr>
+  <tr><td><strong>ربات تلگرام</strong></td><td>@peopleforpeacebot</td></tr>
+</table>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <p class="hafez">هرگز نمیرد آنکه دلش زنده شد به عشق — حافظ</p>
+  <p style="font-size:18px; font-weight:700; color:var(--navy); margin-bottom:16px;">
+    هر کودک بیشتر از این‌ها لایق بود.<br>
+    هر. کودک. بیشتر. لایق. بود.
+  </p>
+  <p class="org">
+    People for Peace & Justice ry<br>
+    هلسینکی، فنلاند — اسفند ۱۴۰۴
+  </p>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

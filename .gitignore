@@ -147,9 +147,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build
-frontend/build/
-frontend/.next/
-frontend/.nuxt/
+PFP_Platform/web/build/
+PFP_Platform/web/.next/
+PFP_Platform/web/.nuxt/
 
 # Docker
 *.dockerignore
@@ -165,18 +165,17 @@ frontend/.nuxt/
 Thumbs.db
 
 # Deploy keys (never commit private keys)
-infrastructure/deploy_key
-minab/
+PFP_Platform/infra/deploy_key
 typescript
 kanban.md
-frontend/public/memorial-data.js.bak
-frontend/public/photo-review.html
-frontend/public/photo_audit.html
+PFP_Platform/web/public/memorial-data.js.bak
+PFP_Platform/web/public/photo-review.html
+PFP_Platform/web/public/photo_audit.html
 
 # Test artifacts & reports
-tests/screenshots/
-tests/videos/
-tests/results/
+PFP_Platform/qa/screenshots/
+PFP_Platform/qa/videos/
+PFP_Platform/qa/results/
 test_screenshots/
 test_screenshots_core/
 test_videos/
@@ -190,9 +189,10 @@ debug_*.png
 # Temporary / one-off scripts
 align_campaign_db.py
 inspect_db.py
-telegram-bot/save_session.py
-telegram-bot/telegram_session.json
-telegram-bot/prototype.html
+PFP_Platform/bot/save_session.py
+PFP_Platform/bot/telegram_session.json
+PFP_Platform/bot/prototype.html
 
 # Misc
 Misc Archive/
+Archive/

@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justice for Minab Children — People for Peace & Justice</title>
+<meta name="description" content="People for Peace & Justice is building the legal case for accountability for the Minab school airstrike. Research, documentation, and international legal action for 168 children.">
+<meta property="og:title" content="Justice for Minab Children — Legal Campaign">
+<meta property="og:description" content="Building the legal case for accountability. 168 children killed in a US airstrike on a school. We're pursuing justice through the ICC, universal jurisdiction, and international law.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://peopleforpeace.live/justice.html">
+<meta property="og:image" content="https://peopleforpeace.live/images/og-justice.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #273548;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.15);
+  --red-accent: #8b2232;
+  --red-bright: #dc2626;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--gold-light); }
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bg-deep);
+  background: var(--gold);
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+  color: var(--bg-deep);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════════════════════════════ */
+.section {
+  padding: 120px 40px 100px;
+  position: relative;
+  overflow: hidden;
+}
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(139,34,50,0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+.section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.section + .section { border-top: 1px solid rgba(201,168,76,0.06); }
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════════ */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 900;
+  line-height: 1.08;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+h1 .accent { color: var(--gold); }
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+p, li {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+.lead {
+  font-size: 21px;
+  line-height: 1.65;
+  color: var(--text-primary);
+  max-width: 780px;
+}
+.gold-rule {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 24px 0;
+  border: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(139,34,50,0.1) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 70%, rgba(201,168,76,0.05) 0%, transparent 50%),
+    var(--bg-deep);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+.hero-stat-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-number {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+}
+.hero-stat-number.red { color: var(--red-bright); }
+.hero-stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-block;
+  padding: 14px 36px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bg-deep);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+  color: var(--bg-deep);
+}
+.btn-outline {
+  display: inline-block;
+  padding: 14px 36px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  background: transparent;
+  border: 2px solid rgba(201,168,76,0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  color: var(--gold-light);
+}
+
+/* Hero photo mosaic */
+.hero-mosaic {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 4px;
+  aspect-ratio: 5/4;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(139,34,50,0.2);
+}
+.hero-mosaic::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(10,14,26,0.8) 100%);
+  pointer-events: none;
+}
+.hero-mosaic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.2);
+  transition: filter 0.5s;
+}
+.hero-mosaic:hover img { filter: grayscale(0); }
+.hero-mosaic-label {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INCIDENT SECTION
+   ═══════════════════════════════════════════════════════════════ */
+.incident-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.fact-list {
+  list-style: none;
+  margin-top: 24px;
+}
+.fact-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.06);
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+}
+.fact-list li:last-child { border-bottom: none; }
+.fact-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+.fact-text strong { color: var(--white); }
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.stat-card {
+  text-align: center;
+  padding: 28px 16px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red-accent), var(--gold));
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-num.red { color: var(--red-bright); }
+.stat-lbl {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESEARCH METHODOLOGY
+   ═══════════════════════════════════════════════════════════════ */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 40px 0;
+}
+.research-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 12px;
+  padding: 32px 28px;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative;
+}
+.research-card:hover {
+  border-color: rgba(201,168,76,0.25);
+  transform: translateY(-3px);
+}
+.research-card .card-num {
+  font-family: var(--font-mono);
+  font-size: 48px;
+  font-weight: 400;
+  color: rgba(201,168,76,0.12);
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  line-height: 1;
+}
+.research-card h3 { font-size: 20px; margin-bottom: 14px; }
+.research-card p { font-size: 15px; line-height: 1.7; }
+
+/* ═══════════════════════════════════════════════════════════════
+   LEGAL PATHWAYS
+   ═══════════════════════════════════════════════════════════════ */
+.pathway-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 40px 0;
+}
+.pathway-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 12px;
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.pathway-card:hover {
+  border-color: rgba(201,168,76,0.25);
+  transform: translateY(-3px);
+}
+.pathway-card .pathway-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.pathway-tag.green { background: rgba(34,197,94,0.15); color: #86efac; }
+.pathway-tag.blue { background: rgba(59,130,246,0.15); color: #93bbfd; }
+.pathway-tag.amber { background: rgba(245,158,11,0.15); color: #fcd34d; }
+.pathway-card h3 { font-size: 20px; margin-bottom: 12px; }
+.pathway-card p { font-size: 15px; line-height: 1.7; }
+.pathway-card ul { list-style: none; margin-top: 14px; }
+.pathway-card ul li {
+  font-size: 14px;
+  padding: 6px 0;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+.pathway-card ul li::before {
+  content: '→';
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   EVIDENCE FRAMEWORK
+   ═══════════════════════════════════════════════════════════════ */
+.evidence-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 40px 0;
+}
+.evidence-item {
+  background: var(--bg-card);
+  border-left: 3px solid var(--gold);
+  padding: 24px 20px;
+  border-radius: 0 8px 8px 0;
+}
+.evidence-item h4 {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+.evidence-item p { font-size: 14px; line-height: 1.65; }
+
+/* ═══════════════════════════════════════════════════════════════
+   TIMELINE
+   ═══════════════════════════════════════════════════════════════ */
+.timeline {
+  position: relative;
+  margin: 40px 0;
+  padding-left: 40px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--red-accent), var(--gold), var(--gold-dim));
+}
+.tl-item {
+  position: relative;
+  padding-bottom: 40px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  border: 3px solid var(--bg-deep);
+  border-radius: 50%;
+  left: -31px;
+  top: 4px;
+}
+.tl-phase {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.tl-item h3 { font-size: 20px; margin-bottom: 8px; }
+.tl-item p { font-size: 15px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   TEAM
+   ═══════════════════════════════════════════════════════════════ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 40px 0;
+}
+.team-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 12px;
+  padding: 32px 28px;
+  text-align: center;
+}
+.team-card .role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.team-card h3 { font-size: 20px; color: var(--white); margin-bottom: 8px; }
+.team-card p { font-size: 14px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   PARTNERS
+   ═══════════════════════════════════════════════════════════════ */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin: 40px 0;
+}
+.partner-item {
+  padding: 20px 24px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  border: 1px solid rgba(201,168,76,0.06);
+}
+.partner-item strong { color: var(--gold-light); }
+.partner-item span { font-size: 14px; color: var(--text-muted); }
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA / FOOTER
+   ═══════════════════════════════════════════════════════════════ */
+.cta-section {
+  text-align: center;
+  padding: 100px 40px;
+  background:
+    radial-gradient(ellipse at 50% 60%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    var(--bg-deep);
+}
+.cta-section h2 { margin-bottom: 16px; }
+.cta-section p { max-width: 600px; margin: 0 auto 40px; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+.footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid rgba(201,168,76,0.06);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.footer a { color: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; }
+.d4 { transition-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-mosaic { max-width: 400px; }
+  .incident-grid { grid-template-columns: 1fr; gap: 40px; }
+  .research-grid { grid-template-columns: 1fr; }
+  .pathway-grid { grid-template-columns: 1fr; }
+  .evidence-row { grid-template-columns: 1fr 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .section { padding: 80px 20px 60px; }
+  .nav { padding: 12px 20px; }
+  .nav-links { display: none; }
+  .hero-stat-row { gap: 20px; }
+  .hero-stat-number { font-size: 32px; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .evidence-row { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">People for Peace & Justice</a>
+  <div class="nav-links">
+    <a href="#incident">The Incident</a>
+    <a href="#research">Research</a>
+    <a href="#legal">Legal Pathways</a>
+    <a href="#evidence">Evidence</a>
+    <a href="#timeline">Roadmap</a>
+    <a href="#team">Team</a>
+  </div>
+  <a href="memorial.html" class="nav-cta">View Memorial</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge fade-in">⚖️ Legal Campaign</div>
+        <h1 class="fade-in d1">Justice for<br><span class="accent">Minab Children</span></h1>
+        <p class="hero-subtitle fade-in d2">
+          Building the legal case for accountability. Research, documentation, and international legal action for 168 children killed in an airstrike on their school.
+        </p>
+        <div class="hero-stat-row fade-in d3">
+          <div class="hero-stat">
+            <div class="hero-stat-number red">168</div>
+            <div class="hero-stat-label">Lives Lost</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number red">108</div>
+            <div class="hero-stat-label">Children</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number">100</div>
+            <div class="hero-stat-label">Identified</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number">3</div>
+            <div class="hero-stat-label">Legal Tracks</div>
+          </div>
+        </div>
+        <div class="hero-actions fade-in d4">
+          <a href="memorial.html" class="btn-primary">See Their Faces</a>
+          <a href="#research" class="btn-outline">Our Research</a>
+        </div>
+      </div>
+      <div class="fade-in d2">
+        <div class="hero-mosaic" id="heroMosaic"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     THE INCIDENT
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="incident">
+  <div class="container">
+    <p class="kicker fade-in">What Happened</p>
+    <h2 class="fade-in d1">February 28, 2026 — Minab, Iran</h2>
+    <hr class="gold-rule fade-in d1">
+    <div class="incident-grid">
+      <div>
+        <p class="lead fade-in d2">
+          On the first day of the US-Iran conflict, a BGM-109 Tomahawk cruise missile struck
+          the <strong style="color:var(--white)">Shajareh Tayyebeh Girls' Elementary School</strong>
+          in Minab, Hormozgan Province. At least <strong style="color:var(--red-bright)">168 people</strong>
+          were killed — the overwhelming majority schoolgirls aged 7 to 12.
+        </p>
+        <ul class="fact-list fade-in d3">
+          <li>
+            <span class="fact-icon">📋</span>
+            <span class="fact-text">The <strong>US military's own preliminary investigation</strong> concluded this was a targeting error based on outdated 2013 intelligence data.</span>
+          </li>
+          <li>
+            <span class="fact-icon">🏫</span>
+            <span class="fact-text">The building had been converted to a <strong>civilian school in 2016</strong> — a decade-old intelligence failure.</span>
+          </li>
+          <li>
+            <span class="fact-icon">📰</span>
+            <span class="fact-text">Independently verified by <strong>NYT, BBC Verify, Washington Post, Bellingcat,</strong> and multiple international media outlets.</span>
+          </li>
+          <li>
+            <span class="fact-icon">⚖️</span>
+            <span class="fact-text"><strong>Human Rights Watch</strong> called for investigation as a potential war crime. <strong>UNESCO</strong> classified it as a grave violation of humanitarian law.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="fade-in d3">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-num red">168+</div>
+            <div class="stat-lbl">Lives Lost</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num red">108</div>
+            <div class="stat-lbl">Children Killed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">95+</div>
+            <div class="stat-lbl">Injured</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">100</div>
+            <div class="stat-lbl">Identified by Name</div>
+          </div>
+        </div>
+        <p style="margin-top:20px; font-size:14px; color:var(--text-muted); text-align:center;">
+          At least 68 victims remain unidentified — bodies too severely damaged for visual identification.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     RESEARCH & DOCUMENTATION
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="research">
+  <div class="container">
+    <p class="kicker fade-in">Research & Documentation</p>
+    <h2 class="fade-in d1">Building the <span class="accent">Evidentiary Foundation</span></h2>
+    <hr class="gold-rule fade-in d1">
+    <p class="lead fade-in d2">
+      Every legal pathway depends on the quality of evidence. Our research methodology
+      combines open-source intelligence, forensic documentation, and international legal standards
+      to build a case that can stand up in court.
+    </p>
+    <div class="research-grid fade-in d3">
+      <div class="research-card">
+        <span class="card-num">01</span>
+        <h3>Victim Identification</h3>
+        <p>Systematic identification and verification of every victim by name, age, and photograph. 100 children identified to date through cross-referencing school records, family testimonies, and community sources.</p>
+      </div>
+      <div class="research-card">
+        <span class="card-num">02</span>
+        <h3>OSINT Analysis</h3>
+        <p>Open-source intelligence gathering using satellite imagery (before/after), ADS-B flight tracking data, social media forensics, and geolocation analysis to reconstruct the attack timeline and verify the weapon type.</p>
+      </div>
+      <div class="research-card">
+        <span class="card-num">03</span>
+        <h3>Legal Research</h3>
+        <p>Comprehensive analysis of applicable international law — Rome Statute, Geneva Conventions, customary IHL — to identify the strongest legal basis for each pathway and anticipate defense arguments.</p>
+      </div>
+      <div class="research-card">
+        <span class="card-num">04</span>
+        <h3>Media Verification</h3>
+        <p>Archive and verification of all independent media reports, investigative journalism, and official statements. Building a chronological evidence library with source attestation and chain of custody.</p>
+      </div>
+      <div class="research-card">
+        <span class="card-num">05</span>
+        <h3>Precedent Analysis</h3>
+        <p>Study of successful international prosecutions — Anwar Raslan (Syria/Germany), Al Mahdi (ICC/Mali), Ukraine cases — to model our filings and evidence standards on proven approaches.</p>
+      </div>
+      <div class="research-card">
+        <span class="card-num">06</span>
+        <h3>Witness Documentation</h3>
+        <p>Protocols for ethical, trauma-informed testimony collection from survivors, first responders, and community members. Designed to meet ICC admissibility standards while protecting witness safety.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LEGAL PATHWAYS
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="legal">
+  <div class="container">
+    <p class="kicker fade-in">Legal Strategy</p>
+    <h2 class="fade-in d1">Three Pathways to <span class="accent">Accountability</span></h2>
+    <hr class="gold-rule fade-in d1">
+    <p class="lead fade-in d2">
+      Our focused legal strategy targets three mutually-reinforcing approaches.
+      Each pathway amplifies the others — public pressure creates political will for ICC action,
+      which generates evidence for universal jurisdiction filings.
+    </p>
+    <div class="pathway-grid fade-in d3">
+      <div class="pathway-card">
+        <span class="pathway-tag green">Approach 1</span>
+        <h3>Public Pressure Engine</h3>
+        <p>Global campaigns creating the political will that makes legal action possible. Without sustained public attention, no prosecutor will act.</p>
+        <ul>
+          <li>#JusticeForMinab awareness campaigns</li>
+          <li>Coordinated Twitter storms and social actions</li>
+          <li>Petitions to ICC and world leaders</li>
+          <li>Media amplification of investigative reports</li>
+        </ul>
+      </div>
+      <div class="pathway-card">
+        <span class="pathway-tag blue">Approach 2</span>
+        <h3>ICC via Article 12(3)</h3>
+        <p>Iran files an ad hoc declaration accepting ICC jurisdiction over the attack on its territory. Precedents: Palestine (2014), Ukraine.</p>
+        <ul>
+          <li>Individual criminal responsibility</li>
+          <li>Command responsibility for targeting decisions</li>
+          <li>Rome Statute Article 8 — war crimes</li>
+          <li>Can lead to arrest warrants</li>
+        </ul>
+      </div>
+      <div class="pathway-card">
+        <span class="pathway-tag amber">Approach 3</span>
+        <h3>Universal Jurisdiction</h3>
+        <p>Criminal complaint filed in Germany under Völkerstrafgesetzbuch. No territorial connection needed. ECCHR has done this for Syria.</p>
+        <ul>
+          <li>Germany's proven track record (Anwar Raslan)</li>
+          <li>No cooperation from Iran or US needed</li>
+          <li>ECCHR partnership for filing support</li>
+          <li>Travel restrictions on named individuals</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fade-in d4" style="text-align:center; font-size:14px; color:var(--text-muted); margin-top:8px;">
+      Each approach feeds the others: pressure creates will for ICC action, ICC generates evidence for Germany, Germany's investigation validates pressure campaigns.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     EVIDENCE FRAMEWORK
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="evidence">
+  <div class="container">
+    <p class="kicker fade-in">Evidence Framework</p>
+    <h2 class="fade-in d1">What We're <span class="accent">Documenting</span></h2>
+    <hr class="gold-rule fade-in d1">
+    <p class="lead fade-in d2">
+      Building an evidence package that meets international legal standards,
+      designed for use across all three accountability pathways.
+    </p>
+    <div class="evidence-row fade-in d3">
+      <div class="evidence-item">
+        <h4>Physical Evidence</h4>
+        <p>Satellite imagery, weapon fragment analysis, blast pattern mapping, structural damage assessment</p>
+      </div>
+      <div class="evidence-item">
+        <h4>Digital Evidence</h4>
+        <p>Social media documentation, ADS-B data, communication intercepts, official statements archive</p>
+      </div>
+      <div class="evidence-item">
+        <h4>Testimonial Evidence</h4>
+        <p>Survivor statements, first responder accounts, medical personnel records, community witness depositions</p>
+      </div>
+      <div class="evidence-item">
+        <h4>Documentary Evidence</h4>
+        <p>School enrollment records, building permits, military target lists, intelligence assessment reports</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ROADMAP / TIMELINE
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="timeline">
+  <div class="container">
+    <p class="kicker fade-in">Roadmap</p>
+    <h2 class="fade-in d1">From Documentation to <span class="accent">Accountability</span></h2>
+    <hr class="gold-rule fade-in d1">
+    <div class="timeline fade-in d2">
+      <div class="tl-item">
+        <div class="tl-phase">Phase 1 · Now</div>
+        <h3>Foundation & Legal Entity</h3>
+        <p>Establishing People for Peace & Justice ry (Finland). Building the evidence archive, content library, and research methodology. Victim identification and verification.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">Phase 2 · Month 1–2</div>
+        <h3>Evidence Gathering & Outreach</h3>
+        <p>Engaging legal partners (DAWN, ECCHR, CJA). Formalizing witness documentation protocols. Building the evidence package to ICC admissibility standards.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">Phase 3 · Month 2–4</div>
+        <h3>Legal Filings</h3>
+        <p>Criminal complaint to German Generalbundesanwalt. ICC Article 12(3) advocacy with Iran's legal representatives. UNHRC Commission of Inquiry petition.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">Phase 4 · Month 4–12+</div>
+        <h3>Sustained Pressure & Support</h3>
+        <p>Supporting prosecutors with evidence and witnesses. Daily memorial campaigns. Monitoring proceedings and amplifying legal developments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TEAM & ENTITY
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="team">
+  <div class="container">
+    <p class="kicker fade-in">The Team</p>
+    <h2 class="fade-in d1">People for Peace & <span class="accent">Justice ry</span></h2>
+    <hr class="gold-rule fade-in d1">
+    <p class="lead fade-in d2">
+      A Finnish registered association established to provide the legal and organizational
+      foundation for accountability work. Registered under the Finnish Associations Act,
+      domiciled in Helsinki.
+    </p>
+    <div class="team-grid fade-in d3">
+      <div class="team-card">
+        <div class="role">Chairperson</div>
+        <h3>Mahdi Farimani</h3>
+        <p>Helsinki, Finland · Technology & campaign infrastructure</p>
+      </div>
+      <div class="team-card">
+        <div class="role">Board Member</div>
+        <h3>Zahra Azhar</h3>
+        <p>Den Haag, Netherlands · Research & advocacy</p>
+      </div>
+      <div class="team-card">
+        <div class="role">Board Member</div>
+        <h3>Ali Akbar Siapoush</h3>
+        <p>Den Haag, Netherlands · Community coordination</p>
+      </div>
+    </div>
+
+    <h3 class="fade-in d3" style="margin-top:48px;">Target Legal Partners</h3>
+    <div class="partners-grid fade-in d4">
+      <div class="partner-item">
+        <strong>ECCHR</strong> — European Center for Constitutional and Human Rights<br>
+        <span>Berlin · Universal jurisdiction expertise</span>
+      </div>
+      <div class="partner-item">
+        <strong>DAWN</strong> — Democracy for Arab World Now<br>
+        <span>Washington · ICC Article 12(3) advocacy</span>
+      </div>
+      <div class="partner-item">
+        <strong>CJA</strong> — Center for Justice & Accountability<br>
+        <span>San Francisco · International accountability litigation</span>
+      </div>
+      <div class="partner-item">
+        <strong>TRIAL International</strong><br>
+        <span>Geneva · Universal jurisdiction cases</span>
+      </div>
+      <div class="partner-item">
+        <strong>Human Rights Watch</strong><br>
+        <span>Already investigating as war crime</span>
+      </div>
+      <div class="partner-item">
+        <strong>Amnesty International</strong><br>
+        <span>Global advocacy and documentation support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CTA
+     ═══════════════════════════════════════════════════════════ -->
+<section class="cta-section" id="act">
+  <div class="container">
+    <p class="kicker fade-in">Take Action</p>
+    <h2 class="fade-in d1">Join the Fight for <span class="accent">Justice</span></h2>
+    <p class="fade-in d2" style="font-size:18px; color:var(--text-secondary);">
+      168 children deserve more than silence. Support our legal campaign by joining the volunteer network, sharing the memorial, or contacting us to contribute to the evidence base.
+    </p>
+    <div class="cta-buttons fade-in d3">
+      <a href="https://t.me/peopleforpeacebot" class="btn-primary">✊ Join the Campaign</a>
+      <a href="memorial.html" class="btn-outline">View the Memorial</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <p>
+    People for Peace & Justice ry · Helsinki, Finland
+    &nbsp;·&nbsp;
+    <a href="/">Home</a>
+    &nbsp;·&nbsp;
+    <a href="memorial.html">Memorial</a>
+    &nbsp;·&nbsp;
+    <a href="https://t.me/peopleforpeacebot">Telegram</a>
+  </p>
+  <p style="margin-top:12px; font-family:var(--font-display); font-style:italic; color:var(--text-muted);">
+    هرگز نمیرد آنکه دلش زنده شد به عشق — حافظ
+  </p>
+  <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">
+    Those whose hearts are alive with love never die — Hafez
+  </p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // --- Photo mosaic for hero (20 children) ---
+  const mosaic = document.getElementById('heroMosaic');
+  if (mosaic) {
+    const BASE = 'https://peopleforpeace.live/images/children/';
+    for (let r = 0; r < 4; r++) {
+      for (let c = 0; c < 5; c++) {
+        const rr = String(r).padStart(2, '0');
+        const cc = String(c).padStart(2, '0');
+        const img = document.createElement('img');
+        img.src = `${BASE}child_r${rr}_c${cc}.jpg`;
+        img.alt = 'Child from Minab';
+        img.loading = 'lazy';
+        img.onerror = function() { this.style.opacity = '0.1'; };
+        mosaic.appendChild(img);
+      }
+    }
+    const label = document.createElement('div');
+    label.className = 'hero-mosaic-label';
+    label.textContent = '100 identified. 68 more remain unnamed.';
+    mosaic.appendChild(label);
+  }
+
+  // --- Fade-in observer ---
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+  // --- Nav scroll effect ---
+  const nav = document.getElementById('nav');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 100) {
+      nav.style.borderBottomColor = 'rgba(201,168,76,0.15)';
+    } else {
+      nav.style.borderBottomColor = 'rgba(201,168,76,0.08)';
+    }
+    lastScroll = y;
+  }, { passive: true });
+
+})();
+</script>
+</body>
+</html>

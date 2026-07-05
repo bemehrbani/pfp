@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Faces of Peace — Minab Children</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a14;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            background: linear-gradient(180deg, #0f0f19 0%, #0a0a14 100%);
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            color: #e8be5c;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            color: #b0b0ba;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 16px 20px;
+            margin: 10px auto 0;
+            max-width: 500px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #e8be5c;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 6px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 0.58;
+            background: #1a1a28;
+        }
+
+        .card:hover {
+            transform: scale(1.08);
+            z-index: 10;
+            box-shadow: 0 8px 30px rgba(232, 190, 92, 0.3);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s ease;
+        }
+
+        .card:hover img {
+            filter: brightness(1.1) contrast(1.05);
+        }
+
+        .card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 8px 8px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .overlay {
+            transform: translateY(0);
+        }
+
+        .card .name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #e8be5c;
+        }
+
+        .card .number {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(0,0,0,0.6);
+            color: #888;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .number {
+            opacity: 1;
+        }
+
+        /* Modal */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 500px;
+            max-height: 80vh;
+            text-align: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 65vh;
+            border-radius: 14px;
+            border: 2px solid #e8be5c;
+        }
+
+        .modal-name {
+            margin-top: 16px;
+            font-size: 1.6rem;
+            color: #e8be5c;
+            font-weight: 700;
+        }
+
+        .modal-caption {
+            margin-top: 8px;
+            color: #b0b0ba;
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #222;
+            margin-top: 30px;
+        }
+
+        .footer .cta {
+            font-size: 1.3rem;
+            color: #e8be5c;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .footer .hashtags {
+            color: #8ca0dc;
+            font-size: 0.9rem;
+        }
+
+        .footer .brand {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4px;
+                padding: 10px;
+            }
+            .header h1 { font-size: 1.5rem; }
+            .stats-bar { gap: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>100 Faces of Peace</h1>
+        <p>Each face is a child from Minab, Iran. Each one has a name, a dream, and a future that depends on the choices we make today.</p>
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-num">100</div>
+                <div class="stat-label">Children</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">100</div>
+                <div class="stat-label">Dreams</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">1</div>
+                <div class="stat-label">Demand: Peace</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid" id="photoGrid"></div>
+
+    <div class="footer">
+        <div class="cta">Their futures are in your hands.</div>
+        <div class="hashtags">#100FacesOfPeace · #PeopleForPeace · #MinabChildren</div>
+        <div class="brand">People for Peace · 2026</div>
+    </div>
+
+    <div class="modal-backdrop" id="modal">
+        <div class="modal-content">
+            <img id="modalImg" src="" alt="">
+            <div class="modal-name" id="modalName"></div>
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+
+    <script>
+        const captions = [
+            "wants to grow up in a world without fear.",
+            "dreams of going to school every day.",
+            "has never known peace — but deserves it.",
+            "doesn't understand why the world forgot.",
+            "believes in a better tomorrow.",
+            "has a smile that sanctions can't erase.",
+            "is waiting for someone to care.",
+            "hopes the world will listen.",
+            "deserves the same chances as every other child.",
+            "wants to be a doctor someday.",
+        ];
+
+        function extractName(filename) {
+            const stem = filename.replace(/\.\w+$/, '');
+            if (/^child_\d+$/.test(stem)) return null;
+            // Check for Arabic/Farsi chars
+            if (/[\u0600-\u06FF]/.test(stem)) return null;
+            const parts = stem.replace(/_\d+$/, '').split('_');
+            const clean = parts
+                .map(p => p.replace(/[^a-zA-Z]/g, ''))
+                .filter(p => p.length >= 2)
+                .map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase());
+            return clean.length > 0 ? clean.join(' ') : null;
+        }
+
+        // File list (populated by the generator script or manually)
+        const photos = ["2ezZa_Habashia_38.jpg", "Alireza_Zareie_59.jpg", "Amirali_Jadav_71.jpg", "Amirali_Kam_al_103.jpg", "Arash_Golazir_101.jpg", "Asma_Zakeri_41.jpg", "Asra_Zakeri_26.jpg", "Athare_Zareiee_22.jpg", "Heidar_Salehi_89.jpg", "Makan_Nasiti_35.jpg", "Masina_Salari_83.jpg", "Parsa_Mokhtar_34.jpg", "Reza_Barani_64.jpg", "Reza_Ranjbar_77.jpg", "Saleh_Abbasi_56.jpg", "Samira_Malanhi_13.jpg", "Sanar_Salari_28.jpg", "Sina_Za_keri_55.jpg", "Sobhan_Ahmai_47.jpg", "Zahra_Ansarifa_16.jpg", "Zahra_Sharafi_24.jpg", "Zona_Pasand_30.jpg", "adia_Shahmir_27.jpg", "aman_Karamz\u00e9_80.jpg", "aran_Ghasemy_8.jpg", "arya_Bahadori_66.jpg", "aryam_Bazara_21.jpg", "atemeh_Derazetr_5.jpg", "ayesh_Alihosse_23.jpg", "ayesh_Alihosse_42.jpg", "az_Anhmadizac_74.jpg", "child_001.jpg", "child_008.jpg", "child_011.jpg", "child_012.jpg", "child_015.jpg", "child_028.jpg", "child_029.jpg", "child_030.jpg", "child_033.jpg", "child_034.jpg", "child_046.jpg", "child_047.jpg", "child_049.jpg", "child_050.jpg", "child_051.jpg", "child_055.jpg", "child_057.jpg", "child_059.jpg", "child_060.jpg", "child_065.jpg", "child_066.jpg", "child_067.jpg", "child_070.jpg", "child_075.jpg", "child_078.jpg", "child_081.jpg", "child_087.jpg", "child_089.jpg", "child_090.jpg", "child_091.jpg", "child_092.jpg", "child_095.jpg", "child_097.jpg", "hheil_Chamalipc_75.jpg", "inab_Bahrami_7.jpg", "inab_Makizade_29.jpg", "lasoumenh_Naza!_6.jpg", "li_Zareie_ghola_39.jpg", "liasghar_Zareie_46.jpg", "lyayesn_Saleh_9.jpg", "mayoon_Zein\u00e9e_88.jpg", "min_Ahmadzac_87.jpg", "mirali_Boostan_76.jpg", "moien_Zeinali_72.jpg", "nial_Faghirdoc_96.jpg", "ona_AhnmadZac_20.jpg", "rena_Hosseinpc_86.jpg", "shammad_Jan_61.jpg", "sirhossein_J_af_51.jpg", "vad_Sartakzac_79.jpg", "vadijeh_Darvid_25.jpg", "wrham_Ranjbat_67.jpg", "ybhan_Shahda_91.jpg", "\u0623\u0645\u0627\u0639\u06210\u062c\u061f_\u0644\u0648\u0648\u0644\u0633\u0629_97.jpg", "\u0623\u0645\u0642\u0627\u0629\u0643_\u0623\u0644\u0637\u0648\u0627\u0629_102.jpg", "\u0623\u0645\u0648\u0645\u0629\u0627\u0644\u0627_\u062f\u0627\u062f\u0645_99.jpg", "\u0627_\u062a\u0645\u0637\u0629\u062a\u0637_\u062c\u0645\u06396\u0645_44.jpg", "\u0627_\u0637\u0637\u0644\u0629_\u0637\u0627\u0648\u0644\u0627_\u062c\u0627\u0647_17.jpg", "\u0627_\u0645\u0627\u0637\u0639\u0623\u062a5_\u0645\u0637\u0648\u0643\u0637\u0627_85.jpg", "\u0627\u0637\u0639_\u0647\u0645\u0627_30_\u0645\u0637\u0627\u0645\u0637\u0629\u0631_57.jpg", "\u0627\u0639\u0643\u0627\u062a7_\u062f\u0645\u0637\u0627\u0623\u062a\u0643_43.jpg", "\u0627\u0639\u0645\u0627\u062c_2_\u0639\u0645\u0648_\u0627\u0644\u0627\u0639\u061f_19.jpg", "\u062a\u0637\u0639\u0627\u062f\u0637_\u0637\u062d\u0645\u0637\u0627\u0621_\u0629\u0637\u062d_45.jpg", "\u0637\u0642\u0643\u06376_\u062c\u0645\u0631\u0627\u0621_\u0644\u0627_10.jpg", "\u0644\u0627\u0637\u0635\u0637\u0629\u0637\u0645\u0627\u0627_\u0623\u0644\u0645_82.jpg", "\u0644\u0637\u0629\u0639\u0637\u0629\u0638\u0629_\u0646\u0623\u0622\u0623\u062972_12.jpg", "\u0644\u0637\u0646\u0638_\u0637\u0639\u0645\u0637\u0639\u063a\u0623\u0629_40.jpg", "\u0645\u0627\u0632\u0639\u0627\u0643\u00ab_\u200f_\u0641\u0645\u0627\u0648\u0627\u0645\u0646_48.jpg", "\u0645\u0637_\u0623_\u062a\u0643\u0627_\u0627\u0644\u0627\u0639\u0645\u06395_65.jpg"];
+
+        const grid = document.getElementById('photoGrid');
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modalImg');
+        const modalName = document.getElementById('modalName');
+        const modalCaption = document.getElementById('modalCaption');
+
+        photos.forEach((filename, i) => {
+            const name = extractName(filename);
+            const displayName = name || `Child #${i + 1}`;
+            const caption = `${displayName} ${captions[i % captions.length]}`;
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="splitted_photos/${filename}" alt="${displayName}" loading="lazy">
+                <div class="overlay">
+                    <div class="name">${displayName}</div>
+                </div>
+                <div class="number">#${i + 1}</div>
+            `;
+            card.addEventListener('click', () => {
+                modalImg.src = `splitted_photos/${filename}`;
+                modalName.textContent = displayName;
+                modalCaption.textContent = caption;
+                modal.classList.add('active');
+            });
+            grid.appendChild(card);
+        });
+
+        modal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') modal.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

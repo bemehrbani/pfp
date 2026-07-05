@@ -42,7 +42,7 @@ jobs:
           echo "PREV_COMMIT=$PREV_COMMIT" >> $GITHUB_ENV
 
           echo "=== Pre-deploy database backup ==="
-          $SSH_CMD "cd /opt/pfp && set -a && source .env.production 2>/dev/null && set +a && mkdir -p infrastructure/postgres/backups/pre-deploy && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml exec -T postgres pg_dump -U pfp_user -d pfp_campaign --clean --if-exists --no-owner 2>/dev/null | gzip > infrastructure/postgres/backups/pre-deploy/pfp_pre_deploy_\$(date +%Y-%m-%d_%H%M%S).sql.gz && echo '✅ Backup created'"
+          $SSH_CMD "cd /opt/pfp && set -a && source .env.production 2>/dev/null && set +a && mkdir -p PFP_Platform/infra/postgres/backups/pre-deploy && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml exec -T postgres pg_dump -U pfp_user -d pfp_campaign --clean --if-exists --no-owner 2>/dev/null | gzip > PFP_Platform/infra/postgres/backups/pre-deploy/pfp_pre_deploy_\$(date +%Y-%m-%d_%H%M%S).sql.gz && echo '✅ Backup created'"
 
           echo "=== Pulling latest code ==="
           $SSH_CMD "cd /opt/pfp && git fetch origin main && git reset --hard origin/main"

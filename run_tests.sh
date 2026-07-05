@@ -168,8 +168,12 @@ run_tests_directly() {
     print_header "Running tests directly"
 
     # Check if we're in the right directory
-    if [ ! -f "manage.py" ]; then
-        print_error "manage.py not found. Please run from the project root directory."
+    if [ -f "PFP_Platform/api/manage.py" ]; then
+        MANAGE_PY="PFP_Platform/api/manage.py"
+    elif [ -f "manage.py" ]; then
+        MANAGE_PY="manage.py"
+    else
+        print_error "manage.py not found. Please run from the project root directory or PFP_Platform/api."
         exit 1
     fi
 

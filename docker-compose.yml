@@ -29,7 +29,7 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: ./PFP_Platform/api
       dockerfile: Dockerfile
     command: >
       sh -c "python manage.py migrate &&
@@ -44,7 +44,7 @@ services:
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
     volumes:
-      - ./backend:/app
+      - ./PFP_Platform/api:/app
       - static_volume:/app/static
       - media_volume:/app/media
     ports:
@@ -57,7 +57,7 @@ services:
 
   celery:
     build:
-      context: ./backend
+      context: ./PFP_Platform/api
       dockerfile: Dockerfile
     command: celery -A config worker --loglevel=info
     environment:
@@ -68,7 +68,7 @@ services:
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
     volumes:
-      - ./backend:/app
+      - ./PFP_Platform/api:/app
     depends_on:
       postgres:
         condition: service_healthy
@@ -77,7 +77,7 @@ services:
 
   celery-beat:
     build:
-      context: ./backend
+      context: ./PFP_Platform/api
       dockerfile: Dockerfile
     command: celery -A config beat --loglevel=info
     environment:
@@ -88,7 +88,7 @@ services:
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
     volumes:
-      - ./backend:/app
+      - ./PFP_Platform/api:/app
     depends_on:
       postgres:
         condition: service_healthy
@@ -97,7 +97,7 @@ services:
 
   telegram-bot:
     build:
-      context: ./telegram-bot
+      context: ./PFP_Platform/bot
       dockerfile: Dockerfile
     command: python bot.py --mode polling
     environment:
@@ -109,8 +109,8 @@ services:
       DJANGO_API_URL: http://backend:8000/api
       DJANGO_SETTINGS_MODULE: config.settings.development
     volumes:
-      - ./telegram-bot:/app
-      - ./backend:/app/backend  # Mount entire backend directory
+      - ./PFP_Platform/bot:/app
+      - ./PFP_Platform/api:/app/backend  # Mount entire backend directory
     depends_on:
       postgres:
         condition: service_healthy
@@ -121,14 +121,14 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./PFP_Platform/web
       dockerfile: Dockerfile
     ports:
       - "3000:80"
     environment:
       REACT_APP_API_URL: http://localhost:8000/api
     volumes:
-      - ./frontend:/app
+      - ./PFP_Platform/web:/app
       - /app/node_modules
     depends_on:
       - backend

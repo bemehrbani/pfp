@@ -54,7 +54,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install -r backend/requirements.txt
+          pip install -r PFP_Platform/api/requirements.txt
           pip install coverage django-coverage-plugin
 
       - name: Run backend tests
@@ -67,7 +67,7 @@ jobs:
           CELERY_BROKER_URL: redis://localhost:6379/0
           CELERY_RESULT_BACKEND: redis://localhost:6379/0
         run: |
-          cd backend
+          cd PFP_Platform/api
           python manage.py test --noinput --verbosity=2
 
       - name: Run backend tests with coverage
@@ -80,7 +80,7 @@ jobs:
           CELERY_BROKER_URL: redis://localhost:6379/0
           CELERY_RESULT_BACKEND: redis://localhost:6379/0
         run: |
-          cd backend
+          cd PFP_Platform/api
           coverage run manage.py test --noinput
           coverage report
           coverage xml
@@ -88,7 +88,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          file: backend/coverage.xml
+          file: PFP_Platform/api/coverage.xml
           flags: backend
           name: backend-coverage
 
@@ -104,21 +104,21 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
-          cache-dependency-path: frontend/package-lock.json
+          cache-dependency-path: PFP_Platform/web/package-lock.json
 
       - name: Install frontend dependencies
-        working-directory: frontend
+        working-directory: PFP_Platform/web
         run: npm ci --legacy-peer-deps
 
       - name: Run frontend tests
-        working-directory: frontend
+        working-directory: PFP_Platform/web
         run: npm test -- --watchAll=false --passWithNoTests
         env:
           CI: true
           REACT_APP_API_URL: http://localhost:8000/api
 
       - name: Build frontend
-        working-directory: frontend
+        working-directory: PFP_Platform/web
         run: npm run build
         env:
           REACT_APP_API_URL: http://localhost:8000/api
@@ -162,8 +162,8 @@ jobs:
       - name: Run bandit security scan (Python)
         run: |
           pip install bandit
-          bandit -r backend/ -f json -o bandit-report.json || true
+          bandit -r PFP_Platform/api/ -f json -o bandit-report.json || true
 
       - name: Run npm audit (Node.js)
-        working-directory: frontend
+        working-directory: PFP_Platform/web
         run: npm audit --audit-level=high || true

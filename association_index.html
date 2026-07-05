@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master File Index — People for Peace & Justice ry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0a0e1a;
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-hover: #273548;
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dim: rgba(201,168,76,0.12);
+      --red-accent: #8b2232;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --white: #ffffff;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+      padding: 40px 20px;
+    }
+
+    /* Ambient Glows */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(201,168,76,0.03) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 85%, rgba(139,34,50,0.04) 0%, transparent 45%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      background: var(--gold-dim);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4.5vw, 54px);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    h1 .accent {
+      color: var(--gold);
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      max-width: 700px;
+      margin: 0 auto 16px;
+    }
+
+    .meta-tag {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    hr.gold-rule {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 24px auto 0;
+      border: none;
+    }
+
+    /* Credentials Card */
+    .credentials-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-left: 4px solid var(--gold);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cred-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cred-body {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .cred-value {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--white);
+      background: var(--bg-deep);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.05);
+      display: inline-block;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    /* Grid Categories */
+    .category-section {
+      margin-bottom: 48px;
+    }
+
+    .category-header {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 10px;
+    }
+
+    .category-header span.icon {
+      color: var(--gold);
+    }
+
+    /* Table styles */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-primary);
+      text-align: left;
+    }
+
+    th, td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    th {
+      background: rgba(0, 0, 0, 0.2);
+      color: var(--text-secondary);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    /* Links & Buttons */
+    .doc-link {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .doc-link:hover {
+      color: var(--gold-light);
+      text-decoration: underline;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-secondary);
+      border: 1px solid rgba(255,255,255,0.05);
+      font-family: var(--font-mono);
+    }
+
+    .tag.primary {
+      background: var(--gold-dim);
+      color: var(--gold-light);
+      border-color: rgba(201,168,76,0.3);
+    }
+
+    .description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <div class="badge">🕊️ People For Peace · Governance</div>
+      <h1>Master Registry & <span class="accent">File Index</span></h1>
+      <p class="subtitle">Official documentation database of People for Peace & Justice ry (Finland)</p>
+      <div class="meta-tag">Business ID: 3616815-5 · Established 2026</div>
+      <hr class="gold-rule">
+    </header>
+
+    <!-- Credentials Card -->
+    <div class="credentials-card">
+      <div class="cred-title">🔒 Secure Access Credentials</div>
+      <div class="cred-body">
+        The board report portal and the legal registration directory are restricted to authorized trustees. Use the following access code to unlock them:
+      </div>
+      <div>
+        <span class="cred-value">pfpj2026</span>
+      </div>
+    </div>
+
+    <!-- Category 1: Public Website -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="icon">🌐</span> 1. Public Facing Website
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%">Title</th>
+              <th style="width: 20%">File Link</th>
+              <th style="width: 15%">Scope</th>
+              <th style="width: 40%">Purpose & Explanation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Landing Page</strong></td>
+              <td><a href="./PFP_Platform/web/public/landing.html" target="_blank" class="doc-link">landing.html ↗</a></td>
+              <td><span class="tag">Public</span></td>
+              <td class="description">The primary homepage presenting the association's mission, volunteer recruitment CTAs, and bot integration details.</td>
+            </tr>
+            <tr>
+              <td><strong>Minab Memorial</strong></td>
+              <td><a href="./PFP_Platform/web/public/memorial.html" target="_blank" class="doc-link">memorial.html ↗</a></td>
+              <td><span class="tag">Public</span></td>
+              <td class="description">Digital memorial space documenting the identities and stories of children lost in the Minab incident.</td>
+            </tr>
+            <tr>
+              <td><strong>Evidence Forensics</strong></td>
+              <td><a href="./PFP_Platform/web/public/evidence.html" target="_blank" class="doc-link">evidence.html ↗</a></td>
+              <td><span class="tag">Public</span></td>
+              <td class="description">Open-source database logging strike geolocation coordinates, weapon shell fragments, and metadata.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Category 2: Board Showcase -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="icon">🔒</span> 2. Restricted Board & Analysis Portal
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%">Title</th>
+              <th style="width: 20%">File Link</th>
+              <th style="width: 15%">Scope</th>
+              <th style="width: 40%">Purpose & Explanation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Board Portal Dashboard</strong></td>
+              <td><a href="./PFP_Platform/web/public/report.html" target="_blank" class="doc-link">report.html ↗</a></td>
+              <td><span class="tag primary">Restricted</span></td>
+              <td class="description">
+                <strong>Showcase Page.</strong> Locally localized in English & Farsi. Displays:
+                <br>• Interactive grid matching 18 international benchmarks and legal precedents.
+                <br>• The 7-chapter draft brief structure and initial factual determination reports.
+                <br>• The 4 field search initiatives to address physical metallurgy, RF logging, and witness gaps.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Category 3: Legal NGO Registration -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="icon">⚖️</span> 3. Legal Registry & Governance Directory
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%">Title</th>
+              <th style="width: 20%">File Link</th>
+              <th style="width: 15%">Scope</th>
+              <th style="width: 40%">Purpose & Explanation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Legal Documents Index</strong></td>
+              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/index.html" target="_blank" class="doc-link">index.html (Gate) ↗</a></td>
+              <td><span class="tag primary">Restricted</span></td>
+              <td class="description">The entry gate folder hosting all registration forms, rules, and ecosystem briefs. Opens <code>docs.html</code> once unlocked.</td>
+            </tr>
+            <tr>
+              <td><strong>Association Rules (§1-9)</strong></td>
+              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/saannot.html" target="_blank" class="doc-link">saannot.html ↗</a></td>
+              <td><span class="tag primary">Restricted</span></td>
+              <td class="description">Official bilingual rules of the association (Finnish + English side-by-side) fully PRH-ready.</td>
+            </tr>
+            <tr>
+              <td><strong>Founding Charter</strong></td>
+              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/perustamiskirja.html" target="_blank" class="doc-link">perustamiskirja.html ↗</a></td>
+              <td><span class="tag primary">Restricted</span></td>
+              <td class="description">Bilingual Founding Charter stating intention to form the NGO, specifying board seats.</td>
+            </tr>
+            <tr>
+              <td><strong>Founding Minutes</strong></td>
+              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/poytakirja.html" target="_blank" class="doc-link">poytakirja.html ↗</a></td>
+              <td><span class="tag primary">Restricted</span></td>
+              <td class="description">Minutes of the founding general assembly setting up the initial governing board.</td>
+            </tr>
+            <tr>
+              <td><strong>Establishment Kanban</strong></td>
+              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/tasks.html" target="_blank" class="doc-link">tasks.html ↗</a></td>
+              <td><span class="tag primary">Restricted</span></td>
+              <td class="description">Task tracker recording phases of association formation, banking setups, and NGO OKRs.</td>
+            </tr>
+            <tr>
+              <td><strong>NGO Benchmarking</strong></td>
+              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/benchmarks.html" target="_blank" class="doc-link">benchmarks.html ↗</a></td>
+              <td><span class="tag primary">Restricted</span></td>
+              <td class="description">Comparative research report detailing structural setups and growth patterns of 8 benchmark NGOs.</td>
+            </tr>
+            <tr>
+              <td><strong>Hague Justice Ecosystem</strong></td>
+              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/peer-orgs.html" target="_blank" class="doc-link">peer-orgs.html ↗</a></td>
+              <td><span class="tag primary">Restricted</span></td>
+              <td class="description">Strategic priority map linking PFPJ ry to Dutch international prosecutors, the ICC, and ICJ.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Category 4: Operational Manuals -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="icon">⚙️</span> 4. Operational Manuals & Technical Details
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%">Title</th>
+              <th style="width: 20%">File Link</th>
+              <th style="width: 15%">Scope</th>
+              <th style="width: 40%">Purpose & Explanation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Telegram Bot Manual</strong></td>
+              <td><a href="./PFPJ_Ry/governance/platform-guide.md" target="_blank" class="doc-link">platform-guide.md ↗</a></td>
+              <td><span class="tag">Internal</span></td>
+              <td class="description">Guide for coordinators creating campaigns, defining stepped actions, and broadcasting.</td>
+            </tr>
+            <tr>
+              <td><strong>Project Codebase Documentation</strong></td>
+              <td><a href="./README.md" target="_blank" class="doc-link">README.md ↗</a></td>
+              <td><span class="tag">Technical</span></td>
+              <td class="description">General technical specifications for Django Rest API, React frontend modules, and production deployment scripts.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      <p>Confidential Registry Database · Generated for the Board of Trustees Meeting · <a href="https://peopleforpeace.live">peopleforpeace.live</a></p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

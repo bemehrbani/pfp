@@ -1,0 +1,702 @@
+{
+  "0": {
+    "border_index": "4",
+    "filename": "child_001.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "1": {
+    "border_index": "5",
+    "filename": "atemeh_Derazetr_5.jpg",
+    "name": "atemeh Derazetr",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "2": {
+    "border_index": "6",
+    "filename": "lasoumenh_Naza!_6.jpg",
+    "name": "lasoumenh Naza!",
+    "name_source": "extracted",
+    "needs_correction": "YES"
+  },
+  "3": {
+    "border_index": "7",
+    "filename": "inab_Bahrami_7.jpg",
+    "name": "inab Bahrami",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "4": {
+    "border_index": "8",
+    "filename": "aran_Ghasemy_8.jpg",
+    "name": "aran Ghasemy",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "5": {
+    "border_index": "9",
+    "filename": "lyayesn_Saleh_9.jpg",
+    "name": "lyayesn Saleh",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "6": {
+    "border_index": "10",
+    "filename": "طقكط6_جمراء_لا_10.jpg",
+    "name": "طقكط6 جمراء لا",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "7": {
+    "border_index": "11",
+    "filename": "child_008.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "8": {
+    "border_index": "12",
+    "filename": "لطةعطةظة_نأآأة72_12.jpg",
+    "name": "لطةعطةظة نأآأة72",
+    "name_source": "extracted",
+    "needs_correction": "YES"
+  },
+  "9": {
+    "border_index": "13",
+    "filename": "Samira_Malanhi_13.jpg",
+    "name": "Samira Malanhi",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "10": {
+    "border_index": "14",
+    "filename": "child_011.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "11": {
+    "border_index": "15",
+    "filename": "child_012.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "12": {
+    "border_index": "16",
+    "filename": "Zahra_Ansarifa_16.jpg",
+    "name": "Zahra Ansarifa",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "13": {
+    "border_index": "17",
+    "filename": "ا_ططلة_طاولا_جاه_17.jpg",
+    "name": "ا ططلة طاولا جاه",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "14": {
+    "border_index": "18",
+    "filename": "child_015.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "15": {
+    "border_index": "19",
+    "filename": "اعماج_2_عمو_الاع؟_19.jpg",
+    "name": "اعماج 2 عمو الاع؟",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "16": {
+    "border_index": "20",
+    "filename": "ona_AhnmadZac_20.jpg",
+    "name": "ona AhnmadZac",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "17": {
+    "border_index": "21",
+    "filename": "aryam_Bazara_21.jpg",
+    "name": "aryam Bazara",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "18": {
+    "border_index": "22",
+    "filename": "Athare_Zareiee_22.jpg",
+    "name": "Athare Zareiee",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "19": {
+    "border_index": "23",
+    "filename": "ayesh_Alihosse_23.jpg",
+    "name": "ayesh Alihosse",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "20": {
+    "border_index": "24",
+    "filename": "Zahra_Sharafi_24.jpg",
+    "name": "Zahra Sharafi",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "21": {
+    "border_index": "25",
+    "filename": "vadijeh_Darvid_25.jpg",
+    "name": "vadijeh Darvid",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "22": {
+    "border_index": "26",
+    "filename": "Asra_Zakeri_26.jpg",
+    "name": "Asra Zakeri",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "23": {
+    "border_index": "27",
+    "filename": "adia_Shahmir_27.jpg",
+    "name": "-adia Shahmir",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "24": {
+    "border_index": "28",
+    "filename": "Sanar_Salari_28.jpg",
+    "name": "Sanar Salari",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "25": {
+    "border_index": "29",
+    "filename": "inab_Makizade_29.jpg",
+    "name": "‘inab Makizade",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "26": {
+    "border_index": "30",
+    "filename": "Zona_Pasand_30.jpg",
+    "name": "Zona Pasand",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "27": {
+    "border_index": "31",
+    "filename": "child_028.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "28": {
+    "border_index": "32",
+    "filename": "child_029.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "29": {
+    "border_index": "33",
+    "filename": "child_030.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "30": {
+    "border_index": "34",
+    "filename": "Parsa_Mokhtar_34.jpg",
+    "name": "Parsa Mokhtar",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "31": {
+    "border_index": "35",
+    "filename": "Makan_Nasiti_35.jpg",
+    "name": "Makan Nasiti",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "32": {
+    "border_index": "36",
+    "filename": "child_033.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "33": {
+    "border_index": "37",
+    "filename": "child_034.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "34": {
+    "border_index": "38",
+    "filename": "2ezZa_Habashia_38.jpg",
+    "name": "2ezZa Habashia",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "35": {
+    "border_index": "39",
+    "filename": "li_Zareie_ghola_39.jpg",
+    "name": "li Zareie ghola",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "36": {
+    "border_index": "40",
+    "filename": "لطنظ_طعمطعغأة_40.jpg",
+    "name": "لطنظ طعمطعغأة",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "37": {
+    "border_index": "41",
+    "filename": "Asma_Zakeri_41.jpg",
+    "name": "‘Asma Zakeri",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "38": {
+    "border_index": "42",
+    "filename": "ayesh_Alihosse_42.jpg",
+    "name": "ayesh Alihosse",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "39": {
+    "border_index": "43",
+    "filename": "اعكات7_دمطاأتك_43.jpg",
+    "name": "اعكات7 دمطاأتك",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "40": {
+    "border_index": "44",
+    "filename": "ا_تمطةتط_جمع6م_44.jpg",
+    "name": "ا تمطةتط جمع6م",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "41": {
+    "border_index": "45",
+    "filename": "تطعادط_طحمطاء_ةطح_45.jpg",
+    "name": "تطعادط طحمطاء ةطح",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "42": {
+    "border_index": "46",
+    "filename": "liasghar_Zareie_46.jpg",
+    "name": "liasghar Zareie",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "43": {
+    "border_index": "47",
+    "filename": "Sobhan_Ahmai_47.jpg",
+    "name": "Sobhan Ahmai",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "44": {
+    "border_index": "48",
+    "filename": "مازعاك«_‏_فماوامن_48.jpg",
+    "name": "مازعاك« ‏ فماوامن",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "45": {
+    "border_index": "49",
+    "filename": "child_046.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "46": {
+    "border_index": "50",
+    "filename": "child_047.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "47": {
+    "border_index": "51",
+    "filename": "sirhossein_J_af_51.jpg",
+    "name": "sirhossein J af",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "48": {
+    "border_index": "52",
+    "filename": "child_049.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "49": {
+    "border_index": "53",
+    "filename": "child_050.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "50": {
+    "border_index": "54",
+    "filename": "child_051.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "51": {
+    "border_index": "55",
+    "filename": "Sina_Za_keri_55.jpg",
+    "name": "Sina Za keri",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "52": {
+    "border_index": "56",
+    "filename": "Saleh_Abbasi_56.jpg",
+    "name": "Saleh Abbasi",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "53": {
+    "border_index": "57",
+    "filename": "اطع_هما_30_مطامطةر_57.jpg",
+    "name": "اطع هما 30 مطامطةر",
+    "name_source": "extracted",
+    "needs_correction": "YES"
+  },
+  "54": {
+    "border_index": "58",
+    "filename": "child_055.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "55": {
+    "border_index": "59",
+    "filename": "Alireza_Zareie_59.jpg",
+    "name": "Alireza Zareie",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "56": {
+    "border_index": "60",
+    "filename": "child_057.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "57": {
+    "border_index": "61",
+    "filename": "shammad_Jan_61.jpg",
+    "name": "shammad Jan",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "58": {
+    "border_index": "62",
+    "filename": "child_059.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "59": {
+    "border_index": "63",
+    "filename": "child_060.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "60": {
+    "border_index": "64",
+    "filename": "Reza_Barani_64.jpg",
+    "name": "-Reza Barani",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "61": {
+    "border_index": "65",
+    "filename": "مط_أ_تكا_الاعمع5_65.jpg",
+    "name": "مط أ تكا الاعمع5",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "62": {
+    "border_index": "66",
+    "filename": "arya_Bahadori_66.jpg",
+    "name": "arya Bahadori",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "63": {
+    "border_index": "67",
+    "filename": "wrham_Ranjbat_67.jpg",
+    "name": "wrham Ranjbat",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "64": {
+    "border_index": "68",
+    "filename": "child_065.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "65": {
+    "border_index": "69",
+    "filename": "child_066.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "66": {
+    "border_index": "70",
+    "filename": "child_067.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "67": {
+    "border_index": "71",
+    "filename": "Amirali_Jadav_71.jpg",
+    "name": "Amirali Jadav",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "68": {
+    "border_index": "72",
+    "filename": "moien_Zeinali_72.jpg",
+    "name": "moien Zeinali",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "69": {
+    "border_index": "73",
+    "filename": "child_070.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "70": {
+    "border_index": "74",
+    "filename": "az_Anhmadizac_74.jpg",
+    "name": "‘az Anhmadizac",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "71": {
+    "border_index": "75",
+    "filename": "hheil_Chamalipc_75.jpg",
+    "name": "hheil Chamalipc",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "72": {
+    "border_index": "76",
+    "filename": "mirali_Boostan_76.jpg",
+    "name": "mirali Boostan",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "73": {
+    "border_index": "77",
+    "filename": "Reza_Ranjbar_77.jpg",
+    "name": "Reza Ranjbar",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "74": {
+    "border_index": "78",
+    "filename": "child_075.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "75": {
+    "border_index": "79",
+    "filename": "vad_Sartakzac_79.jpg",
+    "name": "vad Sartakzac",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "76": {
+    "border_index": "80",
+    "filename": "aman_Karamzé_80.jpg",
+    "name": "aman Karamzé",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "77": {
+    "border_index": "81",
+    "filename": "child_078.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "78": {
+    "border_index": "82",
+    "filename": "لاطصطةطماا_ألم_82.jpg",
+    "name": "لاطصطةطماا ألم",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "79": {
+    "border_index": "83",
+    "filename": "Masina_Salari_83.jpg",
+    "name": "Masina Salari",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "80": {
+    "border_index": "84",
+    "filename": "child_081.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "81": {
+    "border_index": "85",
+    "filename": "ا_ماطعأت5_مطوكطا_85.jpg",
+    "name": "ا ماطعأت5 مطوكطا",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "82": {
+    "border_index": "86",
+    "filename": "rena_Hosseinpc_86.jpg",
+    "name": "rena Hosseinpc",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "83": {
+    "border_index": "87",
+    "filename": "min_Ahmadzac_87.jpg",
+    "name": "min Ahmadzac",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "84": {
+    "border_index": "88",
+    "filename": "mayoon_Zeinée_88.jpg",
+    "name": "mayoon Zeinée",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "85": {
+    "border_index": "89",
+    "filename": "Heidar_Salehi_89.jpg",
+    "name": "Heidar Salehi",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "86": {
+    "border_index": "90",
+    "filename": "child_087.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "87": {
+    "border_index": "91",
+    "filename": "ybhan_Shahda_91.jpg",
+    "name": "ybhan Shahda",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "88": {
+    "border_index": "92",
+    "filename": "child_089.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "89": {
+    "border_index": "93",
+    "filename": "child_090.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "90": {
+    "border_index": "94",
+    "filename": "child_091.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "91": {
+    "border_index": "95",
+    "filename": "child_092.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "92": {
+    "border_index": "96",
+    "filename": "nial_Faghirdoc_96.jpg",
+    "name": "nial Faghirdoc",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "93": {
+    "border_index": "97",
+    "filename": "أماعء0ج؟_لوولسة_97.jpg",
+    "name": "أماعء0ج؟ لوولسة",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "94": {
+    "border_index": "98",
+    "filename": "child_095.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "95": {
+    "border_index": "99",
+    "filename": "أمومةالا_دادم_99.jpg",
+    "name": "أمومةالا دادم",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "96": {
+    "border_index": "100",
+    "filename": "child_097.jpg",
+    "name": "",
+    "name_source": "numbered",
+    "needs_correction": "NO"
+  },
+  "97": {
+    "border_index": "101",
+    "filename": "Arash_Golazir_101.jpg",
+    "name": "Arash Golazir",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "98": {
+    "border_index": "102",
+    "filename": "أمقاةك_ألطواة_102.jpg",
+    "name": "أمقاةك ألطواة",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  },
+  "99": {
+    "border_index": "103",
+    "filename": "Amirali_Kam_al_103.jpg",
+    "name": "Amirali Kam al",
+    "name_source": "extracted",
+    "needs_correction": "NO"
+  }
+}
