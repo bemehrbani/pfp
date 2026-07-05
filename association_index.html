@@ -58,6 +58,93 @@
       margin: 0 auto;
       position: relative;
       z-index: 1;
+      display: none; /* Hidden initially */
+    }
+
+    /* Password Protection Screen */
+    #lockOverlay {
+      position: fixed;
+      inset: 0;
+      background-color: var(--bg-deep);
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .lock-box {
+      background-color: var(--bg-card);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .lock-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .lock-box h2 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .lock-box p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .lock-input {
+      width: 100%;
+      background-color: rgba(0,0,0,0.3);
+      border: 1px solid rgba(201,168,76,0.15);
+      color: var(--text-primary);
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 16px;
+      outline: none;
+      font-family: var(--font-mono);
+      letter-spacing: 2px;
+    }
+    
+    .lock-input:focus {
+      border-color: var(--gold);
+    }
+
+    .lock-btn {
+      width: 100%;
+      background-color: var(--gold);
+      color: var(--bg-deep);
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .lock-btn:hover {
+      background-color: var(--gold-light);
+    }
+
+    .lock-error {
+      color: #f87171;
+      font-size: 13px;
+      margin-top: 12px;
+      display: none;
     }
 
     /* Header */
@@ -276,7 +363,19 @@
 </head>
 <body>
 
-  <div class="container">
+  <!-- ====== PASSWORD LOCK OVERLAY ====== -->
+  <div id="lockOverlay">
+    <div class="lock-box">
+      <div class="lock-icon">🔒</div>
+      <h2>PFPJ ry Master Registry</h2>
+      <p>This is an internal showcase environment. Enter the board credentials to unlock.</p>
+      <input type="password" id="passInput" class="lock-input" placeholder="••••••••" onkeydown="checkKey(event)" autofocus>
+      <button class="lock-btn" onclick="unlockPortal()">Unlock Registry</button>
+      <div id="lockError" class="lock-error">Invalid password. Please check credentials.</div>
+    </div>
+  </div>
+
+  <div class="container" id="dashboardContent">
 
     <header>
       <div class="badge">🕊️ People For Peace · Governance</div>
@@ -315,19 +414,19 @@
           <tbody>
             <tr>
               <td><strong>Landing Page</strong></td>
-              <td><a href="./PFP_Platform/web/public/landing.html" target="_blank" class="doc-link">landing.html ↗</a></td>
+              <td><a href="./landing.html" target="_blank" class="doc-link">landing.html ↗</a></td>
               <td><span class="tag">Public</span></td>
               <td class="description">The primary homepage presenting the association's mission, volunteer recruitment CTAs, and bot integration details.</td>
             </tr>
             <tr>
               <td><strong>Minab Memorial</strong></td>
-              <td><a href="./PFP_Platform/web/public/memorial.html" target="_blank" class="doc-link">memorial.html ↗</a></td>
+              <td><a href="./memorial.html" target="_blank" class="doc-link">memorial.html ↗</a></td>
               <td><span class="tag">Public</span></td>
               <td class="description">Digital memorial space documenting the identities and stories of children lost in the Minab incident.</td>
             </tr>
             <tr>
               <td><strong>Evidence Forensics</strong></td>
-              <td><a href="./PFP_Platform/web/public/evidence.html" target="_blank" class="doc-link">evidence.html ↗</a></td>
+              <td><a href="./evidence.html" target="_blank" class="doc-link">evidence.html ↗</a></td>
               <td><span class="tag">Public</span></td>
               <td class="description">Open-source database logging strike geolocation coordinates, weapon shell fragments, and metadata.</td>
             </tr>
@@ -354,13 +453,13 @@
           <tbody>
             <tr>
               <td><strong>Board Portal Dashboard</strong></td>
-              <td><a href="./PFP_Platform/web/public/report.html" target="_blank" class="doc-link">report.html ↗</a></td>
+              <td><a href="./report.html" target="_blank" class="doc-link">report.html ↗</a></td>
               <td><span class="tag primary">Restricted</span></td>
               <td class="description">
                 <strong>Showcase Page.</strong> Locally localized in English & Farsi. Displays:
                 <br>• Interactive grid matching 18 international benchmarks and legal precedents.
                 <br>• The 7-chapter draft brief structure and initial factual determination reports.
-                <br>• The 4 field search initiatives to address physical metallurgy, RF logging, and witness gaps.
+                <br>• The 4 field initiatives to address physical metallurgy, RF logging, and witness gaps.
               </td>
             </tr>
           </tbody>
@@ -386,43 +485,43 @@
           <tbody>
             <tr>
               <td><strong>Legal Documents Index</strong></td>
-              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/index.html" target="_blank" class="doc-link">index.html (Gate) ↗</a></td>
+              <td><a href="./legal/jfmc-2026/index.html" target="_blank" class="doc-link">index.html (Gate) ↗</a></td>
               <td><span class="tag primary">Restricted</span></td>
               <td class="description">The entry gate folder hosting all registration forms, rules, and ecosystem briefs. Opens <code>docs.html</code> once unlocked.</td>
             </tr>
             <tr>
               <td><strong>Association Rules (§1-9)</strong></td>
-              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/saannot.html" target="_blank" class="doc-link">saannot.html ↗</a></td>
+              <td><a href="./legal/jfmc-2026/saannot.html" target="_blank" class="doc-link">saannot.html ↗</a></td>
               <td><span class="tag primary">Restricted</span></td>
               <td class="description">Official bilingual rules of the association (Finnish + English side-by-side) fully PRH-ready.</td>
             </tr>
             <tr>
               <td><strong>Founding Charter</strong></td>
-              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/perustamiskirja.html" target="_blank" class="doc-link">perustamiskirja.html ↗</a></td>
+              <td><a href="./legal/jfmc-2026/perustamiskirja.html" target="_blank" class="doc-link">perustamiskirja.html ↗</a></td>
               <td><span class="tag primary">Restricted</span></td>
               <td class="description">Bilingual Founding Charter stating intention to form the NGO, specifying board seats.</td>
             </tr>
             <tr>
               <td><strong>Founding Minutes</strong></td>
-              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/poytakirja.html" target="_blank" class="doc-link">poytakirja.html ↗</a></td>
+              <td><a href="./legal/jfmc-2026/poytakirja.html" target="_blank" class="doc-link">poytakirja.html ↗</a></td>
               <td><span class="tag primary">Restricted</span></td>
               <td class="description">Minutes of the founding general assembly setting up the initial governing board.</td>
             </tr>
             <tr>
               <td><strong>Establishment Kanban</strong></td>
-              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/tasks.html" target="_blank" class="doc-link">tasks.html ↗</a></td>
+              <td><a href="./legal/jfmc-2026/tasks.html" target="_blank" class="doc-link">tasks.html ↗</a></td>
               <td><span class="tag primary">Restricted</span></td>
               <td class="description">Task tracker recording phases of association formation, banking setups, and NGO OKRs.</td>
             </tr>
             <tr>
               <td><strong>NGO Benchmarking</strong></td>
-              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/benchmarks.html" target="_blank" class="doc-link">benchmarks.html ↗</a></td>
+              <td><a href="./legal/jfmc-2026/benchmarks.html" target="_blank" class="doc-link">benchmarks.html ↗</a></td>
               <td><span class="tag primary">Restricted</span></td>
               <td class="description">Comparative research report detailing structural setups and growth patterns of 8 benchmark NGOs.</td>
             </tr>
             <tr>
               <td><strong>Hague Justice Ecosystem</strong></td>
-              <td><a href="./PFP_Platform/web/public/legal/jfmc-2026/peer-orgs.html" target="_blank" class="doc-link">peer-orgs.html ↗</a></td>
+              <td><a href="./legal/jfmc-2026/peer-orgs.html" target="_blank" class="doc-link">peer-orgs.html ↗</a></td>
               <td><span class="tag primary">Restricted</span></td>
               <td class="description">Strategic priority map linking PFPJ ry to Dutch international prosecutors, the ICC, and ICJ.</td>
             </tr>
@@ -449,15 +548,9 @@
           <tbody>
             <tr>
               <td><strong>Telegram Bot Manual</strong></td>
-              <td><a href="./PFPJ_Ry/governance/platform-guide.md" target="_blank" class="doc-link">platform-guide.md ↗</a></td>
+              <td><a href="../../PFPJ_Ry/governance/platform-guide.md" target="_blank" class="doc-link">platform-guide.md ↗</a></td>
               <td><span class="tag">Internal</span></td>
               <td class="description">Guide for coordinators creating campaigns, defining stepped actions, and broadcasting.</td>
-            </tr>
-            <tr>
-              <td><strong>Project Codebase Documentation</strong></td>
-              <td><a href="./README.md" target="_blank" class="doc-link">README.md ↗</a></td>
-              <td><span class="tag">Technical</span></td>
-              <td class="description">General technical specifications for Django Rest API, React frontend modules, and production deployment scripts.</td>
             </tr>
           </tbody>
         </table>
@@ -470,5 +563,45 @@
 
   </div>
 
+  <script>
+    const HASH = '91a82833497d3b24224b075577c99fa13e521767da7e59a809d53f17394e8ae7';
+
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function checkKey(e) {
+      if (e.key === "Enter") {
+        unlockPortal();
+      }
+    }
+
+    async function unlockPortal() {
+      const val = document.getElementById("passInput").value;
+      const hashed = await sha256(val);
+      if (hashed === HASH) {
+        sessionStorage.setItem("pfpj-board-authenticated", "true");
+        document.getElementById("lockOverlay").style.display = "none";
+        document.getElementById("dashboardContent").style.display = "block";
+      } else {
+        const errorEl = document.getElementById("lockError");
+        errorEl.style.display = "block";
+        document.getElementById("passInput").value = "";
+        document.getElementById("passInput").focus();
+        setTimeout(() => {
+          errorEl.style.display = "none";
+        }, 3000);
+      }
+    }
+
+    // Auto-login check (so it persists for session)
+    if (sessionStorage.getItem("pfpj-board-authenticated") === "true") {
+      document.getElementById("lockOverlay").style.display = "none";
+      document.getElementById("dashboardContent").style.display = "block";
+    }
+  </script>
 </body>
 </html>
