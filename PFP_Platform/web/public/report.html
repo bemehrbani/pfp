@@ -981,6 +981,9 @@
       <button class="view-tab" onclick="switchView('initiativesView')" data-i18n="tab_initiatives">
         📋 Board Assessment & Initiatives
       </button>
+      <button class="view-tab" onclick="switchView('scholarsView')" data-i18n="tab_scholars">
+        🎓 Scholar Outreach & Validation
+      </button>
     </div>
 
     <main>
@@ -2058,6 +2061,83 @@
         </section>
       </div>
 
+      <!-- VIEW 5: SCHOLAR OUTREACH & VALIDATION -->
+      <div id="scholarsView" class="view-section">
+        <style>
+          .selected-row {
+            background: rgba(201, 168, 76, 0.1) !important;
+            border-left: 3px solid var(--gold) !important;
+          }
+          #scholarsTableBody tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+          }
+        </style>
+        <section class="analysis-grid" style="grid-template-columns: 1fr; margin-bottom: 24px;">
+          <div class="analysis-card" style="border: 1px solid rgba(201,168,76,0.25);">
+            <div class="card-header">
+              <span class="step-num">🎓</span>
+              <h2 data-i18n="sch_title">Scholar Outreach & Case Validation</h2>
+            </div>
+            <p style="font-size: 14.5px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 20px;" data-i18n="sch_desc">
+              To validate the 10 similarity factors and strengthen our legal filings under universal jurisdiction, we are engaging with leading international and Iranian experts in IHL, criminal law, and digital forensics. Monitor outreach status, find contact emails, and copy invitation templates below.
+            </p>
+          </div>
+        </section>
+
+        <!-- Monitor Table -->
+        <section class="analysis-grid" style="grid-template-columns: 1fr; margin-bottom: 24px;">
+          <div class="analysis-card" style="padding: 24px;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 16px; font-family: 'Playfair Display', serif;" data-i18n="sch_monitor_title">Scholars Involvement Monitor</h3>
+            
+            <div style="overflow-x: auto; width: 100%;">
+              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.2);">
+                    <th style="padding: 12px 16px; color: var(--text-secondary);" data-i18n="tbl_th_name">Scholar Name</th>
+                    <th style="padding: 12px 16px; color: var(--text-secondary);" data-i18n="tbl_th_affiliation">Affiliation / Role</th>
+                    <th style="padding: 12px 16px; color: var(--text-secondary);" data-i18n="tbl_th_email">Email Address</th>
+                    <th style="padding: 12px 16px; color: var(--text-secondary);" data-i18n="tbl_th_status">Status</th>
+                    <th style="padding: 12px 16px; color: var(--text-secondary); text-align: center;" data-i18n="tbl_th_action">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="scholarsTableBody">
+                  <!-- Generated via javascript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Interactive Email Composer / Template Viewer -->
+        <section class="analysis-grid" style="grid-template-columns: 1fr;">
+          <div class="analysis-card" style="padding: 24px; border-top: 3px solid var(--gold);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 1.3rem; font-family: 'Playfair Display', serif;" data-i18n="sch_composer_title">Dynamic Email Invitation Template</h3>
+                <p style="font-size: 13px; color: var(--text-muted);" id="composerSelectedScholar">Selected: None</p>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button class="aspect-btn active" onclick="setEmailLanguage('fa')" style="font-size: 12px; padding: 6px 12px;">فارسی</button>
+                <button class="aspect-btn" onclick="setEmailLanguage('en')" style="font-size: 12px; padding: 6px 12px;">English</button>
+              </div>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 18px; margin-bottom: 16px;">
+              <div style="margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                <strong style="color: var(--gold);" data-i18n="comp_subject">Subject:</strong> 
+                <span id="emailSubject" style="font-family: var(--sans); color: var(--text-primary);">Please select a scholar...</span>
+              </div>
+              <div id="emailBody" style="white-space: pre-wrap; font-family: var(--sans); font-size: 14px; line-height: 1.6; max-height: 350px; overflow-y: auto; color: var(--text-secondary);">Select a scholar from the table to load their personalized template.</div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end;">
+              <button class="lock-btn" onclick="copyEmailToClipboard()" style="max-width: 200px; padding: 10px 20px; font-size: 14px;" data-i18n="comp_copy_btn">Copy Invitation Email</button>
+              <div id="copyTooltip" style="display: none; margin-left: 12px; color: #8ec3f8; align-self: center; font-size: 13px;" data-i18n="comp_copied">Copied to Clipboard!</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
     </main>
 
     <footer>
@@ -2148,6 +2228,19 @@
         tab_structure: "📋 Minab Report Structure",
         tab_draft: "📖 Read Factual Determination Draft",
         tab_initiatives: "📋 Board Assessment & Initiatives",
+        tab_scholars: "🎓 Scholar Outreach & Validation",
+        sch_title: "Scholar Outreach & Case Validation",
+        sch_desc: "To validate the 10 similarity factors and strengthen our legal filings under universal jurisdiction, we are engaging with leading international and Iranian experts in IHL, criminal law, and digital forensics. Monitor outreach status, find contact emails, and copy invitation templates below.",
+        sch_monitor_title: "Scholars Involvement Monitor",
+        tbl_th_name: "Scholar Name",
+        tbl_th_affiliation: "Affiliation / Role",
+        tbl_th_email: "Email Address",
+        tbl_th_status: "Status",
+        tbl_th_action: "Actions",
+        sch_composer_title: "Dynamic Email Invitation Template",
+        comp_subject: "Subject:",
+        comp_copy_btn: "Copy Invitation Email",
+        comp_copied: "Copied to Clipboard!",
         tb_title: "Programmatic Verification & Process Flow",
         tb_step1: "Step 01",
         tb_step1_title: "API Registry Query",
@@ -2317,6 +2410,19 @@
         tab_structure: "📋 ساختار گزارش میناب",
         tab_draft: "📖 پیش‌نویس احراز واقعیت شکایت",
         tab_initiatives: "📋 ارزیابی حقوقی و برنامه‌های میدانی",
+        tab_scholars: "🎓 ارتباط با اساتید و نخبگان",
+        sch_title: "ارتباط با اساتید و اعتبارسنجی پرونده",
+        sch_desc: "جهت اعتبارسنجی فاکتورهای ده‌گانه تقارن و تقویت لوایح حقوقی تحت صلاحیت قضایی بین‌المللی، ما در حال رایزنی با برجسته‌ترین اساتید حقوق بشردوستانه، حقوق کیفری و کارشناسان جرم‌یابی دیجیتال هستیم. در این بخش می‌توانید روند پیشرفت ارتباطات را رصد کرده و قالب‌های ایمیل اختصاصی را کپی نمایید.",
+        sch_monitor_title: "جدول پایش مشارکت و ارتباط با اساتید",
+        tbl_th_name: "نام استاد / متخصص",
+        tbl_th_affiliation: "سازمان / تخصص",
+        tbl_th_email: "نشانی ایمیل",
+        tbl_th_status: "وضعیت ارتباط",
+        tbl_th_action: "عملیات",
+        sch_composer_title: "قالب پویا و اختصاصی دعوت‌نامه ایمیلی",
+        comp_subject: "موضوع:",
+        comp_copy_btn: "کپی متن ایمیل دعوت‌نامه",
+        comp_copied: "متن ایمیل با موفقیت کپی شد!",
         tb_title: "تأیید برنامه‌نویسی و جریان کار پردازش اهداف",
         tb_step1: "گام ۰۱",
         tb_step1_title: "استعلام از طریق وب‌سرویس API",
@@ -2549,6 +2655,327 @@
       });
     }
 
+    // Scholars database
+    const scholarsData = [
+      {
+        id: "momtaz",
+        nameEn: "Dr. Jamshid Momtaz",
+        nameFa: "دکتر جمشید ممتاز",
+        affiliationEn: "ILC / University of Tehran",
+        affiliationFa: "کمیسیون حقوق بین‌الملل / دانشگاه تهران",
+        roleEn: "Core IHL Scholar",
+        roleFa: "استاد طراز اول حقوق بشردوستانه",
+        email: "j.momtaz@ut.ac.ir",
+        status: "Not Contacted",
+        defaultLang: "fa"
+      },
+      {
+        id: "akhavan",
+        nameEn: "Dr. Payam Akhavan",
+        nameFa: "دکتر پیام اخوان",
+        affiliationEn: "Massey College / PCA",
+        affiliationFa: "کالج مسی / دیوان دایمی داوری هلیسنکی",
+        roleEn: "International Legal Counsel",
+        roleFa: "مشاور حقوقی دادگاه‌های بین‌المللی",
+        email: "payam.akhavan@utoronto.ca",
+        status: "Not Contacted",
+        defaultLang: "en"
+      },
+      {
+        id: "zamani",
+        nameEn: "Dr. Seyed Ghasem Zamani",
+        nameFa: "دکتر سید قاسم زمانی",
+        affiliationEn: "Allameh Tabataba'i University",
+        affiliationFa: "دانشگاه علامه طباطبائی",
+        roleEn: "International Law Professor",
+        roleFa: "استاد حقوق بین‌الملل عمومی",
+        email: "g.zamani@atu.ac.ir",
+        status: "Not Contacted",
+        defaultLang: "fa"
+      },
+      {
+        id: "nezhandi",
+        nameEn: "Dr. Heydar Nezhandi-Manesh",
+        nameFa: "دکتر حیدر نژندی‌منش",
+        affiliationEn: "Allameh Tabataba'i University",
+        affiliationFa: "دانشگاه علامه طباطبائی",
+        roleEn: "IHL & ICC Expert",
+        roleFa: "دانشیار حقوق بین‌الملل و حقوق کیفری",
+        email: "h.nezhandi@atu.ac.ir",
+        status: "Not Contacted",
+        defaultLang: "fa"
+      },
+      {
+        id: "askari",
+        nameEn: "Dr. Pouria Askari",
+        nameFa: "دکتر پوریا عسکری",
+        affiliationEn: "Allameh Tabataba'i University",
+        affiliationFa: "دانشگاه علامه طباطبائی",
+        roleEn: "IHL & Arbitration Scholar",
+        roleFa: "دانشیار حقوق بین‌الملل و داوری",
+        email: "p.askari@atu.ac.ir",
+        status: "Not Contacted",
+        defaultLang: "fa"
+      },
+      {
+        id: "zakerhosseini",
+        nameEn: "Dr. Mohammad Hadi Zakerhosseini",
+        nameFa: "دکتر محمد هادی ذاکرحسینی",
+        affiliationEn: "University of Tehran",
+        affiliationFa: "دانشگاه تهران",
+        roleEn: "Int. Criminal Law Expert",
+        roleFa: "استادیار و رئیس مرکز حقوق کیفری بین‌الملل",
+        email: "m.zakerhosseini@ut.ac.ir",
+        status: "Not Contacted",
+        defaultLang: "fa"
+      },
+      {
+        id: "lehto",
+        nameEn: "Dr. Marja Lehto",
+        nameFa: "دکتر ماریا لتو",
+        affiliationEn: "Finnish MFA / Helsinki University",
+        affiliationFa: "وزارت امور خارجه فنلاند / دانشگاه هلسینکی",
+        roleEn: "Ambassador / IHL Scholar",
+        roleFa: "سفیر امور حقوقی فنلاند / حقوق بشردوستانه",
+        email: "marja.lehto@gov.fi",
+        status: "Not Contacted",
+        defaultLang: "en"
+      },
+      {
+        id: "mahmoudi",
+        nameEn: "Dr. Said Mahmoudi",
+        nameFa: "دکتر سعید محمودی",
+        affiliationEn: "Stockholm University",
+        affiliationFa: "دانشگاه استکهلم سوئد",
+        roleEn: "Law of Armed Conflict Professor",
+        roleFa: "استاد حقوق بین‌الملل و داوری سوئد",
+        email: "said.mahmoudi@juridicum.su.se",
+        status: "Not Contacted",
+        defaultLang: "en"
+      },
+      {
+        id: "koskenniemi",
+        nameEn: "Prof. Martti Koskenniemi",
+        nameFa: "پروفسور مارتی کاسکنیمی",
+        affiliationEn: "University of Helsinki",
+        affiliationFa: "دانشگاه هلسینکی فنلاند",
+        roleEn: "Legal Precedent Expert",
+        roleFa: "نظریه‌پرداز برجسته حقوق بین‌الملل",
+        email: "martti.koskenniemi@helsinki.fi",
+        status: "Not Contacted",
+        defaultLang: "en"
+      },
+      {
+        id: "dowlatabadi",
+        nameEn: "Dr. Shiva Dowlatabadi",
+        nameFa: "دکتر شیوا دولت‌آبادی",
+        affiliationEn: "Child Protecting Society (IRSPrC)",
+        affiliationFa: "انجمن حمایت از حقوق کودکان",
+        roleEn: "Child Psychology Specialist",
+        roleFa: "متخصص روانشناسی کودک و حقوق کودک",
+        email: "s.dowlatabadi@irsprc.org",
+        status: "Not Contacted",
+        defaultLang: "fa"
+      },
+      {
+        id: "sadeghi",
+        nameEn: "Dr. Fatemeh Sadeghi",
+        nameFa: "فاطمه صادقی",
+        affiliationEn: "UCL / Sociologist",
+        affiliationFa: "جامعه‌شناس و تحلیل‌گر ارشد",
+        roleEn: "Sociology Specialist",
+        roleFa: "پژوهشگر مطالعات اجتماعی و حقوق بشر",
+        email: "f.sadeghi@soc.ucl.ac.uk",
+        status: "Not Contacted",
+        defaultLang: "fa"
+      }
+    ];
+
+    let selectedScholarId = null;
+    let emailComposeLang = "fa";
+
+    function renderScholarsTable() {
+      const tbody = document.getElementById("scholarsTableBody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+
+      scholarsData.forEach(sch => {
+        const tr = document.createElement("tr");
+        tr.style.borderBottom = "1px solid var(--border)";
+        tr.style.cursor = "pointer";
+        tr.className = sch.id === selectedScholarId ? "selected-row" : "";
+        if (sch.id === selectedScholarId) {
+          tr.style.background = "rgba(201,168,76,0.1)";
+        }
+        tr.onclick = () => selectScholar(sch.id);
+
+        const name = currentLang === "fa" ? sch.nameFa : sch.nameEn;
+        const aff = currentLang === "fa" ? sch.affiliationFa : sch.affiliationEn;
+        const role = currentLang === "fa" ? sch.roleFa : sch.roleEn;
+
+        // Status badge style
+        let badgeColor = "#6b7280";
+        let badgeBg = "rgba(107,114,128,0.15)";
+        if (sch.status === "Email Sent") {
+          badgeColor = "#d4a853";
+          badgeBg = "rgba(212,168,83,0.15)";
+        } else if (sch.status === "Under Review") {
+          badgeColor = "#6495ed";
+          badgeBg = "rgba(100,149,237,0.15)";
+        } else if (sch.status === "Feedback Received") {
+          badgeColor = "#10b981";
+          badgeBg = "rgba(16,185,129,0.15)";
+        }
+
+        const isRtl = currentLang === "fa";
+
+        tr.innerHTML = `
+          <td style="padding: 12px 16px; font-weight: bold; color: var(--text-primary);">
+            ${name}
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: normal; margin-top: 2px;">${role}</div>
+          </td>
+          <td style="padding: 12px 16px; color: var(--text-secondary);">${aff}</td>
+          <td style="padding: 12px 16px; font-family: var(--font-mono); font-size: 12.5px; color: var(--gold-light);">${sch.email}</td>
+          <td style="padding: 12px 16px;">
+            <select onclick="event.stopPropagation()" onchange="updateScholarStatus('${sch.id}', this.value)" style="background: ${badgeBg}; color: ${badgeColor}; border: 1px solid ${badgeColor}; border-radius: 4px; padding: 4px 8px; font-size: 12px; cursor: pointer; outline: none;">
+              <option value="Not Contacted" ${sch.status === 'Not Contacted' ? 'selected' : ''}>Not Contacted</option>
+              <option value="Email Sent" ${sch.status === 'Email Sent' ? 'selected' : ''}>Email Sent</option>
+              <option value="Under Review" ${sch.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
+              <option value="Feedback Received" ${sch.status === 'Feedback Received' ? 'selected' : ''}>Feedback Received</option>
+            </select>
+          </td>
+          <td style="padding: 12px 16px; text-align: center;">
+            <button onclick="event.stopPropagation(); selectScholar('${sch.id}')" class="aspect-btn" style="padding: 4px 10px; font-size: 12px; margin: 0; background: var(--gold-dim); color: var(--gold);">
+              ${isRtl ? 'انتخاب قالب' : 'Load Template'}
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateScholarStatus(id, newStatus) {
+      const sch = scholarsData.find(s => s.id === id);
+      if (sch) {
+        sch.status = newStatus;
+        renderScholarsTable();
+      }
+    }
+
+    function selectScholar(id) {
+      selectedScholarId = id;
+      const sch = scholarsData.find(s => s.id === id);
+      if (sch) {
+        // Set the composer selected scholar text
+        const name = currentLang === "fa" ? sch.nameFa : sch.nameEn;
+        document.getElementById("composerSelectedScholar").textContent = (currentLang === "fa" ? "استاد انتخاب شده: " : "Selected Scholar: ") + name;
+        
+        // Auto set the email language to the scholar's default
+        setEmailLanguage(sch.defaultLang);
+      }
+      renderScholarsTable();
+    }
+
+    function setEmailLanguage(lang) {
+      emailComposeLang = lang;
+      
+      // Update active state of language buttons in email composer
+      const composer = document.getElementById("scholarsView");
+      if (composer) {
+        const buttons = composer.querySelectorAll(".aspect-btn");
+        buttons.forEach(btn => {
+          if (btn.textContent.trim() === "فارسی" && lang === "fa") btn.classList.add("active");
+          else if (btn.textContent.trim() === "English" && lang === "en") btn.classList.add("active");
+          else btn.classList.remove("active");
+        });
+      }
+
+      generateEmailText();
+    }
+
+    function generateEmailText() {
+      if (!selectedScholarId) {
+        document.getElementById("emailSubject").textContent = currentLang === "fa" ? "لطفاً یک استاد را از جدول بالا انتخاب کنید..." : "Please select a scholar from the table above...";
+        document.getElementById("emailBody").textContent = currentLang === "fa" ? "با انتخاب هر استاد، پیش‌نویس اختصاصی او در این کادر نمایش داده می‌شود." : "Select a scholar to load their personalized invitation template here.";
+        return;
+      }
+
+      const sch = scholarsData.find(s => s.id === selectedScholarId);
+      if (!sch) return;
+
+      const lastNameFa = sch.nameFa.split(" ").slice(-1)[0];
+      const lastNameEn = sch.nameEn.split(" ").slice(-1)[0];
+      const specialtyFa = currentLang === "fa" ? sch.roleFa : sch.roleEn;
+      const specialtyEn = sch.roleEn;
+
+      if (emailComposeLang === "fa") {
+        document.getElementById("emailSubject").textContent = `درخواست بررسی تخصصی فاکتورهای تقارن حوادث در پرونده حمله به مدرسه میناب`;
+        document.getElementById("emailBody").textContent = `استاد گرانقدر، جناب آقای/سرکار خانم دکتر ${lastNameFa}
+
+با سلام و احترام؛
+
+پیرو پژوهش‌های حقوقی جاری در موسسه «مردم برای صلح و عدالت» (PFPJ ry) ثبت شده در هلسینکی فنلاند (با شناسه ثبتی ۳۶۱۶۸۱۵-۵)، به استحضار می‌رساند که تیم حقوقی و پژوهشی ما در حال نهایی‌سازی لایحه شکایت کیفری و پرونده احراز واقعیت جهت تسلیم به دادستانی کل فنلاند (تحت صلاحیت قضایی بین‌المللی) و همچنین دفتر دادستان دیوان کیفری بین‌المللی (ICC) در لاهه است.
+
+این پرونده به بررسی ابعاد حقوقی و فنی حمله هوایی با تسلیحات هدایت‌شونده دقیق در تاریخ ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶) به مدرسه ابتدایی دخترانه شجره طیبه در میناب می‌پردازد که متأسفانه منجر به جان‌باختن ۱۶۸ کودک گردید. استدلال حقوقی ما متمرکز بر سهل‌انگاری سیستماتیک فرماندهی در صحت‌سنجی پایگاه‌های داده هدف‌گیری صلح‌زمان و رد دفاع «ابهام جنگ» (Fog of War) با استناد به آرای قضایی تاریخی است.
+
+در همین راستا، ما چارچوبی متشکل از «۱۰ فاکتور کلیدی تقارن و مشابهت حوادث» را جهت انطباق علمی این پرونده تدوین نموده‌ایم. با توجه به دانش تخصصی و تجربه ارزشمند جنابعالی در حوزه [${specialtyFa}]، بسیار مفتخر خواهیم بود اگر این فاکتورهای فنی را مورد ارزیابی قرار داده و نظرات خود را منعکس فرمایید.
+
+شما می‌توانید سند فنی مذکور را به صورت آنلاین در لینک زیر مشاهده فرمایید:
+https://peopleforpeace.live/similarity_factors.html
+
+همچنین نسخه چاپی این پیوست فنی به این ایمیل ضمیمه گردیده است. سپاسگزار خواهیم بود اگر نظرات ارزشمند خود را در قالب پاسخ به این ایمیل یا یک گفتگوی آنلاین کوتاه ۱۵ دقیقه‌ای با ما در میان بگذارید.
+
+پیشاپیش از بذل توجه، وقت و راهنمایی‌های گرانقدرتان صمیمانه سپاسگزاریم.
+
+با تجدید احترام؛
+مهدی فریمانی
+مدیر پروژه و پژوهشگر ارشد
+مردم برای صلح و عدالت (PFPJ ry)`;
+      } else {
+        document.getElementById("emailSubject").textContent = `Expert Review Request: Accident Similarity Benchmarking & Legal Precedents (Minab School Case)`;
+        document.getElementById("emailBody").textContent = `Dear Professor ${lastNameEn},
+
+I hope this email finds you well.
+
+I am writing to you on behalf of People for Peace & Justice ry (PFPJ ry), a registered non-governmental association incorporated in Helsinki, Finland (Business ID: 3616815-5).
+
+We are currently preparing a formal legal complaint and factual determination dossier to be submitted under universal jurisdiction to the Office of the Prosecutor General of Finland, as well as an Article 15 communication to the Office of the Prosecutor of the International Criminal Court (ICC).
+
+The case concerns the precision-guided airstrike conducted on February 28, 2026, against the Shajareh Tayyebeh Girls' Elementary School in Minab, Iran, which resulted in the deaths of 168 children. Our legal argument establishes command-level targeting database negligence (pre-planned peacetime lists) rather than a tactical "fog of war" mistake, drawing direct precedents from historic incidents (such as the Belgrade Chinese Embassy and Kabul drone strikes).
+
+To ground our case in rigorous international humanitarian law (IHL) and targeting doctrine, we have compiled a framework of "10 Potential Accident Similarity Factors" to prove systemic planning negligence.
+
+Given your outstanding expertise in ${specialtyEn}, we would be deeply honored if you could review our technical framework. You can access the document online at the following link:
+https://peopleforpeace.live/similarity_factors.html
+
+Alternatively, a print-ready version of this technical annex is attached to this email. We would be grateful for a brief email response with your comments, or a 15-minute online video call to discuss your observations at your convenience.
+
+Thank you very much for your time, consideration, and invaluable support.
+
+Sincerely,
+Mahdi Farimani
+Lead Researcher & Project Manager
+People for Peace & Justice ry (PFPJ ry)
+Helsinki, Finland`;
+      }
+    }
+
+    function copyEmailToClipboard() {
+      const subject = document.getElementById("emailSubject").textContent;
+      const body = document.getElementById("emailBody").textContent;
+      if (!selectedScholarId) return;
+
+      const fullText = `Subject: ${subject}\n\n${body}`;
+      
+      navigator.clipboard.writeText(fullText).then(() => {
+        const tooltip = document.getElementById("copyTooltip");
+        tooltip.style.display = "inline-block";
+        setTimeout(() => {
+          tooltip.style.display = "none";
+        }, 3000);
+      });
+    }
+
     function setLang(lang) {
       currentLang = lang;
       const isRTL = lang === 'fa' || lang === 'ar';
@@ -2573,6 +3000,10 @@
       
       // Render aspect badges on lang switch
       renderAspectBadges();
+
+      // Render scholars table on lang switch
+      renderScholarsTable();
+      generateEmailText();
 
       // Store preference
       try { localStorage.setItem('pfp-lang', lang); } catch (e) { }

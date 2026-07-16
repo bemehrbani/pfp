@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Annex: 10 Accident Similarity Factors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=Vazirmatn:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0a0e1a;
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dim: rgba(201,168,76,0.08);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: rgba(255,255,255,0.06);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --font-rtl: 'Vazirmatn', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .title-area h1 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .title-area p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-lang {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+
+    .btn-lang.active, .btn-lang:hover {
+      background: var(--gold);
+      color: var(--bg-deep);
+    }
+
+    .intro-box {
+      background: var(--gold-dim);
+      border-left: 3px solid var(--gold);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 32px;
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .factor-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.01);
+      transition: border-color 0.2s;
+    }
+
+    .factor-card:hover {
+      border-color: rgba(201,168,76,0.3);
+    }
+
+    .factor-num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .factor-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .factor-desc {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+        padding: 0;
+      }
+      .container {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .factor-card {
+        page-break-inside: avoid;
+        border: 1px solid #cccccc;
+        color: #000000;
+      }
+      .factor-title {
+        color: #000000;
+      }
+      .factor-desc {
+        color: #333333;
+      }
+      .btn-lang, .lang-toggle {
+        display: none;
+      }
+    }
+
+    /* RTL Support */
+    body[dir="rtl"] {
+      font-family: var(--font-rtl);
+    }
+    body[dir="rtl"] .factor-title {
+      font-family: var(--font-rtl);
+      font-weight: 700;
+    }
+    body[dir="rtl"] .intro-box {
+      border-left: none;
+      border-right: 3px solid var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="title-area">
+        <h1 id="mainTitle">Technical Annex: 10 Accident Similarity Factors</h1>
+        <p id="subTitle">PFPJ ry Case Verification & IHL Benchmarking</p>
+      </div>
+      <div class="lang-toggle">
+        <button class="btn-lang active" onclick="toggleLang('en')">EN</button>
+        <button class="btn-lang" onclick="toggleLang('fa')">فارسی</button>
+      </div>
+    </header>
+
+    <div class="intro-box" id="introText">
+      This technical annex details the 10 core factors used to evaluate the similarity between the target incident and international precedents. This framework serves as the basis for legal analysis and expert validation in our case files.
+    </div>
+
+    <div id="factorsContainer">
+      <!-- Generated dynamically -->
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      en: {
+        title: "Technical Annex: 10 Accident Similarity Factors",
+        sub: "PFPJ ry Case Verification & IHL Benchmarking",
+        intro: "This technical annex details the 10 core factors used to evaluate the similarity between the target incident and international precedents. This framework serves as the basis for legal analysis and expert validation in our case files.",
+        factors: [
+          {
+            num: "Factor 01",
+            title: "Peacetime Target Nomination Databases",
+            desc: "Utilization of pre-compiled target lists developed during peacetime, indicating targeting errors are structural planning failures rather than dynamic tactical adaptations."
+          },
+          {
+            num: "Factor 02",
+            title: "Coordinate & Geolocation Validation Negligence",
+            desc: "Failure to verify geographic target coordinates using real-time physical or visual validation, relying instead on outdated database entries."
+          },
+          {
+            num: "Factor 03",
+            title: "Dual-Use Classification Failures",
+            desc: "Incorrectly classifying civilian structures (e.g. educational facilities) as active military targets without verifying direct, hostiles-related usage."
+          },
+          {
+            num: "Factor 04",
+            title: "Precision-Guided Weaponry Implication",
+            desc: "Deploying highly accurate precision-guided munitions. This establishes that execution deviations did not cause the crash, proving planning and intelligence negligence."
+          },
+          {
+            num: "Factor 05",
+            title: "Failure of Visual & Intelligence Safeguards",
+            desc: "Launching strikes without implementing feasibility safeguards, such as visual reconnaissance or sensor vetting, directly prior to strike execution."
+          },
+          {
+            num: "Factor 06",
+            title: "Collateral Damage Estimation Disproportionality",
+            desc: "A significant discrepancy between pre-strike collateral damage estimations (CDE) and actual civilian casualties, demonstrating inadequate risk assessment."
+          },
+          {
+            num: "Factor 07",
+            title: "Proximity to Legitimate Military Objectives",
+            desc: "Justifying civilian object strikes by claiming proximity to military targets, bypassing requirements to implement effective containment strategies."
+          },
+          {
+            num: "Factor 08",
+            title: "Command Responsibility & Systemic SOP Errors",
+            desc: "Targeting errors that stem from command-approved standard operating procedures (SOPs) rather than individual crew performance."
+          },
+          {
+            num: "Factor 09",
+            title: "Day 1 Hostilities Timing",
+            desc: "Strikes executed during the initial hours of conflict using pre-existing target lists, removing the defense of 'fog of war' confusion."
+          },
+          {
+            num: "Factor 10",
+            title: "Exclusion of Independent Local Registries",
+            desc: "Failure to cross-reference coordinates with public municipal registries, international NGO lists, or local mapping databases before authorizing strikes."
+          }
+        ]
+      },
+      fa: {
+        title: "پیوست فنی: ۱۰ فاکتور تقارن و مشابهت حوادث",
+        sub: "اعتبارسنجی پرونده و تطبیق با حقوق بشردوستانه بین‌المللی",
+        intro: "این پیوست فنی جزئیات ۱۰ فاکتور کلیدی مورد استفاده برای ارزیابی مشابهت بین حادثه اخیر و نمونه‌های حقوقی بین‌المللی را تشریح می‌کند. این چارچوب مبنای تحلیل‌های حقوقی و نظرات تخصصی اساتید قرار خواهد گرفت.",
+        factors: [
+          {
+            num: "فاکتور ۰۱",
+            title: "پایگاه‌داده‌های هدف‌گیری صلح‌زمان",
+            desc: "بهره‌گیری از لیست‌های از پیش تعیین‌شده هدف صلح‌زمان که نشان می‌دهد خطاهای هدف‌گیری حاصل نارسایی‌های برنامه‌ریزی ساختاری هستند و نه شرایط اضطراری نبرد."
+          },
+          {
+            num: "فاکتور ۰۲",
+            title: "اهمال در صحت‌سنجی موقعیت و مختصات جغرافیایی",
+            desc: "عدم تایید مختصات جغرافیایی اهداف از طریق صحت‌سنجی فیزیکی یا بصری بلادرنگ و تکیه صرف بر اطلاعات قدیمی پایگاه‌داده‌ها."
+          },
+          {
+            num: "فاکتور ۰۳",
+            title: "اشتباه در رده‌بندی کاربری دوگانه اهداف صلح‌بخش",
+            desc: "رده‌بندی اشتباه کاربری‌های غیرنظامی (مانند مجتمع‌های آموزشی) به عنوان اهداف نظامی بدون تایید مستقیم فعالیت‌های جنگی در آن‌ها."
+          },
+          {
+            num: "فاکتور ۰۴",
+            title: "بکارگیری تسلیحات هدایت‌شونده دقیق",
+            desc: "استفاده از تسلیحات با دقت بالا که نشان می‌دهد انحرافات فنی علت حادثه نبوده، بلکه سهل‌انگاری در برنامه‌ریزی اطلاعاتی عامل اصلی بوده است."
+          },
+          {
+            num: "فاکتور ۰۵",
+            title: "اهمال در تدابیر پیشگیرانه بصری و اطلاعاتی",
+            desc: "اجرای حمله بدون به کار بستن پروتکل‌های ایمنی اطلاعاتی مانند تصویربرداری شناسایی مستقیم بلافاصله قبل از شلیک."
+          },
+          {
+            num: "فاکتور ۰۶",
+            title: "عدم تناسب بین آسیب برآورده شده و تلفات واقعی",
+            desc: "شکاف فاحش میان برآورد تلفات جانبی قبل از عملیات و خسارت واقعی غیرنظامیان که بر نقص شدید در تحلیل‌های ریسک فرماندهی دلالت دارد."
+          },
+          {
+            num: "فاکتور ۰۷",
+            title: "مجاورت با اهداف نظامی مشروع صوری",
+            desc: "توجیه حمله به ساختارهای غیرنظامی به بهانه نزدیکی به مقرهای نظامی بدون اتخاذ اقدامات پیشگیرانه مهارکننده."
+          },
+          {
+            num: "فاکتور ۰۸",
+            title: "مسئولیت فرماندهی در رویه‌های استاندارد عملیاتی",
+            desc: "خطاهایی که ناشی از رویه‌های کاری مصوب فرماندهی (SOP) هستند، نه خطای فردی خلبان یا مجری عملیات."
+          },
+          {
+            num: "فاکتور ۰۹",
+            title: "زمان‌بندی حمله در روز آغازین مخاصمات (روز اول)",
+            desc: "انجام حملات در ساعت ابتدایی شروع درگیری با استفاده از اهداف از‌پیش‌برنامه‌ریزی‌شده که عذر «ابهام و هیجان نبرد» را ناممکن می‌سازد."
+          },
+          {
+            num: "فاکتور ۱۰",
+            title: "نادیده گرفتن مراجع و ثبت‌های محلی مستقل",
+            desc: "عدم تطبیق مختصات با نقشه‌های ثبت دولتی، مراجع شهرداری یا پایگاه‌های اطلاعاتی سازمان‌های بین‌المللی پیش از تایید نهایی حمله."
+          }
+        ]
+      }
+    };
+
+    function toggleLang(lang) {
+      document.body.dir = lang === 'fa' ? 'rtl' : 'ltr';
+      document.getElementById('mainTitle').textContent = data[lang].title;
+      document.getElementById('subTitle').textContent = data[lang].sub;
+      document.getElementById('introText').textContent = data[lang].intro;
+
+      // Update active button
+      document.querySelectorAll('.btn-lang').forEach(btn => btn.classList.remove('active'));
+      const buttons = document.querySelectorAll('.btn-lang');
+      buttons.forEach(btn => {
+        if ((btn.textContent.trim() === 'EN' && lang === 'en') || (btn.textContent.trim() === 'فارسی' && lang === 'fa')) {
+          btn.classList.add('active');
+        }
+      });
+
+      const container = document.getElementById('factorsContainer');
+      container.innerHTML = '';
+
+      data[lang].factors.forEach(f => {
+        const card = document.createElement('div');
+        card.className = 'factor-card';
+        card.innerHTML = `
+          <span class="factor-num">${f.num}</span>
+          <h3 class="factor-title">${f.title}</h3>
+          <p class="factor-desc">${f.desc}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Initialize with English
+    toggleLang('en');
+  </script>
+</body>
+</html>

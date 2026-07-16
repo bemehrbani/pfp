@@ -422,13 +422,25 @@
               <td><strong>Minab Memorial</strong></td>
               <td><a href="./memorial.html" target="_blank" class="doc-link">memorial.html ↗</a></td>
               <td><span class="tag">Public</span></td>
-              <td class="description">Digital memorial space documenting the identities and stories of children lost in the Minab incident.</td>
+              <td class="description">Digital memorial space presenting the portrait grid of all child victims.</td>
+            </tr>
+            <tr>
+              <td><strong>Student Profiles</strong></td>
+              <td><a href="./child.html?id=child_r01_c01" target="_blank" class="doc-link">child.html?id=... ↗</a></td>
+              <td><span class="tag">Public</span></td>
+              <td class="description">Dynamic single profile page displaying individual photographs, ages, and memorial descriptions of each child.</td>
             </tr>
             <tr>
               <td><strong>Evidence Forensics</strong></td>
               <td><a href="./evidence.html" target="_blank" class="doc-link">evidence.html ↗</a></td>
               <td><span class="tag">Public</span></td>
               <td class="description">Open-source database logging strike geolocation coordinates, weapon shell fragments, and metadata.</td>
+            </tr>
+            <tr>
+              <td><strong>Technical Similarity Annex</strong></td>
+              <td><a href="./similarity_factors.html" target="_blank" class="doc-link">similarity_factors.html ↗</a></td>
+              <td><span class="tag">Public</span></td>
+              <td class="description">Technical brief detailing the 10 similarity factors used to benchmark targeting errors, coordinate validation, and Command negligence. Printable as PDF for outreach.</td>
             </tr>
           </tbody>
         </table>
@@ -459,7 +471,7 @@
                 <strong>Showcase Page.</strong> Locally localized in English & Farsi. Displays:
                 <br>• Interactive grid matching 18 international benchmarks and legal precedents.
                 <br>• The 7-chapter draft brief structure and initial factual determination reports.
-                <br>• The 4 field initiatives to address physical metallurgy, RF logging, and witness gaps.
+                <br>• The 4 field search initiatives to address physical metallurgy, RF logging, and witness gaps.
               </td>
             </tr>
           </tbody>
@@ -573,6 +585,7 @@
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
+    // Key listener for password box
     function checkKey(e) {
       if (e.key === "Enter") {
         unlockPortal();
