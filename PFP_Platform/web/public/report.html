@@ -1044,36 +1044,51 @@
         <section>
           <div class="section-title" data-i18n="tb_tbl_title">Interactive Aspect Filtering Matrix</div>
           
-          <!-- Aspect Selectors -->
-          <div class="aspect-selector">
-            <button class="aspect-btn active" onclick="filterAspect('all')">
-              <span class="aspect-code">All Cases</span>
-              <span class="aspect-name">View Complete Registry</span>
-            </button>
-            <button class="aspect-btn" onclick="filterAspect('A')">
-              <span class="aspect-code">Aspect A</span>
-              <span class="aspect-name">Precision-Guided Weapons</span>
-            </button>
-            <button class="aspect-btn" onclick="filterAspect('B')">
-              <span class="aspect-code">Aspect B</span>
-              <span class="aspect-name">Targeting/Intel Errors</span>
-            </button>
-            <button class="aspect-btn" onclick="filterAspect('C')">
-              <span class="aspect-code">Aspect C</span>
-              <span class="aspect-name">Protected Sites (Schools)</span>
-            </button>
-            <button class="aspect-btn" onclick="filterAspect('D')">
-              <span class="aspect-code">Aspect D</span>
-              <span class="aspect-name">Proportionality/Proximity</span>
-            </button>
-            <button class="aspect-btn" onclick="filterAspect('E')">
-              <span class="aspect-code">Aspect E</span>
-              <span class="aspect-name">Universal Jurisdiction</span>
-            </button>
-            <button class="aspect-btn" onclick="filterAspect('F')">
-              <span class="aspect-code">Aspect F</span>
-              <span class="aspect-name">Aggressive War Day 1</span>
-            </button>
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 14px; font-weight: bold; color: var(--text-secondary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span>⚖️</span>
+              <span data-i18n="filter_by_aspect_lbl">Filter by Aspect</span>
+            </div>
+            <!-- Aspect Selectors -->
+            <div class="aspect-selector" style="margin-bottom: 24px;">
+              <button class="aspect-btn active" onclick="filterAspect('all')">
+                <span class="aspect-code">All Cases</span>
+                <span class="aspect-name">View Complete Registry</span>
+              </button>
+              <button class="aspect-btn" onclick="filterAspect('A')">
+                <span class="aspect-code">Aspect A</span>
+                <span class="aspect-name">Precision-Guided Weapons</span>
+              </button>
+              <button class="aspect-btn" onclick="filterAspect('B')">
+                <span class="aspect-code">Aspect B</span>
+                <span class="aspect-name">Targeting/Intel Errors</span>
+              </button>
+              <button class="aspect-btn" onclick="filterAspect('C')">
+                <span class="aspect-code">Aspect C</span>
+                <span class="aspect-name">Protected Sites (Schools)</span>
+              </button>
+              <button class="aspect-btn" onclick="filterAspect('D')">
+                <span class="aspect-code">Aspect D</span>
+                <span class="aspect-name">Proportionality/Proximity</span>
+              </button>
+              <button class="aspect-btn" onclick="filterAspect('E')">
+                <span class="aspect-code">Aspect E</span>
+                <span class="aspect-name">Universal Jurisdiction</span>
+              </button>
+              <button class="aspect-btn" onclick="filterAspect('F')">
+                <span class="aspect-code">Aspect F</span>
+                <span class="aspect-name">Aggressive War Day 1</span>
+              </button>
+            </div>
+
+            <div style="font-size: 14px; font-weight: bold; color: var(--text-secondary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span>🔍</span>
+              <span data-i18n="filter_by_investigator_lbl">Filter by Investigator</span>
+            </div>
+            <!-- Investigator Selectors -->
+            <div class="aspect-selector" id="investigatorSelector">
+              <!-- Dynamically populated -->
+            </div>
           </div>
 
           <!-- Cases Grid -->
@@ -2195,24 +2210,192 @@
       document.getElementById(viewId).classList.add('active');
     }
 
-    function filterAspect(aspect) {
-      // Update button active state in benchmarks selector
-      const selectors = document.querySelector('.aspect-selector');
-      const buttons = selectors.querySelectorAll('.aspect-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+    let activeAspectFilter = 'all';
+    let activeInvestigatorFilter = 'all';
+    let aspectCounts = {};
+    let investigatorCounts = {};
 
+    function initializeFilters() {
+      const cards = document.querySelectorAll('.case-card');
+      
+      // Calculate counts
+      aspectCounts = { all: cards.length, A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
+      investigatorCounts = {};
+
+      cards.forEach(card => {
+        // Aspect counts
+        const aspectsAttr = card.getAttribute('data-aspects') || "";
+        const aspects = aspectsAttr.split(',').map(a => a.trim()).filter(Boolean);
+        aspects.forEach(asp => {
+          if (aspectCounts[asp] !== undefined) aspectCounts[asp]++;
+        });
+
+        // Investigator
+        let investigator = "";
+        const labels = card.querySelectorAll('.detail-label');
+        labels.forEach(lbl => {
+          const text = lbl.textContent.trim().toLowerCase();
+          if (text.includes('investigator') || text.includes('بررسی‌کننده')) {
+            investigator = lbl.nextElementSibling.textContent.trim();
+          }
+        });
+        if (investigator) {
+          investigatorCounts[investigator] = (investigatorCounts[investigator] || 0) + 1;
+          card.setAttribute('data-investigator-val', investigator);
+        }
+      });
+
+      // Update Aspect Buttons UI with counts
+      const aspectSelectorDiv = document.querySelector('.aspect-selector:not(#investigatorSelector)');
+      if (aspectSelectorDiv) {
+        const aspectButtons = aspectSelectorDiv.querySelectorAll('.aspect-btn');
+        aspectButtons.forEach(btn => {
+          const onclickAttr = btn.getAttribute('onclick') || "";
+          const match = onclickAttr.match(/filterAspect\('([^']+)'\)/);
+          if (match) {
+            const aspect = match[1];
+            const count = aspectCounts[aspect] || 0;
+            
+            let countEl = btn.querySelector('.aspect-count-badge');
+            if (!countEl) {
+              countEl = document.createElement('span');
+              countEl.className = 'aspect-count-badge';
+              countEl.style.marginLeft = 'auto';
+              countEl.style.background = 'rgba(255,255,255,0.08)';
+              countEl.style.padding = '2px 8px';
+              countEl.style.borderRadius = '99px';
+              countEl.style.fontSize = '11px';
+              countEl.style.fontFamily = 'monospace';
+              countEl.style.color = 'var(--gold-light)';
+              countEl.style.marginTop = '4px';
+              btn.appendChild(countEl);
+            }
+            countEl.textContent = `${count} ${currentLang === 'fa' ? 'گزارش' : 'reports'}`;
+          }
+        });
+      }
+
+      // Render Investigator Buttons
+      const invContainer = document.getElementById("investigatorSelector");
+      if (invContainer) {
+        invContainer.innerHTML = "";
+
+        // All Investigators button
+        const allBtn = document.createElement("button");
+        allBtn.className = "aspect-btn" + (activeInvestigatorFilter === "all" ? " active" : "");
+        allBtn.innerHTML = `
+          <span class="aspect-code">${currentLang === 'fa' ? 'همه مراجع' : 'All Investigators'}</span>
+          <span class="aspect-name" style="font-size: 11px; color: var(--text-muted);">${currentLang === 'fa' ? 'نمایش کل پرونده‌ها' : 'Show all cases'}</span>
+          <span class="aspect-count-badge" style="margin-top: 4px; margin-left: auto; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 99px; font-size: 11px; font-family: monospace; color: var(--gold-light);">${aspectCounts.all} ${currentLang === 'fa' ? 'گزارش' : 'reports'}</span>
+        `;
+        allBtn.onclick = () => filterByInvestigator('all', allBtn);
+        invContainer.appendChild(allBtn);
+
+        // Sort investigators by name
+        const sortedInvs = Object.keys(investigatorCounts).sort();
+        sortedInvs.forEach(inv => {
+          const count = investigatorCounts[inv];
+          const btn = document.createElement("button");
+          btn.className = "aspect-btn" + (activeInvestigatorFilter === inv ? " active" : "");
+          btn.innerHTML = `
+            <span class="aspect-code" style="text-transform: none; font-size: 12px;">${inv}</span>
+            <span class="aspect-name" style="font-size: 11px; color: var(--text-muted);">${currentLang === 'fa' ? 'مرجع بررسی‌کننده' : 'Investigating Agency'}</span>
+            <span class="aspect-count-badge" style="margin-top: 4px; margin-left: auto; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 99px; font-size: 11px; font-family: monospace; color: var(--gold-light);">${count} ${currentLang === 'fa' ? 'گزارش' : 'reports'}</span>
+          `;
+          btn.onclick = () => filterByInvestigator(inv, btn);
+          invContainer.appendChild(btn);
+        });
+      }
+    }
+
+    function filterAspect(aspect) {
+      activeAspectFilter = aspect;
+      activeInvestigatorFilter = 'all';
+
+      // Update aspect buttons active state
+      const aspectSelectorDiv = document.querySelector('.aspect-selector:not(#investigatorSelector)');
+      if (aspectSelectorDiv) {
+        const aspectButtons = aspectSelectorDiv.querySelectorAll('.aspect-btn');
+        aspectButtons.forEach(btn => {
+          const onclickAttr = btn.getAttribute('onclick') || "";
+          if (onclickAttr.includes(`'${aspect}'`)) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+      }
+
+      // Reset investigator buttons
+      const invContainer = document.getElementById("investigatorSelector");
+      if (invContainer) {
+        const buttons = invContainer.querySelectorAll('.aspect-btn');
+        buttons.forEach((btn, idx) => {
+          if (idx === 0) btn.classList.add('active');
+          else btn.classList.remove('active');
+        });
+      }
+
+      applyCombinedFilter();
+    }
+
+    function filterByInvestigator(investigator, clickedBtn) {
+      activeInvestigatorFilter = investigator;
+      activeAspectFilter = 'all';
+
+      // Reset aspect buttons
+      const aspectSelectorDiv = document.querySelector('.aspect-selector:not(#investigatorSelector)');
+      if (aspectSelectorDiv) {
+        const aspectButtons = aspectSelectorDiv.querySelectorAll('.aspect-btn');
+        aspectButtons.forEach(btn => {
+          const onclickAttr = btn.getAttribute('onclick') || "";
+          if (onclickAttr.includes("'all'")) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+      }
+
+      // Update investigator buttons active state
+      const invContainer = document.getElementById("investigatorSelector");
+      if (invContainer) {
+        const buttons = invContainer.querySelectorAll('.aspect-btn');
+        buttons.forEach(btn => {
+          if (btn === clickedBtn) btn.classList.add('active');
+          else btn.classList.remove('active');
+        });
+      }
+
+      applyCombinedFilter();
+    }
+
+    function applyCombinedFilter() {
       const cards = document.querySelectorAll('.case-card');
       cards.forEach(card => {
-        if (aspect === 'all') {
+        let show = true;
+
+        // Apply aspect filter
+        if (activeAspectFilter !== 'all') {
+          const aspectsAttr = card.getAttribute('data-aspects') || "";
+          const aspects = aspectsAttr.split(',').map(a => a.trim()).filter(Boolean);
+          if (!aspects.includes(activeAspectFilter)) {
+            show = false;
+          }
+        }
+
+        // Apply investigator filter
+        if (activeInvestigatorFilter !== 'all') {
+          const cardInv = card.getAttribute('data-investigator-val') || "";
+          if (cardInv !== activeInvestigatorFilter) {
+            show = false;
+          }
+        }
+
+        if (show) {
           card.classList.remove('hidden');
         } else {
-          const aspects = card.getAttribute('data-aspects').split(',');
-          if (aspects.includes(aspect)) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
-          }
+          card.classList.add('hidden');
         }
       });
     }
@@ -2253,6 +2436,8 @@
         tb_step3_desc: "Day 1 strikes leverage pre-planned peacetime target lists, highlighting systematic intelligence negligence.",
         tb_stat_precedents: "Selected Precedents",
         tb_tbl_title: "Interactive Aspect Filtering Matrix",
+        filter_by_aspect_lbl: "Filter by Aspect",
+        filter_by_investigator_lbl: "Filter by Investigator",
         st_collab_title: "Open-Source Collaboration Initiative",
         st_collab_desc: "The Minab Accountability Report is a collaborative legal project. We are open-sourcing our document structure so that legal scholars, activists, and citizens can join our Finnish Association (PFPJ ry) and contribute directly. Select a channel below to get involved.",
         st_p1_badge: "Pillar 1 — Capital",
@@ -2435,6 +2620,8 @@
         tb_step3_desc: "حملات روز اول بر اساس لیست اهداف از پیش تعیین‌شده در زمان صلح صورت گرفته که سهل‌انگاری اطلاعاتی را برجسته می‌سازد.",
         tb_stat_precedents: "پرونده انتخاب شده",
         tb_tbl_title: "ماتریس فیلتر تعاملی جنبه‌های حقوقی",
+        filter_by_aspect_lbl: "فیلتر بر اساس جنبه حقوقی",
+        filter_by_investigator_lbl: "فیلتر بر اساس مرجع بررسی‌کننده",
         st_collab_title: "طرح همکاری با جامعه داوطلبان",
         st_collab_desc: "تهیه گزارش میناب یک پروژه حقوقی جمعی است. ما ساختار سند خود را به صورت متن‌باز ارائه کرده‌ایم تا کارشناسان، پژوهشگران و داوطلبان بتوانند با عضویت در انجمن فنلاندی (PFPJ ry) مستقیماً مشارکت کنند. یکی از کانال‌های زیر را انتخاب کنید.",
         st_p1_badge: "ستون ۱ — سرمایه فیزیکی",
@@ -2918,12 +3105,12 @@
 
 این پرونده به بررسی ابعاد حقوقی و فنی حمله هوایی با تسلیحات هدایت‌شونده دقیق در تاریخ ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶) به مدرسه ابتدایی دخترانه شجره طیبه در میناب می‌پردازد که متأسفانه منجر به جان‌باختن ۱۶۸ کودک گردید. استدلال حقوقی ما متمرکز بر سهل‌انگاری سیستماتیک فرماندهی در صحت‌سنجی پایگاه‌های داده هدف‌گیری صلح‌زمان و رد دفاع «ابهام جنگ» (Fog of War) با استناد به آرای قضایی تاریخی است.
 
-در همین راستا، ما چارچوبی متشکل از «۱۰ فاکتور کلیدی تقارن و مشابهت حوادث» را جهت انطباق علمی این پرونده تدوین نموده‌ایم. با توجه به دانش تخصصی و تجربه ارزشمند جنابعالی در حوزه [${specialtyFa}]، بسیار مفتخر خواهیم بود اگر این فاکتورهای فنی را مورد ارزیابی قرار داده و نظرات خود را منعکس فرمایید.
+پیشینه و ایده اولیه این پژوهش بر اساس مشاوره‌ها و جلسات هماهنگی ارزشمندی شکل گرفته است که پیش از این با همراهی و راهنمایی‌های استادان ارجمند، جناب آقای دکتر محمد جلالی، جناب آقای دکتر تهمورث بشیریه و سرکار خانم دکتر نسرین مصفا برگزار شده است. در همین راستا، جهت تکمیل متدولوژی و تدوین «۱۰ فاکتور کلیدی تقارن و مشابهت حوادث» برای انطباق علمی این پرونده، نیازمند بهره‌مندی از آرا و ارزیابی‌های تخصصی دیگر نخبگان این حوزه هستیم.
 
-شما می‌توانید سند فنی مذکور را به صورت آنلاین در لینک زیر مشاهده فرمایید:
+با توجه به دانش تخصصی و تجربه ارزشمند جنابعالی در حوزه [${specialtyFa}]، بسیار مفتخر خواهیم بود اگر این فاکتورهای فنی را مورد ارزیابی قرار داده و نظرات خود را منعکس فرمایید. شما می‌توانید سند فنی مذکور را به صورت آنلاین در لینک زیر مشاهده فرمایید:
 https://peopleforpeace.live/similarity_factors.html
 
-همچنین نسخه چاپی این پیوست فنی به این ایمیل ضمیمه گردیده است. سپاسگزار خواهیم بود اگر نظرات ارزشمند خود را در قالب پاسخ به این ایمیل یا یک گفتگوی آنلاین کوتاه ۱۵ دقیقه‌ای با ما در میان بگذارید.
+نسخه چاپی این پیوست فنی نیز به این ایمیل ضمیمه گردیده است. سپاسگزار خواهیم بود اگر نظرات خود را در قالب پاسخ به این ایمیل یا یک گفتگوی آنلاین کوتاه ۱۵ دقیقه‌ای با ما در میان بگذارید. همچنین در صورتی که استادان یا متخصصان دیگری را در این زمینه می‌شناسید که مشارکت آن‌ها می‌تواند به غنای این پژوهش کمک کند، خواهشمند است ایشان را به ما معرفی نمایید.
 
 پیشاپیش از بذل توجه، وقت و راهنمایی‌های گرانقدرتان صمیمانه سپاسگزاریم.
 
@@ -3000,6 +3187,9 @@ Helsinki, Finland`;
       
       // Render aspect badges on lang switch
       renderAspectBadges();
+
+      // Initialize dynamic filters & report counts
+      initializeFilters();
 
       // Render scholars table on lang switch
       renderScholarsTable();
