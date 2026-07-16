@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پیوست فنی: فاکتورهای تقارن حوادث و مراجع تحقیق</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0a0e1a;
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dim: rgba(201,168,76,0.08);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: rgba(255,255,255,0.06);
+      --font-body: 'Vazirmatn', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .document-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .page {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      margin-bottom: 40px;
+      position: relative;
+      min-height: 1120px; /* Standard A4 ratio approximation on screen */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .page-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .page-header h1 {
+      font-size: 22px;
+      color: #ffffff;
+      font-weight: 900;
+    }
+
+    .page-header .doc-meta {
+      font-size: 12px;
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 1px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .intro-box {
+      background: var(--gold-dim);
+      border-right: 3px solid var(--gold);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      text-align: justify;
+    }
+
+    /* Grid for sources */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .source-card {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .source-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .source-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Factors layout */
+    .factor-item {
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    
+    .factor-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .factor-num {
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+
+    .factor-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .factor-desc {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      text-align: justify;
+      padding-right: 20px;
+    }
+
+    /* Precedents Grid */
+    .precedents-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .precedent-item {
+      font-size: 12.5px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.01);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .precedent-num {
+      color: var(--gold);
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .print-btn-container {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .btn-print {
+      background: var(--gold);
+      color: var(--bg-deep);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+    }
+
+    .btn-print:hover {
+      background: var(--gold-light);
+      box-shadow: 0 6px 16px rgba(201,168,76,0.4);
+    }
+
+    /* Print settings */
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+        padding: 0;
+      }
+      .print-btn-container {
+        display: none;
+      }
+      .page {
+        border: none;
+        box-shadow: none;
+        padding: 40px;
+        margin-bottom: 0;
+        background: #ffffff;
+        color: #000000;
+        page-break-after: always;
+        height: 297mm; /* Standard A4 height */
+        width: 210mm; /* Standard A4 width */
+        min-height: auto;
+      }
+      .page:last-child {
+        page-break-after: avoid;
+      }
+      .page-header h1, .source-title, .factor-title, .precedent-item {
+        color: #000000 !important;
+      }
+      .source-card, .precedent-item {
+        border: 1px solid #dddddd !important;
+        background: none !important;
+      }
+      .factor-desc, .source-desc, .intro-box {
+        color: #333333 !important;
+      }
+      .intro-box {
+        background: #f9f9f9 !important;
+        border-right: 3px solid #000000 !important;
+      }
+      .page-footer, .page-header {
+        border-color: #cccccc !important;
+        color: #666666 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-btn-container">
+    <button class="btn-print" onclick="window.print()">🖨️ پرینت / ذخیره به صورت PDF دو صفحه‌ای</button>
+  </div>
+
+  <div class="document-container">
+    
+    <!-- PAGE 1 -->
+    <div class="page">
+      <div>
+        <header class="page-header">
+          <h1>پیوست فنی: فاکتورهای تقارن حوادث و مراجع تحقیق</h1>
+          <div class="doc-meta">PFPJ ry · صفحه ۱ از ۲</div>
+        </header>
+
+        <div class="intro-box">
+          این پیوست فنی توسط بخش حقوقی انجمن «مردم برای صلح و عدالت» (PFPJ ry - هلسینکی، فنلاند) جهت ارزیابی مشابهت فنی و حقوقی حمله هوایی مورخ ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶) به مدرسه دخترانه شجره طیبه میناب با سایر پرونده‌های حمله به اهداف غیرنظامی تدوین گردیده است. این چارچوب مبنای لایحه شکایت کیفری جهانی به دادستانی کل فنلاند و دیوان کیفری بین‌المللی (ICC) می‌باشد.
+        </div>
+
+        <h2 class="section-title">۱. منابع علمی و پایگاه‌های داده تحقیق (Research Sources)</h2>
+        <div class="sources-grid">
+          <div class="source-card">
+            <h3 class="source-title">📚 پایگاه ابزارهای حقوقی ICC</h3>
+            <p class="source-desc">شامل بیش از ۱۵۰ هزار سند رسمی، اساسنامه رم و آرای صادر شده از شعب دیوان کیفری بین‌المللی جهت احراز رویه‌های مسئولیت فرماندهی.</p>
+          </div>
+          <div class="source-card">
+            <h3 class="source-title">⚖️ بانک اطلاعات آرای ECHR</h3>
+            <p class="source-desc">شامل بیش از ۱۴ هزار تصمیم دادگاه حقوق بشر اروپا ناظر بر الزامات پیشگیرانه در مأموریت‌های هوایی بر اساس ماده ۲ کنوانسیون اروپا.</p>
+          </div>
+          <div class="source-card">
+            <h3 class="source-title">🎯 گزارشات نظارتی Airwars</h3>
+            <p class="source-desc">پایگاه داده مستقل ارزیابی تلفات غیرنظامی ناشی از حملات هوایی بین‌المللی با بررسی بیش از ۱۴,۵۰۰ مورد شلیک موشک هدایت‌شونده.</p>
+          </div>
+          <div class="source-card">
+            <h3 class="source-title">🏛️ مراجع و تصمیمات دیوان بین‌المللی دادگستری</h3>
+            <p class="source-desc">دسترسی به ۳ هزار سند حقوقی و احکام رسمی صادره از دیوان بین‌المللی دادگستری (ICJ) از مخازن معتبر پژوهشی نظیر Zenodo.</p>
+          </div>
+        </div>
+
+        <h2 class="section-title">۲. فاکتورهای ده‌گانه تقارن و مشابهت حوادث (بخش اول)</h2>
+        
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۰۱</span>
+          <h3 class="factor-title">پایگاه‌داده‌های هدف‌گیری صلح‌زمان</h3>
+          <p class="factor-desc">تکیه بر لیست‌های از پیش تعیین‌شده اهداف صلح‌زمان که اثبات می‌کند خطاهای هدف‌گیری محصول برنامه‌ریزی ساختاری فرماندهی است و نه ضرورت تاکتیکی نبرد.</p>
+        </div>
+
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۰۲</span>
+          <h3 class="factor-title">اهمال در صحت‌سنجی فیزیکی و جغرافیایی</h3>
+          <p class="factor-desc">عدم تایید نهایی مختصات جغرافیایی هدف از طریق اطلاعات زنده شناسایی و تکیه غیرمسئولانه بر داده‌های قدیمی نقشه‌ها.</p>
+        </div>
+
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۰۳</span>
+          <h3 class="factor-title">رده‌بندی اشتباه کاربری دوگانه</h3>
+          <p class="factor-desc">تعریف کاربری مجتمع‌های غیرنظامی (مانند مدارس) به عنوان هدف نظامی بدون احراز و راستی‌آزمایی استفاده مستقیم جنگی از آن‌ها.</p>
+        </div>
+
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۰۴</span>
+          <h3 class="factor-title">به‌کارگیری تسلیحات هدایت‌شونده دقیق</h3>
+          <p class="factor-desc">شلیک تسلیحات با دقت بالا که فرض انحراف فنی پرتابه را رد کرده و مسئولیت مستقیم طراحان و فرماندهان عملیات را اثبات می‌کند.</p>
+        </div>
+      </div>
+      
+      <footer class="page-footer">
+        <span>سازمان مردم برای صلح و عدالت (PFPJ ry)</span>
+        <span>شماره ثبت تجاری: 3616815-5</span>
+      </footer>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+      <div>
+        <header class="page-header">
+          <h1>پیوست فنی: فاکتورهای تقارن حوادث و مراجع تحقیق</h1>
+          <div class="doc-meta">PFPJ ry · صفحه ۲ از ۲</div>
+        </header>
+
+        <h2 class="section-title">۲. فاکتورهای ده‌گانه تقارن و مشابهت حوادث (بخش دوم)</h2>
+
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۰۵</span>
+          <h3 class="factor-title">فقدان و حذف فیلترهای شناسایی و بصری</h3>
+          <p class="factor-desc">حذف یا نادیده گرفتن پروتکل‌های تایید نهایی چشمی یا حسگرهای حرارتی بلافاصله پیش از صدور دستور شلیک نهایی.</p>
+        </div>
+
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۰۶</span>
+          <h3 class="factor-title">عدم تناسب فاحش برآورد خسارت با تلفات واقعی</h3>
+          <p class="factor-desc">فاصله بحرانی میان ارزیابی‌های پیش‌بینی‌شده خسارات غیرنظامی (CDE) و آمار واقعی کشته‌شدگان که حاکی از بی‌توجهی سیستماتیک به جان غیرنظامیان است.</p>
+        </div>
+
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۰۷</span>
+          <h3 class="factor-title">مجاورت صوری با اهداف نظامی مشروع</h3>
+          <p class="factor-desc">توجیه حمله به ساختارهای غیرنظامی به بهانه نزدیکی به مقرهای نظامی صوری بدون اتخاذ تدابیر تفکیک‌کننده و مهارکننده.</p>
+        </div>
+
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۰۸</span>
+          <h3 class="factor-title">خطای ساختاری در رویه‌های استاندارد (SOP)</h3>
+          <p class="factor-desc">اثبات این موضوع که خطا ناشی از پروتکل‌های مصوب فرماندهی ارشد است و نه یک اقدام یا خطای فردی خدمه پروازی.</p>
+        </div>
+
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۰۹</span>
+          <h3 class="factor-title">روز آغازین مخاصمات (Day 1 Hostilities)</h3>
+          <p class="factor-desc">انجام حمله در ساعات اولیه درگیری با تکیه بر اطلاعات از‌پیش‌تعیین‌شده، که دفاع فرماندهی مبنی بر «ابهام و شلوغی صحنه نبرد» را باطل می‌سازد.</p>
+        </div>
+
+        <div class="factor-item">
+          <span class="factor-num">فاکتور ۱۰</span>
+          <h3 class="factor-title">عدم انطباق با پایگاه‌های داده محلی مستقل</h3>
+          <p class="factor-desc">سهل‌انگاری در مقایسه مختصات هدف با ثبت‌های شهری دولتی، نقشه‌های مدارس، یا دفاتر مراجع بین‌المللی پیش از تایید نهایی.</p>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 24px;">۳. پرونده‌های مشابه استخراج‌شده (Founded Precedent Cases)</h2>
+        <div class="precedents-grid">
+          <div class="precedent-item"><span class="precedent-num">۰۱</span> بمباران سفارت چین در بلگراد (۱۹۹۹)</div>
+          <div class="precedent-item"><span class="precedent-num">۰۲</span> حمله هوایی به تانکرهای سوخت قندوز (۲۰۰۹)</div>
+          <div class="precedent-item"><span class="precedent-num">۰۳</span> حمله به کاروان پناهندگان کاتیر-یورت چچن (۲۰۰۰)</div>
+          <div class="precedent-item"><span class="precedent-num">۰۴</span> حمله به مسجد الجینه حلب (۲۰۱۷)</div>
+          <div class="precedent-item"><span class="precedent-num">۰۵</span> حمله پهپادی کابل (۲۰۲۱)</div>
+          <div class="precedent-item"><span class="precedent-num">۰۶</span> حمله روز اول مزارع الدوره بغداد (۲۰۰۳)</div>
+          <div class="precedent-item"><span class="precedent-num">۰۷</span> حمله به مدرسه مذهبی دشت ارچی قندوز (۲۰۱۸)</div>
+          <div class="precedent-item"><span class="precedent-num">۰۸</span> بمباران پناهگاه العامریه بغداد (۱۹۹۱)</div>
+          <div class="precedent-item"><span class="precedent-num">۰۹</span> کشتار مقر سازمان ملل در قانا (۱۹۹۶)</div>
+          <div class="precedent-item"><span class="precedent-num">۱۰</span> دومین حمله به منطقه مسکونی قانا (۲۰۰۶)</div>
+          <div class="precedent-item"><span class="precedent-num">۱۱</span> حمله ناتو به ایستگاه تلویزیونی بلگراد (۱۹۹۹)</div>
+          <div class="precedent-item"><span class="precedent-num">۱۲</span> حمله ناتو به روستای کوریسا کوزوو (۱۹۹۹)</div>
+          <div class="precedent-item"><span class="precedent-num">۱۳</span> حمله به مجتمع مدارس حاس ادلب (۲۰۱۶)</div>
+          <div class="precedent-item"><span class="precedent-num">۱۴</span> حمله به بیمارستان عبس یمن (۲۰۱۶)</div>
+          <div class="precedent-item"><span class="precedent-num">۱۵</span> حمله به اتوبوس مدرسه ضحیان یمن (۲۰۱۸)</div>
+          <div class="precedent-item"><span class="precedent-num">۱۶</span> حمله به مدرسه البراء ادلب (۲۰۱۹)</div>
+          <div class="precedent-item"><span class="precedent-num">۱۷</span> بمباران مدارس چرنیهیو اوکراین (۲۰۲۲)</div>
+          <div class="precedent-item"><span class="precedent-num">۱۸</span> حمله به بازار مستباء یمن (۲۰۱۶)</div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>مکاتبه اضطراری حقوقی · دیوان کیفری بین‌المللی (ICC)</span>
+        <span>سند ارزیابی فنی و تطبیقی پرونده میناب</span>
+      </footer>
+    </div>
+
+  </div>
+
+</body>
+</html>
