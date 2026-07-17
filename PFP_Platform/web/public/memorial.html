@@ -88,24 +88,63 @@
             text-decoration: underline
         }
 
-        /* ─── LANG TOGGLE ─── */
+        /* ─── LANG TOGGLE / NAVBAR ─── */
         .lang-bar {
             position: fixed;
-            top: 16px;
-            right: 16px;
-            z-index: 100;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             display: flex;
-            gap: 4px;
-            background: rgba(10, 14, 23, .85);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 4px
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 32px;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: background var(--t);
+        }
+
+        .lang-bar-logo {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.02em;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        
+        .navbar-links a {
+            font-size: 0.9rem;
+            color: var(--text2);
+            font-weight: 600;
+            transition: color var(--t);
+        }
+        
+        .navbar-links a:hover,
+        .navbar-links a.active {
+            color: var(--gold);
+        }
+
+        @media (max-width: 860px) {
+            .navbar-links {
+                display: none;
+            }
+        }
+
+        .lang-bar-nav {
+            display: flex;
+            gap: 6px;
         }
 
         .lang-btn {
             padding: 6px 14px;
-            border: none;
+            border: 1px solid var(--border);
             border-radius: 16px;
             background: transparent;
             color: var(--text2);
@@ -815,12 +854,25 @@
 </head>
 
 <body>
-    <!-- Language toggle -->
-    <div class="lang-bar">
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
-        <button class="lang-btn" onclick="setLang('ar')">العربية</button>
-    </div>
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="lang-bar">
+        <span class="lang-bar-logo">☮ PFPJ ry</span>
+        <div class="navbar-links">
+            <a href="landing.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="memorial.html" class="active">Minab Memorial</a>
+            <a href="evidence.html">Forensic Evidence</a>
+            <a href="similarity_annex.html">Technical Annex</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <div class="lang-bar-nav">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+                <button class="lang-btn" onclick="setLang('fi')">FI</button>
+            </div>
+            <a href="mailto:info@peopleforpeace.live" class="cta-nav" style="background:rgba(212, 168, 83, 0.15); border:1px solid var(--gold); color:var(--gold); padding:6px 18px; border-radius:20px; font-size:0.85rem; font-weight:600; margin-left:12px; text-decoration:none;">✉ Contact</a>
+        </div>
+    </nav>
 
     <!-- Hero -->
     <section class="hero" id="hero">
@@ -839,7 +891,7 @@
          <a href="#children" class="nav-link" data-i18n="navFaces">Their Faces</a>
          <a href="#stories" class="nav-link" data-i18n="navStories">Stories</a>
          <a href="#investigation" class="nav-link" data-i18n="navInvestigation">Investigation</a>
-         <a href="/evidence.html" class="nav-link" data-i18n="navEvidence">Evidence</a>
+         <a href="evidence.html" class="nav-link" data-i18n="navEvidence">Evidence</a>
          <a href="#act" class="nav-link" data-i18n="navAct">Act Now</a>
      </nav>
 
@@ -945,12 +997,14 @@
     <footer class="memorial-footer">
         <p class="quote-fa" data-i18n="footerQuoteFa">هرگز نمیرد آنکه دلش زنده شد به عشق</p>
         <p class="quote-en" data-i18n="footerQuoteEn">Those whose hearts are alive with love never die — Hafez</p>
-        <div class="footer-links">
-            <a href="/" data-i18n="backHome">← Back to Home</a>
-            <a href="/dashboard-live.html">Dashboard</a>
-            <a href="/campaign-guide.html">Campaign Guide</a>
-            <a href="/data.html">📊 Open Data & API</a>
+        <div class="footer-links" style="display:flex; justify-content:center; gap:20px; margin-top:12px;">
+            <a href="landing.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="evidence.html">Evidence</a>
+            <a href="similarity_annex.html">Technical Annex</a>
+            <a href="mailto:info@peopleforpeace.live">info@peopleforpeace.live</a>
         </div>
+        <p style="margin-top:16px; font-size:0.8rem; color:#64748b;">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
     </footer>
 
 
@@ -967,7 +1021,8 @@
             const isRtl = lang === 'fa' || lang === 'ar';
             document.documentElement.lang = lang;
             document.body.dir = isRtl ? 'rtl' : 'ltr';
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === (lang === 'en' ? 'EN' : lang === 'fa' ? 'فارسی' : 'العربية')));
+            const labels = { en: 'EN', fa: 'فارسی', fi: 'FI' };
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === labels[lang]));
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 const val = t(key);
@@ -1155,6 +1210,7 @@
         setLang(currentLang);
         handleScrollAnimations();
     </script>
+    <script src="contact-modal.js"></script>
 </body>
 
 </html>

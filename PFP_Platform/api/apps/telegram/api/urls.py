@@ -12,6 +12,7 @@ urlpatterns = [
     path('webhook/set/', views.SetTelegramWebhookView.as_view(), name='set_webhook'),
     path('webhook/delete/', views.DeleteTelegramWebhookView.as_view(), name='delete_webhook'),
     path('send-message/', views.SendTelegramMessageView.as_view(), name='send_message'),
+    path('submit-contact/', views.SubmitContactView.as_view(), name='submit_contact'),
     
     # Telegram webhook (no authentication required for Telegram servers)
     # MUST BE LAST because <str:bot_token> catches everything (like 'set' and 'delete')

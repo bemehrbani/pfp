@@ -3,6 +3,7 @@ API views for Telegram app.
 """
 import json
 import logging
+from asgiref.sync import async_to_sync
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 from django.views import View
@@ -262,11 +263,14 @@ class SendTelegramMessageView(APIView):
 
         try:
             bot = telegram.Bot(token=bot_token)
-            sent_message = bot.send_message(
-                chat_id=chat_id,
-                text=message,
-                parse_mode='HTML'
-            )
+            async def send():
+                async with bot:
+                    return await bot.send_message(
+                        chat_id=chat_id,
+                        text=message,
+                        parse_mode='HTML'
+                    )
+            sent_message = async_to_sync(send)()
 
             return Response({
                 'status': 'success',
@@ -286,4 +290,95 @@ class SendTelegramMessageView(APIView):
             return Response({
                 'status': 'error',
                 'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class SubmitContactView(APIView):
+    """Public endpoint to submit contact and volunteer requests, forwarding them to Telegram."""
+    permission_classes = [permissions.AllowAny]
+
+    @swagger_auto_schema(
+        operation_description="Submit a contact or volunteer request",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=['name', 'email', 'message'],
+            properties={
+                'name': openapi.Schema(type=openapi.TYPE_STRING, description='Submitter name'),
+                'email': openapi.Schema(type=openapi.TYPE_STRING, description='Submitter email'),
+                'role': openapi.Schema(type=openapi.TYPE_STRING, description='Role or interest (e.g. Volunteer, Scholar)'),
+                'message': openapi.Schema(type=openapi.TYPE_STRING, description='Message body'),
+            }
+        ),
+        responses={200: openapi.Response('Submission forwarded successfully')}
+    )
+    def post(self, request):
+        """Forward contact form submission to Telegram notification chat."""
+        if not HAS_TELEGRAM:
+            return Response({'error': 'telegram package not installed'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
+        name = request.data.get('name')
+        email = request.data.get('email')
+        role = request.data.get('role', 'General Inquiry')
+        message = request.data.get('message')
+
+        if not name or not email or not message:
+            return Response({
+                'error': 'name, email, and message are required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # Get configured chat ID or fallback to Campaign group ID
+        bot_token = settings.TELEGRAM_BOT_TOKEN
+        chat_id = getattr(settings, 'TELEGRAM_NOTIFICATIONS_CHAT_ID', '')
+
+        if not chat_id:
+            # Fallback: try to find the first campaign with a telegram_group_id
+            try:
+                from apps.campaigns.models import Campaign
+                campaign = Campaign.objects.filter(telegram_group_id__isnull=False).first()
+                if campaign:
+                    chat_id = campaign.telegram_group_id
+            except Exception as e:
+                logger.error(f'Error searching fallback Campaign group ID: {e}')
+
+        if not bot_token:
+            return Response({
+                'error': 'Telegram bot token not configured'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        if not chat_id:
+            return Response({
+                'error': 'Telegram notifications chat ID not configured'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        # Format beautiful message
+        formatted_message = (
+            f"<b>📥 New Contact/Volunteer Submission</b>\n\n"
+            f"👤 <b>Name:</b> {name}\n"
+            f"✉️ <b>Email:</b> {email}\n"
+            f"🏷️ <b>Interest/Role:</b> {role}\n\n"
+            f"📝 <b>Message:</b>\n"
+            f"{message}"
+        )
+
+        try:
+            bot = telegram.Bot(token=bot_token)
+            async def send():
+                async with bot:
+                    return await bot.send_message(
+                        chat_id=chat_id,
+                        text=formatted_message,
+                        parse_mode='HTML'
+                    )
+            async_to_sync(send)()
+
+            return Response({
+                'status': 'success',
+                'message': 'Notification sent to Telegram group successfully.'
+            })
+
+        except Exception as e:
+            logger.error(f'Error forwarding contact form to Telegram: {e}')
+            return Response({
+                'status': 'error',
+                'message': f'Failed to send message: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Annex: Accident Similarity Factors & Research Sources</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Vazirmatn:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0a0e1a;
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dim: rgba(201,168,76,0.08);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: rgba(255,255,255,0.06);
+      --font-en: 'Inter', sans-serif;
+      --font-fa: 'Vazirmatn', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s;
+    }
+
+    .document-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .page {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      margin-bottom: 40px;
+      position: relative;
+      min-height: 1120px; /* A4 aspect ratio approximation */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .page-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .page-header h1 {
+      font-size: 20px;
+      color: #ffffff;
+      font-weight: 900;
+    }
+
+    .page-header .doc-meta {
+      font-size: 11px;
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 1px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .intro-box {
+      background: var(--gold-dim);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-align: justify;
+    }
+
+    body.rtl .intro-box {
+      border-right: 3px solid var(--gold);
+    }
+    body.ltr .intro-box {
+      border-left: 3px solid var(--gold);
+    }
+
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .source-card {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .source-title {
+      font-size: 13.5px;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .source-desc {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+    }
+
+    .factor-item {
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    
+    .factor-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .factor-num {
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: bold;
+    }
+    body.rtl .factor-num {
+      margin-left: 8px;
+    }
+    body.ltr .factor-num {
+      margin-right: 8px;
+    }
+
+    .factor-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .factor-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: justify;
+    }
+    body.rtl .factor-desc {
+      padding-right: 20px;
+    }
+    body.ltr .factor-desc {
+      padding-left: 20px;
+    }
+
+    .precedents-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .precedent-item {
+      font-size: 11.5px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.01);
+      border: 1px solid var(--border);
+      padding: 7px 12px;
+      border-radius: 6px;
+    }
+
+    .precedent-num {
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: bold;
+    }
+
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: var(--text-secondary);
+    }
+
+    .control-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-print {
+      background: var(--gold);
+      color: var(--bg-deep);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: bold;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+    }
+
+    .btn-print:hover {
+      background: var(--gold-light);
+      box-shadow: 0 6px 16px rgba(201,168,76,0.4);
+    }
+
+    .lang-selector {
+      display: flex;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      border-radius: 20px;
+      padding: 2px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      color: var(--text-secondary);
+      border: none;
+      padding: 6px 16px;
+      border-radius: 18px;
+      cursor: pointer;
+      font-size: 12.5px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover {
+      color: #ffffff;
+    }
+
+    .lang-btn.active {
+      background: var(--gold);
+      color: var(--bg-deep);
+    }
+
+    /* Print settings */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+      .control-container {
+        display: none !important;
+      }
+      .page {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 30px !important;
+        margin-bottom: 0 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        page-break-after: always !important;
+        height: 297mm !important;
+        width: 210mm !important;
+        min-height: auto !important;
+      }
+      .page:last-child {
+        page-break-after: avoid !important;
+      }
+      .page-header h1, .source-title, .factor-title, .precedent-item {
+        color: #000000 !important;
+      }
+      .source-card, .precedent-item {
+        border: 1px solid #dddddd !important;
+        background: none !important;
+      }
+      .factor-desc, .source-desc, .intro-box {
+        color: #333333 !important;
+      }
+      .intro-box {
+        background: #f9f9f9 !important;
+        border-color: #000000 !important;
+      }
+      .page-footer, .page-header {
+        border-color: #cccccc !important;
+        color: #666666 !important;
+      }
+    }
+  </style>
+</head>
+<body class="ltr">
+
+  <div class="control-container">
+    <button class="btn-print" id="btnPrint" onclick="window.print()">🖨️ Print / Save as 2-Page PDF</button>
+    <div class="lang-selector">
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+      <button class="lang-btn" onclick="setLang('fi')">FI</button>
+    </div>
+  </div>
+
+  <div class="document-container">
+    
+    <!-- PAGE 1 -->
+    <div class="page">
+      <div>
+        <header class="page-header">
+          <h1 id="pageTitle1">Technical Annex: Accident Similarity Factors & Research Sources</h1>
+          <div class="doc-meta" id="docMeta1">PFPJ ry · Page 1 of 2</div>
+        </header>
+
+        <div class="intro-box" id="introText">
+          This technical annex has been compiled by the legal department of the association People for Peace & Justice ry (PFPJ ry - Helsinki, Finland) to evaluate the technical and legal similarity of the airstrike on February 28, 2026, targeting the Shajareh Tayyebeh girls' elementary school in Minab with historical cases of attacks on civilian objects. This framework forms the basis of the universal jurisdiction criminal complaint to the Prosecutor General of Finland and the International Criminal Court (ICC).
+        </div>
+
+        <h2 class="section-title" id="secTitleSources">1. Academic Research Sources & Databases</h2>
+        <div class="sources-grid" id="sourcesGrid">
+          <!-- Dynamically populated -->
+        </div>
+
+        <h2 class="section-title" id="secTitleFactors1">2. The 10 Accident Similarity Factors (Part 1)</h2>
+        <div id="factorsGrid1">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+      
+      <footer class="page-footer" id="footer1">
+        <span id="footerBrand">People for Peace & Justice ry (PFPJ ry)</span>
+        <span id="footerReg">Business ID: 3616815-5</span>
+      </footer>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+      <div>
+        <header class="page-header">
+          <h1 id="pageTitle2">Technical Annex: Accident Similarity Factors & Research Sources</h1>
+          <div class="doc-meta" id="docMeta2">PFPJ ry · Page 2 of 2</div>
+        </header>
+
+        <h2 class="section-title" id="secTitleFactors2">2. The 10 Accident Similarity Factors (Part 2)</h2>
+        <div id="factorsGrid2">
+          <!-- Dynamically populated -->
+        </div>
+
+        <h2 class="section-title" id="secTitlePrecedents" style="margin-top: 24px;">3. Extracted Historical Precedent Cases</h2>
+        <div class="precedents-grid" id="precedentsGrid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <footer class="page-footer" id="footer2">
+        <span id="footerPage2L">Urgent Legal Communication · International Criminal Court (ICC)</span>
+        <span id="footerPage2R">Technical & Comparative Evaluation Document — Minab Case</span>
+      </footer>
+    </div>
+
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        pageTitle: "Technical Annex: Accident Similarity Factors & Research Sources",
+        metaPage1: "PFPJ ry · Page 1 of 2",
+        metaPage2: "PFPJ ry · Page 2 of 2",
+        printBtn: "🖨️ Print / Save as 2-Page PDF",
+        intro: "This technical annex has been compiled by the legal department of the association People for Peace & Justice ry (PFPJ ry - Helsinki, Finland) to evaluate the technical and legal similarity of the airstrike on February 28, 2026, targeting the Shajareh Tayyebeh girls' elementary school in Minab with historical cases of attacks on civilian objects. This framework forms the basis of the universal jurisdiction criminal complaint to the Prosecutor General of Finland and the International Criminal Court (ICC).",
+        secSources: "1. Academic Research Sources & Databases",
+        secFactors1: "2. The 10 Accident Similarity Factors (Part 1)",
+        secFactors2: "2. The 10 Accident Similarity Factors (Part 2)",
+        secPrecedents: "3. Extracted Historical Precedent Cases",
+        footerBrand: "People for Peace & Justice ry (PFPJ ry)",
+        footerReg: "Business ID: 3616815-5",
+        footerP2L: "Urgent Legal Communication · International Criminal Court (ICC)",
+        footerP2R: "Technical & Comparative Evaluation Document — Minab Case",
+        sources: [
+          { title: "📚 ICC Legal Tools Database", desc: "Contains over 150,000 official documents, Rome Statute provisions, and rulings from the International Criminal Court to establish command responsibility practices." },
+          { title: "⚖️ ECHR Case-Law Database", desc: "Features over 14,000 European Court of Human Rights decisions regarding precautionary duties in aerial operations under Article 2 of the ECHR." },
+          { title: "🎯 Airwars Monitoring Reports", desc: "An independent monitoring database assessing civilian casualties from international airstrikes, evaluating over 14,500 guided missile launches." },
+          { title: "🏛️ ICJ Precedents & Rulings", desc: "Access to over 3,000 international legal documents and official judgments of the International Court of Justice (ICJ) from repositories like Zenodo." }
+        ],
+        factors: [
+          { num: "Factor 01", title: "Peacetime Target Nomination Databases", desc: "Utilization of pre-compiled target lists developed during peacetime, indicating targeting errors are structural planning failures rather than dynamic tactical adaptations." },
+          { num: "Factor 02", title: "Coordinate & Geolocation Validation Negligence", desc: "Failure to verify geographic target coordinates using real-time physical or visual validation, relying instead on outdated database entries." },
+          { num: "Factor 03", title: "Dual-Use Classification Failures", desc: "Incorrectly classifying civilian structures (e.g. educational facilities) as active military targets without verifying direct, hostiles-related usage." },
+          { num: "Factor 04", title: "Precision-Guided Weaponry Implication", desc: "Deploying highly accurate precision-guided munitions. This establishes that execution deviations did not cause the crash, proving planning and intelligence negligence." },
+          { num: "Factor 05", title: "Failure of Visual & Intelligence Safeguards", desc: "Launching strikes without implementing feasibility safeguards, such as visual reconnaissance or sensor vetting, directly prior to strike execution." },
+          { num: "Factor 06", title: "Collateral Damage Estimation Disproportionality", desc: "A significant discrepancy between pre-strike collateral damage estimations (CDE) and actual civilian casualties, demonstrating inadequate risk assessment." },
+          { num: "Factor 07", title: "Proximity to Legitimate Military Objectives", desc: "Justifying civilian object strikes by claiming proximity to military targets, bypassing requirements to implement effective containment strategies." },
+          { num: "Factor 08", title: "Command Responsibility & Systemic SOP Errors", desc: "Targeting errors that stem from command-approved standard operating procedures (SOPs) rather than individual crew performance." },
+          { num: "Factor 09", title: "Day 1 Hostilities Timing", desc: "Strikes executed during the initial hours of conflict using pre-existing target lists, removing the defense of 'fog of war' confusion." },
+          { num: "Factor 10", title: "Exclusion of Independent Local Registries", desc: "Failure to cross-reference coordinates with public municipal registries, international NGO lists, or local mapping databases before authorizing strikes." }
+        ],
+        precedents: [
+          "Bombing of the Chinese Embassy in Belgrade (1999)",
+          "Kunduz Airstrike on Fuel Tankers (2009)",
+          "Katyr-Yurt Refugee Convoy Strike, Chechnya (2000)",
+          "Al-Jinah Mosque Strike in Aleppo (2017)",
+          "Kabul Drone Strike (2021)",
+          "Day 1 Strike on Al-Dora Farms, Baghdad (2003)",
+          "Dasht-e-Archi Religious School Strike, Kunduz (2018)",
+          "Al-Amiriyah Shelter Bombing, Baghdad (1991)",
+          "Qana UN Compound Massacre (1996)",
+          "Second Qana Airstrike on Residential Area (2006)",
+          "NATO Strike on Belgrade RTS TV Station (1999)",
+          "NATO Strike on Koriša Village, Kosovo (1999)",
+          "Haas School Complex Strike in Idlib (2016)",
+          "Abs Hospital Strike in Yemen (2016)",
+          "Dahyan School Bus Airstrike, Yemen (2018)",
+          "Al-Bara School Strike in Idlib (2019)",
+          "Chernihiv Schools Bombing, Ukraine (2022)",
+          "Mastaba Market Strike in Yemen (2016)"
+        ]
+      },
+      fa: {
+        pageTitle: "پیوست فنی: فاکتورهای تقارن حوادث و مراجع تحقیق",
+        metaPage1: "PFPJ ry · صفحه ۱ از ۲",
+        metaPage2: "PFPJ ry · صفحه ۲ از ۲",
+        printBtn: "🖨️ پرینت / ذخیره به صورت PDF دو صفحه‌ای",
+        intro: "این پیوست فنی توسط بخش حقوقی انجمن «مردم برای صلح و عدالت» (PFPJ ry - هلسینکی، فنلاند) جهت ارزیابی مشابهت فنی و حقوقی حمله هوایی مورخ ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶) به مدرسه دخترانه شجره طیبه میناب با سایر پرونده‌های حمله به اهداف غیرنظامی تدوین گردیده است. این چارچوب مبنای لایحه شکایت کیفری جهانی به دادستانی کل فنلاند و دیوان کیفری بین‌المللی (ICC) می‌باشد.",
+        secSources: "۱. منابع علمی و پایگاه‌های داده تحقیق (Research Sources)",
+        secFactors1: "۲. فاکتورهای ده‌گانه تقارن و مشابهت حوادث (بخش اول)",
+        secFactors2: "۲. فاکتورهای ده‌گانه تقارن و مشابهت حوادث (بخش دوم)",
+        secPrecedents: "۳. پرونده‌های مشابه استخراج‌شده (Founded Precedent Cases)",
+        footerBrand: "سازمان مردم برای صلح و عدالت (PFPJ ry)",
+        footerReg: "شماره ثبت تجاری: 3616815-5",
+        footerP2L: "مکاتبه اضطراری حقوقی · دیوان کیفری بین‌المللی (ICC)",
+        footerP2R: "سند ارزیابی فنی و تطبیقی پرونده میناب",
+        sources: [
+          { title: "📚 پایگاه ابزارهای حقوقی ICC", desc: "شامل بیش از ۱۵۰ هزار سند رسمی، اساسنامه رم و آرای صادر شده از شعب دیوان کیفری بین‌المللی جهت احراز رویه‌های مسئولیت فرماندهی." },
+          { title: "⚖️ بانک اطلاعات آرای ECHR", desc: "شامل بیش از ۱۴ هزار تصمیم دادگاه حقوق بشر اروپا ناظر بر الزامات پیشگیرانه در مأموریت‌های هوایی بر اساس ماده ۲ کنوانسیون اروپا." },
+          { title: "🎯 گزارشات نظارتی Airwars", desc: "پایگاه داده مستقل ارزیابی تلفات غیرنظامی ناشی از حملات هوایی بین‌المللی با بررسی بیش از ۱۴,۵۰۰ مورد شلیک موشک هدایت‌شونده." },
+          { title: "🏛️ مراجع و تصمیمات دیوان بین‌المللی دادگستری", desc: "دسترسی به ۳ هزار سند حقوقی و احکام رسمی صادره از دیوان بین‌المللی دادگستری (ICJ) از مخازن معتبر پژوهشی نظیر Zenodo." }
+        ],
+        factors: [
+          { num: "فاکتور ۰۱", title: "پایگاه‌داده‌های هدف‌گیری صلح‌زمان", desc: "تکیه بر لیست‌های از پیش تعیین‌شده اهداف صلح‌زمان که اثبات می‌کند خطاهای هدف‌گیری محصول برنامه‌ریزی ساختاری فرماندهی است و نه ضرورت تاکتیکی نبرد." },
+          { num: "فاکتور ۰۲", title: "اهمال در صحت‌سنجی فیزیکی و جغرافیایی", desc: "عدم تایید نهایی مختصات جغرافیایی هدف از طریق اطلاعات زنده شناسایی و تکیه غیرمسئولانه بر داده‌های قدیمی نقشه‌ها." },
+          { num: "فاکتور ۰۳", title: "رده‌بندی اشتباه کاربری دوگانه", desc: "تعریف کاربری مجتمع‌های غیرنظامی (مانند مدارس) به عنوان هدف نظامی بدون احراز و راستی‌آزمایی استفاده مستقیم جنگی از آن‌ها." },
+          { num: "فاکتور ۰۴", title: "به‌کارگیری تسلیحات هدایت‌شونده دقیق", desc: "شلیک تسلیحات با دقت بالا که فرض انحراف فنی پرتابه را رد کرده و مسئولیت مستقیم طراحان و فرماندهان عملیات را اثبات می‌کند." },
+          { num: "فاکتور ۰۵", title: "فقدان و حذف فیلترهای شناسایی و بصری", desc: "حذف یا نادیده گرفتن پروتکل‌های تایید نهایی چشمی یا حسگرهای حرارتی بلافاصله پیش از صدور دستور شلیک نهایی." },
+          { num: "فاکتور ۰۶", title: "عدم تناسب فاحش برآورد خسارت با تلفات واقعی", desc: "فاصله بحرانی میان ارزیابی‌های پیش‌بینی‌شده خسارات غیرنظامی (CDE) و آمار واقعی کشته‌شدگان که حاکی از بی‌توجهی سیستماتیک به جان غیرنظامیان است." },
+          { num: "فاکتور ۰۷", title: "مجاورت صوری با اهداف نظامی مشروع", desc: "توجیه حمله به ساختارهای غیرنظامی به بهانه نزدیکی به مقرهای نظامی صوری بدون اتخاذ تدابیر تفکیک‌کننده و مهارکننده." },
+          { num: "فاکتور ۰۸", title: "خطی ساختاری در رویه‌های استاندارد (SOP)", desc: "خطاهایی که ناشی از رویه‌های کاری مصوب فرماندهی (SOP) هستند، نه خطای فردی خلبان یا مجری عملیات." },
+          { num: "فاکتور ۰۹", title: "روز آغازین مخاصمات (Day 1 Hostilities)", desc: "انجام حمله در ساعات اولیه درگیری با تکیه بر اطلاعات از‌پیش‌تعیین‌شده، که دفاع فرماندهی مبنی بر «ابهام و شلوغی صحنه نبرد» را باطل می‌سازد." },
+          { num: "فاکتور ۱۰", title: "عدم انطباق با پایگاه‌های داده محلی مستقل", desc: "سهل‌انگاری در مقایسه مختصات هدف با ثبت‌های شهری دولتی، نقشه‌های مدارس، یا دفاتر مراجع بین‌المللی پیش از تایید نهایی." }
+        ],
+        precedents: [
+          "بمباران سفارت چین در بلگراد (۱۹۹۹)",
+          "حمله هوایی به تانکرهای سوخت قندوز (۲۰۰۹)",
+          "حمله به کاروان پناهندگان کاتیر-یورت چچن (۲۰۰۰)",
+          "حمله به مسجد الجینه حلب (۲۰۱۷)",
+          "حمله پهپادی کابل (۲۰۲۱)",
+          "حمله روز اول مزارع الدوره بغداد (۲۰۰۳)",
+          "حمله به مدرسه مذهبی دشت ارچی قندوز (۲۰۱۸)",
+          "بمباران پناهگاه العامریه بغداد (۱۹۹۱)",
+          "کشتار مقر سازمان ملل در قانا (۱۹۹۶)",
+          "دومین حمله به منطقه مسکونی قانا (۲۰۰۶)",
+          "حمله ناتو به ایستگاه تلویزیونی بلگراد (۱۹۹۹)",
+          "حمله ناتو به روستای کوریسا کوزوو (۱۹۹۹)",
+          "حمله به مجتمع مدارس حاس ادلب (۲۰۱۶)",
+          "حمله به بیمارستان عبس یمن (۲۰۱۶)",
+          "حمله به اتوبوس مدرسه ضحیان یمن (۲۰۱۸)",
+          "حمله به مدرسه البراء ادلب (۲۰۱۹)",
+          "بمباران مدارس چرنیهیو اوکراین (۲۰۲۲)",
+          "حمله به بازار مستباء یمن (۲۰۱۶)"
+        ]
+      },
+      fi: {
+        pageTitle: "Tekninen liite: Onnettomuuksien samankaltaisuustekijät & tutkintalähteet",
+        metaPage1: "PFPJ ry · Sivu 1 / 2",
+        metaPage2: "PFPJ ry · Sivu 2 / 2",
+        printBtn: "🖨️ Tulosta / Tallenna 2-sivuisena PDF-tiedostona",
+        intro: "Tämän teknisen liitteen on laatinut People for Peace & Justice ry -yhdistyksen (PFPJ ry - Helsinki, Suomi) oikeudellinen osasto arvioidakseen 28. helmikuuta 2026 tapahtuneen Shajareh Tayyebehin tyttöjen alakouluun kohdistuneen ilmaiskun teknistä ja oikeudellista samankaltaisuutta muiden siviilikohteisiin tehtyjen hyökkäysten kanssa. Tämä kehys muodostaa pohjan yleisen toimivallan mukaiselle rikosilmoitukselle Suomen valtakunnansyyttäjälle ja Kansainväliselle rikostuomioistuimelle (ICC).",
+        secSources: "1. Akateemiset tutkimuslähteet & tietokannat",
+        secFactors1: "2. Onnettomuuden 10 samankaltaisuustekijää (Osa 1)",
+        secFactors2: "2. Onnettomuuden 10 samankaltaisuustekijää (Osa 2)",
+        secPrecedents: "3. Löydetyt historialliset ennakkotapaukset",
+        footerBrand: "People for Peace & Justice ry (PFPJ ry)",
+        footerReg: "Y-tunnus: 3616815-5",
+        footerP2L: "Kiireellinen oikeudellinen tiedonanto · Kansainvälinen rikostuomioistuin (ICC)",
+        footerP2R: "Tekninen & vertaileva arviointiasiakirja — Minabin tapaus",
+        sources: [
+          { title: "📚 ICC:n oikeudellisten työkalujen tietokanta", desc: "Sisältää yli 150 000 virallista asiakirjaa, Rooman perussäännön määräyksiä ja Kansainvälisen rikostuomioistuimen ratkaisuja komentajavastuun todentamiseksi." },
+          { title: "⚖️ ECHR:n oikeustapaustietokanta", desc: "Sisältää yli 14 000 Euroopan ihmisoikeustuomioistuimen päätöstä ilmailuoperaatioiden varotoimenpiteistä Euroopan ihmisoikeussopimuksen 2 artiklan mukaisesti." },
+          { title: "🎯 Airwars-seurantaraportit", desc: "Riippumaton seurantatietokanta kansainvälisten ilmaiskujen siviiliuhreista, arvioiden yli 14 500 ohjatun ohjuksen laukaisua." },
+          { title: "🏛️ ICJ:n ennakkotapaukset & ratkaisut", desc: "Pääsy yli 3 000 kansainväliseen oikeudelliseen asiakirjaan ja Kansainvälisen tuomioistuimen (ICJ) viralliseen tuomioon Zenodon kaltaisista arkistoista." }
+        ],
+        factors: [
+          { num: "Tekijä 01", title: "Rauhanaikaiset kohdetietokannat", desc: "Rauhanaikana laadittujen kohdelistojen hyödyntäminen, mikä osoittaa kohdistusvirheiden johtuvan rakenteellisesta suunnittelun epäonnistumisesta pikemmin kuin tilannekohtaisesta taktisesta sopeutumisesta." },
+          { num: "Tekijä 02", title: "Koordinaattien ja paikannuksen vahvistamisen laiminlyönti", desc: "Koordinaattien vahvistamisen laiminlyönti reaaliaikaisella fyysisellä tai visuaalisella havainnoinnilla, luottaen sen sijaan vanhentuneisiin tietokantatietoihin." },
+          { num: "Tekijä 03", title: "Kaksikäyttöluokituksen epäonnistuminen", desc: "Siviilirakennusten (kuten oppilaitosten) virheellinen luokittelu sotilaskohteiksi ilman suoran, sotilaallisen käytön varmistamista." },
+          { num: "Tekijä 04", title: "Täsmäaseiden käyttöön liittyvä vastuu", desc: "Erittäin tarkkojen täsmäaseiden käyttö. Tämä osoittaa, ettei poikkeama johtunut teknisestä virheestä, mikä todistaa suunnittelu- ja tiedustelutoiminnan huolimattomuuden." },
+          { num: "Tekijä 05", title: "Visuaalisten ja tiedustelullisten suojatoimien puute", desc: "Iskujen suorittaminen ilman toteutettavuuden suojatoimia, kuten suoraa visuaalista tiedustelua tai sensoritietojen varmistamista juuri ennen hyökkäyksen aloittamista." },
+          { num: "Tekijä 06", title: "Siviiliuhrien arvioinnin suhteettomuus", desc: "Merkittävä ero ennen iskua tehdyn oheisvahinkoarvion (CDE) ja toteutuneiden siviiliuhrien määrän välillä, mikä osoittaa puutteellista riskinarviointia." },
+          { num: "Tekijä 07", title: "Sotilaskohteiden näennäinen läheisyys", desc: "Siviilikohteeseen kohdistuvan iskun oikeuttaminen väittämällä sen sijaitsevan sotilaskohteen läheisyydessä, sivuuttaen vaatimukset tehokkaiden rajaamistoimenpiteiden toteuttamisesta." },
+          { num: "Tekijä 08", title: "Komentajavastuu ja systemaattiset toimintamenetelmälliset virheet", desc: "Kohdistusvirheet, jotka johtuvat komentotasolla hyväksytyistä vakiotoimintamenetelmistä (SOP) pikemmin kuin yksittäisen miehistön suorituksesta." },
+          { num: "Tekijä 09", title: "Iskun ajoitus vihollisuuksien ensimmäisenä päivänä", desc: "Iskujen toteuttaminen konfliktin ensimmäisten tuntien aikana valmiiden kohdelistojen perusteella, mikä sulkee pois puolustautumisen 'sodan sumun' aiheuttamalla hämmennyksellä." },
+          { num: "Tekijä 10", title: "Riippumattomien paikallisten rekistereiden huomiotta jättäminen", desc: "Koordinaattien ristiinvertailun laiminlyönti julkisten kunnallisten rekistereiden, kansainvälisten järjestöjen luetteloiden tai paikallisten karttatietokantojen kanssa ennen iskun hyväksymistä." }
+        ],
+        precedents: [
+          "Kiinan suurlähetystön pommitus Belgradissa (1999)",
+          "Kunduzin ilmaisku polttoainetankkereihin (2009)",
+          "Katyr-Jurtin pakolaiskolonnan isku, Tšetšenia (2000)",
+          "Al-Jinahin moskeijan ilmaisku Aleppossa (2017)",
+          "Kabulin lennokki-isku (2021)",
+          "Ensimmäisen päivän isku Al-Doran maatiloille, Bagdad (2003)",
+          "Dasht-e-Archin uskonnollisen koulun ilmaisku, Kunduz (2018)",
+          "Al-Amiriyahin pommisuojan pommitus, Bagdad (1991)",
+          "Qanan YK-tukikohdan verilöyly (1996)",
+          "Qanan toinen ilmaisku asuinalueelle (2006)",
+          "Naton isku Belgradin RTS-televisioasemalle (1999)",
+          "Naton isku Korišan kylään, Kosovo (1999)",
+          "Haasin koulukeskuksen ilmaisku Idlibissä (2016)",
+          "Absin sairaalan ilmaisku Jemenissä (2016)",
+          "Dahyanin koulubussin ilmaisku Jemenissä (2018)",
+          "Al-Baran koulun ilmaisku Idlibissä (2019)",
+          "Tšernihivin koulujen pommitus, Ukraina (2022)",
+          "Mustaban torin ilmaisku Jemenissä (2016)"
+        ]
+      }
+    };
+
+    let currentLang = 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+      const t = translations[lang] || translations.en;
+      
+      const isRTL = lang === 'fa';
+      document.documentElement.lang = lang;
+      document.body.dir = isRTL ? 'rtl' : 'ltr';
+      
+      // Update body classes
+      document.body.classList.remove('rtl', 'ltr');
+      document.body.classList.add(isRTL ? 'rtl' : 'ltr');
+
+      // Update fonts
+      if (isRTL) {
+        document.body.style.fontFamily = "var(--font-fa)";
+      } else {
+        document.body.style.fontFamily = "var(--font-en)";
+      }
+
+      // Update basic texts
+      document.getElementById('pageTitle1').textContent = t.pageTitle;
+      document.getElementById('pageTitle2').textContent = t.pageTitle;
+      document.getElementById('docMeta1').textContent = t.metaPage1;
+      document.getElementById('docMeta2').textContent = t.metaPage2;
+      document.getElementById('btnPrint').textContent = t.printBtn;
+      document.getElementById('introText').textContent = t.intro;
+      document.getElementById('secTitleSources').textContent = t.secSources;
+      document.getElementById('secTitleFactors1').textContent = t.secFactors1;
+      document.getElementById('secTitleFactors2').textContent = t.secFactors2;
+      document.getElementById('secTitlePrecedents').textContent = t.secPrecedents;
+      
+      document.getElementById('footerBrand').textContent = t.footerBrand;
+      document.getElementById('footerReg').textContent = t.footerReg;
+      document.getElementById('footerPage2L').textContent = t.footerP2L;
+      document.getElementById('footerPage2R').textContent = t.footerP2R;
+
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const activeLabels = { en: 'EN', fa: 'فارسی', fi: 'FI' };
+        btn.classList.toggle('active', btn.textContent.trim() === activeLabels[lang]);
+      });
+
+      // Render Sources
+      const sourcesContainer = document.getElementById('sourcesGrid');
+      sourcesContainer.innerHTML = t.sources.map(s => `
+        <div class="source-card">
+          <h3 class="source-title">${s.title}</h3>
+          <p class="source-desc">${s.desc}</p>
+        </div>
+      `).join('');
+
+      // Render Factors Part 1 (Factors 1-4)
+      const factorsContainer1 = document.getElementById('factorsGrid1');
+      factorsContainer1.innerHTML = t.factors.slice(0, 4).map(f => `
+        <div class="factor-item">
+          <span class="factor-num">${f.num}</span>
+          <h3 class="factor-title">${f.title}</h3>
+          <p class="factor-desc">${f.desc}</p>
+        </div>
+      `).join('');
+
+      // Render Factors Part 2 (Factors 5-10)
+      const factorsContainer2 = document.getElementById('factorsGrid2');
+      factorsContainer2.innerHTML = t.factors.slice(4).map(f => `
+        <div class="factor-item">
+          <span class="factor-num">${f.num}</span>
+          <h3 class="factor-title">${f.title}</h3>
+          <p class="factor-desc">${f.desc}</p>
+        </div>
+      `).join('');
+
+      // Render Precedent Cases
+      const precedentsContainer = document.getElementById('precedentsGrid');
+      precedentsContainer.innerHTML = t.precedents.map((p, idx) => {
+        const numStr = String(idx + 1).padStart(2, '0');
+        // If Farsi, format Persian numerals or keep original
+        const formattedNum = lang === 'fa' ? numStr.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]) : numStr;
+        return `
+          <div class="precedent-item">
+            <span class="precedent-num">${formattedNum}</span>
+            <span>${p}</span>
+          </div>
+        `;
+      }).join('');
+
+      // Store preference
+      try { localStorage.setItem('pfp-lang', lang); } catch (e) { }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      let saved = 'en';
+      try { saved = localStorage.getItem('pfp-lang') || 'en'; } catch (e) {}
+      setLang(saved);
+    });
+  </script>
+</body>
+</html>

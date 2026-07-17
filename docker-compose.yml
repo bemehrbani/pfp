@@ -43,12 +43,14 @@ services:
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,backend}
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_NOTIFICATIONS_CHAT_ID: ${TELEGRAM_NOTIFICATIONS_CHAT_ID:-}
     volumes:
       - ./PFP_Platform/api:/app
       - static_volume:/app/static
       - media_volume:/app/media
     ports:
-      - "8001:8000"
+      - "8000:8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -67,6 +69,8 @@ services:
       DJANGO_SETTINGS_MODULE: config.settings.development
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_NOTIFICATIONS_CHAT_ID: ${TELEGRAM_NOTIFICATIONS_CHAT_ID:-}
     volumes:
       - ./PFP_Platform/api:/app
     depends_on:
@@ -87,6 +91,8 @@ services:
       DJANGO_SETTINGS_MODULE: config.settings.development
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_NOTIFICATIONS_CHAT_ID: ${TELEGRAM_NOTIFICATIONS_CHAT_ID:-}
     volumes:
       - ./PFP_Platform/api:/app
     depends_on:

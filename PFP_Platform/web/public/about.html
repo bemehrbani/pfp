@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0e17" />
+    <meta name="description" content="About People for Peace & Justice ry (PFPJ ry) - A registered international human rights NGO in Helsinki, Finland." />
+    <title data-i18n="about_page_title">About Us — People for Peace & Justice ry</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a1f2e;
+            --bg-card-hover: #222842;
+            --text-primary: #f0ebe3;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-gold: #d4a853;
+            --accent-gold-dim: rgba(212, 168, 83, 0.15);
+            --accent-peace: #7cb68e;
+            --accent-peace-dim: rgba(124, 182, 142, 0.12);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Source Sans 3', sans-serif;
+            --font-rtl: 'Vazirmatn', sans-serif;
+            --radius: 12px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        body[dir="rtl"] {
+            font-family: var(--font-rtl);
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Navbar style */
+        .lang-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .lang-bar-logo {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 0.02em;
+        }
+
+        body[dir="rtl"] .lang-bar-logo {
+            font-family: var(--font-rtl);
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .navbar-links a.active,
+        .navbar-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        @media (max-width: 860px) {
+            .navbar-links {
+                display: none;
+            }
+        }
+
+        .lang-bar-nav {
+            display: flex;
+            gap: 6px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all var(--transition);
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: var(--accent-gold-dim);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .cta-nav {
+            background: var(--accent-gold-dim);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 6px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all var(--transition);
+            margin-left: 12px;
+        }
+
+        body[dir="rtl"] .cta-nav {
+            margin-left: 0;
+            margin-right: 12px;
+        }
+
+        /* Container & Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 48px;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        body[dir="rtl"] .hero-title {
+            font-family: var(--font-rtl);
+            font-weight: 900;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 64px;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--accent-gold-dim);
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        body[dir="rtl"] .section-title {
+            font-family: var(--font-rtl);
+            font-weight: 700;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 860px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 32px;
+        }
+
+        .about-card h3 {
+            color: var(--accent-gold);
+            margin-bottom: 16px;
+            font-size: 1.3rem;
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .about-card ul {
+            padding-left: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        body[dir="rtl"] .about-card ul {
+            padding-left: 0;
+            padding-right: 20px;
+        }
+
+        .about-card li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-card {
+            background: rgba(212, 168, 83, 0.03);
+            border: 1px dashed var(--accent-gold);
+            border-radius: var(--radius);
+            padding: 24px;
+            align-self: start;
+        }
+
+        .sidebar-card h3 {
+            color: #ffffff;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-item span:first-child {
+            color: var(--text-muted);
+        }
+
+        .sidebar-item span:last-child {
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 24px;
+        }
+
+        @media (max-width: 860px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            border-color: var(--accent-gold);
+            background: var(--bg-card-hover);
+        }
+
+        .team-photo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 auto 16px;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .team-role {
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .team-bio {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Advisors Grid */
+        .advisor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .advisor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .advisor-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .advisor-icon {
+            font-size: 1.8rem;
+            background: rgba(255,255,255,0.03);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            border: 1px solid var(--border-subtle);
+            flex-shrink: 0;
+        }
+
+        .advisor-details h4 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .advisor-details p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            padding: 48px 24px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="lang-bar">
+        <span class="lang-bar-logo display-font">☮ PFPJ ry</span>
+        <div class="navbar-links">
+            <a href="landing.html" data-i18n="nav_home">Home</a>
+            <a href="about.html" class="active" data-i18n="nav_about">About Us</a>
+            <a href="memorial.html" data-i18n="nav_memorial">Minab Memorial</a>
+            <a href="evidence.html" data-i18n="nav_evidence">Forensic Evidence</a>
+            <a href="similarity_annex.html" data-i18n="nav_annex">Technical Annex</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <div class="lang-bar-nav">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+                <button class="lang-btn" onclick="setLang('fi')">FI</button>
+            </div>
+            <a href="mailto:info@peopleforpeace.live" class="cta-nav" data-i18n="nav_contact">✉ Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <!-- ====== HERO ====== -->
+        <header class="hero-section">
+            <h1 class="hero-title" data-i18n="about_title">People for Peace & Justice ry</h1>
+            <p class="hero-subtitle" data-i18n="about_subtitle">An independent, registered international human rights and legal advocacy association domiciled in Helsinki, Finland.</p>
+        </header>
+
+        <!-- ====== MISSION & VISION ====== -->
+        <section class="section">
+            <div class="about-grid">
+                <div class="about-card">
+                    <h2 class="section-title">
+                        <span>⚖️</span> <span data-i18n="mission_title">Our Mission & Purpose</span>
+                    </h2>
+                    <p data-i18n="mission_desc_1">People for Peace & Justice ry (PFPJ ry) is established to advance international justice, accountability, and legal recourse for human rights violations and war crimes committed against civilians, with a particular focus on the protection of children in zones of conflict.</p>
+                    <p data-i18n="mission_desc_2">Our core activities operate across three main avenues of legal advocacy:</p>
+                    <ul>
+                        <li data-i18n="act_1"><strong>Legal Research & Forensic Documentation:</strong> Compiling open-source intelligence (OSINT), satellite mappings, weapon shell fragment metrics, and geolocation data that meet the rigorous standards of international tribunals.</li>
+                        <li data-i18n="act_2"><strong>International Litigation Support:</strong> Preparing Article 15 Communications for the Office of the Prosecutor of the International Criminal Court (ICC) and dossiers for Universal Jurisdiction complaints in Europe.</li>
+                        <li data-i18n="act_3"><strong>Victim Advocacy:</strong> Preserving the memory of casualties, establishing permanent digital memorials for victims, and linking affected families with international legal networks.</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 data-i18n="entity_title">Entity Registry Details</h3>
+                    <div class="sidebar-item">
+                        <span data-i18n="ent_name">Registered Name</span>
+                        <span>People for Peace & Justice ry</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span data-i18n="ent_type">Entity Type</span>
+                        <span data-i18n="ent_type_val">Registered Association (ry)</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span data-i18n="ent_domicile">Domicile</span>
+                        <span data-i18n="ent_domicile_val">Helsinki, Finland 🇫🇮</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span data-i18n="ent_id">Business ID</span>
+                        <span>3616815-5</span>
+                    </div>
+                    <div class="sidebar-item" style="border-bottom:none;">
+                        <span data-i18n="ent_rules">Bylaws (Säännöt)</span>
+                        <a href="legal/saannot.html" target="_blank" style="text-decoration:underline;">View Statutes</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== BOARD OF TRUSTEES ====== -->
+        <section class="section">
+            <h2 class="section-title">
+                <span>👥</span> <span data-i18n="board_title">Board of Trustees</span>
+            </h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo">⚖️</div>
+                    <div class="team-name" style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <span>Mahdi Farimani</span>
+                        <a href="https://www.linkedin.com/in/mahdifarimani/" target="_blank" style="color:var(--text-secondary); font-size:0.95rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color='var(--text-secondary)'">🔗</a>
+                    </div>
+                    <div class="team-role" data-i18n="role_chair">Chairperson (Helsinki)</div>
+                    <p class="team-bio" data-i18n="bio_mahdi">Responsible for leading legal filings under Universal Jurisdiction in Finland, managing research operations, and coordinating case files.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo">🕊️</div>
+                    <div class="team-name" style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <span>Zahra Azhar</span>
+                        <a href="https://www.linkedin.com/in/zahra-azhar-0717a545/" target="_blank" style="color:var(--text-secondary); font-size:0.95rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color='var(--text-secondary)'">🔗</a>
+                    </div>
+                    <div class="team-role" data-i18n="role_trustee">Board Member (The Hague)</div>
+                    <p class="team-bio" data-i18n="bio_zahra">Coordinating liaison with the International Criminal Court (ICC) and NGOs operating in the international criminal justice network in the Netherlands.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo">💼</div>
+                    <div class="team-name" style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <span>Ali Akbar Siapoush</span>
+                        <a href="https://www.linkedin.com/in/ali-akbar-siapoush-b0450240/" target="_blank" style="color:var(--text-secondary); font-size:0.95rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color='var(--text-secondary)'">🔗</a>
+                    </div>
+                    <div class="team-role" data-i18n="role_trustee">Board Member (Amsterdam)</div>
+                    <p class="team-bio" data-i18n="bio_ali">Managing academic collaborations, international outreach pipelines, and coordinating case-benchmarking research panels.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo">🔍</div>
+                    <div class="team-name" style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <span>Jussi Simolin</span>
+                        <a href="https://www.linkedin.com/in/jussisimolin/" target="_blank" style="color:var(--text-secondary); font-size:0.95rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color='var(--text-secondary)'">🔗</a>
+                    </div>
+                    <div class="team-role" data-i18n="role_inspector">Operations Inspector (Helsinki)</div>
+                    <p class="team-bio" data-i18n="bio_jussi">Elected operations inspector responsible for reviewing the association's administration, operations, and financial integrity under Finnish law.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== ADVISORY COUNCIL ====== -->
+        <section class="section">
+            <h2 class="section-title">
+                <span>🎓</span> <span data-i18n="advisors_title">Academic & Legal Advisory Council</span>
+            </h2>
+            <div class="advisor-grid">
+                <div class="advisor-card">
+                    <div class="advisor-icon">🏛️</div>
+                    <div class="advisor-details">
+                        <h4>Dr. Nasrin Mosaffa</h4>
+                        <p data-i18n="adv_nasrin">Professor of International Relations & International Organizations, University of Tehran. Specializing in Children in Armed Conflict & IHL.</p>
+                    </div>
+                </div>
+                <div class="advisor-card">
+                    <div class="advisor-icon">⚖️</div>
+                    <div class="advisor-details">
+                        <h4>Dr. Seyyed Fatemi</h4>
+                        <p data-i18n="adv_fatemi">Professor of International Law and Human Rights, Shahid Beheshti University. Expert in International Humanitarian Law & Comparative Law.</p>
+                    </div>
+                </div>
+                <div class="advisor-card">
+                    <div class="advisor-icon">📖</div>
+                    <div class="advisor-details">
+                        <h4>Dr. Mohammad Jalali</h4>
+                        <p data-i18n="adv_jalali">Associate Professor of Public Law, Shahid Beheshti University. Specializing in Public Law, State Vetting, and Command Negligence.</p>
+                    </div>
+                </div>
+                <div class="advisor-card">
+                    <div class="advisor-icon">⚖️</div>
+                    <div class="advisor-details">
+                        <h4>Dr. Tahmoures Bashirieh</h4>
+                        <p data-i18n="adv_tahmoures">Assistant Professor of Criminal Law & Criminology, Allameh Tabataba'i University. Specializing in International Criminal Law.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="footer-logo">People for Peace & Justice ry</div>
+        <div class="footer-links">
+            <a href="landing.html" data-i18n="nav_home">Home</a> ·
+            <a href="about.html" data-i18n="nav_about">About Us</a> ·
+            <a href="memorial.html" data-i18n="nav_memorial">Memorial</a> ·
+            <a href="evidence.html" data-i18n="nav_evidence">Evidence</a> ·
+            <a href="similarity_annex.html" data-i18n="nav_annex">Technical Annex</a> ·
+            <a href="mailto:info@peopleforpeace.live">info@peopleforpeace.live</a>
+        </div>
+        <p class="footer-copy" data-i18n="footer_copy_pfpj">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
+    </footer>
+
+    <!-- ====== TRANSLATIONS & TOGGLE ====== -->
+    <script>
+        const translations = {
+            en: {
+                about_page_title: "About Us — People for Peace & Justice ry",
+                nav_home: "Home",
+                nav_about: "About Us",
+                nav_memorial: "Minab Memorial",
+                nav_evidence: "Forensic Evidence",
+                nav_annex: "Technical Annex",
+                nav_contact: "✉ Contact",
+                about_title: "People for Peace & Justice ry",
+                about_subtitle: "An independent, registered international human rights and legal advocacy association domiciled in Helsinki, Finland.",
+                mission_title: "Our Mission & Purpose",
+                mission_desc_1: "People for Peace & Justice ry (PFPJ ry) is established to advance international justice, accountability, and legal recourse for human rights violations and war crimes committed against civilians, with a particular focus on the protection of children in zones of conflict.",
+                mission_desc_2: "Our core activities operate across three main avenues of legal advocacy:",
+                act_1: "<strong>Legal Research & Forensic Documentation:</strong> Compiling open-source intelligence (OSINT), satellite mappings, weapon shell fragment metrics, and geolocation data that meet the rigorous standards of international tribunals.",
+                act_2: "<strong>International Litigation Support:</strong> Preparing Article 15 Communications for the Office of the Prosecutor of the International Criminal Court (ICC) and dossiers for Universal Jurisdiction complaints in Europe.",
+                act_3: "<strong>Victim Advocacy:</strong> Preserving the memory of casualties, establishing permanent digital memorials for victims, and linking affected families with international legal networks.",
+                entity_title: "Entity Registry Details",
+                ent_name: "Registered Name",
+                ent_type: "Entity Type",
+                ent_type_val: "Registered Association (ry)",
+                ent_domicile: "Domicile",
+                ent_domicile_val: "Helsinki, Finland 🇫🇮",
+                ent_id: "Business ID",
+                ent_rules: "Bylaws (Säännöt)",
+                board_title: "Board of Trustees",
+                role_chair: "Chairperson (Helsinki)",
+                role_trustee: "Board Member (Netherlands)",
+                bio_mahdi: "Responsible for leading legal filings under Universal Jurisdiction in Finland, managing research operations, and coordinating case files.",
+                bio_zahra: "Coordinating liaison with the International Criminal Court (ICC) and NGOs operating in the international criminal justice network in the Netherlands.",
+                bio_ali: "Managing academic collaborations, international outreach pipelines, and coordinating case-benchmarking research panels.",
+                role_inspector: "Operations Inspector (Helsinki)",
+                bio_jussi: "Elected operations inspector responsible for reviewing the association's administration, operations, and financial integrity under Finnish law.",
+                advisors_title: "Academic & Legal Advisory Council",
+                adv_nasrin: "Professor of International Relations & International Organizations, University of Tehran. Specializing in Children in Armed Conflict & IHL.",
+                adv_fatemi: "Professor of International Law and Human Rights, Shahid Beheshti University. Expert in International Humanitarian Law & Comparative Law.",
+                adv_jalali: "Associate Professor of Public Law, Shahid Beheshti University. Specializing in Public Law, State Vetting, and Command Negligence.",
+                adv_tahmoures: "Assistant Professor of Criminal Law & Criminology, Allameh Tabataba'i University. Specializing in International Criminal Law.",
+                footer_copy_pfpj: "People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026"
+            },
+            fa: {
+                about_page_title: "درباره ما — مردم برای صلح و عدالت (PFPJ ry)",
+                nav_home: "خانه",
+                nav_about: "درباره ما",
+                nav_memorial: "یادبود میناب",
+                nav_evidence: "مستندات فنی",
+                nav_annex: "پیوست فنی",
+                nav_contact: "✉ تماس با ما",
+                about_title: "مردم برای صلح و عدالت (PFPJ ry)",
+                about_subtitle: "انجمن حقوق بشری مستقل و ثبت شده در هلسینکی فنلاند، متمرکز بر دادخواهی حقوقی و مستندسازی جنایات جنگی.",
+                mission_title: "مأموریت و اهداف ما",
+                mission_desc_1: "انجمن «مردم برای صلح و عدالت» (PFPJ ry) با هدف ارتقای عدالت بین‌المللی، پاسخگو کردن ناقضان حقوق بشر و فراهم کردن بسترهای پیگرد حقوقی جنایات علیه غیرنظامیان، به ویژه کودکان در مناطق جنگی، تاسیس شده است.",
+                mission_desc_2: "فعالیت‌های محوری ما در سه حوزه تخصصی پیگیری می‌شود:",
+                act_1: "<strong>مستندسازی و تحقیقات حقوقی پیشرفته:</strong> جمع‌آوری داده‌های هوش اطلاعاتی متن‌باز (OSINT)، تصویربرداری‌های ماهواره‌ای، بررسی قطعات سلاح‌ها و راستی‌آزمایی موقعیت جغرافیایی مطابق با استانداردهای رسمی محاکم بین‌المللی.",
+                act_2: "<strong>حمایت از پرونده‌های قضایی بین‌المللی:</strong> آماده‌سازی گزارش‌های ماده ۱۵ اساسنامه رم برای دادستان دیوان کیفری بین‌المللی (ICC) در لاهه و ثبت لوایح حقوقی تحت صلاحیت قضایی بین‌المللی در اروپا.",
+                act_3: "<strong>حمایت از خانواده‌های قربانیان:</strong> زنده نگه‌داشتن یاد قربانیان با ایجاد دیوارهای یادبود دیجیتال و اتصال خانواده‌های آسیب‌دیده با شبکه‌های وکالت بین‌المللی.",
+                entity_title: "جزئیات ثبت قانونی انجمن",
+                ent_name: "نام رسمی",
+                ent_type: "نوع شخصیت حقوقی",
+                ent_type_val: "انجمن ثبت‌شده (ry) فنلاند",
+                ent_domicile: "مقر قانونی",
+                ent_domicile_val: "هلسینکی، فنلاند 🇫🇮",
+                ent_id: "شناسه ثبتی (Y-tunnus)",
+                ent_rules: "اساسنامه رسمی (Säännöt)",
+                board_title: "هیئت امنای انجمن",
+                role_chair: "رئیس هیئت مدیره (هلسینکی)",
+                role_trustee: "عضو هیئت مدیره (هلند)",
+                bio_mahdi: "مسئول پیگیری لوایح حقوقی تحت صلاحیت قضایی بین‌المللی در فنلاند، مدیریت عملیات پژوهش و هماهنگی مستندات پرونده.",
+                bio_zahra: "مسئول ارتباط با دیوان کیفری بین‌المللی (ICC) و هماهنگی با سازمان‌های غیردولتی همکار در شبکه عدالت کیفری هلند.",
+                bio_ali: "مسئول هماهنگی همکاری‌های دانشگاهی، شبکه‌های ارتباطی بین‌المللی و مدیریت پنل‌های ارزیابی و تطبیق پرونده‌ها.",
+                role_inspector: "بازرس عملیاتی (هلسینکی)",
+                bio_jussi: "بازرس منتخب متعهد به بررسی اداری، عملیاتی و ارزیابی درستی مالی انجمن تحت قوانین فنلاند.",
+                advisors_title: "شورای مشاوران حقوقی و علمی",
+                adv_nasrin: "استاد روابط بین‌الملل و سازمان‌های بین‌المللی دانشگاه تهران. متخصص حوزه حقوق کودکان در مخاصمات مسلحانه و حقوق بشردوستانه.",
+                adv_fatemi: "استاد حقوق بین‌الملل و حقوق بشر دانشگاه شهید بهشتی. متخصص برجسته حقوق بشردوستانه بین‌المللی و حقوق تطبیقی.",
+                adv_jalali: "دانشیار حقوق عمومی دانشگاه شهید بهشتی. متخصص حقوق عمومی، نظارت بر کاربری‌های صلح‌بخش و سهل‌انگاری فرماندهی.",
+                adv_tahmoures: "استادیار حقوق کیفری و جرم‌شناسی دانشگاه علامه طباطبائی. متخصص و پژوهشگر ارشد حقوق کیفری بین‌المللی.",
+                footer_copy_pfpj: "سازمان مردم برای صلح و عدالت (PFPJ ry) هلسینکی فنلاند · شناسه ثبتی: 3616815-5 · تاسیس ۲۰۲۶"
+            },
+            fi: {
+                about_page_title: "Tietoa meistä — People for Peace & Justice ry",
+                nav_home: "Koti",
+                nav_about: "Tietoa meistä",
+                nav_memorial: "Minabin muistomerkki",
+                nav_evidence: "Forensinen todistusaineisto",
+                nav_annex: "Tekninen liite",
+                nav_contact: "✉ Ota yhteyttä",
+                about_title: "People for Peace & Justice ry",
+                about_subtitle: "Riippumaton, rekisteröity kansainvälinen ihmisoikeus- ja oikeudellinen vaikuttamisjärjestö, jonka kotipaikka on Helsinki.",
+                mission_title: "Tehtävämme ja tarkoituksemme",
+                mission_desc_1: "People for Peace & Justice ry (PFPJ ry) on perustettu edistämään kansainvälistä oikeudenmukaisuutta, vastuuvelvollisuutta ja siviileihin kohdistuvien ihmisoikeusloukkausten ja sotarikosten oikeussuojakeinoja, painottaen erityisesti lasten suojelua konfliktialueilla.",
+                mission_desc_2: "Ydintoimintamme jakautuu kolmeen oikeudellisen vaikuttamisen pääalueeseen:",
+                act_1: "<strong>Oikeudellinen tutkimus ja forensinen dokumentointi:</strong> Avointen lähteiden tiedustelun (OSINT), satelliittikuvien, asetyyppien sirpalemittausten ja paikannustietojen kerääminen, jotka täyttävät kansainvälisten tuomioistuinten tiukat vaatimukset.",
+                act_2: "<strong>Kansainvälisen oikeudenkäynnin tuki:</strong> Rooman perussäännön 15 artiklan mukaisten ilmoitusten valmistelu Kansainvälisen rikostuomioistuimen (ICC) syyttäjänvirastolle sekä aineiston valmistelu yleistoimivaltavalituksiin Euroopassa.",
+                act_3: "<strong>Uhrien suojelu ja tuki:</strong> Uhrien muiston kunnioittaminen, pysyvien digitaalisten muistomerkkien luominen uhreille ja heidän perheidensä yhdistäminen kansainvälisiin oikeudellisiin verkostoihin.",
+                entity_title: "Yhdistysrekisterin tiedot",
+                ent_name: "Rekisteröity nimi",
+                ent_type: "Yhteisömuoto",
+                ent_type_val: "Rekisteröity yhdistys (ry)",
+                ent_domicile: "Kotipaikka",
+                ent_domicile_val: "Helsinki, Suomi 🇫🇮",
+                ent_id: "Y-tunnus",
+                ent_rules: "Säännöt",
+                board_title: "Hallitus",
+                role_chair: "Puheenjohtaja (Helsinki)",
+                role_trustee: "Hallituksen jäsen (Alankomaat)",
+                bio_mahdi: "Vastuussa yleistoimivaltaan perustuvien oikeudellisten kanteiden ajamisesta Suomessa, tutkimustoiminnan johtamisesta ja tapausten valmistelusta.",
+                bio_zahra: "Koordinoi yhteydenpitoa Kansainväliseen rikostuomioistuimeen (ICC) ja Alankomaissa toimiviin kansainvälisen rikosoikeuden verkoston kansalaisjärjestöihin.",
+                bio_ali: "Vastaa akateemisesta yhteistyöstä, kansainvälisistä suhteista ja tapausten vertailuanalyysejä tekevien tutkimuspaneelien koordinoinnista.",
+                role_inspector: "Toiminnantarkastaja (Helsinki)",
+                bio_jussi: "Valittu toiminnantarkastaja, joka vastaa yhdistyksen hallinnon, toiminnan ja talouden tarkastuksesta Suomen yhdistyslain mukaisesti.",
+                advisors_title: "Akateeminen ja oikeudellinen neuvonantajakunta",
+                adv_nasrin: "Kansainvälisten suhteiden ja kansainvälisten järjestöjen professori, Teheranin yliopisto. Erikoistunut lapsiin aseellisissa konflikteissa ja humanitaariseen oikeuteen.",
+                adv_fatemi: "Kansainvälisen oikeuden ja ihmisoikeuksien professori, Shahid Beheshti -yliopisto. Kansainvälisen humanitaarisen oikeuden ja vertailevan oikeustieteen asiantuntija.",
+                adv_jalali: "Julkisoikeuden apulaisprofessori, Shahid Beheshti -yliopisto. Erikoistunut julkisoikeuteen, valtioiden valvontaan ja komentajuuden laiminlyönteihin.",
+                adv_tahmoures: "Rikosoikeuden ja kriminologian apulaisprofessori, Allameh Tabataba'i -yliopisto. Erikoistunut kansainväliseen rikosoikeuteen.",
+                footer_copy_pfpj: "People for Peace & Justice ry (Helsinki, Suomi) · Y-tunnus: 3616815-5 · Perustettu 2026"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+            const isRTL = lang === 'fa';
+            document.documentElement.lang = lang;
+            document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+            document.body.dir = isRTL ? 'rtl' : 'ltr';
+
+            // Toggle stylesheet directories / fonts
+            if (isRTL) {
+                document.body.style.fontFamily = "var(--font-rtl)";
+            } else {
+                document.body.style.fontFamily = "var(--font-body)";
+            }
+
+            // Update translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update title
+            document.title = translations[lang]['about_page_title'];
+
+            // Update active state of language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            const labels = { en: 'EN', fa: 'فارسی', fi: 'FI' };
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.textContent.trim() === labels[lang]) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize language
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const saved = localStorage.getItem('pfp-lang') || 'en';
+                setLang(saved);
+            } catch (e) {
+                setLang('en');
+            }
+        });
+    </script>
+    <script src="contact-modal.js"></script>
+</body>
+
+</html>

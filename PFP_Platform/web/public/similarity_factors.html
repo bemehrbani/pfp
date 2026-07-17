@@ -33,8 +33,81 @@
       background: var(--bg-deep);
       color: var(--text-primary);
       line-height: 1.6;
-      padding: 40px 24px;
+      padding: 100px 24px 40px;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Unified Navbar ─── */
+    .lang-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 32px;
+        background: rgba(10, 14, 23, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        transition: background 0.3s;
+    }
+
+    .lang-bar-logo {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: 0.02em;
+    }
+
+    .navbar-links {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+    }
+    
+    .navbar-links a {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        transition: color 0.3s;
+        text-decoration: none;
+    }
+    
+    .navbar-links a:hover,
+    .navbar-links a.active {
+        color: var(--gold);
+    }
+
+    .lang-bar-nav {
+        display: flex;
+        gap: 6px;
+    }
+
+    .lang-btn {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 6px 14px;
+        border-radius: 16px;
+        cursor: pointer;
+        font-size: .8rem;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+        background: rgba(201,168,76,0.15);
+        color: var(--gold);
+        border-color: var(--gold);
+    }
+
+    @media (max-width: 860px) {
+        .navbar-links {
+            display: none;
+        }
     }
 
     .container {
@@ -47,60 +120,33 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
 
-    header {
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 24px;
-      margin-bottom: 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
+  <!-- ====== NAVIGATION ====== -->
+  <nav class="lang-bar">
+      <span class="lang-bar-logo">☮ PFPJ ry</span>
+      <div class="navbar-links">
+          <a href="landing.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="memorial.html">Minab Memorial</a>
+          <a href="evidence.html">Forensic Evidence</a>
+          <a href="similarity_annex.html" class="active">Technical Annex</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+          <div class="lang-bar-nav">
+              <button class="lang-btn active" onclick="toggleLang('en')">EN</button>
+              <button class="lang-btn" onclick="toggleLang('fa')">فارسی</button>
+              <button class="lang-btn" onclick="toggleLang('fi')">FI</button>
+          </div>
+          <a href="mailto:info@peopleforpeace.live" class="cta-nav" style="background:rgba(212, 168, 83, 0.15); border:1px solid var(--gold); color:var(--gold); padding:6px 18px; border-radius:20px; font-size:0.85rem; font-weight:600; text-decoration:none; margin-left:12px;">✉ Contact</a>
+      </div>
+  </nav>
 
-    .title-area h1 {
-      font-family: var(--font-display);
-      font-size: 28px;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-
-    .title-area p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    .lang-toggle {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn-lang {
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      padding: 6px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: bold;
-      transition: all 0.2s;
-    }
-
-    .btn-lang.active, .btn-lang:hover {
-      background: var(--gold);
-      color: var(--bg-deep);
-    }
-
-    .intro-box {
-      background: var(--gold-dim);
-      border-left: 3px solid var(--gold);
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 32px;
-      font-size: 15px;
-      color: var(--text-secondary);
-    }
+  <div class="container">
+    <header>
+      <div class="title-area">
+        <p>Technical Document</p>
+        <h1 id="mainTitle">Accident Similarity Factors</h1>
+      </div>
+    </header>
 
     .factor-card {
       border: 1px solid var(--border);
@@ -318,8 +364,78 @@
             desc: "عدم تطبیق مختصات با نقشه‌های ثبت دولتی، مراجع شهرداری یا پایگاه‌های اطلاعاتی سازمان‌های بین‌المللی پیش از تایید نهایی حمله."
           }
         ]
+      },
+      fi: {
+        title: "Tekninen liite: 10 onnettomuuden samankaltaisuustekijää",
+        sub: "PFPJ ry:n tapauksen vahvistaminen & IHL-vertailuanalyysi",
+        intro: "Tämä tekninen liite esittelee 10 ydintekijää, joita käytetään arvioitaessa kohdetapauksen samankaltaisuutta kansainvälisten ennakkotapausten kanssa. Kehys toimii oikeudellisen analyysin ja asiantuntija-arvioiden pohjana tapausasiakirjoissamme.",
+        factors: [
+          {
+            num: "Tekijä 01",
+            title: "Rauhanaikaiset kohdetietokannat",
+            desc: "Rauhanaikana laadittujen kohdelistojen hyödyntäminen, mikä osoittaa kohdistusvirheiden johtuvan rakenteellisesta suunnittelun epäonnistumisesta pikemmin kuin tilannekohtaisesta taktisesta sopeutumisesta."
+          },
+          {
+            num: "Tekijä 02",
+            title: "Koordinaattien ja paikannuksen vahvistamisen laiminlyönti",
+            desc: "Koordinaattien vahvistamisen laiminlyönti reaaliaikaisella fyysisellä tai visuaalisella havainnoinnilla, luottaen sen sijaan vanhentuneisiin tietokantatietoihin."
+          },
+          {
+            num: "Tekijä 03",
+            title: "Kaksikäyttöluokituksen epäonnistuminen",
+            desc: "Siviilirakennusten (kuten oppilaitosten) virheellinen luokittelu sotilaskohteiksi ilman suoran, sotilaallisen käytön varmistamista."
+          },
+          {
+            num: "Tekijä 04",
+            title: "Täsmäaseiden käyttöön liittyvä vastuu",
+            desc: "Erittäin tarkkojen täsmäaseiden käyttö. Tämä osoittaa, ettei poikkeama johtunut teknisestä virheestä, mikä todistaa suunnittelu- ja tiedustelutoiminnan huolimattomuuden."
+          },
+          {
+            num: "Tekijä 05",
+            title: "Visuaalisten ja tiedustelullisten suojatoimien puute",
+            desc: "Iskujen suorittaminen ilman toteutettavuuden suojatoimia, kuten suoraa visuaalista tiedustelua tai sensoritietojen varmistamista juuri ennen hyökkäyksen aloittamista."
+          },
+          {
+            num: "Tekijä 06",
+            title: "Siviiliuhrien arvioinnin suhteettomuus",
+            desc: "Merkittävä ero ennen iskua tehdyn oheisvahinkoarvion (CDE) ja toteutuneiden siviiliuhrien määrän välillä, mikä osoittaa puutteellista riskinarviointia."
+          },
+          {
+            num: "Tekijä 07",
+            title: "Sotilaskohteiden näennäinen läheisyys",
+            desc: "Siviilikohteeseen kohdistuvan iskun oikeuttaminen väittämällä sen sijaitsevan sotilaskohteen läheisyydessä, sivuuttaen vaatimukset tehokkaiden rajaamistoimenpiteiden toteuttamisesta."
+          },
+          {
+            num: "Tekijä 08",
+            title: "Komentajavastuu ja systemaattiset toimintamenetelmälliset virheet",
+            desc: "Kohdistusvirheet, jotka johtuvat komentotasolla hyväksytyistä vakiotoimintamenetelmistä (SOP) pikemmin kuin yksittäisen miehistön suorituksesta."
+          },
+          {
+            num: "Tekijä 09",
+            title: "Iskun ajoitus vihollisuuksien ensimmäisenä päivänä",
+            desc: "Iskujen toteuttaminen konfliktin ensimmäisten tuntien aikana valmiiden kohdelistojen perusteella, mikä sulkee pois puolustautumisen 'sodan sumun' aiheuttamalla hämmennyksellä."
+          },
+          {
+            num: "Tekijä 10",
+            title: "Riippumattomien paikallisten rekistereiden huomiotta jättäminen",
+            desc: "Koordinaattien ristiinvertailun laiminlyönti julkisten kunnallisten rekistereiden, kansainvälisten järjestöjen luetteloiden tai paikallisten karttatietokantojen kanssa ennen iskun hyväksymistä."
+          }
+        ]
       }
     };
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 24px; text-align: center; font-size: 0.9rem;">
+        <div style="display:flex; justify-content:center; gap:20px; margin-bottom:12px; flex-wrap:wrap;">
+            <a href="landing.html" style="color:var(--text-secondary); text-decoration:none;">Home</a> ·
+            <a href="about.html" style="color:var(--text-secondary); text-decoration:none;">About Us</a> ·
+            <a href="memorial.html" style="color:var(--text-secondary); text-decoration:none;">Memorial</a> ·
+            <a href="evidence.html" style="color:var(--text-secondary); text-decoration:none;">Evidence</a> ·
+            <a href="mailto:info@peopleforpeace.live" style="color:var(--text-secondary); text-decoration:none;">info@peopleforpeace.live</a>
+        </div>
+        <p style="color:var(--text-secondary); font-size:0.8rem;">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
+    </footer>
+  </div> <!-- Close container -->
 
     function toggleLang(lang) {
       document.body.dir = lang === 'fa' ? 'rtl' : 'ltr';
@@ -328,10 +444,10 @@
       document.getElementById('introText').textContent = data[lang].intro;
 
       // Update active button
-      document.querySelectorAll('.btn-lang').forEach(btn => btn.classList.remove('active'));
-      const buttons = document.querySelectorAll('.btn-lang');
-      buttons.forEach(btn => {
-        if ((btn.textContent.trim() === 'EN' && lang === 'en') || (btn.textContent.trim() === 'فارسی' && lang === 'fa')) {
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      const labels = { en: 'EN', fa: 'فارسی', fi: 'FI' };
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.textContent.trim() === labels[lang]) {
           btn.classList.add('active');
         }
       });
@@ -354,5 +470,6 @@
     // Initialize with English
     toggleLang('en');
   </script>
+  <script src="contact-modal.js"></script>
 </body>
 </html>
