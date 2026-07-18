@@ -431,7 +431,7 @@
             <a href="about.html" style="color:var(--text-secondary); text-decoration:none;">About Us</a> ·
             <a href="memorial.html" style="color:var(--text-secondary); text-decoration:none;">Memorial</a> ·
             <a href="evidence.html" style="color:var(--text-secondary); text-decoration:none;">Evidence</a> ·
-            <a href="mailto:info@peopleforpeace.live" style="color:var(--text-secondary); text-decoration:none;">info@peopleforpeace.live</a>
+            <a href="mailto:info@peopleforpeace.live" id="footerContactLink" style="color:var(--text-secondary); text-decoration:none;">Contact Us</a>
         </div>
         <p style="color:var(--text-secondary); font-size:0.8rem;">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
     </footer>
@@ -442,6 +442,9 @@
       document.getElementById('mainTitle').textContent = data[lang].title;
       document.getElementById('subTitle').textContent = data[lang].sub;
       document.getElementById('introText').textContent = data[lang].intro;
+      
+      const contactLabels = { en: 'Contact Us', fa: 'تماس با ما', fi: 'Ota yhteyttä' };
+      document.getElementById('footerContactLink').textContent = contactLabels[lang];
 
       // Update active button
       document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
