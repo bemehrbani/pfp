@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Global Initiatives Directory - Tracking and building synergy among organizations and campaigns supporting the Minab Children incident.">
+<title>Global Initiatives &amp; Synergy Directory — Legal Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #243048;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dim: rgba(201,168,76,0.12);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --accent-blue: #3b82f6;
+  --accent-blue-dim: rgba(59,130,246,0.1);
+  --accent-red: #ef4444;
+  --accent-red-dim: rgba(239,68,68,0.1);
+  --accent-green: #10b981;
+  --accent-green-dim: rgba(16,185,129,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-width: 960px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,34,50,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Navigation Topbar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+  background: rgba(10, 14, 26, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+}
+.topbar a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.topbar a:hover {
+  opacity: 0.8;
+  transform: translateX(-2px);
+}
+.topbar a.next-link:hover {
+  transform: translateX(2px);
+}
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Article Container */
+.article {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 56px 32px 96px;
+}
+
+/* Header styling */
+.article-header {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.article-flag {
+  font-size: 52px;
+  display: block;
+  margin-bottom: 16px;
+}
+.article-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.5vw, 44px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.gold-rule {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 24px auto;
+  border: none;
+}
+.purpose {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+/* Controls / Filters */
+.controls-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 168, 76, 0.08);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+}
+.filter-btn:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  color: var(--gold-light);
+}
+.filter-btn.active {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--white);
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  max-width: 280px;
+  min-width: 200px;
+}
+.search-box input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 168, 76, 0.08);
+  border-radius: 20px;
+  padding: 8px 16px 8px 36px;
+  color: var(--white);
+  font-size: 13px;
+  font-family: var(--font-body);
+  transition: all 0.2s ease;
+}
+.search-box input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(201,168,76,0.1);
+}
+.search-box::before {
+  content: '🔍';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* Initiatives Grid & Cards */
+.initiatives-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin-bottom: 56px;
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.init-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 168, 76, 0.08);
+  border-radius: 14px;
+  padding: 32px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.init-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 168, 76, 0.25);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+.init-card::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: transparent;
+  transition: background-color 0.3s;
+}
+.init-card.priority-high::after { background: var(--accent-red); }
+.init-card.priority-medium::after { background: var(--gold); }
+.init-card.priority-low::after { background: var(--accent-blue); }
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.card-header-left h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+}
+.card-header-left h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+.card-header-left h2 a:hover {
+  color: var(--gold-light);
+}
+
+.tags-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+}
+.tag-category {
+  background: var(--gold-dim);
+  color: var(--gold-light);
+}
+
+.priority-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.priority-high {
+  background: var(--accent-red-dim);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.priority-medium {
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--gold-light);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+.priority-low {
+  background: var(--accent-blue-dim);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.card-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.card-section-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.activities-list {
+  list-style: none;
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+.activities-list li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+.activities-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--gold-light);
+}
+
+.synergy-block {
+  background: rgba(201,168,76,0.03);
+  border: 1px solid rgba(201,168,76,0.06);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-top: 16px;
+}
+.synergy-block h4 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 6px;
+}
+.synergy-block p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Matrix & Tables */
+.section-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin: 64px 0 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14px;
+}
+thead th {
+  text-align: left;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(201, 168, 76, 0.18);
+}
+tbody td {
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.05);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+tbody tr {
+  transition: background-color 0.2s;
+}
+tbody tr:hover {
+  background: rgba(201, 168, 76, 0.02);
+}
+tbody td strong {
+  color: var(--white);
+}
+
+.table-priority-high { color: #f87171; font-weight: 600; }
+.table-priority-medium { color: var(--gold-light); font-weight: 600; }
+.table-priority-low { color: #60a5fa; font-weight: 600; }
+
+/* Alerts */
+.alert {
+  padding: 20px 24px;
+  border-radius: 10px;
+  margin: 32px 0;
+  border-left: 4px solid;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.alert-note {
+  background: rgba(201, 168, 76, 0.05);
+  border-color: var(--gold);
+  color: var(--text-secondary);
+}
+.alert-note strong {
+  color: var(--gold-light);
+}
+
+.article-footer {
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid rgba(201, 168, 76, 0.08);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.article-footer a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+}
+.article-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .topbar { padding: 12px 16px; }
+  .article { padding: 32px 16px 64px; }
+  .controls-panel { flex-direction: column; align-items: stretch; }
+  .search-box { max-width: 100%; }
+  .init-card { padding: 24px; }
+  thead { display: none; }
+  tbody td { display: block; text-align: right; padding: 10px 12px; border-bottom: none; }
+  tbody td::before { content: attr(data-label); float: left; font-weight: 700; color: var(--gold); text-transform: uppercase; font-size: 11px; }
+  tbody tr { display: block; padding: 16px 0; border-bottom: 1px solid rgba(201, 168, 76, 0.1); }
+}
+
+@media print {
+  .topbar { display: none; }
+  body { background: white; color: #1a1a1a; }
+  body::before, body::after { display: none; }
+  .article { max-width: 100%; padding: 0; }
+  .init-card { border-color: #ccc; background: #fafafa; margin-bottom: 20px; page-break-inside: avoid; }
+  .synergy-block { background: #eee; border-color: #ddd; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="docs.html">← Back to Documents</a>
+  <span class="topbar-title">Initiatives Directory</span>
+  <a class="next-link" href="peer-orgs.html">Peer Orgs →</a>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <span class="article-flag">💫</span>
+    <h1>Global Initiatives &amp; <em style="color:var(--gold);">Synergy Directory</em></h1>
+    <hr class="gold-rule">
+    <p class="purpose">Comprehensive directory of organizations, campaigns, and global activities supporting the Minab Children incident · Curated for the Board of Trustees to drive coalition and synergy.</p>
+  </header>
+
+  <!-- Filter & Search Panel -->
+  <section class="controls-panel" id="controls">
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterCategory('all', this)">All</button>
+      <button class="filter-btn" onclick="filterCategory('advocacy', this)">Legal &amp; Advocacy</button>
+      <button class="filter-btn" onclick="filterCategory('youth-art', this)">Youth &amp; Art</button>
+      <button class="filter-btn" onclick="filterCategory('intergovernmental', this)">UN &amp; Oversight</button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search initiatives..." onkeyup="searchDirectory()">
+    </div>
+  </section>
+
+  <!-- Main Directory Grid -->
+  <section class="initiatives-grid" id="directoryGrid">
+    
+    <!-- Stars of Minab -->
+    <div class="init-card priority-high" data-category="youth-art" id="init-stars">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h2><a href="https://starsofminab.com" target="_blank" rel="noopener">Stars of Minab (Setareh-haye Minab)</a></h2>
+          <div class="tags-row">
+            <span class="tag tag-category">Youth &amp; Art</span>
+            <span class="tag">International Coalition</span>
+            <span class="tag">YouTube: @StarsOfMinab</span>
+          </div>
+        </div>
+        <div class="priority-badge priority-high">High Synergy</div>
+      </div>
+      <p class="card-desc">An international youth-led coalition and campaign dedicated to preserving the memory of the elementary schoolchildren killed in the strike. The organization utilizes narrative art and media to represent the children as stars whose light continues to reach the world.</p>
+      
+      <h3 class="card-section-title">Core Activities</h3>
+      <ul class="activities-list">
+        <li>Organizing the international exhibition <em>\"Children of Minab Still Draw the Sun\"</em> featuring recovered children's artwork and tributes.</li>
+        <li>Publishing digital memory projects and detailed testimonial videos on YouTube.</li>
+        <li>Creating public awareness around the \"permanent absence\" of the children's futures.</li>
+      </ul>
+
+      <div class="synergy-block">
+        <h4>Synergy Action Plan</h4>
+        <p><strong>Memorial Linking:</strong> Cross-link PFP's digital memorial mosaic directly with their platform. Coordinate with their artist network to produce digital assets and high-impact memorial card graphics for volunteer campaigns.</p>
+      </div>
+    </div>
+
+    <!-- 168+1 Campaign -->
+    <div class="init-card priority-high" data-category="advocacy" id="init-168plus1">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h2><a href="https://168plus1.com" target="_blank" rel="noopener">168+1 Campaign</a></h2>
+          <div class="tags-row">
+            <span class="tag tag-category">Legal &amp; Advocacy</span>
+            <span class="tag">Diaspora Initiative</span>
+            <span class="tag">Hashtag: #من_صدای_مینابم</span>
+          </div>
+        </div>
+        <div class="priority-badge priority-high">High Synergy</div>
+      </div>
+      <p class="card-desc">An international media and legal campaign established in memory of the 168 victims of the Shajareh Tayyebeh school strike. The campaign is structured around building public pressure and legal cases to hold target states accountable.</p>
+      
+      <h3 class="card-section-title">Core Activities</h3>
+      <ul class="activities-list">
+        <li>Coordinating international legal actions and petitions demanding formal investigations.</li>
+        <li>Building a comprehensive digital archive of victim testimonies and media reports.</li>
+        <li>Mobilizing international public opinion through targeted social media hashtags.</li>
+      </ul>
+
+      <div class="synergy-block">
+        <h4>Synergy Action Plan</h4>
+        <p><strong>OSINT Sharing:</strong> Establish a channel to share PFP's forensic data (weapons mapping, satellite coordinates) with their legal analysts. Co-schedule social media pressure actions (e.g., `#OneMonthMinab` anniversary event).</p>
+      </div>
+    </div>
+
+    <!-- Forensic Architecture -->
+    <div class="init-card priority-medium" data-category="advocacy" id="init-forensic">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h2><a href="https://forensic-architecture.org" target="_blank" rel="noopener">Forensic Architecture</a></h2>
+          <div class="tags-row">
+            <span class="tag tag-category">Legal &amp; Advocacy</span>
+            <span class="tag">Research Agency</span>
+            <span class="tag">London / Global</span>
+          </div>
+        </div>
+        <div class="priority-badge priority-medium">Medium Synergy</div>
+      </div>
+      <p class="card-desc">An academic-led research agency that uses spatial and visual mapping to investigate state violence and violations of international law.</p>
+      
+      <h3 class="card-section-title">Core Activities</h3>
+      <ul class="activities-list">
+        <li>Developing advanced 3D spatial reconstructions of the airstrike site at Shajareh Tayyebeh Primary School.</li>
+        <li>Analyzing weapon debris, entry trajectories, and blast radius maps to identify military weapon systems.</li>
+      </ul>
+
+      <div class="synergy-block">
+        <h4>Synergy Action Plan</h4>
+        <p><strong>Visual Evidence:</strong> Embed their 3D structural analysis within PFP's public-facing Evidence Portal (`evidence.html`) and incorporate their findings into Universal Jurisdiction legal filings in Germany.</p>
+      </div>
+    </div>
+
+    <!-- Human Rights Activists in Iran (HRA) -->
+    <div class="init-card priority-medium" data-category="advocacy" id="init-hra">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h2><a href="https://en-hrana.org" target="_blank" rel="noopener">Human Rights Activists in Iran (HRA)</a></h2>
+          <div class="tags-row">
+            <span class="tag tag-category">Legal &amp; Advocacy</span>
+            <span class="tag">NGO</span>
+            <span class="tag">Established Peer</span>
+          </div>
+        </div>
+        <div class="priority-badge priority-medium">Medium Synergy</div>
+      </div>
+      <p class="card-desc">An independent human rights organization focused on monitoring and documenting violations of human rights in Iran.</p>
+      
+      <h3 class="card-section-title">Core Activities</h3>
+      <ul class="activities-list">
+        <li>Gathering on-the-ground testimonials, hospital data, and victim profiles.</li>
+        <li>Organizing letters and joint statements demanding DoD accountability and policy audits.</li>
+      </ul>
+
+      <div class="synergy-block">
+        <h4>Synergy Action Plan</h4>
+        <p><strong>Data Cross-Verification:</strong> Cross-reference PFP's database of 100 verified child victims with HRA's verified lists to achieve absolute dataset integrity before submitting documents to the UN.</p>
+      </div>
+    </div>
+
+    <!-- Amnesty International & Human Rights Watch -->
+    <div class="init-card priority-medium" data-category="advocacy" id="init-amnesty-hrw">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h2>Amnesty International &amp; Human Rights Watch</h2>
+          <div class="tags-row">
+            <span class="tag tag-category">Legal &amp; Advocacy</span>
+            <span class="tag">Global NGOs</span>
+            <span class="tag">Established Authority</span>
+          </div>
+        </div>
+        <div class="priority-badge priority-medium">Medium Synergy</div>
+      </div>
+      <p class="card-desc">Leading international human rights NGOs dedicated to documenting war crimes, advocating for victims, and auditing civilian harm mitigation policies of major military powers.</p>
+      
+      <h3 class="card-section-title">Core Activities</h3>
+      <ul class="activities-list">
+        <li>Publishing detailed investigation briefs declaring the Minab school strike a potential war crime.</li>
+        <li>Engaging U.S. defense officials directly to demand systemic investigation guidelines.</li>
+      </ul>
+
+      <div class="synergy-block">
+        <h4>Synergy Action Plan</h4>
+        <p><strong>Resource Distribution:</strong> Integrate their official investigation publications into PFP's public Amplify portal, utilizing their institutional authority to support our volunteer action campaigns.</p>
+      </div>
+    </div>
+
+    <!-- U.S. Congressional Oversight -->
+    <div class="init-card priority-medium" data-category="intergovernmental" id="init-congress">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h2>U.S. Congressional Oversight</h2>
+          <div class="tags-row">
+            <span class="tag tag-category">UN &amp; Oversight</span>
+            <span class="tag">Legislative Inquiry</span>
+            <span class="tag">Washington DC</span>
+          </div>
+        </div>
+        <div class="priority-badge priority-medium">Medium Synergy</div>
+      </div>
+      <p class="card-desc">Formal inquiry efforts initiated by U.S. lawmakers targeting the Department of Defense regarding the application of AI and targeting errors during the war's outbreak.</p>
+      
+      <h3 class="card-section-title">Core Activities</h3>
+      <ul class="activities-list">
+        <li>Formal letter sent by Rep. Yassamin Ansari demanding U.S. DoD transparency on civilian casualty counts.</li>
+        <li>Senate Armed Services Committee action restricting travel funds for the Secretary of Defense until civilian harm reports are released.</li>
+      </ul>
+
+      <div class="synergy-block">
+        <h4>Synergy Action Plan</h4>
+        <p><strong>Legislative Briefing:</strong> Prepare concise, prosecution-grade briefing dossiers on the Minab school attack and send them to the oversight staffers of Senators Gillibrand, Slotkin, and Rep. Ansari.</p>
+      </div>
+    </div>
+
+    <!-- UN Human Rights Council -->
+    <div class="init-card priority-low" data-category="intergovernmental" id="init-unhrc">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h2>UN Human Rights Council (UNHRC)</h2>
+          <div class="tags-row">
+            <span class="tag tag-category">UN &amp; Oversight</span>
+            <span class="tag">Intergovernmental Body</span>
+            <span class="tag">Geneva</span>
+          </div>
+        </div>
+        <div class="priority-badge priority-low">Low Synergy</div>
+      </div>
+      <p class="card-desc">The primary intergovernmental body within the UN system responsible for strengthening the promotion and protection of human rights globally.</p>
+      
+      <h3 class="card-section-title">Core Activities</h3>
+      <ul class="activities-list">
+        <li>Conducted an urgent debate on the protection of education and children in armed conflict.</li>
+        <li>Special Rapporteur reports addressing the strike, alongside resolutions condemning military actions against school infrastructure.</li>
+      </ul>
+
+      <div class="synergy-block">
+        <h4>Synergy Action Plan</h4>
+        <p><strong>UN Special Procedures:</strong> Submit formal evidence packets to the Special Rapporteur on the Right to Education and the Special Rapporteur on Human Rights in Iran to keep the case prominent on the UN agenda.</p>
+      </div>
+    </div>
+
+    <!-- Tehran UNICEF Artists -->
+    <div class="init-card priority-low" data-category="youth-art" id="init-unicef-art">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h2>UNICEF Protest Artists &amp; Grassroots Tributes</h2>
+          <div class="tags-row">
+            <span class="tag tag-category">Youth &amp; Art</span>
+            <span class="tag">Grassroots Protest</span>
+            <span class="tag">Tehran, Iran</span>
+          </div>
+        </div>
+        <div class="priority-badge priority-low">Low Synergy</div>
+      </div>
+      <p class="card-desc">Local artists and victims' families who staged peaceful memorials and installations in Iran, utilizing physical art to voice grief and demand international action.</p>
+      
+      <h3 class="card-section-title">Core Activities</h3>
+      <ul class="activities-list">
+        <li>Constructing a symbolic mock destroyed classroom installation in front of the Tehran UNICEF office.</li>
+        <li>Displaying drawings and personal items of the deceased children to humanize the tragedy.</li>
+      </ul>
+
+      <div class="synergy-block">
+        <h4>Synergy Action Plan</h4>
+        <p><strong>Digital Archiving:</strong> Create a dedicated gallery space on PFP's public portal showcasing digital replicas or photos of the classroom installation and children's drawings to convey the human cost of the strike.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Important Governance Notice -->
+  <section class="section">
+    <h2 class="section-title" id="governance-notice">Strategic Governance Notice</h2>
+    <div class="alert alert-note">
+      <strong>⚠️ Independence &amp; Neutrality:</strong> While certain commemorative initiatives are backed or launched by official Iranian government channels (such as the Ministry of Cultural Heritage plans for a permanent secretariat, museum, and state-sponsored mourning processes), <strong>People for Peace &amp; Justice ry (PFPJ ry)</strong> must maintain a strict distance. To secure international legal standing, universal jurisdiction support, and observer status at the Assembly of States Parties (ASP), the association must remain strictly independent, apolitical, and neutral.
+    </div>
+  </section>
+
+  <!-- Summary Synergy Table -->
+  <section class="section">
+    <h2 class="section-title" id="synergy-matrix">Initiative Synergy Matrix</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Organization / Initiative</th>
+          <th>Primary Focus</th>
+          <th>Synergy Priority</th>
+          <th>Immediate Timeline Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Stars of Minab</strong></td>
+          <td>Memorial, Art &amp; Youth Advocacy</td>
+          <td><span class="table-priority-high">🔴 High</span></td>
+          <td data-label="Immediate Action">Integrate art network into PFP memorial cards.</td>
+        </tr>
+        <tr>
+          <td><strong>168+1 Campaign</strong></td>
+          <td>Diaspora Mobilization &amp; Petitions</td>
+          <td><span class="table-priority-high">🔴 High</span></td>
+          <td data-label="Immediate Action">Coordinate petitional actions and X/Twitter storm.</td>
+        </tr>
+        <tr>
+          <td><strong>Forensic Architecture</strong></td>
+          <td>3D Blast Spatial Reconstruction</td>
+          <td><span class="table-priority-medium">🟡 Medium</span></td>
+          <td data-label="Immediate Action">Embed 3D models into PFP Evidence Portal.</td>
+        </tr>
+        <tr>
+          <td><strong>Human Rights Activists (HRA)</strong></td>
+          <td>Violation Documentation</td>
+          <td><span class="table-priority-medium">🟡 Medium</span></td>
+          <td data-label="Immediate Action">Cross-verify names registry for 100% integrity.</td>
+        </tr>
+        <tr>
+          <td><strong>Amnesty / HRW</strong></td>
+          <td>IHL Auditing &amp; Accountability</td>
+          <td><span class="table-priority-medium">🟡 Medium</span></td>
+          <td data-label="Immediate Action">Add official reports to public PFP Amplify portal.</td>
+        </tr>
+        <tr>
+          <td><strong>U.S. Congressional Oversight</strong></td>
+          <td>DoD AI &amp; Casualty Investigations</td>
+          <td><span class="table-priority-medium">🟡 Medium</span></td>
+          <td data-label="Immediate Action">Send briefing dossier to congressional offices.</td>
+        </tr>
+        <tr>
+          <td><strong>UN Human Rights Council</strong></td>
+          <td>Intergovernmental Standards</td>
+          <td><span class="table-priority-low">🟢 Low</span></td>
+          <td data-label="Immediate Action">Draft evidence report for UN Special Rapporteurs.</td>
+        </tr>
+        <tr>
+          <td><strong>UNICEF Tributes Artists</strong></td>
+          <td>Grassroots Art &amp; Memorials</td>
+          <td><span class="table-priority-low">🟢 Low</span></td>
+          <td data-label="Immediate Action">Digitally archive and publish classroom installations.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</article>
+
+<footer class="article-footer">
+  Research compiled: July 20, 2026 · 8 global initiatives mapped for synergy<br>
+  <a href="docs.html">← Back to Documents Portal</a> · <a href="peer-orgs.html">Peer Organizations</a> · <a href="tasks.html">NGO Tasks</a>
+</footer>
+
+<script>
+// Cryptographic access check
+const HASH = '91a82833497d3b24224b075577c99fa13e521767da7e59a809d53f17394e8ae7';
+if (sessionStorage.getItem('pfp_legal_token') !== HASH) {
+  window.location.href = 'index.html';
+}
+
+// Interactive filtering logic
+function filterCategory(category, buttonElement) {
+  // Update active state on buttons
+  const buttons = document.querySelectorAll('.filter-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  buttonElement.classList.add('active');
+
+  // Filter cards
+  const cards = document.querySelectorAll('.init-card');
+  cards.forEach(card => {
+    if (category === 'all') {
+      card.style.display = 'block';
+    } else {
+      const cardCategory = card.getAttribute('data-category');
+      if (cardCategory === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    }
+  });
+}
+
+// Live search logic
+function searchDirectory() {
+  const input = document.getElementById('searchInput');
+  const filter = input.value.toLowerCase();
+  const cards = document.querySelectorAll('.init-card');
+
+  cards.forEach(card => {
+    const text = card.textContent || card.innerText;
+    if (text.toLowerCase().indexOf(filter) > -1) {
+      // Respect active category filter during search
+      const activeBtn = document.querySelector('.filter-btn.active');
+      const activeCategory = activeBtn.textContent.toLowerCase();
+      const cardCategory = card.getAttribute('data-category');
+      
+      if (activeCategory === 'all' || 
+          (activeCategory === 'legal & advocacy' && cardCategory === 'advocacy') ||
+          (activeCategory === 'youth & art' && cardCategory === 'youth-art') ||
+          (activeCategory === 'un & oversight' && cardCategory === 'intergovernmental')) {
+        card.style.display = 'block';
+      }
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>

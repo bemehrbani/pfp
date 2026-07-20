@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0e17" />
+    <meta name="description" content="Global Initiatives Directory - Tracking and building synergy among organizations and campaigns supporting the Minab Children incident." />
+    <title>Global Initiatives Directory | People for Peace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg2: #111827;
+            --bg3: #0d1220;
+            --bg-card: #1a1f2e;
+            --bg-card-h: #222842;
+            --text: #f0ebe3;
+            --text2: #9ca3af;
+            --muted: #6b7280;
+            --gold: #d4a853;
+            --gold-d: rgba(212, 168, 83, .15);
+            --peace: #7cb68e;
+            --peace-d: rgba(124, 182, 142, .12);
+            --red: #c4564a;
+            --red-d: rgba(196, 86, 74, .12);
+            --blue: #60a5fa;
+            --blue-d: rgba(96, 165, 250, .12);
+            --border: rgba(255, 255, 255, .06);
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'Source Sans 3', sans-serif;
+            --rtl: 'Vazirmatn', sans-serif;
+            --r: 12px;
+            --t: .3s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased }
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+        body[dir="rtl"] { font-family: var(--rtl) }
+        body[dir="rtl"] .serif { font-family: var(--rtl) }
+
+        a { color: var(--gold); text-decoration: none; transition: color var(--t) }
+        a:hover { color: var(--text) }
+
+        /* NAVBAR */
+        .lang-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 32px;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: background var(--t);
+        }
+        .lang-bar-logo {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.02em;
+        }
+        .navbar-links { display: flex; gap: 24px; align-items: center }
+        .navbar-links a {
+            font-size: 0.9rem;
+            color: var(--text2);
+            font-weight: 600;
+            transition: color var(--t);
+        }
+        .navbar-links a:hover, .navbar-links a.active { color: var(--gold) }
+        .lang-bar-nav { display: flex; gap: 6px }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all var(--t);
+        }
+        .lang-btn.active {
+            background: var(--gold-d);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .cta-nav {
+            background: rgba(212, 168, 83, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--t);
+        }
+        .cta-nav:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 60px 24px 40px;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, rgba(212,168,83,0.03) 0%, transparent 70%);
+        }
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .hero-title em { font-style: italic; color: var(--gold) }
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text2);
+            max-width: 800px;
+            margin: 0 auto 32px;
+            font-weight: 300;
+        }
+
+        /* FILTERS & SEARCH */
+        .search-filter-section {
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            color: var(--text2);
+            padding: 8px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all var(--t);
+        }
+        .filter-tab:hover, .filter-tab.active {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: var(--gold-d);
+        }
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+        }
+        .search-input {
+            width: 100%;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 16px 10px 40px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all var(--t);
+        }
+        .search-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 12px rgba(212,168,83,0.15);
+        }
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        /* DIRECTORY LISTING */
+        .directory-container {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+        }
+        .directory-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        .directory-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 32px;
+            transition: all var(--t);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+        .directory-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 168, 83, 0.25);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            background: var(--bg-card-h);
+        }
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .card-title {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+        .card-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .badge-cat {
+            background: var(--gold-d);
+            color: var(--gold);
+            border: 1px solid rgba(212,168,83,0.2);
+        }
+        .badge-type {
+            background: rgba(255,255,255,0.05);
+            color: var(--text2);
+            border: 1px solid var(--border);
+        }
+        .card-desc {
+            font-size: 1.05rem;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-top: 8px;
+        }
+        .activities-list {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .activities-list li {
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.95rem;
+            color: var(--text2);
+        }
+        .activities-list li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        .card-actions {
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all var(--t);
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--bg);
+        }
+        .btn-primary:hover {
+            background: var(--text);
+            color: var(--bg);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--text);
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 24px;
+            background: var(--bg3);
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: var(--text2);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .footer-links a:hover { color: var(--gold) }
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* RTL & Layout adjustments */
+        body[dir="rtl"] .search-icon { left: auto; right: 16px; }
+        body[dir="rtl"] .search-input { padding: 10px 40px 10px 16px; }
+        body[dir="rtl"] .activities-list li { padding-left: 0; padding-right: 20px; }
+        body[dir="rtl"] .activities-list li::before { left: auto; right: 0; }
+
+        @media (max-width: 768px) {
+            .search-filter-section { flex-direction: column; align-items: stretch; }
+            .search-wrapper { max-width: 100%; }
+            .directory-card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== LANGUAGE BAR ====== -->
+    <nav class="lang-bar">
+        <span class="lang-bar-logo display-font" data-i18n="logo">☮ PFPJ ry</span>
+        <div class="navbar-links">
+            <a href="landing.html" data-i18n="nav_home">Home</a>
+            <a href="about.html" data-i18n="nav_about">About Us</a>
+            <a href="memorial.html" data-i18n="nav_memorial">Minab Memorial</a>
+            <a href="evidence.html" data-i18n="nav_evidence">Forensic Evidence</a>
+            <a href="similarity_factors.html" data-i18n="nav_annex">Technical Annex</a>
+            <a href="initiatives.html" class="active" data-i18n="nav_initiatives">Global Initiatives</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <div class="lang-bar-nav">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+                <button class="lang-btn" onclick="setLang('fi')">FI</button>
+            </div>
+            <a href="mailto:info@peopleforpeace.live" class="cta-nav" data-i18n="nav_contact">✉ Contact</a>
+        </div>
+    </nav>
+
+    <!-- ====== HERO ====== -->
+    <section class="hero">
+        <h1 class="hero-title" data-i18n="title">Global Initiatives &amp; <em>Alliances</em></h1>
+        <p class="hero-subtitle" data-i18n="subtitle">An open directory of organizations, campaigns, and legal groups actively working towards justice, accountability, and documentation for the Minab School incident.</p>
+    </section>
+
+    <!-- ====== SEARCH & FILTER ====== -->
+    <section class="search-filter-section">
+        <div class="filters">
+            <button class="filter-tab active" onclick="filterCat('all', this)" data-i18n="filter_all">All</button>
+            <button class="filter-tab" onclick="filterCat('advocacy', this)" data-i18n="filter_advocacy">Legal &amp; Advocacy</button>
+            <button class="filter-tab" onclick="filterCat('youth-art', this)" data-i18n="filter_youth_art">Youth &amp; Art</button>
+            <button class="filter-tab" onclick="filterCat('un-oversight', this)" data-i18n="filter_un">UN &amp; Oversight</button>
+        </div>
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search initiatives..." onkeyup="searchList()" data-i18n-placeholder="search_placeholder" />
+        </div>
+    </section>
+
+    <!-- ====== DIRECTORY LISTINGS ====== -->
+    <div class="directory-container">
+        <div class="directory-grid" id="directoryGrid">
+            <!-- Dynamic Content Injected and Localized via JS -->
+        </div>
+    </div>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="landing.html" data-i18n="nav_home">Home</a>
+            <a href="about.html" data-i18n="nav_about">About Us</a>
+            <a href="memorial.html" data-i18n="nav_memorial">Memorial</a>
+            <a href="evidence.html" data-i18n="nav_evidence">Evidence</a>
+            <a href="similarity_factors.html" data-i18n="nav_annex">Technical Annex</a>
+            <a href="initiatives.html" class="active" data-i18n="nav_initiatives">Global Initiatives</a>
+            <a href="mailto:info@peopleforpeace.live" data-i18n="footer_contact">Contact Us</a>
+        </div>
+        <p class="footer-copy" data-i18n="footer_copy">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
+    </footer>
+
+    <!-- ====== DATA & INTERACTIVITY ====== -->
+    <script>
+        // TRILINGUAL DATA
+        const DATA = {
+            stars: {
+                id: "stars",
+                cat: "youth-art",
+                links: [
+                    { labelKey: "btn_website", url: "https://starsofminab.com", primary: true },
+                    { labelKey: "btn_youtube", url: "https://youtube.com/@StarsOfMinab", primary: false }
+                ]
+            },
+            campaign168: {
+                id: "campaign168",
+                cat: "advocacy",
+                links: [
+                    { labelKey: "btn_website", url: "https://168plus1.com", primary: true }
+                ]
+            },
+            forensic: {
+                id: "forensic",
+                cat: "advocacy",
+                links: [
+                    { labelKey: "btn_website", url: "https://forensic-architecture.org", primary: true }
+                ]
+            },
+            hra: {
+                id: "hra",
+                cat: "advocacy",
+                links: [
+                    { labelKey: "btn_website", url: "https://en-hrana.org", primary: true }
+                ]
+            },
+            amnesty: {
+                id: "amnesty",
+                cat: "advocacy",
+                links: [
+                    { labelKey: "btn_amnesty", url: "https://amnesty.org", primary: true },
+                    { labelKey: "btn_hrw", url: "https://hrw.org", primary: false }
+                ]
+            },
+            congress: {
+                id: "congress",
+                cat: "un-oversight",
+                links: [
+                    { labelKey: "btn_congressional_records", url: "https://www.congress.gov", primary: true }
+                ]
+            },
+            unhrc: {
+                id: "unhrc",
+                cat: "un-oversight",
+                links: [
+                    { labelKey: "btn_ohchr", url: "https://ohchr.org", primary: true }
+                ]
+            },
+            unicef_art: {
+                id: "unicef_art",
+                cat: "youth-art",
+                links: [
+                    { labelKey: "btn_news_archive", url: "https://www.unicef.org", primary: true }
+                ]
+            }
+        };
+
+        const translations = {
+            en: {
+                logo: "☮ PFPJ ry",
+                nav_home: "Home",
+                nav_about: "About Us",
+                nav_memorial: "Minab Memorial",
+                nav_evidence: "Forensic Evidence",
+                nav_annex: "Technical Annex",
+                nav_initiatives: "Global Initiatives",
+                nav_contact: "✉ Contact",
+                title: "Global Initiatives & Alliances",
+                subtitle: "An open directory of organizations, campaigns, and legal groups actively working towards justice, accountability, and documentation for the Minab School incident.",
+                filter_all: "All",
+                filter_advocacy: "Legal & Advocacy",
+                filter_youth_art: "Youth & Art",
+                filter_un: "UN & Oversight",
+                search_placeholder: "Search initiatives...",
+                label_activities: "Core Activities",
+                footer_contact: "Contact Us",
+                footer_copy: "People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026",
+                
+                // Card Details
+                stars_title: "Stars of Minab (Setareh-haye Minab)",
+                stars_desc: "An international youth-led coalition and campaign dedicated to preserving the memory of the elementary school students killed in the strike. The organization utilizes narrative art and media to represent the children as stars whose light continues to reach the world.",
+                stars_act1: "Organizing the international exhibition 'Children of Minab Still Draw the Sun' featuring recovered children's artwork and tributes.",
+                stars_act2: "Publishing digital memory projects and detailed testimonial videos on YouTube.",
+                stars_act3: "Creating public awareness around the 'permanent absence' of the children's futures.",
+                stars_cat: "Youth & Art",
+                stars_type: "International Coalition",
+
+                campaign168_title: "168+1 Campaign",
+                campaign168_desc: "An international media and legal campaign established in memory of the 168 victims of the Shajareh Tayyebeh school strike. The campaign is structured around building public pressure and legal cases to hold target states accountable.",
+                campaign168_act1: "Coordinating international legal actions and petitions demanding formal investigations.",
+                campaign168_act2: "Building a comprehensive digital archive of victim testimonies and media reports.",
+                campaign168_act3: "Mobilizing international public opinion through targeted social media campaigns.",
+                campaign168_cat: "Legal & Advocacy",
+                campaign168_type: "Diaspora Initiative",
+
+                forensic_title: "Forensic Architecture",
+                forensic_desc: "An academic-led research agency that uses spatial, digital, and architectural analysis to investigate state violence and violations of international law.",
+                forensic_act1: "Conducting a 3D structural reconstruction of the strike on the Shajareh Tayyebeh Primary School to analyze target identification and weapon trajectories.",
+                forensic_act2: "Analyzing weapon debris, entry trajectories, and blast radius maps to identify military weapon systems.",
+                forensic_cat: "Legal & Advocacy",
+                forensic_type: "Research Agency",
+
+                hra_title: "Human Rights Activists in Iran (HRA)",
+                hra_desc: "An independent human rights organization focused on monitoring, documenting, and reporting human rights violations in Iran.",
+                hra_act1: "Compiled on-the-ground damage reports and victim testimonies from Minab.",
+                hra_act2: "Co-drafted joint letters demanding accountability from the U.S. Department of Defense.",
+                hra_cat: "Legal & Advocacy",
+                hra_type: "NGO",
+
+                amnesty_title: "Amnesty International & Human Rights Watch",
+                amnesty_desc: "Leading international human rights NGOs dedicated to documenting war crimes, advocating for victims, and auditing civilian harm mitigation policies of major military powers.",
+                amnesty_act1: "Conducted field and remote investigations of the Minab strike, concluding it may constitute a war crime due to failure to verify target civilian status.",
+                amnesty_act2: "Lobbying the U.S. DoD to reform its civilian harm mitigation policies.",
+                amnesty_cat: "Legal & Advocacy",
+                amnesty_type: "Global Organizations",
+
+                congress_title: "U.S. Congressional Oversight",
+                congress_desc: "Formal inquiry efforts initiated by U.S. lawmakers targeting the Department of Defense regarding the application of AI and targeting errors during the war's outbreak.",
+                congress_act1: "Formal letter spearheaded by Rep. Yassamin Ansari demanding U.S. DoD transparency regarding civilian casualties.",
+                congress_act2: "Senate Armed Services Committee action restricting travel funds for the Secretary of Defense until civilian harm reports are released.",
+                congress_cat: "UN & Oversight",
+                congress_type: "Legislative Inquiry",
+
+                unhrc_title: "UN Human Rights Council & Special Procedures",
+                unhrc_desc: "The primary intergovernmental body within the UN system responsible for strengthening the promotion and protection of human rights globally.",
+                unhrc_act1: "Conducted an urgent debate on the protection of education and children in armed conflict following the strike.",
+                unhrc_act2: "Special Rapporteur reports addressing the strike, alongside resolutions condemning military actions against school infrastructure.",
+                unhrc_cat: "UN & Oversight",
+                unhrc_type: "Intergovernmental Body",
+
+                unicef_art_title: "UNICEF Protest Artists & Grassroots Tributes",
+                unicef_art_desc: "Local artists and victims' families who staged peaceful memorials and installations in Iran, utilizing physical art to voice grief and demand international action.",
+                unicef_art_act1: "Constructed a mock destroyed classroom in front of the UNICEF office in Tehran, filled with memorial child drawings.",
+                unicef_art_act2: "Displaying drawings and personal items of the deceased children to humanize the tragedy.",
+                unicef_art_cat: "Youth & Art",
+                unicef_art_type: "Grassroots Protest",
+
+                // Button Labels
+                btn_website: "Visit Website",
+                btn_youtube: "YouTube Channel",
+                btn_amnesty: "Amnesty site",
+                btn_hrw: "HRW site",
+                btn_congressional_records: "Congressional Records",
+                btn_ohchr: "OHCHR site",
+                btn_news_archive: "News Archive"
+            },
+            fa: {
+                logo: "☮ PFPJ ry",
+                nav_home: "خانه",
+                nav_about: "درباره ما",
+                nav_memorial: "یادبود میناب",
+                nav_evidence: "مستندات فنی",
+                nav_annex: "پیوست فنی",
+                nav_initiatives: "ابتکارات جهانی",
+                nav_contact: "✉ تماس با ما",
+                title: "ابتکارات و هم‌پیمانی‌های جهانی",
+                subtitle: "دایرکتوری آزاد سازمان‌ها، کمپین‌ها و گروه‌های حقوقی فعال که برای دستیابی به عدالت، پاسخگویی و مستندسازی فاجعه مدرسه میناب تلاش می‌کنند.",
+                filter_all: "همه",
+                filter_advocacy: "حقوقی و دادخواهی",
+                filter_youth_art: "جوانان و هنر",
+                filter_un: "ملل متحد و نظارت",
+                search_placeholder: "جستجوی ابتکارات...",
+                label_activities: "فعالیت‌های اصلی",
+                footer_contact: "تماس با ما",
+                footer_copy: "سازمان مردم برای صلح و عدالت (PFPJ ry) هلسینکی فنلاند · شناسه ثبتی: 3616815-5 · تاسیس ۲۰۲۶",
+                
+                // Card Details
+                stars_title: "ستاره‌های میناب (Setareh-haye Minab)",
+                stars_desc: "یک ائتلاف و کمپین بین‌المللی تحت رهبری جوانان که برای حفظ نام و یاد دانش‌آموزان جان‌باخته در حمله به مدرسه شجره طیبه میناب فعالیت می‌کند. این گروه با استفاده از هنر روایی و رسانه، دانش‌آموزان را به عنوان ستاره‌هایی به تصویر می‌کشد که نور آن‌ها هرگز خاموش نمی‌شود.",
+                stars_act1: "برگزاری نمایشگاه بین‌المللی «کودکان میناب هنوز خورشید را نقاشی می‌کنند» با نمایش آثار هنری به‌جامانده از کودکان.",
+                stars_act2: "انتشار پروژه‌های یادبود دیجیتال و مصاحبه‌ها و ویدئوهای مستند در یوتیوب.",
+                stars_act3: "ایجاد آگاهی عمومی در سطح جهانی درباره آینده‌های ناتمام و سلب شده از دانش‌آموزان.",
+                stars_cat: "جوانان و هنر",
+                stars_type: "ائتلاف بین‌المللی",
+
+                campaign168_title: "کمپین ۱۶۸+۱",
+                campaign168_desc: "یک طرح رسانه‌ای و حقوقی بین‌المللی برای بزرگداشت ۱۶۸ قربانی فاجعه میناب. این کمپین بر ایجاد فشارهای دیپلماتیک و تدارک پرونده‌های حقوقی بین‌المللی متمرکز است.",
+                campaign168_act1: "سازماندهی دادخواهی‌های بین‌المللی و پتیشن‌های جهانی برای الزام به تحقیقات رسمی.",
+                campaign168_act2: "توسعه آرشیو دیجیتال جامعی از شهادت‌های بازماندگان و مستندات رسانه‌ای.",
+                campaign168_act3: "بسیج افکار عمومی بین‌المللی با استفاده از هشتگ‌های اختصاصی (#من_صدای_مینابم).",
+                campaign168_cat: "حقوقی و دادخواهی",
+                campaign168_type: "ابتکار دیاسپورا",
+
+                forensic_title: "فورنزیک آرکیتکچر (Forensic Architecture)",
+                forensic_desc: "یک مرکز پژوهشی آکادمیک که با استفاده از بازسازی‌های فضایی و نقشه‌برداری‌های پیشرفته به بررسی ابعاد حملات نظامی و نقض حقوق بین‌الملل می‌پردازد.",
+                forensic_act1: "توسعه شبیه‌سازی‌ها و بازسازی‌های فضایی سه‌بعدی از محل برخورد موشک به دبستان شجره طیبه میناب.",
+                forensic_act2: "تحلیل بقایای پرتابه، خط سیر ورود موشک و نقشه شعاع انفجار برای تعیین دقیق سیستم‌های تسلیحاتی به‌کار رفته.",
+                forensic_cat: "حقوقی و دادخواهی",
+                forensic_type: "آژانس تحقیقاتی",
+
+                hra_title: "مجموعه فعالان حقوق بشر در ایران (HRA)",
+                hra_desc: "یک سازمان مستقل حقوق بشری که بر مستندسازی، گزارش‌دهی و پایش موارد نقض حقوق بشر در ایران متمرکز است.",
+                hra_act1: "جمع‌آوری شهادت‌های میدانی، داده‌های درمانی و پرونده‌های مستند قربانیان فاجعه میناب.",
+                hra_act2: "تنظیم بیانیه‌ها و اقدامات مشترک برای الزام پنتاگون به انتشار گزارش تحقیقات داخلی.",
+                hra_cat: "حقوقی و دادخواهی",
+                hra_type: "سازمان غیردولتی",
+
+                amnesty_title: "عفو بین‌الملل و دیدبان حقوق بشر",
+                amnesty_desc: "سازمان‌های پیشرو بین‌المللی حقوق بشر متمرکز بر مستندسازی جرایم جنگی، حمایت از قربانیان و حسابرسی سیاست‌های کاهش آسیب‌های غیرنظامی در ارتش‌های جهان.",
+                amnesty_act1: "انتشار گزارش‌های مستند و تفصیلی درباره بمباران مدرسه میناب به عنوان جنایت جنگی احتمالی به دلیل عدم بررسی غیرنظامی بودن هدف.",
+                amnesty_act2: "مذاکره مستقیم با مقامات دفاعی برای اصلاح پروتکل‌های هدف‌گیری و پاسخگویی به آسیب‌های غیرنظامی.",
+                amnesty_cat: "حقوقی و دادخواهی",
+                amnesty_type: "سازمان‌های بین‌المللی",
+
+                congress_title: "نظارت کنگره ایالات متحده",
+                congress_desc: "اقدامات و تفحص‌های رسمی قانون‌گذاران آمریکایی از وزارت دفاع در خصوص نحوه استفاده از سامانه‌های هوش مصنوعی و خطاهای محاسباتی در حمله میناب.",
+                congress_act1: "نامه رسمی نماینده یاسمین انصاری جهت شفاف‌سازی آمار واقعی تلفات غیرنظامی فاجعه میناب.",
+                congress_act2: "مصوبه کمیته نیروهای مسلح سنا در محدودسازی بودجه سفرهای اداری وزیر دفاع تا زمان انتشار رسمی پرونده تحقیقات حمله.",
+                congress_cat: "UN & نظارت",
+                congress_type: "تفحص پارلمانی",
+
+                unhrc_title: "شورای حقوق بشر ملل متحد (UNHRC)",
+                unhrc_desc: "نهاد بین‌دولتی ارشد سازمان ملل متحد برای ارتقا و محافظت از حقوق بشر در سراسر جهان.",
+                unhrc_act1: "برگزاری نشست اضطراری درباره حفاظت از مدارس و کودکان در درگیری‌های مسلحانه پس از حمله میناب.",
+                unhrc_act2: "تنظیم گزارش‌های گزارشگران ویژه ملل متحد و بیانیه‌های محکومیت حمله به زیرساخت‌های آموزشی.",
+                unhrc_cat: "UN & نظارت",
+                unhrc_type: "نهاد بین‌دولتی",
+
+                unicef_art_title: "هنرمندان یادبود یونیسف",
+                unicef_art_desc: "هنرمندان محلی و خانواده‌های قربانیان که با برپایی چیدمان‌های هنری و یادبودها در ایران اعتراض خود را به سکوت نهادهای بین‌المللی نشان دادند.",
+                unicef_art_act1: "ساخت یک کلاس درس نمادین و تخریب‌شده در مقابل دفتر یونیسف در تهران با استفاده از نقاشی‌ها و لوازم شخصی قربانیان.",
+                unicef_art_act2: "نمایش نقاشی‌ها و آثار خلاقانه دانش‌آموزان برای تصویرسازی ابعاد انسانی فاجعه.",
+                unicef_art_cat: "جوانان و هنر",
+                unicef_art_type: "اعتراض مردمی",
+
+                // Button Labels
+                btn_website: "مشاهده وب‌سایت",
+                btn_youtube: "کانال یوتیوب",
+                btn_amnesty: "سایت عفو بین‌الملل",
+                btn_hrw: "سایت دیدبان حقوق بشر",
+                btn_congressional_records: "اسناد کنگره",
+                btn_ohchr: "سایت OHCHR",
+                btn_news_archive: "آرشیو اخبار"
+            },
+            fi: {
+                logo: "☮ PFPJ ry",
+                nav_home: "Koti",
+                nav_about: "Tietoa meistä",
+                nav_memorial: "Minabin muistomerkki",
+                nav_evidence: "Forensinen todistusaineisto",
+                nav_annex: "Tekninen liite",
+                nav_initiatives: "Globaalit aloitteet",
+                nav_contact: "✉ Ota yhteyttä",
+                title: "Globaalit aloitteet & Allianssit",
+                subtitle: "Avoin hakemisto organisaatioista, kampanjoista ja lakiryhmistä, jotka työskentelevät aktiivisesti Minabin koululaisiskun oikeudenmukaisuuden, vastuuvelvollisuuden ja dokumentoinnin puolesta.",
+                filter_all: "Kaikki",
+                filter_advocacy: "Oikeudellinen & Vaikuttaminen",
+                filter_youth_art: "Nuoriso & Taide",
+                filter_un: "YK & Valvonta",
+                search_placeholder: "Etsi aloitteita...",
+                label_activities: "Päätoiminta",
+                footer_contact: "Ota yhteyttä",
+                footer_copy: "People for Peace & Justice ry (Helsinki, Suomi) · Y-tunnus: 3616815-5 · Perustettu 2026",
+                
+                // Card Details
+                stars_title: "Stars of Minab (Setareh-haye Minab)",
+                stars_desc: "Kansainvälinen nuorten johtama koalitio ja kampanja, joka on omistettu iskussa menehtyneiden lasten muiston säilyttämiselle. Järjestö käyttää taidetta ja mediaa kuvatakseen lapset tähtinä, joiden valo saavuttaa maailman.",
+                stars_act1: "Kansainvälisen 'Children of Minab Still Draw the Sun' -taidenäyttelyn järjestäminen menehtyneiden lasten piirustuksista.",
+                stars_act2: "Digitaalisten muistoprojektien ja todistusvideoiden julkaiseminen YouTubessa.",
+                stars_act3: "Maailmanlaajuisen tietoisuuden lisääminen lasten riistetystä tulevaisuudesta.",
+                stars_cat: "Nuoriso & Taide",
+                stars_type: "Kansainvälinen koalitio",
+
+                campaign168_title: "168+1 -kampanja",
+                campaign168_desc: "Kansainvälinen media- ja lakikampanja Minabin koululaisiskun 168 uhrin muistoksi. Kampanja keskittyy julkisen paineen ja oikeustapausten rakentamiseen syyllisten saattamiseksi vastuuseen.",
+                campaign168_act1: "Kansainvälisten lakitoimien ja vetoomusten koordinointi riippumattomien tutkimusten vaatimiseksi.",
+                campaign168_act2: "Kattavan digitaalisen arkiston rakentaminen selviytyjien todistuksista ja mediaraporteista.",
+                campaign168_act3: "Kansainvälisen yleisen mielipiteen mobilisointi sosiaalisen median kampanjoiden avulla.",
+                campaign168_cat: "Oikeudellinen & Vaikuttaminen",
+                campaign168_type: "Diaspora-aloite",
+
+                forensic_title: "Forensic Architecture",
+                forensic_desc: "Akateeminen tutkimustoimisto, joka käyttää tilallista ja visuaalista mallinnusta valtion väkivallan ja kansainvälisen oikeuden loukkausten tutkimiseen.",
+                forensic_act1: "Edistyksellisten 3D-mallinnusten kehittäminen Minabin Shajareh Tayyebehin koulun iskupaikasta kohdentumisvirheen ja aseen reitin analysoimiseksi.",
+                forensic_act2: "Aseromun, tulokulmien ja räjähdysalueiden analysointi käytettyjen asejärjestelmien tunnistamiseksi.",
+                forensic_cat: "Oikeudellinen & Vaikuttaminen",
+                forensic_type: "Tutkimustoimisto",
+
+                hra_title: "Human Rights Activists in Iran (HRA)",
+                hra_desc: "Riippumaton ihmisoikeusjärjestö, joka keskittyy ihmisoikeusloukkausten seurantaan ja dokumentointiin Iranissa.",
+                hra_act1: "Paikan päällä kerättyjen lausuntojen, sairaalatietojen ja uhriprofiilien kerääminen.",
+                hra_act2: "Yhteisten lausuntojen laatiminen vastuuvelvollisuuden ja tarkastusraporttien vaatimiseksi Yhdysvaltain puolustusministeriöltä.",
+                hra_cat: "Oikeudellinen & Vaikuttaminen",
+                hra_type: "Kansalaisjärjestö",
+
+                amnesty_title: "Amnesty International & Human Rights Watch",
+                amnesty_desc: "Johtavat kansainväliset ihmisoikeusjärjestöt, jotka dokumentoivat sotarikoksia, puolustavat uhreja ja auditoivat suurvaltojen siviiliuhrikäytäntöjä.",
+                amnesty_act1: "Yksityiskohtaisten tutkimusraporttien julkaiseminen, joissa isku luokitellaan mahdolliseksi sotarikokseksi siviilikohteen varmentamisen laiminlyönnin vuoksi.",
+                amnesty_act2: "Vaikuttamistyö puolustusviranomaisiin siviiliuhrien tutkintaohjeiden ja vastuullisuuden uudistamiseksi.",
+                amnesty_cat: "Oikeudellinen & Vaikuttaminen",
+                amnesty_type: "Globaalit järjestöt",
+
+                congress_title: "Yhdysvaltain kongressin valvonta",
+                congress_desc: "Yhdysvaltain lainsäätäjien käynnistämät kyselyt puolustusministeriölle tekoälyn käytöstä ja kohdennusvirheistä sodan alussa.",
+                congress_act1: "Edustaja Yassamin Ansarin virallinen kirje siviiliuhrimäärien julkistamiseksi Minabissa.",
+                congress_act2: "Senaatin puolustusvaliokunnan toimet puolustusministerin matkabudjetin rajoittamiseksi, kunnes iskun tutkintaraportti julkaistaan.",
+                congress_cat: "YK & Valvonta",
+                congress_type: "Parlamentaarinen kysely",
+
+                unhrc_title: "YK:n ihmisoikeusneuvosto (UNHRC)",
+                unhrc_desc: "YK-järjestelmän keskeisin hallitustenvälinen elin, joka vastaa ihmisoikeuksien edistämisestä ja suojelusta globaalisti.",
+                unhrc_act1: "Erityiskeskustelun järjestäminen koulutuksen ja lasten suojelusta aseellisissa konflikteissa iskun jälkeen.",
+                unhrc_act2: "Erityisraportoijien lausunnot ja päätöslauselmat, joissa tuomitaan kouluihin ja siviilirakenteisiin kohdistuvat hyökkäykset.",
+                unhrc_cat: "YK & Valvonta",
+                unhrc_type: "Hallitustenvälinen elin",
+
+                unicef_art_title: "UNICEF-mielenosoituksen taiteilijat",
+                unicef_art_desc: "Paikalliset taiteilijat ja uhrien perheet, jotka järjestivät julkisia taideinstallaatioita ja muistotilaisuuksia Iranissa osoittaakseen surua ja vaatiakseen toimia.",
+                unicef_art_act1: "Symbolisen tuhotun luokkahuoneen rakentaminen Teheranin UNICEF-toimiston eteen käyttäen lasten piirustuksia ja esineitä.",
+                unicef_art_act2: "Menehtyneiden lasten piirustusten esillepano iskun inhimillisen tragedian korostamiseksi.",
+                unicef_art_cat: "Nuoriso & Taide",
+                unicef_art_type: "Ruohonjuuritason protesti",
+
+                // Button Labels
+                btn_website: "Siirry sivustolle",
+                btn_youtube: "YouTube-kanava",
+                btn_amnesty: "Amnestyn sivusto",
+                btn_hrw: "HRW:n sivusto",
+                btn_congressional_records: "Kongressin asiakirjat",
+                btn_ohchr: "OHCHR:n sivusto",
+                btn_news_archive: "Uutisarkisto"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('pfp-lang', lang);
+            const isRTL = lang === 'fa';
+            document.documentElement.lang = lang;
+            document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+            document.body.dir = isRTL ? 'rtl' : 'ltr';
+
+            // Update active state on language buttons
+            const labels = { en: 'EN', fa: 'فارسی', fi: 'FI' };
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.trim() === labels[lang]);
+            });
+
+            // Localize text content in header, hero, footer
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Localize placeholder
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                const placeholderKey = searchInput.getAttribute('data-i18n-placeholder');
+                if (translations[lang][placeholderKey]) {
+                    searchInput.placeholder = translations[lang][placeholderKey];
+                }
+            }
+
+            renderDirectory();
+        }
+
+        // RENDER DIRECTORY CARDS
+        function renderDirectory() {
+            const grid = document.getElementById('directoryGrid');
+            if (!grid) return;
+
+            let html = "";
+            for (const key in DATA) {
+                const item = DATA[key];
+                const title = translations[currentLang][`${item.id}_title`] || "";
+                const desc = translations[currentLang][`${item.id}_desc`] || "";
+                const catLabel = translations[currentLang][`${item.id}_cat`] || "";
+                const typeLabel = translations[currentLang][`${item.id}_type`] || "";
+                const activitiesLabel = translations[currentLang]["label_activities"] || "Core Activities";
+
+                // Read activities
+                let activitiesHtml = "";
+                let actIdx = 1;
+                while (true) {
+                    const actText = translations[currentLang][`${item.id}_act${actIdx}`];
+                    if (!actText) break;
+                    activitiesHtml += `<li>${actText}</li>`;
+                    actIdx++;
+                }
+
+                // Render link buttons
+                let buttonsHtml = "";
+                item.links.forEach(link => {
+                    const btnLabel = translations[currentLang][link.labelKey] || "Link";
+                    const btnClass = link.primary ? "btn-primary" : "btn-secondary";
+                    buttonsHtml += `
+                        <a href="${link.url}" target="_blank" rel="noopener" class="action-btn ${btnClass}">
+                            ${btnLabel} ↗
+                        </a>
+                    `;
+                });
+
+                html += `
+                    <div class="directory-card" data-category="${item.cat}" id="card-${item.id}">
+                        <div class="card-top">
+                            <div>
+                                <h2 class="card-title">${title}</h2>
+                                <div class="badge-row">
+                                    <span class="card-badge badge-cat">${catLabel}</span>
+                                    <span class="card-badge badge-type">${typeLabel}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-desc">${desc}</p>
+                        
+                        <h3 class="section-title">${activitiesLabel}</h3>
+                        <ul class="activities-list">
+                            ${activitiesHtml}
+                        </ul>
+
+                        <div class="card-actions">
+                            ${buttonsHtml}
+                        </div>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+        }
+
+        // FILTER CARDS
+        function filterCat(category, buttonEl) {
+            document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+            buttonEl.classList.add('active');
+
+            const cards = document.querySelectorAll('.directory-card');
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    const cardCat = card.getAttribute('data-category');
+                    card.style.display = (cardCat === category) ? 'flex' : 'none';
+                }
+            });
+        }
+
+        // LIVE SEARCH
+        function searchList() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.directory-card');
+            const activeTab = document.querySelector('.filter-tab.active');
+            const activeCat = activeTab ? activeTab.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                const cardCat = card.getAttribute('data-category');
+                const matchesSearch = text.includes(query);
+                const matchesFilter = (activeCat === 'all' || cardCat === activeCat);
+
+                card.style.display = (matchesSearch && matchesFilter) ? 'flex' : 'none';
+            });
+        }
+
+        // INITIALIZATION
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('pfp-lang') || 'en';
+            setLang(savedLang);
+        });
+    </script>
+</body>
+</html>

@@ -19,6 +19,7 @@ These are the public pages served on the live website to volunteers, donors, and
 | **Landing Homepage** | [landing.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/landing.html) | `/landing.html` | The main website landing page with the association mission statement, volunteer signup CTAs, and recent updates. |
 | **Digital Memorial** | [memorial.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/memorial.html) | `/memorial.html` | The digital memorial archive grid listing names, ages, and backgrounds of the children of the Minab incident. |
 | **Evidence Portal** | [evidence.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/evidence.html) | `/evidence.html` | The public forensics and weapon database containing GIS coordinates, weapon fragments, and photos. |
+| **Initiatives Directory** | [initiatives.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/initiatives.html) | `/initiatives.html` | Global directory of active entities, NGOs, campaigns, and key groups working on the Minab incident to drive strategic synergy. |
 
 ---
 
@@ -50,6 +51,7 @@ These are the registration, charter, rules, and research documents filed in Finl
 | :--- | :--- | :--- | :--- |
 | **NGO Benchmarking** | [benchmarks.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/legal/jfmc-2026/benchmarks.html) | `/legal/jfmc-2026/benchmarks.html` | Benchmark report on 8 human rights NGOs (TRIAL, CIJA, ABC, etc.) detailing their funding and strategic focus. |
 | **Peer Organizations** | [peer-orgs.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/legal/jfmc-2026/peer-orgs.html) | `/legal/jfmc-2026/peer-orgs.html` | Network matrix of Hague international courts, prosecutors, and research partnerships. |
+| **Initiatives & Synergy Board** | [initiatives.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/legal/jfmc-2026/initiatives.html) | `/legal/jfmc-2026/initiatives.html` | Internal board directory detailing strategic synergy plans, timeline actions, and strategic warning notices for coalition building. |
 | **ASP Observer Guide** | [asp-guide.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/legal/jfmc-2026/asp-guide.html) | `/legal/jfmc-2026/asp-guide.html` | Roadmap to obtaining official NGO observer status at the ICC Assembly of States Parties. |
 
 ### pre-Decision Archive
