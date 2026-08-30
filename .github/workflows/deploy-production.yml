@@ -6,7 +6,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.actor == 'mahdifarimani' || github.triggering_actor == 'mahdifarimani'
+    if: github.actor == 'mahdifarimani' || github.triggering_actor == 'mahdifarimani' || github.actor == 'bemehrbani' || github.triggering_actor == 'bemehrbani'
     steps:
       - name: Deploy to Production Server
         uses: appleboy/ssh-action@master
@@ -16,7 +16,12 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd /opt/pfp
-            git pull origin main
+            if [ ! -d ".git" ]; then
+              git init
+              git remote add origin https://github.com/bemehrbani/pfp.git
+            fi
+            git fetch origin main
+            git reset --hard origin/main
             
             # Restart docker containers for production
             # Preserves stealth mode explicitly if needed
