@@ -5,19 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0a0e17">
-    <title>Open Data — Minab School Children | People for Peace</title>
+    <title>Open Data Hub — Minab Incident Datasets & Registries | People for Peace</title>
     <meta name="description"
-        content="Open access to verified names, photos, and stories of the 168 children killed in the Minab School airstrike. For researchers, journalists, and advocates.">
-    <meta property="og:title" content="Open Data — Minab School Children" />
-    <meta property="og:description" content="Verified names, photos, and stories of 168 children — free JSON API and CSV for researchers, journalists, and advocates." />
+        content="Open access to verified names, mothers' profiles, family clusters, and forensic sources of the Minab School airstrike. JSON APIs and CSV downloads.">
+    <meta property="og:title" content="Open Data Hub — Minab School Datasets" />
+    <meta property="og:description" content="Verified victim rosters, maternal profiles, family clusters, and primary forensic sources — free JSON APIs and CSV downloads." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://peopleforpeace.live/data.html" />
     <meta property="og:image" content="https://peopleforpeace.live/images/og-memorial.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Open Data — Minab School Children" />
-    <meta name="twitter:description" content="Verified names, photos, and stories — free JSON API and CSV downloads." />
+    <meta name="twitter:title" content="Open Data Hub — Minab School Datasets" />
+    <meta name="twitter:description" content="Verified names, mothers, and forensic sources — free JSON APIs and CSV downloads." />
     <meta name="twitter:image" content="https://peopleforpeace.live/images/og-memorial.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +34,7 @@
             --muted: #6b7280;
             --gold: #d4a853;
             --gold-d: rgba(212, 168, 83, .15);
+            --rose: #e88ca5;
             --border: rgba(255, 255, 255, .06);
             --serif: 'Playfair Display', Georgia, serif;
             --sans: 'Source Sans 3', sans-serif;
@@ -44,9 +45,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
-        h1 { font-family: var(--serif); font-size: clamp(1.5rem, 4vw, 2.2rem); text-align: center; margin-bottom: 8px; }
-        .subtitle { text-align: center; color: var(--text2); margin-bottom: 40px; }
+        .container { max-width: 960px; margin: 0 auto; padding: 60px 20px; }
+        h1 { font-family: var(--serif); font-size: clamp(1.6rem, 4vw, 2.4rem); text-align: center; margin-bottom: 8px; color: var(--text); }
+        .subtitle { text-align: center; color: var(--text2); margin-bottom: 36px; }
         .divider { width: 50px; height: 2px; background: var(--gold); margin: 16px auto 32px; }
 
         .card {
@@ -54,188 +55,165 @@
             border: 1px solid var(--border);
             border-radius: var(--r);
             padding: 28px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            transition: var(--t);
         }
-        .card h2 { font-size: 1.1rem; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .card:hover { border-color: rgba(212,168,83,0.25); }
+        .card h2 { font-size: 1.2rem; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
         .card p { color: var(--text2); font-size: .92rem; margin-bottom: 12px; }
         .card code {
             display: block;
-            background: rgba(0,0,0,.3);
+            background: rgba(0,0,0,.35);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 14px 18px;
-            font-size: .82rem;
+            padding: 12px 16px;
+            font-size: .84rem;
             color: #60a5fa;
             word-break: break-all;
-            margin: 8px 0;
+            margin: 8px 0 14px;
         }
 
-        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
-        .stat { text-align: center; padding: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); }
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 36px; }
+        .stat { text-align: center; padding: 18px 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); }
         .stat .num { font-family: var(--serif); font-size: 2rem; font-weight: 900; color: var(--gold); }
-        .stat .lbl { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+        .stat .lbl { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-top: 4px; }
 
         .btn {
             display: inline-flex; align-items: center; gap: 8px;
-            padding: 12px 24px; border-radius: 25px;
-            text-decoration: none; font-weight: 600; font-size: .9rem;
-            transition: var(--t); margin: 4px;
+            padding: 10px 20px; border-radius: 25px;
+            text-decoration: none; font-weight: 700; font-size: .88rem;
+            transition: var(--t); cursor: pointer; border: none;
         }
         .btn-gold { background: linear-gradient(135deg, var(--gold), #b8922e); color: #0a0e17; }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,168,83,.3); }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,168,83,.3); color: #0a0e17; }
         .btn-outline { background: transparent; color: var(--gold); border: 1px solid rgba(212,168,83,.3); }
         .btn-outline:hover { background: var(--gold-d); }
 
-        .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
 
         table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .85rem; }
-        th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { color: var(--gold); font-weight: 600; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--gold); font-weight: 600; background: rgba(0,0,0,0.2); }
         td { color: var(--text2); }
 
-        .footer { text-align: center; padding: 32px; color: var(--muted); font-size: .8rem; border-top: 1px solid var(--border); margin-top: 40px; }
-        .footer a { color: var(--gold); }
+        .footer { text-align: center; padding: 40px 20px 20px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--border); margin-top: 40px; }
+        .footer a { color: var(--gold); margin: 0 8px; }
 
-        @media (max-width: 600px) {
-            .stats-row { grid-template-columns: 1fr; }
+        @media (max-width: 768px) {
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>📊 Open Data — Minab School</h1>
-        <p class="subtitle">Verified names, photos, and stories — free for researchers, journalists, and advocates</p>
+        <h1>📊 Open Data Hub — Minab Incident</h1>
+        <p class="subtitle">Unified relational datasets, mothers' profiles, family clusters, and forensic sources for researchers, prosecutors, and human rights advocates.</p>
         <div class="divider"></div>
 
         <div class="stats-row">
             <div class="stat">
-                <div class="num" id="childCount">—</div>
-                <div class="lbl">Children Identified</div>
+                <div class="num">156</div>
+                <div class="lbl">Certified Martyrs</div>
             </div>
             <div class="stat">
-                <div class="num" id="photoCount">—</div>
-                <div class="lbl">With Photos</div>
+                <div class="num" id="childCount">120</div>
+                <div class="lbl">Victims Tracked</div>
             </div>
             <div class="stat">
-                <div class="num" id="adultCount">—</div>
-                <div class="lbl">Staff / Teachers</div>
+                <div class="num" id="mothersCount">10</div>
+                <div class="lbl">Mothers Profiled</div>
+            </div>
+            <div class="stat">
+                <div class="num" id="clustersCount">10</div>
+                <div class="lbl">Family Clusters</div>
             </div>
         </div>
 
-        <!-- JSON API -->
+        <!-- Master JSON Dataset -->
         <div class="card">
-            <h2>🔗 JSON API</h2>
-            <p>Fetch all children's data programmatically. Returns names (English + Farsi), age, gender, photo URLs, and profile page links.</p>
-            <code>GET https://peopleforpeace.live/children.json</code>
-            <p style="font-size:.8rem;color:var(--muted);">No authentication required. CORS enabled. Updated periodically.</p>
+            <h2>📦 Canonical Unified JSON Dataset</h2>
+            <p>Complete relational schema matching <code>minab_data_model.json</code> with foreign key resolution across victims, mothers, family clusters, and forensic sources.</p>
+            <code>GET https://peopleforpeace.live/dataset.json</code>
             <div class="btns">
-                <a class="btn btn-gold" href="/children.json" target="_blank">📥 View JSON</a>
-                <a class="btn btn-outline" href="/children.json" download="minab_children.json">⬇ Download JSON</a>
+                <a class="btn btn-gold" href="/dataset.json" target="_blank">📥 View Unified JSON</a>
+                <a class="btn btn-outline" href="/dataset.json" download="minab_unified_dataset.json">⬇ Download Dataset</a>
             </div>
         </div>
 
-        <!-- Response Schema -->
+        <!-- Entity CSV Downloads -->
         <div class="card">
-            <h2>📋 Response Schema</h2>
+            <h2>📄 Spreadsheet CSV Exports</h2>
+            <p>Download structured CSV tables for analytical use, statistical auditing, or spreadsheet software:</p>
+            <div class="btns">
+                <a class="btn btn-gold" href="/minab_victims.csv" download="minab_victims.csv">⬇ Victims CSV</a>
+                <a class="btn btn-gold" href="/minab_mothers.csv" download="minab_mothers.csv">⬇ Mothers CSV</a>
+                <a class="btn btn-gold" href="/minab_family_clusters.csv" download="minab_family_clusters.csv">⬇ Family Clusters CSV</a>
+                <a class="btn btn-gold" href="/minab_sources.csv" download="minab_sources.csv">⬇ Forensic Sources CSV</a>
+            </div>
+        </div>
+
+        <!-- Specific JSON APIs -->
+        <div class="card">
+            <h2>🔗 Individual Entity JSON APIs</h2>
             <table>
                 <thead>
-                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                    <tr><th>Entity Endpoint</th><th>Format</th><th>Description</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>id</td><td>string</td><td>Unique slug (e.g. "zeynab-bahrami")</td></tr>
-                    <tr><td>name</td><td>string</td><td>Full name in English</td></tr>
-                    <tr><td>nameFa</td><td>string</td><td>Full name in Farsi (Persian)</td></tr>
-                    <tr><td>age</td><td>number|null</td><td>Age at time of death (if known)</td></tr>
-                    <tr><td>gender</td><td>"boy"|"girl"</td><td>Gender</td></tr>
-                    <tr><td>hasPhoto</td><td>boolean</td><td>Whether a photo is available</td></tr>
-                    <tr><td>photoUrl</td><td>string|null</td><td>Direct URL to the child's photo</td></tr>
-                    <tr><td>profileUrl</td><td>string</td><td>URL to the child's memorial page</td></tr>
+                    <tr>
+                        <td><code>/children.json</code></td>
+                        <td>JSON</td>
+                        <td>Children & educators memorial list with photo grid links</td>
+                    </tr>
+                    <tr>
+                        <td><code>/mothers.json</code></td>
+                        <td>JSON</td>
+                        <td>Mothers' profiles, testimonies, and linked children IDs</td>
+                    </tr>
+                    <tr>
+                        <td><code>/family_clusters.json</code></td>
+                        <td>JSON</td>
+                        <td>Family clusters and multi-victim household mappings</td>
+                    </tr>
+                    <tr>
+                        <td><code>/sources.json</code></td>
+                        <td>JSON</td>
+                        <td>Evidentiary sources (satellite, munitions, judicial filings)</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- CSV Download -->
+        <!-- License & Attribution -->
         <div class="card">
-            <h2>📄 CSV Download</h2>
-            <p>Download a spreadsheet-ready CSV file with all identified children's information.</p>
-            <div class="btns">
-                <button class="btn btn-gold" onclick="downloadCSV()">📥 Download CSV</button>
-            </div>
-        </div>
-
-        <!-- Usage Examples -->
-        <div class="card">
-            <h2>💻 Usage Examples</h2>
-            <p>JavaScript:</p>
-            <code>const res = await fetch('https://peopleforpeace.live/children.json');<br>
-const data = await res.json();<br>
-data.children.forEach(c => console.log(c.name, c.nameFa));</code>
-            <p>Python:</p>
-            <code>import requests<br>
-data = requests.get('https://peopleforpeace.live/children.json').json()<br>
-for child in data['children']:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;print(child['name'], child['nameFa'])</code>
-        </div>
-
-        <!-- License -->
-        <div class="card">
-            <h2>⚖️ License & Attribution</h2>
-            <p>This data is provided free under a <strong>Creative Commons CC-BY 4.0</strong> license for educational, awareness, and humanitarian purposes.</p>
-            <p>When using this data, please credit: <strong>People for Peace — peopleforpeace.live</strong></p>
-            <p style="font-size:.8rem;color:var(--muted);">Sources: Minab Governor's Office, Middle East Eye, Iran Gymnastics Federation, Human Rights Watch</p>
+            <h2>⚖️ Open Access License & Attribution</h2>
+            <p>All data is provided free and unrestricted under the <strong>Creative Commons CC-BY 4.0 International License</strong> for legal justice, academic research, and humanitarian remembrance.</p>
+            <p>Attribution citation: <em>People for Peace & Justice ry (PFPJ ry) — Minab Incident Master Casualty & Mothers Registry (2026)</em></p>
         </div>
 
         <div class="footer">
-            <a href="/memorial.html">← Memorial Page</a> &nbsp;·&nbsp;
-            <a href="/">Home</a> &nbsp;·&nbsp;
+            <a href="/">Home</a> ·
+            <a href="/memorial.html">Memorial</a> ·
+            <a href="/mothers.html">Mothers</a> ·
+            <a href="/evidence.html">Evidence</a> ·
+            <a href="/sources.html">Forensic Report</a> ·
             <a href="https://t.me/peopleforpeacebot">Telegram Bot</a>
-            <p style="margin-top:12px;">People for Peace · 2026</p>
+            <p style="margin-top:14px;">People for Peace & Justice ry · Helsinki, Finland</p>
         </div>
     </div>
 
     <script>
-        // Fetch and populate stats
-        fetch('/children.json')
+        fetch('/dataset.json')
             .then(r => r.json())
             .then(data => {
-                document.getElementById('childCount').textContent = data.totalIdentified;
-                document.getElementById('photoCount').textContent = data.withPhotos;
-                document.getElementById('adultCount').textContent = data.adults;
+                if (data.summary_stats) {
+                    document.getElementById('childCount').textContent = data.summary_stats.total_victims_tracked;
+                    document.getElementById('mothersCount').textContent = data.summary_stats.total_mothers_profiled;
+                    document.getElementById('clustersCount').textContent = data.summary_stats.total_family_clusters;
+                }
             })
-            .catch(() => {
-                document.getElementById('childCount').textContent = '117';
-                document.getElementById('photoCount').textContent = '98';
-                document.getElementById('adultCount').textContent = '3';
-            });
-
-        function downloadCSV() {
-            fetch('/children.json')
-                .then(r => r.json())
-                .then(data => {
-                    const rows = [['Name', 'Name (Farsi)', 'Age', 'Gender', 'Has Photo', 'Photo URL', 'Profile URL']];
-                    data.children.forEach(c => {
-                        rows.push([
-                            c.name,
-                            c.nameFa,
-                            c.age || '',
-                            c.gender,
-                            c.hasPhoto ? 'Yes' : 'No',
-                            c.photoUrl || '',
-                            c.profileUrl,
-                        ]);
-                    });
-                    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
-                    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'minab_children.csv';
-                    a.click();
-                    URL.revokeObjectURL(url);
-                });
-        }
+            .catch(e => console.log('Data loaded statically'));
     </script>
 </body>
-
 </html>

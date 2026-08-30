@@ -1,0 +1,692 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pfp.ngo/schemas/minab_data_model.json",
+  "title": "MinabIncidentDataset",
+  "description": "Unified data model and schema for the Shajareh Tayyebeh school incident in Minab (Feb 28, 2026), capturing victims, mothers, family clusters, and source references for legal documentation, human rights reporting, and memorial initiatives.",
+  "type": "object",
+  "required": [
+    "incident_metadata",
+    "sources",
+    "victims",
+    "mothers",
+    "family_clusters"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "incident_metadata": {
+      "$ref": "#/$defs/IncidentMetadata"
+    },
+    "sources": {
+      "type": "array",
+      "description": "Registry of primary evidence, media reports, official investigations, and OSINT source references.",
+      "items": {
+        "$ref": "#/$defs/SourceReference"
+      },
+      "uniqueItems": true
+    },
+    "victims": {
+      "type": "array",
+      "description": "Registry of all documented direct victims (children, teachers, school staff, community members, and unborn fetuses).",
+      "items": {
+        "$ref": "#/$defs/Victim"
+      },
+      "uniqueItems": true
+    },
+    "mothers": {
+      "type": "array",
+      "description": "Registry of mothers of victims with biographical, bereavement, and testimonial profiles.",
+      "items": {
+        "$ref": "#/$defs/MotherProfile"
+      },
+      "uniqueItems": true
+    },
+    "family_clusters": {
+      "type": "array",
+      "description": "Aggregated family units and bereavement clusters documenting intergenerational civilian impact.",
+      "items": {
+        "$ref": "#/$defs/FamilyCluster"
+      },
+      "uniqueItems": true
+    },
+    "summary_stats": {
+      "$ref": "#/$defs/DatasetSummaryStats"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the dataset release (e.g. 1.0.0).",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of last data validation and export."
+    }
+  },
+  "$defs": {
+    "SourceReference": {
+      "type": "object",
+      "description": "Evidence citation or reference source documenting incident details and victim profiles.",
+      "required": [
+        "id",
+        "title",
+        "outlet",
+        "tier",
+        "reliability_score"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the source (e.g., 'SRC-001', 'EVD-MUN-002').",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "description": "Full title or headline of the source citation."
+        },
+        "outlet": {
+          "type": "string",
+          "description": "Publishing organization, agency, court filing, news outlet, or archive."
+        },
+        "url": {
+          "type": ["string", "null"],
+          "format": "uri-reference",
+          "description": "Direct URL or permalink to digital evidence / archival snapshot."
+        },
+        "publication_date": {
+          "type": ["string", "null"],
+          "description": "Publication or collection date in ISO format (YYYY-MM-DD or YYYY-MM)."
+        },
+        "tier": {
+          "type": ["string", "integer"],
+          "description": "Evidence verification hierarchy: Tier 1 (Primary / Forensic / Legal), Tier 2 (Official Military / Gov), Tier 3 (Verified OSINT / Independent Media), Tier 4 (Local Testimonies / Secondary Media).",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            "1",
+            "2",
+            "3",
+            "4",
+            "tier_1",
+            "tier_2",
+            "tier_3",
+            "tier_4",
+            "Tier 1",
+            "Tier 2",
+            "Tier 3",
+            "Tier 4",
+            "primary_legal_evidence",
+            "official_investigation",
+            "verified_osint",
+            "media_report",
+            "witness_testimony"
+          ]
+        },
+        "reliability_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Normalized reliability rating from 0.0 (unverified) to 1.0 (authoritative forensic proof)."
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "Contextual notes, evidentiary value, or verification remarks."
+        },
+        "archive_hash": {
+          "type": ["string", "null"],
+          "description": "Cryptographic checksum (SHA-256) of archived evidence file if stored."
+        }
+      }
+    },
+    "MultilingualText": {
+      "type": "object",
+      "description": "Structured bilingual or multilingual text representation.",
+      "required": ["en"],
+      "additionalProperties": false,
+      "properties": {
+        "en": {
+          "type": "string",
+          "description": "English translation or text."
+        },
+        "fa": {
+          "type": "string",
+          "description": "Persian (Farsi) original or translation."
+        },
+        "ar": {
+          "type": "string",
+          "description": "Arabic translation (optional)."
+        }
+      }
+    },
+    "PhotoGridCoordinates": {
+      "type": "object",
+      "description": "Physical and digital coordinate mapping on the 100-child memorial mosaic grid.",
+      "additionalProperties": false,
+      "properties": {
+        "grid_index": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 199,
+          "description": "0-based position on the 100-child memorial mosaic grid."
+        },
+        "border_index": {
+          "type": ["integer", "string", "null"],
+          "description": "Border index number as numbered on the official visual roster."
+        },
+        "row": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 20,
+          "description": "Row position in the mosaic layout."
+        },
+        "col": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 20,
+          "description": "Column position in the mosaic layout."
+        },
+        "filename": {
+          "type": ["string", "null"],
+          "description": "Standardized photo filename (e.g. Asma_Zakeri_41.jpg)."
+        },
+        "match_confidence": {
+          "type": ["string", "null"],
+          "enum": ["HIGH", "MEDIUM", "LOW", "MANUAL_VERIFIED", null],
+          "description": "Confidence level of facial recognition / OCR name matching."
+        }
+      }
+    },
+    "Victim": {
+      "type": "object",
+      "description": "Individual record of a casualty or survivor of the Minab incident.",
+      "required": [
+        "id",
+        "full_name_en",
+        "full_name_fa",
+        "role",
+        "status",
+        "identification_method",
+        "sources"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique victim identifier (e.g., 'VIC-001', 'asma-zakeri').",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "full_name_en": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Standardized Latin transliteration of full name."
+        },
+        "full_name_fa": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Persian (Farsi) official spelling of full name."
+        },
+        "father_name": {
+          "type": ["string", "null"],
+          "description": "Father's first name."
+        },
+        "mother_id": {
+          "type": ["string", "null"],
+          "description": "Foreign key reference to MotherProfile.id.",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "age": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 120,
+          "description": "Age in years at the time of the incident (can be null for unborn fetus or unknown)."
+        },
+        "age_months": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 1200,
+          "description": "Age in months, used for infants and developmental milestone tracking."
+        },
+        "gender": {
+          "type": ["string", "null"],
+          "enum": ["female", "male", "unknown", "other", null],
+          "description": "Gender of the victim."
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "student",
+            "teacher",
+            "staff",
+            "parent",
+            "community",
+            "unborn_fetus"
+          ],
+          "description": "Civic or educational role at the time of the strike."
+        },
+        "grade_or_class": {
+          "type": ["string", "null"],
+          "description": "School grade or classroom designation (e.g., 'Grade 1', 'Grade 3B', 'Kindergarten')."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "killed",
+            "injured",
+            "missing"
+          ],
+          "description": "Casualty classification status."
+        },
+        "identification_method": {
+          "type": "string",
+          "enum": [
+            "visual",
+            "dna",
+            "personal_belongings",
+            "unrecovered",
+            "official_records",
+            "eyewitness"
+          ],
+          "description": "Forensic or administrative method used to verify victim identity."
+        },
+        "burial_location": {
+          "type": ["string", "null"],
+          "description": "Cemetery name, city, or plot where the victim is laid to rest (e.g., 'Behesht-e Zahra Minab', 'Shahrak Beheshti Cemetery')."
+        },
+        "photo_url": {
+          "type": ["string", "null"],
+          "description": "URL or relative asset path to the verified portrait / photo."
+        },
+        "photo_grid": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PhotoGridCoordinates"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Memorial mosaic grid mapping or position coordinates."
+        },
+        "biography": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MultilingualText"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Brief life summary, personal dreams, hobbies, or narrative notes."
+        },
+        "family_cluster_id": {
+          "type": ["string", "null"],
+          "description": "Foreign key reference to FamilyCluster.cluster_id."
+        },
+        "sources": {
+          "type": "array",
+          "description": "List of source IDs validating this victim record (must resolve in sources registry).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "injuries_description": {
+          "type": ["string", "null"],
+          "description": "Medical summary of injuries if status is injured or for forensic records."
+        },
+        "date_of_death": {
+          "type": ["string", "null"],
+          "description": "Date of martyrdom/death in ISO format (YYYY-MM-DD)."
+        }
+      }
+    },
+    "MotherQuote": {
+      "type": "object",
+      "description": "Recorded oral history quote or testimony from a mother.",
+      "required": ["quote_en"],
+      "additionalProperties": false,
+      "properties": {
+        "quote_en": {
+          "type": "string",
+          "description": "English translation of mother's statement."
+        },
+        "quote_fa": {
+          "type": ["string", "null"],
+          "description": "Original Persian quote transcript."
+        },
+        "date": {
+          "type": ["string", "null"],
+          "description": "Date testimony was recorded (YYYY-MM-DD)."
+        },
+        "context": {
+          "type": ["string", "null"],
+          "description": "Setting or context of quote (e.g. 'Memorial vigil', 'Hospital interview')."
+        },
+        "source_id": {
+          "type": ["string", "null"],
+          "description": "Reference source ID documenting this quote."
+        }
+      }
+    },
+    "MotherProfile": {
+      "type": "object",
+      "description": "Comprehensive profile of a mother affected by the Minab incident.",
+      "required": [
+        "id",
+        "full_name_en",
+        "full_name_fa",
+        "is_casualty",
+        "status",
+        "children_ids",
+        "sources"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique mother identifier (e.g., 'MOM-001', 'mother-zakeri').",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "full_name_en": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Standardized Latin transliteration of mother's full name."
+        },
+        "full_name_fa": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Persian (Farsi) official spelling of mother's full name."
+        },
+        "spouse_name": {
+          "type": ["string", "null"],
+          "description": "Spouse's full name."
+        },
+        "is_casualty": {
+          "type": "boolean",
+          "description": "True if the mother was herself killed or injured in the incident."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "killed",
+            "injured",
+            "survived"
+          ],
+          "description": "Personal casualty status of the mother."
+        },
+        "profession": {
+          "type": ["string", "null"],
+          "description": "Mother's profession or occupation (e.g., 'Teacher', 'Nurse', 'Homemaker')."
+        },
+        "narrative_summary": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MultilingualText"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Narrative overview of her bereavement, family background, and advocacy."
+        },
+        "quotes": {
+          "type": "array",
+          "description": "Collection of direct quotes, testimonies, and oral history excerpts.",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/MotherQuote"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "children_ids": {
+          "type": "array",
+          "description": "Foreign key IDs of her children (each must exist in victims registry).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "other_family_member_ids": {
+          "type": "array",
+          "description": "Foreign key IDs of other affected family members.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "photo_url": {
+          "type": ["string", "null"],
+          "description": "URL or path to photo/portrait."
+        },
+        "family_cluster_id": {
+          "type": ["string", "null"],
+          "description": "Reference to FamilyCluster.cluster_id."
+        },
+        "sources": {
+          "type": "array",
+          "description": "List of source IDs validating this mother profile.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FamilyCluster": {
+      "type": "object",
+      "description": "Family aggregate grouping documenting the multi-victim toll on specific households.",
+      "required": [
+        "cluster_id",
+        "family_surname_en",
+        "family_surname_fa",
+        "total_killed",
+        "total_injured",
+        "member_ids"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "cluster_id": {
+          "type": "string",
+          "description": "Unique family cluster identifier (e.g., 'FAM-001', 'cluster-zakeri').",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "family_surname_en": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Family surname in Latin characters."
+        },
+        "family_surname_fa": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Family surname in Persian (Farsi) script."
+        },
+        "mother_id": {
+          "type": ["string", "null"],
+          "description": "Foreign key reference to the matriarch / MotherProfile.id."
+        },
+        "total_killed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of family members killed in the incident."
+        },
+        "total_injured": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of family members injured in the incident."
+        },
+        "member_ids": {
+          "type": "array",
+          "description": "List of all Victim and MotherProfile IDs belonging to this family unit.",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "description": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MultilingualText"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Summary of the family tragedy, lineage, and neighborhood ties."
+        },
+        "neighborhood_or_residence": {
+          "type": ["string", "null"],
+          "description": "Neighborhood, village, or district in Minab."
+        },
+        "sources": {
+          "type": "array",
+          "description": "Source IDs documenting this family cluster.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IncidentCoordinates": {
+      "type": "object",
+      "description": "Geographic latitude and longitude coordinates.",
+      "required": ["latitude", "longitude"],
+      "additionalProperties": false,
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "minimum": -90.0,
+          "maximum": 90.0,
+          "description": "WGS 84 Latitude in decimal degrees."
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180.0,
+          "maximum": 180.0,
+          "description": "WGS 84 Longitude in decimal degrees."
+        }
+      }
+    },
+    "IncidentMetadata": {
+      "type": "object",
+      "description": "Core metadata and factual chronology of the Minab school airstrike.",
+      "required": [
+        "incident_id",
+        "incident_name_en",
+        "incident_name_fa",
+        "incident_date",
+        "target_facility_en",
+        "target_facility_fa",
+        "city",
+        "province",
+        "country",
+        "coordinates",
+        "weapon_system",
+        "legal_standard_of_proof"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "incident_id": {
+          "type": "string",
+          "description": "Canonical incident identifier (e.g. 'MINAB-2026-0228')."
+        },
+        "incident_name_en": {
+          "type": "string",
+          "description": "Official incident title in English."
+        },
+        "incident_name_fa": {
+          "type": "string",
+          "description": "Official incident title in Persian."
+        },
+        "incident_date": {
+          "type": "string",
+          "description": "Date of incident in ISO 8601 format (e.g., '2026-02-28')."
+        },
+        "incident_time_local": {
+          "type": ["string", "null"],
+          "description": "Approximate local strike time (e.g. '08:45 IRST')."
+        },
+        "target_facility_en": {
+          "type": "string",
+          "description": "Name of targeted school in English (e.g., 'Shajareh Tayyebeh Girls Elementary School')."
+        },
+        "target_facility_fa": {
+          "type": "string",
+          "description": "Name of targeted school in Persian (e.g., 'دبستان دخترانه شجره طیبه میناب')."
+        },
+        "city": {
+          "type": "string",
+          "description": "City location (Minab)."
+        },
+        "province": {
+          "type": "string",
+          "description": "Province location (Hormozgan)."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country (Iran)."
+        },
+        "coordinates": {
+          "$ref": "#/$defs/IncidentCoordinates"
+        },
+        "weapon_system": {
+          "type": "string",
+          "description": "Munition type determined by forensic evidence (e.g., 'Tomahawk BGM-109 Cruise Missile')."
+        },
+        "responsible_force": {
+          "type": ["string", "null"],
+          "description": "Military command or unit responsible (e.g., 'US Naval Forces Central Command / Operation Epic Fury')."
+        },
+        "legal_standard_of_proof": {
+          "type": "string",
+          "description": "Applicable legal standard of proof (e.g. 'Reasonable grounds to believe')."
+        },
+        "summary": {
+          "$ref": "#/$defs/MultilingualText"
+        }
+      }
+    },
+    "DatasetSummaryStats": {
+      "type": "object",
+      "description": "Aggregate statistics of casualties and verified profiles.",
+      "additionalProperties": false,
+      "properties": {
+        "total_estimated_killed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_documented_victims": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_documented_mothers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_family_clusters": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_sources_cited": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

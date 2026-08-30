@@ -491,6 +491,23 @@
             if (child.notes) {
                 bioRows.push(`<div class="bio-row"><span class="bio-label">Notes</span><span class="bio-value">${child.notes}</span></div>`);
             }
+            if (child.motherName || child.motherNameFa) {
+                const mName = (currentLang === 'fa' && child.motherNameFa) ? child.motherNameFa : (child.motherName || child.motherNameFa);
+                const mLabel = currentLang === 'fa' ? 'مادر' : (currentLang === 'ar' ? 'الأم' : 'Mother');
+                bioRows.push(`<div class="bio-row"><span class="bio-label">${mLabel}</span><span class="bio-value"><a href="mothers.html" style="color:var(--rose);">${mName} ↗</a></span></div>`);
+            }
+            if (child.familyClusterName) {
+                const fLabel = currentLang === 'fa' ? 'تبار خانوادگی' : (currentLang === 'ar' ? 'العائلة' : 'Family Cluster');
+                bioRows.push(`<div class="bio-row"><span class="bio-label">${fLabel}</span><span class="bio-value"><a href="mothers.html" style="color:var(--gold);">${child.familyClusterName} ↗</a></span></div>`);
+            }
+            if (child.identificationMethod) {
+                const idLabel = currentLang === 'fa' ? 'روش احراز هویت' : (currentLang === 'ar' ? 'طريقة التعرف' : 'Identification');
+                const idVal = child.identificationMethod === 'unrecovered' ? (currentLang === 'fa' ? 'جاویدالاثر (بدون مزار)' : 'Unrecovered / Epicenter') : child.identificationMethod.toUpperCase();
+                bioRows.push(`<div class="bio-row"><span class="bio-label">${idLabel}</span><span class="bio-value">${idVal}</span></div>`);
+            }
+            const srcLabel = currentLang === 'fa' ? 'گزارش مراجع' : (currentLang === 'ar' ? 'التقرير الجنائي' : 'Forensic Audit');
+            const srcVal = currentLang === 'fa' ? 'پزشکی قانونی و دادستانی میناب ↗' : 'Forensic DNA & Judicial Indictment ↗';
+            bioRows.push(`<div class="bio-row"><span class="bio-label">${srcLabel}</span><span class="bio-value"><a href="sources.html" style="color:var(--blue);">${srcVal}</a></span></div>`);
 
             // Related story
             let storyHtml = '';
@@ -578,12 +595,13 @@
                 <footer class="memorial-footer" style="text-align:center; padding: 32px 0; border-top: 1px solid var(--border); margin-top: 40px;">
                     <div class="footer-quote-fa" style="margin-bottom:8px;">${t.footerFa}</div>
                     <div class="footer-quote-en" style="margin-bottom:16px;">${t.footerEn}</div>
-                    <div class="footer-links" style="display:flex; justify-content:center; gap:20px; margin-bottom:16px; font-size:0.9rem;">
+                    <div class="footer-links" style="display:flex; justify-content:center; flex-wrap:wrap; gap:20px; margin-bottom:16px; font-size:0.9rem;">
                         <a href="landing.html">Home</a>
-                        <a href="about.html">About Us</a>
                         <a href="memorial.html">Memorial</a>
+                        <a href="mothers.html">Mothers</a>
                         <a href="evidence.html">Evidence</a>
-                        <a href="mailto:info@peopleforpeace.live">${t.footer_contact}</a>
+                        <a href="sources.html">Forensic Report</a>
+                        <a href="data.html">Open Data</a>
                     </div>
                     <p style="font-size:0.8rem; color:#64748b;">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
                 </footer>`;

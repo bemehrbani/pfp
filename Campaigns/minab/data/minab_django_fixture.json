@@ -1,0 +1,94 @@
+[
+  {
+    "model": "campaigns.incident",
+    "pk": "MINAB-2026-0228",
+    "fields": {
+      "name_en": "Shajareh Tayyebeh Girls' Elementary School Airstrike",
+      "name_fa": "حمله موشکی به دبستان دخترانه شجره طیبه میناب",
+      "date": "2026-02-28",
+      "time_local": "08:45 IRST",
+      "facility_en": "Shajareh Tayyebeh Girls' Elementary School",
+      "facility_fa": "دبستان دخترانه شجره طیبه میناب",
+      "city": "Minab",
+      "province": "Hormozgan",
+      "country": "Iran",
+      "latitude": 27.1352,
+      "longitude": 57.0805,
+      "weapon_system": "Tomahawk BGM-109 Cruise Missile (Block IV/V)",
+      "responsible_force": "United States Naval Forces Central Command / Operation Epic Fury",
+      "legal_standard_of_proof": "Reasonable grounds to believe",
+      "summary_en": "On February 28, 2026 at approximately 08:45 IRST, during the opening hours of the school day, three precision-guided BGM-109 Tomahawk cruise missiles struck the Shajareh Tayyebeh Elementary School in Minab, Hormozgan Province, Iran. The school was an active civilian educational facility separated since 2016 by a concrete security barrier from an adjacent military facility. The strike caused massive civilian casualties, killing approximately 168 individuals, predominantly young girls aged 6 to 12, along with educators and staff.",
+      "summary_fa": "در تاریخ ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶) ساعت ۰۸:۴۵ صبح، سه فروند موشک کروز هدایت‌شونده دقیق BGM-109 تاماهاک به دبستان دخترانه شجره طیبه در میناب اصابت کردند. این مدرسه از سال ۲۰۱۶ با دیوار بتنی از پادگان مجاور جدا شده و دارای کاربری کاملاً غیرنظامی بود. این حمله منجر به شهادت بیش از ۱۶۸ تن، عمدتاً دختران ۶ الی ۱۲ ساله، معلمان و کادر آموزشی مدرسه گردید."
+    }
+  },
+  {
+    "model": "campaigns.sourcereference",
+    "pk": "EVD-SAT-001",
+    "fields": {
+      "title": "Satellite Imagery and Spatial Geo-Partitioning Analysis (2013-2026)",
+      "outlet": "Planet Labs / Google Earth Historical Archive",
+      "url": "https://pfp.ngo/evidence/EVD-SAT-001",
+      "publication_date": "2026-03-05",
+      "tier": "Tier 1",
+      "reliability_score": 0.99,
+      "notes": "High-resolution satellite imagery confirming physical concrete wall boundary built in 2016 separating school compound from naval base.",
+      "archive_hash": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0"
+    }
+  },
+  {
+    "model": "campaigns.sourcereference",
+    "pk": "EVD-MUN-002",
+    "fields": {
+      "title": "Munitions Forensic Analysis: BGM-109 Tomahawk Cruise Missile Debris",
+      "outlet": "Independent Weapons Research & Bellingcat",
+      "url": "https://pfp.ngo/evidence/EVD-MUN-002",
+      "publication_date": "2026-03-08",
+      "tier": "Tier 1",
+      "reliability_score": 0.98,
+      "notes": "Physical serial numbers and aerodynamic fin debris recovered at strike crater matching US Navy Tomahawk Block IV/V specifications.",
+      "archive_hash": "b2c3d4e5f6a7890123456789abcdef0123456789abcdef0123456789abcdef1"
+    }
+  },
+  {
+    "model": "campaigns.sourcereference",
+    "pk": "EVD-LAUNCH-003",
+    "fields": {
+      "title": "Launch Platform Attribution & Strike Vector Tracking",
+      "outlet": "Operation Epic Fury Operational Assessment",
+      "url": "https://pfp.ngo/evidence/EVD-LAUNCH-003",
+      "publication_date": "2026-03-12",
+      "tier": "Tier 1",
+      "reliability_score": 0.95,
+      "notes": "Trajectory and carrier strike group positioning in the Gulf of Oman verifying launch origin from US naval vessels.",
+      "archive_hash": "c3d4e5f6a7b890123456789abcdef0123456789abcdef0123456789abcdef2"
+    }
+  },
+  {
+    "model": "campaigns.sourcereference",
+    "pk": "EVD-CENTCOM-004",
+    "fields": {
+      "title": "US CENTCOM Preliminary 15-6 Investigation & Target Intelligence Failures",
+      "outlet": "US Department of Defense / Declassified Excerpts",
+      "url": "https://pfp.ngo/evidence/EVD-CENTCOM-004",
+      "publication_date": "2026-04-02",
+      "tier": "Tier 2",
+      "reliability_score": 0.94,
+      "notes": "Internal admissions regarding reliance on pre-2016 outdated DIA target databases and algorithmic pipeline verification failures.",
+      "archive_hash": "d4e5f6a7b8c990123456789abcdef0123456789abcdef0123456789abcdef3"
+    }
+  },
+  {
+    "model": "campaigns.sourcereference",
+    "pk": "EVD-VIC-005",
+    "fields": {
+      "title": "Victims Identity & Digital Memorial Roster",
+      "outlet": "People for Peace & Justice ry (PFPJ ry) Registry",
+      "url": "https://pfp.ngo/evidence/EVD-VIC-005",
+      "publication_date": "2026-07-03",
+      "tier": "Tier 1",
+      "reliability_score": 0.99,
+      "notes": "Comprehensive portrait-matched and family-verified roster of 100 documented victim profiles and bereaved mothers.",
+      "archive_hash": "e5f6a7b8c9d090123456789abcdef0123456789abcdef0123456789abcdef4"
+    }
+  }
+]

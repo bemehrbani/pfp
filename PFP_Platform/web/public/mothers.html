@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0e17" />
+    <meta name="description"
+        content="Mothers & Families of Minab — Documenting maternal love, bereavement, heroic rescues, and family lineages of the Shajareh Tayyebeh school airstrike." />
+    <meta property="og:title" content="Mothers & Families of Minab — People for Peace" />
+    <meta property="og:description"
+        content="Stories of courage, loss, and love: Profiles of the mothers and family clusters of the Minab school incident." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://peopleforpeace.live/mothers.html" />
+    <meta property="og:image" content="https://peopleforpeace.live/images/og-memorial.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mothers & Families of Minab — People for Peace" />
+    <meta name="twitter:description" content="Profiles, family lineages, and maternal testimonies from the Minab school incident." />
+    <meta name="twitter:image" content="https://peopleforpeace.live/images/og-memorial.png" />
+    <title id="pageTitle">Mothers & Families of Minab | People for Peace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg2: #111827;
+            --bg3: #1a1f2e;
+            --bg-card: #161c2d;
+            --bg-card-hover: #1e263d;
+            --text: #f0ebe3;
+            --text2: #9ca3af;
+            --muted: #6b7280;
+            --gold: #d4a853;
+            --gold-d: rgba(212, 168, 83, 0.15);
+            --rose: #e88ca5;
+            --rose-d: rgba(232, 140, 165, 0.15);
+            --peace: #7cb68e;
+            --peace-d: rgba(124, 182, 142, 0.12);
+            --red: #c4564a;
+            --red-d: rgba(196, 86, 74, 0.12);
+            --blue: #60a5fa;
+            --border: rgba(255, 255, 255, 0.07);
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'Source Sans 3', sans-serif;
+            --rtl: 'Vazirmatn', sans-serif;
+            --r: 14px;
+            --t: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        body[dir="rtl"] { font-family: var(--rtl); }
+        body[dir="rtl"] .serif { font-family: var(--rtl); }
+        a { color: var(--gold); text-decoration: none; transition: var(--t); }
+        a:hover { color: #fff; text-decoration: none; }
+
+        /* ─── NAVBAR ─── */
+        .nav {
+            position: sticky; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 32px;
+            background: rgba(10, 14, 23, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links a { font-size: 0.9rem; color: var(--text2); font-weight: 600; padding: 6px 12px; border-radius: 8px; transition: var(--t); }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); background: var(--gold-d); }
+        .lang-switch { display: flex; gap: 4px; background: rgba(255,255,255,0.05); padding: 3px; border-radius: 20px; border: 1px solid var(--border); }
+        .lang-btn { background: none; border: none; color: var(--text2); padding: 4px 10px; border-radius: 14px; cursor: pointer; font-size: 0.78rem; font-weight: 600; transition: var(--t); }
+        .lang-btn.active { background: var(--gold); color: #0a0e17; }
+
+        @media (max-width: 900px) { .nav-links { display: none; } }
+
+        /* ─── HERO ─── */
+        .hero {
+            padding: 90px 24px 50px; text-align: center;
+            background: radial-gradient(circle at 50% 20%, rgba(232,140,165,0.08) 0%, rgba(10,14,23,0) 70%);
+            position: relative;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 14px; border-radius: 20px;
+            background: var(--rose-d); color: var(--rose);
+            font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 16px; border: 1px solid rgba(232,140,165,0.3);
+        }
+        .hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.2; margin-bottom: 16px; }
+        .hero p { max-width: 760px; margin: 0 auto 32px; color: var(--text2); font-size: 1.12rem; }
+
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+            max-width: 960px; margin: 0 auto;
+        }
+        .stat-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 20px 16px; text-align: center;
+        }
+        .stat-card .num { font-family: var(--serif); font-size: 2.2rem; font-weight: 900; color: var(--gold); }
+        .stat-card .lbl { font-size: 0.78rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+        @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        /* ─── SECTION ─── */
+        .section { max-width: 1160px; margin: 0 auto; padding: 60px 24px; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h2 { font-family: var(--serif); font-size: 2rem; color: var(--text); margin-bottom: 8px; }
+        .section-header p { color: var(--text2); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+
+        /* ─── FILTER BAR ─── */
+        .filter-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+        .filter-btn {
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text2); padding: 8px 18px; border-radius: 25px;
+            font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: var(--t);
+        }
+        .filter-btn:hover, .filter-btn.active { background: var(--gold-d); color: var(--gold); border-color: var(--gold); }
+
+        /* ─── MOTHERS GRID ─── */
+        .mothers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+        .mother-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 24px; display: flex; flex-direction: column;
+            transition: var(--t); cursor: pointer; position: relative; overflow: hidden;
+        }
+        .mother-card:hover { transform: translateY(-4px); background: var(--bg-card-hover); border-color: rgba(212,168,83,0.3); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+        .mother-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+        .mother-avatar {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: var(--rose-d); border: 2px solid var(--rose);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; flex-shrink: 0;
+        }
+        .mother-avatar.teacher { border-color: var(--gold); background: var(--gold-d); }
+        .mother-avatar.hero { border-color: var(--peace); background: var(--peace-d); }
+        .mother-title h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+        .mother-title .fa-name { font-family: var(--rtl); font-size: 0.95rem; color: var(--text2); margin-top: 2px; }
+        .mother-title .role-tag {
+            display: inline-block; font-size: 0.72rem; font-weight: 700;
+            padding: 2px 8px; border-radius: 12px; margin-top: 4px;
+            background: rgba(255,255,255,0.06); color: var(--text2);
+        }
+        .mother-title .role-tag.killed { background: var(--red-d); color: var(--red); }
+        .mother-title .role-tag.survived { background: var(--peace-d); color: var(--peace); }
+
+        .mother-summary { font-size: 0.92rem; color: var(--text2); line-height: 1.6; margin-bottom: 16px; flex-grow: 1; }
+        .mother-quote {
+            background: rgba(0,0,0,0.25); border-left: 3px solid var(--rose);
+            padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 0.85rem;
+            font-style: italic; color: #e0d7cb; margin-bottom: 16px;
+        }
+        body[dir="rtl"] .mother-quote { border-left: none; border-right: 3px solid var(--rose); border-radius: 8px 0 0 8px; }
+        .mother-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid var(--border); padding-top: 14px; font-size: 0.8rem; color: var(--muted);
+        }
+        .mother-children-count { display: flex; align-items: center; gap: 6px; color: var(--gold); font-weight: 600; }
+
+        /* ─── FAMILY CLUSTERS ACCORDION ─── */
+        .clusters-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
+        .cluster-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 22px; transition: var(--t);
+        }
+        .cluster-card:hover { border-color: rgba(212,168,83,0.3); }
+        .cluster-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .cluster-name { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; color: var(--gold); }
+        .cluster-badges { display: flex; gap: 6px; }
+        .badge-killed { background: var(--red-d); color: var(--red); font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+        .badge-injured { background: var(--blue); color: #0a0e17; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+        .cluster-desc { font-size: 0.9rem; color: var(--text2); margin-bottom: 16px; line-height: 1.5; }
+        .cluster-members { display: flex; flex-wrap: wrap; gap: 6px; }
+        .member-pill {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+            padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; color: var(--text);
+            display: inline-flex; align-items: center; gap: 4px;
+        }
+        .member-pill.killed::before { content: '🕯'; font-size: 0.7rem; }
+        .member-pill.injured::before { content: '🩹'; font-size: 0.7rem; }
+
+        /* ─── MODAL ─── */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 2000;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+            display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-content {
+            background: var(--bg-card); border: 1px solid rgba(212,168,83,0.3);
+            border-radius: 16px; max-width: 650px; width: 100%; max-height: 90vh;
+            overflow-y: auto; padding: 32px; position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+        }
+        .modal-close {
+            position: absolute; top: 18px; right: 18px;
+            background: rgba(255,255,255,0.1); border: none; color: #fff;
+            width: 32px; height: 32px; border-radius: 50%; font-size: 1.2rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+        body[dir="rtl"] .modal-close { right: auto; left: 18px; }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            text-align: center; padding: 50px 24px 30px; border-top: 1px solid var(--border);
+            color: var(--muted); font-size: 0.85rem;
+        }
+        .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; margin-bottom: 16px; font-weight: 600; }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="nav">
+        <a href="/" class="nav-logo">
+            <span>🕊️</span> People for Peace
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/memorial.html">Memorial (100 Faces)</a>
+            <a href="/mothers.html" class="active">Mothers & Families</a>
+            <a href="/evidence.html">Evidence</a>
+            <a href="/sources.html">Forensic Report</a>
+            <a href="/data.html">Open Data</a>
+        </div>
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('fa')">فا</button>
+            <button class="lang-btn" onclick="setLanguage('ar')">عر</button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-badge" id="heroBadge">🌸 Maternal Profiles & Lineages</div>
+        <h1 id="heroTitle">Mothers & Families of Minab</h1>
+        <p id="heroSub">
+            Documenting maternal grief, heroic rescue actions, and the intergenerational family lineages impacted by the February 28, 2026 airstrike on the Shajareh Tayyebeh School.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="num" id="statMartyrs">156</div>
+                <div class="lbl" id="lblMartyrs">Certified Martyrs</div>
+            </div>
+            <div class="stat-card">
+                <div class="num" id="statMothers">10</div>
+                <div class="lbl" id="lblMothers">Mothers Profiled</div>
+            </div>
+            <div class="stat-card">
+                <div class="num" id="statClusters">10</div>
+                <div class="lbl" id="lblClusters">Family Clusters</div>
+            </div>
+            <div class="stat-card">
+                <div class="num" id="statInjured">95+</div>
+                <div class="lbl" id="lblInjured">Documented Injured</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mothers Directory -->
+    <main class="section">
+        <div class="section-header">
+            <h2 id="mothersSecTitle">Mothers & Maternal Narratives</h2>
+            <p id="mothersSecSub">Honoring educator-mothers, bereaved mothers of multiple children, and emergency responder mothers.</p>
+        </div>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterMothers('all', this)">All Profiles</button>
+            <button class="filter-btn" onclick="filterMothers('teacher', this)">Teacher-Mothers</button>
+            <button class="filter-btn" onclick="filterMothers('multiple', this)">Multiple Losses</button>
+            <button class="filter-btn" onclick="filterMothers('hero', this)">Rescue & Survivor</button>
+            <button class="filter-btn" onclick="filterMothers('unmarked', this)">Unmarked Martyr</button>
+        </div>
+
+        <div class="mothers-grid" id="mothersGrid">
+            <!-- Rendered by JS -->
+        </div>
+    </main>
+
+    <!-- Family Clusters -->
+    <section class="section" style="background: rgba(255,255,255,0.015); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+        <div class="section-header">
+            <h2 id="clustersSecTitle">Family Lineages & Bereavement Clusters</h2>
+            <p id="clustersSecSub">Mapping households where multiple siblings and family members were killed or injured together.</p>
+        </div>
+
+        <div class="clusters-grid" id="clustersGrid">
+            <!-- Rendered by JS -->
+        </div>
+    </section>
+
+    <!-- Maternal Oral Histories & Quotes -->
+    <section class="section">
+        <div class="section-header">
+            <h2 id="quotesSecTitle">Maternal Testimonies</h2>
+            <p id="quotesSecSub">Words of mothers and children speaking truth to history.</p>
+        </div>
+
+        <div class="mothers-grid">
+            <div class="mother-card" style="cursor: default;">
+                <div class="mother-quote" style="font-size: 1rem; line-height: 1.8;">
+                    "My brother and mother went to school together that morning, and neither ever returned."
+                </div>
+                <div style="font-weight: 700; color: var(--gold);">— Nila Sadeghi (Age 10)</div>
+                <div style="font-size: 0.8rem; color: var(--text2);">Daughter of Teacher Neda Solhizadeh & Sister of Martyr Hami Sadeghi</div>
+            </div>
+
+            <div class="mother-card" style="cursor: default;">
+                <div class="mother-quote" style="font-size: 1rem; line-height: 1.8;">
+                    "A mother knows every line on her child's fingers. I recognized him by his little hand that used to hold mine."
+                </div>
+                <div style="font-weight: 700; color: var(--gold);">— Mohaddeseh Falahat</div>
+                <div style="font-size: 0.8rem; color: var(--text2);">Mother of Amin Ahmadzadeh (Identified by his hand in the morgue)</div>
+            </div>
+
+            <div class="mother-card" style="cursor: default;">
+                <div class="mother-quote" style="font-size: 1rem; line-height: 1.8;">
+                    "Every day I look at his red sneaker. The earth took all of him, but his memory cannot be erased."
+                </div>
+                <div style="font-weight: 700; color: var(--gold);">— Atiyeh Rahinezhad</div>
+                <div style="font-size: 0.8rem; color: var(--text2);">Mother of Makan Nasiri (7-year-old Gymnast / "The Unmarked Martyr")</div>
+            </div>
+
+            <div class="mother-card" style="cursor: default;">
+                <div class="mother-quote" style="font-size: 1rem; line-height: 1.8;">
+                    "I didn't think about dying. All I could hear in my mind was my children calling me from inside the smoke."
+                </div>
+                <div style="font-weight: 700; color: var(--gold);">— Zahra Molaei</div>
+                <div style="font-size: 0.8rem; color: var(--text2);">Mother who rescued her 2 children 2 minutes before Strike 2</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Detail -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/memorial.html">Memorial</a>
+            <a href="/mothers.html">Mothers</a>
+            <a href="/evidence.html">Evidence</a>
+            <a href="/sources.html">Forensic Report</a>
+            <a href="/data.html">Open Data</a>
+        </div>
+        <p>People for Peace & Justice ry (PFPJ ry) · Helsinki, Finland · Business ID: 3616815-5</p>
+        <p style="margin-top: 6px; font-size: 0.78rem;">Dedicated to the memory of 156 martyrs of the Shajareh Tayyebeh School airstrike.</p>
+    </footer>
+
+    <script>
+        let DATASET = null;
+        let currentLang = 'en';
+
+        const I18N = {
+            en: {
+                pageTitle: "Mothers & Families of Minab | People for Peace",
+                heroBadge: "🌸 Maternal Profiles & Lineages",
+                heroTitle: "Mothers & Families of Minab",
+                heroSub: "Documenting maternal grief, heroic rescue actions, and the intergenerational family lineages impacted by the February 28, 2026 airstrike on the Shajareh Tayyebeh School.",
+                lblMartyrs: "Certified Martyrs",
+                lblMothers: "Mothers Profiled",
+                lblClusters: "Family Clusters",
+                lblInjured: "Documented Injured",
+                mothersSecTitle: "Mothers & Maternal Narratives",
+                mothersSecSub: "Honoring educator-mothers, bereaved mothers of multiple children, and emergency responder mothers.",
+                clustersSecTitle: "Family Lineages & Bereavement Clusters",
+                clustersSecSub: "Mapping households where multiple siblings and family members were killed or injured together.",
+                quotesSecTitle: "Maternal Testimonies",
+                quotesSecSub: "Words of mothers and children speaking truth to history.",
+                killedTag: "Martyred / Killed",
+                survivedTag: "Survivor / Rescuer",
+                childrenLost: "Children Lost/Tracked",
+                viewDetails: "View Full Profile →"
+            },
+            fa: {
+                pageTitle: "مادران و خانواده‌های شهدای میناب | مردم برای صلح",
+                heroBadge: "🌸 نمایه هویتی و روایت مادران",
+                heroTitle: "مادران و خانواده‌های میناب",
+                heroSub: "مستندسازی ایثار، سوگواری، روایت‌های نجات و تبارنامه خانوادگی فاجعه حمله موشکی به دبستان شجره طیبه میناب (۹ اسفند ۱۴۰۴).",
+                lblMartyrs: "شهدای احراز هویت شده",
+                lblMothers: "مادران ثبت شده",
+                lblClusters: "تبارنامه‌های خانوادگی",
+                lblInjured: "مجروحان مستند شده",
+                mothersSecTitle: "روایت‌ها و نیمرخ هویتی مادران",
+                mothersSecSub: "گرامیداشت معلمان-مادر، مادران داغدار چند فرزند و پرستاران امدادرسان.",
+                clustersSecTitle: "تبارنامه‌ها و خوشه‌های خانوادگی داغدار",
+                clustersSecSub: "نقشه‌برداری از خانواده‌هایی که چند فرزند یا عضو خانواده را همزمان از دست داده‌اند.",
+                quotesSecTitle: "شهادت‌ها و روایت‌های مکتوب مادران",
+                quotesSecSub: "سخنانی برآمده از قلب حقیقت برای تاریخ.",
+                killedTag: "شهیده / جان‌باخته",
+                survivedTag: "بازمانده / امدادگر",
+                childrenLost: "فرزندان در این واقعه",
+                viewDetails: "مشاهده نمایه کامل ←"
+            },
+            ar: {
+                pageTitle: "أمهات وعائلات ميناب | أناس من أجل السلام",
+                heroBadge: "🌸 ملفات الأمهات والعائلات",
+                heroTitle: "أمهات وعائلات ميناب",
+                heroSub: "توثيق التضحيات والأثر العائلي للغارة الجوية على مدرسة شجرة طيبة في 28 فبراير 2026.",
+                lblMartyrs: "الشهداء الموثقون",
+                lblMothers: "الأمهات الموثقات",
+                lblClusters: "العائلات المتضررة",
+                lblInjured: "الجرحى الموثقون",
+                mothersSecTitle: "روايات الأمهات",
+                mothersSecSub: "تكريم الأمهات المعلمات، والأمهات الثكالى بعدة أطفال، والممرضات.",
+                clustersSecTitle: "العائلات المنكوبة",
+                clustersSecSub: "توثيق العائلات التي فقدت عدة أفراد في الهجوم.",
+                quotesSecTitle: "شهادات الأمهات",
+                quotesSecSub: "كلمات الأمهات الشاهدات على المأساة.",
+                killedTag: "شهيدة",
+                survivedTag: "ناجية / منقذة",
+                childrenLost: "الأطفال المرتبطون",
+                viewDetails: "عرض الملف الكامل ←"
+            }
+        };
+
+        async function init() {
+            try {
+                const res = await fetch('/dataset.json');
+                DATASET = await res.json();
+            } catch (e) {
+                console.error('Failed to load dataset.json, fallback', e);
+            }
+            renderAll();
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'fa' || lang === 'ar') ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.toggle('active', b.getAttribute('onclick').includes(`'${lang}'`));
+            });
+
+            const t = I18N[lang] || I18N.en;
+            document.getElementById('pageTitle').textContent = t.pageTitle;
+            document.getElementById('heroBadge').textContent = t.heroBadge;
+            document.getElementById('heroTitle').textContent = t.heroTitle;
+            document.getElementById('heroSub').textContent = t.heroSub;
+            document.getElementById('lblMartyrs').textContent = t.lblMartyrs;
+            document.getElementById('lblMothers').textContent = t.lblMothers;
+            document.getElementById('lblClusters').textContent = t.lblClusters;
+            document.getElementById('lblInjured').textContent = t.lblInjured;
+            document.getElementById('mothersSecTitle').textContent = t.mothersSecTitle;
+            document.getElementById('mothersSecSub').textContent = t.mothersSecSub;
+            document.getElementById('clustersSecTitle').textContent = t.clustersSecTitle;
+            document.getElementById('clustersSecSub').textContent = t.clustersSecSub;
+            document.getElementById('quotesSecTitle').textContent = t.quotesSecTitle;
+            document.getElementById('quotesSecSub').textContent = t.quotesSecSub;
+
+            renderAll();
+        }
+
+        function renderAll() {
+            if (!DATASET) return;
+            renderMothers(DATASET.mothers);
+            renderClusters(DATASET.family_clusters);
+        }
+
+        function renderMothers(mothers) {
+            const grid = document.getElementById('mothersGrid');
+            const t = I18N[currentLang] || I18N.en;
+
+            grid.innerHTML = mothers.map(m => {
+                const isKilled = m.is_casualty;
+                const statusTag = isKilled ? t.killedTag : t.survivedTag;
+                const statusClass = isKilled ? 'killed' : 'survived';
+                const avatarIcon = m.profession.includes('Teacher') ? '👩‍🏫' : (m.id.includes('molaei') ? '🦸‍♀️' : '👩‍👧‍👦');
+                const avatarClass = m.profession.includes('Teacher') ? 'teacher' : (m.id.includes('molaei') ? 'hero' : '');
+
+                const nameDisplay = currentLang === 'fa' ? m.full_name_fa : m.full_name_en;
+                const subName = currentLang === 'fa' ? m.full_name_en : m.full_name_fa;
+
+                const firstQuote = (m.quotes && m.quotes.length > 0) ? m.quotes[0] : '';
+
+                return `
+                    <div class="mother-card" onclick="openMotherModal('${m.id}')">
+                        <div class="mother-header">
+                            <div class="mother-avatar ${avatarClass}">${avatarIcon}</div>
+                            <div class="mother-title">
+                                <h3>${nameDisplay}</h3>
+                                <div class="fa-name">${subName}</div>
+                                <span class="role-tag ${statusClass}">${statusTag} · ${m.profession}</span>
+                            </div>
+                        </div>
+                        <div class="mother-summary">${m.narrative_summary}</div>
+                        ${firstQuote ? `<div class="mother-quote">"${firstQuote}"</div>` : ''}
+                        <div class="mother-footer">
+                            <div class="mother-children-count">
+                                <span>👶</span> ${m.children_ids ? m.children_ids.length : 0} ${t.childrenLost}
+                            </div>
+                            <div>${t.viewDetails}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderClusters(clusters) {
+            const grid = document.getElementById('clustersGrid');
+            grid.innerHTML = clusters.map(c => {
+                const surname = currentLang === 'fa' ? c.family_surname_fa : c.family_surname_en;
+                const members = (c.member_ids || []).map(mid => {
+                    const victim = DATASET.victims.find(v => v.id === mid);
+                    const name = victim ? (currentLang === 'fa' ? victim.full_name_fa : victim.full_name_en) : mid;
+                    const status = victim ? victim.status : 'killed';
+                    return `<span class="member-pill ${status}">${name}</span>`;
+                }).join('');
+
+                return `
+                    <div class="cluster-card">
+                        <div class="cluster-head">
+                            <div class="cluster-name">${surname}</div>
+                            <div class="cluster-badges">
+                                <span class="badge-killed">🕯 ${c.total_killed} Killed</span>
+                                ${c.total_injured > 0 ? `<span class="badge-injured">🩹 ${c.total_injured} Injured</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="cluster-desc">${c.description}</div>
+                        <div class="cluster-members">${members}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterMothers(type, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            if (!DATASET) return;
+            let filtered = DATASET.mothers;
+
+            if (type === 'teacher') {
+                filtered = DATASET.mothers.filter(m => m.profession.toLowerCase().includes('teacher'));
+            } else if (type === 'multiple') {
+                filtered = DATASET.mothers.filter(m => m.children_ids && m.children_ids.length > 1);
+            } else if (type === 'hero') {
+                filtered = DATASET.mothers.filter(m => !m.is_casualty);
+            } else if (type === 'unmarked') {
+                filtered = DATASET.mothers.filter(m => m.id.includes('nasiri'));
+            }
+
+            renderMothers(filtered);
+        }
+
+        function openMotherModal(motherId) {
+            if (!DATASET) return;
+            const mother = DATASET.mothers.find(m => m.id === motherId);
+            if (!mother) return;
+
+            const name = currentLang === 'fa' ? mother.full_name_fa : mother.full_name_en;
+            const subName = currentLang === 'fa' ? mother.full_name_en : mother.full_name_fa;
+
+            const linkedVictims = (mother.children_ids || []).map(cid => {
+                const v = DATASET.victims.find(x => x.id === cid);
+                if (!v) return `<div class="member-pill">${cid}</div>`;
+                const vname = currentLang === 'fa' ? v.full_name_fa : v.full_name_en;
+                return `
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px 14px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${vname}</strong> (${v.role})
+                            <div style="font-size: 0.8rem; color: var(--text2);">${v.age ? `Age ${v.age}` : 'Age unknown'} · ${v.status}</div>
+                        </div>
+                        <a href="/child.html?id=${v.id}" target="_blank" style="font-size: 0.8rem; font-weight: 700;">Memorial Page ↗</a>
+                    </div>
+                `;
+            }).join('');
+
+            const quotesHtml = (mother.quotes || []).map(q => `
+                <div class="mother-quote" style="margin-bottom: 12px;">"${q}"</div>
+            `).join('');
+
+            document.getElementById('modalBody').innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <h2 style="font-family: var(--serif); color: var(--gold); font-size: 1.6rem; margin-bottom: 4px;">${name}</h2>
+                    <div style="color: var(--text2); font-size: 1rem;">${subName} · <span style="color: var(--rose);">${mother.profession}</span></div>
+                </div>
+
+                <div style="line-height: 1.7; color: var(--text); margin-bottom: 24px; font-size: 0.95rem;">
+                    ${mother.narrative_summary}
+                </div>
+
+                ${quotesHtml ? `<h4 style="margin-bottom: 10px; color: var(--gold);">Direct Testimonies & Quotes</h4>${quotesHtml}` : ''}
+
+                <h4 style="margin-top: 20px; margin-bottom: 10px; color: var(--gold);">Linked Children & Family Members</h4>
+                <div>${linkedVictims || '<p style="color: var(--text2);">No direct children records linked.</p>'}</div>
+            `;
+
+            document.getElementById('modalOverlay').classList.add('open');
+        }
+
+        function closeModal(e) {
+            document.getElementById('modalOverlay').classList.remove('open');
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

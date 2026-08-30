@@ -1,0 +1,254 @@
+{
+  "mothers": [
+    {
+      "id": "moth-neda-solhizadeh",
+      "full_name_en": "Neda Solhizadeh",
+      "full_name_fa": "ندا صلحی‌زاده",
+      "spouse_name": "Hamid Sadeghi",
+      "is_casualty": true,
+      "status": "killed",
+      "profession": "Primary School Teacher & Educator",
+      "narrative_summary": "Beloved elementary school educator who died alongside her 11-year-old son Hami Sadeghi in the school prayer hall during the secondary missile strike. Their bodies were repatriated to Rafsanjan for a joint funeral. Survived by her 10-year-old daughter Nila Sadeghi, who witnessed the tragedy.",
+      "quotes": [
+        "My brother and mother went to school together that morning, and neither ever returned. — Nila Sadeghi (daughter, age 10)"
+      ],
+      "children_ids": [
+        "hami-sadeghi",
+        "nila-sadeghi"
+      ],
+      "other_family_member_ids": [],
+      "photo_url": "https://peopleforpeace.live/images/mothers/neda_solhizadeh.jpg",
+      "family_cluster_id": "FAM-SADEGHI",
+      "sources": [
+        "EVD-VIC-005",
+        "SRC-BONYAD-003",
+        "SRC-PROS-002"
+      ]
+    },
+    {
+      "id": "moth-zohreh-shahriyari",
+      "full_name_en": "Zohreh Shahriyari",
+      "full_name_fa": "زهره شهریاری",
+      "spouse_name": "Mohammad Shahriyari",
+      "is_casualty": true,
+      "status": "killed",
+      "profession": "2nd Grade Teacher",
+      "narrative_summary": "Expectant mother and devoted second-grade teacher who was 6 months pregnant at the time of the airstrike. She stayed behind to shield students under desks and perished alongside her unborn child, Mohammad-Ali Shahriyari. Identified by her engraved gold wedding ring. Formally recognized as two distinct martyrs by the judiciary.",
+      "quotes": [
+        "She refused to flee while her classroom of children was paralyzed in fear."
+      ],
+      "children_ids": [
+        "unborn-fetus-shahriyari"
+      ],
+      "other_family_member_ids": [],
+      "photo_url": "https://peopleforpeace.live/images/mothers/zohreh_shahriyari.jpg",
+      "family_cluster_id": "FAM-SHAHRIYARI",
+      "sources": [
+        "SRC-PROS-002",
+        "SRC-LMO-001"
+      ]
+    },
+    {
+      "id": "moth-atiyeh-rahinezhad",
+      "full_name_en": "Atiyeh Rahinezhad",
+      "full_name_fa": "عطیه راه‌نژاد",
+      "spouse_name": "Ali Nasiri",
+      "is_casualty": false,
+      "status": "survived",
+      "profession": "Homemaker & Community Peace Advocate",
+      "narrative_summary": "Mother of 7-year-old active gymnast Makan Nasiri ('The Unmarked Martyr' / شهید بی‌نشان). Her son was located at the direct epicenter of missile detonation and no matchable biological remains were recovered despite extensive DNA testing. She keeps his single recovered left sneaker as a memorial and advocates internationally against civilian bombing.",
+      "quotes": [
+        "Every day I look at his red sneaker and remember him running to school. The earth took all of him, but his memory cannot be erased."
+      ],
+      "children_ids": [
+        "makan-nasiri"
+      ],
+      "other_family_member_ids": [],
+      "photo_url": "https://peopleforpeace.live/images/mothers/atiyeh_rahinezhad.jpg",
+      "family_cluster_id": "FAM-NASIRI",
+      "sources": [
+        "EVD-VIC-005",
+        "SRC-LMO-001",
+        "SRC-GYM-004"
+      ]
+    },
+    {
+      "id": "moth-fatemeh-zakeri",
+      "full_name_en": "Fatemeh (Mother of Asra & Salma Zakeri)",
+      "full_name_fa": "فاطمه (مادر اسرا و سلما ذاکری)",
+      "spouse_name": "Mokhtar Zakeri",
+      "is_casualty": false,
+      "status": "survived",
+      "profession": "Homemaker",
+      "narrative_summary": "Mother who suffered the devastating loss of both her young daughters, Asra Zakeri (4th grade) and Salma Zakeri (1st grade, age 7). The extended Zakeri family lost over six members in the strike.",
+      "quotes": [
+        "I sent two daughters in their clean white hijabs to school; I received two sealed caskets."
+      ],
+      "children_ids": [
+        "asra-zakeri",
+        "salma-zakeri"
+      ],
+      "other_family_member_ids": [
+        "asma-zakeri",
+        "reyhaneh-zakeri",
+        "sina-zakeri"
+      ],
+      "photo_url": "https://peopleforpeace.live/images/mothers/mother_zakeri.jpg",
+      "family_cluster_id": "FAM-ZAKERI",
+      "sources": [
+        "EVD-VIC-005",
+        "SRC-PROS-002"
+      ]
+    },
+    {
+      "id": "moth-karyanipak",
+      "full_name_en": "Mother of Karyanipak Brothers",
+      "full_name_fa": "مادر برادران کاریانی‌پاک",
+      "spouse_name": "Abdollah Karyanipak",
+      "is_casualty": false,
+      "status": "survived",
+      "profession": "Homemaker",
+      "narrative_summary": "Mother of two young brothers, Ali-Akbar Karyanipak and Mohammad-Ali Karyanipak, who were both killed together in the morning school wing during the first missile impact.",
+      "quotes": [
+        "My two sons held hands when they left the house. They left together and they left this world together."
+      ],
+      "children_ids": [
+        "ali-akbar-karyanipak",
+        "mohammad-ali-karyanipak"
+      ],
+      "other_family_member_ids": [],
+      "photo_url": "https://peopleforpeace.live/images/mothers/mother_karyanipak.jpg",
+      "family_cluster_id": "FAM-KARYANIPAK",
+      "sources": [
+        "EVD-VIC-005",
+        "SRC-PROS-002"
+      ]
+    },
+    {
+      "id": "moth-mohaddeseh-falahat",
+      "full_name_en": "Mohaddeseh Falahat",
+      "full_name_fa": "محدثه فلاحت",
+      "spouse_name": "Abbas Ahmadzadeh",
+      "is_casualty": false,
+      "status": "survived",
+      "profession": "Homemaker",
+      "narrative_summary": "Mother who spent days searching morgues for her children Amin and Mahdieh Ahmadzadeh. She was only able to identify her son by recognizing the specific shape of his fingernails and hand after thermal blast damage made facial recognition impossible.",
+      "quotes": [
+        "A mother knows every line on her child's fingers. I recognized him by his little hand that used to hold mine."
+      ],
+      "children_ids": [
+        "amin-ahmadzade"
+      ],
+      "other_family_member_ids": [
+        "athena-ahmadzadeh",
+        "arad-ahmadizadeh"
+      ],
+      "photo_url": "https://peopleforpeace.live/images/mothers/mohaddeseh_falahat.jpg",
+      "family_cluster_id": "FAM-AHMADZADEH",
+      "sources": [
+        "EVD-VIC-005",
+        "SRC-LMO-001"
+      ]
+    },
+    {
+      "id": "moth-ahmadi-siblings",
+      "full_name_en": "Mother of Ahmadi Siblings",
+      "full_name_fa": "مادر شهیدان احمدی (سبحان و حنانه)",
+      "spouse_name": "Hassan Ahmadi",
+      "is_casualty": false,
+      "status": "survived",
+      "profession": "Homemaker",
+      "narrative_summary": "Mother of young siblings Sobhan and Hananeh/Hanieh Ahmadi. Her son Sobhan was identified because he clutched his elementary Persian textbook to his chest, on which she had neatly written his name in red ink.",
+      "quotes": [
+        "He loved his books. Even in his last moments under the dust, he held his Farsi book tight against his heart."
+      ],
+      "children_ids": [
+        "sobhan-ahmadi",
+        "hanieh-ahmadi"
+      ],
+      "other_family_member_ids": [],
+      "photo_url": "https://peopleforpeace.live/images/mothers/mother_ahmadi.jpg",
+      "family_cluster_id": "FAM-AHMADI",
+      "sources": [
+        "EVD-VIC-005",
+        "SRC-LMO-001"
+      ]
+    },
+    {
+      "id": "moth-raeisi-siblings",
+      "full_name_en": "Mother of Raeisi Siblings",
+      "full_name_fa": "مادر شهیدان رئیسی (آسنا و محمدحاتم)",
+      "spouse_name": "Hassan Raeisi",
+      "is_casualty": false,
+      "status": "survived",
+      "profession": "Homemaker",
+      "narrative_summary": "Mother who lost both her young children, daughter Asna Raeisi and son Mohammad-Hatam (Hesam) Raeisi, during the strike on the ground floor classrooms.",
+      "quotes": [
+        "My entire house became empty in a single morning."
+      ],
+      "children_ids": [
+        "asna-raeisi",
+        "mohammad-hatam-raeisi"
+      ],
+      "other_family_member_ids": [],
+      "photo_url": "https://peopleforpeace.live/images/mothers/mother_raeisi.jpg",
+      "family_cluster_id": "FAM-RAEISI",
+      "sources": [
+        "EVD-VIC-005",
+        "SRC-PROS-002"
+      ]
+    },
+    {
+      "id": "moth-bahrami-cluster",
+      "full_name_en": "Mother of Bahrami Family",
+      "full_name_fa": "مادر خانواده بهرامی",
+      "spouse_name": "Eshagh Bahrami",
+      "is_casualty": false,
+      "status": "survived",
+      "profession": "Homemaker",
+      "narrative_summary": "Mother of Zeynab Bahrami and guardian in the extended Bahrami household, which mourned the deaths of four young children (Zeynab, Mohammadayan, Zahra, and Mahna Bahrami).",
+      "quotes": [
+        "Our whole family used to fill the courtyard with laughter; now there is only silence."
+      ],
+      "children_ids": [
+        "zeynab-bahrami",
+        "mohammadayan-bahrami"
+      ],
+      "other_family_member_ids": [
+        "zahra-bahrami",
+        "mahna-bahrami"
+      ],
+      "photo_url": "https://peopleforpeace.live/images/mothers/mother_bahrami.jpg",
+      "family_cluster_id": "FAM-BAHRAMI",
+      "sources": [
+        "EVD-VIC-005",
+        "SRC-PROS-002"
+      ]
+    },
+    {
+      "id": "moth-zahra-molaei-hero",
+      "full_name_en": "Zahra Molaei (Rescuing Mother)",
+      "full_name_fa": "زهرا ملایی (مادر فداکار نجات‌بخش)",
+      "spouse_name": "Reza Molaei",
+      "is_casualty": false,
+      "status": "survived",
+      "profession": "Parent & Local Resident",
+      "narrative_summary": "Heroic mother living 150 meters from the school. Immediately upon hearing the blast of Strike 1, she sprinted through dust and debris into the crumbling building, pulled her 7-year-old daughter Mehgol from ceiling rubble and hauled her 12-year-old son Mohammad-Javad through a shattered window frame just two minutes before Strike 2 destroyed the central shelter.",
+      "quotes": [
+        "I didn't think about dying. All I could hear in my mind was my children calling me from inside the smoke."
+      ],
+      "children_ids": [
+        "mohammad-javad-molaei-surv",
+        "mehgol-molaei-surv"
+      ],
+      "other_family_member_ids": [],
+      "photo_url": "https://peopleforpeace.live/images/mothers/zahra_molaei.jpg",
+      "family_cluster_id": "FAM-MOLAEI",
+      "sources": [
+        "EVD-VIC-005",
+        "SRC-IRCS-005"
+      ]
+    }
+  ],
+  "total": 10
+}
