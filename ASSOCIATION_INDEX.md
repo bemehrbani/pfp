@@ -19,6 +19,12 @@ These are the public pages served on the live website to volunteers, donors, and
 | **Landing Homepage** | [landing.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/landing.html) | `/landing.html` | The main website landing page with the association mission statement, volunteer signup CTAs, and recent updates. |
 | **Digital Memorial** | [memorial.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/memorial.html) | `/memorial.html` | The digital memorial archive grid listing names, ages, and backgrounds of the children of the Minab incident. |
 | **Evidence Portal** | [evidence.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/evidence.html) | `/evidence.html` | The public forensics and weapon database containing GIS coordinates, weapon fragments, and photos. |
+| **Multimedia Library** | [multimedia.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/multimedia.html) | `/multimedia.html` | The comprehensive video and audio library featuring 25+ investigative video reports, 12-episode documentary series, and direct HD downloads. |
+| **Mothers & Families** | [mothers.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/mothers.html) | `/mothers.html` | Showcase honoring the bereaved mothers, maternal profiles, and affected family clusters. |
+| **Forensic Sources** | [sources.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/sources.html) | `/sources.html` | Open-source intelligence registry, media verification grades, and primary sources reliability report. |
+| **Open Data Portal** | [data.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/data.html) | `/data.html` | Researcher open-data download portal for canonical JSON datasets and CSV casualty tables. |
+| **Similarity Factors** | [similarity_factors.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/similarity_factors.html) | `/similarity_factors.html` | Comparative legal benchmarking of the Minab incident against 18 historical international precedents. |
+| **Technical Annex** | [similarity_annex.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/similarity_annex.html) | `/similarity_annex.html` | Detailed 2-page technical annex breaking down legal causality, negligence, and targeting errors. |
 | **Initiatives Directory** | [initiatives.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/initiatives.html) | `/initiatives.html` | Global directory of active entities, NGOs, campaigns, and key groups working on the Minab incident to drive strategic synergy. |
 
 ---
@@ -73,3 +79,27 @@ These documents are guidelines for administrators managing the volunteer platfor
 | **Telegram Bot Guide** | [platform-guide.md](file:///Users/mahdifarimani/Documents/PFP/PFPJ_Ry/governance/platform-guide.md) | Standard guide on logging into `/admin`, creating campaigns, defining stepped tasks, and broadcasting. |
 | **General Campaigns List** | [campaign.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/campaign.md) | General strategy roadmap and tasks listing for crowdsourcing volunteers. |
 | **Codebase Documentation**| [README.md](file:///Users/mahdifarimani/Documents/PFP/README.md) | Technical setup guides for Django REST, React, Redis, PostgreSQL, and Docker. |
+| **Local RAG Base**        | [LOCAL_RAG.md](file:///Users/mahdifarimani/Documents/PFP/LOCAL_RAG.md) | Authoritative knowledge base for AI agents, developers, and board members. |
+
+---
+
+## 📁 5. Minab Incident Canonical Data & Evidentiary Dossier
+Authoritative forensic, legal, and casualty records establishing legal accountability for the February 28, 2026 airstrike on Shajareh Tayyebeh School.
+
+| Document Title | Local File Link | Purpose & Evidentiary Value |
+| :--- | :--- | :--- |
+| **Fact-Retrieval Handover (FA)** | [fact_retrieval_handover_fa.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/justiceForMinab/docs/fact_retrieval_handover_fa.md) | Official transition dossier detailing verified facts, pending investigations, and evidentiary needs. |
+| **Sources & Casualty Forensic Report** | [IRANIAN_SOURCES_RELIABILITY_REPORT.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/data/IRANIAN_SOURCES_RELIABILITY_REPORT.md) | Exhaustive 4-tier OSINT & forensic analysis reconciling casualty numbers (156 confirmed martyrs). |
+| **Casualties Master Registry** | [MINAB_CASUALTIES_MASTER_REGISTRY.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/data/MINAB_CASUALTIES_MASTER_REGISTRY.md) | Complete census of student and educator casualties with cross-verified citations. |
+| **Mothers & Families Directory** | [MINAB_MOTHERS_AND_FAMILIES_DIRECTORY.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/data/MINAB_MOTHERS_AND_FAMILIES_DIRECTORY.md) | Documented registry of bereaved mothers, survivor testimonies, and family clusters. |
+| **Canonical Incident Dataset** | [minab_incident_dataset.json](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/data/minab_incident_dataset.json) | Production JSON dataset feeding the public memorial, API fixtures, and analytics. |
+| **Data Architecture & Validator** | [validate_minab_data.py](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/data/validate_minab_data.py) | Relational integrity verification engine and automated CSV exporter. |
+| **Satellite Analysis (EVD-SAT-001)** | [satellite_evidence.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/justiceForMinab/evidence/satellite_evidence.md) | Multi-year satellite imagery proving complete physical wall separation of the school since 2016. |
+| **Munitions Identification (EVD-MUN-002)** | [munitions_evidence.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/justiceForMinab/evidence/munitions_evidence.md) | Physical and photographic analysis proving usage of US Navy BGM-109 Tomahawk cruise missiles. |
+| **Launch Platform Attribution (EVD-LAUNCH-003)**| [launch_attribution.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/justiceForMinab/evidence/launch_attribution.md) | Flight telemetry and attribution to USS Abraham Lincoln Carrier Strike Group. |
+| **CENTCOM 15-6 Investigation (EVD-CENTCOM-004)**| [centcom_preliminary_report.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/justiceForMinab/evidence/centcom_preliminary_report.md) | Deconstruction of US military admission regarding outdated pre-2016 DIA intelligence and AI targeting. |
+| **Initial 100 Victims Archive (EVD-VIC-005)** | [victim_memorial_list.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/justiceForMinab/evidence/victim_memorial_list.md) | Verified biographies, sports achievements, and family records of the initial 100 child casualties. |
+| **Legal Benchmarks Database (18 Cases)** | [index.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/index.md) | Master comparative registry mapping 18 international precedents against 10 similarity factors. |
+| **Case Law Query Pipeline (HUDOC & CourtListener)** | [query_similar_cases.py](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/query_similar_cases.py) | CLI pipeline querying live international jurisprudence (ECtHR HUDOC & US Federal/OLC opinions). |
+| **Full Legal Reports & Judgments Archive (18 Dossiers)** | [full_reports/](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/full_reports/) | Local repository containing full-text judgments (ECtHR Grand Chamber, ICTY OTP) and official UN/NGO inquiry reports for all 18 cases. |
+
