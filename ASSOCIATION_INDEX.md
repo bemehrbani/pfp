@@ -69,6 +69,19 @@ These are the registration, charter, rules, and research documents filed in Finl
 | **NGO Comparison** | [ngo-comparison.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/legal/ngo-comparison.html) | `/legal/jfmc-2026/ngo-comparison.html` | Strategic head-to-head comparison grid of Finland vs Netherlands. |
 | **ANBI Policy Plan** | [anbi-plan.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/legal/jfmc-2026/anbi-plan.html) | `/legal/jfmc-2026/anbi-plan.html` | Draft policy plan for Dutch ANBI tax-exempt status (archived). |
 
+### Makan ry Registration Portal (Finland PRH)
+*   **Makan Founder Portal (Web):** [index.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/legal/makan/index.html) (Web: `/legal/makan/index.html` or `/makan/` — Password: `makan2026`)
+*   **Makan Working Directory:** [Makan_Ry/](file:///Users/mahdifarimani/Documents/PFP/Makan_Ry/README.md)
+
+| Document Title | Local File Link | Web URL Path | Purpose & Explanation |
+| :--- | :--- | :--- | :--- |
+| **Makan Gate & Portal** | [index.html](file:///Users/mahdifarimani/Documents/PFP/PFP_Platform/web/public/legal/makan/index.html) | `/legal/makan/index.html` | Password-gated interactive review, digital signing, and ID upload portal for founders. |
+| **Makan PRH Rules** | [saannot-prh.txt](file:///Users/mahdifarimani/Documents/PFP/Makan_Ry/legal/saannot-prh.txt) | `Makan_Ry/legal/saannot-prh.txt` | Clean statutory Finnish rules (§1–§10) for PRH online form. |
+| **Makan Trilingual Rules** | [saannot_trilingual.md](file:///Users/mahdifarimani/Documents/PFP/Makan_Ry/legal/saannot_trilingual.md) | `Makan_Ry/legal/saannot_trilingual.md` | Side-by-side rules in Persian, Finnish, and English. |
+| **Makan Founding Charter** | [perustamiskirja.md](file:///Users/mahdifarimani/Documents/PFP/Makan_Ry/legal/perustamiskirja.md) | `Makan_Ry/legal/perustamiskirja.md` | Founding charter stating intent to form Makan ry with signature blocks. |
+| **Makan Founding Minutes** | [perustava_kokous_poytakirja.md](file:///Users/mahdifarimani/Documents/PFP/Makan_Ry/legal/perustava_kokous_poytakirja.md) | `Makan_Ry/legal/perustava_kokous_poytakirja.md` | Constitutive meeting minutes electing board and setting €5/mo dues. |
+| **Makan Registration Guide** | [REGISTRATION_CHECKLIST.md](file:///Users/mahdifarimani/Documents/PFP/Makan_Ry/REGISTRATION_CHECKLIST.md) | `Makan_Ry/REGISTRATION_CHECKLIST.md` | 5-phase execution guide for PRH filing, Holvi/OP bank setup, and tax exemption. |
+
 ---
 
 ## ⚙️ 4. Administration & Campaigns Guides
@@ -102,4 +115,5 @@ Authoritative forensic, legal, and casualty records establishing legal accountab
 | **Legal Benchmarks Database (18 Cases)** | [index.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/index.md) | Master comparative registry mapping 18 international precedents against 10 similarity factors. |
 | **Case Law Query Pipeline (HUDOC & CourtListener)** | [query_similar_cases.py](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/query_similar_cases.py) | CLI pipeline querying live international jurisprudence (ECtHR HUDOC & US Federal/OLC opinions). |
 | **Full Legal Reports & Judgments Archive (18 Dossiers)** | [full_reports/](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/full_reports/) | Local repository containing full-text judgments (ECtHR Grand Chamber, ICTY OTP) and official UN/NGO inquiry reports for all 18 cases. |
+
 

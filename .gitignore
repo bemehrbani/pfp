@@ -55,6 +55,7 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media/
+!PFP_Platform/web/public/media/subtitles/
 
 # Flask stuff:
 instance/
@@ -196,3 +197,6 @@ PFP_Platform/bot/prototype.html
 # Misc
 Misc Archive/
 Archive/
+
+# Diplomatic correspondence & embassy packages (confidential/local)
+Campaigns/minab/embassy_submission_package/
