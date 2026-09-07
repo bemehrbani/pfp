@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PFPJ ry — Factual Determination & Formal Complaint (Minab Elementary School Strike)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #060913;
+      --bg-surface: #0e1424;
+      --bg-card: #141c33;
+      --bg-card-alt: #18223d;
+      --gold: #d4af37;
+      --gold-light: #f5e7b2;
+      --gold-dim: rgba(212, 175, 55, 0.12);
+      --gold-border: rgba(212, 175, 55, 0.25);
+      --crimson: #c8323c;
+      --crimson-dim: rgba(200, 50, 60, 0.12);
+      --crimson-border: rgba(200, 50, 60, 0.25);
+      --blue: #3b82f6;
+      --blue-dim: rgba(59, 130, 246, 0.12);
+      --teal: #10b981;
+      --teal-dim: rgba(16, 185, 129, 0.12);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --font-en-serif: 'Playfair Display', Georgia, serif;
+      --font-en-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-fa: 'Vazirmatn', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: var(--font-en-sans);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Top Utility Bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 9, 19, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gold-border);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .brand-title-wrap h1 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title-wrap .badge-legal {
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-light);
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .brand-meta {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Mode Switch Pills */
+    .view-mode-selector {
+      display: inline-flex;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .mode-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mode-btn:hover {
+      color: #fff;
+    }
+
+    .mode-btn.active {
+      background: var(--gold);
+      color: #060913;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Action Buttons */
+    .btn-action {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:hover {
+      background: var(--gold);
+      color: #060913;
+    }
+
+    .btn-portal {
+      background: var(--blue-dim);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+    }
+
+    .btn-portal:hover {
+      background: #3b82f6;
+      color: #fff;
+    }
+
+    /* Navigation Bar */
+    .nav-sections-bar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 8px 24px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+    }
+
+    .nav-pill {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 5px 11px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .nav-pill:hover, .nav-pill:focus {
+      color: var(--gold);
+      border-color: var(--gold-border);
+      background: var(--gold-dim);
+    }
+
+    /* Container */
+    .reader-container {
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* Header Banner */
+    .complaint-hero {
+      background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-card) 100%);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .complaint-hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--crimson) 50%, var(--gold) 100%);
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .meta-box {
+      font-size: 12px;
+    }
+
+    .meta-box .label {
+      color: var(--text-muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+      font-family: var(--font-mono);
+    }
+
+    .meta-box .value {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Search bar */
+    .search-wrap {
+      margin-bottom: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .search-input {
+      flex: 1;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+      font-family: var(--font-en-sans);
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--gold);
+    }
+
+    /* Sections */
+    .section-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      margin-bottom: 28px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .section-card:hover {
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+
+    .section-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section-header-title-en {
+      font-family: var(--font-en-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: -0.2px;
+    }
+
+    .section-header-title-fa {
+      font-family: var(--font-fa);
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--gold);
+      direction: rtl;
+    }
+
+    .badge-sec {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+    }
+
+    .badge-sec.substantive {
+      background: var(--crimson-dim);
+      border: 1px solid var(--crimson-border);
+      color: #fca5a5;
+    }
+
+    .badge-sec.procedural {
+      background: var(--blue-dim);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+    }
+
+    .badge-sec.remedial {
+      background: var(--teal-dim);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #6ee7b7;
+    }
+
+    .badge-sec.standard {
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-light);
+    }
+
+    /* Clause Layouts */
+    .clause-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      padding: 22px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      position: relative;
+    }
+
+    .clause-row:last-child {
+      border-bottom: none;
+    }
+
+    .clause-row:hover {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    /* Column Modes */
+    body.mode-en .clause-row {
+      grid-template-columns: 1fr;
+    }
+    body.mode-en .clause-col-fa {
+      display: none !important;
+    }
+    body.mode-en .section-header-title-fa {
+      display: none !important;
+    }
+
+    body.mode-fa .clause-row {
+      grid-template-columns: 1fr;
+    }
+    body.mode-fa .clause-col-en {
+      display: none !important;
+    }
+    body.mode-fa .section-header-title-en {
+      display: none !important;
+    }
+
+    .clause-col-en {
+      font-family: var(--font-en-sans);
+      font-size: 14.5px;
+      color: #e2e8f0;
+      line-height: 1.75;
+    }
+
+    .clause-col-fa {
+      font-family: var(--font-fa);
+      font-size: 15px;
+      color: #e2e8f0;
+      line-height: 2;
+      direction: rtl;
+      text-align: right;
+    }
+
+    .clause-header-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .clause-id {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--gold-dim);
+      color: var(--gold-light);
+      border: 1px solid var(--gold-border);
+      padding: 1px 7px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .clause-heading {
+      font-weight: 700;
+      color: #fff;
+      font-size: 14.5px;
+    }
+
+    .clause-col-fa .clause-heading {
+      font-family: var(--font-fa);
+      font-weight: 800;
+      font-size: 15.5px;
+      color: #fef08a;
+    }
+
+    /* Legal Quote Callout Box */
+    .quote-box {
+      margin-top: 14px;
+      padding: 14px 18px;
+      background: rgba(10, 15, 30, 0.7);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--gold-light);
+      line-height: 1.6;
+    }
+
+    .clause-col-fa .quote-box {
+      border-left: none;
+      border-right: 3px solid var(--gold);
+      border-radius: 8px 0 0 8px;
+      font-style: normal;
+      direction: rtl;
+    }
+
+    .precedent-pill {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--crimson-dim);
+      border: 1px solid var(--crimson-border);
+      color: #fca5a5;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-style: normal;
+      font-family: var(--font-mono);
+    }
+
+    .evidence-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      margin-right: 4px;
+    }
+
+    /* Footer */
+    .reader-footer {
+      margin-top: 48px;
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #111 !important;
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
+      }
+      .top-bar, .nav-sections-bar, .controls-group, .search-wrap, .btn-action, .btn-portal {
+        display: none !important;
+      }
+      .reader-container {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      .complaint-hero {
+        background: #fff !important;
+        border: 1px solid #999 !important;
+        color: #000 !important;
+        page-break-after: avoid;
+      }
+      .section-card {
+        background: #fff !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+        margin-bottom: 20pt !important;
+      }
+      .section-header {
+        background: #f3f4f6 !important;
+        color: #000 !important;
+        border-bottom: 1px solid #999 !important;
+      }
+      .section-header-title-en, .section-header-title-fa {
+        color: #000 !important;
+      }
+      .clause-row {
+        border-bottom: 1px solid #eee !important;
+      }
+      .clause-col-en, .clause-col-fa {
+        color: #111 !important;
+      }
+      .quote-box {
+        background: #f9fafb !important;
+        color: #222 !important;
+        border-color: #444 !important;
+      }
+      .precedent-pill, .evidence-pill, .clause-id {
+        background: #eee !important;
+        color: #000 !important;
+        border: 1px solid #aaa !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .clause-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="mode-both">
+
+  <!-- TOP UTILITY BAR -->
+  <header class="top-bar">
+    <div class="brand-group">
+      <div class="brand-logo">⚖️</div>
+      <div class="brand-title-wrap">
+        <h1>
+          PFPJ ry · Formal Criminal Complaint Dossier
+          <span class="badge-legal">FIN-HELSINKI 3616815-5</span>
+        </h1>
+        <div class="brand-meta">Minab Elementary School Strike · Docket: Finnish Office of Prosecutor General & ICC OTP</div>
+      </div>
+    </div>
+
+    <div class="controls-group">
+      <!-- Mode selector -->
+      <div class="view-mode-selector" title="Switch Reading Mode">
+        <button class="mode-btn active" id="btnModeBoth" onclick="setMode('both')">
+          <span>⚖️ Side-by-Side</span>
+        </button>
+        <button class="mode-btn" id="btnModeEn" onclick="setMode('en')">
+          <span>🇬🇧 English</span>
+        </button>
+        <button class="mode-btn" id="btnModeFa" onclick="setMode('fa')">
+          <span>🇮🇷 فارسی</span>
+        </button>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <button class="btn-action" onclick="window.print()" title="Print or Export to PDF">
+        🖨️ Print / PDF
+      </button>
+
+      <a class="btn-action btn-portal" href="report.html" title="Open Full Portal with 18 Case Benchmarks">
+        🏛️ Case-Book Portal
+      </a>
+    </div>
+  </header>
+
+  <!-- QUICK NAVIGATION PILLS -->
+  <nav class="nav-sections-bar">
+    <a href="#sec1" class="nav-pill">§1 Introduction</a>
+    <a href="#sec2" class="nav-pill">§2 Methodology & Forensics</a>
+    <a href="#sec3" class="nav-pill">§3 Chronology & Geometry</a>
+    <a href="#sec4" class="nav-pill">§4 Applicable IHL</a>
+    <a href="#sec5" class="nav-pill">§5 Legal Liability & Negligence</a>
+    <a href="#sec6" class="nav-pill">§6 European Jurisdiction</a>
+    <a href="#sec7" class="nav-pill">§7 Prosecutorial Demands</a>
+  </nav>
+
+  <main class="reader-container">
+
+    <!-- HERO HEADER -->
+    <section class="complaint-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <span class="badge-sec standard" style="margin-bottom: 12px; display: inline-block;">COURT-READY FACTUAL DETERMINATION & FORMAL CRIMINAL COMPLAINT</span>
+          <h2 style="font-family: var(--font-en-serif); font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 8px;">
+            Targeting Negligence, Precaution Breaches & Disproportionality in the Aerial Bombardment of Shajareh Tayyebeh Girls' Elementary School
+          </h2>
+          <div style="font-family: var(--font-fa); font-size: 18px; font-weight: 700; color: var(--gold-light); direction: rtl; margin-top: 6px;">
+            احراز واقعیت و شکایت کیفری رسمی در خصوص سهل‌انگاری در هدف‌گیری، نقض تعهدات احتیاطی و عدم تناسب فاحش در بمباران مدرسه دخترانه شجره طیبه میناب
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-meta-grid">
+        <div class="meta-box">
+          <div class="label">Filing Organization</div>
+          <div class="value">People for Peace & Justice ry (PFPJ ry)</div>
+          <div style="font-size: 11px; color: var(--text-secondary);">Helsinki, Finland (PRH Business ID: 3616815-5)</div>
+        </div>
+        <div class="meta-box">
+          <div class="label">Target of Investigation</div>
+          <div class="value">US Dept of Defense / CENTCOM</div>
+          <div style="font-size: 11px; color: var(--text-secondary);">Peacetime Target Nomination Board & DIA Review Cells</div>
+        </div>
+        <div class="meta-box">
+          <div class="label">Incident Under Review</div>
+          <div class="value">Airstrike on Shajareh Tayyebeh School</div>
+          <div style="font-size: 11px; color: var(--text-secondary);">Minab, Iran · Feb 28, 2026 · GPS: 27.1432° N, 57.0784° E</div>
+        </div>
+        <div class="meta-box">
+          <div class="label">Certified Human Toll</div>
+          <div class="value" style="color: #fca5a5;">156 Fatalities · 95+ Severely Maimed</div>
+          <div style="font-size: 11px; color: var(--text-secondary);">120 Verified Primary Schoolchildren (Ages 7–12)</div>
+        </div>
+        <div class="meta-box">
+          <div class="label">Primary Judicial Dockets</div>
+          <div class="value">Finnish Prosecutor General · ICC OTP</div>
+          <div style="font-size: 11px; color: var(--text-secondary);">Ch. 11 Rikoslaki (Finland) & Art. 15 Rome Statute</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE FILTER / SEARCH -->
+    <div class="search-wrap">
+      <input type="text" id="filterInput" class="search-input" placeholder="🔍 Search keywords across English & Persian text (e.g. 'Belgrade', 'Hanan', 'Tomahawk', 'صلاحیت جهانی', 'ماده ۲')..." onkeyup="filterClauses()">
+    </div>
+
+    <!-- ==================== SECTION 1 ==================== -->
+    <article class="section-card" id="sec1">
+      <div class="section-header">
+        <div class="section-header-title-en">SECTION 1: INTRODUCTION & EXECUTIVE SUMMARY</div>
+        <span class="badge-sec standard">Procedural Framework</span>
+        <div class="section-header-title-fa">بخش ۱: مقدمه و خلاصه اجرایی پرونده</div>
+      </div>
+
+      <!-- Clause 1.1 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">1.1</span>
+            <span class="clause-heading">Mandate of Complaining Body</span>
+          </div>
+          <p>This Factual Determination and Complaint is submitted by <strong>People for Peace & Justice ry (PFPJ ry)</strong>, a registered non-governmental organization incorporated in Helsinki, Finland (Business ID: 3616815-5). The mandate of this filing is to compile, verify, and submit evidence establishing command negligence and violation of the duty of precaution under International Humanitarian Law (IHL) in relation to the devastating airstrike conducted on February 28, 2026, against the Shajareh Tayyebeh Girls' Elementary School in Minab, Iran.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">مأموریت نهاد شاکی و ثبت قانونی</span>
+            <span class="clause-id">۱.۱</span>
+          </div>
+          <p>این سند احراز واقعیت و شکایت حقوقی توسط <strong>انجمن مردم برای صلح و عدالت (PFPJ ry)</strong>، به عنوان یک سازمان غیردولتی ثبت‌شده در هلسینکی فنلاند (شناسه ثبتی: 3616815-5) ارائه می‌گردد. مأموریت این پرونده، جمع‌آوری، تأیید و ارائه شواهد اثبات‌کننده سهل‌انگاری فرماندهی و نقض اصول احتیاطی تحت حقوق بین‌الملل بشردوستانه (IHL) در رابطه با حمله موشکی ویرانگر ۲۸ فوریه ۲۰۲۶ به مدرسه دخترانه شجره طیبه در میناب ایران است.</p>
+        </div>
+      </div>
+
+      <!-- Clause 1.2 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">1.2</span>
+            <span class="clause-heading">Opening Salvo Strike & Mass Child Toll</span>
+          </div>
+          <p>On February 28, 2026, during the opening hours of military operations, a precision-guided US BGM-109 Tomahawk cruise missile struck the central wing of the Shajareh Tayyebeh school complex. At the time of the impact, the school was in active session with approximately 300 children present. The strike resulted in <strong>156 certified deaths</strong> (including 120 young schoolchildren and 26 educators/staff) and the severe wounding of over 95 others, representing one of the single largest child civilian casualty events of modern aerial warfare.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">شلیک موج اول و فاجعه انسانی کودکان</span>
+            <span class="clause-id">۱.۲</span>
+          </div>
+          <p>در تاریخ ۲۸ فوریه ۲۰۲۶ و در اولین ساعات آغاز عملیات نظامی، یک فروند موشک کروز هدایت‌شونده دقیق BGM-109 Tomahawk متعلق به ارتش آمریکا به بال مرکزی مجتمع آموزشی شجره طیبه اصابت کرد. در زمان حمله، کلاس‌های مدرسه با حضور حدود ۳۰۰ دانش‌آموز برقرار بود. این اصابت منجر به شهادت <strong>۱۵۶ تن</strong> (شامل ۱۲۰ دانش‌آموز خردسال، ۲۶ معلم و کادر آموزشی، ۷ تن از والدین، ۲ تن از اهالی و ۱ جنین) و مجروحیت شدید بیش از ۹۵ تن دیگر گردید که یکی از بزرگترین فجایع تلفات کودکان در حملات هوایی معاصر به شمار می‌رود.</p>
+        </div>
+      </div>
+
+      <!-- Clause 1.3 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">1.3</span>
+            <span class="clause-heading">Rebuttal of CENTCOM's "Coordinates Error" Defense</span>
+          </div>
+          <p>Preliminary statements from the US Department of Defense and the Defense Intelligence Agency (DIA) characterized the strike as a "tragic coordinates error" resulting from mistaken targeting of the adjacent Islamic Revolutionary Guard Corps (IRGC) naval logistics base. PFPJ ry rejects this defense. Investigation of the targeting cycle proves that the strike planner office utilized outdated or unverified coordinate databases, failing to verify target usage changes. Under international law, this constitutes <strong>systemic planning negligence</strong>, rather than a permissible "fog of war" mistake.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">رد ادعای «اشتباه در مختصات» پنتاگون</span>
+            <span class="clause-id">۱.۳</span>
+          </div>
+          <p>بیانیه‌های اولیه وزارت دفاع آمریکا و آژانس اطلاعات دفاعی (DIA) این حمله را یک «اشتباه تراژیک در ثبت مختصات» در پی هدف‌گیری پایگاه پشتیبانی نیروی دریایی سپاه در مجاورت مدرسه توصیف کردند. انجمن PFPJ ry این دفاعیه را قاطعانه رد می‌کند. بررسی‌های فنی چرخه هدف‌گیری ثابت می‌کند که طراحان حمله از بانک‌های اطلاعاتی قدیمی و غیرمعتبر استفاده کرده و کاربری محلی را بازبینی نکرده بودند. طبق حقوق بین‌الملل، این سهل‌انگاری سیستماتیک برنامه‌ریزی است و نه اشتباه غیرقابل اجتناب در زمان جنگ.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==================== SECTION 2 ==================== -->
+    <article class="section-card" id="sec2">
+      <div class="section-header">
+        <div class="section-header-title-en">SECTION 2: INVESTIGATIVE METHODOLOGY & EVIDENCE FORENSICS</div>
+        <span class="badge-sec standard">Forensic Protocol</span>
+        <div class="section-header-title-fa">بخش ۲: روش‌شناسی تحقیق و اصالت‌سنجی شواهد</div>
+      </div>
+
+      <!-- Clause 2.1 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">2.1</span>
+            <span class="clause-heading">Berkeley Protocol & Chain of Custody</span>
+          </div>
+          <p><span class="evidence-pill">EVD-OSINT-001</span> The findings in this dossier are established using high-standard Open-Source Intelligence (OSINT) methodology, satellite imagery analysis, flight tracking telemetry, weapons fragmentation verification, and cross-verification of victim registries. Digital chain-of-custody was maintained for all geolocation logs and victim profiles to ensure compliance with European prosecutorial standards and the Berkeley Protocol on Digital Open Source Investigations.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">استاندارد پروتکل برکلی و زنجیره مدرک</span>
+            <span class="clause-id">۲.۱</span>
+          </div>
+          <p>یافته‌های این پرونده بر اساس روش‌شناسی استاندارد اطلاعات متن‌باز (OSINT)، تحلیل تصاویر ماهواره‌ای، رهگیری داده‌های پروازی، آزمایش قطعات سلاح و اعتبارسنجی ثبت قربانیان استوار است. فرآیند ثبت و نگهداری زنجیره مدرک دیجیتال برای رعایت استانداردهای مراجع قضایی اروپایی و پروتکل برکلی به دقت مراعات گردید.</p>
+        </div>
+      </div>
+
+      <!-- Clause 2.2 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">2.2</span>
+            <span class="clause-heading">Victim Memorial Database & Chronolocational Proof</span>
+          </div>
+          <p><span class="evidence-pill">EVD-VIC-005</span> PFPJ ry has compiled a memorial database containing the profiles of the victims, including the geolocated remains, photos, and birth records of 100 verified children killed in the blast. Visual assets were authenticated using shadow chronolocation and metadata analysis.</p>
+          <div class="quote-box">
+            "Verification of child casualties in school airstrikes must adhere to strict spatial and chronolocational standards to eliminate doubts regarding military presence."
+            <div class="precedent-pill">Cross-Ref Precedent: Case 13 (Hass School Strike, Syria, 2016)</div>
+          </div>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">بانک اطلاعات شهدا و احراز زمانی‌مکانی</span>
+            <span class="clause-id">۲.۲</span>
+          </div>
+          <p>انجمن PFPJ ry پایگاه داده‌ای برای ثبت یادبود قربانیان تدوین نموده که شامل مشخصات، تصاویر تأیید شده و گواهی‌های فوت ۱۰۰ کودک قربانی است. اصالت تصاویر با تحلیل سایه‌ها (کرونولوکیشن) و متادیتا تأیید شده است.</p>
+          <div class="quote-box">
+            «تأیید تلفات کودکان در حملات هوایی به مدارس مستلزم رعایت استانداردهای دقیق مکانی و زمانی است تا هرگونه ادعای حضور نظامی منتفی گردد.»
+            <div class="precedent-pill">مرجع پرونده مشابه: مورد ۱۳ (حمله به مدرسه حاس، سوریه، ۲۰۱۶)</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==================== SECTION 3 ==================== -->
+    <article class="section-card" id="sec3">
+      <div class="section-header">
+        <div class="section-header-title-en">SECTION 3: CHRONOLOGY & GEOGRAPHIC ANALYSIS</div>
+        <span class="badge-sec standard">Spatial Geometry</span>
+        <div class="section-header-title-fa">بخش ۳: کرونولوژی و تحلیل جغرافیایی هدف</div>
+      </div>
+
+      <!-- Clause 3.1 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">3.1</span>
+            <span class="clause-heading">Geospatial Demarcation & Decade-Long Schoolyard History</span>
+          </div>
+          <p><span class="evidence-pill">EVD-SAT-001</span> The Shajareh Tayyebeh Girls' School is located at GPS coordinates <strong>27.1432° N, 57.0784° E</strong> in Minab, Hormozgan Province. The school property shares a northern boundary fence with the Minab IRGC Naval Base. High-resolution satellite chronologies from 2015 to 2026 prove that the school facility has been continuously active for over a decade, featuring distinct playground structures, a sports courtyard, and visible daily assemblies of children wearing bright uniforms.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">موقعیت مکانی و سابقه ده‌ساله مدرسه</span>
+            <span class="clause-id">۳.۱</span>
+          </div>
+          <p>مدرسه دخترانه شجره طیبه در مختصات جغرافیایی 27.1432 N، 57.0784 E در میناب (استان هرمزگان) واقع شده است. این ملک آموزشی دیوار به دیوار پایگاه نیروی دریایی سپاه در میناب است. تحلیل تصاویر ماهواره‌ای بین سال‌های ۲۰۱۵ تا ۲۰۲۶ ثابت می‌کند این مرکز آموزشی به طور مداوم فعال بوده و حیاط بازی و تجمع روزانه کودکان با لباس‌های رنگی یکدست کاملاً قابل رویت بوده است.</p>
+        </div>
+      </div>
+
+      <!-- Clause 3.2 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">3.2</span>
+            <span class="clause-heading">The 42-Meter Separation & Inevitable Lethal Blast Radius</span>
+          </div>
+          <p>Peacetime records show that the school was officially registered with the Ministry of Education and listed in public municipal databases. The geographic separation between the school's central building and the nearest military warehouse inside the base is exactly <strong>42 meters</strong>, which is well within the known lethal blast radius of a heavy Tomahawk cruise missile carrying a 1,000-lb WDU-36/B warhead (lethal radius 65–85 meters; fragmentation >400 meters).</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">فاصله ۴۲ متری و قطعیت اصابت موج انفجار</span>
+            <span class="clause-id">۳.۲</span>
+          </div>
+          <p>سوابق رسمی نشان می‌دهد این مدرسه در وزارت آموزش و پرورش ثبت رسمی بوده و در نقشه‌های شهری عمومی ثبت شده است. فاصله فیزیکی ساختمان مرکزی مدرسه تا نزدیک‌ترین انبار نظامی داخل پایگاه دقیقاً ۴۲ متر است که بسیار کمتر از شعاع تخریب مرگبار کلاهک جنگی ۱۰۰۰ پوندی موشک توماهوک می‌باشد.</p>
+        </div>
+      </div>
+
+      <!-- Clause 3.3 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">3.3</span>
+            <span class="clause-heading">Opening Hour Execution: Peacetime Target Folder Origin</span>
+          </div>
+          <p><span class="evidence-pill">EVD-LAUNCH-003</span> The chronological log of the strike on February 28, 2026, shows that the missile was launched during the opening hour of hostilities. In modern doctrine, Day 1 kinetic strikes are executed exclusively from pre-planned Target Nomination Lists (TNL) compiled weeks or months prior to the outbreak of war, during peacetime conditions when operators had ample time and resources to conduct vetting.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">شلیک در ساعت نخست: ریشه در لیست‌های زمان صلح</span>
+            <span class="clause-id">۳.۳</span>
+          </div>
+          <p>جدول زمانی شلیک نشان می‌دهد موشک در اولین ساعت آغاز مخاصمه شلیک شده است. این امر نشان می‌دهد که هدف از لیست‌های از پیش‌تعیین‌شده در زمان صلح انتخاب شده و طراحان نظامی هفته‌ها قبل زمان کافی برای بازبینی کاربری محل را داشته‌اند.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==================== SECTION 4 ==================== -->
+    <article class="section-card" id="sec4">
+      <div class="section-header">
+        <div class="section-header-title-en">SECTION 4: APPLICABLE INTERNATIONAL HUMANITARIAN LAW</div>
+        <span class="badge-sec standard">Legal Norms</span>
+        <div class="section-header-title-fa">بخش ۴: حقوق بین‌الملل بشردوستانه قابل اعمال</div>
+      </div>
+
+      <!-- Clause 4.1 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">4.1</span>
+            <span class="clause-heading">Principle of Distinction & Legal Presumption of Civilian Status</span>
+          </div>
+          <p>Under Customary International Humanitarian Law (IHL Rule 1) and Additional Protocol I (Article 48), the Principle of Distinction requires conflicting parties to distinguish between civilian objects and military objectives. <strong>Article 52(3)</strong> establishes an unequivocal legal presumption: <em>in case of doubt whether an object normally dedicated to civilian purposes, such as a school, is being used to make an effective contribution to military action, it must be presumed not to be so used.</em></p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">اصل تفکیک و اماره قانونی ماهیت غیرنظامی</span>
+            <span class="clause-id">۴.۱</span>
+          </div>
+          <p>طبق حقوق بین‌الملل بشردوستانه عرفی و پروتکل الحاقی اول (ماده ۴۸)، اصل تفکیک طرف‌های درگیر را ملزم می‌کند همواره بین اهداف نظامی و غیرنظامی تفکیک قائل شوند. طبق بند ۳ ماده ۵۲، در صورت بروز شک در مورد کاربری غیرنظامی مراکزی مثل مدارس، فرض قانونی بر غیرنظامی بودن مطلق آن محل است مگر خلاف آن در محکمه ثابت شود.</p>
+        </div>
+      </div>
+
+      <!-- Clause 4.2 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">4.2</span>
+            <span class="clause-heading">Safe Schools Declaration & Educational Sanctuary</span>
+          </div>
+          <p>Furthermore, the <strong>Safe Schools Declaration</strong>, to which international coalitions adhere, mandates heightened precautions when conducting operations in proximity to educational infrastructure to prevent disruption of children's rights to education and safety, reinforced by the UN Convention on the Rights of the Child (Article 38).</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">بیانیه مدارس ایمن و مصونیت مراکز آموزشی</span>
+            <span class="clause-id">۴.۲</span>
+          </div>
+          <p>علاوه بر این، بیانیه مدارس ایمن (Safe Schools Declaration) که ائتلاف‌های بین‌المللی متعهد به آن هستند، رعایت تدابیر احتیاطی شدید را در مجاورت مراکز آموزشی الزامی می‌داند تا حق امنیت و تحصیل کودکان حفظ شود.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==================== SECTION 5 ==================== -->
+    <article class="section-card" id="sec5">
+      <div class="section-header">
+        <div class="section-header-title-en">SECTION 5: LEGAL LIABILITY & NEGLECT OF PRECAUTION</div>
+        <span class="badge-sec substantive">Substantive Indictment</span>
+        <div class="section-header-title-fa">بخش ۵: مسئولیت حقوقی و نقض تعهدات احتیاطی در حمله</div>
+      </div>
+
+      <!-- Clause 5.1 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">5.1</span>
+            <span class="clause-heading">Failure of Continuous Target Verification (Duty of Precaution)</span>
+          </div>
+          <p>Under <strong>AP I Article 57(2)(a)(i)</strong> and <strong>Customary IHL Rule 15</strong>, targeting authorities bear an affirmative, continuous duty to verify that objectives are neither civilians nor civilian objects. Target nominators relied on stale 2013 intelligence, failing to verify coordinate usage shifts over a decade despite public registration and physical concrete wall partitioning.</p>
+          <div class="quote-box">
+            "Failing to track target coordinate usage changes over time and striking newly constructed or active civilian structures constitutes a breach of the duty of precaution. Proximity to a military objective compounds rather than excuses the duty to verify."
+            <div class="precedent-pill">Cross-Ref Precedent: Case 04 (Al-Jina Mosque Strike, UN CoI 2017)</div>
+          </div>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">نقض تعهد مستمر به راستی‌آزمایی هدف (اصل احتیاط)</span>
+            <span class="clause-id">۵.۱</span>
+          </div>
+          <p>بر اساس ماده ۵۷ بند ۲(الف)(۱) پروتکل اول الحاقی و قاعده ۱۵ حقوق عرفی بشردوستانه، طراحان و فرماندهان ملزم به راستی‌آزمایی مستمر ماهیت غیرنظامی اهداف هستند. تکیه بر اطلاعات منسوخ ۲۰۱۳ و اهمال ده‌ساله در بررسی تغییرات کاربری مجتمع آموزشی، نقض قطعی این تعهد است.</p>
+          <div class="quote-box">
+            «عدم ردیابی تغییرات کاربری مختصات در گذر زمان نقض فاحش اصل احتیاط است؛ مجاورت با پایگاه نظامی نه تنها رافع مسئولیت نیست بلکه وظیفه راستی‌آزمایی را تشدید می‌کند.»
+            <div class="precedent-pill">مرجع پرونده مشابه: مورد ۰۴ (حمله به مسجد الجینه، کمیسیون تحقیق سازمان ملل ۲۰۱۷)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clause 5.2 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">5.2</span>
+            <span class="clause-heading">Rejection of the "Fog of War" / "Honest Mistake" Defense</span>
+          </div>
+          <p>Because this strike occurred on <strong>Day 1</strong> of the international armed conflict, the target list was pre-planned during peacetime. The defense of rapid, high-pressure tactical adjustments in combat does not apply to target nominators working in peacetime intelligence offices weeks prior to launch.</p>
+          <div class="quote-box">
+            "Targeting errors originating from pre-planned nomination lists compiled during peacetime reflect systematic negligence, stripping commanders of the 'fog of war' excuse."
+            <div class="precedent-pill">Cross-Ref Precedents: Case 01 (Belgrade Embassy, 1999) & Case 06 (Dora Farms, 2003)</div>
+          </div>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">رد دفاعیه «اشتباه غیرعمدی» و «مه جنگ»</span>
+            <span class="clause-id">۵.۲</span>
+          </div>
+          <p>از آنجا که حمله در روز اول جنگ و بر اساس اهداف نامزدشده در زمان صلح رخ داد، فرماندهان نظامی نمی‌توانند به اضطرار میدان نبرد یا غبار جنگ متوسل شوند؛ فرصت کافی برای استعلام ثبتی وجود داشته است.</p>
+          <div class="quote-box">
+            «خطاهای هدف‌گیری ناشی از لیست‌های زمان صلح بازتاب سهل‌انگاری سیستماتیک بوده و عذر شرایط اضطراری نبرد را به طور کامل ساقط می‌نماید.»
+            <div class="precedent-pill">مراجع پرونده مشابه: مورد ۰۱ (سفارت چین در بلگراد، ۱۹۹۹) و مورد ۰۶ (مزارع دورا، ۲۰۰۳)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clause 5.2b -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">5.2b</span>
+            <span class="clause-heading">Precision-Guided Ballistics & Upstream Culpability (The Belgrade Standard)</span>
+          </div>
+          <p><span class="evidence-pill">EVD-MUN-002</span> As established by the ICTY OTP in the Belgrade Embassy investigation (Case 01, §§ 80–85), autonomous precision guidance eliminates aerodynamic drift or operator error as a legal defense. Debris recovery confirms sub-5m terminal accuracy, shifting 100% of liability onto intelligence nominators. Unlike 1999 GPS JDAMs, the Tomahawk's <strong>DSMAC optical scene-matching camera</strong> should have visually alerted planners to the schoolyard, proving reckless disregard (<em>dolus eventualis</em>).</p>
+          <div class="quote-box">
+            "When precision-guided weapons function with mechanical perfection, targeting liability shifts entirely away from executing aircrews and onto the intelligence officers who compiled the target coordinate folder."
+            <div class="precedent-pill">Cross-Ref Precedent: Case 01 (Belgrade Chinese Embassy, ICTY OTP 2000)</div>
+          </div>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">تسلیحات هدایت دقیق و انتقال مسئولیت به طراحان (معیار بلگراد)</span>
+            <span class="clause-id">۵.۲b</span>
+          </div>
+          <p>به تصریح دادستانی دادگاه بین‌المللی یوگسلاوی سابق (ICTY OTP §§ 80–85)، هدایت دقیق خودکار ماهواره‌ای احتمال انحراف بالستیک یا خطای خلبان را منتفی می‌سازد و مسئولیت را ۱۰۰٪ به طراحان مختصات منتقل می‌کند. همچنین سامانه اپتیکی DSMAC توماهوک باید پیش از اصابت کاربری مدرسه را شناسایی می‌کرد که عدم توجه به آن نشانه سوءنیت احتمالی (dolus eventualis) است.</p>
+          <div class="quote-box">
+            «اصابت مکانیکی بی‌نقص سلاح‌های هدایت دقیق، هرگونه مسئولیت را از خلبانان و اپراتورهای پرتاب سلب و مستقیماً متوجه طراحان و افسران اطلاعاتی زمان صلح می‌سازد.»
+            <div class="precedent-pill">مرجع پرونده مشابه: مورد ۰۱ (گزارش دادستانی دادگاه بین‌المللی یوگسلاوی، ۲۰۰۰)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clause 5.3 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">5.3</span>
+            <span class="clause-heading">Inherent Disproportionality & Means/Methods of Warfare</span>
+          </div>
+          <p>Under <strong>AP I Article 57(2)(a)(ii)</strong> and <strong>Article 51(5)(b)</strong>, launching a 1,000-lb high-explosive unitary warhead immediately adjacent to an active school during morning class hours violates the duty in choice of means and methods. The catastrophic civilian toll was mathematically certain and grossly excessive in relation to any anticipated concrete military advantage.</p>
+          <div class="quote-box">
+            "Deploying heavy blast weapons in or adjacent to civilian settlements is impossible to reconcile with the standard of care required in military operations. High precision in munition delivery confirms that targeting child concentrations is the product of gross command recklessness."
+            <div class="precedent-pill">Cross-Ref Precedents: Case 03 (Isayeva v. Russia, ECtHR 2005) & Case 15 (Dahyan School Bus, UN GEE 2018)</div>
+          </div>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">عدم تناسب فاحش و نقض تعهد در انتخاب وسایل و روش‌های نبرد</span>
+            <span class="clause-id">۵.۳</span>
+          </div>
+          <p>مطابق بند ۲(الف)(۲) ماده ۵۷ و ماده ۵۱ پروتکل اول، بکارگیری کلاهک سنگین ۱۰۰۰ پوندی در مجاورت بلافصل یک مدرسه فعال در ساعات درسی نقض مستقیم تعهد در گزینش تسلیحات است؛ وقوع فاجعه انسانی از نظر محاسباتی قطعی و نسبت به مزیت نظامی ادعایی آشکارا نامتناسب بود.</p>
+          <div class="quote-box">
+            «استفاده از بمب‌های سنگین انفجاری در مجاورت بافت‌های مسکونی با استانداردهای احتیاطی حقوق بین‌الملل غیرقابل جمع است و فرضیه جنایت جنگی را محرز می‌سازد.»
+            <div class="precedent-pill">مراجع پرونده مشابه: مورد ۰۳ (عیسایوا علیه روسیه، ۲۰۰۵) و مورد ۱۵ (اتوبوس دانش‌آموزان ضحیان، ۲۰۱۸)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clause 5.4 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">5.4</span>
+            <span class="clause-heading">Command Confirmation Bias & Remote Sensor Blindness</span>
+          </div>
+          <p>Relying on high-altitude surveillance without positive ground verification created a fatal cognitive echo chamber. As in the 2021 Kabul drone strike, analysts anchored on a military threat hypothesis, systematically filtering out routine civilian life indicators—including school buses, morning assembly lines, and children in uniform—as operational noise.</p>
+          <div class="quote-box">
+            "Remote sensor loops under operational stress suffer from cognitive tunnel vision, converting neutral civilian objects into threat signatures and blinding command cells to the presence of children."
+            <div class="precedent-pill">Cross-Ref Precedents: Case 05 (Kabul Drone Strike, CENTCOM IG 2021) & Case 13 (Hass School, 2016)</div>
+          </div>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">سوگیری تأیید در اطلاعات سنجش از دور و کوری حسگرها</span>
+            <span class="clause-id">۵.۴</span>
+          </div>
+          <p>اتکای صرف به تصاویر هوایی بدون راستی‌آزمایی میدانی موجب سوگیری شناختی شد؛ همانند حمله پهپادی ۲۰۲۱ کابل، تحلیلگران با پیش‌فرض نظامی، الگوهای روزمره مدرسه نظیر تردد سرویس‌ها و دختران با روپوش را به عنوان جابجایی نیرو نادیده گرفتند.</p>
+          <div class="quote-box">
+            «حلقه‌های هدایت از دور تحت استرس دچار تونل دید شناختی شده و نشانه‌های حضور کودکان را از فیلترهای تحلیلی حذف می‌کنند.»
+            <div class="precedent-pill">مراجع پرونده مشابه: مورد ۰۵ (پهپاد کابل، ۲۰۲۱) و مورد ۱۳ (مجتمع مدارس حاس سوریه، ۲۰۱۶)</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==================== SECTION 6 ==================== -->
+    <article class="section-card" id="sec6">
+      <div class="section-header">
+        <div class="section-header-title-en">SECTION 6: JURISDICTIONAL LINK & EUROPEAN PROCEDURAL OBLIGATIONS</div>
+        <span class="badge-sec procedural">Jurisdictional Gate</span>
+        <div class="section-header-title-fa">بخش ۶: پیوند صلاحیتی و تعهدات دادرسی در اروپا</div>
+      </div>
+
+      <!-- Clause 6.1 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">6.1</span>
+            <span class="clause-heading">Legal Domicile & Territorial Nexus in Helsinki</span>
+          </div>
+          <p>PFPJ ry is incorporated in Helsinki, Finland (Business ID: 3616815-5), creating an immutable institutional nexus within the legal order of a Council of Europe Member State to document IHL violations and seek judicial redress for victims.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">مقر رسمی و پیوند نهادی در هلسینکی فنلاند</span>
+            <span class="clause-id">۶.۱</span>
+          </div>
+          <p>انجمن PFPJ ry ثبت‌شده رسمی در هلسینکی فنلاند (شناسه: ۳۶۱۶۸۱۵-۵) است و پیوند سرزمینی تفکیک‌ناپذیری با نظام حقوقی شورای اروپا جهت دادخواهی برای قربانیان ایجاد می‌نماید.</p>
+        </div>
+      </div>
+
+      <!-- Clause 6.2 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">6.2</span>
+            <span class="clause-heading">Universal Jurisdiction under Finnish Penal Code (Rikoslaki)</span>
+          </div>
+          <p><strong>Chapter 1, Section 7</strong> of Rikoslaki (39/1889) extends Finnish criminal jurisdiction unconditionally over international offenses. <strong>Chapter 11, Section 6</strong> criminalizes Aggravated War Crimes (<em>Törkeä sotarikos</em>), mandating domestic investigation where mass child casualties result from disproportionate attacks.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">صلاحیت جهانی ذیل قانون مجازات فنلاند (Rikoslaki)</span>
+            <span class="clause-id">۶.۲</span>
+          </div>
+          <p>فصل ۱ ماده ۷ قانون مجازات فنلاند صلاحیت کیفری دادگاه‌ها را به نحو مطلق بر جرایم بین‌المللی تسری داده و فصل ۱۱ ماده ۶ جنایات جنگی مشدد را با تعقیب اجباری جرم‌انگاری کرده است.</p>
+        </div>
+      </div>
+
+      <!-- Clause 6.3 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">6.3</span>
+            <span class="clause-heading">Binding Procedural Obligation under ECHR Article 2 (The Hanan Precedent)</span>
+          </div>
+          <p>Pursuant to the ECtHR Grand Chamber ruling in <strong>Hanan v. Germany (2021, §§ 132–145)</strong>, European states hold an autonomous, detachable procedural obligation to criminally investigate extraterritorial strikes when territorial remedies are blocked and an impunity vacuum exists.</p>
+          <div class="quote-box">
+            "European states bear a binding procedural obligation under Article 2 ECHR to investigate civilian casualties from strikes when domestic immunity regimes create an impunity gap."
+            <div class="precedent-pill">Cross-Ref Precedent: Case 02 (Hanan v. Germany [GC], 2021)</div>
+          </div>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">تعهد دادرسی الزام‌آور به موجب ماده ۲ ECHR (رویه قضایی حنان)</span>
+            <span class="clause-id">۶.۳</span>
+          </div>
+          <p>طبق رأی هیئت عمومی دیوان اروپایی حقوق بشر در پرونده حنان علیه آلمان (۲۰۲۱)، دولت‌های اروپایی در صورت بروز خلاء دادرسی و مصونیت عاملان، تعهد دادرسی مستقل جهت پیگرد حملات فرامرزی دارند.</p>
+          <div class="quote-box">
+            «دولت‌های اروپایی بر اساس ماده ۲ کنوانسیون حقوق بشر اروپا موظف به انجام تحقیقات کیفری مستقل در خصوص جنایات منجر به سلب حیات هستند.»
+            <div class="precedent-pill">مرجع پرونده مشابه: مورد ۰۲ (هیئت عمومی دیوان اروپایی، حنان علیه آلمان، ۲۰۲۱)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clause 6.4 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">6.4</span>
+            <span class="clause-heading">Comparative European Authority (German GBA & VStGB § 1)</span>
+          </div>
+          <p>Under <strong>Section 1 of the German VStGB</strong>, universal jurisdiction requires only factual indications of a war crime (<em>Anfangsverdacht</em> under § 152(2) StPO). The certified deaths of 156 civilians legally surpasses this threshold, compelling European prosecutorial action.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">رویه مقایسه‌ای دادستانی فدرال آلمان (GBA و ماده ۱ VStGB)</span>
+            <span class="clause-id">۶.۴</span>
+          </div>
+          <p>بر اساس ماده ۱ قانون VStGB و ماده ۱۵۲ آیین دادرسی آلمان، وجود صرف امارات اولیه (Anfangsverdacht) برای شروع تعقیب کافی است و شهادت ۱۵۶ انسان بی‌گناه فراتر از این آستانه است.</p>
+        </div>
+      </div>
+
+      <!-- Clause 6.5 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">6.5</span>
+            <span class="clause-heading">Distinguishing the Kunduz "Honest Mistake" Defense</span>
+          </div>
+          <p>In <em>Hanan</em>, the commander operated under fluid, dynamic nighttime combat with 7 real-time informant checks. In Minab, planners executed a Day 1 static target from peacetime nomination lists with zero verification against public educational registries, establishing conscious disregard (<em>dolus eventualis</em>).</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">تفکیک ماهوی از پرونده قندوز و رد اشتباه صادقانه</span>
+            <span class="clause-id">۶.۵</span>
+          </div>
+          <p>در پرونده حنان حمله در نبرد متحرک شبانه با استعلام‌های مکرر رخ داد؛ در میناب حمله به هدفی ثابت و ثبتی از پیش‌تعیین‌شده در روز اول جنگ انجام شد که نشانه سوءنیت احتمالی است.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==================== SECTION 7 ==================== -->
+    <article class="section-card" id="sec7">
+      <div class="section-header">
+        <div class="section-header-title-en">SECTION 7: PROSECUTORIAL RECOMMENDATIONS & REMEDIES</div>
+        <span class="badge-sec remedial">Remedial Petitions</span>
+        <div class="section-header-title-fa">بخش ۷: توصیه‌های دادستانی و مطالبات حقوقی جبرانی</div>
+      </div>
+
+      <!-- Clause 7.1 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">7.1</span>
+            <span class="clause-heading">Petition to the Finnish Office of the Prosecutor General</span>
+          </div>
+          <p>PFPJ ry formally petitions the Finnish Prosecutor General (<em>Valtakunnansyyttäjän toimisto</em>) to issue an investigation order (<em>syyttämismääräys</em>) under <strong>Chapter 1, Section 12 of Rikoslaki</strong> for the National Bureau of Investigation (KRP) to initiate pre-trial inquiries into target nomination officers.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">درخواست صدور دستور تعقیب از دادستان کل فنلاند</span>
+            <span class="clause-id">۷.۱</span>
+          </div>
+          <p>انجمن PFPJ ry رسماً از دادستان کل فنلاند تقاضا دارد طبق فصل ۱ ماده ۱۲ قانون مجازات، دستور تعقیب کیفری رسمی را خطاب به پلیس امنیت و تحقیقات جنایی فنلاند (KRP) صادر نماید.</p>
+        </div>
+      </div>
+
+      <!-- Clause 7.2 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">7.2</span>
+            <span class="clause-heading">Article 15 Rome Statute Communication to the ICC</span>
+          </div>
+          <p>PFPJ ry submits this dossier to the ICC Office of the Prosecutor in The Hague under Article 15, alleging war crimes under <strong>Article 8(2)(b)(i)</strong> (civilian objects), <strong>8(2)(b)(ii)</strong> (educational buildings), and <strong>8(2)(b)(iv)</strong> (disproportionate attacks).</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">ارائه شکایت رسمی به دفتر دادستانی دیوان کیفری بین‌المللی (ماده ۱۵)</span>
+            <span class="clause-id">۷.۲</span>
+          </div>
+          <p>پرونده احراز واقعیت به عنوان ارتباط رسمی ذیل ماده ۱۵ اساسنامه رم با اتهام جنایات جنگی تحت بندهای ۱، ۲ و ۴ از جزء ب ماده ۸ به دادستانی ICC در لاهه تسلیم می‌شود.</p>
+        </div>
+      </div>
+
+      <!-- Clause 7.3 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">7.3</span>
+            <span class="clause-heading">Parallel Filings with German GBA & Genocide Network</span>
+          </div>
+          <p>PFPJ ry shall lodge a parallel criminal complaint (<em>Strafanzeige</em>) with the German Federal Prosecutor General in Karlsruhe under § 1 and § 11(1) no. 3 VStGB, requesting evidence sharing via the European Genocide Network.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">اقامه شکایت موازی نزد دادستان فدرال آلمان (GBA) و شبکه نسل‌کشی</span>
+            <span class="clause-id">۷.۳</span>
+          </div>
+          <p>شکایت موازی کیفری (Strafanzeige) نزد دادستان کل آلمان در کارلسروهه بر اساس مواد ۱ و ۱۱ قانون VStGB و همکاری با شبکه اروپایی پیگرد جنایات جنگی ثبت خواهد شد.</p>
+        </div>
+      </div>
+
+      <!-- Clause 7.4 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">7.4</span>
+            <span class="clause-heading">Evidentiary Preservation & Judicial Chain of Custody</span>
+          </div>
+          <p>Physical missile remnants, serial number fragments, and local RF telecommunications logs are secured under Berkeley Protocol standards in European repositories for immediate transfer upon issuance of letters rogatory (<em>oikeusapupyyntö</em>).</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">حفظ دایمی ادله و رعایت زنجیره مدرک قضایی (پروتکل برکلی)</span>
+            <span class="clause-id">۷.۴</span>
+          </div>
+          <p>قطعات فیزیکی سیستم هدایت موشک و داده‌های مخابراتی دکل‌ها تحت استانداردهای پروتکل برکلی در مخازن امن اروپایی جهت ارائه به بازپرسان نگهداری می‌شوند.</p>
+        </div>
+      </div>
+
+      <!-- Clause 7.5 -->
+      <div class="clause-row">
+        <div class="clause-col-en">
+          <div class="clause-header-line">
+            <span class="clause-id">7.5</span>
+            <span class="clause-heading">Enforcement of Victims' Procedural Rights (ECHR Article 13)</span>
+          </div>
+          <p>Demanding unhindered legal access for victims' kin to non-classified dossiers and ensuring any prosecutorial closure is subject to judicial review, vindicating the victims' right to truth and effective remedy.</p>
+        </div>
+        <div class="clause-col-fa">
+          <div class="clause-header-line">
+            <span class="clause-heading">تضمین حقوق مشارکتی اولیای دم و دادرسی مؤثر (ماده ۱۳ ECHR)</span>
+            <span class="clause-id">۷.۵</span>
+          </div>
+          <p>تضمین دسترسی کامل وکلای قربانیان به بخش‌های پرونده و نظارت قضایی دادگاه‌های تجدیدنظر بر تصمیمات دادستانی جهت احقاق حق بر حقیقت و جبران خسارت.</p>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <footer class="reader-footer">
+    <div>People for Peace & Justice ry (PFPJ ry) · Helsinki, Finland · Business ID: 3616815-5</div>
+    <div style="margin-top: 6px;">Prepared for Legal Executive Review · Confidential Work Product</div>
+  </footer>
+
+  <script>
+    // Mode Switcher
+    function setMode(mode) {
+      document.body.classList.remove('mode-both', 'mode-en', 'mode-fa');
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+
+      if (mode === 'en') {
+        document.body.classList.add('mode-en');
+        document.getElementById('btnModeEn').classList.add('active');
+      } else if (mode === 'fa') {
+        document.body.classList.add('mode-fa');
+        document.getElementById('btnModeFa').classList.add('active');
+      } else {
+        document.body.classList.add('mode-both');
+        document.getElementById('btnModeBoth').classList.add('active');
+      }
+      localStorage.setItem('pfpj-reader-mode', mode);
+    }
+
+    // Restore saved mode
+    const savedMode = localStorage.getItem('pfpj-reader-mode');
+    if (savedMode) {
+      setMode(savedMode);
+    }
+
+    // Interactive Search / Filter
+    function filterClauses() {
+      const q = document.getElementById('filterInput').value.toLowerCase().trim();
+      const rows = document.querySelectorAll('.clause-row');
+      
+      if (!q) {
+        rows.forEach(r => r.style.display = 'grid');
+        return;
+      }
+
+      rows.forEach(r => {
+        const text = r.textContent.toLowerCase();
+        if (text.includes(q)) {
+          r.style.display = 'grid';
+        } else {
+          r.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
