@@ -200,3 +200,10 @@ Archive/
 
 # Diplomatic correspondence & embassy packages (confidential/local)
 Campaigns/minab/embassy_submission_package/
+
+# Heavy video archives and screening media (host externally / keep out of git)
+Campaigns/minab/screening_media/
+
+# Agent scratch directory
+scratch/
+
