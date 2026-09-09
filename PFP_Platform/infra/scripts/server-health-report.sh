@@ -18,9 +18,16 @@ set -euo pipefail
 PROJECT_DIR="/opt/pfp"
 GIT_DIR="/opt/pfp.git"
 GIT="git --git-dir=${GIT_DIR} --work-tree=${PROJECT_DIR}"
+
+# Load environment variables if present
+if [ -f "${PROJECT_DIR}/.env" ]; then
+  # shellcheck disable=SC1091
+  set -a && source "${PROJECT_DIR}/.env" && set +a
+fi
+
 COMPOSE_FILES="-f docker-compose.production.yml -f docker-compose.stealth.yml"
-BOT_TOKEN="8743296270:AAFny3S8Cp3WtcqpROlcPMfbFptLtUlI3Lc"
-ALERT_CHAT_ID="23932283"
+BOT_TOKEN="${TELEGRAM_BOT_TOKEN:-${BOT_TOKEN:-}}"
+ALERT_CHAT_ID="${TELEGRAM_ALERT_CHAT_ID:-${ALERT_CHAT_ID:-}}"
 
 cd "$PROJECT_DIR"
 

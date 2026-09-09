@@ -13,12 +13,11 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_HSTS_PRELOAD = False
 
 # CSRF trusted origins — required by Django 4.x for admin login behind reverse proxy
+_extra_origins = os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
 CSRF_TRUSTED_ORIGINS = [
     'https://peopleforpeace.live',
     'http://peopleforpeace.live',
-    'http://65.109.198.200:8080',
-    'http://65.109.198.200:8001',
-]
+] + [origin.strip() for origin in _extra_origins if origin.strip()]
 
 # Telegram stays in polling mode (no webhook without domain)
 TELEGRAM_USE_WEBHOOK = False
