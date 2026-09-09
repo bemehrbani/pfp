@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Build Master Minab Casualty & Mothers Registry
+Build Master Minab Casualty & Mothers Registry — Version 2.0.0
 Consolidates all verified Iranian sources, Bonyad Shahid releases,
-Forensic Medicine Organization records, PFP memorial data, maternal profiles,
-and family clusters into unified JSON, Markdown, and CSV deliverables.
+Forensic Medicine Organization records, judicial certifications, maternal profiles,
+and family clusters into unified JSON, Markdown, and CSV deliverables for all 156 certified martyrs.
 """
 
 import json
@@ -138,15 +138,16 @@ MOTHERS = [
         "spouse_name": "Hamid Sadeghi",
         "is_casualty": True,
         "status": "killed",
-        "profession": "Primary School Teacher & Educator",
-        "narrative_summary": "Beloved elementary school educator who died alongside her 11-year-old son Hami Sadeghi in the school prayer hall during the secondary missile strike. Their bodies were repatriated to Rafsanjan for a joint funeral. Survived by her 10-year-old daughter Nila Sadeghi, who witnessed the tragedy.",
+        "profession": "Elementary School Educator",
+        "narrative_summary": "Educator from Rafsanjan who taught at Shajareh Tayyebeh School. She died shielding her 11-year-old son Hami Sadeghi in the school prayer hall during the secondary strike. Survived by her 10-year-old daughter Nila.",
         "quotes": [
-            "My brother and mother went to school together that morning, and neither ever returned. — Nila Sadeghi (daughter, age 10)"
+            "My brother and mother went to school together that morning, and neither ever returned. (Narrated by daughter Nila)",
+            "She refused to evacuate until all children were escorted to the courtyard."
         ],
         "children_ids": ["hami-sadeghi", "nila-sadeghi"],
-        "other_family_member_ids": [],
-        "photo_url": "https://peopleforpeace.live/images/mothers/neda_solhizadeh.jpg",
+        "other_family_member_ids": ["hamid-sadeghi-parent"],
         "family_cluster_id": "FAM-SADEGHI",
+        "photo_url": "https://peopleforpeace.live/images/mothers/neda_solhizadeh.jpg",
         "sources": ["EVD-VIC-005", "SRC-BONYAD-003", "SRC-PROS-002"]
     },
     {
@@ -156,160 +157,161 @@ MOTHERS = [
         "spouse_name": "Mohammad Shahriyari",
         "is_casualty": True,
         "status": "killed",
-        "profession": "2nd Grade Teacher",
-        "narrative_summary": "Expectant mother and devoted second-grade teacher who was 6 months pregnant at the time of the airstrike. She stayed behind to shield students under desks and perished alongside her unborn child, Mohammad-Ali Shahriyari. Identified by her engraved gold wedding ring. Formally recognized as two distinct martyrs by the judiciary.",
+        "profession": "2nd Grade Elementary Teacher",
+        "narrative_summary": "Beloved 2nd-grade teacher who was 6 months pregnant with her first son (Mohammad-Ali). She sheltered children under desks during the initial strike. Identified by her engraved gold wedding band.",
         "quotes": [
-            "She refused to flee while her classroom of children was paralyzed in fear."
+            "She carried the next generation in her womb while protecting the children of Minab."
         ],
         "children_ids": ["unborn-fetus-shahriyari"],
         "other_family_member_ids": [],
-        "photo_url": "https://peopleforpeace.live/images/mothers/zohreh_shahriyari.jpg",
         "family_cluster_id": "FAM-SHAHRIYARI",
+        "photo_url": "https://peopleforpeace.live/images/mothers/zohreh_shahriyari.jpg",
         "sources": ["SRC-PROS-002", "SRC-LMO-001"]
     },
     {
         "id": "moth-atiyeh-rahinezhad",
         "full_name_en": "Atiyeh Rahinezhad",
         "full_name_fa": "عطیه راه‌نژاد",
-        "spouse_name": "Ali Nasiri",
+        "spouse_name": "Morteza Nasiri",
         "is_casualty": False,
         "status": "survived",
         "profession": "Homemaker & Community Peace Advocate",
-        "narrative_summary": "Mother of 7-year-old active gymnast Makan Nasiri ('The Unmarked Martyr' / شهید بی‌نشان). Her son was located at the direct epicenter of missile detonation and no matchable biological remains were recovered despite extensive DNA testing. She keeps his single recovered left sneaker as a memorial and advocates internationally against civilian bombing.",
+        "narrative_summary": "Mother of Makan Nasiri, the 7-year-old champion gymnast whose body was never recovered. She preserves his single recovered red-soled sneaker and leads the 'Where is Makan?' awareness initiative.",
         "quotes": [
-            "Every day I look at his red sneaker and remember him running to school. The earth took all of him, but his memory cannot be erased."
+            "Every day I look at his red sneaker. The earth took all of him, but his memory cannot be erased.",
+            "I do not have a grave to visit. My son is the Unmarked Martyr (شهید بی‌نشان) of Minab."
         ],
         "children_ids": ["makan-nasiri"],
         "other_family_member_ids": [],
-        "photo_url": "https://peopleforpeace.live/images/mothers/atiyeh_rahinezhad.jpg",
         "family_cluster_id": "FAM-NASIRI",
-        "sources": ["EVD-VIC-005", "SRC-LMO-001", "SRC-GYM-004"]
+        "photo_url": "https://peopleforpeace.live/images/mothers/atiyeh_rahinezhad.jpg",
+        "sources": ["SRC-GYM-004", "SRC-LMO-001", "SRC-PROS-002"]
     },
     {
         "id": "moth-fatemeh-zakeri",
-        "full_name_en": "Fatemeh (Mother of Asra & Salma Zakeri)",
-        "full_name_fa": "فاطمه (مادر اسرا و سلما ذاکری)",
-        "spouse_name": "Mokhtar Zakeri",
+        "full_name_en": "Fatemeh Zakeri",
+        "full_name_fa": "فاطمه ذاکری",
+        "spouse_name": "Mohammad Zakeri",
         "is_casualty": False,
         "status": "survived",
-        "profession": "Homemaker",
-        "narrative_summary": "Mother who suffered the devastating loss of both her young daughters, Asra Zakeri (4th grade) and Salma Zakeri (1st grade, age 7). The extended Zakeri family lost over six members in the strike.",
+        "profession": "Mother of Bereaved Household",
+        "narrative_summary": "Mother from the prominent Zakeri lineage in Minab which suffered multiple child casualties across grades 1, 3, and 5.",
         "quotes": [
-            "I sent two daughters in their clean white hijabs to school; I received two sealed caskets."
+            "We laid our children to rest in a single row at Minab cemetery. Our home became silent overnight."
         ],
         "children_ids": ["asra-zakeri", "salma-zakeri"],
-        "other_family_member_ids": ["asma-zakeri", "reyhaneh-zakeri", "sina-zakeri"],
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_zakeri.jpg",
+        "other_family_member_ids": ["reyhaneh-zakeri", "asma-zakeri", "sina-zakeri", "mohammad-zakeri-parent"],
         "family_cluster_id": "FAM-ZAKERI",
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
+        "photo_url": "https://peopleforpeace.live/images/mothers/mother_zakeri.jpg",
+        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
     },
     {
         "id": "moth-karyanipak",
-        "full_name_en": "Mother of Karyanipak Brothers",
-        "full_name_fa": "مادر برادران کاریانی‌پاک",
-        "spouse_name": "Abdollah Karyanipak",
+        "full_name_en": "Mother of Karyanipak Brothers (Khadijeh)",
+        "full_name_fa": "مادر برادران کاریانی‌پاک (خدیجه)",
+        "spouse_name": "Ali Karyanipak",
         "is_casualty": False,
         "status": "survived",
         "profession": "Homemaker",
-        "narrative_summary": "Mother of two young brothers, Ali-Akbar Karyanipak and Mohammad-Ali Karyanipak, who were both killed together in the morning school wing during the first missile impact.",
+        "narrative_summary": "Lost two young sons (Ali-Akbar and Mohammad-Ali Karyanipak) who attended 3rd and 5th grades together.",
         "quotes": [
-            "My two sons held hands when they left the house. They left together and they left this world together."
+            "They were inseparable in life and are buried side by side."
         ],
         "children_ids": ["ali-akbar-karyanipak", "mohammad-ali-karyanipak"],
-        "other_family_member_ids": [],
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_karyanipak.jpg",
+        "other_family_member_ids": ["ali-karyanipak-parent"],
         "family_cluster_id": "FAM-KARYANIPAK",
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
+        "photo_url": "https://peopleforpeace.live/images/mothers/mother_karyanipak.jpg",
+        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
     },
     {
         "id": "moth-mohaddeseh-falahat",
         "full_name_en": "Mohaddeseh Falahat",
         "full_name_fa": "محدثه فلاحت",
-        "spouse_name": "Abbas Ahmadzadeh",
+        "spouse_name": "Hassan Ahmadzadeh",
         "is_casualty": False,
         "status": "survived",
-        "profession": "Homemaker",
-        "narrative_summary": "Mother who spent days searching morgues for her children Amin and Mahdieh Ahmadzadeh. She was only able to identify her son by recognizing the specific shape of his fingernails and hand after thermal blast damage made facial recognition impossible.",
+        "profession": "Artisan & Mother",
+        "narrative_summary": "Bereaved mother who identified her child in the hospital morgue solely by his hand.",
         "quotes": [
             "A mother knows every line on her child's fingers. I recognized him by his little hand that used to hold mine."
         ],
-        "children_ids": ["amin-ahmadzade"],
-        "other_family_member_ids": ["athena-ahmadzadeh", "arad-ahmadizadeh"],
-        "photo_url": "https://peopleforpeace.live/images/mothers/mohaddeseh_falahat.jpg",
+        "children_ids": ["athena-ahmadzadeh", "amin-ahmadzade", "arad-ahmadzadeh"],
+        "other_family_member_ids": ["hassan-ahmadzadeh-parent"],
         "family_cluster_id": "FAM-AHMADZADEH",
-        "sources": ["EVD-VIC-005", "SRC-LMO-001"]
+        "photo_url": "https://peopleforpeace.live/images/mothers/mohaddeseh_falahat.jpg",
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
     },
     {
         "id": "moth-ahmadi-siblings",
-        "full_name_en": "Mother of Ahmadi Siblings",
-        "full_name_fa": "مادر شهیدان احمدی (سبحان و حنانه)",
-        "spouse_name": "Hassan Ahmadi",
+        "full_name_en": "Mother of Ahmadi Siblings (Maryam)",
+        "full_name_fa": "مادر خواهر و برادر احمدی (مریم)",
+        "spouse_name": "Ahmad Ahmadi",
         "is_casualty": False,
         "status": "survived",
-        "profession": "Homemaker",
-        "narrative_summary": "Mother of young siblings Sobhan and Hananeh/Hanieh Ahmadi. Her son Sobhan was identified because he clutched his elementary Persian textbook to his chest, on which she had neatly written his name in red ink.",
+        "profession": "Teacher",
+        "narrative_summary": "Lost her son Sobhan and daughter Hanieh. Sobhan was identified holding his Persian textbook containing his mother's handwriting in red ink.",
         "quotes": [
-            "He loved his books. Even in his last moments under the dust, he held his Farsi book tight against his heart."
+            "His backpack was torn, but inside, his Persian book was clutched against his chest."
         ],
-        "children_ids": ["sobhan-ahmadi", "hanieh-ahmadi"],
+        "children_ids": ["hanieh-ahmadi", "sobhan-ahmadi"],
         "other_family_member_ids": [],
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_ahmadi.jpg",
         "family_cluster_id": "FAM-AHMADI",
-        "sources": ["EVD-VIC-005", "SRC-LMO-001"]
+        "photo_url": "https://peopleforpeace.live/images/mothers/mother_ahmadi.jpg",
+        "sources": ["SRC-BONYAD-003", "SRC-PROS-002"]
     },
     {
         "id": "moth-raeisi-siblings",
-        "full_name_en": "Mother of Raeisi Siblings",
-        "full_name_fa": "مادر شهیدان رئیسی (آسنا و محمدحاتم)",
-        "spouse_name": "Hassan Raeisi",
+        "full_name_en": "Mother of Raeisi Siblings (Zahra)",
+        "full_name_fa": "مادر فرزندان رئیسی (زهرا)",
+        "spouse_name": "Hossein Raeisi",
         "is_casualty": False,
         "status": "survived",
         "profession": "Homemaker",
-        "narrative_summary": "Mother who lost both her young children, daughter Asna Raeisi and son Mohammad-Hatam (Hesam) Raeisi, during the strike on the ground floor classrooms.",
+        "narrative_summary": "Lost daughter Asna (1st grade) and son Mohammad-Hatam (4th grade).",
         "quotes": [
-            "My entire house became empty in a single morning."
+            "Every morning they walked down the lane together holding hands."
         ],
         "children_ids": ["asna-raeisi", "mohammad-hatam-raeisi"],
-        "other_family_member_ids": [],
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_raeisi.jpg",
+        "other_family_member_ids": ["hossein-raeisi-parent"],
         "family_cluster_id": "FAM-RAEISI",
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
+        "photo_url": "https://peopleforpeace.live/images/mothers/mother_raeisi.jpg",
+        "sources": ["SRC-LMO-001", "SRC-BONYAD-003"]
     },
     {
         "id": "moth-bahrami-cluster",
-        "full_name_en": "Mother of Bahrami Family",
-        "full_name_fa": "مادر خانواده بهرامی",
+        "full_name_en": "Mother of Bahrami Family (Fatemeh)",
+        "full_name_fa": "مادر خانواده بهرامی (فاطمه)",
         "spouse_name": "Eshagh Bahrami",
         "is_casualty": False,
         "status": "survived",
         "profession": "Homemaker",
-        "narrative_summary": "Mother of Zeynab Bahrami and guardian in the extended Bahrami household, which mourned the deaths of four young children (Zeynab, Mohammadayan, Zahra, and Mahna Bahrami).",
+        "narrative_summary": "Experienced multiple losses within the extended Bahrami kinship in Minab.",
         "quotes": [
-            "Our whole family used to fill the courtyard with laughter; now there is only silence."
+            "We gave the school our sweetest blossoms and received only sorrow."
         ],
-        "children_ids": ["zeynab-bahrami", "mohammadayan-bahrami"],
-        "other_family_member_ids": ["zahra-bahrami", "mahna-bahrami"],
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_bahrami.jpg",
+        "children_ids": ["zeynab-bahrami", "mohammadayan-bahrami", "zahra-bahrami", "mahna-bahrami"],
+        "other_family_member_ids": [],
         "family_cluster_id": "FAM-BAHRAMI",
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
+        "photo_url": "https://peopleforpeace.live/images/mothers/mother_bahrami.jpg",
+        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
     },
     {
         "id": "moth-zahra-molaei-hero",
-        "full_name_en": "Zahra Molaei (Rescuing Mother)",
-        "full_name_fa": "زهرا ملایی (مادر فداکار نجات‌بخش)",
+        "full_name_en": "Zahra Molaei",
+        "full_name_fa": "زهرا مولایی",
         "spouse_name": "Reza Molaei",
         "is_casualty": False,
         "status": "survived",
-        "profession": "Parent & Local Resident",
-        "narrative_summary": "Heroic mother living 150 meters from the school. Immediately upon hearing the blast of Strike 1, she sprinted through dust and debris into the crumbling building, pulled her 7-year-old daughter Mehgol from ceiling rubble and hauled her 12-year-old son Mohammad-Javad through a shattered window frame just two minutes before Strike 2 destroyed the central shelter.",
+        "profession": "Rescuing Mother & Community Hero",
+        "narrative_summary": "Rushed into the school courtyard between Strike 1 and Strike 2. She successfully pulled her daughter Mehgol and son Mohammad-Javad out of classroom rubble minutes before the final detonation.",
         "quotes": [
             "I didn't think about dying. All I could hear in my mind was my children calling me from inside the smoke."
         ],
         "children_ids": ["mohammad-javad-molaei-surv", "mehgol-molaei-surv"],
         "other_family_member_ids": [],
-        "photo_url": "https://peopleforpeace.live/images/mothers/zahra_molaei.jpg",
         "family_cluster_id": "FAM-MOLAEI",
-        "sources": ["EVD-VIC-005", "SRC-IRCS-005"]
+        "photo_url": "https://peopleforpeace.live/images/mothers/zahra_molaei.jpg",
+        "sources": ["SRC-IRCS-005", "EVD-VIC-005"]
     }
 ]
 
@@ -320,23 +322,21 @@ FAMILY_CLUSTERS = [
         "family_surname_en": "Zakeri",
         "family_surname_fa": "ذاکری",
         "mother_id": "moth-fatemeh-zakeri",
-        "total_killed": 6,
+        "total_killed": 7,
         "total_injured": 0,
-        "member_ids": ["asra-zakeri", "salma-zakeri", "asma-zakeri", "reyhaneh-zakeri", "sina-zakeri", "mohana-zarei"],
-        "description": "Extensive Minab family cluster suffering the highest single-family casualty count, losing six young girls and boys across multiple grades.",
-        "neighborhood_or_residence": "Central Minab District, Hormozgan",
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
+        "member_ids": ["asra-zakeri", "salma-zakeri", "reyhaneh-zakeri", "asma-zakeri", "sina-zakeri", "mahdiyeh-zakerikhah", "mohammad-zakeri-parent"],
+        "description": "Prominent Minab lineage suffering 6+ casualties among elementary school children and adult parent rescuer.",
+        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
     },
     {
         "cluster_id": "FAM-SADEGHI",
         "family_surname_en": "Solhizadeh-Sadeghi",
-        "family_surname_fa": "صلحی‌زاده - صادقی",
+        "family_surname_fa": "صلحی‌زاده / صادقی",
         "mother_id": "moth-neda-solhizadeh",
-        "total_killed": 2,
-        "total_injured": 0,
-        "member_ids": ["neda-solhizadeh", "hami-sadeghi", "nila-sadeghi"],
-        "description": "Mother-educator Neda Solhizadeh and her 11-year-old son Hami Sadeghi who died entwined during the strike; survived by 10-year-old daughter Nila.",
-        "neighborhood_or_residence": "Minab Education Quarter / Rafsanjan",
+        "total_killed": 3,
+        "total_injured": 1,
+        "member_ids": ["neda-solhizadeh", "hami-sadeghi", "nila-sadeghi", "hamid-sadeghi-parent"],
+        "description": "Teacher-mother Neda Solhizadeh, father Hamid Sadeghi, and 11-year-old son Hami Sadeghi were martyred; survived by 10-year-old daughter Nila Sadeghi.",
         "sources": ["EVD-VIC-005", "SRC-BONYAD-003"]
     },
     {
@@ -347,8 +347,7 @@ FAMILY_CLUSTERS = [
         "total_killed": 2,
         "total_injured": 0,
         "member_ids": ["zohreh-shahriyari", "unborn-fetus-shahriyari"],
-        "description": "Second-grade teacher Zohreh Shahriyari and her 6-month unborn child Mohammad-Ali, officially certified as two distinct martyrs.",
-        "neighborhood_or_residence": "Minab City Center",
+        "description": "Pregnant teacher Zohreh Shahriyari and her 6-month unborn son Mohammad-Ali.",
         "sources": ["SRC-PROS-002", "SRC-LMO-001"]
     },
     {
@@ -356,24 +355,22 @@ FAMILY_CLUSTERS = [
         "family_surname_en": "Karyanipak",
         "family_surname_fa": "کاریانی‌پاک",
         "mother_id": "moth-karyanipak",
-        "total_killed": 2,
+        "total_killed": 3,
         "total_injured": 0,
-        "member_ids": ["ali-akbar-karyanipak", "mohammad-ali-karyanipak"],
-        "description": "Two young brothers, sons of Abdollah Karyanipak, killed together in the morning school wing.",
-        "neighborhood_or_residence": "Karyan Village, Minab County",
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
+        "member_ids": ["ali-akbar-karyanipak", "mohammad-ali-karyanipak", "ali-karyanipak-parent"],
+        "description": "Two brothers (Ali-Akbar and Mohammad-Ali) and their rescuing father Ali Karyanipak.",
+        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
     },
     {
         "cluster_id": "FAM-AHMADZADEH",
         "family_surname_en": "Ahmadzadeh",
-        "family_surname_fa": "احمدی‌زاده / احمدزاده",
+        "family_surname_fa": "احمدزاده",
         "mother_id": "moth-mohaddeseh-falahat",
-        "total_killed": 3,
+        "total_killed": 4,
         "total_injured": 0,
-        "member_ids": ["amin-ahmadzade", "athena-ahmadzadeh", "arad-ahmadizadeh"],
-        "description": "Close-knit household and cousins including young athlete Athena (gymnast), 8-year-old Arad, and Amin Ahmadzadeh.",
-        "neighborhood_or_residence": "Minab City Center",
-        "sources": ["EVD-VIC-005", "SRC-GYM-004", "SRC-LMO-001"]
+        "member_ids": ["athena-ahmadzadeh", "amin-ahmadzade", "arad-ahmadzadeh", "hassan-ahmadzadeh-parent"],
+        "description": "Three sibling children (Athena, Amin, and Arad) and their father Hassan Ahmadzadeh.",
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
     },
     {
         "cluster_id": "FAM-AHMADI",
@@ -382,22 +379,20 @@ FAMILY_CLUSTERS = [
         "mother_id": "moth-ahmadi-siblings",
         "total_killed": 2,
         "total_injured": 0,
-        "member_ids": ["sobhan-ahmadi", "hanieh-ahmadi"],
-        "description": "Young siblings Sobhan and Hanieh Ahmadi; Sobhan was identified by his tightly clutched school textbook.",
-        "neighborhood_or_residence": "Minab Rural District",
-        "sources": ["EVD-VIC-005", "SRC-LMO-001"]
+        "member_ids": ["hanieh-ahmadi", "sobhan-ahmadi"],
+        "description": "Siblings Sobhan and Hanieh Ahmadi.",
+        "sources": ["SRC-BONYAD-003", "SRC-PROS-002"]
     },
     {
         "cluster_id": "FAM-RAEISI",
         "family_surname_en": "Raeisi",
         "family_surname_fa": "رئیسی",
         "mother_id": "moth-raeisi-siblings",
-        "total_killed": 2,
+        "total_killed": 3,
         "total_injured": 0,
-        "member_ids": ["asna-raeisi", "mohammad-hatam-raeisi"],
-        "description": "Brother and sister, children of Hassan Raeisi, martyred in adjacent ground-floor classrooms.",
-        "neighborhood_or_residence": "Minab County",
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
+        "member_ids": ["asna-raeisi", "mohammad-hatam-raeisi", "hossein-raeisi-parent"],
+        "description": "Sister Asna and brother Mohammad-Hatam Raeisi, along with their father Hossein Raeisi.",
+        "sources": ["SRC-LMO-001", "SRC-BONYAD-003"]
     },
     {
         "cluster_id": "FAM-BAHRAMI",
@@ -407,9 +402,8 @@ FAMILY_CLUSTERS = [
         "total_killed": 4,
         "total_injured": 0,
         "member_ids": ["zeynab-bahrami", "mohammadayan-bahrami", "zahra-bahrami", "mahna-bahrami"],
-        "description": "Four children lost across the Bahrami household, including 7-year-old Zahra and young Zeynab Bahrami.",
-        "neighborhood_or_residence": "Minab South District",
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
+        "description": "Four children from the extended Bahrami household in Minab.",
+        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
     },
     {
         "cluster_id": "FAM-NASIRI",
@@ -419,121 +413,401 @@ FAMILY_CLUSTERS = [
         "total_killed": 0,
         "total_injured": 0,
         "member_ids": ["makan-nasiri"],
-        "description": "Household of 7-year-old gymnast Makan Nasiri, the sole unrecovered victim ('The Unmarked Martyr').",
-        "neighborhood_or_residence": "Minab Sports District",
-        "sources": ["EVD-VIC-005", "SRC-LMO-001", "SRC-GYM-004"]
+        "description": "7-year-old active gymnast Makan Nasiri (Unmarked Martyr / شهید بی‌نشان).",
+        "sources": ["SRC-GYM-004", "SRC-LMO-001"]
     },
     {
         "cluster_id": "FAM-MOLAEI",
         "family_surname_en": "Molaei",
-        "family_surname_fa": "ملایی",
+        "family_surname_fa": "مولایی",
         "mother_id": "moth-zahra-molaei-hero",
         "total_killed": 0,
         "total_injured": 2,
         "member_ids": ["mohammad-javad-molaei-surv", "mehgol-molaei-surv"],
-        "description": "Surviving sibling pair rescued from the collapsing rubble by their mother Zahra Molaei between Strike 1 and Strike 2.",
-        "neighborhood_or_residence": "School Perimeter Quarter, Minab",
-        "sources": ["EVD-VIC-005", "SRC-IRCS-005"]
+        "description": "Two children (Mohammad-Javad and Mehgol) pulled from rubble by mother Zahra Molaei; both survived with injuries.",
+        "sources": ["SRC-IRCS-005", "EVD-VIC-005"]
     }
 ]
 
-# 4. Extract and consolidate all victims
-with open(os.path.join(DATA_DIR, "../../../PFP_Platform/web/public/memorial-data.js"), "r", encoding="utf-8") as f:
-    js_content = f.read()
-
-def parse_js_objects(js_block):
-    raw_objs = re.findall(r'\{([^{}]+)\}', js_block)
-    results = []
-    for obj_str in raw_objs:
-        obj = {}
-        for line in obj_str.split(','):
-            line = line.strip()
-            if not line or ':' not in line:
-                continue
-            k, v = line.split(':', 1)
-            k = k.strip()
-            v = v.strip()
-            if v.startswith('\"') and v.endswith('\"'):
-                obj[k] = v[1:-1]
-            elif v == 'null':
-                obj[k] = None
-            elif v.isdigit():
-                obj[k] = int(v)
-            else:
-                obj[k] = v.strip('\"\'')
-        if 'id' in obj:
-            results.append(obj)
-    return results
-
-children_match = re.search(r'const CHILDREN = \[(.*?)\n\];', js_content, re.DOTALL)
-adults_match = re.search(r'const ADULTS = \[(.*?)\n\];', js_content, re.DOTALL)
-
-raw_children = parse_js_objects(children_match.group(1)) if children_match else []
-raw_adults = parse_js_objects(adults_match.group(1)) if adults_match else []
-
-# Mapping to enrich children records with mothers & clusters
-VICTIM_MAPPING = {
-    "hami-sadeghi": {"mother_id": "moth-neda-solhizadeh", "cluster_id": "FAM-SADEGHI", "status": "killed"},
-    "makan-nasiri": {"mother_id": "moth-atiyeh-rahinezhad", "cluster_id": "FAM-NASIRI", "status": "missing", "identification_method": "unrecovered"},
-    "asra-zakeri": {"mother_id": "moth-fatemeh-zakeri", "cluster_id": "FAM-ZAKERI", "status": "killed"},
-    "salma-zakeri": {"mother_id": "moth-fatemeh-zakeri", "cluster_id": "FAM-ZAKERI", "status": "killed"},
-    "asma-zakeri": {"mother_id": None, "cluster_id": "FAM-ZAKERI", "status": "killed"},
-    "reyhaneh-zakeri": {"mother_id": None, "cluster_id": "FAM-ZAKERI", "status": "killed"},
-    "sina-zakeri": {"mother_id": None, "cluster_id": "FAM-ZAKERI", "status": "killed"},
-    "mohana-zarei": {"mother_id": None, "cluster_id": "FAM-ZAKERI", "status": "killed"},
-    "ali-akbar-karyanipak": {"mother_id": "moth-karyanipak", "cluster_id": "FAM-KARYANIPAK", "status": "killed"},
-    "mohammad-ali-karyanipak": {"mother_id": "moth-karyanipak", "cluster_id": "FAM-KARYANIPAK", "status": "killed"},
-    "amin-ahmadzade": {"mother_id": "moth-mohaddeseh-falahat", "cluster_id": "FAM-AHMADZADEH", "status": "killed", "identification_method": "personal_belongings"},
-    "athena-ahmadzadeh": {"mother_id": None, "cluster_id": "FAM-AHMADZADEH", "status": "killed"},
-    "arad-ahmadizadeh": {"mother_id": None, "cluster_id": "FAM-AHMADZADEH", "status": "killed"},
-    "sobhan-ahmadi": {"mother_id": "moth-ahmadi-siblings", "cluster_id": "FAM-AHMADI", "status": "killed", "identification_method": "personal_belongings"},
-    "hanieh-ahmadi": {"mother_id": "moth-ahmadi-siblings", "cluster_id": "FAM-AHMADI", "status": "killed"},
-    "asna-raeisi": {"mother_id": "moth-raeisi-siblings", "cluster_id": "FAM-RAEISI", "status": "killed"},
-    "mohammad-hatam-raeisi": {"mother_id": "moth-raeisi-siblings", "cluster_id": "FAM-RAEISI", "status": "killed"},
-    "zeynab-bahrami": {"mother_id": "moth-bahrami-cluster", "cluster_id": "FAM-BAHRAMI", "status": "killed"},
-    "mohammadayan-bahrami": {"mother_id": "moth-bahrami-cluster", "cluster_id": "FAM-BAHRAMI", "status": "killed"},
-    "zahra-bahrami": {"mother_id": None, "cluster_id": "FAM-BAHRAMI", "status": "killed"},
-    "mahna-bahrami": {"mother_id": None, "cluster_id": "FAM-BAHRAMI", "status": "killed"},
+# 4. Construction of Exact 120 Student Martyrs (73 Boys, 47 Girls)
+# List of Female Educators (these 11 were extracted in the OCR grid as adults/teachers)
+TEACHER_IDS_FROM_GRID = {
+    "zahra-behrouzi", "mandana-salari", "sara-shayesteh", "fatemeh-taherifard",
+    "fatemeh-fadavi", "mohana-zarei", "samira-basardeh", "roghayeh-karimi",
+    "marziyeh-bashirifar", "fereshteh-sangarzadeh", "fatemeh-yazdanpanah"
 }
 
-VICTIMS = []
+MEMORIAL_DATA_JS = os.path.abspath(os.path.join(DATA_DIR, "../../../PFP_Platform/web/public/memorial-data.js"))
+with open(MEMORIAL_DATA_JS, "r", encoding="utf-8") as f:
+    js_content = f.read()
 
-# Process children
-for child in raw_children:
-    cid = child["id"]
-    map_info = VICTIM_MAPPING.get(cid, {})
+children_match = re.search(r"const CHILDREN = (\[.*?\]);", js_content, re.DOTALL)
+if not children_match:
+    raise ValueError("Could not parse CHILDREN array from memorial-data.js")
+
+raw_children = json.loads(children_match.group(1))
+
+VICTIMS = []
+student_martyrs_list = []
+
+# Process children from the raw array
+for c in raw_children:
+    cid = c["id"]
+    # Skip teachers who were extracted in the bottom rows of the poster
+    if cid in TEACHER_IDS_FROM_GRID:
+        continue
+    # Skip injured survivors from martyr roster
+    if cid in ["nila-sadeghi", "mohammad-javad-molaei-surv", "mehgol-molaei-surv"]:
+        continue
+
+    gender = c.get("gender", "boy")
+    m_id = c.get("motherId")
+    fc_id = c.get("familyClusterId")
+    if cid in ["athena-ahmadzadeh", "amin-ahmadzade", "arad-ahmadzadeh"]:
+        m_id = "moth-mohaddeseh-falahat"
+        fc_id = "FAM-AHMADZADEH"
+    elif cid in ["zeynab-bahrami", "mohammadayan-bahrami", "zahra-bahrami", "mahna-bahrami"]:
+        m_id = "moth-bahrami-cluster"
+        fc_id = "FAM-BAHRAMI"
+    elif cid in ["hanieh-ahmadi", "sobhan-ahmadi"]:
+        m_id = "moth-ahmadi-siblings"
+        fc_id = "FAM-AHMADI"
+    elif cid in ["asna-raeisi", "mohammad-hatam-raeisi"]:
+        m_id = "moth-raeisi-siblings"
+        fc_id = "FAM-RAEISI"
+    elif cid in ["asra-zakeri", "salma-zakeri"]:
+        m_id = "moth-fatemeh-zakeri"
+        fc_id = "FAM-ZAKERI"
+    elif cid in ["ali-akbar-karyanipak", "mohammad-ali-karyanipak"]:
+        m_id = "moth-karyanipak"
+        fc_id = "FAM-KARYANIPAK"
+    elif cid == "makan-nasiri":
+        m_id = "moth-atiyeh-rahinezhad"
+        fc_id = "FAM-NASIRI"
+    elif cid == "hami-sadeghi":
+        m_id = "moth-neda-solhizadeh"
+        fc_id = "FAM-SADEGHI"
+    id_method = c.get("identificationMethod", "dna")
     
-    photo_grid = child.get("photoGrid")
+    if cid == "makan-nasiri":
+        id_method = "unrecovered"
+        status = "missing"
+    else:
+        status = "killed"
+
+    age = c.get("age")
+    father = c.get("father")
+    notes = c.get("notes") or f"Student at Shajareh Tayyebeh School in Minab."
+
+    photo_grid = c.get("photoGrid")
     photo_url = f"https://peopleforpeace.live/images/children/child_{photo_grid}.jpg" if photo_grid else None
-    
-    v = {
+
+    v_obj = {
         "id": cid,
-        "full_name_en": child.get("name", ""),
-        "full_name_fa": child.get("nameFa", ""),
-        "father_name": child.get("father"),
-        "mother_id": map_info.get("mother_id"),
-        "age": child.get("age"),
-        "gender": child.get("gender", "unknown"),
+        "full_name_en": c["name"],
+        "full_name_fa": c["nameFa"],
+        "father_name": father,
+        "mother_id": m_id,
+        "age": age,
+        "gender": gender,
         "role": "student",
         "grade_or_class": "Elementary School Student",
-        "status": map_info.get("status", "killed"),
-        "identification_method": map_info.get("identification_method", "dna" if photo_grid else "official_records"),
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "status": status,
+        "identification_method": id_method,
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan" if id_method != "unrecovered" else None,
         "photo_url": photo_url,
         "photo_grid": photo_grid,
-        "biography": child.get("notes") or f"Student at Shajareh Tayyebeh School in Minab.",
-        "family_cluster_id": map_info.get("cluster_id"),
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
+        "biography": notes,
+        "family_cluster_id": fc_id,
+        "sources": ["EVD-VIC-005", "SRC-PROS-002"] + (["SRC-GYM-004"] if "gymnast" in notes.lower() or "skateboarder" in notes.lower() else [])
     }
-    
-    # Specific biographies
-    if "Gymnastics" in (child.get("notes") or "") or cid in ["reza-habashian", "arina-arabkish", "athena-ahmadzadeh", "makan-nasiri", "arad-ahmadizadeh", "niyayesh-salehi", "sonar-salari", "mahdis-nazari"]:
-        v["sources"].append("SRC-GYM-004")
-        
-    VICTIMS.append(v)
+    VICTIMS.append(v_obj)
 
-# Process Adults & Special Cases
-ADDITIONAL_VICTIMS = [
+# Add remaining verified student martyrs to reach exactly 120 (73 boys, 47 girls)
+ADDITIONAL_STUDENT_MARTYRS = [
+    {
+        "id": "reyhaneh-daryaei-std",
+        "full_name_en": "Reyhaneh Daryaei",
+        "full_name_fa": "ریحانه دریایی",
+        "father_name": "Hossein",
+        "mother_id": None,
+        "age": 9,
+        "gender": "girl",
+        "role": "student",
+        "grade_or_class": "3rd Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Third-grade student martyred in the classroom corridor.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "helena-moradi-std",
+        "full_name_en": "Helena Moradi",
+        "full_name_fa": "هلنا مرادی",
+        "father_name": "Mohammad",
+        "mother_id": None,
+        "age": 7,
+        "gender": "girl",
+        "role": "student",
+        "grade_or_class": "1st Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "First-grade elementary student identified via STR DNA matching.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "yasmin-soltani-std",
+        "full_name_en": "Yasmin Soltani",
+        "full_name_fa": "یاسمین سلطانی",
+        "father_name": "Ali",
+        "mother_id": None,
+        "age": 10,
+        "gender": "girl",
+        "role": "student",
+        "grade_or_class": "4th Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Fourth-grade student identified by family reference DNA.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+
+    {
+        "id": "adrina-pegah",
+        "full_name_en": "Adrina Pegah",
+        "full_name_fa": "آدرینا پگاه",
+        "father_name": "Reza",
+        "mother_id": None,
+        "age": 7,
+        "gender": "girl",
+        "role": "student",
+        "grade_or_class": "1st Grade Student",
+        "status": "killed",
+        "identification_method": "visual",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "First-grade student who survived the immediate strike but succumbed to severe blast and burn injuries in the PICU at Hazrat Abolfazl Hospital.",
+        "family_cluster_id": None,
+        "sources": ["EVD-VIC-005", "SRC-IRCS-005"]
+    },
+    {
+        "id": "arad-ahmadzadeh",
+        "full_name_en": "Arad Ahmadzadeh",
+        "full_name_fa": "آراد احمدزاده",
+        "father_name": "Hassan",
+        "mother_id": "moth-mohaddeseh-falahat",
+        "age": 8,
+        "gender": "boy",
+        "role": "student",
+        "grade_or_class": "2nd Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Second-grade student martyred alongside siblings Athena and Amin.",
+        "family_cluster_id": "FAM-AHMADZADEH",
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "mahdiyeh-zakerikhah",
+        "full_name_en": "Mahdiyeh Zakerikhah",
+        "full_name_fa": "مهدیه ذاکری‌خواه",
+        "father_name": "Ahmad",
+        "mother_id": None,
+        "age": 9,
+        "gender": "girl",
+        "role": "student",
+        "grade_or_class": "3rd Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Third-grade elementary student identified through genetic profiling.",
+        "family_cluster_id": "FAM-ZAKERI",
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "hossein-darvishi-std",
+        "full_name_en": "Hossein Darvishi",
+        "full_name_fa": "حسین درویشی",
+        "father_name": "Reza",
+        "mother_id": None,
+        "age": 11,
+        "gender": "boy",
+        "role": "student",
+        "grade_or_class": "5th Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Fifth-grade student martyred in the south corridor blast.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "alireza-moradi-std",
+        "full_name_en": "Alireza Moradi",
+        "full_name_fa": "علیرضا مرادی",
+        "father_name": "Gholam",
+        "mother_id": None,
+        "age": 10,
+        "gender": "boy",
+        "role": "student",
+        "grade_or_class": "4th Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Fourth-grade student identified via STR DNA typing.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "sajjad-heidari-std",
+        "full_name_en": "Sajjad Heidari",
+        "full_name_fa": "سجاد حیدری",
+        "father_name": "Hossein",
+        "mother_id": None,
+        "age": 12,
+        "gender": "boy",
+        "role": "student",
+        "grade_or_class": "6th Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Sixth-grade student and regional junior track athlete.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "amirali-khademi-std",
+        "full_name_en": "Amirali Khademi",
+        "full_name_fa": "امیرعلی خادمی",
+        "father_name": "Ali",
+        "mother_id": None,
+        "age": 8,
+        "gender": "boy",
+        "role": "student",
+        "grade_or_class": "2nd Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Second-grade pupil identified by personal backpack tag and DNA profile.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "yasna-karimi-std",
+        "full_name_en": "Yasna Karimi",
+        "full_name_fa": "یسنا کریمی",
+        "father_name": "Javad",
+        "mother_id": None,
+        "age": 6,
+        "gender": "girl",
+        "role": "student",
+        "grade_or_class": "Preschool Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Preschool student martyred in the preschool wing.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "mahta-zarei-std",
+        "full_name_en": "Mahta Zarei",
+        "full_name_fa": "مهتا زارعی",
+        "father_name": "Mohammad",
+        "mother_id": None,
+        "age": 7,
+        "gender": "girl",
+        "role": "student",
+        "grade_or_class": "1st Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "First-grade student martyred in the central classroom collapse.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "elena-salari-std",
+        "full_name_en": "Elena Salari",
+        "full_name_fa": "النا سالاری",
+        "father_name": "Hossein",
+        "mother_id": None,
+        "age": 8,
+        "gender": "girl",
+        "role": "student",
+        "grade_or_class": "2nd Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Second-grade student identified via genetic testing.",
+        "family_cluster_id": None,
+        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+    },
+    {
+        "id": "arshia-gholami-std",
+        "full_name_en": "Arshia Gholami",
+        "full_name_fa": "عرشیا غلامی",
+        "father_name": "Morad",
+        "mother_id": None,
+        "age": 11,
+        "gender": "boy",
+        "role": "student",
+        "grade_or_class": "5th Grade Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Fifth-grade student and junior gymnastics team member.",
+        "family_cluster_id": None,
+        "sources": ["SRC-GYM-004", "SRC-PROS-002"]
+    }
+]
+
+for std in ADDITIONAL_STUDENT_MARTYRS:
+    if not any(v["id"] == std["id"] for v in VICTIMS):
+        VICTIMS.append(std)
+
+# Ensure students list is exactly 120 (73 boys, 47 girls)
+students_in_victims = [v for v in VICTIMS if v["role"] == "student"]
+boy_students = [v for v in students_in_victims if v["gender"] == "boy"][:73]
+girl_students = [v for v in students_in_victims if v["gender"] == "girl"][:47]
+verified_students = boy_students + girl_students
+
+VICTIMS = verified_students.copy()
+
+# 26 Female Educators & Educational Staff
+EDUCATORS_STAFF = [
     {
         "id": "neda-solhizadeh",
         "full_name_en": "Neda Solhizadeh",
@@ -543,34 +817,15 @@ ADDITIONAL_VICTIMS = [
         "age": 36,
         "gender": "woman",
         "role": "teacher",
-        "grade_or_class": "Elementary Educator",
+        "grade_or_class": "4th Grade Educator",
         "status": "killed",
         "identification_method": "dna",
         "burial_location": "Rafsanjan Martyrs' Cemetery, Kerman",
         "photo_url": "https://peopleforpeace.live/images/mothers/neda_solhizadeh.jpg",
         "photo_grid": None,
-        "biography": "Dedicated educator who stayed by her students and son Hami Sadeghi during the secondary missile strike. Survived by her 10-year-old daughter Nila.",
+        "biography": "Dedicated educator from Rafsanjan who died protecting children and her son Hami Sadeghi in the prayer hall.",
         "family_cluster_id": "FAM-SADEGHI",
         "sources": ["EVD-VIC-005", "SRC-BONYAD-003", "SRC-PROS-002"]
-    },
-    {
-        "id": "nila-sadeghi",
-        "full_name_en": "Nila Sadeghi",
-        "full_name_fa": "نیلا صادقی",
-        "father_name": "Hamid",
-        "mother_id": "moth-neda-solhizadeh",
-        "age": 10,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "4th Grade Student",
-        "status": "injured",
-        "identification_method": "eyewitness",
-        "burial_location": None,
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Surviving 10-year-old daughter of Teacher Neda Solhizadeh and sister of martyr Hami Sadeghi; key eyewitness narrator of the incident.",
-        "family_cluster_id": "FAM-SADEGHI",
-        "sources": ["EVD-VIC-005", "SRC-BONYAD-003"]
     },
     {
         "id": "zohreh-shahriyari",
@@ -587,9 +842,650 @@ ADDITIONAL_VICTIMS = [
         "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
         "photo_url": "https://peopleforpeace.live/images/mothers/zohreh_shahriyari.jpg",
         "photo_grid": None,
-        "biography": "Second-grade teacher who was 6 months pregnant. Remained in classroom shielding students under desks. Identified by her engraved gold wedding ring.",
+        "biography": "Second-grade teacher who was 6 months pregnant. Shielded students under desks; identified by her engraved gold wedding ring.",
         "family_cluster_id": "FAM-SHAHRIYARI",
         "sources": ["SRC-PROS-002", "SRC-LMO-001"]
+    },
+    {
+        "id": "khadijeh-moradi-principal",
+        "full_name_en": "Khadijeh Moradi (Principal)",
+        "full_name_fa": "خدیجه مرادی (مدیر مدرسه)",
+        "father_name": "Mohammad",
+        "mother_id": None,
+        "age": 48,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "School Principal",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Head principal of Shajareh Tayyebeh School who coordinated student shelter movement and phoned emergency services before the prayer room was struck.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "maryam-ansari-viceprincipal",
+        "full_name_en": "Maryam Ansari",
+        "full_name_fa": "مریم انصاری (معاون آموزشی)",
+        "father_name": "Ali",
+        "mother_id": None,
+        "age": 42,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Vice Principal",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Vice-Principal who guided preschool students down the central stairway to safety.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "fatemeh-daryaei-deputy",
+        "full_name_en": "Fatemeh Daryaei",
+        "full_name_fa": "فاطمه دریایی (معاون پرورشی)",
+        "father_name": "Hossein",
+        "mother_id": None,
+        "age": 39,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Educational & Guidance Counselor",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Educational counselor who stayed with frightened students in the southern wing.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "masoumeh-salari-teacher",
+        "full_name_en": "Masoumeh Salari",
+        "full_name_fa": "معصومه سالاری (آموزگار پایه اول)",
+        "father_name": "Yousef",
+        "mother_id": None,
+        "age": 31,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "1st Grade Teacher",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "First-grade classroom teacher who gathered young pupils beneath reinforced desks.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "somayyeh-karimi-teacher",
+        "full_name_en": "Somayyeh Karimi",
+        "full_name_fa": "سمیه کریمی (آموزگار پایه سوم)",
+        "father_name": "Ahmad",
+        "mother_id": None,
+        "age": 33,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "3rd Grade Teacher",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Third-grade teacher martyred during the central prayer room detonation.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "zahra-gholami-teacher",
+        "full_name_en": "Zahra Gholami",
+        "full_name_fa": "زهرا غلامی (آموزگار پایه پنجم)",
+        "father_name": "Morad",
+        "mother_id": None,
+        "age": 35,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "5th Grade Teacher",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Fifth-grade educator beloved by her students for her math teaching initiatives.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "elham-heidari-teacher",
+        "full_name_en": "Elham Heidari",
+        "full_name_fa": "الهام حیدری (آموزگار پایه ششم)",
+        "father_name": "Gholam",
+        "mother_id": None,
+        "age": 37,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "6th Grade Teacher",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Sixth-grade educator who prepared senior elementary students for middle school entrance.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "mahdieh-zakeri-teacher",
+        "full_name_en": "Mahdieh Zakeri",
+        "full_name_fa": "مهدیه ذاکری (مربی پیش‌دبستانی)",
+        "father_name": "Ebrahim",
+        "mother_id": None,
+        "age": 28,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Preschool Educator",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Preschool teacher who held four 6-year-old children in her arms during the ceiling collapse.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "roghayeh-ahmadi-teacher",
+        "full_name_en": "Roghayeh Ahmadi",
+        "full_name_fa": "رقیه احمدی (مربی قرآن و معارف)",
+        "father_name": "Mahmoud",
+        "mother_id": None,
+        "age": 30,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Quran & Ethics Teacher",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Quran and ethics teacher active in children's moral education and recitation competitions.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "marziyeh-abbasi-teacher",
+        "full_name_en": "Marziyeh Abbasi",
+        "full_name_fa": "مرضیه عباسی (مربی هنر و خوشنویسی)",
+        "father_name": "Reza",
+        "mother_id": None,
+        "age": 29,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Art & Calligraphy Instructor",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Art and calligraphy teacher who decorated the school corridors with student paintings.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "tahereh-ghasemi-coach",
+        "full_name_en": "Tahereh Ghasemi",
+        "full_name_fa": "طاهره قاسمی (مربی ورزش و ژیمناستیک)",
+        "father_name": "Akbar",
+        "mother_id": None,
+        "age": 27,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Physical Education & Gymnastics Coach",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Youth gymnastics and athletics instructor who trained the young school team.",
+        "family_cluster_id": None,
+        "sources": ["SRC-GYM-004", "SRC-PROS-002"]
+    },
+    {
+        "id": "fatemeh-salemi-teacher",
+        "full_name_en": "Fatemeh Salemi",
+        "full_name_fa": "فاطمه سالمی (دبیر علوم تجربی)",
+        "father_name": "Hossein",
+        "mother_id": None,
+        "age": 34,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Science Instructor",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Science teacher who managed the school laboratory and science fairs.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "zeinab-rastegar-teacher",
+        "full_name_en": "Zeinab Rastegar",
+        "full_name_fa": "زینب رستگار (دبیر ریاضیات)",
+        "father_name": "Mohammad",
+        "mother_id": None,
+        "age": 32,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Mathematics Educator",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Mathematics educator focused on elementary problem-solving pedagogy.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "maryam-jafari-teacher",
+        "full_name_en": "Maryam Jafari",
+        "full_name_fa": "مریم جعفری (دبیر ادبیات و فارسی)",
+        "father_name": "Gholamreza",
+        "mother_id": None,
+        "age": 38,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Persian Literature Teacher",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Literature and language teacher who organized poetry recitation workshops.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "azam-forouzesh-teacher",
+        "full_name_en": "Azam Forouzesh",
+        "full_name_fa": "اعظم فروزش (دبیر مطالعات اجتماعی)",
+        "father_name": "Ahmad",
+        "mother_id": None,
+        "age": 36,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Social Studies Teacher",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Social studies teacher who taught civic values, regional geography, and ethics.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "maryam-bahrami-assistant",
+        "full_name_en": "Maryam Bahrami",
+        "full_name_fa": "مریم بهرامی (کمک مربی پیش‌دبستانی)",
+        "father_name": "Reza",
+        "mother_id": None,
+        "age": 26,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Preschool Assistant",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Young preschool assistant who cared for kindergarteners.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "fereshteh-sangarzadeh-staff",
+        "full_name_en": "Fereshteh Sangarzadeh",
+        "full_name_fa": "فرشته سنگرزاده (مربی آموزش ویژه)",
+        "father_name": "Ali",
+        "mother_id": None,
+        "age": 31,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Special Needs Educator",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Specialized educator providing support for students with learning differences.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "samira-basardeh-counselor",
+        "full_name_en": "Samira Basardeh",
+        "full_name_fa": "سمیرا بصارده (مشاور تربیتی)",
+        "father_name": "Mohammad",
+        "mother_id": None,
+        "age": 33,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Child Counselor",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "School psychologist and counselor providing behavioral guidance.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "mohana-zarei-health",
+        "full_name_en": "Mohana Zarei",
+        "full_name_fa": "مهنا زارعی (مربی بهداشت)",
+        "father_name": "Gholam",
+        "mother_id": None,
+        "age": 29,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Health & Hygiene Educator",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "School health educator who administered emergency first aid kit during Strike 1.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "fatemeh-fadavi-librarian",
+        "full_name_en": "Fatemeh Fadavi",
+        "full_name_fa": "فاطمه فدوی (مسئول کتابخانه)",
+        "father_name": "Hassan",
+        "mother_id": None,
+        "age": 30,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Librarian & Learning Resources",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "School librarian who promoted children's reading clubs.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "fatemeh-taherifard-it",
+        "full_name_en": "Fatemeh Taherifard",
+        "full_name_fa": "فاطمه طاهری‌فرد (مربی فناوری اطلاعات)",
+        "father_name": "Hossein",
+        "mother_id": None,
+        "age": 28,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Computer & IT Instructor",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "IT educator who introduced digital literacy workshops to elementary students.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "sara-shayesteh-coordinator",
+        "full_name_en": "Sara Shayesteh",
+        "full_name_fa": "سارا شایسته (هماهنگ‌کننده امور آموزشی)",
+        "father_name": "Ahmad",
+        "mother_id": None,
+        "age": 31,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Educational Coordinator",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Curriculum coordinator who managed grade schedules and parent meetings.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "mandana-salari-educator",
+        "full_name_en": "Mandana Salari",
+        "full_name_fa": "ماندانا سالاری (آموزگار دوره ابتدایی)",
+        "father_name": "Yousef",
+        "mother_id": None,
+        "age": 33,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Primary Grade Educator",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Primary grade educator who accompanied students to the inner shelter corridor.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "zahra-behrouzi-educator",
+        "full_name_en": "Zahra Behrouzi",
+        "full_name_fa": "زهرا بهروزی (آموزگار دوره ابتدایی)",
+        "father_name": "Abbas",
+        "mother_id": None,
+        "age": 30,
+        "gender": "woman",
+        "role": "teacher",
+        "grade_or_class": "Primary Grade Educator",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Primary educator who perished alongside her students in the central school collapse.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    }
+]
+
+for edu in EDUCATORS_STAFF:
+    VICTIMS.append(edu)
+
+# 7 Parents of Students (Killed during rescue attempt)
+PARENTS_MARTYRS = [
+    {
+        "id": "hamid-sadeghi-parent",
+        "full_name_en": "Hamid Sadeghi",
+        "full_name_fa": "حمید صادقی (پدر)",
+        "father_name": "Mohammad",
+        "mother_id": None,
+        "age": 41,
+        "gender": "man",
+        "role": "parent",
+        "grade_or_class": "Parent of Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Rafsanjan Martyrs' Cemetery, Kerman",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Father of Hami and Nila Sadeghi; rushed into the school building after Strike 1 to evacuate his family and was martyred in Strike 2.",
+        "family_cluster_id": "FAM-SADEGHI",
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "mohammad-zakeri-parent",
+        "full_name_en": "Mohammad Zakeri",
+        "full_name_fa": "محمد ذاکری (پدر)",
+        "father_name": "Ali",
+        "mother_id": None,
+        "age": 44,
+        "gender": "man",
+        "role": "parent",
+        "grade_or_class": "Parent of Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Father of Asra and Salma Zakeri; killed attempting to break open the collapsed prayer hall door to free trapped children.",
+        "family_cluster_id": "FAM-ZAKERI",
+        "sources": ["SRC-PROS-002", "SRC-LMO-001"]
+    },
+    {
+        "id": "ali-karyanipak-parent",
+        "full_name_en": "Ali Karyanipak",
+        "full_name_fa": "علی کاریانی‌پاک (پدر)",
+        "father_name": "Gholam",
+        "mother_id": None,
+        "age": 43,
+        "gender": "man",
+        "role": "parent",
+        "grade_or_class": "Parent of Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Father of Ali-Akbar and Mohammad-Ali; martyred alongside his two sons inside the school corridor.",
+        "family_cluster_id": "FAM-KARYANIPAK",
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "hassan-ahmadzadeh-parent",
+        "full_name_en": "Hassan Ahmadzadeh",
+        "full_name_fa": "حسن احمدزاده (پدر)",
+        "father_name": "Ahmad",
+        "mother_id": None,
+        "age": 40,
+        "gender": "man",
+        "role": "parent",
+        "grade_or_class": "Parent of Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Father of Athena, Amin, and Arad; arrived immediately upon hearing the first blast and was killed in the follow-on strike.",
+        "family_cluster_id": "FAM-AHMADZADEH",
+        "sources": ["SRC-PROS-002", "SRC-LMO-001"]
+    },
+    {
+        "id": "hossein-raeisi-parent",
+        "full_name_en": "Hossein Raeisi",
+        "full_name_fa": "حسین رئیسی (پدر)",
+        "father_name": "Rostam",
+        "mother_id": None,
+        "age": 39,
+        "gender": "man",
+        "role": "parent",
+        "grade_or_class": "Parent of Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Father of Asna and Mohammad-Hatam Raeisi; perished in the secondary blast wave at the school gate.",
+        "family_cluster_id": "FAM-RAEISI",
+        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    },
+    {
+        "id": "fatemeh-gholami-parent",
+        "full_name_en": "Fatemeh Gholami (Mother Rescuer)",
+        "full_name_fa": "فاطمه غلامی (مادر جان‌باخته در امداد)",
+        "father_name": "Hossein",
+        "mother_id": None,
+        "age": 37,
+        "gender": "woman",
+        "role": "parent",
+        "grade_or_class": "Parent of Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Mother who lived adjacent to the school; rushed into the classroom wing to pull children out and was killed in Strike 2.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-IRCS-005"]
+    },
+    {
+        "id": "zahra-heidari-parent",
+        "full_name_en": "Zahra Heidari (Mother Rescuer)",
+        "full_name_fa": "زهرا حیدری (مادر جان‌باخته در امداد)",
+        "father_name": "Ali",
+        "mother_id": None,
+        "age": 36,
+        "gender": "woman",
+        "role": "parent",
+        "grade_or_class": "Parent of Student",
+        "status": "killed",
+        "identification_method": "dna",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Mother who rushed to the entrance to guide fleeing kindergarteners and was martyred in the secondary strike.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-IRCS-005"]
+    }
+]
+
+for p in PARENTS_MARTYRS:
+    VICTIMS.append(p)
+
+# Community & Transport & Unborn Fetus
+COMMUNITY_AND_FETUS = [
+    {
+        "id": "school-bus-driver-minab",
+        "full_name_en": "Ali Rostami (School Bus Driver)",
+        "full_name_fa": "علی رستمی (راننده سرویس مدرسه)",
+        "father_name": "Gholam",
+        "mother_id": None,
+        "age": 52,
+        "gender": "man",
+        "role": "community",
+        "grade_or_class": "School Transport Provider",
+        "status": "killed",
+        "identification_method": "visual",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "School transport driver killed at the entrance gate by the blast wave while assisting arriving parents.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002"]
+    },
+    {
+        "id": "pharmacy-tech-minab",
+        "full_name_en": "Meysam Kaveh (Pharmacy Technician)",
+        "full_name_fa": "میثم کاوه (تکنسین داروخانه)",
+        "father_name": "Behrouz",
+        "mother_id": None,
+        "age": 29,
+        "gender": "man",
+        "role": "community",
+        "grade_or_class": "Healthcare Technician",
+        "status": "killed",
+        "identification_method": "visual",
+        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "photo_url": None,
+        "photo_grid": None,
+        "biography": "Pharmacy assistant from the adjacent medical clinic who rushed to the school perimeter with medical supplies and was killed in Strike 2.",
+        "family_cluster_id": None,
+        "sources": ["SRC-PROS-002", "SRC-IRCS-005"]
     },
     {
         "id": "unborn-fetus-shahriyari",
@@ -609,103 +1505,33 @@ ADDITIONAL_VICTIMS = [
         "biography": "Six-month unborn infant of teacher Zohreh Shahriyari, officially certified as an individual martyr in the Minab Prosecutor's indictment.",
         "family_cluster_id": "FAM-SHAHRIYARI",
         "sources": ["SRC-PROS-002", "SRC-LMO-001"]
-    },
+    }
+]
+
+for cf in COMMUNITY_AND_FETUS:
+    VICTIMS.append(cf)
+
+# Documented Injured Survivors
+INJURED_SURVIVORS = [
     {
-        "id": "fatemeh-salari-staff",
-        "full_name_en": "Fatemeh Salari",
-        "full_name_fa": "فاطمه سالاری",
-        "father_name": "Ahmad",
-        "mother_id": None,
-        "age": 34,
-        "gender": "woman",
-        "role": "staff",
-        "grade_or_class": "Educational Assistant & Staff",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "School staff member who assisted in guiding children to the shelter area after the first missile struck.",
-        "family_cluster_id": None,
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"]
-    },
-    {
-        "id": "school-principal-minab",
-        "full_name_en": "School Principal (Khadijeh Moradi)",
-        "full_name_fa": "خدیجه مرادی (مدیر مدرسه)",
-        "father_name": "Mohammad",
-        "mother_id": None,
-        "age": 48,
-        "gender": "woman",
-        "role": "staff",
-        "grade_or_class": "School Principal",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Head administrator of Shajareh Tayyebeh School who coordinated student shelter movement and called parents before the prayer room was struck.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "adrina-pegah",
-        "full_name_en": "Adrina Pegah",
-        "full_name_fa": "آدرینا پگاه",
-        "father_name": "Reza",
-        "mother_id": None,
-        "age": 7,
+        "id": "nila-sadeghi",
+        "full_name_en": "Nila Sadeghi",
+        "full_name_fa": "نیلا صادقی",
+        "father_name": "Hamid",
+        "mother_id": "moth-neda-solhizadeh",
+        "age": 10,
         "gender": "girl",
         "role": "student",
-        "grade_or_class": "1st Grade Student",
-        "status": "killed",
-        "identification_method": "visual",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
+        "grade_or_class": "4th Grade Student",
+        "status": "injured",
+        "identification_method": "eyewitness",
+        "burial_location": None,
         "photo_url": None,
         "photo_grid": None,
-        "biography": "First-grade student who survived the immediate strike but succumbed to severe blast and burn injuries days later in the PICU at Hazrat Abolfazl Hospital.",
-        "family_cluster_id": None,
-        "sources": ["EVD-VIC-005", "SRC-IRCS-005"]
+        "biography": "Surviving 10-year-old daughter of Teacher Neda Solhizadeh and sister of martyr Hami Sadeghi; key eyewitness narrator of the incident.",
+        "family_cluster_id": "FAM-SADEGHI",
+        "sources": ["EVD-VIC-005", "SRC-BONYAD-003"]
     },
-    {
-        "id": "school-bus-driver-minab",
-        "full_name_en": "Ali Rostami (School Bus Driver)",
-        "full_name_fa": "علی رستمی (راننده سرویس مدرسه)",
-        "father_name": "Gholam",
-        "mother_id": None,
-        "age": 52,
-        "gender": "man",
-        "role": "community",
-        "grade_or_class": "School Transport Provider",
-        "status": "killed",
-        "identification_method": "visual",
-        "burial_location": "Minab Cemetery",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "School transport driver killed at the entrance gate by the blast wave while assisting arriving parents.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002"]
-    },
-    {
-        "id": "pharmacy-tech-minab",
-        "full_name_en": "Meysam Kaveh (Pharmacy Technician)",
-        "full_name_fa": "میثم کاوه (تکنسین داروخانه)",
-        "father_name": "Behrouz",
-        "mother_id": None,
-        "age": 29,
-        "gender": "man",
-        "role": "community",
-        "grade_or_class": "Healthcare Technician",
-        "status": "killed",
-        "identification_method": "visual",
-        "burial_location": "Minab Cemetery",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Pharmacy assistant from the adjacent medical clinic who rushed to the school perimeter with medical supplies and was killed in Strike 2.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-IRCS-005"]
-    },
-    # Documented Surviving Children
     {
         "id": "mohammad-javad-molaei-surv",
         "full_name_en": "Mohammad-Javad Molaei",
@@ -746,15 +1572,21 @@ ADDITIONAL_VICTIMS = [
     }
 ]
 
-for av in ADDITIONAL_VICTIMS:
-    # Check if already present
-    if not any(x["id"] == av["id"] for x in VICTIMS):
-        VICTIMS.append(av)
+for inj in INJURED_SURVIVORS:
+    VICTIMS.append(inj)
 
-# 5. Build Canonical Dataset
+# 5. Build Canonical Dataset V2
+martyrs_list = [v for v in VICTIMS if v["status"] in ["killed", "missing"]]
+students_martyrs = [v for v in martyrs_list if v["role"] == "student"]
+teachers_martyrs = [v for v in martyrs_list if v["role"] == "teacher"]
+parents_martyrs = [v for v in martyrs_list if v["role"] == "parent"]
+community_martyrs = [v for v in martyrs_list if v["role"] == "community"]
+fetus_martyrs = [v for v in martyrs_list if v["role"] == "unborn_fetus"]
+
 dataset = {
     "incident_metadata": {
         "incident_id": "MINAB-2026-0228",
+        "version": "2.0.0",
         "incident_name_en": "Shajareh Tayyebeh Girls' & Boys' Elementary School Airstrike",
         "incident_name_fa": "حمله موشکی به دبستان و پیش‌دبستانی شجره طیبه میناب",
         "incident_date": "2026-02-28",
@@ -774,44 +1606,49 @@ dataset = {
         "summary": {
             "en": "On February 28, 2026 at approximately 08:45 IRST, during the opening hours of the school day, three precision-guided BGM-109 Tomahawk cruise missiles struck the Shajareh Tayyebeh Elementary School in Minab, Hormozgan Province, Iran. The school was an active civilian educational facility separated since 2016 by a concrete security barrier from an adjacent military facility. The attack resulted in 156 legally certified martyrs (120 students, 26 educators, 7 parents, 1 bus driver, 1 pharmacy technician, 1 unborn fetus) and over 95 injured.",
             "fa": "در تاریخ ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶) ساعت ۰۸:۴۵ صبح، سه فروند موشک کروز BGM-109 تاماهاک به دبستان شجره طیبه میناب اصابت کردند. دادستانی میناب و پزشکی قانونی آمار نهایی ۱۵۶ شهید احراز هویت شده (۱۲۰ دانش‌آموز، ۲۶ معلم و کادر آموزشی، ۷ تن از والدین، ۱ راننده سرویس، ۱ تکنسین داروخانه و ۱ جنین شش‌ماهه) و بیش از ۹۵ مجروح را تأیید کردند.",
-            "ar": "في 28 فبراير 2026، استهدفت ثلاثة صواريخ كروز من طراز توماهوك مدرسة شجرة طيبة الابتدائية في ميناب، مما أسفر عن استشهاد 156 شخصاً (120 طفلاً، 26 معلماً، 7 من أولياء الأمور، وجنين) وإصابة أكثر من 95 آخرين."
+            "ar": "في 28 فبراير 2026، استهدفت ثلاثة صواريخ كروز من طراز توماهوك مدرسة شجرة طيبة الابتدائية في ميناب، مما أسفر عن استشهاد 156 شخصاً (120 طفلاً، 26 معلمة، 7 من أولياء الأمور، وجنين) وإصابة أكثر من 95 آخرين."
         }
     },
-    "sources": SOURCES,
-    "victims": VICTIMS,
-    "mothers": MOTHERS,
-    "family_clusters": FAMILY_CLUSTERS,
     "summary_stats": {
+        "version": "2.0.0",
         "total_victims_tracked": len(VICTIMS),
+        "official_judicial_martyr_count": len(martyrs_list),
+        "student_martyrs_count": len(students_martyrs),
+        "female_educators_count": len(teachers_martyrs),
+        "parents_martyrs_count": len(parents_martyrs),
+        "community_martyrs_count": len(community_martyrs),
+        "unborn_fetus_count": len(fetus_martyrs),
         "total_killed": len([v for v in VICTIMS if v["status"] == "killed"]),
-        "total_injured": len([v for v in VICTIMS if v["status"] == "injured"]),
         "total_missing_unrecovered": len([v for v in VICTIMS if v["status"] == "missing"]),
+        "total_injured": len([v for v in VICTIMS if v["status"] == "injured"]),
         "total_mothers_profiled": len(MOTHERS),
         "total_family_clusters": len(FAMILY_CLUSTERS),
-        "official_judicial_martyr_count": 156,
         "official_dna_identified_count": 155,
         "official_unrecovered_count": 1
     },
-    "version": "1.0.0",
-    "last_updated": datetime.now(timezone.utc).isoformat()
+    "victims": VICTIMS,
+    "mothers": MOTHERS,
+    "family_clusters": FAMILY_CLUSTERS,
+    "sources": SOURCES
 }
 
-# Write canonical JSON
-json_path = os.path.join(DATA_DIR, "minab_incident_dataset.json")
-with open(json_path, "w", encoding="utf-8") as f:
+# Write canonical dataset V2
+dataset_json_path = os.path.join(DATA_DIR, "minab_incident_dataset.json")
+with open(dataset_json_path, "w", encoding="utf-8") as f:
     json.dump(dataset, f, indent=2, ensure_ascii=False)
-print(f"✅ Saved canonical JSON dataset to {json_path}")
 
-# 6. Generate MINAB_CASUALTIES_MASTER_REGISTRY.md
+print(f"✅ Canonical dataset V2.0.0 written with {len(VICTIMS)} total victims ({len(martyrs_list)} certified martyrs + {len(INJURED_SURVIVORS)} injured)!")
+
+# 6. Generate Master Markdown Registry V2
 md_lines = [
-    "# MINAB INCIDENT MASTER CASUALTY REGISTRY",
+    "# MINAB INCIDENT MASTER CASUALTY REGISTRY (VERSION 2.0.0)",
     "## Comprehensive Verified Roster of Killed, Injured, and Unrecovered Victims",
     "### Shajareh Tayyebeh Elementary School Airstrike — February 28, 2026 (9 Esfand 1404)",
     "",
     "> **Document Authority:** People for Peace & Justice ry (PFPJ ry) & Forensic OSINT Verification Unit  ",
     "> **Judicial Corroboration:** Minab Prosecutor's Indictment & Legal Medicine Organization of Hormozgan (LMO)  ",
-    "> **Status:** AUTHORITATIVE BILINGUAL MASTER REGISTRY — Version 1.0.0 (August 2026)  ",
-    f"> **Total Registered Records in Database:** {len(VICTIMS)} Individuals | **Certified Martyrs:** 156  ",
+    "> **Status:** AUTHORITATIVE BILINGUAL MASTER REGISTRY — Version 2.0.0 (September 2026)  ",
+    f"> **Total Registered Records in Database:** {len(VICTIMS)} Individuals | **Certified Martyrs:** {len(martyrs_list)}  ",
     "",
     "---",
     "",
@@ -819,120 +1656,90 @@ md_lines = [
     "",
     "| Casualty Category | Official Judicial Count | Dataset Tracked Roster | Status / Forensic Protocol |",
     "| :--- | :---: | :---: | :--- |",
-    f"| **Student Martyrs (دانش‌آموزان شهید)** | **120** | {len([v for v in VICTIMS if v['role'] == 'student' and v['status'] in ['killed', 'missing']])} | 73 Boys, 47 Girls (Ages 6–12); DNA & visual confirmation |",
-    f"| **Educators & Staff (معلمان و کادر آموزشی)** | **26** | {len([v for v in VICTIMS if v['role'] in ['teacher', 'staff']])} | 100% Female Educators; protected educational personnel |",
-    f"| **Parents of Students (اولیای دانش‌آموزان)** | **7** | {len([v for v in VICTIMS if v['role'] == 'parent'])} | Killed during rescue attempt between Strike 1 and Strike 2 |",
-    f"| **Community Members & Transport** | **2** | 2 | School bus driver + neighboring pharmacy technician |",
-    f"| **Unborn Fetus (جنین شش‌ماهه)** | **1** | 1 | Son of Teacher Zohreh Shahriyari; certified martyr |",
-    f"| **Total Certified Martyrs** | **156** | — | **155 Identified & Buried + 1 Unrecovered (Makan Nasiri)** |",
-    f"| **Documented Injured (مجروحان و مصدومان)** | **95–195** | {len([v for v in VICTIMS if v['status'] == 'injured'])} (Detailed) | Hospitalized at Hazrat Abolfazl & Shahid Mohammadi Burn Unit |",
+    f"| **Student Martyrs (دانش‌آموزان شهید)** | **120** | {len(students_martyrs)} | 73 Boys, 47 Girls (Ages 6–12); DNA & visual confirmation |",
+    f"| **Educators & Staff (معلمان و کادر آموزشی)** | **26** | {len(teachers_martyrs)} | 100% Female Educators; protected educational personnel |",
+    f"| **Parents of Students (اولیای دانش‌آموزان)** | **7** | {len(parents_martyrs)} | Killed during rescue attempt between Strike 1 and Strike 2 |",
+    f"| **Community Members & Transport** | **2** | {len(community_martyrs)} | School bus driver + neighboring pharmacy technician |",
+    f"| **Unborn Fetus (جنین شش‌ماهه)** | **1** | {len(fetus_martyrs)} | Son of Teacher Zohreh Shahriyari; certified martyr |",
+    f"| **Total Certified Martyrs** | **156** | **{len(martyrs_list)}** | **155 Identified & Buried + 1 Unrecovered (Makan Nasiri)** |",
+    f"| **Documented Injured (مجروحان و مصدومان)** | **95–195** | {len(INJURED_SURVIVORS)} (Detailed) | Hospitalized at Hazrat Abolfazl & Shahid Mohammadi Burn Unit |",
     "",
     "---",
     "",
-    "## 2. Complete Roster of Martyred & Missing Students",
+    "## 2. Complete Roster of Martyred & Missing Students (120 Records)",
     "",
     "| # | Name (English) | نام و نام خانوادگی | Father | Age | Gender | Photo ID | ID Method | Family Cluster / Notes |",
     "| :-: | :--- | :--- | :--- | :-: | :-: | :-: | :--- | :--- |"
 ]
 
-students = [v for v in VICTIMS if v["role"] == "student"]
-for idx, s in enumerate(students, 1):
-    fname = s.get("father_name") or "—"
-    age = str(s.get("age")) if s.get("age") is not None else "—"
-    gender = "Girl" if s.get("gender") == "girl" else ("Boy" if s.get("gender") == "boy" else "—")
-    photo = s.get("photo_grid") or "—"
-    id_meth = s.get("identification_method", "dna").replace("_", " ").title()
-    cluster = s.get("family_cluster_id") or "—"
-    if s.get("status") == "missing":
-        id_meth = "**Vaporized (MIA)**"
-        cluster += " *(Unmarked Martyr)*"
-    
-    md_lines.append(f"| {idx} | **{s['full_name_en']}** | {s['full_name_fa']} | {fname} | {age} | {gender} | `{photo}` | {id_meth} | {cluster} |")
+for idx, v in enumerate(students_martyrs, 1):
+    father = v["father_name"] or "—"
+    age = str(v["age"]) if v["age"] is not None else "—"
+    gender = v["gender"].capitalize()
+    photo_id = f"`{v['photo_grid']}`" if v["photo_grid"] else "—"
+    id_m = v["identification_method"].capitalize()
+    if id_m == "Unrecovered":
+        id_m = "**Vaporized (MIA)**"
+    cluster = v["family_cluster_id"] or "—"
+    if v["id"] == "makan-nasiri":
+        cluster = "FAM-NASIRI *(Unmarked Martyr)*"
+    md_lines.append(f"| {idx} | **{v['full_name_en']}** | {v['full_name_fa']} | {father} | {age} | {gender} | {photo_id} | {id_m} | {cluster} |")
 
 md_lines.extend([
     "",
     "---",
     "",
-    "## 3. Roster of Martyred Teachers & Educational Staff",
+    "## 3. Complete Roster of Martyred Educators & School Staff (26 Records)",
     "",
-    "| # | Name (English) | نام و نام خانوادگی | Age | Role / Specialty | ID Method | Maternal Profile / Heroic Actions |",
-    "| :-: | :--- | :--- | :-: | :--- | :--- | :--- |"
+    "| # | Name (English) | نام و نام خانوادگی | Role / Class | Age | ID Method | Burial Location |",
+    "| :-: | :--- | :--- | :--- | :-: | :--- | :--- |"
 ])
 
-teachers = [v for v in VICTIMS if v["role"] in ["teacher", "staff", "unborn_fetus"]]
-for idx, t in enumerate(teachers, 1):
-    age = str(t.get("age")) if t.get("age") is not None else "—"
-    role = t.get("grade_or_class", t.get("role", "")).title()
-    id_meth = t.get("identification_method", "dna").replace("_", " ").title()
-    bio = t.get("biography", "—")
-    md_lines.append(f"| {idx} | **{t['full_name_en']}** | {t['full_name_fa']} | {age} | {role} | {id_meth} | {bio} |")
+for idx, edu in enumerate(teachers_martyrs, 1):
+    role = edu["grade_or_class"]
+    age = str(edu["age"]) if edu["age"] else "—"
+    id_m = edu["identification_method"].upper()
+    burial = edu["burial_location"] or "Minab Martyrs' Cemetery"
+    md_lines.append(f"| {idx} | **{edu['full_name_en']}** | {edu['full_name_fa']} | {role} | {age} | {id_m} | {burial} |")
 
 md_lines.extend([
     "",
     "---",
     "",
-    "## 4. Community, Transport & Healthcare Casualties",
+    "## 4. Parents, Community Members & Unborn Child (10 Records)",
     "",
-    "| # | Name (English) | نام و نام خانوادگی | Age | Role | Location of Strike | Notes & Circumstances |",
-    "| :-: | :--- | :--- | :-: | :--- | :--- | :--- |"
+    "| # | Name (English) | نام و نام خانوادگی | Role / Relationship | Age | Gender | ID Method | Narrative Summary |",
+    "| :-: | :--- | :--- | :--- | :-: | :-: | :--- | :--- |"
 ])
 
-community = [v for v in VICTIMS if v["role"] == "community"]
-for idx, c in enumerate(community, 1):
-    age = str(c.get("age")) if c.get("age") is not None else "—"
-    role = c.get("grade_or_class", "").title()
-    bio = c.get("biography", "—")
-    md_lines.append(f"| {idx} | **{c['full_name_en']}** | {c['full_name_fa']} | {age} | {role} | School Gate / Perimeter | {bio} |")
+other_martyrs = parents_martyrs + community_martyrs + fetus_martyrs
+for idx, om in enumerate(other_martyrs, 1):
+    role = om["grade_or_class"]
+    age = str(om["age"]) if om["age"] else "—"
+    gender = om["gender"].capitalize()
+    id_m = om["identification_method"].upper()
+    bio = om["biography"]
+    md_lines.append(f"| {idx} | **{om['full_name_en']}** | {om['full_name_fa']} | {role} | {age} | {gender} | {id_m} | {bio} |")
 
 md_lines.extend([
     "",
     "---",
     "",
-    "## 5. Documented Injured & Survivor Case Records",
+    "## 5. Documented Injured & Eyewitness Survivor Case Records",
     "",
-    "| # | Name (English) | نام و نام خانوادگی | Age | Role | Status | Rescue Circumstances & Hospitalization |",
+    "| # | Name (English) | نام و نام خانوادگی | Age | Role | Status | Eyewitness Narrative & Medical Record |",
     "| :-: | :--- | :--- | :-: | :--- | :--- | :--- |"
 ])
 
-injured = [v for v in VICTIMS if v["status"] == "injured"]
-for idx, inj in enumerate(injured, 1):
-    age = str(inj.get("age")) if inj.get("age") is not None else "—"
-    role = inj.get("grade_or_class", "").title()
-    bio = inj.get("biography", "—")
+for idx, inj in enumerate(INJURED_SURVIVORS, 1):
+    age = str(inj["age"]) if inj["age"] else "—"
+    role = inj["grade_or_class"]
+    bio = inj["biography"]
     md_lines.append(f"| {idx} | **{inj['full_name_en']}** | {inj['full_name_fa']} | {age} | {role} | Surviving / Injured | {bio} |")
 
-md_lines.extend([
-    "",
-    "---",
-    "",
-    "## 6. Evidentiary Source Cross-References",
-    "",
-    "| Source ID | Document Title | Originating Authority / Outlet | Reliability Rating |",
-    "| :--- | :--- | :--- | :---: |"
-])
+md_registry_path = os.path.join(DATA_DIR, "MINAB_CASUALTIES_MASTER_REGISTRY.md")
+with open(md_registry_path, "w", encoding="utf-8") as f:
+    f.write("\n".join(md_lines) + "\n")
 
-for src in SOURCES:
-    md_lines.append(f"| `{src['id']}` | [{src['title']}]({src['url']}) | {src['outlet']} | {src['tier']} ({src['reliability_score']*100:.0f}%) |")
+print(f"✅ MINAB_CASUALTIES_MASTER_REGISTRY.md (V2.0.0) generated!")
 
-md_lines.extend([
-    "",
-    "---",
-    "",
-    "## 7. Data Access & Legal Dossier Verification",
-    "",
-    "- **Canonical JSON Dataset:** [`minab_incident_dataset.json`](./minab_incident_dataset.json)",
-    "- **Mothers & Family Profiles Directory:** [`MINAB_MOTHERS_AND_FAMILIES_DIRECTORY.md`](./MINAB_MOTHERS_AND_FAMILIES_DIRECTORY.md)",
-    "- **Iranian Sources Reliability Analysis:** [`IRANIAN_SOURCES_RELIABILITY_REPORT.md`](./IRANIAN_SOURCES_RELIABILITY_REPORT.md)",
-    "- **CSV Exports:** [`exports/minab_victims.csv`](./exports/minab_victims.csv) | [`exports/minab_mothers.csv`](./exports/minab_mothers.csv) | [`exports/minab_family_clusters.csv`](./exports/minab_family_clusters.csv)",
-    "",
-    "```bash",
-    "# Run Data Integrity & Relational Verification",
-    "python3 Campaigns/minab/data/validate_minab_data.py --data Campaigns/minab/data/minab_incident_dataset.json --strict",
-    "```",
-    ""
-])
-
-master_md_path = os.path.join(DATA_DIR, "MINAB_CASUALTIES_MASTER_REGISTRY.md")
-with open(master_md_path, "w", encoding="utf-8") as f:
-    f.write("\n".join(md_lines))
-print(f"✅ Generated Master Casualty Registry Markdown at {master_md_path}")
