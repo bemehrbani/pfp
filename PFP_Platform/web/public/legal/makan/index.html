@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>درگاه هیئت مؤسس انجمن ماکان — Makan ry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #070c18;
+  --bg-card: #0f172a;
+  --gold: #c9a84c;
+  --gold-light: #f3e5ab;
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-gold: rgba(201, 168, 76, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 25% 20%, rgba(201,168,76,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 80%, rgba(30,58,138,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.gate-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  padding: 44px 36px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.05);
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gate-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 999px;
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.gate-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+h1 span {
+  color: var(--gold);
+}
+
+.subtext {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: #090e1a;
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 2px;
+  outline: none;
+  transition: all 0.3s ease;
+  direction: ltr;
+}
+
+.input-group input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--gold), #e8d48b);
+  color: #070c18;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.error-msg {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin-top: 14px;
+  display: none;
+  font-weight: 500;
+}
+
+.footer-info {
+  margin-top: 30px;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 16px;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<div class="gate-card">
+  <div class="gate-badge">🔒 پورتال محرمانه هیئت مؤسس · Perustajien portaali</div>
+  <div class="gate-icon">⚖️</div>
+  <h1>انجمن ماکان · <span>Makan ry</span></h1>
+  <p class="subtext">
+    درگاه بررسی اسناد قانونی، تأیید اساسنامه، امضای دیجیتال منشور تأسیس و بارگذاری مدارک اعضای هیئت مؤسس در فنلاند.
+  </p>
+
+  <form id="authForm" onsubmit="return handleAuth(event)">
+    <div class="input-group">
+      <input type="password" id="accessCode" placeholder="رمز عبور ورود / Salasana" autofocus autocomplete="off">
+    </div>
+    <button type="submit" class="submit-btn">ورود به پورتال هیئت مؤسس</button>
+    <div id="errorMsg" class="error-msg">رمز عبور نادرست است. لطفاً مجدداً بررسی فرمایید.</div>
+  </form>
+
+  <div class="footer-info">
+    Makan ry — Non-profit Association in Finland<br>
+    Yhdistyslaki (503/1989) · Patentti- ja rekisterihallitus (PRH)
+  </div>
+</div>
+
+<script>
+const VALID_HASHES = [
+  'befc016a3876071e91ade044a398c19160784dd11364642aeda6cddf755c79d5', // makan2026
+  '91a82833497d3b24224b075577c99fa13e521767da7e59a809d53f17394e8ae7'  // pfpj2026
+];
+
+async function sha256(msg) {
+  const buf = new TextEncoder().encode(msg.trim());
+  const digest = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function handleAuth(e) {
+  e.preventDefault();
+  const input = document.getElementById('accessCode').value;
+  const hash = await sha256(input);
+  if (VALID_HASHES.includes(hash)) {
+    sessionStorage.setItem('makan_founder_token', hash);
+    sessionStorage.setItem('makan_auth_time', Date.now().toString());
+    window.location.href = 'portal.html';
+  } else {
+    const err = document.getElementById('errorMsg');
+    err.style.display = 'block';
+    document.getElementById('accessCode').value = '';
+    document.getElementById('accessCode').focus();
+    setTimeout(() => { err.style.display = 'none'; }, 3500);
+  }
+}
+
+// Auto redirect if already verified
+if (VALID_HASHES.includes(sessionStorage.getItem('makan_founder_token'))) {
+  window.location.href = 'portal.html';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>پورتال هیئت مؤسس انجمن ماکان — Makan ry (Single Source of Truth)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #070c18;
+  --bg-card: #0f172a;
+  --bg-card-sub: #1e293b;
+  --gold: #c9a84c;
+  --gold-light: #f3e5ab;
+  --gold-dim: rgba(201, 168, 76, 0.12);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-gold: rgba(201, 168, 76, 0.25);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --success: #10b981;
+  --success-dim: rgba(16, 185, 129, 0.15);
+  --info: #3b82f6;
+  --max-width: 1080px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.8;
+  padding-bottom: 80px;
+  -webkit-font-smoothing: antialiased;
+}
+
+header {
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid var(--border-gold);
+  padding: 24px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  font-size: 28px;
+}
+
+.brand-text h1 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.brand-text h1 span {
+  color: var(--gold);
+}
+
+.brand-text p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-tag {
+  background: var(--gold-dim);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-soft);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 32px auto;
+  padding: 0 20px;
+}
+
+/* Navigation Tabs */
+.nav-pills {
+  display: flex;
+  gap: 10px;
+  background: var(--bg-card);
+  padding: 8px;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  margin-bottom: 28px;
+  overflow-x: auto;
+}
+
+.nav-pill {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-pill:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nav-pill.active {
+  background: var(--gold);
+  color: #070c18;
+  font-weight: 800;
+}
+
+/* Sections */
+.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.card.highlight {
+  border-color: var(--border-gold);
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h2 span.badge {
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--gold-dim);
+  color: var(--gold-light);
+  border: 1px solid var(--border-gold);
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+h3 {
+  font-size: 1.15rem;
+  color: var(--gold-light);
+  margin: 24px 0 12px;
+}
+
+p, li {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+}
+
+ul, ol {
+  padding-right: 22px;
+  margin-bottom: 16px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+/* Document Review Accordion / Subtabs */
+.draft-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.draft-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-soft);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.88rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.draft-btn.active {
+  background: rgba(201, 168, 76, 0.15);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+.code-viewer {
+  background: #050811;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 20px;
+  font-family: 'DM Sans', monospace;
+  font-size: 13.5px;
+  direction: ltr;
+  text-align: left;
+  white-space: pre-wrap;
+  max-height: 480px;
+  overflow-y: auto;
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+.code-viewer.rtl-text {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 14.5px;
+}
+
+/* Downloads Grid */
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.download-card {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.download-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-gold);
+}
+
+.download-card.primary-card {
+  border-color: rgba(201, 168, 76, 0.4);
+  background: linear-gradient(180deg, #18233c 0%, #111a2e 100%);
+}
+
+.download-card-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.download-card h4 {
+  font-size: 1.15rem;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.download-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--gold), #e8d48b);
+  color: #070c18;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.download-btn:hover {
+  box-shadow: 0 6px 20px rgba(201, 168, 76, 0.35);
+  transform: scale(1.01);
+}
+
+.download-btn.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
+  border: 1px solid var(--border-soft);
+}
+
+.download-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+}
+
+/* Requirements Cards */
+.req-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.req-item {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.req-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gold);
+}
+
+.req-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.req-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.req-body {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.alert-ssot {
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid var(--border-gold);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 20px 0;
+}
+
+.alert-ssot h3 {
+  color: var(--gold-light);
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-card {
+  background: #090e1a;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.step-card h4 {
+  color: var(--gold-light);
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.step-card p {
+  margin-bottom: 0;
+  font-size: 0.92rem;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand-title">
+      <span class="brand-logo">⚖️</span>
+      <div class="brand-text">
+        <h1>انجمن ماکان · <span>Makan ry</span></h1>
+        <p>پورتال مرجع رسمی و مخزن اسناد هیئت مؤسس (Single Source of Truth)</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="logos.html" class="status-tag" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; background: rgba(201,168,76,0.25); color: #fff;">🎨 طرح‌های لوگو و نشان</a>
+      <span class="status-tag">نسخه ثبت PRH 2026</span>
+      <button class="logout-btn" onclick="handleLogout()">خروج از پورتال</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Nav Pills -->
+  <div class="nav-pills">
+    <button class="nav-pill active" onclick="showTab('tab-overview')">📌 ۱. خلاصه و نقشه راه</button>
+    <button class="nav-pill" onclick="showTab('tab-drafts')">📜 ۲. بازبینی پیش‌نویس‌ها</button>
+    <button class="nav-pill" onclick="showTab('tab-downloads')">📥 ۳. دانلود اسناد Word و راهنمای امضا</button>
+    <button class="nav-pill" onclick="showTab('tab-docs')">📂 ۴. اطلاعات و مدارک هویتی الزامی</button>
+  </div>
+
+  <!-- TAB 1: OVERVIEW -->
+  <div id="tab-overview" class="tab-content active">
+    <div class="card highlight">
+      <h2>مأموریت و ارکان قانونی انجمن ماکان <span class="badge">PRH Finland</span></h2>
+      <p>
+        همکار گرامی و عضو محترم هیئت مؤسس، به پورتال مرجع تأسیس و ثبت رسمی <strong>انجمن ماکان (Makan ry)</strong> خوش آمدید.
+        این انجمن به عنوان یک نهاد مدنی مستقل، غیرانتفاعی و بشردوستانه در کشور فنلاند طبق قانون انجمن‌های فنلاند (<em>Yhdistyslaki 503/1989</em>) در حال ثبت در اداره ثبت اختراعات و شرکت‌ها (PRH) است.
+      </p>
+
+      <div class="req-grid" style="margin-top: 24px;">
+        <div class="req-item">
+          <div class="req-num">ENTITY STATUS</div>
+          <div class="req-title">انجمن ثبت‌شده (ry)</div>
+          <div class="req-body">
+            نام رسمی: <strong>Makan ry</strong><br>
+            مرکز فعالیت: <strong>Helsinki</strong><br>
+            شناسه شرکتی (Y-tunnus) پس از ثبت در سامانه اداره ثبت فنلاند صادر می‌شود.
+          </div>
+        </div>
+
+        <div class="req-item">
+          <div class="req-num">GOVERNANCE</div>
+          <div class="req-title">ارکان و ساختار</div>
+          <div class="req-body">
+            • مجمع عمومی (بالاترین مرجع تصمیم‌گیری)<br>
+            • هیئت مدیره (رئیس + ۲ تا ۶ عضو اصلی)<br>
+            • بازرس/حسابرس عملکرد (Toiminnantarkastaja)<br>
+            • حق عضویت مصوب: ۵ یورو در ماه
+          </div>
+        </div>
+
+        <div class="req-item">
+          <div class="req-num">LEGAL PRINCIPLES</div>
+          <div class="req-title">اهداف بنیادین</div>
+          <div class="req-body">
+            • دفاع از استقلال ملت‌ها و ترویج صلح جهانی<br>
+            • مخالفت قاطع با جنگ‌ها و تجاوز نظامی<br>
+            • افشای تحریم‌های ظالمانه یکجانبه علیه غیرنظامیان<br>
+            • انتشار بیانیه‌ها به فارسی، فنلاندی و انگلیسی
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>نقشه راه تکمیل فرآیند تأسیس</h2>
+      <ol style="padding-right: 24px; margin-top: 14px;">
+        <li><strong>مرحله اول (مطالعه پیش‌نویس‌ها):</strong> متن‌های حقوقی را در تب دوم بازبینی فرمایید.</li>
+        <li><strong>مرحله دوم (دانلود فایل‌های Word):</strong> در تب سوم، فایل‌های Word را دانلود نموده، مشخصات فردی و آدرس کامل خود را تکمیل فرمایید.</li>
+        <li><strong>مرحله سوم (امضای اسناد):</strong> فایل‌ها را به فرمت PDF درآورده و به شیوه دلخواه (دستی با پرینت یا امضای دیجیتال معتبر) امضا فرمایید.</li>
+        <li><strong>مرحله چهارم (ارسال برای ثبت در PRH):</strong> مدارک شناسایی و نسخه امضاشده را ارسال فرمایید تا درخواست ثبت در سامانه اداره ثبت فنلاند ثبت گردد.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- TAB 2: DRAFTS REVIEW -->
+  <div id="tab-drafts" class="tab-content">
+    <div class="card">
+      <h2>بازبینی متن پیش‌نویس اسناد قانونی انجمن</h2>
+      <p style="margin-bottom: 18px;">
+        تمامی متون حقوقی زیر جهت ثبت اداری و انطباق با قوانین فنلاند و اهداف مؤسسین تدوین شده‌اند:
+      </p>
+
+      <div class="draft-tabs">
+        <button class="draft-btn active" onclick="loadDraft('fi-rules')">🇫🇮 اساسنامه رسمی فنلاندی (Säännöt)</button>
+        <button class="draft-btn" onclick="loadDraft('trilingual')">🌐 اساسنامه ۳ زبانه (FA / FI / EN)</button>
+        <button class="draft-btn" onclick="loadDraft('charter')">✍️ منشور تأسیس (Perustamiskirja)</button>
+        <button class="draft-btn" onclick="loadDraft('minutes')">📋 صورت‌جلسه مجمع مؤسس (Pöytäkirja)</button>
+        <button class="draft-btn" onclick="loadDraft('fees')">💳 دستورالعمل عضویت و ۵ یورو حق عضویت</button>
+        <button class="draft-btn" onclick="loadDraft('ethics')">⚖️ مرام‌نامه استقلال و شفافیت</button>
+      </div>
+
+      <div id="draftContainer" class="code-viewer"></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: WORD DOWNLOADS & SIGNING -->
+  <div id="tab-downloads" class="tab-content">
+    <div class="card highlight">
+      <h2>دانلود اسناد در فرمت Word و راهنمای امضا <span class="badge">Single Source of Truth</span></h2>
+      
+      <div class="alert-ssot">
+        <h3>🛡️ کارکرد این درگاه به عنوان «مرجع معتبر اسناد» (Source of Truth)</h3>
+        <p>
+          این درگاه صرفاً مخزن اسناد رسمی و مرجع حقیقت (Single Source of Truth) انجمن ماکان است. به منظور رعایت کامل حریم خصوصی و استقلال اداری مؤسسین، <strong>هیچ‌گونه عملیات جمع‌آوری داده یا امضای سیستمی در این وب‌سایت انجام نمی‌شود</strong>.
+        </p>
+        <p style="margin-bottom: 0;">
+          شما می‌توانید فایل‌های Word زیر را دانلود فرموده، اطلاعات شخصی و آدرس پستی خود را درج کرده، فایل نهایی PDF را ایجاد نمایید و با روش مورد نظر خود (امضای دستی روی کاغذ یا امضای الکترونیک معتبر) امضا فرمایید.
+        </p>
+      </div>
+
+      <h3>📥 فایل‌های قابل ویرایش در فرمت Microsoft Word (.docx):</h3>
+
+      <div class="download-grid">
+        
+        <div class="download-card primary-card">
+          <div>
+            <div class="download-card-badge">MANDATORY · FORM 01</div>
+            <h4>منشور تأسیس انجمن ماکان<br><span style="font-size: 0.9rem; color: var(--gold-light);">Perustamiskirja (Founding Charter)</span></h4>
+            <p>سند اصلی اعلام اراده تأسیس، تعیین اعضای هیئت مدیره و بازرسان به همراه جداول درج نام، کد ملی، آدرس پستی و امضا.</p>
+          </div>
+          <a href="downloads/01_Makan_ry_Perustamiskirja_Founding_Charter.docx" download class="download-btn">
+            📥 دانلود فایل Word (.docx)
+          </a>
+        </div>
+
+        <div class="download-card primary-card">
+          <div>
+            <div class="download-card-badge">MANDATORY · FORM 02</div>
+            <h4>صورت‌جلسه مجمع مؤسس<br><span style="font-size: 0.9rem; color: var(--gold-light);">Perustavan kokouksen pöytäkirja</span></h4>
+            <p>صورت‌جلسه رسمی شامل دستور جلسه، مصوبات، تصویب حق عضویت ۵ یورویی، انتخاب ارکان و تعیین حق امضا.</p>
+          </div>
+          <a href="downloads/02_Makan_ry_Perustava_kokous_Poytakirja_Minutes.docx" download class="download-btn">
+            📥 دانلود فایل Word (.docx)
+          </a>
+        </div>
+
+        <div class="download-card">
+          <div>
+            <div class="download-card-badge">OFFICIAL STATUTE · 03</div>
+            <h4>اساسنامه رسمی فنلاندی<br><span style="font-size: 0.9rem; color: var(--gold-light);">Makan ry Säännöt (PRH)</span></h4>
+            <p>متن رسمی ۱۰ ماده‌ای به زبان فنلاندی منطبق با استاندارد اداره ثبت اختراعات و شرکت‌های فنلاند.</p>
+          </div>
+          <a href="downloads/03_Makan_ry_Saannot_Official_PRH.docx" download class="download-btn secondary">
+            📥 دانلود فایل Word (.docx)
+          </a>
+        </div>
+
+        <div class="download-card">
+          <div>
+            <div class="download-card-badge">TRILINGUAL EDITION · 04</div>
+            <h4>اساسنامه جامع سه زبانه<br><span style="font-size: 0.9rem; color: var(--gold-light);">فارسی / Suomi / English</span></h4>
+            <p>اساسنامه کامل تطبیقی برای مطالعه، استناد اعضا و ثبت در سوابق بین‌المللی انجمن.</p>
+          </div>
+          <a href="downloads/04_Makan_ry_Saannot_Trilingual_Bylaws.docx" download class="download-btn secondary">
+            📥 دانلود فایل Word (.docx)
+          </a>
+        </div>
+
+        <div class="download-card">
+          <div>
+            <div class="download-card-badge">GOVERNANCE · 05</div>
+            <h4>آیین‌نامه عضویت و حق عضویت<br><span style="font-size: 0.9rem; color: var(--gold-light);">Membership & Fee Policy</span></h4>
+            <p>شرح حقوق و تعهدات اعضا، سازوکار دریافت ۵ یورو ماهانه و حسابداری.</p>
+          </div>
+          <a href="downloads/05_Makan_ry_Membership_and_Dues_Policy.docx" download class="download-btn secondary">
+            📥 دانلود فایل Word (.docx)
+          </a>
+        </div>
+
+        <div class="download-card">
+          <div>
+            <div class="download-card-badge">ALL-IN-ONE KIT · 06</div>
+            <h4>بسته جامع ثبت هیئت مؤسس<br><span style="font-size: 0.9rem; color: var(--gold-light);">Founders Registration Kit</span></h4>
+            <p>مجموعه کامل اسناد، چک‌لیست و راهنمای ثبت تجمیع‌شده در یک فایل اختصاصی.</p>
+          </div>
+          <a href="downloads/06_Makan_ry_Founders_Registration_Kit.docx" download class="download-btn secondary">
+            📦 دانلود بسته کامل (.docx)
+          </a>
+        </div>
+
+      </div>
+
+      <hr style="border: none; border-top: 1px solid var(--border-soft); margin: 30px 0;">
+
+      <h3>📝 راهنمای گام‌به‌گام تکمیل، امضا و تحویل اسناد:</h3>
+      
+      <div class="step-card">
+        <h4>گام ۱: دانلود و درج اطلاعات شخصی</h4>
+        <p>فایل‌های Word منشور تأسیس و صورت‌جلسه را باز کنید و اطلاعات فردی شامل نام کامل، کد ملی، آدرس پستی، شهر اقامت و سمت خود را در جدول‌های مشخص‌شده تایپ فرمایید.</p>
+      </div>
+
+      <div class="step-card">
+        <h4>گام ۲: خروجی PDF و امضا به شیوه دلخواه</h4>
+        <p>فایل تکمیل‌شده را به صورت PDF ذخیره فرمایید و با یکی از روش‌های زیر امضا نمایید:<br>
+        • <strong>روش الف (پرینت و امضای دستی):</strong> سند را پرینت نموده، با خودکار امضا کنید و اسکن تمیز یا عکس باکیفیت آن را تهیه نمایید.<br>
+        • <strong>روش ب (امضای دیجیتال رسمی):</strong> فایل PDF را از طریق سامانه‌های معتبر امضای دیجیتال (مانند Visma Sign، Adobe Sign، DocuSign یا گواهی هویت بانکی فنلاند) امضا فرمایید.</p>
+      </div>
+
+      <div class="step-card">
+        <h4>گام ۳: ارسال فایل امضاشده و تصویر مدرک شناسایی</h4>
+        <p>فایل امضاشده نهایی را همراه با تصویر کارت شناسایی یا پاسپورت جهت ارسال به اداره ثبت فنلاند (PRH) تحویل دهید.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 4: REQUIRED DOCUMENTS & INFO -->
+  <div id="tab-docs" class="tab-content">
+    <div class="card highlight">
+      <h2>اطلاعات و مدارک هویتی الزامی جهت ثبت در PRH فنلاند</h2>
+      <p>
+        طبق قانون انجمن‌های فنلاند (<em>Yhdistyslaki 503/1989 § 35</em>)، برای ثبت رسمی هیئت مدیره در اداره ثبت اختراعات و شرکت‌ها (PRH) و افتتاح حساب بانکی، موارد هویتی و اقامتی زیر از هر یک از مؤسسین الزامی است:
+      </p>
+
+      <div class="req-grid" style="margin-top: 24px;">
+        <div class="req-item">
+          <div class="req-num">REQUIREMENT 1</div>
+          <div class="req-title">نام و نام خانوادگی کامل</div>
+          <div class="req-body">
+            <strong>Koko nimi (Etunimet ja sukunimi)</strong><br>
+            نام و نام خانوادگی دقیقاً مطابق با گذرنامه معتبر یا کارت شناسایی رسمی.<br>
+            <em>تذکر: در صورت داشتن چند نام میانی، همه آن‌ها باید درج گردند.</em>
+          </div>
+        </div>
+
+        <div class="req-item">
+          <div class="req-num">REQUIREMENT 2</div>
+          <div class="req-title">کد ملی فنلاند یا تاریخ تولد</div>
+          <div class="req-body">
+            <strong>Henkilötunnus tai syntymäaika</strong><br>
+            کد ملی فنلاند (به فرمت: DDMMYY-XXXX) برای افراد مقیم فنلاند، یا تاریخ دقیق تولد برای افرادی که هنوز کد ملی فنلاندی ندارند.
+          </div>
+        </div>
+
+        <div class="req-item">
+          <div class="req-num">REQUIREMENT 3</div>
+          <div class="req-title">آدرس کامل محل سکونت و کد پستی</div>
+          <div class="req-body">
+            <strong>Täydellinen katuosoite ja postinumero</strong><br>
+            <strong>نشانی کامل پستی محل سکونت (شامل نام خیابان، شماره پلاک، شماره واحد، کد پستی و شهر).</strong><br>
+            <em>اداره ثبت فنلاند (PRH) نشانی پستی کلیه اعضای هیئت مدیره را در پرونده ثبت ثبت می‌نماید.</em>
+          </div>
+        </div>
+
+        <div class="req-item">
+          <div class="req-num">REQUIREMENT 4</div>
+          <div class="req-title">شهر محل اقامت قانونی و تابعیت</div>
+          <div class="req-body">
+            <strong>Kotikunta ja kansalaisuus</strong><br>
+            شهر محل سکونت قانونی (مثلاً Helsinki, Espoo, Vantaa) و تابعیت فرد.<br>
+            <em>نکته کلیدی: طبق قانون فنلاند، رئیس هیئت مدیره (Puheenjohtaja) باید دارای اقامتگاه قانونی (Kotikunta) در فنلاند باشد.</em>
+          </div>
+        </div>
+
+        <div class="req-item">
+          <div class="req-num">REQUIREMENT 5</div>
+          <div class="req-title">تصویر مدرک شناسایی معتبر</div>
+          <div class="req-body">
+            <strong>Passi tai Henkilökortti</strong><br>
+            تصویر اسکن‌شده یا عکس واضح از صفحه اول پاسپورت معتبر یا کارت شناسایی صادره از پلیس فنلاند (Henkilökortti) جهت احراز هویت.
+          </div>
+        </div>
+
+        <div class="req-item">
+          <div class="req-num">REQUIREMENT 6</div>
+          <div class="req-title">نسخه امضاشده منشور تأسیس</div>
+          <div class="req-body">
+            <strong>Allekirjoitettu perustamiskirja</strong><br>
+            نسخه امضاشده منشور تأسیس (امضای دستی یا امضای دیجیتال معتبر) که در تب سوم دانلود فرموده‌اید.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" style="margin-top: 28px; background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3);">
+        <h4 style="color: #6ee7b7;">خلاصه نحوه ارسال مدارک:</h4>
+        <p style="color: #e2e8f0;">
+          اعضای محترم هیئت مؤسس پس از تکمیل اسناد Word و امضای PDF، فایل‌های نهایی را به همراه تصویر پاسپورت به ایمیل هماهنگی یا مدیر پرونده ارسال می‌فرمایند تا جهت تکمیل پروسه ثبت به سامانه رسمی اداره ثبت فنلاند (PRH) ارسال گردد.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Authentication check
+const VALID_HASHES = [
+  'befc016a3876071e91ade044a398c19160784dd11364642aeda6cddf755c79d5',
+  '91a82833497d3b24224b075577c99fa13e521767da7e59a809d53f17394e8ae7'
+];
+
+if (!VALID_HASHES.includes(sessionStorage.getItem('makan_founder_token'))) {
+  window.location.href = 'index.html';
+}
+
+function handleLogout() {
+  sessionStorage.removeItem('makan_founder_token');
+  window.location.href = 'index.html';
+}
+
+// Tab switcher
+function showTab(tabId) {
+  document.querySelectorAll('.nav-pill').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  
+  event.currentTarget.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// Drafts content
+const DRAFTS = {
+  'fi-rules': `MAKAN RY — SÄÄNNÖT (OFFICIAL PRH FORM)
+
+§ 1 — Nimi ja kotipaikka
+Yhdistyksen nimi on Makan ry. Yhdistyksen kotipaikka on Helsinki.
+
+§ 2 — Tarkoitus ja toimintamuodot
+Yhdistys on itsenäinen, voittoa tavoittelematon, humanitaarinen ja yleishyödyllinen kansalaisjärjestö, joka on riippumaton puoluepolitiikasta, ideologioista ja uskonnoista.
+Tarkoituksena on:
+1. Edistää rauhaa, kansojen itsemääräämisoikeutta, suvereniteettia ja kansainvälistä oikeudenmukaisuutta YK:n peruskirjan mukaisesti.
+2. Vastustaa sotia, aseellista väkivaltaa, sotilaallista aggressiota, miehitystä sekä ulkovaltojen kolonialistista ja uuskolonialistista sekaantumista kansojen sisäisiin asioihin, erityisesti Länsi-Aasiassa ja Iranissa.
+3. Vastustaa, tutkia ja tuoda julki yksipuolisia ja laittomia talouspakotteita, jotka vaarantavat siviiliväestön toimeentulon, terveydenhuollon, lääketurvan ja perusoikeudet.
+4. Lisätä yleistä tietoisuutta sotien ja taloussaartojen inhimillisistä ja yhteiskunnallisista tuhoista.
+5. Vahvistaa yhteisöllisyyttä, kulttuurienvälistä ymmärrystä ja vuoropuhelua suomalaisten, iranilaisten ja maahanmuuttajien välillä.
+Yhdistys järjestää seminaareja, paneeleja, työpajoja, kääntää ja julkaisee tiedotteita suomeksi, persiaksi ja englanniksi.
+
+§ 3 — Jäsenet
+Varsinaiseksi jäseneksi voi liittyä jokainen luonnollinen henkilö, joka hyväksyy yhdistyksen tarkoituksen ja tukee kansojen itsenäisyyttä. Kannatusjäseneksi voidaan hyväksyä henkilö tai oikeustoimikelpoinen yhteisö.
+
+§ 4 — Jäsenmaksut
+Jäsenmaksun suuruudesta päättää vuosikokous (5 € / kk tai 60 € / vuosi).
+
+§ 5 — Hallitus
+Hallitukseen kuuluu puheenjohtaja sekä 2–6 varsinaista jäsentä. Toimikausi on yksi vuosi.
+
+§ 6 — Nimenkirjoitusoikeus
+Yhdistyksen nimen kirjoittaa puheenjohtaja yksin tai kaksi hallituksen jäsentä yhdessä.
+
+§ 7 — Tilikausi ja toiminnantarkastus
+Tilikausi on kalenterivuosi (1.1.–31.12.). Valitaan yksi toiminnantarkastaja ja yksi varatoiminnantarkastaja.
+
+§ 8 — Kokoukset
+Vuosikokous pidetään maaliskuun loppuun mennessä. Kokouskutsu vähintään 7 päivää aiemmin.
+
+§ 9 — Vuosikokouksen asiat
+Käsitellään tilinpäätös, vastuuvapaus, toimintasuunnitelma, jäsenmaksut ja vaalit.
+
+§ 10 — Purkaminen
+Purkautuessa varat luovutetaan rekisteröidylle yleishyödylliselle rauhanjärjestölle.`,
+
+  'trilingual': `اساسنامه سه زبانه انجمن ماکان (Trilingual Bylaws)
+
+ماده ۱: نام و اقامتگاه
+نام انجمن: «انجمن ماکان» (Makan ry)
+اقامتگاه قانونی: هلسینکی، فنلاند (Helsinki, Finland)
+
+ماده ۲: اهداف و روش‌های فعالیت
+انجمن نهادی مستقل، غیرانتفاعی، بشردوستانه و عام‌المنفعه است و فاقد وابستگی حزبی، سیاسی، ایدئولوژیک و دینی می‌باشد.
+اهداف کلیدی:
+• ترویج صلح، احترام به حاکمیت ملی و استقلال ملت‌ها بر اساس منشور ملل متحد.
+• مخالفت قاطع با هرگونه تجاوز نظامی، اشغالگری و جنگ‌افروزی.
+• افشاگری و مقابله با سیاست‌های استعمارگرایانه بیگانگان در غرب آسیا و ایران.
+• محکومیت تحریم‌های یکجانبه اقتصادی که سلامت، معیشت و حقوق غیرنظامیان را نشانه می‌روند.
+• فعالیت رسانه‌ای و آموزشی مستمر به سه زبان: فارسی، فنلاندی و انگلیسی.
+
+ماده ۳: شرایط عضویت
+هر فرد حامی استقلال ملل و پذیرای اساسنامه می‌تواند به عضویت عادی درآید. اشخاص حقیقی و حقوقی حامی مالی و معنوی نیز به عنوان عضو حامی پذیرفته می‌شوند.
+
+ماده ۴: حق عضویت
+حق عضویت ماهانه ۵ یورو (۶۰ یورو سالانه) توسط مجمع عمومی تصویب می‌شود.
+
+ماده ۵ تا ۱۰: ارکان و نظارت
+شامل مجمع عمومی، هیئت مدیره (رئیس و حداقل ۲ عضو)، بازرس قانونی مالی (Toiminnantarkastaja)، دوره مالی سال تقویمی، حق امضای تعهدآور و واگذاری دارایی‌ها به سازمان‌های صلح در صورت انحلال.`,
+
+  'charter': `منشور تأسیس انجمن ماکان / PERUSTAMISKIRJA
+
+Me allekirjoittaneet olemme perustaneet Makan ry -nimisen yhdistyksen, liittyneet siihen jäseniksi ja hyväksyneet sille liitteenä olevat säännöt.
+
+Hallitus (Board of Directors):
+• Puheenjohtaja (رئیس هیئت مدیره)
+• Hallituksen jäsenet (اعضای هیئت مدیره)
+
+Toiminnantarkastajat (Operations Inspectors):
+• Toiminnantarkastaja (بازرس اصلی)
+• Varatoiminnantarkastaja (بازرس علی‌البدل)
+
+Helsinki, 2026.
+Allekirjoitukset: (حداقل ۳ امضای رسمی مؤسسین)`,
+
+  'minutes': `صورت‌جلسه مجمع عمومی مؤسس / PERUSTAVAN KOKOUKSEN PÖYTÄKIRJA
+
+دستور جلسه و مصوبات:
+۱. افتتاح جلسه و بیان انگیزه تأسیس انجمن در راستای صلح، نفی جنگ و مقابله با تحریم‌ها.
+۲. انتخاب رئیس، منشی و دو ناظر بر صورت‌جلسه.
+۳. احراز حد نصاب و اعلام رسمیت قانونی جلسه.
+۴. تصویب نام رسمی انجمن: Makan ry.
+۵. تصویب نهایی اساسنامه ۱۰ ماده‌ای.
+۶. تصویب حق عضویت ۵ یورویی در ماه.
+۷. انتخاب رئیس و اعضای هیئت مدیره و بازرسان مالی.
+۸. اعطای وکالت تام به رئیس هیئت مدیره جهت ثبت اینترنتی در PRH.`,
+
+  'fees': `دستورالعمل عضویت و دریافت ۵ یورو حق عضویت ماهانه
+
+۱. اعضای عادی (Ordinary Members):
+• حق عضویت: ۵ یورو در ماه (یا ۶۰ یورو سالیانه).
+• حق رأی در مجامع عمومی و انتخاب ارکان مدیریتی.
+• تعهد به ترویج بیانیه‌ها و حضور در برنامه‌ها.
+
+۲. روش‌های پرداخت:
+• پرداخت خودکار بانکی دوره‌ای (SEPA Recurring Payment / Toistuva tilisiirto).
+• حساب بانکی اختصاصی در بانک Holvi فنلاند و درگاه پرداخت آنلاین.
+• سیستم MobilePay ویژه انجمن‌ها در فنلاند.`,
+
+  'ethics': `مرام‌نامه استقلال، شفافیت و عدم وابستگی انجمن ماکان
+
+۱. استقلال کامل ساختاری و سیاسی:
+عدم وابستگی به هیچ دولت خارجی، کانون‌های قدرت بین‌المللی، احزاب سیاسی یا نهادهای نظامی.
+
+۲. شفافیت مالی و گزارش‌دهی سالانه:
+انتشار منظم ترازنامه مالی سالیانه برای اعضا و نهادهای ناظر دولتی فنلاند، حسابرسی سالانه توسط بازرس قانونی (Toiminnantarkastaja) و ممنوعیت پذیرش کمک‌های مالی مشروط سیاسی.`
+};
+
+function loadDraft(key) {
+  document.querySelectorAll('.draft-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  const box = document.getElementById('draftContainer');
+  box.innerText = DRAFTS[key] || '';
+  if (key === 'fi-rules') {
+    box.classList.remove('rtl-text');
+  } else {
+    box.classList.add('rtl-text');
+  }
+}
+
+// Initial draft load
+document.getElementById('draftContainer').innerText = DRAFTS['fi-rules'];
+</script>
+
+</body>
+</html>
