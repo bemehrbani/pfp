@@ -105,14 +105,19 @@ async def start_command(update: Update, context: CallbackContext):
 
 
 async def _show_language_picker(update: Update, context: CallbackContext, message_text: str = None):
-    """Show language selection buttons."""
-    text = message_text or "🌍 Choose your language / زبان خود را انتخاب کنید / اختر لغتك:"
+    """Show 4-language selection buttons."""
+    text = message_text or "🌍 Valitse kieli / Choose your language / زبان خود را انتخاب کنید:"
 
-    keyboard = [[
-        InlineKeyboardButton("🇬🇧 English", callback_data="lang_en"),
-        InlineKeyboardButton("🇮🇷 فارسی", callback_data="lang_fa"),
-        InlineKeyboardButton("🇸🇦 العربية", callback_data="lang_ar"),
-    ]]
+    keyboard = [
+        [
+            InlineKeyboardButton("🇫🇮 Suomi", callback_data="lang_fi"),
+            InlineKeyboardButton("🇬🇧 English", callback_data="lang_en"),
+        ],
+        [
+            InlineKeyboardButton("🇮🇷 فارسی", callback_data="lang_fa"),
+            InlineKeyboardButton("🇸🇦 العربية", callback_data="lang_ar"),
+        ]
+    ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await context.bot.send_message(
@@ -132,8 +137,8 @@ async def language_callback_handler(update: Update, context: CallbackContext):
     query = update.callback_query
     await query.answer()
 
-    lang_code = query.data.split('_')[1]  # lang_en → en, lang_fa → fa, lang_ar → ar
-    if lang_code not in ('en', 'fa', 'ar'):
+    lang_code = query.data.split('_')[1]  # lang_fi, lang_en, lang_fa, lang_ar
+    if lang_code not in ('fi', 'en', 'fa', 'ar'):
         lang_code = 'en'
 
     # Save language preference
@@ -148,22 +153,19 @@ async def language_callback_handler(update: Update, context: CallbackContext):
 
 
 async def _send_welcome(update: Update, context: CallbackContext, session, lang: str):
-    """Send the simplified welcome message with the single CTA button."""
+    """Send the official PFPJ ry welcome message with full action menu."""
     chat_id = update.effective_chat.id
     user = update.effective_user
     db_user = await get_user_by_telegram_id(user.id)
 
-    # Simplified Welcome
-    keyboard = [
-        [InlineKeyboardButton(t('simplified_btn_start', lang), callback_data="simp_start_task")]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
+    reply_markup = get_main_menu_inline(lang)
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text=t('simplified_welcome', lang),
+        text=t('welcome', lang),
         reply_markup=reply_markup,
         parse_mode='Markdown',
+        disable_web_page_preview=True
     )
 
     if not db_user:

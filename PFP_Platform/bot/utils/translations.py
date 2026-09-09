@@ -1,9 +1,149 @@
 """
 Translations for PFP Telegram Bot.
-Supports: English (en), Farsi (fa), Arabic (ar).
+Supports: Finnish (fi), English (en), Farsi (fa), Arabic (ar).
 """
 
+SUPPORTED_LANGUAGES = ('fi', 'en', 'fa', 'ar')
+
 TRANSLATIONS = {
+    "choose_language": {
+        "fi": "🌍 Valitse kieli / Choose language:",
+        "en": "🌍 Choose your language:",
+        "fa": "🌍 زبان خود را انتخاب کنید:",
+        "ar": "🌍 اختر لغتك:",
+    },
+    "language_set": {
+        "fi": "✅ Kieleksi asetettu *Suomi*.",
+        "en": "✅ Language set to *English*.",
+        "fa": "✅ زبان به *فارسی* تغییر کرد.",
+        "ar": "✅ تم تعيين اللغة إلى *العربية*.",
+    },
+    "welcome": {
+        "fi": "🕊️ *People for Peace & Justice ry*\n\nKunnioitamme Minabin iskun 156 uhria (120 koululaista, 26 opettajaa ja koulun työntekijää). PFPJ ry on Helsingissä rekisteröity kansalaisjärjestö (Y-tunnus: 3616815-5), joka edistää kansainvälistä oikeudenmukaisuutta, IHL-dokumentaatiota ja rauhaa.\n\nValitse osio alta:",
+        "en": "🕊️ *People for Peace & Justice ry*\n\nWe honor the 156 victims and martyrs of the Minab primary school strike (120 elementary students, 26 teachers and staff). PFPJ ry is a registered non-governmental association in Helsinki, Finland (Business ID: 3616815-5) dedicated to universal jurisdiction, forensic documentation, and peace.\n\nWhat would you like to explore?",
+        "fa": "🕊️ *انجمن مردم برای صلح و عدالت (PFPJ ry)*\n\nما یاد و نام ۱۵۶ شهید سرافراز فاجعه دبستان شجره طیبه میناب (شامل ۱۲۰ دانش‌آموز خردسال و ۲۶ معلم و کادر آموزشی) را گرامی می‌داریم. این انجمن به عنوان یک نهاد مدنی مستقل ثبت‌شده در هلسینکی فنلاند (شناسه ملی: 3616815-5) در راستای دادخواهی حقوقی بین‌المللی، مستندسازی فنی و پاسداری از یاد قربانیان فعالیت می‌کند.\n\nبرای شروع، یکی از بخش‌های زیر را انتخاب کنید:",
+        "ar": "🕊️ *جمعية الناس من أجل السلام والعدالة*\n\nنُخلّد ذكرى ١٥٦ شهيداً في مدرسة ميناب (١٢٠ تلميذاً و٢٦ معلماً وكادراً تعليمياً). نحن منظمة غير حكومية مسجلة في هلسنكي، فنلندا (السجل: 3616815-5) مكرسة للمحاسبة القانونية الدولية والتوثيق الجنائي والسلام.\n\nماذا تود أن تستكشف؟",
+    },
+    "btn_memorial": {
+        "fi": "🕊️ Digitaalinen muistomerkki",
+        "en": "🕊️ Digital Memorial",
+        "fa": "🕊️ یادبود دیجیتال",
+        "ar": "🕊️ النصب التذكاري الرقمي",
+    },
+    "btn_multimedia": {
+        "fi": "🎬 Mediakirjasto ja videot",
+        "en": "🎬 Multimedia Library",
+        "fa": "🎬 کتابخانه چندرسانه‌ای",
+        "ar": "🎬 مكتبة الوسائط",
+    },
+    "btn_evidence": {
+        "fi": "⚖️ Oikeudelliset todisteet",
+        "en": "⚖️ Forensic Evidence",
+        "fa": "⚖️ اسناد و مدارک فنی",
+        "ar": "⚖️ الأدلة الجنائية",
+    },
+    "btn_actions_events": {
+        "fi": "📢 Toiminta ja tapahtumat",
+        "en": "📢 Actions & Helsinki Event",
+        "fa": "📢 رویداد هلسینکی و دادخواهی",
+        "ar": "📢 الفعاليات والتحرك المدني",
+    },
+    "btn_missions": {
+        "fi": "🎯 Vapaaehtoistehtävät",
+        "en": "🎯 Volunteer Missions",
+        "fa": "🎯 وظایف داوطلبانه",
+        "ar": "🎯 المهام التطوعية",
+    },
+    "btn_about_pfp": {
+        "fi": "🏛️ Tietoa yhdistyksestä",
+        "en": "🏛️ About PFPJ ry",
+        "fa": "🏛️ درباره انجمن",
+        "ar": "🏛️ عن الجمعية",
+    },
+    "memorial_title": {
+        "fi": "🕊️ *Minabin lasten digitaalinen muistomerkki*\n\nMuistamme jokaista 156 uhria (120 koululaista, 26 opettajaa).",
+        "en": "🕊️ *Minab Children Digital Memorial*\n\nPreserving the memory, names, and stories of the 156 martyrs (120 schoolchildren, 26 teachers and staff).",
+        "fa": "🕊️ *یادبود دیجیتال کودکان دبستان میناب*\n\nپاسداری از نام و خاطره ۱۵۶ شهید (شامل ۱۲۰ دانش‌آموز خردسال و ۲۶ آموزگار و کادر آموزشی).",
+        "ar": "🕊️ *النصب التذكاري الرقمي لأطفال ميناب*\n\nتخليد أسماء وقصص ١٥٦ شهيداً (١٢٠ تلميذاً و٢٦ معلماً).",
+    },
+    "memorial_candle_btn": {
+        "fi": "🕯️ Sytytä muistokynttilä",
+        "en": "🕯️ Light a Memorial Candle",
+        "fa": "🕯️ روشن کردن شمع یادبود",
+        "ar": "🕯️ إشعال شمعة تذكارية",
+    },
+    "memorial_browse_btn": {
+        "fi": "📖 Selaa uhrien tietoja",
+        "en": "📖 Browse Victim Records",
+        "fa": "📖 مرور اسامی و مشخصات",
+        "ar": "📖 استعراض سجلات الضحايا",
+    },
+    "memorial_search_btn": {
+        "fi": "🔍 Etsi nimellä",
+        "en": "🔍 Search by Name",
+        "fa": "🔍 جستجو بر اساس نام",
+        "ar": "🔍 البحث بالاسم",
+    },
+    "memorial_candle_lit_success": {
+        "fi": "🕯️ *Kynttilä sytytetty.*\n\nKiitos osanotostasi. Yhteensä sytytettyjä kynttilöitä: *{count}*.",
+        "en": "🕯️ *Memorial Candle Lit.*\n\nThank you for honoring the memory of the children. Total tributes: *{count}*.",
+        "fa": "🕯️ *شمع یادبود روشن شد.*\n\nاز ادای احترام و همبستگی انسانی شما سپاسگزاریم. مجموع شمع‌های روشن‌شده: *{count}*.",
+        "ar": "🕯️ *تم إشعال الشمعة التذكارية.*\n\nشكراً لتضامنك وتكريمك لذكراهم. مجموع الشموع: *{count}*.",
+    },
+    "multimedia_title": {
+        "fi": "🎬 *PFPJ ry Mediakirjasto*\n\n25+ tutkivaa dokumenttia, kenttäraporttia ja analyysia suomenkielisillä, englanninkielisillä ja persiankielisillä tekstityksillä.",
+        "en": "🎬 *PFPJ ry Multimedia & Investigation Library*\n\n25+ curated documentaries, open-source forensic breakdowns, and field reports with verified CC subtitles (EN, FA, FI).",
+        "fa": "🎬 *کتابخانه چندرسانه‌ای و مستندات PFPJ ry*\n\nبیش از ۲۵ مستند تحلیلی، گزارش‌های میدانی بین‌المللی و آثار تصویری همراه با زیرنویس دقیق فارسی، فنلاندی و انگلیسی.",
+        "ar": "🎬 *مكتبة الوسائط والوثائقيات*\n\nأكثر من ٢٥ فيلماً وثائقياً وتحقيقاً جنائياً مفتوح المصدر مع ترجمة كاملة.",
+    },
+    "multimedia_watch_online": {
+        "fi": "🌐 Katso verkossa teksteillä ↗",
+        "en": "🌐 Watch on Web with Subtitles ↗",
+        "fa": "🌐 مشاهده آنلاین با زیرنویس ↗",
+        "ar": "🌐 المشاهدة عبر الويب مع الترجمة ↗",
+    },
+    "multimedia_download_mp4": {
+        "fi": "📥 Lataa video (Full HD)",
+        "en": "📥 Download Video (Full HD)",
+        "fa": "📥 دانلود ویدیو (Full HD)",
+        "ar": "📥 تحميل الفيديو (Full HD)",
+    },
+    "evidence_title": {
+        "fi": "⚖️ *Oikeudelliset ja tekniset todisteet*\n\nMinabin iskun riippumaton OSINT- ja IHL-tutkinta-aineisto.",
+        "en": "⚖️ *Forensic Evidence & Legal Docket*\n\nIndependent open-source geospatial, weapons forensics, and International Humanitarian Law documentation.",
+        "fa": "⚖️ *اسناد فنی و مدارک حقوقی فاجعه میناب*\n\nمستندات مستقل متن‌باز (OSINT)، تصاویر ماهواره‌ای، تطبیق قطعات سلاح و تحلیل نقض کنوانسیون‌های ژنو.",
+        "ar": "⚖️ *الملف الجنائي والأدلة القانونية*\n\nالتحقيقات الجغرافية المكانية وأدلة الأسلحة والقانون الدولي الإنساني.",
+    },
+    "events_title": {
+        "fi": "📢 *Kansalaistoiminta ja tapahtumat*\n\nHelsingin muistotilaisuus, vetoomukset ja solidaarisuusverkosto.",
+        "en": "📢 *Civic Action & Helsinki Memorial Event*\n\nParticipate in upcoming screenings, Nordic parliamentary advocacy, and legal coalitions.",
+        "fa": "📢 *رویداد یادبود هلسینکی و اقدامات دادخواهی*\n\nثبت‌نام در مراسم یادبود و اکران مستند هلسینکی، تومارهای بین‌المللی و شبکه‌سازی مدنی.",
+        "ar": "📢 *التحرك المدني وفعالية هلسنكي التذكارية*\n\nالمشاركة في عروض الأفلام والعرائض البرلمانية والتضامن الإنساني.",
+    },
+    "event_helsinki_btn": {
+        "fi": "🎟️ Helsingin tilaisuus: Ilmoittaudu (RSVP)",
+        "en": "🎟️ Helsinki Memorial Screening: RSVP",
+        "fa": "🎟️ ثبت‌نام رویداد اکران و یادبود هلسینکی (RSVP)",
+        "ar": "🎟️ التسجيل في فعالية هلسنكي التذكارية (RSVP)",
+    },
+    "event_rsvp_confirmed": {
+        "fi": "✅ *Ilmoittautumisesi on vastaanotettu!*\n\nOdotamme tapaamistasi Helsingin muistotilaisuudessa. Saat tarkemmat tiedot ja salin vahvistuksen ennen tilaisuutta.",
+        "en": "✅ *RSVP Confirmed!*\n\nThank you for joining us for the Helsinki Memorial Screening & Visual Exhibition. Further venue details will be sent prior to the event.",
+        "fa": "✅ *ثبت‌نام شما با موفقیت ثبت شد!*\n\nاز همراهی شما در رویداد یادبود و اکران مستند هلسینکی سپاسگزاریم. جزئیات دقیق سالن پیش از مراسم برای شما ارسال خواهد شد.",
+        "ar": "✅ *تم تأكيد تسجيلك بنجاح!*\n\nشكراً لانضمامك إلى فعالية هلسنكي التذكارية. سيتم إرسال التفاصيل قبل الموعد.",
+    },
+    "about_pfp_text": {
+        "fi": "🏛️ *People for Peace & Justice ry (PFPJ ry)*\n\n📍 *Kotipaikka:* Helsinki, Suomi\n📄 *Y-tunnus:* 3616815-5 (Patentti- ja rekisterihallitus)\n🌐 *Verkkosivusto:* [peopleforpeace.live](https://peopleforpeace.live)\n\n⚖️ *Tehtävämme:*\n1. Kansainvälisen humanitaarisen oikeuden (IHL) loukkausten dokumentointi.\n2. Koulujen ja siviilikohteiden suojelun edistäminen Geneven sopimusten mukaisesti.\n3. Oikeudellisen vastuun edistäminen yleismaailmallisen toimivallan (Universal Jurisdiction) kautta.\n4. Uhrien muiston vaaliminen ja rauhankasvatus Pohjoismaissa ja maailmanlaajuisesti.",
+        "en": "🏛️ *People for Peace & Justice ry (PFPJ ry)*\n\n📍 *Registered Seat:* Helsinki, Finland\n📄 *Business ID (Y-tunnus):* 3616815-5 (Finnish PRH Registry)\n🌐 *Website:* [peopleforpeace.live](https://peopleforpeace.live)\n\n⚖️ *Our Mission:*\n1. Document violations of International Humanitarian Law (IHL).\n2. Advocate for the immunity of educational facilities under Geneva Conventions.\n3. Support accountability under Universal Jurisdiction mechanisms in Europe.\n4. Preserve victim memory and cultivate grassroots peace advocacy in the Nordic region and globally.",
+        "fa": "🏛️ *انجمن مردم برای صلح و عدالت (People for Peace & Justice ry)*\n\n📍 *مقر رسمی:* هلسینکی، فنلاند\n📄 *شناسه ثبتی (Y-tunnus):* 3616815-5 (اداره ثبت شرکت‌ها و انجمن‌های فنلاند - PRH)\n🌐 *وبگاه رسمی:* [peopleforpeace.live](https://peopleforpeace.live)\n\n⚖️ *اهداف و مأموریت‌ها:*\n۱. مستندسازی نقض حقوق بین‌الملل بشردوستانه (IHL) و حفاظت از مراکز آموزشی طبق کنوانسیون‌های ژنو.\n۲. پیگیری دادخواهی حقوقی در دادگاه‌های بین‌المللی و چارچوب صلاحیت قضایی جهانی.\n۳. حفظ نام و یاد قربانیان غیرنظامی و پشتیبانی از خانواده‌های آسیب‌دیده.\n۴. ایجاد همبستگی مدنی و ترویج صلح در منطقه نوردیک و سراسر جهان.",
+        "ar": "🏛️ *جمعية الناس من أجل السلام والعدالة (PFPJ ry)*\n\n📍 *المقر:* هلسنكي، فنلندا\n📄 *رقم التسجيل:* 3616815-5 (السجل الفنلندي PRH)\n🌐 *الموقع الرسمي:* [peopleforpeace.live](https://peopleforpeace.live)\n\n⚖️ *أهدافنا:*\n١. توثيق انتهاكات القانون الدولي الإنساني وحماية المدارس وفقاً لاتفاقيات جنيف.\n٢. دعم المحاسبة القانونية بموجب الاختصاص القضائي العالمي في أوروبا.\n٣. تخليد ذكرى الضحايا ودعم عائلاتهم.\n٤. تعزيز ثقافة السلام والتضامن المدني في دول الشمال الأوروبي وحول العالم.",
+    },
+    "btn_back_to_menu": {
+        "fi": "🏠 Päävalikko",
+        "en": "🏠 Main Menu",
+        "fa": "🏠 منوی اصلی",
+        "ar": "🏠 القائمة الرئيسية",
+    },
     # ── Language Picker ──────────────────────────────────────────────
     "choose_language": {
         "en": "🌍 Choose your language:",
@@ -20,13 +160,13 @@ TRANSLATIONS = {
     "welcome": {
         "en": (
             "🕊️ *People for Peace*\n\n"
-            "We honor the 168 children of Minab. Their memory is our call to action "
+            "We honor the 120 children of Minab. Their memory is our call to action "
             "— to stop this war and fight for peace.\n\n"
             "What would you like to do?"
         ),
         "fa": (
             "🕊️ *مردم برای صلح*\n\n"
-            "ما یاد ۱۶۸ کودک میناب را گرامی می‌داریم. خاطره آنها ندای ما برای عمل است "
+            "ما یاد ۱۲۰ کودک میناب را گرامی می‌داریم. خاطره آنها ندای ما برای عمل است "
             "— برای پایان دادن به این جنگ و مبارزه برای صلح.\n\n"
             "چه کاری می‌خواهید انجام دهید؟"
         ),
@@ -61,16 +201,19 @@ TRANSLATIONS = {
     },
 
     "btn_help": {
+        "fi": "ℹ️ Ohje",
         "en": "ℹ️ Help",
         "fa": "ℹ️ راهنما",
         "ar": "ℹ️ مساعدة",
     },
     "btn_profile": {
+        "fi": "👤 Oma profiili",
         "en": "👤 Profile",
         "fa": "👤 پروفایل",
         "ar": "👤 الملف الشخصي",
     },
     "btn_language": {
+        "fi": "🌍 Vaihda kieli",
         "en": "🌍 Language",
         "fa": "🌍 زبان",
         "ar": "🌍 اللغة",
@@ -151,10 +294,10 @@ TRANSLATIONS = {
             "🎉 *You've joined {name}!*\n\n"
             "📅 *What happened:*\n"
             "On Feb 28, 2026, a school in Minab, Iran was bombed.\n"
-            "168 children were killed.\n\n"
+            "120 children were killed.\n\n"
             "📋 *What we're doing:*\n"
             "We honor their memory and fight for peace. "
-            "We've identified names and photos of 168 children, "
+            "We've identified names and photos of 120 children, "
             "built an online memorial, collected investigative reports, "
             "and launched an international petition.\n\n"
             "🤲 *How you help:*\n"
@@ -172,10 +315,10 @@ TRANSLATIONS = {
             "🎉 *شما به {name} پیوستید!*\n\n"
             "📅 *چه اتفاقی افتاد:*\n"
             "۹ اسفند ۱۴۰۴ — مدرسه‌ای در میناب بمباران شد.\n"
-            "۱۶۸ کودک جان باختند.\n\n"
+            "۱۲۰ کودک جان باختند.\n\n"
             "📋 *ما چیکار کردیم:*\n"
             "ما یاد آنها را گرامی می‌داریم و برای صلح مبارزه می‌کنیم. "
-            "اسم و عکس ۱۶۸ کودک رو شناسایی کردیم، "
+            "اسم و عکس ۱۲۰ کودک رو شناسایی کردیم، "
             "یادبود آنلاین ساختیم، گزارش‌های تحقیقی جمع کردیم "
             "و طومار بین‌المللی راه انداختیم.\n\n"
             "🤲 *شما چطور کمک می‌کنید:*\n"
@@ -903,7 +1046,7 @@ TRANSLATIONS = {
             "and calls for peace. Ideas:\n\n"
             "💡 *Content Ideas:*\n"
             "• Write a Twitter thread about what happened on Feb 28\n"
-            "• Create a poem or tribute for the 168 children\n"
+            "• Create a poem or tribute for the 120 children\n"
             "• Make a before/after graphic of the school\n"
             "• Record a 60-second video message for peace\n"
             "• Post on Instagram (feed or story) with the hashtags below\n\n"
@@ -921,7 +1064,7 @@ TRANSLATIONS = {
             "و برای صلح فراخوان دهد. ایده‌ها:\n\n"
             "💡 *ایده‌های محتوا:*\n"
             "• یک رشته توییت درباره اتفاقات ۹ اسفند بنویسید\n"
-            "• یک شعر یا یادبود برای ۱۶۸ کودک بنویسید\n"
+            "• یک شعر یا یادبود برای ۱۲۰ کودک بنویسید\n"
             "• یک گرافیک قبل/بعد از مدرسه بسازید\n"
             "• یک پیام ویدیویی ۶۰ ثانیه‌ای برای صلح ضبط کنید\n"
             "• در اینستاگرام (فید یا استوری) با هشتگ‌های زیر پست کنید\n\n"
@@ -968,8 +1111,8 @@ TRANSLATIONS = {
         "ar": "📤 أرسل محتواك أو رابطه هنا لإكمال المهمة.",
     },
     "content_child_inspiration": {
-        "en": "🕯 *{name}* — one of 168 children killed in Minab.\nLet their story inspire your content.",
-        "fa": "🕯 *{name}* — یکی از ۱۶۸ کودک کشته شده در میناب.\nبگذار داستانشان الهام‌بخش محتوای تو باشد.",
+        "en": "🕯 *{name}* — one of 120 children killed in Minab.\nLet their story inspire your content.",
+        "fa": "🕯 *{name}* — یکی از ۱۲۰ کودک کشته شده در میناب.\nبگذار داستانشان الهام‌بخش محتوای تو باشد.",
         "ar": "🕯 *{name}* — أحد ١٦٨ طفلاً قُتلوا في ميناب.\nدع قصتهم تلهم محتواك.",
     },
     "btn_do_another": {
@@ -1104,7 +1247,7 @@ TRANSLATIONS = {
     "invite_message": {
         "en": (
             "🕊️ *People for Peace — Join Our Movement*\n\n"
-            "168 children were killed in one airstrike on a school in Minab, Iran.\n"
+            "120 children were killed in one airstrike on a school in Minab, Iran.\n"
             "We honor their memory and fight for peace.\n\n"
             "📢 Join our channel: https://t.me/people4peace\n"
             "🤖 Take action via our bot (pinned in channel)\n\n"
@@ -1112,7 +1255,7 @@ TRANSLATIONS = {
         ),
         "fa": (
             "🕊️ *مردم برای صلح — به جنبش ما بپیوندید*\n\n"
-            "۱۶۸ کودک در یک حمله هوایی به مدرسه‌ای در میناب، ایران کشته شدند.\n"
+            "۱۲۰ کودک در یک حمله هوایی به مدرسه‌ای در میناب، ایران کشته شدند.\n"
             "ما یاد آنها را گرامی می‌داریم و برای صلح مبارزه می‌کنیم.\n\n"
             "📢 به کانال ما بپیوندید: https://t.me/people4peace\n"
             "🤖 از طریق ربات ما اقدام کنید (پین شده در کانال)\n\n"
@@ -1138,7 +1281,7 @@ TRANSLATIONS = {
         "en": (
             "🔥 <b>March 28 Twitter Storm — One Month Since Minab</b>\n\n"
             "On February 28, an airstrike hit a school in Minab, Iran — "
-            "killing 168 children. One month later, the world is moving on.\n\n"
+            "killing 120 children. One month later, the world is moving on.\n\n"
             "<b>We won't let that happen.</b>\n\n"
             "📅 <b>When:</b> March 28, 1 PM UTC\n"
             "(🇺🇸 8 AM ET · 🇪🇺 2 PM CET · 🇮🇷 4:30 PM IRST)\n\n"
@@ -1147,14 +1290,14 @@ TRANSLATIONS = {
             "• Or write your own using the hashtags below\n"
             "• Retweet and reply to amplify each other\n\n"
             "#️⃣ <b>Hashtags:</b>\n"
-            "<code>#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar</code>\n\n"
+            "<code>#JusticeForMinabChildren #OneMonthMinab #120Children #StopTheWar</code>\n\n"
             "🤖 Start → @peopleforpeacebot\n"
             "📢 Channel → @people4peace"
         ),
         "fa": (
             "🔥 <b>طوفان توییتری ۲۸ مارس — یک ماه پس از میناب</b>\n\n"
             "۹ اسفند، یک حمله هوایی به مدرسه‌ای در میناب، ایران — "
-            "۱۶۸ کودک را کشت. یک ماه بعد، دنیا دارد فراموش می‌کند.\n\n"
+            "۱۲۰ کودک را کشت. یک ماه بعد، دنیا دارد فراموش می‌کند.\n\n"
             "<b>ما اجازه نمی‌دهیم.</b>\n\n"
             "📅 <b>زمان:</b> ۲۸ مارس، ساعت ۱ ظهر UTC\n"
             "(🇮🇷 ۴:۳۰ عصر ایران · 🇪🇺 ۲ ظهر اروپا · 🇺🇸 ۸ صبح آمریکا)\n\n"
@@ -1163,7 +1306,7 @@ TRANSLATIONS = {
             "• یا خودتان با هشتگ‌های زیر بنویسید\n"
             "• ریتوییت و ریپلای کنید تا همدیگر را تقویت کنید\n\n"
             "#️⃣ <b>هشتگ‌ها:</b>\n"
-            "<code>#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar</code>\n\n"
+            "<code>#JusticeForMinabChildren #OneMonthMinab #120Children #StopTheWar</code>\n\n"
             "🤖 شروع → @peopleforpeacebot\n"
             "📢 کانال → @people4peace"
         ),
@@ -1179,7 +1322,7 @@ TRANSLATIONS = {
             "• أو اكتب تغريدتك باستخدام الهاشتاغات أدناه\n"
             "• أعد التغريد والرد لتضخيم بعضكم البعض\n\n"
             "#️⃣ <b>الهاشتاغات:</b>\n"
-            "<code>#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar</code>\n\n"
+            "<code>#JusticeForMinabChildren #OneMonthMinab #120Children #StopTheWar</code>\n\n"
             "🤖 ابدأ → @peopleforpeacebot\n"
             "📢 القناة → @people4peace"
         ),
@@ -1209,9 +1352,9 @@ TRANSLATIONS = {
         "ar": "تريد تغريدة أخرى؟ اضغط أدناه 👇",
     },
     "twitter_storm_hashtags": {
-        "en": "#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar",
-        "fa": "#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar",
-        "ar": "#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar",
+        "en": "#JusticeForMinabChildren #OneMonthMinab #120Children #StopTheWar",
+        "fa": "#JusticeForMinabChildren #OneMonthMinab #120Children #StopTheWar",
+        "ar": "#JusticeForMinabChildren #OneMonthMinab #120Children #StopTheWar",
     },
     "twitter_storm_countdown": {
         "en": "⏰ {days} days until the Twitter Storm!",
@@ -1222,7 +1365,7 @@ TRANSLATIONS = {
         "en": (
             "📢 <b>One Week Until the Twitter Storm!</b>\n\n"
             "March 28 · 1 PM UTC\n"
-            "One month since Minab. 168 children.\n\n"
+            "One month since Minab. 120 children.\n\n"
             "Prepare your tweets, rally your network, and let's make noise together.\n\n"
             "🤖 Get ready-made tweets: @peopleforpeacebot\n"
             "#JusticeForMinabChildren #OneMonthMinab"
@@ -1230,7 +1373,7 @@ TRANSLATIONS = {
         "fa": (
             "📢 <b>یک هفته تا طوفان توییتری!</b>\n\n"
             "۲۸ مارس · ساعت ۱ ظهر UTC\n"
-            "یک ماه از میناب. ۱۶۸ کودک.\n\n"
+            "یک ماه از میناب. ۱۲۰ کودک.\n\n"
             "توییت‌هایتان رو آماده کنید، شبکه‌تان رو بسیج کنید و با هم صدا بشیم.\n\n"
             "🤖 توییت‌های آماده: @peopleforpeacebot\n"
             "#عدالت_برای_کودکان_میناب #یک_ماه_میناب"
@@ -1248,7 +1391,7 @@ TRANSLATIONS = {
         "en": (
             "🚨 <b>TOMORROW: Twitter Storm!</b>\n\n"
             "March 28 · 1 PM UTC\n\n"
-            "168 children. One month. Zero accountability.\n"
+            "120 children. One month. Zero accountability.\n"
             "Tomorrow we change that.\n\n"
             "Set your alarm. Prepare your tweets.\n"
             "🤖 @peopleforpeacebot has 12 ready-to-post tweets.\n\n"
@@ -1257,7 +1400,7 @@ TRANSLATIONS = {
         "fa": (
             "🚨 <b>فردا: طوفان توییتری!</b>\n\n"
             "۲۸ مارس · ساعت ۱ ظهر UTC\n\n"
-            "۱۶۸ کودک. یک ماه. صفر پاسخگویی.\n"
+            "۱۲۰ کودک. یک ماه. صفر پاسخگویی.\n"
             "فردا این رو تغییر می‌دهیم.\n\n"
             "آلارم بذارید. توییت‌هایتان رو آماده کنید.\n"
             "🤖 @peopleforpeacebot ۱۲ توییت آماده دارد.\n\n"
@@ -1278,15 +1421,15 @@ TRANSLATIONS = {
             "⚡ <b>IT'S TIME! Twitter Storm is LIVE!</b>\n\n"
             "Go go go! 🚀\n\n"
             "Tweet NOW. Retweet everything. Tag everyone.\n"
-            "168 children deserve to be heard.\n\n"
+            "120 children deserve to be heard.\n\n"
             "🤖 Get tweets: @peopleforpeacebot\n"
-            "#JusticeForMinabChildren #OneMonthMinab #168Children #StopTheWar"
+            "#JusticeForMinabChildren #OneMonthMinab #120Children #StopTheWar"
         ),
         "fa": (
             "⚡ <b>وقتشه! طوفان توییتری شروع شد!</b>\n\n"
             "بزن بریم! 🚀\n\n"
             "الان توییت بزنید. همه رو ریتوییت کنید. همه رو تگ کنید.\n"
-            "۱۶۸ کودک حق دارند شنیده شوند.\n\n"
+            "۱۲۰ کودک حق دارند شنیده شوند.\n\n"
             "🤖 توییت بگیرید: @peopleforpeacebot\n"
             "#عدالت_برای_کودکان_میناب #یک_ماه_میناب #۱۶۸کودک #جنگ_را_متوقف_کنید"
         ),
@@ -1304,17 +1447,17 @@ TRANSLATIONS = {
     "sharing_hashtags": {
         "en": (
             "📋 <b>Use these hashtags:</b>\n"
-            "<code>#JusticeForMinabChildren #MinabSchool #168Children "
+            "<code>#JusticeForMinabChildren #MinabSchool #120Children "
             "#HandsOffIran #IStandWithIran #StopTheWar</code>"
         ),
         "fa": (
             "📋 <b>از این هشتگ‌ها استفاده کنید:</b>\n"
-            "<code>#JusticeForMinabChildren #MinabSchool #168Children "
+            "<code>#JusticeForMinabChildren #MinabSchool #120Children "
             "#HandsOffIran #IStandWithIran #StopTheWar</code>"
         ),
         "ar": (
             "📋 <b>استخدم هذه الهاشتاغات:</b>\n"
-            "<code>#JusticeForMinabChildren #MinabSchool #168Children "
+            "<code>#JusticeForMinabChildren #MinabSchool #120Children "
             "#HandsOffIran #IStandWithIran #StopTheWar</code>"
         ),
     },
@@ -1388,7 +1531,7 @@ TRANSLATIONS = {
     },
     "invite_memorial_caption": {
         "en": (
-            "🕯 168 children were killed in the Minab school attack.\n\n"
+            "🕯 120 children were killed in the Minab school attack.\n\n"
             "Their names have been identified. Their photos collected.\n"
             "We're keeping their case alive.\n\n"
             "🤲 You can help — just 2 minutes:\n"
@@ -1399,7 +1542,7 @@ TRANSLATIONS = {
             "#JusticeForMinab #MinabSchoolMassacre"
         ),
         "fa": (
-            "🕯 ۱۶۸ کودک در حمله به مدرسه میناب کشته شدند.\n\n"
+            "🕯 ۱۲۰ کودک در حمله به مدرسه میناب کشته شدند.\n\n"
             "نام‌هایشان مشخص شده. عکس‌هایشان جمع‌آوری شده.\n"
             "ما داریم پرونده‌شان رو زنده نگه می‌داریم.\n\n"
             "🤲 شما هم می‌تونید کمک کنید — فقط ۲ دقیقه:\n"
@@ -1608,13 +1751,13 @@ TRANSLATIONS = {
     "simplified_welcome": {
         "en": (
             "🕊️ *Justice for Minab*\n\n"
-            "On February 28, 2026, 168 children were killed in their school.\n"
+            "On February 28, 2026, 120 children were killed in their school.\n"
             "We are uniting to ensure their stories are heard and justice is served.\n\n"
             "The mission is clear: Comment on key posts with our hashtags — that's it."
         ),
         "fa": (
             "🕊️ *عدالت برای میناب*\n\n"
-            "در ۹ اسفند ۱۴۰۴، ۱۶۸ کودک در مدرسه خود کشته شدند.\n"
+            "در ۹ اسفند ۱۴۰۴، ۱۲۰ کودک در مدرسه خود کشته شدند.\n"
             "ما متحد می‌شویم تا مطمئن شویم صدای آنها شنیده می‌شود و عدالت برقرار می‌گردد.\n\n"
             "ماموریت روشن است: روی پست‌های هدف با هشتگ‌های ما کامنت بگذارید — همین."
         ),
@@ -1775,19 +1918,19 @@ TRANSLATIONS = {
     "simplified_comment_en": {
         "en": (
             "📋 *Ready-Made Comment (EN)*\n\n"
-            "`We must not look away. 168 children were killed in their classroom in Minab. "
+            "`We must not look away. 120 children were killed in their classroom in Minab. "
             "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre`\n\n"
             "👉 Tap the text above to copy it!"
         ),
         "fa": (
             "📋 *کامنت آماده (انگلیسی)*\n\n"
-            "`We must not look away. 168 children were killed in their classroom in Minab. "
+            "`We must not look away. 120 children were killed in their classroom in Minab. "
             "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre`\n\n"
             "👉 برای کپی کردن روی متن بالا ضربه بزنید!"
         ),
         "ar": (
             "📋 *تعليق جاهز (انجليزي)*\n\n"
-            "`We must not look away. 168 children were killed in their classroom in Minab. "
+            "`We must not look away. 120 children were killed in their classroom in Minab. "
             "Hold the perpetrators accountable #JusticeForMinab #MinabSchoolMassacre`\n\n"
             "👉 اضغط على النص أعلاه لنسخه!"
         ),
@@ -1795,19 +1938,19 @@ TRANSLATIONS = {
     "simplified_comment_fa": {
         "en": (
             "📋 *Ready-Made Comment (FA)*\n\n"
-            "`ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
+            "`ما نباید روی برگردانیم. ۱۲۰ کودک در کلاس درس خود در میناب کشته شدند. "
             "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre`\n\n"
             "👉 Tap the text above to copy it!"
         ),
         "fa": (
             "📋 *کامنت آماده (فارسی)*\n\n"
-            "`ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
+            "`ما نباید روی برگردانیم. ۱۲۰ کودک در کلاس درس خود در میناب کشته شدند. "
             "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre`\n\n"
             "👉 برای کپی کردن روی متن بالا ضربه بزنید!"
         ),
         "ar": (
             "📋 *تعليق جاهز (فارسي)*\n\n"
-            "`ما نباید روی برگردانیم. ۱۶۸ کودک در کلاس درس خود در میناب کشته شدند. "
+            "`ما نباید روی برگردانیم. ۱۲۰ کودک در کلاس درس خود در میناب کشته شدند. "
             "عاملین باید پاسخگو باشند #JusticeForMinab #MinabSchoolMassacre`\n\n"
             "👉 اضغط على النص أعلاه لنسخه!"
         ),
@@ -1889,28 +2032,24 @@ def t(key: str, lang: str = 'en') -> str:
 
 
 def get_main_menu_inline(lang: str = 'en'):
-    """Get the main menu as InlineKeyboardMarkup.
-
-    Layout (5 buttons):
-      ✊ My Campaigns
-      📢 Share Channel
-      🔥 Twitter Storm
-      🌍 Language  |  ℹ️ Help
-    """
+    """Get the official PFPJ ry main menu as InlineKeyboardMarkup."""
     from telegram import InlineKeyboardButton, InlineKeyboardMarkup
     keyboard = [
         [
-            InlineKeyboardButton(t('btn_my_campaigns', lang), callback_data='menu_campaigns'),
+            InlineKeyboardButton(t('btn_memorial', lang), callback_data='menu_memorial'),
+            InlineKeyboardButton(t('btn_multimedia', lang), callback_data='menu_multimedia'),
         ],
         [
-            InlineKeyboardButton(t('btn_invite_friends', lang), callback_data='menu_invite'),
+            InlineKeyboardButton(t('btn_evidence', lang), callback_data='menu_evidence'),
+            InlineKeyboardButton(t('btn_actions_events', lang), callback_data='menu_events'),
         ],
         [
-            InlineKeyboardButton(t('btn_storm', lang), callback_data='menu_storm'),
+            InlineKeyboardButton(t('btn_missions', lang), callback_data='menu_campaigns'),
+            InlineKeyboardButton(t('btn_about_pfp', lang), callback_data='menu_about'),
         ],
         [
+            InlineKeyboardButton(t('btn_profile', lang), callback_data='menu_profile'),
             InlineKeyboardButton(t('btn_language', lang), callback_data='menu_language'),
-            InlineKeyboardButton(t('btn_help', lang), callback_data='menu_help'),
         ],
     ]
     return InlineKeyboardMarkup(keyboard)
@@ -1919,7 +2058,12 @@ def get_main_menu_inline(lang: str = 'en'):
 def get_back_to_menu_inline(lang: str = 'en'):
     """Get a single 'Back to Menu' inline button."""
     from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-    label = {'en': '🏠 Main Menu', 'fa': '🏠 منوی اصلی', 'ar': '🏠 القائمة الرئيسية'}
+    label = {
+        'fi': '🏠 Päävalikko',
+        'en': '🏠 Main Menu',
+        'fa': '🏠 منوی اصلی',
+        'ar': '🏠 القائمة الرئيسية'
+    }
     return InlineKeyboardMarkup([
         [InlineKeyboardButton(label.get(lang, label['en']), callback_data='menu_main')]
     ])
@@ -1928,28 +2072,36 @@ def get_back_to_menu_inline(lang: str = 'en'):
 def get_keyboard_buttons(lang: str = 'en') -> list[list[str]]:
     """Get the main ReplyKeyboard buttons in the given language."""
     return [
-        [t('btn_my_campaigns', lang)],
-        [t('btn_invite_friends', lang)],
-        [t('btn_language', lang), t('btn_help', lang)],
+        [t('btn_memorial', lang), t('btn_multimedia', lang)],
+        [t('btn_evidence', lang), t('btn_actions_events', lang)],
+        [t('btn_missions', lang), t('btn_about_pfp', lang)],
+        [t('btn_profile', lang), t('btn_language', lang)],
     ]
 
 
 def get_button_routes(lang: str = 'en') -> dict[str, str]:
-    """Get button text → route mapping for the given language."""
+    """Get button text -> route mapping for the given language."""
     return {
+        t('btn_memorial', lang): '_route_memorial',
+        t('btn_multimedia', lang): '_route_multimedia',
+        t('btn_evidence', lang): '_route_evidence',
+        t('btn_actions_events', lang): '_route_events',
+        t('btn_missions', lang): '_route_campaigns',
+        t('btn_about_pfp', lang): '_route_about',
+        t('btn_profile', lang): '_route_profile',
+        t('btn_language', lang): '_route_language',
+        t('btn_help', lang): '_route_help',
+        # Legacy mappings
         t('btn_campaigns', lang): '_route_campaigns',
         t('btn_my_campaigns', lang): '_route_campaigns',
         t('btn_tasks', lang): '_route_tasks',
         t('btn_progress', lang): '_route_profile',
-
-        t('btn_help', lang): '_route_help',
-        t('btn_profile', lang): '_route_profile',
-        t('btn_language', lang): '_route_language',
-        t('btn_invite_friends', lang): '_route_invite',
+        t('btn_storm', lang): '_route_events',
     }
 
 
-# All possible button texts across all languages (for routing)
+# All possible button texts across all 4 supported languages (for routing)
 ALL_BUTTON_ROUTES: dict[str, str] = {}
-for _lang in ('en', 'fa', 'ar'):
+for _lang in ('fi', 'en', 'fa', 'ar'):
     ALL_BUTTON_ROUTES.update(get_button_routes(_lang))
+

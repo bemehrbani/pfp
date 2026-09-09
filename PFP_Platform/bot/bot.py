@@ -120,6 +120,14 @@ class PFPCampaignBot:
             # Register command handlers
             self.application.add_handler(CommandHandler("start", start_command))
             self.application.add_handler(CommandHandler("help", help_command))
+            self.application.add_handler(CommandHandler("memorial", memorial_menu_handler))
+            self.application.add_handler(CommandHandler("multimedia", multimedia_menu_handler))
+            self.application.add_handler(CommandHandler("documentaries", multimedia_menu_handler))
+            self.application.add_handler(CommandHandler("evidence", evidence_menu_handler))
+            self.application.add_handler(CommandHandler("forensics", evidence_menu_handler))
+            self.application.add_handler(CommandHandler("events", events_menu_handler))
+            self.application.add_handler(CommandHandler("actions", events_menu_handler))
+            self.application.add_handler(CommandHandler("about", about_pfp_handler))
             self.application.add_handler(CommandHandler("campaigns", campaigns_command))
             self.application.add_handler(CommandHandler("joincampaign", joincampaign_command))
             self.application.add_handler(CommandHandler("tasks", tasks_command))
@@ -140,6 +148,22 @@ class PFPCampaignBot:
             self.application.add_handler(
                 CallbackQueryHandler(language_callback_handler, pattern=r"^lang_")
             )
+
+            # Register Memorial callback handlers
+            self.application.add_handler(CallbackQueryHandler(memorial_candle_handler, pattern=r"^memorial_candle$"))
+            self.application.add_handler(CallbackQueryHandler(memorial_pagination_handler, pattern=r"^memorial_page_"))
+            self.application.add_handler(CallbackQueryHandler(victim_detail_handler, pattern=r"^victim_"))
+
+            # Register Multimedia callback handlers
+            self.application.add_handler(CallbackQueryHandler(multimedia_category_handler, pattern=r"^media_cat_"))
+            self.application.add_handler(CallbackQueryHandler(media_detail_handler, pattern=r"^media_item_"))
+
+            # Register Evidence callback handlers
+            self.application.add_handler(CallbackQueryHandler(evidence_chapter_handler, pattern=r"^ev_ch_"))
+
+            # Register Events & Actions callback handlers
+            self.application.add_handler(CallbackQueryHandler(event_detail_handler, pattern=r"^event_helsinki_detail$"))
+            self.application.add_handler(CallbackQueryHandler(event_do_rsvp_handler, pattern=r"^event_do_rsvp$"))
 
             # Register callback query handlers
             for handler in campaign_handlers:

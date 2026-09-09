@@ -23,6 +23,23 @@ from .registration import (
 )
 from .simplified import simplified_handlers
 
+# New PFPJ ry core pillar handlers
+from .memorial import (
+    memorial_menu_handler, memorial_candle_handler,
+    memorial_pagination_handler, victim_detail_handler
+)
+from .multimedia import (
+    multimedia_menu_handler, multimedia_category_handler,
+    media_detail_handler
+)
+from .evidence import (
+    evidence_menu_handler, evidence_chapter_handler
+)
+from .actions_events import (
+    events_menu_handler, event_detail_handler,
+    event_do_rsvp_handler, about_pfp_handler
+)
+
 # Export handler functions
 __all__ = [
     # Command handlers
@@ -68,4 +85,25 @@ __all__ = [
     'text_message_handler',
     'unknown_command_handler',
     'simplified_handlers',
+
+    # Memorial handlers
+    'memorial_menu_handler',
+    'memorial_candle_handler',
+    'memorial_pagination_handler',
+    'victim_detail_handler',
+
+    # Multimedia handlers
+    'multimedia_menu_handler',
+    'multimedia_category_handler',
+    'media_detail_handler',
+
+    # Evidence handlers
+    'evidence_menu_handler',
+    'evidence_chapter_handler',
+
+    # Actions & Events handlers
+    'events_menu_handler',
+    'event_detail_handler',
+    'event_do_rsvp_handler',
+    'about_pfp_handler',
 ]

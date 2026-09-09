@@ -253,6 +253,24 @@ async def menu_callback_handler(update: Update, context: CallbackContext):
             reply_markup=get_main_menu_inline(lang),
             parse_mode='Markdown',
         )
+    elif action == 'menu_memorial':
+        from handlers.memorial import memorial_menu_handler
+        await memorial_menu_handler(update, context)
+    elif action == 'menu_multimedia':
+        from handlers.multimedia import multimedia_menu_handler
+        await multimedia_menu_handler(update, context)
+    elif action == 'menu_evidence':
+        from handlers.evidence import evidence_menu_handler
+        await evidence_menu_handler(update, context)
+    elif action == 'menu_events':
+        from handlers.actions_events import events_menu_handler
+        await events_menu_handler(update, context)
+    elif action == 'menu_about':
+        from handlers.actions_events import about_pfp_handler
+        await about_pfp_handler(update, context)
+    elif action == 'menu_profile':
+        from handlers.profile import profile_command
+        await profile_command(update, context)
     elif action == 'menu_campaigns':
         # Show user's joined campaigns (task-first flow)
         session, _ = await state_manager.get_or_create_session(update, context)
@@ -268,23 +286,26 @@ async def menu_callback_handler(update: Update, context: CallbackContext):
         await _handle_help(query, lang)
     elif action == 'menu_language':
         await query.message.reply_text(
-            t('language_prompt', lang),
+            t('choose_language', lang),
             reply_markup=_get_language_keyboard(),
             parse_mode='Markdown',
         )
     elif action == 'menu_storm':
-        from handlers.storm import storm_command
-        await storm_command(update, context)
+        from handlers.actions_events import events_menu_handler
+        await events_menu_handler(update, context)
     else:
         logger.warning(f"Unknown menu action: {action}")
 
 
 def _get_language_keyboard():
-    """Build the language selection inline keyboard."""
+    """Build the 4-language selection inline keyboard."""
     from telegram import InlineKeyboardButton, InlineKeyboardMarkup
     return InlineKeyboardMarkup([
         [
+            InlineKeyboardButton("🇫🇮 Suomi", callback_data="lang_fi"),
             InlineKeyboardButton("🇬🇧 English", callback_data="lang_en"),
+        ],
+        [
             InlineKeyboardButton("🇮🇷 فارسی", callback_data="lang_fa"),
             InlineKeyboardButton("🇸🇦 العربية", callback_data="lang_ar"),
         ]
