@@ -1,115 +1,112 @@
-{
-  "sources": [
-    {
-      "id": "EVD-SAT-001",
-      "title": "Satellite Imagery and Spatial Geo-Partitioning Analysis (2013-2026)",
-      "outlet": "Planet Labs / Google Earth Historical Archive",
-      "url": "https://pfp.ngo/evidence/EVD-SAT-001",
-      "publication_date": "2026-03-05",
-      "tier": "Tier 1",
-      "reliability_score": 0.99,
-      "notes": "High-resolution satellite imagery confirming physical concrete wall boundary built in 2016 separating school compound from naval base.",
-      "archive_hash": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0"
-    },
-    {
-      "id": "EVD-MUN-002",
-      "title": "Munitions Forensic Analysis: BGM-109 Tomahawk Cruise Missile Debris",
-      "outlet": "Independent Weapons Research & Bellingcat",
-      "url": "https://pfp.ngo/evidence/EVD-MUN-002",
-      "publication_date": "2026-03-08",
-      "tier": "Tier 1",
-      "reliability_score": 0.98,
-      "notes": "Physical serial numbers and aerodynamic fin debris recovered at strike crater matching US Navy Tomahawk Block IV/V specifications.",
-      "archive_hash": "b2c3d4e5f6a7890123456789abcdef0123456789abcdef0123456789abcdef1"
-    },
-    {
-      "id": "EVD-LAUNCH-003",
-      "title": "Launch Platform Attribution & Strike Vector Tracking",
-      "outlet": "Operation Epic Fury Operational Assessment",
-      "url": "https://pfp.ngo/evidence/EVD-LAUNCH-003",
-      "publication_date": "2026-03-12",
-      "tier": "Tier 1",
-      "reliability_score": 0.95,
-      "notes": "Trajectory and carrier strike group positioning in the Arabian Sea verifying launch origin from US naval vessels.",
-      "archive_hash": "c3d4e5f6a7b890123456789abcdef0123456789abcdef0123456789abcdef2"
-    },
-    {
-      "id": "EVD-CENTCOM-004",
-      "title": "CENTCOM Preliminary Investigation Assessment (15-6 Inquiry Summary)",
-      "outlet": "US Central Command / DoD Releases",
-      "url": "https://pfp.ngo/evidence/EVD-CENTCOM-004",
-      "publication_date": "2026-03-15",
-      "tier": "Tier 1",
-      "reliability_score": 0.96,
-      "notes": "Internal acknowledgment of civilian strike resulting from outdated 2013 target list coordinates.",
-      "archive_hash": "d4e5f6a7b8c90123456789abcdef0123456789abcdef0123456789abcdef3"
-    },
-    {
-      "id": "EVD-VIC-005",
-      "title": "Official Identity & Memorial Registry Database of Minab School Victims",
-      "outlet": "People for Peace & Justice ry / Minab Governor's Office",
-      "url": "https://peopleforpeace.live/data.html",
-      "publication_date": "2026-03-18",
-      "tier": "Tier 1",
-      "reliability_score": 0.99,
-      "notes": "Comprehensive verified victim registry with facial image correlation, maternal linkages, and DNA confirmation.",
-      "archive_hash": "e5f6a7b8c9d0123456789abcdef0123456789abcdef0123456789abcdef4"
-    },
-    {
-      "id": "SRC-LMO-001",
-      "title": "Hormozgan Forensic DNA Laboratory Final Genetic Audit",
-      "outlet": "Legal Medicine Organization of Hormozgan (lmo.ir)",
-      "url": "https://hormozgan.lmo.ir/reports/minab-1404",
-      "publication_date": "2026-04-10",
-      "tier": "Tier 1",
-      "reliability_score": 0.99,
-      "notes": "STR genomic typing of 312 biological samples against family reference blood samples.",
-      "archive_hash": "f6a7b8c9d0e123456789abcdef0123456789abcdef0123456789abcdef5"
-    },
-    {
-      "id": "SRC-PROS-002",
-      "title": "Minab Prosecutor Official Judicial Indictment & Casualty Toll",
-      "outlet": "Minab General and Revolutionary Prosecutor's Office",
-      "url": "https://dadgostari-hr.ir/news/minab-prosecutor-statement",
-      "publication_date": "2026-04-12",
-      "tier": "Tier 1",
-      "reliability_score": 0.99,
-      "notes": "Judicial certification of 156 total martyrs, including 120 students, 26 educators, 7 parents, 1 driver, 1 technician, 1 fetus.",
-      "archive_hash": "a7b8c9d0e1f23456789abcdef0123456789abcdef0123456789abcdef6"
-    },
-    {
-      "id": "SRC-BONYAD-003",
-      "title": "Bonyad Shahid Hormozgan Martyrdom Dossiers & Cemetery Allocation",
-      "outlet": "Navid Shahed Hormozgan / Bonyad Shahid",
-      "url": "https://hormozgan.navideshahed.com/fa/news/minab-martyrs",
-      "publication_date": "2026-03-20",
-      "tier": "Tier 1",
-      "reliability_score": 0.98,
-      "notes": "Official state recognition of martyr status and burial records in Minab and Rafsanjan cemeteries.",
-      "archive_hash": "b8c9d0e1f2a3456789abcdef0123456789abcdef0123456789abcdef7"
-    },
-    {
-      "id": "SRC-GYM-004",
-      "title": "Memorial Statement on Martyred Student Athletes and Gymnasts",
-      "outlet": "Iran Gymnastics Federation / Asian Gymnastics Union",
-      "url": "https://irgymnastics.ir/news/minab-gymnasts-memorial",
-      "publication_date": "2026-03-03",
-      "tier": "Tier 3",
-      "reliability_score": 0.97,
-      "notes": "Official condolences and documentation for 6 young gymnasts and skateboarders killed in the strike.",
-      "archive_hash": "c9d0e1f2a3b456789abcdef0123456789abcdef0123456789abcdef8"
-    },
-    {
-      "id": "SRC-IRCS-005",
-      "title": "Iranian Red Crescent Society Initial Search & Rescue Triage Report",
-      "outlet": "Iranian Red Crescent Society (rcs.ir)",
-      "url": "https://rcs.ir/reports/minab-relief-operation",
-      "publication_date": "2026-03-01",
-      "tier": "Tier 3",
-      "reliability_score": 0.96,
-      "notes": "First responder casualty logs, injured hospitalizations at Hazrat Abolfazl Hospital, and double-tap rescue hazard records.",
-      "archive_hash": "d0e1f2a3b4c56789abcdef0123456789abcdef0123456789abcdef9"
-    }
-  ],
-  "total": 10
-}
+[
+  {
+    "id": "EVD-SAT-001",
+    "title": "Satellite Imagery and Spatial Geo-Partitioning Analysis (2013-2026)",
+    "outlet": "Planet Labs / Google Earth Historical Archive",
+    "url": "https://pfp.ngo/evidence/EVD-SAT-001",
+    "publication_date": "2026-03-05",
+    "tier": "Tier 1",
+    "reliability_score": 0.99,
+    "notes": "High-resolution satellite imagery confirming physical concrete wall boundary built in 2016 separating school compound from naval base.",
+    "archive_hash": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0"
+  },
+  {
+    "id": "EVD-MUN-002",
+    "title": "Munitions Forensic Analysis: BGM-109 Tomahawk Cruise Missile Debris",
+    "outlet": "Independent Weapons Research & Bellingcat",
+    "url": "https://pfp.ngo/evidence/EVD-MUN-002",
+    "publication_date": "2026-03-08",
+    "tier": "Tier 1",
+    "reliability_score": 0.98,
+    "notes": "Physical serial numbers and aerodynamic fin debris recovered at strike crater matching US Navy Tomahawk Block IV/V specifications.",
+    "archive_hash": "b2c3d4e5f6a7890123456789abcdef0123456789abcdef0123456789abcdef1"
+  },
+  {
+    "id": "EVD-LAUNCH-003",
+    "title": "Launch Platform Attribution & Strike Vector Tracking",
+    "outlet": "Operation Epic Fury Operational Assessment",
+    "url": "https://pfp.ngo/evidence/EVD-LAUNCH-003",
+    "publication_date": "2026-03-12",
+    "tier": "Tier 1",
+    "reliability_score": 0.95,
+    "notes": "Trajectory and carrier strike group positioning in the Arabian Sea verifying launch origin from US naval vessels.",
+    "archive_hash": "c3d4e5f6a7b890123456789abcdef0123456789abcdef0123456789abcdef2"
+  },
+  {
+    "id": "EVD-CENTCOM-004",
+    "title": "CENTCOM Preliminary Investigation Assessment (15-6 Inquiry Summary)",
+    "outlet": "US Central Command / DoD Releases",
+    "url": "https://pfp.ngo/evidence/EVD-CENTCOM-004",
+    "publication_date": "2026-03-15",
+    "tier": "Tier 1",
+    "reliability_score": 0.96,
+    "notes": "Internal acknowledgment of civilian strike resulting from outdated 2013 target list coordinates.",
+    "archive_hash": "d4e5f6a7b8c90123456789abcdef0123456789abcdef0123456789abcdef3"
+  },
+  {
+    "id": "EVD-VIC-005",
+    "title": "Official Identity & Memorial Registry Database of Minab School Victims",
+    "outlet": "People for Peace & Justice ry / Minab Governor's Office",
+    "url": "https://peopleforpeace.live/data.html",
+    "publication_date": "2026-03-18",
+    "tier": "Tier 1",
+    "reliability_score": 0.99,
+    "notes": "Comprehensive verified victim registry with facial image correlation, maternal linkages, and DNA confirmation.",
+    "archive_hash": "e5f6a7b8c9d0123456789abcdef0123456789abcdef0123456789abcdef4"
+  },
+  {
+    "id": "SRC-LMO-001",
+    "title": "Hormozgan Forensic DNA Laboratory Final Genetic Audit",
+    "outlet": "Legal Medicine Organization of Hormozgan (lmo.ir)",
+    "url": "https://hormozgan.lmo.ir/reports/minab-1404",
+    "publication_date": "2026-04-10",
+    "tier": "Tier 1",
+    "reliability_score": 0.99,
+    "notes": "STR genomic typing of 312 biological samples against family reference blood samples.",
+    "archive_hash": "f6a7b8c9d0e123456789abcdef0123456789abcdef0123456789abcdef5"
+  },
+  {
+    "id": "SRC-PROS-002",
+    "title": "Minab Prosecutor Official Judicial Indictment & Casualty Toll",
+    "outlet": "Minab General and Revolutionary Prosecutor's Office",
+    "url": "https://dadgostari-hr.ir/news/minab-prosecutor-statement",
+    "publication_date": "2026-04-12",
+    "tier": "Tier 1",
+    "reliability_score": 0.99,
+    "notes": "Judicial certification of 156 total martyrs, including 120 students, 26 educators, 7 parents, 1 driver, 1 technician, 1 fetus.",
+    "archive_hash": "a7b8c9d0e1f23456789abcdef0123456789abcdef0123456789abcdef6"
+  },
+  {
+    "id": "SRC-BONYAD-003",
+    "title": "Bonyad Shahid Hormozgan Martyrdom Dossiers & Cemetery Allocation",
+    "outlet": "Navid Shahed Hormozgan / Bonyad Shahid",
+    "url": "https://hormozgan.navideshahed.com/fa/news/minab-martyrs",
+    "publication_date": "2026-03-20",
+    "tier": "Tier 1",
+    "reliability_score": 0.98,
+    "notes": "Official state recognition of martyr status and burial records in Minab and Rafsanjan cemeteries.",
+    "archive_hash": "b8c9d0e1f2a3456789abcdef0123456789abcdef0123456789abcdef7"
+  },
+  {
+    "id": "SRC-GYM-004",
+    "title": "Memorial Statement on Martyred Student Athletes and Gymnasts",
+    "outlet": "Iran Gymnastics Federation / Asian Gymnastics Union",
+    "url": "https://irgymnastics.ir/news/minab-gymnasts-memorial",
+    "publication_date": "2026-03-03",
+    "tier": "Tier 3",
+    "reliability_score": 0.97,
+    "notes": "Official condolences and documentation for 6 young gymnasts and skateboarders killed in the strike.",
+    "archive_hash": "c9d0e1f2a3b456789abcdef0123456789abcdef0123456789abcdef8"
+  },
+  {
+    "id": "SRC-IRCS-005",
+    "title": "Iranian Red Crescent Society Initial Search & Rescue Triage Report",
+    "outlet": "Iranian Red Crescent Society (rcs.ir)",
+    "url": "https://rcs.ir/reports/minab-relief-operation",
+    "publication_date": "2026-03-01",
+    "tier": "Tier 3",
+    "reliability_score": 0.96,
+    "notes": "First responder casualty logs, injured hospitalizations at Hazrat Abolfazl Hospital, and double-tap rescue hazard records.",
+    "archive_hash": "d0e1f2a3b4c56789abcdef0123456789abcdef0123456789abcdef9"
+  }
+]

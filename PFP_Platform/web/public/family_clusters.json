@@ -1,194 +1,184 @@
-{
-  "family_clusters": [
-    {
-      "cluster_id": "FAM-ZAKERI",
-      "family_surname_en": "Zakeri",
-      "family_surname_fa": "ذاکری",
-      "mother_id": "moth-fatemeh-zakeri",
-      "total_killed": 6,
-      "total_injured": 0,
-      "member_ids": [
-        "asra-zakeri",
-        "salma-zakeri",
-        "asma-zakeri",
-        "reyhaneh-zakeri",
-        "sina-zakeri",
-        "mohana-zarei"
-      ],
-      "description": "Extensive Minab family cluster suffering the highest single-family casualty count, losing six young girls and boys across multiple grades.",
-      "neighborhood_or_residence": "Central Minab District, Hormozgan",
-      "sources": [
-        "EVD-VIC-005",
-        "SRC-PROS-002"
-      ]
-    },
-    {
-      "cluster_id": "FAM-SADEGHI",
-      "family_surname_en": "Solhizadeh-Sadeghi",
-      "family_surname_fa": "صلحی‌زاده - صادقی",
-      "mother_id": "moth-neda-solhizadeh",
-      "total_killed": 2,
-      "total_injured": 1,
-      "member_ids": [
-        "neda-solhizadeh",
-        "hami-sadeghi",
-        "nila-sadeghi"
-      ],
-      "description": "Mother-educator Neda Solhizadeh and her 11-year-old son Hami Sadeghi who died entwined during the strike; survived by 10-year-old daughter Nila.",
-      "neighborhood_or_residence": "Minab Education Quarter / Rafsanjan",
-      "sources": [
-        "EVD-VIC-005",
-        "SRC-BONYAD-003"
-      ]
-    },
-    {
-      "cluster_id": "FAM-SHAHRIYARI",
-      "family_surname_en": "Shahriyari",
-      "family_surname_fa": "شهریاری",
-      "mother_id": "moth-zohreh-shahriyari",
-      "total_killed": 2,
-      "total_injured": 0,
-      "member_ids": [
-        "zohreh-shahriyari",
-        "unborn-fetus-shahriyari"
-      ],
-      "description": "Second-grade teacher Zohreh Shahriyari and her 6-month unborn child Mohammad-Ali, officially certified as two distinct martyrs.",
-      "neighborhood_or_residence": "Minab City Center",
-      "sources": [
-        "SRC-PROS-002",
-        "SRC-LMO-001"
-      ]
-    },
-    {
-      "cluster_id": "FAM-KARYANIPAK",
-      "family_surname_en": "Karyanipak",
-      "family_surname_fa": "کاریانی‌پاک",
-      "mother_id": "moth-karyanipak",
-      "total_killed": 2,
-      "total_injured": 0,
-      "member_ids": [
-        "ali-akbar-karyanipak",
-        "mohammad-ali-karyanipak"
-      ],
-      "description": "Two young brothers, sons of Abdollah Karyanipak, killed together in the morning school wing.",
-      "neighborhood_or_residence": "Karyan Village, Minab County",
-      "sources": [
-        "EVD-VIC-005",
-        "SRC-PROS-002"
-      ]
-    },
-    {
-      "cluster_id": "FAM-AHMADZADEH",
-      "family_surname_en": "Ahmadzadeh",
-      "family_surname_fa": "احمدی‌زاده / احمدزاده",
-      "mother_id": "moth-mohaddeseh-falahat",
-      "total_killed": 3,
-      "total_injured": 0,
-      "member_ids": [
-        "amin-ahmadzade",
-        "athena-ahmadzadeh",
-        "arad-ahmadizadeh"
-      ],
-      "description": "Close-knit household and cousins including young athlete Athena (gymnast), 8-year-old Arad, and Amin Ahmadzadeh.",
-      "neighborhood_or_residence": "Minab City Center",
-      "sources": [
-        "EVD-VIC-005",
-        "SRC-GYM-004",
-        "SRC-LMO-001"
-      ]
-    },
-    {
-      "cluster_id": "FAM-AHMADI",
-      "family_surname_en": "Ahmadi",
-      "family_surname_fa": "احمدی",
-      "mother_id": "moth-ahmadi-siblings",
-      "total_killed": 2,
-      "total_injured": 0,
-      "member_ids": [
-        "sobhan-ahmadi",
-        "hanieh-ahmadi"
-      ],
-      "description": "Young siblings Sobhan and Hanieh Ahmadi; Sobhan was identified by his tightly clutched school textbook.",
-      "neighborhood_or_residence": "Minab Rural District",
-      "sources": [
-        "EVD-VIC-005",
-        "SRC-LMO-001"
-      ]
-    },
-    {
-      "cluster_id": "FAM-RAEISI",
-      "family_surname_en": "Raeisi",
-      "family_surname_fa": "رئیسی",
-      "mother_id": "moth-raeisi-siblings",
-      "total_killed": 2,
-      "total_injured": 0,
-      "member_ids": [
-        "asna-raeisi",
-        "mohammad-hatam-raeisi"
-      ],
-      "description": "Brother and sister, children of Hassan Raeisi, martyred in adjacent ground-floor classrooms.",
-      "neighborhood_or_residence": "Minab County",
-      "sources": [
-        "EVD-VIC-005",
-        "SRC-PROS-002"
-      ]
-    },
-    {
-      "cluster_id": "FAM-BAHRAMI",
-      "family_surname_en": "Bahrami",
-      "family_surname_fa": "بهرامی",
-      "mother_id": "moth-bahrami-cluster",
-      "total_killed": 4,
-      "total_injured": 0,
-      "member_ids": [
-        "zeynab-bahrami",
-        "mohammadayan-bahrami",
-        "zahra-bahrami",
-        "mahna-bahrami"
-      ],
-      "description": "Four children lost across the Bahrami household, including 7-year-old Zahra and young Zeynab Bahrami.",
-      "neighborhood_or_residence": "Minab South District",
-      "sources": [
-        "EVD-VIC-005",
-        "SRC-PROS-002"
-      ]
-    },
-    {
-      "cluster_id": "FAM-NASIRI",
-      "family_surname_en": "Nasiri",
-      "family_surname_fa": "نصیری",
-      "mother_id": "moth-atiyeh-rahinezhad",
-      "total_killed": 0,
-      "total_injured": 0,
-      "member_ids": [
-        "makan-nasiri"
-      ],
-      "description": "Household of 7-year-old gymnast Makan Nasiri, the sole unrecovered victim ('The Unmarked Martyr').",
-      "neighborhood_or_residence": "Minab Sports District",
-      "sources": [
-        "EVD-VIC-005",
-        "SRC-LMO-001",
-        "SRC-GYM-004"
-      ]
-    },
-    {
-      "cluster_id": "FAM-MOLAEI",
-      "family_surname_en": "Molaei",
-      "family_surname_fa": "ملایی",
-      "mother_id": "moth-zahra-molaei-hero",
-      "total_killed": 0,
-      "total_injured": 2,
-      "member_ids": [
-        "mohammad-javad-molaei-surv",
-        "mehgol-molaei-surv"
-      ],
-      "description": "Surviving sibling pair rescued from the collapsing rubble by their mother Zahra Molaei between Strike 1 and Strike 2.",
-      "neighborhood_or_residence": "School Perimeter Quarter, Minab",
-      "sources": [
-        "EVD-VIC-005",
-        "SRC-IRCS-005"
-      ]
-    }
-  ],
-  "total": 10
-}
+[
+  {
+    "cluster_id": "FAM-ZAKERI",
+    "family_surname_en": "Zakeri",
+    "family_surname_fa": "ذاکری",
+    "mother_id": "moth-fatemeh-zakeri",
+    "total_killed": 7,
+    "total_injured": 0,
+    "member_ids": [
+      "asra-zakeri",
+      "salma-zakeri",
+      "reyhaneh-zakeri",
+      "asma-zakeri",
+      "sina-zakeri",
+      "mahdiyeh-zakerikhah",
+      "mohammad-zakeri-parent"
+    ],
+    "description": "Prominent Minab lineage suffering 6+ casualties among elementary school children and adult parent rescuer.",
+    "sources": [
+      "SRC-BONYAD-003",
+      "SRC-LMO-001"
+    ]
+  },
+  {
+    "cluster_id": "FAM-SADEGHI",
+    "family_surname_en": "Solhizadeh-Sadeghi",
+    "family_surname_fa": "صلحی‌زاده / صادقی",
+    "mother_id": "moth-neda-solhizadeh",
+    "total_killed": 3,
+    "total_injured": 1,
+    "member_ids": [
+      "neda-solhizadeh",
+      "hami-sadeghi",
+      "nila-sadeghi",
+      "hamid-sadeghi-parent"
+    ],
+    "description": "Teacher-mother Neda Solhizadeh, father Hamid Sadeghi, and 11-year-old son Hami Sadeghi were martyred; survived by 10-year-old daughter Nila Sadeghi.",
+    "sources": [
+      "EVD-VIC-005",
+      "SRC-BONYAD-003"
+    ]
+  },
+  {
+    "cluster_id": "FAM-SHAHRIYARI",
+    "family_surname_en": "Shahriyari",
+    "family_surname_fa": "شهریاری",
+    "mother_id": "moth-zohreh-shahriyari",
+    "total_killed": 2,
+    "total_injured": 0,
+    "member_ids": [
+      "zohreh-shahriyari",
+      "unborn-fetus-shahriyari"
+    ],
+    "description": "Pregnant teacher Zohreh Shahriyari and her 6-month unborn son Mohammad-Ali.",
+    "sources": [
+      "SRC-PROS-002",
+      "SRC-LMO-001"
+    ]
+  },
+  {
+    "cluster_id": "FAM-KARYANIPAK",
+    "family_surname_en": "Karyanipak",
+    "family_surname_fa": "کاریانی‌پاک",
+    "mother_id": "moth-karyanipak",
+    "total_killed": 3,
+    "total_injured": 0,
+    "member_ids": [
+      "ali-akbar-karyanipak",
+      "mohammad-ali-karyanipak",
+      "ali-karyanipak-parent"
+    ],
+    "description": "Two brothers (Ali-Akbar and Mohammad-Ali) and their rescuing father Ali Karyanipak.",
+    "sources": [
+      "SRC-BONYAD-003",
+      "SRC-LMO-001"
+    ]
+  },
+  {
+    "cluster_id": "FAM-AHMADZADEH",
+    "family_surname_en": "Ahmadzadeh",
+    "family_surname_fa": "احمدزاده",
+    "mother_id": "moth-mohaddeseh-falahat",
+    "total_killed": 4,
+    "total_injured": 0,
+    "member_ids": [
+      "athena-ahmadzadeh",
+      "amin-ahmadzade",
+      "arad-ahmadzadeh",
+      "hassan-ahmadzadeh-parent"
+    ],
+    "description": "Three sibling children (Athena, Amin, and Arad) and their father Hassan Ahmadzadeh.",
+    "sources": [
+      "SRC-LMO-001",
+      "SRC-PROS-002"
+    ]
+  },
+  {
+    "cluster_id": "FAM-AHMADI",
+    "family_surname_en": "Ahmadi",
+    "family_surname_fa": "احمدی",
+    "mother_id": "moth-ahmadi-siblings",
+    "total_killed": 2,
+    "total_injured": 0,
+    "member_ids": [
+      "hanieh-ahmadi",
+      "sobhan-ahmadi"
+    ],
+    "description": "Siblings Sobhan and Hanieh Ahmadi.",
+    "sources": [
+      "SRC-BONYAD-003",
+      "SRC-PROS-002"
+    ]
+  },
+  {
+    "cluster_id": "FAM-RAEISI",
+    "family_surname_en": "Raeisi",
+    "family_surname_fa": "رئیسی",
+    "mother_id": "moth-raeisi-siblings",
+    "total_killed": 3,
+    "total_injured": 0,
+    "member_ids": [
+      "asna-raeisi",
+      "mohammad-hatam-raeisi",
+      "hossein-raeisi-parent"
+    ],
+    "description": "Sister Asna and brother Mohammad-Hatam Raeisi, along with their father Hossein Raeisi.",
+    "sources": [
+      "SRC-LMO-001",
+      "SRC-BONYAD-003"
+    ]
+  },
+  {
+    "cluster_id": "FAM-BAHRAMI",
+    "family_surname_en": "Bahrami",
+    "family_surname_fa": "بهرامی",
+    "mother_id": "moth-bahrami-cluster",
+    "total_killed": 4,
+    "total_injured": 0,
+    "member_ids": [
+      "zeynab-bahrami",
+      "mohammadayan-bahrami",
+      "zahra-bahrami",
+      "mahna-bahrami"
+    ],
+    "description": "Four children from the extended Bahrami household in Minab.",
+    "sources": [
+      "SRC-BONYAD-003",
+      "SRC-LMO-001"
+    ]
+  },
+  {
+    "cluster_id": "FAM-NASIRI",
+    "family_surname_en": "Nasiri",
+    "family_surname_fa": "نصیری",
+    "mother_id": "moth-atiyeh-rahinezhad",
+    "total_killed": 0,
+    "total_injured": 0,
+    "member_ids": [
+      "makan-nasiri"
+    ],
+    "description": "7-year-old active gymnast Makan Nasiri (Unmarked Martyr / شهید بی‌نشان).",
+    "sources": [
+      "SRC-GYM-004",
+      "SRC-LMO-001"
+    ]
+  },
+  {
+    "cluster_id": "FAM-MOLAEI",
+    "family_surname_en": "Molaei",
+    "family_surname_fa": "مولایی",
+    "mother_id": "moth-zahra-molaei-hero",
+    "total_killed": 0,
+    "total_injured": 2,
+    "member_ids": [
+      "mohammad-javad-molaei-surv",
+      "mehgol-molaei-surv"
+    ],
+    "description": "Two children (Mohammad-Javad and Mehgol) pulled from rubble by mother Zahra Molaei; both survived with injuries.",
+    "sources": [
+      "SRC-IRCS-005",
+      "EVD-VIC-005"
+    ]
+  }
+]

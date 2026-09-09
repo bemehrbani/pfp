@@ -1,0 +1,70 @@
+{
+  "archive_version": "1.0",
+  "total_primary_sources": 7,
+  "generated_at": "2026-08-30T19:23:56.974768Z",
+  "sources": [
+    {
+      "id": "SRC-LMO-001",
+      "title": "Legal Medicine Organization of Hormozgan STR DNA Forensic Report",
+      "authority": "Legal Medicine Organization of Hormozgan (lmo.ir)",
+      "tier": "Tier 1 (A1 - Primary Forensic)",
+      "file_name": "src_01_lmo_hormozgan_dna_report.md",
+      "sha256_hash": "071884f06463f7e0f1bc8518ff04e4ac7fb28b990ebdc75f95d93a03a2a9f86a",
+      "archived_at": "2026-08-30T19:23:56.974272Z"
+    },
+    {
+      "id": "SRC-PROSECUTOR-002",
+      "title": "Minab General & Revolutionary Prosecutor taheri Formal Certification & Indictment",
+      "authority": "Minab General and Revolutionary Prosecutor's Office",
+      "tier": "Tier 1 (A1 - Judicial Authority)",
+      "file_name": "src_02_minab_prosecutor_indictment.md",
+      "sha256_hash": "230a00cce450fbca6e9936a2ceb2f3a92eeec19407f493c3a9ee6d70f24bcfbd",
+      "archived_at": "2026-08-30T19:23:56.974385Z"
+    },
+    {
+      "id": "SRC-BONYAD-003",
+      "title": "Bonyad Shahid Hormozgan Martyr Dossier & Cemetery Plot Allocation",
+      "authority": "Bonyad Shahid and Affairs of Martyrs (isaar.ir / navideshahed.com)",
+      "tier": "Tier 1 (A1 - Government Registry)",
+      "file_name": "src_03_bonyad_shahid_registry.md",
+      "sha256_hash": "fa43791935d948f327f2430b40614de41fb5d1e88adc42c1d22df71f22baac3f",
+      "archived_at": "2026-08-30T19:23:56.974459Z"
+    },
+    {
+      "id": "SRC-GOVERNORATE-004",
+      "title": "Minab Special Governorate Infrastructure & Spatial Demarcation Declaration",
+      "authority": "Minab Special Governorate & Municipal Education Board",
+      "tier": "Tier 1 (A1 - Municipal Civil Authority)",
+      "file_name": "src_04_minab_governorate_declaration.md",
+      "sha256_hash": "50a926dc629d8bc831194bd16c49b42f1324dffca4f087dfc2de334e826600c0",
+      "archived_at": "2026-08-30T19:23:56.974527Z"
+    },
+    {
+      "id": "SRC-IRCS-005",
+      "title": "Iranian Red Crescent Society Search, Rescue & ICC Article 8 Communication",
+      "authority": "Iranian Red Crescent Society (rcs.ir)",
+      "tier": "Tier 3 (B1 - Independent Humanitarian)",
+      "file_name": "src_05_ircs_icc_communication.md",
+      "sha256_hash": "9c446dba67e712abb59e9ae7a4e00a5dbb9cbe49b827f4499863fe3b185f7fb2",
+      "archived_at": "2026-08-30T19:23:56.974589Z"
+    },
+    {
+      "id": "SRC-GYMNASTICS-006",
+      "title": "Iran Gymnastics Federation & Asian Gymnastics Union Casualty Memorial",
+      "authority": "Iran Gymnastics Federation (gymfed.ir) & Asian Gymnastics Union (AGU)",
+      "tier": "Tier 3 (B1 - Athletic Federation)",
+      "file_name": "src_06_gymnastics_federation_tribute.md",
+      "sha256_hash": "75549d00e71b4c130075e2e3ca57015426e9e242b0d6dc5effd7ca715869e5bd",
+      "archived_at": "2026-08-30T19:23:56.974655Z"
+    },
+    {
+      "id": "SRC-OSINT-007",
+      "title": "International OSINT & Munitions Forensics Dossier (Bellingcat / BBC Verify / NYT)",
+      "authority": "Bellingcat Open Source Investigations & BBC Verify",
+      "tier": "Tier 4 (A1 - Forensic Cross-Check)",
+      "file_name": "src_07_osint_munitions_dossier.md",
+      "sha256_hash": "cbcba3c1e3612d56959bfe5c4764b18db32d92fad1f6d1f3a19ae02f75046f4e",
+      "archived_at": "2026-08-30T19:23:56.974718Z"
+    }
+  ]
+}

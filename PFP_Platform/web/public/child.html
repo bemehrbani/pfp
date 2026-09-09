@@ -418,6 +418,10 @@
             renderTribute();
         }
 
+        function getChildById(id) {
+            return CHILDREN.find(c => c.id === id) || (typeof ADULTS !== 'undefined' ? ADULTS.find(a => a.id === id) : null);
+        }
+
         function renderPage() {
             const t = CHILD_I18N[currentLang] || CHILD_I18N.en;
             const main = document.getElementById('mainContent');
