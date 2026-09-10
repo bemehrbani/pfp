@@ -1,0 +1,20 @@
+# ==============================================================================
+# GitHub CODEOWNERS
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# ==============================================================================
+
+# Default repository maintainers
+* @mahdifarimani @bemehrbani
+
+# Legal research, campaign documentation, and complaint dossiers
+/Campaigns/ @zahraazhar1 @mahdifarimani @bemehrbani
+/Makan_Ry/legal/ @zahraazhar1 @mahdifarimani @bemehrbani
+/PFPJ_Ry/legal/ @zahraazhar1 @mahdifarimani @bemehrbani
+
+# Application code, API, Frontend, Infrastructure, and CI/CD
+/PFP_Platform/ @mahdifarimani @bemehrbani
+/.github/ @mahdifarimani @bemehrbani
+/docker-compose*.yml @mahdifarimani @bemehrbani
+/deploy*.sh @mahdifarimani @bemehrbani
+/run_tests.sh @mahdifarimani @bemehrbani
+/Makefile @mahdifarimani @bemehrbani

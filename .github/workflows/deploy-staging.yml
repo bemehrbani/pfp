@@ -4,6 +4,16 @@ on:
   push:
     branches:
       - dev
+    paths-ignore:
+      - '**.md'
+      - 'Campaigns/**'
+      - 'Makan_Ry/**'
+      - 'PFPJ_Ry/**'
+      - 'Archive/**'
+      - 'scratch/**'
+      - '.agent/**'
+      - '.claude/**'
+      - '.gitignore'
 
 jobs:
   deploy:

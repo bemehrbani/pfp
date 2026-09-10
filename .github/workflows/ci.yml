@@ -3,8 +3,28 @@ name: CI Pipeline
 on:
   push:
     branches: [main, dev]
+    paths-ignore:
+      - '**.md'
+      - 'Campaigns/**'
+      - 'Makan_Ry/**'
+      - 'PFPJ_Ry/**'
+      - 'Archive/**'
+      - 'scratch/**'
+      - '.agent/**'
+      - '.claude/**'
+      - '.gitignore'
   pull_request:
     branches: [main, dev]
+    paths-ignore:
+      - '**.md'
+      - 'Campaigns/**'
+      - 'Makan_Ry/**'
+      - 'PFPJ_Ry/**'
+      - 'Archive/**'
+      - 'scratch/**'
+      - '.agent/**'
+      - '.claude/**'
+      - '.gitignore'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
