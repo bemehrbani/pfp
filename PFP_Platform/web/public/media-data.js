@@ -8,6 +8,62 @@ const PFP_MEDIA_DATA = [
   // 1. INTERNATIONAL OSINT & VIDEO INVESTIGATIONS
   // ==========================================
   {
+    id: "sky-news-investigation-evidence-points-to-us",
+    sourceUrl: "https://www.youtube.com/watch?v=siRuobaj7IE&t=8s",
+    slug: "sky-news-investigation-minab-attack-evidence-points-to-us",
+    category: "international",
+    categoryLabel: { en: "International Investigation", fa: "تحقیقات بین‌المللی" },
+    title: {
+      en: "Sky News Full Investigation: All Evidence Points to US Being Responsible",
+      fa: "مستند تحقیقی اسکای نیوز: تمام شواهد نشان‌دهنده مسئولیت ارتش آمریکا است"
+    },
+    producer: "Sky News",
+    runtime: "49:35",
+    resolution: "1080p Full HD",
+    language: "English",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=siRuobaj7IE",
+    youtubeId: "siRuobaj7IE",
+    poster: "/images/sky-news-investigation.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=siRuobaj7IE",
+    featured: true,
+    description: {
+      en: "In this comprehensive 50-minute investigative documentary, Sky News' Dominic Waghorn reports from Minab — the first major western journalist on the ground. Through forensic 3D site reconstruction, interviews with bereaved mothers and survivors, and testimony from US military whistleblowers, Sky News investigates the fatal strike on Shajareh Tayyebeh Primary School that killed 156 people, concluding all evidence points to US military responsibility.",
+      fa: "در این مستند تحقیقی جامع ۵۰ دقیقه‌ای، دومینیک واگهورن خبرنگار ارشد بین‌المللی اسکای نیوز با سفر میدانی به میناب به‌عنوان نخستین خبرنگار غربی، فاجعه حمله به دبستان شجره طیبه را بررسی می‌کند. این مستند با بازسازی سه‌بعدی محل اصابت موشک، گفتگو با کودکان بازمانده و مادران داغدار، و شهادت افشاگران نظامی آمریکا، شواهدی جامع از مسئولیت ارتش ایالات متحده در شهادت ۱۵۶ غیرنظامی از جمله ۱۲۰ دانش‌آموز ارائه می‌دهد."
+    },
+    keyFindings: [
+      "First on-the-ground investigation in Minab conducted by a major western news organization (Dominic Waghorn).",
+      "3D forensic spatial reconstruction corroborating the triple-strike Tomahawk timeline and blast trajectory.",
+      "Firsthand testimonies from surviving children, bereaved families, and emergency triage doctors in Hormozgan.",
+      "Revelations from US defense and military whistleblowers disclosing intelligence targeting failures and strike approvals."
+    ],
+    tags: ["Sky News", "Dominic Waghorn", "OSINT", "Full Documentary", "Tomahawk", "School Strike", "Geneva Conventions", "Whistleblowers"]
+  },
+  {
+    id: "minab-sky-distortion-interview",
+    sourceUrl: "https://www.youtube.com/watch?v=27c0QBF-7pk",
+    slug: "war-crime-or-mistake-sky-news-minab-distortion",
+    category: "international",
+    categoryLabel: {"en": "International Investigation", "fa": "تحقیقات بین‌المللی"},
+    title: {"en": "War Crime or Mistake? How Sky Distorted the Minab School Bombing", "fa": "جنایت جنگی یا اشتباه؟ تحریف واقعه مدرسه میناب توسط رسانه‌های غربی"},
+    producer: "Jedaal English (Dr. Helyeh Doutaghi & Prof. Bikrum Gill)",
+    runtime: "01:28:46",
+    resolution: "1080p Full HD",
+    language: "English",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=27c0QBF-7pk",
+    youtubeId: "27c0QBF-7pk",
+    poster: "/images/still-minab/sky-distortion-interview.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=27c0QBF-7pk",
+    featured: true,
+    description: {"en": "An in-depth critical panel featuring Dr. Helyeh Doutaghi and Prof. Bikrum Gill analyzing how Western mainstream reporting (specifically Sky News) framed the deadly strike on Shajareh Tayyebeh Primary School as an operational error rather than an egregious war crime under International Humanitarian Law.", "fa": "نشست تحلیلی و موشکافانه با حضور دکتر حلیه دوتاقی و پروفسور بیکرام گیل در نقد روایت رسانه‌های غربی (به‌ویژه اسکای نیوز) و بازنمایی حمله به دبستان دخترانه میناب به‌عنوان خطای عملیاتی به جای جنایت جنگی آشکار."},
+    keyFindings: ["Critical legal and political analysis of mainstream media framing of civilian strikes.", "Detailed deconstruction of the 'targeting mistake' defense under Geneva Protocol I.", "Contextualizing the Minab massacre within broader imperial warfare and geopolitical erasure."],
+    tags: ["Helyeh Doutaghi", "Bikrum Gill", "Sky News Critique", "Media Analysis", "War Crimes", "IHL", "Jedaal English"]
+  },
+
+  {
     id: "sky-news-visual-investigation",
     sourceUrl: "https://news.sky.com/topic/iran-5858",
     slug: "sky-news-investigation-minab-primary-school",
@@ -104,7 +160,7 @@ const PFP_MEDIA_DATA = [
   },
   {
     id: "sky-news-evidence-points-to-us",
-    sourceUrl: "https://news.sky.com/world",
+    sourceUrl: "https://www.youtube.com/watch?v=siRuobaj7IE&t=8s",
     slug: "sky-news-evidence-points-to-us-strike",
     category: "international",
     categoryLabel: { en: "International Investigation", fa: "تحقیقات بین‌المللی" },
@@ -383,7 +439,190 @@ const PFP_MEDIA_DATA = [
   },
 
   // ==========================================
-  // 3. 12-EPISODE DOCUMENTARY SERIES: "قصه‌های ناتمام میناب"
+  // 3. "STILL, MINAB" (هنوز میناب) — 8-PART FIELDWORK ETHNOGRAPHY MINI-SERIES
+  // ==========================================
+  {
+    id: "still-minab-ep01",
+    sourceUrl: "https://www.youtube.com/watch?v=RYd8ePRlq1U",
+    slug: "still-minab-ep01-the-angels-games",
+    category: "still_minab",
+    categoryLabel: {"en": "Still, Minab Series", "fa": "مجموعه مستند «هنوز میناب»"},
+    episodeNumber: 1,
+    title: {"en": "Still, Minab — Ep. 01: The Angels' Games", "fa": "هنوز میناب — قسمت ۱: بازی فرشته‌ها"},
+    producer: "Dr. Helyeh Doutaghi / Jedaal English",
+    runtime: "15:16",
+    resolution: "1080p Full HD",
+    language: "English / Farsi",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=RYd8ePRlq1U",
+    youtubeId: "RYd8ePRlq1U",
+    poster: "/images/still-minab/ep01.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=RYd8ePRlq1U",
+    featured: true,
+    description: {"en": "Episode One of Dr. Helyeh Doutaghi's fieldwork ethnography follows eleven-year-old Parastesh Zaeri, a survivor of the Shajareye Tayebe School bombing in Minab who does not yet know her nine-year-old brother was killed.", "fa": "قسمت اول از مجموعه مردم‌نگاری میدانی دکتر حلیه دوتاقی که سرگذشت پرستش زائری، دختر ۱۱ ساله نجات‌یافته از بمباران دبستان شجره طیبه میناب را روایت می‌کند که هنوز از شهادت برادر ۹ ساله‌اش بی‌خبر است."},
+    keyFindings: ["Fieldwork ethnography documenting personal testimonies from surviving children in Minab.", "Account of Parastesh Zaeri and the psychological reality of children surviving the triple-tap strike.", "Researched, written, and narrated by Dr. Helyeh Doutaghi; directed by Ali Farirzade."],
+    tags: ["Still Minab", "Helyeh Doutaghi", "Jedaal English", "Parastesh Zaeri", "Episode 1", "Children of Minab"]
+  },
+  {
+    id: "still-minab-ep02",
+    sourceUrl: "https://www.youtube.com/watch?v=iF1663_LL_I",
+    slug: "still-minab-ep02-sweet-dreams-mommy",
+    category: "still_minab",
+    categoryLabel: {"en": "Still, Minab Series", "fa": "مجموعه مستند «هنوز میناب»"},
+    episodeNumber: 2,
+    title: {"en": "Still, Minab — Ep. 02: Sweet Dreams, Mommy", "fa": "هنوز میناب — قسمت ۲: خواب‌های شیرین، مادر"},
+    producer: "Dr. Helyeh Doutaghi / Jedaal English",
+    runtime: "20:18",
+    resolution: "1080p Full HD",
+    language: "English / Farsi",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=iF1663_LL_I",
+    youtubeId: "iF1663_LL_I",
+    poster: "/images/still-minab/ep02.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=iF1663_LL_I",
+    featured: false,
+    description: {"en": "Documents the profound maternal grief, familial trauma, and unfinished lives in Minab following the three cruise missile strikes on the primary school.", "fa": "ثبت رنج عمیق مادران داغدار، تروماهای خانوادگی و خاطرات ناتمام به‌جا مانده از کودکان شهید دبستان شجره طیبه میناب."},
+    tags: ["Still Minab", "Helyeh Doutaghi", "Mothers of Minab", "Episode 2", "Fieldwork"]
+  },
+  {
+    id: "still-minab-ep03",
+    sourceUrl: "https://www.youtube.com/watch?v=uWFNHw0sVT0",
+    slug: "still-minab-ep03-last-dance",
+    category: "still_minab",
+    categoryLabel: {"en": "Still, Minab Series", "fa": "مجموعه مستند «هنوز میناب»"},
+    episodeNumber: 3,
+    title: {"en": "Still, Minab — Ep. 03: Last Dance", "fa": "هنوز میناب — قسمت ۳: آخرین رقص"},
+    producer: "Dr. Helyeh Doutaghi / Jedaal English",
+    runtime: "18:14",
+    resolution: "1080p Full HD",
+    language: "English / Farsi",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=uWFNHw0sVT0",
+    youtubeId: "uWFNHw0sVT0",
+    poster: "/images/still-minab/ep03.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=uWFNHw0sVT0",
+    featured: false,
+    description: {"en": "Explores the innocent childhood aspirations, joyful moments, and artistic dreams of the young schoolchildren in Minab before the attack.", "fa": "روایتی از آرزوهای معصومانه، لحظات شاد و امیدهای کودکان دبستان میناب پیش از وقوع فاجعه بمباران."},
+    tags: ["Still Minab", "Childhood Dreams", "Helyeh Doutaghi", "Episode 3"]
+  },
+  {
+    id: "still-minab-ep04",
+    sourceUrl: "https://www.youtube.com/watch?v=DywsmADbxV8",
+    slug: "still-minab-ep04-the-second-explosion",
+    category: "still_minab",
+    categoryLabel: {"en": "Still, Minab Series", "fa": "مجموعه مستند «هنوز میناب»"},
+    episodeNumber: 4,
+    title: {"en": "Still, Minab — Ep. 04: The Second Explosion", "fa": "هنوز میناب — قسمت ۴: انفجار دوم"},
+    producer: "Dr. Helyeh Doutaghi / Jedaal English",
+    runtime: "17:43",
+    resolution: "1080p Full HD",
+    language: "English / Farsi",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=DywsmADbxV8",
+    youtubeId: "DywsmADbxV8",
+    poster: "/images/still-minab/ep04.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=DywsmADbxV8",
+    featured: false,
+    description: {"en": "Examines the devastating secondary strike that hit as parents and first responders rushed to the school to rescue children trapped in rubble.", "fa": "بررسی اصابت موشک دوم در الگوی حمله متوالی که هم‌زمان با هجوم والدین و امدادگران برای نجات کودکان از زیر آوار صورت گرفت."},
+    keyFindings: ["Firsthand eyewitness corroboration of the secondary missile strike timing.", "Testimonies from parents struck while searching for their daughters at the school perimeter."],
+    tags: ["Still Minab", "Second Strike", "Double Tap", "First Responders", "Episode 4"]
+  },
+  {
+    id: "still-minab-ep05",
+    sourceUrl: "https://www.youtube.com/watch?v=DdulnBe_nZw",
+    slug: "still-minab-ep05-from-now-on-i-want-to-live",
+    category: "still_minab",
+    categoryLabel: {"en": "Still, Minab Series", "fa": "مجموعه مستند «هنوز میناب»"},
+    episodeNumber: 5,
+    title: {"en": "Still, Minab — Ep. 05: From Now On, I Want to Live", "fa": "هنوز میناب — قسمت ۵: از این به بعد می‌خواهم زندگی کنم"},
+    producer: "Dr. Helyeh Doutaghi / Jedaal English",
+    runtime: "18:59",
+    resolution: "1080p Full HD",
+    language: "English / Farsi",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=DdulnBe_nZw",
+    youtubeId: "DdulnBe_nZw",
+    poster: "/images/still-minab/ep05.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=DdulnBe_nZw",
+    featured: false,
+    description: {"en": "Follows surviving students through their medical rehabilitation, physical recovery, and the communal determination to persevere.", "fa": "پیگیری روند درمان و بازتوانی جسمی کودکان بازمانده و اراده جمعی جامعه میناب برای تداوم زندگی و مقاومت."},
+    tags: ["Still Minab", "Rehabilitation", "Survivors", "Resilience", "Episode 5"]
+  },
+  {
+    id: "still-minab-ep06",
+    sourceUrl: "https://www.youtube.com/watch?v=mo7Nd-FN8zI",
+    slug: "still-minab-ep06-who-knows-where-minab-is",
+    category: "still_minab",
+    categoryLabel: {"en": "Still, Minab Series", "fa": "مجموعه مستند «هنوز میناب»"},
+    episodeNumber: 6,
+    title: {"en": "Still, Minab — Ep. 06: Who Knows Where Minab Is?", "fa": "هنوز میناب — قسمت ۶: چه کسی می‌داند میناب کجاست؟"},
+    producer: "Dr. Helyeh Doutaghi / Jedaal English",
+    runtime: "22:56",
+    resolution: "1080p Full HD",
+    language: "English / Farsi",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=mo7Nd-FN8zI",
+    youtubeId: "mo7Nd-FN8zI",
+    poster: "/images/still-minab/ep06.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=mo7Nd-FN8zI",
+    featured: false,
+    description: {"en": "An ethnographic inquiry into geographical marginalization, international silence, and how imperial warfare treats distant civilian populations as collateral.", "fa": "بررسی مردم‌نگارانه حاشیه‌رانی جغرافیایی، سکوت مجامع جهانی و نادیده گرفتن حقوق انسانی غیرنظامیان در محاسبات جنگی قدرت‌ها."},
+    tags: ["Still Minab", "Geography", "Imperialism", "Helyeh Doutaghi", "Episode 6"]
+  },
+  {
+    id: "still-minab-ep07",
+    sourceUrl: "https://www.youtube.com/watch?v=IIJMnpLrE2U",
+    slug: "still-minab-ep07-stubborn-and-patient",
+    category: "still_minab",
+    categoryLabel: {"en": "Still, Minab Series", "fa": "مجموعه مستند «هنوز میناب»"},
+    episodeNumber: 7,
+    title: {"en": "Still, Minab — Ep. 07: Stubborn and Patient", "fa": "هنوز میناب — قسمت ۷: سرسخت و شکیبا"},
+    producer: "Dr. Helyeh Doutaghi / Jedaal English",
+    runtime: "22:15",
+    resolution: "1080p Full HD",
+    language: "English / Farsi",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=IIJMnpLrE2U",
+    youtubeId: "IIJMnpLrE2U",
+    poster: "/images/still-minab/ep07.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=IIJMnpLrE2U",
+    featured: false,
+    description: {"en": "Documents the steadfastness and dignity of Hormozgan families refusing to let their children's memory be erased or distorted in geopolitical narratives.", "fa": "روایتی از پایداری و وقار خانواده‌های هرمزگان در صیانت از یاد و نام فرزندانشان در برابر تحریف‌های رسانه‌ای و تاریخی."},
+    tags: ["Still Minab", "Patience", "Dignity", "Oral History", "Episode 7"]
+  },
+  {
+    id: "still-minab-ep08",
+    sourceUrl: "https://www.youtube.com/watch?v=4YKS-aPUGIk",
+    slug: "still-minab-ep08-this-is-not-a-military-zone",
+    category: "still_minab",
+    categoryLabel: {"en": "Still, Minab Series", "fa": "مجموعه مستند «هنوز میناب»"},
+    episodeNumber: 8,
+    title: {"en": "Still, Minab — Ep. 08: This Is Not a Military Zone", "fa": "هنوز میناب — قسمت ۸: اینجا منطقه نظامی نیست"},
+    producer: "Dr. Helyeh Doutaghi / Jedaal English",
+    runtime: "27:20",
+    resolution: "1080p Full HD",
+    language: "English / Farsi",
+    subtitles: ["English", "فارسی", "Suomi"],
+    year: "2026",
+    videoUrl: "https://www.youtube.com/watch?v=4YKS-aPUGIk",
+    youtubeId: "4YKS-aPUGIk",
+    poster: "/images/still-minab/ep08.jpg",
+    downloadUrl: "https://www.youtube.com/watch?v=4YKS-aPUGIk",
+    featured: true,
+    description: {"en": "The series finale systematically refutes assertions of military proximity, proving Shajareye Tayebe was exclusively an elementary school filled with children.", "fa": "قسمت پایانی مجموعه: ابطال قطعی هرگونه ادعای نزدیکی به اهداف نظامی و اثبات هویت کاملاً آموزشی و غیرنظامی دبستان شجره طیبه میناب."},
+    keyFindings: ["Conclusive spatial and photographic refutation of military proximity claims.", "Documentation of complete civilian demographics and physical school infrastructure."],
+    tags: ["Still Minab", "Finale", "Civilian Infrastructure", "Geneva Conventions", "Episode 8"]
+  },
+
+  // ==========================================
+  // 4. 12-EPISODE DOCUMENTARY SERIES: "قصه‌های ناتمام میناب"
   // ==========================================
   {
     id: "aparat-series-ep01",
@@ -711,7 +950,7 @@ const PFP_MEDIA_DATA = [
   },
 
   // ==========================================
-  // 4. FEATURE DOCUMENTARY PROFILES (CINEMA & FESTIVALS)
+  // 5. FEATURE DOCUMENTARY PROFILES (CINEMA & FESTIVALS)
   // ==========================================
   {
     id: "hoda-documentary-profile",
@@ -771,7 +1010,7 @@ const PFP_MEDIA_DATA = [
   },
 
   // ==========================================
-  // 5. AUDIO ORAL HISTORIES & SOUNDTRACKS
+  // 6. AUDIO ORAL HISTORIES & SOUNDTRACKS
   // ==========================================
   {
     id: "melody-of-peace-score",
@@ -803,7 +1042,7 @@ const PFP_MEDIA_DATA = [
   },
 
   // ==========================================
-  // 6. VISUAL MEMORIALS & MOSAIC ASSETS
+  // 7. VISUAL MEMORIALS & MOSAIC ASSETS
   // ==========================================
   {
     id: "100-faces-of-peace-mosaic",

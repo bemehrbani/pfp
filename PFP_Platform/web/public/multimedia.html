@@ -346,15 +346,15 @@
         </p>
         <div class="hero-stats-grid">
             <div class="hero-stat-card">
-                <div class="hero-stat-num">24+</div>
+                <div class="hero-stat-num">39+</div>
                 <div class="hero-stat-label" id="stat-total-lbl">Media Files</div>
             </div>
             <div class="hero-stat-card">
-                <div class="hero-stat-num">10</div>
+                <div class="hero-stat-num">11</div>
                 <div class="hero-stat-label" id="stat-intl-lbl">OSINT Investigations</div>
             </div>
             <div class="hero-stat-card">
-                <div class="hero-stat-num">12</div>
+                <div class="hero-stat-num">20</div>
                 <div class="hero-stat-label" id="stat-series-lbl">Series Episodes</div>
             </div>
             <div class="hero-stat-card">
@@ -396,12 +396,13 @@
         <!-- Search & Category Filters -->
         <div class="controls-panel">
             <div class="filter-tabs" id="category-tabs">
-                <button class="tab-btn active" data-category="all" onclick="filterCategory('all')">All Media (24)</button>
-                <button class="tab-btn" data-category="international" onclick="filterCategory('international')">International OSINT (10)</button>
-                <button class="tab-btn" data-category="series_minab" onclick="filterCategory('series_minab')">12-Episode Series (12)</button>
-                <button class="tab-btn" data-category="farsi_reports" onclick="filterCategory('farsi_reports')">Field Documentaries (3)</button>
-                <button class="tab-btn" data-category="audio_memorials" onclick="filterCategory('audio_memorials')">Audio & Scores</button>
-                <button class="tab-btn" data-category="visual_memorials" onclick="filterCategory('visual_memorials')">Visual Memorials</button>
+                <button class="tab-btn active" id="tab-all" data-category="all" onclick="filterCategory('all')">All Media (39)</button>
+                <button class="tab-btn" id="tab-still-minab" data-category="still_minab" onclick="filterCategory('still_minab')">Still, Minab (8)</button>
+                <button class="tab-btn" id="tab-intl" data-category="international" onclick="filterCategory('international')">International OSINT (11)</button>
+                <button class="tab-btn" id="tab-series" data-category="series_minab" onclick="filterCategory('series_minab')">12-Episode Series (12)</button>
+                <button class="tab-btn" id="tab-farsi" data-category="farsi_reports" onclick="filterCategory('farsi_reports')">Field Documentaries (3)</button>
+                <button class="tab-btn" id="tab-audio" data-category="audio_memorials" onclick="filterCategory('audio_memorials')">Audio & Scores</button>
+                <button class="tab-btn" id="tab-visual" data-category="visual_memorials" onclick="filterCategory('visual_memorials')">Visual Memorials</button>
             </div>
             <div class="search-bar-row">
                 <div class="search-input-wrap">
@@ -470,7 +471,7 @@
             fa: {
                 badge: "آرشیو مستندات تصویری و تحقیقات چندرسانه‌ای",
                 title: "کتابخانه چندرسانه‌ای و مستندات",
-                desc: "مشاهده و دریافت بیش از ۲۴ مستند تصویری، مجموعه مستند ۱۲ قسمتی، بازسازی‌های فنی ماهواره‌ای و آرشیو تاریخ شفاهی فاجعه مدرسه میناب.",
+                desc: "مشاهده و دریافت بیش از ۳۹ اثر تصویری، مجموعه مستند «هنوز میناب»، مجموعه ۱۲ قسمتی، بازسازی‌های فنی ماهواره‌ای و آرشیو تاریخ شفاهی فاجعه مدرسه میناب.",
                 navMemorial: "یادبود دیجیتال",
                 navEvidence: "مستندات فنی",
                 navMultimedia: "چندرسانه‌ای",
@@ -522,6 +523,16 @@
             document.getElementById('spot-desc').innerText = t.spotDesc;
             document.getElementById('spot-btn').innerHTML = `<span>${t.spotBtn}</span>`;
             document.getElementById('search-input').placeholder = t.searchPlaceholder;
+
+            if (document.getElementById('tab-all')) {
+                document.getElementById('tab-all').innerText = lang === 'fa' ? 'همه آثار (۳۹)' : 'All Media (39)';
+                document.getElementById('tab-still-minab').innerText = lang === 'fa' ? 'مجموعه «هنوز میناب» (۸)' : 'Still, Minab (8)';
+                document.getElementById('tab-intl').innerText = lang === 'fa' ? 'تحقیقات بین‌المللی (۱۱)' : 'International OSINT (11)';
+                document.getElementById('tab-series').innerText = lang === 'fa' ? 'مجموعه ۱۲ قسمتی (۱۲)' : '12-Episode Series (12)';
+                document.getElementById('tab-farsi').innerText = lang === 'fa' ? 'مستندهای میدانی (۳)' : 'Field Documentaries (3)';
+                document.getElementById('tab-audio').innerText = lang === 'fa' ? 'موسیقی و نواها' : 'Audio & Scores';
+                document.getElementById('tab-visual').innerText = lang === 'fa' ? 'یادبودهای تصویری' : 'Visual Memorials';
+            }
 
             renderGrid();
         }
@@ -600,7 +611,7 @@
                             <div class="card-footer">
                                 <span>${item.language} • ${item.resolution || '1080p'}</span>
                                 <div class="card-actions">
-                                    ${item.downloadUrl ? `<a href="${item.downloadUrl}" download class="icon-btn" title="Download">📥</a>` : ''}
+                                    ${item.downloadUrl && !item.downloadUrl.includes('youtube') ? `<a href="${item.downloadUrl}" download class="icon-btn" title="Download">📥</a>` : (item.youtubeId || (item.videoUrl && item.videoUrl.includes('youtube')) ? `<a href="${item.videoUrl || item.sourceUrl}" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Watch on YouTube">▶</a>` : '')}
                                     <a href="${targetUrl}" class="icon-btn" title="Open page">↗</a>
                                 </div>
                             </div>

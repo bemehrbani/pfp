@@ -73,6 +73,8 @@ class MultimediaService:
     def get_categories() -> List[Dict[str, str]]:
         return [
             {"id": "international", "label_en": "🌐 International OSINT", "label_fa": "🌐 تحقیقات بین‌المللی", "label_fi": "🌐 Kansainvälinen OSINT"},
-            {"id": "farsi_doc", "label_en": "🎥 Field Reports & Series", "label_fa": "🎥 مستندهای میدانی و روایات", "label_fi": "🎥 Kenttäraportit ja sarjat"},
+            {"id": "still_minab", "label_en": "🎞️ Still, Minab Series", "label_fa": "🎞️ مجموعه مستند «هنوز میناب»", "label_fi": "🎞️ Still, Minab -sarja"},
+            {"id": "series_minab", "label_en": "📺 Unfinished Tales Series", "label_fa": "📺 مجموعه قصه‌های ناتمام", "label_fi": "📺 Keskeneräiset tarinat"},
+            {"id": "farsi_doc", "label_en": "🎥 Field Reports & Cinema", "label_fa": "🎥 مستندهای میدانی و سینمایی", "label_fi": "🎥 Kenttäraportit ja elokuva"},
             {"id": "music_score", "label_en": "🎵 Tributes & Audio", "label_fa": "🎵 نغمات صلح و آثار صوتی", "label_fi": "🎵 Muistomusiikki ja ääni"}
         ]
