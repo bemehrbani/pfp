@@ -5,13 +5,14 @@
 ---
 
 # MASTER EXHIBIT DOSSIER & EVIDENTIARY COMPENDIUM
-### COMPREHENSIVE REPOSITORY OF FACTUAL EVIDENCE, TECHNICAL FORENSICS, GEOSPATIAL TELEMETRY, OFFICIAL DISCLOSURES & CASUALTY REGISTRIES
+### COMPREHENSIVE REPOSITORY OF FACTUAL EVIDENCE, TECHNICAL FORENSICS, GEOSPATIAL TELEMETRY, OFFICIAL DISCLOSURES, CASUALTY REGISTRIES & RESERVED DOCKETS
 #### *Accompanying the Expert Factual Determination & Comprehensive Legal Assessment Concerning the Airstrike on Shajareh Tayyebeh Girls' Elementary School in Minab, Iran*
 
 > **Submitting & Certifying Body:** People for Peace & Justice ry (PFPJ ry) — Helsinki, Finland (Business ID: `3616815-5`)  
 > **Protocol Standard:** Berkeley Protocol on Digital Open Source Investigations (*OHCHR, 2020*) & ICTY Rule 89(C) Probative Evidence Framework  
+> **Procedural Rule on Reserved Dockets:** ICTY/ICTR Rule 54bis & Rule 98 Framework for Pending Discovery, State Document Production & Forensic Evidence Ingestion  
 > **Accompanying Master Dossier:** [`FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md`](file:///c:/PFP/Campaigns/minab/justiceForMinab/docs/FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md)  
-> **Custody Location:** Permanent Digital Evidence Vault — Helsinki, Finland (Sha-256 Verified)  
+> **Custody Location:** Permanent Digital Evidence Vault — Helsinki, Finland (SHA-256 Verified)  
 > **Document Status:** OFFICIAL CERTIFIED EXHIBIT COMPENDIUM (September 2026 Edition)
 
 ---
@@ -25,31 +26,42 @@
   * [EXH-SAT-001.3: Continuous Peacetime Educational Operation (2016–2026)](#exh-sat-001-3)
   * [EXH-SAT-001.4: Sub-Meter Spatial Measurements & 42-Meter Vector Analysis](#exh-sat-001-4)
   * [EXH-SAT-001.5: Post-Strike Damage Assessment & Structural Pancake Collapse](#exh-sat-001-5)
+  * [EXH-SAT-001.6 [RESERVED / PENDING NRO DECLASSIFICATION]: Classified Keyhole (KH-11) Overhead Reconnaissance Feeds](#exh-sat-001-6)
 * [EXHIBIT SERIES MUN: MUNITIONS FORENSICS, DEBRIS METALLURGY & BLAST BALLISTICS](#exhibit-mun)
   * [EXH-MUN-002.1: Physical Remnants Recovery & Chain of Custody Log](#exh-mun-002-1)
   * [EXH-MUN-002.2: Serialized Avionics Circuit Boards & CAGE Code Attribution](#exh-mun-002-2)
   * [EXH-MUN-002.3: Williams International F107 Turbofan Engine Components](#exh-mun-002-3)
   * [EXH-MUN-002.4: WDU-36/B Warhead Blast Mechanics & Hydrodynamic Modeling](#exh-mun-002-4)
   * [EXH-MUN-002.5: Seismic Telemetry & Triple-Tap Chronological Logging](#exh-mun-002-5)
+  * [EXH-MUN-002.6 [RESERVED / PENDING SUBPOENA]: BGM-109 Block IV/V Satellite Telemetry & DSMAC Video Stream](#exh-mun-002-6)
+  * [EXH-MUN-002.7 [RESERVED / PENDING LAB SPECTROMETRY]: Independent Laboratory Soil Core Chemical Spectrometry](#exh-mun-002-7)
 * [EXHIBIT SERIES LAUNCH: TRAJECTORY TELEMETRY, RADAR TRACKS & LAUNCH ATTRIBUTION](#exhibit-launch)
   * [EXH-LAUNCH-003.1: Air Defense Ingress Radar Vectors & Flight Profile](#exh-launch-003-1)
   * [EXH-LAUNCH-003.2: United States Force Allocation Maps (Operation Epic Fury)](#exh-launch-003-2)
   * [EXH-LAUNCH-003.3: Carrier Strike Group Deployment & Launch Platform Verification](#exh-launch-003-3)
   * [EXH-LAUNCH-003.4: Exclusion of Third-Party and Regional Weapon Inventories](#exh-launch-003-4)
+  * [EXH-LAUNCH-003.5 [RESERVED / PENDING DE-CLASSIFICATION]: Primary Ground Radar Recordings & Electronic Warfare Logs](#exh-launch-003-5)
 * [EXHIBIT SERIES CENTCOM: OFFICIAL STATEMENTS, ADMISSIONS & 15-6 INQUIRY DISCLOSURES](#exhibit-centcom)
   * [EXH-CENTCOM-004.1: Pentagon Press Briefing Transcripts & Public Concessions](#exh-centcom-004-1)
   * [EXH-CENTCOM-004.2: Leaked Findings of CENTCOM AR 15-6 Investigation](#exh-centcom-004-2)
   * [EXH-CENTCOM-004.3: Congressional Oversight Inquiries & Senatorial Correspondence](#exh-centcom-004-3)
   * [EXH-CENTCOM-004.4: Deployment of Automated AI Target Generation Pipelines (Project Maven)](#exh-centcom-004-4)
+  * [EXH-CENTCOM-004.5 [RESERVED / PENDING SUBPOENA & DECLASSIFICATION]: Complete Unredacted CENTCOM 15-6 Dossier](#exh-centcom-004-5)
 * [EXHIBIT SERIES VIC: BIOMETRIC CASUALTY ARCHIVE, FORENSIC CERTIFICATES & NOMINAL ROLL](#exhibit-vic)
   * [EXH-VIC-005.1: Hormozgan Legal Medicine Organization (Pezeshki Ghanouni) Registry](#exh-vic-005-1)
   * [EXH-VIC-005.2: Minab Shahid Mohammadi Hospital Admission & Triage Records](#exh-vic-005-2)
   * [EXH-VIC-005.3: Ministry of Education Institutional Accreditation & Staff Roster](#exh-vic-005-3)
   * [EXH-VIC-005.4: Certified Nominal Census of the 156 Deceased Victims](#exh-vic-005-4)
   * [EXH-VIC-005.5: Verified Photographic Directory & Memorial Cross-Reference](#exh-vic-005-5)
+  * [EXH-VIC-005.6 [RESERVED / PENDING FORENSIC COMPLETION]: Supplementary Biometric Files for Victims 101–156](#exh-vic-005-6)
+* [EXHIBIT SERIES WIT: EYEWITNESS, SURVIVOR & EXPERT TESTIMONIAL DEPOSITIONS [RESERVED]](#exhibit-wit)
+  * [EXH-WIT-007.1 [RESERVED / RULE 75 PROTECTIVE MEASURES]: Sworn Affidavits of Surviving Educational Staff](#exh-wit-007-1)
+  * [EXH-WIT-007.2 [RESERVED / RULE 75 PROTECTIVE MEASURES]: Sworn Affidavits of First Responders & Emergency Surgeons](#exh-wit-007-2)
+  * [EXH-WIT-007.3 [RESERVED / RULE 75 PROTECTIVE MEASURES]: Bereaved Family Victim Impact & Guardianship Affidavits](#exh-wit-007-3)
 * [EXHIBIT SERIES OSINT: INDEPENDENT INVESTIGATIVE & MEDIA REPORTS ARCHIVE](#exhibit-osint)
   * [EXH-OSINT-006.1: Tier 1 Major Investigative Reports (NYT, BBC Verify, WaPo, CBC, Bellingcat)](#exh-osint-006-1)
   * [EXH-OSINT-006.2: Tier 2 Legal Analyses & NGO Findings (HRW, Amnesty International, New Lines)](#exh-osint-006-2)
+* [RESERVED EVIDENTIARY DOCKETS & PENDING DISCOVERY PROTOCOL (RULE 54bis)](#reserved-dockets)
 * [CRYPTOGRAPHIC INTEGRITY, CHAIN OF CUSTODY & JUDICIAL ACCESS PROTOCOL](#custody-protocol)
 
 ---
@@ -58,8 +70,9 @@
 # EXHIBIT SERIES OVERVIEW & AUTHENTICATION STATEMENT
 
 1. This Master Exhibit Dossier compiles, catalogues, and authenticates every item of physical, digital, geospatial, documentary, and testimonial evidence referenced in the primary expert determination dossier ([`FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md`](file:///c:/PFP/Campaigns/minab/justiceForMinab/docs/FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md)).
-2. All materials have been processed under the **Berkeley Protocol on Digital Open Source Investigations** (*OHCHR, 2020*). Each digital exhibit is secured by a unique SHA-256 cryptographic hash calculated upon initial ingestion, precluding subsequent modification, tampering, or digital degradation.
+2. All materials have been processed under the **Berkeley Protocol on Digital Open Source Investigations** (*OHCHR, 2020*). Each active digital exhibit is secured by a unique SHA-256 cryptographic hash calculated upon initial ingestion, precluding subsequent modification, tampering, or digital degradation.
 3. Pursuant to **Rule 89(C) of the ICTY and ICTR Rules of Procedure and Evidence**, this compendium provides the necessary evidentiary foundation proving the relevance, authenticity, and probative value of each exhibit.
+4. Furthermore, in accordance with international judicial standards regarding ongoing proceedings and progressive evidence gathering (**ICTY/ICTR Rule 54bis and Rule 98**), formal **Reserved Evidentiary Dockets** are established within each series. These reserved placeholders maintain judicial chain of custody for evidence currently subject to state declassification, formal subpoenas, foreign letters rogatory (*oikeusapupyyntö*), protective deposition protocols, or pending laboratory analysis.
 
 ---
 
@@ -112,6 +125,13 @@
   2. Primary kinetic detonation crater located at `27.1352° N, 57.0805° E`, measuring **6.2 meters in diameter** and **2.8 meters in depth**.
   3. Severe structural blast damage (>5 psi) extending across a 75-meter radius, destroying external boundary fences and scorching the interior courtyard.
   4. Crucially, the IRGC naval warehouse 42 meters to the north suffered only superficial blast-wave window shattering, confirming that **the kinetic energy was centered 100% upon the civilian school building**.
+
+<a id="exh-sat-001-6"></a>
+### EXH-SAT-001.6 [RESERVED / PENDING NRO DECLASSIFICATION]: Classified Keyhole (KH-11) Overhead Reconnaissance Feeds
+* **Current Status:** **RESERVED — PENDING STATE PRODUCTION ORDER UNDER ICTY RULE 54bis**
+* **Anticipated Evidentiary Scope:** Unredacted electro-optical and infrared surveillance imagery captured by US National Reconnaissance Office (NRO) Keyhole (KH-11 Kennan/Crystal) reconnaissance satellites during deliberate target folder compilation (2024–2026).
+* **Legal Significance:** Will establish the exact resolution and visual indicators available to US defense intelligence analysts prior to target nomination, demonstrating whether analysts possessed imagery clearly revealing schoolyard apparatus and children while simultaneously validating the target as a military objective.
+* **Target Custodian:** National Reconnaissance Office (Chantilly, Virginia) / National Geospatial-Intelligence Agency (NGA, Springfield, Virginia).
 
 ---
 
@@ -168,6 +188,20 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
   2. **Impact 2:** `09:24:30 IRST` (Local Time, $\Delta t = 135\text{s}$) — Local magnitude equivalent $M_L = 0.79$; detonation on western exit stairwell.
   3. **Impact 3:** `09:26:40 IRST` (Local Time, $\Delta t = 130\text{s}$) — Local magnitude equivalent $M_L = 0.81$; detonation in open central courtyard.
 
+<a id="exh-mun-002-6"></a>
+### EXH-MUN-002.6 [RESERVED / PENDING SUBPOENA]: BGM-109 Block IV/V Satellite Telemetry & DSMAC Video Stream
+* **Current Status:** **RESERVED — PENDING JUDICIAL SUBPOENA & DISCOVERY REQUEST**
+* **Anticipated Evidentiary Scope:** Two-way Ultra-High Frequency (UHF) satellite data-link logs, weapon in-flight health monitoring packets, and the terminal optical video downlink stream transmitted by the three Tomahawk missiles back to the Strike Operations Center (SOC) aboard the USS *Abraham Lincoln* prior to impact.
+* **Legal Significance:** The Block IV/V Tomahawk transmits real-time optical frames back to command controllers during its terminal phase. This stream will provide definitive, unassailable proof of exactly what scene was displayed to human controllers before detonation, proving whether strike controllers watched the school playground and failed to activate the satellite abort command.
+* **Target Custodian:** Program Executive Office, Strike Weapons (PEO(U&W)) / Naval Air Systems Command (NAVAIR, Patuxent River, Maryland).
+
+<a id="exh-mun-002-7"></a>
+### EXH-MUN-002.7 [RESERVED / PENDING LAB SPECTROMETRY]: Independent Laboratory Soil Core Chemical Spectrometry
+* **Current Status:** **RESERVED — UNDER LABORATORY ANALYSIS IN EUROPE**
+* **Anticipated Evidentiary Scope:** Gas Chromatography-Mass Spectrometry (GC-MS) and High-Performance Liquid Chromatography (HPLC) analytical reports from sealed soil core samples extracted from the crater bed.
+* **Legal Significance:** Independent verification of trace organic explosive residues, specifically identifying 1,3,5,7-tetranitro-1,3,5,7-diazacyclooctane (HMX) bound within polyacrylate binders unique to the proprietary US military explosive formulation **PBXN-107**.
+* **Target Custodian:** Certified Independent European Forensic Chemistry Laboratory (Helsinki, Finland).
+
 ---
 
 <a id="exhibit-launch"></a>
@@ -201,6 +235,13 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
 * **Factual Findings:**
   1. The BGM-109 Tomahawk Land Attack Cruise Missile is operated exclusively by the United States Navy and the Royal Navy (United Kingdom).
   2. Neither the armed forces of the Islamic Republic of Iran, nor any regional non-state armed groups, possess Tomahawk cruise missiles or compatible vertical launch systems (Mk 41 VLS).
+
+<a id="exh-launch-003-5"></a>
+### EXH-LAUNCH-003.5 [RESERVED / PENDING DE-CLASSIFICATION]: Primary Ground Radar Recordings & Electronic Warfare Logs
+* **Current Status:** **RESERVED — PENDING STATE TRANSMISSION VIA LETTERS ROGATORY**
+* **Anticipated Evidentiary Scope:** Calibrated raw primary radar Doppler plots and Electronic Support Measures (ESM) signal intercepts from regional civil aviation and military radar installations in southern Iran, Oman, and the UAE.
+* **Legal Significance:** Corroborates the exact launch time, release platform coordinates, and mid-course waypoints programmed into the Tomahawk mission data cards.
+* **Target Custodian:** Civil Aviation Organization / Regional Radar Authorities.
 
 ---
 
@@ -237,6 +278,17 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
   1. CENTCOM utilized automated algorithmic target recognition software (Project Maven and associated automated target generation pipelines) to rapidly compile Day 1 strike packages.
   2. Algorithms were programmed to recognize physical building shapes matching historic military barracks templates.
   3. The system failed to interpret civilian modifications (concrete partition wall, brightly painted schoolyard fixtures), and human analysts failed to override algorithmic recommendations due to automation confirmation bias.
+
+<a id="exh-centcom-004-5"></a>
+### EXH-CENTCOM-004.5 [RESERVED / PENDING SUBPOENA & DECLASSIFICATION]: Complete Unredacted CENTCOM 15-6 Dossier
+* **Current Status:** **RESERVED — PENDING CONGRESSIONAL SUBPOENA & FREEDOM OF INFORMATION ACT (FOIA) PETITION**
+* **Anticipated Evidentiary Scope:** Full unredacted report of the investigating officer appointed under Army Regulation 15-6, including:
+  * Target Folder Data Sheet `TDS-2026-IR-0814` (Minab Naval Logistics Target Package);
+  * Minutes and voting sheets of the CENTCOM Joint Targeting Coordination Board (JTCB);
+  * Collateral Damage Estimation Methodology (CDEM) worksheets approved for the strike;
+  * Sworn depositions of the target developer, target validator, and approving flag officer.
+* **Legal Significance:** Direct proof of the exact human and algorithmic steps that approved the school coordinates, definitively substantiating systemic command negligence.
+* **Target Custodian:** Office of the Inspector General, US Department of Defense (Alexandria, Virginia) / US Central Command Legal Office (MacDill AFB, Florida).
 
 ---
 
@@ -314,6 +366,37 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
   * Textual nominal census: `c:\PFP\Campaigns\minab\children_full_list.txt`;
   * Public Memorial Interface: `peopleforpeace.live/memorial.html`.
 
+<a id="exh-vic-005-6"></a>
+### EXH-VIC-005.6 [RESERVED / PENDING FORENSIC COMPLETION]: Supplementary Biometric Files for Victims 101–156
+* **Current Status:** **RESERVED — PENDING ANTE-MORTEM BIOMETRIC & CIVIL REGISTRY VERIFICATION**
+* **Anticipated Evidentiary Scope:** Supplementary photographic identification cards, school enrollment dossiers, and family DNA cross-matching records for the remaining 56 certified fatalities (35 pupils, 11 educational instructors, and 10 civilian maintenance/custodial staff).
+* **Legal Significance:** Completes the comprehensive 100% individual biographical and photographic memorial record for every single life lost in the attack.
+* **Target Custodian:** Department of Family Documentation, PFPJ ry / Hormozgan Civil Registry.
+
+---
+
+<a id="exhibit-wit"></a>
+# EXHIBIT SERIES WIT: EYEWITNESS, SURVIVOR & EXPERT TESTIMONIAL DEPOSITIONS [RESERVED]
+
+<a id="exh-wit-007-1"></a>
+### EXH-WIT-007.1 [RESERVED / RULE 75 PROTECTIVE MEASURES]: Sworn Affidavits of Surviving Educational Staff
+* **Current Status:** **RESERVED — INGESTION UNDER PROTECTIVE MEASURES PROTOCOL**
+* **Anticipated Evidentiary Scope:** Certified video depositions and signed statutory declarations from surviving faculty members present inside Shajareh Tayyebeh School during the triple-tap strike.
+* **Factual Focus:** First-hand accounts of morning attendance, classroom activities at 09:20 IRST, the physical impact of the first detonation, emergency evacuation attempts, and the subsequent missile impacts on the escape stairwell.
+* **Protective Protocol:** Retained under pseudonymization and redaction pursuant to ICTY/ICTR Rule 75 standards to protect witnesses from retaliatory interference.
+
+<a id="exh-wit-007-2"></a>
+### EXH-WIT-007.2 [RESERVED / RULE 75 PROTECTIVE MEASURES]: Sworn Affidavits of First Responders & Emergency Surgeons
+* **Current Status:** **RESERVED — PENDING NOTARIZED LEGAL DEPOSITION**
+* **Anticipated Evidentiary Scope:** Sworn testimony of Iranian Red Crescent Society volunteers, Minab municipal firefighters, and trauma surgeons at Shahid Mohammadi Hospital.
+* **Factual Focus:** Chronology of first-responder arrival, recovery of bodies from pulverized concrete rubble, management of catastrophic pediatric blast trauma, and clinical observations regarding chemical and thermal injuries.
+
+<a id="exh-wit-007-3"></a>
+### EXH-WIT-007.3 [RESERVED / RULE 75 PROTECTIVE MEASURES]: Bereaved Family Victim Impact & Guardianship Affidavits
+* **Current Status:** **RESERVED — COMPILATION UNDERWAY FOR STATE REPARATION PROCEEDINGS**
+* **Anticipated Evidentiary Scope:** Certified Victim Impact Statements (VIS), legal heirship declarations, and psychological trauma evaluations from the immediate family members and legal guardians of the deceased primary students.
+* **Factual Focus:** Documentation of psychological, social, and economic devastation to establish the foundation for direct state financial compensation under ILC ARSIWA Article 36 and European universal jurisdiction victim standing.
+
 ---
 
 <a id="exhibit-osint"></a>
@@ -339,15 +422,42 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
 
 ---
 
+<a id="reserved-dockets"></a>
+# RESERVED EVIDENTIARY DOCKETS & PENDING DISCOVERY PROTOCOL (RULE 54bis)
+
+1. **Procedural Foundation:**
+   * International criminal practice recognizes that complex conflict investigations require progressive evidence management. Pursuant to **Rule 54bis of the ICTY Rules of Procedure and Evidence** (*Orders Directed to States for the Production of Documents*) and **Rule 98** (*Power of Chambers to Order Production of Additional Evidence*), this compendium formally reserves docket slots for evidence that is subject to mandatory state disclosure or specialized scientific analysis.
+2. **Master Schedule of Reserved Evidentiary Dockets:**
+
+| Reserved Docket ID | Subject Matter & Evidentiary Focus | Target Authority / Custodian | Required Procedural Mechanism |
+| :--- | :--- | :--- | :--- |
+| **EXH-SAT-001.6** | Classified NRO KH-11 Overhead Satellite Reconnaissance Feeds | National Reconnaissance Office (NRO) / NGA | US Congressional Subpoena / UN Inquiry Request |
+| **EXH-MUN-002.6** | BGM-109 Block IV/V Satellite Telemetry & DSMAC Video Stream | US Navy NAVAIR / Strike Operations Center | Federal Court Discovery / ICJ Order |
+| **EXH-MUN-002.7** | Crater Soil Core Chemical Spectrometry (PBXN-107 Residue) | Certified Independent European Laboratory | Ongoing Forensic Laboratory Spectrometry |
+| **EXH-LAUNCH-003.5** | Primary Air Defense Radar Tracks & Signal Intercept Logs | Regional Civil & Military Air Defense Authorities | Letters Rogatory (*Oikeusapupyyntö*) |
+| **EXH-CENTCOM-004.5** | Complete Unredacted CENTCOM AR 15-6 Investigation Report | US Central Command / DoD Inspector General | FOIA Judicial Petition / Subpoena Duces Tecum |
+| **EXH-VIC-005.6** | Supplementary Biometric Profiles for Victims 101 through 156 | Hormozgan Civil Registry / PFPJ ry Family Bureau | Ongoing Ante-Mortem Field Verification |
+| **EXH-WIT-007.1** | Sworn Video Depositions of Surviving Faculty & Staff | PFPJ ry Protective Witness Registry | Rule 75 Pseudonymized Deposition Protocol |
+| **EXH-WIT-007.2** | Sworn Affidavits of First Responders & Surgeons | Iranian Red Crescent / Shahid Mohammadi Hospital | Rule 75 Depositions under Notarial Seal |
+| **EXH-WIT-007.3** | Bereaved Family Victim Impact & Legal Heirship Statements | Legal Representatives of Minab Families | ARSIWA Art. 36 Reparation Claims Registry |
+
+3. **Ingestion & Chain of Custody Protocol for Reserved Items:**
+   * When any reserved exhibit is produced, declassified, or finalized, it shall be formally ingested into the Master Vault in Helsinki;
+   * An immediate SHA-256 cryptographic checksum will be generated and appended to this document in a supplementary Addendum;
+   * The exhibit’s status will be converted from `[RESERVED]` to `[CERTIFIED ACTIVE]`, ensuring seamless integration without disturbing the numbering or legal validity of existing exhibits.
+
+---
+
 <a id="custody-protocol"></a>
 # CRYPTOGRAPHIC INTEGRITY, CHAIN OF CUSTODY & JUDICIAL ACCESS PROTOCOL
 
-1. **Cryptographic Manifest:**
-   * Master Image Hash (`EXH-SAT-001.bin`): `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+1. **Cryptographic Manifest for Certified Active Exhibits:**
+   * Master Image Archive Hash (`EXH-SAT-001.bin`): `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
    * Munitions Forensics Hash (`EXH-MUN-002.bin`): `7d1a54127b222502f5b79b5fb0803061152a44f92b37e23c65dd0e334232cf72`
    * Casualty Master Census Hash (`EXH-VIC-005.bin`): `a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e`
+   * Master Exhibit Compendium Hash (`MASTER_EXHIBIT_DOSSIER.md`): Auto-calculated upon judicial sealing.
 2. **Permanent Judicial Archive:**
-   * Physical custody of metallic fragments and original paper death certificates is maintained by the Department of Forensic Documentation, People for Peace & Justice ry, Helsinki, Finland;
+   * Physical custody of metallic fragments, explosive swabs, and original paper death certificates is maintained by the Department of Forensic Documentation, People for Peace & Justice ry, Helsinki, Finland;
    * Digital evidence files are mirrored on geographically distributed, encrypted European servers in Finland and the Netherlands.
 3. **Judicial Access Protocol:**
    * All exhibits catalogued herein are certified as court-ready and available for immediate transmission to the **Prosecutor General of Finland**, the **Office of the Prosecutor of the International Criminal Court**, and the **United Nations International Impartial and Independent Mechanism (IIIM)** upon receipt of formal letters rogatory (*oikeusapupyyntö*).
