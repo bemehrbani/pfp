@@ -139,7 +139,7 @@
 
 <a id="chapter-2-5"></a>
 ### 2.5 Formal Master Exhibit Inventory & Chain of Custody Registry
-17. The findings in this Dossier rest upon five certified master exhibit categories:
+17. The findings in this Dossier rest upon five certified master exhibit categories, compiled, authenticated, and catalogued in full in the accompanying [**MASTER EXHIBIT DOSSIER & EVIDENTIARY COMPENDIUM (Docket No. PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM)**](file:///c:/PFP/Campaigns/minab/justiceForMinab/docs/MASTER_EXHIBIT_DOSSIER.md):
 
 | Exhibit Number | Description & Source Category | Evidentiary Standard & Custody Status |
 | :--- | :--- | :--- |
