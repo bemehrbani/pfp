@@ -207,3 +207,7 @@ Campaigns/minab/screening_media/
 # Agent scratch directory
 scratch/
 
+# Local cross-device sync scripts
+sync_pfp.ps1
+Sync-Push-To-OneDrive.bat
+Sync-Pull-From-OneDrive.bat
