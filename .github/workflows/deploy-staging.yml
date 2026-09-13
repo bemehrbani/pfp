@@ -40,11 +40,17 @@ jobs:
           echo "=== Syncing staging environment ==="
           $SSH_CMD "cd /opt/pfp-staging && if [ -f .env.staging ]; then cp .env.staging .env.production && cp .env.staging .env; fi"
 
+          echo "=== Ensuring log & media permissions ==="
+          $SSH_CMD "cd /opt/pfp-staging && mkdir -p PFP_Platform/api/logs PFP_Platform/api/static PFP_Platform/api/media && chmod -R 777 PFP_Platform/api/logs PFP_Platform/api/static PFP_Platform/api/media"
+
           echo "=== Rebuilding and restarting staging services ==="
           $SSH_CMD "cd /opt/pfp-staging && docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build --remove-orphans"
 
           echo "=== Waiting for services to stabilize ==="
           sleep 30
+
+          echo "=== Backend status & diagnostics ==="
+          $SSH_CMD "cd /opt/pfp-staging && docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml logs --tail=40 backend"
 
           echo "=== Running migrations ==="
           $SSH_CMD "cd /opt/pfp-staging && docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py migrate --noinput"
