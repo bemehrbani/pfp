@@ -20,13 +20,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
       - name: Deploy to Staging Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          script: |
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          SSH_CMD="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}"
+          $SSH_CMD << 'EOF'
+            set -e
             cd /opt/pfp-staging
             git pull origin dev
             
@@ -40,8 +48,9 @@ jobs:
             docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build
             
             # Apply migrations
-            docker exec pfp-staging-backend-1 python manage.py migrate
-            docker exec pfp-staging-backend-1 python manage.py collectstatic --noinput
+            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py migrate --noinput
+            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py collectstatic --noinput
             
             # Trigger initial fetch to populate the bot with fresh scrape data and clear legacies
-            docker exec pfp-staging-backend-1 python manage.py shell -c "from apps.campaigns.tasks import fetch_global_protests; fetch_global_protests()"
+            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py shell -c "from apps.campaigns.tasks import fetch_global_protests; fetch_global_protests()"
+          EOF

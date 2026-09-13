@@ -10,7 +10,7 @@ Tests cover:
 
 import json
 from datetime import datetime, timedelta
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, AsyncMock
 from django.test import TestCase, override_settings
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -594,7 +594,7 @@ class TelegramAPITests(APITestCase):
         mock_sent_message.chat.id = 987654321
         mock_sent_message.date = datetime(2023, 1, 1, 12, 0, 0)
 
-        mock_bot.send_message.return_value = mock_sent_message
+        mock_bot.send_message = AsyncMock(return_value=mock_sent_message)
 
         data = {
             'chat_id': 987654321,
