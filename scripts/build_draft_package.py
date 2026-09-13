@@ -947,17 +947,22 @@ The build engine automatically:
 def main():
     parser = argparse.ArgumentParser(description="Compile report package draft versions.")
     parser.add_argument("--date", default=None, help="Production date (YYYY-MM-DD). Default: today.")
+    parser.add_argument("--version-tag", default=None, help="Version tag (e.g. v2). Default: None.")
     parser.add_argument("--output-dir", default=None, help="Root drafts folder. Default: Draft_Versions.")
     args = parser.parse_args()
 
     production_date = args.date or datetime.now().strftime("%Y-%m-%d")
     drafts_root = args.output_dir or DEFAULT_DRAFTS_ROOT
-    version_dir = os.path.join(drafts_root, production_date)
+    version_folder = f"{production_date}_{args.version_tag}" if args.version_tag else production_date
+    version_dir = os.path.join(drafts_root, version_folder)
 
     os.makedirs(version_dir, exist_ok=True)
 
+    tag_str = f" ({args.version_tag})" if args.version_tag else ""
+    tag_file = f"_{args.version_tag}" if args.version_tag else ""
+
     print("=" * 70)
-    print(f"PFPJ ry Report Package Compiler: Draft Version {production_date}")
+    print(f"PFPJ ry Report Package Compiler: Draft Version {production_date}{tag_str}")
     print(f"Target Version Directory: {version_dir}")
     print("=" * 70)
 
@@ -967,12 +972,12 @@ def main():
             sys.exit(1)
 
     # 1. Main Report Filenames
-    main_docx = os.path.join(version_dir, f"PFPJ_Minab_Factual_Determination_Main_Report_{production_date}_Draft.docx")
-    main_pdf = os.path.join(version_dir, f"PFPJ_Minab_Factual_Determination_Main_Report_{production_date}_Draft.pdf")
+    main_docx = os.path.join(version_dir, f"PFPJ_Minab_Factual_Determination_Main_Report_{production_date}{tag_file}_Draft.docx")
+    main_pdf = os.path.join(version_dir, f"PFPJ_Minab_Factual_Determination_Main_Report_{production_date}{tag_file}_Draft.pdf")
 
     # 2. Annex Document Filenames
-    annex_docx = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}_Draft.docx")
-    annex_pdf = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}_Draft.pdf")
+    annex_docx = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}{tag_file}_Draft.docx")
+    annex_pdf = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}{tag_file}_Draft.pdf")
 
     # Step 1: Compile Main Report DOCX
     print("\n[1/4] Compiling Main Report (Word Document)...")

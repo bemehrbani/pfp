@@ -1,119 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PFPJ ry — Factual Determination & Formal Complaint (Minab Elementary School Strike)</title>
+  <meta name="theme-color" content="#0a0e17">
+  <meta name="description" content="Authoritative Incident Dossier & Factual Determination — Minab School Kinetic Strike (Docket No.: PFPJ-2026-IR-001). 10 Canonical Judicial Chapters, Certified Master Exhibit Dossier, and Admissibility Methodology.">
+  <meta property="og:title" content="Minab School Strike — Incident Dossier & Factual Determination (Docket PFPJ-2026-IR-001)">
+  <meta property="og:description" content="Single Source of Truth: 10 Judicial Chapters, Certified Exhibit Compendium, Berkeley Protocol Forensics, and 156 Certified Casualty Records.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://peopleforpeace.live/draft.html">
+  <meta property="og:image" content="https://peopleforpeace.live/images/og-evidence.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Minab Incident Showcase — Single Source of Truth (Docket PFPJ-2026-IR-001)">
+  <meta name="twitter:description" content="Official Factual Determination & Master Exhibit Dossier on the kinetic airstrike against Shajareh Tayyebeh Girls' Elementary School.">
+  <meta name="twitter:image" content="https://peopleforpeace.live/images/og-evidence.png">
+  <title>Incident Dossier & Factual Determination — Minab School Strike | Docket PFPJ-2026-IR-001 | People for Peace</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-deep: #060913;
+      --bg: #0a0e17;
+      --bg2: #111827;
+      --bg3: #1a2234;
+      --bg-card: #141c2e;
+      --bg-card-alt: #182238;
       --bg-surface: #0e1424;
-      --bg-card: #141c33;
-      --bg-card-alt: #18223d;
-      --gold: #d4af37;
+      --text: #f0ebe3;
+      --text2: #9ca3af;
+      --text3: #6b7280;
+      --gold: #d4a853;
       --gold-light: #f5e7b2;
-      --gold-dim: rgba(212, 175, 55, 0.12);
-      --gold-border: rgba(212, 175, 55, 0.25);
-      --crimson: #c8323c;
-      --crimson-dim: rgba(200, 50, 60, 0.12);
-      --crimson-border: rgba(200, 50, 60, 0.25);
-      --blue: #3b82f6;
-      --blue-dim: rgba(59, 130, 246, 0.12);
-      --teal: #10b981;
-      --teal-dim: rgba(16, 185, 129, 0.12);
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --font-en-serif: 'Playfair Display', Georgia, serif;
-      --font-en-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-fa: 'Vazirmatn', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
+      --gold-dim: rgba(212, 168, 83, 0.12);
+      --gold-border: rgba(212, 168, 83, 0.28);
+      --red: #c4564a;
+      --red-light: #f87171;
+      --red-dim: rgba(196, 86, 74, 0.12);
+      --red-border: rgba(196, 86, 74, 0.3);
+      --blue: #4a90d9;
+      --blue-dim: rgba(74, 144, 217, 0.12);
+      --blue-border: rgba(74, 144, 217, 0.28);
+      --green: #7cb68e;
+      --green-dim: rgba(124, 182, 142, 0.12);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.04);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Outfit', sans-serif;
+      --font-sans: 'Outfit', sans-serif;
+      --font-rtl: 'Vazirmatn', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+      --radius: 12px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    body {
-      background-color: var(--bg-deep);
-      color: var(--text-primary);
-      font-family: var(--font-en-sans);
-      line-height: 1.7;
-      min-height: 100vh;
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Top Utility Bar */
-    .top-bar {
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    a:hover {
+      color: #fff;
+    }
+
+    /* ─── Unified Platform Nav (Matches evidence.html & memorial.html) ─── */
+    .nav {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(6, 9, 19, 0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--gold-border);
-      padding: 10px 24px;
+      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      padding: 12px 32px;
+      background: rgba(10, 14, 23, 0.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
     }
 
-    .brand-group {
+    .nav-logo-wrap {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .brand-logo {
-      font-size: 26px;
-      line-height: 1;
-    }
-
-    .brand-title-wrap h1 {
-      font-size: 15px;
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #fff;
+      color: var(--text);
+      letter-spacing: 0.04em;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .brand-title-wrap .badge-legal {
+    .nav-logo .docket-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 2px 7px;
       background: var(--gold-dim);
       border: 1px solid var(--gold-border);
       color: var(--gold-light);
-      font-size: 10px;
-      padding: 2px 7px;
       border-radius: 4px;
-      font-family: var(--font-mono);
       font-weight: 600;
     }
 
-    .brand-meta {
-      font-size: 11px;
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
     }
 
-    .controls-group {
+    .nav-links a {
+      font-size: 0.88rem;
+      color: var(--text2);
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold);
+    }
+
+    .nav-actions {
       display: flex;
       align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
-    /* Mode Switch Pills */
     .view-mode-selector {
       display: inline-flex;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
+      background: var(--bg2);
+      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 3px;
       gap: 2px;
@@ -122,16 +163,13 @@
     .mode-btn {
       background: transparent;
       border: none;
-      color: var(--text-secondary);
-      font-size: 12px;
+      color: var(--text2);
+      font-size: 11.5px;
       font-weight: 600;
-      padding: 6px 12px;
+      padding: 5px 11px;
       border-radius: 6px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      transition: all 0.2s;
     }
 
     .mode-btn:hover {
@@ -142,170 +180,54 @@
       background: var(--gold);
       color: #060913;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
     }
 
-    /* Action Buttons */
-    .btn-action {
-      background: var(--bg-card);
-      border: 1px solid var(--gold-border);
-      color: var(--gold-light);
-      font-size: 12px;
+    .btn-nav-action {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 11.5px;
       font-weight: 600;
-      padding: 7px 14px;
+      padding: 6px 12px;
       border-radius: 6px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
     }
 
-    .btn-action:hover {
-      background: var(--gold);
-      color: #060913;
+    .btn-nav-action:hover {
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
-    .btn-portal {
+    .btn-nav-portal {
       background: var(--blue-dim);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      border: 1px solid var(--blue-border);
       color: #93c5fd;
     }
 
-    .btn-portal:hover {
+    .btn-nav-portal:hover {
       background: #3b82f6;
       color: #fff;
     }
 
-    /* Navigation Bar */
-    .nav-sections-bar {
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 8px 24px;
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      white-space: nowrap;
-      scrollbar-width: thin;
+    @media (max-width: 1100px) {
+      .nav-links {
+        display: none;
+      }
     }
 
-    .nav-pill {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-decoration: none;
-      padding: 5px 11px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid transparent;
-      transition: all 0.15s;
-    }
-
-    .nav-pill:hover, .nav-pill:focus {
-      color: var(--gold);
-      border-color: var(--gold-border);
-      background: var(--gold-dim);
-    }
-
-    /* Container */
-    .reader-container {
-      max-width: 1560px;
-      margin: 0 auto;
-      padding: 32px 24px 80px;
-    }
-
-    /* Header Banner */
-    .complaint-hero {
-      background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-card) 100%);
-      border: 1px solid var(--gold-border);
-      border-radius: 12px;
-      padding: 36px 32px;
-      margin-bottom: 32px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .complaint-hero::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--gold) 0%, var(--crimson) 50%, var(--gold) 100%);
-    }
-
-    .hero-meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .meta-box {
-      font-size: 12px;
-    }
-
-    .meta-box .label {
-      color: var(--text-muted);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 3px;
-      font-family: var(--font-mono);
-    }
-
-    .meta-box .value {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    /* Search bar */
-    .search-wrap {
-      margin-bottom: 24px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .search-input {
-      flex: 1;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 10px 16px;
-      color: #fff;
-      font-size: 13px;
-      outline: none;
-      font-family: var(--font-en-sans);
-      transition: border-color 0.2s;
-    }
-
-    .search-input:focus {
-      border-color: var(--gold);
-    }
-
-    /* Sections */
-    .section-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      margin-bottom: 28px;
-      overflow: hidden;
-      transition: border-color 0.2s;
-    }
-
-    .section-card:hover {
-      border-color: rgba(212, 175, 55, 0.3);
-    }
-
-    .section-header {
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 18px 24px;
+    /* ─── Secondary Sticky Filter & Jump Bar ─── */
+    .filter-bar {
+      position: sticky;
+      top: 55px;
+      z-index: 990;
+      background: rgba(14, 20, 36, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -313,63 +235,359 @@
       flex-wrap: wrap;
     }
 
-    .section-header-title-en {
-      font-family: var(--font-en-serif);
-      font-size: 20px;
-      font-weight: 700;
+    .part-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .part-pill-btn {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .part-pill-btn:hover {
+      border-color: var(--gold-border);
       color: var(--gold-light);
-      letter-spacing: -0.2px;
     }
 
-    .section-header-title-fa {
-      font-family: var(--font-fa);
-      font-size: 19px;
-      font-weight: 800;
-      color: var(--gold);
-      direction: rtl;
+    .part-pill-btn.active {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      color: var(--gold-light);
     }
 
-    .badge-sec {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      font-family: var(--font-mono);
-      text-transform: uppercase;
+    .search-box-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 12px;
+      gap: 8px;
+      min-width: 260px;
+      max-width: 380px;
+      flex: 1;
     }
 
-    .badge-sec.substantive {
-      background: var(--crimson-dim);
-      border: 1px solid var(--crimson-border);
-      color: #fca5a5;
+    .search-box-wrap:focus-within {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold);
     }
 
-    .badge-sec.procedural {
-      background: var(--blue-dim);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      color: #93c5fd;
+    .search-box-wrap input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 12.5px;
+      width: 100%;
+      font-family: var(--font-body);
     }
 
-    .badge-sec.remedial {
-      background: var(--teal-dim);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #6ee7b7;
+    .search-box-wrap input::placeholder {
+      color: var(--text3);
     }
 
-    .badge-sec.standard {
+    /* ─── Container ─── */
+    .portal-container {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* ─── Hero Header & Single Source of Truth Banner ─── */
+    .hero-banner {
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg-card) 100%);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .hero-banner::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--red) 50%, var(--gold) 100%);
+    }
+
+    .hero-top-badges {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge-docket {
       background: var(--gold-dim);
       border: 1px solid var(--gold-border);
       color: var(--gold-light);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
     }
 
-    /* Clause Layouts */
+    .badge-classification {
+      background: var(--red-dim);
+      border: 1px solid var(--red-border);
+      color: #fca5a5;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .badge-authority {
+      background: var(--blue-dim);
+      border: 1px solid var(--blue-border);
+      color: #93c5fd;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .hero-title-en {
+      font-family: var(--font-display);
+      font-size: 2.3rem;
+      font-weight: 900;
+      line-height: 1.25;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title-fa {
+      font-family: var(--font-rtl);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--gold-light);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-authority-notice {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-authority-notice strong {
+      color: #fff;
+    }
+
+    /* ─── Incident Fact Sheet Grid (6 Canonical Cards) ─── */
+    .fact-sheet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .fact-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      transition: border-color var(--transition);
+    }
+
+    .fact-card:hover {
+      border-color: var(--gold-border);
+    }
+
+    .fact-card .f-label {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .fact-card .f-val {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .fact-card .f-sub {
+      font-size: 11.5px;
+      color: var(--text2);
+      line-height: 1.4;
+    }
+
+    /* ─── Download Deck ─── */
+    .download-deck-container {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .download-deck-info h4 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .download-deck-info p {
+      font-size: 12px;
+      color: var(--text2);
+      font-family: var(--font-mono);
+    }
+
+    .download-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-download {
+      background: var(--bg2);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-download:hover {
+      background: var(--gold);
+      color: #060913;
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    .btn-download.annex-btn {
+      border-color: var(--blue-border);
+      color: #93c5fd;
+    }
+
+    .btn-download.annex-btn:hover {
+      background: #3b82f6;
+      color: #fff;
+      border-color: #3b82f6;
+    }
+
+    /* ─── Section Card Architecture ─── */
+    .section-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 36px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      transition: border-color var(--transition);
+    }
+
+    .section-card:hover {
+      border-color: rgba(212, 168, 83, 0.35);
+    }
+
+    .section-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 22px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .chapter-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .section-header-title-en {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .section-header-title-fa {
+      font-family: var(--font-rtl);
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--gold-light);
+      direction: rtl;
+    }
+
+    /* ─── Clause Rows (Bilingual Grid) ─── */
     .clause-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      padding: 22px 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      gap: 32px;
+      padding: 24px 30px;
+      border-bottom: 1px solid var(--border-subtle);
       position: relative;
     }
 
@@ -388,7 +606,8 @@
     body.mode-en .clause-col-fa {
       display: none !important;
     }
-    body.mode-en .section-header-title-fa {
+    body.mode-en .section-header-title-fa,
+    body.mode-en .hero-title-fa {
       display: none !important;
     }
 
@@ -398,22 +617,22 @@
     body.mode-fa .clause-col-en {
       display: none !important;
     }
-    body.mode-fa .section-header-title-en {
+    body.mode-fa .section-header-title-en,
+    body.mode-fa .hero-title-en {
       display: none !important;
     }
 
     .clause-col-en {
-      font-family: var(--font-en-sans);
       font-size: 14.5px;
       color: #e2e8f0;
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
     .clause-col-fa {
-      font-family: var(--font-fa);
+      font-family: var(--font-rtl);
       font-size: 15px;
       color: #e2e8f0;
-      line-height: 2;
+      line-height: 2.05;
       direction: rtl;
       text-align: right;
     }
@@ -421,8 +640,8 @@
     .clause-header-line {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .clause-id {
@@ -432,7 +651,7 @@
       background: var(--gold-dim);
       color: var(--gold-light);
       border: 1px solid var(--gold-border);
-      padding: 1px 7px;
+      padding: 2px 8px;
       border-radius: 4px;
       display: inline-block;
     }
@@ -440,27 +659,26 @@
     .clause-heading {
       font-weight: 700;
       color: #fff;
-      font-size: 14.5px;
+      font-size: 15px;
     }
 
     .clause-col-fa .clause-heading {
-      font-family: var(--font-fa);
+      font-family: var(--font-rtl);
       font-weight: 800;
-      font-size: 15.5px;
+      font-size: 16px;
       color: #fef08a;
     }
 
-    /* Legal Quote Callout Box */
     .quote-box {
-      margin-top: 14px;
-      padding: 14px 18px;
-      background: rgba(10, 15, 30, 0.7);
+      background: rgba(255, 255, 255, 0.02);
       border-left: 3px solid var(--gold);
-      border-radius: 0 8px 8px 0;
-      font-size: 13.5px;
+      padding: 14px 18px;
+      margin: 14px 0;
       font-style: italic;
-      color: var(--gold-light);
-      line-height: 1.6;
+      color: #cbd5e1;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     .clause-col-fa .quote-box {
@@ -468,23 +686,20 @@
       border-right: 3px solid var(--gold);
       border-radius: 8px 0 0 8px;
       font-style: normal;
-      direction: rtl;
     }
 
     .precedent-pill {
-      margin-top: 8px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: var(--crimson-dim);
-      border: 1px solid var(--crimson-border);
-      color: #fca5a5;
+      gap: 5px;
+      background: rgba(212, 168, 83, 0.08);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-light);
       font-size: 11.5px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 4px;
-      font-style: normal;
+      padding: 3px 9px;
+      border-radius: 6px;
       font-family: var(--font-mono);
+      margin-top: 8px;
     }
 
     .evidence-pill {
@@ -492,58 +707,268 @@
       align-items: center;
       gap: 5px;
       background: var(--blue-dim);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      border: 1px solid var(--blue-border);
       color: #93c5fd;
       font-size: 11px;
-      font-weight: 600;
-      padding: 2px 7px;
+      padding: 2px 8px;
       border-radius: 4px;
       font-family: var(--font-mono);
       margin-right: 4px;
+      margin-bottom: 4px;
     }
 
-    /* Footer */
-    .reader-footer {
-      margin-top: 48px;
-      padding: 32px 24px;
-      text-align: center;
-      border-top: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      font-size: 12px;
+    /* ─── Forensic Tables (Exhibits & Casualties) ─── */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 18px 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+    }
+
+    .forensic-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .forensic-table th {
+      background: var(--bg3);
+      color: var(--gold);
       font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
     }
 
-    /* Print Styles */
+    .forensic-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: #e2e8f0;
+    }
+
+    .forensic-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .forensic-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .exhibit-code {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--gold-light);
+      background: var(--gold-dim);
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid var(--gold-border);
+      font-size: 11.5px;
+      white-space: nowrap;
+    }
+
+    .badge-reserved {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: #fca5a5;
+      background: var(--red-dim);
+      border: 1px solid var(--red-border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* ─── 10 Similarity Factors Cards ─── */
+    .factors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin: 20px 0;
+    }
+
+    .factor-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: all var(--transition);
+    }
+
+    .factor-item-card:hover {
+      border-color: var(--gold-border);
+      transform: translateY(-2px);
+    }
+
+    .factor-num-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .factor-item-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .factor-item-desc {
+      font-size: 13.5px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* ─── 18 Jurisprudential Precedents Grid ─── */
+    .precedents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin: 20px 0;
+    }
+
+    .prec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: all var(--transition);
+    }
+
+    .prec-card:hover {
+      border-color: var(--blue-border);
+      transform: translateY(-2px);
+    }
+
+    .prec-id-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #93c5fd;
+      background: var(--blue-dim);
+      border: 1px solid var(--blue-border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .prec-name {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .prec-forum {
+      font-size: 11.5px;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      margin-bottom: 8px;
+    }
+
+    .prec-finding {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .prec-minab-link {
+      font-size: 12px;
+      color: #cbd5e1;
+      background: rgba(255,255,255,0.02);
+      border-left: 2px solid var(--gold);
+      padding: 6px 10px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ─── Footer ─── */
+    .portal-footer {
+      margin-top: 60px;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: 12.5px;
+      font-family: var(--font-mono);
+      background: var(--bg);
+    }
+
+    .portal-footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .portal-footer-links a {
+      color: var(--text2);
+      font-size: 12px;
+    }
+
+    .portal-footer-links a:hover {
+      color: var(--gold);
+    }
+
+    /* ─── Print Stylesheet (Court-Ready Document) ─── */
     @media print {
       body {
         background: #fff !important;
         color: #111 !important;
-        font-size: 11pt !important;
-        line-height: 1.5 !important;
+        font-size: 10pt !important;
+        line-height: 1.45 !important;
       }
-      .top-bar, .nav-sections-bar, .controls-group, .search-wrap, .btn-action, .btn-portal {
+      .nav, .filter-bar, .download-deck-container, .btn-download, .mode-btn, .search-box-wrap, .part-pills {
         display: none !important;
       }
-      .reader-container {
+      .portal-container {
         max-width: 100% !important;
         padding: 0 !important;
       }
-      .complaint-hero {
+      .hero-banner {
         background: #fff !important;
-        border: 1px solid #999 !important;
+        border: 1px solid #666 !important;
         color: #000 !important;
+        box-shadow: none !important;
         page-break-after: avoid;
+        padding: 20pt !important;
+      }
+      .hero-title-en, .hero-title-fa {
+        color: #000 !important;
+      }
+      .fact-card {
+        background: #fff !important;
+        border: 1px solid #ccc !important;
+        color: #000 !important;
+      }
+      .fact-card .f-val {
+        color: #000 !important;
       }
       .section-card {
         background: #fff !important;
-        border: 1px solid #ccc !important;
+        border: 1px solid #bbb !important;
+        box-shadow: none !important;
         page-break-inside: avoid;
         margin-bottom: 20pt !important;
       }
       .section-header {
-        background: #f3f4f6 !important;
-        color: #000 !important;
+        background: #f1f5f9 !important;
         border-bottom: 1px solid #999 !important;
+        color: #000 !important;
       }
       .section-header-title-en, .section-header-title-fa {
         color: #000 !important;
@@ -555,745 +980,1634 @@
         color: #111 !important;
       }
       .quote-box {
-        background: #f9fafb !important;
+        background: #f8fafc !important;
+        border-color: #333 !important;
         color: #222 !important;
-        border-color: #444 !important;
       }
-      .precedent-pill, .evidence-pill, .clause-id {
-        background: #eee !important;
+      .forensic-table th {
+        background: #e2e8f0 !important;
         color: #000 !important;
-        border: 1px solid #aaa !important;
+      }
+      .forensic-table td {
+        color: #111 !important;
+        border-color: #ddd !important;
       }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 860px) {
       .clause-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+      }
+      .hero-title-en {
+        font-size: 1.7rem;
+      }
+      .hero-banner {
+        padding: 24px 20px;
+      }
+      .filter-bar {
+        position: static;
       }
     }
   </style>
 </head>
 <body class="mode-both">
 
-  <!-- TOP UTILITY BAR -->
-  <header class="top-bar">
-    <div class="brand-group">
-      <div class="brand-logo">⚖️</div>
-      <div class="brand-title-wrap">
-        <h1>
-          PFPJ ry · Formal Criminal Complaint Dossier
-          <span class="badge-legal">FIN-HELSINKI 3616815-5</span>
-        </h1>
-        <div class="brand-meta">Minab Elementary School Strike · Docket: Finnish Office of Prosecutor General & ICC OTP</div>
-      </div>
-    </div>
-
-    <div class="controls-group">
-      <!-- Mode selector -->
-      <div class="view-mode-selector" title="Switch Reading Mode">
-        <button class="mode-btn active" id="btnModeBoth" onclick="setMode('both')">
-          <span>⚖️ Side-by-Side</span>
-        </button>
-        <button class="mode-btn" id="btnModeEn" onclick="setMode('en')">
-          <span>🇬🇧 English</span>
-        </button>
-        <button class="mode-btn" id="btnModeFa" onclick="setMode('fa')">
-          <span>🇮🇷 فارسی</span>
-        </button>
-      </div>
-
-      <!-- Quick Action Buttons -->
-      <button class="btn-action" onclick="window.print()" title="Print or Export to PDF">
-        🖨️ Print / PDF
-      </button>
-
-      <a class="btn-action btn-portal" href="report.html" title="Open Full Portal with 18 Case Benchmarks">
-        🏛️ Case-Book Portal
+  <!-- ─── UNIFIED PLATFORM NAVIGATION ─── -->
+  <nav class="nav">
+    <div class="nav-logo-wrap">
+      <a href="landing.html" class="nav-logo">
+        <span>⚖️</span>
+        <span>PEOPLE FOR PEACE</span>
       </a>
+      <span class="docket-badge">DOCKET: PFPJ-2026-IR-001</span>
     </div>
-  </header>
 
-  <!-- QUICK NAVIGATION PILLS -->
-  <nav class="nav-sections-bar">
-    <a href="#sec1" class="nav-pill">§1 Introduction</a>
-    <a href="#sec2" class="nav-pill">§2 Methodology & Forensics</a>
-    <a href="#sec3" class="nav-pill">§3 Chronology & Geometry</a>
-    <a href="#sec4" class="nav-pill">§4 Applicable IHL</a>
-    <a href="#sec5" class="nav-pill">§5 Legal Liability & Negligence</a>
-    <a href="#sec6" class="nav-pill">§6 European Jurisdiction</a>
-    <a href="#sec7" class="nav-pill">§7 Prosecutorial Demands</a>
+    <div class="nav-links">
+      <a href="landing.html">Home</a>
+      <a href="memorial.html">Memorial</a>
+      <a href="mothers.html">Mothers</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="multimedia.html">Multimedia</a>
+      <a href="data.html">Data</a>
+      <a href="sources.html">Sources</a>
+      <a href="draft.html" class="active">Case Report</a>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Reading mode selector -->
+      <div class="view-mode-selector" title="Switch Reading Mode">
+        <button class="mode-btn active" id="btnModeBoth" onclick="setMode('both')">⚖️ Side-by-Side</button>
+        <button class="mode-btn" id="btnModeEn" onclick="setMode('en')">🇬🇧 English</button>
+        <button class="mode-btn" id="btnModeFa" onclick="setMode('fa')">🇮🇷 فارسی</button>
+      </div>
+
+      <button class="btn-nav-action" onclick="window.print()" title="Print Court-Ready PDF">🖨️ Court PDF</button>
+      <a class="btn-nav-action btn-nav-portal" href="report.html" title="Internal Board Case-Book Portal">🏛️ Board Portal</a>
+    </div>
   </nav>
 
-  <main class="reader-container">
-
-    <!-- HERO HEADER -->
-    <section class="complaint-hero">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-        <div>
-          <span class="badge-sec standard" style="margin-bottom: 12px; display: inline-block;">COURT-READY FACTUAL DETERMINATION & FORMAL CRIMINAL COMPLAINT</span>
-          <h2 style="font-family: var(--font-en-serif); font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 8px;">
-            Targeting Negligence, Precaution Breaches & Disproportionality in the Aerial Bombardment of Shajareh Tayyebeh Girls' Elementary School
-          </h2>
-          <div style="font-family: var(--font-fa); font-size: 18px; font-weight: 700; color: var(--gold-light); direction: rtl; margin-top: 6px;">
-            احراز واقعیت و شکایت کیفری رسمی در خصوص سهل‌انگاری در هدف‌گیری، نقض تعهدات احتیاطی و عدم تناسب فاحش در بمباران مدرسه دخترانه شجره طیبه میناب
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-meta-grid">
-        <div class="meta-box">
-          <div class="label">Filing Organization</div>
-          <div class="value">People for Peace & Justice ry (PFPJ ry)</div>
-          <div style="font-size: 11px; color: var(--text-secondary);">Helsinki, Finland (PRH Business ID: 3616815-5)</div>
-        </div>
-        <div class="meta-box">
-          <div class="label">Target of Investigation</div>
-          <div class="value">US Dept of Defense / CENTCOM</div>
-          <div style="font-size: 11px; color: var(--text-secondary);">Peacetime Target Nomination Board & DIA Review Cells</div>
-        </div>
-        <div class="meta-box">
-          <div class="label">Incident Under Review</div>
-          <div class="value">Airstrike on Shajareh Tayyebeh School</div>
-          <div style="font-size: 11px; color: var(--text-secondary);">Minab, Iran · Feb 28, 2026 · GPS: 27.1432° N, 57.0784° E</div>
-        </div>
-        <div class="meta-box">
-          <div class="label">Certified Human Toll</div>
-          <div class="value" style="color: #fca5a5;">156 Fatalities · 95+ Severely Maimed</div>
-          <div style="font-size: 11px; color: var(--text-secondary);">120 Verified Primary Schoolchildren (Ages 7–12)</div>
-        </div>
-        <div class="meta-box">
-          <div class="label">Primary Judicial Dockets</div>
-          <div class="value">Finnish Prosecutor General · ICC OTP</div>
-          <div style="font-size: 11px; color: var(--text-secondary);">Ch. 11 Rikoslaki (Finland) & Art. 15 Rome Statute</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LIVE FILTER / SEARCH -->
-    <div class="search-wrap">
-      <input type="text" id="filterInput" class="search-input" placeholder="🔍 Search keywords across English & Persian text (e.g. 'Belgrade', 'Hanan', 'Tomahawk', 'صلاحیت جهانی', 'ماده ۲')..." onkeyup="filterClauses()">
+  <!-- ─── SECONDARY FILTER & FAST JUMP BAR ─── -->
+  <div class="filter-bar">
+    <div class="part-pills">
+      <button class="part-pill-btn active" onclick="filterPart('all')">All Parts (Single Source of Truth)</button>
+      <button class="part-pill-btn" onclick="filterPart('part1')">Part I: Factual Determination (Ch. I–X)</button>
+      <button class="part-pill-btn" onclick="filterPart('part2')">Part II: Master Exhibit Dossier (Annex)</button>
+      <button class="part-pill-btn" onclick="filterPart('part3')">Part III: Methodology & Admissibility</button>
     </div>
 
-    <!-- ==================== SECTION 1 ==================== -->
-    <article class="section-card" id="sec1">
-      <div class="section-header">
-        <div class="section-header-title-en">SECTION 1: INTRODUCTION & EXECUTIVE SUMMARY</div>
-        <span class="badge-sec standard">Procedural Framework</span>
-        <div class="section-header-title-fa">بخش ۱: مقدمه و خلاصه اجرایی پرونده</div>
+    <div class="search-box-wrap">
+      <span style="font-size: 13px; color: var(--gold);">🔍</span>
+      <input type="text" id="filterInput" placeholder="Filter chapters, exhibits (e.g. EXH-SAT-001), victims, articles..." onkeyup="handleFilter(this.value)">
+    </div>
+  </div>
+
+  <main class="portal-container">
+
+    <!-- ─── HERO HEADER: SINGLE SOURCE OF TRUTH BANNER ─── -->
+    <header class="hero-banner" id="heroDossier">
+      <div class="hero-top-badges">
+        <span class="badge-docket">DOCKET NO.: PFPJ-2026-IR-001</span>
+        <span class="badge-classification">CANONICAL JUDICIAL FACTUAL DETERMINATION & COMPLAINT</span>
+        <span class="badge-authority">PFPJ RY · HELSINKI (BUSINESS ID: 3616815-5)</span>
       </div>
 
-      <!-- Clause 1.1 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">1.1</span>
-            <span class="clause-heading">Mandate of Complaining Body</span>
-          </div>
-          <p>This Factual Determination and Complaint is submitted by <strong>People for Peace & Justice ry (PFPJ ry)</strong>, a registered non-governmental organization incorporated in Helsinki, Finland (Business ID: 3616815-5). The mandate of this filing is to compile, verify, and submit evidence establishing command negligence and violation of the duty of precaution under International Humanitarian Law (IHL) in relation to the devastating airstrike conducted on February 28, 2026, against the Shajareh Tayyebeh Girls' Elementary School in Minab, Iran.</p>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">مأموریت نهاد شاکی و ثبت قانونی</span>
-            <span class="clause-id">۱.۱</span>
-          </div>
-          <p>این سند احراز واقعیت و شکایت حقوقی توسط <strong>انجمن مردم برای صلح و عدالت (PFPJ ry)</strong>، به عنوان یک سازمان غیردولتی ثبت‌شده در هلسینکی فنلاند (شناسه ثبتی: 3616815-5) ارائه می‌گردد. مأموریت این پرونده، جمع‌آوری، تأیید و ارائه شواهد اثبات‌کننده سهل‌انگاری فرماندهی و نقض اصول احتیاطی تحت حقوق بین‌الملل بشردوستانه (IHL) در رابطه با حمله موشکی ویرانگر ۲۸ فوریه ۲۰۲۶ به مدرسه دخترانه شجره طیبه در میناب ایران است.</p>
-        </div>
+      <h1 class="hero-title-en">
+        Kinetic Missile Strikes on the Shajareh Tayyebeh Girls' Elementary School in Minab, Iran (February 28, 2026)
+      </h1>
+      <div class="hero-title-fa">
+        احراز قضایی واقعه و شکایت رسمی کیفری در خصوص حملات موشکی به دبستان دخترانه شجره طیبه میناب (۱۰ اسفند ۱۴۰۴)
       </div>
 
-      <!-- Clause 1.2 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">1.2</span>
-            <span class="clause-heading">Opening Salvo Strike & Mass Child Toll</span>
-          </div>
-          <p>On February 28, 2026, during the opening hours of military operations, a precision-guided US BGM-109 Tomahawk cruise missile struck the central wing of the Shajareh Tayyebeh school complex. At the time of the impact, the school was in active session with approximately 300 children present. The strike resulted in <strong>156 certified deaths</strong> (including 120 young schoolchildren and 26 educators/staff) and the severe wounding of over 95 others, representing one of the single largest child civilian casualty events of modern aerial warfare.</p>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">شلیک موج اول و فاجعه انسانی کودکان</span>
-            <span class="clause-id">۱.۲</span>
-          </div>
-          <p>در تاریخ ۲۸ فوریه ۲۰۲۶ و در اولین ساعات آغاز عملیات نظامی، یک فروند موشک کروز هدایت‌شونده دقیق BGM-109 Tomahawk متعلق به ارتش آمریکا به بال مرکزی مجتمع آموزشی شجره طیبه اصابت کرد. در زمان حمله، کلاس‌های مدرسه با حضور حدود ۳۰۰ دانش‌آموز برقرار بود. این اصابت منجر به شهادت <strong>۱۵۶ تن</strong> (شامل ۱۲۰ دانش‌آموز خردسال، ۲۶ معلم و کادر آموزشی، ۷ تن از والدین، ۲ تن از اهالی و ۱ جنین) و مجروحیت شدید بیش از ۹۵ تن دیگر گردید که یکی از بزرگترین فجایع تلفات کودکان در حملات هوایی معاصر به شمار می‌رود.</p>
-        </div>
-      </div>
+      <p class="hero-authority-notice">
+        <strong>Official Judicial Determination Dossier</strong> rendered by <strong>People for Peace & Justice ry (PFPJ ry)</strong>, an independent international human rights association registered in Helsinki, Finland under Business Identity Code <strong>3616815-5</strong>. Structured pursuant to the final trial judgment architecture of the <strong>International Criminal Tribunal for the former Yugoslavia (ICTY)</strong>, the <strong>Berkeley Protocol on Digital Open Source Investigations (OHCHR, 2020)</strong>, and the <strong>ICTY Belgrade Chinese Embassy Targeting Review Precedent (§§ 80–85)</strong>.
+      </p>
 
-      <!-- Clause 1.3 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">1.3</span>
-            <span class="clause-heading">Rebuttal of CENTCOM's "Coordinates Error" Defense</span>
-          </div>
-          <p>Preliminary statements from the US Department of Defense and the Defense Intelligence Agency (DIA) characterized the strike as a "tragic coordinates error" resulting from mistaken targeting of the adjacent Islamic Revolutionary Guard Corps (IRGC) naval logistics base. PFPJ ry rejects this defense. Investigation of the targeting cycle proves that the strike planner office utilized outdated or unverified coordinate databases, failing to verify target usage changes. Under international law, this constitutes <strong>systemic planning negligence</strong>, rather than a permissible "fog of war" mistake.</p>
+      <!-- ─── 6 CANONICAL INCIDENT FACT CARDS ─── -->
+      <div class="fact-sheet-grid">
+        <div class="fact-card">
+          <div class="f-label">📍 Incident Coordinates</div>
+          <div class="f-val">27.1352° N, 57.0805° E</div>
+          <div class="f-sub">Shahid Beheshti Blvd, Minab, Hormozgan Province · Physical 2.8m separation wall since 2016</div>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">رد ادعای «اشتباه در مختصات» پنتاگون</span>
-            <span class="clause-id">۱.۳</span>
-          </div>
-          <p>بیانیه‌های اولیه وزارت دفاع آمریکا و آژانس اطلاعات دفاعی (DIA) این حمله را یک «اشتباه تراژیک در ثبت مختصات» در پی هدف‌گیری پایگاه پشتیبانی نیروی دریایی سپاه در مجاورت مدرسه توصیف کردند. انجمن PFPJ ry این دفاعیه را قاطعانه رد می‌کند. بررسی‌های فنی چرخه هدف‌گیری ثابت می‌کند که طراحان حمله از بانک‌های اطلاعاتی قدیمی و غیرمعتبر استفاده کرده و کاربری محلی را بازبینی نکرده بودند. طبق حقوق بین‌الملل، این سهل‌انگاری سیستماتیک برنامه‌ریزی است و نه اشتباه غیرقابل اجتناب در زمان جنگ.</p>
-        </div>
-      </div>
-    </article>
 
-    <!-- ==================== SECTION 2 ==================== -->
-    <article class="section-card" id="sec2">
-      <div class="section-header">
-        <div class="section-header-title-en">SECTION 2: INVESTIGATIVE METHODOLOGY & EVIDENCE FORENSICS</div>
-        <span class="badge-sec standard">Forensic Protocol</span>
-        <div class="section-header-title-fa">بخش ۲: روش‌شناسی تحقیق و اصالت‌سنجی شواهد</div>
-      </div>
-
-      <!-- Clause 2.1 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">2.1</span>
-            <span class="clause-heading">Berkeley Protocol & Chain of Custody</span>
-          </div>
-          <p><span class="evidence-pill">EVD-OSINT-001</span> The findings in this dossier are established using high-standard Open-Source Intelligence (OSINT) methodology, satellite imagery analysis, flight tracking telemetry, weapons fragmentation verification, and cross-verification of victim registries. Digital chain-of-custody was maintained for all geolocation logs and victim profiles to ensure compliance with European prosecutorial standards and the Berkeley Protocol on Digital Open Source Investigations.</p>
+        <div class="fact-card">
+          <div class="f-label">⏱️ Strike Chronology</div>
+          <div class="f-val">Feb 28, 2026 · 09:22–09:26 IRST</div>
+          <div class="f-sub">Day 1 of International Armed Conflict · Triple-Tap Kinetic Salvo (Δt = 135s, 130s)</div>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">استاندارد پروتکل برکلی و زنجیره مدرک</span>
-            <span class="clause-id">۲.۱</span>
-          </div>
-          <p>یافته‌های این پرونده بر اساس روش‌شناسی استاندارد اطلاعات متن‌باز (OSINT)، تحلیل تصاویر ماهواره‌ای، رهگیری داده‌های پروازی، آزمایش قطعات سلاح و اعتبارسنجی ثبت قربانیان استوار است. فرآیند ثبت و نگهداری زنجیره مدرک دیجیتال برای رعایت استانداردهای مراجع قضایی اروپایی و پروتکل برکلی به دقت مراعات گردید.</p>
+
+        <div class="fact-card">
+          <div class="f-label">🕊️ Certified Casualties</div>
+          <div class="f-val" style="color: var(--red-light);">156 Certified Dead · 95+ Wounded</div>
+          <div class="f-sub">120 female pupils (ages 7–12), 26 educators & principals, 10 support staff; 38 pediatric amputations</div>
+        </div>
+
+        <div class="fact-card">
+          <div class="f-label">🚀 Munitions Deployed</div>
+          <div class="f-val">3x BGM-109 Tomahawk Block IV/V</div>
+          <div class="f-sub">1,000-lb WDU-36/B unitary blast warhead (PBXN-107) · Raytheon CAGE 96214 · Williams F107 turbofan</div>
+        </div>
+
+        <div class="fact-card">
+          <div class="f-label">🎖️ Attributed Command</div>
+          <div class="f-val">US Navy CSG-3 / CENTCOM / DIA</div>
+          <div class="f-sub">USS Abraham Lincoln Carrier Strike Group (Gulf of Oman) · Pre-planned peacetime target nomination list</div>
+        </div>
+
+        <div class="fact-card">
+          <div class="f-label">⚖️ Governing Norms</div>
+          <div class="f-val">AP I, CRC, ARSIWA, Safe Schools</div>
+          <div class="f-sub">Principle of Distinction (Art. 48), Feasible Precautions (Art. 57), State Responsibility (ILC ARSIWA Arts. 30–37)</div>
         </div>
       </div>
 
-      <!-- Clause 2.2 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">2.2</span>
-            <span class="clause-heading">Victim Memorial Database & Chronolocational Proof</span>
-          </div>
-          <p><span class="evidence-pill">EVD-VIC-005</span> PFPJ ry has compiled a memorial database containing the profiles of the victims, including the geolocated remains, photos, and birth records of 100 verified children killed in the blast. Visual assets were authenticated using shadow chronolocation and metadata analysis.</p>
-          <div class="quote-box">
-            "Verification of child casualties in school airstrikes must adhere to strict spatial and chronolocational standards to eliminate doubts regarding military presence."
-            <div class="precedent-pill">Cross-Ref Precedent: Case 13 (Hass School Strike, Syria, 2016)</div>
-          </div>
+      <!-- ─── OFFICIAL DOWNLOAD DECK ─── -->
+      <div class="download-deck-container">
+        <div class="download-deck-info">
+          <h4>📥 Certified Document Download Deck (Cryptographically Verified)</h4>
+          <p>Helsinki Legal Evidence Vault · SHA-256 Checksums · Court-Ready PDF & Word Packages</p>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">بانک اطلاعات شهدا و احراز زمانی‌مکانی</span>
-            <span class="clause-id">۲.۲</span>
-          </div>
-          <p>انجمن PFPJ ry پایگاه داده‌ای برای ثبت یادبود قربانیان تدوین نموده که شامل مشخصات، تصاویر تأیید شده و گواهی‌های فوت ۱۰۰ کودک قربانی است. اصالت تصاویر با تحلیل سایه‌ها (کرونولوکیشن) و متادیتا تأیید شده است.</p>
-          <div class="quote-box">
-            «تأیید تلفات کودکان در حملات هوایی به مدارس مستلزم رعایت استانداردهای دقیق مکانی و زمانی است تا هرگونه ادعای حضور نظامی منتفی گردد.»
-            <div class="precedent-pill">مرجع پرونده مشابه: مورد ۱۳ (حمله به مدرسه حاس، سوریه، ۲۰۱۶)</div>
-          </div>
-        </div>
-      </div>
-    </article>
 
-    <!-- ==================== SECTION 3 ==================== -->
-    <article class="section-card" id="sec3">
-      <div class="section-header">
-        <div class="section-header-title-en">SECTION 3: CHRONOLOGY & GEOGRAPHIC ANALYSIS</div>
-        <span class="badge-sec standard">Spatial Geometry</span>
-        <div class="section-header-title-fa">بخش ۳: کرونولوژی و تحلیل جغرافیایی هدف</div>
+        <div class="download-buttons">
+          <a class="btn-download" href="docs/minab-report/PFPJ_Minab_Master_Factual_Determination_Report.pdf" download title="Download Official Master Report PDF (847 KB)">
+            📄 Master Report (PDF)
+          </a>
+          <a class="btn-download" href="docs/minab-report/PFPJ_Minab_Master_Factual_Determination_Report.docx" download title="Download Master Report Word Document (61 KB)">
+            📝 Master Report (DOCX)
+          </a>
+          <a class="btn-download annex-btn" href="docs/minab-report/PFPJ_Minab_Master_Exhibit_Dossier_Annex.pdf" download title="Download Master Exhibit Dossier Annex PDF (802 KB)">
+            📂 Exhibit Annex (PDF)
+          </a>
+          <a class="btn-download annex-btn" href="docs/minab-report/PFPJ_Minab_Master_Exhibit_Dossier_Annex.docx" download title="Download Master Exhibit Dossier Annex Word Document (61 KB)">
+            📑 Exhibit Annex (DOCX)
+          </a>
+          <a class="btn-download" href="docs/minab-report/PACKAGE_MANIFEST.md" target="_blank" title="Inspect Cryptographic Package Manifest with SHA-256 Checksums">
+            🔐 Checksums
+          </a>
+        </div>
       </div>
+    </header>
 
-      <!-- Clause 3.1 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">3.1</span>
-            <span class="clause-heading">Geospatial Demarcation & Decade-Long Schoolyard History</span>
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <!-- ─── PART I: CANONICAL FACTUAL DETERMINATION (CHAPTERS I THROUGH X) ─ -->
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <div id="part1Container" class="portal-major-part">
+      
+      <!-- CHAPTER I -->
+      <section class="section-card searchable-card" id="chapter-1">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter I</span>
+            <h2 class="section-header-title-en">Procedural Background, Mandate & Executive Summary</h2>
           </div>
-          <p><span class="evidence-pill">EVD-SAT-001</span> The Shajareh Tayyebeh Girls' School is located at GPS coordinates <strong>27.1432° N, 57.0784° E</strong> in Minab, Hormozgan Province. The school property shares a northern boundary fence with the Minab IRGC Naval Base. High-resolution satellite chronologies from 2015 to 2026 prove that the school facility has been continuously active for over a decade, featuring distinct playground structures, a sports courtyard, and visible daily assemblies of children wearing bright uniforms.</p>
+          <div class="section-header-title-fa">پیشینه رسیدگی، مأموریت و خلاصه اجرایی احرازها</div>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">موقعیت مکانی و سابقه ده‌ساله مدرسه</span>
-            <span class="clause-id">۳.۱</span>
-          </div>
-          <p>مدرسه دخترانه شجره طیبه در مختصات جغرافیایی 27.1432 N، 57.0784 E در میناب (استان هرمزگان) واقع شده است. این ملک آموزشی دیوار به دیوار پایگاه نیروی دریایی سپاه در میناب است. تحلیل تصاویر ماهواره‌ای بین سال‌های ۲۰۱۵ تا ۲۰۲۶ ثابت می‌کند این مرکز آموزشی به طور مداوم فعال بوده و حیاط بازی و تجمع روزانه کودکان با لباس‌های رنگی یکدست کاملاً قابل رویت بوده است.</p>
-        </div>
-      </div>
 
-      <!-- Clause 3.2 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">3.2</span>
-            <span class="clause-heading">The 42-Meter Separation & Inevitable Lethal Blast Radius</span>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 1.1</span>
+              <span class="clause-heading">Institutional Mandate & Review Authority</span>
+            </div>
+            <p>1. This Expert Judicial Determination and Comprehensive Legal Assessment Dossier is rendered by <strong>People for Peace & Justice ry (PFPJ ry)</strong>, an independent, registered non-governmental human rights association incorporated under the Finnish Associations Act (<em>Yhdistyslaki 503/1989</em>) with the Finnish Patent and Registration Office (PRH) under Business Identity Code <strong>3616815-5</strong> in Helsinki, Finland.</p>
+            <p>2. In the absence of an immediate, independent international tribunal convened under Chapter VII of the United Nations Charter, PFPJ ry exercises its non-governmental investigatory mandate to preserve the historical, forensic, and judicial record of grave violations of International Humanitarian Law (IHL).</p>
+            <p>3. To ensure absolute parity with established international jurisprudence, this dossier adopts the structure, evidentiary standards, and chain of reasoning of the final trial judgments of the <strong>International Criminal Tribunal for the former Yugoslavia (ICTY)</strong> and the <strong>International Criminal Tribunal for Rwanda (ICTR)</strong>.</p>
+            <p>4. This report serves four foundational institutional purposes: (i) Establish a court-ready factual determination of the February 28, 2026 airstrike on the Shajareh Tayyebeh Girls' Elementary School; (ii) Apply the ICTY OTP targeting jurisprudence (<em>Belgrade Chinese Embassy Precedent</em>) to demonstrate targeting negligence; (iii) Detail the State Responsibility of the United States under customary international law and the ILC ARSIWA framework; and (iv) Deposit verified physical, biometric, and digital evidence into secure European custody to support state reparations and universal jurisdiction proceedings.</p>
           </div>
-          <p>Peacetime records show that the school was officially registered with the Ministry of Education and listed in public municipal databases. The geographic separation between the school's central building and the nearest military warehouse inside the base is exactly <strong>42 meters</strong>, which is well within the known lethal blast radius of a heavy Tomahawk cruise missile carrying a 1,000-lb WDU-36/B warhead (lethal radius 65–85 meters; fragmentation >400 meters).</p>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">فاصله ۴۲ متری و قطعیت اصابت موج انفجار</span>
-            <span class="clause-id">۳.۲</span>
-          </div>
-          <p>سوابق رسمی نشان می‌دهد این مدرسه در وزارت آموزش و پرورش ثبت رسمی بوده و در نقشه‌های شهری عمومی ثبت شده است. فاصله فیزیکی ساختمان مرکزی مدرسه تا نزدیک‌ترین انبار نظامی داخل پایگاه دقیقاً ۴۲ متر است که بسیار کمتر از شعاع تخریب مرگبار کلاهک جنگی ۱۰۰۰ پوندی موشک توماهوک می‌باشد.</p>
-        </div>
-      </div>
 
-      <!-- Clause 3.3 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">3.3</span>
-            <span class="clause-heading">Opening Hour Execution: Peacetime Target Folder Origin</span>
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۱.۱</span>
+              <span class="clause-heading">مأموریت نهادی و صلاحیت بررسی</span>
+            </div>
+            <p>۱. این پرونده احراز قضایی تخصصی و ارزیابی جامع حقوقی توسط انجمن <strong>People for Peace & Justice ry (PFPJ ry)</strong>، یک تشکل مستقل حقوق بشری ثبت‌شده تحت قانون انجمن‌های فنلاند (<em>Yhdistyslaki 503/1989</em>) در اداره ثبت اختراعات و شرکت‌های فنلاند (PRH) با شناسه تجاری <strong>3616815-5</strong> در هلسینکی فنلاند، صادر گردیده است.</p>
+            <p>۲. در غیاب یک دادگاه بین‌المللی مستقل و فوری تشکیل‌شده ذیل فصل هفتم منشور ملل متحد، انجمن PFPJ ry مأموریت تحقیقی خود را برای ثبت و حفظ اسناد تاریخی، جرم‌شناختی و قضایی موارد نقض فاحش حقوق بین‌الملل بشردوستانه (IHL) اعمال می‌نماید.</p>
+            <p>۳. جهت تضمین هم‌ترازی با رویه قضایی بین‌المللی، این پرونده ساختار، معیارهای ادله و زنجیره استدلال احکام نهایی <strong>دادگاه کیفری بین‌المللی یوگسلاوی سابق (ICTY)</strong> و <strong>دادگاه بین‌المللی رواندا (ICTR)</strong> را به کار بسته است.</p>
+            <p>۴. این گزارش چهار هدف نهادی بنیادین را محقق می‌سازد: (۱) احراز رسمی و قابل ارائه به دادگاه در خصوص حمله هوایی ۱۰ اسفند ۱۴۰۴ به دبستان دخترانه شجره طیبه؛ (۲) تطبیق با رویه دادستانی دادگاه لاهه در بمباران سفارت چین در بلگراد جهت اثبات قصور در هدف‌گیری؛ (۳) تبیین مسئولیت بین‌المللی دولت آمریکا تحت طرح مسئولیت دولت‌ها (ARSIWA)؛ و (۴) تودیع ادله فیزیکی، بیومتریک و دیجیتال در امانت‌داری امن اروپایی جهت پیگیری غرامت‌های دولتی و صلاحیت جهانی قضایی.</p>
           </div>
-          <p><span class="evidence-pill">EVD-LAUNCH-003</span> The chronological log of the strike on February 28, 2026, shows that the missile was launched during the opening hour of hostilities. In modern doctrine, Day 1 kinetic strikes are executed exclusively from pre-planned Target Nomination Lists (TNL) compiled weeks or months prior to the outbreak of war, during peacetime conditions when operators had ample time and resources to conduct vetting.</p>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">شلیک در ساعت نخست: ریشه در لیست‌های زمان صلح</span>
-            <span class="clause-id">۳.۳</span>
-          </div>
-          <p>جدول زمانی شلیک نشان می‌دهد موشک در اولین ساعت آغاز مخاصمه شلیک شده است. این امر نشان می‌دهد که هدف از لیست‌های از پیش‌تعیین‌شده در زمان صلح انتخاب شده و طراحان نظامی هفته‌ها قبل زمان کافی برای بازبینی کاربری محل را داشته‌اند.</p>
-        </div>
-      </div>
-    </article>
 
-    <!-- ==================== SECTION 4 ==================== -->
-    <article class="section-card" id="sec4">
-      <div class="section-header">
-        <div class="section-header-title-en">SECTION 4: APPLICABLE INTERNATIONAL HUMANITARIAN LAW</div>
-        <span class="badge-sec standard">Legal Norms</span>
-        <div class="section-header-title-fa">بخش ۴: حقوق بین‌الملل بشردوستانه قابل اعمال</div>
-      </div>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 1.2</span>
+              <span class="clause-heading">Procedural History & Evidentiary Ingestion</span>
+            </div>
+            <p>5. Immediately following the kinetic impact on February 28, 2026, PFPJ ry activated an emergency evidentiary collection and verification protocol.</p>
+            <p>6. Operating under the <strong>Berkeley Protocol on Digital Open Source Investigations</strong> (<em>OHCHR, 2020</em>), PFPJ ry gathered, catalogued, cryptographically hashed, and analyzed high-resolution satellite imagery (Planet Labs, Maxar Technologies, Airbus Pleiades), regional seismic recordings, verified ground-level video footage, open-source aircraft flight-tracking (ADS-B) logs, municipal civil registry certificates, hospital admission databases, and physical munitions metallurgical debris.</p>
+            <p>7. Furthermore, PFPJ ry formally reviewed the public disclosures, press briefings, and leaked preliminary investigation findings issued by the United States Department of Defense (DoD) and United States Central Command (CENTCOM), integrating official admissions into the evidentiary corpus.</p>
+            <div>
+              <span class="evidence-pill">EXH-SAT-001</span>
+              <span class="evidence-pill">EXH-MUN-002</span>
+              <span class="evidence-pill">EXH-CENTCOM-004</span>
+              <span class="evidence-pill">EXH-VIC-005</span>
+            </div>
+          </div>
 
-      <!-- Clause 4.1 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">4.1</span>
-            <span class="clause-heading">Principle of Distinction & Legal Presumption of Civilian Status</span>
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۱.۲</span>
+              <span class="clause-heading">پیشینه دادرسی و فرآیند پذیرش ادله</span>
+            </div>
+            <p>۵. بلافاصله پس از اصابت‌های موشکی در ۱۰ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶)، این انجمن پروتکل اضطراری جمع‌آوری و اعتبارسنجی ادله را فعال نمود.</p>
+            <p>۶. تحت استانداردهای <strong>پروتکل برکلی در تحقیقات دیجیتال منبع‌باز</strong> (<em>کمیساریای عالی حقوق بشر سازمان ملل، ۲۰۲۰</em>)، تصاویر ماهواره‌ای با رزولوشن بالا (Planet Labs، Maxar، Airbus)، داده‌های لرزه‌نگاری منطقه‌ای، ویدیوهای میدانی تأییدشده، داده‌های هوانوردی ADS-B، اسناد ثبت احوال، دفاتر پذیرش بیمارستانی و بقایای متالورژیک تسلیحات با هش‌های رمزشناختی SHA-256 ثبت و تحلیل گردیدند.</p>
+            <p>۷. علاوه بر این، بیانیه‌های رسمی وزارت دفاع آمریکا، کنفرانس‌های خبری ستاد فرماندهی مرکزی (سنتکام) و درز اطلاعات تحقیقات داخلی ارتش ذیل آیین‌نامه ۱۵-۶ به عنوان اقاریر رسمی به بدنه ادله پرونده افزوده شد.</p>
           </div>
-          <p>Under Customary International Humanitarian Law (IHL Rule 1) and Additional Protocol I (Article 48), the Principle of Distinction requires conflicting parties to distinguish between civilian objects and military objectives. <strong>Article 52(3)</strong> establishes an unequivocal legal presumption: <em>in case of doubt whether an object normally dedicated to civilian purposes, such as a school, is being used to make an effective contribution to military action, it must be presumed not to be so used.</em></p>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">اصل تفکیک و اماره قانونی ماهیت غیرنظامی</span>
-            <span class="clause-id">۴.۱</span>
-          </div>
-          <p>طبق حقوق بین‌الملل بشردوستانه عرفی و پروتکل الحاقی اول (ماده ۴۸)، اصل تفکیک طرف‌های درگیر را ملزم می‌کند همواره بین اهداف نظامی و غیرنظامی تفکیک قائل شوند. طبق بند ۳ ماده ۵۲، در صورت بروز شک در مورد کاربری غیرنظامی مراکزی مثل مدارس، فرض قانونی بر غیرنظامی بودن مطلق آن محل است مگر خلاف آن در محکمه ثابت شود.</p>
-        </div>
-      </div>
 
-      <!-- Clause 4.2 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">4.2</span>
-            <span class="clause-heading">Safe Schools Declaration & Educational Sanctuary</span>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 1.3</span>
+              <span class="clause-heading">Executive Summary of Determinations</span>
+            </div>
+            <p>8. On the basis of the verified evidence set forth in this Dossier, the Panel makes the following foundational determinations:</p>
+            <ul style="padding-left: 20px; margin: 10px 0;">
+              <li><strong>The Incident:</strong> On Saturday, February 28, 2026, at 09:22 to 09:26 IRST, during the opening salvo of international armed conflict, three US Navy <strong>BGM-109 Tomahawk Land Attack Cruise Missiles (TLAM)</strong> carrying 1,000-pound WDU-36/B unitary blast warheads struck the central classroom wing and courtyard of the <strong>Shajareh Tayyebeh Girls' Elementary School</strong> in Minab, Hormozgan Province, Iran (<code>27.1352° N, 57.0805° E</code>).</li>
+              <li><strong>The Human Toll:</strong> The strikes occurred while morning classes were in active session, resulting in <strong>156 certified deaths</strong>—comprising <strong>120 female primary students aged 7 to 12</strong>, <strong>26 teachers and educational administrators</strong>, and <strong>10 civilian staff</strong>—along with the severe wounding and permanent maiming of over <strong>95 survivors</strong>.</li>
+              <li><strong>The Cause:</strong> The strike resulted from catastrophic target vetting negligence, database circularity, and a failure of positive target identification (PID) within the US peacetime target nomination pipeline. US authorities relied on unverified pre-2016 intelligence records that failed to reflect the physical partitioning and conversion of the facility into an elementary school ten years prior.</li>
+              <li><strong>Legal Conclusion:</strong> The strike constitutes a serious breach of the Principle of Distinction (AP I Art. 48, 52), a gross failure of Feasible Precautions in Attack (AP I Art. 57), and a violation of the special protections shielding children and educational sanctuaries. These acts engage the international <strong>State Responsibility</strong> of the United States of America under customary international law, requiring cessation, full restitution, compensation, and satisfaction.</li>
+            </ul>
           </div>
-          <p>Furthermore, the <strong>Safe Schools Declaration</strong>, to which international coalitions adhere, mandates heightened precautions when conducting operations in proximity to educational infrastructure to prevent disruption of children's rights to education and safety, reinforced by the UN Convention on the Rights of the Child (Article 38).</p>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">بیانیه مدارس ایمن و مصونیت مراکز آموزشی</span>
-            <span class="clause-id">۴.۲</span>
-          </div>
-          <p>علاوه بر این، بیانیه مدارس ایمن (Safe Schools Declaration) که ائتلاف‌های بین‌المللی متعهد به آن هستند، رعایت تدابیر احتیاطی شدید را در مجاورت مراکز آموزشی الزامی می‌داند تا حق امنیت و تحصیل کودکان حفظ شود.</p>
-        </div>
-      </div>
-    </article>
 
-    <!-- ==================== SECTION 5 ==================== -->
-    <article class="section-card" id="sec5">
-      <div class="section-header">
-        <div class="section-header-title-en">SECTION 5: LEGAL LIABILITY & NEGLECT OF PRECAUTION</div>
-        <span class="badge-sec substantive">Substantive Indictment</span>
-        <div class="section-header-title-fa">بخش ۵: مسئولیت حقوقی و نقض تعهدات احتیاطی در حمله</div>
-      </div>
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۱.۳</span>
+              <span class="clause-heading">خلاصه اجرایی احرازهای قضایی</span>
+            </div>
+            <p>۸. بر پایه ادله معتبر مندرج در این پرونده، هیئت کارشناسان احرازهای قطعی زیر را صادر می‌نماید:</p>
+            <ul style="padding-right: 20px; margin: 10px 0; line-height: 2;">
+              <li><strong>واقعه:</strong> در روز شنبه ۱۰ اسفند ۱۴۰۴، ساعت ۰۹:۲۲ تا ۰۹:۲۶ به وقت محلی، در موج اول نبرد بین‌المللی، سه فروند موشک کروز <strong>BGM-109 تاماهاک نیروی دریایی آمریکا</strong> مجهز به کلاهک ۱۰۰۰ پوندی WDU-36/B به بال مرکزی و حیاط <strong>دبستان دخترانه شجره طیبه میناب</strong> (مختصات <code>27.1352° N, 57.0805° E</code>) اصابت کردند.</li>
+              <li><strong>خسارات انسانی:</strong> حمله در حین ساعات آموزشی صبحگاه رخ داد و به <strong>شهادت ۱۶۸ نفر</strong> (از جمله <strong>۱۲۰ دختربچه دانش‌آموز ۷ تا ۱۲ ساله</strong>، <strong>۲۶ آموزگار و مدیر مدرسه</strong> و <strong>۱۰ پرسنل خدماتی</strong>) و جراحت شدید و نقص عضو مادام‌العمر بیش از <strong>۹۵ بازمانده</strong> انجامید.</li>
+              <li><strong>علت فنی:</strong> حمله حاصل سهل‌انگاری فاحش در اعتبارسنجی هدف، اعتبارسنجی دورانی پایگاه‌داده‌ها و تکیه بر پرونده اطلاعاتی منسوخ قبل از سال ۲۰۱۶ بود که تفکیک فیزیکی مدرسه از پایگاه نظامی همجوار در ۱۰ سال گذشته را نادیده گرفته بود.</li>
+              <li><strong>نتیجه‌گیری حقوقی:</strong> این حمله ناقض اصل تفکیک (ماده ۴۸ پروتکل الحاقی ۱)، نقض تعهد اتخاذ تدابیر احتیاطی (ماده ۵۷) و نقض مصونیت مراکز آموزشی کودکان است که مستقیماً موجب تحمیل <strong>مسئولیت بین‌المللی دولت آمریکا</strong> می‌گردد.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-      <!-- Clause 5.1 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">5.1</span>
-            <span class="clause-heading">Failure of Continuous Target Verification (Duty of Precaution)</span>
+      <!-- CHAPTER II -->
+      <section class="section-card searchable-card" id="chapter-2">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter II</span>
+            <h2 class="section-header-title-en">Evidentiary Principles, Admissibility & Standard of Proof</h2>
           </div>
-          <p>Under <strong>AP I Article 57(2)(a)(i)</strong> and <strong>Customary IHL Rule 15</strong>, targeting authorities bear an affirmative, continuous duty to verify that objectives are neither civilians nor civilian objects. Target nominators relied on stale 2013 intelligence, failing to verify coordinate usage shifts over a decade despite public registration and physical concrete wall partitioning.</p>
-          <div class="quote-box">
-            "Failing to track target coordinate usage changes over time and striking newly constructed or active civilian structures constitutes a breach of the duty of precaution. Proximity to a military objective compounds rather than excuses the duty to verify."
-            <div class="precedent-pill">Cross-Ref Precedent: Case 04 (Al-Jina Mosque Strike, UN CoI 2017)</div>
-          </div>
+          <div class="section-header-title-fa">اصول ادله، قابلیت پذیرش و استاندارد اثبات</div>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">نقض تعهد مستمر به راستی‌آزمایی هدف (اصل احتیاط)</span>
-            <span class="clause-id">۵.۱</span>
-          </div>
-          <p>بر اساس ماده ۵۷ بند ۲(الف)(۱) پروتکل اول الحاقی و قاعده ۱۵ حقوق عرفی بشردوستانه، طراحان و فرماندهان ملزم به راستی‌آزمایی مستمر ماهیت غیرنظامی اهداف هستند. تکیه بر اطلاعات منسوخ ۲۰۱۳ و اهمال ده‌ساله در بررسی تغییرات کاربری مجتمع آموزشی، نقض قطعی این تعهد است.</p>
-          <div class="quote-box">
-            «عدم ردیابی تغییرات کاربری مختصات در گذر زمان نقض فاحش اصل احتیاط است؛ مجاورت با پایگاه نظامی نه تنها رافع مسئولیت نیست بلکه وظیفه راستی‌آزمایی را تشدید می‌کند.»
-            <div class="precedent-pill">مرجع پرونده مشابه: مورد ۰۴ (حمله به مسجد الجینه، کمیسیون تحقیق سازمان ملل ۲۰۱۷)</div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Clause 5.2 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">5.2</span>
-            <span class="clause-heading">Rejection of the "Fog of War" / "Honest Mistake" Defense</span>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 2.1 & 2.2</span>
+              <span class="clause-heading">Standard of Proof & The ICTY Rule 89(C) Probative Standard</span>
+            </div>
+            <p>9. In conformity with the settled practice of international criminal tribunals at the investigation, confirmation, and review stages—including the <strong>ICTY Committee Established to Review the NATO Bombing Campaign Against the Federal Republic of Yugoslavia (2000)</strong>, the Pre-Trial Chambers of the International Criminal Court, and United Nations Commissions of Inquiry—this Panel applies the <strong>"reasonable grounds to believe"</strong> evidentiary standard.</p>
+            <p>10. Statutory Rule 89(C) of the ICTY and ICTR Rules of Procedure and Evidence provides:</p>
+            <div class="quote-box">
+              "A Chamber may admit any relevant evidence which it deems to have probative value."
+            </div>
+            <p>11. International tribunals do not apply municipal hearsay exclusionary rules. Evidence is admitted provided it possesses two indispensable qualities: (i) <strong>relevance</strong> to the issues under review, and (ii) <strong>probative value</strong>, evaluated through reliability, authenticity, and source corroboration (<em>Prosecutor v. Tadić</em>, 1996; <em>Prosecutor v. Delalić et al.</em>, 1997).</p>
           </div>
-          <p>Because this strike occurred on <strong>Day 1</strong> of the international armed conflict, the target list was pre-planned during peacetime. The defense of rapid, high-pressure tactical adjustments in combat does not apply to target nominators working in peacetime intelligence offices weeks prior to launch.</p>
-          <div class="quote-box">
-            "Targeting errors originating from pre-planned nomination lists compiled during peacetime reflect systematic negligence, stripping commanders of the 'fog of war' excuse."
-            <div class="precedent-pill">Cross-Ref Precedents: Case 01 (Belgrade Embassy, 1999) & Case 06 (Dora Farms, 2003)</div>
-          </div>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">رد دفاعیه «اشتباه غیرعمدی» و «مه جنگ»</span>
-            <span class="clause-id">۵.۲</span>
-          </div>
-          <p>از آنجا که حمله در روز اول جنگ و بر اساس اهداف نامزدشده در زمان صلح رخ داد، فرماندهان نظامی نمی‌توانند به اضطرار میدان نبرد یا غبار جنگ متوسل شوند؛ فرصت کافی برای استعلام ثبتی وجود داشته است.</p>
-          <div class="quote-box">
-            «خطاهای هدف‌گیری ناشی از لیست‌های زمان صلح بازتاب سهل‌انگاری سیستماتیک بوده و عذر شرایط اضطراری نبرد را به طور کامل ساقط می‌نماید.»
-            <div class="precedent-pill">مراجع پرونده مشابه: مورد ۰۱ (سفارت چین در بلگراد، ۱۹۹۹) و مورد ۰۶ (مزارع دورا، ۲۰۰۳)</div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Clause 5.2b -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">5.2b</span>
-            <span class="clause-heading">Precision-Guided Ballistics & Upstream Culpability (The Belgrade Standard)</span>
-          </div>
-          <p><span class="evidence-pill">EVD-MUN-002</span> As established by the ICTY OTP in the Belgrade Embassy investigation (Case 01, §§ 80–85), autonomous precision guidance eliminates aerodynamic drift or operator error as a legal defense. Debris recovery confirms sub-5m terminal accuracy, shifting 100% of liability onto intelligence nominators. Unlike 1999 GPS JDAMs, the Tomahawk's <strong>DSMAC optical scene-matching camera</strong> should have visually alerted planners to the schoolyard, proving reckless disregard (<em>dolus eventualis</em>).</p>
-          <div class="quote-box">
-            "When precision-guided weapons function with mechanical perfection, targeting liability shifts entirely away from executing aircrews and onto the intelligence officers who compiled the target coordinate folder."
-            <div class="precedent-pill">Cross-Ref Precedent: Case 01 (Belgrade Chinese Embassy, ICTY OTP 2000)</div>
-          </div>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">تسلیحات هدایت دقیق و انتقال مسئولیت به طراحان (معیار بلگراد)</span>
-            <span class="clause-id">۵.۲b</span>
-          </div>
-          <p>به تصریح دادستانی دادگاه بین‌المللی یوگسلاوی سابق (ICTY OTP §§ 80–85)، هدایت دقیق خودکار ماهواره‌ای احتمال انحراف بالستیک یا خطای خلبان را منتفی می‌سازد و مسئولیت را ۱۰۰٪ به طراحان مختصات منتقل می‌کند. همچنین سامانه اپتیکی DSMAC توماهوک باید پیش از اصابت کاربری مدرسه را شناسایی می‌کرد که عدم توجه به آن نشانه سوءنیت احتمالی (dolus eventualis) است.</p>
-          <div class="quote-box">
-            «اصابت مکانیکی بی‌نقص سلاح‌های هدایت دقیق، هرگونه مسئولیت را از خلبانان و اپراتورهای پرتاب سلب و مستقیماً متوجه طراحان و افسران اطلاعاتی زمان صلح می‌سازد.»
-            <div class="precedent-pill">مرجع پرونده مشابه: مورد ۰۱ (گزارش دادستانی دادگاه بین‌المللی یوگسلاوی، ۲۰۰۰)</div>
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۲.۱ و ۲.۲</span>
+              <span class="clause-heading">معیار اثبات و استاندارد ادله ذیل ماده ۸۹(C) دادگاه بین‌المللی یوگسلاوی</span>
+            </div>
+            <p>۹. در انطباق کامل با رویه محاکم کیفری بین‌المللی در مراحل تحقیق و تأیید—از جمله کمیته بررسی عملیات ناتو در دادگاه لاهه (۲۰۰۰) و شعب مقدماتی دیوان کیفری بین‌المللی—هیئت کارشناسان استاندارد اثباتی <strong>«دلایل معقول برای باور» (Reasonable grounds to believe)</strong> را اعمال نموده است.</p>
+            <p>۱۰. بر اساس ماده ۸۹(C) آیین دادرسی دادگاه لاهه:</p>
+            <div class="quote-box">
+              «دادگاه می‌تواند هرگونه دلیل مربوطه‌ای را که دارای ارزش اثباتی تشخیص دهد، بپذیرد.»
+            </div>
+            <p>۱۱. محاکم بین‌المللی محصور به تشریفات سختگیرانه ادله در حقوق داخلی کشورها نیستند؛ بلکه کفایت می‌کند دلیل واجد دو ویژگی (۱) <strong>ارتباط موضوعی</strong> و (۲) <strong>ارزش اثباتی</strong> ناشی از اصالت و قابلیت اتکا باشد.</p>
           </div>
         </div>
-      </div>
 
-      <!-- Clause 5.3 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">5.3</span>
-            <span class="clause-heading">Inherent Disproportionality & Means/Methods of Warfare</span>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 2.3 to 2.5</span>
+              <span class="clause-heading">Berkeley Protocol Standards & Official State Admissions Weight</span>
+            </div>
+            <p>12. All open-source telemetry and digital media were captured, cryptographically signed with SHA-256 hashes, and catalogued in strict compliance with the <strong>Berkeley Protocol on Digital Open Source Investigations (OHCHR, 2020)</strong>. Geolocation, shadow chronolocation, and flight radar telemetry were cross-checked against sub-meter multispectral satellite feeds.</p>
+            <p>13. Under <strong>ICTY Rule 89(F)</strong> and customary evidentiary law, formal admissions and disclosures by official state organs (Pentagon briefings, CENTCOM AR 15-6 statements against interest) carry heightened probative weight regarding US launch authorship, weapon identification, and coordinate source.</p>
           </div>
-          <p>Under <strong>AP I Article 57(2)(a)(ii)</strong> and <strong>Article 51(5)(b)</strong>, launching a 1,000-lb high-explosive unitary warhead immediately adjacent to an active school during morning class hours violates the duty in choice of means and methods. The catastrophic civilian toll was mathematically certain and grossly excessive in relation to any anticipated concrete military advantage.</p>
-          <div class="quote-box">
-            "Deploying heavy blast weapons in or adjacent to civilian settlements is impossible to reconcile with the standard of care required in military operations. High precision in munition delivery confirms that targeting child concentrations is the product of gross command recklessness."
-            <div class="precedent-pill">Cross-Ref Precedents: Case 03 (Isayeva v. Russia, ECtHR 2005) & Case 15 (Dahyan School Bus, UN GEE 2018)</div>
-          </div>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">عدم تناسب فاحش و نقض تعهد در انتخاب وسایل و روش‌های نبرد</span>
-            <span class="clause-id">۵.۳</span>
-          </div>
-          <p>مطابق بند ۲(الف)(۲) ماده ۵۷ و ماده ۵۱ پروتکل اول، بکارگیری کلاهک سنگین ۱۰۰۰ پوندی در مجاورت بلافصل یک مدرسه فعال در ساعات درسی نقض مستقیم تعهد در گزینش تسلیحات است؛ وقوع فاجعه انسانی از نظر محاسباتی قطعی و نسبت به مزیت نظامی ادعایی آشکارا نامتناسب بود.</p>
-          <div class="quote-box">
-            «استفاده از بمب‌های سنگین انفجاری در مجاورت بافت‌های مسکونی با استانداردهای احتیاطی حقوق بین‌الملل غیرقابل جمع است و فرضیه جنایت جنگی را محرز می‌سازد.»
-            <div class="precedent-pill">مراجع پرونده مشابه: مورد ۰۳ (عیسایوا علیه روسیه، ۲۰۰۵) و مورد ۱۵ (اتوبوس دانش‌آموزان ضحیان، ۲۰۱۸)</div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Clause 5.4 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">5.4</span>
-            <span class="clause-heading">Command Confirmation Bias & Remote Sensor Blindness</span>
-          </div>
-          <p>Relying on high-altitude surveillance without positive ground verification created a fatal cognitive echo chamber. As in the 2021 Kabul drone strike, analysts anchored on a military threat hypothesis, systematically filtering out routine civilian life indicators—including school buses, morning assembly lines, and children in uniform—as operational noise.</p>
-          <div class="quote-box">
-            "Remote sensor loops under operational stress suffer from cognitive tunnel vision, converting neutral civilian objects into threat signatures and blinding command cells to the presence of children."
-            <div class="precedent-pill">Cross-Ref Precedents: Case 05 (Kabul Drone Strike, CENTCOM IG 2021) & Case 13 (Hass School, 2016)</div>
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۲.۳ تا ۲.۵</span>
+              <span class="clause-heading">استانداردهای پروتکل برکلی و ارزش اثباتی اقاریر رسمی دولت</span>
+            </div>
+            <p>۱۲. کلیه مستندات دیجیتال و دورسنجی طبق <strong>پروتکل برکلی در تحقیقات منبع‌باز دیجیتال (OHCHR 2020)</strong> ذخیره و با شناسه هش SHA-256 مهروموم شده‌اند. تطبیق سایه‌ها، داده‌های راداری و تصاویر ماهواره‌ای زیر یک متر اصالت ادله را تضمین می‌کنند.</p>
+            <p>۱۳. بر اساس ماده ۸۹(F) آیین دادرسی دادگاه لاهه، اظهارات و اقاریر رسمی صادره از ارگان‌های دولتی (مانند نشست‌های پنتاگون و گزارش ارتش ۱۵-۶) به عنوان «اقرار علیه خود» بالاترین درجه ارزش اثباتی را در احراز مسئولیت شلیک موشک و نوع سلاح دارا می‌باشند.</p>
           </div>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">سوگیری تأیید در اطلاعات سنجش از دور و کوری حسگرها</span>
-            <span class="clause-id">۵.۴</span>
-          </div>
-          <p>اتکای صرف به تصاویر هوایی بدون راستی‌آزمایی میدانی موجب سوگیری شناختی شد؛ همانند حمله پهپادی ۲۰۲۱ کابل، تحلیلگران با پیش‌فرض نظامی، الگوهای روزمره مدرسه نظیر تردد سرویس‌ها و دختران با روپوش را به عنوان جابجایی نیرو نادیده گرفتند.</p>
-          <div class="quote-box">
-            «حلقه‌های هدایت از دور تحت استرس دچار تونل دید شناختی شده و نشانه‌های حضور کودکان را از فیلترهای تحلیلی حذف می‌کنند.»
-            <div class="precedent-pill">مراجع پرونده مشابه: مورد ۰۵ (پهپاد کابل، ۲۰۲۱) و مورد ۱۳ (مجتمع مدارس حاس سوریه، ۲۰۱۶)</div>
-          </div>
-        </div>
-      </div>
-    </article>
+      </section>
 
-    <!-- ==================== SECTION 6 ==================== -->
-    <article class="section-card" id="sec6">
-      <div class="section-header">
-        <div class="section-header-title-en">SECTION 6: JURISDICTIONAL LINK & EUROPEAN PROCEDURAL OBLIGATIONS</div>
-        <span class="badge-sec procedural">Jurisdictional Gate</span>
-        <div class="section-header-title-fa">بخش ۶: پیوند صلاحیتی و تعهدات دادرسی در اروپا</div>
-      </div>
+      <!-- CHAPTER III -->
+      <section class="section-card searchable-card" id="chapter-3">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter III</span>
+            <h2 class="section-header-title-en">Legal Qualification of Conflict & Educational Sanctuary Status</h2>
+          </div>
+          <div class="section-header-title-fa">توصیف حقوقی مخاصمه مسلحانه و مصونیت مراکز آموزشی</div>
+        </div>
 
-      <!-- Clause 6.1 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">6.1</span>
-            <span class="clause-heading">Legal Domicile & Territorial Nexus in Helsinki</span>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 3.1 to 3.3</span>
+              <span class="clause-heading">The Tadić Principle & International Armed Conflict (Common Art. 2 GC)</span>
+            </div>
+            <p>14. In <em>Prosecutor v. Duško Tadić</em> (Case No. IT-94-1-AR72, Appeals Chamber, October 2, 1995, § 70), the ICTY Appeals Chamber defined the threshold: <em>"[A]n armed conflict exists whenever there is a resort to armed force between States[...]."</em></p>
+            <p>15. Under Common Article 2 of the 1949 Geneva Conventions, to which both the United States and Iran are High Contracting Parties, the deployment of kinetic cruise missiles against sovereign Iranian territory on February 28, 2026, constituted a resort to armed force between States, qualifying <em>ipso jure</em> as an <strong>International Armed Conflict (IAC)</strong>.</p>
+            <p>16. The operational nexus is established: the three Tomahawk missiles were launched as part of the opening wave of "Operation Epic Fury" directed against sovereign territory.</p>
           </div>
-          <p>PFPJ ry is incorporated in Helsinki, Finland (Business ID: 3616815-5), creating an immutable institutional nexus within the legal order of a Council of Europe Member State to document IHL violations and seek judicial redress for victims.</p>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">مقر رسمی و پیوند نهادی در هلسینکی فنلاند</span>
-            <span class="clause-id">۶.۱</span>
-          </div>
-          <p>انجمن PFPJ ry ثبت‌شده رسمی در هلسینکی فنلاند (شناسه: ۳۶۱۶۸۱۵-۵) است و پیوند سرزمینی تفکیک‌ناپذیری با نظام حقوقی شورای اروپا جهت دادخواهی برای قربانیان ایجاد می‌نماید.</p>
-        </div>
-      </div>
 
-      <!-- Clause 6.2 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">6.2</span>
-            <span class="clause-heading">Universal Jurisdiction under Finnish Penal Code (Rikoslaki)</span>
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۳.۱ تا ۳.۳</span>
+              <span class="clause-heading">اصل تادیچ و مخاصمه مسلحانه بین‌المللی (ماده ۲ مشترک کنوانسیون‌های ژنو)</span>
+            </div>
+            <p>۱۴. در رأی تاریخی پرونده تادیچ (دادگاه لاهه، ۱۹۹۵، بند ۷۰) تعریف حاکم تصریح دارد: <em>«مخاصمه مسلحانه زمانی محقق می‌شود که توسل به نیروی مسلح میان دولت‌ها صورت گیرد...»</em></p>
+            <p>۱۵. بر اساس ماده ۲ مشترک کنوانسیون‌های چهارگانه ژنو ۱۹۴۹، شلیک موشک‌های کروز به خاک ایران در ۱۰ اسفند ۱۴۰۴ ماهیتاً یک <strong>مخاصمه مسلحانه بین‌المللی (IAC)</strong> است و تمامی احکام کنوانسیون‌ها و حقوق عرفی را فعال نموده است.</p>
+            <p>۱۶. ارتباط عملیاتی (Nexus) محرز است: پرتاب موشک‌های تاماهاک در قالب موج افتتاحیه عملیات جنگی آمریکا به سوی خاک سرزمینی انجام پذیرفته است.</p>
           </div>
-          <p><strong>Chapter 1, Section 7</strong> of Rikoslaki (39/1889) extends Finnish criminal jurisdiction unconditionally over international offenses. <strong>Chapter 11, Section 6</strong> criminalizes Aggravated War Crimes (<em>Törkeä sotarikos</em>), mandating domestic investigation where mass child casualties result from disproportionate attacks.</p>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">صلاحیت جهانی ذیل قانون مجازات فنلاند (Rikoslaki)</span>
-            <span class="clause-id">۶.۲</span>
-          </div>
-          <p>فصل ۱ ماده ۷ قانون مجازات فنلاند صلاحیت کیفری دادگاه‌ها را به نحو مطلق بر جرایم بین‌المللی تسری داده و فصل ۱۱ ماده ۶ جنایات جنگی مشدد را با تعقیب اجباری جرم‌انگاری کرده است.</p>
-        </div>
-      </div>
 
-      <!-- Clause 6.3 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">6.3</span>
-            <span class="clause-heading">Binding Procedural Obligation under ECHR Article 2 (The Hanan Precedent)</span>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 3.4 & 3.5</span>
+              <span class="clause-heading">The Absolute Presumption of Civilian Status in Doubt (AP I Art. 52(3))</span>
+            </div>
+            <p>17. Under Additional Protocol I Article 52(1) and Customary IHL Rule 8, civilian objects comprise all objects which are not military objectives. Educational facilities are protected civilian objects <em>par excellence</em>.</p>
+            <div class="quote-box">
+              "In case of doubt whether an object which is normally dedicated to civilian purposes, such as a place of worship, a house or other dwelling or a school, is being used to make an effective contribution to military action, it shall be presumed not to be so used." (AP I Art. 52(3))
+            </div>
+            <p>18. Target planners were bound by an affirmative legal obligation to presume that the Shajareh Tayyebeh School was a protected civilian sanctuary. No verified intelligence existed showing any military use.</p>
           </div>
-          <p>Pursuant to the ECtHR Grand Chamber ruling in <strong>Hanan v. Germany (2021, §§ 132–145)</strong>, European states hold an autonomous, detachable procedural obligation to criminally investigate extraterritorial strikes when territorial remedies are blocked and an impunity vacuum exists.</p>
-          <div class="quote-box">
-            "European states bear a binding procedural obligation under Article 2 ECHR to investigate civilian casualties from strikes when domestic immunity regimes create an impunity gap."
-            <div class="precedent-pill">Cross-Ref Precedent: Case 02 (Hanan v. Germany [GC], 2021)</div>
-          </div>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">تعهد دادرسی الزام‌آور به موجب ماده ۲ ECHR (رویه قضایی حنان)</span>
-            <span class="clause-id">۶.۳</span>
-          </div>
-          <p>طبق رأی هیئت عمومی دیوان اروپایی حقوق بشر در پرونده حنان علیه آلمان (۲۰۲۱)، دولت‌های اروپایی در صورت بروز خلاء دادرسی و مصونیت عاملان، تعهد دادرسی مستقل جهت پیگرد حملات فرامرزی دارند.</p>
-          <div class="quote-box">
-            «دولت‌های اروپایی بر اساس ماده ۲ کنوانسیون حقوق بشر اروپا موظف به انجام تحقیقات کیفری مستقل در خصوص جنایات منجر به سلب حیات هستند.»
-            <div class="precedent-pill">مرجع پرونده مشابه: مورد ۰۲ (هیئت عمومی دیوان اروپایی، حنان علیه آلمان، ۲۰۲۱)</div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Clause 6.4 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">6.4</span>
-            <span class="clause-heading">Comparative European Authority (German GBA & VStGB § 1)</span>
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۳.۴ و ۳.۵</span>
+              <span class="clause-heading">فرض قطعی بر غیرنظامی بودن در صورت تردید (ماده ۵۲(۳) پروتکل الحاقی ۱)</span>
+            </div>
+            <p>۱۷. مدارس از بنیادین‌ترین اهداف غیرنظامی مصون تحت حمایت کنوانسیون چهارم ژنو و بیانیه مدارس امن هستند.</p>
+            <div class="quote-box">
+              «در صورت بروز تردید در این که ساختاری که معمولاً به مقاصد غیرنظامی اختصاص دارد، مانند اماکن مذهبی، منازل یا مدارس، آیا برای مشارکت مؤثر در عملیات نظامی به کار گرفته می‌شود یا خیر، باید فرض شود که برای اهداف نظامی به کار گرفته نمی‌شود.» (ماده ۵۲ بند ۳ پروتکل الحاقی ۱)
+            </div>
+            <p>۱۸. طراحان نظامی موظف بودند فرض را بر مصونیت کامل مدرسه بگذارند؛ در حالی که هیچ سندی دال بر استفاده نظامی از مدرسه وجود نداشته است.</p>
           </div>
-          <p>Under <strong>Section 1 of the German VStGB</strong>, universal jurisdiction requires only factual indications of a war crime (<em>Anfangsverdacht</em> under § 152(2) StPO). The certified deaths of 156 civilians legally surpasses this threshold, compelling European prosecutorial action.</p>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">رویه مقایسه‌ای دادستانی فدرال آلمان (GBA و ماده ۱ VStGB)</span>
-            <span class="clause-id">۶.۴</span>
-          </div>
-          <p>بر اساس ماده ۱ قانون VStGB و ماده ۱۵۲ آیین دادرسی آلمان، وجود صرف امارات اولیه (Anfangsverdacht) برای شروع تعقیب کافی است و شهادت ۱۵۶ انسان بی‌گناه فراتر از این آستانه است.</p>
-        </div>
-      </div>
+      </section>
 
-      <!-- Clause 6.5 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">6.5</span>
-            <span class="clause-heading">Distinguishing the Kunduz "Honest Mistake" Defense</span>
+      <!-- CHAPTER IV -->
+      <section class="section-card searchable-card" id="chapter-4">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter IV</span>
+            <h2 class="section-header-title-en">Factual Findings: Physical Environment, Wall & Triple-Tap Salvo</h2>
           </div>
-          <p>In <em>Hanan</em>, the commander operated under fluid, dynamic nighttime combat with 7 real-time informant checks. In Minab, planners executed a Day 1 static target from peacetime nomination lists with zero verification against public educational registries, establishing conscious disregard (<em>dolus eventualis</em>).</p>
+          <div class="section-header-title-fa">یافته‌های واقعی: محیط فیزیکی، دیوار تفکیک ۲۰۱۶ و الگوی شلیک سه‌گانه</div>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">تفکیک ماهوی از پرونده قندوز و رد اشتباه صادقانه</span>
-            <span class="clause-id">۶.۵</span>
-          </div>
-          <p>در پرونده حنان حمله در نبرد متحرک شبانه با استعلام‌های مکرر رخ داد؛ در میناب حمله به هدفی ثابت و ثبتی از پیش‌تعیین‌شده در روز اول جنگ انجام شد که نشانه سوءنیت احتمالی است.</p>
-        </div>
-      </div>
-    </article>
 
-    <!-- ==================== SECTION 7 ==================== -->
-    <article class="section-card" id="sec7">
-      <div class="section-header">
-        <div class="section-header-title-en">SECTION 7: PROSECUTORIAL RECOMMENDATIONS & REMEDIES</div>
-        <span class="badge-sec remedial">Remedial Petitions</span>
-        <div class="section-header-title-fa">بخش ۷: توصیه‌های دادستانی و مطالبات حقوقی جبرانی</div>
-      </div>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 4.1 & 4.2</span>
+              <span class="clause-heading">Civilian Conversion & The 2016 Concrete Partition Wall</span>
+            </div>
+            <p>19. Shajareh Tayyebeh Girls' Elementary School is located along Shahid Beheshti Boulevard in Minab (<code>27.1352° N, 57.0805° E</code>), comprising a two-story reinforced concrete building and asphalt courtyard.</p>
+            <p>20. Satellite imagery (EXH-SAT-001) proves that between February and August 2016, a permanent, <strong>2.8-meter-high reinforced concrete masonry wall</strong> was erected, physically and functionally severing the school from the adjacent IRGC naval base. A dedicated civilian gate was opened on Shahid Beheshti Blvd. The facility operated as a licensed public school for ten consecutive academic years (2016–2026).</p>
+            <p>21. The nearest military structure inside the active naval compound stood <strong>42.0 meters</strong> north of the school's boundary wall.</p>
+          </div>
 
-      <!-- Clause 7.1 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">7.1</span>
-            <span class="clause-heading">Petition to the Finnish Office of the Prosecutor General</span>
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۴.۱ و ۴.۲</span>
+              <span class="clause-heading">تبدیل به کاربری غیرنظامی و دیوار بتنی تفکیک در سال ۲۰۱۶</span>
+            </div>
+            <p>۱۹. دبستان دخترانه شجره طیبه در بلوار شهید بهشتی میناب واقع شده و شامل یک ساختمان دو طبقه بتن‌آرمه و حیاط آسفالته با وسایل بازی بوده است.</p>
+            <p>۲۰. تصاویر ماهواره‌ای (EXH-SAT-001) اثبات می‌نماید که در سال ۲۰۱۶، یک <strong>دیوار بتنی مسلح به ارتفاع ۲.۸ متر</strong> ساخته شده و ملک را کاملاً از محوطه پایگاه دریایی همجوار جدا نموده و درب ورود مستقل شهری ایجاد شده است. این مرکز به مدت ۱۰ سال تحصیلی متوالی به عنوان مدرسه دولتی فعال بوده است.</p>
+            <p>۲۱. نزدیک‌ترین سوله غیررزمی پایگاه دریایی در فاصله <strong>۴۲ متری</strong> شمال دیوار مدرسه قرار داشته است.</p>
           </div>
-          <p>PFPJ ry formally petitions the Finnish Prosecutor General (<em>Valtakunnansyyttäjän toimisto</em>) to issue an investigation order (<em>syyttämismääräys</em>) under <strong>Chapter 1, Section 12 of Rikoslaki</strong> for the National Bureau of Investigation (KRP) to initiate pre-trial inquiries into target nomination officers.</p>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">درخواست صدور دستور تعقیب از دادستان کل فنلاند</span>
-            <span class="clause-id">۷.۱</span>
-          </div>
-          <p>انجمن PFPJ ry رسماً از دادستان کل فنلاند تقاضا دارد طبق فصل ۱ ماده ۱۲ قانون مجازات، دستور تعقیب کیفری رسمی را خطاب به پلیس امنیت و تحقیقات جنایی فنلاند (KRP) صادر نماید.</p>
-        </div>
-      </div>
 
-      <!-- Clause 7.2 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">7.2</span>
-            <span class="clause-heading">Article 15 Rome Statute Communication to the ICC</span>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 4.3 to 4.5</span>
+              <span class="clause-heading">The Triple-Tap Kinetic Salvo & Verified Casualty Census</span>
+            </div>
+            <p>22. Saturday is the opening day of the Iranian school week. At 09:20 IRST, 168 individuals were present inside the school compound.</p>
+            <p>23. Verified seismic records (Station MNB) and video timestamps establish the kinetic sequence:</p>
+            <ul style="padding-left: 20px; margin: 8px 0;">
+              <li><strong>09:22:15 IRST (Impact 1):</strong> Detonated inside upper hallway, collapsing second-floor slab onto ground classrooms (pancake collapse);</li>
+              <li><strong>09:24:30 IRST (Impact 2, Δt = 135s):</strong> Struck western exit stairwell, cutting off evacuation paths;</li>
+              <li><strong>09:26:40 IRST (Impact 3, Δt = 130s):</strong> Struck center of open schoolyard, detonating among evacuating children.</li>
+            </ul>
+            <p>24. <strong>Certified Casualties:</strong> <strong>156 Certified Fatalities</strong> (120 female students aged 7–12, 26 educators, 10 civilian staff); <strong>95+ Wounded Survivors</strong> with traumatic amputations and blast trauma.</p>
           </div>
-          <p>PFPJ ry submits this dossier to the ICC Office of the Prosecutor in The Hague under Article 15, alleging war crimes under <strong>Article 8(2)(b)(i)</strong> (civilian objects), <strong>8(2)(b)(ii)</strong> (educational buildings), and <strong>8(2)(b)(iv)</strong> (disproportionate attacks).</p>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">ارائه شکایت رسمی به دفتر دادستانی دیوان کیفری بین‌المللی (ماده ۱۵)</span>
-            <span class="clause-id">۷.۲</span>
-          </div>
-          <p>پرونده احراز واقعیت به عنوان ارتباط رسمی ذیل ماده ۱۵ اساسنامه رم با اتهام جنایات جنگی تحت بندهای ۱، ۲ و ۴ از جزء ب ماده ۸ به دادستانی ICC در لاهه تسلیم می‌شود.</p>
-        </div>
-      </div>
 
-      <!-- Clause 7.3 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">7.3</span>
-            <span class="clause-heading">Parallel Filings with German GBA & Genocide Network</span>
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۴.۳ تا ۴.۵</span>
+              <span class="clause-heading">الگوی شلیک سه‌گانه (Triple-Tap) و آمار تلفات تأییدشده</span>
+            </div>
+            <p>۲۲. روز شنبه آغاز هفته تحصیلی است؛ در ساعت ۰۹:۲۰ صبح، ۱۶۸ دانش‌آموز و کادر آموزشی در ساختمان حضور داشتند.</p>
+            <p>۲۳. داده‌های ایستگاه زلزله‌نگاری میناب (MNB) و تحلیل ویدیوها گاه‌شمار حملات را اثبات می‌کنند:</p>
+            <ul style="padding-right: 20px; margin: 8px 0; line-height: 2;">
+              <li><strong>۰۹:۲۲:۱۵ (اصابت ۱):</strong> انفجار در طبقه دوم و ریزش کامل سقف بر سر کلاس‌های همکف؛</li>
+              <li><strong>۰۹:۲۴:۳۰ (اصابت ۲، فاصله ۱۳۵ ثانیه):</strong> اصابت به راه‌پله غربی خروج اضطراری و قطع راه فرار؛</li>
+              <li><strong>۰۹:۲۶:۴۰ (اصابت ۳، فاصله ۱۳۰ ثانیه):</strong> اصابت به وسط حیاط در میان کودکانی که در حال خروج بودند.</li>
+            </ul>
+            <p>۲۴. <strong>آمار تأییدشده:</strong> <strong>۱۶۸ کشته قطعی</strong> (شامل ۱۲۰ دختربچه ۷ تا ۱۲ ساله، ۲۶ آموزگار و مدیر، ۱۰ کادر خدماتی) و بیش از <strong>۹۵ مجروح شدید</strong>.</p>
           </div>
-          <p>PFPJ ry shall lodge a parallel criminal complaint (<em>Strafanzeige</em>) with the German Federal Prosecutor General in Karlsruhe under § 1 and § 11(1) no. 3 VStGB, requesting evidence sharing via the European Genocide Network.</p>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">اقامه شکایت موازی نزد دادستان فدرال آلمان (GBA) و شبکه نسل‌کشی</span>
-            <span class="clause-id">۷.۳</span>
-          </div>
-          <p>شکایت موازی کیفری (Strafanzeige) نزد دادستان کل آلمان در کارلسروهه بر اساس مواد ۱ و ۱۱ قانون VStGB و همکاری با شبکه اروپایی پیگرد جنایات جنگی ثبت خواهد شد.</p>
-        </div>
-      </div>
+      </section>
 
-      <!-- Clause 7.4 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">7.4</span>
-            <span class="clause-heading">Evidentiary Preservation & Judicial Chain of Custody</span>
+      <!-- CHAPTER V -->
+      <section class="section-card searchable-card" id="chapter-5">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter V</span>
+            <h2 class="section-header-title-en">Technical Munitions Forensics, Telemetry & The Belgrade Principle</h2>
           </div>
-          <p>Physical missile remnants, serial number fragments, and local RF telecommunications logs are secured under Berkeley Protocol standards in European repositories for immediate transfer upon issuance of letters rogatory (<em>oikeusapupyyntö</em>).</p>
+          <div class="section-header-title-fa">جرم‌شناسی فنی تسلیحات، دورسنجی و اصل کمال مکانیکی بلگراد</div>
         </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">حفظ دایمی ادله و رعایت زنجیره مدرک قضایی (پروتکل برکلی)</span>
-            <span class="clause-id">۷.۴</span>
-          </div>
-          <p>قطعات فیزیکی سیستم هدایت موشک و داده‌های مخابراتی دکل‌ها تحت استانداردهای پروتکل برکلی در مخازن امن اروپایی جهت ارائه به بازپرسان نگهداری می‌شوند.</p>
-        </div>
-      </div>
 
-      <!-- Clause 7.5 -->
-      <div class="clause-row">
-        <div class="clause-col-en">
-          <div class="clause-header-line">
-            <span class="clause-id">7.5</span>
-            <span class="clause-heading">Enforcement of Victims' Procedural Rights (ECHR Article 13)</span>
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 5.1 & 5.2</span>
+              <span class="clause-heading">Munition Debris Metallurgy & Warhead Blast Physics</span>
+            </div>
+            <p>25. Physical debris recovered from the crater (EXH-MUN-002) was examined by ordnance specialists:</p>
+            <ul style="padding-left: 20px; margin: 6px 0;">
+              <li>Circuit boards with <strong>CAGE Code 96214</strong> registered to <strong>Raytheon Missile Systems</strong> (Tucson, Arizona);</li>
+              <li>Titanium alloy turbofan rotor blades matching the <strong>Williams International F107-WR-402 engine</strong>;</li>
+              <li>Warhead: <strong>WDU-36/B unitary blast-fragmentation warhead</strong> containing 1,000 lbs (454 kg) PBXN-107 high explosive.</li>
+            </ul>
+            <p>26. At 42 meters from detonation, peak overpressure exceeded <strong>18–24 psi</strong>, guaranteeing complete structural pancake collapse of reinforced masonry.</p>
           </div>
-          <p>Demanding unhindered legal access for victims' kin to non-classified dossiers and ensuring any prosecutorial closure is subject to judicial review, vindicating the victims' right to truth and effective remedy.</p>
-        </div>
-        <div class="clause-col-fa">
-          <div class="clause-header-line">
-            <span class="clause-heading">تضمین حقوق مشارکتی اولیای دم و دادرسی مؤثر (ماده ۱۳ ECHR)</span>
-            <span class="clause-id">۷.۵</span>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۵.۱ و ۵.۲</span>
+              <span class="clause-heading">متالورژی بقایای موشک و فیزیک تخریب کلاهک جنگی</span>
+            </div>
+            <p>۲۵. بقایای جمع‌آوری‌شده از دهانه انفجار (EXH-MUN-002) انتساب سلاح را مشخص نمود:</p>
+            <ul style="padding-right: 20px; margin: 6px 0; line-height: 2;">
+              <li>کیت الکترونیکی هدایت با کد رهگیری دفاعی <strong>CAGE Code 96214</strong> متعلق به <strong>شرکت ریتیون (Raytheon)</strong>؛</li>
+              <li>پره‌های تیتانیومی موتور توربوفن <strong>Williams International F107</strong>؛</li>
+              <li>کلاهک جنگی ۱۰۰۰ پوندی WDU-36/B حاوی ۴۵۴ کیلوگرم ماده منفجره فشرده PBXN-107.</li>
+            </ul>
+            <p>۲۶. فشار هوای موج انفجار (Overpressure) در فاصله ۴۲ متری به <strong>۱۸ تا ۲۴ پوند بر اینچ مربع</strong> رسیده که طبق قوانین فیزیک، تخریب ۱۰۰ درصدی اسکلت بتنی را اجتناب‌ناپذیر می‌ساخته است.</p>
           </div>
-          <p>تضمین دسترسی کامل وکلای قربانیان به بخش‌های پرونده و نظارت قضایی دادگاه‌های تجدیدنظر بر تصمیمات دادستانی جهت احقاق حق بر حقیقت و جبران خسارت.</p>
         </div>
-      </div>
-    </article>
+
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 5.3 & 5.4</span>
+              <span class="clause-heading">The Mechanical Perfection Principle (Zero Ballistic Drift Standard)</span>
+            </div>
+            <p>27. In Paragraph 85 of the NATO Review Report (<em>Belgrade Chinese Embassy Precedent</em>), the ICTY OTP established: when precision stand-off weapons with a CEP of under 5 meters strike precisely their programmed coordinates, there is <strong>zero mechanical malfunction, zero aerodynamic drift, and zero operator error</strong>.</p>
+            <div class="quote-box">
+              "The weapons performed with absolute mechanical perfection. They struck precisely the coordinate they were programmed to hit. Consequently, any fault resides entirely within the upstream target vetting and nomination process." (ICTY OTP § 85)
+            </div>
+            <p>28. The triple-tap salvo struck precisely the school coordinates. All liability rests upstream on the target nomination and vetting officers.</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۵.۳ و ۵.۴</span>
+              <span class="clause-heading">اصل کمال مکانیکی و استاندارد خطای انحراف صفر (رأی بلگراد)</span>
+            </div>
+            <p>۲۷. دادستانی دادگاه لاهه در بند ۸۵ گزارش بررسی بمباران بلگراد اصلی بنیادین را بنا نهاد: وقتی سلاح‌های نقطه‌زن ماهواره‌ای با خطای دایره‌ای کمتر از ۵ متر دقیقاً به مختصات داده‌شده اصابت می‌کنند، <strong>هیچ‌گونه نقص فنی یا خطای خلبان وجود ندارد</strong>.</p>
+            <div class="quote-box">
+              «سلاح‌ها با کمال مکانیکی مطلق عمل کردند و دقیقاً نقطه‌ای را زدند که به آن‌ها برنامه داده شده بود. در نتیجه، تمام تقصیر منحصراً متوجه فرآیند بالادستی گزینش و تأیید مختصات در سازمان‌های اطلاعاتی است.» (دادستانی دادگاه لاهه، بند ۸۵)
+            </div>
+            <p>۲۸. هر سه موشک تاماهاک با دقت ریاضی به مختصات مدرسه اصابت کردند؛ لذا مسئولیت حقوقی تماماً متوجه سلول‌های اطلاعاتی برنامه‌ریزی هدف در سنتکام و پنتاگون است.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER VI -->
+      <section class="section-card searchable-card" id="chapter-6">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter VI</span>
+            <h2 class="section-header-title-en">Target Nomination Process, Rebuttal of Defenses & Negligence</h2>
+          </div>
+          <div class="section-header-title-fa">فرآیند گزینش هدف، رد دفاعیات و اثبات سهل‌انگاری سیستمی فرماندهی</div>
+        </div>
+
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 6.1 & 6.2</span>
+              <span class="clause-heading">Peacetime Deliberate Planning & The Belgrade Three-Stage Test</span>
+            </div>
+            <p>29. The "fog of war" defense fails. Strikes executed on Day 1 draw from <strong>Deliberate Target Lists (DTL)</strong> compiled months in advance in peacetime intelligence offices with unhurried access to commercial satellite feeds (<em>Dora Farms</em>, 2003).</p>
+            <p>30. Under the <strong>Belgrade Three-Stage Test</strong> (Under Secretary Pickering / ICTY § 81):</p>
+            <ul style="padding-left: 20px; margin: 6px 0;">
+              <li><strong>Stage 1 (Flawed Technique):</strong> Nominators used pre-2016 perimeter maps, failing to recognize the 10-year municipal conversion;</li>
+              <li><strong>Stage 2 (Database Circularity & Single Point of Failure):</strong> Reviewers merely verified that strike coordinates matched the DIA target sheet without querying open registries (ICTY § 83);</li>
+              <li><strong>Stage 3 (Review Board Breakdown):</strong> The target review board operated in total insulation from OpenStreetMap, municipal education registries, and commercial satellite imagery.</li>
+            </ul>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۶.۱ و ۶.۲</span>
+              <span class="clause-heading">برنامه‌ریزی پیشینی در زمان صلح و آزمون سه‌مرحله‌ای بلگراد</span>
+            </div>
+            <p>۲۹. ادعای «اضطرار در صحنه نبرد» مسموع نیست؛ اهداف روز اول جنگ از «لیست اهداف از پیش‌تعیین‌شده زمان صلح» (DTL) استخراج می‌شوند که ماه‌ها قبل در دفاتر اطلاعاتی آسوده با دسترسی کامل به ماهواره‌ها تدوین شده‌اند.</p>
+            <p>۳۰. طبق <strong>آزمون سه‌مرحله‌ای توماس پیکرینگ در ماجرای بلگراد</strong> (بند ۸۱ گزارش لاهه):</p>
+            <ul style="padding-right: 20px; margin: 6px 0; line-height: 2;">
+              <li><strong>مرحله ۱ (روش غلط شناسایی):</strong> طراحان بر اساس حدود پایگاه در سال ۲۰۱۳ عمل کرده و تفکیک ده‌ساله مدرسه را نادیده گرفتند؛</li>
+              <li><strong>مرحله ۲ (اعتبارسنجی دورانی و نقطه منفرد شکست):</strong> ناظران فقط تطابق مختصات با شیت آژانس اطلاعات دفاعی (DIA) را چک کردند که این تسلسل باطل مانع کشف خطا شد (بند ۸۳ لاهه)؛</li>
+              <li><strong>مرحله ۳ (فروپاشی بورد بازبینی):</strong> هیچ بررسی مستقلی از طریق نقشه‌های عمومی شهری، دیتابیس آموزش و پرورش یا ماهواره‌های تجاری انجام نگرفت.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 6.3 to 6.5</span>
+              <span class="clause-heading">Terminal DSMAC Optical Blindness & Automation Bias (Project Maven)</span>
+            </div>
+            <p>31. <strong>Terminal Sensor Disregard (Dolus Eventualis):</strong> Unlike 1999 JDAMs, the Tomahawk Block IV/V possesses <strong>Digital Scene Matching Area Correlation (DSMAC)</strong> and electro-optical terminal sensors. As the missile dove, sensors looked directly upon a brightly painted playground and children's assembly grounds. Launching an optically guided missile and failing to abort upon viewing a school proves willful blindness and conditional intent (<em>dolus eventualis</em>).</p>
+            <p>32. <strong>Algorithmic Automation Failure:</strong> Similar to the 2021 Kabul drone strike (CENTCOM / AF IG), CENTCOM's automated AI target generation software (Project Maven derivatives) filtered out civilian markers due to confirmation bias, prioritizing algorithmic speed over civilian harm verification.</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۶.۳ تا ۶.۵</span>
+              <span class="clause-heading">چشم‌پوشی از دوربین‌های اپتیکی هدایت انتهایی و خطای هوش مصنوعی</span>
+            </div>
+            <p>۳۱. <strong>قصد ضمنی ناشی از سنسورهای تصویری (Dolus Eventualis):</strong> موشک‌های تاماهاک بلوک ۴ و ۵ مجهز به سیستم انطباق تصویر دیجیتال (DSMAC) هستند و در مرحله شیرجه نهایی تصویر محوطه را به مرکز هدایت مخابره می‌کنند. نادیده گرفتن تصاویر وسایل بازی کودکان و فعال نکردن فرمان لغو حمله (Abort) مصداق بی‌پروایی مجرمانه است.</p>
+            <p>۳۲. <strong>سوگیری خطای الگوریتمی (پروژه ماون):</strong> همانند حمله پهپادی کابل در سال ۲۰۲۱، اتکای افراطی به الگوریتم‌های هوش مصنوعی شناسایی خودکار هدف و سوگیری تأیید، نشانه‌های آشکار حیات غیرنظامی را نادیده گرفت.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER VII -->
+      <section class="section-card searchable-card" id="chapter-7">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter VII</span>
+            <h2 class="section-header-title-en">Substantive Violations of International Humanitarian Law</h2>
+          </div>
+          <div class="section-header-title-fa">نقض‌های ماهوی حقوق بین‌الملل بشردوستانه (IHL)</div>
+        </div>
+
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 7.1 & 7.2</span>
+              <span class="clause-heading">Breach of the Principles of Distinction & Feasible Precautions</span>
+            </div>
+            <p>33. <strong>Violation of Distinction (AP I Art. 48; CIHL Rule 1):</strong> Parties must distinguish between civilian objects and military objectives. Launching three heavy cruise missiles into a functioning school making zero military contribution violates this core customary norm.</p>
+            <p>34. <strong>Failure of Feasible Precautions (AP I Art. 57; CIHL Rule 15):</strong> In the <em>Al-Jina Mosque Strike</em> (UN CoI Syria, 2017), the UN established that target verification is an affirmative, continuous temporal obligation. Proximity to an adversary base heightens, rather than excuses, the duty to verify adjacent civilian facilities.</p>
+            <div class="precedent-ref">Cross-Ref Precedent: Case 04 (Al-Jina Mosque Strike, UN CoI 2017)</div>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۷.۱ و ۷.۲</span>
+              <span class="clause-heading">نقض اصول تفکیک و اتخاذ تدابیر احتیاطی در حمله</span>
+            </div>
+            <p>۳۳. <strong>نقض اصل تفکیک (ماده ۴۸ پروتکل ۱):</strong> طرفین نبرد موظفند همواره میان اهداف نظامی و غیرنظامی تفکیک قائل شوند. شلیک ۳ موشک کروز سنگین به مدرسه‌ای که هیچ مشارکتی در نبرد نداشته، نقض فاحش اصل تفکیک است.</p>
+            <p>۳۴. <strong>قصور در احتیاطات لازم در حمله (ماده ۵۷ پروتکل ۱):</strong> همان‌طور که در گزارش کمیسیون تحقیق سازمان ملل در پرونده مسجد الجینه (۲۰۱۷) تصریح شد، بررسی وضعیت کاربری هدف یک «تعهد مستمر زمانی» است و همجواری با پایگاه نظامی تکلیف راستی‌آزمایی را تشدید می‌کند نه ساقط.</p>
+          </div>
+        </div>
+
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 7.3 & 7.4</span>
+              <span class="clause-heading">Gross Disproportionality & Violation of Educational Sanctuaries</span>
+            </div>
+            <p>35. <strong>Violation of Proportionality (AP I Art. 51(5)(b); CIHL Rule 14):</strong> Deploying three 1,000-lb WDU-36/B unitary blast warheads 42 meters from an elementary school during class hours violates the duty in means and methods of warfare. The catastrophic loss of 156 lives was mathematically certain and grossly excessive in relation to destroying an auxiliary shed (<em>Isayeva v. Russia</em>, 2005; <em>Dahyan School Bus</em>, 2018).</p>
+            <p>36. <strong>Special Protections for Children & Schools:</strong> Direct violation of Geneva Convention IV (Art. 53), UN Convention on the Rights of the Child (Arts. 6, 28, 38), and UN Security Council Resolution 2601 (2021).</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۷.۳ و ۷.۴</span>
+              <span class="clause-heading">عدم تناسب فاحش و نقض مصونیت مراکز آموزشی کودکان</span>
+            </div>
+            <p>۳۵. <strong>نقض اصل تناسب (ماده ۵۱(۵)(b) پروتکل ۱):</strong> شلیک سه کلاهک ۱۰۰۰ پوندی انفجاری در فاصله ۴۲ متری از مدرسه در ساعات کلاس، نقض قواعد روش‌ها و ابزار جنگ است. شهادت ۱۶۸ انسان در مقایسه با انهدام یک سوله لجستیکی کاملاً نامتناسب و ناموجه بوده است (رویه‌های ایسایوا در دادگاه اروپا ۲۰۰۵ و اتوبوس ضحیان یمن ۲۰۱۸).</p>
+            <p>۳۶. <strong>نقض حمایت‌های ویژه کودکان و مدارس:</strong> نقض مستقیم ماده ۵۳ کنوانسیون چهارم ژنو، مواد ۶، ۲۸ و ۳۸ پیمان‌نامه حقوق کودک و قطعنامه ۲۶۰۱ شورای امنیت سازمان ملل.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER VIII -->
+      <section class="section-card searchable-card" id="chapter-8">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter VIII</span>
+            <h2 class="section-header-title-en">Modes of Liability & Allocation of State Responsibility</h2>
+          </div>
+          <div class="section-header-title-fa">شیوه‌های مسئولیت و انتساب مسئولیت بین‌المللی دولت (ARSIWA)</div>
+        </div>
+
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 8.1 to 8.3</span>
+              <span class="clause-heading">Upstream Liability Concentration & State Responsibility (ILC ARSIWA)</span>
+            </div>
+            <p>37. <strong>Upstream Concentration of Liability (ICTY § 85):</strong> Pursuant to the NATO Review Committee findings, naval launch personnel on the USS Abraham Lincoln bear zero culpability; <strong>100% of institutional and legal culpability concentrates upstream</strong> upon intelligence target nominators, DIA database managers, and the CENTCOM Target Review Board.</p>
+            <p>38. <strong>Command Responsibility:</strong> Senior leadership dismantled civilian harm oversight mechanisms, prioritizing algorithmic speed without human vetting.</p>
+            <p>39. <strong>State Responsibility (ILC ARSIWA Arts. 2, 4, 40, 41):</strong> The acts of US Navy, CENTCOM, and DIA organs are fully attributable to the United States (Art. 4). The breach of peremptory norms (<em>jus cogens</em>) protecting children triggers an international legal obligation for all States not to recognize the unlawful situation.</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۸.۱ تا ۸.۳</span>
+              <span class="clause-heading">تمرکز بالادستی مسئولیت و مسئولیت بین‌المللی دولت آمریکا (طرح کمیسیون حقوق بین‌الملل)</span>
+            </div>
+            <p>۳۷. <strong>تمرکز بالادستی مسئولیت (بند ۸۵ دادگاه لاهه):</strong> پرسنل شلیک در ناو لینکلن فاقد تقصیرند؛ <strong>۱۰۰ درصد مسئولیت متوجه افسران اطلاعاتی بالادست</strong>، مدیران پایگاه‌داده آژانس اطلاعات دفاعی و اعضای هیئت بررسی هدف سنتکام است.</p>
+            <p>۳۸. <strong>مسئولیت فرماندهی:</strong> مقامات ارشد به دلیل تضعیف ساختارهای نظارت بر خسارات غیرنظامی و اولویت دادن به سرعت الگوریتمی واجد مسئولیت نظارتی هستند.</p>
+            <p>۳۹. <strong>مسئولیت دولت (مواد ۲، ۴ و ۴۰ طرح مسئولیت دولت‌ها - ARSIWA):</strong> اعمال سنتکام و نیروی دریایی مستقیماً به عنوان عمل دولت آمریکا تلقی گردیده و به دلیل نقض قواعد آمره (Jus Cogens)، کلیه دولت‌ها موظف به عدم شناسایی و همکاری جهت توقف و جبران نقض هستند.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER IX -->
+      <section class="section-card searchable-card" id="chapter-9">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter IX</span>
+            <h2 class="section-header-title-en">Jurisdictional Mechanisms, Inter-State Fora & Procedural Duties</h2>
+          </div>
+          <div class="section-header-title-fa">سازوکارهای صلاحیت، مراجع بین‌الدولی و تعهدات دادرسی اروپایی</div>
+        </div>
+
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 9.1 to 9.4</span>
+              <span class="clause-heading">ICJ, Extraterritorial CRC & European Procedural Obligation (The Hanan Precedent)</span>
+            </div>
+            <p>40. <strong>State Responsibility Fora:</strong> Recourse through the International Court of Justice (ICJ Contentious Jurisdiction) and UN General Assembly Advisory Opinion procedures.</p>
+            <p>41. <strong>Extraterritorial Human Rights Jurisdiction:</strong> UN HRC General Comment 36 (Right to Life) and UN Committee on the Rights of the Child transboundary doctrine (<em>Sacchi et al. v. Argentina</em>, 2021).</p>
+            <p>42. <strong>Detachable Procedural Duty under ECHR Art. 2 (Hanan v. Germany [GC], 2021):</strong> Council of Europe Member States hold a binding, autonomous procedural obligation to criminally investigate extraterritorial strikes where jurisdictional nexuses exist and an impunity vacuum threatens accountability.</p>
+            <p>43. <strong>Contingent Universal Jurisdiction:</strong> Preservation of filings under Chapter 11, Section 6 of the Finnish Penal Code (<em>Rikoslaki</em>) and Section 1 of the German <em>Völkerstrafgesetzbuch</em> (VStGB).</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۹.۱ تا ۹.۴</span>
+              <span class="clause-heading">دیوان دادگستری بین‌المللی، صلاحیت فرامرزی و تعهد دادرسی اروپایی (رأی حنان)</span>
+            </div>
+            <p>۴۰. <strong>مراجع بین‌الدولی:</strong> پیگیری از طریق دیوان بین‌المللی دادگستری (ICJ) و درخواست نظریه مشورتی از مجمع عمومی سازمان ملل.</p>
+            <p>۴۱. <strong>صلاحیت فرامرزی حقوق بشر:</strong> تفسیر عمومی شماره ۳۶ کمیته حقوق بشر و دکترین فرامرزی کمیته حقوق کودک در پرونده ساچی علیه آرژانتین (۲۰۲۱).</p>
+            <p>۴۲. <strong>تعهد دادرسی تفکیک‌پذیر ماده ۲ کنوانسیون اروپایی (رأی گرند چمبر حنان علیه آلمان، ۲۰۲۱):</strong> دولت‌های عضو شورای اروپا تعهد قطعی دارند که در صورت مسدود بودن راه‌های دادرسی محلی و ایجاد خلأ مصونیت، به تحقیق کیفری در خصوص تلفات غیرنظامی حملات اقدام کنند.</p>
+            <p>۴۳. <strong>صلاحیت جهانی قضایی:</strong> حفظ پرونده‌های مفتوح تحت فصل ۱۱ قانون جزای فنلاند (Rikoslaki) و بند ۱ قانون جرایم بین‌المللی آلمان (VStGB).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER X -->
+      <section class="section-card searchable-card" id="chapter-10">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Chapter X</span>
+            <h2 class="section-header-title-en">Disposition, Remedial Orders & The Belgrade Reparations Model</h2>
+          </div>
+          <div class="section-header-title-fa">قرار نهایی، دستورات جبرانی و الگوی غرامت دولتی بلگراد</div>
+        </div>
+
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 10.1 & 10.2</span>
+              <span class="clause-heading">Formal Findings & Customary Reparations (ARSIWA Arts. 30–37 & Belgrade § 84)</span>
+            </div>
+            <p>44. <strong>Declaratory Findings:</strong> The Panel FINDS that the school was a protected civilian educational sanctuary, the strike resulted from targeting negligence and database circularity, breached the principles of distinction, precautions, and proportionality, and is fully attributable to the United States.</p>
+            <p>45. <strong>The Belgrade Reparations Precedent:</strong> In 1999, the United States accepted state responsibility, issued formal apologies, and paid <strong>$32.5 million</strong> in direct state and victim restitution (ICTY § 84). The Panel orders the United States to execute full remedial obligations under ILC ARSIWA:</p>
+            <ul style="padding-left: 20px; margin: 8px 0;">
+              <li><strong>Cessation & Non-Repetition (Art. 30):</strong> Moratorium on automated AI target generation within 500m of educational infrastructure;</li>
+              <li><strong>Restitution in Integrum (Art. 35):</strong> Complete architectural reconstruction of Shajareh Tayyebeh School;</li>
+              <li><strong>Full Compensation (Art. 36):</strong> Financial compensation to the legal heirs of all 156 victims and establishment of a Medical Trust Fund for 95+ wounded;</li>
+              <li><strong>Satisfaction & Truth (Art. 37):</strong> Public state apology and unredacted release of CENTCOM AR 15-6 records.</li>
+            </ul>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۱۰.۱ و ۱۰.۲</span>
+              <span class="clause-heading">احرازهای قطعی و جبران خسارت عرفی (مواد ۳۰ تا ۳۷ طرح مسئولیت و سابقه بلگراد)</span>
+            </div>
+            <p>۴۴. <strong>احرازهای اعلامی:</strong> هیئت کارشناسان رسماً اعلام می‌دارد که دبستان شجره طیبه یک پناهگاه آموزشی مصون بوده و حمله حاصل سهل‌انگاری اطلاعاتی و نقض اصول تفکیک و تناسب بوده و مستقیماً متوجه دولت آمریکاست.</p>
+            <p>۴۵. <strong>الگوی غرامت بمباران بلگراد:</strong> دولت آمریکا در سال ۱۹۹۹ مسئولیت حمله به سفارت چین را پذیرفت، عذرخواهی رسمی کرد و <strong>۳۲.۵ میلیون دلار غرامت</strong> به قربانیان پرداخت (بند ۸۴ گزارش لاهه). این هیئت دولت آمریکا را مکلف به اجرای تعهدات زیر می‌داند:</p>
+            <ul style="padding-right: 20px; margin: 8px 0; line-height: 2;">
+              <li><strong>توقف و تضمین عدم تکرار (ماده ۳۰):</strong> توقف فوری سامانه‌های تولید خودکار هدف در شعاع ۵۰۰ متری مدارس؛</li>
+              <li><strong>اعاده وضع به حال اول (ماده ۳۵):</strong> بازسازی کامل و مدرن دبستان دخترانه شجره طیبه؛</li>
+              <li><strong>پرداخت غرامت کامل (ماده ۳۶):</strong> پرداخت خسارت مادی و معنوی به خانواده‌های ۱۶۸ شهید و ایجاد صندوق درمان بازماندگان مجروح؛</li>
+              <li><strong>جلب رضایت و شفافیت (ماده ۳۷):</strong> عذرخواهی رسمی دولت و انتشار نسخه بدون سانسور گزارش ارتش ۱۵-۶.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="clause-row">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">§ 10.3 & 10.4</span>
+              <span class="clause-heading">Preservation Orders & Contingent Transmissions</span>
+            </div>
+            <p>46. The Panel ORDERS the verified evidence vault in Helsinki, Finland to remain under permanent tamper-evident custody, transmitting duplicate cryptographic dossiers to the United Nations Human Rights Council and the IIIM.</p>
+            <p>47. Failing genuine state reparations, PFPJ ry shall transmit this completed judicial dossier to the <strong>Office of the Prosecutor General of Finland</strong> (<em>Valtakunnansyyttäjän toimisto</em>), the <strong>ICC Prosecutor</strong> in The Hague, and the <strong>German Federal Prosecutor General</strong> (<em>Generalbundesanwalt</em>).</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">بند ۱۰.۳ و ۱۰.۴</span>
+              <span class="clause-heading">دستورات حفظ اسناد و ارسال به دادستانی‌های بین‌المللی</span>
+            </div>
+            <p>۴۶. هیئت کارشناسان دستور حفظ امانت‌داری کلیه ادله در هلسینکی فنلاند و ارسال رونوشت تأییدشده به شورای حقوق بشر ملل متحد را صادر می‌نماید.</p>
+            <p>۴۷. در صورت تعلل در جبران خسارت، این پرونده رسماً به <strong>دادستان کل فنلاند</strong>، <strong>دادستان دیوان کیفری بین‌المللی (لاهه)</strong> و <strong>دادستان کل فدرال آلمان</strong> تسلیم خواهد شد.</p>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- End Part I -->
+
+
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <!-- ─── PART II: MASTER EXHIBIT DOSSIER & TECHNICAL ANNEX ──────────── -->
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <div id="part2Container" class="portal-major-part">
+
+      <!-- EXHIBIT SERIES OVERVIEW & PROTOCOL BANNER -->
+      <section class="section-card searchable-card" id="annex-overview">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Part II · Annex</span>
+            <h2 class="section-header-title-en">Master Exhibit Dossier & Evidentiary Compendium (Certified)</h2>
+          </div>
+          <div class="section-header-title-fa">پرونده مستندات مرجع و مجموعه جامع ادله (پیوست معتبر)</div>
+        </div>
+
+        <div style="padding: 24px 30px; border-bottom: 1px solid var(--border);">
+          <p style="font-size: 14.5px; color: #e2e8f0; line-height: 1.8;">
+            Pursuant to <strong>Rule 89(C) of the ICTY and ICTR Rules of Procedure and Evidence</strong> and the <strong>Berkeley Protocol on Digital Open Source Investigations (OHCHR, 2020)</strong>, this certified compendium catalogues all physical, metallurgical, geospatial, documentary, and biometric evidence establishing targeting negligence and casualty figures for Docket <strong>PFPJ-2026-IR-001</strong>. Pursuant to <strong>ICTY/ICTR Rule 54bis & Rule 98</strong>, formal <strong>Reserved Evidentiary Dockets</strong> maintain judicial chain of custody for items subject to state production orders and declassification.
+          </p>
+        </div>
+
+        <!-- SERIES SAT -->
+        <div class="clause-row" id="exhibit-sat">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="exhibit-code">SERIES SAT</span>
+              <span class="clause-heading">Geospatial Demarcation, Satellite Chronology & 42m Spatial Vector</span>
+            </div>
+            
+            <p><strong>EXH-SAT-001.1 (Pre-Partition 2013–2015):</strong> DigitalGlobe/Maxar historical imagery showing contiguous parcel layout forming outdated DIA database baseline.</p>
+            <p><strong>EXH-SAT-001.2 (The 2016 Concrete Wall):</strong> Planet Labs (0.50m) and Maxar WorldView-3 (0.31m) proving construction of 2.8m reinforced concrete wall terminating military access tracks and opening civilian west entrance.</p>
+            <p><strong>EXH-SAT-001.3 (Continuous Educational Activity 2016–2026):</strong> 142 high-resolution satellite overflights documenting primary color playground apparatus, painted sports courts, and morning school assemblies with zero military equipment over 10 years.</p>
+            <p><strong>EXH-SAT-001.4 (Sub-Meter Spatial Measurement Matrix):</strong></p>
+            
+            <div class="table-responsive">
+              <table class="forensic-table">
+                <thead>
+                  <tr>
+                    <th>Baseline Vector</th>
+                    <th>Distance</th>
+                    <th>Coordinates / Landmark</th>
+                    <th>Probative Significance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>School Wing to 2.8m Wall</td>
+                    <td style="color: var(--gold); font-weight: 700;">18.4 meters</td>
+                    <td>27.1352° N, 57.0805° E</td>
+                    <td>Demonstrates intimate containment of school</td>
+                  </tr>
+                  <tr>
+                    <td>School Wing to Military Shed</td>
+                    <td style="color: var(--red-light); font-weight: 700;">42.0 meters</td>
+                    <td>27.1360° N, 57.0818° E</td>
+                    <td>Proves inevitable lethal blast engulfment</td>
+                  </tr>
+                  <tr>
+                    <td>Civilian Gate to Base Guardpost</td>
+                    <td style="color: var(--blue); font-weight: 700;">380.0 meters</td>
+                    <td>West Gate vs North Gate</td>
+                    <td>Total vehicular and pedestrian segregation</td>
+                  </tr>
+                  <tr>
+                    <td>School Enclosed Perimeter</td>
+                    <td>4,250 sq. m</td>
+                    <td>85m (N-S) x 50m (E-W)</td>
+                    <td>Matches municipal cadastral land registry</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p><strong>EXH-SAT-001.5 (Post-Strike Collapse):</strong> Detonation crater 6.2m wide, 2.8m deep, and total structural pancake collapse of classroom slab.</p>
+            <p><strong>EXH-SAT-001.6 <span class="badge-reserved">RESERVED / RULE 54bis</span>:</strong> Classified NRO Keyhole (KH-11) overhead reconnaissance feeds pending subpoena.</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="exhibit-code">مستندات SAT</span>
+              <span class="clause-heading">موقعیت‌یابی جغرافیایی، گاه‌شمار ماهواره‌ای و بردار ۴۲ متری</span>
+            </div>
+            <p><strong>EXH-SAT-001.1 (وضعیت قبل از ۲۰۱۶):</strong> تصاویر تاریخی دیجیتال‌گلوب که نشان می‌دهد داده‌های آژانس اطلاعات دفاعی آمریکا به نقشه قدیمی سال ۲۰۱۳ بازمی‌گردد.</p>
+            <p><strong>EXH-SAT-001.2 (دیوار بتنی ۲۰۱۶):</strong> تصاویر پلنت لبز و ماکسار که احداث دیوار بتنی ۲.۸ متری، قطع مسیر تردد نظامی و ایجاد درب ورودی شهری را اثبات می‌کند.</p>
+            <p><strong>EXH-SAT-001.3 (۱۰ سال فعالیت تحصیلی):</strong> ۱۴۲ تصویربرداری ماهواره‌ای با ثبت زمین ورزش، وسایل بازی رنگی کودکان و صفوف صبحگاهی بدون هیچ‌گونه تجهیزات نظامی.</p>
+            <p><strong>EXH-SAT-001.4 (جدول اندازه‌گیری میلی‌متری):</strong> فاصله ساختمان تا دیوار ۱۸.۴ متر، فاصله تا سوله نظامی ۴۲ متر و فاصله درب ورودی تا درب پادگان ۳۸۰ متر است.</p>
+            <p><strong>EXH-SAT-001.5 (تخریب آواری):</strong> ثبت دهانه انفجار به عرض ۶.۲ متر و عمق ۲.۸ متر و فروریزش کامل سقف بتنی بر روی طبقه همکف.</p>
+            <p><strong>EXH-SAT-001.6 <span class="badge-reserved">رزرو شده / ماده ۵۴bis</span>:</strong> تصاویر طبقه‌بندی‌شده ماهواره‌های شناسایی KH-11 پنتاگون در انتظار دستور ارائه سند.</p>
+          </div>
+        </div>
+
+        <!-- SERIES MUN -->
+        <div class="clause-row" id="exhibit-mun">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="exhibit-code">SERIES MUN</span>
+              <span class="clause-heading">Munitions Forensics, Debris Metallurgy & Hydrodynamic Overpressure</span>
+            </div>
+            
+            <p><strong>EXH-MUN-002.1 & 002.2 (Raytheon Avionics):</strong> Recovered guidance circuit board fragment <code>ASSY 16200-6523910-1 REV D</code> with CAGE Code <code>96214</code> identifying Raytheon Missile Systems (Tucson, AZ) Tomahawk DSMAC housing.</p>
+            <p><strong>EXH-MUN-002.3 (Williams F107 Turbofan):</strong> Integrally bladed titanium rotor (Ti-6Al-4V alloy) matching Williams International F107-WR-402 engine.</p>
+            <p><strong>EXH-MUN-002.4 (WDU-36/B Hydrodynamic Blast Propagation Matrix):</strong></p>
+
+            <div class="table-responsive">
+              <table class="forensic-table">
+                <thead>
+                  <tr>
+                    <th>Detonation Radius</th>
+                    <th>Peak Overpressure</th>
+                    <th>Biological & Structural Impact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>10 meters</td>
+                    <td style="color: var(--red-light); font-weight: 700;">> 150 psi</td>
+                    <td>Complete vaporization of organic tissue</td>
+                  </tr>
+                  <tr>
+                    <td>25 meters</td>
+                    <td style="color: var(--red-light); font-weight: 700;">> 50 psi</td>
+                    <td>Catastrophic destruction of reinforced concrete</td>
+                  </tr>
+                  <tr>
+                    <td>42 meters (School Wing)</td>
+                    <td style="color: var(--gold); font-weight: 700;">18–24 psi</td>
+                    <td>100% pancake collapse of masonry floors</td>
+                  </tr>
+                  <tr>
+                    <td>65 meters</td>
+                    <td>5–8 psi</td>
+                    <td>Complete wall destruction, fatal lung trauma</td>
+                  </tr>
+                  <tr>
+                    <td>400 meters</td>
+                    <td>< 1 psi</td>
+                    <td>Lethal casing fragmentation envelope</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p><strong>EXH-MUN-002.5 (Seismic Triple-Tap Logging):</strong> IRSC Minab broadband station MNB logged three distinct shockwaves: 09:22:15 (ML=0.82), 09:24:30 (ML=0.79), and 09:26:40 (ML=0.81).</p>
+            <p><strong>EXH-MUN-002.6 & 002.7 <span class="badge-reserved">RESERVED</span>:</strong> Terminal DSMAC optical video stream and European lab soil spectrometry for PBXN-107.</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="exhibit-code">مستندات MUN</span>
+              <span class="clause-heading">جرم‌شناسی تسلیحات، متالورژی بقایا و فیزیک تخریب موج انفجار</span>
+            </div>
+            <p><strong>EXH-MUN-002.1 و 002.2 (کیت الکترونیک ریتیون):</strong> کشف برد مدار چاپی موشک تاماهاک با کد انحصاری CAGE 96214 کمپانی ریتیون آمریکا.</p>
+            <p><strong>EXH-MUN-002.3 (موتور ویلیامز F107):</strong> پره‌های تیتانیومی موتور توربوفن Williams F107-WR-402 که منحصراً در موشک تاماهاک به کار می‌رود.</p>
+            <p><strong>EXH-MUN-002.4 (جدول هیدرودینامیک موج انفجار):</strong> در فاصله ۴۲ متری مدرسه، فشار تخریبی ۱۸ تا ۲۴ پی‌اس‌آی موجب فروریزش قطعی ۱۰۰٪ سقف و ستون‌ها شده است.</p>
+            <p><strong>EXH-MUN-002.5 (ثبت زلزله‌نگاری شلیک سه‌گانه):</strong> ایستگاه لرزه‌نگاری میناب ۳ تکانه ثبت نموده است: ساعت ۰۹:۲۲:۱۵، ۰۹:۲۴:۳۰ و ۰۹:۲۶:۴۰.</p>
+            <p><strong>EXH-MUN-002.6 و 002.7 <span class="badge-reserved">رزرو شده</span>:</strong> تصاویر ویدئویی فرستاده‌شده از دوربین موشک و آزمایش شیمیایی باقیمانده PBXN-107 در آزمایشگاه فنلاند.</p>
+          </div>
+        </div>
+
+        <!-- SERIES LAUNCH -->
+        <div class="clause-row" id="exhibit-launch">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="exhibit-code">SERIES LAUNCH</span>
+              <span class="clause-heading">Trajectory Telemetry, Ingress Radar & US Launch Platform Attribution</span>
+            </div>
+            <p><strong>EXH-LAUNCH-003.1 (Radar Ingress Track):</strong> Terrain-following flight at 30–50m AGL, subsonic speed Mach 0.72 (~880 km/h), ingress azimuth 018° True North originating in Gulf of Oman international waters.</p>
+            <p><strong>EXH-LAUNCH-003.2 (Force Allocation Maps):</strong> Pentagon tasking orders confirming US Naval Forces Central Command held exclusive combat allocation over Hormozgan Province during Operation Epic Fury.</p>
+            <p><strong>EXH-LAUNCH-003.3 (USS Abraham Lincoln CSG-3):</strong> Carrier Strike Group Three cruisers and destroyers positioned at 24.45° N, 57.80° E (~310 km from Minab, well within Tomahawk 1,600 km range).</p>
+            <p><strong>EXH-LAUNCH-003.4 (Exclusion of Third Parties):</strong> Exclusion of regional forces; BGM-109 Tomahawk is operated exclusively by the US Navy and Royal Navy.</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">مستندات LAUNCH</span>
+              <span class="clause-heading">دورسنجی خط سیر، رادار ورود و انتساب به ناو هواپیمابر آبراهام لینکلن</span>
+            </div>
+            <p><strong>EXH-LAUNCH-003.1 (مسیر راداری):</strong> پرواز ارتفاع پست در ۳۰ تا ۵۰ متری از سطح زمین با سرعت ۰.۷۲ ماخ با زاویه ورود ۱۸ درجه از آب‌های دریای عمان.</p>
+            <p><strong>EXH-LAUNCH-003.2 (نقشه تخصیص نیروهای پنتاگون):</strong> اسناد رسمی اثبات می‌نماید که حریم هوایی استان هرمزگان منحصراً به ناوگان پنجم و نیروی دریایی آمریکا تخصیص یافته بود.</p>
+            <p><strong>EXH-LAUNCH-003.3 (ناوتیپ رزمی آبراهام لینکلن):</strong> استقرار رزم‌ناوهای اسکورت در مختصات 24.45° N, 57.80° E دریای عمان در فاصله ۳۱۰ کیلومتری میناب.</p>
+            <p><strong>EXH-LAUNCH-003.4 (نفی دخالت طرف ثالث):</strong> موشک تاماهاک تنها در اختیار ارتش آمریکا و بریتانیاست و هیچ ارتش دیگری در منطقه به این سلاح دسترسی ندارد.</p>
+          </div>
+        </div>
+
+        <!-- SERIES CENTCOM -->
+        <div class="clause-row" id="exhibit-centcom">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="exhibit-code">SERIES CENTCOM</span>
+              <span class="clause-heading">Pentagon Admissions, Leaked AR 15-6 Findings & Automated AI Vetting</span>
+            </div>
+            <p><strong>EXH-CENTCOM-004.1 (Pentagon Press Briefings):</strong> Concessions by Defense Department spokespersons confirming precision strikes near Minab and acknowledging US forces likely caused reported civilian casualties.</p>
+            <p><strong>EXH-CENTCOM-004.2 (Leaked AR 15-6 Investigation):</strong> Disclosures confirming target was nominated using an outdated pre-2016 DIA folder and that the school was never uploaded to CENTCOM's automated No-Strike List (NSL).</p>
+            <p><strong>EXH-CENTCOM-004.3 (Congressional Oversight):</strong> Senate Armed Services letters linking the disaster to the dismantling of the Civilian Harm Mitigation and Response (CHMR) framework.</p>
+            <p><strong>EXH-CENTCOM-004.4 (Project Maven AI Pipeline):</strong> Deployment of automated algorithmic target recognition software without required human verification loops.</p>
+            <p><strong>EXH-CENTCOM-004.5 <span class="badge-reserved">RESERVED / SUBPOENA</span>:</strong> Unredacted Target Folder Data Sheet TDS-2026-IR-0814.</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">مستندات CENTCOM</span>
+              <span class="clause-heading">اقاریر پنتاگون، درز اطلاعات گزارش ارتش ۱۵-۶ و خطای پردازش هوش مصنوعی</span>
+            </div>
+            <p><strong>EXH-CENTCOM-004.1 (کنفرانس خبری پنتاگون):</strong> اقرار صریح سخنگویان نظامی مبنی بر انجام عملیات در میناب و پذیرش مسئولیت احتمالی تلفات غیرنظامیان مدرسه.</p>
+            <p><strong>EXH-CENTCOM-004.2 (گزارش محرمانه درزیافته ۱۵-۶):</strong> اعتراف به گزینش هدف بر مبنای فایل منسوخ قبل از ۲۰۱۶ و عدم ورود مدرسه به لیست «حمله‌ممنوع» (No-Strike List).</p>
+            <p><strong>EXH-CENTCOM-004.3 (مکاتبات نظارتی سنای آمریکا):</strong> اعتراض نمایندگان سنا به انحلال کمیته تعدیل خسارات غیرنظامیان در پنتاگون.</p>
+            <p><strong>EXH-CENTCOM-004.4 (پروژه هوش مصنوعی ماون):</strong> بهره‌گیری از الگوریتم‌های ماشینی تولید خودکار هدف بدون نظارت کافی کارشناسان انسانی.</p>
+          </div>
+        </div>
+
+        <!-- SERIES VIC -->
+        <div class="clause-row" id="exhibit-vic">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="exhibit-code">SERIES VIC</span>
+              <span class="clause-heading">Biometric Casualty Archive & Certified Nominal Roll (156 Fatalities)</span>
+            </div>
+            <p><strong>EXH-VIC-005.1 (Pezeshki Ghanouni Registry):</strong> Hormozgan Forensic Medicine certified 156 fatalities (68% crushing/polytrauma, 22% shrapnel, 10% burns).</p>
+            <p><strong>EXH-VIC-005.2 (Shahid Mohammadi Hospital Triage):</strong> 95+ wounded survivors treated, including 38 pediatric limb amputations.</p>
+            <p><strong>EXH-VIC-005.3 (Ministry of Education Licensing):</strong> School accreditation code <code>96142081</code> and official 26-teacher faculty roster.</p>
+            <p><strong>EXH-VIC-005.4 (Sample Certified Nominal Census of Primary Students):</strong></p>
+
+            <div class="table-responsive">
+              <table class="forensic-table">
+                <thead>
+                  <tr>
+                    <th>Entry ID</th>
+                    <th>Verified Full Name</th>
+                    <th>Age</th>
+                    <th>Grade</th>
+                    <th>Certificate No.</th>
+                    <th>Pathology Finding</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="exhibit-code">VIC-001</span></td>
+                    <td><strong>Fatemeh Derazsetar</strong></td>
+                    <td>8</td>
+                    <td>Grade 2</td>
+                    <td>PG-MNB-2026-0811</td>
+                    <td>Blast polytrauma / structural collapse</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">VIC-002</span></td>
+                    <td><strong>Masoumeh Nazari</strong></td>
+                    <td>9</td>
+                    <td>Grade 3</td>
+                    <td>PG-MNB-2026-0812</td>
+                    <td>Severe cranial shrapnel penetration</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">VIC-003</span></td>
+                    <td><strong>Zeinab Bahrami</strong></td>
+                    <td>7</td>
+                    <td>Grade 1</td>
+                    <td>PG-MNB-2026-0813</td>
+                    <td>Structural crushing / thoracic asphyxia</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">VIC-004</span></td>
+                    <td><strong>Baran Ghasemy</strong></td>
+                    <td>10</td>
+                    <td>Grade 4</td>
+                    <td>PG-MNB-2026-0814</td>
+                    <td>Blast overpressure / lung rupture</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">VIC-005</span></td>
+                    <td><strong>Setayesh Saleh</strong></td>
+                    <td>11</td>
+                    <td>Grade 5</td>
+                    <td>PG-MNB-2026-0815</td>
+                    <td>Penetrating casing shrapnel</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">VIC-006</span></td>
+                    <td><strong>Samira Malahi</strong></td>
+                    <td>8</td>
+                    <td>Grade 2</td>
+                    <td>PG-MNB-2026-0816</td>
+                    <td>Structural collapse crushing</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">VIC-007</span></td>
+                    <td><strong>Zahra Ansarifard</strong></td>
+                    <td>12</td>
+                    <td>Grade 6</td>
+                    <td>PG-MNB-2026-0817</td>
+                    <td>Thermal burns & blast shock</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">VIC-EDU-01</span></td>
+                    <td><strong>Maryam Dehghani</strong></td>
+                    <td>42</td>
+                    <td>Principal</td>
+                    <td>PG-MNB-2026-0785</td>
+                    <td>Traumatic blast overpressure</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">VIC-EDU-02</span></td>
+                    <td><strong>Tahereh Soleimani</strong></td>
+                    <td>38</td>
+                    <td>Vice Principal</td>
+                    <td>PG-MNB-2026-0786</td>
+                    <td>Structural collapse crushing</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="font-size: 12px; color: var(--text2);"><em>(Complete certified nominal directory of 156 deceased and 100 verified photo profiles accessible via <a href="memorial.html">Memorial Portal</a>)</em></p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">مستندات VIC</span>
+              <span class="clause-heading">آرشیو بیومتریک قربانیان، گواهی‌های پزشکی قانونی و اسامی شهدا</span>
+            </div>
+            <p><strong>EXH-VIC-005.1 (پزشکی قانونی هرمزگان):</strong> صدور گواهی شهادت برای ۱۶۸ نفر (۶۸٪ آوار بتنی، ۲۲٪ ترکش، ۱۰٪ سوختگی حرارتی).</p>
+            <p><strong>EXH-VIC-005.2 (بیمارستان شهید محمدی):</strong> ثبت پذیرش ۹۵ مجروح، شامل ۳۸ مورد قطع عضو در دختران ۷ تا ۱۲ ساله.</p>
+            <p><strong>EXH-VIC-005.3 (آموزش و پرورش):</strong> کد مجوز رسمی مدرسه ۹۶۱۴۲۰۸۱ و لیست ثبت‌شده ۲۶ آموزگار و کادر دفتری.</p>
+            <p><strong>EXH-VIC-005.4 (فهرست نمونه شهدای دانش‌آموز):</strong> شامل فاطمه درازستار (۸ ساله)، معصومه نظری (۹ ساله)، زینب بهرامی (۷ ساله)، باران قاسمی (۱۰ ساله)، ستایش صالح (۱۱ ساله)، مریم دهقانی (مدیر ۴۲ ساله) و طاهره سلیمانی (معاون ۳۸ ساله).</p>
+            <p style="font-size: 12px; color: var(--gold-light);"><em>(فهرست کامل اسامی و تصاویر ۱۰۰ کودک در <a href="memorial.html">صفحه یادبود آنلاین</a> در دسترس است)</em></p>
+          </div>
+        </div>
+
+        <!-- SERIES WIT -->
+        <div class="clause-row" id="exhibit-wit">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="exhibit-code">SERIES WIT</span>
+              <span class="clause-heading">Survivor & Eyewitness Testimonial Depositions (Rule 75 Protective Measures)</span>
+            </div>
+            <p><strong>EXH-WIT-007.1 [RESERVED / RULE 75]:</strong> Sworn video depositions and statutory declarations from surviving faculty members present inside Shajareh Tayyebeh School at 09:20 IRST during the initial kinetic detonation.</p>
+            <p><strong>EXH-WIT-007.2 [RESERVED / RULE 75]:</strong> Sworn affidavits and clinical logs of Iranian Red Crescent first responders and emergency trauma surgeons at Shahid Mohammadi Hospital documenting catastrophic pediatric blast injuries.</p>
+            <p><strong>EXH-WIT-007.3 [RESERVED / RULE 75]:</strong> Bereaved family Victim Impact Statements (VIS), guardianship declarations, and certified legal heirship registries compiled for state reparation proceedings under ILC ARSIWA Article 36.</p>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="exhibit-code">مستندات WIT</span>
+              <span class="clause-heading">شهادت بازماندگان و شهود عینی (تدابیر حفاظتی ماده ۷۵)</span>
+            </div>
+            <p><strong>EXH-WIT-007.1 (شهادت کادر آموزشی):</strong> اظهارات ویدئویی معلمان نجات‌یافته در خصوص آغاز کلاس‌ها و لحظه وقوع اولین انفجار.</p>
+            <p><strong>EXH-WIT-007.2 (شهادت امدادگران و پزشکان):</strong> گزارش‌های بالینی پزشکان جراح بیمارستان شهید محمدی در خصوص ماهیت ترومای انفجاری کودکان.</p>
+            <p><strong>EXH-WIT-007.3 (اظهارات اولیای دم):</strong> پرونده‌های انحصار وراثت و ارزیابی آسیب‌های روحی خانواده‌های شهدا جهت طرح دعوای غرامت دولتی.</p>
+          </div>
+        </div>
+
+        <!-- SERIES OSINT -->
+        <div class="clause-row" id="exhibit-osint">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="exhibit-code">SERIES OSINT</span>
+              <span class="clause-heading">Tier-1 Major Investigative Reports & International NGO Legal Findings</span>
+            </div>
+            <p><strong>EXH-OSINT-006.1 (Tier 1 Major Investigative Reports):</strong></p>
+            <ul style="padding-left: 20px; margin: 6px 0;">
+              <li><strong>The New York Times (Visual Investigation, March 11):</strong> Verified strike aftermath footage; proved strike coordinates drew from obsolete DIA data; verified preliminary US military admissions;</li>
+              <li><strong>BBC Verify (Satellite & Munitions Analysis):</strong> Confirmed triple-tap strike pattern and authenticated BGM-109 Tomahawk wreckage;</li>
+              <li><strong>The Washington Post (Targeting Chain Investigation):</strong> Proved school had been physically walled off since 2016; linked targeting failure to the dismantling of Pentagon civilian harm mitigation offices;</li>
+              <li><strong>CBC News (Visual Investigation):</strong> Detailed analysis of precision strike trajectory; verified the school was a former IRGC building converted a decade prior;</li>
+              <li><strong>Bellingcat (OSINT Munitions Forensics — Trevor Ball):</strong> Debris metallurgy and metallurgical verification refuting initial denials.</li>
+            </ul>
+            <p><strong>EXH-OSINT-006.2 (Tier 2 Legal Analyses & NGO Findings):</strong></p>
+            <ul style="padding-left: 20px; margin: 6px 0;">
+              <li><strong>Human Rights Watch:</strong> Field investigation characterizing strike as an apparent war crime demanding independent international inquiry;</li>
+              <li><strong>Amnesty International:</strong> Legal assessment determining catastrophic breach of IHL distinction and proportionality principles;</li>
+              <li><strong>New Lines Institute:</strong> IHL target analysis proving commercial satellite feeds would have readily revealed civilian educational activity.</li>
+            </ul>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="exhibit-code">مستندات OSINT</span>
+              <span class="clause-heading">تحقیقات رسانه‌های تراز اول جهان و ارزیابی‌های سازمان‌های بین‌المللی حقوق بشر</span>
+            </div>
+            <p><strong>EXH-OSINT-006.1 (تحقیقات سطح یک رسانه‌های جهان):</strong></p>
+            <ul style="padding-right: 20px; margin: 6px 0; line-height: 2;">
+              <li><strong>نیویورک تایمز (تحقیق تصویری ۱۱ مارس):</strong> اثبات بهره‌گیری سنتکام از نقشه‌های قدیمی و افشای تحقیقات داخلی ارتش؛</li>
+              <li><strong>بی‌بی‌سی Verify:</strong> تأیید الگوی ۳ ضربه‌ای اصابت‌ها و تطبیق بقایای تاماهاک؛</li>
+              <li><strong>واشنگتن پست:</strong> اثبات تفکیک فیزیکی مدرسه از سال ۲۰۱۶ و ارتباط آن با تضعیف پروتکل‌های احتیاطی پنتاگون؛</li>
+              <li><strong>سی‌بی‌سی نیوز کانادا:</strong> بررسی دقیق خط سیر بالستیک و اثبات تغییر کاربری ده‌ساله ملک؛</li>
+              <li><strong>بلینگکت (ترور بال):</strong> تطبیق ماهواره‌ای و جرم‌شناسی قطعات جهت رد تکذیبیه‌های اولیه.</li>
+            </ul>
+            <p><strong>EXH-OSINT-006.2 (یافته‌های سازمان‌های بین‌المللی حقوق بشر):</strong></p>
+            <ul style="padding-right: 20px; margin: 6px 0; line-height: 2;">
+              <li><strong>دیده‌بان حقوق بشر (HRW):</strong> طبقه‌بندی حمله به عنوان جنایت جنگی آشکار نیازمند تعقیب کیفری؛</li>
+              <li><strong>عفو بین‌الملل:</strong> احراز نقض قطعی اصول تفکیک و تناسب در حقوق بشردوستانه بین‌المللی؛</li>
+              <li><strong>اندیشکده نیولاینز:</strong> اثبات امکان کشف آسان کاربری آموزشی مدرسه از طریق ماهواره‌های تجاری.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MASTER SCHEDULE OF RESERVED DOCKETS -->
+        <div class="clause-row" id="reserved-dockets">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">RULE 54bis PROTOCOL</span>
+              <span class="clause-heading">Master Schedule of Reserved Evidentiary Dockets</span>
+            </div>
+            <p>Under ICTY Rule 54bis (Orders to States) and Rule 98, formal reserved dockets maintain judicial custody for items subject to state production orders:</p>
+            
+            <div class="table-responsive">
+              <table class="forensic-table">
+                <thead>
+                  <tr>
+                    <th>Docket ID</th>
+                    <th>Subject Matter</th>
+                    <th>Target Custodian</th>
+                    <th>Procedural Mechanism</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="exhibit-code">EXH-SAT-001.6</span></td>
+                    <td>Classified NRO KH-11 Overhead Feeds</td>
+                    <td>NRO / NGA (Chantilly, VA)</td>
+                    <td>Congressional Subpoena / UN Request</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">EXH-MUN-002.6</span></td>
+                    <td>Tomahawk DSMAC Terminal Video Stream</td>
+                    <td>NAVAIR / Strike Operations Center</td>
+                    <td>Federal Court Discovery / ICJ Order</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">EXH-MUN-002.7</span></td>
+                    <td>Soil Core Chemical Spectrometry (PBXN-107)</td>
+                    <td>Certified European Lab (Helsinki)</td>
+                    <td>Gas Chromatography-Mass Spectrometry</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">EXH-LAUNCH-003.5</span></td>
+                    <td>Primary Radar Doppler Recordings</td>
+                    <td>Civil & Military Radar Authorities</td>
+                    <td>Letters Rogatory (Oikeusapupyyntö)</td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibit-code">EXH-CENTCOM-004.5</span></td>
+                    <td>Unredacted CENTCOM 15-6 Report</td>
+                    <td>DoD IG / CENTCOM Legal Office</td>
+                    <td>FOIA Judicial Petition / Subpoena</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">پروتکل ماده ۵۴bis</span>
+              <span class="clause-heading">جدول مستندات ادله رزروشده تحت صلاحیت دادگاه</span>
+            </div>
+            <p>طبق ماده ۵۴bis آیین دادرسی بین‌المللی (دستور ارائه اسناد به دولت‌ها)، پرونده‌های رزروشده برای ادله‌ای که نیازمند الزام قضایی، رفع طبقه‌بندی محرمانه یا آزمایشگاهی هستند، مفتوح باقی می‌مانند تا پس از دریافت مستقیماً با هش رمزنگاری الحاق شوند.</p>
+          </div>
+        </div>
+
+        <!-- CRYPTOGRAPHIC INTEGRITY MANIFEST -->
+        <div class="clause-row" id="crypto-manifest">
+          <div class="clause-col-en">
+            <div class="clause-header-line">
+              <span class="clause-id">INTEGRITY REGISTRY</span>
+              <span class="clause-heading">Cryptographic Verification Manifest (SHA-256 Checksums)</span>
+            </div>
+            <p>All core documents and media archives deposited in the Permanent Evidence Vault in Helsinki, Finland are verified by immutable SHA-256 checksums:</p>
+            
+            <div class="table-responsive">
+              <table class="forensic-table">
+                <thead>
+                  <tr>
+                    <th>Document Package</th>
+                    <th>Format</th>
+                    <th>File Size</th>
+                    <th>SHA-256 Cryptographic Checksum</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Master Determination Main Report</strong></td>
+                    <td><code>PDF</code></td>
+                    <td>847 KB</td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">3130d7899aa45ecc07ae17e3359095a15d17e7abe560148b40fb38ee111568f8</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Master Determination Main Report</strong></td>
+                    <td><code>DOCX</code></td>
+                    <td>61 KB</td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">ba936d5138f02ca33ce55fb7e34eb624af5a46bd94ef04cf25ef355c84c47b2c</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Master Exhibit Dossier Annex</strong></td>
+                    <td><code>PDF</code></td>
+                    <td>802 KB</td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">e71ef0d2706f176a212c7f4abb45755adbf041728e741e4473e9c6854e5e55e1</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Master Exhibit Dossier Annex</strong></td>
+                    <td><code>DOCX</code></td>
+                    <td>61 KB</td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">36a0409be4a2202061f92b45f7f148cfdb6de7ebfbc1ecfcfbdb37e4b577bf3b</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="clause-col-fa">
+            <div class="clause-header-line">
+              <span class="clause-id">ثبت اصالت</span>
+              <span class="clause-heading">شناسنامه رمزشناختی و کدهای هش SHA-256 اسناد</span>
+            </div>
+            <p>کلیه بسته‌های اسناد و گزارش‌های رسمی صادره با امضای رمزشناختی SHA-256 مهروموم شده و در سرورهای امن هلسینکی جهت دسترسی محاکم بین‌المللی تودیع گردیده‌اند.</p>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- End Part II -->
+
+
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <!-- ─── PART III: INVESTIGATIVE METHODOLOGY & ADMISSIBILITY ────────── -->
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <div id="part3Container" class="portal-major-part">
+
+      <section class="section-card searchable-card" id="methodology-framework">
+        <div class="section-header">
+          <div class="section-header-left">
+            <span class="chapter-tag">Part III · Methodology</span>
+            <h2 class="section-header-title-en">Investigative Methodology, 10 Similarity Factors & 18 Case Benchmarks</h2>
+          </div>
+          <div class="section-header-title-fa">روش‌شناسی تحقیق، ۱۰ فاکتور تقارن حوادث و ۱۸ نمونه تطبیقی بین‌المللی</div>
+        </div>
+
+        <div style="padding: 24px 30px; border-bottom: 1px solid var(--border);">
+          <p style="font-size: 14.5px; color: #e2e8f0; line-height: 1.8;">
+            The investigative and legal findings of Docket <strong>PFPJ-2026-IR-001</strong> operate under the <strong>Berkeley Protocol on Digital Open Source Investigations (OHCHR, 2020)</strong> and the evidentiary standard of the International Criminal Tribunals (<strong>ICTY Rule 89(C) & Rule 89(F)</strong>). Below are the 10 comparative accident similarity factors and the 18 international jurisprudence precedents establishing command negligence and state responsibility.
+          </p>
+        </div>
+
+        <!-- 10 ACCIDENT SIMILARITY FACTORS -->
+        <div style="padding: 24px 30px; border-bottom: 1px solid var(--border);">
+          <h3 style="font-family: var(--font-display); font-size: 20px; color: var(--gold-light); margin-bottom: 16px;">
+            The 10 Accident Similarity Factors (Comparative Forensic Analysis)
+          </h3>
+
+          <div class="factors-grid">
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 01</span>
+              <h4 class="factor-item-title">Peacetime Target Nomination Databases</h4>
+              <p class="factor-item-desc">Reliance on pre-planned nomination lists compiled during peacetime, proving that targeting errors are structural institutional failures rather than dynamic tactical fog-of-war decisions.</p>
+            </div>
+
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 02</span>
+              <h4 class="factor-item-title">Coordinate & Geolocation Validation Negligence</h4>
+              <p class="factor-item-desc">Failure to verify geographic coordinates using real-time physical or visual validation, relying instead on decade-old stale database records.</p>
+            </div>
+
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 03</span>
+              <h4 class="factor-item-title">Dual-Use Classification Failures</h4>
+              <p class="factor-item-desc">Incorrectly classifying civilian educational structures as active military facilities without verifying direct, continuous hostile usage.</p>
+            </div>
+
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 04</span>
+              <h4 class="factor-item-title">Precision Munitions Implication (Mechanical Perfection)</h4>
+              <p class="factor-item-desc">Deploying precision-guided stand-off weapons with sub-5m CEP proves zero aerodynamic drift or operator error, concentrating 100% of liability on intelligence nominators.</p>
+            </div>
+
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 05</span>
+              <h4 class="factor-item-title">Failure of Visual & Sensor Safeguards (Terminal Abort)</h4>
+              <p class="factor-item-desc">Launching strikes with optical DSMAC terminal sensors without implementing abort safeguards upon encountering primary school playground fixtures and children.</p>
+            </div>
+
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 06</span>
+              <h4 class="factor-item-title">Collateral Damage Estimation Disproportionality</h4>
+              <p class="factor-item-desc">Gross mathematical disparity between pre-strike collateral damage estimations (CDE) and the certainty of child casualties in morning school hours.</p>
+            </div>
+
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 07</span>
+              <h4 class="factor-item-title">Proximity to Legitimate Objectives (42m Engulfment)</h4>
+              <p class="factor-item-desc">Justifying civilian building strikes by claiming proximity to military targets, ignoring that a 1,000-lb blast warhead guarantees 100% pancake collapse at 42 meters.</p>
+            </div>
+
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 08</span>
+              <h4 class="factor-item-title">Command Responsibility & Systemic SOP Errors</h4>
+              <p class="factor-item-desc">Errors stemming from command-level standard operating procedures, dismantling of civilian casualty oversight units, and unverified AI algorithmic pipelines.</p>
+            </div>
+
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 09</span>
+              <h4 class="factor-item-title">Day 1 Hostilities Timing</h4>
+              <p class="factor-item-desc">Strikes executed during the opening hours of conflict from peacetime lists, decisively depriving commanders of the "fog of war" defense.</p>
+            </div>
+
+            <div class="factor-item-card">
+              <span class="factor-num-badge">Factor 10</span>
+              <h4 class="factor-item-title">Exclusion of Independent Local Registries</h4>
+              <p class="factor-item-desc">Failure to cross-reference target coordinates against publicly accessible municipal databases, OpenStreetMap, and educational licensing registers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18 JURISPRUDENTIAL PRECEDENTS MATRIX -->
+        <div style="padding: 24px 30px;">
+          <h3 style="font-family: var(--font-display); font-size: 20px; color: var(--gold-light); margin-bottom: 16px;">
+            The 18 International Jurisprudential Precedents Matrix
+          </h3>
+
+          <div class="precedents-grid">
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 01</span>
+              <h4 class="prec-name">Belgrade Chinese Embassy Bombing</h4>
+              <div class="prec-forum">ICTY OTP Final Report (2000) §§ 80–85</div>
+              <p class="prec-finding">Pickering 3-stage failure test; database circularity (ICTY § 83); mechanical perfection standard shifting 100% liability upstream to intelligence nominators (ICTY § 85); US paid $32.5M state reparations (ICTY § 84).</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Governs upstream targeting liability and provides binding reparations benchmark.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 02</span>
+              <h4 class="prec-name">Hanan v. Germany [Grand Chamber]</h4>
+              <div class="prec-forum">European Court of Human Rights (2021) §§ 132–145</div>
+              <p class="prec-finding">Grand Chamber affirmed that European states hold an autonomous, detachable procedural obligation under ECHR Article 2 to criminally investigate extraterritorial strikes when an impunity gap exists.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Establishes binding jurisdictional duty for Finnish and German prosecutors.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 03</span>
+              <h4 class="prec-name">Isayeva v. Russia (Katyr-Yurt)</h4>
+              <div class="prec-forum">European Court of Human Rights (2005) §§ 189–191</div>
+              <p class="prec-finding">Deploying heavy, uncontained blast munitions in or immediately adjacent to civilian settlements violates the right to life; precision weapon availability heightens scrutiny.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Detonating 1,000-lb blast warheads 42m from school constitutes per se violation.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 04</span>
+              <h4 class="prec-name">Al-Jina Mosque Airstrike</h4>
+              <div class="prec-forum">UN Commission of Inquiry on Syria (2017) A/HRC/36/55</div>
+              <p class="prec-finding">Affirmative duty of feasible precautions requires continuous temporal verification; proximity to military targets magnifies the obligation to verify adjacent civilian facilities.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Rebuts claim that school's location near naval base excuses verification failure.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 05</span>
+              <h4 class="prec-name">Kabul Drone Strike (Zemari Ahmadi)</h4>
+              <div class="prec-forum">US CENTCOM & Air Force IG Investigation (2021)</div>
+              <p class="prec-finding">Confirmation bias in remote surveillance loops causes analysts to interpret neutral civilian objects as threat signatures, blinding command cells to children.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Explains cognitive failure of CENTCOM Project Maven AI target vetting loops.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 06</span>
+              <h4 class="prec-name">Dora Farms Opening Strike</h4>
+              <div class="prec-forum">Human Rights Watch Off-Target Report (2003)</div>
+              <p class="prec-finding">Day 1 strikes originate from pre-planned nomination lists compiled during peacetime, stripping military planners of dynamic combat 'fog of war' excuses.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Strips US Central Command of battlefield confusion defense.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 07</span>
+              <h4 class="prec-name">Al-Bader School Strike, Yemen</h4>
+              <div class="prec-forum">Mwatana for Human Rights (2016)</div>
+              <p class="prec-finding">Striking active schools during daytime instructional hours constitutes gross operational negligence and presumptive disproportionate attack.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Saturday morning timing with 168 children present establishes recklessness.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 08</span>
+              <h4 class="prec-name">Shajareh Tayyebeh Incident (Minab)</h4>
+              <div class="prec-forum">PFPJ ry Independent Judicial Inquiry (2026)</div>
+              <p class="prec-finding">Triple-tap TLAM strike killing 156 civilians due to 2013 coordinate database staleness and failure to recognize 2016 physical partition wall.</p>
+              <div class="prec-minab-link"><strong>Docket No.:</strong> PFPJ-2026-IR-001 (Main Subject Matter).</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 09</span>
+              <h4 class="prec-name">Granai Airstrike, Afghanistan</h4>
+              <div class="prec-forum">US CENTCOM Investigation (2009)</div>
+              <p class="prec-finding">Failure to assess civilian presence in residential buildings prior to dropping 500-lb and 2,000-lb bombs killed 86+ children and women.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Confirms systemic flaw in heavy blast munition selection in populated zones.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 10</span>
+              <h4 class="prec-name">Azizabad Airstrike, Herat</h4>
+              <div class="prec-forum">UNAMA Human Rights Special Report (2008)</div>
+              <p class="prec-finding">Reliance on unverified local informant intelligence without independent overhead corroboration resulted in 90 civilian deaths (60 children).</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Single point of failure in targeting intelligence sources.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 11</span>
+              <h4 class="prec-name">MSF Kunduz Trauma Centre</h4>
+              <div class="prec-forum">US CENTCOM AR 15-6 Investigation (2015)</div>
+              <p class="prec-finding">AC-130 gunship attacked hospital due to physical building misidentification, despite hospital coordinates existing in US No-Strike List.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Demonstrates breakdown between No-Strike List registries and strike operators.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 12</span>
+              <h4 class="prec-name">Tabqa Dam Airstrikes</h4>
+              <div class="prec-forum">New York Times Investigation (2017)</div>
+              <p class="prec-finding">Secret strike cell bypassed No-Strike lists and safety protocols to drop bunker busters on critical infrastructure without command vetting.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Pattern of bypassing mandatory civilian harm mitigation filters.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 13</span>
+              <h4 class="prec-name">Hass School Complex, Idlib</h4>
+              <div class="prec-forum">UN Commission of Inquiry on Syria (2016)</div>
+              <p class="prec-finding">Multi-missile strike on educational complex during morning classes killing 22 children and 6 teachers ruled a deliberate or reckless war crime.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Establishes international precedent for child casualty forensic verification.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 14</span>
+              <h4 class="prec-name">Baghuz Strike (Talon Anvil)</h4>
+              <div class="prec-forum">New York Times Visual Investigation (2019)</div>
+              <p class="prec-finding">Classified strike cell systematically misclassified civilian crowds as combatants, concealing 70 civilian deaths under operational secrecy.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Illustrates institutional incentives to cover up upstream targeting failures.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 15</span>
+              <h4 class="prec-name">Dahyan Student Bus Strike</h4>
+              <div class="prec-forum">UN Group of Eminent Experts on Yemen (2018)</div>
+              <p class="prec-finding">US-manufactured GBU-12 bomb struck school bus killing 40 boys; UN GEE concluded strike violated distinction and proportionality.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Establishes that precision weapons striking children creates legal presumption of war crime.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 16</span>
+              <h4 class="prec-name">Deir ez-Zor Airport Airstrike</h4>
+              <div class="prec-forum">US CENTCOM Investigation (2016)</div>
+              <p class="prec-finding">Coalition aircraft attacked Syrian military positions due to confirmation bias, confusing targets despite intelligence alerts.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Proves cognitive anchoring in targeting review cells.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 17</span>
+              <h4 class="prec-name">Wech Baghtu Wedding Strike</h4>
+              <div class="prec-forum">Afghan Independent Human Rights Commission (2008)</div>
+              <p class="prec-finding">Close air support strikes on wedding party killed 37 civilians (primarily children) due to false intelligence of Taliban presence.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Rebuts target nominators' claims of positive identification.</div>
+            </div>
+
+            <div class="prec-card">
+              <span class="prec-id-badge">CASE 18</span>
+              <h4 class="prec-name">Amiriyah Air Raid Shelter</h4>
+              <div class="prec-forum">Middle East Watch / HRW Report (1991)</div>
+              <p class="prec-finding">Two F-117 stealth bombers dropped precision GBU-27 laser-guided bombs through ventilation shaft of civilian bomb shelter, incinerating 408 civilians based on unverified intelligence that shelter was converted into military command bunker.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Foundational benchmark for catastrophic peacetime intelligence failure.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- End Part III -->
 
   </main>
 
-  <footer class="reader-footer">
-    <div>People for Peace & Justice ry (PFPJ ry) · Helsinki, Finland · Business ID: 3616815-5</div>
-    <div style="margin-top: 6px;">Prepared for Legal Executive Review · Confidential Work Product</div>
+  <!-- ─── FOOTER ─── -->
+  <footer class="portal-footer">
+    <div class="portal-footer-links">
+      <a href="landing.html">Home</a>
+      <a href="memorial.html">Memorial</a>
+      <a href="mothers.html">Mothers</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="data.html">Data</a>
+      <a href="sources.html">Sources</a>
+      <a href="docs/minab-report/PFPJ_Minab_Master_Factual_Determination_Report.pdf">Download PDF</a>
+      <a href="docs/minab-report/PACKAGE_MANIFEST.md">Cryptographic Manifest</a>
+      <a href="report.html">Board Portal</a>
+    </div>
+    <p>
+      <strong>PEOPLE FOR PEACE & JUSTICE RY (PFPJ RY)</strong> — Helsinki, Finland (Business Identity Code: <strong>3616815-5</strong>)<br>
+      Independent International Inquiry Panel · Docket No.: <strong>PFPJ-2026-IR-001</strong> · Authentic Judicial Text: English<br>
+      Permanent Evidence Vault: Helsinki, Finland · Distributed European Mirrors (Finland & Netherlands)
+    </p>
   </footer>
 
+  <!-- ─── INTERACTIVE CONTROLS SCRIPT ─── -->
   <script>
-    // Mode Switcher
+    // 1. Reading Mode Toggles (Side-by-Side, English, Farsi)
     function setMode(mode) {
       document.body.classList.remove('mode-both', 'mode-en', 'mode-fa');
-      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('btnModeBoth').classList.remove('active');
+      document.getElementById('btnModeEn').classList.remove('active');
+      document.getElementById('btnModeFa').classList.remove('active');
 
-      if (mode === 'en') {
+      if (mode === 'both') {
+        document.body.classList.add('mode-both');
+        document.getElementById('btnModeBoth').classList.add('active');
+      } else if (mode === 'en') {
         document.body.classList.add('mode-en');
         document.getElementById('btnModeEn').classList.add('active');
       } else if (mode === 'fa') {
         document.body.classList.add('mode-fa');
         document.getElementById('btnModeFa').classList.add('active');
-      } else {
-        document.body.classList.add('mode-both');
-        document.getElementById('btnModeBoth').classList.add('active');
       }
-      localStorage.setItem('pfpj-reader-mode', mode);
+      localStorage.setItem('pfpj_reader_mode', mode);
     }
 
-    // Restore saved mode
-    const savedMode = localStorage.getItem('pfpj-reader-mode');
+    // Restore mode
+    const savedMode = localStorage.getItem('pfpj_reader_mode');
     if (savedMode) {
       setMode(savedMode);
     }
 
-    // Interactive Search / Filter
-    function filterClauses() {
-      const q = document.getElementById('filterInput').value.toLowerCase().trim();
-      const rows = document.querySelectorAll('.clause-row');
+    // 2. Part Filter (All Parts, Part I, Part II, Part III)
+    function filterPart(part) {
+      const p1 = document.getElementById('part1Container');
+      const p2 = document.getElementById('part2Container');
+      const p3 = document.getElementById('part3Container');
+      const btns = document.querySelectorAll('.part-pill-btn');
       
+      btns.forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      if (part === 'all') {
+        p1.style.display = 'block';
+        p2.style.display = 'block';
+        p3.style.display = 'block';
+      } else if (part === 'part1') {
+        p1.style.display = 'block';
+        p2.style.display = 'none';
+        p3.style.display = 'none';
+      } else if (part === 'part2') {
+        p1.style.display = 'none';
+        p2.style.display = 'block';
+        p3.style.display = 'none';
+      } else if (part === 'part3') {
+        p1.style.display = 'none';
+        p2.style.display = 'none';
+        p3.style.display = 'block';
+      }
+    }
+
+    // 3. Real-time Search Filter
+    function handleFilter(query) {
+      const q = query.toLowerCase().trim();
+      const cards = document.querySelectorAll('.searchable-card, .clause-row, .factor-item-card, .prec-card');
+
       if (!q) {
-        rows.forEach(r => r.style.display = 'grid');
+        cards.forEach(c => c.style.display = '');
         return;
       }
 
-      rows.forEach(r => {
-        const text = r.textContent.toLowerCase();
+      cards.forEach(c => {
+        const text = c.textContent.toLowerCase();
         if (text.includes(q)) {
-          r.style.display = 'grid';
+          c.style.display = '';
         } else {
-          r.style.display = 'none';
+          c.style.display = 'none';
         }
       });
     }
   </script>
+
 </body>
 </html>

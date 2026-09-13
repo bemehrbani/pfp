@@ -95,11 +95,11 @@
 1. This Expert Judicial Determination and Comprehensive Legal Assessment Dossier is rendered by **People for Peace & Justice ry (PFPJ ry)**, an independent, registered non-governmental human rights organization incorporated under the Finnish Associations Act (*Yhdistyslaki 503/1989*) with the Finnish Patent and Registration Office (PRH) under Business Identity Code **3616815-5** in Helsinki, Finland.
 2. In the absence of an immediate, independent international tribunal convened under Chapter VII of the United Nations Charter, PFPJ ry exercises its non-governmental investigatory mandate to preserve the historical, forensic, and judicial record of grave violations of International Humanitarian Law (IHL).
 3. To ensure absolute parity with established international jurisprudence, this dossier adopts the structure, evidentiary standards, and chain of reasoning of the final trial judgments of the **International Criminal Tribunal for the former Yugoslavia (ICTY)** and the **International Criminal Tribunal for Rwanda (ICTR)**.
-4. The primary objective of this report is **not** the immediate lodging of an individual criminal trial indictment against tactical service-members. Rather, its immediate institutional purpose is:
-   * (i) To establish an immutable, court-ready **factual determination** of the February 28, 2026 airstrike on the Shajareh Tayyebeh Girls' Elementary School;
-   * (ii) To apply the ICTY OTP targeting jurisprudence (*Belgrade Chinese Embassy Precedent*) to demonstrate that the strike was the product of systemic peacetime targeting negligence;
-   * (iii) To articulate the comprehensive **State Responsibility** of the United States under customary international law and the ILC ARSIWA framework; and
-   * (iv) To deposit verified physical, biometric, and digital evidence into secure European custody, establishing a foundation for state-level reparations and contingent universal jurisdiction proceedings ([Chapter IX](#chapter-9) and [Chapter X](#chapter-10)).
+4. This report serves four institutional purposes:
+   * (i) Establish a court-ready factual determination of the February 28, 2026 airstrike on the Shajareh Tayyebeh Girls' Elementary School;
+   * (ii) Apply the ICTY OTP targeting jurisprudence (*Belgrade Chinese Embassy Precedent*) to demonstrate that peacetime targeting negligence caused the strike;
+   * (iii) Detail the State Responsibility of the United States under customary international law and the ILC ARSIWA framework; and
+   * (iv) Deposit verified physical, biometric, and digital evidence into secure European custody to support state reparations and universal jurisdiction proceedings ([Chapter IX](#chapter-9) and [Chapter X](#chapter-10)).
 
 <a id="chapter-1-2"></a>
 ### 1.2 Procedural History and Evidentiary Ingestion
@@ -193,7 +193,7 @@
 
 <a id="chapter-3-5"></a>
 ### 3.5 The Absolute Presumption of Civilian Status in Case of Doubt (AP I Art. 52(3))
-31. Crucially, the law of international armed conflict establishes an explicit, mandatory presumption in **Article 52(3) of Additional Protocol I**:
+31. The law of international armed conflict establishes an explicit presumption in **Article 52(3) of Additional Protocol I**:
 > *"In case of doubt whether an object which is normally dedicated to civilian purposes, such as a place of worship, a house or other dwelling or a school, is being used to make an effective contribution to military action, it shall be presumed not to be so used."*
 32. In the present case, the Shajareh Tayyebeh School was an active elementary educational facility dedicated exclusively to civilian instruction. Under international law, US target planners were bound by an affirmative legal obligation to presume that the school was a protected civilian sanctuary unless conclusive, verified, real-time intelligence proved it was being used to make an effective contribution to military action. No such intelligence existed.
 
@@ -215,7 +215,7 @@
    * **Physical Partition:** A continuous, 2.8-meter-high reinforced concrete masonry wall was constructed, completely walling off the school parcel from the adjacent naval compound;
    * **Independent Access:** The original military gates were demolished, and a civilian public entrance was constructed facing west toward Shahid Beheshti Boulevard;
    * **Public Registration:** The school was transferred to the Iranian Ministry of Education, received official administrative licensing, and served as the primary public elementary school for girls in the district for **ten consecutive academic years (2016–2026)**.
-37. The nearest military structure inside the active naval base—a single-story logistics auxiliary storage building (`27.1360° N, 57.0818° E`)—was situated **42 meters** north of the school's boundary wall.
+37. The nearest military structure inside the active naval base, a single-story logistics auxiliary storage building (`27.1360° N, 57.0818° E`), stood **42 meters** north of the school's boundary wall.
 
 <a id="chapter-4-3"></a>
 ### 4.3 Operational Chronology: The Morning Academic Session
@@ -280,7 +280,7 @@
 
 <a id="chapter-6-1"></a>
 ### 6.1 Peacetime Deliberate Planning vs. Active Combat Fog of War (*Dora Farms*)
-52. Military defendants frequently attempt to justify targeting misidentifications by invoking the "fog of war"—the informational deficits, time urgency, and extreme cognitive stress of dynamic combat.
+52. Military authorities frequently attempt to justify targeting misidentifications by invoking the "fog of war," citing informational deficits, time urgency, and cognitive stress during dynamic combat.
 53. International jurisprudence decisively rejects this defense where strikes are executed during the opening phase of a campaign from pre-planned target lists.
 54. In **Case 06: *Dora Farms Peacetime Strike* (Human Rights Watch, 2003)** and **Case 01: *Belgrade Chinese Embassy* (ICTY OTP, 2000)**, it was settled that targets struck on Day 1 originate from **Deliberate Target Lists (DTL)** compiled months or years in advance. Planners operate in air-conditioned, peacetime command centers with unhurried analytical access to global surveillance assets.
 55. Because the Shajareh Tayyebeh School coordinate was approved during peacetime, US Central Command cannot invoke battlefield confusion or dynamic combat exigencies to excuse its failure to verify the target.
@@ -318,7 +318,7 @@
 ### 6.4 Mental Element (*Mens Rea*): Terminal DSMAC Sensor Disregard & *Dolus Eventualis*
 65. The Minab incident exhibits an aggravating dimension far exceeding Belgrade. In 1999, the B-2 bombers dropped GPS JDAMs that were ballistically blind in their terminal dive.
 66. In Minab, the **BGM-109 Block IV/V Tomahawk** was equipped with **Digital Scene Matching Area Correlation (DSMAC)** and high-resolution electro-optical terminal sensors. As the missile executed its terminal dive profile, the camera looked directly upon a brightly painted primary school playground, assembly lines, and courtyard equipment.
-67. Launching a weapon with optical terminal matching and failing to abort the strike upon encountering an obvious educational facility demonstrates **willful blindness and conditional intent (*dolus eventualis*)**—reconciling oneself to the destruction of an active civilian facility.
+67. Launching a weapon with optical terminal matching and failing to abort upon encountering an obvious educational facility demonstrates **willful blindness and conditional intent (*dolus eventualis*)**, where operators reconcile themselves to destroying an active civilian facility.
 
 <a id="chapter-6-5"></a>
 ### 6.5 Command Confirmation Bias & Automated AI Pipeline Failure (*Kabul Drone*)
@@ -334,9 +334,9 @@
 
 <a id="chapter-7-1"></a>
 ### 7.1 Violation of the Principle of Distinction (AP I Arts. 48, 51, 52; CIHL Rules 1, 7, 10)
-71. The Principle of Distinction is the foundational cornerstone of IHL. Under **Article 48 of Additional Protocol I**:
+71. Under **Article 48 of Additional Protocol I**:
 > *"The Parties to the conflict shall at all times distinguish between the civilian population and combatants and between civilian objects and military objectives and accordingly shall direct their operations only against military objectives."*
-72. Directing three precision-guided cruise missiles against an active girls' elementary school constitutes a direct violation of the Principle of Distinction. Because the school made zero contribution to military action, directing kinetic force against it was inherently unlawful.
+72. Directing three precision-guided cruise missiles against an active girls' elementary school violates the Principle of Distinction. Because the school made zero contribution to military action, directing kinetic force against it was unlawful.
 
 <a id="chapter-7-2"></a>
 ### 7.2 Violation of the Affirmative Duty to Take Feasible Precautions (AP I Art. 57; CIHL Rules 15–21; *Al-Jina*)
@@ -346,7 +346,7 @@
 
 <a id="chapter-7-3"></a>
 ### 7.3 Violation of the Principle of Proportionality (AP I Art. 51(5)(b); CIHL Rule 14; *Katyr-Yurt* & *Dahyan*)
-76. Even if CENTCOM intended to strike the adjacent storage building 42 meters away, the strike was fundamentally disproportionate.
+76. Even if CENTCOM intended to strike the adjacent storage building 42 meters away, the strike violated the principle of proportionality.
 77. In **Case 03: *Isayeva v. Russia* (ECtHR, 2005, §§ 189–191)**, the Court held that deploying heavy aerial bombs adjacent to a civilian settlement violates the right to life. In **Case 15: *Dahyan School Bus Strike* (UN GEE, 2018)**, deploying blast weapons near children was condemned as an indiscriminate attack.
 78. Detonating three 1,000-lb WDU-36/B warheads 42 meters from an active school on a Saturday morning made the catastrophic loss of child life mathematically certain, far exceeding any direct military advantage offered by destroying an auxiliary warehouse.
 
@@ -429,7 +429,7 @@
 
 <a id="chapter-10-2"></a>
 ### 10.2 State Reparations under Customary International Law (ARSIWA Articles 30–37 & Belgrade Precedent § 84)
-91. Applying the **Belgrade Precedent (ICTY OTP § 84)**—where the United States accepted full responsibility, apologized, and paid **\$32.5 million** in direct state and victim restitution—the Panel demands that the United States execute the following remedial obligations under ILC ARSIWA Articles 30–37:
+91. Applying the **Belgrade Precedent (ICTY OTP § 84)**, in which the United States accepted responsibility, apologized, and paid **\$32.5 million** in direct state and victim restitution, the Panel demands that the United States execute the following remedial obligations under ILC ARSIWA Articles 30–37:
    * **Cessation & Non-Repetition (Art. 30):** An immediate, binding moratorium on automated AI target generation pipelines for coordinates within 500 meters of registered civilian and educational buildings, coupled with mandatory 72-hour human visual verification protocols;
    * **Restitution (*Restitutio in Integrum*, Art. 35):** Full state-funded architectural reconstruction of the Shajareh Tayyebeh Girls' Elementary School as a modern, fortified educational facility;
    * **Full Compensation (Art. 36):** Direct financial compensation to the legal heirs of all **156 deceased victims** covering wrongful death and moral damages, and the establishment of an independently managed Medical & Psychological Trust Fund covering lifelong rehabilitation for all **95+ wounded survivors**;

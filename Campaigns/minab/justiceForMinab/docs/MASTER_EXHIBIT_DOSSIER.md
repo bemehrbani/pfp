@@ -124,7 +124,7 @@
   1. Total structural pancake collapse of the two-story reinforced concrete and brick classroom wing, with the upper concrete roof slab resting directly upon pulverized ground-floor foundations.
   2. Primary kinetic detonation crater located at `27.1352° N, 57.0805° E`, measuring **6.2 meters in diameter** and **2.8 meters in depth**.
   3. Severe structural blast damage (>5 psi) extending across a 75-meter radius, destroying external boundary fences and scorching the interior courtyard.
-  4. Crucially, the IRGC naval warehouse 42 meters to the north suffered only superficial blast-wave window shattering, confirming that **the kinetic energy was centered 100% upon the civilian school building**.
+  4. The IRGC naval warehouse 42 meters to the north suffered only superficial blast-wave window shattering, confirming that **the kinetic energy centered on the civilian school building**.
 
 <a id="exh-sat-001-6"></a>
 ### EXH-SAT-001.6 [RESERVED / PENDING NRO DECLASSIFICATION]: Classified Keyhole (KH-11) Overhead Reconnaissance Feeds
@@ -219,7 +219,7 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
 ### EXH-LAUNCH-003.2: United States Force Allocation Maps (Operation Epic Fury)
 * **Description:** Declassified and publicly disclosed US Department of Defense Force Allocation Maps for the opening phase of "Operation Epic Fury" (February 28, 2026).
 * **Factual Findings:**
-  1. Under Joint Forces Air Component Commander (JFACC) tasking orders, the southern Iranian coastal sector—including Hormozgan Province, the Strait of Hormuz, and Minab—was assigned **exclusively to US Naval Forces Central Command (NAVCENT)**.
+  1. Under Joint Forces Air Component Commander (JFACC) tasking orders, the southern Iranian coastal sector, including Hormozgan Province, the Strait of Hormuz, and Minab, was assigned **exclusively to US Naval Forces Central Command (NAVCENT)**.
   2. Allied or regional partner forces (such as the Israeli Air Force) held geographic tasking exclusively in central and western Iran, excluding third-party attribution for the Minab strike.
 
 <a id="exh-launch-003-3"></a>
@@ -273,9 +273,9 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
 
 <a id="exh-centcom-004-4"></a>
 ### EXH-CENTCOM-004.4: Deployment of Automated AI Target Generation Pipelines (Project Maven)
-* **Description:** Technical evaluation of automated targeting algorithms utilized during Operation Epic Fury.
+* **Description:** Technical evaluation of automated targeting algorithms used during Operation Epic Fury.
 * **Factual Findings:**
-  1. CENTCOM utilized automated algorithmic target recognition software (Project Maven and associated automated target generation pipelines) to rapidly compile Day 1 strike packages.
+  1. CENTCOM used automated algorithmic target recognition software (Project Maven and associated automated target generation pipelines) to compile Day 1 strike packages.
   2. Algorithms were programmed to recognize physical building shapes matching historic military barracks templates.
   3. The system failed to interpret civilian modifications (concrete partition wall, brightly painted schoolyard fixtures), and human analysts failed to override algorithmic recommendations due to automation confirmation bias.
 
@@ -370,7 +370,7 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
 ### EXH-VIC-005.6 [RESERVED / PENDING FORENSIC COMPLETION]: Supplementary Biometric Files for Victims 101–156
 * **Current Status:** **RESERVED — PENDING ANTE-MORTEM BIOMETRIC & CIVIL REGISTRY VERIFICATION**
 * **Anticipated Evidentiary Scope:** Supplementary photographic identification cards, school enrollment dossiers, and family DNA cross-matching records for the remaining 56 certified fatalities (35 pupils, 11 educational instructors, and 10 civilian maintenance/custodial staff).
-* **Legal Significance:** Completes the comprehensive 100% individual biographical and photographic memorial record for every single life lost in the attack.
+* **Legal Significance:** Completes the individual biographical and photographic memorial record for each person killed in the attack.
 * **Target Custodian:** Department of Family Documentation, PFPJ ry / Hormozgan Civil Registry.
 
 ---

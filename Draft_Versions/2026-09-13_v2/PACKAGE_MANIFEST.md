@@ -10,10 +10,10 @@
 
 | Document Role | Format | File Name | Size (KB) | SHA-256 Checksum |
 | :--- | :--- | :--- | :--- | :--- |
-| **Main Report** | `DOCX` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-09-13_Draft.docx` | 61.3 KB | `6f08c3282d19c9a95aa0f33983bd288a58b729a99b5ac9cc61ed811dab3dba54` |
-| **Main Report** | `PDF` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-09-13_Draft.pdf` | 847.3 KB | `8f02385c639f152227fa4fe07410df5e0e70184ae843a60b76cc738746b94053` |
-| **Annex Document** | `DOCX` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-09-13_Draft.docx` | 61.2 KB | `7ce3f114351f5388b720e04de4d0efaab54a31f9fd9fa8b6e777ebcbcca2ec11` |
-| **Annex Document** | `PDF` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-09-13_Draft.pdf` | 802.4 KB | `8fa669a2beaf58178d69ed9624d69f0e519068543073bcf5376d0ace60901848` |
+| **Main Report** | `DOCX` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-09-13_v2_Draft.docx` | 61.3 KB | `ba936d5138f02ca33ce55fb7e34eb624af5a46bd94ef04cf25ef355c84c47b2c` |
+| **Main Report** | `PDF` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-09-13_v2_Draft.pdf` | 847.3 KB | `3130d7899aa45ecc07ae17e3359095a15d17e7abe560148b40fb38ee111568f8` |
+| **Annex Document** | `DOCX` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-09-13_v2_Draft.docx` | 61.2 KB | `36a0409be4a2202061f92b45f7f148cfdb6de7ebfbc1ecfcfbdb37e4b577bf3b` |
+| **Annex Document** | `PDF` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-09-13_v2_Draft.pdf` | 802.4 KB | `e71ef0d2706f176a212c7f4abb45755adbf041728e741e4473e9c6854e5e55e1` |
 
 ---
 
@@ -34,4 +34,4 @@ All documents in this package have been compiled as **preliminary working drafts
 
 * **Submitting Body:** People for Peace & Justice ry (PFPJ ry)
 * **Helsinki Headquarters:** `legal@peopleforpeace.live` / `contact@peopleforpeace.live`
-* **Package Generation Timestamp:** `2026-09-13 12:54:05`
+* **Package Generation Timestamp:** `2026-09-13 12:53:59`
