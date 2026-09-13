@@ -33,27 +33,26 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           SSH_CMD="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}"
-          $SSH_CMD << 'EOF'
-            set -e
-            cd /opt/pfp-staging
-            git pull origin dev
-            
-            # Ensure .env.staging is used as .env and .env.production
-            if [ -f .env.staging ]; then
-                cp .env.staging .env.production
-                cp .env.staging .env
-            fi
-            
-            # Restart docker containers for staging
-            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build --remove-orphans
-            
-            # Allow services to stabilize
-            sleep 20
-            
-            # Apply migrations and collect static
-            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py migrate --noinput
-            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py collectstatic --noinput
-            
-            # Trigger initial fetch asynchronously via Celery
-            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py shell -c "from apps.campaigns.tasks import fetch_global_protests; fetch_global_protests.delay()" || true
-          EOF
+
+          echo "=== Pulling latest dev code ==="
+          $SSH_CMD "cd /opt/pfp-staging && git fetch origin dev && git reset --hard origin/dev"
+
+          echo "=== Syncing staging environment ==="
+          $SSH_CMD "cd /opt/pfp-staging && if [ -f .env.staging ]; then cp .env.staging .env.production && cp .env.staging .env; fi"
+
+          echo "=== Rebuilding and restarting staging services ==="
+          $SSH_CMD "cd /opt/pfp-staging && docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build --remove-orphans"
+
+          echo "=== Waiting for services to stabilize ==="
+          sleep 30
+
+          echo "=== Running migrations ==="
+          $SSH_CMD "cd /opt/pfp-staging && docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py migrate --noinput"
+
+          echo "=== Collecting static files ==="
+          $SSH_CMD "cd /opt/pfp-staging && docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py collectstatic --noinput"
+
+          echo "=== Verifying staging services ==="
+          $SSH_CMD "cd /opt/pfp-staging && docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml ps"
+
+          echo "✅ Staging deployment completed successfully!"
