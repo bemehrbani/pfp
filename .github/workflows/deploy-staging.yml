@@ -45,12 +45,15 @@ jobs:
             fi
             
             # Restart docker containers for staging
-            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build
+            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build --remove-orphans
             
-            # Apply migrations
+            # Allow services to stabilize
+            sleep 20
+            
+            # Apply migrations and collect static
             docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py migrate --noinput
             docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py collectstatic --noinput
             
-            # Trigger initial fetch to populate the bot with fresh scrape data and clear legacies
-            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py shell -c "from apps.campaigns.tasks import fetch_global_protests; fetch_global_protests()"
+            # Trigger initial fetch asynchronously via Celery
+            docker compose -p pfp-staging -f docker-compose.production.yml -f docker-compose.staging.yml exec -T backend python manage.py shell -c "from apps.campaigns.tasks import fetch_global_protests; fetch_global_protests.delay()" || true
           EOF
