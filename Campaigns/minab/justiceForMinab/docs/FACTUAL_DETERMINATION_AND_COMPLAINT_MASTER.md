@@ -65,7 +65,7 @@
     * [6.2.3 Stage 3: Target Review Board Breakdown & Non-Consultation of Open Data](#chapter-6-2-3)
   * [6.3 Technical and Legal Rebuttal of the "Coordinate Error" Defense](#chapter-6-3)
   * [6.4 Mental Element (*Mens Rea*): Terminal DSMAC Sensor Disregard & *Dolus Eventualis*](#chapter-6-4)
-  * [6.5 Command Confirmation Bias & Automated AI Pipeline Failure (*Kabul Drone*)](#chapter-6-5)
+  * [6.5 Command Confirmation Bias & Automated AI Pipeline Failure (*The Maven-Claude Kill Chain*)](#chapter-6-5)
 * [CHAPTER VII: SUBSTANTIVE LEGAL FINDINGS ON VIOLATIONS OF INTERNATIONAL HUMANITARIAN LAW](#chapter-7)
   * [7.1 Violation of the Principle of Distinction (AP I Arts. 48, 51, 52; CIHL Rules 1, 7, 10)](#chapter-7-1)
   * [7.2 Violation of the Affirmative Duty to Take Feasible Precautions (AP I Art. 57; CIHL Rules 15–21; *Al-Jina*)](#chapter-7-2)
@@ -107,15 +107,18 @@
 ### 1.2 Procedural History and Evidentiary Ingestion
 5. Immediately following the kinetic impact on February 28, 2026, PFPJ ry activated an emergency evidentiary collection and verification protocol.
 6. Operating under the **Berkeley Protocol on Digital Open Source Investigations** (*OHCHR, 2020*), PFPJ ry gathered, catalogued, cryptographically hashed, and analyzed high-resolution satellite imagery (Planet Labs, Maxar Technologies, Airbus Pleiades), regional seismic recordings, verified ground-level video footage, open-source aircraft flight-tracking (ADS-B) logs, municipal civil registry certificates, hospital admission databases, and physical munitions metallurgical debris.
-7. Furthermore, PFPJ ry formally reviewed the public disclosures, press briefings, and leaked preliminary investigation findings issued by the United States Department of Defense (DoD) and United States Central Command (CENTCOM), integrating official admissions into the evidentiary corpus.
+7. Furthermore, PFPJ ry formally reviewed and ingested:
+   * (i) Official public disclosures, press briefings, and leaked preliminary investigation findings issued by the United States Department of Defense (DoD) and United States Central Command (CENTCOM) under Army Regulation 15-6;
+   * (ii) The formal findings of the **United Nations Independent International Fact-Finding Mission on the Islamic Republic of Iran (FFMI)** presented to the United Nations Human Rights Council (**UN Doc. A/HRC/63/61**, 17 September 2026, mandated under UN HRC Res. S-39/1), which conclusively determined "reasonable grounds to believe" that the United States committed **war crimes** in its indiscriminate attack on the Shajareh Tayyebeh School; and
+   * (iii) The technical investigative disclosures published by **Bloomberg News** (*Inside US Military ‘Kill Chain’ That Destroyed an Iranian School*, 18 September 2026, by Ben Bartenstein and Krishna Karra), revealing the operational role of Palantir’s Maven Smart System, Anthropic’s Claude AI integration, database synchronization disconnects, and the dismantling of CENTCOM’s civilian harm mitigation infrastructure.
 
 <a id="chapter-1-3"></a>
 ### 1.3 Executive Summary of Determinations
 8. On the basis of the verified evidence set forth in this Dossier, the Panel makes the following foundational determinations:
    * **The Incident:** On Saturday, February 28, 2026, at approximately 09:22 to 09:26 IRST, during the opening salvo of international armed conflict, three US Navy **BGM-109 Tomahawk Land Attack Cruise Missiles (TLAM)** carrying 1,000-pound WDU-36/B unitary blast-fragmentation warheads struck the central classroom wing and courtyard of the **Shajareh Tayyebeh Girls' Elementary School** in Minab, Hormozgan Province, Iran (`27.1352° N, 57.0805° E`).
    * **The Human Toll:** The strikes occurred while morning classes were in active session, resulting in **156 certified deaths**—comprising **120 female primary students aged 7 to 12**, **26 teachers and educational administrators**, and **10 civilian staff**—along with the severe wounding and permanent maiming of over **95 survivors**.
-   * **The Cause:** The strike resulted from catastrophic target vetting negligence, database circularity, and a failure of positive target identification (PID) within the US peacetime target nomination pipeline. US authorities relied on unverified pre-2016 intelligence records that failed to reflect the physical partitioning and conversion of the facility into an elementary school ten years prior.
-   * **Legal Conclusion:** The strike constitutes a serious breach of the Principle of Distinction (AP I Art. 48, 52), a gross failure of Feasible Precautions in Attack (AP I Art. 57), and a violation of the special protections shielding children and educational sanctuaries. These acts engage the international **State Responsibility** of the United States of America under customary international law, requiring cessation, full restitution, compensation, and satisfaction.
+   * **The Cause:** The strike resulted from catastrophic target vetting negligence, database circularity, algorithmic automation bias within the **Palantir Maven Smart System**, and the elimination of human civilian harm review within CENTCOM (where the civilian harm mitigation team was reduced from 10 to a single analyst). US authorities relied on unverified, stale pre-2016 intelligence records that failed to reflect the physical partitioning and conversion of the facility into an elementary school ten years prior.
+   * **Legal Conclusion & Multilateral Concurrence:** The strike constitutes a serious breach of the Principle of Distinction (AP I Art. 48, 52), a gross failure of Feasible Precautions in Attack (AP I Art. 57), and an unlawful indiscriminate attack amounting to a **war crime**—as formally affirmed by the United Nations Fact-Finding Mission on Iran in **UN Doc. A/HRC/63/61**. These acts engage the international **State Responsibility** of the United States of America under customary international law, requiring cessation, full restitution, compensation, and satisfaction.
 
 [↑ Back to Table of Contents](#table-of-contents)
 ---
@@ -125,7 +128,7 @@
 
 <a id="chapter-2-1"></a>
 ### 2.1 Standard of Proof ("Reasonable Grounds to Believe" Standard)
-9. In conformity with the settled practice of international criminal tribunals at the investigation, confirmation, and review stages—including the **ICTY Committee Established to Review the NATO Bombing Campaign Against the Federal Republic of Yugoslavia (2000)**, the Pre-Trial Chambers of the International Criminal Court, and United Nations Independent Commissions of Inquiry—this Panel applies the **"reasonable grounds to believe"** evidentiary standard.
+9. In conformity with the settled practice of international criminal tribunals at the investigation, confirmation, and review stages—including the **ICTY Committee Established to Review the NATO Bombing Campaign Against the Federal Republic of Yugoslavia (2000)**, the Pre-Trial Chambers of the International Criminal Court, and the **United Nations Independent International Fact-Finding Mission on Iran (UN Doc. A/HRC/63/61, ¶¶ 12–15)**—this Panel applies the **"reasonable grounds to believe"** evidentiary standard.
 10. Under this standard, a factual proposition is established when a coherent, corroborated body of credible evidence would satisfy an objective and reasonable observer that the underlying fact occurred as documented, and that the attributed legal infractions were committed by the identified actors.
 
 <a id="chapter-2-2"></a>
@@ -146,19 +149,21 @@
 <a id="chapter-2-4"></a>
 ### 2.4 Evidentiary Weight of Official State Admissions & Defense Disclosures
 15. Under **ICTY Rule 89(F)** and customary international evidentiary doctrine, formal admissions, statements against interest, and factual disclosures made by official state organs enjoy heightened probative value.
-16. The Panel treats the official statements issued by the US Department of Defense, statements by US Central Command spokespersons, and disclosures originating from the internal US Army Regulation 15-6 preliminary investigation as highly probative evidence regarding: (i) US military authorship of the launch, (ii) weapon system identification, and (iii) the operational reliance on outdated targeting coordinates.
+16. The Panel treats the official statements issued by the US Department of Defense, statements by US Central Command spokespersons, internal disclosures originating from the US Army Regulation 15-6 preliminary inquiry, independent investigative findings corroborated by Bloomberg News, and intergovernmental determinations rendered by the United Nations Fact-Finding Mission as highly probative evidence regarding: (i) US military authorship of the launch, (ii) weapon system identification, (iii) reliance on outdated targeting coordinates, and (iv) the operational deployment and failure modes of algorithmic targeting tools.
 
 <a id="chapter-2-5"></a>
 ### 2.5 Formal Master Exhibit Inventory & Chain of Custody Registry
-17. The findings in this Dossier rest upon five certified master exhibit categories, compiled, authenticated, and catalogued in full in the accompanying [**MASTER EXHIBIT DOSSIER & EVIDENTIARY COMPENDIUM (Docket No. PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM)**](MASTER_EXHIBIT_DOSSIER.md):
+17. The findings in this Dossier rest upon seven certified master exhibit categories, compiled, authenticated, and catalogued in full in the accompanying [**MASTER EXHIBIT DOSSIER & EVIDENTIARY COMPENDIUM (Docket No. PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM)**](MASTER_EXHIBIT_DOSSIER.md):
 
 | Exhibit Number | Description & Source Category | Evidentiary Standard & Custody Status |
 | :--- | :--- | :--- |
 | **EXH-SAT-001** | Multi-Year Satellite Imagery Archive (Planet Labs 0.50m, Maxar WorldView-3 0.31m, Airbus Pleiades: 2013–2026) | Verified Ortho-rectified; Cryptographic SHA-256 Secured; Demonstrates continuous physical boundary wall and schoolyard infrastructure since 2016. |
 | **EXH-MUN-002** | Physical Munitions Forensics & Metallurgical Debris Recovered from Shajareh Tayyebeh Compound | Serialized circuit boards with US Defense Logistics Agency CAGE codes; Williams F107 turbofan engine casing fragments; Raytheon folding wing assemblies. |
 | **EXH-LAUNCH-003** | Flight Telemetry, ADS-B Track Logs & Force Allocation Vector Reconstructions | Naval tracking data and regional air defense radar records documenting cruise missile ingress from the Gulf of Oman (USS Abraham Lincoln CSG sector). |
-| **EXH-CENTCOM-004** | Official US Government Statements & CENTCOM AR 15-6 Preliminary Investigation Disclosures | Certified transcripts of Pentagon press briefings, congressional correspondence, and leaked internal military findings conceding US responsibility. |
+| **EXH-CENTCOM-004** | Official US Government Statements, CENTCOM AR 15-6 Inquiry & Algorithmic Pipeline Records | Certified transcripts of Pentagon press briefings, congressional correspondence, leaked internal military findings, and documented Maven Smart System targeting parameters. |
 | **EXH-VIC-005** | Biometric Casualty Archive, Forensic Certificates & Educational Enrollment Records | Hormozgan Legal Medicine Organization (*Pezeshki Ghanouni*) autopsy records; Shahid Mohammadi Hospital triage logs; official Ministry of Education enrollment rosters for 156 deceased individuals. |
+| **EXH-OSINT-006** | Tier 1 Investigative Consortium Reports (Bloomberg Visual Investigation, NYT, BBC, WaPo, Bellingcat) | Independently authenticated open-source reporting, technical kill-chain forensic models, and published expert investigations. |
+| **EXH-UN-008** | United Nations Human Rights Council Independent International Fact-Finding Mission on Iran Report (**UN Doc. A/HRC/63/61**) | Official UN Intergovernmental Report establishing reasonable grounds for US War Crimes, indiscriminate attack, and systemic failure of feasible precautions. |
 
 [↑ Back to Table of Contents](#table-of-contents)
 ---
@@ -212,13 +217,13 @@ This definition has been incorporated into the jurisprudence of the Internationa
 ### 3.6 Protected Status of Civilian Population and Educational Sanctuaries
 34. Under **Article 4 of Geneva Convention IV**, protected persons are those who, at a given moment and in any manner whatsoever, find themselves, in case of a conflict or occupation, in the hands of a Party to the conflict or Occupying Power of which they are not nationals.
 35. Under **Article 52(1) of Additional Protocol I** (reflecting Customary IHL Rule 8), civilian objects are all objects which are not military objectives. Military objectives are strictly limited to those objects which by their nature, location, purpose, or use make an effective contribution to military action and whose total or partial destruction offers a definite military advantage.
-36. Educational facilities are civilian objects *par excellence*. Under **Geneva Convention IV (Article 53)**, **Customary IHL Rule 10**, and the **Safe Schools Declaration (2015)**, schools enjoy heightened legal protection designed to insulate children and educational infrastructure from the effects of military kinetic violence.
+36. Educational facilities are civilian objects *par excellence*. Under **Geneva Convention IV (Article 53)**, **Customary IHL Rule 10**, and the **Safe Schools Declaration (2015)**, schools enjoy heightened legal protection designed to insulate children and educational infrastructure from the effects of military kinetic violence. This protected character was explicitly reaffirmed by the **United Nations Independent International Fact-Finding Mission on Iran (UN Doc. A/HRC/63/61, ¶ 48)**, which established that the Shajareh Tayyebeh facility was a *"clearly identifiable educational institution dedicated to children,"* entirely devoid of military equipment, military personnel, or any legitimate military objective.
 
 <a id="chapter-3-7"></a>
 ### 3.7 The Absolute Presumption of Civilian Status in Case of Doubt (AP I Art. 52(3))
 37. The law of international armed conflict establishes an explicit presumption in **Article 52(3) of Additional Protocol I**:
 > *"In case of doubt whether an object which is normally dedicated to civilian purposes, such as a place of worship, a house or other dwelling or a school, is being used to make an effective contribution to military action, it shall be presumed not to be so used."*
-38. In the present case, the Shajareh Tayyebeh School was an active elementary educational facility dedicated exclusively to civilian instruction. Under international law, US target planners were bound by an affirmative legal obligation to presume that the school was a protected civilian sanctuary unless conclusive, verified, real-time intelligence proved it was being used to make an effective contribution to military action. No such intelligence existed.
+38. In the present case, the Shajareh Tayyebeh School was an active elementary educational facility dedicated exclusively to civilian instruction. Under international law, US target planners were bound by an affirmative legal obligation to presume that the school was a protected civilian sanctuary unless conclusive, verified, real-time intelligence proved it was being used to make an effective contribution to military action. As formally concluded in **UN Doc. A/HRC/63/61 (¶¶ 51–53)**, no such intelligence existed; the attacking forces acted upon unsubstantiated hypotheses and unverified historical lists, failing to rebut the mandatory presumption of civilian protection.
 
 [↑ Back to Table of Contents](#table-of-contents)
 ---
@@ -312,25 +317,26 @@ This definition has been incorporated into the jurisprudence of the Internationa
 ### 6.2 The Anatomy of Targeting Failure: The Belgrade Three-Stage Test (*Pickering Doctrine*)
 62. Following the May 7, 1999 bombing of the Chinese Embassy in Belgrade, Under Secretary of State Thomas Pickering delivered the official US finding (captured in **ICTY OTP Report Paragraph 81**), identifying **three basic structural failures**:
 > *"First, the technique used to locate the intended target [...] was severely flawed. Second, none of the military or intelligence databases used to verify target information contained the correct location of the Chinese Embassy. Third, nowhere in the target review process was either of the first two mistakes detected."*
-63. Applying this exact tripartite test to the Minab strike demonstrates identical institutional negligence:
+63. Applying this exact tripartite test to the Minab strike demonstrates identical institutional negligence, corroborated by the findings of the UN Fact-Finding Mission (**UN Doc. A/HRC/63/61, ¶¶ 50–54**) and independent technical disclosures (**Bloomberg Visual Investigation, 18 September 2026**):
 
 <a id="chapter-6-2-1"></a>
 #### 6.2.1 Stage 1: Flawed Target Identification Methodology
-64. In Belgrade, an intelligence officer used inappropriate land navigation techniques ("intersection and resection") on tourist maps. In Minab, CENTCOM and DIA target developers used legacy base perimeter records dating prior to 2016, failing to examine the parcel's ten-year municipal evolution or the construction of the 2.8m concrete partition wall.
+64. In Belgrade, an intelligence officer used inappropriate land navigation techniques ("intersection and resection") on tourist maps. In Minab, CENTCOM and DIA target developers used legacy base perimeter records dating prior to 2016, failing to examine the parcel's ten-year municipal evolution or the construction of the 2.8m concrete partition wall. As documented by Bloomberg's investigative reconstruction (*Inside US Military ‘Kill Chain’ That Destroyed an Iranian School*), CENTCOM's targeting systems ingested "stale" pre-2016 intelligence classifying the compound as an IRGC naval logistics facility. While secondary intelligence branches had separately recorded the facility's conversion into an elementary school, this critical information was isolated in disconnected databases and failed to synchronize or propagate to the operational targeting layer.
 
 <a id="chapter-6-2-2"></a>
 #### 6.2.2 Stage 2: Database Inadequacy, Circularity & Single Point of Failure (ICTY § 83)
 65. In **Paragraph 83 of the Belgrade Report**, the ICTY OTP established:
 > *"The data base reviews were limited to validating the target data sheet geographic coordinates and the information put into the data base by the NIMA analyst. Such a circular process did not serve to uncover the original error and highlighted the system's susceptibility to a single point of data base failure."*
-66. The Minab targeting chain suffered from identical **circular database validation**. CENTCOM review officers simply confirmed that the strike coordinates matched the historical DIA target dossier. No officer initiated an independent query of updated civil registries or external imagery, creating a **single point of database failure** that proved fatal to 156 civilians.
+66. The Minab targeting chain suffered from identical **circular database validation**, exacerbated by automated algorithmic data ingestion. CENTCOM utilized **Palantir Technologies’ Maven Smart System**, an AI-driven targeting and intelligence platform designed to fuse satellite imagery, signals, and sensor feeds. Ingesting obsolete DIA target files, the Maven platform retained the high-confidence military classification of the parcel without verifying whether the underlying data reflected contemporary ground reality. Review officers simply verified that the strike coordinates matched the Maven target nomination sheet, creating a catastrophic **single point of database failure** that proved fatal to 156 civilians.
 
 <a id="chapter-6-2-3"></a>
 #### 6.2.3 Stage 3: Target Review Board Breakdown & Non-Consultation of Open Data
 67. In Belgrade, Pickering admitted that *"no one who might have known that the targeted building was not the intended target [...] was ever consulted."*
-68. In Minab, the Target Review Board operated in complete insulation from readily accessible public information:
+68. In Minab, the Target Review Board operated in complete insulation from readily accessible public information and dismantled its own institutional safeguards:
    * **Open-Source Mapping:** OpenStreetMap openly identified the building as the *Shajareh Tayyebeh Girls' Elementary School*;
    * **Commercial Satellite Feeds:** Planet Labs and Maxar captured hundreds of passes showing children playing in the courtyard;
-   * **National Educational Registry:** The school was officially licensed under the Hormozgan Department of Education.
+   * **National Educational Registry:** The school was officially licensed under the Hormozgan Department of Education;
+   * **Dismantling of Civilian Harm Review:** As revealed by Bloomberg, CENTCOM’s dedicated Civilian Harm Mitigation and Response (CHMR) unit was drastically reduced from **10 members down to a single analyst** prior to the air campaign. Consequently, **zero civilian harm mitigation specialists reviewed the Minab school target packet** before the launch order was issued.
 
 <a id="chapter-6-3"></a>
 ### 6.3 Technical and Legal Rebuttal of the "Coordinate Error" Defense
@@ -344,10 +350,14 @@ This definition has been incorporated into the jurisprudence of the Internationa
 73. Launching a weapon with optical terminal matching and failing to abort upon encountering an obvious educational facility demonstrates **willful blindness and conditional intent (*dolus eventualis*)**, where operators reconcile themselves to destroying an active civilian facility.
 
 <a id="chapter-6-5"></a>
-### 6.5 Command Confirmation Bias & Automated AI Pipeline Failure (*Kabul Drone*)
-74. The cognitive pathology in Minab mirrors **Case 05: *Kabul Drone Strike AR 15-6 Investigation* (CENTCOM / Air Force IG, 2021)**:
-75. In the August 29, 2021 Kabul strike, US drone operators tracked civilian Zemari Ahmadi, interpreting water jugs as explosives due to confirmation bias. The Air Force IG found that analysts systematically filtered out contradictory civilian evidence.
-76. In Minab, CENTCOM’s automated AI-assisted target nomination pipeline (Project Maven derivatives) and human vetting officers operated under the pre-conceived hypothesis that the area was an IRGC base, filtering out ten years of civilian educational activity.
+### 6.5 Command Confirmation Bias & Automated AI Pipeline Failure (*The Maven-Claude Kill Chain*)
+74. The cognitive and algorithmic pathology in Minab mirrors and expands upon **Case 05: *Kabul Drone Strike AR 15-6 Investigation* (CENTCOM / Air Force IG, 2021)**:
+75. In the August 29, 2021 Kabul strike, US drone operators tracked civilian Zemari Ahmadi, interpreting water jugs as explosives due to confirmation bias. The Air Force IG found that analysts systematically filtered out contradictory civilian evidence to validate a pre-determined threat narrative.
+76. In Minab, this human confirmation bias was automated, accelerated, and institutionalized through an algorithmic kill chain. According to technical investigations published by Bloomberg News:
+   * **Algorithmic Target Generation:** CENTCOM deployed Palantir’s **Maven Smart System** integrated with **Anthropic’s Claude AI** to rapidly synthesize intelligence data, rank targets by operational value, and automatically generate target nomination summaries;
+   * **Extreme Time Compression:** The AI pipeline compressed multi-hour target verification cycles into minutes. Amid an intensive opening air campaign executing over 1,000 strikes in 24 hours, human commanders operated under cognitive saturation and systematically deferred to the high-confidence scores generated by the AI system (**"automation bias"**);
+   * **Post-Strike Vendor Remediation:** Following the destruction of the school, the Pentagon internally recognized US responsibility within hours. Palantir subsequently deployed emergency software patches to the Maven platform to retroactively add automated "re-review" checkpoints to flag disqualifying civilian factors that human operators had overlooked;
+   * **Legal Inadmissibility of the "Algorithmic Glitch" Defense:** In International Humanitarian Law, algorithms and software models cannot be held criminally liable; legal obligations attach exclusively to human commanders and the High Contracting Parties they represent. Delegating target verification to opaque, high-speed automated pipelines—while gutting the civilian harm mitigation personnel required to supervise them—constitutes gross organizational negligence, willful blindness, and an intentional abdication of the non-delegable duty of positive target identification.
 
 [↑ Back to Table of Contents](#table-of-contents)
 ---
@@ -360,12 +370,14 @@ This definition has been incorporated into the jurisprudence of the Internationa
 77. Under **Article 48 of Additional Protocol I**:
 > *"The Parties to the conflict shall at all times distinguish between the civilian population and combatants and between civilian objects and military objectives and accordingly shall direct their operations only against military objectives."*
 78. Directing three precision-guided cruise missiles against an active girls' elementary school violates the Principle of Distinction. Because the school made zero contribution to military action, directing kinetic force against it was unlawful.
+78 bis. This conclusion was definitively corroborated by the **United Nations Independent International Fact-Finding Mission on Iran (UN Doc. A/HRC/63/61, ¶¶ 54–58)**, which determined that the Minab strike constituted an **unlawful indiscriminate attack** launched against a clearly identifiable civilian educational structure, establishing **"reasonable grounds to believe that the United States committed war crimes"** under customary international humanitarian law and the Rome Statute of the International Criminal Court.
 
 <a id="chapter-7-2"></a>
 ### 7.2 Violation of the Affirmative Duty to Take Feasible Precautions (AP I Art. 57; CIHL Rules 15–21; *Al-Jina*)
 79. Under **Article 57(2)(a)(i) of Additional Protocol I**, planners must *"do everything feasible to verify that the objectives to be attacked are neither civilians nor civilian objects"*.
 80. In **Case 04: *Al-Jina Mosque Strike* (UN Commission of Inquiry on Syria, 2017, A/HRC/36/55)**, the UN established that target verification is a **continuous, temporal obligation**. Proximity to an adversary military base magnifies, rather than diminishes, the affirmative duty to verify adjacent civilian facilities.
-81. CENTCOM’s failure to verify the status of the school over a ten-year peacetime window constitutes a per se violation of the duty of feasible precautions.
+81. CENTCOM’s failure to verify the status of the school over a ten-year peacetime window constitutes a *per se* violation of the duty of feasible precautions. As the UN Fact-Finding Mission concluded in **UN Doc. A/HRC/63/61 (¶ 56)**, relying upon unverified historical entries in targeting databases without conducting real-time pre-strike verification constitutes gross recklessness in the planning and execution of attacks.
+81 bis. Furthermore, technical disclosures published by Bloomberg News (*Inside US Military ‘Kill Chain’ That Destroyed an Iranian School*) establish that CENTCOM systematically disabled its own precautionary apparatus: the command reduced its dedicated Civilian Harm Mitigation and Response (CHMR) unit from **10 personnel to a single analyst**, ensuring that **not a single civilian protection specialist examined the Minab target packet**. Operating a 1,000-target campaign with an incapacitated civilian harm review team demonstrates an institutional abandonment of the precautionary mandate codified in AP I Article 57.
 
 <a id="chapter-7-3"></a>
 ### 7.3 Violation of the Principle of Proportionality (AP I Art. 51(5)(b); CIHL Rule 14; *Katyr-Yurt* & *Dahyan*)
@@ -393,19 +405,23 @@ This definition has been incorporated into the jurisprudence of the Internationa
 87. The naval launch personnel aboard the USS *Abraham Lincoln* Carrier Strike Group executed a lawful launch order targeting programmed coordinates.
 88. Consequently, **zero legal culpability rests with the tactical naval launch crew**. Instead, **100% of the institutional and legal culpability concentrates upstream** upon:
    * (i) The intelligence officers who nominated the pre-2016 coordinates;
-   * (ii) The DIA database managers who failed to update the No-Strike List; and
-   * (iii) The CENTCOM Target Review Board members who validated the strike without verifying the physical ground reality.
+   * (ii) The DIA database managers who failed to update the No-Strike List;
+   * (iii) The commanders and targeting engineers who deployed the Palantir Maven Smart System without human-in-the-loop safeguards; and
+   * (iv) The CENTCOM Target Review Board members who validated the strike without verifying the physical ground reality.
 
 <a id="chapter-8-2"></a>
 ### 8.2 Superior Responsibility & Systemic Command Failure
 89. Under the doctrine of Command Responsibility (*In re Yamashita*; ICTY Statute Art. 7(3)), military commanders bear legal responsibility if they knew or had reason to know that subordinate targeting pipelines were operating on unverified databases, yet failed to take necessary and reasonable measures to prevent wrongful strikes.
-90. The dissolution of civilian harm mitigation oversight programs and the prioritization of algorithmic strike speed without human vetting establish systemic command failure.
+90. Systemic command culpability is firmly established by:
+   * (i) The affirmative command decision to dismantle the CENTCOM Civilian Harm Mitigation and Response unit, slashing its staff from 10 members to one;
+   * (ii) The prioritization of algorithmic velocity (compressing verification to minutes across >1,000 targets) over mandatory positive target identification; and
+   * (iii) The failure of operational commanders to monitor terminal DSMAC video feeds or order a weapon abort when precision sensors revealed an active schoolyard.
 
 <a id="chapter-8-3"></a>
 ### 8.3 State Responsibility for Internationally Wrongful Acts (ILC ARSIWA Arts. 2, 4, 8, 40, 41)
 91. Beyond individual liability, the Minab school strike directly engages the **State Responsibility of the United States of America** under customary international law, as codified in the **ILC Articles on State Responsibility (ARSIWA, 2001)**:
    * **Attribution (Article 4 ARSIWA):** All organs involved (US Navy, CENTCOM, DIA) are official organs of the United States State;
-   * **Breach (Article 2 ARSIWA):** The kinetic attack breached primary conventional and customary IHL obligations;
+   * **Breach (Article 2 ARSIWA):** The kinetic attack breached primary conventional and customary IHL obligations, as independently established by the United Nations Fact-Finding Mission (**UN Doc. A/HRC/63/61**);
    * **Peremptory Norms (Articles 40 & 41 ARSIWA):** The prohibition against targeting child civilian sanctuaries is a peremptory norm (*jus cogens*). All States are legally obligated not to recognize the situation as lawful and to cooperate to bring the breach to an end.
 
 [↑ Back to Table of Contents](#table-of-contents)
@@ -446,23 +462,23 @@ This definition has been incorporated into the jurisprudence of the Internationa
 ### 10.1 Formal Declaratory Determinations of the Expert Chamber
 96. **FOR THE FOREGOING REASONS,** this Panel renders the following formal declaratory findings:
    * (1) **FINDS** that the Shajareh Tayyebeh Girls' Elementary School in Minab was on February 28, 2026, a protected civilian educational object enjoying absolute immunity under International Humanitarian Law;
-   * (2) **FINDS** that the kinetic strike executed by three US Navy BGM-109 Tomahawk cruise missiles was the direct result of upstream target nomination negligence, database circularity, and failure of positive target identification;
-   * (3) **FINDS** that the strike breached the Principles of Distinction, Feasible Precautions, and Proportionality;
+   * (2) **FINDS** that the kinetic strike executed by three US Navy BGM-109 Tomahawk cruise missiles was the direct result of upstream target nomination negligence, database circularity, automated AI kill-chain failure, and the institutional dismantling of civilian harm review mechanisms;
+   * (3) **FINDS**, in full concurrence with the United Nations Independent International Fact-Finding Mission on Iran (**UN Doc. A/HRC/63/61**), that the strike constituted an unlawful indiscriminate attack amounting to a **war crime** in breach of the Principles of Distinction, Feasible Precautions, and Proportionality;
    * (4) **DETERMINES** that the acts are fully attributable to the United States of America, engaging its international State Responsibility under customary international law.
 
 <a id="chapter-10-2"></a>
 ### 10.2 State Reparations under Customary International Law (ARSIWA Articles 30–37 & Belgrade Precedent § 84)
 97. Applying the **Belgrade Precedent (ICTY OTP § 84)**, in which the United States accepted responsibility, apologized, and paid **\$32.5 million** in direct state and victim restitution, the Panel demands that the United States execute the following remedial obligations under ILC ARSIWA Articles 30–37:
-   * **Cessation & Non-Repetition (Art. 30):** An immediate, binding moratorium on automated AI target generation pipelines for coordinates within 500 meters of registered civilian and educational buildings, coupled with mandatory 72-hour human visual verification protocols;
+   * **Cessation & Non-Repetition (Art. 30):** An immediate, binding moratorium on automated AI target nomination and prioritization platforms (including Palantir Maven Smart System and integrated LLM architectures) for strike coordinates within 500 meters of registered civilian, medical, and educational buildings, coupled with mandatory, un-compressable 72-hour human visual verification protocols and the full restoration of independent Civilian Harm Mitigation and Response oversight units;
    * **Restitution (*Restitutio in Integrum*, Art. 35):** Full state-funded architectural reconstruction of the Shajareh Tayyebeh Girls' Elementary School as a modern, fortified educational facility;
    * **Full Compensation (Art. 36):** Direct financial compensation to the legal heirs of all **156 deceased victims** covering wrongful death and moral damages, and the establishment of an independently managed Medical & Psychological Trust Fund covering lifelong rehabilitation for all **95+ wounded survivors**;
-   * **Satisfaction & Truth (Art. 37):** A formal, public acknowledgment of wrongdoing and an official state apology, accompanied by the unredacted public declassification of the CENTCOM AR 15-6 investigation records.
+   * **Satisfaction & Truth (Art. 37):** A formal, public acknowledgment of wrongdoing and an official state apology, accompanied by the unredacted public declassification of the CENTCOM AR 15-6 investigation records and full disclosure of the Maven-Claude targeting log for February 28, 2026.
 
 <a id="chapter-10-3"></a>
 ### 10.3 Orders Concerning Judicial Preservation of Evidence & International Fact-Finding
 98. The Panel orders:
-   * (i) That the verified master evidentiary archives (EXH-SAT-001 through EXH-VIC-005) remain deposited in permanent, tamper-evident custody in Helsinki, Finland, under the Berkeley Protocol;
-   * (ii) That duplicate cryptographic archives be formally transmitted to the **United Nations Human Rights Council** and the **International Impartial and Independent Mechanism (IIIM)**.
+   * (i) That the verified master evidentiary archives (EXH-SAT-001 through EXH-UN-008) remain deposited in permanent, tamper-evident custody in Helsinki, Finland, under the Berkeley Protocol;
+   * (ii) That duplicate cryptographic archives be formally transmitted to the **President of the United Nations Human Rights Council** and the **Secretariat of the Independent International Fact-Finding Mission on the Islamic Republic of Iran** in connection with the 63rd Regular Session (UN Doc. A/HRC/63/61), and to the **International Impartial and Independent Mechanism (IIIM)**.
 
 <a id="chapter-10-4"></a>
 ### 10.4 Contingent Prosecutorial Directions & Transmissions

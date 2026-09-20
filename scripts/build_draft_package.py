@@ -31,8 +31,7 @@ from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml import OxmlElement, parse_xml
 from docx.oxml.ns import qn, nsdecls
 
-# PDF generation via Playwright (System Chrome)
-from playwright.sync_api import sync_playwright
+# PDF generation via Playwright (System Chrome) - imported lazily in compile_html_to_pdf
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS_DIR = os.path.join(BASE_DIR, "Campaigns", "minab", "justiceForMinab", "docs")
@@ -794,6 +793,8 @@ def compile_html_to_pdf(html_content, pdf_path, production_date, doc_type="main"
     </div>
     """
 
+    from playwright.sync_api import sync_playwright
+
     with sync_playwright() as p:
         browser = p.chromium.launch(channel="chrome", headless=True)
         page = browser.new_page()
@@ -949,6 +950,7 @@ def main():
     parser.add_argument("--date", default=None, help="Production date (YYYY-MM-DD). Default: today.")
     parser.add_argument("--version-tag", default=None, help="Version tag (e.g. v2). Default: None.")
     parser.add_argument("--output-dir", default=None, help="Root drafts folder. Default: Draft_Versions.")
+    parser.add_argument("--docx-only", action="store_true", help="Compile Word DOCX documents only (skip PDF).")
     args = parser.parse_args()
 
     production_date = args.date or datetime.now().strftime("%Y-%m-%d")
@@ -979,34 +981,58 @@ def main():
     annex_docx = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}{tag_file}_Draft.docx")
     annex_pdf = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}{tag_file}_Draft.pdf")
 
-    # Step 1: Compile Main Report DOCX
-    print("\n[1/4] Compiling Main Report (Word Document)...")
-    compile_markdown_to_docx(MAIN_REPORT_SRC, main_docx, production_date, doc_type="main")
+    if args.docx_only:
+        # Step 1: Compile Main Report DOCX
+        print("\n[1/2] Compiling Main Report (Word Document)...")
+        compile_markdown_to_docx(MAIN_REPORT_SRC, main_docx, production_date, doc_type="main")
 
-    # Step 2: Compile Main Report PDF
-    print("\n[2/4] Compiling Main Report (PDF Document)...")
-    main_html = markdown_to_html(MAIN_REPORT_SRC, production_date, doc_type="main")
-    compile_html_to_pdf(main_html, main_pdf, production_date, doc_type="main")
+        # Step 2: Compile Annex Document DOCX
+        print("\n[2/2] Compiling Annex Document (Word Document)...")
+        compile_markdown_to_docx(ANNEX_DOC_SRC, annex_docx, production_date, doc_type="annex")
 
-    # Step 3: Compile Annex Document DOCX
-    print("\n[3/4] Compiling Annex Document (Word Document)...")
-    compile_markdown_to_docx(ANNEX_DOC_SRC, annex_docx, production_date, doc_type="annex")
+        # Step 3: Compute Hashes and Generate Manifest
+        print("\n[3/3] Generating Package Manifest & Verification Hashes...")
+        doc_records = [
+            ("Main Report", "DOCX", os.path.basename(main_docx), os.path.getsize(main_docx), calculate_sha256(main_docx)),
+            ("Annex Document", "DOCX", os.path.basename(annex_docx), os.path.getsize(annex_docx), calculate_sha256(annex_docx)),
+        ]
+        generate_manifest(version_dir, production_date, doc_records)
+        generate_drafts_readme(drafts_root)
+    else:
+        # Step 1: Compile Main Report DOCX
+        print("\n[1/4] Compiling Main Report (Word Document)...")
+        compile_markdown_to_docx(MAIN_REPORT_SRC, main_docx, production_date, doc_type="main")
 
-    # Step 4: Compile Annex Document PDF
-    print("\n[4/4] Compiling Annex Document (PDF Document)...")
-    annex_html = markdown_to_html(ANNEX_DOC_SRC, production_date, doc_type="annex")
-    compile_html_to_pdf(annex_html, annex_pdf, production_date, doc_type="annex")
+        # Step 2: Compile Main Report PDF
+        print("\n[2/4] Compiling Main Report (PDF Document)...")
+        main_html = markdown_to_html(MAIN_REPORT_SRC, production_date, doc_type="main")
+        compile_html_to_pdf(main_html, main_pdf, production_date, doc_type="main")
 
-    # Step 5: Compute Hashes and Generate Manifest
-    print("\n[5/5] Generating Package Manifest & Verification Hashes...")
-    doc_records = [
-        ("Main Report", "DOCX", os.path.basename(main_docx), os.path.getsize(main_docx), calculate_sha256(main_docx)),
-        ("Main Report", "PDF", os.path.basename(main_pdf), os.path.getsize(main_pdf), calculate_sha256(main_pdf)),
-        ("Annex Document", "DOCX", os.path.basename(annex_docx), os.path.getsize(annex_docx), calculate_sha256(annex_docx)),
-        ("Annex Document", "PDF", os.path.basename(annex_pdf), os.path.getsize(annex_pdf), calculate_sha256(annex_pdf)),
-    ]
-    generate_manifest(version_dir, production_date, doc_records)
-    generate_drafts_readme(drafts_root)
+        # Step 3: Compile Annex Document DOCX
+        print("\n[3/4] Compiling Annex Document (Word Document)...")
+        compile_markdown_to_docx(ANNEX_DOC_SRC, annex_docx, production_date, doc_type="annex")
+
+        # Step 4: Compile Annex Document PDF
+        print("\n[4/4] Compiling Annex Document (PDF Document)...")
+        annex_html = markdown_to_html(ANNEX_DOC_SRC, production_date, doc_type="annex")
+        compile_html_to_pdf(annex_html, annex_pdf, production_date, doc_type="annex")
+
+        # Step 5: Compute Hashes and Generate Manifest
+        print("\n[5/5] Generating Package Manifest & Verification Hashes...")
+        doc_records = [
+            ("Main Report", "DOCX", os.path.basename(main_docx), os.path.getsize(main_docx), calculate_sha256(main_docx)),
+            ("Main Report", "PDF", os.path.basename(main_pdf), os.path.getsize(main_pdf), calculate_sha256(main_pdf)),
+            ("Annex Document", "DOCX", os.path.basename(annex_docx), os.path.getsize(annex_docx), calculate_sha256(annex_docx)),
+            ("Annex Document", "PDF", os.path.basename(annex_pdf), os.path.getsize(annex_pdf), calculate_sha256(annex_pdf)),
+        ]
+        generate_manifest(version_dir, production_date, doc_records)
+        generate_drafts_readme(drafts_root)
+
+    # Also place a convenient copy in the root workspace
+    root_copy = os.path.join(BASE_DIR, f"PFPJ_Minab_Factual_Determination_Main_Report_Updated_{production_date}.docx")
+    import shutil
+    shutil.copy2(main_docx, root_copy)
+    print(f"\n  [ROOT COPY OK] Placed convenient copy at: {root_copy}")
 
     print("\n" + "=" * 70)
     print(f"SUCCESS: Report package successfully created in {version_dir}")

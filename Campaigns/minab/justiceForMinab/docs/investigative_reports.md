@@ -66,6 +66,13 @@ These are deep, original investigations with exclusive evidence. **Highest ampli
 - **Published**: Early March 2026
 - **Key findings**: First to report blast resulted from precision strike with outdated intelligence; historical satellite imagery showed school was once part of IRGC naval base; wall constructed between 2013–2016; school had functioned as civilian facility since separation
 
+### 8. Bloomberg News — Visual Investigation: Inside US Military ‘Kill Chain’
+- **URL**: [bloomberg.com — Inside US Military ‘Kill Chain’ That Destroyed an Iranian School](https://www.bloomberg.com/graphics/2026-iran-school-attack/)
+- **Authors**: Ben Bartenstein and Krishna Karra
+- **Published**: September 18, 2026
+- **Key findings**: Reconstructed the algorithmic targeting kill chain; revealed CENTCOM deployed Palantir's Maven Smart System integrated with Anthropic's Claude AI; extreme time compression reduced vetting to minutes across >1,000 Day 1 strikes; CENTCOM's Civilian Harm Mitigation team was gutted from 10 analysts to 1, resulting in zero civilian harm review for Minab; disconnected intelligence databases failed to synchronize the school's 10-year civilian conversion; Pentagon knew within hours; Palantir quietly deployed post-strike patches to Maven adding automated civilian disqualification checks.
+- **Evidence type**: Pentagon investigative disclosures, algorithmic pipeline audit, corporate responses (Palantir, Anthropic), visual satellite data modeling
+
 ---
 
 ## 🟠 Tier 2 — Investigative Analysis & Legal Reports
@@ -104,6 +111,11 @@ These are deep, original investigations with exclusive evidence. **Highest ampli
 - **URL**: [ohchr.org — Iran: UN experts condemn strike on girls' school in Minab](https://www.ohchr.org/en/press-releases/2026/03/iran-un-experts-condemn-strike-girls-school-minab)
 - **Published**: March 4, 2026
 - **Key findings**: Called for urgent, independent investigation; attacks on schools constitute grave violation of IHL and human rights law; called for immediate cessation of hostilities; strikes part of "broader pattern of unlawful unilateral actions"
+
+### 13b. UN Independent International Fact-Finding Mission on Iran (FFMI) — War Crimes Report
+- **URL**: [ohchr.org — Report of the Independent International Fact-Finding Mission on Iran (UN Doc. A/HRC/63/61)](https://www.ohchr.org/sites/default/files/documents/hrbodies/hrcouncil/sessions-regular/session63/a-hrc-63-61-aev.pdf)
+- **Published**: September 17, 2026 (Submitted to 63rd Session of UN Human Rights Council)
+- **Key findings**: Formally concluded under the "reasonable grounds to believe" standard that the United States committed **war crimes** during its February 28, 2026 strikes in Iran; confirmed the strike on the Shajareh Tayyebeh Primary School in Minab was an **unlawful indiscriminate attack** killing >120 schoolchildren and educators; determined the school was a "clearly identifiable" educational sanctuary with no military presence or military use; established that US forces failed to take feasible precautions by recklessly relying on unverified, outdated targeting databases.
 
 ### 14. UNESCO — Official Condemnation
 - **URL**: [unesco.org — UNESCO condemns bombing of Shajareh Tayyebeh school in Minab](https://www.unesco.org/en/articles/unesco-condemns-attack-school-iran-minab)

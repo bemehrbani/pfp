@@ -45,7 +45,7 @@
   * [EXH-CENTCOM-004.1: Pentagon Press Briefing Transcripts & Public Concessions](#exh-centcom-004-1)
   * [EXH-CENTCOM-004.2: Leaked Findings of CENTCOM AR 15-6 Investigation](#exh-centcom-004-2)
   * [EXH-CENTCOM-004.3: Congressional Oversight Inquiries & Senatorial Correspondence](#exh-centcom-004-3)
-  * [EXH-CENTCOM-004.4: Deployment of Automated AI Target Generation Pipelines (Project Maven)](#exh-centcom-004-4)
+  * [EXH-CENTCOM-004.4: Deployment of Automated AI Target Generation Pipelines (Palantir Maven Smart System & Claude AI)](#exh-centcom-004-4)
   * [EXH-CENTCOM-004.5 [RESERVED / PENDING SUBPOENA & DECLASSIFICATION]: Complete Unredacted CENTCOM 15-6 Dossier](#exh-centcom-004-5)
 * [EXHIBIT SERIES VIC: BIOMETRIC CASUALTY ARCHIVE, FORENSIC CERTIFICATES & NOMINAL ROLL](#exhibit-vic)
   * [EXH-VIC-005.1: Hormozgan Legal Medicine Organization (Pezeshki Ghanouni) Registry](#exh-vic-005-1)
@@ -59,8 +59,10 @@
   * [EXH-WIT-007.2 [RESERVED / RULE 75 PROTECTIVE MEASURES]: Sworn Affidavits of First Responders & Emergency Surgeons](#exh-wit-007-2)
   * [EXH-WIT-007.3 [RESERVED / RULE 75 PROTECTIVE MEASURES]: Bereaved Family Victim Impact & Guardianship Affidavits](#exh-wit-007-3)
 * [EXHIBIT SERIES OSINT: INDEPENDENT INVESTIGATIVE & MEDIA REPORTS ARCHIVE](#exhibit-osint)
-  * [EXH-OSINT-006.1: Tier 1 Major Investigative Reports (NYT, BBC Verify, WaPo, CBC, Bellingcat)](#exh-osint-006-1)
+  * [EXH-OSINT-006.1: Tier 1 Major Investigative Reports (Bloomberg, NYT, BBC Verify, WaPo, CBC, Bellingcat)](#exh-osint-006-1)
   * [EXH-OSINT-006.2: Tier 2 Legal Analyses & NGO Findings (HRW, Amnesty International, New Lines)](#exh-osint-006-2)
+* [EXHIBIT SERIES UN: UNITED NATIONS INTERGOVERNMENTAL FACT-FINDING ARCHIVE](#exhibit-un)
+  * [EXH-UN-008.1: Independent International Fact-Finding Mission on Iran Report (UN Doc. A/HRC/63/61)](#exh-un-008-1)
 * [RESERVED EVIDENTIARY DOCKETS & PENDING DISCOVERY PROTOCOL (RULE 54bis)](#reserved-dockets)
 * [CRYPTOGRAPHIC INTEGRITY, CHAIN OF CUSTODY & JUDICIAL ACCESS PROTOCOL](#custody-protocol)
 
@@ -272,12 +274,14 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
   2. Inquiries explicitly linked the disaster to the **dismantling of the Civilian Harm Mitigation and Response (CHMR) framework** and the revocation of mandatory civilian casualty pre-strike vetting protocols.
 
 <a id="exh-centcom-004-4"></a>
-### EXH-CENTCOM-004.4: Deployment of Automated AI Target Generation Pipelines (Project Maven)
-* **Description:** Technical evaluation of automated targeting algorithms used during Operation Epic Fury.
-* **Factual Findings:**
-  1. CENTCOM used automated algorithmic target recognition software (Project Maven and associated automated target generation pipelines) to compile Day 1 strike packages.
-  2. Algorithms were programmed to recognize physical building shapes matching historic military barracks templates.
-  3. The system failed to interpret civilian modifications (concrete partition wall, brightly painted schoolyard fixtures), and human analysts failed to override algorithmic recommendations due to automation confirmation bias.
+### EXH-CENTCOM-004.4: Deployment of Automated AI Target Generation Pipelines (Palantir Maven Smart System & Claude AI)
+* **Description:** Technical evaluation and forensic audit of automated algorithmic targeting systems deployed by CENTCOM during Operation Epic Fury, as substantiated by Pentagon investigative disclosures and Bloomberg News reporting.
+* **Factual Findings & System Architecture:**
+  1. **Platform Stack:** CENTCOM deployed the **Maven Smart System** (developed by Palantir Technologies), integrating large language and reasoning models (**Anthropic’s Claude**) to synthesize multi-INT feeds, calculate target priority scores, and draft automated target nomination rationales;
+  2. **Stale Classification Ingestion:** Maven ingested legacy pre-2016 targeting databases classifying the parcel as an active IRGC naval logistics depot. While secondary intelligence branches had separately recorded the facility's 2016 physical partition and conversion to an elementary school, these records were stored in disconnected database silos and never synchronized into Maven's operational targeting layer;
+  3. **Extreme Time Compression & Automation Bias:** During the opening 24 hours of the conflict, the Maven platform processed over 1,000 strikes, compressing target validation workflows from hours/days into minutes. Human targeters and approving commanders operated under cognitive saturation, displaying uncritical automation bias toward algorithmic recommendations;
+  4. **Elimination of Civilian Harm Safeguards:** Prior to the operation, CENTCOM’s dedicated Civilian Harm Mitigation and Response (CHMR) unit was reduced from **10 members to a single analyst**. Zero civilian harm mitigation specialists reviewed the Minab school target packet before weapons release;
+  5. **Post-Strike Vendor Remediation:** Following internal Pentagon confirmation of US responsibility for the school's destruction within hours of impact, Palantir quietly deployed emergency software updates to Maven, introducing automated "re-review" checkpoints to search for disqualifying civilian factors previously missed by human operators.
 
 <a id="exh-centcom-004-5"></a>
 ### EXH-CENTCOM-004.5 [RESERVED / PENDING SUBPOENA & DECLASSIFICATION]: Complete Unredacted CENTCOM 15-6 Dossier
@@ -410,7 +414,8 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
   2. **BBC Verify (Satellite & Munitions Analysis — Early March 2026):** Confirmed multiple impact sites; identified the triple-tap strike pattern; verified BGM-109 Tomahawk cruise missile fragments;
   3. **The Washington Post (Targeting Chain Investigation — March 2026):** Confirmed the school was on the US target nomination list; proved school was physically walled off from IRGC compound since 2016; linked strike to the dismantling of Pentagon civilian harm mitigation programs;
   4. **CBC News (Visual Investigation & Senate Record — March 2026):** Detailed analysis of precision strike trajectory; verified the school was a former IRGC building converted a decade prior;
-  5. **Bellingcat (OSINT Munitions Forensics — Trevor Ball):** Geolocated video footage; definitively attributed munition debris to US-manufactured BGM-109 Tomahawk, refuting official initial denials.
+  5. **Bellingcat (OSINT Munitions Forensics — Trevor Ball):** Geolocated video footage; definitively attributed munition debris to US-manufactured BGM-109 Tomahawk, refuting official initial denials;
+  6. **Bloomberg News (Visual Investigation — September 18, 2026, by Ben Bartenstein & Krishna Karra):** *"Inside US Military ‘Kill Chain’ That Destroyed an Iranian School"* — Comprehensive technical and operational forensic reconstruction of the AI targeting pipeline; detailed the deployment of Palantir’s Maven Smart System and Anthropic’s Claude AI; exposed extreme kill-chain time compression across >1,000 Day 1 strikes; documented that the CENTCOM Civilian Harm Mitigation team was gutted from 10 analysts to 1; and proved that disconnected intelligence databases failed to synchronize the school's ten-year civilian conversion into Maven's operational targeting layer.
 
 <a id="exh-osint-006-2"></a>
 ### EXH-OSINT-006.2: Tier 2 Legal Analyses & NGO Findings (HRW, Amnesty International, New Lines)
@@ -419,6 +424,21 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
   1. **Human Rights Watch (War Crime Assessment):** Characterized the attack as an apparent war crime demanding an independent international investigation; verified physical partitioning of the school since 2016;
   2. **Amnesty International (IHL Violation Determination):** Declared the strike an "absolute violation of international law" and attributed direct responsibility to the United States;
   3. **New Lines Institute (IHL Target Analysis):** Established that the strike violated the core principles of distinction, proportionality, and precaution, and noted that publicly available commercial data could have easily confirmed the facility's civilian character.
+
+---
+
+<a id="exhibit-un"></a>
+# EXHIBIT SERIES UN: UNITED NATIONS INTERGOVERNMENTAL FACT-FINDING ARCHIVE
+
+<a id="exh-un-008-1"></a>
+### EXH-UN-008.1: Independent International Fact-Finding Mission on the Islamic Republic of Iran Report (UN Doc. A/HRC/63/61 — September 17, 2026)
+* **Description:** Official Report of the Independent International Fact-Finding Mission on the Islamic Republic of Iran, presented to the United Nations Human Rights Council at its 63rd Regular Session (mandated under HRC Resolution S-39/1).
+* **Authentic UN Symbol & Reference:** `UN Doc. A/HRC/63/61` (*Advance Edited Version: a-hrc-63-61-aev.pdf*).
+* **Core Intergovernmental Findings Catalogued:**
+  1. **War Crimes Determination:** Formally concluded under the "reasonable grounds to believe" standard that the United States committed **war crimes** during kinetic operations in Iran on February 28, 2026;
+  2. **Minab School Strike (Shajareh Tayyebeh):** Established that US armed forces launched an **unlawful indiscriminate attack** against the Shajareh Tayyebeh Primary School in Minab, resulting in over 120 verified child fatalities and the deaths of educators and civilian staff;
+  3. **Protected Civilian Sanctuary:** Confirmed that the school was a *"clearly identifiable educational institution dedicated to children,"* entirely devoid of military personnel or legitimate military utility;
+  4. **Reckless Failure of Feasible Precautions:** Determined that US forces breached their affirmative legal duty under Additional Protocol I, Article 57, by relying upon unverified historical entries in targeting databases without conducting real-time verification before striking.
 
 ---
 
