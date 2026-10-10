@@ -255,7 +255,8 @@
             transition: transform var(--transition);
         }
 
-        .nav-item:hover .nav-link .caret {
+        .nav-item:hover .nav-link .caret,
+        .nav-item.is-open .nav-link .caret {
             transform: rotate(180deg);
             opacity: 1;
         }
@@ -277,9 +278,23 @@
             opacity: 0;
             visibility: hidden;
             transform: translateY(8px);
-            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                        visibility 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 150ms;
             pointer-events: none;
             z-index: 1001;
+        }
+
+        /* Invisible physical bridge filling the 8px margin-top gap between nav-link and dropdown */
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -16px;
+            left: 0;
+            right: 0;
+            height: 16px;
+            background: transparent;
         }
 
         body[dir="rtl"] .dropdown-menu {
@@ -288,11 +303,13 @@
         }
 
         .nav-item:hover .dropdown-menu,
+        .nav-item.is-open .dropdown-menu,
         .nav-item:focus-within .dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
             pointer-events: auto;
+            transition-delay: 0s;
         }
 
         .dropdown-item {
@@ -1483,7 +1500,7 @@
                 </li>
 
                 <!-- Case File Dropdown -->
-                <li class="nav-item">
+                <li class="nav-item has-dropdown">
                     <a href="draft.html" class="nav-link">
                         <span data-i18n="nav_case_file">Case File</span>
                         <span class="caret">▼</span>
@@ -1529,7 +1546,7 @@
                 </li>
 
                 <!-- Memorial Dropdown -->
-                <li class="nav-item">
+                <li class="nav-item has-dropdown">
                     <a href="memorial.html" class="nav-link">
                         <span data-i18n="nav_memorial">Memorial</span>
                         <span class="caret">▼</span>
@@ -1559,7 +1576,7 @@
                 </li>
 
                 <!-- About Dropdown -->
-                <li class="nav-item">
+                <li class="nav-item has-dropdown">
                     <a href="about.html" class="nav-link">
                         <span data-i18n="nav_about">About</span>
                         <span class="caret">▼</span>
@@ -2402,8 +2419,75 @@
             memorialSec.insertBefore(bgContainer, memorialSec.firstChild);
         }
 
+        // Navigation Dropdown interaction & lock-on-click
+        function initNavDropdowns() {
+            const dropdownItems = document.querySelectorAll('.nav-item.has-dropdown');
+
+            dropdownItems.forEach(item => {
+                const link = item.querySelector(':scope > .nav-link');
+                const menu = item.querySelector('.dropdown-menu');
+                if (!link || !menu) return;
+
+                link.setAttribute('aria-haspopup', 'true');
+                link.setAttribute('aria-expanded', 'false');
+
+                link.addEventListener('click', (e) => {
+                    // Prevent immediate jump to allow lock-toggle on click
+                    e.preventDefault();
+                    const wasOpen = item.classList.contains('is-open');
+
+                    dropdownItems.forEach(other => {
+                        other.classList.remove('is-open');
+                        const otherLink = other.querySelector(':scope > .nav-link');
+                        if (otherLink) {
+                            otherLink.setAttribute('aria-expanded', 'false');
+                            if (other !== item) otherLink.blur();
+                        }
+                    });
+
+                    if (!wasOpen) {
+                        item.classList.add('is-open');
+                        link.setAttribute('aria-expanded', 'true');
+                    } else {
+                        item.classList.remove('is-open');
+                        link.setAttribute('aria-expanded', 'false');
+                        link.blur();
+                    }
+                });
+            });
+
+            // Dismiss dropdowns when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.nav-item.has-dropdown')) {
+                    dropdownItems.forEach(item => {
+                        item.classList.remove('is-open');
+                        const link = item.querySelector(':scope > .nav-link');
+                        if (link) {
+                            link.setAttribute('aria-expanded', 'false');
+                            link.blur();
+                        }
+                    });
+                }
+            });
+
+            // Dismiss dropdowns on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    dropdownItems.forEach(item => {
+                        item.classList.remove('is-open');
+                        const link = item.querySelector(':scope > .nav-link');
+                        if (link) {
+                            link.setAttribute('aria-expanded', 'false');
+                            link.blur();
+                        }
+                    });
+                }
+            });
+        }
+
         // Init
         document.addEventListener('DOMContentLoaded', () => {
+            initNavDropdowns();
             renderFeaturedChildren();
             initMemorialMarquee();
 
