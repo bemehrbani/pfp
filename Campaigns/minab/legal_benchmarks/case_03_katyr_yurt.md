@@ -20,7 +20,7 @@ Russian military forces conducted heavy aerial bombardments on the village of Ka
 ## 3. Legal Proceedings & Public Reports
 *   **Investigating Body:** European Court of Human Rights (ECtHR).
 *   **Key Judgment:** *Isayeva v. Russia (Application no. 57950/00) - ECtHR Judgment (24 February 2005)*.
-*   **Public Report URL:** [ECtHR HUDOC Portal - Isayeva v. Russia Judgment](https://hudoc.echr.coe.int/eng?i=001-68379)
+*   **Public Report URL:** [ECtHR HUDOC Portal - Isayeva v. Russia Judgment](https://hudoc.echr.coe.int/eng?i=001-68381)
 
 ---
 
