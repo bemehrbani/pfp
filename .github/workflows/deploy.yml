@@ -68,6 +68,9 @@ jobs:
           echo "=== Reloading services with fresh static assets ==="
           $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml restart backend frontend"
 
+          echo "=== Configuring host Nginx for admin static assets ==="
+          $SSH_CMD "python3 /opt/pfp/PFP_Platform/infra/scripts/configure_host_nginx.py"
+
           echo "=== Health check ==="
           HEALTH=$($SSH_CMD "curl -sf --max-time 10 http://localhost:8001/health/simple/ || echo 'FAILED'")
           if [ "$HEALTH" = "FAILED" ]; then
@@ -96,6 +99,10 @@ jobs:
 
           echo "=== Backend API check ==="
           $SSH_CMD "curl -sf --max-time 5 http://localhost:8001/health/simple/ && echo ' ✅ Backend OK' || echo '⚠️ Backend unreachable'"
+
+          echo "=== Admin static asset checks ==="
+          $SSH_CMD "curl -sf --max-time 5 http://localhost:8001/static/admin/css/base.523eb49842a7.css > /dev/null && echo '✅ Backend Admin Static OK' || echo '⚠️ Backend Admin Static unreachable'"
+          $SSH_CMD "curl -sf --max-time 5 http://localhost:8080/static/admin/css/base.523eb49842a7.css > /dev/null && echo '✅ Frontend Admin Static OK' || echo '⚠️ Frontend Admin Static unreachable'"
 
           echo "=== Current commit ==="
           $SSH_CMD "cd /opt/pfp && git log --oneline -1"
