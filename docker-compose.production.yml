@@ -165,6 +165,7 @@ services:
     environment:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
     volumes:
+      - static_volume:/usr/share/nginx/django_static:ro
       - ./PFP_Platform/web/logs:/app/logs
     depends_on:
       - backend
