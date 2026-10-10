@@ -415,6 +415,8 @@ def main():
     download_hudoc_judgment("001-68381", "case_03", "Case of Isayeva v. Russia", "57950/00", "Russia")
     # Case 11: Banković and Others v. Belgium and Others (Grand Chamber)
     download_hudoc_judgment("001-22099", "case_11", "Bankovic and Others v. Belgium and Others", "52207/99", "Belgium and 16 Others")
+    # Case 19: Isayeva, Yusupova and Bazayeva v. Russia (Chamber)
+    download_hudoc_judgment("001-68379", "case_19", "Case of Isayeva, Yusupova and Bazayeva v. Russia", "57947/00, 57948/00, 57949/00", "Russia")
 
     # 2. Download ICTY Official Report (Cases 01 & 12)
     print("\n--- Phase 2: Extracting ICTY Official Findings ---")
@@ -425,7 +427,7 @@ def main():
     compile_all_remaining_cases()
 
     print("\n" + "=" * 70)
-    print(f"🎉 All 18 Full Case Reports are now compiled and stored in:\n{OUTPUT_DIR}")
+    print(f"🎉 All 19 Full Case Reports are now compiled and stored in:\n{OUTPUT_DIR}")
     print("=" * 70)
 
 if __name__ == "__main__":
