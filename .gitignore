@@ -215,4 +215,5 @@ Sync-Pull-From-OneDrive.bat
 # Root working convenience exports
 /PFPJ_Minab_*.docx
 /PFPJ_Minab_*.pdf
+~$*
 
