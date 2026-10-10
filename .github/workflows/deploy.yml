@@ -47,6 +47,9 @@ jobs:
           echo "=== Pulling latest code ==="
           $SSH_CMD "cd /opt/pfp && if [ ! -d '.git' ]; then git init && git remote add origin https://github.com/bemehrbani/pfp.git; fi && git fetch origin main && git reset --hard origin/main"
 
+          echo "=== Freeing Docker disk space & BuildKit cache ==="
+          $SSH_CMD "docker builder prune -af --force 2>/dev/null || true; docker image prune -f 2>/dev/null || true; df -h /"
+
           echo "=== Rebuilding and restarting services ==="
           $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml up -d --build --remove-orphans"
 
