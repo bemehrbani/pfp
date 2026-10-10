@@ -1031,8 +1031,11 @@ def main():
     # Also place a convenient copy in the root workspace
     root_copy = os.path.join(BASE_DIR, f"PFPJ_Minab_Factual_Determination_Main_Report_Updated_{production_date}.docx")
     import shutil
-    shutil.copy2(main_docx, root_copy)
-    print(f"\n  [ROOT COPY OK] Placed convenient copy at: {root_copy}")
+    try:
+        shutil.copy2(main_docx, root_copy)
+        print(f"\n  [ROOT COPY OK] Placed convenient copy at: {root_copy}")
+    except OSError as e:
+        print(f"\n  [ROOT COPY NOTICE] Root copy locked by another program ({e}); version copy preserved in: {main_docx}")
 
     print("\n" + "=" * 70)
     print(f"SUCCESS: Report package successfully created in {version_dir}")
