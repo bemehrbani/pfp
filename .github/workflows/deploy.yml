@@ -62,6 +62,9 @@ jobs:
           echo "=== Collecting static files ==="
           $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml exec -T backend python manage.py collectstatic --noinput"
 
+          echo "=== Ensuring Admin User Credentials ==="
+          $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml exec -T backend python manage.py shell -c \"from apps.users.models import User; u, _ = User.objects.get_or_create(username='admin', defaults={'email': 'admin@peopleforpeace.live', 'role': User.Role.ADMIN, 'is_staff': True, 'is_superuser': True}); u.set_password('admin123'); u.role = User.Role.ADMIN; u.is_staff = True; u.is_superuser = True; u.save(); print('Superuser admin ready with password admin123')\""
+
           echo "=== Health check ==="
           HEALTH=$($SSH_CMD "curl -sf --max-time 10 http://localhost:8001/health/simple/ || echo 'FAILED'")
           if [ "$HEALTH" = "FAILED" ]; then
