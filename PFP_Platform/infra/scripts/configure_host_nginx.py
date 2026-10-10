@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Configure host Nginx to proxy Django admin static assets to backend container (127.0.0.1:8001).
-Idempotent and safe: creates backups before modifications and rolls back if nginx -t fails.
+Inspect and configure host Nginx for Django static assets (peopleforpeace.live).
 """
 import glob
 import os
@@ -9,113 +8,111 @@ import re
 import subprocess
 import sys
 
-BLOCK = """
-    # Django static assets proxy (Admin, DRF, Swagger)
+CORRECT_BLOCK = """
+    # Django static assets proxy (Admin, DRF, Swagger) - ^~ overrides regex
     location ^~ /static/admin/ {
         proxy_pass http://127.0.0.1:8001;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-        expires 30d;
-        add_header Cache-Control "public";
     }
-
     location ^~ /static/rest_framework/ {
         proxy_pass http://127.0.0.1:8001;
         proxy_set_header Host $host;
-        expires 30d;
-        add_header Cache-Control "public";
     }
-
     location ^~ /static/drf-yasg/ {
         proxy_pass http://127.0.0.1:8001;
         proxy_set_header Host $host;
-        expires 30d;
-        add_header Cache-Control "public";
     }
 """
 
 def main():
-    candidate_files = (
-        glob.glob('/etc/nginx/sites-enabled/*') +
-        glob.glob('/etc/nginx/sites-available/*') +
-        glob.glob('/etc/nginx/conf.d/*.conf')
-    )
+    print("=== Host Nginx Inspection ===")
+    print("sites-enabled:", os.listdir('/etc/nginx/sites-enabled/') if os.path.exists('/etc/nginx/sites-enabled/') else 'none')
+    print("sites-available:", os.listdir('/etc/nginx/sites-available/') if os.path.exists('/etc/nginx/sites-available/') else 'none')
 
-    pfp_files = []
-    for f in candidate_files:
-        try:
-            if os.path.isfile(f) and not f.endswith('.bak'):
-                with open(f, 'r') as fp:
-                    content = fp.read()
-                if 'peopleforpeace.live' in content or '8001' in content or '8080' in content:
-                    real_path = os.path.realpath(f)
-                    if real_path not in pfp_files:
-                        pfp_files.append(real_path)
-        except Exception as e:
-            print(f"Skipping {f}: {e}")
+    target_files = []
+    for d in ['/etc/nginx/sites-enabled', '/etc/nginx/sites-available', '/etc/nginx/conf.d']:
+        if os.path.exists(d):
+            for f in os.listdir(d):
+                p = os.path.join(d, f)
+                if os.path.isfile(p) and not f.endswith('.bak') and not f.startswith('.'):
+                    try:
+                        content = open(p).read()
+                        if 'peopleforpeace.live' in content:
+                            real = os.path.realpath(p)
+                            if real not in target_files:
+                                target_files.append(real)
+                    except Exception as e:
+                        print(f"Error reading {p}: {e}")
 
-    print(f"Target Nginx config files: {pfp_files}")
-    if not pfp_files:
-        print("No target Nginx config files found. Checking default...")
-        for f in ['/etc/nginx/sites-available/default', '/etc/nginx/conf.d/default.conf']:
-            if os.path.exists(f):
-                pfp_files.append(os.path.realpath(f))
-
-    modified_files = []
-    for f in pfp_files:
-        with open(f, 'r') as fp:
+    print(f"PFP Config files found: {target_files}")
+    for tf in target_files:
+        print(f"\n--- BEGIN {tf} ---")
+        with open(tf) as fp:
             content = fp.read()
+        print(content)
+        print(f"--- END {tf} ---\n")
 
-        if '/static/admin/' in content:
-            print(f"Rule already present in {f}")
-            continue
+        # Replace existing static/admin block if it lacks ^~ or points to wrong port
+        # or remove old static/admin blocks and inject correct one
+        backup = tf + '.bak'
+        with open(backup, 'w') as bfp:
+            bfp.write(content)
 
-        backup_path = f + '.bak'
-        with open(backup_path, 'w') as fp:
-            fp.write(content)
+        # Regex remove any existing location [/~^ ]* /static/admin/ { ... }
+        # Clean replacement:
+        cleaned = re.sub(r'location\s+[\^~]*\s*/static/admin/\s*\{[^}]*\}', '', content)
+        cleaned = re.sub(r'location\s+[\^~]*\s*/static/rest_framework/\s*\{[^}]*\}', '', cleaned)
+        cleaned = re.sub(r'location\s+[\^~]*\s*/static/drf-yasg/\s*\{[^}]*\}', '', cleaned)
 
-        if 'location /admin/' in content:
-            new_content = content.replace('location /admin/', BLOCK + '\n    location /admin/', 1)
-        elif 'location /api/' in content:
-            new_content = content.replace('location /api/', BLOCK + '\n    location /api/', 1)
-        elif 'location / {' in content:
-            new_content = content.replace('location / {', BLOCK + '\n    location / {', 1)
+        # Inject CORRECT_BLOCK right before location /admin/ or location /api/ or location /
+        if 'location /admin/' in cleaned:
+            updated = cleaned.replace('location /admin/', CORRECT_BLOCK + '\n    location /admin/', 1)
+        elif 'location /api/' in cleaned:
+            updated = cleaned.replace('location /api/', CORRECT_BLOCK + '\n    location /api/', 1)
+        elif 'location / {' in cleaned:
+            updated = cleaned.replace('location / {', CORRECT_BLOCK + '\n    location / {', 1)
         else:
-            last_brace = content.rfind('}')
-            if last_brace != -1:
-                new_content = content[:last_brace] + BLOCK + content[last_brace:]
-            else:
-                new_content = content + '\n' + BLOCK
+            idx = cleaned.rfind('}')
+            updated = cleaned[:idx] + CORRECT_BLOCK + cleaned[idx:]
 
-        with open(f, 'w') as fp:
-            fp.write(new_content)
-        modified_files.append((f, backup_path))
-        print(f"Injected /static/admin/ rules into {f}")
+        with open(tf, 'w') as ufp:
+            ufp.write(updated)
+        print(f"Rewrote {tf} with ^~ static proxy to 127.0.0.1:8001")
 
-    if not modified_files:
-        print("No Nginx configs needed modifications.")
+    # Test and reload
+    t = subprocess.run(['nginx', '-t'], capture_output=True, text=True)
+    print("nginx -t stdout:", t.stdout)
+    print("nginx -t stderr:", t.stderr)
+    if t.returncode == 0:
+        subprocess.run(['systemctl', 'reload', 'nginx'])
+        print("✅ Host Nginx reloaded successfully")
     else:
-        # Test configuration
-        test_res = subprocess.run(['nginx', '-t'], capture_output=True, text=True)
-        print("nginx -t output:")
-        print(test_res.stdout)
-        print(test_res.stderr)
+        print("❌ Nginx config test failed! Restoring backups...")
+        for tf in target_files:
+            bak = tf + '.bak'
+            if os.path.exists(bak):
+                open(tf, 'w').write(open(bak).read())
+        subprocess.run(['nginx', '-t'])
+        sys.exit(1)
 
-        if test_res.returncode == 0:
-            reload_res = subprocess.run(['systemctl', 'reload', 'nginx'], capture_output=True, text=True)
-            if reload_res.returncode != 0:
-                subprocess.run(['nginx', '-s', 'reload'])
-            print("✅ Host Nginx reloaded successfully")
-        else:
-            print("❌ Nginx test failed! Restoring backups...")
-            for f, bak in modified_files:
-                if os.path.exists(bak):
-                    with open(bak, 'r') as bfp, open(f, 'w') as orig_fp:
-                        orig_fp.write(bfp.read())
-            subprocess.run(['nginx', '-t'])
-            sys.exit(1)
+    # Now verify locally on host via curl
+    print("\n=== Testing local curl via host Nginx ===")
+    c1 = subprocess.run(
+        ['curl', '-sI', 'http://127.0.0.1/static/admin/css/base.523eb49842a7.css', '-H', 'Host: peopleforpeace.live'],
+        capture_output=True, text=True
+    )
+    print("Host Nginx HTTP response for base.css:")
+    print(c1.stdout)
+
+    c2 = subprocess.run(
+        ['curl', '-k', '-sI', 'https://127.0.0.1/static/admin/css/base.523eb49842a7.css', '-H', 'Host: peopleforpeace.live'],
+        capture_output=True, text=True
+    )
+    print("Host Nginx HTTPS response for base.css:")
+    print(c2.stdout)
 
 if __name__ == '__main__':
     main()
