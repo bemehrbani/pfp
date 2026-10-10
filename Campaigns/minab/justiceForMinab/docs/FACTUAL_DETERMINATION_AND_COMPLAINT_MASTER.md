@@ -19,12 +19,6 @@
 
 ---
 
-> 🌐 **Interactive Online Reader:** [https://peopleforpeace.live/draft.html](https://peopleforpeace.live/draft.html)  
-> 📄 **Standalone Court Reader:** Open `PFP_Platform/web/public/draft.html` in your browser  
-> 💻 **GitHub Master Docket:** [FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md](https://github.com/bemehrbani/pfp/blob/main/Campaigns/minab/justiceForMinab/docs/FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md)
-
----
-
 <a id="table-of-contents"></a>
 ## TABLE OF CONTENTS
 
@@ -152,11 +146,11 @@
 
 | Exhibit Number | Description & Source Category | Evidentiary Standard & Custody Status |
 | :--- | :--- | :--- |
-| **EXH-SAT-001** | Multi-Year Satellite Imagery Archive (Planet Labs 0.50m, Maxar WorldView-3 0.31m, Airbus Pleiades: 2013–2026) | Verified Ortho-rectified; Cryptographic SHA-256 Secured; Demonstrates continuous physical boundary wall and schoolyard infrastructure since 2016. |
-| **EXH-MUN-002** | Physical Munitions Forensics & Metallurgical Debris Recovered from Shajareh Tayyebeh Compound | Serialized circuit boards with US Defense Logistics Agency CAGE codes; Williams F107 turbofan engine casing fragments; Raytheon folding wing assemblies. |
-| **EXH-LAUNCH-003** | Flight Telemetry, ADS-B Track Logs & Force Allocation Vector Reconstructions | Naval tracking data and regional air defense radar records documenting cruise missile ingress from the Gulf of Oman (USS Abraham Lincoln CSG sector). |
-| **EXH-CENTCOM-004** | Official US Government Statements & CENTCOM AR 15-6 Preliminary Investigation Disclosures | Certified transcripts of Pentagon press briefings, congressional correspondence, and leaked internal military findings conceding US responsibility. |
-| **EXH-VIC-005** | Biometric Casualty Archive, Forensic Certificates & Educational Enrollment Records | Hormozgan Legal Medicine Organization (*Pezeshki Ghanouni*) autopsy records; Shahid Mohammadi Hospital triage logs; official Ministry of Education enrollment rosters for 156 deceased individuals. |
+| [**EXH-SAT-001**](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat) | Multi-Year Satellite Imagery Archive (Planet Labs 0.50m, Maxar WorldView-3 0.31m, Airbus Pleiades: 2013–2026) | Verified Ortho-rectified; Cryptographic SHA-256 Secured; Demonstrates continuous physical boundary wall and schoolyard infrastructure since 2016. |
+| [**EXH-MUN-002**](MASTER_EXHIBIT_DOSSIER.md#exhibit-mun) | Physical Munitions Forensics & Metallurgical Debris Recovered from Shajareh Tayyebeh Compound | Serialized circuit boards with US Defense Logistics Agency CAGE codes; Williams F107 turbofan engine casing fragments; Raytheon folding wing assemblies. |
+| [**EXH-LAUNCH-003**](MASTER_EXHIBIT_DOSSIER.md#exhibit-launch) | Flight Telemetry, ADS-B Track Logs & Force Allocation Vector Reconstructions | Naval tracking data and regional air defense radar records documenting cruise missile ingress from the Gulf of Oman (USS Abraham Lincoln CSG sector). |
+| [**EXH-CENTCOM-004**](MASTER_EXHIBIT_DOSSIER.md#exhibit-centcom) | Official US Government Statements & CENTCOM AR 15-6 Preliminary Investigation Disclosures | Certified transcripts of Pentagon press briefings, congressional correspondence, and leaked internal military findings conceding US responsibility. |
+| [**EXH-VIC-005**](MASTER_EXHIBIT_DOSSIER.md#exhibit-vic) | Biometric Casualty Archive, Forensic Certificates & Educational Enrollment Records | Hormozgan Legal Medicine Organization (*Pezeshki Ghanouni*) autopsy records; Shahid Mohammadi Hospital triage logs; official Ministry of Education enrollment rosters for 156 deceased individuals. |
 
 [↑ Back to Table of Contents](#table-of-contents)
 ---
@@ -210,7 +204,7 @@
 
 <a id="chapter-4-2"></a>
 ### 4.2 Historical Status, Civilian Conversion & The 2016 Concrete Partition Wall
-35. Historical spatial analysis (EXH-SAT-001) confirms that prior to 2016, the parcel formed part of the outer administrative buffer zone of an IRGC Naval Logistics Base.
+35. Historical spatial analysis ([EXH-SAT-001](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat)) confirms that prior to 2016, the parcel formed part of the outer administrative buffer zone of an IRGC Naval Logistics Base.
 36. However, satellite imagery and municipal records prove that between **February and August 2016**, the parcel underwent a comprehensive, permanent physical transformation:
    * **Physical Partition:** A continuous, 2.8-meter-high reinforced concrete masonry wall was constructed, completely walling off the school parcel from the adjacent naval compound;
    * **Independent Access:** The original military gates were demolished, and a civilian public entrance was constructed facing west toward Shahid Beheshti Boulevard;
@@ -232,7 +226,7 @@
 
 <a id="chapter-4-5"></a>
 ### 4.5 Casualty Census, Demographic Matrix & Physical Devastation
-42. Forensic medicine documentation (EXH-VIC-005) confirms a devastating civilian toll:
+42. Forensic medicine documentation ([EXH-VIC-005](MASTER_EXHIBIT_DOSSIER.md#exhibit-vic)) confirms a devastating civilian toll:
    * **Total Certified Fatalities:** **156 individuals** killed;
    * **Child Fatalities:** **120 certified female students**, all between the ages of 7 and 12 years;
    * **Adult Fatalities:** **26 educators, instructors, and school administrators**, and **10 civilian support personnel**;
@@ -247,7 +241,7 @@
 
 <a id="chapter-5-1"></a>
 ### 5.1 Munition Identification & Debris Metallurgy
-43. Physical debris recovered from the impact crater and schoolyard (EXH-MUN-002) was examined by certified ordnance forensics specialists.
+43. Physical debris recovered from the impact crater and schoolyard ([EXH-MUN-002](MASTER_EXHIBIT_DOSSIER.md#exhibit-mun)) was examined by certified ordnance forensics specialists.
 44. The metallurgical and serialized evidence confirms the weapon deployed:
    * Serialized avionics circuit boards bearing Commercial and Government Entity (CAGE) codes registered to Raytheon Missile Systems (Tucson, Arizona);
    * Fragments of titanium alloy turbofan rotor blades matching the Williams International F107-WR-402 cruise missile engine;
@@ -263,7 +257,7 @@
 
 <a id="chapter-5-3"></a>
 ### 5.3 Force Allocation & Launch Platform Attribution (USS Abraham Lincoln CSG)
-47. Regional air defense radar ingress vectors and naval tracking data (EXH-LAUNCH-003) establish that the cruise missiles flew at low altitude (30–50 meters AGL) following an ingress route from the Gulf of Oman.
+47. Regional air defense radar ingress vectors and naval tracking data ([EXH-LAUNCH-003](MASTER_EXHIBIT_DOSSIER.md#exhibit-launch)) establish that the cruise missiles flew at low altitude (30–50 meters AGL) following an ingress route from the Gulf of Oman.
 48. United States Department of Defense Force Allocation Maps for Operation Epic Fury confirm that surface combatants and guided-missile submarines attached to the **USS Abraham Lincoln Carrier Strike Group (CSG-3)** held exclusive combat allocation over the Hormozgan and Strait of Hormuz operational sector.
 
 <a id="chapter-5-4"></a>
@@ -438,7 +432,7 @@
 <a id="chapter-10-3"></a>
 ### 10.3 Orders Concerning Judicial Preservation of Evidence & International Fact-Finding
 92. The Panel orders:
-   * (i) That the verified master evidentiary archives (EXH-SAT-001 through EXH-VIC-005) remain deposited in permanent, tamper-evident custody in Helsinki, Finland, under the Berkeley Protocol;
+   * (i) That the verified master evidentiary archives ([EXH-SAT-001](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat) through [EXH-VIC-005](MASTER_EXHIBIT_DOSSIER.md#exhibit-vic)) remain deposited in permanent, tamper-evident custody in Helsinki, Finland, under the Berkeley Protocol;
    * (ii) That duplicate cryptographic archives be formally transmitted to the **United Nations Human Rights Council** and the **International Impartial and Independent Mechanism (IIIM)**.
 
 <a id="chapter-10-4"></a>
