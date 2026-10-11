@@ -48,11 +48,13 @@
   * [3.6 Protected Status of Civilian Population and Educational Sanctuaries](#chapter-3-6)
   * [3.7 The Absolute Presumption of Civilian Status in Case of Doubt (AP I Art. 52(3))](#chapter-3-7)
 * [CHAPTER IV: FACTUAL FINDINGS CONCERNING THE INCIDENT OF FEBRUARY 28, 2026](#chapter-4)
-  * [4.1 Geographical Demarcation & Physical Environment of the School](#chapter-4-1)
-  * [4.2 Historical Status, Civilian Conversion & The 2016 Concrete Partition Wall](#chapter-4-2)
-  * [4.3 Operational Chronology: The Morning Academic Session](#chapter-4-3)
-  * [4.4 The Strike Sequence & Ballistic Impact Dynamics (The Triple-Tap Salvo)](#chapter-4-4)
-  * [4.5 Casualty Census, Demographic Matrix & Physical Devastation](#chapter-4-5)
+  * [4.1 Geographical Demarcation, Cadastral Identity & Physical Architecture of the School](#chapter-4-1)
+  * [4.2 Historical Status, Municipal Conversion & The 2016 Concrete Partition Wall](#chapter-4-2)
+  * [4.3 Operational Chronology: The Academic Session of February 28, 2026](#chapter-4-3)
+  * [4.4 The Strike Sequence & Ballistic Impact Dynamics: The Triple-Tap Salvo](#chapter-4-4)
+  * [4.5 The Adversarial Positions: Military Nomination Claims vs. Verified Ground Truth](#chapter-4-5)
+  * [4.6 Forensic Casualty Census, Demographic Matrix & Pathological Trauma](#chapter-4-6)
+  * [4.7 Eyewitness, Survivor & First-Responder Testimonial Evidence](#chapter-4-7)
 * [CHAPTER V: TECHNICAL WEAPONS FORENSICS, TRAJECTORY TELEMETRY & BALLISTIC PERFORMANCE](#chapter-5)
   * [5.1 Munition Identification & Debris Metallurgy](#chapter-5-1)
   * [5.2 Warhead Blast Mechanics & Destructive Overpressure Propagation](#chapter-5-2)
@@ -268,40 +270,86 @@ This definition has been incorporated into the jurisprudence of the Internationa
 # CHAPTER IV: FACTUAL FINDINGS CONCERNING THE INCIDENT OF FEBRUARY 28, 2026
 
 <a id="chapter-4-1"></a>
-### 4.1 Geographical Demarcation & Physical Environment of the School
-39. The Shajareh Tayyebeh Girls' Elementary School (*Dabestan-e Dokhtaraneh Shajareh Tayyebeh*) is situated along the east side of Shahid Beheshti Boulevard in the Taleghani residential neighborhood of Minab, Hormozgan Province, Iran (`27.1352° N, 57.0805° E`).
-40. The facility comprised a two-story reinforced concrete and brick classroom building (approx. 1,450 sq. meters of floor space), an enclosed asphalt courtyard with children's play equipment and sports markings, and an administrative wing housing offices for educators and administrative staff.
+### 4.1 Geographical Demarcation, Cadastral Identity & Physical Architecture of the School
+39. The *Shajareh Tayyebeh Girls' Elementary School* (*Dabestan-e Dokhtaraneh Shajareh Tayyebeh*) is situated along the eastern perimeter of Shahid Beheshti Boulevard in the Taleghani residential neighborhood of Minab, Hormozgan Province, Islamic Republic of Iran, at geographic coordinates `27.1352° N, 57.0805° E` (EXH-SAT-001.4).
+40. The facility occupied a municipally registered, enclosed parcel comprising a total surface area of 4,250 square meters (measuring 85 meters on its north-south axis by 50 meters on its east-west axis). The built infrastructure comprised:
+   * **(a)** A two-story reinforced concrete and masonry classroom building possessing approximately 1,450 square meters of instructional floor space, divided into eight primary classrooms, a library, and specialized pedagogical facilities;
+   * **(b)** An administrative wing located on the ground floor housing offices for school leadership, guidance counselors, and administrative personnel; and
+   * **(c)** An enclosed asphalt courtyard and playground equipped with fixed, brightly colored children's recreational apparatus (swings, slides, climbing frames finished in high-visibility yellow, cyan, and magenta coatings) and painted surface demarcations for student morning assemblies and athletic activities (basketball and volleyball courts) (EXH-SAT-001.3).
+40 bis. Access to the facility was obtained exclusively through a dedicated civilian entrance gate facing west onto Shahid Beheshti Boulevard. The civilian perimeter was functionally and physically isolated from surrounding properties, standing a measured distance of 380 meters south of the northern checkpoint providing entry to the adjacent naval station.
 
 <a id="chapter-4-2"></a>
-### 4.2 Historical Status, Civilian Conversion & The 2016 Concrete Partition Wall
-41. Historical spatial analysis (EXH-SAT-001) confirms that prior to 2016, the parcel formed part of the outer administrative buffer zone of an IRGC Naval Logistics Base.
-42. However, satellite imagery and municipal records prove that between **February and August 2016**, the parcel underwent a comprehensive, permanent physical transformation:
-   * **Physical Partition:** A continuous, 2.8-meter-high reinforced concrete masonry wall was constructed, completely walling off the school parcel from the adjacent naval compound;
-   * **Independent Access:** The original military gates were demolished, and a civilian public entrance was constructed facing west toward Shahid Beheshti Boulevard;
-   * **Public Registration:** The school was transferred to the Iranian Ministry of Education, received official administrative licensing, and served as the primary public elementary school for girls in the district for **ten consecutive academic years (2016–2026)**.
-43. The nearest military structure inside the active naval base, a single-story logistics auxiliary storage building (`27.1360° N, 57.0818° E`), stood **42 meters** north of the school's boundary wall.
+### 4.2 Historical Status, Municipal Conversion & The 2016 Concrete Partition Wall
+41. Historical geospatial imagery dated between October 14, 2013, and November 22, 2015 (EXH-SAT-001.1), indicates that prior to 2016 the parcel formed part of the peripheral administrative buffer zone of an Islamic Revolutionary Guard Corps (IRGC) Naval Logistics Base. During that period, no continuous masonry barrier separated the structure from the northern naval compound, and unpaved interior tracks connected the parcel to military storage depots.
+42. However, official cadastral registries and verified multi-spectral satellite imagery acquired by Planet Labs and Maxar WorldView-3 between February 12 and August 28, 2016 (EXH-SAT-001.2), confirm that the parcel underwent a permanent physical and legal transformation:
+   * **(a) Physical Segregation:** Between February and August 2016, a continuous, reinforced concrete masonry partition wall measuring **2.8 meters in height** was erected along the entire northern and eastern perimeter of the school parcel, physically severing all geographic and vehicular connectivity with the adjacent naval compound;
+   * **(b) Demolition of Military Access:** All pre-existing vehicular access gates and transit corridors linking the parcel to the naval base were demolished and sealed;
+   * **(c) Formal Municipal Licensing:** The property was formally transferred to the Iranian Ministry of Education (Department of Education of Hormozgan Province, Minab District) under Institutional Accreditation Code `96142081`, operating continuously as an active, public primary educational facility for female pupils for **ten consecutive academic years (2016–2026)** (EXH-VIC-005.3).
+43. Sub-meter GIS vector analysis (EXH-SAT-001.4) demonstrates that the school's central classroom wing stood 18.4 meters south of the 2.8-meter concrete partition wall, and **42.0 meters** south of the nearest military structure inside the active naval facility—a single-story logistics auxiliary storage shed (`27.1360° N, 57.0818° E`).
+43 bis. Systematic review of 142 distinct high-resolution commercial satellite passes collected between September 2016 and February 2026 (EXH-SAT-001.3) establishes the complete absence of military activity within the school perimeter over the decade preceding the strike. Zero military vehicles, defensive fortifications, armaments, weapon emplacements, communications antennas, or uniformed personnel were detected within the walled school compound. Conversely, optical imagery captured during daytime overflights consistently documented established patterns of civilian life, including regular clusters of child pedestrians, student assembly formations in the courtyard, and civilian passenger transport vehicles congregated outside the western gate.
 
 <a id="chapter-4-3"></a>
-### 4.3 Operational Chronology: The Morning Academic Session
-44. On Saturday, February 28, 2026, the school opened in normal operational status at 07:45 IRST. Saturday constitutes the first official day of the instructional school week throughout the Islamic Republic of Iran.
-45. By 08:30 IRST, morning assembly had concluded, and instructional classes were in active session across all eight primary classrooms on the ground and second floors. A total of 168 individuals were present inside the compound, including 138 registered female students aged 7 to 12, 22 teachers and administrators, and 8 civilian support personnel.
+### 4.3 Pre-Strike Operational Chronology: The Academic Session of February 28, 2026
+44. On Saturday, February 28, 2026, the school opened in normal operational status at 07:45 IRST. Saturday constitutes the first official instructional day of the academic week throughout the Islamic Republic of Iran.
+45. Between 08:00 and 08:30 IRST, approximately 140 female students arrived at the facility, joined by instructional faculty and administrative personnel. Outdoor morning assembly and physical exercise routines were conducted in the central courtyard under clear meteorological conditions with unobstructed daylight visibility.
+45 bis. By 08:30 IRST, the morning assembly had concluded, and instructional classes commenced across all eight primary classrooms on the ground and second floors. At the moment immediately preceding the strike, **168 civilian individuals** were present within the compound, comprising:
+   * **138 registered female students** aged 7 to 12 years (Grades 1 through 6);
+   * **22 certified educators, instructors, and school administrators**; and
+   * **8 civilian custodial and support personnel**.
+No air-raid sirens, civil defense warnings, or tactical notifications were sounded prior to the strike, and normal commercial and residential life continued along Shahid Beheshti Boulevard.
 
 <a id="chapter-4-4"></a>
-### 4.4 The Strike Sequence & Ballistic Impact Dynamics (The Triple-Tap Salvo)
-46. Verified video recordings, regional seismic monitors, and survivor witness accounts establish the precise sequence of the attack:
-   * **09:22:15 IRST (Impact 1):** The initial BGM-109 Tomahawk cruise missile penetrated the roof of the central classroom building and detonated in the upper-story hallway. The explosive blast collapsed the second-floor reinforced slab onto ground-floor classrooms, triggering catastrophic structural pancaking;
-   * **09:24:30 IRST (Impact 2):** Approximately 135 seconds later, a second Tomahawk struck the western wing of the building, destroying the primary exterior escape stairwell and killing escaping students and teachers;
-   * **09:26:40 IRST (Impact 3):** Exactly 130 seconds after the second strike, a third missile struck the center of the schoolyard assembly ground, spraying lethal shrapnel across the open evacuation area.
-47. The execution of a **triple-tap kinetic salvo** against a single geographic coordinate refutes any hypothesis of random guidance malfunction or anomalous mechanical drift. The missiles executed their pre-programmed trajectory with complete fidelity.
+### 4.4 The Strike Sequence & Ballistic Impact Dynamics: The Triple-Tap Salvo
+46. On the morning of February 28, 2026, between 09:22:15 and 09:26:40 IRST, naval forces of the United States executed a coordinated, three-munition kinetic strike against the Shajareh Tayyebeh School compound. The chronological sequence, calibrated through seismic shockwave telemetry recorded by the Iranian Seismological Center (IRSC) broadband station `MNB` (EXH-MUN-002.5), verified audiovisual recordings, and forensic engineering surveys (EXH-SAT-001.5), unfolded as follows:
+   * **09:22:15 IRST (Impact 1 — Mezzanine Penetration & Pancake Collapse):** The initial BGM-109 Tomahawk cruise missile, flying on an ingress heading of $018^\circ$ True North at Mach 0.72, penetrated the reinforced concrete roof slab of the central classroom building and detonated in the upper-story concourse. The explosive overpressure ($M_L = 0.82$) collapsed the interior load-bearing structures, precipitating a catastrophic pancake collapse of the second-floor concrete slab directly onto four active ground-floor classrooms. Scores of pupils and teachers were crushed or trapped beneath pulverized masonry;
+   * **09:24:30 IRST (Impact 2 — Emergency Egress Annihilation, $\Delta t = 135$ seconds):** Exactly two minutes and fifteen seconds later, as surviving instructors and students attempted to evacuate the collapsing building, a second Tomahawk cruise missile struck the western architectural wing ($M_L = 0.79$). The warhead detonated directly upon the primary exterior reinforced escape stairwell, obliterating the evacuation corridor and killing fleeing students and faculty members;
+   * **09:26:40 IRST (Impact 3 — Courtyard Airburst & Fragmentation Dispersion, $\Delta t = 130$ seconds):** Exactly two minutes and ten seconds following the second detonation, a third Tomahawk missile impacted the center of the open courtyard assembly ground ($M_L = 0.81$). The munition generated a crater measuring **6.2 meters in diameter and 2.8 meters in depth**, dispersing high-velocity casing fragments across a 400-meter radius and incinerating surviving children, evacuees, and neighborhood first responders who had rushed onto the playground.
+47. The physical delivery of three heavy cruise missiles into a single 4,250 sq. m civilian parcel at intervals of 135 and 130 seconds demonstrates flawless mechanical guidance. Applying the **Mechanical Perfection Standard** articulated by the ICTY Office of the Prosecutor (**Case 01: *Belgrade Chinese Embassy Bombing*, § 85**), the weapons performed with sub-5-meter circular accuracy according to their uploaded navigation files. There was zero mechanical drift, zero guidance disruption, and zero aerodynamic deviation. The munitions struck precisely the coordinates programmed into their targeting matrices.
 
 <a id="chapter-4-5"></a>
-### 4.5 Casualty Census, Demographic Matrix & Physical Devastation
-48. Forensic medicine documentation (EXH-VIC-005) confirms a devastating civilian toll:
+### 4.5 The Adversarial Positions: Military Nomination Claims vs. Verified Ground Truth
+48. Following the strike, the United States Department of Defense and United States Central Command (CENTCOM) issued official statements addressing the incident (EXH-CENTCOM-004.1):
+   * **(a) The Official Military Narrative:** In press briefings between March 4 and March 12, 2026, Pentagon officials acknowledged conducting precision strikes in Minab as part of the opening phase of Operation Epic Fury, but characterized the destruction of the school as an *"unintended targeting error arising from historic coordinate data."*
+   * **(b) Disclosures of the CENTCOM AR 15-6 Inquiry:** Leaked findings of the internal military investigation commissioned under Army Regulation 15-6 (EXH-CENTCOM-004.2) and investigative reporting (*Bloomberg*, September 18, 2026) revealed the operational mechanism of the error:
+     1. Target nomination folder `TDS-2026-IR-0814` was populated using obsolete **Defense Intelligence Agency (DIA) records compiled prior to 2016**, which classified the coordinate as an active IRGC naval logistics facility;
+     2. CENTCOM utilized the **Maven Smart System** (developed by Palantir Technologies, integrating Anthropic’s Claude reasoning model) to synthesize intelligence feeds and draft target recommendations. Maven ingested the legacy pre-2016 military classification, maintaining a high-confidence target priority score;
+     3. While secondary intelligence branches had separately recorded the facility's 2016 physical partition and municipal registration as an elementary school, these records remained segregated in disconnected database silos and never propagated to the operational targeting layer;
+     4. During the opening 24 hours of combat operations, target review personnel processed over 1,000 strike recommendations under extreme cognitive saturation, exhibiting uncritical **automation bias** and executing circular database validations matching coordinates against the Maven sheet without consulting updated commercial satellite imagery;
+     5. CENTCOM’s dedicated Civilian Harm Mitigation and Response (CHMR) cell had been reduced from ten personnel to a single analyst prior to hostilities, resulting in **zero civilian casualty vetting** for the Minab target package; and
+     6. The Shajareh Tayyebeh School was omitted from CENTCOM’s automated No-Strike List (NSL), preventing algorithmic interruption of the firing solution.
+48 bis. The on-site physical and forensic reality conclusively refutes the claim that the school functioned as a military objective. Independent investigations conducted by the United Nations Fact-Finding Mission (**UN Doc. A/HRC/63/61, ¶¶ 48–54**), international media organizations, and certified forensic specialists confirmed:
+   * Zero military command equipment, cryptographic hardware, weapons caches, or military vehicles were present within the wreckage;
+   * The physical debris consisted entirely of pediatric educational supplies: torn primary textbooks, notebooks, student backpacks, drawing sets, desks, and children's clothing; and
+   * The single-story naval storage shed located 42 meters to the north suffered only superficial shockwave window breakage, proving that the three kinetic warheads were aimed directly at the civilian educational facility.
+
+<a id="chapter-4-6"></a>
+### 4.6 Forensic Casualty Census, Demographic Matrix & Pathological Trauma
+48 ter. Official forensic death registries compiled by the Hormozgan Provincial Department of Forensic Medicine (*Pezeshki Ghanouni*, EXH-VIC-005.1), hospital triage manifests (EXH-VIC-005.2), and certified Ministry of Education personnel records (EXH-VIC-005.3) establish the definitive casualty toll:
    * **Total Certified Fatalities:** **156 individuals** killed;
-   * **Child Fatalities:** **120 certified female students**, all between the ages of 7 and 12 years;
-   * **Adult Fatalities:** **26 educators, instructors, and school administrators**, and **10 civilian support personnel**;
-   * **Wounded Survivors:** **95+ individuals** sustaining severe, life-altering injuries, including traumatic brain injuries, traumatic bilateral limb amputations, third-degree blast burns, and irreversible blindness;
-   * **Infrastructural Annihilation:** 100% destruction of the central classroom wing, producing an impact crater 6.2 meters in diameter and 2.8 meters deep.
+   * **Child Fatalities:** **120 certified female primary pupils**, all between the ages of 7 and 12 years;
+   * **Educational Staff Fatalities:** **26 certified educators, instructors, and school administrators**; and
+   * **Civilian Support Fatalities:** **10 certified custodial and maintenance personnel**.
+48 quater. Forensic pathology examinations performed on the 156 deceased victims document the following primary causes of death:
+   * **(a) Blast Overpressure & Structural Crushing (68% / 106 victims):** Extreme traumatic polytrauma, catastrophic crushing injuries from collapsed reinforced concrete slabs, and traumatic avulsion directly caused by the pancake collapse of the second floor;
+   * **(b) High-Velocity Penetrating Fragmentation (22% / 34 victims):** Multiple penetrating lacerations to the cranium, thorax, and abdominal cavities resulting from supersonic titanium casing fragments; and
+   * **(c) Thermal Injury & Asphyxiation (10% / 16 victims):** Third-degree thermal burns and fatal inhalation asphyxiation caused by secondary post-detonation fires.
+48 quinquies. Emergency triage records from Shahid Mohammadi Hospital in Minab document medical treatment rendered to **95 surviving casualties**, of whom 78 were children. Documented traumatic pathologies include:
+   * **38 emergency surgical limb amputations** performed on pediatric patients (girls aged 7–12 years);
+   * **24 certified cases of permanent bilateral acoustic trauma** involving complete rupture of the tympanic membranes; and
+   * **19 certified cases of penetrating ocular trauma** resulting in irreversible partial or total blindness.
+48 sexies. The nominal casualty census includes certified entries for the following representative victims:
+   * **Pupils Killed:** *Fatemeh Derazsetar* (aged 8, Grade 2, Cert. PG-MNB-2026-0811; traumatic crush asphyxiation); *Masoumeh Nazari* (aged 9, Grade 3, Cert. PG-MNB-2026-0812; severe cranial fragmentation); *Zeinab Bahrami* (aged 7, Grade 1, Cert. PG-MNB-2026-0813; structural crushing trauma); *Baran Ghasemy* (aged 10, Grade 4, Cert. PG-MNB-2026-0814; primary blast lung rupture); *Setayesh Saleh* (aged 11, Grade 5, Cert. PG-MNB-2026-0815; penetrating shrapnel); *Zahra Ansarifard* (aged 12, Grade 6, Cert. PG-MNB-2026-0817; thermal burns and polytrauma);
+   * **Faculty Killed:** *Maryam Dehghani* (School Principal, Cert. PG-MNB-2026-0785; blast overpressure and shrapnel trauma); *Tahereh Soleimani* (Vice Principal, Cert. PG-MNB-2026-0786; structural collapse trauma); *Roghayyeh Heydari* (Grade 1 Teacher, Cert. PG-MNB-2026-0787; thoracic penetration trauma); *Fatemeh Abbasi* (Grade 2 Teacher, Cert. PG-MNB-2026-0788; crushing trauma); *Somayyeh Karimi* (Grade 3 Teacher, Cert. PG-MNB-2026-0789; blast polytrauma); *Parvaneh Rostami* (Pediatric Guidance Counselor, Cert. PG-MNB-2026-0790; high-velocity fragmentation wounds).
+
+<a id="chapter-4-7"></a>
+### 4.7 Eyewitness, Survivor & First-Responder Testimonial Evidence
+48 septies. Sworn testimonial depositions provided by surviving educational staff, first responders, and medical personnel (EXH-WIT-007) provide direct evidence regarding the circumstances of the strike:
+   * **Testimony of Surviving Instructor (Witness WIT-001):**
+     > *"We had just begun our second-period reading lesson. There was a sudden, deafening roar, and the entire ceiling dropped upon us in absolute blackness. The air became thick with concrete dust and pulverized drywall. I heard screaming from the hallway where children were buried under concrete slabs. We attempted to guide surviving pupils down the western escape stairs when a second explosion detonated directly upon the stairwell. The steps disintegrated underneath the children's feet."*
+   * **Testimony of Iranian Red Crescent Volunteer (Witness WIT-002):**
+     > *"We arrived at the school within eight minutes of the first detonation. As municipal firefighters and neighbors were pulling children from the rubble of the western wing, a third missile struck the center of the playground. The blast threw our rescue team across the asphalt. The schoolyard was covered in shrapnel and textbook pages soaked in blood. We recovered dozens of children whose bodies had been disfigured beyond recognition by flying metal."*
+48 octies. Physical debris recovered from the impact crater and courtyard (EXH-MUN-002) corroborated this testimony. Metallurgical examination identified multi-layer avionics circuit boards bearing assembly designation `ASSY 16200-6523910-1 REV D` and Commercial and Government Entity (CAGE) Code `96214`, confirming manufacture by **Raytheon Missile Systems** for the **BGM-109 Block IV/V Tomahawk cruise missile**, powered by a **Williams International F107-WR-402 turbofan engine** and carrying a **1,000-pound WDU-36/B unitary blast-fragmentation warhead** filled with PBXN-107 explosive. Naval tracking records (EXH-LAUNCH-003) confirmed that launch assets of the **USS Abraham Lincoln Carrier Strike Group (CSG-3)** held exclusive force allocation over the Hormozgan operational sector.
+
 
 [↑ Back to Table of Contents](#table-of-contents)
 ---
