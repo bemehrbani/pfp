@@ -10,8 +10,8 @@
 
 | Document Role | Format | File Name | Size (KB) | SHA-256 Checksum |
 | :--- | :--- | :--- | :--- | :--- |
-| **Main Report** | `DOCX` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-10-11_Draft.docx` | 76.9 KB | `edcbf7719fd98d031ffbfecb05e89c1f4788fa86486c3bfb78764b1c5a1e69ec` |
-| **Annex Document** | `DOCX` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-10-11_Draft.docx` | 61.4 KB | `b8ed7ca3089a5a05ffe40c4c391ef500892204bbe1602568c506f992dbebb1d1` |
+| **Main Report** | `DOCX` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-10-11_Draft.docx` | 82.5 KB | `94706ef777e9f47421592752e884e94e4c52f3e23e445d0d8c4872dd9ebb3a9a` |
+| **Annex Document** | `DOCX` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-10-11_Draft.docx` | 61.4 KB | `153c1fec76d4845aa55f0a9af3e719916ca1093a07d89c3edf9f28bd2eac725c` |
 
 ---
 
@@ -32,4 +32,4 @@ All documents in this package have been compiled as **preliminary working drafts
 
 * **Submitting Body:** People for Peace & Justice ry (PFPJ ry)
 * **Helsinki Headquarters:** `legal@peopleforpeace.live` / `contact@peopleforpeace.live`
-* **Package Generation Timestamp:** `2026-10-11 20:28:17`
+* **Package Generation Timestamp:** `2026-10-11 20:51:17`
