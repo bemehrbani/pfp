@@ -19,7 +19,7 @@ from django.test import Client
 from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
-from apps.telegram.models import TelegramSession, TelegramMessageLog
+from apps.telegram.models import TelegramSession, TelegramMessageLog, ContactSubmission
 
 User = get_user_model()
 
@@ -670,3 +670,99 @@ class TelegramAPITests(APITestCase):
 
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class ContactSubmissionModelTests(TestCase):
+    """Test ContactSubmission model creation and defaults."""
+
+    def test_contact_submission_creation(self):
+        """Test ContactSubmission creation with required and optional fields."""
+        submission = ContactSubmission.objects.create(
+            name='Jane Doe',
+            email='jane@example.com',
+            role='Volunteer / OSINT Researcher',
+            message='I want to assist with forensic satellite analysis.',
+            ip_address='192.168.1.1',
+            user_agent='Mozilla/5.0 TestBrowser'
+        )
+
+        self.assertEqual(submission.name, 'Jane Doe')
+        self.assertEqual(submission.email, 'jane@example.com')
+        self.assertEqual(submission.role, 'Volunteer / OSINT Researcher')
+        self.assertEqual(submission.message, 'I want to assist with forensic satellite analysis.')
+        self.assertEqual(submission.status, ContactSubmission.Status.NEW)
+        self.assertFalse(submission.telegram_sent)
+        self.assertIsNone(submission.telegram_error)
+        self.assertEqual(submission.ip_address, '192.168.1.1')
+        self.assertEqual(submission.user_agent, 'Mozilla/5.0 TestBrowser')
+        self.assertEqual(str(submission), 'Jane Doe (jane@example.com) - Volunteer / OSINT Researcher')
+        self.assertIsNotNone(submission.created_at)
+        self.assertIsNotNone(submission.updated_at)
+
+
+class SubmitContactViewTests(APITestCase):
+    """Test SubmitContactView public endpoint."""
+
+    def setUp(self):
+        self.url = reverse('telegram:submit_contact')
+        self.valid_payload = {
+            'name': 'Alex Smith',
+            'email': 'alex@example.org',
+            'role': 'Legal Scholar / Advisory',
+            'message': 'Offering pro-bono consultation on ICC filing procedures.'
+        }
+
+    @patch('telegram.Bot')
+    def test_submit_contact_persists_to_db_and_sends_telegram(self, mock_bot_class):
+        """Test that submission is saved to DB and Telegram notification is dispatched."""
+        mock_bot = MagicMock()
+        mock_bot_class.return_value = mock_bot
+        mock_bot.send_message = AsyncMock()
+
+        with override_settings(
+            TELEGRAM_BOT_TOKEN='test_bot_token',
+            TELEGRAM_NOTIFICATIONS_CHAT_ID='-100123456789'
+        ):
+            response = self.client.post(self.url, self.valid_payload, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['status'], 'success')
+        self.assertIn('id', response.data)
+
+        # Verify database record
+        submission = ContactSubmission.objects.get(id=response.data['id'])
+        self.assertEqual(submission.name, 'Alex Smith')
+        self.assertEqual(submission.email, 'alex@example.org')
+        self.assertEqual(submission.role, 'Legal Scholar / Advisory')
+        self.assertTrue(submission.telegram_sent)
+        self.assertIsNone(submission.telegram_error)
+
+        # Verify telegram was called
+        mock_bot.send_message.assert_called_once()
+        call_kwargs = mock_bot.send_message.call_args[1]
+        self.assertEqual(call_kwargs['chat_id'], '-100123456789')
+        self.assertIn('Alex Smith', call_kwargs['text'])
+
+    def test_submit_contact_persists_to_db_even_without_telegram_config(self):
+        """Test that submission is still saved to DB when Telegram is not configured."""
+        with override_settings(
+            TELEGRAM_BOT_TOKEN='',
+            TELEGRAM_NOTIFICATIONS_CHAT_ID=''
+        ):
+            response = self.client.post(self.url, self.valid_payload, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        submission = ContactSubmission.objects.get(id=response.data['id'])
+        self.assertEqual(submission.name, 'Alex Smith')
+        self.assertFalse(submission.telegram_sent)
+        self.assertIn('not configured', submission.telegram_error)
+
+    def test_submit_contact_validation_missing_fields(self):
+        """Test submission validation with missing required fields."""
+        incomplete_payload = {
+            'name': 'Alex Smith',
+            # missing email and message
+        }
+        response = self.client.post(self.url, incomplete_payload, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(ContactSubmission.objects.count(), 0)

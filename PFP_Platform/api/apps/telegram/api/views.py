@@ -14,6 +14,7 @@ from rest_framework import permissions, status, serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from apps.users.permissions import IsAdminUser
+from apps.telegram.models import ContactSubmission
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
@@ -294,7 +295,7 @@ class SendTelegramMessageView(APIView):
 
 
 class SubmitContactView(APIView):
-    """Public endpoint to submit contact and volunteer requests, forwarding them to Telegram."""
+    """Public endpoint to submit contact and volunteer requests, storing them in the DB and forwarding to Telegram."""
     permission_classes = [permissions.AllowAny]
 
     @swagger_auto_schema(
@@ -309,13 +310,10 @@ class SubmitContactView(APIView):
                 'message': openapi.Schema(type=openapi.TYPE_STRING, description='Message body'),
             }
         ),
-        responses={200: openapi.Response('Submission forwarded successfully')}
+        responses={200: openapi.Response('Submission saved and forwarded successfully')}
     )
     def post(self, request):
-        """Forward contact form submission to Telegram notification chat."""
-        if not HAS_TELEGRAM:
-            return Response({'error': 'telegram package not installed'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
-
+        """Save contact form submission to database and forward to Telegram."""
         name = request.data.get('name')
         email = request.data.get('email')
         role = request.data.get('role', 'General Inquiry')
@@ -326,12 +324,38 @@ class SubmitContactView(APIView):
                 'error': 'name, email, and message are required'
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        # Get configured chat ID or fallback to Campaign group ID
+        # Extract client IP and User-Agent for auditing
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip_address = x_forwarded_for.split(',')[0].strip()
+        else:
+            ip_address = request.META.get('REMOTE_ADDR')
+        user_agent = request.META.get('HTTP_USER_AGENT', '')
+
+        # 1. ALWAYS persist submission to database first
+        submission = ContactSubmission.objects.create(
+            name=name.strip(),
+            email=email.strip(),
+            role=role.strip() if role else 'General Inquiry',
+            message=message.strip(),
+            ip_address=ip_address,
+            user_agent=user_agent[:500] if user_agent else '',
+        )
+
+        # 2. Forward to Telegram if configured
+        if not HAS_TELEGRAM:
+            submission.telegram_error = 'telegram package not installed'
+            submission.save(update_fields=['telegram_error'])
+            return Response({
+                'status': 'success',
+                'message': 'Submission received successfully.',
+                'id': submission.id
+            }, status=status.HTTP_201_CREATED)
+
         bot_token = settings.TELEGRAM_BOT_TOKEN
         chat_id = getattr(settings, 'TELEGRAM_NOTIFICATIONS_CHAT_ID', '')
 
         if not chat_id:
-            # Fallback: try to find the first campaign with a telegram_group_id
             try:
                 from apps.campaigns.models import Campaign
                 campaign = Campaign.objects.filter(telegram_group_id__isnull=False).first()
@@ -340,24 +364,25 @@ class SubmitContactView(APIView):
             except Exception as e:
                 logger.error(f'Error searching fallback Campaign group ID: {e}')
 
-        if not bot_token:
+        if not bot_token or not chat_id:
+            err_msg = 'Telegram bot token or notifications chat ID not configured'
+            logger.warning(f'Contact submission #{submission.id} saved to DB, but {err_msg}')
+            submission.telegram_error = err_msg
+            submission.save(update_fields=['telegram_error'])
             return Response({
-                'error': 'Telegram bot token not configured'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                'status': 'success',
+                'message': 'Submission received successfully.',
+                'id': submission.id
+            }, status=status.HTTP_201_CREATED)
 
-        if not chat_id:
-            return Response({
-                'error': 'Telegram notifications chat ID not configured'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-        # Format beautiful message
+        # Format Telegram notification message
         formatted_message = (
-            f"<b>📥 New Contact/Volunteer Submission</b>\n\n"
-            f"👤 <b>Name:</b> {name}\n"
-            f"✉️ <b>Email:</b> {email}\n"
-            f"🏷️ <b>Interest/Role:</b> {role}\n\n"
+            f"<b>📥 New Contact/Volunteer Submission #{submission.id}</b>\n\n"
+            f"👤 <b>Name:</b> {submission.name}\n"
+            f"✉️ <b>Email:</b> {submission.email}\n"
+            f"🏷️ <b>Interest/Role:</b> {submission.role}\n\n"
             f"📝 <b>Message:</b>\n"
-            f"{message}"
+            f"{submission.message}"
         )
 
         try:
@@ -370,15 +395,21 @@ class SubmitContactView(APIView):
                         parse_mode='HTML'
                     )
             async_to_sync(send)()
+            submission.telegram_sent = True
+            submission.save(update_fields=['telegram_sent'])
 
             return Response({
                 'status': 'success',
-                'message': 'Notification sent to Telegram group successfully.'
-            })
+                'message': 'Submission received and notification sent successfully.',
+                'id': submission.id
+            }, status=status.HTTP_201_CREATED)
 
         except Exception as e:
-            logger.error(f'Error forwarding contact form to Telegram: {e}')
+            logger.error(f'Error forwarding contact form #{submission.id} to Telegram: {e}')
+            submission.telegram_error = str(e)
+            submission.save(update_fields=['telegram_error'])
             return Response({
-                'status': 'error',
-                'message': f'Failed to send message: {str(e)}'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                'status': 'success',
+                'message': 'Submission received successfully.',
+                'id': submission.id
+            }, status=status.HTTP_201_CREATED)

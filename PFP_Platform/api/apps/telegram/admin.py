@@ -3,7 +3,7 @@ Admin configuration for Telegram app.
 """
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from .models import TelegramSession, TelegramMessageLog
+from .models import TelegramSession, TelegramMessageLog, ContactSubmission
 
 
 @admin.register(TelegramSession)
@@ -71,3 +71,41 @@ class TelegramMessageLogAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         """Message logs should not be edited."""
         return False
+
+
+@admin.register(ContactSubmission)
+class ContactSubmissionAdmin(admin.ModelAdmin):
+    """Admin interface for ContactSubmission model."""
+
+    list_display = (
+        'id', 'name', 'email', 'role', 'status',
+        'telegram_sent', 'created_at'
+    )
+    list_filter = ('status', 'telegram_sent', 'role', 'created_at')
+    search_fields = ('name', 'email', 'message', 'notes')
+    list_editable = ('status',)
+    readonly_fields = (
+        'created_at', 'updated_at', 'ip_address',
+        'user_agent', 'telegram_sent', 'telegram_error'
+    )
+    date_hierarchy = 'created_at'
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'email', 'role', 'status')
+        }),
+        (_('Submission Content'), {
+            'fields': ('message',)
+        }),
+        (_('Admin Management'), {
+            'fields': ('notes',)
+        }),
+        (_('Telegram Dispatch Info'), {
+            'fields': ('telegram_sent', 'telegram_error'),
+            'classes': ('collapse',)
+        }),
+        (_('Technical Metadata'), {
+            'fields': ('ip_address', 'user_agent', 'created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )

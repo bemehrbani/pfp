@@ -1,7 +1,7 @@
 # Case Dossier 19: Shaami-Yurt Refugee Convoy Strike (ECtHR / Russia)
 > **Database ID:** PFPJ-LB-019  
 > **Applicable Aspects:** A (Aviation Weapons), B (Targeting Error & Intelligence Siloing), C (Protected Civilian Convoy & Red Cross Vehicles), D (Proportionality & Weapons Blast Radius), E (Universal Jurisdiction & Detachable Procedural Duty), F (Planning & Control of Military Operations)  
-> **Paired Precedent:** [Case 03: Katyr-Yurt Village Strike (*Isayeva v. Russia*)](file:///c:/PFP/Campaigns/minab/legal_benchmarks/case_03_katyr_yurt.md)
+> **Paired Precedent:** [Case 03: Katyr-Yurt Village Strike (*Isayeva v. Russia*)](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/case_03_katyr_yurt.md)
 
 ---
 
@@ -25,7 +25,7 @@
 *   **Adjudicating Body:** European Court of Human Rights (ECtHR) — Former First Section.
 *   **Official Judgment:** *Isayeva, Yusupova and Bazayeva v. Russia* (Applications nos. 57947/00, 57948/00, and 57949/00), Judgment of 24 February 2005 (Final 6 July 2005).
 *   **Official HUDOC Reference:** [HUDOC Item ID 001-68379](https://hudoc.echr.coe.int/eng?i=001-68379).
-*   **Full Judgment Dossier:** [case_19_case_of_isayeva_yusupova_and_bazayeva_v_russia_full_judgment.md](file:///c:/PFP/Campaigns/minab/legal_benchmarks/full_reports/case_19_case_of_isayeva_yusupova_and_bazayeva_v_russia_full_judgment.md).
+*   **Full Judgment Dossier:** [case_19_case_of_isayeva_yusupova_and_bazayeva_v_russia_full_judgment.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/full_reports/case_19_case_of_isayeva_yusupova_and_bazayeva_v_russia_full_judgment.md).
 
 ---
 

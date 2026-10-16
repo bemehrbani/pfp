@@ -17,11 +17,13 @@ Applies clear "WORKING DRAFT — PRIVATELY SHARED FOR FEEDBACK" indicators:
 """
 
 import argparse
+import base64
 import hashlib
 import os
 import re
 import sys
 from datetime import datetime
+from pathlib import Path
 
 # Microsoft Word generation
 import docx
@@ -439,6 +441,41 @@ def compile_markdown_to_docx(md_path, docx_path, production_date, doc_type="main
             i += 1
             continue
 
+        # Image handling: ![caption](path)
+        img_match = re.match(r'^!\[(.*?)\]\((.*?)\)$', stripped)
+        if img_match:
+            caption = img_match.group(1)
+            img_rel_path = img_match.group(2)
+            if i + 1 < n and lines[i + 1].strip().startswith('*') and lines[i + 1].strip().endswith('*'):
+                next_line = lines[i + 1].strip()[1:-1].strip()
+                if next_line.startswith("Figure ") or next_line.startswith("Plate ") or next_line.startswith("لوح "):
+                    caption = next_line
+                    i += 1
+            img_full_path = (Path(md_path).parent / img_rel_path).resolve()
+            if not img_full_path.exists():
+                fallback = Path(BASE_DIR) / "Campaigns" / "minab" / "justiceForMinab" / "evidence" / "assets" / Path(img_rel_path).name
+                if fallback.exists():
+                    img_full_path = fallback
+            if img_full_path.exists():
+                p_img = doc.add_paragraph()
+                p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p_img.paragraph_format.space_before = Pt(8)
+                p_img.paragraph_format.space_after = Pt(2)
+                run_img = p_img.add_run()
+                run_img.add_picture(str(img_full_path), width=Inches(6.2))
+                if caption:
+                    p_cap = doc.add_paragraph()
+                    p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    p_cap.paragraph_format.space_before = Pt(0)
+                    p_cap.paragraph_format.space_after = Pt(8)
+                    r_cap = p_cap.add_run(caption)
+                    r_cap.font.name = 'Calibri'
+                    r_cap.font.size = Pt(8.5)
+                    r_cap.font.italic = True
+                    r_cap.font.color.rgb = RGBColor(0x64, 0x74, 0x8B)
+            i += 1
+            continue
+
         # Regular Paragraph
         p = doc.add_paragraph()
         p.paragraph_format.space_before = Pt(2)
@@ -503,7 +540,12 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
         s = re.sub(r'`(.*?)`', r'<code>\1</code>', s)
         return s
 
-    for line in lines:
+    skip_next = False
+    for i, line in enumerate(lines):
+        if skip_next:
+            skip_next = False
+            continue
+
         stripped = line.strip()
 
         # Tables
@@ -549,6 +591,33 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
         num_match = re.match(r'^(\s*)(\d+)\.\s+(.*)$', line)
         if num_match:
             html_parts.append(f'<div class="numbered-item"><strong>{num_match.group(2)}.</strong> {format_inline_html(num_match.group(3))}</div>')
+            continue
+
+        # Image handling: ![caption](path)
+        img_match = re.match(r'^!\[(.*?)\]\((.*?)\)$', stripped)
+        if img_match:
+            caption = img_match.group(1)
+            img_rel_path = img_match.group(2)
+            if i + 1 < len(lines) and lines[i + 1].strip().startswith('*') and lines[i + 1].strip().endswith('*'):
+                next_line = lines[i + 1].strip()[1:-1].strip()
+                if next_line.startswith("Figure ") or next_line.startswith("Plate ") or next_line.startswith("لوح "):
+                    caption = format_inline_html(next_line)
+                    skip_next = True
+            img_full_path = (Path(md_path).parent / img_rel_path).resolve()
+            if not img_full_path.exists():
+                fallback = Path(BASE_DIR) / "Campaigns" / "minab" / "justiceForMinab" / "evidence" / "assets" / Path(img_rel_path).name
+                if fallback.exists():
+                    img_full_path = fallback
+            if img_full_path.exists():
+                ext = img_full_path.suffix.lower().replace(".", "")
+                mime = "image/png" if ext == "png" else ("image/jpeg" if ext in ("jpg", "jpeg") else "image/png")
+                with open(img_full_path, "rb") as f_img:
+                    b64_data = base64.b64encode(f_img.read()).decode("utf-8")
+                clean_alt = re.sub(r'<[^>]+>', '', caption).replace('"', '&quot;')
+                html_parts.append(f'''<div class="figure-container">
+                    <img src="data:{mime};base64,{b64_data}" alt="{clean_alt}" />
+                    <div class="figure-caption">{caption}</div>
+                </div>''')
             continue
 
         html_parts.append(f'<p class="body-p">{format_inline_html(stripped)}</p>')
@@ -748,6 +817,29 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
       color: #2563eb;
       text-decoration: none;
     }}
+
+    .figure-container {{
+      text-align: center;
+      margin: 18px 0 22px 0;
+      page-break-inside: avoid;
+    }}
+    .figure-container img {{
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      display: block;
+      margin: 0 auto 6px auto;
+    }}
+    .figure-caption {{
+      font-size: 8pt;
+      font-style: italic;
+      color: #64748b;
+      margin-top: 6px;
+      line-height: 1.4;
+      text-align: center;
+    }}
   </style>
 </head>
 <body>
@@ -799,6 +891,8 @@ def compile_html_to_pdf(html_content, pdf_path, production_date, doc_type="main"
         browser = p.chromium.launch(channel="chrome", headless=True)
         page = browser.new_page()
         page.set_content(html_content, wait_until="load")
+        page.wait_for_load_state("networkidle")
+        page.wait_for_function("() => Array.from(document.images).every(img => img.complete && img.naturalWidth > 0)")
         page.pdf(
             path=pdf_path,
             format="A4",

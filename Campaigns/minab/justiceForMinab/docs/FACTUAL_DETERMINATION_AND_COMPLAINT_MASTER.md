@@ -19,12 +19,6 @@
 
 ---
 
-> 🌐 **Interactive Online Reader:** [https://peopleforpeace.live/draft.html](https://peopleforpeace.live/draft.html)  
-> 📄 **Standalone Court Reader:** Open `PFP_Platform/web/public/draft.html` in your browser  
-> 💻 **GitHub Master Docket:** [FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md](https://github.com/bemehrbani/pfp/blob/main/Campaigns/minab/justiceForMinab/docs/FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md)
-
----
-
 <a id="table-of-contents"></a>
 ## TABLE OF CONTENTS
 
@@ -194,13 +188,13 @@
 
 | Exhibit Number | Description & Source Category | Evidentiary Standard & Custody Status |
 | :--- | :--- | :--- |
-| **EXH-SAT-001** | Multi-Year Satellite Imagery Archive (Planet Labs 0.50m, Maxar WorldView-3 0.31m, Airbus Pleiades: 2013–2026) | Verified Ortho-rectified; Cryptographic SHA-256 Secured; Demonstrates continuous physical boundary wall and schoolyard infrastructure since 2016. |
-| **EXH-MUN-002** | Physical Munitions Forensics & Metallurgical Debris Recovered from Shajareh Tayyebeh Compound | Serialized circuit boards with US Defense Logistics Agency CAGE codes; Williams F107 turbofan engine casing fragments; Raytheon folding wing assemblies. |
-| **EXH-LAUNCH-003** | Flight Telemetry, ADS-B Track Logs & Force Allocation Vector Reconstructions | Naval tracking data and regional air defense radar records documenting cruise missile ingress from the Gulf of Oman (USS Abraham Lincoln CSG sector). |
-| **EXH-CENTCOM-004** | Official US Government Statements, CENTCOM AR 15-6 Inquiry & Algorithmic Pipeline Records | Certified transcripts of Pentagon press briefings, congressional correspondence, leaked internal military findings, and documented Maven Smart System targeting parameters. |
-| **EXH-VIC-005** | Biometric Casualty Archive, Forensic Certificates & Educational Enrollment Records | Hormozgan Legal Medicine Organization (*Pezeshki Ghanouni*) autopsy records; Shahid Mohammadi Hospital triage logs; official Ministry of Education enrollment rosters for 156 deceased individuals. |
-| **EXH-OSINT-006** | Tier 1 Investigative Consortium Reports (Bloomberg Visual Investigation, NYT, BBC, WaPo, Bellingcat) | Independently authenticated open-source reporting, technical kill-chain forensic models, and published expert investigations. |
-| **EXH-UN-008** | United Nations Human Rights Council Independent International Fact-Finding Mission on Iran Report (**UN Doc. A/HRC/63/61**) | Official UN Intergovernmental Report establishing reasonable grounds for US War Crimes, indiscriminate attack, and systemic failure of feasible precautions. |
+| [**EXH-SAT-001**](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat) | Multi-Year Satellite Imagery Archive (Planet Labs 0.50m, Maxar WorldView-3 0.31m, Airbus Pleiades: 2013–2026) | Verified Ortho-rectified; Cryptographic SHA-256 Secured; Demonstrates continuous physical boundary wall and schoolyard infrastructure since 2016. |
+| [**EXH-MUN-002**](MASTER_EXHIBIT_DOSSIER.md#exhibit-mun) | Physical Munitions Forensics & Metallurgical Debris Recovered from Shajareh Tayyebeh Compound | Serialized circuit boards with US Defense Logistics Agency CAGE codes; Williams F107 turbofan engine casing fragments; Raytheon folding wing assemblies. |
+| [**EXH-LAUNCH-003**](MASTER_EXHIBIT_DOSSIER.md#exhibit-launch) | Flight Telemetry, ADS-B Track Logs & Force Allocation Vector Reconstructions | Naval tracking data and regional air defense radar records documenting cruise missile ingress from the Gulf of Oman (USS Abraham Lincoln CSG sector). |
+| [**EXH-CENTCOM-004**](MASTER_EXHIBIT_DOSSIER.md#exhibit-centcom) | Official US Government Statements, CENTCOM AR 15-6 Inquiry & Algorithmic Pipeline Records | Certified transcripts of Pentagon press briefings, congressional correspondence, leaked internal military findings, and documented Maven Smart System targeting parameters. |
+| [**EXH-VIC-005**](MASTER_EXHIBIT_DOSSIER.md#exhibit-vic) | Biometric Casualty Archive, Forensic Certificates & Educational Enrollment Records | Hormozgan Legal Medicine Organization (*Pezeshki Ghanouni*) autopsy records; Shahid Mohammadi Hospital triage logs; official Ministry of Education enrollment rosters for 156 deceased individuals. |
+| [**EXH-OSINT-006**](MASTER_EXHIBIT_DOSSIER.md#exhibit-osint) | Tier 1 Investigative Consortium Reports (Bloomberg Visual Investigation, NYT, BBC, WaPo, Bellingcat) | Independently authenticated open-source reporting, technical kill-chain forensic models, and published expert investigations. |
+| [**EXH-UN-008**](MASTER_EXHIBIT_DOSSIER.md#exhibit-un) | United Nations Human Rights Council Independent International Fact-Finding Mission on Iran Report (**UN Doc. A/HRC/63/61**) | Official UN Intergovernmental Report establishing reasonable grounds for US War Crimes, indiscriminate attack, and systemic failure of feasible precautions. |
 
 [↑ Back to Table of Contents](#table-of-contents)
 ---
@@ -280,13 +274,13 @@ This definition has been incorporated into the jurisprudence of the Internationa
 
 <a id="chapter-4-2"></a>
 ### 4.2 Historical Status, Municipal Conversion & The 2016 Concrete Partition Wall
-41. Historical geospatial imagery dated between October 14, 2013, and November 22, 2015 (EXH-SAT-001.1), indicates that prior to 2016 the parcel formed part of the peripheral administrative buffer zone of an Islamic Revolutionary Guard Corps (IRGC) Naval Logistics Base. During that period, no continuous masonry barrier separated the structure from the northern naval compound, and unpaved interior tracks connected the parcel to military storage depots.
-42. However, official cadastral registries and verified multi-spectral satellite imagery acquired by Planet Labs and Maxar WorldView-3 between February 12 and August 28, 2016 (EXH-SAT-001.2), confirm that the parcel underwent a permanent physical and legal transformation:
+41. Historical geospatial imagery dated between October 14, 2013, and November 22, 2015 ([EXH-SAT-001.1](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat)), indicates that prior to 2016 the parcel formed part of the peripheral administrative buffer zone of an Islamic Revolutionary Guard Corps (IRGC) Naval Logistics Base. During that period, no continuous masonry barrier separated the structure from the northern naval compound, and unpaved interior tracks connected the parcel to military storage depots.
+42. However, official cadastral registries and verified multi-spectral satellite imagery acquired by Planet Labs and Maxar WorldView-3 between February 12 and August 28, 2016 ([EXH-SAT-001.2](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat)), confirm that the parcel underwent a permanent physical and legal transformation:
    * **(a) Physical Segregation:** Between February and August 2016, a continuous, reinforced concrete masonry partition wall measuring **2.8 meters in height** was erected along the entire northern and eastern perimeter of the school parcel, physically severing all geographic and vehicular connectivity with the adjacent naval compound;
    * **(b) Demolition of Military Access:** All pre-existing vehicular access gates and transit corridors linking the parcel to the naval base were demolished and sealed;
-   * **(c) Formal Municipal Licensing:** The property was formally transferred to the Iranian Ministry of Education (Department of Education of Hormozgan Province, Minab District) under Institutional Accreditation Code `96142081`, operating continuously as an active, public primary educational facility for female pupils for **ten consecutive academic years (2016–2026)** (EXH-VIC-005.3).
-43. Sub-meter GIS vector analysis (EXH-SAT-001.4) demonstrates that the school's central classroom wing stood 18.4 meters south of the 2.8-meter concrete partition wall, and **42.0 meters** south of the nearest military structure inside the active naval facility—a single-story logistics auxiliary storage shed (`27.1360° N, 57.0818° E`).
-43 bis. Systematic review of 142 distinct high-resolution commercial satellite passes collected between September 2016 and February 2026 (EXH-SAT-001.3) establishes the complete absence of military activity within the school perimeter over the decade preceding the strike. Zero military vehicles, defensive fortifications, armaments, weapon emplacements, communications antennas, or uniformed personnel were detected within the walled school compound. Conversely, optical imagery captured during daytime overflights consistently documented established patterns of civilian life, including regular clusters of child pedestrians, student assembly formations in the courtyard, and civilian passenger transport vehicles congregated outside the western gate.
+   * **(c) Formal Municipal Licensing:** The property was formally transferred to the Iranian Ministry of Education (Department of Education of Hormozgan Province, Minab District) under Institutional Accreditation Code `96142081`, operating continuously as an active, public primary educational facility for female pupils for **ten consecutive academic years (2016–2026)** ([EXH-VIC-005.3](MASTER_EXHIBIT_DOSSIER.md#exhibit-vic)).
+43. Sub-meter GIS vector analysis ([EXH-SAT-001.4](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat)) demonstrates that the school's central classroom wing stood 18.4 meters south of the 2.8-meter concrete partition wall, and **42.0 meters** south of the nearest military structure inside the active naval facility—a single-story logistics auxiliary storage shed (`27.1360° N, 57.0818° E`).
+43 bis. Systematic review of 142 distinct high-resolution commercial satellite passes collected between September 2016 and February 2026 ([EXH-SAT-001.3](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat)) establishes the complete absence of military activity within the school perimeter over the decade preceding the strike. Zero military vehicles, defensive fortifications, armaments, weapon emplacements, communications antennas, or uniformed personnel were detected within the walled school compound. Conversely, optical imagery captured during daytime overflights consistently documented established patterns of civilian life, including regular clusters of child pedestrians, student assembly formations in the courtyard, and civilian passenger transport vehicles congregated outside the western gate.
 
 <a id="chapter-4-3"></a>
 ### 4.3 Pre-Strike Operational Chronology: The Academic Session of February 28, 2026
@@ -300,7 +294,7 @@ No air-raid sirens, civil defense warnings, or tactical notifications were sound
 
 <a id="chapter-4-4"></a>
 ### 4.4 The Strike Sequence & Ballistic Impact Dynamics: The Triple-Tap Salvo
-46. On the morning of February 28, 2026, between 09:22:15 and 09:26:40 IRST, naval forces of the United States executed a coordinated, three-munition kinetic strike against the Shajareh Tayyebeh School compound. The chronological sequence, calibrated through seismic shockwave telemetry recorded by the Iranian Seismological Center (IRSC) broadband station `MNB` (EXH-MUN-002.5), verified audiovisual recordings, and forensic engineering surveys (EXH-SAT-001.5), unfolded as follows:
+46. On the morning of February 28, 2026, between 09:22:15 and 09:26:40 IRST, naval forces of the United States executed a coordinated, three-munition kinetic strike against the Shajareh Tayyebeh School compound. The chronological sequence, calibrated through seismic shockwave telemetry recorded by the Iranian Seismological Center (IRSC) broadband station `MNB` ([EXH-MUN-002.5](MASTER_EXHIBIT_DOSSIER.md#exhibit-mun)), verified audiovisual recordings, and forensic engineering surveys ([EXH-SAT-001.5](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat)), unfolded as follows:
    * **09:22:15 IRST (Impact 1 — Mezzanine Penetration & Pancake Collapse):** The initial BGM-109 Tomahawk cruise missile, flying on an ingress heading of $018^\circ$ True North at Mach 0.72, penetrated the reinforced concrete roof slab of the central classroom building and detonated in the upper-story concourse. The explosive overpressure ($M_L = 0.82$) collapsed the interior load-bearing structures, precipitating a catastrophic pancake collapse of the second-floor concrete slab directly onto four active ground-floor classrooms. Scores of pupils and teachers were crushed or trapped beneath pulverized masonry;
    * **09:24:30 IRST (Impact 2 — Emergency Egress Annihilation, $\Delta t = 135$ seconds):** Exactly two minutes and fifteen seconds later, as surviving instructors and students attempted to evacuate the collapsing building, a second Tomahawk cruise missile struck the western architectural wing ($M_L = 0.79$). The warhead detonated directly upon the primary exterior reinforced escape stairwell, obliterating the evacuation corridor and killing fleeing students and faculty members;
    * **09:26:40 IRST (Impact 3 — Courtyard Airburst & Fragmentation Dispersion, $\Delta t = 130$ seconds):** Exactly two minutes and ten seconds following the second detonation, a third Tomahawk missile impacted the center of the open courtyard assembly ground ($M_L = 0.81$). The munition generated a crater measuring **6.2 meters in diameter and 2.8 meters in depth**, dispersing high-velocity casing fragments across a 400-meter radius and incinerating surviving children, evacuees, and neighborhood first responders who had rushed onto the playground.
@@ -308,9 +302,9 @@ No air-raid sirens, civil defense warnings, or tactical notifications were sound
 
 <a id="chapter-4-5"></a>
 ### 4.5 The Adversarial Positions: Military Nomination Claims vs. Verified Ground Truth
-48. Following the strike, the United States Department of Defense and United States Central Command (CENTCOM) issued official statements addressing the incident (EXH-CENTCOM-004.1):
+48. Following the strike, the United States Department of Defense and United States Central Command (CENTCOM) issued official statements addressing the incident ([EXH-CENTCOM-004.1](MASTER_EXHIBIT_DOSSIER.md#exhibit-centcom)):
    * **(a) The Official Military Narrative:** In press briefings between March 4 and March 12, 2026, Pentagon officials acknowledged conducting precision strikes in Minab as part of the opening phase of Operation Epic Fury, but characterized the destruction of the school as an *"unintended targeting error arising from historic coordinate data."*
-   * **(b) Disclosures of the CENTCOM AR 15-6 Inquiry:** Leaked findings of the internal military investigation commissioned under Army Regulation 15-6 (EXH-CENTCOM-004.2) and investigative reporting (*Bloomberg*, September 18, 2026) revealed the operational mechanism of the error:
+   * **(b) Disclosures of the CENTCOM AR 15-6 Inquiry:** Leaked findings of the internal military investigation commissioned under Army Regulation 15-6 ([EXH-CENTCOM-004.2](MASTER_EXHIBIT_DOSSIER.md#exhibit-centcom)) and investigative reporting (*Bloomberg*, September 18, 2026) revealed the operational mechanism of the error:
      1. Target nomination folder `TDS-2026-IR-0814` was populated using obsolete **Defense Intelligence Agency (DIA) records compiled prior to 2016**, which classified the coordinate as an active IRGC naval logistics facility;
      2. CENTCOM utilized the **Maven Smart System** (developed by Palantir Technologies, integrating Anthropic’s Claude reasoning model) to synthesize intelligence feeds and draft target recommendations. Maven ingested the legacy pre-2016 military classification, maintaining a high-confidence target priority score;
      3. While secondary intelligence branches had separately recorded the facility's 2016 physical partition and municipal registration as an elementary school, these records remained segregated in disconnected database silos and never propagated to the operational targeting layer;
@@ -324,7 +318,7 @@ No air-raid sirens, civil defense warnings, or tactical notifications were sound
 
 <a id="chapter-4-6"></a>
 ### 4.6 Forensic Casualty Census, Demographic Matrix & Pathological Trauma
-48 ter. Official forensic death registries compiled by the Hormozgan Provincial Department of Forensic Medicine (*Pezeshki Ghanouni*, EXH-VIC-005.1), hospital triage manifests (EXH-VIC-005.2), and certified Ministry of Education personnel records (EXH-VIC-005.3) establish the definitive casualty toll:
+48 ter. Official forensic death registries compiled by the Hormozgan Provincial Department of Forensic Medicine (*Pezeshki Ghanouni*, [EXH-VIC-005.1](MASTER_EXHIBIT_DOSSIER.md#exhibit-vic)), hospital triage manifests ([EXH-VIC-005.2](MASTER_EXHIBIT_DOSSIER.md#exhibit-vic)), and certified Ministry of Education personnel records ([EXH-VIC-005.3](MASTER_EXHIBIT_DOSSIER.md#exhibit-vic)) establish the definitive casualty toll:
    * **Total Certified Fatalities:** **156 individuals** killed;
    * **Child Fatalities:** **120 certified female primary pupils**, all between the ages of 7 and 12 years;
    * **Educational Staff Fatalities:** **26 certified educators, instructors, and school administrators**; and
@@ -359,7 +353,7 @@ No air-raid sirens, civil defense warnings, or tactical notifications were sound
 
 <a id="chapter-5-1"></a>
 ### 5.1 Munition Identification & Debris Metallurgy
-49. Physical debris recovered from the impact crater and schoolyard (EXH-MUN-002) was examined by certified ordnance forensics specialists.
+49. Physical debris recovered from the impact crater and schoolyard ([EXH-MUN-002](MASTER_EXHIBIT_DOSSIER.md#exhibit-mun)) was examined by certified ordnance forensics specialists.
 50. The metallurgical and serialized evidence confirms the weapon deployed:
    * Serialized avionics circuit boards bearing Commercial and Government Entity (CAGE) codes registered to Raytheon Missile Systems (Tucson, Arizona);
    * Fragments of titanium alloy turbofan rotor blades matching the Williams International F107-WR-402 cruise missile engine;
@@ -375,7 +369,7 @@ No air-raid sirens, civil defense warnings, or tactical notifications were sound
 
 <a id="chapter-5-3"></a>
 ### 5.3 Force Allocation & Launch Platform Attribution (USS Abraham Lincoln CSG)
-53. Regional air defense radar ingress vectors and naval tracking data (EXH-LAUNCH-003) establish that the cruise missiles flew at low altitude (30–50 meters AGL) following an ingress route from the Gulf of Oman.
+53. Regional air defense radar ingress vectors and naval tracking data ([EXH-LAUNCH-003](MASTER_EXHIBIT_DOSSIER.md#exhibit-launch)) establish that the cruise missiles flew at low altitude (30–50 meters AGL) following an ingress route from the Gulf of Oman.
 54. United States Department of Defense Force Allocation Maps for Operation Epic Fury confirm that surface combatants and guided-missile submarines attached to the **USS Abraham Lincoln Carrier Strike Group (CSG-3)** held exclusive combat allocation over the Hormozgan and Strait of Hormuz operational sector.
 
 <a id="chapter-5-4"></a>
@@ -545,7 +539,7 @@ No air-raid sirens, civil defense warnings, or tactical notifications were sound
    * **Prompt and Initiated *Ex Officio* (§§ 209, 212):** Authorities must act on their own motion without waiting for formal complaints from vulnerable victims;
    * **Hierarchically and Practically Independent (§ 210):** Investigators cannot belong to the same military chain of command implicated in the strike;
    * **Capable of Establishing Command Accountability (§ 211):** The inquiry must examine operations record books, mission logs, targeting sheets, and commander directives, rather than rubber-stamping self-serving witness accounts (§§ 220–222); and
-   * **Subject to Public Scrutiny and Victim Standing (§§ 213, 224):** Victims and their next-of-kin must be granted formal procedural status and access to proceedings.  
+   * **Subject to Public Scrutiny and Victim Standing (§§ 213, 224):** Victims and their next-of-kin must be granted formal procedural status and access to proceedings.
 CENTCOM’s closed-door AR 15-6 investigation into the Minab strike—which withheld targeting logs, shielded senior command nominators, and excluded the families of the 156 deceased school children—violates every foundational benchmark of *Isayeva, Yusupova & Bazayeva*. This structural domestic failure activates the subsidiary procedural jurisdiction of European investigative magistrates (such as the Office of the Prosecutor General of Finland under *Rikoslaki* Chapter 1, Section 7, and the German Federal Public Prosecutor General under *VStGB* § 1) to initiate independent structural investigations (*Strukturermittlungsverfahren*).
 
 <a id="chapter-9-4"></a>
@@ -579,7 +573,7 @@ CENTCOM’s closed-door AR 15-6 investigation into the Minab strike—which with
 <a id="chapter-10-3"></a>
 ### 10.3 Orders Concerning Judicial Preservation of Evidence & International Fact-Finding
 98. The Panel orders:
-   * (i) That the verified master evidentiary archives (EXH-SAT-001 through EXH-UN-008) remain deposited in permanent, tamper-evident custody in Helsinki, Finland, under the Berkeley Protocol;
+   * (i) That the verified master evidentiary archives ([EXH-SAT-001](MASTER_EXHIBIT_DOSSIER.md#exhibit-sat) through [EXH-UN-008](MASTER_EXHIBIT_DOSSIER.md#exhibit-un)) remain deposited in permanent, tamper-evident custody in Helsinki, Finland, under the Berkeley Protocol;
    * (ii) That duplicate cryptographic archives be formally transmitted to the **President of the United Nations Human Rights Council** and the **Secretariat of the Independent International Fact-Finding Mission on the Islamic Republic of Iran** in connection with the 63rd Regular Session (UN Doc. A/HRC/63/61), and to the **International Impartial and Independent Mechanism (IIIM)**.
 
 <a id="chapter-10-4"></a>
@@ -594,6 +588,6 @@ CENTCOM’s closed-door AR 15-6 investigation into the Minab strike—which with
 
 **RENDERED AND SEALED** this 12th day of September, 2026, at Helsinki, Finland.
 
-**PEOPLE FOR PEACE & JUSTICE RY (PFPJ RY)**  
-*Expert International Inquiry Panel*  
+**PEOPLE FOR PEACE & JUSTICE RY (PFPJ RY)**
+*Expert International Inquiry Panel*
 Helsinki, Finland — Business Identity Code: `3616815-5`

@@ -178,3 +178,80 @@ class TelegramMessageLog(models.Model):
 
     def __str__(self):
         return f'Message {self.message_id} from {self.from_user.get("username", "unknown")}'
+
+
+class ContactSubmission(models.Model):
+    """
+    Stores contact and volunteer inquiries submitted via the website form.
+    """
+    class Status(models.TextChoices):
+        NEW = 'new', _('New')
+        CONTACTED = 'contacted', _('Contacted')
+        RESOLVED = 'resolved', _('Resolved')
+        ARCHIVED = 'archived', _('Archived')
+
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_('Name')
+    )
+    email = models.EmailField(
+        verbose_name=_('Email Address')
+    )
+    role = models.CharField(
+        max_length=150,
+        default='General Inquiry',
+        verbose_name=_('Role / Area of Interest')
+    )
+    message = models.TextField(
+        verbose_name=_('Message')
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.NEW,
+        verbose_name=_('Status')
+    )
+    telegram_sent = models.BooleanField(
+        default=False,
+        verbose_name=_('Sent to Telegram')
+    )
+    telegram_error = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name=_('Telegram Error')
+    )
+    ip_address = models.GenericIPAddressField(
+        null=True,
+        blank=True,
+        verbose_name=_('IP Address')
+    )
+    user_agent = models.TextField(
+        blank=True,
+        default='',
+        verbose_name=_('User Agent')
+    )
+    notes = models.TextField(
+        blank=True,
+        default='',
+        verbose_name=_('Admin Notes')
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=_('Submitted At')
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_('Updated At')
+    )
+
+    class Meta:
+        verbose_name = _('Contact Submission')
+        verbose_name_plural = _('Contact Submissions')
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['status', 'created_at']),
+            models.Index(fields=['email']),
+        ]
+
+    def __str__(self):
+        return f'{self.name} ({self.email}) - {self.role}'

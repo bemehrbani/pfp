@@ -47,6 +47,9 @@ jobs:
           echo "=== Pulling latest code ==="
           $SSH_CMD "cd /opt/pfp && if [ ! -d '.git' ]; then git init && git remote add origin https://github.com/bemehrbani/pfp.git; fi && git fetch origin main && git reset --hard origin/main"
 
+          echo "=== Freeing Docker disk space & BuildKit cache ==="
+          $SSH_CMD "docker builder prune -af --force 2>/dev/null || true; docker image prune -f 2>/dev/null || true; df -h /"
+
           echo "=== Rebuilding and restarting services ==="
           $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml up -d --build --remove-orphans"
 
@@ -58,6 +61,15 @@ jobs:
 
           echo "=== Collecting static files ==="
           $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml exec -T backend python manage.py collectstatic --noinput"
+
+          echo "=== Ensuring Admin User Credentials ==="
+          $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml exec -T backend python manage.py shell -c \"from apps.users.models import User; u, _ = User.objects.get_or_create(username='admin', defaults={'email': 'admin@peopleforpeace.live', 'role': User.Role.ADMIN, 'is_staff': True, 'is_superuser': True}); u.set_password('admin123'); u.role = User.Role.ADMIN; u.is_staff = True; u.is_superuser = True; u.save(); print('Superuser admin ready with password admin123')\""
+
+          echo "=== Reloading services with fresh static assets ==="
+          $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml restart backend frontend"
+
+          echo "=== Configuring host Nginx for admin static assets ==="
+          $SSH_CMD "python3 /opt/pfp/PFP_Platform/infra/scripts/configure_host_nginx.py"
 
           echo "=== Health check ==="
           HEALTH=$($SSH_CMD "curl -sf --max-time 10 http://localhost:8001/health/simple/ || echo 'FAILED'")
@@ -87,6 +99,10 @@ jobs:
 
           echo "=== Backend API check ==="
           $SSH_CMD "curl -sf --max-time 5 http://localhost:8001/health/simple/ && echo ' ✅ Backend OK' || echo '⚠️ Backend unreachable'"
+
+          echo "=== Admin static asset checks ==="
+          $SSH_CMD "curl -sf --max-time 5 http://localhost:8001/static/admin/css/base.523eb49842a7.css > /dev/null && echo '✅ Backend Admin Static OK' || echo '⚠️ Backend Admin Static unreachable'"
+          $SSH_CMD "curl -sf --max-time 5 http://localhost:8080/static/admin/css/base.523eb49842a7.css > /dev/null && echo '✅ Frontend Admin Static OK' || echo '⚠️ Frontend Admin Static unreachable'"
 
           echo "=== Current commit ==="
           $SSH_CMD "cd /opt/pfp && git log --oneline -1"
