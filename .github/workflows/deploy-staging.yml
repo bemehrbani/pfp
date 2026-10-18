@@ -7,7 +7,6 @@ on:
     paths-ignore:
       - '**.md'
       - 'Campaigns/**'
-      - 'Makan_Ry/**'
       - 'PFPJ_Ry/**'
       - 'Archive/**'
       - 'scratch/**'

@@ -157,24 +157,8 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="nav">
-        <a href="/" class="nav-logo">
-            <span>🕊️</span> People for Peace
-        </a>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/memorial.html">Memorial (100 Faces)</a>
-            <a href="/mothers.html">Mothers & Families</a>
-            <a href="/evidence.html">Evidence</a>
-            <a href="/sources.html" class="active">Forensic Report</a>
-            <a href="/data.html">Open Data</a>
-        </div>
-        <div class="lang-switch">
-            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-            <button class="lang-btn" onclick="setLanguage('fa')">فا</button>
-            <button class="lang-btn" onclick="setLanguage('ar')">عر</button>
-        </div>
-    </nav>
+    <header class="site-header" id="pfpSiteHeader"></header>
+    <script src="site-nav.js"></script>
 
     <!-- Hero -->
     <header class="hero">
@@ -255,6 +239,11 @@
                         <td>Crisis management & spatial verification</td>
                         <td>Verified concrete wall construction separating school from IRGC base since 2016.</td>
                     </tr>
+                    <tr>
+                        <td><strong><a href="https://www.dropsitenews.com/p/minab-school-massacre-iran-war-children-families" target="_blank" rel="noopener">Drop Site News (SRC-INVESTIGATION-008)</a></strong></td>
+                        <td>On-the-ground investigation &amp; witness depositions</td>
+                        <td>13,000+ word field investigation (Jeremy Scahill, Murtaza Hussain, Reza Sayah, Sept 30, 2026); depositions of teacher Hossniyeh Salem, Fire Chief Mehran Zakeri, Hospital Director Dr. Movarekh, and Pentagon whistleblowers Wes J. Bryant and Harrison Mann; confirms Raytheon CAGE codes and secondary strike on Shahid Absalan Clinic.</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -308,6 +297,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><strong><a href="https://www.ohchr.org/sites/default/files/documents/hrbodies/hrcouncil/sessions-regular/session63/a-hrc-63-61-aev.pdf" target="_blank" rel="noopener">UN Fact-Finding Mission on Iran (UN Doc. A/HRC/63/61)</a></strong></td>
+                        <td>UN Human Rights Council (63rd Session)</td>
+                        <td>Formally concluded under the "reasonable grounds to believe" standard (Sept 17, 2026) that the US committed war crimes in the Minab school strike — an unlawful indiscriminate attack killing &gt;120 schoolchildren without feasible precautions.</td>
+                    </tr>
+                    <tr>
+                        <td><strong><a href="https://www.bloomberg.com/graphics/2026-iran-school-attack/" target="_blank" rel="noopener">Bloomberg News (Visual Investigation)</a></strong></td>
+                        <td>Algorithmic kill-chain audit</td>
+                        <td>Exposed CENTCOM deployment of Palantir's Maven Smart System + Anthropic's Claude AI across &gt;1,000 Day 1 strikes (Sept 18, 2026), reduction of Civilian Harm Mitigation team from 10 analysts to 1, and post-strike Palantir software patches.</td>
+                    </tr>
                     <tr>
                         <td><strong>Iranian Red Crescent Society (rcs.ir)</strong></td>
                         <td>Search & rescue triage</td>
@@ -414,5 +413,6 @@
             document.getElementById('t3Head').textContent = t.t3Head;
         }
     </script>
+    <script src="contact-modal.js"></script>
 </body>
 </html>

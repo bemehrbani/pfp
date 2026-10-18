@@ -142,10 +142,12 @@
     // 2. Localization Map
     const modalI18n = {
         en: {
-            title: "Join & Support PFPJ ry",
-            subtitle: "Fill out the form below to support our legal advocacy or join our team. Submissions are instantly routed to our Telegram group.",
+            title: "Contact & Support PFPJ ry",
+            subtitle: "Reach out to support our legal advocacy, contribute evidence, or join our team. Submissions are saved directly and routed to our coordination team on Telegram.",
             label_name: "Name",
             label_email: "Email Address",
+            label_handle: "Telegram @username or Signal / Phone (Optional)",
+            placeholder_handle: "@username or +358...",
             label_role: "Area of Interest / Role",
             label_msg: "Message / Experience Summary",
             opt_volunteer: "Volunteer / OSINT Researcher",
@@ -155,31 +157,37 @@
             opt_general: "General Inquiry",
             submit_btn: "Submit Request",
             submitting: "Submitting...",
-            success: "Submission received successfully!",
-            error: "Error sending request. Please try again."
+            success: "Thank you! Your message has been received by our team.",
+            error: "Error sending request. Please try again.",
+            tg_channel_note: "Official Telegram Channel:"
         },
         fa: {
-            title: "مشارکت و پشتیبانی از PFPJ ry",
-            subtitle: "جهت عضویت، همکاری یا حمایت مالی فرم زیر را تکمیل نمایید. اطلاعات به گروه تلگرام هدایت می‌شوند.",
+            title: "ارتباط و پشتیبانی از PFPJ ry",
+            subtitle: "جهت ارتباط، ارسال مستندات، همکاری علمی یا حمایت از صندوق حقوقی فرم زیر را تکمیل نمایید. پیام شما مستقیماً ثبت و به تیم هماهنگی در تلگرام ارسال می‌شود.",
             label_name: "نام و نام خانوادگی",
             label_email: "آدرس ایمیل",
-            label_role: "زمینه همکاری / نقش",
-            label_msg: "پیام / خلاصه سوابق و تجربه",
+            label_handle: "شناسه تلگرام (@username) یا شماره تماس / سیگنال (اختیاری)",
+            placeholder_handle: "@username یا شماره تماس...",
+            label_role: "زمینه همکاری / موضوع پیام",
+            label_msg: "پیام / خلاصه دیدگاه یا مستندات",
             opt_volunteer: "داوطلب / پژوهشگر اطلاعات متن‌باز (OSINT)",
             opt_scholar: "حقوق‌دان / مشاور علمی",
-            opt_witness: "شاهد / ارائه‌دهنده مدرک",
+            opt_witness: "شاهد / ارائه‌دهنده مدرک و مستندات",
             opt_funder: "حمایت از صندوق حقوقی پرونده",
-            opt_general: "سایر موضوعات",
-            submit_btn: "ارسال درخواست",
+            opt_general: "سایر موضوعات / ارتباط عمومی",
+            submit_btn: "ارسال پیام",
             submitting: "در حال ارسال...",
-            success: "درخواست شما با موفقیت ارسال شد.",
-            error: "خطا در ارسال درخواست. لطفا مجدداً تلاش کنید."
+            success: "سپاسگزاریم! پیام شما با موفقیت ثبت و دریافت شد.",
+            error: "خطا در ارسال درخواست. لطفا مجدداً تلاش کنید.",
+            tg_channel_note: "کانال رسمی تلگرام:"
         },
         fi: {
-            title: "Liity & Tue — PFPJ ry",
-            subtitle: "Täytä alla oleva lomake tukeaksesi oikeudenkäyntiämme tai liittyäksesi tiimiin. Tiedot lähetetään Telegram-ryhmäämme.",
+            title: "Ota yhteyttä & Tue — PFPJ ry",
+            subtitle: "Täytä alla oleva lomake tukeaksesi oikeudenkäyntiämme, toimittaaksesi todisteita tai liittyäksesi tiimiin. Viestit ohjataan suoraan tiimillemme.",
             label_name: "Nimi",
             label_email: "Sähköpostiosoite",
+            label_handle: "Telegram @käyttäjänimi tai Signal / Puhelin (Valinnainen)",
+            placeholder_handle: "@username tai +358...",
             label_role: "Kiinnostuksen kohde / Rooli",
             label_msg: "Viesti / Kokemuksen tiivistelmä",
             opt_volunteer: "Vapaaehtoinen / OSINT-tutkija",
@@ -187,18 +195,44 @@
             opt_witness: "Todistaja / Todisteiden toimittaja",
             opt_funder: "Oikeudenkäyntirahaston lahjoittaja",
             opt_general: "Yhteydenotto",
-            submit_btn: "Lähetä pyyntö",
+            submit_btn: "Lähetä viesti",
             submitting: "Lähetetään...",
-            success: "Pyyntö lähetetty onnistuneesti!",
-            error: "Virhe lähetyksessä. Yritä uudelleen."
+            success: "Kiitos! Viestisi on vastaanotettu.",
+            error: "Virhe lähetyksessä. Yritä uudelleen.",
+            tg_channel_note: "Virallinen Telegram-kanava:"
         }
     };
 
     // Get current language from document element or globally set variable
     function getLang() {
-        if (typeof currentLang !== 'undefined') return currentLang;
+        if (typeof currentLang !== 'undefined' && ['en', 'fa', 'fi'].includes(currentLang)) return currentLang;
+        try {
+            const saved = localStorage.getItem('pfp-lang') || localStorage.getItem('pfp_lang');
+            if (saved && ['en', 'fa', 'fi'].includes(saved)) return saved;
+        } catch (_) {}
         const htmlLang = document.documentElement.lang || 'en';
         return ['en', 'fa', 'fi'].includes(htmlLang) ? htmlLang : 'en';
+    }
+
+    function normalizeRoleOption(roleHint) {
+        if (!roleHint) return null;
+        const r = String(roleHint).toLowerCase();
+        if (r.includes('fund') || r.includes('donat') || r.includes('capital')) {
+            return 'Litigation Fund Contributor';
+        }
+        if (r.includes('scholar') || r.includes('advis') || r.includes('review') || r.includes('draft') || r.includes('legal')) {
+            return 'Legal Scholar / Advisory';
+        }
+        if (r.includes('witness') || r.includes('evidence') || r.includes('fact')) {
+            return 'Witness / Evidence Contributor';
+        }
+        if (r.includes('volunteer') || r.includes('research') || r.includes('osint')) {
+            return 'Volunteer / Researcher';
+        }
+        if (r.includes('general') || r.includes('contact') || r.includes('inquir')) {
+            return 'General Inquiry';
+        }
+        return null;
     }
 
     // 3. Inject HTML markup
@@ -209,19 +243,23 @@
         <div class="contact-modal-content">
             <span class="contact-modal-close" onclick="closeContactModal()">&times;</span>
             <h3 style="margin-top:0; margin-bottom:8px; color:#d4a853; font-size: 1.35rem;" id="modal_title">${t.title}</h3>
-            <p style="font-size:0.88rem; color:#94a3b8; margin-bottom:20px; line-height: 1.5;" id="modal_subtitle">${t.subtitle}</p>
+            <p style="font-size:0.88rem; color:#94a3b8; margin-bottom:16px; line-height: 1.5;" id="modal_subtitle">${t.subtitle}</p>
             
             <form id="contactForm" onsubmit="submitContactForm(event)">
                 <div class="contact-form-group">
-                    <label id="modal_label_name">${t.label_name}</label>
+                    <label id="modal_label_name" for="contactName">${t.label_name}</label>
                     <input type="text" id="contactName" required>
                 </div>
                 <div class="contact-form-group">
-                    <label id="modal_label_email">${t.label_email}</label>
+                    <label id="modal_label_email" for="contactEmail">${t.label_email}</label>
                     <input type="email" id="contactEmail" required>
                 </div>
                 <div class="contact-form-group">
-                    <label id="modal_label_role">${t.label_role}</label>
+                    <label id="modal_label_handle" for="contactHandle">${t.label_handle}</label>
+                    <input type="text" id="contactHandle" placeholder="${t.placeholder_handle}" dir="ltr">
+                </div>
+                <div class="contact-form-group">
+                    <label id="modal_label_role" for="contactRole">${t.label_role}</label>
                     <select id="contactRole">
                         <option value="Volunteer / Researcher" id="modal_opt_volunteer">${t.opt_volunteer}</option>
                         <option value="Legal Scholar / Advisory" id="modal_opt_scholar">${t.opt_scholar}</option>
@@ -231,7 +269,7 @@
                     </select>
                 </div>
                 <div class="contact-form-group">
-                    <label id="modal_label_msg">${t.label_msg}</label>
+                    <label id="modal_label_msg" for="contactMessage">${t.label_msg}</label>
                     <textarea id="contactMessage" required rows="4"></textarea>
                 </div>
                 
@@ -239,6 +277,11 @@
             </form>
             
             <div id="contactFormStatus" class="contact-status"></div>
+
+            <div style="margin-top:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:space-between; font-size:0.8rem; color:#94a3b8;">
+                <span id="modal_tg_note">${t.tg_channel_note}</span>
+                <a href="https://t.me/people4peace" target="_blank" rel="noopener" style="color:#d4a853; text-decoration:none; font-weight:600;">✈ @people4peace</a>
+            </div>
         </div>
     `;
 
@@ -249,15 +292,17 @@
     document.body.appendChild(modalDiv);
 
     // 4. Expose Global functions
-    window.openContactModal = function() {
+    window.openContactModal = function(roleHint) {
         // Refresh localization strings in case language changed
         const currentL = getLang();
-        const curT = modalI18n[currentL];
+        const curT = modalI18n[currentL] || modalI18n.en;
         
         document.getElementById('modal_title').textContent = curT.title;
         document.getElementById('modal_subtitle').textContent = curT.subtitle;
         document.getElementById('modal_label_name').textContent = curT.label_name;
         document.getElementById('modal_label_email').textContent = curT.label_email;
+        document.getElementById('modal_label_handle').textContent = curT.label_handle;
+        document.getElementById('contactHandle').placeholder = curT.placeholder_handle;
         document.getElementById('modal_label_role').textContent = curT.label_role;
         document.getElementById('modal_label_msg').textContent = curT.label_msg;
         document.getElementById('modal_opt_volunteer').textContent = curT.opt_volunteer;
@@ -266,6 +311,16 @@
         document.getElementById('modal_opt_funder').textContent = curT.opt_funder;
         document.getElementById('modal_opt_general').textContent = curT.opt_general;
         document.getElementById('modal_submit_btn').textContent = curT.submit_btn;
+        document.getElementById('modal_tg_note').textContent = curT.tg_channel_note;
+
+        const statusDiv = document.getElementById('contactFormStatus');
+        if (statusDiv) statusDiv.style.display = 'none';
+
+        const matchedRole = normalizeRoleOption(roleHint);
+        if (matchedRole) {
+            const roleSelect = document.getElementById('contactRole');
+            if (roleSelect) roleSelect.value = matchedRole;
+        }
 
         document.getElementById('contactModal').classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -279,7 +334,7 @@
     window.submitContactForm = async function(event) {
         event.preventDefault();
         const currentL = getLang();
-        const curT = modalI18n[currentL];
+        const curT = modalI18n[currentL] || modalI18n.en;
         const statusDiv = document.getElementById('contactFormStatus');
         
         statusDiv.style.display = 'block';
@@ -290,6 +345,7 @@
         const payload = {
             name: document.getElementById('contactName').value,
             email: document.getElementById('contactEmail').value,
+            contact_handle: document.getElementById('contactHandle').value,
             role: document.getElementById('contactRole').value,
             message: document.getElementById('contactMessage').value
         };
@@ -332,21 +388,15 @@
         }
     });
 
-    // 5. Automatically rewrite raw mailto links to trigger modal
-    function bindMailtoLinks() {
-        const links = document.querySelectorAll('a[href^="mailto:info@peopleforpeace.live"]');
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.openContactModal();
-            });
-        });
-    }
-
-    // Run binding on load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', bindMailtoLinks);
-    } else {
-        bindMailtoLinks();
-    }
+    // 5. Global event delegation for all contact triggers (works with dynamic DOM)
+    document.addEventListener('click', function(e) {
+        const trigger = e.target.closest('a[href^="mailto:info@peopleforpeace.live"], a[href="#contact"], [data-open-contact], [data-contact-role]');
+        if (!trigger) return;
+        e.preventDefault();
+        if (typeof window.closeMobileNav === 'function') {
+            window.closeMobileNav();
+        }
+        const roleAttr = trigger.getAttribute('data-contact-role') || trigger.getAttribute('href') || '';
+        window.openContactModal(roleAttr);
+    });
 })();

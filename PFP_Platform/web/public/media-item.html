@@ -231,23 +231,8 @@
 
 <body>
     <!-- Navigation Header -->
-    <nav class="nav">
-        <a href="/landing.html" class="nav-brand">
-            <div class="nav-logo-badge">🕊️</div>
-            <span>People for Peace & Justice</span>
-        </a>
-        <div class="nav-links">
-            <a href="/memorial.html" id="nav-memorial">Memorial</a>
-            <a href="/evidence.html" id="nav-evidence">Evidence</a>
-            <a href="/multimedia.html" class="active" id="nav-multimedia">Multimedia</a>
-            <a href="/amplify.html" id="nav-amplify">Amplify</a>
-            <a href="/initiatives.html" id="nav-initiatives">Initiatives</a>
-            <a href="/about.html" id="nav-about">About</a>
-        </div>
-        <div>
-            <button class="lang-btn" id="lang-toggle-btn" onclick="toggleLanguage()">فارسی</button>
-        </div>
-    </nav>
+    <header class="site-header" id="pfpSiteHeader"></header>
+    <script src="site-nav.js"></script>
 
     <!-- Breadcrumb -->
     <div class="breadcrumb-strip">
@@ -690,6 +675,7 @@
             renderItem(found);
         });
     </script>
+    <script src="contact-modal.js"></script>
 </body>
 
 </html>

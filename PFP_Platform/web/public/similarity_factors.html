@@ -120,34 +120,44 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
 
-  <!-- ====== NAVIGATION ====== -->
-  <nav class="lang-bar">
-      <span class="lang-bar-logo">☮ PFPJ ry</span>
-      <div class="navbar-links">
-          <a href="landing.html">Home</a>
-          <a href="about.html">About Us</a>
-          <a href="memorial.html">Minab Memorial</a>
-          <a href="evidence.html">Forensic Evidence</a>
-          <a href="similarity_annex.html" class="active">Technical Annex</a>
-          <a href="initiatives.html">Global Initiatives</a>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-          <div class="lang-bar-nav">
-              <button class="lang-btn active" onclick="toggleLang('en')">EN</button>
-              <button class="lang-btn" onclick="toggleLang('fa')">فارسی</button>
-              <button class="lang-btn" onclick="toggleLang('fi')">FI</button>
-          </div>
-          <a href="mailto:info@peopleforpeace.live" class="cta-nav" style="background:rgba(212, 168, 83, 0.15); border:1px solid var(--gold); color:var(--gold); padding:6px 18px; border-radius:20px; font-size:0.85rem; font-weight:600; text-decoration:none; margin-left:12px;">✉ Contact</a>
-      </div>
-  </nav>
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
 
-  <div class="container">
-    <header>
-      <div class="title-area">
-        <p>Technical Document</p>
-        <h1 id="mainTitle">Accident Similarity Factors</h1>
-      </div>
-    </header>
+    .title-area h1 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .title-area p {
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 6px;
+    }
+
+    .intro-box {
+      background: var(--gold-dim);
+      border-left: 3px solid var(--gold);
+      padding: 18px 20px;
+      border-radius: 8px;
+      margin-bottom: 28px;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+    }
 
     .factor-card {
       border: 1px solid var(--border);
@@ -208,7 +218,7 @@
       .factor-desc {
         color: #333333;
       }
-      .btn-lang, .lang-toggle {
+      .lang-btn, .lang-toggle {
         display: none;
       }
     }
@@ -217,7 +227,8 @@
     body[dir="rtl"] {
       font-family: var(--font-rtl);
     }
-    body[dir="rtl"] .factor-title {
+    body[dir="rtl"] .factor-title,
+    body[dir="rtl"] .title-area h1 {
       font-family: var(--font-rtl);
       font-weight: 700;
     }
@@ -229,33 +240,51 @@
 </head>
 <body>
 
+  <!-- ====== NAVIGATION ====== -->
+  <header class="site-header" id="pfpSiteHeader"></header>
+  <script src="site-nav.js"></script>
+
   <div class="container">
     <header>
       <div class="title-area">
         <h1 id="mainTitle">Technical Annex: 10 Accident Similarity Factors</h1>
-        <p id="subTitle">PFPJ ry Case Verification & IHL Benchmarking</p>
+        <p id="subTitle">PFPJ ry Case Verification & IHL Benchmarking (19 International Precedents)</p>
       </div>
       <div class="lang-toggle">
-        <button class="btn-lang active" onclick="toggleLang('en')">EN</button>
-        <button class="btn-lang" onclick="toggleLang('fa')">فارسی</button>
+        <button class="lang-btn active" onclick="toggleLang('en')">EN</button>
+        <button class="lang-btn" onclick="toggleLang('fa')">فارسی</button>
+        <button class="lang-btn" onclick="toggleLang('fi')">FI</button>
       </div>
     </header>
 
     <div class="intro-box" id="introText">
-      This technical annex details the 10 core factors used to evaluate the similarity between the target incident and international precedents. This framework serves as the basis for legal analysis and expert validation in our case files.
+      This technical annex details the 10 core factors used to evaluate the similarity between the target incident and 19 international legal precedents. This framework serves as the basis for legal analysis and expert validation in our case files.
     </div>
 
     <div id="factorsContainer">
       <!-- Generated dynamically -->
     </div>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 24px; text-align: center; font-size: 0.9rem;">
+      <div style="display:flex; justify-content:center; gap:20px; margin-bottom:12px; flex-wrap:wrap;">
+        <a href="landing.html" style="color:var(--text-secondary); text-decoration:none;">Home</a> ·
+        <a href="about.html" style="color:var(--text-secondary); text-decoration:none;">About Us</a> ·
+        <a href="memorial.html" style="color:var(--text-secondary); text-decoration:none;">Memorial</a> ·
+        <a href="evidence.html" style="color:var(--text-secondary); text-decoration:none;">Evidence</a> ·
+        <a href="draft.html" style="color:var(--text-secondary); text-decoration:none;">Master Dossier</a> ·
+        <a href="#contact" data-open-contact="true" id="footerContactLink" style="color:var(--text-secondary); text-decoration:none;">Contact Us</a>
+      </div>
+      <p style="color:var(--text-secondary); font-size:0.8rem;">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
+    </footer>
   </div>
 
   <script>
     const data = {
       en: {
         title: "Technical Annex: 10 Accident Similarity Factors",
-        sub: "PFPJ ry Case Verification & IHL Benchmarking",
-        intro: "This technical annex details the 10 core factors used to evaluate the similarity between the target incident and international precedents. This framework serves as the basis for legal analysis and expert validation in our case files.",
+        sub: "PFPJ ry Case Verification & IHL Benchmarking (19 International Precedents)",
+        intro: "This technical annex details the 10 core factors used to evaluate the similarity between the February 28, 2026 Minab school strike and 19 international legal precedents (including Belgrade 1999, Al-Amiriyah 1991, and the twin ECtHR Isayeva judgments of 2005). This framework serves as the basis for legal analysis and expert validation in Docket PFPJ-2026-IR-001.",
         factors: [
           {
             num: "Factor 01",
@@ -265,111 +294,111 @@
           {
             num: "Factor 02",
             title: "Coordinate & Geolocation Validation Negligence",
-            desc: "Failure to verify geographic target coordinates using real-time physical or visual validation, relying instead on outdated database entries."
+            desc: "Failure to verify geographic target coordinates using real-time physical or visual validation, relying instead on outdated pre-2016 database entries isolated in disconnected intelligence silos."
           },
           {
             num: "Factor 03",
             title: "Dual-Use Classification Failures",
-            desc: "Incorrectly classifying civilian structures (e.g. educational facilities) as active military targets without verifying direct, hostiles-related usage."
+            desc: "Incorrectly classifying civilian structures (such as the Shajareh Tayyebeh Girls' Elementary School) as active military targets without verifying direct, continuous hostilities-related usage."
           },
           {
             num: "Factor 04",
-            title: "Precision-Guided Weaponry Implication",
-            desc: "Deploying highly accurate precision-guided munitions. This establishes that execution deviations did not cause the crash, proving planning and intelligence negligence."
+            title: "Precision-Guided Weaponry Implication (Mechanical Perfection)",
+            desc: "Deploying highly accurate precision-guided munitions (BGM-109 Tomahawk Block IV/V with sub-5m CEP). Under ICTY OTP § 85, this proves zero ballistic drift or operator error, concentrating 100% of culpability upstream on target nominators."
           },
           {
             num: "Factor 05",
-            title: "Failure of Visual & Intelligence Safeguards",
-            desc: "Launching strikes without implementing feasibility safeguards, such as visual reconnaissance or sensor vetting, directly prior to strike execution."
+            title: "Failure of Visual & Sensor Safeguards (Terminal Abort)",
+            desc: "Launching strikes equipped with optical DSMAC terminal sensors without implementing abort safeguards upon encountering primary school playground fixtures and children."
           },
           {
             num: "Factor 06",
             title: "Collateral Damage Estimation Disproportionality",
-            desc: "A significant discrepancy between pre-strike collateral damage estimations (CDE) and actual civilian casualties, demonstrating inadequate risk assessment."
+            desc: "A gross mathematical discrepancy between pre-strike collateral damage estimations (CDE) and the certainty of mass child casualties during Saturday morning instructional hours."
           },
           {
             num: "Factor 07",
-            title: "Proximity to Legitimate Military Objectives",
-            desc: "Justifying civilian object strikes by claiming proximity to military targets, bypassing requirements to implement effective containment strategies."
+            title: "Proximity to Legitimate Military Objectives (42m Engulfment)",
+            desc: "Justifying civilian object strikes by claiming proximity to military targets, ignoring that three 1,000-lb WDU-36/B blast warheads (300m fragmentation radius) at 42 meters guarantee 100% structural collapse."
           },
           {
             num: "Factor 08",
-            title: "Command Responsibility & Systemic SOP Errors",
-            desc: "Targeting errors that stem from command-approved standard operating procedures (SOPs) rather than individual crew performance."
+            title: "Command Responsibility, CHMR Dismantling & Algorithmic SOP Errors",
+            desc: "Targeting errors stemming from command-level decisions: slashing CENTCOM's Civilian Harm Mitigation and Response (CHMR) unit from 10 analysts to 1, and delegating target vetting across >1,000 Day 1 strikes to automated AI pipelines (Palantir Maven Smart System + Claude AI)."
           },
           {
             num: "Factor 09",
             title: "Day 1 Hostilities Timing",
-            desc: "Strikes executed during the initial hours of conflict using pre-existing target lists, removing the defense of 'fog of war' confusion."
+            desc: "Strikes executed during the opening hours of conflict using pre-existing peacetime target lists, decisively removing the defense of dynamic 'fog of war' confusion."
           },
           {
             num: "Factor 10",
             title: "Exclusion of Independent Local Registries",
-            desc: "Failure to cross-reference coordinates with public municipal registries, international NGO lists, or local mapping databases before authorizing strikes."
+            desc: "Failure to cross-reference target coordinates with OpenStreetMap, public municipal cadastral registries, Ministry of Education licensing (Code 96142081), or commercial satellite imagery before authorizing strikes."
           }
         ]
       },
       fa: {
         title: "پیوست فنی: ۱۰ فاکتور تقارن و مشابهت حوادث",
-        sub: "اعتبارسنجی پرونده و تطبیق با حقوق بشردوستانه بین‌المللی",
-        intro: "این پیوست فنی جزئیات ۱۰ فاکتور کلیدی مورد استفاده برای ارزیابی مشابهت بین حادثه اخیر و نمونه‌های حقوقی بین‌المللی را تشریح می‌کند. این چارچوب مبنای تحلیل‌های حقوقی و نظرات تخصصی اساتید قرار خواهد گرفت.",
+        sub: "اعتبارسنجی پرونده و تطبیق با ۱۹ سابقه حقوق بشردوستانه بین‌المللی",
+        intro: "این پیوست فنی جزئیات ۱۰ فاکتور کلیدی مورد استفاده برای ارزیابی مشابهت بین حمله ۲۸ فوریه ۲۰۲۶ به دبستان شجره طیبه میناب و ۱۹ سابقه قضایی بین‌المللی (از جمله بلگراد ۱۹۹۹، العامریه ۱۹۹۱ و آرای دوگانه ایسایوا در دیوان اروپایی حقوق بشر ۲۰۰۵) را تشریح می‌کند.",
         factors: [
           {
             num: "فاکتور ۰۱",
-            title: "پایگاه‌داده‌های هدف‌گیری صلح‌زمان",
-            desc: "بهره‌گیری از لیست‌های از پیش تعیین‌شده هدف صلح‌زمان که نشان می‌دهد خطاهای هدف‌گیری حاصل نارسایی‌های برنامه‌ریزی ساختاری هستند و نه شرایط اضطراری نبرد."
+            title: "پایگاه‌داده‌های هدف‌گیری زمان صلح",
+            desc: "بهره‌گیری از لیست‌های از پیش تعیین‌شده هدف در زمان صلح که نشان می‌دهد خطاهای هدف‌گیری حاصل نارسایی‌های برنامه‌ریزی ساختاری هستند و نه شرایط اضطراری نبرد."
           },
           {
             num: "فاکتور ۰۲",
             title: "اهمال در صحت‌سنجی موقعیت و مختصات جغرافیایی",
-            desc: "عدم تایید مختصات جغرافیایی اهداف از طریق صحت‌سنجی فیزیکی یا بصری بلادرنگ و تکیه صرف بر اطلاعات قدیمی پایگاه‌داده‌ها."
+            desc: "عدم تایید مختصات جغرافیایی اهداف از طریق صحت‌سنجی فیزیکی یا بصری بلادرنگ و تکیه صرف بر اطلاعات منسوخ پیش از ۲۰۱۶ در جزایر اطلاعاتی مجزا."
           },
           {
             num: "فاکتور ۰۳",
-            title: "اشتباه در رده‌بندی کاربری دوگانه اهداف صلح‌بخش",
-            desc: "رده‌بندی اشتباه کاربری‌های غیرنظامی (مانند مجتمع‌های آموزشی) به عنوان اهداف نظامی بدون تایید مستقیم فعالیت‌های جنگی در آن‌ها."
+            title: "اشتباه در رده‌بندی کاربری دوگانه اهداف غیرنظامی",
+            desc: "رده‌بندی اشتباه کاربری‌های غیرنظامی (مانند دبستان دخترانه شجره طیبه) به عنوان اهداف نظامی بدون احراز مشارکت مستقیم در عملیات جنگی."
           },
           {
             num: "فاکتور ۰۴",
-            title: "بکارگیری تسلیحات هدایت‌شونده دقیق",
-            desc: "استفاده از تسلیحات با دقت بالا که نشان می‌دهد انحرافات فنی علت حادثه نبوده، بلکه سهل‌انگاری در برنامه‌ریزی اطلاعاتی عامل اصلی بوده است."
+            title: "بکارگیری تسلیحات نقطه‌زن و اصل کمال مکانیکی",
+            desc: "استفاده از موشک‌های نقطه‌زن تاماهاک با خطای کمتر از ۵ متر؛ طبق بند ۸۵ گزارش دادستانی لاهه، این امر فرض انحراف فنی را رد کرده و ۱۰۰٪ مسئولیت را متوجه طراحان اطلاعاتی بالادست می‌سازد."
           },
           {
             num: "فاکتور ۰۵",
-            title: "اهمال در تدابیر پیشگیرانه بصری و اطلاعاتی",
-            desc: "اجرای حمله بدون به کار بستن پروتکل‌های ایمنی اطلاعاتی مانند تصویربرداری شناسایی مستقیم بلافاصله قبل از شلیک."
+            title: "اهمال در تدابیر پیشگیرانه بصری و سنسورهای هدایت پایانی (DSMAC)",
+            desc: "اجرای حمله با موشک‌های مجهز به دوربین تطبیق صحنه دیجیتال بدون صدور فرمان لغو حمله (Abort) هنگام مشاهده حیاط مدرسه و کودکان."
           },
           {
             num: "فاکتور ۰۶",
-            title: "عدم تناسب بین آسیب برآورده شده و تلفات واقعی",
-            desc: "شکاف فاحش میان برآورد تلفات جانبی قبل از عملیات و خسارت واقعی غیرنظامیان که بر نقص شدید در تحلیل‌های ریسک فرماندهی دلالت دارد."
+            title: "عدم تناسب فاحش برآورد خسارت جانبی با تلفات واقعی",
+            desc: "شکاف فاحش میان برآورد تلفات جانبی قبل از عملیات (CDE) و قطعیت ریاضی شهادت کودکان در ساعات آغازین صبح شنبه."
           },
           {
             num: "فاکتور ۰۷",
-            title: "مجاورت با اهداف نظامی مشروع صوری",
-            desc: "توجیه حمله به ساختارهای غیرنظامی به بهانه نزدیکی به مقرهای نظامی بدون اتخاذ اقدامات پیشگیرانه مهارکننده."
+            title: "مجاورت با اهداف نظامی و شعاع تخریب ۴۲ متری",
+            desc: "توجیه حمله به بنای غیرنظامی به بهانه همجواری با سوله نظامی در فاصله ۴۲ متری، با نادیده گرفتن اینکه سه کلاهک ۱۰۰۰ پوندی (شعاع ترکش ۳۰۰ متری) فروریزش ۱۰۰ درصدی مدرسه را حتمی می‌سازد."
           },
           {
             num: "فاکتور ۰۸",
-            title: "مسئولیت فرماندهی در رویه‌های استاندارد عملیاتی",
-            desc: "خطاهایی که ناشی از رویه‌های کاری مصوب فرماندهی (SOP) هستند، نه خطای فردی خلبان یا مجری عملیات."
+            title: "مسئولیت فرماندهی، انحلال واحد CHMR و خطای الگوریتمی (ماون–کلود)",
+            desc: "خطاهای ناشی از تصمیمات کلان فرماندهی: کاهش واحد کاهش آسیب به غیرنظامیان سنتکام (CHMR) از ۱۰ کارشناس به ۱ نفر و واگذاری راستی‌آزمایی بیش از ۱,۰۰۰ هدف روز اول به سامانه هوش مصنوعی پالانتیر ماون و کلود."
           },
           {
             num: "فاکتور ۰۹",
-            title: "زمان‌بندی حمله در روز آغازین مخاصمات (روز اول)",
-            desc: "انجام حملات در ساعت ابتدایی شروع درگیری با استفاده از اهداف از‌پیش‌برنامه‌ریزی‌شده که عذر «ابهام و هیجان نبرد» را ناممکن می‌سازد."
+            title: "زمان‌بندی حمله در ساعات آغازین روز اول مخاصمات",
+            desc: "انجام حملات در ساعات ابتدایی شروع درگیری با استفاده از اهداف از‌پیش‌برنامه‌ریزی‌شده زمان صلح که عذر «غبار صحنه نبرد» را کاملاً ساقط می‌سازد."
           },
           {
             num: "فاکتور ۱۰",
-            title: "نادیده گرفتن مراجع و ثبت‌های محلی مستقل",
-            desc: "عدم تطبیق مختصات با نقشه‌های ثبت دولتی، مراجع شهرداری یا پایگاه‌های اطلاعاتی سازمان‌های بین‌المللی پیش از تایید نهایی حمله."
+            title: "نادیده گرفتن نقشه‌های عمومی و مراجع ثبتی مستقل",
+            desc: "عدم تطبیق مختصات با نقشه OpenStreetMap، کاداستر شهری، کد مجوز آموزش و پرورش (۹۶۱۴۲۰۸۱) و تصاویر ماهواره‌ای تجاری پیش از تایید نهایی حمله."
           }
         ]
       },
       fi: {
         title: "Tekninen liite: 10 onnettomuuden samankaltaisuustekijää",
-        sub: "PFPJ ry:n tapauksen vahvistaminen & IHL-vertailuanalyysi",
-        intro: "Tämä tekninen liite esittelee 10 ydintekijää, joita käytetään arvioitaessa kohdetapauksen samankaltaisuutta kansainvälisten ennakkotapausten kanssa. Kehys toimii oikeudellisen analyysin ja asiantuntija-arvioiden pohjana tapausasiakirjoissamme.",
+        sub: "PFPJ ry:n tapauksen vahvistaminen & IHL-vertailuanalyysi (19 ennakkotapausta)",
+        intro: "Tämä tekninen liite esittelee 10 ydintekijää, joita käytetään arvioitaessa Minabin kouluiskun (28.2.2026) samankaltaisuutta 19 kansainvälisen ennakkotapauksen kanssa (mukaan lukien Belgrad 1999, Al-Amiriyah 1991 ja EIT:n Isayeva-tuomiot 2005).",
         factors: [
           {
             num: "Tekijä 01",
@@ -408,8 +437,8 @@
           },
           {
             num: "Tekijä 08",
-            title: "Komentajavastuu ja systemaattiset toimintamenetelmälliset virheet",
-            desc: "Kohdistusvirheet, jotka johtuvat komentotasolla hyväksytyistä vakiotoimintamenetelmistä (SOP) pikemmin kuin yksittäisen miehistön suorituksesta."
+            title: "Komentajavastuu, CHMR-yksikön alasajo ja tekoälyputken virheet",
+            desc: "Kohdistusvirheet, jotka johtuvat komentotason päätöksistä: CENTCOMin siviilivahinkojen ehkäisyryhmän (CHMR) supistamisesta 10 asiantuntijasta yhteen sekä yli 1 000 ensipäivän iskun validoinnin siirtämisestä automatisoidulle Palantir Maven / Claude AI -järjestelmälle."
           },
           {
             num: "Tekijä 09",
@@ -424,20 +453,6 @@
         ]
       }
     };
-
-    <!-- ====== FOOTER ====== -->
-    <footer class="footer" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 24px; text-align: center; font-size: 0.9rem;">
-        <div style="display:flex; justify-content:center; gap:20px; margin-bottom:12px; flex-wrap:wrap;">
-            <a href="landing.html" style="color:var(--text-secondary); text-decoration:none;">Home</a> ·
-            <a href="about.html" style="color:var(--text-secondary); text-decoration:none;">About Us</a> ·
-            <a href="memorial.html" style="color:var(--text-secondary); text-decoration:none;">Memorial</a> ·
-            <a href="evidence.html" style="color:var(--text-secondary); text-decoration:none;">Evidence</a> ·
-            <a href="initiatives.html" style="color:var(--text-secondary); text-decoration:none;">Global Initiatives</a> ·
-            <a href="mailto:info@peopleforpeace.live" id="footerContactLink" style="color:var(--text-secondary); text-decoration:none;">Contact Us</a>
-        </div>
-        <p style="color:var(--text-secondary); font-size:0.8rem;">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
-    </footer>
-  </div> <!-- Close container -->
 
     function toggleLang(lang) {
       document.body.dir = lang === 'fa' ? 'rtl' : 'ltr';
@@ -475,6 +490,6 @@
     // Initialize with English
     toggleLang('en');
   </script>
-  <script src="contact-modal.js"></script>
+    <script src="contact-modal.js"></script>
 </body>
 </html>

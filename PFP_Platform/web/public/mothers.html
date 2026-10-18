@@ -217,24 +217,8 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="nav">
-        <a href="/" class="nav-logo">
-            <span>🕊️</span> People for Peace
-        </a>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/memorial.html">Memorial (100 Faces)</a>
-            <a href="/mothers.html" class="active">Mothers & Families</a>
-            <a href="/evidence.html">Evidence</a>
-            <a href="/sources.html">Forensic Report</a>
-            <a href="/data.html">Open Data</a>
-        </div>
-        <div class="lang-switch">
-            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-            <button class="lang-btn" onclick="setLanguage('fa')">فا</button>
-            <button class="lang-btn" onclick="setLanguage('ar')">عر</button>
-        </div>
-    </nav>
+    <header class="site-header" id="pfpSiteHeader"></header>
+    <script src="site-nav.js"></script>
 
     <!-- Hero -->
     <header class="hero">
@@ -609,5 +593,6 @@
 
         window.addEventListener('DOMContentLoaded', init);
     </script>
+    <script src="contact-modal.js"></script>
 </body>
 </html>

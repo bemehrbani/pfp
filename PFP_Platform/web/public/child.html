@@ -446,7 +446,7 @@
                             <a href="about.html">About Us</a>
                             <a href="memorial.html">Memorial</a>
                             <a href="evidence.html">Evidence</a>
-                            <a href="mailto:info@peopleforpeace.live">${t.footer_contact}</a>
+                            <a href="#contact" data-open-contact="true">${t.footer_contact}</a>
                         </div>
                         <p style="font-size:0.8rem; color:#64748b;">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
                     </footer>`;
@@ -606,6 +606,7 @@
                         <a href="evidence.html">Evidence</a>
                         <a href="sources.html">Forensic Report</a>
                         <a href="data.html">Open Data</a>
+                        <a href="#contact" data-open-contact="true">${t.footer_contact || 'Contact Us'}</a>
                     </div>
                     <p style="font-size:0.8rem; color:#64748b;">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
                 </footer>`;
@@ -704,6 +705,7 @@
             setLang(currentLang);
         }
     </script>
+    <script src="site-nav.js"></script>
     <script src="contact-modal.js"></script>
 </body>
 

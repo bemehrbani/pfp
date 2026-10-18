@@ -33,6 +33,7 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
+          TELEGRAM_ADMIN_CHAT_ID: ${{ secrets.TELEGRAM_ADMIN_CHAT_ID }}
         run: |
           SSH_CMD="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}"
 
@@ -51,7 +52,7 @@ jobs:
           $SSH_CMD "docker builder prune -af --force 2>/dev/null || true; docker image prune -f 2>/dev/null || true; df -h /"
 
           echo "=== Rebuilding and restarting services ==="
-          $SSH_CMD "cd /opt/pfp && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml up -d --build --remove-orphans"
+          $SSH_CMD "cd /opt/pfp && set -a && source .env.production 2>/dev/null || true && source .env 2>/dev/null || true && export TELEGRAM_NOTIFICATIONS_CHAT_ID=\"\${TELEGRAM_NOTIFICATIONS_CHAT_ID:-${TELEGRAM_ADMIN_CHAT_ID}}\" && set +a && docker compose -f docker-compose.production.yml -f docker-compose.stealth.yml up -d --build --remove-orphans"
 
           echo "=== Waiting for services to stabilize ==="
           sleep 30

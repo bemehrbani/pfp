@@ -306,6 +306,7 @@ class SubmitContactView(APIView):
             properties={
                 'name': openapi.Schema(type=openapi.TYPE_STRING, description='Submitter name'),
                 'email': openapi.Schema(type=openapi.TYPE_STRING, description='Submitter email'),
+                'contact_handle': openapi.Schema(type=openapi.TYPE_STRING, description='Optional Telegram @username or Signal/Phone'),
                 'role': openapi.Schema(type=openapi.TYPE_STRING, description='Role or interest (e.g. Volunteer, Scholar)'),
                 'message': openapi.Schema(type=openapi.TYPE_STRING, description='Message body'),
             }
@@ -314,8 +315,12 @@ class SubmitContactView(APIView):
     )
     def post(self, request):
         """Save contact form submission to database and forward to Telegram."""
+        import html
+        import os
+
         name = request.data.get('name')
         email = request.data.get('email')
+        contact_handle = (request.data.get('contact_handle') or '').strip()
         role = request.data.get('role', 'General Inquiry')
         message = request.data.get('message')
 
@@ -332,12 +337,16 @@ class SubmitContactView(APIView):
             ip_address = request.META.get('REMOTE_ADDR')
         user_agent = request.META.get('HTTP_USER_AGENT', '')
 
+        clean_message = message.strip()
+        notes_text = f"Direct Handle (Telegram/Signal/Phone): {contact_handle}" if contact_handle else ""
+
         # 1. ALWAYS persist submission to database first
         submission = ContactSubmission.objects.create(
             name=name.strip(),
             email=email.strip(),
             role=role.strip() if role else 'General Inquiry',
-            message=message.strip(),
+            message=clean_message,
+            notes=notes_text,
             ip_address=ip_address,
             user_agent=user_agent[:500] if user_agent else '',
         )
@@ -353,18 +362,39 @@ class SubmitContactView(APIView):
             }, status=status.HTTP_201_CREATED)
 
         bot_token = settings.TELEGRAM_BOT_TOKEN
-        chat_id = getattr(settings, 'TELEGRAM_NOTIFICATIONS_CHAT_ID', '')
+        target_chat_ids = []
 
-        if not chat_id:
+        notif_chat_id = str(getattr(settings, 'TELEGRAM_NOTIFICATIONS_CHAT_ID', '') or '').strip()
+        if notif_chat_id:
+            target_chat_ids.extend([cid.strip() for cid in notif_chat_id.split(',') if cid.strip()])
+
+        bot_admin_ids = str(os.environ.get('BOT_ADMIN_IDS', '') or '').strip()
+        if bot_admin_ids:
+            for cid in bot_admin_ids.split(','):
+                if cid.strip() and cid.strip() not in target_chat_ids:
+                    target_chat_ids.append(cid.strip())
+
+        if not target_chat_ids:
             try:
                 from apps.campaigns.models import Campaign
                 campaign = Campaign.objects.filter(telegram_group_id__isnull=False).first()
-                if campaign:
-                    chat_id = campaign.telegram_group_id
+                if campaign and campaign.telegram_group_id:
+                    target_chat_ids.append(str(campaign.telegram_group_id))
             except Exception as e:
                 logger.error(f'Error searching fallback Campaign group ID: {e}')
 
-        if not bot_token or not chat_id:
+        if not target_chat_ids:
+            try:
+                from apps.telegram.models import TelegramSession
+                admin_session = TelegramSession.objects.filter(user__is_staff=True).order_by('-last_interaction').first()
+                if not admin_session:
+                    admin_session = TelegramSession.objects.order_by('-last_interaction').first()
+                if admin_session and admin_session.telegram_chat_id:
+                    target_chat_ids.append(str(admin_session.telegram_chat_id))
+            except Exception as e:
+                logger.error(f'Error searching fallback TelegramSession chat ID: {e}')
+
+        if not bot_token or not target_chat_ids:
             err_msg = 'Telegram bot token or notifications chat ID not configured'
             logger.warning(f'Contact submission #{submission.id} saved to DB, but {err_msg}')
             submission.telegram_error = err_msg
@@ -375,28 +405,44 @@ class SubmitContactView(APIView):
                 'id': submission.id
             }, status=status.HTTP_201_CREATED)
 
-        # Format Telegram notification message
+        # Format Telegram notification message with HTML escaping
+        handle_line = f"📱 <b>Telegram / Signal / Phone:</b> {html.escape(contact_handle)}\n" if contact_handle else ""
         formatted_message = (
-            f"<b>📥 New Contact/Volunteer Submission #{submission.id}</b>\n\n"
-            f"👤 <b>Name:</b> {submission.name}\n"
-            f"✉️ <b>Email:</b> {submission.email}\n"
-            f"🏷️ <b>Interest/Role:</b> {submission.role}\n\n"
+            f"<b>📥 New Contact/Support Submission #{submission.id}</b>\n\n"
+            f"👤 <b>Name:</b> {html.escape(submission.name)}\n"
+            f"✉️ <b>Email:</b> {html.escape(submission.email)}\n"
+            f"{handle_line}"
+            f"🏷️ <b>Interest/Role:</b> {html.escape(submission.role)}\n\n"
             f"📝 <b>Message:</b>\n"
-            f"{submission.message}"
+            f"{html.escape(submission.message)}"
         )
 
         try:
             bot = telegram.Bot(token=bot_token)
-            async def send():
+            sent_any = False
+            errors = []
+
+            async def send_all():
+                nonlocal sent_any
                 async with bot:
-                    return await bot.send_message(
-                        chat_id=chat_id,
-                        text=formatted_message,
-                        parse_mode='HTML'
-                    )
-            async_to_sync(send)()
-            submission.telegram_sent = True
-            submission.save(update_fields=['telegram_sent'])
+                    for cid in target_chat_ids:
+                        try:
+                            await bot.send_message(
+                                chat_id=cid,
+                                text=formatted_message,
+                                parse_mode='HTML'
+                            )
+                            sent_any = True
+                        except Exception as send_err:
+                            errors.append(f"{cid}: {send_err}")
+
+            async_to_sync(send_all)()
+            submission.telegram_sent = sent_any
+            if errors and not sent_any:
+                submission.telegram_error = "; ".join(errors)
+                submission.save(update_fields=['telegram_sent', 'telegram_error'])
+            else:
+                submission.save(update_fields=['telegram_sent'])
 
             return Response({
                 'status': 'success',

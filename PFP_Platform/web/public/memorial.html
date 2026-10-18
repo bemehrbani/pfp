@@ -855,28 +855,8 @@
 
 <body>
     <!-- ====== NAVIGATION ====== -->
-    <nav class="lang-bar">
-        <span class="lang-bar-logo">☮ PFPJ ry</span>
-        <div class="navbar-links">
-            <a href="landing.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="memorial.html" class="active">Minab Memorial</a>
-            <a href="multimedia.html">Multimedia</a>
-            <a href="mothers.html">Mothers & Families</a>
-            <a href="evidence.html">Forensic Evidence</a>
-            <a href="sources.html">Forensic Report</a>
-            <a href="similarity_annex.html">Technical Annex</a>
-            <a href="initiatives.html">Global Initiatives</a>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;">
-            <div class="lang-bar-nav">
-                <button class="lang-btn active" onclick="setLang('en')">EN</button>
-                <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
-                <button class="lang-btn" onclick="setLang('fi')">FI</button>
-            </div>
-            <a href="mailto:info@peopleforpeace.live" class="cta-nav" style="background:rgba(212, 168, 83, 0.15); border:1px solid var(--gold); color:var(--gold); padding:6px 18px; border-radius:20px; font-size:0.85rem; font-weight:600; margin-left:12px; text-decoration:none;">✉ Contact</a>
-        </div>
-    </nav>
+    <header class="site-header" id="pfpSiteHeader"></header>
+    <script src="site-nav.js"></script>
 
     <!-- Hero -->
     <section class="hero" id="hero">
@@ -1009,7 +989,7 @@
             <a href="sources.html">Forensic Report</a>
             <a href="similarity_annex.html">Technical Annex</a>
             <a href="initiatives.html">Global Initiatives</a>
-            <a href="mailto:info@peopleforpeace.live" data-i18n="footer_contact">Contact Us</a>
+            <a href="#contact" data-open-contact="true" data-i18n="footer_contact">Contact Us</a>
         </div>
         <p style="margin-top:16px; font-size:0.8rem; color:#64748b;">People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026</p>
     </footer>

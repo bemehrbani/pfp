@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <meta name="theme-color" content="#0a0e17" />
-  <meta name="description" content="Interactive 3D Spatial Reconstruction of Shajareh Tayyebeh Primary School in Minab, Iran — Open-source architectural modeling and forensic analysis." />
-  <meta property="og:title" content="3D Spatial Reconstruction — Minab Primary School Strike" />
-  <meta property="og:description" content="Explore the interactive 3D spatial reconstruction of the school strike, blast crater, and verified forensic evidence." />
-  <meta property="og:image" content="https://peopleforpeace.live/images/og-evidence.png" />
+  <meta name="description" content="Walkable 3D Spatial Experience of Shajareh Tayyebeh Primary School in Minab — Verified interior rooms, camera-projected children's photos/videos, and the Accountability Vow." />
+  <meta property="og:title" content="Walkable 3D Memorial & Spatial Experience — Minab Primary School" />
+  <meta property="og:description" content="Walk inside the reconstructed rooms of Shajareh Tayyebeh School, see the camera-aligned photos and videos of the children before the February 28, 2026 strike, and sign the Accountability Vow." />
+  <meta property="og:image" content="https://peopleforpeace.live/images/fa_spots/spot_floorplan_cutaway.jpg" />
   <title data-i18n="pageTitle">3D Spatial Reconstruction — Minab Primary School | People for Peace</title>
 
   <!-- Google Fonts -->
@@ -19,16 +19,17 @@
     :root {
       --bg: #0a0e17;
       --bg-panel: rgba(14, 20, 32, 0.88);
-      --bg-card: rgba(26, 32, 46, 0.95);
+      --bg-card: rgba(20, 27, 42, 0.97);
       --text: #f0ebe3;
       --text-muted: #9ca3af;
       --gold: #d4a853;
       --gold-dim: rgba(212, 168, 83, 0.18);
       --red: #c4564a;
-      --red-dim: rgba(196, 86, 74, 0.2);
+      --red-dim: rgba(196, 86, 74, 0.22);
       --blue: #4a90d9;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-gold: rgba(212, 168, 83, 0.35);
+      --green: #10b981;
+      --border: rgba(255, 255, 255, 0.09);
+      --border-gold: rgba(212, 168, 83, 0.4);
       --font-display: 'Playfair Display', Georgia, serif;
       --font-body: 'Source Sans 3', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -62,16 +63,19 @@
       height: 100% !important;
     }
 
-    /* UI HUD Overlay (Top, Bottom, Lateral) */
+    /* UI HUD Overlay */
     .hud-layer {
       position: absolute;
-      inset: 0;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 0;
       pointer-events: none;
       z-index: 10;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 16px 24px;
+      padding: 10px 20px 14px;
     }
     .hud-layer > * { pointer-events: auto; }
 
@@ -84,18 +88,20 @@
       backdrop-filter: blur(16px);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 10px 20px;
+      padding: 10px 18px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+      gap: 12px;
+      flex-wrap: wrap;
     }
     .hud-header-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
     .back-btn {
       color: var(--gold);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       padding: 6px 12px;
       border-radius: 8px;
@@ -105,13 +111,14 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
     .back-btn:hover {
       background: var(--gold);
       color: var(--bg);
     }
     .header-titles h1 {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--text);
       letter-spacing: 0.02em;
@@ -126,8 +133,36 @@
     .hud-header-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
+    .vow-cta-btn {
+      background: linear-gradient(135deg, #d4a853 0%, #b8862d 100%);
+      color: #0a0e17;
+      border: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 18px rgba(212, 168, 83, 0.45);
+      transition: all var(--transition);
+    }
+    .vow-cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 26px rgba(212, 168, 83, 0.75);
+    }
+    .vow-counter-pill {
+      background: rgba(10, 14, 23, 0.25);
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
     .lang-switcher {
       display: flex;
       background: rgba(0, 0, 0, 0.3);
@@ -139,7 +174,7 @@
       background: transparent;
       border: none;
       color: var(--text-muted);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       padding: 4px 10px;
       border-radius: 16px;
@@ -151,12 +186,18 @@
       color: var(--bg);
     }
 
-    /* CAMERA PRESETS BAR */
+    /* TOP SUB-BAR: CAMERA PRESETS, CUTAWAY, WALK MODE, TOUR & SPATIAL EXPORT */
+    .top-subrow {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
     .presets-bar {
       display: flex;
-      gap: 8px;
-      align-self: flex-start;
-      margin-top: 12px;
+      gap: 6px;
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       padding: 6px 10px;
@@ -168,29 +209,124 @@
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      padding: 6px 12px;
+      padding: 6px 11px;
       border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 500;
+      font-size: 0.8rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all var(--transition);
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      white-space: nowrap;
     }
-    .preset-btn:hover {
+    .preset-btn:hover, .preset-btn.active {
       color: var(--text);
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(212, 168, 83, 0.18);
+      border-color: var(--border-gold);
+    }
+    .tour-btn {
+      background: rgba(74, 144, 217, 0.18);
+      border-color: rgba(74, 144, 217, 0.5);
+      color: #93c5fd;
+    }
+    .tour-btn.active {
+      background: var(--blue);
+      color: #fff;
+    }
+    .cutaway-btn {
+      background: rgba(212, 168, 83, 0.14);
+      border-color: rgba(212, 168, 83, 0.45);
+      color: #fde68a;
+    }
+    .export-btn {
+      background: rgba(16, 185, 129, 0.14);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
     }
     .vr-btn {
       background: var(--red-dim);
       border-color: var(--red);
       color: #ff9d94;
     }
-    .vr-btn:hover {
-      background: var(--red);
+
+    /* GUIDED STORY NARRATOR BANNER */
+    .story-banner {
+      display: none;
+      align-self: center;
+      max-width: 760px;
+      width: 100%;
+      background: rgba(14, 20, 32, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 14px 20px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+      margin-top: 8px;
+    }
+    .story-banner.visible {
+      display: block;
+    }
+    .story-step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .story-step-badge {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .story-controls {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .story-nav-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .story-nav-btn:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+    .story-body-flex {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-top: 6px;
+    }
+    .story-thumb {
+      width: 128px;
+      height: 74px;
+      object-fit: cover;
+      border-radius: 7px;
+      border: 1px solid var(--border-gold);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .story-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
       color: #fff;
+      margin-bottom: 3px;
+    }
+    .story-text {
+      font-size: 0.85rem;
+      color: #d1d5db;
+      line-height: 1.48;
     }
 
     /* BOTTOM CONTROLS & TIMELINE SCRUBBER */
@@ -198,8 +334,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
-      max-width: 680px;
+      gap: 8px;
+      max-width: 740px;
       margin: 0 auto;
       width: 100%;
     }
@@ -209,22 +345,22 @@
       backdrop-filter: blur(16px);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 16px 24px;
+      padding: 13px 22px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
     .timeline-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
-      font-size: 0.85rem;
+      margin-bottom: 8px;
+      font-size: 0.84rem;
       font-weight: 600;
     }
     .state-toggle-btn {
       background: none;
       border: none;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.84rem;
+      font-weight: 700;
       cursor: pointer;
       color: var(--text-muted);
       transition: color var(--transition);
@@ -237,7 +373,6 @@
       color: #f87171;
     }
 
-    /* Range Slider */
     .slider-container {
       position: relative;
       width: 100%;
@@ -271,7 +406,7 @@
     }
 
     .help-hint {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
       text-align: center;
       letter-spacing: 0.02em;
@@ -291,64 +426,64 @@
       top: -16px; left: -16px;
       width: 32px; height: 32px;
       border-radius: 50%;
-      background: rgba(212, 168, 83, 0.3);
+      background: rgba(212, 168, 83, 0.32);
       animation: pinPulse 2s infinite ease-out;
     }
     .pin-icon {
       position: relative;
-      width: 20px; height: 20px;
+      width: 24px; height: 24px;
       background: var(--gold);
       color: #0a0e17;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 900;
-      box-shadow: 0 0 12px rgba(212, 168, 83, 0.9);
+      box-shadow: 0 0 14px rgba(212, 168, 83, 0.95);
       transition: transform var(--transition);
+    }
+    .hotspot-pin.vow-pin .pin-icon {
+      background: #10b981;
+      color: #fff;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.95);
     }
     .hotspot-pin:hover .pin-icon {
       transform: scale(1.3);
       background: #ffffff;
+      color: #0a0e17;
     }
     .pin-tooltip {
       position: absolute;
-      left: 28px; top: -4px;
-      background: rgba(14, 20, 32, 0.92);
+      left: 30px; top: -3px;
+      background: rgba(14, 20, 32, 0.94);
       border: 1px solid var(--border-gold);
       color: var(--text);
       padding: 4px 10px;
       border-radius: 6px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 600;
       white-space: nowrap;
       pointer-events: none;
-      opacity: 0;
-      transform: translateX(-4px);
-      transition: all var(--transition);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-    }
-    .hotspot-pin:hover .pin-tooltip {
-      opacity: 1;
-      transform: translateX(0);
+      opacity: 0.92;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
     }
     @keyframes pinPulse {
       0% { transform: scale(0.6); opacity: 1; }
-      100% { transform: scale(1.8); opacity: 0; }
+      100% { transform: scale(1.9); opacity: 0; }
     }
 
-    /* EVIDENCE MODAL DRAWER */
+    /* EVIDENCE & MEDIA MODAL DRAWER */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(10, 14, 23, 0.7);
-      backdrop-filter: blur(8px);
+      background: rgba(10, 14, 23, 0.78);
+      backdrop-filter: blur(10px);
       z-index: 100;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 18px;
       opacity: 0;
       pointer-events: none;
       transition: opacity var(--transition);
@@ -361,13 +496,16 @@
       background: var(--bg-card);
       border: 1px solid var(--border-gold);
       border-radius: 16px;
-      max-width: 580px;
+      max-width: 720px;
+      max-height: 92vh;
+      overflow-y: auto;
       width: 100%;
-      padding: 28px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      transform: translateY(20px);
+      padding: 22px 26px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+      transform: translateY(16px);
       transition: transform var(--transition);
       position: relative;
+      user-select: text;
     }
     .modal-backdrop.visible .evidence-modal {
       transform: translateY(0);
@@ -376,10 +514,10 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
     .badge-evidence {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -393,83 +531,264 @@
       background: none;
       border: none;
       color: var(--text-muted);
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       cursor: pointer;
       line-height: 1;
-      padding: 4px 8px;
-      border-radius: 6px;
-      transition: color var(--transition);
+      padding: 2px 8px;
     }
     .modal-close:hover { color: #fff; }
     .modal-title {
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .modal-cat {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--gold);
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
+    }
+    .modal-media-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .modal-video-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .modal-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-spot-img-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border-gold);
+      position: relative;
+    }
+    .modal-spot-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .spot-img-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(10, 14, 23, 0.82);
+      color: var(--gold);
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      text-align: center;
     }
     .modal-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: #d1d5db;
+      line-height: 1.58;
+      margin-bottom: 12px;
     }
+    .modal-testimony-box {
+      background: rgba(196, 86, 74, 0.12);
+      border-left: 3px solid var(--red);
+      padding: 11px 14px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+      display: none;
+    }
+    .modal-testimony-box.active {
+      display: block;
+    }
+    body[dir="rtl"] .modal-testimony-box {
+      border-left: none;
+      border-right: 3px solid var(--red);
+    }
+    .testimony-quote {
+      font-style: italic;
+      font-size: 0.87rem;
+      color: #f3f4f6;
+      line-height: 1.52;
+      margin-bottom: 5px;
+    }
+    .testimony-author {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fca5a5;
+    }
+    .modal-kids-strip {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 6px 0;
+      margin-bottom: 12px;
+    }
+    .kid-mini-card {
+      flex: 0 0 80px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .kid-mini-card:hover {
+      border-color: var(--gold);
+    }
+    .kid-mini-card img {
+      width: 62px;
+      height: 62px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+      margin: 0 auto 4px;
+    }
+    .kid-mini-card span {
+      display: block;
+      font-size: 0.67rem;
+      line-height: 1.2;
+      color: #e5e7eb;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .modal-finding-box {
       background: rgba(0, 0, 0, 0.35);
       border-left: 3px solid var(--gold);
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 4px;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
     body[dir="rtl"] .modal-finding-box {
       border-left: none;
       border-right: 3px solid var(--gold);
     }
     .finding-label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
     .finding-text {
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.45;
     }
     .modal-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 14px;
+      padding-top: 12px;
       border-top: 1px solid var(--border);
+      gap: 10px;
+      flex-wrap: wrap;
     }
     .ref-code {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
     }
-    .btn-registry-link {
-      color: var(--gold);
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .btn-registry-link:hover { text-decoration: underline; }
 
-    /* Responsive adjustments */
+    /* ACCOUNTABILITY VOW & PETITION MODAL */
+    .vow-pledge-box {
+      background: rgba(212, 168, 83, 0.09);
+      border: 1px solid var(--border-gold);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #fef3c7;
+    }
+    .vow-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .vow-field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #d1d5db;
+      margin-bottom: 4px;
+    }
+    .vow-field input, .vow-field select, .vow-field textarea {
+      width: 100%;
+      padding: 9px 12px;
+      background: rgba(10, 14, 23, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: #fff;
+      font-size: 0.88rem;
+      font-family: inherit;
+    }
+    .vow-field input:focus, .vow-field select:focus, .vow-field textarea:focus {
+      border-color: var(--gold);
+      outline: none;
+    }
+    .vow-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: #e5e7eb;
+      margin: 12px 0 16px;
+      cursor: pointer;
+    }
+    .vow-checkbox-row input {
+      margin-top: 3px;
+      accent-color: var(--gold);
+      width: 16px;
+      height: 16px;
+    }
+    .vow-submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #d4a853 0%, #b8862d 100%);
+      color: #0a0e17;
+      border: none;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .vow-submit-btn:hover {
+      filter: brightness(1.08);
+    }
+    .vow-status-msg {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 7px;
+      font-size: 0.85rem;
+      text-align: center;
+      display: none;
+    }
+
     @media (max-width: 768px) {
-      .hud-layer { padding: 12px 14px; }
+      .hud-layer { padding: 10px 12px; }
       .header-titles .coords { display: none; }
       .presets-bar { overflow-x: auto; max-width: 100%; }
-      .timeline-card { padding: 12px 16px; }
-      .evidence-modal { padding: 20px; }
+      .vow-form-grid, .modal-media-grid { grid-template-columns: 1fr; }
+      .pin-tooltip { display: none; }
+      .story-thumb { display: none; }
     }
   </style>
 </head>
@@ -481,42 +800,81 @@
   <!-- HUD Interface Layer -->
   <div class="hud-layer">
 
-    <!-- Top Navigation Header -->
-    <header class="hud-header">
-      <div class="hud-header-left">
-        <a href="evidence.html" class="back-btn" data-i18n="navEvidence">← Back to Evidence</a>
-        <div class="header-titles">
-          <h1 class="display-font" data-i18n="heroTitle">Shajareh Tayyebeh Primary School</h1>
-          <div class="coords" data-i18n="heroCoords">27°08'43"N 57°05'02"E · Minab, Hormozgan · Strike: Feb 28, 2026</div>
+    <div>
+      <!-- Top Navigation Header -->
+      <header class="hud-header">
+        <div class="hud-header-left">
+          <a href="evidence.html" class="back-btn" data-i18n="navEvidence">← Back to Evidence</a>
+          <div class="header-titles">
+            <h1 class="display-font" data-i18n="heroTitle">Shajareh Tayyebeh Primary School</h1>
+            <div class="coords" data-i18n="heroCoords">27°08'43"N 57°05'02"E · Minab, Hormozgan · Strike: Feb 28, 2026</div>
+          </div>
+        </div>
+
+        <div class="hud-header-right">
+          <button class="vow-cta-btn" id="openVowBtn">
+            <span>✍️</span>
+            <span data-i18n="signVowBtn">Sign Accountability Vow</span>
+            <span class="vow-counter-pill" id="vowCountBadge">1,428</span>
+          </button>
+
+          <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="fi" onclick="setLanguage('fi')">FI</button>
+            <button class="lang-btn" data-lang="fa" onclick="setLanguage('fa')">فارسی</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Sub-bar: Guided Tour + Cutaway Floors + Walk Inside + Presets + Spatial.io GLB Export -->
+      <div class="top-subrow">
+        <div class="presets-bar">
+          <button class="preset-btn tour-btn" id="btnGuidedTour" data-i18n="guidedTourBtn">🎧 Walk Inside & Listen: 8-Stop Tour</button>
+          <button class="preset-btn cutaway-btn" id="btnCutaway" data-i18n="cutawayBtn">🏠 Floorplan Cutaway: All Floors</button>
+          <button class="preset-btn" id="btnWalkMode" data-i18n="walkModeBtn">🚶 Walk Inside (WASD)</button>
+          <button class="preset-btn" id="presetBoysArch" data-i18n="presetBoysArch">🌹 Boys' Ceremony Room</button>
+          <button class="preset-btn" id="presetStairs" data-i18n="presetStairs">🌈 Rainbow Staircase</button>
+          <button class="preset-btn" id="presetGirlsHall" data-i18n="presetGirlsHall">👧 Girls' Upper Hall</button>
+          <button class="preset-btn" id="presetCrater" data-i18n="presetCrater">💥 5m Impact Crater</button>
+          <button class="preset-btn export-btn" id="btnExportGlb" title="Download 3D .GLB file to import into Spatial.io">📦 Export .GLB (Spatial.io)</button>
+          <button class="preset-btn vr-btn" id="enterVrBtn" style="display: none;" data-i18n="enterVrBtn">🥽 Enter WebXR VR</button>
         </div>
       </div>
 
-      <div class="hud-header-right">
-        <div class="lang-switcher">
-          <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-          <button class="lang-btn" data-lang="fi" onclick="setLanguage('fi')">FI</button>
-          <button class="lang-btn" data-lang="fa" onclick="setLanguage('fa')">فارسی</button>
+      <!-- Guided Audio-Visual Story Banner -->
+      <div class="story-banner" id="storyBanner">
+        <div class="story-step-header">
+          <span class="story-step-badge" id="storyStepBadge">STOP 1 OF 8 · COURTYARD ASSEMBLY LINES</span>
+          <div class="story-controls">
+            <button class="story-nav-btn" id="btnStoryPrev">◀ Prev</button>
+            <button class="story-nav-btn" id="btnStoryAudio">🔊 Female Voice On</button>
+            <select id="narrationSpeedSelect" class="story-nav-btn" style="background:rgba(15,23,42,0.9); color:#e2e8f0; cursor:pointer;" title="Voiceover Pace">
+              <option value="0.86">0.85× Slow &amp; Sorrowful</option>
+              <option value="0.94" selected>0.95× Calm &amp; Gentle</option>
+              <option value="1.0">1.00× Normal Pace</option>
+            </select>
+            <button class="story-nav-btn" id="btnStoryVideo">🎬 Open Spot Video &amp; Photo</button>
+            <button class="story-nav-btn" id="btnStoryNext">Next ▶</button>
+            <button class="story-nav-btn" id="btnStoryClose">✕</button>
+          </div>
+        </div>
+        <div class="story-body-flex">
+          <img id="storyThumbImg" class="story-thumb" src="images/fa_spots/spot_assembly_lines.jpg" alt="Spot preview" />
+          <div>
+            <div class="story-title" id="storyTitle">Morning Assembly in the Schoolyard</div>
+            <p class="story-text" id="storyText">Walk across the six yellow morning assembly lines where children aged 6 to 13 lined up before entering their classrooms.</p>
+          </div>
         </div>
       </div>
-    </header>
-
-    <!-- Camera Presets Toolstrip -->
-    <div class="presets-bar">
-      <button class="preset-btn" id="presetOrbit" data-i18n="presetOrbit">🛸 Drone Orbit</button>
-      <button class="preset-btn" id="presetCrater" data-i18n="presetCrater">💥 Impact Crater</button>
-      <button class="preset-btn" id="presetEntrances" data-i18n="presetEntrances">🚪 Dual Entrances</button>
-      <button class="preset-btn" id="presetWall" data-i18n="presetWall">🧱 2016 Boundary Wall</button>
-      <button class="preset-btn" id="presetTopDown" data-i18n="presetTopDown">🛰️ Satellite Ortho</button>
-      <button class="preset-btn vr-btn" id="enterVrBtn" style="display: none;" data-i18n="enterVrBtn">🥽 Enter WebXR VR</button>
     </div>
 
     <!-- Bottom Timeline Scrubber -->
     <div class="hud-bottom">
       <div class="timeline-card">
         <div class="timeline-header">
-          <button class="state-toggle-btn active" id="btnStatePre" onclick="setTemporalCondition(0.0); document.getElementById('timelineSlider').value = 0;" data-i18n="preStrikeBtn">Pre-Strike (Intact)</button>
-          <span style="color:var(--text-muted); font-size:0.75rem;" data-i18n="hotspotsCount">5 Verified Evidence Coordinates Active</span>
-          <button class="state-toggle-btn red" id="btnStatePost" onclick="setTemporalCondition(1.0); document.getElementById('timelineSlider').value = 1;" data-i18n="postStrikeBtn">Post-Strike (Damage)</button>
+          <button class="state-toggle-btn active" id="btnStatePre" onclick="setTemporalCondition(0.0); document.getElementById('timelineSlider').value = 0;" data-i18n="preStrikeBtn">☀ Before Strike (School Full of Life)</button>
+          <span style="color:var(--text-muted); font-size:0.74rem;" data-i18n="hotspotsCount">8 Camera-Aligned Interior &amp; Courtyard Stations Active</span>
+          <button class="state-toggle-btn red" id="btnStatePost" onclick="setTemporalCondition(1.0); document.getElementById('timelineSlider').value = 1;" data-i18n="postStrikeBtn">💥 After Strike (Extent of Damage &amp; 5m Crater)</button>
         </div>
 
         <div class="slider-container">
@@ -524,41 +882,131 @@
         </div>
       </div>
 
-      <div class="help-hint" data-i18n="controlsHelp">
-        Drag to rotate · Scroll / Pinch to zoom · Right-click / Two fingers to pan · Click pulsing markers for evidence
+      <div class="help-hint" id="controlsHintText" data-i18n="controlsHelp">
+        Click "🏠 Floorplan Cutaway" to look inside rooms · WASD / Arrows to walk inside · Click any yellow camera frustum or pulsing pin to watch the exact photo/video on the spot
       </div>
     </div>
 
   </div>
 
-  <!-- Evidence Detail Modal -->
+  <!-- On-The-Spot Evidence, Video & Camera-Aligned Photo Modal -->
   <div class="modal-backdrop" id="evidenceModal">
     <div class="evidence-modal" role="dialog" aria-modal="true">
       <div class="modal-top">
-        <span class="badge-evidence" data-i18n="evidenceBadge">Forensic Evidence Dossier</span>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <span class="badge-evidence" id="modalBadge" data-i18n="evidenceBadge">Forensic Architecture Camera-Aligned Spot</span>
+          <button class="story-nav-btn" id="modalListenBtn" style="border-color:rgba(217,119,6,0.55); color:#fcd34d;">🎧 Listen to Room Voiceover</button>
+        </div>
         <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">&times;</button>
       </div>
 
-      <h2 class="modal-title" id="modalTitle">Evidence Title</h2>
-      <div class="modal-cat" id="modalCategory">Category</div>
+      <h2 class="modal-title" id="modalTitle">Spot Title</h2>
+      <div class="modal-cat" id="modalCategory">Location Context</div>
 
-      <p class="modal-desc" id="modalDesc">Detailed description will appear here.</p>
+      <!-- Side-by-Side: Local HD Video Player + Camera-Aligned Spot Still -->
+      <div class="modal-media-grid">
+        <div class="modal-video-wrap" id="modalVideoWrap">
+          <video id="modalVideoPlayer" controls playsinline preload="metadata"></video>
+        </div>
+        <div class="modal-spot-img-wrap">
+          <img id="modalSpotImg" src="images/fa_spots/spot_facade_porch.jpg" alt="Camera-aligned school photo" />
+          <div class="spot-img-caption" id="modalSpotCaption">3D Camera-Matched Archive Frame</div>
+        </div>
+      </div>
+
+      <p class="modal-desc" id="modalDesc">Detailed description.</p>
+
+      <!-- Firsthand Survivor / Mother / Teacher Testimony -->
+      <div class="modal-testimony-box" id="modalTestimonyBox">
+        <div class="testimony-quote" id="modalTestimonyQuote"></div>
+        <div class="testimony-author" id="modalTestimonyAuthor"></div>
+      </div>
+
+      <!-- Children Portraits Strip for this Wing/Spot -->
+      <div class="modal-kids-strip" id="modalKidsStrip"></div>
 
       <div class="modal-finding-box">
-        <div class="finding-label">Forensic Determination</div>
+        <div class="finding-label" data-i18n="forensicLabel">Spatial Verification & Legal Determination</div>
         <div class="finding-text" id="modalFinding">Finding text here.</div>
       </div>
 
       <div class="modal-footer">
         <span class="ref-code" id="modalRef">EVD-REF-000</span>
-        <a href="evidence.html" class="btn-registry-link" data-i18n="viewInEvidencePortal">View in Evidence Registry →</a>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <button class="vow-cta-btn" style="padding:6px 12px; font-size:0.78rem;" onclick="closeModal(); openVowModal();">✍️ Sign the Vow</button>
+          <a href="memorial.html" class="btn-registry-link" style="color:var(--gold); font-size:0.82rem; font-weight:600; text-decoration:none;" data-i18n="viewInEvidencePortal">Full Memorial Registry →</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Three.js (r128) & OrbitControls from reliable cdnjs -->
+  <!-- Accountability Vow & Petition Modal -->
+  <div class="modal-backdrop" id="vowModal">
+    <div class="evidence-modal" role="dialog" aria-modal="true">
+      <div class="modal-top">
+        <span class="badge-evidence" data-i18n="vowBadge">Global Accountability Petition & Civic Vow</span>
+        <button class="modal-close" id="vowCloseBtn" aria-label="Close vow modal">&times;</button>
+      </div>
+
+      <h2 class="modal-title" data-i18n="vowTitle">The Minab Accountability Vow</h2>
+      <div class="modal-cat" data-i18n="vowSubtitle">November 20 World Children's Day · People for Peace & Justice ry</div>
+
+      <div class="vow-pledge-box" id="vowPledgeText" data-i18n="vowPledgeText">
+        "Having walked through the reconstructed halls of Shajareh Tayyebeh Primary School and witnessed the lives of the 120+ schoolchildren and 26 educators taken on February 28, 2026, I solemnly vow to stand ready and participate in every lawful civic, investigative, and judicial endeavor to hold every person in the chain of command responsible for this atrocity."
+      </div>
+
+      <form id="vowForm">
+        <div class="vow-form-grid">
+          <div class="vow-field">
+            <label data-i18n="vowNameLabel">Full Name *</label>
+            <input type="text" id="vowName" required placeholder="Your full name" />
+          </div>
+          <div class="vow-field">
+            <label data-i18n="vowEmailLabel">Email Address *</label>
+            <input type="email" id="vowEmail" required placeholder="you@example.com" />
+          </div>
+        </div>
+
+        <div class="vow-form-grid">
+          <div class="vow-field">
+            <label data-i18n="vowCityLabel">City & Country (e.g., Helsinki, Finland) *</label>
+            <input type="text" id="vowCity" required placeholder="Helsinki, Finland" />
+          </div>
+          <div class="vow-field">
+            <label data-i18n="vowHowLabel">How I Can Contribute to Accountability</label>
+            <select id="vowContribution">
+              <option value="Accountability Vow Signatory — Public Petitioner">Public Petitioner & Global Campaigner</option>
+              <option value="Accountability Vow Signatory — Legal / Human Rights">Legal, Human Rights & Judicial Action</option>
+              <option value="Accountability Vow Signatory — Media / Journalism / XR">Media, Documentary & Spatial XR Amplification</option>
+              <option value="Accountability Vow Signatory — Organizing Satellite Event">Host / Join a Nov 20 World Children's Day Hub</option>
+              <option value="Accountability Vow Signatory — Researcher / OSINT">OSINT & Forensic Research Support</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="vow-field">
+          <label data-i18n="vowMessageLabel">Personal Message of Remembrance or Commitment (Optional)</label>
+          <textarea id="vowMessage" rows="2" placeholder="In memory of the children of Minab..."></textarea>
+        </div>
+
+        <label class="vow-checkbox-row">
+          <input type="checkbox" id="vowCheckbox" required checked />
+          <span data-i18n="vowConsentText">I affirm this vow and consent to be contacted by People for Peace & Justice ry when collective legal, parliamentary, or civic actions are mobilized.</span>
+        </label>
+
+        <button type="submit" class="vow-submit-btn" id="vowSubmitBtn" data-i18n="vowSubmitBtn">✍️ Sign the Vow & Join the Accountability Registry</button>
+        <div class="vow-status-msg" id="vowStatusMsg"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Three.js (r128), OrbitControls & GLTFExporter for Spatial.io export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"></script>
+  <!-- Unified Site Navigation & Contact Modal -->
+  <script src="site-nav.js"></script>
+  <script src="contact-modal.js"></script>
   <!-- Application Logic -->
   <script src="js/reconstruction.js"></script>
 </body>
