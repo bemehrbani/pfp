@@ -48,7 +48,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Wajiheh Zakari, Teacher at Shajareh Tayyebeh School",
         finding: "Chronological satellite analysis (2015–2026) and school photos confirm playground markings, football pitch, and children assembling in the yard.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (00:25–00:40) & 02_progression.mp4",
-        videoFile: "media/fa/02_progression.mp4",
+        videoFile: "media/fa/clips/spot_01_courtyard.mp4",
         videoStart: 15,
         spotImg: "images/fa_spots/spot_assembly_lines.jpg",
         spotCaption: "Camera-matched courtyard assembly lines & pastel perimeter wall"
@@ -61,7 +61,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Forensic Architecture Investigation 121 (Interior Reconstruction)",
         finding: "Camera-frustum alignment locks the exact room dimensions, window grille bars, and teal/pink wall colors on the ground floor.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (01:02–01:28)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_02_boys_arch.mp4",
         videoStart: 62,
         spotImg: "images/fa_spots/spot_boys_flower_arch.jpg",
         spotCaption: "Boys in blue school uniforms under red rose arches (Ground Floor)"
@@ -74,7 +74,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Forensic Architecture Investigation 121",
         finding: "Establishes active, high-density elementary classroom occupancy on the ground floor immediately prior to February 28, 2026.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (01:48–02:02)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_03_boys_classroom.mp4",
         videoStart: 108,
         spotImg: "images/fa_spots/spot_boys_classroom.jpg",
         spotCaption: "35+ boys clapping and singing inside the ground-floor classroom"
@@ -87,7 +87,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Parastesh Zaeri (Age 11, Survivor; her 8-year-old brother Ali Asghar was killed)",
         finding: "This exact rainbow staircase and central hall connection sat directly on the boundary of the 11:22 AM blast collapse zone.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (02:32–02:50)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_04_rainbow_stairs.mp4",
         videoStart: 152,
         spotImg: "images/fa_spots/spot_rainbow_stairs.jpg",
         spotCaption: "Teachers and students at the rainbow staircase & purple doors"
@@ -100,7 +100,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Forensic Architecture Investigation 121",
         finding: "This exact upper-floor girls' assembly room and adjacent classrooms fell completely inside the collapsed west/central blast zone.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (02:55–03:35)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_05_girls_hall.mp4",
         videoStart: 175,
         spotImg: "images/fa_spots/spot_girls_assembly.jpg",
         spotCaption: "80+ schoolgirls seated together in the first-floor assembly hall"
@@ -113,7 +113,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Forensic Architecture Investigation 121 (Impact Crater Analysis)",
         finding: "Obliteration of the two-story west wing and central atrium accounts for the mass casualty toll of 121+ children and 26 teachers.",
         evidenceRef: "FA-121 / 07_impact_crater.mp4 & 01_reconstruction.mp4 (04:40)",
-        videoFile: "media/fa/07_impact_crater.mp4",
+        videoFile: "media/fa/clips/spot_06_crater.mp4",
         videoStart: 0,
         spotImg: "images/fa_spots/spot_crater_photo.jpg",
         spotCaption: "Post-strike drone photogrammetry aligned with the 5m assembly hall crater"
@@ -126,7 +126,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Khadija Ahmedizadeh, Bereaved Mother of 9-year-old Mohammad Taha Jafari",
         finding: "Bellingcat and the Open Source Munitions Portal (OSMP / Airwars / ARES) positively identified the RGM/UGM-109 Tomahawk missile and fragments.",
         evidenceRef: "FA-121 / 04_bomb_cloud.mp4 & 05_shadow_cars.mp4",
-        videoFile: "media/fa/04_bomb_cloud.mp4",
+        videoFile: "media/fa/clips/spot_07_second_wave.mp4",
         videoStart: 10,
         spotImg: "images/fa_spots/spot_damage_extent.jpg",
         spotCaption: "Extent of structural destruction across the school and neighborhood"
@@ -139,7 +139,7 @@ const I18N_DATA = {
         testimonyAuthor: "— The Minab Accountability Vow (People for Peace & Justice ry)",
         finding: "120+ children and 26 educators documented in the PFPJ ry Master Casualty Registry.",
         evidenceRef: "PFPJ-VOW-2026 / 06_before_after.mp4",
-        videoFile: "media/fa/06_before_after.mp4",
+        videoFile: "media/fa/clips/spot_08_cutaway_damage.mp4",
         videoStart: 0,
         spotImg: "images/fa_spots/spot_floorplan_cutaway.jpg",
         spotCaption: "Full 3D cutaway of the reconstructed school rooms"
@@ -187,7 +187,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Wajiheh Zakari, koulun opettaja",
         finding: "Satelliittikuvat (2015–2026) ja koulun valokuvat vahvistavat pihan leikkimerkinnät ja jalkapallokentän.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 & 02_progression.mp4",
-        videoFile: "media/fa/02_progression.mp4",
+        videoFile: "media/fa/clips/spot_01_courtyard.mp4",
         videoStart: 15,
         spotImg: "images/fa_spots/spot_assembly_lines.jpg",
         spotCaption: "Koulupihan keltaiset kokoontumisviivat ja pastellisävyinen muuri"
@@ -200,7 +200,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Forensic Architecture -tutkinta 121",
         finding: "Kamerasovitus vahvistaa huoneen tarkat mitat, ikkunakalterit ja seinävärit.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (01:02–01:28)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_02_boys_arch.mp4",
         videoStart: 62,
         spotImg: "images/fa_spots/spot_boys_flower_arch.jpg",
         spotCaption: "Koulupojat punaisten ruusukaarten alla alakerrassa"
@@ -213,7 +213,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Forensic Architecture -tutkinta 121",
         finding: "Todistaa aktiivisen perusopetuksen alakerran luokissa.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (01:48–02:02)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_03_boys_classroom.mp4",
         videoStart: 108,
         spotImg: "images/fa_spots/spot_boys_classroom.jpg",
         spotCaption: "Yli 35 poikaa laulamassa alakerran luokkahuoneessa"
@@ -226,7 +226,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Parastesh Zaeri (11-vuotias selviytyjä)",
         finding: "Sateenkaariportaikko sijaitsi suoraan romahtaneen keskussalin reunalla.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (02:32–02:50)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_04_rainbow_stairs.mp4",
         videoStart: 152,
         spotImg: "images/fa_spots/spot_rainbow_stairs.jpg",
         spotCaption: "Opettajat ja oppilaat sateenkaariportaikon juurella"
@@ -239,7 +239,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Forensic Architecture -tutkinta 121",
         finding: "Koko tämä yläkerran länsisiipi romahti täydellisesti klo 11.22 ohjusiskussa.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (02:55–03:35)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_05_girls_hall.mp4",
         videoStart: 175,
         spotImg: "images/fa_spots/spot_girls_assembly.jpg",
         spotCaption: "Yli 80 koulutyttöä kokoontuneena yläkerran salissa"
@@ -252,7 +252,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Forensic Architecture -tutkinta 121",
         finding: "Selittää yli 121 lapsen ja 26 opettajan menehtymisen.",
         evidenceRef: "FA-121 / 07_impact_crater.mp4",
-        videoFile: "media/fa/07_impact_crater.mp4",
+        videoFile: "media/fa/clips/spot_06_crater.mp4",
         videoStart: 0,
         spotImg: "images/fa_spots/spot_crater_photo.jpg",
         spotCaption: "Drone-fotogrammetria sovitettuna 5 metrin kraatteriin"
@@ -265,7 +265,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Khadija Ahmedizadeh, 9-vuotiaan Mohammad Taha Jafarin äiti",
         finding: "Bellingcat ja OSMP vahvistivat RGM/UGM-109 Tomahawk -ohjuksen.",
         evidenceRef: "FA-121 / 04_bomb_cloud.mp4",
-        videoFile: "media/fa/04_bomb_cloud.mp4",
+        videoFile: "media/fa/clips/spot_07_second_wave.mp4",
         videoStart: 10,
         spotImg: "images/fa_spots/spot_damage_extent.jpg",
         spotCaption: "Tuhoutuneen alueen laajuus koulurakennuksessa"
@@ -278,7 +278,7 @@ const I18N_DATA = {
         testimonyAuthor: "— Minabin vastuulupaus (People for Peace & Justice ry)",
         finding: "Suora kansalaisrekisteri — People for Peace & Justice ry (3616815-5).",
         evidenceRef: "PFPJ-VOW-2026 / 06_before_after.mp4",
-        videoFile: "media/fa/06_before_after.mp4",
+        videoFile: "media/fa/clips/spot_08_cutaway_damage.mp4",
         videoStart: 0,
         spotImg: "images/fa_spots/spot_floorplan_cutaway.jpg",
         spotCaption: "Koulun molempien kerrosten 3D-pohjapiirros"
@@ -326,7 +326,7 @@ const I18N_DATA = {
         testimonyAuthor: "— وجیهه ذاکری، معلم دبستان شجره طیبه",
         finding: "بررسی تصاویر ماهواره‌ای (۲۰۱۵ تا ۲۰۲۶) و عکس‌های مدرسه، خطوط صف صبحگاهی و حضور روزانه کودکان در حیاط را اثبات می‌کند.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 & 02_progression.mp4",
-        videoFile: "media/fa/02_progression.mp4",
+        videoFile: "media/fa/clips/spot_01_courtyard.mp4",
         videoStart: 15,
         spotImg: "images/fa_spots/spot_assembly_lines.jpg",
         spotCaption: "تطبیق سه‌بعدی خطوط زرد صف صبحگاهی در حیاط مدرسه"
@@ -339,7 +339,7 @@ const I18N_DATA = {
         testimonyAuthor: "— گزارش ۱۲۱ فورنزیک آرکیتکچر",
         finding: "تطبیق زاویه دوربین، ابعاد دقیق اتاق، حفاظ پنجره و رنگ دیوارهای طبقه همکف را تثبیت می‌کند.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (01:02–01:28)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_02_boys_arch.mp4",
         videoStart: 62,
         spotImg: "images/fa_spots/spot_boys_flower_arch.jpg",
         spotCaption: "دانش‌آموزان پسر زیر طاق گل‌های رز در طبقه همکف"
@@ -352,7 +352,7 @@ const I18N_DATA = {
         testimonyAuthor: "— گزارش ۱۲۱ فورنزیک آرکیتکچر",
         finding: "اثبات تراکم بالای دانش‌آموزان خردسال در کلاس‌های طبقه همکف.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (01:48–02:02)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_03_boys_classroom.mp4",
         videoStart: 108,
         spotImg: "images/fa_spots/spot_boys_classroom.jpg",
         spotCaption: "بیش از ۳۵ دانش‌آموز پسر در حال دست زدن و شادی در کلاس همکف"
@@ -365,7 +365,7 @@ const I18N_DATA = {
         testimonyAuthor: "— پرستش زائری (دانش‌آموز ۱۱ ساله بازمانده)",
         finding: "این راه‌پله رنگین‌کمانی دقیقاً در مرز بخش فروریخته سالن اجتماعات مرکزی قرار داشت.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (02:32–02:50)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_04_rainbow_stairs.mp4",
         videoStart: 152,
         spotImg: "images/fa_spots/spot_rainbow_stairs.jpg",
         spotCaption: "معلمان و دانش‌آموزان دختر در پای راه‌پله رنگین‌کمان"
@@ -378,7 +378,7 @@ const I18N_DATA = {
         testimonyAuthor: "— گزارش ۱۲۱ فورنزیک آرکیتکچر",
         finding: "تمام این سالن بزرگ دختران در طبقه اول و کلاس‌های مجاورش در حمله ساعت ۱۱:۲۲ به‌طور کامل فرو ریخت.",
         evidenceRef: "FA-121 / 01_reconstruction.mp4 (02:55–03:35)",
-        videoFile: "media/fa/01_reconstruction.mp4",
+        videoFile: "media/fa/clips/spot_05_girls_hall.mp4",
         videoStart: 175,
         spotImg: "images/fa_spots/spot_girls_assembly.jpg",
         spotCaption: "بیش از ۸۰ دانش‌آموز دختر در سالن اجتماعات طبقه اول"
@@ -391,7 +391,7 @@ const I18N_DATA = {
         testimonyAuthor: "— گزارش ۱۲۱ فورنزیک آرکیتکچر",
         finding: "فرو ریختن سقف طبقه اول و همکف در این محدوده عامل اصلی شهادت بیش از ۱۲۱ کودک و ۲۶ آموزگار بود.",
         evidenceRef: "FA-121 / 07_impact_crater.mp4",
-        videoFile: "media/fa/07_impact_crater.mp4",
+        videoFile: "media/fa/clips/spot_06_crater.mp4",
         videoStart: 0,
         spotImg: "images/fa_spots/spot_crater_photo.jpg",
         spotCaption: "انطباق فتوگرامتری پهپادی با گودال ۵ متری در مرکز سالن مدرسه"
@@ -404,7 +404,7 @@ const I18N_DATA = {
         testimonyAuthor: "— خدیجه احمدی‌زاده، مادر داغدار دانش‌آموز ۹ ساله محمدطه جعفری",
         finding: "بلینگ‌کت و پرتال مهمات متن‌باز (OSMP / Airwars) موشک RGM/UGM-109 Tomahawk ارتش آمریکا را تأیید کردند.",
         evidenceRef: "FA-121 / 04_bomb_cloud.mp4",
-        videoFile: "media/fa/04_bomb_cloud.mp4",
+        videoFile: "media/fa/clips/spot_07_second_wave.mp4",
         videoStart: 10,
         spotImg: "images/fa_spots/spot_damage_extent.jpg",
         spotCaption: "محدوده دقیق تخریب سازه مدرسه (کادر زردرنگ)"
@@ -417,7 +417,7 @@ const I18N_DATA = {
         testimonyAuthor: "— میثاق دادخواهی میناب (انجمن صلح و عدالت PFPJ ry)",
         finding: "ثبت رسمی در سامانه انجمن صلح و عدالت هلسینکی (3616815-5).",
         evidenceRef: "PFPJ-VOW-2026 / 06_before_after.mp4",
-        videoFile: "media/fa/06_before_after.mp4",
+        videoFile: "media/fa/clips/spot_08_cutaway_damage.mp4",
         videoStart: 0,
         spotImg: "images/fa_spots/spot_floorplan_cutaway.jpg",
         spotCaption: "نمای برش‌خورده سه‌بعدی اتاق‌های هر دو طبقه مدرسه"
@@ -1268,8 +1268,25 @@ function updateHotspotPositions() {
   const width = container.clientWidth;
   const height = container.clientHeight;
   const tempV = new THREE.Vector3();
+  const currentTourStopId = isGuidedTour && GUIDED_TOUR_STOPS[currentTourIndex]
+    ? GUIDED_TOUR_STOPS[currentTourIndex].hotspotId
+    : null;
 
   HOTSPOT_CONFIGS.forEach(cfg => {
+    const isPostStrikePin = cfg.id === 'crater_damage' || cfg.id === 'second_wave';
+    if (damageSliderValue < 0.35 && isPostStrikePin && currentTourStopId !== cfg.id) {
+      cfg.domElement.style.display = 'none';
+      return;
+    }
+    if (damageSliderValue >= 0.65 && !isPostStrikePin && cfg.id !== 'vow_shrine' && currentTourStopId !== cfg.id) {
+      cfg.domElement.style.display = 'none';
+      return;
+    }
+    if (cutawayState === 2 && cfg.id === 'girls_upper_hall' && currentTourStopId !== cfg.id) {
+      cfg.domElement.style.display = 'none';
+      return;
+    }
+
     tempV.copy(cfg.posVec);
     tempV.project(camera);
 
@@ -1279,6 +1296,7 @@ function updateHotspotPositions() {
     }
 
     cfg.domElement.style.display = 'block';
+    cfg.domElement.classList.toggle('active-pin', currentTourStopId === cfg.id || activeHotspotId === cfg.id);
     const x = (tempV.x * 0.5 + 0.5) * width;
     const y = (-tempV.y * 0.5 + 0.5) * height;
     cfg.domElement.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
@@ -1306,6 +1324,7 @@ function selectHotspot(id) {
 }
 
 function showHotspotModal(id) {
+  activeHotspotId = id;
   const t = I18N_DATA[currentLang] || I18N_DATA.en;
   const data = t.hotspots[id];
   if (!data) return;
@@ -1316,11 +1335,13 @@ function showHotspotModal(id) {
   document.getElementById('modalFinding').textContent = data.finding;
   document.getElementById('modalRef').textContent = data.evidenceRef;
 
-  // Native HTML5 Local Video Player (100% reliable, no Vimeo 401 blocks)
+  // Dedicated instant-start room video clip
   const videoPlayer = document.getElementById('modalVideoPlayer');
   if (videoPlayer && data.videoFile) {
     videoPlayer.src = data.videoFile;
-    videoPlayer.currentTime = data.videoStart || 0;
+    videoPlayer.loop = true;
+    videoPlayer.muted = true;
+    videoPlayer.currentTime = 0;
     videoPlayer.play().catch(() => {});
   }
 

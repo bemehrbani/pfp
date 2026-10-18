@@ -55,7 +55,15 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media/
+!PFP_Platform/web/public/media/
+PFP_Platform/web/public/media/*
 !PFP_Platform/web/public/media/subtitles/
+!PFP_Platform/web/public/media/subtitles/**
+!PFP_Platform/web/public/media/narration/
+!PFP_Platform/web/public/media/narration/**
+!PFP_Platform/web/public/media/fa/
+!PFP_Platform/web/public/media/fa/clips/
+!PFP_Platform/web/public/media/fa/clips/**
 
 # Flask stuff:
 instance/
