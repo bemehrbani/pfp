@@ -65,34 +65,37 @@ Each entry reproduces the concrete operational sequence: date, time, physical se
 ---
 
 ## Case 04: Al-Jina Mosque Complex Airstrike (March 16, 2017)
-* **Authoritative Source:** *UN Independent International Commission of Inquiry on the Syrian Arab Republic (A/HRC/36/55, Annex II)*; CENTCOM Investigation Report (June 2017).
-* **Date & Micro-Time:** March 16, 2017, at approximately 18:55 local time.
+* **Authoritative Source:** *UN Independent International Commission of Inquiry on the Syrian Arab Republic (A/HRC/36/55, ¶¶ 53–61)*; USCENTCOM AR 15-6 Investigation Briefing (7 June 2017); Forensic Architecture & Bellingcat Investigations.
+* **Date & Micro-Time:** March 16, 2017, at approximately 18:55 local time (dusk interval between *Maghrib* and *Isha* prayers).
 * **Geographic Locus:** Al-Jina village, western Aleppo countryside, Syrian Arab Republic (`36.1425° N, 36.8483° E`).
-* **Weaponry Deployed:** Two 500-lb GBU-38 JDAM precision-guided bombs followed by AGM-114 Hellfire missiles launched from MQ-9 Reaper drones.
-* **Intended Target vs. Actual Object:** U.S. CENTCOM targeted what intelligence characterized as an "Al-Qaeda meeting hall" located across from a mosque. The building struck was the Jami' Umar ibn al-Khattab service hall, an active religious, social, and educational extension of the mosque filled with evening worshippers and children attending religious instruction.
-* **Casualties:** Between 38 and 49 civilians killed (including multiple children); dozens wounded.
+* **Weaponry Deployed:** Ten (10) GBU-39 Small Diameter Bombs (SDB) and two 500-lb JDAMs delivered by F-15E strike fighters; followed by two (2) AGM-114 Hellfire blast-fragmentation missiles launched by an MQ-9 Reaper drone.
+* **Intended Target vs. Actual Object:** U.S. CENTCOM targeted what intelligence characterized as an "Al-Qaeda meeting hall" located across from a mosque. The building struck was the Jami' Umar ibn al-Khattab service hall, an active religious, social, and educational extension of the mosque filled with 250–300 evening worshippers and children attending regular Thursday religious instruction (*Tablighi Jamaat*) and an evening meal.
+* **Casualties:** Between 38 and 49 civilians killed (including at least 5 children); dozens wounded and permanently maimed; zero verified al-Qaeda casualties.
 
 ### Operational Sequence & Factual Mechanics of the Error
-1. **Stale Imagery & Coordinate Boundary Blindness:** U.S. intelligence analysts identified an assembly of adult males and classified the structure as a detached militant compound. Analysts failed to identify that the building had been dedicated years earlier as an integral expansion of the adjacent mosque.
-2. **Failure of Temporal Pattern-of-Life:** The strike was authorized at 18:55, precisely coinciding with dusk Maghrib prayers and community lectures, when civilian density peaked.
-3. **Precision Strike Execution:** Strike aircraft delivered two 500-lb JDAMs that penetrated the roof and collapsed the interior prayer hall. Drones subsequently fired Hellfire missiles at individuals fleeing the rubble into surrounding courtyards.
-4. **Admission of No-Strike Database Absence:** CENTCOM's internal investigation conceded that targeting personnel did not realize the structure was a functional mosque auxiliary because it had never been mapped onto the military's localized "no-strike list."
+1. **The 3-Day Custody Failure & Coordinate Boundary Blindness:** Targeting teams held intelligence on the site three days prior to the attack, but deferred target planning to the day of execution. Planners failed to conduct pre-strike pattern-of-life surveillance during dusk hours, remaining oblivious to the regular Thursday evening gathering.
+2. **Rejection of the "Adjacent Compound" Defense:** 3D photogrammetric analysis (Forensic Architecture) proved that the service hall was structurally integrated with the mosque via open archways without separating doors, refuting the claim of an isolated insurgent bunker.
+3. **Shift-Change Handover Breakdown:** CENTCOM's internal AR 15-6 inquiry formally admitted that *"irregularities in changeovers of teams on shift contributed to a lack of situational awareness, knowledge, and understanding among strike cell individuals,"* leading to a *"preventable error"* wherein the religious character of the building was overlooked.
+4. **No-Strike List (NSL) Database Absence:** CENTCOM conceded the structure had never been entered into the military's localized No-Strike List, causing automated targeting validation queries to clear the firing solution without alert.
+5. **Follow-On Precision Strikes on Fleeing Non-Combatants:** Following the roof collapse, an MQ-9 Reaper drone fired two Hellfire missiles at civilians and rescuers fleeing along exterior roadways, violating the absolute prohibition against targeting non-combatants and evacuees.
 
 ---
 
 ## Case 05: Kabul Drone Strike on the Ahmadi Family (August 29, 2021)
-* **Authoritative Source:** *U.S. Air Force Inspector General Report (Lt. Gen. Sami Said, Nov 2021)*; U.S. CENTCOM Investigation; New York Times Visual Forensic Investigation.
-* **Date & Micro-Time:** August 29, 2021, at 16:50 local time.
-* **Geographic Locus:** Residential courtyard, Khwaja Burha neighborhood, Kabul, Afghanistan.
-* **Weaponry Deployed:** One AGM-114 Hellfire precision-guided air-to-ground missile fired from an MQ-9 Reaper drone.
-* **Intended Target vs. Actual Object:** Intended target was an ISIS-K operative transporting vehicle-borne improvised explosive devices (VBIED) to attack Hamid Karzai International Airport. Actual object was a white Toyota Corolla driven by Zamarai Ahmadi, a long-time employee of the American humanitarian NGO *Nutrition and Education International* (NEI).
-* **Casualties:** 10 civilians killed—including 7 children: Zamir (20), Faisal (16), Farzad (10), Armin (4), Benyamin (3), Ayat (2), and Malika (2); zero combatants present.
+* **Authoritative Sources:** *U.S. Air Force Inspector General Report (Lt. Gen. Sami Said, Nov 2021)*; U.S. CENTCOM Press Briefing (Gen. Kenneth F. McKenzie Jr., Sept 17, 2021); Declassified CENTCOM AR 15-6 Investigation Records (FOIA, Jan 2022); New York Times Visual Forensic Investigation (Koettl et al., Sept 10, 2021); Just Security IHL Doctrinal Analysis (Haque, Goodman, Finucane, 2021); Lieber Institute West Point (Meier & Nasu, 2021).
+* **Date & Micro-Time:** August 29, 2021, at approximately 16:50 local Kabul time.
+* **Geographic Locus:** Enclosed residential courtyard, Khwaja Burha neighborhood, District 15, Kabul, Afghanistan (34°33'44.8"N, 69°10'33.7"E).
+* **Weaponry Deployed:** One AGM-114 Hellfire precision air-to-ground missile fired from an MQ-9 Reaper remotely piloted aircraft.
+* **Intended Target vs. Actual Object:** Intended target was an ISIS-K operative transporting vehicle-borne improvised explosive devices (VBIED) to attack Hamid Karzai International Airport. Actual object was a white Toyota Corolla driven by Zamarai Ahmadi, a 15-year logistical engineer for American humanitarian NGO *Nutrition and Education International* (NEI).
+* **Casualties:** 10 civilians killed—including 7 children: Zamir (20), Faisal (16), Farzad (10), Armin (4), Benyamin (3), Ayat (2), and Malika (2); zero combatants or military materiel present.
 
 ### Operational Sequence & Factual Mechanics of the Error
-1. **Cognitive Confirmation Bias:** In the wake of the Abbey Gate suicide bombing, drone intelligence cells were hyper-sensitized to white Toyota Corollas. Analysts tracked Ahmadi throughout his workday as he distributed water and food supplies, interpreting standard NGO pickups as terrorist cell logistics.
-2. **The "Explosives" Water Jug Fallacy:** Analysts observed Ahmadi loading heavy plastic canisters into his trunk at his office. Because the municipal water supply in his neighborhood was shut off, he was transporting drinking water home. Targeting cells classified the jugs as liquid explosives.
-3. **Execution into a Residential Enclosure:** At 16:50, Ahmadi turned into the narrow courtyard of his family home. As he shifted into park, his children, nephews, and nieces ran out to greet his vehicle.
-4. **Blindness to Child Presence:** Seconds prior to launch, drone video feeds displayed a child moving adjacent to the vehicle. Targeting personnel, gripped by perceptual tunnel vision, failed to call an abort. The Hellfire struck the engine block/hood, creating a thermal blast inside the enclosed concrete courtyard that killed all 10 family members.
+1. **Cognitive Confirmation Bias & Hypothesis Locking:** In the wake of the Abbey Gate suicide bombing, drone intelligence cells were hyper-sensitized to white Toyota Corollas. Analysts tracked Ahmadi throughout his workday as he distributed soy meal and picked up colleagues, interpreting ordinary humanitarian duties as terrorist cell logistics.
+2. **The "Explosives" Water Jug Fallacy:** Analysts observed Ahmadi loading heavy plastic canisters into his trunk at his office. Because the municipal water supply in his neighborhood had collapsed, he was transporting drinking water home. Targeting cells classified the jugs with "high confidence" as liquid explosives.
+3. **Execution into a Confined Residential Enclosure:** At 16:50, Ahmadi turned into the narrow courtyard of his family home. As he shifted into park, his children, nephews, and nieces ran out to greet his vehicle.
+4. **Blindness to Child Presence & Abort Failure:** Declassified telemetry proves drone video feeds displayed a child moving adjacent to the vehicle approximately two minutes prior to launch. Targeting personnel, gripped by perceptual tunnel vision ("soda-straw effect"), failed to communicate the child's presence or call an abort. The Hellfire struck the engine block, creating an intense thermal/overpressure wave inside the enclosed concrete courtyard that killed all 10 family members.
+5. **Dismantling of the "Secondary Explosion" Pretext:** Visual and structural blast forensics proved that CENTCOM's claim of secondary detonations was false; the secondary blast was merely the vehicle gas tank and a domestic propane cylinder.
+6. **Direct Legal Transposition to Minab:** Kabul is the canonical operational template for Minab's critique of the US intelligence chain. It proves that remote standoff surveillance without ground verification produces severe confirmation bias. In Minab, this human cognitive pathology was mechanized, accelerated, and institutionalized through Palantir Maven and Claude AI, leading commanders to execute stand-off strikes against an elementary school while ignoring terminal optical feeds and active student assemblies.
 
 ---
 
