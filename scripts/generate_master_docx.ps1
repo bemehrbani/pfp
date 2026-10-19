@@ -224,19 +224,30 @@ Write-Host ("Writing temporary HTML file: " + $tempHtmlPath)
 
 # Destination paths
 $destDocsDir = [System.IO.Path]::GetDirectoryName($SourceMd)
-$mainDocxDest = [System.IO.Path]::Combine($destDocsDir, "FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.docx")
-
 $draftsDir = ("E:\Papers\PFPJ\Draft_Versions\" + $ProductionDate)
 if (-not (Test-Path $draftsDir)) {
     New-Item -ItemType Directory -Path $draftsDir -Force | Out-Null
 }
-$datedDocxDest = [System.IO.Path]::Combine($draftsDir, ("PFPJ_Minab_Factual_Determination_Main_Report_" + $ProductionDate + "_Draft.docx"))
-
 $platformDocsDir = "E:\Papers\PFPJ\PFP_Platform\web\public\docs\minab-report"
 if (-not (Test-Path $platformDocsDir)) {
     New-Item -ItemType Directory -Path $platformDocsDir -Force | Out-Null
 }
-$platformDocxDest = [System.IO.Path]::Combine($platformDocsDir, "PFPJ_Minab_Master_Factual_Determination_Report.docx")
+
+$isAnnex = $SourceMd -match "MASTER_EXHIBIT_DOSSIER"
+
+if ($isAnnex) {
+    $mainDocxDest = [System.IO.Path]::Combine($destDocsDir, "MASTER_EXHIBIT_DOSSIER.docx")
+    $datedDocxDest = [System.IO.Path]::Combine($draftsDir, ("PFPJ_Minab_Master_Exhibit_Dossier_Annex_" + $ProductionDate + "_Draft.docx"))
+    $platformDocxDest = [System.IO.Path]::Combine($platformDocsDir, "PFPJ_Minab_Master_Exhibit_Dossier_Annex.docx")
+    $headerText = "WORKING DRAFT -- PRIVATELY SHARED FOR FEEDBACK | MASTER EXHIBIT COMPENDIUM"
+    $footerText = "CONFIDENTIAL | PEOPLE FOR PEACE & JUSTICE RY | EXHIBIT DOSSIER PFPJ-2026-IR-001 | DRAFT DATE: " + $ProductionDate
+} else {
+    $mainDocxDest = [System.IO.Path]::Combine($destDocsDir, "FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.docx")
+    $datedDocxDest = [System.IO.Path]::Combine($draftsDir, ("PFPJ_Minab_Factual_Determination_Main_Report_" + $ProductionDate + "_Draft.docx"))
+    $platformDocxDest = [System.IO.Path]::Combine($platformDocsDir, "PFPJ_Minab_Master_Factual_Determination_Report.docx")
+    $headerText = "WORKING DRAFT -- PRIVATELY SHARED FOR FEEDBACK | NOT FOR PUBLIC CITATION"
+    $footerText = "CONFIDENTIAL | PEOPLE FOR PEACE & JUSTICE RY | DOCKET PFPJ-2026-IR-001 | DRAFT DATE: " + $ProductionDate
+}
 
 Write-Host "Launching Microsoft Word COM engine to compile DOCX..."
 $word = New-Object -ComObject Word.Application
@@ -256,7 +267,7 @@ try {
         # Header setup
         $header = $section.Headers.Item(1)
         $headerRange = $header.Range
-        $headerRange.Text = "WORKING DRAFT -- PRIVATELY SHARED FOR FEEDBACK | NOT FOR PUBLIC CITATION"
+        $headerRange.Text = $headerText
         $headerRange.Font.Name = "Calibri"
         $headerRange.Font.Size = 8.5
         $headerRange.Font.Bold = $true
@@ -266,7 +277,7 @@ try {
         # Footer setup
         $footer = $section.Footers.Item(1)
         $footerRange = $footer.Range
-        $footerRange.Text = "CONFIDENTIAL | PEOPLE FOR PEACE & JUSTICE RY | DOCKET PFPJ-2026-IR-001 | DRAFT DATE: " + $ProductionDate
+        $footerRange.Text = $footerText
         $footerRange.Font.Name = "Calibri"
         $footerRange.Font.Size = 8
         $footerRange.Font.Color = 0x8B7464

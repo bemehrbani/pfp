@@ -61,8 +61,10 @@
 * [EXHIBIT SERIES OSINT: INDEPENDENT INVESTIGATIVE & MEDIA REPORTS ARCHIVE](#exhibit-osint)
   * [EXH-OSINT-006.1: Tier 1 Major Investigative Reports (Bloomberg, NYT, BBC Verify, WaPo, CBC, Bellingcat)](#exh-osint-006-1)
   * [EXH-OSINT-006.2: Tier 2 Legal Analyses & NGO Findings (HRW, Amnesty International, New Lines)](#exh-osint-006-2)
+  * [EXH-OSINT-006.3: Comparative Benchmark Dossier: Case 15 Dahyan Bus Strike (Bellingcat, CNN, HRW, Amnesty, Mwatana & JIAT)](#exh-osint-006-3)
 * [EXHIBIT SERIES UN: UNITED NATIONS INTERGOVERNMENTAL FACT-FINDING ARCHIVE](#exhibit-un)
   * [EXH-UN-008.1: Independent International Fact-Finding Mission on Iran Report (UN Doc. A/HRC/63/61)](#exh-un-008-1)
+  * [EXH-UN-008.2: UN Group of Eminent Experts on Yemen Report (UN Doc. A/HRC/42/17 & A/HRC/42/CRP.1 — Case 15 Benchmark)](#exh-un-008-2)
 * [RESERVED EVIDENTIARY DOCKETS & PENDING DISCOVERY PROTOCOL (RULE 54bis)](#reserved-dockets)
 * [CRYPTOGRAPHIC INTEGRITY, CHAIN OF CUSTODY & JUDICIAL ACCESS PROTOCOL](#custody-protocol)
 
@@ -641,6 +643,18 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
   2. **Amnesty International (IHL Violation Determination):** Declared the strike an "absolute violation of international law" and attributed direct responsibility to the United States;
   3. **New Lines Institute (IHL Target Analysis):** Established that the strike violated the core principles of distinction, proportionality, and precaution, and noted that publicly available commercial data could have easily confirmed the facility's civilian character.
 
+<a id="exh-osint-006-3"></a>
+### EXH-OSINT-006.3: Comparative Benchmark Dossier: Case 15 Dahyan Bus Strike (Bellingcat, CNN, HRW, Amnesty, Mwatana & JIAT)
+* **Description:** Comprehensive evidentiary and investigative benchmark dossier concerning the August 9, 2018 Dahyan market school bus airstrike in Sa'ada, Yemen (Case 15), compiled pursuant to ICTY Rule 89(C) to establish governing precedent on sub-meter guided munitions forensics, belligerent ROE admissions, and contractor complicity.
+* **Archival Reference:** `Campaigns/minab/legal_benchmarks/annexes_and_exhibits/case_15_dahyan_school_bus/EXH-CASE15-ANNEX-1_UN_GEE_and_Bellingcat_Dahyan_Bus_Dossier.md` & `case_15_dahyan_school_bus_un_gee_full_report.md`.
+* **Primary Investigative Sources & Forensics Catalogued:**
+  1. **Bellingcat Investigation Team (Munitions Forensics — August 13, 2018):** Geolocated impact crater in Dahyan market (`17.0694° N, 43.6192° E`); matched fin and actuator remnants to Lockheed Martin GBU-12 Paveway II laser-guided bomb bearing CAGE Code `94117` and DoD contract `W31P4Q-09-C-0365`;
+  2. **CNN International Investigative Unit (Nima Elbagir et al. — August 17, 2018):** Recovered on-bus ante-mortem video recorded by schoolchildren minutes prior to impact; confirmed weapon delivery under US Foreign Military Sales (FMS) package;
+  3. **Human Rights Watch (War Crime Field Report — September 2, 2018):** Documented 51 fatalities (including 40 children) and 79 wounded; interviewed 14 survivors and eyewitnesses; proved the absence of any military objective at the market stop;
+  4. **Amnesty International (Munitions & ATT Briefing — August 24, 2018):** Technical ballistics analysis proving that deploying a 500-lb blast warhead in an open-air civilian marketplace constitutes an inherently disproportionate attack;
+  5. **Mwatana for Human Rights & Columbia Law School Human Rights Institute (*Day of Judgment*, March 2019, pp. 64–72):** Ground-level trauma and surgical registry reconstruction from Al-Talh and Al-Jumhori hospitals; detailed corporate legal liability of US arms manufacturers;
+  6. **Joint Incident Assessment Team (JIAT Press Conference Concession — September 1, 2018):** Formal belligerent concession by Coalition Legal Advisor Mansour Al-Mansour admitting the strike was "unjustified", conceded an operational delay caused target expiration, admitted failure to abort upon entering a civilian market, and recommended criminal discipline and victim redress.
+
 ---
 
 <a id="exhibit-un"></a>
@@ -655,6 +669,19 @@ Distance from Detonation | Peak Overpressure (psi) | Structural & Biological Eff
   2. **Minab School Strike (Shajareh Tayyebeh):** Established that US armed forces launched an **unlawful indiscriminate attack** against the Shajareh Tayyebeh Primary School in Minab, resulting in over 120 verified child fatalities and the deaths of educators and civilian staff;
   3. **Protected Civilian Sanctuary:** Confirmed that the school was a *"clearly identifiable educational institution dedicated to children,"* entirely devoid of military personnel or legitimate military utility;
   4. **Reckless Failure of Feasible Precautions:** Determined that US forces breached their affirmative legal duty under Additional Protocol I, Article 57, by relying upon unverified historical entries in targeting databases without conducting real-time verification before striking.
+
+<a id="exh-un-008-2"></a>
+### EXH-UN-008.2: UN Group of Eminent Experts on Yemen Report (UN Doc. A/HRC/42/17 & A/HRC/42/CRP.1 — Case 15 Benchmark)
+* **Description:** Intergovernmental findings and legal determinations of the United Nations Group of Eminent International and Regional Experts on Yemen (UN GEE) presented to the Human Rights Council at its 42nd Session, providing the controlling UN jurisprudence on school conveyance strikes and feasible precautions under Additional Protocol I, Article 57.
+* **Authentic UN Symbols & Official References:**
+  - Primary Report: `UN Doc. A/HRC/42/17` (September 2019, paras 25, 30, 82);
+  - Detailed Factual Findings: `UN Doc. A/HRC/42/CRP.1` (September 2019, paras 449–450, 896–905);
+  - UN Security Council Child & Armed Conflict Record: `UN Doc. A/73/907–S/2019/509` (paras 176–192).
+* **Core Intergovernmental Legal Precedents Catalogued:**
+  1. **Strict Presumption of Civilian Status (A/HRC/42/17, para 25):** The UN GEE affirmed that school transports and educational cohorts retain unconditional civilian protection under Additional Protocol I, Article 52(3), precluding belligerent assertions of military target status absent direct participation in hostilities;
+  2. **Affirmative Verification Duty in Broad Daylight (A/HRC/42/CRP.1, paras 449–450):** Held that executing a precision airstrike in broad daylight in an open civilian market when optical sensors have uninterrupted observation of children constitutes a reckless abandonment of the duty to take all feasible precautions under AP I Article 57(2)(a);
+  3. **The Absolute Duty to Abort Strike Chains (A/HRC/42/CRP.1, paras 896–898):** Established that the obligation under AP I Article 57(2)(b) to cancel or suspend an attack is non-discretionary the moment it becomes apparent that the objective is civilian or disproportionate—a standard directly applicable to CENTCOM's failure to abort missiles 2 and 3 in the Minab triple-tap sequence;
+  4. **Categorical War Crime Determination (A/HRC/42/17, para 82):** Formally determined reasonable grounds to believe that launching a precision-guided munition into a concentrated group of schoolchildren constitutes the war crime of intentionally launching an indiscriminate or disproportionate attack under customary international law and Rome Statute Article 8(2)(b)(iv).
 
 ---
 
