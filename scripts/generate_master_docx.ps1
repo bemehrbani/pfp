@@ -2,11 +2,15 @@
 # Generates professional MS Word (.docx) editions of the Minab Master Report
 
 param (
-    [string]$SourceMd = "E:\Papers\PFPJ\Campaigns\minab\justiceForMinab\docs\FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md",
-    [string]$ProductionDate = "2026-10-18"
+    [string]$SourceMd = "",
+    [string]$ProductionDate = (Get-Date -Format "yyyy-MM-dd")
 )
 
 $ErrorActionPreference = "Stop"
+$RepoRoot = Split-Path -Parent $PSScriptRoot
+if ([string]::IsNullOrEmpty($SourceMd)) {
+    $SourceMd = Join-Path $RepoRoot "Campaigns\minab\justiceForMinab\docs\FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md"
+}
 
 Write-Host ("Reading Markdown source: " + $SourceMd)
 if (-not (Test-Path $SourceMd)) {
@@ -224,11 +228,11 @@ Write-Host ("Writing temporary HTML file: " + $tempHtmlPath)
 
 # Destination paths
 $destDocsDir = [System.IO.Path]::GetDirectoryName($SourceMd)
-$draftsDir = ("E:\Papers\PFPJ\Draft_Versions\" + $ProductionDate)
+$draftsDir = Join-Path $RepoRoot ("Draft_Versions\" + $ProductionDate)
 if (-not (Test-Path $draftsDir)) {
     New-Item -ItemType Directory -Path $draftsDir -Force | Out-Null
 }
-$platformDocsDir = "E:\Papers\PFPJ\PFP_Platform\web\public\docs\minab-report"
+$platformDocsDir = Join-Path $RepoRoot "PFP_Platform\web\public\docs\minab-report"
 if (-not (Test-Path $platformDocsDir)) {
     New-Item -ItemType Directory -Path $platformDocsDir -Force | Out-Null
 }

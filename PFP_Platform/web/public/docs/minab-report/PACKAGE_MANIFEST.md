@@ -1,6 +1,6 @@
-# REPORT DRAFT PACKAGE MANIFEST: 2026-10-18
+# REPORT DRAFT PACKAGE MANIFEST: 2026-10-19
 > **Issuing Authority:** People for Peace & Justice ry (PFPJ ry) — Helsinki, Finland (Business ID: `3616815-5`)  
-> **Production Date:** `2026-10-18`  
+> **Production Date:** `2026-10-19`  
 > **Classification:** **CONFIDENTIAL WORKING DRAFT / PRIVATELY SHARED FOR FEEDBACK**  
 > **Governing Dockets:** `PFPJ-2026-IR-001` (Main Report) & `PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM` (Annex Dossier)  
 
@@ -10,10 +10,10 @@
 
 | Document Role | Format | File Name | Size (KB) | SHA-256 Checksum |
 | :--- | :--- | :--- | :--- | :--- |
-| **Main Report** | `DOCX` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-10-18_Draft.docx` | 84.2 KB | `cbe0bac3f100520fe42ec38c8d1bd3a89ce7b81c3f97bd90943bafaf5bf2d75b` |
-| **Main Report** | `PDF` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-10-18_Draft.pdf` | 1117.0 KB | `5ef56bfdf1de1464f5c308c66acb39062b9d7d702e87564941a58cafecefca0a` |
-| **Annex Document** | `DOCX` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-10-18_Draft.docx` | 69.8 KB | `98eae1a617eb7cf3aee5f9c97308060590d1d7de7a1566b25cc8d31e142cb7db` |
-| **Annex Document** | `PDF` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-10-18_Draft.pdf` | 920.4 KB | `818f5c6ead41744e87af10f877d9b76d16ff0178671ec0d24dfff5b2df8b371d` |
+| **Main Report** | `DOCX` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-10-19_Draft.docx` | 116.0 KB | `ecb04ace713e405496f87f3396de07a7aa7a17faf9933a33604f2e8229b69c15` |
+| **Main Report** | `PDF` | `PFPJ_Minab_Factual_Determination_Main_Report_2026-10-19_Draft.pdf` | 1441.6 KB | `3adfa53fff059f0eaa8f618ddaf0849fa3202d0bb1c61099f6dc9c3e8f71b785` |
+| **Annex Document** | `DOCX` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-10-19_Draft.docx` | 72.1 KB | `3907a78ef5ba32103f0b53d5fa2a4322a8c384979f16a1333c2df40e9cc4f03d` |
+| **Annex Document** | `PDF` | `PFPJ_Minab_Master_Exhibit_Dossier_Annex_2026-10-19_Draft.pdf` | 959.3 KB | `ad8aeeee1c9ed74b577ffc4a10943363b93c74378e4db78e6a4d5c07d4f5a0bb` |
 
 ---
 
@@ -34,4 +34,4 @@ All documents in this package have been compiled as **preliminary working drafts
 
 * **Submitting Body:** People for Peace & Justice ry (PFPJ ry)
 * **Helsinki Headquarters:** `legal@peopleforpeace.live` / `contact@peopleforpeace.live`
-* **Package Generation Timestamp:** `2026-10-18 12:21:11`
+* **Package Generation Timestamp:** `2026-10-21 14:58:33`
