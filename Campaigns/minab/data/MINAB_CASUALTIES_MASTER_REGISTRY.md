@@ -1,209 +1,204 @@
-# MINAB INCIDENT MASTER CASUALTY REGISTRY (VERSION 2.0.0)
-## Comprehensive Verified Roster of Killed, Injured, and Unrecovered Victims
+# MINAB INCIDENT MASTER CASUALTY REGISTRY (VERSION 3.0.0)
+## Comprehensive Verified Roster of All 156 Martyrs, 28 Rubble Drawings & Eyewitness Survivors
 ### Shajareh Tayyebeh Elementary School Airstrike — February 28, 2026 (9 Esfand 1404)
 
-> **Document Authority:** People for Peace & Justice ry (PFPJ ry) & Forensic OSINT Verification Unit  
-> **Judicial Corroboration:** Minab Prosecutor's Indictment & Legal Medicine Organization of Hormozgan (LMO)  
-> **Status:** AUTHORITATIVE BILINGUAL MASTER REGISTRY — Version 2.0.0 (September 2026)  
-> **Total Registered Records in Database:** 159 Individuals | **Certified Martyrs:** 156  
+> **Document Authority:** People for Peace & Justice ry (PFPJ ry, Helsinki — Business ID: `3616815-5`)  
+> **Primary Civil & School Roster Corroboration:** Official Shajareh Tayyebeh School Roster (`1404`), Portrait Archives (`120` Students + `26` Female Teachers), and Rubble Artifact Archive (`28` Drawings)  
+> **Status:** AUTHORITATIVE BILINGUAL MASTER REGISTRY — Version 3.0.0 (October 2026)  
+> **Total Certified Martyrs:** **156** (`120` Students, `26` Female Teachers, `7` Parents, `1` School Bus Driver, `1` Clinic Pharmacy Technician, `1` Six-Month Unborn Child **Mohammad Shirgir**)  
 
 ---
 
-## 1. Casualty Statistics & Reconciliation Overview
+## 1. Casualty Statistics & Grade Breakdown
 
-| Casualty Category | Official Judicial Count | Dataset Tracked Roster | Status / Forensic Protocol |
+| Casualty Category | Official Count | Gender Breakdown | Identification & Portrait Status |
 | :--- | :---: | :---: | :--- |
-| **Student Martyrs (دانش‌آموزان شهید)** | **120** | 120 | 73 Boys, 47 Girls (Ages 6–12); DNA & visual confirmation |
-| **Educators & Staff (معلمان و کادر آموزشی)** | **26** | 26 | 100% Female Educators; protected educational personnel |
-| **Parents of Students (اولیای دانش‌آموزان)** | **7** | 7 | Killed during rescue attempt between Strike 1 and Strike 2 |
-| **Community Members & Transport** | **2** | 2 | School bus driver + neighboring pharmacy technician |
-| **Unborn Fetus (جنین شش‌ماهه)** | **1** | 1 | Son of Teacher Zohreh Shahriyari; certified martyr |
-| **Total Certified Martyrs** | **156** | **156** | **155 Identified & Buried + 1 Unrecovered (Makan Nasiri)** |
-| **Documented Injured (مجروحان و مصدومان)** | **95–195** | 3 (Detailed) | Hospitalized at Hazrat Abolfazl & Shahid Mohammadi Burn Unit |
+| **Student Martyrs (دانش‌آموزان شهید)** | **120** | 73 Boys, 47 Girls | 118 Identified (`شهید`) + 2 Unrecovered (`شهید ولی شناسایی نشده`: Makan Nasiri Khouzani & Mohammad-Taha Jafari); 119 Studio Portraits |
+| — *Grade 1 (پایه اول)* | 28 | 15 Boys, 13 Girls | 27 Identified + 1 Unrecovered (`Makan Nasiri Khouzani`) |
+| — *Grade 2 (پایه دوم)* | 27 | 19 Boys, 8 Girls | 27 Identified |
+| — *Grade 3 (پایه سوم)* | 15 | 12 Boys, 3 Girls | 15 Identified |
+| — *Grade 4 (پایه چهارم)* | 30 | 15 Boys, 15 Girls | 29 Identified + 1 Unrecovered (`Mohammad-Taha Jafari`) |
+| — *Grade 5 (پایه پنجم)* | 12 | 10 Boys, 2 Girls | 12 Identified |
+| — *Grade 6 (پایه ششم)* | 8 | 2 Boys, 6 Girls | 8 Identified |
+| **Educators & Staff (معلمان شهیده)** | **26** | 26 Women (100% Female) | All 26 Verified by Name & Studio Portrait |
+| **Parents of Students (اولیای دانش‌آموزان)** | **7** | 4 Men, 3 Women | Martyred at school gate/courtyard during drop-off & rescue |
+| **Community & Transport (سرویس و درمانگاه)** | **2** | 2 Men | 1 School Bus Driver + 1 Adjacent Clinic Pharmacy Technician |
+| **Unborn Child (جنین شش‌ماهه)** | **1** | 1 Boy | **Mohammad Shirgir (`محمد شیرگیر`)**, 6-month unborn son of martyred teacher Zohreh Shahriyari |
+| **Total Certified Martyrs** | **156** | **80 Male, 76 Female** | **154 Identified & Buried + 2 Unrecovered Remains** |
 
 ---
 
-## 2. Complete Roster of Martyred & Missing Students (120 Records)
+## 2. Complete Official Roster of 120 Martyred Schoolchildren
 
-| # | Name (English) | نام و نام خانوادگی | Father | Age | Gender | Photo ID | ID Method | Family Cluster / Notes |
-| :-: | :--- | :--- | :--- | :-: | :-: | :-: | :--- | :--- |
-| 1 | **Parsa Mokhtarinasab** | پارسا مختاری‌نسب | Mohammad | — | Boy | `r02_c00` | Dna | — |
-| 2 | **Makan Nasiri** | ماکان نصیری | — | — | Boy | `r02_c01` | **Vaporized (MIA)** | FAM-NASIRI *(Unmarked Martyr)* |
-| 3 | **Amirmohammad Boostani** | امیرمحمد بوستانی | — | — | Boy | `r02_c02` | Dna | — |
-| 4 | **Amirmohammad Ghasemi** | امیرمحمد قاسمی | — | — | Boy | `r02_c03` | Dna | — |
-| 5 | **Reza Habashian** | رضا حبشیان | Ali | 7 | Boy | `r02_c04` | Dna | — |
-| 6 | **Ali Zarei Gholam** | علی زارعی غلام | — | — | Boy | `r02_c05` | Dna | — |
-| 7 | **Sobhan Ahmadi** | سبحان احمدی | — | — | Boy | `r03_c00` | Personal_belongings | FAM-AHMADI |
-| 8 | **Mahdi Delavari** | مهدی دلاوری | — | — | Boy | `r03_c01` | Dna | — |
-| 9 | **Mohammadtaha Jafari** | محمدطه جعفری | — | — | Boy | `r03_c02` | Dna | — |
-| 10 | **Mohammadtaha Malahi** | محمدطه ملاحی | — | — | Boy | `r03_c03` | Dna | — |
-| 11 | **Amirhossein Jafari** | امیرحسین جعفری | — | — | Boy | `r03_c04` | Dna | — |
-| 12 | **Mohammad Hatam Raeisi** | محمد حاتم رئیسی | Hassan | — | Boy | `r03_c05` | Dna | FAM-RAEISI |
-| 13 | **Hossein Rahsepar** | حسین ره‌سپار | — | — | Boy | `r03_c06` | Dna | — |
-| 14 | **Mohammad Abadizadeh** | محمد آبادی‌زاده | — | — | Boy | `r03_c07` | Dna | — |
-| 15 | **Sina Zakeri** | سینا ذاکری | — | — | Boy | `r03_c08` | Dna | FAM-ZAKERI |
-| 16 | **Ali Asghar Zaeri** | علی‌اصغر زاعری | Javad | 8 | Boy | `r03_c09` | Dna | — |
-| 17 | **Alireza Zarei** | علیرضا زارعی | Ehsan | — | Boy | `r03_c10` | Dna | — |
-| 18 | **Mohammadsadegh Gholami** | محمدصادق غلامی | — | — | Boy | `r03_c11` | Dna | — |
-| 19 | **Saleh Abbasi** | صالح عباسی | — | — | Boy | `r03_c12` | Dna | — |
-| 20 | **Mohammad Loghmani** | محمد لقمانی | — | — | Boy | `r03_c13` | Dna | — |
-| 21 | **Hani Paritaghinejhad** | هانی پریتاغی‌نژاد | — | — | Boy | `r03_c14` | Dna | — |
-| 22 | **Sepehr Karimi** | سپهر کریمی | — | — | Boy | `r04_c00` | Dna | — |
-| 23 | **Arya Bahadori** | آریا بهادری | Torfi | 9 | Boy | `r04_c01` | Dna | — |
-| 24 | **Parham Ranjbari** | پرهام رنجبری | Mojtaba | 9 | Boy | `r04_c02` | Dna | — |
-| 25 | **Mohammad Sadra Zarei** | محمد صدرا زارعی | Mehdi | — | Boy | `r04_c03` | Dna | — |
-| 26 | **Ali Akbar Karyanipak** | علی‌اکبر کاریانی‌پاک | Abdollah | — | Boy | `r04_c04` | Dna | FAM-KARYANIPAK |
-| 27 | **Mohammad Reza Shahsavari** | محمدرضا شهسواری | Amir | — | Boy | `r04_c05` | Dna | — |
-| 28 | **Amirali Jadavi** | امیرعلی جدوی | — | — | Boy | `r04_c06` | Dna | — |
-| 29 | **Moien Zeinali** | معین زینلی | — | — | Boy | `r04_c07` | Dna | — |
-| 30 | **Mohammad Raofinia** | محمد رئوفی‌نیا | — | — | Boy | `r04_c08` | Dna | — |
-| 31 | **Aliasghar Foroozafar** | علی‌اصغر فروزافر | — | — | Boy | `r04_c09` | Dna | — |
-| 32 | **Arad Ahmadizadeh** | آراد احمدی‌زاده | — | 8 | Boy | `r04_c10` | Dna | FAM-AHMADZADEH |
-| 33 | **Soheil Chamalipour** | سهیل چملی‌پور | — | — | Boy | `r04_c11` | Dna | — |
-| 34 | **Mohammad Jamali** | محمد جمالی | — | — | Boy | `r04_c12` | Dna | — |
-| 35 | **Alireza Shahrjoo** | علیرضا شهرجو | — | — | Boy | `r04_c13` | Dna | — |
-| 36 | **Reza Barani** | رضا بارانی | Masoud | — | Boy | `r04_c14` | Dna | — |
-| 37 | **Javad Sartakzade** | جواد سرتک‌زاده | — | — | Boy | `r05_c00` | Dna | — |
-| 38 | **Saman Karimzadeh** | سامان کریم‌زاده | Farzad | 7 | Boy | `r05_c01` | Dna | — |
-| 39 | **Mohammad Ali Karyanipak** | محمدعلی کاریانی‌پاک | — | — | Boy | `r05_c02` | Dna | FAM-KARYANIPAK |
-| 40 | **Amir Mohammadi** | امیر محمدی | — | — | Boy | `r05_c03` | Dna | — |
-| 41 | **Masiha Salari** | مسیحا سالاری | — | — | Boy | `r05_c04` | Dna | — |
-| 42 | **Ali Salari** | علی سالاری | — | — | Boy | `r05_c05` | Dna | — |
-| 43 | **Ehsan Saleminia** | احسان سالمی‌نیا | Ebrahim | — | Boy | `r05_c06` | Dna | — |
-| 44 | **Sorena Hosseinpour** | سورنا حسین‌پور | — | — | Boy | `r05_c07` | Dna | — |
-| 45 | **Amin Ahmadzade** | امین احمدزاده | — | — | Boy | `r05_c08` | Personal_belongings | FAM-AHMADZADEH |
-| 46 | **Homayoon Zeinali** | همایون زینلی | — | — | Boy | `r05_c09` | Dna | — |
-| 47 | **Heidar Salehi** | حیدر صالحی | — | — | Boy | `r05_c10` | Dna | — |
-| 48 | **Mohammad Shahdoosti** | محمد شاهدوستی | Abdollah | — | Boy | `r05_c11` | Dna | — |
-| 49 | **Amirali Boostani** | امیرعلی بوستانی | — | — | Boy | `r05_c12` | Dna | — |
-| 50 | **Reza Ranjbar** | رضا رنجبر | Mohammad | — | Boy | `r05_c13` | Dna | — |
-| 51 | **Amirmohammad Bagheri** | امیرمحمد باقری | — | — | Boy | `r05_c14` | Dna | — |
-| 52 | **Danial Faghirdoost** | دانیال فقیردوست | — | — | Boy | `r06_c03` | Dna | — |
-| 53 | **Hami Sadeghi** | هامی صادقی | — | — | Boy | `r06_c04` | Dna | FAM-SADEGHI |
-| 54 | **Mohammadmahdi Jangichi** | محمدمهدی جنگیچی | — | — | Boy | `r06_c05` | Dna | — |
-| 55 | **Sobhan Shahdadi** | سبحان شهدادی | — | — | Boy | `r06_c06` | Dna | — |
-| 56 | **Benyamin Jangjoo** | بنیامین جنگجو | Shahram | — | Boy | `r06_c07` | Dna | — |
-| 57 | **Mohammadayan Bahrami** | محمدآیان بهرامی | Sajjad | — | Boy | `r06_c08` | Dna | FAM-BAHRAMI |
-| 58 | **Amirghasem Zaeri** | امیرقاسم زاعری | Najibollah | 7 | Boy | `r06_c09` | Dna | — |
-| 59 | **Mahdi Salari** | مهدی سالاری | — | — | Boy | `r06_c10` | Dna | — |
-| 60 | **Amirali Kamali** | امیرعلی کمالی | — | — | Boy | `r06_c11` | Dna | — |
-| 61 | **Arsha Mirani** | آرشا میرانی | — | — | Boy | `r06_c12` | Dna | — |
-| 62 | **Hamed Par'asheghnejad** | حامد پرعاشق‌نژاد | Hadi | 7 | Boy | `r06_c13` | Dna | — |
-| 63 | **Arash Golazin** | آرش گلآذین | — | — | Boy | `r06_c14` | Dna | — |
-| 64 | **Ahmad Soltani** | احمد سلطانی | Yaser | 8 | Boy | — | Official_records | — |
-| 65 | **Mahmoud Gholamiyani** | محمود غلامیانی | Ghanbar | — | Boy | — | Official_records | — |
-| 66 | **Amirhossein Rasouli Soleimani** | امیرحسین رسولی سلیمانی | Hossein | — | Boy | — | Official_records | — |
-| 67 | **Mohammad Mahdi Chegininia** | محمدمهدی چگینی‌نیا | Abbas | — | Boy | — | Official_records | — |
-| 68 | **Arad Ahmadzadeh** | آراد احمدزاده | Hassan | 8 | Boy | — | Dna | FAM-AHMADZADEH |
-| 69 | **Hossein Darvishi** | حسین درویشی | Reza | 11 | Boy | — | Dna | — |
-| 70 | **Alireza Moradi** | علیرضا مرادی | Gholam | 10 | Boy | — | Dna | — |
-| 71 | **Sajjad Heidari** | سجاد حیدری | Hossein | 12 | Boy | — | Dna | — |
-| 72 | **Amirali Khademi** | امیرعلی خادمی | Ali | 8 | Boy | — | Dna | — |
-| 73 | **Arshia Gholami** | عرشیا غلامی | Morad | 11 | Boy | — | Dna | — |
-| 74 | **Zeynab Bahrami** | زینب بهرامی | Eshagh | — | Girl | `r00_c00` | Dna | FAM-BAHRAMI |
-| 75 | **Baran Ghasemy** | باران قاسمی | — | — | Girl | `r00_c01` | Dna | — |
-| 76 | **Niyayesh Salehi** | نیایش صالحی | — | 9 | Girl | `r00_c02` | Dna | — |
-| 77 | **Helma Ghasemy** | حلما قاسمی | — | — | Girl | `r00_c03` | Dna | — |
-| 78 | **Nazanin Zahra Behroozi** | نازنین‌زهرا بهروزی | — | — | Girl | `r00_c04` | Dna | — |
-| 79 | **Zahra Bahrami** | زهرا بهرامی | — | 7 | Girl | `r00_c05` | Dna | FAM-BAHRAMI |
-| 80 | **Samira Malahi** | سمیرا ملاحی | — | — | Girl | `r00_c09` | Dna | — |
-| 81 | **Arina ArabKish** | آرینا عرب‌کیش | — | — | Girl | `r00_c10` | Dna | — |
-| 82 | **Zahra Soleimani** | زهرا سلیمانی | — | — | Girl | `r00_c11` | Dna | — |
-| 83 | **Mahna Bahrami** | مهنا بهرامی | — | — | Girl | `r00_c12` | Dna | FAM-BAHRAMI |
-| 84 | **Fatemeh Dorazehi** | فاطمه دورازهی | Abdollah | 10 | Girl | `r00_c13` | Dna | — |
-| 85 | **Masoumeh Nazari** | معصومه نظری | — | — | Girl | `r00_c14` | Dna | — |
-| 86 | **Reyhaneh Zakeri** | ریحانه ذاکری | — | — | Girl | `r01_c00` | Dna | FAM-ZAKERI |
-| 87 | **Athena Ahmadzadeh** | آتنا احمدزاده | Abbas | — | Girl | `r01_c01` | Dna | FAM-AHMADZADEH |
-| 88 | **Maryam Pazarak** | مریم پازارک | Mostafa | — | Girl | `r01_c02` | Dna | — |
-| 89 | **Athareh Zarei** | اطهره زارعی | Ali | — | Girl | `r01_c03` | Dna | — |
-| 90 | **Zahra Sharafi** | زهرا شرفی | — | — | Girl | `r01_c05` | Dna | — |
-| 91 | **Khadijeh Darvishi** | خدیجه درویشی | Reza | — | Girl | `r01_c06` | Dna | — |
-| 92 | **Asra Zakeri** | اسرا ذاکری | Gahhar | — | Girl | `r01_c07` | Dna | FAM-ZAKERI |
-| 93 | **Nadia Shahmiri** | نادیا شاهمیری | Hassan | 9 | Girl | `r01_c08` | Dna | — |
-| 94 | **Sonar Salari** | سونار سالاری | — | 9 | Girl | `r01_c09` | Dna | — |
-| 95 | **Zeinab Makizadeh** | زینب مکی‌زاده | — | — | Girl | `r01_c10` | Dna | — |
-| 96 | **Zoha Pasand** | زهرا پسند | Ebrahim | — | Girl | `r01_c11` | Dna | — |
-| 97 | **Zahra Ansari** | زهرا انصاری | Amir | — | Girl | `r01_c12` | Dna | — |
-| 98 | **Liyana Mohammadi** | لیانا محمدی | Faez | — | Girl | `r01_c13` | Dna | — |
-| 99 | **Fatemeh Zahra Karimi** | فاطمه‌زهرا کریمی | Javad | — | Girl | `r01_c14` | Dna | — |
-| 100 | **Fatemeh Rahdar** | فاطمه رهدار | Abed | — | Girl | `r02_c06` | Dna | — |
-| 101 | **Asma Zakeri** | اسما ذاکری | — | — | Girl | `r02_c07` | Dna | FAM-ZAKERI |
-| 102 | **Setayesh Alihoseini** | ستایش علی‌حسینی | — | — | Girl | `r02_c08` | Dna | — |
-| 103 | **Salma Zakeri** | سلما ذاکری | — | — | Girl | `r02_c09` | Dna | FAM-ZAKERI |
-| 104 | **Athena Chamaninejad** | آتنا چمنی‌نژاد | Rouhollah | 6 | Girl | `r02_c10` | Dna | — |
-| 105 | **Farimah Fakhari** | فریما فخاری | — | — | Girl | `r02_c11` | Dna | — |
-| 106 | **Hananeh Mehdikhah** | حنانه مهدیخواه | Mousa | — | Girl | `r02_c12` | Dna | — |
-| 107 | **Hanieh Ahmadi** | هانیه احمدی | — | — | Girl | `r02_c13` | Dna | FAM-AHMADI |
-| 108 | **Raha Zareie** | رها زارعی | — | — | Girl | `r02_c14` | Dna | — |
-| 109 | **Hana Dehghani** | هانا دهقانی | Emad | 8 | Girl | — | Official_records | — |
-| 110 | **Mahdis Nazari** | مهدیس نظری | Ali | 7 | Girl | — | Official_records | — |
-| 111 | **Fatemeh Shahdadi** | فاطمه شهدادی | Mohammad | — | Girl | — | Official_records | — |
-| 112 | **Asna Raeisi** | آسنا رئیسی | Hassan | — | Girl | — | Official_records | FAM-RAEISI |
-| 113 | **Adrina Pegah** | آدرینا پگاه | Reza | 7 | Girl | — | Visual | — |
-| 114 | **Reyhaneh Daryaei** | ریحانه دریایی | Hossein | 9 | Girl | — | Dna | — |
-| 115 | **Helena Moradi** | هلنا مرادی | Mohammad | 7 | Girl | — | Dna | — |
-| 116 | **Yasmin Soltani** | یاسمین سلطانی | Ali | 10 | Girl | — | Dna | — |
-| 117 | **Mahdiyeh Zakerikhah** | مهدیه ذاکری‌خواه | Ahmad | 9 | Girl | — | Dna | FAM-ZAKERI |
-| 118 | **Yasna Karimi** | یسنا کریمی | Javad | 6 | Girl | — | Dna | — |
-| 119 | **Mahta Zarei** | مهتا زارعی | Mohammad | 7 | Girl | — | Dna | — |
-| 120 | **Elena Salari** | النا سالاری | Hossein | 8 | Girl | — | Dna | — |
-
----
-
-## 3. Complete Roster of Martyred Educators & School Staff (26 Records)
-
-| # | Name (English) | نام و نام خانوادگی | Role / Class | Age | ID Method | Burial Location |
-| :-: | :--- | :--- | :--- | :-: | :--- | :--- |
-| 1 | **Neda Solhizadeh** | ندا صلحی‌زاده | 4th Grade Educator | 36 | DNA | Rafsanjan Martyrs' Cemetery, Kerman |
-| 2 | **Zohreh Shahriyari** | زهره شهریاری | 2nd Grade Teacher | 32 | PERSONAL_BELONGINGS | Minab Martyrs' Cemetery, Hormozgan |
-| 3 | **Khadijeh Moradi (Principal)** | خدیجه مرادی (مدیر مدرسه) | School Principal | 48 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 4 | **Maryam Ansari** | مریم انصاری (معاون آموزشی) | Vice Principal | 42 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 5 | **Fatemeh Daryaei** | فاطمه دریایی (معاون پرورشی) | Educational & Guidance Counselor | 39 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 6 | **Masoumeh Salari** | معصومه سالاری (آموزگار پایه اول) | 1st Grade Teacher | 31 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 7 | **Somayyeh Karimi** | سمیه کریمی (آموزگار پایه سوم) | 3rd Grade Teacher | 33 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 8 | **Zahra Gholami** | زهرا غلامی (آموزگار پایه پنجم) | 5th Grade Teacher | 35 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 9 | **Elham Heidari** | الهام حیدری (آموزگار پایه ششم) | 6th Grade Teacher | 37 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 10 | **Mahdieh Zakeri** | مهدیه ذاکری (مربی پیش‌دبستانی) | Preschool Educator | 28 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 11 | **Roghayeh Ahmadi** | رقیه احمدی (مربی قرآن و معارف) | Quran & Ethics Teacher | 30 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 12 | **Marziyeh Abbasi** | مرضیه عباسی (مربی هنر و خوشنویسی) | Art & Calligraphy Instructor | 29 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 13 | **Tahereh Ghasemi** | طاهره قاسمی (مربی ورزش و ژیمناستیک) | Physical Education & Gymnastics Coach | 27 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 14 | **Fatemeh Salemi** | فاطمه سالمی (دبیر علوم تجربی) | Science Instructor | 34 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 15 | **Zeinab Rastegar** | زینب رستگار (دبیر ریاضیات) | Mathematics Educator | 32 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 16 | **Maryam Jafari** | مریم جعفری (دبیر ادبیات و فارسی) | Persian Literature Teacher | 38 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 17 | **Azam Forouzesh** | اعظم فروزش (دبیر مطالعات اجتماعی) | Social Studies Teacher | 36 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 18 | **Maryam Bahrami** | مریم بهرامی (کمک مربی پیش‌دبستانی) | Preschool Assistant | 26 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 19 | **Fereshteh Sangarzadeh** | فرشته سنگرزاده (مربی آموزش ویژه) | Special Needs Educator | 31 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 20 | **Samira Basardeh** | سمیرا بصارده (مشاور تربیتی) | Child Counselor | 33 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 21 | **Mohana Zarei** | مهنا زارعی (مربی بهداشت) | Health & Hygiene Educator | 29 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 22 | **Fatemeh Fadavi** | فاطمه فدوی (مسئول کتابخانه) | Librarian & Learning Resources | 30 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 23 | **Fatemeh Taherifard** | فاطمه طاهری‌فرد (مربی فناوری اطلاعات) | Computer & IT Instructor | 28 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 24 | **Sara Shayesteh** | سارا شایسته (هماهنگ‌کننده امور آموزشی) | Educational Coordinator | 31 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 25 | **Mandana Salari** | ماندانا سالاری (آموزگار دوره ابتدایی) | Primary Grade Educator | 33 | DNA | Minab Martyrs' Cemetery, Hormozgan |
-| 26 | **Zahra Behrouzi** | زهرا بهروزی (آموزگار دوره ابتدایی) | Primary Grade Educator | 30 | DNA | Minab Martyrs' Cemetery, Hormozgan |
+| # | Name (English) | نام و نام خانوادگی | Grade | Gender | Birth Date (Shamsi) | Birth Date (Gregorian) | Age | Status | Portrait |
+| :-: | :--- | :--- | :-: | :-: | :-: | :-: | :-: | :--- | :-: |
+| 1 | **Amin Ahmadzadeh** | امین احمدزاده | Grade 1 | Boy | `1398/06/06` | `2019-08-28` | 6 | Martyred (شهید) | `amin-ahmadzade.jpg` |
+| 2 | **Araz Ahmadizadeh Zahraei** | آراز احمدی زاده زهرائی | Grade 2 | Boy | `1396/11/05` | `2018-01-25` | 8 | Martyred (شهید) | `arad-ahmadizadeh.jpg` |
+| 3 | **Sobhan Ahmadi Tifkani** | سبحان احمدی طیفکانی | Grade 4 | Boy | `1395/06/28` | `2016-09-18` | 9 | Martyred (شهید) | `sobhan-ahmadi.jpg` |
+| 4 | **Mohammad Abadizadeh** | محمد آبادی زاده | Grade 4 | Boy | `1394/07/16` | `2015-10-08` | 10 | Martyred (شهید) | `mohammad-abadizadeh.jpg` |
+| 5 | **Reza Barani** | رضا بارانی | Grade 2 | Boy | `1397/02/27` | `2018-05-17` | 7 | Martyred (شهید) | `reza-barani.jpg` |
+| 6 | **Amirmohammad Bagheri** | امیرمحمد باقری | Grade 5 | Boy | `1393/11/09` | `2015-01-29` | 11 | Martyred (شهید) | `amirmohammad-bagheri.jpg` |
+| 7 | **Amirali Boostani** | امیرعلی بوستانی | Grade 4 | Boy | `1394/10/30` | `2016-01-20` | 10 | Martyred (شهید) | `amirali-boostani.jpg` |
+| 8 | **Amirmohammad Boostani** | امیرمحمد بوستانی | Grade 2 | Boy | `1397/04/06` | `2018-06-27` | 7 | Martyred (شهید) | `amirmohammad-boostani.jpg` |
+| 9 | **Arya Bahadori** | آریا بهادری | Grade 3 | Boy | `1395/11/07` | `2017-01-26` | 9 | Martyred (شهید) | `arya-bahadori.jpg` |
+| 10 | **Mohammad-Kian Bahrami** | محمدکیان بهرامی | Grade 1 | Boy | `1397/09/08` | `2018-11-29` | 7 | Martyred (شهید) | `mohammadayan-bahrami.jpg` |
+| 11 | **Hamed Paritaghinejad** | حامد پری تقی نژاد | Grade 1 | Boy | `1397/12/07` | `2019-02-26` | 7 | Martyred (شهید) | `hamed-parasheghnejad.jpg` |
+| 12 | **Hani Paritaghinejad** | هانی پری تقی نژاد | Grade 4 | Boy | `1394/11/26` | `2016-02-15` | 10 | Martyred (شهید) | `hani-paritaghinejhad.jpg` |
+| 13 | **Mohammad Pirzadeh** | محمد پیرزاده | Grade 3 | Boy | `1395/02/10` | `2016-04-29` | 9 | Martyred (شهید) | `mohammad-pirzadeh.jpg` |
+| 14 | **Amirali Jadavi** | امیرعلی جداوی | Grade 2 | Boy | `1396/08/04` | `2017-10-26` | 8 | Martyred (شهید) | `amirali-jadavi.jpg` |
+| 15 | **Mohammad-Taha Jafari** | محمدطاها جعفری | Grade 4 | Boy | `1395/02/25` | `2016-05-14` | 9 | **Unrecovered (شهید ولی شناسایی نشده)** | `mohammadtaha-jafari.jpg` |
+| 16 | **Amirhossein Jafari Ravangi** | امیرحسین جعفری راونگی | Grade 4 | Boy | `1395/01/15` | `2016-04-03` | 9 | Martyred (شهید) | `amirhossein-jafari.jpg` |
+| 17 | **Mohammad Jamali Nezhadi** | محمد جمالی نژادی | Grade 2 | Boy | `1396/12/28` | `2018-03-19` | 7 | Martyred (شهید) | `mohammad-jamali.jpg` |
+| 18 | **Benyamin Jangjoo** | بنیامین جنگجو | Grade 3 | Boy | `1396/05/21` | `2017-08-12` | 8 | Martyred (شهید) | `benyamin-jangjoo.jpg` |
+| 19 | **Mohammad-Mahdi Jangichi Minabi** | محمدمهدی جنگیچی مینابی | Grade 5 | Boy | `1394/01/04` | `2015-03-24` | 10 | Martyred (شهید) | `mohammadmahdi-jangichi.jpg` |
+| 20 | **Soheil Chamalipour Sarkami** | سهیل چملی پورسرکمی | Grade 2 | Boy | `1396/12/11` | `2018-03-02` | 7 | Martyred (شهید) | `soheil-chamalipour.jpg` |
+| 21 | **Reza Habashian** | رضا حبشیان | Grade 2 | Boy | `1397/05/25` | `2018-08-16` | 7 | Martyred (شهید) | `reza-habashian.jpg` |
+| 22 | **Amirali Hassanzadeh** | امیرعلی حسن زاده | Grade 5 | Boy | `1393/08/27` | `2014-11-18` | 11 | Martyred (شهید) | `amirali-hassanzadeh.jpg` |
+| 23 | **Sorena Hosseinpour** | سورنا حسین پور | Grade 1 | Boy | `1398/03/09` | `2019-05-30` | 6 | Martyred (شهید) | `sorena-hosseinpour.jpg` |
+| 24 | **Ali Hafizi** | علی حفیظی | Grade 5 | Boy | `1394/05/02` | `2015-07-24` | 10 | Martyred (شهید) | `ali-hafizi.jpg` |
+| 25 | **Mahdi Delavari** | مهدی دلاوری | Grade 4 | Boy | `1395/05/28` | `2016-08-18` | 9 | Martyred (شهید) | `mahdi-delavari.jpg` |
+| 26 | **Mahdi Zakeri** | مهدی ذاکری | Grade 3 | Boy | `1396/06/15` | `2017-09-06` | 8 | Martyred (شهید) | `mahdi-zakeri.jpg` |
+| 27 | **Sina Zakeri Gourzangnejad** | سینا ذاکری گورزانگ نژاد | Grade 4 | Boy | `1394/07/04` | `2015-09-26` | 10 | Martyred (شهید) | `sina-zakeri.jpg` |
+| 28 | **Amirhossein Rasouli Soleimani** | امیرحسین رسولی سلیمانی | Grade 3 | Boy | `1396/06/07` | `2017-08-29` | 8 | Martyred (شهید) | `amirhossein-rasouli.jpg` |
+| 29 | **Reza Ranjbar** | رضا رنجبر | Grade 1 | Boy | `1398/04/04` | `2019-06-25` | 6 | Martyred (شهید) | `reza-ranjbar.jpg` |
+| 30 | **Parham Ranjbari** | پرهام رنجبری | Grade 2 | Boy | `1395/11/20` | `2017-02-08` | 9 | Martyred (شهید) | `parham-ranjbari.jpg` |
+| 31 | **Homayoun Ranjbari** | همایون رنجبری | Grade 1 | Boy | `1397/12/03` | `2019-02-22` | 7 | Martyred (شهید) | `homayoun-ranjbari.jpg` |
+| 32 | **Hossein Rahsepar** | حسین رهسپار | Grade 4 | Boy | `1394/10/10` | `2015-12-31` | 10 | Martyred (شهید) | `hossein-rahsepar.jpg` |
+| 33 | **Mohammad Raoufinia** | محمد رئوفی نیا | Grade 2 | Boy | `1396/08/15` | `2017-11-06` | 8 | Martyred (شهید) | `mohammad-raofinia.jpg` |
+| 34 | **Mohammad-Hesam Raeisi** | محمدحسام رئیسی | Grade 4 | Boy | `1394/12/11` | `2016-03-01` | 9 | Martyred (شهید) | `mohammad-hatam-raeisi.jpg` |
+| 35 | **Ali Zarei** | علی زارعی | Grade 6 | Boy | `1391/11/04` | `2013-01-23` | 13 | Martyred (شهید) | `ali-zarei-gholam.jpg` |
+| 36 | **Alireza Zarei** | علیرضا زارعی | Grade 3 | Boy | `1395/09/23` | `2016-12-13` | 9 | Martyred (شهید) | `alireza-zarei.jpg` |
+| 37 | **Mohammad-Sadra Zareipour** | محمدصدرا زارعی پور | Grade 3 | Boy | `1395/12/28` | `2017-03-18` | 8 | Martyred (شهید) | `mohammad-sadra-zarei.jpg` |
+| 38 | **Ali-Asghar Zaeri** | علی اصغر زائری | Grade 3 | Boy | `1396/05/28` | `2017-08-19` | 8 | Martyred (شهید) | `ali-asghar-zaeri.jpg` |
+| 39 | **Moien Zeinali** | معین زینلی | Grade 2 | Boy | `1396/08/06` | `2017-10-28` | 8 | Martyred (شهید) | `moien-zeinali.jpg` |
+| 40 | **Homayoon Zeinali** | همایون زینلی | Grade 1 | Boy | `1398/06/09` | `2019-08-31` | 6 | Martyred (شهید) | `homayoon-zeinali.jpg` |
+| 41 | **Ali Salari** | علی سالاری | Grade 1 | Boy | `1397/12/19` | `2019-03-10` | 6 | Martyred (شهید) | `ali-salari.jpg` |
+| 42 | **Masiha Salari** | مسیحا سالاری | Grade 1 | Boy | `1397/10/23` | `2019-01-13` | 7 | Martyred (شهید) | `masiha-salari.jpg` |
+| 43 | **Mahdi Salari** | مهدی سالاری | Grade 4 | Boy | `1394/05/20` | `2015-08-11` | 10 | Martyred (شهید) | `mahdi-salari.jpg` |
+| 44 | **Ehsan Saleminia** | احسان سالمی نیا | Grade 1 | Boy | `1398/01/28` | `2019-04-17` | 6 | Martyred (شهید) | `ehsan-saleminia.jpg` |
+| 45 | **Ahmadreza Sartakzadeh** | احمدرضا سرتک زاده | Grade 5 | Boy | `1394/06/06` | `2015-08-28` | 10 | Martyred (شهید) | `ahmadreza-sartakzadeh.jpg` |
+| 46 | **Javad Sartakzadeh** | جواد سرتک زاده | Grade 2 | Boy | `1397/03/26` | `2018-06-16` | 7 | Martyred (شهید) | `javad-sartakzade.jpg` |
+| 47 | **Ahmad Soltani** | احمد سلطانی | Grade 3 | Boy | `1396/06/30` | `2017-09-21` | 8 | Martyred (شهید) | `ahmad-soltani.jpg` |
+| 48 | **Sobhan Shahdadi** | سبحان شهدادی | Grade 1 | Boy | `1398/06/23` | `2019-09-14` | 6 | Martyred (شهید) | `sobhan-shahdadi.jpg` |
+| 49 | **Mohammad Shahdoostipour** | محمد شهدوستی پور | Grade 3 | Boy | `1396/01/25` | `2017-04-14` | 8 | Martyred (شهید) | `mohammad-shahdoosti.jpg` |
+| 50 | **Alireza Shahrjoo** | علیرضا شهرجو | Grade 1 | Boy | `1397/01/12` | `2018-04-01` | 7 | Martyred (شهید) | `alireza-shahrjoo.jpg` |
+| 51 | **Mohammad-Reza Shahsavari** | محمدرضا شهسواری | Grade 2 | Boy | `1396/07/17` | `2017-10-09` | 8 | Martyred (شهید) | `mohammad-reza-shahsavari.jpg` |
+| 52 | **Hami Sadeghi** | حامی صادقی | Grade 5 | Boy | `1394/01/31` | `2015-04-20` | 10 | Martyred (شهید) | `hami-sadeghi.jpg` |
+| 53 | **Heidar Salehi Kahanshouieh** | حیدر صالحی کهنشوئیه | Grade 2 | Boy | `1397/01/28` | `2018-04-17` | 7 | Martyred (شهید) | `heidar-salehi.jpg` |
+| 54 | **Saleh Abbasi Doumshahri** | صالح عباسی دومشهری | Grade 5 | Boy | `1393/08/08` | `2014-10-30` | 11 | Martyred (شهید) | `saleh-abbasi.jpg` |
+| 55 | **Ali Arab-Kish Chalouei** | علی عرب کیش چلوئی | Grade 5 | Boy | `1394/04/13` | `2015-07-04` | 10 | Martyred (شهید) | `ali-arabkish.jpg` |
+| 56 | **Mohammad-Sadegh Gholami** | محمدصادق غلامی | Grade 1 | Boy | `1397/09/27` | `2018-12-18` | 7 | Martyred (شهید) | `mohammadsadegh-gholami.jpg` |
+| 57 | **Ali-Asghar Forouzanfar** | علی اصغر فروزان فر | Grade 2 | Boy | `1396/10/14` | `2018-01-04` | 8 | Martyred (شهید) | `aliasghar-foroozafar.jpg` |
+| 58 | **Danial Faghirdoost** | دانیال فقیردوست | Grade 5 | Boy | `1394/03/18` | `2015-06-08` | 10 | Martyred (شهید) | `danial-faghirdoost.jpg` |
+| 59 | **Amir Ghasemzaei** | امیر قاسم زائی | Grade 2 | Boy | `1397/02/29` | `2018-05-19` | 7 | Martyred (شهید) | `amirghasem-zaeri.jpg` |
+| 60 | **Amirmohammad Ghasemi** | امیرمحمد قاسمی | Grade 2 | Boy | `1397/01/24` | `2018-04-13` | 7 | Martyred (شهید) | `amirmohammad-ghasemi.jpg` |
+| 61 | **Saman Karamzadeh** | سامان کرم زاده | Grade 2 | Boy | `1397/06/07` | `2018-08-29` | 7 | Martyred (شهید) | `saman-karimzadeh.jpg` |
+| 62 | **Ali-Akbar Karyanipak** | علی اکبر کریانی پاک | Grade 3 | Boy | `1396/01/08` | `2017-03-28` | 8 | Martyred (شهید) | `ali-akbar-karyanipak.jpg` |
+| 63 | **Mohammad-Ali Karyanipak** | محمدعلی کریانی پاک | Grade 2 | Boy | `1397/05/19` | `2018-08-10` | 7 | Martyred (شهید) | `mohammad-ali-karyanipak.jpg` |
+| 64 | **Sepehr Karimi** | سپهر کریمی | Grade 4 | Boy | `1395/06/26` | `2016-09-16` | 9 | Martyred (شهید) | `sepehr-karimi.jpg` |
+| 65 | **Amirali Kamali** | امیرعلی کمالی | Grade 1 | Boy | `1398/04/02` | `2019-06-23` | 6 | Martyred (شهید) | `amirali-kamali.jpg` |
+| 66 | **Arash Golazin** | آرش گل آذین | Grade 2 | Boy | `1397/06/14` | `2018-09-05` | 7 | Martyred (شهید) | `arash-golazin.jpg` |
+| 67 | **Mohammad Loghmani Abdan** | محمد لقمانی آبدان | Grade 4 | Boy | `1394/08/13` | `2015-11-04` | 10 | Martyred (شهید) | `mohammad-loghmani.jpg` |
+| 68 | **Amir Mohammadi** | امیر محمدی | Grade 2 | Boy | `1397/06/24` | `2018-09-15` | 7 | Martyred (شهید) | `amir-mohammadi.jpg` |
+| 69 | **Parsa Mokhtarinasab** | پارسا مختاری نسب | Grade 5 | Boy | `1393/08/07` | `2014-10-29` | 11 | Martyred (شهید) | `parsa-mokhtarinasab.jpg` |
+| 70 | **Mohammad-Taha Malahi** | محمدطاها ملاحی | Grade 4 | Boy | `1394/12/26` | `2016-03-16` | 9 | Martyred (شهید) | `mohammadtaha-malahi.jpg` |
+| 71 | **Arsha Mirani** | آرشا میرانی | Grade 1 | Boy | `1398/01/06` | `2019-03-26` | 6 | Martyred (شهید) | `arsha-mirani.jpg` |
+| 72 | **Mikaeil Mirdoraghi** | میکائیل میردورقی | Grade 3 | Boy | `1395/10/21` | `2017-01-10` | 9 | Martyred (شهید) | `mikael-mirdoraghi.jpg` |
+| 73 | **Makan Nasiri Khouzani** | ماکان نصیری خوزانی | Grade 1 | Boy | `1397/10/09` | `2018-12-30` | 7 | **Unrecovered (شهید ولی شناسایی نشده)** | `makan-nasiri.jpg` |
+| 74 | **Motahareh Ahmadzadeh** | مطهره احمدزاده | Grade 4 | Girl | `1395/06/07` | `2016-08-28` | 9 | Martyred (شهید) | `motahareh-ahmadzadeh.jpg` |
+| 75 | **Mahdieh Ahmadzadeh** | مهدیه احمدزاده | Grade 6 | Girl | `1393/01/02` | `2014-03-22` | 11 | Martyred (شهید) | `mahdieh-ahmadzadeh.jpg` |
+| 76 | **Athena Ahmadzadeh Halvani** | آتنا احمدزاده حلوانی | Grade 4 | Girl | `1394/07/20` | `2015-10-12` | 10 | Martyred (شهید) | `athena-ahmadzadeh.jpg` |
+| 77 | **Hanieh Ahmadi Tifkani** | هانیه احمدی طیفکانی | Grade 1 | Girl | `1397/09/18` | `2018-12-09` | 7 | Martyred (شهید) | `hanieh-ahmadi.jpg` |
+| 78 | **Zahra Ansarifar** | زهرا انصاری فر | Grade 2 | Girl | `1397/02/15` | `2018-05-05` | 7 | Martyred (شهید) | `zahra-ansari.jpg` |
+| 79 | **Maryam Bazrak** | مریم بازرک | Grade 4 | Girl | `1394/08/26` | `2015-11-17` | 10 | Martyred (شهید) | `maryam-pazarak.jpg` |
+| 80 | **Zahra Bahrami** | زهرا بهرامی | Grade 2 | Girl | `1397/05/06` | `2018-07-28` | 7 | Martyred (شهید) | `zahra-bahrami.jpg` |
+| 81 | **Zeynab Bahrami** | زینب بهرامی | Grade 6 | Girl | `1393/05/14` | `2014-08-05` | 11 | Martyred (شهید) | `zeynab-bahrami.jpg` |
+| 82 | **Mohana Bahrami Ravangi** | محنا بهرامی راونگی | Grade 4 | Girl | `1393/06/28` | `2014-09-19` | 11 | Martyred (شهید) | `mahna-bahrami.jpg` |
+| 83 | **Zahra Behrouzi** | زهرا بهروزی | Grade 3 | Girl | `1396/05/19` | `2017-08-10` | 8 | Martyred (شهید) | `nazanin-zahra-behroozi.jpg` |
+| 84 | **Zoha Pasand** | ضحا پسند | Grade 2 | Girl | `1396/09/20` | `2017-12-11` | 8 | Martyred (شهید) | `zoha-pasand.jpg` |
+| 85 | **Adrina Pegah** | آدرینا پگاه | Grade 1 | Girl | `1397/09/18` | `2018-12-09` | 7 | Martyred (شهید) | — |
+| 86 | **Athena Chamalinejad** | آتنا چملی نژاد | Grade 1 | Girl | `1398/03/13` | `2019-06-03` | 6 | Martyred (شهید) | `athena-chamaninejad.jpg` |
+| 87 | **Fatemeh Dorazehi** | فاطمه درازهی | Grade 2 | Girl | `1396/11/10` | `2018-01-30` | 8 | Martyred (شهید) | `fatemeh-dorazehi.jpg` |
+| 88 | **Khadijeh Darvishi** | خدیجه درویشی | Grade 4 | Girl | `1395/05/21` | `2016-08-11` | 9 | Martyred (شهید) | `khadijeh-darvishi.jpg` |
+| 89 | **Hana Dehghani** | حنا دهقانی | Grade 3 | Girl | `1396/05/16` | `2017-08-07` | 8 | Martyred (شهید) | `hana-dehghani.jpg` |
+| 90 | **Hananeh Zakeri Khahan** | حنانه ذاکری خواهان | Grade 1 | Girl | `1398/02/13` | `2019-05-03` | 6 | Martyred (شهید) | `hananeh-zakerikhahan.jpg` |
+| 91 | **Asra Zakeri** | اسرا ذاکری | Grade 4 | Girl | `1395/06/10` | `2016-08-31` | 9 | Martyred (شهید) | `asra-zakeri.jpg` |
+| 92 | **Reyhaneh Zakeri** | ریحانه ذاکری | Grade 4 | Girl | `1394/07/16` | `2015-10-08` | 10 | Martyred (شهید) | `reyhaneh-zakeri.jpg` |
+| 93 | **Salma Zakeri** | سلما ذاکری | Grade 1 | Girl | `1398/05/16` | `2019-08-07` | 6 | Martyred (شهید) | `salma-zakeri.jpg` |
+| 94 | **Fatemeh Rahdar** | فاطمه رهدار | Grade 5 | Girl | `1393/10/23` | `2015-01-13` | 11 | Martyred (شهید) | `fatemeh-rahdar.jpg` |
+| 95 | **Raha Zarei Bang** | رها زارعی بنگ | Grade 1 | Girl | `1397/07/25` | `2018-10-17` | 7 | Martyred (شهید) | `raha-zareie.jpg` |
+| 96 | **Mohana Zarei Kouhestaki** | مهنا زارعی کوهستکی | Grade 1 | Girl | `1398/04/28` | `2019-07-19` | 6 | Martyred (شهید) | `mohana-zarei.jpg` |
+| 97 | **Athareh Zarei** | اطهره زارعی | Grade 4 | Girl | `1394/09/17` | `2015-12-08` | 10 | Martyred (شهید) | `athareh-zarei.jpg` |
+| 98 | **Sonar Salari** | سونار سالاری | Grade 4 | Girl | `1395/06/26` | `2016-09-16` | 9 | Martyred (شهید) | `sonar-salari.jpg` |
+| 99 | **Mahya Salari** | محیا سالاری | Grade 3 | Girl | `1396/06/02` | `2017-08-24` | 8 | Martyred (شهید) | `mahya-salari.jpg` |
+| 100 | **Zahra Soleimani Tembanouei** | زهرا سلیمانی تمبانوئی | Grade 6 | Girl | `1392/10/15` | `2014-01-05` | 12 | Martyred (شهید) | `zahra-soleimani.jpg` |
+| 101 | **Sara Shayesteh** | سارا شایسته | Grade 1 | Girl | `1398/02/18` | `2019-05-08` | 6 | Martyred (شهید) | `sara-shayesteh.jpg` |
+| 102 | **Zahra Sharafi** | زهرا شرفی | Grade 4 | Girl | `1395/03/23` | `2016-06-12` | 9 | Martyred (شهید) | `zahra-sharafi.jpg` |
+| 103 | **Fadia Shahmiri** | فادیا شه میری | Grade 4 | Girl | `1395/06/12` | `2016-09-02` | 9 | Martyred (شهید) | `nadia-shahmiri.jpg` |
+| 104 | **Niyayesh Salehi** | نیایش صالحی | Grade 4 | Girl | `1395/04/04` | `2016-06-24` | 9 | Martyred (شهید) | `niyayesh-salehi.jpg` |
+| 105 | **Arina Arab-Kish Chalouei** | آرینا عرب کیش چلوئی | Grade 6 | Girl | `1392/08/11` | `2013-11-02` | 12 | Martyred (شهید) | `arina-arabkish.jpg` |
+| 106 | **Setayesh Alihosseini** | ستایش علی حسینی | Grade 4 | Girl | `1395/03/09` | `2016-05-29` | 9 | Martyred (شهید) | `setayesh-alihoseini.jpg` |
+| 107 | **Asra Farahizadeh** | اسرا فرحی زاده | Grade 1 | Girl | `1397/10/13` | `2019-01-03` | 7 | Martyred (شهید) | `asra-farahizadeh.jpg` |
+| 108 | **Baran Ghasemi** | باران قاسمی | Grade 4 | Girl | `1394/08/14` | `2015-11-05` | 10 | Martyred (شهید) | `baran-ghasemy.jpg` |
+| 109 | **Helma Ghasemi** | حلما قاسمی | Grade 4 | Girl | `1395/05/23` | `2016-08-13` | 9 | Martyred (شهید) | `helma-ghasemy.jpg` |
+| 110 | **Fatemeh-Zahra Karimi** | فاطمه زهرا کریمی | Grade 2 | Girl | `1397/06/23` | `2018-09-14` | 7 | Martyred (شهید) | `fatemeh-zahra-karimi.jpg` |
+| 111 | **Liyana Mohammadi** | لیانا محمدی | Grade 2 | Girl | `1397/02/31` | `2018-05-21` | 7 | Martyred (شهید) | `liyana-mohammadi.jpg` |
+| 112 | **Farimah Mafakheri** | فریماه مفاخری | Grade 6 | Girl | `1393/06/10` | `2014-09-01` | 11 | Martyred (شهید) | `farimah-fakhari.jpg` |
+| 113 | **Zeynab Makizadeh** | زینب مکی زاده | Grade 4 | Girl | `1395/06/31` | `2016-09-21` | 9 | Martyred (شهید) | `zeinab-makizadeh.jpg` |
+| 114 | **Samira Malahi Kolahi** | سمیرا ملاحی کلاهی | Grade 5 | Girl | `1392/07/25` | `2013-10-17` | 12 | Martyred (شهید) | `samira-malahi.jpg` |
+| 115 | **Hananeh Mehdikhah** | حنانه مهدی خواه | Grade 1 | Girl | `1397/09/25` | `2018-12-16` | 7 | Martyred (شهید) | `hananeh-mehdikhah.jpg` |
+| 116 | **Mahdis Nazari** | مهدیس نظری | Grade 1 | Girl | `1397/11/16` | `2019-02-05` | 7 | Martyred (شهید) | `mahdis-nazari.jpg` |
+| 117 | **Masoumeh Nazari** | معصومه نظری | Grade 2 | Girl | `1397/06/25` | `2018-09-16` | 7 | Martyred (شهید) | `masoumeh-nazari.jpg` |
+| 118 | **Fatemeh Yazdanpanah Gourzanginia** | فاطمه یزدان پناه گورزانگی نیا | Grade 1 | Girl | `1398/03/13` | `2019-06-03` | 6 | Martyred (شهید) | `fatemeh-yazdanpanah.jpg` |
+| 119 | **Zahra Jalali** | زهرا جلالی | Grade 6 | Girl | `1392/09/23` | `2013-12-14` | 12 | Martyred (شهید) | `zahra-jalali.jpg` |
+| 120 | **Asna Raeisi** | آسنا رئیسی | Grade 6 | Girl | `1392/08/23` | `2013-11-14` | 12 | Martyred (شهید) | `asna-raeisi.jpg` |
 
 ---
 
-## 4. Parents, Community Members & Unborn Child (10 Records)
+## 3. Complete Official Roster of 26 Martyred Female Educators
 
-| # | Name (English) | نام و نام خانوادگی | Role / Relationship | Age | Gender | ID Method | Narrative Summary |
-| :-: | :--- | :--- | :--- | :-: | :-: | :--- | :--- |
-| 1 | **Hamid Sadeghi** | حمید صادقی (پدر) | Parent of Student | 41 | Man | DNA | Father of Hami and Nila Sadeghi; rushed into the school building after Strike 1 to evacuate his family and was martyred in Strike 2. |
-| 2 | **Mohammad Zakeri** | محمد ذاکری (پدر) | Parent of Student | 44 | Man | DNA | Father of Asra and Salma Zakeri; killed attempting to break open the collapsed prayer hall door to free trapped children. |
-| 3 | **Ali Karyanipak** | علی کاریانی‌پاک (پدر) | Parent of Student | 43 | Man | DNA | Father of Ali-Akbar and Mohammad-Ali; martyred alongside his two sons inside the school corridor. |
-| 4 | **Hassan Ahmadzadeh** | حسن احمدزاده (پدر) | Parent of Student | 40 | Man | DNA | Father of Athena, Amin, and Arad; arrived immediately upon hearing the first blast and was killed in the follow-on strike. |
-| 5 | **Hossein Raeisi** | حسین رئیسی (پدر) | Parent of Student | 39 | Man | DNA | Father of Asna and Mohammad-Hatam Raeisi; perished in the secondary blast wave at the school gate. |
-| 6 | **Fatemeh Gholami (Mother Rescuer)** | فاطمه غلامی (مادر جان‌باخته در امداد) | Parent of Student | 37 | Woman | DNA | Mother who lived adjacent to the school; rushed into the classroom wing to pull children out and was killed in Strike 2. |
-| 7 | **Zahra Heidari (Mother Rescuer)** | زهرا حیدری (مادر جان‌باخته در امداد) | Parent of Student | 36 | Woman | DNA | Mother who rushed to the entrance to guide fleeing kindergarteners and was martyred in the secondary strike. |
-| 8 | **Ali Rostami (School Bus Driver)** | علی رستمی (راننده سرویس مدرسه) | School Transport Provider | 52 | Man | VISUAL | School transport driver killed at the entrance gate by the blast wave while assisting arriving parents. |
-| 9 | **Meysam Kaveh (Pharmacy Technician)** | میثم کاوه (تکنسین داروخانه) | Healthcare Technician | 29 | Man | VISUAL | Pharmacy assistant from the adjacent medical clinic who rushed to the school perimeter with medical supplies and was killed in Strike 2. |
-| 10 | **Mohammad-Ali Shahriyari (Unborn Child)** | محمدعلی شهریاری (جنین شش‌ماهه) | Unborn Child (6 months gestation) | — | Boy | DNA | Six-month unborn infant of teacher Zohreh Shahriyari, officially certified as an individual martyr in the Minab Prosecutor's indictment. |
+| # | Name (English) | نام و نام خانوادگی | Role / Position | Portrait | Burial Location |
+| :-: | :--- | :--- | :--- | :-: | :--- |
+| 1 | **Neda Solhizadeh** | ندا صلحی‌زاده | 4th Grade Educator | `neda-solhizadeh.jpg` | Rafsanjan Martyrs' Cemetery, Kerman |
+| 2 | **Zohreh Shahriyari** | زهره شهریاری | 2nd Grade Teacher | `zohreh-shahriyari.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 3 | **Fereshteh Sangarzadeh** | فرشته سنگرزاده | Elementary Educator | `fereshteh-sangarzadeh-staff.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 4 | **Samira Basardeh** | سمیرا بصارده | Educational Counselor & Teacher | `samira-basardeh-counselor.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 5 | **Fatemeh Fadavi** | فاطمه فدوی | Elementary Educator | `fatemeh-fadavi-librarian.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 6 | **Fatemeh Taherifard** | فاطمه طاهری‌فرد | Elementary Educator | `fatemeh-taherifard-it.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 7 | **Mandana Salari** | ماندانا سالاری | Primary Grade Educator | `mandana-salari-educator.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 8 | **Marzieh Bashirifard** | مرضیه بشیری‌فرد | Elementary Educator | `marzieh-bashirifard.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 9 | **Marzieh Firouzi** | مرضیه فیروزی | Elementary Educator | `marzieh-firouzi.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 10 | **Elham Karimi** | الهام کریمی | Elementary Educator | `elham-karimi.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 11 | **Ensieh Karimi** | انسیه کریمی | Elementary Educator | `ensieh-karimi.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 12 | **Sima Karimi** | سیما کریمی | Elementary Educator | `sima-karimi.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 13 | **Farideh Mokhtari** | فریده مختاری | Elementary Educator | `farideh-mokhtari.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 14 | **Fatemeh Askari Minabi** | فاطمه عسکری مینابی | Elementary Educator | `fatemeh-askari-minabi.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 15 | **Fatemeh Salari** | فاطمه سالاری | Elementary Educator | `fatemeh-salari.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 16 | **Fatemeh Shahdadi** | فاطمه شهدادی | Elementary Educator | `fatemeh-shahdadi-teacher.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 17 | **Khadijeh Kamali** | خدیجه کمالی | Elementary Educator | `khadijeh-kamali.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 18 | **Mahdieh Rasouli** | مهدیه رسولی | Elementary Educator | `mahdieh-rasouli.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 19 | **Mahsa Ranjbar** | مهسا رنجبر | Elementary Educator | `mahsa-ranjbar.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 20 | **Raheleh Ranjbar** | راحله رنجبر | Elementary Educator | `raheleh-ranjbar.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 21 | **Maliheh Naeimi** | ملیحه نعیمی | Elementary Educator | `maliheh-naeimi.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 22 | **Mohadeseh Mohammadian** | محدثه محمدیان | Elementary Educator | `mohadeseh-mohammadian.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 23 | **Narges Zakeri** | نرگس ذاکری | Elementary Educator | `narges-zakeri.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 24 | **Nasim Neyestani** | نسیم نیستانی | Elementary Educator | `nasim-neyestani.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 25 | **Razieh Zamani** | رضیه زمانی | Elementary Educator | `razieh-zamani.jpg` | Minab Martyrs' Cemetery, Hormozgan |
+| 26 | **Pooran Gholipour** | پوران قلی‌پور | Elementary Educator | `pooran-gholipour.jpg` | Minab Martyrs' Cemetery, Hormozgan |
 
 ---
 
-## 5. Documented Injured & Eyewitness Survivor Case Records
+## 4. Parents, Community Members & Unborn Child (10 Martyrs)
 
-| # | Name (English) | نام و نام خانوادگی | Age | Role | Status | Eyewitness Narrative & Medical Record |
-| :-: | :--- | :--- | :-: | :--- | :--- | :--- |
-| 1 | **Nila Sadeghi** | نیلا صادقی | 10 | 4th Grade Student | Surviving / Injured | Surviving 10-year-old daughter of Teacher Neda Solhizadeh and sister of martyr Hami Sadeghi; key eyewitness narrator of the incident. |
-| 2 | **Mohammad-Javad Molaei** | محمدجواد ملایی | 12 | 6th Grade Student | Surviving / Injured | Surviving student rescued through a shattered window frame by his mother Zahra Molaei just prior to the prayer room detonation. |
-| 3 | **Mehgol Molaei** | مهگل ملایی | 7 | 1st Grade Student | Surviving / Injured | Surviving first-grader pulled from classroom ceiling debris by her mother Zahra Molaei. |
+| # | Name (English) | نام و نام خانوادگی | Category / Role | Gender | Age | Notes |
+| :-: | :--- | :--- | :--- | :-: | :-: | :--- |
+| 1 | **Hamid Sadeghi** | حمید صادقی (پدر دانش‌آموز) | Parent of Student (Hami & Nila Sadeghi) | Man | 41 | Father of Hami and Nila Sadeghi and husband of teacher Neda Solhizadeh; rushed into the school building after Strike 1 to evacuate his family and was martyred in Strike 2. |
+| 2 | **Mohammad Zakeri** | محمد ذاکری (پدر دانش‌آموز) | Parent of Student (Asra & Salma Zakeri) | Man | 44 | Father of Asra and Salma Zakeri; killed attempting to break open the collapsed prayer hall door to free trapped children. |
+| 3 | **Ali Karyanipak** | علی کریانی‌پاک (پدر دانش‌آموز) | Parent of Student (Ali-Akbar & Mohammad-Ali) | Man | 43 | Father of 3rd-grader Ali-Akbar and 2nd-grader Mohammad-Ali Karyanipak; martyred alongside his two sons inside the school corridor. |
+| 4 | **Hassan Ahmadzadeh** | حسن احمدزاده (پدر دانش‌آموز) | Parent of Student | Man | 40 | Father who arrived immediately upon hearing the first blast and was killed in the secondary strike. |
+| 5 | **Fatemeh Gholami** | فاطمه غلامی (مادر دانش‌آموز) | Parent of Student (Mother) | Woman | 37 | Mother who rushed into the classroom wing to pull children out after Strike 1 and was martyred in Strike 2. |
+| 6 | **Zahra Heidari** | زهرا حیدری (مادر دانش‌آموز) | Parent of Student (Mother) | Woman | 36 | Mother who was at the school entrance guiding children and was martyred in the secondary strike. |
+| 7 | **Maryam Salari** | مریم سالاری (مادر دانش‌آموز) | Parent of Student (Mother) | Woman | 35 | Mother of an elementary student present at the school office during morning drop-off; martyred in the airstrike. |
+| 8 | **Ali Rostami (School Bus Driver)** | علی رستمی (راننده سرویس مدرسه) | School Bus Driver | Man | 52 | School transport driver killed at the entrance gate by the blast wave while assisting arriving students and parents. |
+| 9 | **Meysam Kaveh (Pharmacy Technician)** | میثم کاوه (تکنسین داروخانه درمانگاه مجاور) | Adjacent Clinic Pharmacy Technician | Man | 29 | Pharmacy technician from the adjacent clinic who rushed to the school perimeter with emergency medical supplies and was killed in Strike 2. |
+| 10 | **Mohammad Shirgir (6-Month Unborn Child)** | محمد شیرگیر (جنین شش‌ماهه شهیده زهره شهریاری) | Unborn Child (6 months gestation, son of Teacher Zohreh Shahriyari) | Boy | 0 | Six-month unborn son of martyred 2nd-grade teacher Zohreh Shahriyari, named Mohammad Shirgir (محمد شیرگیر) by his parents and certified as the 156th martyr of the Minab school strike. |

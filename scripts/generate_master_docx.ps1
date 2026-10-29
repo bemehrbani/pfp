@@ -17,7 +17,8 @@ if (-not (Test-Path $SourceMd)) {
     throw ("Source Markdown file not found: " + $SourceMd)
 }
 
-$lines = Get-Content -Path $SourceMd -Encoding utf8
+$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+$lines = [System.IO.File]::ReadAllLines($SourceMd, $utf8NoBom)
 
 function Format-Inline ($text) {
     if ([string]::IsNullOrEmpty($text)) { return "" }
@@ -224,10 +225,9 @@ $html.AppendLine("</body></html>") | Out-Null
 
 $tempHtmlPath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "PFPJ_Minab_Report_Temp.html")
 Write-Host ("Writing temporary HTML file: " + $tempHtmlPath)
-[System.IO.File]::WriteAllText($tempHtmlPath, $html.ToString(), [System.Text.Encoding]::UTF8)
+[System.IO.File]::WriteAllText($tempHtmlPath, $html.ToString(), $utf8NoBom)
 
 # Destination paths
-$destDocsDir = [System.IO.Path]::GetDirectoryName($SourceMd)
 $draftsDir = Join-Path $RepoRoot ("Draft_Versions\" + $ProductionDate)
 if (-not (Test-Path $draftsDir)) {
     New-Item -ItemType Directory -Path $draftsDir -Force | Out-Null
@@ -240,13 +240,11 @@ if (-not (Test-Path $platformDocsDir)) {
 $isAnnex = $SourceMd -match "MASTER_EXHIBIT_DOSSIER"
 
 if ($isAnnex) {
-    $mainDocxDest = [System.IO.Path]::Combine($destDocsDir, "MASTER_EXHIBIT_DOSSIER.docx")
     $datedDocxDest = [System.IO.Path]::Combine($draftsDir, ("PFPJ_Minab_Master_Exhibit_Dossier_Annex_" + $ProductionDate + "_Draft.docx"))
     $platformDocxDest = [System.IO.Path]::Combine($platformDocsDir, "PFPJ_Minab_Master_Exhibit_Dossier_Annex.docx")
     $headerText = "WORKING DRAFT -- PRIVATELY SHARED FOR FEEDBACK | MASTER EXHIBIT COMPENDIUM"
     $footerText = "CONFIDENTIAL | PEOPLE FOR PEACE & JUSTICE RY | EXHIBIT DOSSIER PFPJ-2026-IR-001 | DRAFT DATE: " + $ProductionDate
 } else {
-    $mainDocxDest = [System.IO.Path]::Combine($destDocsDir, "FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.docx")
     $datedDocxDest = [System.IO.Path]::Combine($draftsDir, ("PFPJ_Minab_Factual_Determination_Main_Report_" + $ProductionDate + "_Draft.docx"))
     $platformDocxDest = [System.IO.Path]::Combine($platformDocsDir, "PFPJ_Minab_Master_Factual_Determination_Report.docx")
     $headerText = "WORKING DRAFT -- PRIVATELY SHARED FOR FEEDBACK | NOT FOR PUBLIC CITATION"
@@ -293,10 +291,6 @@ try {
         $table.AutoFitBehavior(2)
     }
 
-    # Save to primary location
-    Write-Host ("Saving Word document: " + $mainDocxDest)
-    $doc.SaveAs2($mainDocxDest, 16)
-
     # Save to dated Draft_Versions
     Write-Host ("Saving dated draft copy: " + $datedDocxDest)
     $doc.SaveAs2($datedDocxDest, 16)
@@ -314,4 +308,4 @@ finally {
 }
 
 # Verify output files
-Get-Item -Path $mainDocxDest, $datedDocxDest, $platformDocxDest | Select-Object FullName, Length, LastWriteTime
+Get-Item -Path $datedDocxDest, $platformDocxDest | Select-Object FullName, Length, LastWriteTime

@@ -250,7 +250,7 @@ Each entry reproduces the concrete operational sequence: date, time, physical se
 1. **Morning Market Stop:** The school bus stopped at a grocery store in the congested center of the Dahyan morning market so students could purchase drinks and snacks.
 2. **Laser Guidance into Civilian Crowd:** The weapon laser designator was placed directly onto the roof of the stationary school bus. The bomb guided flawlessly to the designated crosshairs.
 3. **Total Annihilation of Bus Cabin:** Detonation occurred in the center of the passenger cabin, disintegrating the vehicle and spraying shrapnel across market vendors, destroying nearby shops.
-4. **Physical Ballistic Recovery:** Researchers at the scene recovered bomb debris containing U.S. defense manufacturer CAGE codes (Lockheed Martin 94271), proving the munition executed a perfect precision guidance track to human-selected coordinates.
+4. **Physical Ballistic Recovery:** Researchers at the scene recovered bomb debris containing U.S. defense manufacturer CAGE codes (Lockheed Martin 94117), proving the munition executed a perfect precision guidance track to human-selected coordinates.
 
 ---
 

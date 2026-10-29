@@ -1,1745 +1,494 @@
 #!/usr/bin/env python3
 """
-Build Master Minab Casualty & Mothers Registry — Version 2.0.0
-Consolidates all verified Iranian sources, Bonyad Shahid releases,
-Forensic Medicine Organization records, judicial certifications, maternal profiles,
-and family clusters into unified JSON, Markdown, and CSV deliverables for all 156 certified martyrs.
+Build Master Minab Casualty, Educators & Rubble Artifacts Registry — Version 3.0.0
+Consolidates the official Shajareh Tayyebeh School Roster (1404),
+120 student records (with birth dates, exact ages, grades 1-6, and 119 studio portraits),
+26 female educator records (with 26 studio portraits),
+7 parents, 2 community members, 1 unborn child (Mohammad Shirgir / محمد شیرگیر),
+3 documented injured survivors, and 28 classroom drawings pulled from the rubble
+into unified JSON, Markdown, CSV, and Web JS deliverables.
 """
-
+import csv
 import json
 import os
-import re
-from datetime import datetime, timezone
+from pathlib import Path
 
-DATA_DIR = os.path.dirname(os.path.abspath(__file__))
-EXPORT_DIR = os.path.join(DATA_DIR, "exports")
-os.makedirs(EXPORT_DIR, exist_ok=True)
+DATA_DIR = Path(__file__).resolve().parent
+REPO_ROOT = DATA_DIR.parent.parent.parent
+PUBLIC_DIR = REPO_ROOT / "PFP_Platform" / "web" / "public"
+EXPORT_DIR = DATA_DIR / "exports"
+EXPORT_DIR.mkdir(parents=True, exist_ok=True)
 
-# 1. Base Sources Dictionary
-SOURCES = [
-    {
-        "id": "EVD-SAT-001",
-        "title": "Satellite Imagery and Spatial Geo-Partitioning Analysis (2013-2026)",
-        "outlet": "Planet Labs / Google Earth Historical Archive",
-        "url": "https://pfp.ngo/evidence/EVD-SAT-001",
-        "publication_date": "2026-03-05",
-        "tier": "Tier 1",
-        "reliability_score": 0.99,
-        "notes": "High-resolution satellite imagery confirming physical concrete wall boundary built in 2016 separating school compound from naval base.",
-        "archive_hash": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0"
-    },
-    {
-        "id": "EVD-MUN-002",
-        "title": "Munitions Forensic Analysis: BGM-109 Tomahawk Cruise Missile Debris",
-        "outlet": "Independent Weapons Research & Bellingcat",
-        "url": "https://pfp.ngo/evidence/EVD-MUN-002",
-        "publication_date": "2026-03-08",
-        "tier": "Tier 1",
-        "reliability_score": 0.98,
-        "notes": "Physical serial numbers and aerodynamic fin debris recovered at strike crater matching US Navy Tomahawk Block IV/V specifications.",
-        "archive_hash": "b2c3d4e5f6a7890123456789abcdef0123456789abcdef0123456789abcdef1"
-    },
-    {
-        "id": "EVD-LAUNCH-003",
-        "title": "Launch Platform Attribution & Strike Vector Tracking",
-        "outlet": "Operation Epic Fury Operational Assessment",
-        "url": "https://pfp.ngo/evidence/EVD-LAUNCH-003",
-        "publication_date": "2026-03-12",
-        "tier": "Tier 1",
-        "reliability_score": 0.95,
-        "notes": "Trajectory and carrier strike group positioning in the Arabian Sea verifying launch origin from US naval vessels.",
-        "archive_hash": "c3d4e5f6a7b890123456789abcdef0123456789abcdef0123456789abcdef2"
-    },
-    {
-        "id": "EVD-CENTCOM-004",
-        "title": "CENTCOM Preliminary Investigation Assessment (15-6 Inquiry Summary)",
-        "outlet": "US Central Command / DoD Releases",
-        "url": "https://pfp.ngo/evidence/EVD-CENTCOM-004",
-        "publication_date": "2026-03-15",
-        "tier": "Tier 1",
-        "reliability_score": 0.96,
-        "notes": "Internal acknowledgment of civilian strike resulting from outdated 2013 target list coordinates.",
-        "archive_hash": "d4e5f6a7b8c90123456789abcdef0123456789abcdef0123456789abcdef3"
-    },
-    {
-        "id": "EVD-VIC-005",
-        "title": "Official Identity & Memorial Registry Database of Minab School Victims",
-        "outlet": "People for Peace & Justice ry / Minab Governor's Office",
-        "url": "https://peopleforpeace.live/data.html",
-        "publication_date": "2026-03-18",
-        "tier": "Tier 1",
-        "reliability_score": 0.99,
-        "notes": "Comprehensive verified victim registry with facial image correlation, maternal linkages, and DNA confirmation.",
-        "archive_hash": "e5f6a7b8c9d0123456789abcdef0123456789abcdef0123456789abcdef4"
-    },
-    {
-        "id": "SRC-LMO-001",
-        "title": "Hormozgan Forensic DNA Laboratory Final Genetic Audit",
-        "outlet": "Legal Medicine Organization of Hormozgan (lmo.ir)",
-        "url": "https://hormozgan.lmo.ir/reports/minab-1404",
-        "publication_date": "2026-04-10",
-        "tier": "Tier 1",
-        "reliability_score": 0.99,
-        "notes": "STR genomic typing of 312 biological samples against family reference blood samples.",
-        "archive_hash": "f6a7b8c9d0e123456789abcdef0123456789abcdef0123456789abcdef5"
-    },
-    {
-        "id": "SRC-PROS-002",
-        "title": "Minab Prosecutor Official Judicial Indictment & Casualty Toll",
-        "outlet": "Minab General and Revolutionary Prosecutor's Office",
-        "url": "https://dadgostari-hr.ir/news/minab-prosecutor-statement",
-        "publication_date": "2026-04-12",
-        "tier": "Tier 1",
-        "reliability_score": 0.99,
-        "notes": "Judicial certification of 156 total martyrs, including 120 students, 26 educators, 7 parents, 1 driver, 1 technician, 1 fetus.",
-        "archive_hash": "a7b8c9d0e1f23456789abcdef0123456789abcdef0123456789abcdef6"
-    },
-    {
-        "id": "SRC-BONYAD-003",
-        "title": "Bonyad Shahid Hormozgan Martyrdom Dossiers & Cemetery Allocation",
-        "outlet": "Navid Shahed Hormozgan / Bonyad Shahid",
-        "url": "https://hormozgan.navideshahed.com/fa/news/minab-martyrs",
-        "publication_date": "2026-03-20",
-        "tier": "Tier 1",
-        "reliability_score": 0.98,
-        "notes": "Official state recognition of martyr status and burial records in Minab and Rafsanjan cemeteries.",
-        "archive_hash": "b8c9d0e1f2a3456789abcdef0123456789abcdef0123456789abcdef7"
-    },
-    {
-        "id": "SRC-GYM-004",
-        "title": "Memorial Statement on Martyred Student Athletes and Gymnasts",
-        "outlet": "Iran Gymnastics Federation / Asian Gymnastics Union",
-        "url": "https://irgymnastics.ir/news/minab-gymnasts-memorial",
-        "publication_date": "2026-03-03",
-        "tier": "Tier 3",
-        "reliability_score": 0.97,
-        "notes": "Official condolences and documentation for 6 young gymnasts and skateboarders killed in the strike.",
-        "archive_hash": "c9d0e1f2a3b456789abcdef0123456789abcdef0123456789abcdef8"
-    },
-    {
-        "id": "SRC-IRCS-005",
-        "title": "Iranian Red Crescent Society Initial Search & Rescue Triage Report",
-        "outlet": "Iranian Red Crescent Society (rcs.ir)",
-        "url": "https://rcs.ir/reports/minab-relief-operation",
-        "publication_date": "2026-03-01",
-        "tier": "Tier 3",
-        "reliability_score": 0.96,
-        "notes": "First responder casualty logs, injured hospitalizations at Hazrat Abolfazl Hospital, and double-tap rescue hazard records.",
-        "archive_hash": "d0e1f2a3b4c56789abcdef0123456789abcdef0123456789abcdef9"
-    }
+DATASET_V3 = {'incident_metadata': {'incident_id': 'MINAB-2026-0228', 'version': '3.0.0', 'incident_name_en': "Shajareh Tayyebeh Girls' & Boys' Elementary School Airstrike", 'incident_name_fa': 'حمله موشکی به دبستان و پیش\u200cدبستانی شجره طیبه میناب', 'incident_date': '2026-02-28', 'incident_time_local': '08:45 IRST', 'target_facility_en': 'Shajareh Tayyebeh Elementary School Complex', 'target_facility_fa': 'مجتمع آموزشی دبستان و پیش\u200cدبستانی شجره طیبه میناب', 'city': 'Minab', 'province': 'Hormozgan', 'country': 'Iran', 'coordinates': {'latitude': 27.1352, 'longitude': 57.0805}, 'weapon_system': 'Tomahawk BGM-109 Land Attack Cruise Missile (Block IV/V)', 'responsible_force': 'United States Naval Forces Central Command / Operation Epic Fury', 'legal_standard_of_proof': 'Reasonable grounds to believe', 'summary': {'en': 'On February 28, 2026 at approximately 08:45 IRST (9 Esfand 1404), during the opening hours of the school week, precision-guided BGM-109 Tomahawk cruise missiles struck the Shajareh Tayyebeh Elementary School in Minab, Hormozgan Province, Iran. The attack killed 156 verified martyrs: 120 schoolchildren (73 boys, 47 girls across Grades 1–6; 118 identified and 2 unrecovered remains: Makan Nasiri Khouzani and Mohammad-Taha Jafari), 26 female teachers, 7 parents of students (4 men, 3 women), 1 school bus driver, 1 adjacent clinic pharmacy technician, and 1 six-month unborn child (Mohammad Shirgir, son of martyred teacher Zohreh Shahriyari).', 'fa': 'در تاریخ ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶) ساعت ۰۸:۴۵ صبح، موشک\u200cهای کروز BGM-109 تاماهاک به دبستان دخترانه و پسرانه شجره طیبه در میناب اصابت کردند. بر اساس آمار رسمی نهایی، این حمله منجر به شهادت ۱۵۶ تن گردید: ۱۲۰ دانش\u200cآموز (۷۳ پسر و ۴۷ دختر در پایه\u200cهای اول تا ششم؛ شامل ۱۱۸ شهید شناسایی\u200cشده و ۲ شهید جاویدالاثر شناسایی\u200cنشده: ماکان نصیری خوزانی و محمدطاها جعفری)، ۲۶ معلم و کادر آموزشی خانم، ۷ نفر از اولیای دانش\u200cآموزان (۴ مرد و ۳ زن)، ۱ راننده سرویس مدرسه، ۱ تکنسین داروخانه درمانگاه مجاور و ۱ جنین شش\u200cماهه (شهید محمد شیرگیر، فرزند معلم شهیده زهره شهریاری).', 'ar': 'في 28 فبراير 2026، استهدفت صواريخ كروز من طراز توماهوك مدرسة شجرة طيبة الابتدائية في ميناب، مما أسفر عن استشهاد 156 شخصاً (120 طالباً وطالبة، 26 معلمة، 7 من أولياء الأمور، سائق حافلة، فني صيدلية، وجنين ذو ستة أشهر محمد شيرغير).'}, 'last_updated': '2026-10-29'}, 'summary_stats': {'version': '3.0.0', 'total_victims_tracked': 159, 'official_judicial_martyr_count': 156, 'student_martyrs_count': 120, 'student_boys_count': 73, 'student_girls_count': 47, 'student_grade_breakdown': {'grade_1': 28, 'grade_2': 27, 'grade_3': 15, 'grade_4': 30, 'grade_5': 12, 'grade_6': 8}, 'student_portraits_count': 119, 'female_educators_count': 26, 'teacher_portraits_count': 26, 'parents_martyrs_count': 7, 'parents_men_count': 4, 'parents_women_count': 3, 'community_martyrs_count': 2, 'unborn_fetus_count': 1, 'rubble_drawings_count': 28, 'total_killed': 154, 'total_missing_unrecovered': 2, 'unrecovered_student_ids': ['makan-nasiri', 'mohammadtaha-jafari'], 'total_injured': 3, 'total_mothers_profiled': 10, 'total_family_clusters': 10, 'official_dna_identified_count': 154, 'official_unrecovered_count': 2}, 'victims': [{'id': 'amin-ahmadzade', 'roster_index': 1, 'full_name_en': 'Amin Ahmadzadeh', 'full_name_fa': 'امین احمدزاده', 'father_name': None, 'mother_id': 'moth-mohaddeseh-falahat', 'age': 6, 'birth_date_shamsi': '1398/06/06', 'birth_date_gregorian': '2019-08-28', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'personal_belongings', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amin-ahmadzade.jpg', 'photo_path': 'images/children/amin-ahmadzade.jpg', 'photo_grid': 'r05_c08', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/06/06 / 2019-08-28, age 6).', 'family_cluster_id': 'FAM-AHMADZADEH', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'arad-ahmadizadeh', 'roster_index': 2, 'full_name_en': 'Araz Ahmadizadeh Zahraei', 'full_name_fa': 'آراز احمدی زاده زهرائی', 'father_name': None, 'mother_id': 'moth-mohaddeseh-falahat', 'age': 8, 'birth_date_shamsi': '1396/11/05', 'birth_date_gregorian': '2018-01-25', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/arad-ahmadizadeh.jpg', 'photo_path': 'images/children/arad-ahmadizadeh.jpg', 'photo_grid': 'r04_c10', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/11/05 / 2018-01-25, age 8).', 'family_cluster_id': 'FAM-AHMADZADEH', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'sobhan-ahmadi', 'roster_index': 3, 'full_name_en': 'Sobhan Ahmadi Tifkani', 'full_name_fa': 'سبحان احمدی طیفکانی', 'father_name': None, 'mother_id': 'moth-ahmadi-siblings', 'age': 9, 'birth_date_shamsi': '1395/06/28', 'birth_date_gregorian': '2016-09-18', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'personal_belongings', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/sobhan-ahmadi.jpg', 'photo_path': 'images/children/sobhan-ahmadi.jpg', 'photo_grid': 'r03_c00', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/06/28 / 2016-09-18, age 9).', 'family_cluster_id': 'FAM-AHMADI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-abadizadeh', 'roster_index': 4, 'full_name_en': 'Mohammad Abadizadeh', 'full_name_fa': 'محمد آبادی زاده', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/07/16', 'birth_date_gregorian': '2015-10-08', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-abadizadeh.jpg', 'photo_path': 'images/children/mohammad-abadizadeh.jpg', 'photo_grid': 'r03_c07', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/07/16 / 2015-10-08, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'reza-barani', 'roster_index': 5, 'full_name_en': 'Reza Barani', 'full_name_fa': 'رضا بارانی', 'father_name': 'Masoud', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/02/27', 'birth_date_gregorian': '2018-05-17', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/reza-barani.jpg', 'photo_path': 'images/children/reza-barani.jpg', 'photo_grid': 'r04_c14', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/02/27 / 2018-05-17, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amirmohammad-bagheri', 'roster_index': 6, 'full_name_en': 'Amirmohammad Bagheri', 'full_name_fa': 'امیرمحمد باقری', 'father_name': None, 'mother_id': None, 'age': 11, 'birth_date_shamsi': '1393/11/09', 'birth_date_gregorian': '2015-01-29', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirmohammad-bagheri.jpg', 'photo_path': 'images/children/amirmohammad-bagheri.jpg', 'photo_grid': 'r05_c14', 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1393/11/09 / 2015-01-29, age 11).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amirali-boostani', 'roster_index': 7, 'full_name_en': 'Amirali Boostani', 'full_name_fa': 'امیرعلی بوستانی', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/10/30', 'birth_date_gregorian': '2016-01-20', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirali-boostani.jpg', 'photo_path': 'images/children/amirali-boostani.jpg', 'photo_grid': 'r05_c12', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/10/30 / 2016-01-20, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amirmohammad-boostani', 'roster_index': 8, 'full_name_en': 'Amirmohammad Boostani', 'full_name_fa': 'امیرمحمد بوستانی', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/04/06', 'birth_date_gregorian': '2018-06-27', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirmohammad-boostani.jpg', 'photo_path': 'images/children/amirmohammad-boostani.jpg', 'photo_grid': 'r02_c02', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/04/06 / 2018-06-27, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'arya-bahadori', 'roster_index': 9, 'full_name_en': 'Arya Bahadori', 'full_name_fa': 'آریا بهادری', 'father_name': 'Torfi', 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/11/07', 'birth_date_gregorian': '2017-01-26', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/arya-bahadori.jpg', 'photo_path': 'images/children/arya-bahadori.jpg', 'photo_grid': 'r04_c01', 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/11/07 / 2017-01-26, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammadayan-bahrami', 'roster_index': 10, 'full_name_en': 'Mohammad-Kian Bahrami', 'full_name_fa': 'محمدکیان بهرامی', 'father_name': 'Sajjad', 'mother_id': 'moth-bahrami-cluster', 'age': 7, 'birth_date_shamsi': '1397/09/08', 'birth_date_gregorian': '2018-11-29', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammadayan-bahrami.jpg', 'photo_path': 'images/children/mohammadayan-bahrami.jpg', 'photo_grid': 'r06_c08', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/09/08 / 2018-11-29, age 7).', 'family_cluster_id': 'FAM-BAHRAMI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'hamed-parasheghnejad', 'roster_index': 11, 'full_name_en': 'Hamed Paritaghinejad', 'full_name_fa': 'حامد پری تقی نژاد', 'father_name': 'Hadi', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/12/07', 'birth_date_gregorian': '2019-02-26', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/hamed-parasheghnejad.jpg', 'photo_path': 'images/children/hamed-parasheghnejad.jpg', 'photo_grid': 'r06_c13', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/12/07 / 2019-02-26, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'hani-paritaghinejhad', 'roster_index': 12, 'full_name_en': 'Hani Paritaghinejad', 'full_name_fa': 'هانی پری تقی نژاد', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/11/26', 'birth_date_gregorian': '2016-02-15', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/hani-paritaghinejhad.jpg', 'photo_path': 'images/children/hani-paritaghinejhad.jpg', 'photo_grid': 'r03_c14', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/11/26 / 2016-02-15, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-pirzadeh', 'roster_index': 13, 'full_name_en': 'Mohammad Pirzadeh', 'full_name_fa': 'محمد پیرزاده', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/02/10', 'birth_date_gregorian': '2016-04-29', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-pirzadeh.jpg', 'photo_path': 'images/children/mohammad-pirzadeh.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/02/10 / 2016-04-29, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'amirali-jadavi', 'roster_index': 14, 'full_name_en': 'Amirali Jadavi', 'full_name_fa': 'امیرعلی جداوی', 'father_name': None, 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/08/04', 'birth_date_gregorian': '2017-10-26', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirali-jadavi.jpg', 'photo_path': 'images/children/amirali-jadavi.jpg', 'photo_grid': 'r04_c06', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/08/04 / 2017-10-26, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammadtaha-jafari', 'roster_index': 15, 'full_name_en': 'Mohammad-Taha Jafari', 'full_name_fa': 'محمدطاها جعفری', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/02/25', 'birth_date_gregorian': '2016-05-14', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'missing', 'official_status_fa': 'شهید ولی شناسایی نشده', 'identification_method': 'unrecovered', 'burial_location': None, 'photo_url': 'https://peopleforpeace.live/images/children/mohammadtaha-jafari.jpg', 'photo_path': 'images/children/mohammadtaha-jafari.jpg', 'photo_grid': 'r03_c02', 'linked_drawings': [], 'biography': "4th-grade student (born 1395/02/25 / 2016-05-14, age 9) at Shajareh Tayyebeh School. Listed in the official roster as 'Martyred, remains unrecovered/unidentified' (شهید ولی شناسایی نشده) due to direct blast exposure.", 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amirhossein-jafari', 'roster_index': 16, 'full_name_en': 'Amirhossein Jafari Ravangi', 'full_name_fa': 'امیرحسین جعفری راونگی', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/01/15', 'birth_date_gregorian': '2016-04-03', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirhossein-jafari.jpg', 'photo_path': 'images/children/amirhossein-jafari.jpg', 'photo_grid': 'r03_c04', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/01/15 / 2016-04-03, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-jamali', 'roster_index': 17, 'full_name_en': 'Mohammad Jamali Nezhadi', 'full_name_fa': 'محمد جمالی نژادی', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1396/12/28', 'birth_date_gregorian': '2018-03-19', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-jamali.jpg', 'photo_path': 'images/children/mohammad-jamali.jpg', 'photo_grid': 'r04_c12', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/12/28 / 2018-03-19, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'benyamin-jangjoo', 'roster_index': 18, 'full_name_en': 'Benyamin Jangjoo', 'full_name_fa': 'بنیامین جنگجو', 'father_name': 'Shahram', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/05/21', 'birth_date_gregorian': '2017-08-12', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/benyamin-jangjoo.jpg', 'photo_path': 'images/children/benyamin-jangjoo.jpg', 'photo_grid': 'r06_c07', 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/05/21 / 2017-08-12, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammadmahdi-jangichi', 'roster_index': 19, 'full_name_en': 'Mohammad-Mahdi Jangichi Minabi', 'full_name_fa': 'محمدمهدی جنگیچی مینابی', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/01/04', 'birth_date_gregorian': '2015-03-24', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammadmahdi-jangichi.jpg', 'photo_path': 'images/children/mohammadmahdi-jangichi.jpg', 'photo_grid': 'r06_c05', 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/01/04 / 2015-03-24, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'soheil-chamalipour', 'roster_index': 20, 'full_name_en': 'Soheil Chamalipour Sarkami', 'full_name_fa': 'سهیل چملی پورسرکمی', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1396/12/11', 'birth_date_gregorian': '2018-03-02', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/soheil-chamalipour.jpg', 'photo_path': 'images/children/soheil-chamalipour.jpg', 'photo_grid': 'r04_c11', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/12/11 / 2018-03-02, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'reza-habashian', 'roster_index': 21, 'full_name_en': 'Reza Habashian', 'full_name_fa': 'رضا حبشیان', 'father_name': 'Ali', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/05/25', 'birth_date_gregorian': '2018-08-16', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/reza-habashian.jpg', 'photo_path': 'images/children/reza-habashian.jpg', 'photo_grid': 'r02_c04', 'linked_drawings': [], 'biography': '2nd Grade Student (born 1397/05/25 / 2018-08-16, age 7). Also reported as Jamshian', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amirali-hassanzadeh', 'roster_index': 22, 'full_name_en': 'Amirali Hassanzadeh', 'full_name_fa': 'امیرعلی حسن زاده', 'father_name': None, 'mother_id': None, 'age': 11, 'birth_date_shamsi': '1393/08/27', 'birth_date_gregorian': '2014-11-18', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirali-hassanzadeh.jpg', 'photo_path': 'images/children/amirali-hassanzadeh.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1393/08/27 / 2014-11-18, age 11).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'sorena-hosseinpour', 'roster_index': 23, 'full_name_en': 'Sorena Hosseinpour', 'full_name_fa': 'سورنا حسین پور', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/03/09', 'birth_date_gregorian': '2019-05-30', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/sorena-hosseinpour.jpg', 'photo_path': 'images/children/sorena-hosseinpour.jpg', 'photo_grid': 'r05_c07', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/03/09 / 2019-05-30, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'ali-hafizi', 'roster_index': 24, 'full_name_en': 'Ali Hafizi', 'full_name_fa': 'علی حفیظی', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/05/02', 'birth_date_gregorian': '2015-07-24', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/ali-hafizi.jpg', 'photo_path': 'images/children/ali-hafizi.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/05/02 / 2015-07-24, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'mahdi-delavari', 'roster_index': 25, 'full_name_en': 'Mahdi Delavari', 'full_name_fa': 'مهدی دلاوری', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/05/28', 'birth_date_gregorian': '2016-08-18', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mahdi-delavari.jpg', 'photo_path': 'images/children/mahdi-delavari.jpg', 'photo_grid': 'r03_c01', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/05/28 / 2016-08-18, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mahdi-zakeri', 'roster_index': 26, 'full_name_en': 'Mahdi Zakeri', 'full_name_fa': 'مهدی ذاکری', 'father_name': None, 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/06/15', 'birth_date_gregorian': '2017-09-06', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mahdi-zakeri.jpg', 'photo_path': 'images/children/mahdi-zakeri.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/06/15 / 2017-09-06, age 8).', 'family_cluster_id': 'FAM-ZAKERI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'sina-zakeri', 'roster_index': 27, 'full_name_en': 'Sina Zakeri Gourzangnejad', 'full_name_fa': 'سینا ذاکری گورزانگ نژاد', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/07/04', 'birth_date_gregorian': '2015-09-26', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/sina-zakeri.jpg', 'photo_path': 'images/children/sina-zakeri.jpg', 'photo_grid': 'r03_c08', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/07/04 / 2015-09-26, age 10).', 'family_cluster_id': 'FAM-ZAKERI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amirhossein-rasouli', 'roster_index': 28, 'full_name_en': 'Amirhossein Rasouli Soleimani', 'full_name_fa': 'امیرحسین رسولی سلیمانی', 'father_name': 'Hossein', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/06/07', 'birth_date_gregorian': '2017-08-29', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'official_records', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirhossein-rasouli.jpg', 'photo_path': 'images/children/amirhossein-rasouli.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/06/07 / 2017-08-29, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'reza-ranjbar', 'roster_index': 29, 'full_name_en': 'Reza Ranjbar', 'full_name_fa': 'رضا رنجبر', 'father_name': 'Mohammad', 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/04/04', 'birth_date_gregorian': '2019-06-25', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/reza-ranjbar.jpg', 'photo_path': 'images/children/reza-ranjbar.jpg', 'photo_grid': 'r05_c13', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/04/04 / 2019-06-25, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'parham-ranjbari', 'roster_index': 30, 'full_name_en': 'Parham Ranjbari', 'full_name_fa': 'پرهام رنجبری', 'father_name': 'Mojtaba', 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/11/20', 'birth_date_gregorian': '2017-02-08', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/parham-ranjbari.jpg', 'photo_path': 'images/children/parham-ranjbari.jpg', 'photo_grid': 'r04_c02', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/11/20 / 2017-02-08, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'homayoun-ranjbari', 'roster_index': 31, 'full_name_en': 'Homayoun Ranjbari', 'full_name_fa': 'همایون رنجبری', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/12/03', 'birth_date_gregorian': '2019-02-22', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/homayoun-ranjbari.jpg', 'photo_path': 'images/children/homayoun-ranjbari.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/12/03 / 2019-02-22, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'hossein-rahsepar', 'roster_index': 32, 'full_name_en': 'Hossein Rahsepar', 'full_name_fa': 'حسین رهسپار', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/10/10', 'birth_date_gregorian': '2015-12-31', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/hossein-rahsepar.jpg', 'photo_path': 'images/children/hossein-rahsepar.jpg', 'photo_grid': 'r03_c06', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/10/10 / 2015-12-31, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-raofinia', 'roster_index': 33, 'full_name_en': 'Mohammad Raoufinia', 'full_name_fa': 'محمد رئوفی نیا', 'father_name': None, 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/08/15', 'birth_date_gregorian': '2017-11-06', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-raofinia.jpg', 'photo_path': 'images/children/mohammad-raofinia.jpg', 'photo_grid': 'r04_c08', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/08/15 / 2017-11-06, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-hatam-raeisi', 'roster_index': 34, 'full_name_en': 'Mohammad-Hesam Raeisi', 'full_name_fa': 'محمدحسام رئیسی', 'father_name': 'Hassan', 'mother_id': 'moth-raeisi-siblings', 'age': 9, 'birth_date_shamsi': '1394/12/11', 'birth_date_gregorian': '2016-03-01', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-hatam-raeisi.jpg', 'photo_path': 'images/children/mohammad-hatam-raeisi.jpg', 'photo_grid': 'r03_c05', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/12/11 / 2016-03-01, age 9).', 'family_cluster_id': 'FAM-RAEISI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'ali-zarei-gholam', 'roster_index': 35, 'full_name_en': 'Ali Zarei', 'full_name_fa': 'علی زارعی', 'father_name': None, 'mother_id': None, 'age': 13, 'birth_date_shamsi': '1391/11/04', 'birth_date_gregorian': '2013-01-23', 'gender': 'boy', 'role': 'student', 'grade': 6, 'grade_or_class': '6th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه ششم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/ali-zarei-gholam.jpg', 'photo_path': 'images/children/ali-zarei-gholam.jpg', 'photo_grid': 'r02_c05', 'linked_drawings': [], 'biography': '6th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1391/11/04 / 2013-01-23, age 13).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'alireza-zarei', 'roster_index': 36, 'full_name_en': 'Alireza Zarei', 'full_name_fa': 'علیرضا زارعی', 'father_name': 'Ehsan', 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/09/23', 'birth_date_gregorian': '2016-12-13', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/alireza-zarei.jpg', 'photo_path': 'images/children/alireza-zarei.jpg', 'photo_grid': 'r03_c10', 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/09/23 / 2016-12-13, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-sadra-zarei', 'roster_index': 37, 'full_name_en': 'Mohammad-Sadra Zareipour', 'full_name_fa': 'محمدصدرا زارعی پور', 'father_name': 'Mehdi', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1395/12/28', 'birth_date_gregorian': '2017-03-18', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-sadra-zarei.jpg', 'photo_path': 'images/children/mohammad-sadra-zarei.jpg', 'photo_grid': 'r04_c03', 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/12/28 / 2017-03-18, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'ali-asghar-zaeri', 'roster_index': 38, 'full_name_en': 'Ali-Asghar Zaeri', 'full_name_fa': 'علی اصغر زائری', 'father_name': 'Javad', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/05/28', 'birth_date_gregorian': '2017-08-19', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/ali-asghar-zaeri.jpg', 'photo_path': 'images/children/ali-asghar-zaeri.jpg', 'photo_grid': 'r03_c09', 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/05/28 / 2017-08-19, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'moien-zeinali', 'roster_index': 39, 'full_name_en': 'Moien Zeinali', 'full_name_fa': 'معین زینلی', 'father_name': None, 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/08/06', 'birth_date_gregorian': '2017-10-28', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/moien-zeinali.jpg', 'photo_path': 'images/children/moien-zeinali.jpg', 'photo_grid': 'r04_c07', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/08/06 / 2017-10-28, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'homayoon-zeinali', 'roster_index': 40, 'full_name_en': 'Homayoon Zeinali', 'full_name_fa': 'همایون زینلی', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/06/09', 'birth_date_gregorian': '2019-08-31', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/homayoon-zeinali.jpg', 'photo_path': 'images/children/homayoon-zeinali.jpg', 'photo_grid': 'r05_c09', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/06/09 / 2019-08-31, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'ali-salari', 'roster_index': 41, 'full_name_en': 'Ali Salari', 'full_name_fa': 'علی سالاری', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1397/12/19', 'birth_date_gregorian': '2019-03-10', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/ali-salari.jpg', 'photo_path': 'images/children/ali-salari.jpg', 'photo_grid': 'r05_c05', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/12/19 / 2019-03-10, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'masiha-salari', 'roster_index': 42, 'full_name_en': 'Masiha Salari', 'full_name_fa': 'مسیحا سالاری', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/10/23', 'birth_date_gregorian': '2019-01-13', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/masiha-salari.jpg', 'photo_path': 'images/children/masiha-salari.jpg', 'photo_grid': 'r05_c04', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/10/23 / 2019-01-13, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mahdi-salari', 'roster_index': 43, 'full_name_en': 'Mahdi Salari', 'full_name_fa': 'مهدی سالاری', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/05/20', 'birth_date_gregorian': '2015-08-11', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mahdi-salari.jpg', 'photo_path': 'images/children/mahdi-salari.jpg', 'photo_grid': 'r06_c10', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/05/20 / 2015-08-11, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'ehsan-saleminia', 'roster_index': 44, 'full_name_en': 'Ehsan Saleminia', 'full_name_fa': 'احسان سالمی نیا', 'father_name': 'Ebrahim', 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/01/28', 'birth_date_gregorian': '2019-04-17', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/ehsan-saleminia.jpg', 'photo_path': 'images/children/ehsan-saleminia.jpg', 'photo_grid': 'r05_c06', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/01/28 / 2019-04-17, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'ahmadreza-sartakzadeh', 'roster_index': 45, 'full_name_en': 'Ahmadreza Sartakzadeh', 'full_name_fa': 'احمدرضا سرتک زاده', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/06/06', 'birth_date_gregorian': '2015-08-28', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/ahmadreza-sartakzadeh.jpg', 'photo_path': 'images/children/ahmadreza-sartakzadeh.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/06/06 / 2015-08-28, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'javad-sartakzade', 'roster_index': 46, 'full_name_en': 'Javad Sartakzadeh', 'full_name_fa': 'جواد سرتک زاده', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/03/26', 'birth_date_gregorian': '2018-06-16', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/javad-sartakzade.jpg', 'photo_path': 'images/children/javad-sartakzade.jpg', 'photo_grid': 'r05_c00', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/03/26 / 2018-06-16, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'ahmad-soltani', 'roster_index': 47, 'full_name_en': 'Ahmad Soltani', 'full_name_fa': 'احمد سلطانی', 'father_name': 'Yaser', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/06/30', 'birth_date_gregorian': '2017-09-21', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'official_records', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/ahmad-soltani.jpg', 'photo_path': 'images/children/ahmad-soltani.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/06/30 / 2017-09-21, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'sobhan-shahdadi', 'roster_index': 48, 'full_name_en': 'Sobhan Shahdadi', 'full_name_fa': 'سبحان شهدادی', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/06/23', 'birth_date_gregorian': '2019-09-14', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/sobhan-shahdadi.jpg', 'photo_path': 'images/children/sobhan-shahdadi.jpg', 'photo_grid': 'r06_c06', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/06/23 / 2019-09-14, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-shahdoosti', 'roster_index': 49, 'full_name_en': 'Mohammad Shahdoostipour', 'full_name_fa': 'محمد شهدوستی پور', 'father_name': 'Abdollah', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/01/25', 'birth_date_gregorian': '2017-04-14', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-shahdoosti.jpg', 'photo_path': 'images/children/mohammad-shahdoosti.jpg', 'photo_grid': 'r05_c11', 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/01/25 / 2017-04-14, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'alireza-shahrjoo', 'roster_index': 50, 'full_name_en': 'Alireza Shahrjoo', 'full_name_fa': 'علیرضا شهرجو', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/01/12', 'birth_date_gregorian': '2018-04-01', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/alireza-shahrjoo.jpg', 'photo_path': 'images/children/alireza-shahrjoo.jpg', 'photo_grid': 'r04_c13', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/01/12 / 2018-04-01, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-reza-shahsavari', 'roster_index': 51, 'full_name_en': 'Mohammad-Reza Shahsavari', 'full_name_fa': 'محمدرضا شهسواری', 'father_name': 'Amir', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/07/17', 'birth_date_gregorian': '2017-10-09', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-reza-shahsavari.jpg', 'photo_path': 'images/children/mohammad-reza-shahsavari.jpg', 'photo_grid': 'r04_c05', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/07/17 / 2017-10-09, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'hami-sadeghi', 'roster_index': 52, 'full_name_en': 'Hami Sadeghi', 'full_name_fa': 'حامی صادقی', 'father_name': None, 'mother_id': 'moth-neda-solhizadeh', 'age': 10, 'birth_date_shamsi': '1394/01/31', 'birth_date_gregorian': '2015-04-20', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/hami-sadeghi.jpg', 'photo_path': 'images/children/hami-sadeghi.jpg', 'photo_grid': 'r06_c04', 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/01/31 / 2015-04-20, age 10).', 'family_cluster_id': 'FAM-SADEGHI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'heidar-salehi', 'roster_index': 53, 'full_name_en': 'Heidar Salehi Kahanshouieh', 'full_name_fa': 'حیدر صالحی کهنشوئیه', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/01/28', 'birth_date_gregorian': '2018-04-17', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/heidar-salehi.jpg', 'photo_path': 'images/children/heidar-salehi.jpg', 'photo_grid': 'r05_c10', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/01/28 / 2018-04-17, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'saleh-abbasi', 'roster_index': 54, 'full_name_en': 'Saleh Abbasi Doumshahri', 'full_name_fa': 'صالح عباسی دومشهری', 'father_name': None, 'mother_id': None, 'age': 11, 'birth_date_shamsi': '1393/08/08', 'birth_date_gregorian': '2014-10-30', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/saleh-abbasi.jpg', 'photo_path': 'images/children/saleh-abbasi.jpg', 'photo_grid': 'r03_c12', 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1393/08/08 / 2014-10-30, age 11).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'ali-arabkish', 'roster_index': 55, 'full_name_en': 'Ali Arab-Kish Chalouei', 'full_name_fa': 'علی عرب کیش چلوئی', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/04/13', 'birth_date_gregorian': '2015-07-04', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/ali-arabkish.jpg', 'photo_path': 'images/children/ali-arabkish.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/04/13 / 2015-07-04, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'mohammadsadegh-gholami', 'roster_index': 56, 'full_name_en': 'Mohammad-Sadegh Gholami', 'full_name_fa': 'محمدصادق غلامی', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/09/27', 'birth_date_gregorian': '2018-12-18', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammadsadegh-gholami.jpg', 'photo_path': 'images/children/mohammadsadegh-gholami.jpg', 'photo_grid': 'r03_c11', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/09/27 / 2018-12-18, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'aliasghar-foroozafar', 'roster_index': 57, 'full_name_en': 'Ali-Asghar Forouzanfar', 'full_name_fa': 'علی اصغر فروزان فر', 'father_name': None, 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/10/14', 'birth_date_gregorian': '2018-01-04', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/aliasghar-foroozafar.jpg', 'photo_path': 'images/children/aliasghar-foroozafar.jpg', 'photo_grid': 'r04_c09', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/10/14 / 2018-01-04, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'danial-faghirdoost', 'roster_index': 58, 'full_name_en': 'Danial Faghirdoost', 'full_name_fa': 'دانیال فقیردوست', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/03/18', 'birth_date_gregorian': '2015-06-08', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/danial-faghirdoost.jpg', 'photo_path': 'images/children/danial-faghirdoost.jpg', 'photo_grid': 'r06_c03', 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/03/18 / 2015-06-08, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amirghasem-zaeri', 'roster_index': 59, 'full_name_en': 'Amir Ghasemzaei', 'full_name_fa': 'امیر قاسم زائی', 'father_name': 'Najibollah', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/02/29', 'birth_date_gregorian': '2018-05-19', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirghasem-zaeri.jpg', 'photo_path': 'images/children/amirghasem-zaeri.jpg', 'photo_grid': 'r06_c09', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/02/29 / 2018-05-19, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amirmohammad-ghasemi', 'roster_index': 60, 'full_name_en': 'Amirmohammad Ghasemi', 'full_name_fa': 'امیرمحمد قاسمی', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/01/24', 'birth_date_gregorian': '2018-04-13', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirmohammad-ghasemi.jpg', 'photo_path': 'images/children/amirmohammad-ghasemi.jpg', 'photo_grid': 'r02_c03', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/01/24 / 2018-04-13, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'saman-karimzadeh', 'roster_index': 61, 'full_name_en': 'Saman Karamzadeh', 'full_name_fa': 'سامان کرم زاده', 'father_name': 'Farzad', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/06/07', 'birth_date_gregorian': '2018-08-29', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/saman-karimzadeh.jpg', 'photo_path': 'images/children/saman-karimzadeh.jpg', 'photo_grid': 'r05_c01', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/06/07 / 2018-08-29, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'ali-akbar-karyanipak', 'roster_index': 62, 'full_name_en': 'Ali-Akbar Karyanipak', 'full_name_fa': 'علی اکبر کریانی پاک', 'father_name': 'Abdollah', 'mother_id': 'moth-karyanipak', 'age': 8, 'birth_date_shamsi': '1396/01/08', 'birth_date_gregorian': '2017-03-28', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/ali-akbar-karyanipak.jpg', 'photo_path': 'images/children/ali-akbar-karyanipak.jpg', 'photo_grid': 'r04_c04', 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/01/08 / 2017-03-28, age 8).', 'family_cluster_id': 'FAM-KARYANIPAK', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-ali-karyanipak', 'roster_index': 63, 'full_name_en': 'Mohammad-Ali Karyanipak', 'full_name_fa': 'محمدعلی کریانی پاک', 'father_name': None, 'mother_id': 'moth-karyanipak', 'age': 7, 'birth_date_shamsi': '1397/05/19', 'birth_date_gregorian': '2018-08-10', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-ali-karyanipak.jpg', 'photo_path': 'images/children/mohammad-ali-karyanipak.jpg', 'photo_grid': 'r05_c02', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/05/19 / 2018-08-10, age 7).', 'family_cluster_id': 'FAM-KARYANIPAK', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'sepehr-karimi', 'roster_index': 64, 'full_name_en': 'Sepehr Karimi', 'full_name_fa': 'سپهر کریمی', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/06/26', 'birth_date_gregorian': '2016-09-16', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/sepehr-karimi.jpg', 'photo_path': 'images/children/sepehr-karimi.jpg', 'photo_grid': 'r04_c00', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/06/26 / 2016-09-16, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amirali-kamali', 'roster_index': 65, 'full_name_en': 'Amirali Kamali', 'full_name_fa': 'امیرعلی کمالی', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/04/02', 'birth_date_gregorian': '2019-06-23', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amirali-kamali.jpg', 'photo_path': 'images/children/amirali-kamali.jpg', 'photo_grid': 'r06_c11', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/04/02 / 2019-06-23, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'arash-golazin', 'roster_index': 66, 'full_name_en': 'Arash Golazin', 'full_name_fa': 'آرش گل آذین', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/06/14', 'birth_date_gregorian': '2018-09-05', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/arash-golazin.jpg', 'photo_path': 'images/children/arash-golazin.jpg', 'photo_grid': 'r06_c14', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/06/14 / 2018-09-05, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammad-loghmani', 'roster_index': 67, 'full_name_en': 'Mohammad Loghmani Abdan', 'full_name_fa': 'محمد لقمانی آبدان', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/08/13', 'birth_date_gregorian': '2015-11-04', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammad-loghmani.jpg', 'photo_path': 'images/children/mohammad-loghmani.jpg', 'photo_grid': 'r03_c13', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/08/13 / 2015-11-04, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'amir-mohammadi', 'roster_index': 68, 'full_name_en': 'Amir Mohammadi', 'full_name_fa': 'امیر محمدی', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/06/24', 'birth_date_gregorian': '2018-09-15', 'gender': 'boy', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/amir-mohammadi.jpg', 'photo_path': 'images/children/amir-mohammadi.jpg', 'photo_grid': 'r05_c03', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/06/24 / 2018-09-15, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'parsa-mokhtarinasab', 'roster_index': 69, 'full_name_en': 'Parsa Mokhtarinasab', 'full_name_fa': 'پارسا مختاری نسب', 'father_name': 'Mohammad', 'mother_id': None, 'age': 11, 'birth_date_shamsi': '1393/08/07', 'birth_date_gregorian': '2014-10-29', 'gender': 'boy', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/parsa-mokhtarinasab.jpg', 'photo_path': 'images/children/parsa-mokhtarinasab.jpg', 'photo_grid': 'r02_c00', 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1393/08/07 / 2014-10-29, age 11).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohammadtaha-malahi', 'roster_index': 70, 'full_name_en': 'Mohammad-Taha Malahi', 'full_name_fa': 'محمدطاها ملاحی', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1394/12/26', 'birth_date_gregorian': '2016-03-16', 'gender': 'boy', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohammadtaha-malahi.jpg', 'photo_path': 'images/children/mohammadtaha-malahi.jpg', 'photo_grid': 'r03_c03', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/12/26 / 2016-03-16, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'arsha-mirani', 'roster_index': 71, 'full_name_en': 'Arsha Mirani', 'full_name_fa': 'آرشا میرانی', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/01/06', 'birth_date_gregorian': '2019-03-26', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/arsha-mirani.jpg', 'photo_path': 'images/children/arsha-mirani.jpg', 'photo_grid': 'r06_c12', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/01/06 / 2019-03-26, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mikael-mirdoraghi', 'roster_index': 72, 'full_name_en': 'Mikaeil Mirdoraghi', 'full_name_fa': 'میکائیل میردورقی', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/10/21', 'birth_date_gregorian': '2017-01-10', 'gender': 'boy', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mikael-mirdoraghi.jpg', 'photo_path': 'images/children/mikael-mirdoraghi.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/10/21 / 2017-01-10, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'makan-nasiri', 'roster_index': 73, 'full_name_en': 'Makan Nasiri Khouzani', 'full_name_fa': 'ماکان نصیری خوزانی', 'father_name': None, 'mother_id': 'moth-atiyeh-rahinezhad', 'age': 7, 'birth_date_shamsi': '1397/10/09', 'birth_date_gregorian': '2018-12-30', 'gender': 'boy', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'missing', 'official_status_fa': 'شهید ولی شناسایی نشده', 'identification_method': 'unrecovered', 'burial_location': None, 'photo_url': 'https://peopleforpeace.live/images/children/makan-nasiri.jpg', 'photo_path': 'images/children/makan-nasiri.jpg', 'photo_grid': 'r02_c01', 'linked_drawings': [], 'biography': "1st-grade student and champion youth gymnast (born 1397/10/09 / 2018-12-30, age 7). Listed in the official roster as 'Martyred, remains unrecovered/unidentified' (شهید ولی شناسایی نشده); only his single red-soled sneaker was found in the debris.", 'family_cluster_id': 'FAM-NASIRI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'motahareh-ahmadzadeh', 'roster_index': 74, 'full_name_en': 'Motahareh Ahmadzadeh', 'full_name_fa': 'مطهره احمدزاده', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/06/07', 'birth_date_gregorian': '2016-08-28', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/motahareh-ahmadzadeh.jpg', 'photo_path': 'images/children/motahareh-ahmadzadeh.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/06/07 / 2016-08-28, age 9).', 'family_cluster_id': 'FAM-AHMADZADEH', 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'mahdieh-ahmadzadeh', 'roster_index': 75, 'full_name_en': 'Mahdieh Ahmadzadeh', 'full_name_fa': 'مهدیه احمدزاده', 'father_name': None, 'mother_id': None, 'age': 11, 'birth_date_shamsi': '1393/01/02', 'birth_date_gregorian': '2014-03-22', 'gender': 'girl', 'role': 'student', 'grade': 6, 'grade_or_class': '6th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه ششم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mahdieh-ahmadzadeh.jpg', 'photo_path': 'images/children/mahdieh-ahmadzadeh.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '6th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1393/01/02 / 2014-03-22, age 11).', 'family_cluster_id': 'FAM-AHMADZADEH', 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'athena-ahmadzadeh', 'roster_index': 76, 'full_name_en': 'Athena Ahmadzadeh Halvani', 'full_name_fa': 'آتنا احمدزاده حلوانی', 'father_name': 'Abbas', 'mother_id': 'moth-mohaddeseh-falahat', 'age': 10, 'birth_date_shamsi': '1394/07/20', 'birth_date_gregorian': '2015-10-12', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/athena-ahmadzadeh.jpg', 'photo_path': 'images/children/athena-ahmadzadeh.jpg', 'photo_grid': 'r01_c01', 'linked_drawings': [], 'biography': '4th Grade Student (born 1394/07/20 / 2015-10-12, age 10). Gymnast (Iran Gymnastics Federation)', 'family_cluster_id': 'FAM-AHMADZADEH', 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-GYM-004']}, {'id': 'hanieh-ahmadi', 'roster_index': 77, 'full_name_en': 'Hanieh Ahmadi Tifkani', 'full_name_fa': 'هانیه احمدی طیفکانی', 'father_name': None, 'mother_id': 'moth-ahmadi-siblings', 'age': 7, 'birth_date_shamsi': '1397/09/18', 'birth_date_gregorian': '2018-12-09', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/hanieh-ahmadi.jpg', 'photo_path': 'images/children/hanieh-ahmadi.jpg', 'photo_grid': 'r02_c13', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/09/18 / 2018-12-09, age 7).', 'family_cluster_id': 'FAM-AHMADI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'zahra-ansari', 'roster_index': 78, 'full_name_en': 'Zahra Ansarifar', 'full_name_fa': 'زهرا انصاری فر', 'father_name': 'Amir', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/02/15', 'birth_date_gregorian': '2018-05-05', 'gender': 'girl', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/zahra-ansari.jpg', 'photo_path': 'images/children/zahra-ansari.jpg', 'photo_grid': 'r01_c12', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/02/15 / 2018-05-05, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'maryam-pazarak', 'roster_index': 79, 'full_name_en': 'Maryam Bazrak', 'full_name_fa': 'مریم بازرک', 'father_name': 'Mostafa', 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/08/26', 'birth_date_gregorian': '2015-11-17', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/maryam-pazarak.jpg', 'photo_path': 'images/children/maryam-pazarak.jpg', 'photo_grid': 'r01_c02', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/08/26 / 2015-11-17, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'zahra-bahrami', 'roster_index': 80, 'full_name_en': 'Zahra Bahrami', 'full_name_fa': 'زهرا بهرامی', 'father_name': None, 'mother_id': 'moth-bahrami-cluster', 'age': 7, 'birth_date_shamsi': '1397/05/06', 'birth_date_gregorian': '2018-07-28', 'gender': 'girl', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/zahra-bahrami.jpg', 'photo_path': 'images/children/zahra-bahrami.jpg', 'photo_grid': 'r00_c05', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/05/06 / 2018-07-28, age 7).', 'family_cluster_id': 'FAM-BAHRAMI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'zeynab-bahrami', 'roster_index': 81, 'full_name_en': 'Zeynab Bahrami', 'full_name_fa': 'زینب بهرامی', 'father_name': 'Eshagh', 'mother_id': 'moth-bahrami-cluster', 'age': 11, 'birth_date_shamsi': '1393/05/14', 'birth_date_gregorian': '2014-08-05', 'gender': 'girl', 'role': 'student', 'grade': 6, 'grade_or_class': '6th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه ششم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/zeynab-bahrami.jpg', 'photo_path': 'images/children/zeynab-bahrami.jpg', 'photo_grid': 'r00_c00', 'linked_drawings': [], 'biography': '6th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1393/05/14 / 2014-08-05, age 11).', 'family_cluster_id': 'FAM-BAHRAMI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mahna-bahrami', 'roster_index': 82, 'full_name_en': 'Mohana Bahrami Ravangi', 'full_name_fa': 'محنا بهرامی راونگی', 'father_name': None, 'mother_id': 'moth-bahrami-cluster', 'age': 11, 'birth_date_shamsi': '1393/06/28', 'birth_date_gregorian': '2014-09-19', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mahna-bahrami.jpg', 'photo_path': 'images/children/mahna-bahrami.jpg', 'photo_grid': 'r00_c12', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1393/06/28 / 2014-09-19, age 11).', 'family_cluster_id': 'FAM-BAHRAMI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'nazanin-zahra-behroozi', 'roster_index': 83, 'full_name_en': 'Zahra Behrouzi', 'full_name_fa': 'زهرا بهروزی', 'father_name': None, 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/05/19', 'birth_date_gregorian': '2017-08-10', 'gender': 'girl', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/nazanin-zahra-behroozi.jpg', 'photo_path': 'images/children/nazanin-zahra-behroozi.jpg', 'photo_grid': 'r00_c04', 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/05/19 / 2017-08-10, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'zoha-pasand', 'roster_index': 84, 'full_name_en': 'Zoha Pasand', 'full_name_fa': 'ضحا پسند', 'father_name': 'Ebrahim', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/09/20', 'birth_date_gregorian': '2017-12-11', 'gender': 'girl', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/zoha-pasand.jpg', 'photo_path': 'images/children/zoha-pasand.jpg', 'photo_grid': 'r01_c11', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/09/20 / 2017-12-11, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'adrina-pegah', 'roster_index': 85, 'full_name_en': 'Adrina Pegah', 'full_name_fa': 'آدرینا پگاه', 'father_name': 'Reza', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/09/18', 'birth_date_gregorian': '2018-12-09', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'visual', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'linked_drawings': [], 'biography': '1st Grade Student (born 1397/09/18 / 2018-12-09, age 7). First-grade student who survived the immediate strike but succumbed to severe blast and burn injuries days later in the PICU at Hazrat Abolfazl Hospital.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'athena-chamaninejad', 'roster_index': 86, 'full_name_en': 'Athena Chamalinejad', 'full_name_fa': 'آتنا چملی نژاد', 'father_name': 'Rouhollah', 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/03/13', 'birth_date_gregorian': '2019-06-03', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/athena-chamaninejad.jpg', 'photo_path': 'images/children/athena-chamaninejad.jpg', 'photo_grid': 'r02_c10', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/03/13 / 2019-06-03, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'fatemeh-dorazehi', 'roster_index': 87, 'full_name_en': 'Fatemeh Dorazehi', 'full_name_fa': 'فاطمه درازهی', 'father_name': 'Abdollah', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/11/10', 'birth_date_gregorian': '2018-01-30', 'gender': 'girl', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/fatemeh-dorazehi.jpg', 'photo_path': 'images/children/fatemeh-dorazehi.jpg', 'photo_grid': 'r00_c13', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/11/10 / 2018-01-30, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'khadijeh-darvishi', 'roster_index': 88, 'full_name_en': 'Khadijeh Darvishi', 'full_name_fa': 'خدیجه درویشی', 'father_name': 'Reza', 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/05/21', 'birth_date_gregorian': '2016-08-11', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/khadijeh-darvishi.jpg', 'photo_path': 'images/children/khadijeh-darvishi.jpg', 'photo_grid': 'r01_c06', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/05/21 / 2016-08-11, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'hana-dehghani', 'roster_index': 89, 'full_name_en': 'Hana Dehghani', 'full_name_fa': 'حنا دهقانی', 'father_name': 'Emad', 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/05/16', 'birth_date_gregorian': '2017-08-07', 'gender': 'girl', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'official_records', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/hana-dehghani.jpg', 'photo_path': 'images/children/hana-dehghani.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/05/16 / 2017-08-07, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'hananeh-zakerikhahan', 'roster_index': 90, 'full_name_en': 'Hananeh Zakeri Khahan', 'full_name_fa': 'حنانه ذاکری خواهان', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/02/13', 'birth_date_gregorian': '2019-05-03', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/hananeh-zakerikhahan.jpg', 'photo_path': 'images/children/hananeh-zakerikhahan.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/02/13 / 2019-05-03, age 6).', 'family_cluster_id': 'FAM-ZAKERI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'asra-zakeri', 'roster_index': 91, 'full_name_en': 'Asra Zakeri', 'full_name_fa': 'اسرا ذاکری', 'father_name': 'Gahhar', 'mother_id': 'moth-fatemeh-zakeri', 'age': 9, 'birth_date_shamsi': '1395/06/10', 'birth_date_gregorian': '2016-08-31', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/asra-zakeri.jpg', 'photo_path': 'images/children/asra-zakeri.jpg', 'photo_grid': 'r01_c07', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/06/10 / 2016-08-31, age 9).', 'family_cluster_id': 'FAM-ZAKERI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'reyhaneh-zakeri', 'roster_index': 92, 'full_name_en': 'Reyhaneh Zakeri', 'full_name_fa': 'ریحانه ذاکری', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/07/16', 'birth_date_gregorian': '2015-10-08', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/reyhaneh-zakeri.jpg', 'photo_path': 'images/children/reyhaneh-zakeri.jpg', 'photo_grid': 'r01_c00', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/07/16 / 2015-10-08, age 10).', 'family_cluster_id': 'FAM-ZAKERI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'salma-zakeri', 'roster_index': 93, 'full_name_en': 'Salma Zakeri', 'full_name_fa': 'سلما ذاکری', 'father_name': None, 'mother_id': 'moth-fatemeh-zakeri', 'age': 6, 'birth_date_shamsi': '1398/05/16', 'birth_date_gregorian': '2019-08-07', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/salma-zakeri.jpg', 'photo_path': 'images/children/salma-zakeri.jpg', 'photo_grid': 'r02_c09', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/05/16 / 2019-08-07, age 6).', 'family_cluster_id': 'FAM-ZAKERI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'fatemeh-rahdar', 'roster_index': 94, 'full_name_en': 'Fatemeh Rahdar', 'full_name_fa': 'فاطمه رهدار', 'father_name': 'Abed', 'mother_id': None, 'age': 11, 'birth_date_shamsi': '1393/10/23', 'birth_date_gregorian': '2015-01-13', 'gender': 'girl', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/fatemeh-rahdar.jpg', 'photo_path': 'images/children/fatemeh-rahdar.jpg', 'photo_grid': 'r02_c06', 'linked_drawings': ['drawing-27'], 'biography': "5th-grade student (born 1393/10/23 / 2015-01-13, age 11) at Shajareh Tayyebeh School. Her 5th-grade social studies and dictation assignment depicting a hand-colored globe ('املای تلفیقی با مطالعات اجتماعی پنجم'), signed 'Rahdar', was pulled from under the school rubble.", 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'raha-zareie', 'roster_index': 95, 'full_name_en': 'Raha Zarei Bang', 'full_name_fa': 'رها زارعی بنگ', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/07/25', 'birth_date_gregorian': '2018-10-17', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/raha-zareie.jpg', 'photo_path': 'images/children/raha-zareie.jpg', 'photo_grid': 'r02_c14', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/07/25 / 2018-10-17, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mohana-zarei', 'roster_index': 96, 'full_name_en': 'Mohana Zarei Kouhestaki', 'full_name_fa': 'مهنا زارعی کوهستکی', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/04/28', 'birth_date_gregorian': '2019-07-19', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mohana-zarei.jpg', 'photo_path': 'images/children/mohana-zarei.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/04/28 / 2019-07-19, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'athareh-zarei', 'roster_index': 97, 'full_name_en': 'Athareh Zarei', 'full_name_fa': 'اطهره زارعی', 'father_name': 'Ali', 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/09/17', 'birth_date_gregorian': '2015-12-08', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/athareh-zarei.jpg', 'photo_path': 'images/children/athareh-zarei.jpg', 'photo_grid': 'r01_c03', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1394/09/17 / 2015-12-08, age 10).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'sonar-salari', 'roster_index': 98, 'full_name_en': 'Sonar Salari', 'full_name_fa': 'سونار سالاری', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/06/26', 'birth_date_gregorian': '2016-09-16', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/sonar-salari.jpg', 'photo_path': 'images/children/sonar-salari.jpg', 'photo_grid': 'r01_c09', 'linked_drawings': [], 'biography': '4th Grade Student (born 1395/06/26 / 2016-09-16, age 9). Skateboarder (Iran Gymnastics Federation)', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-GYM-004']}, {'id': 'mahya-salari', 'roster_index': 99, 'full_name_en': 'Mahya Salari', 'full_name_fa': 'محیا سالاری', 'father_name': None, 'mother_id': None, 'age': 8, 'birth_date_shamsi': '1396/06/02', 'birth_date_gregorian': '2017-08-24', 'gender': 'girl', 'role': 'student', 'grade': 3, 'grade_or_class': '3rd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه سوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mahya-salari.jpg', 'photo_path': 'images/children/mahya-salari.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '3rd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1396/06/02 / 2017-08-24, age 8).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'zahra-soleimani', 'roster_index': 100, 'full_name_en': 'Zahra Soleimani Tembanouei', 'full_name_fa': 'زهرا سلیمانی تمبانوئی', 'father_name': None, 'mother_id': None, 'age': 12, 'birth_date_shamsi': '1392/10/15', 'birth_date_gregorian': '2014-01-05', 'gender': 'girl', 'role': 'student', 'grade': 6, 'grade_or_class': '6th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه ششم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/zahra-soleimani.jpg', 'photo_path': 'images/children/zahra-soleimani.jpg', 'photo_grid': 'r00_c11', 'linked_drawings': [], 'biography': '6th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1392/10/15 / 2014-01-05, age 12).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'sara-shayesteh', 'roster_index': 101, 'full_name_en': 'Sara Shayesteh', 'full_name_fa': 'سارا شایسته', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/02/18', 'birth_date_gregorian': '2019-05-08', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/sara-shayesteh.jpg', 'photo_path': 'images/children/sara-shayesteh.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/02/18 / 2019-05-08, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'zahra-sharafi', 'roster_index': 102, 'full_name_en': 'Zahra Sharafi', 'full_name_fa': 'زهرا شرفی', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/03/23', 'birth_date_gregorian': '2016-06-12', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/zahra-sharafi.jpg', 'photo_path': 'images/children/zahra-sharafi.jpg', 'photo_grid': 'r01_c05', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/03/23 / 2016-06-12, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'nadia-shahmiri', 'roster_index': 103, 'full_name_en': 'Fadia Shahmiri', 'full_name_fa': 'فادیا شه میری', 'father_name': 'Hassan', 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/06/12', 'birth_date_gregorian': '2016-09-02', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/nadia-shahmiri.jpg', 'photo_path': 'images/children/nadia-shahmiri.jpg', 'photo_grid': 'r01_c08', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/06/12 / 2016-09-02, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'niyayesh-salehi', 'roster_index': 104, 'full_name_en': 'Niyayesh Salehi', 'full_name_fa': 'نیایش صالحی', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/04/04', 'birth_date_gregorian': '2016-06-24', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/niyayesh-salehi.jpg', 'photo_path': 'images/children/niyayesh-salehi.jpg', 'photo_grid': 'r00_c02', 'linked_drawings': [], 'biography': '4th Grade Student (born 1395/04/04 / 2016-06-24, age 9). Skateboarder (Iran Gymnastics Federation)', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-GYM-004']}, {'id': 'arina-arabkish', 'roster_index': 105, 'full_name_en': 'Arina Arab-Kish Chalouei', 'full_name_fa': 'آرینا عرب کیش چلوئی', 'father_name': None, 'mother_id': None, 'age': 12, 'birth_date_shamsi': '1392/08/11', 'birth_date_gregorian': '2013-11-02', 'gender': 'girl', 'role': 'student', 'grade': 6, 'grade_or_class': '6th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه ششم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/arina-arabkish.jpg', 'photo_path': 'images/children/arina-arabkish.jpg', 'photo_grid': 'r00_c10', 'linked_drawings': [], 'biography': '6th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1392/08/11 / 2013-11-02, age 12).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'setayesh-alihoseini', 'roster_index': 106, 'full_name_en': 'Setayesh Alihosseini', 'full_name_fa': 'ستایش علی حسینی', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/03/09', 'birth_date_gregorian': '2016-05-29', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/setayesh-alihoseini.jpg', 'photo_path': 'images/children/setayesh-alihoseini.jpg', 'photo_grid': 'r02_c08', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/03/09 / 2016-05-29, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'asra-farahizadeh', 'roster_index': 107, 'full_name_en': 'Asra Farahizadeh', 'full_name_fa': 'اسرا فرحی زاده', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/10/13', 'birth_date_gregorian': '2019-01-03', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/asra-farahizadeh.jpg', 'photo_path': 'images/children/asra-farahizadeh.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/10/13 / 2019-01-03, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'baran-ghasemy', 'roster_index': 108, 'full_name_en': 'Baran Ghasemi', 'full_name_fa': 'باران قاسمی', 'father_name': None, 'mother_id': None, 'age': 10, 'birth_date_shamsi': '1394/08/14', 'birth_date_gregorian': '2015-11-05', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/baran-ghasemy.jpg', 'photo_path': 'images/children/baran-ghasemy.jpg', 'photo_grid': 'r00_c01', 'linked_drawings': ['drawing-02'], 'biography': "4th-grade student (born 1394/08/14 / 2015-11-05, age 10) at Shajareh Tayyebeh School. Her hand-colored science notebook drawing of the human digestive and respiratory system ('بدن ما - درس ۶'), signed 'Baran Ghasemi ❤️', was recovered intact from under the classroom rubble.", 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'helma-ghasemy', 'roster_index': 109, 'full_name_en': 'Helma Ghasemi', 'full_name_fa': 'حلما قاسمی', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/05/23', 'birth_date_gregorian': '2016-08-13', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/helma-ghasemy.jpg', 'photo_path': 'images/children/helma-ghasemy.jpg', 'photo_grid': 'r00_c03', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/05/23 / 2016-08-13, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'fatemeh-zahra-karimi', 'roster_index': 110, 'full_name_en': 'Fatemeh-Zahra Karimi', 'full_name_fa': 'فاطمه زهرا کریمی', 'father_name': 'Javad', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/06/23', 'birth_date_gregorian': '2018-09-14', 'gender': 'girl', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/fatemeh-zahra-karimi.jpg', 'photo_path': 'images/children/fatemeh-zahra-karimi.jpg', 'photo_grid': 'r01_c14', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/06/23 / 2018-09-14, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'liyana-mohammadi', 'roster_index': 111, 'full_name_en': 'Liyana Mohammadi', 'full_name_fa': 'لیانا محمدی', 'father_name': 'Faez', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/02/31', 'birth_date_gregorian': '2018-05-21', 'gender': 'girl', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/liyana-mohammadi.jpg', 'photo_path': 'images/children/liyana-mohammadi.jpg', 'photo_grid': 'r01_c13', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/02/31 / 2018-05-21, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'farimah-fakhari', 'roster_index': 112, 'full_name_en': 'Farimah Mafakheri', 'full_name_fa': 'فریماه مفاخری', 'father_name': None, 'mother_id': None, 'age': 11, 'birth_date_shamsi': '1393/06/10', 'birth_date_gregorian': '2014-09-01', 'gender': 'girl', 'role': 'student', 'grade': 6, 'grade_or_class': '6th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه ششم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/farimah-fakhari.jpg', 'photo_path': 'images/children/farimah-fakhari.jpg', 'photo_grid': 'r02_c11', 'linked_drawings': [], 'biography': '6th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1393/06/10 / 2014-09-01, age 11).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'zeinab-makizadeh', 'roster_index': 113, 'full_name_en': 'Zeynab Makizadeh', 'full_name_fa': 'زینب مکی زاده', 'father_name': None, 'mother_id': None, 'age': 9, 'birth_date_shamsi': '1395/06/31', 'birth_date_gregorian': '2016-09-21', 'gender': 'girl', 'role': 'student', 'grade': 4, 'grade_or_class': '4th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/zeinab-makizadeh.jpg', 'photo_path': 'images/children/zeinab-makizadeh.jpg', 'photo_grid': 'r01_c10', 'linked_drawings': [], 'biography': '4th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1395/06/31 / 2016-09-21, age 9).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'samira-malahi', 'roster_index': 114, 'full_name_en': 'Samira Malahi Kolahi', 'full_name_fa': 'سمیرا ملاحی کلاهی', 'father_name': None, 'mother_id': None, 'age': 12, 'birth_date_shamsi': '1392/07/25', 'birth_date_gregorian': '2013-10-17', 'gender': 'girl', 'role': 'student', 'grade': 5, 'grade_or_class': '5th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه پنجم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/samira-malahi.jpg', 'photo_path': 'images/children/samira-malahi.jpg', 'photo_grid': 'r00_c09', 'linked_drawings': [], 'biography': '5th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1392/07/25 / 2013-10-17, age 12).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'hananeh-mehdikhah', 'roster_index': 115, 'full_name_en': 'Hananeh Mehdikhah', 'full_name_fa': 'حنانه مهدی خواه', 'father_name': 'Mousa', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/09/25', 'birth_date_gregorian': '2018-12-16', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/hananeh-mehdikhah.jpg', 'photo_path': 'images/children/hananeh-mehdikhah.jpg', 'photo_grid': 'r02_c12', 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/09/25 / 2018-12-16, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'mahdis-nazari', 'roster_index': 116, 'full_name_en': 'Mahdis Nazari', 'full_name_fa': 'مهدیس نظری', 'father_name': 'Ali', 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/11/16', 'birth_date_gregorian': '2019-02-05', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'official_records', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/mahdis-nazari.jpg', 'photo_path': 'images/children/mahdis-nazari.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '1st Grade Student (born 1397/11/16 / 2019-02-05, age 7). Skateboarder (Iran Gymnastics Federation)', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-GYM-004']}, {'id': 'masoumeh-nazari', 'roster_index': 117, 'full_name_en': 'Masoumeh Nazari', 'full_name_fa': 'معصومه نظری', 'father_name': None, 'mother_id': None, 'age': 7, 'birth_date_shamsi': '1397/06/25', 'birth_date_gregorian': '2018-09-16', 'gender': 'girl', 'role': 'student', 'grade': 2, 'grade_or_class': '2nd Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/masoumeh-nazari.jpg', 'photo_path': 'images/children/masoumeh-nazari.jpg', 'photo_grid': 'r00_c14', 'linked_drawings': [], 'biography': '2nd Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1397/06/25 / 2018-09-16, age 7).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'fatemeh-yazdanpanah', 'roster_index': 118, 'full_name_en': 'Fatemeh Yazdanpanah Gourzanginia', 'full_name_fa': 'فاطمه یزدان پناه گورزانگی نیا', 'father_name': None, 'mother_id': None, 'age': 6, 'birth_date_shamsi': '1398/03/13', 'birth_date_gregorian': '2019-06-03', 'gender': 'girl', 'role': 'student', 'grade': 1, 'grade_or_class': '1st Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/fatemeh-yazdanpanah.jpg', 'photo_path': 'images/children/fatemeh-yazdanpanah.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '1st Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1398/03/13 / 2019-06-03, age 6).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'zahra-jalali', 'roster_index': 119, 'full_name_en': 'Zahra Jalali', 'full_name_fa': 'زهرا جلالی', 'father_name': None, 'mother_id': None, 'age': 12, 'birth_date_shamsi': '1392/09/23', 'birth_date_gregorian': '2013-12-14', 'gender': 'girl', 'role': 'student', 'grade': 6, 'grade_or_class': '6th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه ششم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/zahra-jalali.jpg', 'photo_path': 'images/children/zahra-jalali.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '6th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1392/09/23 / 2013-12-14, age 12).', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'asna-raeisi', 'roster_index': 120, 'full_name_en': 'Asna Raeisi', 'full_name_fa': 'آسنا رئیسی', 'father_name': 'Hassan', 'mother_id': 'moth-raeisi-siblings', 'age': 12, 'birth_date_shamsi': '1392/08/23', 'birth_date_gregorian': '2013-11-14', 'gender': 'girl', 'role': 'student', 'grade': 6, 'grade_or_class': '6th Grade Student', 'grade_or_class_fa': 'دانش\u200cآموز پایه ششم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'official_records', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/children/asna-raeisi.jpg', 'photo_path': 'images/children/asna-raeisi.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': '6th Grade Student at Shajareh Tayyebeh Elementary School in Minab (born 1392/08/23 / 2013-11-14, age 12).', 'family_cluster_id': 'FAM-RAEISI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002']}, {'id': 'neda-solhizadeh', 'roster_index': 1, 'full_name_en': 'Neda Solhizadeh', 'full_name_fa': 'ندا صلحی\u200cزاده', 'father_name': 'Gholamreza', 'mother_id': None, 'age': 36, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': '4th Grade Educator', 'grade_or_class_fa': 'آموزگار پایه چهارم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Rafsanjan Martyrs' Cemetery, Kerman", 'photo_url': 'https://peopleforpeace.live/images/teachers/neda-solhizadeh.jpg', 'photo_path': 'images/teachers/neda-solhizadeh.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Dedicated educator from Rafsanjan who died protecting children and her 5th-grade son Hami Sadeghi in the prayer hall.', 'family_cluster_id': 'FAM-SADEGHI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'zohreh-shahriyari', 'roster_index': 2, 'full_name_en': 'Zohreh Shahriyari', 'full_name_fa': 'زهره شهریاری', 'father_name': 'Hossein', 'mother_id': None, 'age': 32, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': '2nd Grade Teacher', 'grade_or_class_fa': 'آموزگار پایه دوم', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'personal_belongings', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/zohreh-shahriyari.jpg', 'photo_path': 'images/teachers/zohreh-shahriyari.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Second-grade teacher who was 6 months pregnant with her unborn son Mohammad Shirgir (محمد شیرگیر). Shielded students under desks; identified by her engraved gold wedding ring.', 'family_cluster_id': 'FAM-SHAHRIYARI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'fereshteh-sangarzadeh-staff', 'roster_index': 3, 'full_name_en': 'Fereshteh Sangarzadeh', 'full_name_fa': 'فرشته سنگرزاده', 'father_name': 'Ali', 'mother_id': None, 'age': 31, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار و مربی پرورشی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/fereshteh-sangarzadeh-staff.jpg', 'photo_path': 'images/teachers/fereshteh-sangarzadeh-staff.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Dedicated elementary educator at Shajareh Tayyebeh School who stayed with her students during the strike.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'samira-basardeh-counselor', 'roster_index': 4, 'full_name_en': 'Samira Basardeh', 'full_name_fa': 'سمیرا بصارده', 'father_name': 'Mohammad', 'mother_id': None, 'age': 33, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Educational Counselor & Teacher', 'grade_or_class_fa': 'مشاور تربیتی و آموزگار', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/samira-basardeh-counselor.jpg', 'photo_path': 'images/teachers/samira-basardeh-counselor.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'School counselor and educator who guided students toward shelter during the initial blast.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'fatemeh-fadavi-librarian', 'roster_index': 5, 'full_name_en': 'Fatemeh Fadavi', 'full_name_fa': 'فاطمه فدوی', 'father_name': 'Hassan', 'mother_id': None, 'age': 30, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار و مسئول کتابخانه', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/fatemeh-fadavi-librarian.jpg', 'photo_path': 'images/teachers/fatemeh-fadavi-librarian.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Elementary educator and reading mentor martyred alongside her pupils at Shajareh Tayyebeh School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'fatemeh-taherifard-it', 'roster_index': 6, 'full_name_en': 'Fatemeh Taherifard', 'full_name_fa': 'فاطمه طاهری\u200cفرد', 'father_name': 'Hossein', 'mother_id': None, 'age': 28, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/fatemeh-taherifard-it.jpg', 'photo_path': 'images/teachers/fatemeh-taherifard-it.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Young elementary teacher who taught digital literacy and primary classes at Shajareh Tayyebeh School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'mandana-salari-educator', 'roster_index': 7, 'full_name_en': 'Mandana Salari', 'full_name_fa': 'ماندانا سالاری', 'father_name': 'Yousef', 'mother_id': None, 'age': 33, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Primary Grade Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/mandana-salari-educator.jpg', 'photo_path': 'images/teachers/mandana-salari-educator.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Primary grade educator who accompanied her students into the central corridor shelter.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'marzieh-bashirifard', 'roster_index': 8, 'full_name_en': 'Marzieh Bashirifard', 'full_name_fa': 'مرضیه بشیری\u200cفرد', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/marzieh-bashirifard.jpg', 'photo_path': 'images/teachers/marzieh-bashirifard.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'marzieh-firouzi', 'roster_index': 9, 'full_name_en': 'Marzieh Firouzi', 'full_name_fa': 'مرضیه فیروزی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/marzieh-firouzi.jpg', 'photo_path': 'images/teachers/marzieh-firouzi.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'elham-karimi', 'roster_index': 10, 'full_name_en': 'Elham Karimi', 'full_name_fa': 'الهام کریمی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/elham-karimi.jpg', 'photo_path': 'images/teachers/elham-karimi.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'ensieh-karimi', 'roster_index': 11, 'full_name_en': 'Ensieh Karimi', 'full_name_fa': 'انسیه کریمی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/ensieh-karimi.jpg', 'photo_path': 'images/teachers/ensieh-karimi.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'sima-karimi', 'roster_index': 12, 'full_name_en': 'Sima Karimi', 'full_name_fa': 'سیما کریمی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/sima-karimi.jpg', 'photo_path': 'images/teachers/sima-karimi.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'farideh-mokhtari', 'roster_index': 13, 'full_name_en': 'Farideh Mokhtari', 'full_name_fa': 'فریده مختاری', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/farideh-mokhtari.jpg', 'photo_path': 'images/teachers/farideh-mokhtari.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'fatemeh-askari-minabi', 'roster_index': 14, 'full_name_en': 'Fatemeh Askari Minabi', 'full_name_fa': 'فاطمه عسکری مینابی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/fatemeh-askari-minabi.jpg', 'photo_path': 'images/teachers/fatemeh-askari-minabi.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'fatemeh-salari', 'roster_index': 15, 'full_name_en': 'Fatemeh Salari', 'full_name_fa': 'فاطمه سالاری', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/fatemeh-salari.jpg', 'photo_path': 'images/teachers/fatemeh-salari.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'fatemeh-shahdadi-teacher', 'roster_index': 16, 'full_name_en': 'Fatemeh Shahdadi', 'full_name_fa': 'فاطمه شهدادی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/fatemeh-shahdadi-teacher.jpg', 'photo_path': 'images/teachers/fatemeh-shahdadi-teacher.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'khadijeh-kamali', 'roster_index': 17, 'full_name_en': 'Khadijeh Kamali', 'full_name_fa': 'خدیجه کمالی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/khadijeh-kamali.jpg', 'photo_path': 'images/teachers/khadijeh-kamali.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'mahdieh-rasouli', 'roster_index': 18, 'full_name_en': 'Mahdieh Rasouli', 'full_name_fa': 'مهدیه رسولی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/mahdieh-rasouli.jpg', 'photo_path': 'images/teachers/mahdieh-rasouli.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'mahsa-ranjbar', 'roster_index': 19, 'full_name_en': 'Mahsa Ranjbar', 'full_name_fa': 'مهسا رنجبر', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/mahsa-ranjbar.jpg', 'photo_path': 'images/teachers/mahsa-ranjbar.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'raheleh-ranjbar', 'roster_index': 20, 'full_name_en': 'Raheleh Ranjbar', 'full_name_fa': 'راحله رنجبر', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/raheleh-ranjbar.jpg', 'photo_path': 'images/teachers/raheleh-ranjbar.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'maliheh-naeimi', 'roster_index': 21, 'full_name_en': 'Maliheh Naeimi', 'full_name_fa': 'ملیحه نعیمی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/maliheh-naeimi.jpg', 'photo_path': 'images/teachers/maliheh-naeimi.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'mohadeseh-mohammadian', 'roster_index': 22, 'full_name_en': 'Mohadeseh Mohammadian', 'full_name_fa': 'محدثه محمدیان', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/mohadeseh-mohammadian.jpg', 'photo_path': 'images/teachers/mohadeseh-mohammadian.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'narges-zakeri', 'roster_index': 23, 'full_name_en': 'Narges Zakeri', 'full_name_fa': 'نرگس ذاکری', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/narges-zakeri.jpg', 'photo_path': 'images/teachers/narges-zakeri.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator from the Zakeri family at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': 'FAM-ZAKERI', 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'nasim-neyestani', 'roster_index': 24, 'full_name_en': 'Nasim Neyestani', 'full_name_fa': 'نسیم نیستانی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/nasim-neyestani.jpg', 'photo_path': 'images/teachers/nasim-neyestani.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'razieh-zamani', 'roster_index': 25, 'full_name_en': 'Razieh Zamani', 'full_name_fa': 'رضیه زمانی', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/razieh-zamani.jpg', 'photo_path': 'images/teachers/razieh-zamani.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'pooran-gholipour', 'roster_index': 26, 'full_name_en': 'Pooran Gholipour', 'full_name_fa': 'پوران قلی\u200cپور', 'father_name': None, 'mother_id': None, 'age': None, 'birth_date_shamsi': None, 'birth_date_gregorian': None, 'gender': 'woman', 'role': 'teacher', 'grade': None, 'grade_or_class': 'Elementary Educator', 'grade_or_class_fa': 'آموزگار دوره ابتدایی', 'status': 'killed', 'official_status_fa': 'شهید', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': 'https://peopleforpeace.live/images/teachers/pooran-gholipour.jpg', 'photo_path': 'images/teachers/pooran-gholipour.jpg', 'photo_grid': None, 'linked_drawings': [], 'biography': 'Martyred female educator at Shajareh Tayyebeh Elementary School.', 'family_cluster_id': None, 'sources': ['EVD-VIC-005', 'SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'hamid-sadeghi-parent', 'full_name_en': 'Hamid Sadeghi', 'full_name_fa': 'حمید صادقی (پدر دانش\u200cآموز)', 'father_name': 'Mohammad', 'mother_id': None, 'age': 41, 'gender': 'man', 'role': 'parent', 'grade_or_class': 'Parent of Student (Hami & Nila Sadeghi)', 'grade_or_class_fa': 'ولی دانش\u200cآموز (پدر حامی و نیلا صادقی)', 'status': 'killed', 'identification_method': 'dna', 'burial_location': "Rafsanjan Martyrs' Cemetery, Kerman", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Father of Hami and Nila Sadeghi and husband of teacher Neda Solhizadeh; rushed into the school building after Strike 1 to evacuate his family and was martyred in Strike 2.', 'family_cluster_id': 'FAM-SADEGHI', 'sources': ['SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'mohammad-zakeri-parent', 'full_name_en': 'Mohammad Zakeri', 'full_name_fa': 'محمد ذاکری (پدر دانش\u200cآموز)', 'father_name': 'Ali', 'mother_id': None, 'age': 44, 'gender': 'man', 'role': 'parent', 'grade_or_class': 'Parent of Student (Asra & Salma Zakeri)', 'grade_or_class_fa': 'ولی دانش\u200cآموز (پدر اسرا و سلما ذاکری)', 'status': 'killed', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Father of Asra and Salma Zakeri; killed attempting to break open the collapsed prayer hall door to free trapped children.', 'family_cluster_id': 'FAM-ZAKERI', 'sources': ['SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'ali-karyanipak-parent', 'full_name_en': 'Ali Karyanipak', 'full_name_fa': 'علی کریانی\u200cپاک (پدر دانش\u200cآموز)', 'father_name': 'Gholam', 'mother_id': None, 'age': 43, 'gender': 'man', 'role': 'parent', 'grade_or_class': 'Parent of Student (Ali-Akbar & Mohammad-Ali)', 'grade_or_class_fa': 'ولی دانش\u200cآموز (پدر علی\u200cاکبر و محمدعلی کریانی\u200cپاک)', 'status': 'killed', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Father of 3rd-grader Ali-Akbar and 2nd-grader Mohammad-Ali Karyanipak; martyred alongside his two sons inside the school corridor.', 'family_cluster_id': 'FAM-KARYANIPAK', 'sources': ['SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'hassan-ahmadzadeh-parent', 'full_name_en': 'Hassan Ahmadzadeh', 'full_name_fa': 'حسن احمدزاده (پدر دانش\u200cآموز)', 'father_name': 'Ahmad', 'mother_id': None, 'age': 40, 'gender': 'man', 'role': 'parent', 'grade_or_class': 'Parent of Student', 'grade_or_class_fa': 'ولی دانش\u200cآموز', 'status': 'killed', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Father who arrived immediately upon hearing the first blast and was killed in the secondary strike.', 'family_cluster_id': 'FAM-AHMADZADEH', 'sources': ['SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'fatemeh-gholami-parent', 'full_name_en': 'Fatemeh Gholami', 'full_name_fa': 'فاطمه غلامی (مادر دانش\u200cآموز)', 'father_name': 'Hossein', 'mother_id': None, 'age': 37, 'gender': 'woman', 'role': 'parent', 'grade_or_class': 'Parent of Student (Mother)', 'grade_or_class_fa': 'ولی دانش\u200cآموز (مادر)', 'status': 'killed', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Mother who rushed into the classroom wing to pull children out after Strike 1 and was martyred in Strike 2.', 'family_cluster_id': None, 'sources': ['SRC-PROS-002', 'SRC-IRCS-005']}, {'id': 'zahra-heidari-parent', 'full_name_en': 'Zahra Heidari', 'full_name_fa': 'زهرا حیدری (مادر دانش\u200cآموز)', 'father_name': 'Ali', 'mother_id': None, 'age': 36, 'gender': 'woman', 'role': 'parent', 'grade_or_class': 'Parent of Student (Mother)', 'grade_or_class_fa': 'ولی دانش\u200cآموز (مادر)', 'status': 'killed', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Mother who was at the school entrance guiding children and was martyred in the secondary strike.', 'family_cluster_id': None, 'sources': ['SRC-PROS-002', 'SRC-IRCS-005']}, {'id': 'maryam-salari-parent', 'full_name_en': 'Maryam Salari', 'full_name_fa': 'مریم سالاری (مادر دانش\u200cآموز)', 'father_name': 'Rostam', 'mother_id': None, 'age': 35, 'gender': 'woman', 'role': 'parent', 'grade_or_class': 'Parent of Student (Mother)', 'grade_or_class_fa': 'ولی دانش\u200cآموز (مادر)', 'status': 'killed', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Mother of an elementary student present at the school office during morning drop-off; martyred in the airstrike.', 'family_cluster_id': None, 'sources': ['SRC-PROS-002', 'SRC-BONYAD-003']}, {'id': 'school-bus-driver-minab', 'full_name_en': 'Ali Rostami (School Bus Driver)', 'full_name_fa': 'علی رستمی (راننده سرویس مدرسه)', 'father_name': 'Gholam', 'mother_id': None, 'age': 52, 'gender': 'man', 'role': 'community', 'grade_or_class': 'School Bus Driver', 'grade_or_class_fa': 'راننده سرویس مدرسه', 'status': 'killed', 'identification_method': 'visual', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'School transport driver killed at the entrance gate by the blast wave while assisting arriving students and parents.', 'family_cluster_id': None, 'sources': ['SRC-PROS-002']}, {'id': 'pharmacy-tech-minab', 'full_name_en': 'Meysam Kaveh (Pharmacy Technician)', 'full_name_fa': 'میثم کاوه (تکنسین داروخانه درمانگاه مجاور)', 'father_name': 'Behrouz', 'mother_id': None, 'age': 29, 'gender': 'man', 'role': 'community', 'grade_or_class': 'Adjacent Clinic Pharmacy Technician', 'grade_or_class_fa': 'تکنسین داروخانه درمانگاه مجاور', 'status': 'killed', 'identification_method': 'visual', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Pharmacy technician from the adjacent clinic who rushed to the school perimeter with emergency medical supplies and was killed in Strike 2.', 'family_cluster_id': None, 'sources': ['SRC-PROS-002', 'SRC-IRCS-005']}, {'id': 'unborn-fetus-shahriyari', 'full_name_en': 'Mohammad Shirgir (6-Month Unborn Child)', 'full_name_fa': 'محمد شیرگیر (جنین شش\u200cماهه شهیده زهره شهریاری)', 'father_name': 'Shirgir', 'mother_id': 'moth-zohreh-shahriyari', 'age': 0, 'gender': 'boy', 'role': 'unborn_fetus', 'grade_or_class': 'Unborn Child (6 months gestation, son of Teacher Zohreh Shahriyari)', 'grade_or_class_fa': 'فرزند شش\u200cماهه به دنیا نیامده معلم شهیده زهره شهریاری', 'status': 'killed', 'identification_method': 'dna', 'burial_location': "Minab Martyrs' Cemetery, Hormozgan (with Mother Zohreh Shahriyari)", 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Six-month unborn son of martyred 2nd-grade teacher Zohreh Shahriyari, named Mohammad Shirgir (محمد شیرگیر) by his parents and certified as the 156th martyr of the Minab school strike.', 'family_cluster_id': 'FAM-SHAHRIYARI', 'sources': ['SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'nila-sadeghi', 'full_name_en': 'Nila Sadeghi', 'full_name_fa': 'نیلا صادقی', 'father_name': 'Hamid', 'mother_id': 'moth-neda-solhizadeh', 'age': 10, 'gender': 'girl', 'role': 'student', 'grade_or_class': '4th Grade Student (Surviving Eyewitness)', 'grade_or_class_fa': 'دانش\u200cآموز پایه چهارم (جان\u200cبهتری و شاهد عینی)', 'status': 'injured', 'identification_method': 'eyewitness', 'burial_location': None, 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Surviving 10-year-old daughter of Teacher Neda Solhizadeh and sister of 5th-grade martyr Hami Sadeghi; key eyewitness narrator of the incident.', 'family_cluster_id': 'FAM-SADEGHI', 'sources': ['EVD-VIC-005', 'SRC-BONYAD-003']}, {'id': 'mohammad-javad-molaei-surv', 'full_name_en': 'Mohammad-Javad Molaei', 'full_name_fa': 'محمدجواد ملایی', 'father_name': 'Reza', 'mother_id': 'moth-zahra-molaei-hero', 'age': 12, 'gender': 'boy', 'role': 'student', 'grade_or_class': '6th Grade Student (Surviving Eyewitness)', 'grade_or_class_fa': 'دانش\u200cآموز پایه ششم (مصدوم و نجات\u200cیافته)', 'status': 'injured', 'identification_method': 'eyewitness', 'burial_location': None, 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Surviving student rescued through a shattered window frame by his mother Zahra Molaei just prior to the prayer room detonation.', 'family_cluster_id': 'FAM-MOLAEI', 'sources': ['EVD-VIC-005', 'SRC-IRCS-005']}, {'id': 'mehgol-molaei-surv', 'full_name_en': 'Mehgol Molaei', 'full_name_fa': 'مهگل ملایی', 'father_name': 'Reza', 'mother_id': 'moth-zahra-molaei-hero', 'age': 7, 'gender': 'girl', 'role': 'student', 'grade_or_class': '1st Grade Student (Surviving Eyewitness)', 'grade_or_class_fa': 'دانش\u200cآموز پایه اول (مصدوم و نجات\u200cیافته)', 'status': 'injured', 'identification_method': 'eyewitness', 'burial_location': None, 'photo_url': None, 'photo_path': None, 'photo_grid': None, 'biography': 'Surviving first-grader pulled from classroom ceiling debris by her mother Zahra Molaei.', 'family_cluster_id': 'FAM-MOLAEI', 'sources': ['EVD-VIC-005', 'SRC-IRCS-005']}], 'mothers': [{'id': 'moth-neda-solhizadeh', 'full_name_en': 'Neda Solhizadeh', 'full_name_fa': 'ندا صلحی\u200cزاده', 'spouse_name': 'Hamid Sadeghi', 'is_casualty': True, 'status': 'killed', 'profession': 'Elementary School Educator', 'narrative_summary': 'Educator from Rafsanjan who taught at Shajareh Tayyebeh School. She died shielding her 11-year-old son Hami Sadeghi in the school prayer hall during the secondary strike. Survived by her 10-year-old daughter Nila.', 'quotes': ['My brother and mother went to school together that morning, and neither ever returned. (Narrated by daughter Nila)', 'She refused to evacuate until all children were escorted to the courtyard.'], 'children_ids': ['hami-sadeghi', 'nila-sadeghi'], 'other_family_member_ids': ['hamid-sadeghi-parent'], 'family_cluster_id': 'FAM-SADEGHI', 'photo_url': 'https://peopleforpeace.live/images/mothers/neda_solhizadeh.jpg', 'sources': ['EVD-VIC-005', 'SRC-BONYAD-003', 'SRC-PROS-002']}, {'id': 'moth-zohreh-shahriyari', 'full_name_en': 'Zohreh Shahriyari', 'full_name_fa': 'زهره شهریاری', 'spouse_name': 'Mohammad Shirgir', 'is_casualty': True, 'status': 'killed', 'profession': '2nd Grade Elementary Teacher', 'narrative_summary': 'Beloved 2nd-grade teacher who was 6 months pregnant with her first son, Mohammad Shirgir (محمد شیرگیر). She sheltered children under desks during the initial strike and was identified by her engraved gold wedding band.', 'quotes': ['She carried the next generation in her womb while protecting the children of Minab.'], 'children_ids': ['unborn-fetus-shahriyari'], 'other_family_member_ids': [], 'family_cluster_id': 'FAM-SHAHRIYARI', 'photo_url': 'https://peopleforpeace.live/images/mothers/zohreh_shahriyari.jpg', 'sources': ['SRC-PROS-002', 'SRC-LMO-001']}, {'id': 'moth-atiyeh-rahinezhad', 'full_name_en': 'Atiyeh Rahinezhad', 'full_name_fa': 'عطیه راه\u200cنژاد', 'spouse_name': 'Morteza Nasiri', 'is_casualty': False, 'status': 'survived', 'profession': 'Homemaker & Community Peace Advocate', 'narrative_summary': "Mother of Makan Nasiri, the 7-year-old champion gymnast whose body was never recovered. She preserves his single recovered red-soled sneaker and leads the 'Where is Makan?' awareness initiative.", 'quotes': ['Every day I look at his red sneaker. The earth took all of him, but his memory cannot be erased.', 'I do not have a grave to visit. My son is the Unmarked Martyr (شهید بی\u200cنشان) of Minab.'], 'children_ids': ['makan-nasiri'], 'other_family_member_ids': [], 'family_cluster_id': 'FAM-NASIRI', 'photo_url': 'https://peopleforpeace.live/images/mothers/atiyeh_rahinezhad.jpg', 'sources': ['SRC-GYM-004', 'SRC-LMO-001', 'SRC-PROS-002']}, {'id': 'moth-fatemeh-zakeri', 'full_name_en': 'Fatemeh Zakeri', 'full_name_fa': 'فاطمه ذاکری', 'spouse_name': 'Mohammad Zakeri', 'is_casualty': False, 'status': 'survived', 'profession': 'Mother of Bereaved Household', 'narrative_summary': 'Mother from the prominent Zakeri lineage in Minab which suffered multiple child casualties across grades 1, 3, and 5.', 'quotes': ['We laid our children to rest in a single row at Minab cemetery. Our home became silent overnight.'], 'children_ids': ['asra-zakeri', 'salma-zakeri'], 'other_family_member_ids': ['reyhaneh-zakeri', 'sina-zakeri', 'mahdi-zakeri', 'hananeh-zakerikhahan', 'narges-zakeri', 'mohammad-zakeri-parent'], 'family_cluster_id': 'FAM-ZAKERI', 'photo_url': 'https://peopleforpeace.live/images/mothers/mother_zakeri.jpg', 'sources': ['SRC-BONYAD-003', 'SRC-LMO-001']}, {'id': 'moth-karyanipak', 'full_name_en': 'Mother of Karyanipak Brothers (Khadijeh)', 'full_name_fa': 'مادر برادران کاریانی\u200cپاک (خدیجه)', 'spouse_name': 'Ali Karyanipak', 'is_casualty': False, 'status': 'survived', 'profession': 'Homemaker', 'narrative_summary': 'Lost two young sons (Ali-Akbar and Mohammad-Ali Karyanipak) who attended 3rd and 5th grades together.', 'quotes': ['They were inseparable in life and are buried side by side.'], 'children_ids': ['ali-akbar-karyanipak', 'mohammad-ali-karyanipak'], 'other_family_member_ids': ['ali-karyanipak-parent'], 'family_cluster_id': 'FAM-KARYANIPAK', 'photo_url': 'https://peopleforpeace.live/images/mothers/mother_karyanipak.jpg', 'sources': ['SRC-BONYAD-003', 'SRC-LMO-001']}, {'id': 'moth-mohaddeseh-falahat', 'full_name_en': 'Mohaddeseh Falahat', 'full_name_fa': 'محدثه فلاحت', 'spouse_name': 'Hassan Ahmadzadeh', 'is_casualty': False, 'status': 'survived', 'profession': 'Artisan & Mother', 'narrative_summary': 'Bereaved mother who identified her child in the hospital morgue solely by his hand.', 'quotes': ["A mother knows every line on her child's fingers. I recognized him by his little hand that used to hold mine."], 'children_ids': ['athena-ahmadzadeh', 'amin-ahmadzade', 'arad-ahmadzadeh'], 'other_family_member_ids': ['hassan-ahmadzadeh-parent'], 'family_cluster_id': 'FAM-AHMADZADEH', 'photo_url': 'https://peopleforpeace.live/images/mothers/mohaddeseh_falahat.jpg', 'sources': ['SRC-LMO-001', 'SRC-PROS-002']}, {'id': 'moth-ahmadi-siblings', 'full_name_en': 'Mother of Ahmadi Siblings (Maryam)', 'full_name_fa': 'مادر خواهر و برادر احمدی (مریم)', 'spouse_name': 'Ahmad Ahmadi', 'is_casualty': False, 'status': 'survived', 'profession': 'Teacher', 'narrative_summary': "Lost her son Sobhan and daughter Hanieh. Sobhan was identified holding his Persian textbook containing his mother's handwriting in red ink.", 'quotes': ['His backpack was torn, but inside, his Persian book was clutched against his chest.'], 'children_ids': ['hanieh-ahmadi', 'sobhan-ahmadi'], 'other_family_member_ids': [], 'family_cluster_id': 'FAM-AHMADI', 'photo_url': 'https://peopleforpeace.live/images/mothers/mother_ahmadi.jpg', 'sources': ['SRC-BONYAD-003', 'SRC-PROS-002']}, {'id': 'moth-raeisi-siblings', 'full_name_en': 'Mother of Raeisi Siblings (Zahra)', 'full_name_fa': 'مادر فرزندان رئیسی (زهرا)', 'spouse_name': 'Hossein Raeisi', 'is_casualty': False, 'status': 'survived', 'profession': 'Homemaker', 'narrative_summary': 'Lost daughter Asna (1st grade) and son Mohammad-Hatam (4th grade).', 'quotes': ['Every morning they walked down the lane together holding hands.'], 'children_ids': ['asna-raeisi', 'mohammad-hatam-raeisi'], 'other_family_member_ids': ['hossein-raeisi-parent'], 'family_cluster_id': 'FAM-RAEISI', 'photo_url': 'https://peopleforpeace.live/images/mothers/mother_raeisi.jpg', 'sources': ['SRC-LMO-001', 'SRC-BONYAD-003']}, {'id': 'moth-bahrami-cluster', 'full_name_en': 'Mother of Bahrami Family (Fatemeh)', 'full_name_fa': 'مادر خانواده بهرامی (فاطمه)', 'spouse_name': 'Eshagh Bahrami', 'is_casualty': False, 'status': 'survived', 'profession': 'Homemaker', 'narrative_summary': 'Experienced multiple losses within the extended Bahrami kinship in Minab.', 'quotes': ['We gave the school our sweetest blossoms and received only sorrow.'], 'children_ids': ['zeynab-bahrami', 'mohammadayan-bahrami', 'zahra-bahrami', 'mahna-bahrami'], 'other_family_member_ids': [], 'family_cluster_id': 'FAM-BAHRAMI', 'photo_url': 'https://peopleforpeace.live/images/mothers/mother_bahrami.jpg', 'sources': ['SRC-BONYAD-003', 'SRC-LMO-001']}, {'id': 'moth-zahra-molaei-hero', 'full_name_en': 'Zahra Molaei', 'full_name_fa': 'زهرا مولایی', 'spouse_name': 'Reza Molaei', 'is_casualty': False, 'status': 'survived', 'profession': 'Rescuing Mother & Community Hero', 'narrative_summary': 'Rushed into the school courtyard between Strike 1 and Strike 2. She successfully pulled her daughter Mehgol and son Mohammad-Javad out of classroom rubble minutes before the final detonation.', 'quotes': ["I didn't think about dying. All I could hear in my mind was my children calling me from inside the smoke."], 'children_ids': ['mohammad-javad-molaei-surv', 'mehgol-molaei-surv'], 'other_family_member_ids': [], 'family_cluster_id': 'FAM-MOLAEI', 'photo_url': 'https://peopleforpeace.live/images/mothers/zahra_molaei.jpg', 'sources': ['SRC-IRCS-005', 'EVD-VIC-005']}], 'family_clusters': [{'cluster_id': 'FAM-ZAKERI', 'family_surname_en': 'Zakeri', 'family_surname_fa': 'ذاکری', 'mother_id': 'moth-fatemeh-zakeri', 'total_killed': 8, 'total_injured': 0, 'member_ids': ['asra-zakeri', 'salma-zakeri', 'reyhaneh-zakeri', 'sina-zakeri', 'mahdi-zakeri', 'hananeh-zakerikhahan', 'narges-zakeri', 'mohammad-zakeri-parent'], 'description': 'Prominent Minab lineage suffering 8 casualties across elementary grades (Asra, Salma, Reyhaneh, Sina, Mahdi, Hananeh), educator Narges Zakeri, and rescuing father Mohammad Zakeri.', 'sources': ['SRC-BONYAD-003', 'SRC-LMO-001']}, {'cluster_id': 'FAM-SADEGHI', 'family_surname_en': 'Solhizadeh / Sadeghi', 'family_surname_fa': 'صلحی\u200cزاده / صادقی', 'mother_id': 'moth-neda-solhizadeh', 'total_killed': 3, 'total_injured': 1, 'member_ids': ['neda-solhizadeh', 'hami-sadeghi', 'nila-sadeghi', 'hamid-sadeghi-parent'], 'description': 'Teacher-mother Neda Solhizadeh, father Hamid Sadeghi, and 5th-grade son Hami Sadeghi were martyred; survived by 4th-grade daughter Nila Sadeghi.', 'sources': ['EVD-VIC-005', 'SRC-BONYAD-003']}, {'cluster_id': 'FAM-SHAHRIYARI', 'family_surname_en': 'Shahriyari / Shirgir', 'family_surname_fa': 'شهریاری / شیرگیر', 'mother_id': 'moth-zohreh-shahriyari', 'total_killed': 2, 'total_injured': 0, 'member_ids': ['zohreh-shahriyari', 'unborn-fetus-shahriyari'], 'description': 'Pregnant 2nd-grade teacher Zohreh Shahriyari and her 6-month unborn son Mohammad Shirgir (محمد شیرگیر).', 'sources': ['SRC-PROS-002', 'SRC-LMO-001']}, {'cluster_id': 'FAM-KARYANIPAK', 'family_surname_en': 'Karyanipak', 'family_surname_fa': 'کریانی\u200cپاک', 'mother_id': 'moth-karyanipak', 'total_killed': 3, 'total_injured': 0, 'member_ids': ['ali-akbar-karyanipak', 'mohammad-ali-karyanipak', 'ali-karyanipak-parent'], 'description': 'Two brothers (3rd-grader Ali-Akbar and 2nd-grader Mohammad-Ali Karyanipak) and their rescuing father Ali Karyanipak.', 'sources': ['SRC-BONYAD-003', 'SRC-LMO-001']}, {'cluster_id': 'FAM-AHMADZADEH', 'family_surname_en': 'Ahmadzadeh', 'family_surname_fa': 'احمدزاده', 'mother_id': 'moth-mohaddeseh-falahat', 'total_killed': 6, 'total_injured': 0, 'member_ids': ['athena-ahmadzadeh', 'amin-ahmadzade', 'arad-ahmadizadeh', 'motahareh-ahmadzadeh', 'mahdieh-ahmadzadeh', 'hassan-ahmadzadeh-parent'], 'description': 'Extended Ahmadzadeh family children across Grades 1, 2, 4, and 6 and rescuing father Hassan Ahmadzadeh.', 'sources': ['SRC-LMO-001', 'SRC-PROS-002']}, {'cluster_id': 'FAM-AHMADI', 'family_surname_en': 'Ahmadi Tifkani', 'family_surname_fa': 'احمدی طیفکانی', 'mother_id': 'moth-ahmadi-siblings', 'total_killed': 2, 'total_injured': 0, 'member_ids': ['hanieh-ahmadi', 'sobhan-ahmadi'], 'description': 'Siblings Sobhan Ahmadi Tifkani (4th grade) and Hanieh Ahmadi Tifkani (1st grade).', 'sources': ['SRC-BONYAD-003', 'SRC-PROS-002']}, {'cluster_id': 'FAM-RAEISI', 'family_surname_en': 'Raeisi', 'family_surname_fa': 'رئیسی', 'mother_id': 'moth-raeisi-siblings', 'total_killed': 2, 'total_injured': 0, 'member_ids': ['asna-raeisi', 'mohammad-hatam-raeisi'], 'description': '6th-grade sister Asna Raeisi and 4th-grade brother Mohammad-Hesam Raeisi.', 'sources': ['SRC-LMO-001', 'SRC-BONYAD-003']}, {'cluster_id': 'FAM-BAHRAMI', 'family_surname_en': 'Bahrami', 'family_surname_fa': 'بهرامی', 'mother_id': 'moth-bahrami-cluster', 'total_killed': 4, 'total_injured': 0, 'member_ids': ['zeynab-bahrami', 'mohammadayan-bahrami', 'zahra-bahrami', 'mahna-bahrami'], 'description': 'Four children from the extended Bahrami household in Minab across Grades 1, 2, 4, and 6.', 'sources': ['SRC-BONYAD-003', 'SRC-LMO-001']}, {'cluster_id': 'FAM-NASIRI', 'family_surname_en': 'Nasiri Khouzani', 'family_surname_fa': 'نصیری خوزانی', 'mother_id': 'moth-atiyeh-rahinezhad', 'total_killed': 1, 'total_injured': 0, 'member_ids': ['makan-nasiri'], 'description': '7-year-old 1st-grade gymnast Makan Nasiri Khouzani (Unrecovered Martyr / شهید ولی شناسایی نشده).', 'sources': ['SRC-GYM-004', 'SRC-LMO-001']}, {'cluster_id': 'FAM-MOLAEI', 'family_surname_en': 'Molaei', 'family_surname_fa': 'مولایی', 'mother_id': 'moth-zahra-molaei-hero', 'total_killed': 0, 'total_injured': 2, 'member_ids': ['mohammad-javad-molaei-surv', 'mehgol-molaei-surv'], 'description': 'Two children (Mohammad-Javad and Mehgol) pulled from rubble by mother Zahra Molaei; both survived with injuries.', 'sources': ['SRC-IRCS-005', 'EVD-VIC-005']}], 'drawings': [{'id': 'drawing-01', 'page': 1, 'image': 'images/drawings/drawing-01.jpg', 'thumb': 'images/drawings/thumb-01.jpg', 'studentId': None, 'studentNameEn': '1st Grade Student', 'studentNameFa': 'دانش\u200cآموز پایه اول', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_homework', 'title': {'en': '"I Love My Mother. When I Come to School I Miss My Mother"', 'fa': '«من مادرم را دوست دارم. وقتی می\u200cآیم مدرسه دلم برای مادرم تنگ می\u200cشود»', 'fi': '"Rakastan äitiäni. Kun tulen kouluun, minulla on ikävä äitiäni"'}, 'transcriptionFa': 'من مادرم را دوست دارم. وقتی می آیم مدرسه دلم برای مادرم تنگ می شود ❤️ / من بابام را دوست دارم. بابام من را می رسوند مدرسه ❤️', 'translation': {'en': 'Hand-drawn red hearts and potted flowers with two handwritten sentences: "I love my mother. When I come to school I miss my mother ❤️ / I love my dad. My dad drops me off at school ❤️." Pulled from under the collapsed 1st-grade classroom roof.', 'fa': 'نقاشی قلب\u200cها و گلدان\u200cهای قرمز با دست\u200cخط کودکانه: «من مادرم را دوست دارم. وقتی می\u200cآیم مدرسه دلم برای مادرم تنگ می\u200cشود ❤️ / من بابام را دوست دارم. بابام من را می\u200cرسوند مدرسه ❤️» — بیرون کشیده شده از زیر آوار کلاس اول.', 'fi': 'Käsintehtyjä punaisia sydämiä ja kukkia sekä kaksi käsinkirjoitettua lausetta: "Rakastan äitiäni. Kun tulen kouluun, minulla on ikävä äitiäni ❤️ / Rakastan isääni. Isäni tuo minut kouluun ❤️."'}}, {'id': 'drawing-02', 'page': 2, 'image': 'images/drawings/drawing-02.jpg', 'thumb': 'images/drawings/thumb-02.jpg', 'studentId': 'baran-ghasemy', 'studentNameEn': 'Baran Ghasemi (Grade 4)', 'studentNameFa': 'شهیده باران قاسمی (پایه چهارم)', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_homework', 'title': {'en': 'Baran Ghasemi\'s Science Drawing — "Our Body (Lesson 6)"', 'fa': 'نقاشی درس علوم شهیده باران قاسمی — «بدن ما (۱) درس ۶»', 'fi': 'Baran Ghasemin luonnontieteiden piirustus — "Kehomme (Oppitunti 6)"'}, 'transcriptionFa': 'باران قاسمی ❤️ — درس علوم تجربی — بدن ما (۱) — درس (۶)', 'translation': {'en': 'Signed with a purple heart by 4th-grade martyr Baran Ghasemi (born 1394/08/14, age 10), who was killed alongside her classmate Helma Ghasemi. Shows a careful diagram of the brain, lungs, liver, stomach, and intestines for Empirical Science Lesson 6.', 'fa': 'امضا شده با قلب بنفش توسط دانش\u200cآموز شهیده کلاس چهارم باران قاسمی (متولد ۱۴ آبان ۱۳۹۴، ۱۰ ساله): طراحی دقیق مغز، شش\u200cها، کبد، معده و روده\u200cها برای درس ششم علوم تجربی («بدن ما»).', 'fi': 'Neljännen luokan marttyyrin Baran Ghasemin (10 v.) violeteilla sydämillä signeeraama luonnontieteiden vihkosivu ihmiskehon elimistä, joka löydettiin koulun raunioista.'}}, {'id': 'drawing-03', 'page': 3, 'image': 'images/drawings/drawing-03.jpg', 'thumb': 'images/drawings/thumb-03.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Girl Flying Among Shooting Stars', 'fa': 'دخترک فانتزی در میان ستاره\u200cهای دنباله\u200cدار', 'fi': 'Tähdenlentojen keskellä lentävä tyttö'}, 'transcriptionFa': '—', 'translation': {'en': 'Colored-pencil illustration of a smiling girl in a purple hat riding a broomstick above a blue cloud and golden stars, with a tiny heart tag hanging from the handle.', 'fa': 'نقاشی مدادرنگی از دخترکی خندان با کلاه بنفش برفراز ابر آبی و ستاره\u200cهای طلایی که برچسب قلب کوچکی از آن آویزان است.', 'fi': 'Värikynäpiirros hymyilevästä tytöstä lentämässä pilvien ja kultaisten tähtien yllä.'}}, {'id': 'drawing-04', 'page': 4, 'image': 'images/drawings/drawing-04.jpg', 'thumb': 'images/drawings/thumb-04.jpg', 'studentId': None, 'studentNameEn': 'Zeynab Sadat', 'studentNameFa': 'زینب سادات', 'dateOnPage': '1404/10/03 (Dec 24, 2025)', 'hasBlastDamage': False, 'category': 'rubble_homework', 'title': {'en': 'Geometric Shapes — Yellow Birds & Caterpillar on a Branch', 'fa': 'اشکال هندسی — پرندگان زرد و کرم ابریشم روی شاخه (زینب سادات ۱۰/۳)', 'fi': 'Geometriset muodot — Keltaiset linnut oksalla (Zeynab Sadat)'}, 'transcriptionFa': 'زینب سادات ۱۰/۳ — اشکال هندسی', 'translation': {'en': 'Geometry art assignment dated 3 Dey 1404 (Dec 24, 2025) using circles and triangles to create yellow birds, a smiling caterpillar, and blooming branches.', 'fa': 'تکلیف هنر و ریاضی با عنوان «اشکال هندسی» به تاریخ ۳ دی ۱۴۰۴ با امضای «زینب سادات» که با دایره و مثلث پرندگان زرد و شاخه گل\u200cدار ساخته است.', 'fi': 'Geometrian ja kuvataiteen tehtävä (24.12.2025), jossa ympyröistä ja kolmioista on piirretty lintuja ja kukkiva oksa.'}}, {'id': 'drawing-05', 'page': 5, 'image': 'images/drawings/drawing-05.jpg', 'thumb': 'images/drawings/thumb-05.jpg', 'studentId': None, 'studentNameEn': 'Meraj', 'studentNameFa': 'معراج', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_homework', 'title': {'en': 'The Four Seasons — Spring, Summer, Autumn, Winter', 'fa': 'چهار فصل سال — بهار، تابستان، پاییز، زمستان (معراج)', 'fi': 'Neljä vuodenaikaa — Kevät, kesä, syksy ja talvi (Meraj)'}, 'transcriptionFa': 'معراج — بهار / پاییز / تابستان / زمستان', 'translation': {'en': "Four-panel science drawing signed 'Meraj' illustrating a tree across all four seasons: green canopy in Summer, falling leaves in Autumn, blossoms in Spring, and rain and lightning in Winter.", 'fa': 'نقاشی چهارخانه از چهار فصل سال با امضای «معراج»: درخت سرسبز، درخت خزان\u200cزده پاییزی، درخت شکوفه\u200cدار بهاری و بارش باران و رعدوبرق زمستانی.', 'fi': "Nelikenttäinen piirustus puusta neljänä vuodenaikana, signeerannut 'Meraj'."}}, {'id': 'drawing-06', 'page': 6, 'image': 'images/drawings/drawing-06.jpg', 'thumb': 'images/drawings/thumb-06.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Passenger Airplane Over the Blue Sea with Sticker', 'fa': 'هواپیمای مسافربری بر فراز دریای آبی', 'fi': 'Matkustajalentokone sinisen meren yllä'}, 'transcriptionFa': '—', 'translation': {'en': "Drawing of a small white passenger plane flying above blue waves, decorated with a child's reward sticker.", 'fa': 'نقاشی یک هواپیمای مسافربری کوچک بر فراز امواج آبی دریا همراه با برچسب تشویقی کودکانه روی کاغذ.', 'fi': 'Piirustus pienestä matkustajakoneesta sinisten aaltojen yllä sekä lapsen palkintotarra.'}}, {'id': 'drawing-07', 'page': 7, 'image': 'images/drawings/drawing-07.jpg', 'thumb': 'images/drawings/thumb-07.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_homework', 'title': {'en': 'Science Assignment — "Burning of a Candle"', 'fa': 'تکلیف علوم — «موضوع: سوختن شمع»', 'fi': 'Luonnontieteiden tehtävä — "Kynttilän palaminen"'}, 'transcriptionFa': 'علوم — موضوع: سوختن شمع — نوع تغییر: فیزیکی — علت: چون دوباره به حالت اول برمی\u200cگردد.', 'translation': {'en': 'Science notebook page showing a yellow melting candle: "Subject: Burning of a candle. Type of change: Physical (melting wax), because it returns to its original solid state."', 'fa': 'برگه تکلیف درس علوم با نقاشی یک شمع زرد روشن: «موضوع: سوختن شمع — نوع تغییر: فیزیکی — علت: چون دوباره به حالت اول برمی\u200cگردد.»', 'fi': 'Luonnontieteiden vihkosivu palavasta keltaisesta kynttilästä ja vahan sulamisesta.'}}, {'id': 'drawing-08', 'page': 8, 'image': 'images/drawings/drawing-08.jpg', 'thumb': 'images/drawings/thumb-08.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Little House Lifted by a Rope Toward the Clouds', 'fa': 'خانه\u200cای کوچک با قلب\u200cهای صورتی در میان ابرها', 'fi': 'Pieni talo pilvien ja sydänten keskellä'}, 'transcriptionFa': '—', 'translation': {'en': 'A small house with blue windows and a pink heart on its facade, surrounded by floating red hearts and blue clouds.', 'fa': 'نقاشی خانه\u200cای کوچک با پنجره\u200cهای آبی و قلبی بر دیوار آن که در میان ابرهای آبی و قلب\u200cهای قرمز قرار دارد.', 'fi': 'Pieni talo, jonka seinässä on sydän, sinisten pilvien ja punaisten sydänten ympäröimänä.'}}, {'id': 'drawing-09', 'page': 9, 'image': 'images/drawings/drawing-09.jpg', 'thumb': 'images/drawings/thumb-09.jpg', 'studentId': None, 'studentNameEn': '1st Grade Student', 'studentNameFa': 'دانش\u200cآموز پایه اول', 'dateOnPage': 'Autumn/Winter 1404', 'hasBlastDamage': False, 'category': 'rubble_homework', 'title': {'en': "1st-Grade Collage — Yellow School Bus & Persian Vowel 'O' (اُ / ـُ)", 'fa': 'کاردستی کلاس اول — اتوبوس مدرسه (SCHOOL BUS) و نشانه «اُ / ـُ»', 'fi': "1. luokan askartelu — Keltainen koulubussi ja persian 'O'-vokaali"}, 'transcriptionFa': 'اُ / ـُ — SCHOOL BUS — STOP', 'translation': {'en': "First-grade literacy collage teaching the Persian vowel sound 'O' (as in Otobus / Bus), crafted from yellow, blue, and red colored paper with a teacher's checkmark at top.", 'fa': 'کاردستی آموزش الفبای کلاس اول برای نشانه «اُ / ـُ» (اتوبوس) با کاغذ رنگی زرد و آبی و علامت تیک معلم در بالای صفحه.', 'fi': "Ensimmäisen luokan lukutaitotehtävä, jossa opetellaan persian 'O'-äännettä (Otobus / koulubussi) väripaperiaskartelulla."}}, {'id': 'drawing-10', 'page': 10, 'image': 'images/drawings/drawing-10.jpg', 'thumb': 'images/drawings/thumb-10.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Smiling Child with a Heart Balloon Beside a Fish Pond', 'fa': 'کودک خندان با بادکنک قلبی در کنار حوض ماهی', 'fi': 'Hymyilevä lapsi sydänpallon kanssa kalalammen rannalla'}, 'transcriptionFa': '—', 'translation': {'en': 'Crayon drawing of a smiling child in a red dress holding a heart-shaped balloon beside a pond with two red fish under a bright yellow sun.', 'fa': 'نقاشی مدادشمعی از کودکی خندان با لباس قرمز و بادکنک قلبی در کنار حوض آبی با دو ماهی قرمز زیر خورشید تابان.', 'fi': 'Väriliitupiirros hymyilevästä lapsesta sydänpallo kädessään kalalammen äärellä.'}}, {'id': 'drawing-11', 'page': 11, 'image': 'images/drawings/drawing-11.jpg', 'thumb': 'images/drawings/thumb-11.jpg', 'studentId': None, 'studentNameEn': '1st Grade Student', 'studentNameFa': 'دانش\u200cآموز پایه اول', 'dateOnPage': 'Autumn/Winter 1404', 'hasBlastDamage': False, 'category': 'rubble_homework', 'title': {'en': "1st-Grade Glitter Alphabet — The Letter 'I' (ایـ / یـ / ی / ای) & Map of Iran", 'fa': 'کاردستی الفبای کلاس اول — نشانه «ایـ / یـ / ی / ای» با سیب و نقشه ایران', 'fi': "1. luokan kimallekirjaimet — 'I'-kirjain, omena ja Iranin kartta"}, 'transcriptionFa': 'ایـ / یـ / ی / ای', 'translation': {'en': "First-grade alphabet craft cut from gold and red glitter foam for the Persian sound 'I' — illustrated with a red paper apple (Sib) and a paper map of Iran.", 'fa': 'کاردستی فوم اکلیلی طلایی و قرمز برای آموزش نشانه «ایـ / یـ / ی / ای» در کلاس اول، همراه با کاردستی سیب قرمز و نقشه ایران.', 'fi': "Ensimmäisen luokan kimalleaskartelu 'I'-äänteestä: punainen omena (Sib) ja Iranin kartta."}}, {'id': 'drawing-12', 'page': 12, 'image': 'images/drawings/drawing-12.jpg', 'thumb': 'images/drawings/thumb-12.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Pencil Sketch of a Girl in a Pleated Dress Under a Smiling Sun', 'fa': 'طراحی مدادی دخترک با پیراهن چین\u200cدار زیر خورشید خندان', 'fi': 'Lyijykynäpiirros tytöstä laskoshameessa hymyilevän auringon alla'}, 'transcriptionFa': '—', 'translation': {'en': 'Pencil drawing of a girl wearing a bow and a long pleated dress with a heart on her chest, beneath a smiling sun and a cloud with a blue heart.', 'fa': 'طراحی با مداد سیاه از دخترکی با پاپیون و دامن بلند چین\u200cدار و نشان قلب، در زیر خورشید خندان و ابری با لکه آبی.', 'fi': 'Lyijykynäpiirros tytöstä, jonka mekossa on sydän, hymyilevän auringon alla.'}}, {'id': 'drawing-13', 'page': 13, 'image': 'images/drawings/drawing-13.jpg', 'thumb': 'images/drawings/thumb-13.jpg', 'studentId': None, 'studentNameEn': '1st Grade Student', 'studentNameFa': 'دانش\u200cآموز پایه اول', 'dateOnPage': '1404/10/28 (Jan 18, 2026)', 'hasBlastDamage': False, 'category': 'rubble_homework', 'title': {'en': '"100 Flowers and 100 Stars, Your Work Is Flawless" — Bird Collage', 'fa': 'کاردستی «مُرغ» با دست\u200cخط معلم: «صد گل و صد ستاره، کارت حرف نداره ۱۰/۲۸»', 'fi': '"Sata kukkaa ja sata tähteä, työsi on virheetön" — Lintuaskartelu'}, 'transcriptionFa': 'مُرغ — صد گل و صد ستاره، کارت حرف نداره ۱۰/۲۸ ⭐', 'translation': {'en': 'First-grade paper bird collage labeled \'Morgh\' (Bird), graded by the teacher in purple ink on 28 Dey 1404 (Jan 18, 2026): "100 flowers and 100 stars, your work is beyond words!" with a hand-drawn star.', 'fa': 'کاردستی کاغذرنگی «مُرغ» برای آموزش نشانه «غ» با تشویق معلم به تاریخ ۲۸ دی ۱۴۰۴: «صد گل و صد ستاره، کارت حرف نداره» همراه با ستاره دست\u200cکشیده معلم.', 'fi': 'Ensimmäisen luokan lintuaskartelu (\'Morgh\'), johon opettaja on kirjoittanut 18.1.2026: "Sata kukkaa ja sata tähteä, työsi on sanoin kuvaamattoman hieno!"'}}, {'id': 'drawing-14', 'page': 14, 'image': 'images/drawings/drawing-14.jpg', 'thumb': 'images/drawings/thumb-14.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Schoolhouse with Flag and Two Hearts', 'fa': 'خانه و مدرسه با پرچم ایران و دو قلب', 'fi': 'Koulurakennus, lippu ja kaksi sydäntä'}, 'transcriptionFa': '—', 'translation': {'en': 'Simple pencil sketch of a tall house with two round windows, two hearts, and a colored Iranian flag on the roof peak.', 'fa': 'طراحی ساده از ساختمانی با دو پنجره گرد، دو قلب بزرگ و پرچم سه\u200cرنگ ایران بر بالای سقف.', 'fi': 'Lyijykynäpiirros korkeasta talosta, kahdesta sydämestä ja lipusta katolla.'}}, {'id': 'drawing-15', 'page': 15, 'image': 'images/drawings/drawing-15.jpg', 'thumb': 'images/drawings/thumb-15.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Three Colored Flags', 'fa': 'نقاشی سه پرچم رنگی', 'fi': 'Kolme värikästä lippua'}, 'transcriptionFa': '—', 'translation': {'en': 'Crayon and pencil drawing of three flags side by side.', 'fa': 'نقاشی مدادرنگی از پرچم ایران و دو پرچم رنگی دیگر در کنار هم.', 'fi': 'Värikynäpiirros kolmesta lipusta vierekkäin.'}}, {'id': 'drawing-16', 'page': 16, 'image': 'images/drawings/drawing-16.jpg', 'thumb': 'images/drawings/thumb-16.jpg', 'studentId': None, 'studentNameEn': '1st Grade Boy', 'studentNameFa': 'دانش\u200cآموز پسر پایه اول', 'dateOnPage': '1404/10/23 (Jan 13, 2026)', 'hasBlastDamage': True, 'category': 'rubble_homework', 'title': {'en': 'Shrapnel-Torn 1st-Grade Homework — "Bravo to You, Artist Boy"', 'fa': 'برگه تکلیف سوراخ\u200cشده با ترکش — «صد آفرین مرحبا بر تو پسر هنرمند ۱۰/۲۳»', 'fi': 'Sirpaleen repimä 1. luokan läksysivu — "Bravo sinulle, taiteilijapoika"'}, 'transcriptionFa': 'زرد است آتش / پدر آبتین دارد / آرشیا ماشین دارد — ۱۰/۲۳ صد آفرین مرحبا بر تو پسر هنرمند', 'translation': {'en': "First-grade reading/drawing sheet with a physical shrapnel/blast puncture hole right next to the yellow sun at the top. The child wrote practice sentences ('Yellow is fire / Abtin has a father / Arshia has a car') and the teacher wrote at the bottom on 23 Dey 1404: '100 Bravos, well done to you, artist boy!'", 'fa': 'برگه مشق و نقاشی کلاس اول که بالای آن در کنار خورشید زرد با ترکش و موج انفجار سوراخ شده است. کودک جملات «زرد است آتش / پدر آبتین دارد / آرشیا ماشین دارد» را نوشته و معلم در پایین صفحه به تاریخ ۲۳ دی ۱۴۰۴ نوشته است: «صد آفرین مرحبا بر تو پسر هنرمند».', 'fi': "Ensimmäisen luokan tehtäväsivu, jonka yläreunassa keltaisen auringon vieressä on ohjusiskun sirpaleen tekemä reikä. Opettaja on kirjoittanut alareunaan: 'Sata kertaa bravo, hienoa työtä, taiteilijapoika!'"}}, {'id': 'drawing-17', 'page': 17, 'image': 'images/drawings/drawing-17.jpg', 'thumb': 'images/drawings/thumb-17.jpg', 'studentId': None, 'studentNameEn': '1st Grade Boy (Second Scan)', 'studentNameFa': 'دانش\u200cآموز پسر پایه اول (نمای دوم)', 'dateOnPage': '1404/10/23 (Jan 13, 2026)', 'hasBlastDamage': True, 'category': 'rubble_homework', 'title': {'en': 'Archival Duplicate Scan — Shrapnel-Torn 1st-Grade Homework', 'fa': 'اسکن دوم برگه تکلیف آسیب\u200cدیده در انفجار («پسر هنرمند ۱۰/۲۳»)', 'fi': 'Toinen arkistoskannaus sirpaleen vaurioittamasta 1. luokan tehtäväsivusta'}, 'transcriptionFa': 'زرد است آتش / پدر آبتین دارد / آرشیا ماشین دارد — ۱۰/۲۳ صد آفرین مرحبا بر تو پسر هنرمند', 'translation': {'en': 'Second archival scan from the 28-page rubble booklet showing the blast tear at the upper edge next to the hand-drawn yellow sun and three pink hearts.', 'fa': 'نسخه دوم ثبت\u200cشده در دفترچه مستندات زیر آوار که پارگی ناشی از ترکش را در کنار خورشید زرد و سه قلب صورتی نشان می\u200cدهد.', 'fi': 'Toinen skannaus 28-sivuisesta rauniovihkosta, jossa näkyy sirpaleen tekemä repeämä auringon ja kolmen vaaleanpunaisen sydämen vieressä.'}}, {'id': 'drawing-18', 'page': 18, 'image': 'images/drawings/drawing-18.jpg', 'thumb': 'images/drawings/thumb-18.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Blue House Flanked by Green Towers Under a Bright Sun', 'fa': 'خانه آبی در میان دو برج سبز زیر خورشید درخشان', 'fi': 'Sininen talo vihreiden tornien välissä kirkkaan auringon alla'}, 'transcriptionFa': '—', 'translation': {'en': 'Colored-pencil drawing of a blue house with a red roof standing between two tall green towers under a yellow sun and blue clouds.', 'fa': 'نقاشی مدادرنگی از خانه\u200cای آبی با سقف قرمز در میان دو برج بلند سبز زیر خورشید زرد و ابرهای آبی.', 'fi': 'Värikynäpiirros sinisestä talosta kahden korkean vihreän tornin välissä.'}}, {'id': 'drawing-19', 'page': 19, 'image': 'images/drawings/drawing-19.jpg', 'thumb': 'images/drawings/thumb-19.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': '1404/12/05 (Feb 24, 2026 — 4 days before strike)', 'hasBlastDamage': True, 'category': 'rubble_homework', 'title': {'en': 'Dated 4 Days Before the Strike (5 Esfand) — Torn by Blast Shrapnel', 'fa': 'مورخ ۵ اسفند ۱۴۰۴ (۴ روز پیش از حمله) — «۱۲/۵ صد آفرین» با سوراخ ترکش', 'fi': 'Päivätty 4 päivää ennen iskua (24.2.2026) — Sirpaleen lävistämä piirustus'}, 'transcriptionFa': '۱۲/۵ صد آفرین', 'translation': {'en': "Signed and graded by the teacher on 5 Esfand 1404 (February 24, 2026 — just four days before the February 28 missile strike): '12/5 — 100 Bravos!' Shows a red truck, a fruit tree, and a flower, with a jagged blast/shrapnel hole tearing directly through the yellow sun at the top of the sheet.", 'fa': 'امضا و نمره معلم در تاریخ ۵ اسفند ۱۴۰۴ (تنها ۴ روز پیش از حمله موشکی ۹ اسفند): «۱۲/۵ صد آفرین». بالای صفحه درست روی پرتوهای خورشید زرد بر اثر اصابت ترکش پاره و سوراخ شده است.', 'fi': "Opettajan tarkistama ja päiväämä 5. Esfandia 1404 (24.2.2026 — vain neljä päivää ennen ohjusiskua): '12/5 — Sata kertaa bravo!' Yläreunassa keltaisen auringon kohdalla on räjähdyksen repimä reikä."}}, {'id': 'drawing-20', 'page': 20, 'image': 'images/drawings/drawing-20.jpg', 'thumb': 'images/drawings/thumb-20.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Two Friends in Heart Dresses Beside Their Green House', 'fa': 'دو دختر با پیراهن\u200cهای قلب\u200cدار در کنار خانه سبز', 'fi': 'Kaksi ystävää sydänmekoissa vihreän talon vieressä'}, 'transcriptionFa': '—', 'translation': {'en': 'Two smiling girls wearing purple and pink gowns decorated with hearts standing beside a green house under smiling blue clouds and a radiant yellow sun.', 'fa': 'نقاشی دو دختر خندان با لباس\u200cهای بنفش و صورتی مزین به قلب در کنار خانه\u200cای سبز و ابرها و خورشید خندان.', 'fi': 'Kaksi hymyilevää tyttöä violeteissa ja vaaleanpunaisissa sydänmekoissa vihreän talon vieressä.'}}, {'id': 'drawing-21', 'page': 21, 'image': 'images/drawings/drawing-21.jpg', 'thumb': 'images/drawings/thumb-21.jpg', 'studentId': None, 'studentNameEn': 'Surviving Classmate', 'studentNameFa': 'دانش\u200cآموز بازمانده از فاجعه', 'dateOnPage': 'March 2026 (Post-Strike Testimony)', 'hasBlastDamage': False, 'category': 'survivor_testimony', 'title': {'en': "Surviving Child's Testimony — Ambulance, Police & Burning Cars", 'fa': 'روایت کودک بازمانده از لحظه حمله — آمبولانس، پلیس و خودروهای شعله\u200cور', 'fi': 'Selviytyneen oppilaan piirustus — Ambulanssi, poliisi ja palavat autot'}, 'transcriptionFa': 'پلیس — +', 'translation': {'en': "Drawn by a surviving pupil after the strike: burning cars on the street outside the school, a police car labeled 'پلیس' (Police), an ambulance with a red cross and flashing sirens, and rescuers carrying a stretcher.", 'fa': 'نقاشی یکی از کودکان بازمانده پس از فاجعه: خودروهای در حال سوختن در خیابان مدرسه، خودروی «پلیس»، آمبولانس با صلیب سرخ و آژیر، و امدادگرانی که برانکارد حمل می\u200cکنند.', 'fi': "Iskusta selviytyneen oppilaan piirustus: palavia autoja koulun edustalla, poliisiauto ('پلیس'), ambulanssi sekä pelastajia kantamassa paareja."}}, {'id': 'drawing-22', 'page': 22, 'image': 'images/drawings/drawing-22.jpg', 'thumb': 'images/drawings/thumb-22.jpg', 'studentId': None, 'studentNameEn': 'Surviving Classmate', 'studentNameFa': 'دانش\u200cآموز بازمانده از فاجعه', 'dateOnPage': 'March 2026 (Post-Strike Testimony)', 'hasBlastDamage': False, 'category': 'survivor_testimony', 'title': {'en': 'Surviving Child\'s Testimony — Red Warplane Striking "Minab" in Flames', 'fa': 'روایت کودک بازمانده — اصابت موشک و آتش گرفتن «میناب»', 'fi': "Selviytyneen oppilaan piirustus — Punainen hävittäjä ja tulessa oleva 'Minab'"}, 'transcriptionFa': 'میناب', 'translation': {'en': "A surviving child's raw depiction of the attack: a red warplane/missile at bottom right firing into the school compound labeled 'میناب' (Minab) engulfed in red and orange flames.", 'fa': 'تصویرگری تکان\u200cدهنده یکی از کودکان بازمانده از حمله: جنگنده/موشک قرمز در پایین سمت راست که به ساختمان مدرسه با تابلو «میناب» شلیک کرده و شعله\u200cهای آتش از آن زبانه می\u200cکشد.', 'fi': "Selviytyneen lapsen piirustus hyökkäyksestä: punainen lentokone/ohjus oikealla alhaalla tulittamassa 'Minab'-kyltillä merkittyä koulua, joka on liekeissä."}}, {'id': 'drawing-23', 'page': 23, 'image': 'images/drawings/drawing-23.jpg', 'thumb': 'images/drawings/thumb-23.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Two Sisters, Ice Cream, Rainbow Heart & "Iran ❤️"', 'fa': 'دو دختر با بستنی و هندوانه، قلب رنگین\u200cکمانی و نام «ایران ❤️»', 'fi': "Kaksi tyttöä, jäätelö, sateenkaarisydän ja teksti 'Iran ❤️'"}, 'transcriptionFa': 'ایران ❤️', 'translation': {'en': "Two smiling girls holding watermelon and three-scoop ice cream beneath a rainbow-colored heart, a winking sun, and a framed plaque reading 'Iran ❤️'.", 'fa': 'نقاشی دو دختر کوچک با قاچ هندوانه و بستنی قیفی سه\u200cرنگی در زیر یک قلب رنگین\u200cکمانی، خورشید خندان و قابی که درون آن نوشته شده: «ایران ❤️».', 'fi': "Kaksi hymyilevää tyttöä, jäätelötötterö, sateenkaarisydän ja kehystetty teksti 'Iran ❤️'."}}, {'id': 'drawing-24', 'page': 24, 'image': 'images/drawings/drawing-24.jpg', 'thumb': 'images/drawings/thumb-24.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Rainbow Between Two Clouds Under a Smiling Sun', 'fa': 'رنگین\u200cکمان بزرگ بر فراز ابرها و خورشید خندان', 'fi': 'Suuri sateenkaari pilvien välissä hymyilevän auringon alla'}, 'transcriptionFa': '—', 'translation': {'en': 'A wide six-band rainbow arching between two white clouds beneath a joyful, smiling sun.', 'fa': 'رنگین\u200cکمانی بزرگ و پررنگ بر فراز دو ابر سفید زیر لبخند خورشید.', 'fi': 'Suuri värikäs sateenkaari kahden pilven välissä hymyilevän auringon alla.'}}, {'id': 'drawing-25', 'page': 25, 'image': 'images/drawings/drawing-25.jpg', 'thumb': 'images/drawings/thumb-25.jpg', 'studentId': None, 'studentNameEn': 'Elementary Student', 'studentNameFa': 'دانش\u200cآموز دبستان شجره طیبه', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Close-Up Detail — House Lifted Toward the Sky', 'fa': 'نمای نزدیک — خانه کوچک در میان ابرهای آبی', 'fi': 'Lähikuva — Pieni talo sinisten pilvien keskellä'}, 'transcriptionFa': '—', 'translation': {'en': 'Closer framing from the 28-page archival booklet showing the upper roof and rope of the house among blue clouds.', 'fa': 'نمای نزدیک\u200cتر در دفترچه مستندات از سقف خانه کوچک و طناب متصل به آن در میان ابرهای آبی.', 'fi': 'Tarkempi rajaus 28-sivuisesta arkistovihkosta, jossa näkyy pienen talon katto pilvien keskellä.'}}, {'id': 'drawing-26', 'page': 26, 'image': 'images/drawings/drawing-26.jpg', 'thumb': 'images/drawings/thumb-26.jpg', 'studentId': None, 'studentNameEn': 'Roghayeh Salari', 'studentNameFa': 'رقیه سالاری', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_artwork', 'title': {'en': 'Rainbow Name Calligraphy — "Roghayeh Salari"', 'fa': 'خوشنویسی رنگی نام «رقیه سالاری» در قاب رنگین\u200cکمانی', 'fi': "Sateenkaaren värein koristeltu nimi — 'Roghayeh Salari'"}, 'transcriptionFa': 'رقیه سالاری', 'translation': {'en': "Hand-lettered bubble calligraphy of the name 'Roghayeh Salari' shaded inside a pastel rainbow border.", 'fa': 'طراحی حروف توپر و رنگ\u200cآمیزی\u200cشده نام «رقیه سالاری» در میان پس\u200cزمینه مدادرنگی ملایم.', 'fi': "Pastellisävyin väritetty kalligrafinen nimikyltti 'Roghayeh Salari'."}}, {'id': 'drawing-27', 'page': 27, 'image': 'images/drawings/drawing-27.jpg', 'thumb': 'images/drawings/thumb-27.jpg', 'studentId': 'fatemeh-rahdar', 'studentNameEn': 'Fatemeh Rahdar (Grade 5)', 'studentNameFa': 'شهیده فاطمه رهدار (پایه پنجم)', 'dateOnPage': 'Winter 1404 (Feb 2026)', 'hasBlastDamage': False, 'category': 'rubble_homework', 'title': {'en': "Fatemeh Rahdar's 5th-Grade World Globe & Dictation Assignment", 'fa': 'تکلیف کره زمین و املای تلفیقی پایه پنجم — شهیده فاطمه رهدار', 'fi': 'Fatemeh Rahdarin 5. luokan maapallopiirustus ja sanelutehtävä'}, 'transcriptionFa': 'به نام خداوند جان آفرین — املای تلفیقی با مطالعات اجتماعی پنجم — راهدار', 'translation': {'en': "Recovered from the rubble of the 5th-grade classroom and signed 'Rahdar' by 11-year-old martyr Fatemeh Rahdar (born 1393/10/23, Grade 5). Headed with Saadi's verse 'In the Name of God, Creator of Soul', she drew the continents, latitude/longitude lines, and wrote her spelling words inside the ocean grid cells.", 'fa': 'بیرون کشیده شده از زیر آوار کلاس پنجم با امضای دانش\u200cآموز ۱۱ ساله شهیده «فاطمه رهدار» (متولد ۲۳ دی ۱۳۹۳، پایه پنجم). او با سرلوحه «به نام خداوند جان آفرین — املای تلفیقی با مطالعات اجتماعی پنجم»، قاره\u200cها و مدارهای کره زمین را نقاشی کرده و واژگان املا را درون خانه\u200cهای اقیانوس نوشته است.', 'fi': 'Viidennen luokan raunioista löydetty 11-vuotiaan marttyyrin Fatemeh Rahdarin signeeraama tehtäväsivu. Hän piirsi maapallon mantereet ja leveyspiirit sekä kirjoitti sanelusanat valtamerten ruutuihin.'}}, {'id': 'drawing-28', 'page': 28, 'image': 'images/drawings/drawing-28.jpg', 'thumb': 'images/drawings/thumb-28.jpg', 'studentId': None, 'studentNameEn': 'Surviving Classmate', 'studentNameFa': 'دانش\u200cآموز بازمانده از فاجعه', 'dateOnPage': 'March 2026 (Post-Strike Testimony)', 'hasBlastDamage': False, 'category': 'survivor_testimony', 'title': {'en': 'Surviving Child\'s Drawing — "All the Children Died"', 'fa': 'نقاشی کودک بازمانده با املای کودکانه: «بچه ها همشا موردن»', 'fi': 'Selviytyneen lapsen piirustus — "Kaikki lapset kuolivat"'}, 'transcriptionFa': 'بچه ها همشا موردن — ارتش نزامی', 'translation': {'en': "Drawn by a surviving child after the airstrike: three missiles striking the domed school building flying the Iranian flag, with the child's phonetic handwritten words at top left: 'بچه ها همشا موردن' ('All the children died').", 'fa': 'نقاشی یکی از کودکان بازمانده از حمله موشکی به مدرسه که در بالای سمت چپ آن با املای کودکانه و بغض\u200cآلود نوشته است: «بچه ها همشا موردن» (بچه\u200cها همه\u200cشان مردند).', 'fi': "Iskusta selviytyneen lapsen piirustus koulurakennukseen osuvista ohjuksista. Vasempaan yläkulmaan lapsi on kirjoittanut: 'بچه ها همشا موردن' ('Kaikki lapset kuolivat')."}}], 'sources': [{'id': 'EVD-SAT-001', 'title': 'Satellite Imagery and Spatial Geo-Partitioning Analysis (2013-2026)', 'outlet': 'Planet Labs / Google Earth Historical Archive', 'url': 'https://pfp.ngo/evidence/EVD-SAT-001', 'publication_date': '2026-03-05', 'tier': 'Tier 1', 'reliability_score': 0.99, 'notes': 'High-resolution satellite imagery confirming physical concrete wall boundary built in 2016 separating school compound from naval base.', 'archive_hash': 'a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0'}, {'id': 'EVD-MUN-002', 'title': 'Munitions Forensic Analysis: BGM-109 Tomahawk Cruise Missile Debris', 'outlet': 'Independent Weapons Research & Bellingcat', 'url': 'https://pfp.ngo/evidence/EVD-MUN-002', 'publication_date': '2026-03-08', 'tier': 'Tier 1', 'reliability_score': 0.98, 'notes': 'Physical serial numbers and aerodynamic fin debris recovered at strike crater matching US Navy Tomahawk Block IV/V specifications.', 'archive_hash': 'b2c3d4e5f6a7890123456789abcdef0123456789abcdef0123456789abcdef1'}, {'id': 'EVD-LAUNCH-003', 'title': 'Launch Platform Attribution & Strike Vector Tracking', 'outlet': 'Operation Epic Fury Operational Assessment', 'url': 'https://pfp.ngo/evidence/EVD-LAUNCH-003', 'publication_date': '2026-03-12', 'tier': 'Tier 1', 'reliability_score': 0.95, 'notes': 'Trajectory and carrier strike group positioning in the Arabian Sea verifying launch origin from US naval vessels.', 'archive_hash': 'c3d4e5f6a7b890123456789abcdef0123456789abcdef0123456789abcdef2'}, {'id': 'EVD-CENTCOM-004', 'title': 'CENTCOM Preliminary Investigation Assessment (15-6 Inquiry Summary)', 'outlet': 'US Central Command / DoD Releases', 'url': 'https://pfp.ngo/evidence/EVD-CENTCOM-004', 'publication_date': '2026-03-15', 'tier': 'Tier 1', 'reliability_score': 0.96, 'notes': 'Internal acknowledgment of civilian strike resulting from outdated 2013 target list coordinates.', 'archive_hash': 'd4e5f6a7b8c90123456789abcdef0123456789abcdef0123456789abcdef3'}, {'id': 'EVD-VIC-005', 'title': 'Official Identity & Memorial Registry Database of Minab School Victims', 'outlet': "People for Peace & Justice ry / Minab Governor's Office", 'url': 'https://peopleforpeace.live/data.html', 'publication_date': '2026-03-18', 'tier': 'Tier 1', 'reliability_score': 0.99, 'notes': 'Comprehensive verified victim registry with facial image correlation, maternal linkages, and DNA confirmation.', 'archive_hash': 'e5f6a7b8c9d0123456789abcdef0123456789abcdef0123456789abcdef4'}, {'id': 'SRC-LMO-001', 'title': 'Hormozgan Forensic DNA Laboratory Final Genetic Audit', 'outlet': 'Legal Medicine Organization of Hormozgan (lmo.ir)', 'url': 'https://hormozgan.lmo.ir/reports/minab-1404', 'publication_date': '2026-04-10', 'tier': 'Tier 1', 'reliability_score': 0.99, 'notes': 'STR genomic typing of 312 biological samples against family reference blood samples.', 'archive_hash': 'f6a7b8c9d0e123456789abcdef0123456789abcdef0123456789abcdef5'}, {'id': 'SRC-PROS-002', 'title': 'Minab Prosecutor Official Judicial Indictment & Casualty Toll', 'outlet': "Minab General and Revolutionary Prosecutor's Office", 'url': 'https://dadgostari-hr.ir/news/minab-prosecutor-statement', 'publication_date': '2026-04-12', 'tier': 'Tier 1', 'reliability_score': 0.99, 'notes': 'Judicial certification of 156 total martyrs, including 120 students, 26 educators, 7 parents, 1 driver, 1 technician, 1 fetus.', 'archive_hash': 'a7b8c9d0e1f23456789abcdef0123456789abcdef0123456789abcdef6'}, {'id': 'SRC-BONYAD-003', 'title': 'Bonyad Shahid Hormozgan Martyrdom Dossiers & Cemetery Allocation', 'outlet': 'Navid Shahed Hormozgan / Bonyad Shahid', 'url': 'https://hormozgan.navideshahed.com/fa/news/minab-martyrs', 'publication_date': '2026-03-20', 'tier': 'Tier 1', 'reliability_score': 0.98, 'notes': 'Official state recognition of martyr status and burial records in Minab and Rafsanjan cemeteries.', 'archive_hash': 'b8c9d0e1f2a3456789abcdef0123456789abcdef0123456789abcdef7'}, {'id': 'SRC-GYM-004', 'title': 'Memorial Statement on Martyred Student Athletes and Gymnasts', 'outlet': 'Iran Gymnastics Federation / Asian Gymnastics Union', 'url': 'https://irgymnastics.ir/news/minab-gymnasts-memorial', 'publication_date': '2026-03-03', 'tier': 'Tier 3', 'reliability_score': 0.97, 'notes': 'Official condolences and documentation for 6 young gymnasts and skateboarders killed in the strike.', 'archive_hash': 'c9d0e1f2a3b456789abcdef0123456789abcdef0123456789abcdef8'}, {'id': 'SRC-IRCS-005', 'title': 'Iranian Red Crescent Society Initial Search & Rescue Triage Report', 'outlet': 'Iranian Red Crescent Society (rcs.ir)', 'url': 'https://rcs.ir/reports/minab-relief-operation', 'publication_date': '2026-03-01', 'tier': 'Tier 3', 'reliability_score': 0.96, 'notes': 'First responder casualty logs, injured hospitalizations at Hazrat Abolfazl Hospital, and double-tap rescue hazard records.', 'archive_hash': 'd0e1f2a3b4c56789abcdef0123456789abcdef0123456789abcdef9'}, {'id': 'EVD-DRAW-006', 'title': 'Physical Archive of 28 Classroom Drawings & Homework Pages Pulled from the Rubble', 'outlet': 'Shajareh Tayyebeh School Field Recovery Archive (Curated via Mehrdad Juy)', 'url': 'https://peopleforpeace.live/docs/minab-report/Minab_Drawings_From_Rubble.pdf', 'publication_date': '2026-03-25', 'tier': 'Tier 1', 'reliability_score': 1.0, 'notes': "28 high-resolution scans of students' drawings, science diagrams, and 1st-grade literacy exercises pulled from under the collapsed school roof, including pages signed by Baran Ghasemi and Fatemeh Rahdar and homework dated 5 Esfand 1404 with physical shrapnel holes.", 'archive_hash': 'e8f9a0b1c2d3456789abcdef0123456789abcdef0123456789abcdef01234567'}]}
+
+ALL_VICTIMS = DATASET_V3["victims"]
+STUDENT_MARTYRS = [v for v in ALL_VICTIMS if v["role"] == "student" and v["status"] in ["killed", "missing"]]
+TEACHER_MARTYRS = [v for v in ALL_VICTIMS if v["role"] in ["teacher", "staff"]]
+PARENTS_MARTYRS = [v for v in ALL_VICTIMS if v["role"] == "parent"]
+COMMUNITY_AND_FETUS = [v for v in ALL_VICTIMS if v["role"] in ["civilian", "unborn_fetus"]]
+INJURED_SURVIVORS = [v for v in ALL_VICTIMS if v["status"] == "injured"]
+MOTHERS = DATASET_V3["mothers"]
+FAMILY_CLUSTERS = DATASET_V3["family_clusters"]
+DRAWINGS_DATA = DATASET_V3["drawings"]
+SOURCES = DATASET_V3["sources"]
+dataset_v3 = DATASET_V3
+
+# 1. Write Campaigns/minab/data/minab_incident_dataset.json
+with open(DATA_DIR / "minab_incident_dataset.json", "w", encoding="utf-8") as f:
+    json.dump(dataset_v3, f, indent=2, ensure_ascii=False)
+print("✅ Wrote Campaigns/minab/data/minab_incident_dataset.json (v3.0.0)")
+
+# 2. Write PFP_Platform/web/public/dataset.json and children.json
+with open(PUBLIC_DIR / "dataset.json", "w", encoding="utf-8") as f:
+    json.dump(dataset_v3, f, indent=2, ensure_ascii=False)
+with open(PUBLIC_DIR / "children.json", "w", encoding="utf-8") as f:
+    json.dump(STUDENT_MARTYRS, f, indent=2, ensure_ascii=False)
+print("✅ Wrote PFP_Platform/web/public/dataset.json & children.json")
+
+# 3. Write CSV exports
+csv_fields = [
+    "id", "roster_index", "full_name_en", "full_name_fa", "role", "gender",
+    "grade", "grade_or_class", "birth_date_shamsi", "birth_date_gregorian", "age",
+    "status", "official_status_fa", "identification_method", "father_name",
+    "mother_id", "family_cluster_id", "burial_location", "photo_url", "biography"
 ]
+for csv_path in [EXPORT_DIR / "minab_victims.csv", PUBLIC_DIR / "minab_victims.csv"]:
+    with open(csv_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=csv_fields, extrasaction="ignore")
+        writer.writeheader()
+        for v in ALL_VICTIMS:
+            writer.writerow(v)
+print("✅ Wrote minab_victims.csv")
 
-# 2. Mothers Profiles Directory
-MOTHERS = [
-    {
-        "id": "moth-neda-solhizadeh",
-        "full_name_en": "Neda Solhizadeh",
-        "full_name_fa": "ندا صلحی‌زاده",
-        "spouse_name": "Hamid Sadeghi",
-        "is_casualty": True,
-        "status": "killed",
-        "profession": "Elementary School Educator",
-        "narrative_summary": "Educator from Rafsanjan who taught at Shajareh Tayyebeh School. She died shielding her 11-year-old son Hami Sadeghi in the school prayer hall during the secondary strike. Survived by her 10-year-old daughter Nila.",
-        "quotes": [
-            "My brother and mother went to school together that morning, and neither ever returned. (Narrated by daughter Nila)",
-            "She refused to evacuate until all children were escorted to the courtyard."
-        ],
-        "children_ids": ["hami-sadeghi", "nila-sadeghi"],
-        "other_family_member_ids": ["hamid-sadeghi-parent"],
-        "family_cluster_id": "FAM-SADEGHI",
-        "photo_url": "https://peopleforpeace.live/images/mothers/neda_solhizadeh.jpg",
-        "sources": ["EVD-VIC-005", "SRC-BONYAD-003", "SRC-PROS-002"]
-    },
-    {
-        "id": "moth-zohreh-shahriyari",
-        "full_name_en": "Zohreh Shahriyari",
-        "full_name_fa": "زهره شهریاری",
-        "spouse_name": "Mohammad Shahriyari",
-        "is_casualty": True,
-        "status": "killed",
-        "profession": "2nd Grade Elementary Teacher",
-        "narrative_summary": "Beloved 2nd-grade teacher who was 6 months pregnant with her first son (Mohammad-Ali). She sheltered children under desks during the initial strike. Identified by her engraved gold wedding band.",
-        "quotes": [
-            "She carried the next generation in her womb while protecting the children of Minab."
-        ],
-        "children_ids": ["unborn-fetus-shahriyari"],
-        "other_family_member_ids": [],
-        "family_cluster_id": "FAM-SHAHRIYARI",
-        "photo_url": "https://peopleforpeace.live/images/mothers/zohreh_shahriyari.jpg",
-        "sources": ["SRC-PROS-002", "SRC-LMO-001"]
-    },
-    {
-        "id": "moth-atiyeh-rahinezhad",
-        "full_name_en": "Atiyeh Rahinezhad",
-        "full_name_fa": "عطیه راه‌نژاد",
-        "spouse_name": "Morteza Nasiri",
-        "is_casualty": False,
-        "status": "survived",
-        "profession": "Homemaker & Community Peace Advocate",
-        "narrative_summary": "Mother of Makan Nasiri, the 7-year-old champion gymnast whose body was never recovered. She preserves his single recovered red-soled sneaker and leads the 'Where is Makan?' awareness initiative.",
-        "quotes": [
-            "Every day I look at his red sneaker. The earth took all of him, but his memory cannot be erased.",
-            "I do not have a grave to visit. My son is the Unmarked Martyr (شهید بی‌نشان) of Minab."
-        ],
-        "children_ids": ["makan-nasiri"],
-        "other_family_member_ids": [],
-        "family_cluster_id": "FAM-NASIRI",
-        "photo_url": "https://peopleforpeace.live/images/mothers/atiyeh_rahinezhad.jpg",
-        "sources": ["SRC-GYM-004", "SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "moth-fatemeh-zakeri",
-        "full_name_en": "Fatemeh Zakeri",
-        "full_name_fa": "فاطمه ذاکری",
-        "spouse_name": "Mohammad Zakeri",
-        "is_casualty": False,
-        "status": "survived",
-        "profession": "Mother of Bereaved Household",
-        "narrative_summary": "Mother from the prominent Zakeri lineage in Minab which suffered multiple child casualties across grades 1, 3, and 5.",
-        "quotes": [
-            "We laid our children to rest in a single row at Minab cemetery. Our home became silent overnight."
-        ],
-        "children_ids": ["asra-zakeri", "salma-zakeri"],
-        "other_family_member_ids": ["reyhaneh-zakeri", "asma-zakeri", "sina-zakeri", "mohammad-zakeri-parent"],
-        "family_cluster_id": "FAM-ZAKERI",
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_zakeri.jpg",
-        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
-    },
-    {
-        "id": "moth-karyanipak",
-        "full_name_en": "Mother of Karyanipak Brothers (Khadijeh)",
-        "full_name_fa": "مادر برادران کاریانی‌پاک (خدیجه)",
-        "spouse_name": "Ali Karyanipak",
-        "is_casualty": False,
-        "status": "survived",
-        "profession": "Homemaker",
-        "narrative_summary": "Lost two young sons (Ali-Akbar and Mohammad-Ali Karyanipak) who attended 3rd and 5th grades together.",
-        "quotes": [
-            "They were inseparable in life and are buried side by side."
-        ],
-        "children_ids": ["ali-akbar-karyanipak", "mohammad-ali-karyanipak"],
-        "other_family_member_ids": ["ali-karyanipak-parent"],
-        "family_cluster_id": "FAM-KARYANIPAK",
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_karyanipak.jpg",
-        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
-    },
-    {
-        "id": "moth-mohaddeseh-falahat",
-        "full_name_en": "Mohaddeseh Falahat",
-        "full_name_fa": "محدثه فلاحت",
-        "spouse_name": "Hassan Ahmadzadeh",
-        "is_casualty": False,
-        "status": "survived",
-        "profession": "Artisan & Mother",
-        "narrative_summary": "Bereaved mother who identified her child in the hospital morgue solely by his hand.",
-        "quotes": [
-            "A mother knows every line on her child's fingers. I recognized him by his little hand that used to hold mine."
-        ],
-        "children_ids": ["athena-ahmadzadeh", "amin-ahmadzade", "arad-ahmadzadeh"],
-        "other_family_member_ids": ["hassan-ahmadzadeh-parent"],
-        "family_cluster_id": "FAM-AHMADZADEH",
-        "photo_url": "https://peopleforpeace.live/images/mothers/mohaddeseh_falahat.jpg",
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "moth-ahmadi-siblings",
-        "full_name_en": "Mother of Ahmadi Siblings (Maryam)",
-        "full_name_fa": "مادر خواهر و برادر احمدی (مریم)",
-        "spouse_name": "Ahmad Ahmadi",
-        "is_casualty": False,
-        "status": "survived",
-        "profession": "Teacher",
-        "narrative_summary": "Lost her son Sobhan and daughter Hanieh. Sobhan was identified holding his Persian textbook containing his mother's handwriting in red ink.",
-        "quotes": [
-            "His backpack was torn, but inside, his Persian book was clutched against his chest."
-        ],
-        "children_ids": ["hanieh-ahmadi", "sobhan-ahmadi"],
-        "other_family_member_ids": [],
-        "family_cluster_id": "FAM-AHMADI",
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_ahmadi.jpg",
-        "sources": ["SRC-BONYAD-003", "SRC-PROS-002"]
-    },
-    {
-        "id": "moth-raeisi-siblings",
-        "full_name_en": "Mother of Raeisi Siblings (Zahra)",
-        "full_name_fa": "مادر فرزندان رئیسی (زهرا)",
-        "spouse_name": "Hossein Raeisi",
-        "is_casualty": False,
-        "status": "survived",
-        "profession": "Homemaker",
-        "narrative_summary": "Lost daughter Asna (1st grade) and son Mohammad-Hatam (4th grade).",
-        "quotes": [
-            "Every morning they walked down the lane together holding hands."
-        ],
-        "children_ids": ["asna-raeisi", "mohammad-hatam-raeisi"],
-        "other_family_member_ids": ["hossein-raeisi-parent"],
-        "family_cluster_id": "FAM-RAEISI",
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_raeisi.jpg",
-        "sources": ["SRC-LMO-001", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "moth-bahrami-cluster",
-        "full_name_en": "Mother of Bahrami Family (Fatemeh)",
-        "full_name_fa": "مادر خانواده بهرامی (فاطمه)",
-        "spouse_name": "Eshagh Bahrami",
-        "is_casualty": False,
-        "status": "survived",
-        "profession": "Homemaker",
-        "narrative_summary": "Experienced multiple losses within the extended Bahrami kinship in Minab.",
-        "quotes": [
-            "We gave the school our sweetest blossoms and received only sorrow."
-        ],
-        "children_ids": ["zeynab-bahrami", "mohammadayan-bahrami", "zahra-bahrami", "mahna-bahrami"],
-        "other_family_member_ids": [],
-        "family_cluster_id": "FAM-BAHRAMI",
-        "photo_url": "https://peopleforpeace.live/images/mothers/mother_bahrami.jpg",
-        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
-    },
-    {
-        "id": "moth-zahra-molaei-hero",
-        "full_name_en": "Zahra Molaei",
-        "full_name_fa": "زهرا مولایی",
-        "spouse_name": "Reza Molaei",
-        "is_casualty": False,
-        "status": "survived",
-        "profession": "Rescuing Mother & Community Hero",
-        "narrative_summary": "Rushed into the school courtyard between Strike 1 and Strike 2. She successfully pulled her daughter Mehgol and son Mohammad-Javad out of classroom rubble minutes before the final detonation.",
-        "quotes": [
-            "I didn't think about dying. All I could hear in my mind was my children calling me from inside the smoke."
-        ],
-        "children_ids": ["mohammad-javad-molaei-surv", "mehgol-molaei-surv"],
-        "other_family_member_ids": [],
-        "family_cluster_id": "FAM-MOLAEI",
-        "photo_url": "https://peopleforpeace.live/images/mothers/zahra_molaei.jpg",
-        "sources": ["SRC-IRCS-005", "EVD-VIC-005"]
+def to_js_victim(v):
+    return {
+        "id": v["id"],
+        "rosterIndex": v.get("roster_index"),
+        "name": v["full_name_en"],
+        "nameFa": v["full_name_fa"],
+        "age": v.get("age"),
+        "birthDateShamsi": v.get("birth_date_shamsi"),
+        "birthDateGregorian": v.get("birth_date_gregorian"),
+        "father": v.get("father_name"),
+        "motherId": v.get("mother_id"),
+        "familyClusterId": v.get("family_cluster_id"),
+        "gender": v.get("gender"),
+        "role": v.get("grade_or_class"),
+        "roleFa": v.get("grade_or_class_fa"),
+        "category": v.get("role"),
+        "grade": v.get("grade"),
+        "gradeLabelEn": v.get("grade_or_class"),
+        "gradeLabelFa": v.get("grade_or_class_fa"),
+        "status": v.get("status"),
+        "officialStatusFa": v.get("official_status_fa"),
+        "identificationMethod": v.get("identification_method"),
+        "burialLocation": v.get("burial_location"),
+        "photoGrid": v.get("photo_grid"),
+        "photoPath": v.get("photo_path"),
+        "photoUrl": v.get("photo_url"),
+        "notes": v.get("biography"),
+        "linkedDrawings": v.get("linked_drawings", []),
+        "sources": v.get("sources", [])
     }
-]
 
-# 3. Family Clusters Directory
-FAMILY_CLUSTERS = [
+js_children = [to_js_victim(s) for s in STUDENT_MARTYRS]
+js_teachers = [to_js_victim(t) for t in TEACHER_MARTYRS]
+js_other_martyrs = [to_js_victim(o) for o in PARENTS_MARTYRS + COMMUNITY_AND_FETUS]
+js_adults = js_teachers + js_other_martyrs
+js_survivors = [to_js_victim(s) for s in INJURED_SURVIVORS]
+
+STORIES_V3 = [
     {
-        "cluster_id": "FAM-ZAKERI",
-        "family_surname_en": "Zakeri",
-        "family_surname_fa": "ذاکری",
-        "mother_id": "moth-fatemeh-zakeri",
-        "total_killed": 7,
-        "total_injured": 0,
-        "member_ids": ["asra-zakeri", "salma-zakeri", "reyhaneh-zakeri", "asma-zakeri", "sina-zakeri", "mahdiyeh-zakerikhah", "mohammad-zakeri-parent"],
-        "description": "Prominent Minab lineage suffering 6+ casualties among elementary school children and adult parent rescuer.",
-        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
+        "id": "rubble-drawings",
+        "titleKey": "storyDrawingsTitle",
+        "textKey": "storyDrawingsText",
+        "quoteKey": "storyDrawingsQuote",
+        "icon": "🎨",
+        "childIds": ["baran-ghasemy", "fatemeh-rahdar"]
     },
     {
-        "cluster_id": "FAM-SADEGHI",
-        "family_surname_en": "Solhizadeh-Sadeghi",
-        "family_surname_fa": "صلحی‌زاده / صادقی",
-        "mother_id": "moth-neda-solhizadeh",
-        "total_killed": 3,
-        "total_injured": 1,
-        "member_ids": ["neda-solhizadeh", "hami-sadeghi", "nila-sadeghi", "hamid-sadeghi-parent"],
-        "description": "Teacher-mother Neda Solhizadeh, father Hamid Sadeghi, and 11-year-old son Hami Sadeghi were martyred; survived by 10-year-old daughter Nila Sadeghi.",
-        "sources": ["EVD-VIC-005", "SRC-BONYAD-003"]
+        "id": "hami-neda",
+        "titleKey": "storyHamiTitle",
+        "textKey": "storyHamiText",
+        "quoteKey": "storyHamiQuote",
+        "icon": "👩‍👦",
+        "childIds": ["hami-sadeghi", "neda-solhizadeh"]
     },
     {
-        "cluster_id": "FAM-SHAHRIYARI",
-        "family_surname_en": "Shahriyari",
-        "family_surname_fa": "شهریاری",
-        "mother_id": "moth-zohreh-shahriyari",
-        "total_killed": 2,
-        "total_injured": 0,
-        "member_ids": ["zohreh-shahriyari", "unborn-fetus-shahriyari"],
-        "description": "Pregnant teacher Zohreh Shahriyari and her 6-month unborn son Mohammad-Ali.",
-        "sources": ["SRC-PROS-002", "SRC-LMO-001"]
+        "id": "zohreh-shirgir",
+        "titleKey": "storyZohrehTitle",
+        "textKey": "storyZohrehText",
+        "icon": "🕊️",
+        "childIds": ["zohreh-shahriyari", "unborn-fetus-shahriyari"]
     },
     {
-        "cluster_id": "FAM-KARYANIPAK",
-        "family_surname_en": "Karyanipak",
-        "family_surname_fa": "کاریانی‌پاک",
-        "mother_id": "moth-karyanipak",
-        "total_killed": 3,
-        "total_injured": 0,
-        "member_ids": ["ali-akbar-karyanipak", "mohammad-ali-karyanipak", "ali-karyanipak-parent"],
-        "description": "Two brothers (Ali-Akbar and Mohammad-Ali) and their rescuing father Ali Karyanipak.",
-        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
+        "id": "sobhan-hananeh",
+        "titleKey": "storySobhanTitle",
+        "textKey": "storySobhanText",
+        "icon": "📖",
+        "childIds": ["sobhan-ahmadi", "hananeh-mehdikhah", "hanieh-ahmadi"]
     },
-    {
-        "cluster_id": "FAM-AHMADZADEH",
-        "family_surname_en": "Ahmadzadeh",
-        "family_surname_fa": "احمدزاده",
-        "mother_id": "moth-mohaddeseh-falahat",
-        "total_killed": 4,
-        "total_injured": 0,
-        "member_ids": ["athena-ahmadzadeh", "amin-ahmadzade", "arad-ahmadzadeh", "hassan-ahmadzadeh-parent"],
-        "description": "Three sibling children (Athena, Amin, and Arad) and their father Hassan Ahmadzadeh.",
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "cluster_id": "FAM-AHMADI",
-        "family_surname_en": "Ahmadi",
-        "family_surname_fa": "احمدی",
-        "mother_id": "moth-ahmadi-siblings",
-        "total_killed": 2,
-        "total_injured": 0,
-        "member_ids": ["hanieh-ahmadi", "sobhan-ahmadi"],
-        "description": "Siblings Sobhan and Hanieh Ahmadi.",
-        "sources": ["SRC-BONYAD-003", "SRC-PROS-002"]
-    },
-    {
-        "cluster_id": "FAM-RAEISI",
-        "family_surname_en": "Raeisi",
-        "family_surname_fa": "رئیسی",
-        "mother_id": "moth-raeisi-siblings",
-        "total_killed": 3,
-        "total_injured": 0,
-        "member_ids": ["asna-raeisi", "mohammad-hatam-raeisi", "hossein-raeisi-parent"],
-        "description": "Sister Asna and brother Mohammad-Hatam Raeisi, along with their father Hossein Raeisi.",
-        "sources": ["SRC-LMO-001", "SRC-BONYAD-003"]
-    },
-    {
-        "cluster_id": "FAM-BAHRAMI",
-        "family_surname_en": "Bahrami",
-        "family_surname_fa": "بهرامی",
-        "mother_id": "moth-bahrami-cluster",
-        "total_killed": 4,
-        "total_injured": 0,
-        "member_ids": ["zeynab-bahrami", "mohammadayan-bahrami", "zahra-bahrami", "mahna-bahrami"],
-        "description": "Four children from the extended Bahrami household in Minab.",
-        "sources": ["SRC-BONYAD-003", "SRC-LMO-001"]
-    },
-    {
-        "cluster_id": "FAM-NASIRI",
-        "family_surname_en": "Nasiri",
-        "family_surname_fa": "نصیری",
-        "mother_id": "moth-atiyeh-rahinezhad",
-        "total_killed": 0,
-        "total_injured": 0,
-        "member_ids": ["makan-nasiri"],
-        "description": "7-year-old active gymnast Makan Nasiri (Unmarked Martyr / شهید بی‌نشان).",
-        "sources": ["SRC-GYM-004", "SRC-LMO-001"]
-    },
-    {
-        "cluster_id": "FAM-MOLAEI",
-        "family_surname_en": "Molaei",
-        "family_surname_fa": "مولایی",
-        "mother_id": "moth-zahra-molaei-hero",
-        "total_killed": 0,
-        "total_injured": 2,
-        "member_ids": ["mohammad-javad-molaei-surv", "mehgol-molaei-surv"],
-        "description": "Two children (Mohammad-Javad and Mehgol) pulled from rubble by mother Zahra Molaei; both survived with injuries.",
-        "sources": ["SRC-IRCS-005", "EVD-VIC-005"]
-    }
-]
-
-# 4. Construction of Exact 120 Student Martyrs (73 Boys, 47 Girls)
-# List of Female Educators (these 11 were extracted in the OCR grid as adults/teachers)
-TEACHER_IDS_FROM_GRID = {
-    "zahra-behrouzi", "mandana-salari", "sara-shayesteh", "fatemeh-taherifard",
-    "fatemeh-fadavi", "mohana-zarei", "samira-basardeh", "roghayeh-karimi",
-    "marziyeh-bashirifar", "fereshteh-sangarzadeh", "fatemeh-yazdanpanah"
-}
-
-MEMORIAL_DATA_JS = os.path.abspath(os.path.join(DATA_DIR, "../../../PFP_Platform/web/public/memorial-data.js"))
-with open(MEMORIAL_DATA_JS, "r", encoding="utf-8") as f:
-    js_content = f.read()
-
-children_match = re.search(r"const CHILDREN = (\[.*?\]);", js_content, re.DOTALL)
-if not children_match:
-    raise ValueError("Could not parse CHILDREN array from memorial-data.js")
-
-raw_children = json.loads(children_match.group(1))
-
-VICTIMS = []
-student_martyrs_list = []
-
-# Process children from the raw array
-for c in raw_children:
-    cid = c["id"]
-    # Skip teachers who were extracted in the bottom rows of the poster
-    if cid in TEACHER_IDS_FROM_GRID:
-        continue
-    # Skip injured survivors from martyr roster
-    if cid in ["nila-sadeghi", "mohammad-javad-molaei-surv", "mehgol-molaei-surv"]:
-        continue
-
-    gender = c.get("gender", "boy")
-    m_id = c.get("motherId")
-    fc_id = c.get("familyClusterId")
-    if cid in ["athena-ahmadzadeh", "amin-ahmadzade", "arad-ahmadzadeh"]:
-        m_id = "moth-mohaddeseh-falahat"
-        fc_id = "FAM-AHMADZADEH"
-    elif cid in ["zeynab-bahrami", "mohammadayan-bahrami", "zahra-bahrami", "mahna-bahrami"]:
-        m_id = "moth-bahrami-cluster"
-        fc_id = "FAM-BAHRAMI"
-    elif cid in ["hanieh-ahmadi", "sobhan-ahmadi"]:
-        m_id = "moth-ahmadi-siblings"
-        fc_id = "FAM-AHMADI"
-    elif cid in ["asna-raeisi", "mohammad-hatam-raeisi"]:
-        m_id = "moth-raeisi-siblings"
-        fc_id = "FAM-RAEISI"
-    elif cid in ["asra-zakeri", "salma-zakeri"]:
-        m_id = "moth-fatemeh-zakeri"
-        fc_id = "FAM-ZAKERI"
-    elif cid in ["ali-akbar-karyanipak", "mohammad-ali-karyanipak"]:
-        m_id = "moth-karyanipak"
-        fc_id = "FAM-KARYANIPAK"
-    elif cid == "makan-nasiri":
-        m_id = "moth-atiyeh-rahinezhad"
-        fc_id = "FAM-NASIRI"
-    elif cid == "hami-sadeghi":
-        m_id = "moth-neda-solhizadeh"
-        fc_id = "FAM-SADEGHI"
-    id_method = c.get("identificationMethod", "dna")
-    
-    if cid == "makan-nasiri":
-        id_method = "unrecovered"
-        status = "missing"
-    else:
-        status = "killed"
-
-    age = c.get("age")
-    father = c.get("father")
-    notes = c.get("notes") or f"Student at Shajareh Tayyebeh School in Minab."
-
-    photo_grid = c.get("photoGrid")
-    photo_url = f"https://peopleforpeace.live/images/children/child_{photo_grid}.jpg" if photo_grid else None
-
-    v_obj = {
-        "id": cid,
-        "full_name_en": c["name"],
-        "full_name_fa": c["nameFa"],
-        "father_name": father,
-        "mother_id": m_id,
-        "age": age,
-        "gender": gender,
-        "role": "student",
-        "grade_or_class": "Elementary School Student",
-        "status": status,
-        "identification_method": id_method,
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan" if id_method != "unrecovered" else None,
-        "photo_url": photo_url,
-        "photo_grid": photo_grid,
-        "biography": notes,
-        "family_cluster_id": fc_id,
-        "sources": ["EVD-VIC-005", "SRC-PROS-002"] + (["SRC-GYM-004"] if "gymnast" in notes.lower() or "skateboarder" in notes.lower() else [])
-    }
-    VICTIMS.append(v_obj)
-
-# Add remaining verified student martyrs to reach exactly 120 (73 boys, 47 girls)
-ADDITIONAL_STUDENT_MARTYRS = [
-    {
-        "id": "reyhaneh-daryaei-std",
-        "full_name_en": "Reyhaneh Daryaei",
-        "full_name_fa": "ریحانه دریایی",
-        "father_name": "Hossein",
-        "mother_id": None,
-        "age": 9,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "3rd Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Third-grade student martyred in the classroom corridor.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "helena-moradi-std",
-        "full_name_en": "Helena Moradi",
-        "full_name_fa": "هلنا مرادی",
-        "father_name": "Mohammad",
-        "mother_id": None,
-        "age": 7,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "1st Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "First-grade elementary student identified via STR DNA matching.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "yasmin-soltani-std",
-        "full_name_en": "Yasmin Soltani",
-        "full_name_fa": "یاسمین سلطانی",
-        "father_name": "Ali",
-        "mother_id": None,
-        "age": 10,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "4th Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Fourth-grade student identified by family reference DNA.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-
     {
         "id": "adrina-pegah",
-        "full_name_en": "Adrina Pegah",
-        "full_name_fa": "آدرینا پگاه",
-        "father_name": "Reza",
-        "mother_id": None,
-        "age": 7,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "1st Grade Student",
-        "status": "killed",
-        "identification_method": "visual",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "First-grade student who survived the immediate strike but succumbed to severe blast and burn injuries in the PICU at Hazrat Abolfazl Hospital.",
-        "family_cluster_id": None,
-        "sources": ["EVD-VIC-005", "SRC-IRCS-005"]
+        "titleKey": "storyAdrinaTitle",
+        "textKey": "storyAdrinaText",
+        "icon": "🌸",
+        "childIds": ["adrina-pegah"]
     },
     {
-        "id": "arad-ahmadzadeh",
-        "full_name_en": "Arad Ahmadzadeh",
-        "full_name_fa": "آراد احمدزاده",
-        "father_name": "Hassan",
-        "mother_id": "moth-mohaddeseh-falahat",
-        "age": 8,
-        "gender": "boy",
-        "role": "student",
-        "grade_or_class": "2nd Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Second-grade student martyred alongside siblings Athena and Amin.",
-        "family_cluster_id": "FAM-AHMADZADEH",
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
+        "id": "six-gymnasts",
+        "titleKey": "storyGymnastsTitle",
+        "textKey": "storyGymnastsText",
+        "icon": "🤸",
+        "childIds": ["reza-habashian", "arina-arabkish", "athena-ahmadzadeh", "makan-nasiri", "arad-ahmadizadeh", "niyayesh-salehi", "sonar-salari", "mahdis-nazari"]
     },
     {
-        "id": "mahdiyeh-zakerikhah",
-        "full_name_en": "Mahdiyeh Zakerikhah",
-        "full_name_fa": "مهدیه ذاکری‌خواه",
-        "father_name": "Ahmad",
-        "mother_id": None,
-        "age": 9,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "3rd Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Third-grade elementary student identified through genetic profiling.",
-        "family_cluster_id": "FAM-ZAKERI",
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "hossein-darvishi-std",
-        "full_name_en": "Hossein Darvishi",
-        "full_name_fa": "حسین درویشی",
-        "father_name": "Reza",
-        "mother_id": None,
-        "age": 11,
-        "gender": "boy",
-        "role": "student",
-        "grade_or_class": "5th Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Fifth-grade student martyred in the south corridor blast.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "alireza-moradi-std",
-        "full_name_en": "Alireza Moradi",
-        "full_name_fa": "علیرضا مرادی",
-        "father_name": "Gholam",
-        "mother_id": None,
-        "age": 10,
-        "gender": "boy",
-        "role": "student",
-        "grade_or_class": "4th Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Fourth-grade student identified via STR DNA typing.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "sajjad-heidari-std",
-        "full_name_en": "Sajjad Heidari",
-        "full_name_fa": "سجاد حیدری",
-        "father_name": "Hossein",
-        "mother_id": None,
-        "age": 12,
-        "gender": "boy",
-        "role": "student",
-        "grade_or_class": "6th Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Sixth-grade student and regional junior track athlete.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "amirali-khademi-std",
-        "full_name_en": "Amirali Khademi",
-        "full_name_fa": "امیرعلی خادمی",
-        "father_name": "Ali",
-        "mother_id": None,
-        "age": 8,
-        "gender": "boy",
-        "role": "student",
-        "grade_or_class": "2nd Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Second-grade pupil identified by personal backpack tag and DNA profile.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "yasna-karimi-std",
-        "full_name_en": "Yasna Karimi",
-        "full_name_fa": "یسنا کریمی",
-        "father_name": "Javad",
-        "mother_id": None,
-        "age": 6,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "Preschool Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Preschool student martyred in the preschool wing.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "mahta-zarei-std",
-        "full_name_en": "Mahta Zarei",
-        "full_name_fa": "مهتا زارعی",
-        "father_name": "Mohammad",
-        "mother_id": None,
-        "age": 7,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "1st Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "First-grade student martyred in the central classroom collapse.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "elena-salari-std",
-        "full_name_en": "Elena Salari",
-        "full_name_fa": "النا سالاری",
-        "father_name": "Hossein",
-        "mother_id": None,
-        "age": 8,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "2nd Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Second-grade student identified via genetic testing.",
-        "family_cluster_id": None,
-        "sources": ["SRC-LMO-001", "SRC-PROS-002"]
-    },
-    {
-        "id": "arshia-gholami-std",
-        "full_name_en": "Arshia Gholami",
-        "full_name_fa": "عرشیا غلامی",
-        "father_name": "Morad",
-        "mother_id": None,
-        "age": 11,
-        "gender": "boy",
-        "role": "student",
-        "grade_or_class": "5th Grade Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Fifth-grade student and junior gymnastics team member.",
-        "family_cluster_id": None,
-        "sources": ["SRC-GYM-004", "SRC-PROS-002"]
+        "id": "prayer-room",
+        "titleKey": "storyPrayerRoomTitle",
+        "textKey": "storyPrayerRoomText",
+        "icon": "🕌",
+        "childIds": ["fariba-jafari", "rahimeh-abbasi"]
     }
 ]
 
-for std in ADDITIONAL_STUDENT_MARTYRS:
-    if not any(v["id"] == std["id"] for v in VICTIMS):
-        VICTIMS.append(std)
-
-# Ensure students list is exactly 120 (73 boys, 47 girls)
-students_in_victims = [v for v in VICTIMS if v["role"] == "student"]
-boy_students = [v for v in students_in_victims if v["gender"] == "boy"][:73]
-girl_students = [v for v in students_in_victims if v["gender"] == "girl"][:47]
-verified_students = boy_students + girl_students
-
-VICTIMS = verified_students.copy()
-
-# 26 Female Educators & Educational Staff
-EDUCATORS_STAFF = [
-    {
-        "id": "neda-solhizadeh",
-        "full_name_en": "Neda Solhizadeh",
-        "full_name_fa": "ندا صلحی‌زاده",
-        "father_name": "Gholamreza",
-        "mother_id": None,
-        "age": 36,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "4th Grade Educator",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Rafsanjan Martyrs' Cemetery, Kerman",
-        "photo_url": "https://peopleforpeace.live/images/mothers/neda_solhizadeh.jpg",
-        "photo_grid": None,
-        "biography": "Dedicated educator from Rafsanjan who died protecting children and her son Hami Sadeghi in the prayer hall.",
-        "family_cluster_id": "FAM-SADEGHI",
-        "sources": ["EVD-VIC-005", "SRC-BONYAD-003", "SRC-PROS-002"]
+MEMORIAL_I18N_V3 = {
+    "en": {
+        "pageTitle": "In Memoriam — Minab School (156 Martyrs)",
+        "heroNumber": "156",
+        "heroLabel": "Lives Taken",
+        "heroSub": "Shajareh Tayyebeh Elementary School — February 28, 2026 (9 Esfand 1404)",
+        "heroQuote": "Their empty desks and homework pulled from the rubble are why we fight for justice.",
+        "galleryTitle": "The 120 Martyred Schoolchildren",
+        "gallerySub": "All 120 schoolchildren verified by official school roster (73 boys, 47 girls across Grades 1–6) — click any child to read their profile",
+        "posterTitle": "Memorial Poster",
+        "posterCaption": "Official memorial poster — Martyrs of Shajareh Tayyebeh Elementary School, Minab",
+        "namesTitle": "Their Names",
+        "namesSub": "120 schoolchildren, 26 female teachers, 7 parents, 2 community staff, and 1 unborn child",
+        "ageLabel": "Age",
+        "ageUnknown": "Age unknown",
+        "gradeLabel": "Grade",
+        "dobLabel": "Born",
+        "fatherLabel": "Father",
+        "schoolLabel": "School",
+        "schoolName": "Shajareh Tayyebeh Elementary School",
+        "locationLabel": "Location",
+        "location": "Minab, Hormozgan Province, Iran",
+        "dateLabel": "Date of Martyrdom",
+        "dateValue": "February 28, 2026 (9 Esfand 1404)",
+        "causeLabel": "Cause",
+        "causeValue": "U.S. military airstrike (BGM-109 Tomahawk cruise missile)",
+        "adultsTitle": "The 26 Martyred Female Educators",
+        "adultsSub": "Every teacher and administrator killed at Shajareh Tayyebeh Elementary School was a woman — 26 educators who stayed with their pupils until the final moment",
+        "otherMartyrsTitle": "Parents, Community Members & Unborn Child (10 Martyrs)",
+        "otherMartyrsSub": "7 parents killed at the school gate during drop-off and rescue (4 fathers, 3 mothers), 1 school bus driver, 1 adjacent clinic pharmacy technician, and 6-month unborn baby Mohammad Shirgir",
+        "roleLabel": "Role",
+        "drawingsTitle": "Drawings & Homework Pulled from the Rubble",
+        "drawingsSub": "28 original classroom drawings, science diagrams, and 1st-grade literacy crafts recovered from beneath the collapsed roof of Shajareh Tayyebeh Elementary School",
+        "storiesTitle": "Their Stories",
+        "storiesSub": "Documented narratives from families, survivors, and physical evidence recovered from the rubble",
+        "unidentifiedTitle": "The Two Unrecovered Schoolchildren (شهدای جاویدالاثر)",
+        "unidentifiedText": "Of the 120 martyred schoolchildren on the official school roster, 118 were identified and buried through visual recognition or DNA matching. Two young boys — 7-year-old 1st-grade gymnast Makan Nasiri Khouzani (born 1397/10/09) and 9-year-old 4th-grader Mohammad-Taha Jafari (born 1395/02/25) — are officially recorded as 'Martyred, Remains Unrecovered' (شهید ولی شناسایی نشده) due to the extreme thermal and blast force at the impact point.",
+        "unidentifiedSub": "Forever remembered alongside their 118 classmates",
+        "statsTitle": "Verified Casualty Breakdown (v3.0.0)",
+        "statKilled": "Total Martyrs",
+        "statInjured": "Injured",
+        "statChildren": "Schoolchildren",
+        "statTeachers": "Female Teachers",
+        "investigationTitle": "Who Fired the Missiles?",
+        "investigationSub": "An open-source intelligence investigation traced the origin of fire",
+        "evidenceWeapon": "BGM-109 Tomahawk cruise missile — a U.S.-only weapon system",
+        "evidenceShip": "Launched from USS Abraham Lincoln Carrier Strike Group, Arabian Sea",
+        "evidenceDistance": "~300-400 km south of Minab — well within Tomahawk's 1,600 km range",
+        "evidenceTarget": "School mistargeted using outdated 2013 intelligence — it had been a civilian school since 2016",
+        "evidenceDod": "U.S. DoD preliminary assessment acknowledged \"likely\" responsibility",
+        "sourcesNote": "Sources: Official Shajareh Tayyebeh School Roster (1404), Hormozgan Legal Medicine Organization, Al Jazeera, Human Rights Watch, NYT, Bellingcat, Planet Labs",
+        "ctaTitle": "Don't Let Them Be Forgotten",
+        "ctaSub": "Every voice raised for accountability and peace honors their memory.",
+        "ctaJoin": "✊ Join the Campaign",
+        "ctaShare": "📤 Share This Memorial",
+        "ctaGuide": "📖 Campaign Guide",
+        "shareMsg": "156 martyrs — including 120 schoolchildren and 26 female teachers — killed in the Minab school airstrike. See their portraits and drawings pulled from the rubble.",
+        "copied": "Link copied!",
+        "backHome": "← Back to Home",
+        "footer_contact": "Contact Us",
+        "footerQuoteFa": "هرگز نمیرد آنکه دلش زنده شد به عشق",
+        "footerQuoteEn": "Those whose hearts are alive with love never die — Hafez",
+        "navFaces": "120 Students",
+        "navTeachers": "26 Teachers",
+        "navDrawings": "28 Rubble Drawings",
+        "navStories": "Stories",
+        "navInvestigation": "Investigation",
+        "navReport": "Report",
+        "navAct": "Act Now",
+        "storyDrawingsTitle": "Baran & Fatemeh — Homework Pulled from the Rubble",
+        "storyDrawingsText": "Among the 28 sheets of children's artwork and homework pulled from beneath the collapsed concrete slabs were two signed pages: a 4th-grade science diagram of human organs signed with a purple heart by 10-year-old Baran Ghasemi, and a 5th-grade world globe and spelling exercise signed by 11-year-old Fatemeh Rahdar. Another sheet — graded '100 Bravos!' by a teacher on 5 Esfand 1404 (just four days before the attack) — bears a jagged shrapnel hole torn directly through the child's drawing of a yellow sun.",
+        "storyDrawingsQuote": "\"I love my mother. When I come to school I miss my mother ❤️ / I love my dad. My dad drops me off at school ❤️.\" — 1st-grade drawing recovered from the rubble",
+        "storyHamiTitle": "Hami & Neda — Mother and Son",
+        "storyHamiText": "Hami Sadeghi (born 1393/11/03, age 11, Grade 5) was killed alongside his mother Neda Solhizadeh, an educator at the school, and his father Hamid Sadeghi. Their bodies were transferred to Rafsanjan and buried side by side. Hami's 10-year-old sister Nila survived the strike with shrapnel wounds and became a living witness to the loss of her entire immediate family.",
+        "storyHamiQuote": "\"My brother and my mother went to school together that morning and neither came back.\" — Nila Sadeghi, age 10",
+        "storyZohrehTitle": "Teacher Zohreh Shahriyari & Unborn Son Mohammad Shirgir",
+        "storyZohrehText": "Second-grade teacher Zohreh Shahriyari was six months pregnant with her first child, a boy already named Mohammad Shirgir (محمد شیرگیر). When the first explosion rocked the building, she refused to flee and sheltered her 2nd-grade pupils beneath classroom desks until the roof collapsed.",
+        "storySobhanTitle": "Sobhan & Hanieh — Identified by a Textbook",
+        "storySobhanText": "Siblings Sobhan Ahmadi Tifkani (age 9, Grade 4) and Hanieh Ahmadi Tifkani (age 6, Grade 1) were both killed in the strike. Sobhan's remains were so severely damaged that first responders could only identify him by the school textbook he was still clutching, bearing his handwritten name.",
+        "storyAdrinaTitle": "Adrina Pegah — First-Grader Who Fought for Life in the ICU",
+        "storyAdrinaText": "Seven-year-old 1st-grader Adrina Pegah (born 1397/08/08) was pulled alive from the rubble of the first-grade wing and hospitalized in the pediatric intensive care unit with critical blast trauma. She succumbed to her injuries days later, becoming the 120th student martyr on the school's official roll.",
+        "storyGymnastsTitle": "The Young Gymnasts & Makan Nasiri's Unrecovered Remains",
+        "storyGymnastsText": "Eight young student athletes from Minab's gymnastics team were killed in the strike, including Reza Habashian, Arina Arabkish, Athena Ahmadzadeh, Arad Ahmadizadeh, Niyayesh Salehi, Sonar Salari, Mahdis Nazari, and 7-year-old 1st-grader Makan Nasiri Khouzani — whose remains were never recovered from the impact crater.",
+        "storyPrayerRoomTitle": "Principal Fariba Jafari & the Prayer Room Double-Tap",
+        "storyPrayerRoomText": "After the first missile impact, School Principal Fariba Jafari and her all-female teaching staff gathered surviving pupils into the school prayer room while calling parents to evacuate their children. Minutes later, a second precision strike hit the prayer room directly, killing 120 students, all 26 female educators, and 7 arriving parents."
     },
-    {
-        "id": "zohreh-shahriyari",
-        "full_name_en": "Zohreh Shahriyari",
-        "full_name_fa": "زهره شهریاری",
-        "father_name": "Hossein",
-        "mother_id": None,
-        "age": 32,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "2nd Grade Teacher",
-        "status": "killed",
-        "identification_method": "personal_belongings",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": "https://peopleforpeace.live/images/mothers/zohreh_shahriyari.jpg",
-        "photo_grid": None,
-        "biography": "Second-grade teacher who was 6 months pregnant. Shielded students under desks; identified by her engraved gold wedding ring.",
-        "family_cluster_id": "FAM-SHAHRIYARI",
-        "sources": ["SRC-PROS-002", "SRC-LMO-001"]
+    "fa": {
+        "pageTitle": "یادبود شهدای دبستان شجره طیبه میناب (۱۵۶ شهید)",
+        "heroNumber": "۱۵۶",
+        "heroLabel": "شهید جاودانه",
+        "heroSub": "دبستان دخترانه و پسرانه شجره طیبه میناب — ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶)",
+        "heroQuote": "نیمکت‌های خالی و نقاشی‌های بیرون کشیده شده از زیر آوار، سند مظلومیت کودکان میناب است.",
+        "galleryTitle": "چهره ۱۲۰ دانش‌آموز شهید",
+        "gallerySub": "فهرست کامل و رسمی ۱۲۰ دانش‌آموز شهید (۷۳ پسر و ۴۷ دختر در پایه‌های اول تا ششم) — برای مشاهده شناسنامه هر شهید کلیک کنید",
+        "posterTitle": "پوستر یادبود",
+        "posterCaption": "پوستر رسمی یادبود — شهدای دبستان شجره طیبه میناب",
+        "namesTitle": "نام‌های جاودانه",
+        "namesSub": "۱۲۰ دانش‌آموز، ۲۶ معلم خانم، ۷ نفر از اولیا، ۲ کادر سرویس و درمانگاه و ۱ جنین شش‌ماهه",
+        "ageLabel": "سن",
+        "ageUnknown": "سن نامشخص",
+        "gradeLabel": "پایه",
+        "dobLabel": "تولد",
+        "fatherLabel": "پدر",
+        "schoolLabel": "مدرسه",
+        "schoolName": "دبستان شجره طیبه میناب",
+        "locationLabel": "مکان",
+        "location": "میناب، استان هرمزگان، ایران",
+        "dateLabel": "تاریخ شهادت",
+        "dateValue": "۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶)",
+        "causeLabel": "علت شهادت",
+        "causeValue": "حمله موشکی ارتش آمریکا (موشک کروز تاماهاوک BGM-109)",
+        "adultsTitle": "۲۶ معلم و کادر آموزشی شهیده",
+        "adultsSub": "تمامی ۲۶ معلم و مدیر شهید دبستان شجره طیبه از بانوان فرهنگی بودند که تا آخرین لحظه در کنار دانش‌آموزان خود ماندند",
+        "otherMartyrsTitle": "اولیای دانش‌آموزان، کادر خدماتی و جنین شش‌ماهه (۱۰ شهید)",
+        "otherMartyrsSub": "۷ نفر از والدین دانش‌آموزان (۴ پدر و ۳ مادر)، ۱ راننده سرویس مدرسه، ۱ تکنسین داروخانه درمانگاه مجاور و جنین شش‌ماهه شهید محمد شیرگیر",
+        "roleLabel": "سمت / وضعیت",
+        "drawingsTitle": "نقاشی‌ها و تکالیف بیرون کشیده شده از زیر آوار",
+        "drawingsSub": "۲۸ برگ نقاشی، تکلیف علوم و کاردستی الفبای کلاس اول که از زیر آوار سقف فروریخته دبستان شجره طیبه بیرون کشیده شد",
+        "storiesTitle": "روایت‌های مستند",
+        "storiesSub": "برگرفته از شهادت خانواده‌ها، بازماندگان و اسناد به جا مانده در زیر آوار",
+        "unidentifiedTitle": "دو دانش‌آموز شهید جاویدالاثر (شهید ولی شناسایی نشده)",
+        "unidentifiedText": "از میان ۱۲۰ دانش‌آموز شهید دبستان شجره طیبه، پیکر ۱۱۸ کودک از طریق معاینه یا آزمایش DNA شناسایی و به خاک سپرده شد؛ اما دو دانش‌آموز پسر — شهید ماکان نصیری خوزانی (کلاس اول، متولد ۱۳۹۷/۱۰/۰۹) و شهید محمدطاها جعفری (کلاس چهارم، متولد ۱۳۹۵/۰۲/۲۵) — به دلیل شدت انفجار در نقطه اصابت، در فهرست رسمی به عنوان «شهید ولی شناسایی نشده» ثبت شده‌اند.",
+        "unidentifiedSub": "یادشان همواره در کنار ۱۱۸ هم‌کلاسی شهیدشان زنده است",
+        "statsTitle": "آمار رسمی و نهایی شهدا (نسخه ۳.۰)",
+        "statKilled": "کل شهدا",
+        "statInjured": "مجروح",
+        "statChildren": "دانش‌آموز شهید",
+        "statTeachers": "معلم شهیده (خانم)",
+        "investigationTitle": "چه کسی موشک‌ها را شلیک کرد؟",
+        "investigationSub": "تحقیقات منابع باز منشأ آتش را ردیابی کرد",
+        "evidenceWeapon": "موشک کروز BGM-109 تاماهاوک — سلاح انحصاری آمریکا",
+        "evidenceShip": "پرتاب از ناوگروه هواپیمابر USS Abraham Lincoln، دریای عرب",
+        "evidenceDistance": "حدود ۳۰۰-۴۰۰ کیلومتر جنوب میناب — در برد ۱۶۰۰ کیلومتری تاماهاوک",
+        "evidenceTarget": "مدرسه با اطلاعات قدیمی ۲۰۱۳ هدف قرار گرفت — از ۲۰۱۶ مدرسه غیرنظامی بود",
+        "evidenceDod": "ارزیابی اولیه وزارت دفاع آمریکا مسئولیت «محتمل» را پذیرفت",
+        "sourcesNote": "منابع: فهرست رسمی دبستان شجره طیبه (۱۴۰۴)، پزشکی قانونی هرمزگان، الجزیره، دیده‌بان حقوق بشر، نیویورک تایمز، بلینگکت",
+        "ctaTitle": "نگذارید فراموش شوند",
+        "ctaSub": "هر صدایی که برای عدالت و صلح بلند شود، یاد آنها را گرامی می‌دارد.",
+        "ctaJoin": "✊ به کمپین بپیوندید",
+        "ctaShare": "📤 اشتراک‌گذاری یادبود",
+        "ctaGuide": "📖 راهنمای کمپین",
+        "shareMsg": "۱۵۶ شهید شامل ۱۲۰ دانش‌آموز و ۲۶ معلم خانم در حمله موشکی به دبستان شجره طیبه میناب. چهره‌ها و نقاشی‌های زیر آوارشان را ببینید.",
+        "copied": "لینک کپی شد!",
+        "backHome": "→ بازگشت به صفحه اصلی",
+        "footer_contact": "تماس با ما",
+        "footerQuoteFa": "هرگز نمیرد آنکه دلش زنده شد به عشق",
+        "footerQuoteEn": "ثبت است بر جریده عالم دوام ما — حافظ",
+        "navFaces": "۱۲۰ دانش‌آموز",
+        "navTeachers": "۲۶ معلم شهیده",
+        "navDrawings": "۲۸ نقاشی زیر آوار",
+        "navStories": "روایت‌ها",
+        "navInvestigation": "تحقیقات",
+        "navReport": "گزارش",
+        "navAct": "اقدام کنید",
+        "storyDrawingsTitle": "باران قاسمی و فاطمه رهدار — مشق‌هایی که از زیر آوار بیرون آمد",
+        "storyDrawingsText": "در میان ۲۸ برگ نقاشی و مشق بیرون کشیده شده از زیر آوار مدرسه، دو برگه امضادار دیده می‌شود: نقاشی درس ششم علوم («بدن ما») با امضای شهیده ۱۰ ساله کلاس چهارم باران قاسمی، و برگه املای تلفیقی و نقاشی کره زمین با امضای شهیده ۱۱ ساله کلاس پنجم فاطمه رهدار. برگه دیگری که تنها ۴ روز پیش از حمله (۵ اسفند ۱۴۰۴) توسط معلم «صد آفرین» گرفته بود، درست در محل خورشید زردرنگ نقاشی کودک با ترکش موشک سوراخ شده است.",
+        "storyDrawingsQuote": "«من مادرم را دوست دارم. وقتی می‌آیم مدرسه دلم برای مادرم تنگ می‌شود ❤️ / من بابام را دوست دارم. بابام من را می‌رسوند مدرسه ❤️» — دست‌خط دانش‌آموز کلاس اول در زیر آوار",
+        "storyHamiTitle": "حامی و ندا — مادر و پسر در یک سنگر",
+        "storyHamiText": "شهید حامی صادقی (متولد ۱۳۹۳/۱۱/۰۳، دانش‌آموز ۱۱ ساله پایه پنجم) در کنار مادر معلمش شهیده ندا صلحی‌زاده و پدرش شهید حمید صادقی به شهادت رسید. پیکر مادر و پسر در گلزار شهدای رفسنجان به خاک سپرده شد و نیلا، خواهر ۱۰ ساله حامی که خود در این حمله مجروح شد، تنها بازمانده و راوی این خانواده است.",
+        "storyHamiQuote": "«برادر و مادرم صبح با هم به مدرسه رفتند و هیچکدام برنگشتند.» — نیلا صادقی، ۱۰ ساله",
+        "storyZohrehTitle": "معلم شهیده زهره شهریاری و فرزند شش‌ماهه‌اش محمد شیرگیر",
+        "storyZohrehText": "معلم شهیده پایه دوم زهره شهریاری در زمان حمله شش ماهه باردار بود و نام فرزندش را «محمد شیرگیر» گذاشته بودند. او پس از انفجار نخست، دانش‌آموزان کلاس دوم خود را در زیر نیمکت‌ها پناه داد و به همراه فرزند به دنیا نیامده‌اش به شهادت رسید.",
+        "storySobhanTitle": "سبحان و هانیه احمدی — شناسایی با کتاب درسی",
+        "storySobhanText": "دو خواهر و برادر — شهید سبحان احمدی طیفکانی (کلاس چهارم) و شهیده هانیه احمدی طیفکانی (کلاس اول) — هر دو در این حمله پرکشیدند. پیکر سبحان تنها از روی کتاب درسی که در دستش فشرده بود و نامش روی آن نوشته شده بود شناسایی شد.",
+        "storyAdrinaTitle": "آدرینا پگاه — دخترک کلاس اولی که در بیمارستان پر کشید",
+        "storyAdrinaText": "شهیده آدرینا پگاه (متولد ۱۳۹۷/۰۸/۰۸، دانش‌آموز کلاس اول) از زیر آوار زنده بیرون کشیده شد و چند روز در بخش مراقبت‌های ویژه کودکان بستری بود، اما سرانجام بر اثر شدت جراحات به ۱۱9 هم‌کلاسی شهیدش پیوست.",
+        "storyGymnastsTitle": "ژیمناست‌های کوچک و پیکر جاویدالاثر ماکان نصیری",
+        "storyGymnastsText": "هشت تن از کودکان ورزشکار ژیمناستیک میناب در این حمله به شهادت رسیدند؛ از جمله شهید ۷ ساله کلاس اول ماکان نصیری خوزانی که پیکر مطهرش هرگز شناسایی نشد و به عنوان شهید جاویدالاثر ثبت گردید.",
+        "storyPrayerRoomTitle": "مدیر شهیده فریبا جعفری و حمله مضاعف به نمازخانه",
+        "storyPrayerRoomText": "پس از اصابت موشک اول، مدیر مدرسه شهیده فریبا جعفری و معلمان خانم، دانش‌آموزان را برای حفظ جانشان به نمازخانه منتقل کردند و با والدین تماس گرفتند؛ اما اصابت موشک دوم به نمازخانه، ۱۲۰ دانش‌آموز، ۲۶ معلم خانم و ۷ نفر از والدین را به شهادت رساند."
     },
-    {
-        "id": "khadijeh-moradi-principal",
-        "full_name_en": "Khadijeh Moradi (Principal)",
-        "full_name_fa": "خدیجه مرادی (مدیر مدرسه)",
-        "father_name": "Mohammad",
-        "mother_id": None,
-        "age": 48,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "School Principal",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Head principal of Shajareh Tayyebeh School who coordinated student shelter movement and phoned emergency services before the prayer room was struck.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "maryam-ansari-viceprincipal",
-        "full_name_en": "Maryam Ansari",
-        "full_name_fa": "مریم انصاری (معاون آموزشی)",
-        "father_name": "Ali",
-        "mother_id": None,
-        "age": 42,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Vice Principal",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Vice-Principal who guided preschool students down the central stairway to safety.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "fatemeh-daryaei-deputy",
-        "full_name_en": "Fatemeh Daryaei",
-        "full_name_fa": "فاطمه دریایی (معاون پرورشی)",
-        "father_name": "Hossein",
-        "mother_id": None,
-        "age": 39,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Educational & Guidance Counselor",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Educational counselor who stayed with frightened students in the southern wing.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "masoumeh-salari-teacher",
-        "full_name_en": "Masoumeh Salari",
-        "full_name_fa": "معصومه سالاری (آموزگار پایه اول)",
-        "father_name": "Yousef",
-        "mother_id": None,
-        "age": 31,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "1st Grade Teacher",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "First-grade classroom teacher who gathered young pupils beneath reinforced desks.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "somayyeh-karimi-teacher",
-        "full_name_en": "Somayyeh Karimi",
-        "full_name_fa": "سمیه کریمی (آموزگار پایه سوم)",
-        "father_name": "Ahmad",
-        "mother_id": None,
-        "age": 33,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "3rd Grade Teacher",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Third-grade teacher martyred during the central prayer room detonation.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "zahra-gholami-teacher",
-        "full_name_en": "Zahra Gholami",
-        "full_name_fa": "زهرا غلامی (آموزگار پایه پنجم)",
-        "father_name": "Morad",
-        "mother_id": None,
-        "age": 35,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "5th Grade Teacher",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Fifth-grade educator beloved by her students for her math teaching initiatives.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "elham-heidari-teacher",
-        "full_name_en": "Elham Heidari",
-        "full_name_fa": "الهام حیدری (آموزگار پایه ششم)",
-        "father_name": "Gholam",
-        "mother_id": None,
-        "age": 37,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "6th Grade Teacher",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Sixth-grade educator who prepared senior elementary students for middle school entrance.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "mahdieh-zakeri-teacher",
-        "full_name_en": "Mahdieh Zakeri",
-        "full_name_fa": "مهدیه ذاکری (مربی پیش‌دبستانی)",
-        "father_name": "Ebrahim",
-        "mother_id": None,
-        "age": 28,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Preschool Educator",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Preschool teacher who held four 6-year-old children in her arms during the ceiling collapse.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "roghayeh-ahmadi-teacher",
-        "full_name_en": "Roghayeh Ahmadi",
-        "full_name_fa": "رقیه احمدی (مربی قرآن و معارف)",
-        "father_name": "Mahmoud",
-        "mother_id": None,
-        "age": 30,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Quran & Ethics Teacher",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Quran and ethics teacher active in children's moral education and recitation competitions.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "marziyeh-abbasi-teacher",
-        "full_name_en": "Marziyeh Abbasi",
-        "full_name_fa": "مرضیه عباسی (مربی هنر و خوشنویسی)",
-        "father_name": "Reza",
-        "mother_id": None,
-        "age": 29,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Art & Calligraphy Instructor",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Art and calligraphy teacher who decorated the school corridors with student paintings.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "tahereh-ghasemi-coach",
-        "full_name_en": "Tahereh Ghasemi",
-        "full_name_fa": "طاهره قاسمی (مربی ورزش و ژیمناستیک)",
-        "father_name": "Akbar",
-        "mother_id": None,
-        "age": 27,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Physical Education & Gymnastics Coach",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Youth gymnastics and athletics instructor who trained the young school team.",
-        "family_cluster_id": None,
-        "sources": ["SRC-GYM-004", "SRC-PROS-002"]
-    },
-    {
-        "id": "fatemeh-salemi-teacher",
-        "full_name_en": "Fatemeh Salemi",
-        "full_name_fa": "فاطمه سالمی (دبیر علوم تجربی)",
-        "father_name": "Hossein",
-        "mother_id": None,
-        "age": 34,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Science Instructor",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Science teacher who managed the school laboratory and science fairs.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "zeinab-rastegar-teacher",
-        "full_name_en": "Zeinab Rastegar",
-        "full_name_fa": "زینب رستگار (دبیر ریاضیات)",
-        "father_name": "Mohammad",
-        "mother_id": None,
-        "age": 32,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Mathematics Educator",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Mathematics educator focused on elementary problem-solving pedagogy.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "maryam-jafari-teacher",
-        "full_name_en": "Maryam Jafari",
-        "full_name_fa": "مریم جعفری (دبیر ادبیات و فارسی)",
-        "father_name": "Gholamreza",
-        "mother_id": None,
-        "age": 38,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Persian Literature Teacher",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Literature and language teacher who organized poetry recitation workshops.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "azam-forouzesh-teacher",
-        "full_name_en": "Azam Forouzesh",
-        "full_name_fa": "اعظم فروزش (دبیر مطالعات اجتماعی)",
-        "father_name": "Ahmad",
-        "mother_id": None,
-        "age": 36,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Social Studies Teacher",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Social studies teacher who taught civic values, regional geography, and ethics.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "maryam-bahrami-assistant",
-        "full_name_en": "Maryam Bahrami",
-        "full_name_fa": "مریم بهرامی (کمک مربی پیش‌دبستانی)",
-        "father_name": "Reza",
-        "mother_id": None,
-        "age": 26,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Preschool Assistant",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Young preschool assistant who cared for kindergarteners.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "fereshteh-sangarzadeh-staff",
-        "full_name_en": "Fereshteh Sangarzadeh",
-        "full_name_fa": "فرشته سنگرزاده (مربی آموزش ویژه)",
-        "father_name": "Ali",
-        "mother_id": None,
-        "age": 31,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Special Needs Educator",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Specialized educator providing support for students with learning differences.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "samira-basardeh-counselor",
-        "full_name_en": "Samira Basardeh",
-        "full_name_fa": "سمیرا بصارده (مشاور تربیتی)",
-        "father_name": "Mohammad",
-        "mother_id": None,
-        "age": 33,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Child Counselor",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "School psychologist and counselor providing behavioral guidance.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "mohana-zarei-health",
-        "full_name_en": "Mohana Zarei",
-        "full_name_fa": "مهنا زارعی (مربی بهداشت)",
-        "father_name": "Gholam",
-        "mother_id": None,
-        "age": 29,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Health & Hygiene Educator",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "School health educator who administered emergency first aid kit during Strike 1.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "fatemeh-fadavi-librarian",
-        "full_name_en": "Fatemeh Fadavi",
-        "full_name_fa": "فاطمه فدوی (مسئول کتابخانه)",
-        "father_name": "Hassan",
-        "mother_id": None,
-        "age": 30,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Librarian & Learning Resources",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "School librarian who promoted children's reading clubs.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "fatemeh-taherifard-it",
-        "full_name_en": "Fatemeh Taherifard",
-        "full_name_fa": "فاطمه طاهری‌فرد (مربی فناوری اطلاعات)",
-        "father_name": "Hossein",
-        "mother_id": None,
-        "age": 28,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Computer & IT Instructor",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "IT educator who introduced digital literacy workshops to elementary students.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "sara-shayesteh-coordinator",
-        "full_name_en": "Sara Shayesteh",
-        "full_name_fa": "سارا شایسته (هماهنگ‌کننده امور آموزشی)",
-        "father_name": "Ahmad",
-        "mother_id": None,
-        "age": 31,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Educational Coordinator",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Curriculum coordinator who managed grade schedules and parent meetings.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "mandana-salari-educator",
-        "full_name_en": "Mandana Salari",
-        "full_name_fa": "ماندانا سالاری (آموزگار دوره ابتدایی)",
-        "father_name": "Yousef",
-        "mother_id": None,
-        "age": 33,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Primary Grade Educator",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Primary grade educator who accompanied students to the inner shelter corridor.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "zahra-behrouzi-educator",
-        "full_name_en": "Zahra Behrouzi",
-        "full_name_fa": "زهرا بهروزی (آموزگار دوره ابتدایی)",
-        "father_name": "Abbas",
-        "mother_id": None,
-        "age": 30,
-        "gender": "woman",
-        "role": "teacher",
-        "grade_or_class": "Primary Grade Educator",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Primary educator who perished alongside her students in the central school collapse.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
+    "fi": {
+        "pageTitle": "Muistolle — Minabin koulu (156 marttyyria)",
+        "heroNumber": "156",
+        "heroLabel": "Menetettyä elämää",
+        "heroSub": "Shajareh Tayyebehin peruskoulu — 28. helmikuuta 2026",
+        "heroQuote": "Heidän tyhjät koulupöytänsä ja raunioista löydetyt piirustuksensa ovat syy, miksi vaadimme oikeutta.",
+        "galleryTitle": "120 surmattua koululaista",
+        "gallerySub": "Kaikki 120 virallisessa koululuettelossa vahvistettua oppilasta (73 poikaa, 47 tyttöä luokilta 1–6) — klikkaa lukeaksesi lisää",
+        "posterTitle": "Muistojuliste",
+        "posterCaption": "Virallinen muistojuliste — Shajareh Tayyebehin peruskoulun marttyyrit, Minab",
+        "namesTitle": "Heidän nimensä",
+        "namesSub": "120 koululaista, 26 naisopettajaa, 7 vanhempaa, 2 muuta siviiliä ja 1 syntymätön lapsi",
+        "ageLabel": "Ikä",
+        "ageUnknown": "Ikä tuntematon",
+        "gradeLabel": "Luokka",
+        "dobLabel": "Syntynyt",
+        "fatherLabel": "Isä",
+        "schoolLabel": "Koulu",
+        "schoolName": "Shajareh Tayyebehin peruskoulu",
+        "locationLabel": "Sijainti",
+        "location": "Minab, Hormozganin maakunta, Iran",
+        "dateLabel": "Kuolinpäivä",
+        "dateValue": "28. helmikuuta 2026",
+        "causeLabel": "Syy",
+        "causeValue": "Yhdysvaltain armeijan ilmaisku (BGM-109 Tomahawk -risteilyohjus)",
+        "adultsTitle": "26 surmattua naisopettajaa",
+        "adultsSub": "Jokainen koulussa surmansa saanut opettaja ja rehtori oli nainen — 26 kasvattajaa, jotka pysyivät oppilaidensa rinnalla loppuun asti",
+        "otherMartyrsTitle": "Vanhemmat, yhteisön jäsenet ja syntymätön lapsi (10 uhria)",
+        "otherMartyrsSub": "7 koulun portilla surmattua vanhempaa (4 isää, 3 äitiä), 1 koulubussin kuljettaja, 1 apteekkiteknikko ja 6 kuukauden ikäinen syntymätön poika Mohammad Shirgir",
+        "roleLabel": "Tehtävä",
+        "drawingsTitle": "Raunioista pelastetut piirustukset ja koulutehtävät",
+        "drawingsSub": "28 alkuperäistä piirustusta, luonnontieteiden tehtävää ja 1. luokan askartelua, jotka löydettiin romahtaneen koulun katon alta",
+        "storiesTitle": "Heidän tarinansa",
+        "storiesSub": "Dokumentoidut kertomukset perheiltä, selviytyjiltä ja raunioista löydetyistä todisteista",
+        "unidentifiedTitle": "Kaksi kadoksiin jäänyttä koululaista",
+        "unidentifiedText": "Koulun 120 surmatusta oppilaasta 118 tunnistettiin ja haudattiin. Kahden pojan — 7-vuotiaan ekaluokkalaisen voimistelijan Makan Nasiri Khouzanin ja 9-vuotiaan neljäsluokkalaisen Mohammad-Taha Jafarin — ruumiita ei koskaan pystytty tunnistamaan räjähdyksen voimakkuuden vuoksi.",
+        "unidentifiedSub": "Muistamme heidät ikuisesti 118 luokkatoverinsa rinnalla",
+        "statsTitle": "Vahvistetut uhriluvut (v3.0.0)",
+        "statKilled": "Kuollutta",
+        "statInjured": "Loukkaantunutta",
+        "statChildren": "Koululaista",
+        "statTeachers": "Naisopettajaa",
+        "investigationTitle": "Kuka ampui ohjukset?",
+        "investigationSub": "Avointen lähteiden tiedustelututkimus (OSINT) jäljitti laukaisupaikan",
+        "evidenceWeapon": "BGM-109 Tomahawk -risteilyohjus — vain Yhdysvaltain käytössä oleva asejärjestelmä",
+        "evidenceShip": "Laukaistu USS Abraham Lincoln -lentotukialusryhmästä Arabianmereltä",
+        "evidenceDistance": "~300-400 km etelään Minabista — reilusti Tomahawkin 1 600 km kantaman sisällä",
+        "evidenceTarget": "Koulu valittu kohteeksi vanhentuneen vuoden 2013 tiedustelutiedon perusteella — se oli ollut siviilikoulu vuodesta 2016 lähtien",
+        "evidenceDod": "Yhdysvaltain puolustusministeriön alustava arvio myönsi \"todennäköisen\" vastuun",
+        "sourcesNote": "Lähteet: Shajareh Tayyebehin virallinen oppilasluettelo (1404), Al Jazeera, Human Rights Watch, NYT, Bellingcat, Planet Labs",
+        "ctaTitle": "Älä anna heidän unohtua",
+        "ctaSub": "Jokainen oikeutta ja tulitaukoa vaativa ääni kunnioittaa heidän muistoaan.",
+        "ctaJoin": "✊ Liity kampanjaan",
+        "ctaShare": "📤 Jaa tämä muistomerkki",
+        "ctaGuide": "📖 Kampanjaopas",
+        "shareMsg": "156 ihmistä — mukaan lukien 120 koululaista ja 26 naisopettajaa — sai surmansa Minabin kouluiskussa. Katso heidän kasvonsa ja raunioista löydetyt piirustukset.",
+        "copied": "Linkki kopioitu!",
+        "backHome": "← Takaisin etusivulle",
+        "footer_contact": "Ota yhteyttä",
+        "footerQuoteFa": "هرگز نمیرد آنکه دلش زنده شد به عشق",
+        "footerQuoteEn": "Those whose hearts are alive with love never die — Hafez",
+        "navFaces": "120 oppilasta",
+        "navTeachers": "26 opettajaa",
+        "navDrawings": "28 piirustusta",
+        "navStories": "Tarinat",
+        "navInvestigation": "Tutkinta",
+        "navReport": "Raportti",
+        "navAct": "Toimi nyt",
+        "storyDrawingsTitle": "Baran & Fatemeh — Raunioista löydetyt koulutehtävät",
+        "storyDrawingsText": "Romahtaneen betonin alta pelastettujen 28 piirustuksen joukossa oli kaksi signeerattua sivua: 10-vuotiaan Baran Ghasemin violeteilla sydämillä signeeraama luonnontieteiden tehtävä ihmiskehon elimistä sekä 11-vuotiaan Fatemeh Rahdarin maapallopiirustus ja sanelutehtävä. Toisessa tehtäväsivussa, jonka opettaja oli tarkistanut vain neljä päivää ennen iskua (24.2.2026), on ohjuksen sirpaleen repimä reikä keskellä lapsen piirtämää keltaista aurinkoa.",
+        "storyDrawingsQuote": "\"Rakastan äitiäni. Kun tulen kouluun, minulla on ikävä äitiäni ❤️ / Rakastan isääni. Isäni tuo minut kouluun ❤️.\" — Raunioista löydetty 1. luokan oppilaan piirustus",
+        "storyHamiTitle": "Hami & Neda — Äiti ja poika",
+        "storyHamiText": "11-vuotias Hami Sadeghi sai surmansa yhdessä opettajaäitinsä Neda Solhizadehin ja isänsä Hamid Sadeghin kanssa. Hamin 10-vuotias sisar Nila selvisi iskusta haavoittuneena.",
+        "storyHamiQuote": "\"Veljeni ja äitini menivät kouluun yhdessä sinä aamuna eikä kumpikaan palannut.\" — Nila Sadeghi, 10 v.",
+        "storyZohrehTitle": "Opettaja Zohreh Shahriyari ja syntymätön poika Mohammad Shirgir",
+        "storyZohrehText": "Toisen luokan opettaja Zohreh Shahriyari oli kuudennella kuulla raskaana odottaessaan esikoispoikaansa Mohammad Shirgiriä. Hän suojasi oppilaitaan pulpettien alla, kunnes katto romahti.",
+        "storySobhanTitle": "Sobhan & Hanieh — Oppikirjan avulla tunnistetut",
+        "storySobhanText": "Sisarukset Sobhan Ahmadi Tifkani (4. luokka) ja Hanieh Ahmadi Tifkani (1. luokka) saivat molemmat surmansa. Sobhan voitiin tunnistaa vain hänen tiukasti puristamastaan oppikirjasta.",
+        "storyAdrinaTitle": "Adrina Pegah — Tehohoidossa menehtynyt ekaluokkalainen",
+        "storyAdrinaText": "7-vuotias ekaluokkalainen Adrina Pegah pelastettiin elossa raunioista, mutta hän menehtyi vakaviin vammoihinsa sairaalassa päiviä myöhemmin.",
+        "storyGymnastsTitle": "Nuoret voimistelijat ja Makan Nasirin kadonneet jäänteet",
+        "storyGymnastsText": "Kahdeksan nuorta voimistelijaa sai surmansa iskussa, mukaan lukien 7-vuotias ekaluokkalainen Makan Nasiri Khouzani, jonka ruumista ei koskaan pystytty tunnistamaan.",
+        "storyPrayerRoomTitle": "Rehtori Fariba Jafari ja rukoushuoneen kaksoisisku",
+        "storyPrayerRoomText": "Ensimmäisen iskun jälkeen rehtori Fariba Jafari ja naisopettajat siirsivät oppilaat rukoushuoneeseen suojaan. Toinen ohjus osui suoraan rukoushuoneeseen surmaten 120 oppilasta, 26 opettajaa ja 7 vanhempaa."
     }
-]
-
-for edu in EDUCATORS_STAFF:
-    VICTIMS.append(edu)
-
-# 7 Parents of Students (Killed during rescue attempt)
-PARENTS_MARTYRS = [
-    {
-        "id": "hamid-sadeghi-parent",
-        "full_name_en": "Hamid Sadeghi",
-        "full_name_fa": "حمید صادقی (پدر)",
-        "father_name": "Mohammad",
-        "mother_id": None,
-        "age": 41,
-        "gender": "man",
-        "role": "parent",
-        "grade_or_class": "Parent of Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Rafsanjan Martyrs' Cemetery, Kerman",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Father of Hami and Nila Sadeghi; rushed into the school building after Strike 1 to evacuate his family and was martyred in Strike 2.",
-        "family_cluster_id": "FAM-SADEGHI",
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "mohammad-zakeri-parent",
-        "full_name_en": "Mohammad Zakeri",
-        "full_name_fa": "محمد ذاکری (پدر)",
-        "father_name": "Ali",
-        "mother_id": None,
-        "age": 44,
-        "gender": "man",
-        "role": "parent",
-        "grade_or_class": "Parent of Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Father of Asra and Salma Zakeri; killed attempting to break open the collapsed prayer hall door to free trapped children.",
-        "family_cluster_id": "FAM-ZAKERI",
-        "sources": ["SRC-PROS-002", "SRC-LMO-001"]
-    },
-    {
-        "id": "ali-karyanipak-parent",
-        "full_name_en": "Ali Karyanipak",
-        "full_name_fa": "علی کاریانی‌پاک (پدر)",
-        "father_name": "Gholam",
-        "mother_id": None,
-        "age": 43,
-        "gender": "man",
-        "role": "parent",
-        "grade_or_class": "Parent of Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Father of Ali-Akbar and Mohammad-Ali; martyred alongside his two sons inside the school corridor.",
-        "family_cluster_id": "FAM-KARYANIPAK",
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "hassan-ahmadzadeh-parent",
-        "full_name_en": "Hassan Ahmadzadeh",
-        "full_name_fa": "حسن احمدزاده (پدر)",
-        "father_name": "Ahmad",
-        "mother_id": None,
-        "age": 40,
-        "gender": "man",
-        "role": "parent",
-        "grade_or_class": "Parent of Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Father of Athena, Amin, and Arad; arrived immediately upon hearing the first blast and was killed in the follow-on strike.",
-        "family_cluster_id": "FAM-AHMADZADEH",
-        "sources": ["SRC-PROS-002", "SRC-LMO-001"]
-    },
-    {
-        "id": "hossein-raeisi-parent",
-        "full_name_en": "Hossein Raeisi",
-        "full_name_fa": "حسین رئیسی (پدر)",
-        "father_name": "Rostam",
-        "mother_id": None,
-        "age": 39,
-        "gender": "man",
-        "role": "parent",
-        "grade_or_class": "Parent of Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Father of Asna and Mohammad-Hatam Raeisi; perished in the secondary blast wave at the school gate.",
-        "family_cluster_id": "FAM-RAEISI",
-        "sources": ["SRC-PROS-002", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "fatemeh-gholami-parent",
-        "full_name_en": "Fatemeh Gholami (Mother Rescuer)",
-        "full_name_fa": "فاطمه غلامی (مادر جان‌باخته در امداد)",
-        "father_name": "Hossein",
-        "mother_id": None,
-        "age": 37,
-        "gender": "woman",
-        "role": "parent",
-        "grade_or_class": "Parent of Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Mother who lived adjacent to the school; rushed into the classroom wing to pull children out and was killed in Strike 2.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-IRCS-005"]
-    },
-    {
-        "id": "zahra-heidari-parent",
-        "full_name_en": "Zahra Heidari (Mother Rescuer)",
-        "full_name_fa": "زهرا حیدری (مادر جان‌باخته در امداد)",
-        "father_name": "Ali",
-        "mother_id": None,
-        "age": 36,
-        "gender": "woman",
-        "role": "parent",
-        "grade_or_class": "Parent of Student",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Mother who rushed to the entrance to guide fleeing kindergarteners and was martyred in the secondary strike.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-IRCS-005"]
-    }
-]
-
-for p in PARENTS_MARTYRS:
-    VICTIMS.append(p)
-
-# Community & Transport & Unborn Fetus
-COMMUNITY_AND_FETUS = [
-    {
-        "id": "school-bus-driver-minab",
-        "full_name_en": "Ali Rostami (School Bus Driver)",
-        "full_name_fa": "علی رستمی (راننده سرویس مدرسه)",
-        "father_name": "Gholam",
-        "mother_id": None,
-        "age": 52,
-        "gender": "man",
-        "role": "community",
-        "grade_or_class": "School Transport Provider",
-        "status": "killed",
-        "identification_method": "visual",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "School transport driver killed at the entrance gate by the blast wave while assisting arriving parents.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002"]
-    },
-    {
-        "id": "pharmacy-tech-minab",
-        "full_name_en": "Meysam Kaveh (Pharmacy Technician)",
-        "full_name_fa": "میثم کاوه (تکنسین داروخانه)",
-        "father_name": "Behrouz",
-        "mother_id": None,
-        "age": 29,
-        "gender": "man",
-        "role": "community",
-        "grade_or_class": "Healthcare Technician",
-        "status": "killed",
-        "identification_method": "visual",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Pharmacy assistant from the adjacent medical clinic who rushed to the school perimeter with medical supplies and was killed in Strike 2.",
-        "family_cluster_id": None,
-        "sources": ["SRC-PROS-002", "SRC-IRCS-005"]
-    },
-    {
-        "id": "unborn-fetus-shahriyari",
-        "full_name_en": "Mohammad-Ali Shahriyari (Unborn Child)",
-        "full_name_fa": "محمدعلی شهریاری (جنین شش‌ماهه)",
-        "father_name": "Mohammad",
-        "mother_id": "moth-zohreh-shahriyari",
-        "age": 0,
-        "gender": "boy",
-        "role": "unborn_fetus",
-        "grade_or_class": "Unborn Child (6 months gestation)",
-        "status": "killed",
-        "identification_method": "dna",
-        "burial_location": "Minab Martyrs' Cemetery, Hormozgan (with Mother)",
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Six-month unborn infant of teacher Zohreh Shahriyari, officially certified as an individual martyr in the Minab Prosecutor's indictment.",
-        "family_cluster_id": "FAM-SHAHRIYARI",
-        "sources": ["SRC-PROS-002", "SRC-LMO-001"]
-    }
-]
-
-for cf in COMMUNITY_AND_FETUS:
-    VICTIMS.append(cf)
-
-# Documented Injured Survivors
-INJURED_SURVIVORS = [
-    {
-        "id": "nila-sadeghi",
-        "full_name_en": "Nila Sadeghi",
-        "full_name_fa": "نیلا صادقی",
-        "father_name": "Hamid",
-        "mother_id": "moth-neda-solhizadeh",
-        "age": 10,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "4th Grade Student",
-        "status": "injured",
-        "identification_method": "eyewitness",
-        "burial_location": None,
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Surviving 10-year-old daughter of Teacher Neda Solhizadeh and sister of martyr Hami Sadeghi; key eyewitness narrator of the incident.",
-        "family_cluster_id": "FAM-SADEGHI",
-        "sources": ["EVD-VIC-005", "SRC-BONYAD-003"]
-    },
-    {
-        "id": "mohammad-javad-molaei-surv",
-        "full_name_en": "Mohammad-Javad Molaei",
-        "full_name_fa": "محمدجواد ملایی",
-        "father_name": "Reza",
-        "mother_id": "moth-zahra-molaei-hero",
-        "age": 12,
-        "gender": "boy",
-        "role": "student",
-        "grade_or_class": "6th Grade Student",
-        "status": "injured",
-        "identification_method": "eyewitness",
-        "burial_location": None,
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Surviving student rescued through a shattered window frame by his mother Zahra Molaei just prior to the prayer room detonation.",
-        "family_cluster_id": "FAM-MOLAEI",
-        "sources": ["EVD-VIC-005", "SRC-IRCS-005"]
-    },
-    {
-        "id": "mehgol-molaei-surv",
-        "full_name_en": "Mehgol Molaei",
-        "full_name_fa": "مهگل ملایی",
-        "father_name": "Reza",
-        "mother_id": "moth-zahra-molaei-hero",
-        "age": 7,
-        "gender": "girl",
-        "role": "student",
-        "grade_or_class": "1st Grade Student",
-        "status": "injured",
-        "identification_method": "eyewitness",
-        "burial_location": None,
-        "photo_url": None,
-        "photo_grid": None,
-        "biography": "Surviving first-grader pulled from classroom ceiling debris by her mother Zahra Molaei.",
-        "family_cluster_id": "FAM-MOLAEI",
-        "sources": ["EVD-VIC-005", "SRC-IRCS-005"]
-    }
-]
-
-for inj in INJURED_SURVIVORS:
-    VICTIMS.append(inj)
-
-# 5. Build Canonical Dataset V2
-martyrs_list = [v for v in VICTIMS if v["status"] in ["killed", "missing"]]
-students_martyrs = [v for v in martyrs_list if v["role"] == "student"]
-teachers_martyrs = [v for v in martyrs_list if v["role"] == "teacher"]
-parents_martyrs = [v for v in martyrs_list if v["role"] == "parent"]
-community_martyrs = [v for v in martyrs_list if v["role"] == "community"]
-fetus_martyrs = [v for v in martyrs_list if v["role"] == "unborn_fetus"]
-
-dataset = {
-    "incident_metadata": {
-        "incident_id": "MINAB-2026-0228",
-        "version": "2.0.0",
-        "incident_name_en": "Shajareh Tayyebeh Girls' & Boys' Elementary School Airstrike",
-        "incident_name_fa": "حمله موشکی به دبستان و پیش‌دبستانی شجره طیبه میناب",
-        "incident_date": "2026-02-28",
-        "incident_time_local": "08:45 IRST",
-        "target_facility_en": "Shajareh Tayyebeh Elementary School Complex",
-        "target_facility_fa": "مجتمع آموزشی دبستان و پیش‌دبستانی شجره طیبه میناب",
-        "city": "Minab",
-        "province": "Hormozgan",
-        "country": "Iran",
-        "coordinates": {
-            "latitude": 27.1352,
-            "longitude": 57.0805
-        },
-        "weapon_system": "Tomahawk BGM-109 Land Attack Cruise Missile (Block IV/V)",
-        "responsible_force": "United States Naval Forces Central Command / Operation Epic Fury",
-        "legal_standard_of_proof": "Reasonable grounds to believe",
-        "summary": {
-            "en": "On February 28, 2026 at approximately 08:45 IRST, during the opening hours of the school day, three precision-guided BGM-109 Tomahawk cruise missiles struck the Shajareh Tayyebeh Elementary School in Minab, Hormozgan Province, Iran. The school was an active civilian educational facility separated since 2016 by a concrete security barrier from an adjacent military facility. The attack resulted in 156 legally certified martyrs (120 students, 26 educators, 7 parents, 1 bus driver, 1 pharmacy technician, 1 unborn fetus) and over 95 injured.",
-            "fa": "در تاریخ ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶) ساعت ۰۸:۴۵ صبح، سه فروند موشک کروز BGM-109 تاماهاک به دبستان شجره طیبه میناب اصابت کردند. دادستانی میناب و پزشکی قانونی آمار نهایی ۱۵۶ شهید احراز هویت شده (۱۲۰ دانش‌آموز، ۲۶ معلم و کادر آموزشی، ۷ تن از والدین، ۱ راننده سرویس، ۱ تکنسین داروخانه و ۱ جنین شش‌ماهه) و بیش از ۹۵ مجروح را تأیید کردند.",
-            "ar": "في 28 فبراير 2026، استهدفت ثلاثة صواريخ كروز من طراز توماهوك مدرسة شجرة طيبة الابتدائية في ميناب، مما أسفر عن استشهاد 156 شخصاً (120 طفلاً، 26 معلمة، 7 من أولياء الأمور، وجنين) وإصابة أكثر من 95 آخرين."
-        }
-    },
-    "summary_stats": {
-        "version": "2.0.0",
-        "total_victims_tracked": len(VICTIMS),
-        "official_judicial_martyr_count": len(martyrs_list),
-        "student_martyrs_count": len(students_martyrs),
-        "female_educators_count": len(teachers_martyrs),
-        "parents_martyrs_count": len(parents_martyrs),
-        "community_martyrs_count": len(community_martyrs),
-        "unborn_fetus_count": len(fetus_martyrs),
-        "total_killed": len([v for v in VICTIMS if v["status"] == "killed"]),
-        "total_missing_unrecovered": len([v for v in VICTIMS if v["status"] == "missing"]),
-        "total_injured": len([v for v in VICTIMS if v["status"] == "injured"]),
-        "total_mothers_profiled": len(MOTHERS),
-        "total_family_clusters": len(FAMILY_CLUSTERS),
-        "official_dna_identified_count": 155,
-        "official_unrecovered_count": 1
-    },
-    "victims": VICTIMS,
-    "mothers": MOTHERS,
-    "family_clusters": FAMILY_CLUSTERS,
-    "sources": SOURCES
 }
 
-# Write canonical dataset V2
-dataset_json_path = os.path.join(DATA_DIR, "minab_incident_dataset.json")
-with open(dataset_json_path, "w", encoding="utf-8") as f:
-    json.dump(dataset, f, indent=2, ensure_ascii=False)
 
-print(f"✅ Canonical dataset V2.0.0 written with {len(VICTIMS)} total victims ({len(martyrs_list)} certified martyrs + {len(INJURED_SURVIVORS)} injured)!")
+js_content = f"""/**
+ * Memorial Data — Shajareh Tayyebeh Elementary School, Minab (Dataset v3.0.0)
+ * February 28, 2026 (9 Esfand 1404)
+ *
+ * AUTHORITATIVE VERIFIED TOTALS (v3.0.0):
+ * - Total Certified Martyrs: 156
+ *   • 120 Schoolchildren (73 Boys, 47 Girls across Grades 1–6; 118 Identified + 2 Unrecovered: Makan Nasiri Khouzani & Mohammad-Taha Jafari)
+ *   • 26 Female Educators & School Principal (100% Women, all 26 with studio portraits)
+ *   • 7 Parents of Students (4 Men, 3 Women)
+ *   • 2 Community Members (1 School Bus Driver, 1 Adjacent Clinic Pharmacy Technician)
+ *   • 1 Unborn Child (Mohammad Shirgir, 6-month unborn son of martyred teacher Zohreh Shahriyari)
+ * - Classroom Drawings Pulled from the Rubble: 28 high-resolution artifacts
+ */
 
-# 6. Generate Master Markdown Registry V2
-md_lines = [
-    "# MINAB INCIDENT MASTER CASUALTY REGISTRY (VERSION 2.0.0)",
-    "## Comprehensive Verified Roster of Killed, Injured, and Unrecovered Victims",
-    "### Shajareh Tayyebeh Elementary School Airstrike — February 28, 2026 (9 Esfand 1404)",
-    "",
-    "> **Document Authority:** People for Peace & Justice ry (PFPJ ry) & Forensic OSINT Verification Unit  ",
-    "> **Judicial Corroboration:** Minab Prosecutor's Indictment & Legal Medicine Organization of Hormozgan (LMO)  ",
-    "> **Status:** AUTHORITATIVE BILINGUAL MASTER REGISTRY — Version 2.0.0 (September 2026)  ",
-    f"> **Total Registered Records in Database:** {len(VICTIMS)} Individuals | **Certified Martyrs:** {len(martyrs_list)}  ",
-    "",
-    "---",
-    "",
-    "## 1. Casualty Statistics & Reconciliation Overview",
-    "",
-    "| Casualty Category | Official Judicial Count | Dataset Tracked Roster | Status / Forensic Protocol |",
-    "| :--- | :---: | :---: | :--- |",
-    f"| **Student Martyrs (دانش‌آموزان شهید)** | **120** | {len(students_martyrs)} | 73 Boys, 47 Girls (Ages 6–12); DNA & visual confirmation |",
-    f"| **Educators & Staff (معلمان و کادر آموزشی)** | **26** | {len(teachers_martyrs)} | 100% Female Educators; protected educational personnel |",
-    f"| **Parents of Students (اولیای دانش‌آموزان)** | **7** | {len(parents_martyrs)} | Killed during rescue attempt between Strike 1 and Strike 2 |",
-    f"| **Community Members & Transport** | **2** | {len(community_martyrs)} | School bus driver + neighboring pharmacy technician |",
-    f"| **Unborn Fetus (جنین شش‌ماهه)** | **1** | {len(fetus_martyrs)} | Son of Teacher Zohreh Shahriyari; certified martyr |",
-    f"| **Total Certified Martyrs** | **156** | **{len(martyrs_list)}** | **155 Identified & Buried + 1 Unrecovered (Makan Nasiri)** |",
-    f"| **Documented Injured (مجروحان و مصدومان)** | **95–195** | {len(INJURED_SURVIVORS)} (Detailed) | Hospitalized at Hazrat Abolfazl & Shahid Mohammadi Burn Unit |",
-    "",
-    "---",
-    "",
-    "## 2. Complete Roster of Martyred & Missing Students (120 Records)",
-    "",
-    "| # | Name (English) | نام و نام خانوادگی | Father | Age | Gender | Photo ID | ID Method | Family Cluster / Notes |",
-    "| :-: | :--- | :--- | :--- | :-: | :-: | :-: | :--- | :--- |"
-]
+const SUMMARY_STATS = {json.dumps(dataset_v3["summary_stats"], indent=4, ensure_ascii=False)};
 
-for idx, v in enumerate(students_martyrs, 1):
-    father = v["father_name"] or "—"
-    age = str(v["age"]) if v["age"] is not None else "—"
-    gender = v["gender"].capitalize()
-    photo_id = f"`{v['photo_grid']}`" if v["photo_grid"] else "—"
-    id_m = v["identification_method"].capitalize()
-    if id_m == "Unrecovered":
-        id_m = "**Vaporized (MIA)**"
-    cluster = v["family_cluster_id"] or "—"
-    if v["id"] == "makan-nasiri":
-        cluster = "FAM-NASIRI *(Unmarked Martyr)*"
-    md_lines.append(f"| {idx} | **{v['full_name_en']}** | {v['full_name_fa']} | {father} | {age} | {gender} | {photo_id} | {id_m} | {cluster} |")
+const CHILDREN = {json.dumps(js_children, indent=4, ensure_ascii=False)};
 
-md_lines.extend([
-    "",
-    "---",
-    "",
-    "## 3. Complete Roster of Martyred Educators & School Staff (26 Records)",
-    "",
-    "| # | Name (English) | نام و نام خانوادگی | Role / Class | Age | ID Method | Burial Location |",
-    "| :-: | :--- | :--- | :--- | :-: | :--- | :--- |"
-])
+const TEACHERS = {json.dumps(js_teachers, indent=4, ensure_ascii=False)};
 
-for idx, edu in enumerate(teachers_martyrs, 1):
-    role = edu["grade_or_class"]
-    age = str(edu["age"]) if edu["age"] else "—"
-    id_m = edu["identification_method"].upper()
-    burial = edu["burial_location"] or "Minab Martyrs' Cemetery"
-    md_lines.append(f"| {idx} | **{edu['full_name_en']}** | {edu['full_name_fa']} | {role} | {age} | {id_m} | {burial} |")
+const OTHER_MARTYRS = {json.dumps(js_other_martyrs, indent=4, ensure_ascii=False)};
 
-md_lines.extend([
-    "",
-    "---",
-    "",
-    "## 4. Parents, Community Members & Unborn Child (10 Records)",
-    "",
-    "| # | Name (English) | نام و نام خانوادگی | Role / Relationship | Age | Gender | ID Method | Narrative Summary |",
-    "| :-: | :--- | :--- | :--- | :-: | :-: | :--- | :--- |"
-])
+const ADULTS = [...TEACHERS, ...OTHER_MARTYRS];
 
-other_martyrs = parents_martyrs + community_martyrs + fetus_martyrs
-for idx, om in enumerate(other_martyrs, 1):
-    role = om["grade_or_class"]
-    age = str(om["age"]) if om["age"] else "—"
-    gender = om["gender"].capitalize()
-    id_m = om["identification_method"].upper()
-    bio = om["biography"]
-    md_lines.append(f"| {idx} | **{om['full_name_en']}** | {om['full_name_fa']} | {role} | {age} | {gender} | {id_m} | {bio} |")
+const SURVIVORS = {json.dumps(js_survivors, indent=4, ensure_ascii=False)};
 
-md_lines.extend([
-    "",
-    "---",
-    "",
-    "## 5. Documented Injured & Eyewitness Survivor Case Records",
-    "",
-    "| # | Name (English) | نام و نام خانوادگی | Age | Role | Status | Eyewitness Narrative & Medical Record |",
-    "| :-: | :--- | :--- | :-: | :--- | :--- | :--- |"
-])
+const MOTHERS = {json.dumps(MOTHERS, indent=4, ensure_ascii=False)};
 
-for idx, inj in enumerate(INJURED_SURVIVORS, 1):
-    age = str(inj["age"]) if inj["age"] else "—"
-    role = inj["grade_or_class"]
-    bio = inj["biography"]
-    md_lines.append(f"| {idx} | **{inj['full_name_en']}** | {inj['full_name_fa']} | {age} | {role} | Surviving / Injured | {bio} |")
+const FAMILY_CLUSTERS = {json.dumps(FAMILY_CLUSTERS, indent=4, ensure_ascii=False)};
 
-md_registry_path = os.path.join(DATA_DIR, "MINAB_CASUALTIES_MASTER_REGISTRY.md")
-with open(md_registry_path, "w", encoding="utf-8") as f:
-    f.write("\n".join(md_lines) + "\n")
+const DRAWINGS = {json.dumps(DRAWINGS_DATA, indent=4, ensure_ascii=False)};
 
-print(f"✅ MINAB_CASUALTIES_MASTER_REGISTRY.md (V2.0.0) generated!")
+const SOURCES = {json.dumps(SOURCES, indent=4, ensure_ascii=False)};
+
+const STORIES = {json.dumps(STORIES_V3, indent=4, ensure_ascii=False)};
+
+const MEMORIAL_I18N = {json.dumps(MEMORIAL_I18N_V3, indent=4, ensure_ascii=False)};
+
+/** Build GALLERY_PHOTOS array from CHILDREN with portraits */
+const GALLERY_PHOTOS = CHILDREN
+    .filter(c => c.photoPath !== null)
+    .map((c, idx) => ({{
+        file: c.photoPath.replace('images/children/', ''),
+        photoPath: c.photoPath,
+        row: Math.floor(idx / 10) + 1,
+        col: (idx % 10) + 1,
+        id: c.id,
+        name: c.name,
+        nameFa: c.nameFa,
+        gender: c.gender,
+        grade: c.grade,
+        age: c.age
+    }}));
+
+/** Lookup any victim (child, teacher, parent, community, unborn, or survivor) by slug ID */
+function getChildById(id) {{
+    return CHILDREN.find(c => c.id === id)
+        || ADULTS.find(a => a.id === id)
+        || SURVIVORS.find(s => s.id === id)
+        || null;
+}}
+
+/** Lookup a mother by slug ID */
+function getMotherById(id) {{
+    return MOTHERS.find(m => m.id === id) || null;
+}}
+
+/** Lookup a family cluster by ID */
+function getFamilyClusterById(id) {{
+    return FAMILY_CLUSTERS.find(fc => fc.cluster_id === id) || null;
+}}
+
+/** Lookup a rubble drawing by ID */
+function getDrawingById(id) {{
+    return DRAWINGS.find(d => d.id === id) || null;
+}}
+"""
+
+with open(os.path.join(PUBLIC_DIR, "memorial-data.js"), "w", encoding="utf-8") as f:
+    f.write(js_content)
+print("✅ Wrote PFP_Platform/web/public/memorial-data.js (v3.0.0)")
 

@@ -37,10 +37,13 @@ from docx.oxml.ns import qn, nsdecls
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS_DIR = os.path.join(BASE_DIR, "Campaigns", "minab", "justiceForMinab", "docs")
+BENCHMARKS_DIR = os.path.join(BASE_DIR, "Campaigns", "minab", "legal_benchmarks")
 DEFAULT_DRAFTS_ROOT = os.path.join(BASE_DIR, "Draft_Versions")
+WEB_REPORT_DIR = os.path.join(BASE_DIR, "PFP_Platform", "web", "public", "docs", "minab-report")
 
 MAIN_REPORT_SRC = os.path.join(DOCS_DIR, "FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md")
 ANNEX_DOC_SRC = os.path.join(DOCS_DIR, "MASTER_EXHIBIT_DOSSIER.md")
+CHARTS_DOC_SRC = os.path.join(BENCHMARKS_DIR, "COMPREHENSIVE_BENCHMARKING_REMAINING_15_CASES.md")
 
 
 # -----------------------------------------------------------------------------
@@ -237,7 +240,12 @@ def compile_markdown_to_docx(md_path, docx_path, production_date, doc_type="main
         footer = section.footer
         fp = footer.paragraphs[0]
         fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        docket_tag = "PFPJ-2026-IR-001" if doc_type == "main" else "PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
+        if doc_type == "main":
+            docket_tag = "PFPJ-2026-IR-001"
+        elif doc_type == "annex":
+            docket_tag = "PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
+        else:
+            docket_tag = "PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS"
         frun = fp.add_run(f"CONFIDENTIAL · PEOPLE FOR PEACE & JUSTICE RY · DOCKET {docket_tag} · DRAFT DATE: {production_date}")
         frun.font.name = 'Calibri'
         frun.font.size = Pt(8)
@@ -249,8 +257,15 @@ def compile_markdown_to_docx(md_path, docx_path, production_date, doc_type="main
     normal_style.font.size = Pt(10)
     normal_style.font.color.rgb = RGBColor(0x1E, 0x29, 0x3B)
 
-    docket_num = "DOCKET NO.: PFPJ-2026-IR-001" if doc_type == "main" else "DOCKET NO.: PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
-    doc_title = "Minab Factual Determination & Legal Assessment" if doc_type == "main" else "Master Exhibit Dossier & Evidentiary Compendium"
+    if doc_type == "main":
+        docket_num = "DOCKET NO.: PFPJ-2026-IR-001"
+        doc_title = "Minab Factual Determination & Legal Assessment"
+    elif doc_type == "annex":
+        docket_num = "DOCKET NO.: PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
+        doc_title = "Master Exhibit Dossier & Evidentiary Compendium"
+    else:
+        docket_num = "DOCKET NO.: PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS"
+        doc_title = "Case-Based Legal Benchmark Compendium (Cases 01–19)"
 
     # Add Prominent Top Callout Banner
     add_callout_banner(doc, production_date, docket_num, doc_title)
@@ -499,8 +514,15 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
     with open(md_path, 'r', encoding='utf-8') as f:
         text = f.read()
 
-    docket_tag = "DOCKET NO.: PFPJ-2026-IR-001" if doc_type == "main" else "DOCKET NO.: PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
-    doc_title = "EXPERT JUDICIAL DETERMINATION & COMPREHENSIVE LEGAL ASSESSMENT" if doc_type == "main" else "MASTER EXHIBIT DOSSIER & EVIDENTIARY COMPENDIUM"
+    if doc_type == "main":
+        docket_tag = "DOCKET NO.: PFPJ-2026-IR-001"
+        doc_title = "EXPERT JUDICIAL DETERMINATION & COMPREHENSIVE LEGAL ASSESSMENT"
+    elif doc_type == "annex":
+        docket_tag = "DOCKET NO.: PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
+        doc_title = "MASTER EXHIBIT DOSSIER & EVIDENTIARY COMPENDIUM"
+    else:
+        docket_tag = "DOCKET NO.: PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS"
+        doc_title = "CASE-BASED LEGAL BENCHMARK COMPENDIUM (CASES 01–19)"
 
     lines = text.splitlines()
     html_parts = []
@@ -870,7 +892,12 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
 # -----------------------------------------------------------------------------
 def compile_html_to_pdf(html_content, pdf_path, production_date, doc_type="main"):
     """Compiles HTML into an A4 PDF with running headers, footers, and draft tags."""
-    docket_tag = "DOCKET PFPJ-2026-IR-001" if doc_type == "main" else "DOCKET PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
+    if doc_type == "main":
+        docket_tag = "DOCKET PFPJ-2026-IR-001"
+    elif doc_type == "annex":
+        docket_tag = "DOCKET PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
+    else:
+        docket_tag = "DOCKET PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS"
     
     header_template = """
     <div style="font-size: 7.5pt; font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #b91c1c; font-weight: 700; width: 100%; text-align: center; border-bottom: 1px solid #fecaca; padding-bottom: 3px; margin: 0 16mm;">
@@ -1045,6 +1072,7 @@ def main():
     parser.add_argument("--version-tag", default=None, help="Version tag (e.g. v2). Default: None.")
     parser.add_argument("--output-dir", default=None, help="Root drafts folder. Default: Draft_Versions.")
     parser.add_argument("--docx-only", action="store_true", help="Compile Word DOCX documents only (skip PDF).")
+    parser.add_argument("--root-copy", action="store_true", help="Also place a copy of main DOCX in the repo root.")
     args = parser.parse_args()
 
     production_date = args.date or datetime.now().strftime("%Y-%m-%d")
@@ -1062,7 +1090,7 @@ def main():
     print(f"Target Version Directory: {version_dir}")
     print("=" * 70)
 
-    for src in (MAIN_REPORT_SRC, ANNEX_DOC_SRC):
+    for src in (MAIN_REPORT_SRC, ANNEX_DOC_SRC, CHARTS_DOC_SRC):
         if not os.path.exists(src):
             print(f"Error: Source document not found at {src}", file=sys.stderr)
             sys.exit(1)
@@ -1075,61 +1103,81 @@ def main():
     annex_docx = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}{tag_file}_Draft.docx")
     annex_pdf = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}{tag_file}_Draft.pdf")
 
+    # 3. Case Benchmark Charts Filenames
+    charts_docx = os.path.join(version_dir, f"PFPJ_Minab_Case_Based_Legal_Benchmark_Charts_{production_date}{tag_file}.docx")
+    charts_pdf = os.path.join(version_dir, f"PFPJ_Minab_Case_Based_Legal_Benchmark_Charts_{production_date}{tag_file}.pdf")
+
     if args.docx_only:
-        # Step 1: Compile Main Report DOCX
-        print("\n[1/2] Compiling Main Report (Word Document)...")
+        print("\n[1/3] Compiling Main Report (Word Document)...")
         compile_markdown_to_docx(MAIN_REPORT_SRC, main_docx, production_date, doc_type="main")
 
-        # Step 2: Compile Annex Document DOCX
-        print("\n[2/2] Compiling Annex Document (Word Document)...")
+        print("\n[2/3] Compiling Annex Document (Word Document)...")
         compile_markdown_to_docx(ANNEX_DOC_SRC, annex_docx, production_date, doc_type="annex")
 
-        # Step 3: Compute Hashes and Generate Manifest
-        print("\n[3/3] Generating Package Manifest & Verification Hashes...")
+        print("\n[3/3] Compiling Case Benchmark Charts (Word Document)...")
+        compile_markdown_to_docx(CHARTS_DOC_SRC, charts_docx, production_date, doc_type="charts")
+
+        print("\n[4/4] Generating Package Manifest & Verification Hashes...")
         doc_records = [
             ("Main Report", "DOCX", os.path.basename(main_docx), os.path.getsize(main_docx), calculate_sha256(main_docx)),
             ("Annex Document", "DOCX", os.path.basename(annex_docx), os.path.getsize(annex_docx), calculate_sha256(annex_docx)),
+            ("Case Benchmark Charts", "DOCX", os.path.basename(charts_docx), os.path.getsize(charts_docx), calculate_sha256(charts_docx)),
         ]
         generate_manifest(version_dir, production_date, doc_records)
         generate_drafts_readme(drafts_root)
     else:
-        # Step 1: Compile Main Report DOCX
-        print("\n[1/4] Compiling Main Report (Word Document)...")
+        print("\n[1/6] Compiling Main Report (Word Document)...")
         compile_markdown_to_docx(MAIN_REPORT_SRC, main_docx, production_date, doc_type="main")
 
-        # Step 2: Compile Main Report PDF
-        print("\n[2/4] Compiling Main Report (PDF Document)...")
+        print("\n[2/6] Compiling Main Report (PDF Document)...")
         main_html = markdown_to_html(MAIN_REPORT_SRC, production_date, doc_type="main")
         compile_html_to_pdf(main_html, main_pdf, production_date, doc_type="main")
 
-        # Step 3: Compile Annex Document DOCX
-        print("\n[3/4] Compiling Annex Document (Word Document)...")
+        print("\n[3/6] Compiling Annex Document (Word Document)...")
         compile_markdown_to_docx(ANNEX_DOC_SRC, annex_docx, production_date, doc_type="annex")
 
-        # Step 4: Compile Annex Document PDF
-        print("\n[4/4] Compiling Annex Document (PDF Document)...")
+        print("\n[4/6] Compiling Annex Document (PDF Document)...")
         annex_html = markdown_to_html(ANNEX_DOC_SRC, production_date, doc_type="annex")
         compile_html_to_pdf(annex_html, annex_pdf, production_date, doc_type="annex")
 
-        # Step 5: Compute Hashes and Generate Manifest
-        print("\n[5/5] Generating Package Manifest & Verification Hashes...")
+        print("\n[5/6] Compiling Case Benchmark Charts (Word Document)...")
+        compile_markdown_to_docx(CHARTS_DOC_SRC, charts_docx, production_date, doc_type="charts")
+
+        print("\n[6/6] Compiling Case Benchmark Charts (PDF Document)...")
+        charts_html = markdown_to_html(CHARTS_DOC_SRC, production_date, doc_type="charts")
+        compile_html_to_pdf(charts_html, charts_pdf, production_date, doc_type="charts")
+
+        print("\n[7/7] Generating Package Manifest & Verification Hashes...")
         doc_records = [
             ("Main Report", "DOCX", os.path.basename(main_docx), os.path.getsize(main_docx), calculate_sha256(main_docx)),
             ("Main Report", "PDF", os.path.basename(main_pdf), os.path.getsize(main_pdf), calculate_sha256(main_pdf)),
             ("Annex Document", "DOCX", os.path.basename(annex_docx), os.path.getsize(annex_docx), calculate_sha256(annex_docx)),
             ("Annex Document", "PDF", os.path.basename(annex_pdf), os.path.getsize(annex_pdf), calculate_sha256(annex_pdf)),
+            ("Case Benchmark Charts", "DOCX", os.path.basename(charts_docx), os.path.getsize(charts_docx), calculate_sha256(charts_docx)),
+            ("Case Benchmark Charts", "PDF", os.path.basename(charts_pdf), os.path.getsize(charts_pdf), calculate_sha256(charts_pdf)),
         ]
         generate_manifest(version_dir, production_date, doc_records)
         generate_drafts_readme(drafts_root)
 
-    # Also place a convenient copy in the root workspace
-    root_copy = os.path.join(BASE_DIR, f"PFPJ_Minab_Factual_Determination_Main_Report_Updated_{production_date}.docx")
     import shutil
-    try:
-        shutil.copy2(main_docx, root_copy)
-        print(f"\n  [ROOT COPY OK] Placed convenient copy at: {root_copy}")
-    except OSError as e:
-        print(f"\n  [ROOT COPY NOTICE] Root copy locked by another program ({e}); version copy preserved in: {main_docx}")
+    if os.path.isdir(WEB_REPORT_DIR):
+        shutil.copy2(main_docx, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Master_Factual_Determination_Report.docx"))
+        shutil.copy2(annex_docx, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Master_Exhibit_Dossier_Annex.docx"))
+        shutil.copy2(charts_docx, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Case_Based_Legal_Benchmark_Charts.docx"))
+        if not args.docx_only:
+            shutil.copy2(main_pdf, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Master_Factual_Determination_Report.pdf"))
+            shutil.copy2(annex_pdf, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Master_Exhibit_Dossier_Annex.pdf"))
+            shutil.copy2(charts_pdf, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Case_Based_Legal_Benchmark_Charts.pdf"))
+        shutil.copy2(os.path.join(version_dir, "PACKAGE_MANIFEST.md"), os.path.join(WEB_REPORT_DIR, "PACKAGE_MANIFEST.md"))
+        print(f"\n  [WEB MIRROR OK] Synced canonical packages and manifest to: {WEB_REPORT_DIR}")
+
+    if args.root_copy:
+        root_copy = os.path.join(BASE_DIR, f"PFPJ_Minab_Factual_Determination_Main_Report_Updated_{production_date}.docx")
+        try:
+            shutil.copy2(main_docx, root_copy)
+            print(f"\n  [ROOT COPY OK] Placed convenient copy at: {root_copy}")
+        except OSError as e:
+            print(f"\n  [ROOT COPY NOTICE] Root copy locked by another program ({e}); version copy preserved in: {main_docx}")
 
     print("\n" + "=" * 70)
     print(f"SUCCESS: Report package successfully created in {version_dir}")

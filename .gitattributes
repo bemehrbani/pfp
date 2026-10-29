@@ -1,0 +1,20 @@
+# Enforce LF line endings and UTF-8 working-tree encoding for text sources
+* text=auto eol=lf
+
+*.md   text working-tree-encoding=UTF-8 eol=lf
+*.html text working-tree-encoding=UTF-8 eol=lf
+*.py   text working-tree-encoding=UTF-8 eol=lf
+*.ps1  text working-tree-encoding=UTF-8 eol=lf
+*.sh   text working-tree-encoding=UTF-8 eol=lf
+*.json text working-tree-encoding=UTF-8 eol=lf
+*.yml  text working-tree-encoding=UTF-8 eol=lf
+*.yaml text working-tree-encoding=UTF-8 eol=lf
+
+# Binary assets
+*.pdf  binary
+*.docx binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.mp4  binary

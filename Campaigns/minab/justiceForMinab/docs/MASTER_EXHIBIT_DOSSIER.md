@@ -214,7 +214,7 @@
 | Evidentiary Metadata | Value / Specification |
 | :--- | :--- |
 | **Exhibit Identifier** | `EXH-MUN-002.2` [CERTIFIED ACTIVE] |
-| **Manufacturer CAGE Code** | `96214` (Raytheon Missile Systems, Tucson, Arizona, USA) |
+| **Manufacturer CAGE Code** | `05047` (Raytheon Missile Systems, Tucson, Arizona, USA) |
 | **Board Assembly Code** | `ASSY 16200-6523910-1 REV D` |
 | **Dedicated Weapon System** | BGM-109 Tomahawk Land Attack Cruise Missile (Block IV/V) |
 | **Subassembly Function** | Digital Scene Matching Area Correlation (DSMAC) Optical Processor Bus |
@@ -223,7 +223,7 @@
 
 #### Factual & Forensic Determinations:
 1. Fragment `EVD-MUN-002-A`: Fragment of a printed multi-layer circuit board exhibiting conformal coating and labeled: `ASSY 16200-6523910-1 REV D`.
-2. Commercial and Government Entity (CAGE) Code `96214` stamped on component chassis, identifying the manufacturer as **Raytheon Missile Systems** (Tucson, Arizona).
+2. Commercial and Government Entity (CAGE) Code `05047` stamped on component chassis, identifying the manufacturer as **Raytheon Missile Systems** (Tucson, Arizona).
 3. Part numbering and bus architecture correspond strictly to the Digital Scene Matching Area Correlation (DSMAC) and guidance processor housing of the **BGM-109 Block IV/V Tomahawk Land Attack Cruise Missile**.
 
 <a id="exh-mun-002-3"></a>

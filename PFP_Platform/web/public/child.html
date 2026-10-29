@@ -327,7 +327,7 @@
 
     <!-- Back Nav -->
     <div class="back-nav">
-        <a href="children.html" class="back-link" id="backLink">← All Children</a>
+        <a href="memorial.html" class="back-link" id="backLink">← All Martyrs</a>
     </div>
 
     <!-- Content (populated by JS) -->
@@ -419,7 +419,16 @@
         }
 
         function getChildById(id) {
-            return CHILDREN.find(c => c.id === id) || (typeof ADULTS !== 'undefined' ? ADULTS.find(a => a.id === id) : null);
+            return CHILDREN.find(c => c.id === id)
+                || (typeof ADULTS !== 'undefined' ? ADULTS.find(a => a.id === id) : null)
+                || (typeof SURVIVORS !== 'undefined' ? SURVIVORS.find(s => s.id === id) : null);
+        }
+
+        function getPhotoSrc(person) {
+            if (!person) return null;
+            if (person.photoPath) return person.photoPath;
+            if (person.photoGrid) return `images/children/child_${person.photoGrid}.jpg`;
+            return null;
         }
 
         function renderPage() {
@@ -428,6 +437,7 @@
 
             // Back link
             document.getElementById('backLink').textContent = t.backLink;
+            document.getElementById('backLink').href = 'memorial.html';
 
             const child = getChildById(childId);
 
@@ -436,7 +446,7 @@
                     <div class="not-found fade-in">
                         <h2>${t.notFoundTitle}</h2>
                         <p>${t.notFoundText}</p>
-                        <p style="margin-top:20px"><a href="children.html">${t.backLink}</a></p>
+                        <p style="margin-top:20px"><a href="memorial.html">${t.backLink}</a></p>
                     </div>
                     <footer class="memorial-footer" style="text-align:center; padding: 32px 0; border-top: 1px solid var(--border); margin-top: 40px;">
                         <div class="footer-quote-fa" style="margin-bottom:8px;">${t.footerFa}</div>
@@ -456,35 +466,48 @@
             // Update page title and meta
             const displayName = (currentLang === 'fa' && child.nameFa) ? child.nameFa : child.name;
             const childUrl = `https://peopleforpeace.live/child.html?id=${child.id}`;
-            const childDesc = `Remember ${child.name}. A child lost in the Minab School airstrike.`;
+            const roleSummary = child.role || 'Martyr of Shajareh Tayyebeh Elementary School';
+            const childDesc = `Remember ${child.name} (${roleSummary}). Lost in the Minab School airstrike on February 28, 2026.`;
             document.getElementById('pageTitle').textContent = `${child.name} — In Memoriam`;
             document.getElementById('ogTitle').content = `${child.name} — Minab School Memorial`;
             document.getElementById('ogDesc').content = childDesc;
             document.getElementById('ogUrl').content = childUrl;
             document.getElementById('twitterTitle').content = `${child.name} — Minab School Memorial`;
             document.getElementById('twitterDesc').content = childDesc;
-            // Set child photo as OG image if available
-            if (child.photoGrid) {
-                const [, pr, pc] = child.photoGrid.match(/r(\d+)_c(\d+)/);
-                const childPhotoUrl = `https://peopleforpeace.live/images/children/child_r${pr}_c${pc}.jpg`;
-                document.getElementById('ogImage').content = childPhotoUrl;
-                document.getElementById('twitterImage').content = childPhotoUrl;
+
+            const photoSrc = getPhotoSrc(child);
+            if (photoSrc) {
+                const absPhotoUrl = `https://peopleforpeace.live/${photoSrc}`;
+                document.getElementById('ogImage').content = absPhotoUrl;
+                document.getElementById('twitterImage').content = absPhotoUrl;
             }
 
             // Photo
             let photoHtml = '';
-            if (child.photoGrid) {
-                const [, r, c] = child.photoGrid.match(/r(\d+)_c(\d+)/);
-                const photoFile = `child_r${r}_c${c}.jpg`;
-                photoHtml = `<img src="images/children/${photoFile}" alt="${child.name}" />`;
+            if (photoSrc) {
+                photoHtml = `<img src="${photoSrc}" alt="${child.name}" />`;
             } else {
-                const emoji = child.gender === 'girl' ? '👧' : '👦';
+                const emoji = child.category === 'unborn_fetus' ? '🕊️' : (child.gender === 'girl' ? '🌸' : '🕯️');
                 photoHtml = `<div class="no-photo-placeholder">${emoji}</div>`;
             }
 
             // Bio rows
             const bioRows = [];
-            bioRows.push(`<div class="bio-row"><span class="bio-label">${t.ageLabel}</span><span class="bio-value">${child.age || t.ageUnknown}</span></div>`);
+            const roleLabelKey = currentLang === 'fa' ? 'سمت / پایه تحصیلی' : (currentLang === 'fi' ? 'Luokka / Tehtävä' : 'Grade / Role');
+            const roleVal = (currentLang === 'fa' && (child.gradeLabelFa || child.roleFa)) ? (child.gradeLabelFa || child.roleFa) : (child.gradeLabelEn || child.role || t.ageUnknown);
+            bioRows.push(`<div class="bio-row"><span class="bio-label">${roleLabelKey}</span><span class="bio-value" style="color:var(--gold);font-weight:600">${roleVal}</span></div>`);
+
+            if (child.age !== null && child.age !== undefined) {
+                const ageDisplay = child.age === 0 ? (currentLang === 'fa' ? 'جنین ۶ ماهه' : '6-Month Unborn Child') : `${child.age}`;
+                bioRows.push(`<div class="bio-row"><span class="bio-label">${t.ageLabel}</span><span class="bio-value">${ageDisplay}</span></div>`);
+            }
+            if (child.birthDateShamsi) {
+                const dobLabel = currentLang === 'fa' ? 'تاریخ تولد' : (currentLang === 'fi' ? 'Syntymäaika' : 'Date of Birth');
+                const dobVal = child.birthDateGregorian
+                    ? `${child.birthDateShamsi} (${child.birthDateGregorian})`
+                    : child.birthDateShamsi;
+                bioRows.push(`<div class="bio-row"><span class="bio-label">${dobLabel}</span><span class="bio-value">${dobVal}</span></div>`);
+            }
             if (child.father) {
                 bioRows.push(`<div class="bio-row"><span class="bio-label">${t.fatherLabel}</span><span class="bio-value">${child.father}</span></div>`);
             }
@@ -492,26 +515,68 @@
             bioRows.push(`<div class="bio-row"><span class="bio-label">${t.locationLabel}</span><span class="bio-value">${t.location}</span></div>`);
             bioRows.push(`<div class="bio-row"><span class="bio-label">${t.dateLabel}</span><span class="bio-value">${t.dateValue}</span></div>`);
             bioRows.push(`<div class="bio-row"><span class="bio-label">${t.causeLabel}</span><span class="bio-value">${t.causeValue}</span></div>`);
+
+            if (child.officialStatusFa || child.status) {
+                const stLabel = currentLang === 'fa' ? 'وضعیت رسمی' : 'Official Status';
+                const stVal = child.status === 'missing'
+                    ? (currentLang === 'fa' ? 'شهید ولی شناسایی نشده (جاویدالاثر)' : 'Martyred — Remains Unrecovered (شهید ولی شناسایی نشده)')
+                    : (currentLang === 'fa' ? 'شهید (احراز هویت شده)' : 'Certified Martyr (شهید)');
+                const stColor = child.status === 'missing' ? '#f87171' : '#34d399';
+                bioRows.push(`<div class="bio-row"><span class="bio-label">${stLabel}</span><span class="bio-value" style="color:${stColor};font-weight:600">${stVal}</span></div>`);
+            }
+            if (child.burialLocation) {
+                const burLabel = currentLang === 'fa' ? 'محل تدفین' : 'Burial Location';
+                bioRows.push(`<div class="bio-row"><span class="bio-label">${burLabel}</span><span class="bio-value">${child.burialLocation}</span></div>`);
+            }
             if (child.notes) {
-                bioRows.push(`<div class="bio-row"><span class="bio-label">Notes</span><span class="bio-value">${child.notes}</span></div>`);
+                const noteLabel = currentLang === 'fa' ? 'توضیحات مستند' : 'Documented Record';
+                bioRows.push(`<div class="bio-row" style="flex-direction:column;gap:6px"><span class="bio-label">${noteLabel}</span><span class="bio-value" style="text-align:left;line-height:1.65;color:var(--text2)">${child.notes}</span></div>`);
             }
-            if (child.motherName || child.motherNameFa) {
-                const mName = (currentLang === 'fa' && child.motherNameFa) ? child.motherNameFa : (child.motherName || child.motherNameFa);
-                const mLabel = currentLang === 'fa' ? 'مادر' : (currentLang === 'ar' ? 'الأم' : 'Mother');
-                bioRows.push(`<div class="bio-row"><span class="bio-label">${mLabel}</span><span class="bio-value"><a href="mothers.html" style="color:var(--rose);">${mName} ↗</a></span></div>`);
+            if (child.motherId && typeof getMotherById === 'function') {
+                const motherObj = getMotherById(child.motherId);
+                if (motherObj) {
+                    const mName = (currentLang === 'fa' && motherObj.full_name_fa) ? motherObj.full_name_fa : motherObj.full_name_en;
+                    const mLabel = currentLang === 'fa' ? 'مادر' : 'Mother';
+                    bioRows.push(`<div class="bio-row"><span class="bio-label">${mLabel}</span><span class="bio-value"><a href="mothers.html" style="color:var(--pink);">${mName} ↗</a></span></div>`);
+                }
             }
-            if (child.familyClusterName) {
-                const fLabel = currentLang === 'fa' ? 'تبار خانوادگی' : (currentLang === 'ar' ? 'العائلة' : 'Family Cluster');
-                bioRows.push(`<div class="bio-row"><span class="bio-label">${fLabel}</span><span class="bio-value"><a href="mothers.html" style="color:var(--gold);">${child.familyClusterName} ↗</a></span></div>`);
+            if (child.familyClusterId && typeof getFamilyClusterById === 'function') {
+                const fcObj = getFamilyClusterById(child.familyClusterId);
+                if (fcObj) {
+                    const fLabel = currentLang === 'fa' ? 'خاندان / خانواده' : 'Family Cluster';
+                    const fName = currentLang === 'fa' ? `خانواده ${fcObj.family_surname_fa}` : `${fcObj.family_surname_en} Family (${fcObj.total_killed} Martyrs)`;
+                    bioRows.push(`<div class="bio-row"><span class="bio-label">${fLabel}</span><span class="bio-value"><a href="mothers.html" style="color:var(--gold);">${fName} ↗</a></span></div>`);
+                }
             }
-            if (child.identificationMethod) {
-                const idLabel = currentLang === 'fa' ? 'روش احراز هویت' : (currentLang === 'ar' ? 'طريقة التعرف' : 'Identification');
-                const idVal = child.identificationMethod === 'unrecovered' ? (currentLang === 'fa' ? 'جاویدالاثر (بدون مزار)' : 'Unrecovered / Epicenter') : child.identificationMethod.toUpperCase();
-                bioRows.push(`<div class="bio-row"><span class="bio-label">${idLabel}</span><span class="bio-value">${idVal}</span></div>`);
-            }
-            const srcLabel = currentLang === 'fa' ? 'گزارش مراجع' : (currentLang === 'ar' ? 'التقرير الجنائي' : 'Forensic Audit');
-            const srcVal = currentLang === 'fa' ? 'پزشکی قانونی و دادستانی میناب ↗' : 'Forensic DNA & Judicial Indictment ↗';
+            const srcLabel = currentLang === 'fa' ? 'گزارش مراجع' : 'Forensic Audit';
+            const srcVal = currentLang === 'fa' ? 'فهرست رسمی مدرسه و پزشکی قانونی میناب ↗' : 'Official School Roster & Forensic Indictment ↗';
             bioRows.push(`<div class="bio-row"><span class="bio-label">${srcLabel}</span><span class="bio-value"><a href="sources.html" style="color:var(--blue);">${srcVal}</a></span></div>`);
+
+            // Linked Rubble Drawings (for Baran Ghasemi & Fatemeh Rahdar)
+            let drawingHtml = '';
+            if (child.linkedDrawings && child.linkedDrawings.length > 0 && typeof getDrawingById === 'function') {
+                const cards = child.linkedDrawings.map(did => {
+                    const d = getDrawingById(did);
+                    if (!d) return '';
+                    const dTitle = (d.title && (d.title[currentLang] || d.title.en)) || '';
+                    const dDesc = (d.translation && (d.translation[currentLang] || d.translation.en)) || '';
+                    return `
+                        <div class="story-card" style="border-color:rgba(94,234,212,.4);margin-bottom:20px">
+                            <div style="font-size:.75rem;font-weight:700;color:#5eead4;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">
+                                🎨 ${currentLang === 'fa' ? 'تکلیف و نقاشی بیرون کشیده شده از زیر آوار کلاس' : 'Classroom Homework Recovered from the School Rubble'}
+                            </div>
+                            <div class="story-title">${dTitle}</div>
+                            <a href="${d.image}" target="_blank" rel="noopener" style="display:block;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#05070c">
+                                <img src="${d.image}" alt="${dTitle}" style="width:100%;max-height:460px;object-fit:contain;display:block" />
+                            </a>
+                            <div class="story-quote" style="margin-bottom:12px;direction:rtl;font-family:var(--rtl)">${d.transcriptionFa}</div>
+                            <div class="story-text">${dDesc}</div>
+                        </div>`;
+                }).join('');
+                if (cards) {
+                    drawingHtml = `<section class="story-section fade-in delay-3" style="padding-bottom:0">${cards}</section>`;
+                }
+            }
 
             // Related story
             let storyHtml = '';
@@ -532,42 +597,38 @@
                     </section>`;
             }
 
-            // Prev/Next nav
-            const withPhotos = CHILDREN.filter(c => c.photoGrid !== null).sort((a, b) => {
-                const [, ar, ac] = a.photoGrid.match(/r(\d+)_c(\d+)/);
-                const [, br, bc] = b.photoGrid.match(/r(\d+)_c(\d+)/);
-                return parseInt(ar) !== parseInt(br) ? parseInt(ar) - parseInt(br) : parseInt(ac) - parseInt(bc);
-            });
-            const allList = [...withPhotos, ...CHILDREN.filter(c => !c.photoGrid)];
+            // Prev/Next nav across CHILDREN + ADULTS
+            const allList = [...CHILDREN, ...(typeof ADULTS !== 'undefined' ? ADULTS : [])];
             const idx = allList.findIndex(c => c.id === child.id);
             const prev = idx > 0 ? allList[idx - 1] : allList[allList.length - 1];
             const next = idx < allList.length - 1 ? allList[idx + 1] : allList[0];
 
             function navThumb(c) {
-                if (c.photoGrid) {
-                    const [, r2, c2] = c.photoGrid.match(/r(\d+)_c(\d+)/);
-                    return `<img class="nav-thumb" src="images/children/child_r${r2}_c${c2}.jpg" alt="${c.name}" />`;
+                const s = getPhotoSrc(c);
+                if (s) {
+                    return `<img class="nav-thumb" src="${s}" alt="${c.name}" />`;
                 }
-                return `<div class="nav-thumb" style="background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:1.2rem">${c.gender === 'girl' ? '👧' : '👦'}</div>`;
+                return `<div class="nav-thumb" style="background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:1.2rem">${c.gender === 'girl' ? '👧' : '🕯️'}</div>`;
             }
             const prevName = (currentLang === 'fa' && prev.nameFa) ? prev.nameFa : prev.name;
             const nextName = (currentLang === 'fa' && next.nameFa) ? next.nameFa : next.name;
 
             main.innerHTML = `
                 <section class="child-hero">
-                    <div class="photo-frame ${child.gender} fade-in">${photoHtml}</div>
+                    <div class="photo-frame ${child.gender || 'girl'} fade-in">${photoHtml}</div>
                     <h1 class="child-name fade-in delay-1">${displayName}</h1>
-                    ${child.nameFa && currentLang === 'en' ? `<div class="child-name-fa fade-in delay-1">${child.nameFa}</div>` : ''}
+                    ${child.nameFa && currentLang !== 'fa' ? `<div class="child-name-fa fade-in delay-1">${child.nameFa}</div>` : ''}
                     ${child.name && currentLang === 'fa' ? `<div class="child-name-fa fade-in delay-1" style="direction:ltr;font-family:var(--serif);color:var(--text2);font-size:1.1rem">${child.name}</div>` : ''}
                     <div class="gold-divider fade-in delay-2"></div>
                 </section>
 
                 <section class="bio-section fade-in delay-2">
-                    <div class="bio-card ${child.gender}">
+                    <div class="bio-card ${child.gender || 'girl'}">
                         ${bioRows.join('\n')}
                     </div>
                 </section>
 
+                ${drawingHtml}
                 ${storyHtml}
 
                 <section class="tribute-section fade-in delay-3" id="tributeSection"></section>
@@ -700,7 +761,7 @@
 
         /* ─── Init ─── */
         if (!childId) {
-            window.location.href = 'children.html';
+            window.location.href = 'memorial.html';
         } else {
             setLang(currentLang);
         }

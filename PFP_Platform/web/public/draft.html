@@ -222,7 +222,7 @@
     /* ─── Secondary Sticky Filter & Jump Bar ─── */
     .filter-bar {
       position: sticky;
-      top: 55px;
+      top: 72px;
       z-index: 990;
       background: rgba(14, 20, 36, 0.95);
       backdrop-filter: blur(16px);
@@ -995,6 +995,9 @@
     }
 
     @media (max-width: 860px) {
+      .site-header .view-mode-selector {
+        display: none !important;
+      }
       .clause-row {
         grid-template-columns: 1fr !important;
       }
@@ -1025,9 +1028,17 @@
       <button class="part-pill-btn" onclick="filterPart('part3')">Part III: Methodology & Admissibility</button>
     </div>
 
-    <div class="search-box-wrap">
-      <span style="font-size: 13px; color: var(--gold);">🔍</span>
-      <input type="text" id="filterInput" placeholder="Filter chapters, exhibits (e.g. EXH-SAT-001), victims, articles..." onkeyup="handleFilter(this.value)">
+    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+      <div class="view-mode-selector" role="group" aria-label="Reading language mode">
+        <button type="button" class="mode-btn active" data-mode-btn="both" onclick="setMode('both')">EN + FA</button>
+        <button type="button" class="mode-btn" data-mode-btn="en" id="btnModeEn" onclick="setMode('en')">English</button>
+        <button type="button" class="mode-btn" data-mode-btn="fa" id="btnModeFa" onclick="setMode('fa')">فارسی</button>
+      </div>
+
+      <div class="search-box-wrap">
+        <span style="font-size: 13px; color: var(--gold);">🔍</span>
+        <input type="text" id="filterInput" placeholder="Filter chapters, exhibits (e.g. EXH-SAT-001), victims, articles..." onkeyup="handleFilter(this.value)">
+      </div>
     </div>
   </div>
 
@@ -1075,7 +1086,7 @@
         <div class="fact-card">
           <div class="f-label">🚀 Munitions Deployed</div>
           <div class="f-val">3x BGM-109 Tomahawk Block IV/V</div>
-          <div class="f-sub">1,000-lb WDU-36/B unitary blast warhead (PBXN-107) · Raytheon CAGE 96214 · Williams F107 turbofan</div>
+          <div class="f-sub">1,000-lb WDU-36/B unitary blast warhead (PBXN-107) · Raytheon CAGE 05047 · Williams F107 turbofan</div>
         </div>
 
         <div class="fact-card">
@@ -1087,34 +1098,58 @@
         <div class="fact-card">
           <div class="f-label">⚖️ Governing Norms & UN Finding</div>
           <div class="f-val">UN Doc. A/HRC/63/61 · AP I · CRC</div>
-          <div class="f-sub">UN FFMI War Crimes Determination (Sep 17, 2026) · Distinction (Art. 48) · Precautions (Art. 57) · ARSIWA</div>
+          <div class="f-sub">UN FFMI War Crimes Determination (Sep 17, 2026) · Distinction (Art. 48) · Precautions (Art. 57) · ARSIWA ($300M Claim)</div>
         </div>
       </div>
 
       <!-- ─── OFFICIAL DOWNLOAD DECK ─── -->
-      <div class="download-deck-container">
+      <div class="download-deck-container" id="table-of-contents">
         <div class="download-deck-info">
           <h4>📥 Certified Document Download Deck (Cryptographically Verified)</h4>
-          <p>Helsinki Legal Evidence Vault · SHA-256 Checksums · Court-Ready PDF & Word Packages (2026-10-19 Edition)</p>
+          <p>Helsinki Legal Evidence Vault · SHA-256 Checksums · Court-Ready PDF & Word Packages (2026-10-24 Edition — Draft v0.1)</p>
         </div>
 
         <div class="download-buttons">
-          <a class="btn-download" href="docs/minab-report/PFPJ_Minab_Master_Factual_Determination_Report.pdf" download title="Download Official Master Report PDF (1441.6 KB)">
+          <a class="btn-download" href="docs/minab-report/PFPJ_Minab_Master_Factual_Determination_Report.pdf" download title="Download Official Master Report PDF (1623.2 KB · SHA-256: b9f3317d...)">
             📄 Master Report (PDF)
           </a>
-          <a class="btn-download" href="docs/minab-report/PFPJ_Minab_Master_Factual_Determination_Report.docx" download title="Download Master Report Word Document (116.0 KB)">
+          <a class="btn-download" href="docs/minab-report/PFPJ_Minab_Master_Factual_Determination_Report.docx" download title="Download Master Report Word Document (133.0 KB · SHA-256: bfc9da2b...)">
             📝 Master Report (DOCX)
           </a>
-          <a class="btn-download annex-btn" href="docs/minab-report/PFPJ_Minab_Master_Exhibit_Dossier_Annex.pdf" download title="Download Master Exhibit Dossier Annex PDF (959.3 KB)">
+          <a class="btn-download annex-btn" href="docs/minab-report/PFPJ_Minab_Master_Exhibit_Dossier_Annex.pdf" download title="Download Master Exhibit Dossier Annex PDF (959.2 KB · SHA-256: ce2d3203...)">
             📂 Exhibit Annex (PDF)
           </a>
-          <a class="btn-download annex-btn" href="docs/minab-report/PFPJ_Minab_Master_Exhibit_Dossier_Annex.docx" download title="Download Master Exhibit Dossier Annex Word Document (72.1 KB)">
+          <a class="btn-download annex-btn" href="docs/minab-report/PFPJ_Minab_Master_Exhibit_Dossier_Annex.docx" download title="Download Master Exhibit Dossier Annex Word Document (72.1 KB · SHA-256: 792680a4...)">
             📑 Exhibit Annex (DOCX)
+          </a>
+          <a class="btn-download annex-btn" href="docs/minab-report/PFPJ_Minab_Case_Based_Legal_Benchmark_Charts.pdf" download title="Download 19-Case Legal Benchmark Compendium PDF (991.8 KB · SHA-256: 1123ac35...)">
+            📊 Benchmark Charts (PDF)
+          </a>
+          <a class="btn-download annex-btn" href="docs/minab-report/PFPJ_Minab_Case_Based_Legal_Benchmark_Charts.docx" download title="Download 19-Case Legal Benchmark Compendium DOCX (109.2 KB · SHA-256: ae7f4162...)">
+            📈 Benchmark Charts (DOCX)
           </a>
           <a class="btn-download" href="docs/minab-report/PACKAGE_MANIFEST.md" target="_blank" title="Inspect Cryptographic Package Manifest with SHA-256 Checksums">
             🔐 Checksums
           </a>
         </div>
+      </div>
+
+      <!-- ─── CANONICAL TABLE OF CONTENTS JUMP BAR ─── -->
+      <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--gold); font-weight: 700; margin-right: 4px;">TABLE OF CONTENTS:</span>
+        <a href="#chapter-1" class="evidence-pill">Ch. I: Mandate & 19 Benchmarks</a>
+        <a href="#chapter-2" class="evidence-pill">Ch. II: Evidentiary Standard</a>
+        <a href="#chapter-3" class="evidence-pill">Ch. III: Armed Conflict & Sanctuary</a>
+        <a href="#chapter-4" class="evidence-pill">Ch. IV: Factual Findings (156 Dead)</a>
+        <a href="#chapter-5" class="evidence-pill">Ch. V: Weapons Forensics (CAGE 05047)</a>
+        <a href="#chapter-6" class="evidence-pill">Ch. VI: Targeting Negligence & Maven AI</a>
+        <a href="#chapter-7" class="evidence-pill">Ch. VII: IHL Violations</a>
+        <a href="#chapter-8" class="evidence-pill">Ch. VIII: Modes of Liability</a>
+        <a href="#chapter-9" class="evidence-pill">Ch. IX: Jurisdiction</a>
+        <a href="#chapter-10" class="evidence-pill">Ch. X: $300M Reparations & ICC Counts 1–5</a>
+        <a href="#annex-overview" class="evidence-pill">Part II: Exhibit Annex</a>
+        <a href="#crypto-manifest" class="evidence-pill">SHA-256 Registry</a>
+        <a href="#methodology-framework" class="evidence-pill">Part III: 19 Precedents</a>
       </div>
     </header>
 
@@ -1317,13 +1352,13 @@
                   <tr>
                     <td><strong>XII. State Reparations vs. Voluntary Condolences</strong></td>
                     <td>Rejects discretionary <em>ex gratia</em> payments denying legal responsibility; mandates full restitution, compensation, and satisfaction under customary law (<em>Case 05: Kabul</em>; <em>Belgrade</em> § 84; <em>Al-Amiriyah</em>; ILC ARSIWA).</td>
-                    <td>Demand for binding state reparations under ARSIWA Arts. 30–37 covering school reconstruction, victim trust funds, and public apology, transcending token gestures.</td>
-                    <td>Ch. X § 10.2 (¶¶ 97–97 ter)</td>
+                    <td>Demand for binding state reparations under ARSIWA Arts. 30–37 ($300M USD claim) covering school reconstruction, victim trust funds, and public apology, transcending token gestures.</td>
+                    <td>Ch. X § 10.2 (¶¶ 97–97 quater)</td>
                   </tr>
                   <tr>
                     <td><strong>XIII. Precision Munitions & Mechanical Perfection</strong></td>
                     <td>Recovery of Lockheed Martin GBU-12 debris (CAGE 94117) proved sub-meter laser guidance operated flawlessly, eliminating weapon malfunction defense and concentrating 100% of liability upstream (<em>Case 15: Dahyan</em>, Bellingcat, UN GEE, JIAT).</td>
-                    <td>Three Tomahawk Block V TLAM cruise missiles struck the school with zero ballistic drift; Raytheon CAGE components confirm flawless guidance, proving error was upstream human and algorithmic negligence.</td>
+                    <td>Three Tomahawk Block V TLAM cruise missiles struck the school with zero ballistic drift; Raytheon CAGE 05047 components confirm flawless guidance, proving error was upstream human and algorithmic negligence.</td>
                     <td>Ch. V § 5.4 (¶ 57 ter)</td>
                   </tr>
                   <tr>
@@ -1347,23 +1382,25 @@
                 </tbody>
               </table>
             </div>
-            <p>8 quater to 8 octies. Across Chapters II through X, the unified <em>Isayeva</em>, <em>Al-Amiriyah</em>, <em>Al-Jina</em>, <em>Kabul</em>, and <em>Dahyan</em> benchmarks establish that: (1) protected civilian infrastructure and educational sanctuaries benefit from Professor Françoise Hampson's "double lock" of substantive presumption (AP I Art. 52(3), confirmed as customary law by Sir Christopher Greenwood and DoD Manual § 5.11.4) and mandatory procedural warning (AP I Arts. 57(2)(c) & 65(2)); (2) target verification is a continuous temporal obligation (<em>Al-Jina</em> 72-hour rule) where remote confirmation bias and "soda-straw" sensor tunnel vision (<em>Kabul</em>), mechanized in 2026 via Palantir Maven and Claude AI, constitute culpable recklessness under Professor Michael N. Schmitt's taxonomy; (3) CENTCOM's dismantling of its CHMR unit (10→1) represents an affirmative institutional regression reversing the post-<em>Al-Amiriyah</em> Powell-Schwarzkopf CJCS reform; (4) deploying 3,000 lbs of blast-fragmentation ordnance into an enclosed schoolyard replicates the confined slaughter of Public Shelter No. 25 (constructed by Nordic consortium Perusyhtymä Oy / ABV) and the 500-lb GBU-12 disproportionality in <em>Dahyan</em>; (5) flawless mechanical guidance (Raytheon CAGE components, mirroring Lockheed Martin CAGE 94117 in <em>Dahyan</em>) concentrates 100% of culpability upstream; (6) third-state and corporate suppliers face complicity liability under Common Article 1, ATT Art. 7, and ARSIWA Art. 16 (<em>R (CAAT) v. Secretary of State</em>); and (7) closed-door AR 15-6 inquiries and discretionary <em>ex gratia</em> offers fail ECHR Art. 2 and PCIJ <em>Chorzów Factory</em> standards.</p>
+            <p>8 quater to 8 octies. Across Chapters II through X, the unified <em>Isayeva</em>, <em>Al-Amiriyah</em>, <em>Al-Jina</em>, <em>Kabul</em>, and <em>Dahyan</em> benchmarks establish that: (1) protected civilian infrastructure and educational sanctuaries benefit from Professor Françoise Hampson's "double lock" of substantive presumption (AP I Art. 52(3), confirmed as customary law by Sir Christopher Greenwood and DoD Manual § 5.11.4) and mandatory procedural warning (AP I Arts. 57(2)(c) & 65(2)); (2) target verification is a continuous temporal obligation (<em>Al-Jina</em> 72-hour rule) where remote confirmation bias and "soda-straw" sensor tunnel vision (<em>Kabul</em>), mechanized in 2026 via Palantir Maven and Claude AI, constitute culpable recklessness under Professor Michael N. Schmitt's taxonomy; (3) CENTCOM's dismantling of its CHMR unit (10→1) represents an affirmative institutional regression reversing the post-<em>Al-Amiriyah</em> Powell-Schwarzkopf CJCS reform; (4) deploying 3,000 lbs of PBXN-107 blast-fragmentation ordnance into an enclosed schoolyard replicates the confined slaughter of Public Shelter No. 25 (constructed by Nordic consortium Perusyhtymä Oy / ABV) and the 500-lb GBU-12 disproportionality in <em>Dahyan</em>; (5) flawless mechanical guidance (Raytheon CAGE 05047 components, mirroring Lockheed Martin CAGE 94117 in <em>Dahyan</em>) concentrates 100% of culpability upstream; (6) third-state and corporate suppliers face complicity liability under Common Article 1, ATT Art. 7, and ARSIWA Art. 16 (<em>R (CAAT) v. Secretary of State</em>); and (7) closed-door AR 15-6 inquiries and discretionary <em>ex gratia</em> offers fail ECHR Art. 2 and PCIJ <em>Chorzów Factory</em> standards.</p>
+            <p>8 nonies. <strong>The Consolidated Nineteen-Precedent Juridical Framework (Comprehensive Master Compendium Integration):</strong> To establish an unassailable evidentiary and legal foundation before international courts (ICJ, ICC, and European universal jurisdiction tribunals), the Panel formally incorporates the empirical and legal jurisprudence derived from <strong>nineteen authoritative international precedent cases (Cases 01–19)</strong>, demonstrating six systemic targeting failure vectors: <strong>(1) Peacetime Deliberate Planning Negligence & Stale Target Silos:</strong> <em>Case 01 (Belgrade Embassy, ICTY OTP ¶¶ 80–85)</em>, <em>Case 06 (Dora Farms, HRW 2003)</em>, and <em>Case 08 (Al-Amiriyah, HRW 1991 & DoD Title V)</em>; <strong>(2) Remote Sensor Hallucination, FLIR Ambiguity & Algorithmic Automation Trap:</strong> <em>Case 02 (Kunduz Fuel Tankers, ECtHR Hanan v. Germany & Bundestag 17/7400)</em>, <em>Case 05 (Kabul Drone Strike, Air Force IG)</em>, and <em>Case 12 (Koriša Village, ICTY OTP ¶¶ 86–89)</em>; <strong>(3) Institutional Information Siloing & Deconfliction Disregard:</strong> <em>Case 04 (Al-Jina Mosque, UN Doc. A/HRC/36/55)</em>, <em>Case 14 (Abs Rural Hospital, UN Doc. A/HRC/39/43 & JIAT)</em>, and <em>Case 19 (Shaami-Yurt Convoy, ECtHR Isayeva, Yusupova & Bazayeva)</em>; <strong>(4) Weapons Disproportionality <em>Per Se</em> in Confined Civilian Sanctuaries:</strong> <em>Case 03 (Katyr-Yurt, ECtHR Isayeva v. Russia)</em>, <em>Case 17 (Chernihiv Schools Nos. 18 & 21, UN Doc. A/77/533)</em>, and <em>Case 08 (Al-Amiriyah)</em>; <strong>(5) Multi-Tap Aerial Ambush of Evacuating Schoolchildren & Rescuers:</strong> <em>Case 11 (Kunduz MSF Trauma Centre, UNSC Res. 2286 & AR 15-6)</em>, <em>Case 13 (Hass School Complex, UN Doc. A/HRC/34/64 & S/2020/303)</em>, <em>Case 16 (Al-Bara Elementary School, UN Doc. A/HRC/24/46 & HRW)</em>, and <em>Case 18 (Mastaba Market, HRW & Amnesty MDE 31/3815/2016)</em>; and <strong>(6) Precision Munitions Mechanical Perfection & Mandatory Reparations:</strong> <em>Case 09 (Qana UNIFIL Compound, UN Doc. S/1996/337 & UNGA Res. 51/233)</em>, <em>Case 10 (Second Qana Strike, UN Doc. A/HRC/3/2 & S/PRST/2006/35)</em>, <em>Case 07 (Dasht-e Archi Madrassa, UNAMA 2018)</em>, and <em>Case 15 (Dahyan School Bus, UN Doc. A/HRC/42/17 & A/73/907)</em>.</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">بند ۱.۴</span>
-              <span class="clause-heading">چارچوب رویه قضایی تطبیقی: یکپارچه‌سازی سرفصل به سرفصل آرای کابل، ایسایوا، العامریه، الجینه و ضحیان</span>
+              <span class="clause-heading">چارچوب رویه قضایی تطبیقی: یکپارچه‌سازی سرفصل به سرفصل آرای کابل، ایسایوا، العامریه، الجینه، ضحیان و ۱۹ پرونده مرجع</span>
             </div>
             <p>۸ مکرر (8 bis). جهت تضمین بالاترین سطح استحکام قضایی بین‌المللی، هیئت کارشناسان احرازهای موضوعی و حکمی خود را با پنج ستون بنیادین رویه قضایی بین‌المللی تطبیق داده است: (۱) آرای دوگانه دادگاه اروپایی حقوق بشر مورخ ۲۴ فوریه ۲۰۰۵ در <strong>پرونده ایسایوا علیه روسیه (کاتیر-یورت)</strong> و <strong>پرونده ایسایوا، یوسوپووا و بازایوا علیه روسیه (کاروان شامی-یورت)</strong>؛ (۲) تحقیقات مرجع در <strong>پرونده ۰۸ (کشتار پناهگاه غیرنظامی العامریه بغداد، ۱۹۹۱ — دیده‌بان حقوق بشر فصل ۷؛ کنسرسیوم مهندسی فنلاندی-سوئدی Perusyhtymä Oy / ABV؛ اقرار رسمی پنتاگون در پیوست O گزارش کنگره؛ و اصلاحات نهادی پاول-شوارتسکف)</strong>؛ (۳) سابقه <strong>پرونده ۰۴ (بمباران مجموعه مسجد الجینه حلب، ۲۰۱۷ — سند ملل متحد A/HRC/36/55 و تحقیقات AR 15-6 سنتکام)</strong>؛ (۴) اقرارهای رسمی نظامی درباره سوگیری تأیید و خطای دید سنسورها در <strong>پرونده ۰۵ (حمله پهپادی کابل، ۲۹ اوت ۲۰۲۱ — تحقیقات بازرس کل نیروی هوایی آمریکا ژنرال سامی سعید)</strong>؛ و (۵) تحقیقات کمیته کارشناسان برجسته سازمان ملل در یمن و اقرار رسمی ائتلاف در <strong>پرونده ۱۵ (بمباران اتوبوس دانش‌آموزان در بازار ضحیان صعده، ۲۰۱۸ — سند A/HRC/42/17 و بیانیه کمیته مشترک ارزیابی وقایع JIAT)</strong>.</p>
             <p>۸ ثالث تا ثامن (8 ter–octies). اصول حقوقی تثبیت‌شده در این پنج پرونده مرجع در ۱۶ محور بنیادین در سراسر فصول این گزارش اعمال گردیده‌اند:</p>
             <ul style="padding-right: 20px; margin: 8px 0; line-height: 2;">
               <li><strong>۱ تا ۳. رد دفاعیه «هدف پویا»، تکلیف مستمر راستی‌آزمایی زمانی و تله اتوماسیون سوگیری تأیید (فصول ۳، ۶ و ۷):</strong> رد ادعای ظهور ناگهانی غیرنظامیان (<em>ایسایوا</em>) و تغییر کاربری محرمانه پناهگاه‌ها با «قفل دوگانه» پروفسور فرانسواز همپسون (مواد ۵۲(۳) و ۶۵(۲) پروتکل ۱)؛ الزام به رصد مستمر الگوی حیات در اهداف چندروزه و چندساله (<em>الجینه</em> و <em>العامریه</em>)؛ و اثبات اینکه سوگیری تأیید انسانی که در <em>کابل</em> گالن‌های آب را بمب پنداشت، در میناب توسط پالانتیر ماون و هوش مصنوعی کلود در بیش از ۱,۰۰۰ هدف روز اول مکانیزه شد.</li>
               <li><strong>۴ تا ۶. خطای دید لوله‌ای سنسورها (Soda-Straw)، رد بهانه «انفجار ثانویه» و ابطال دفاعیه «اشتباه صادقانه» (فصول ۴، ۵ و ۶):</strong> عدم لغو حمله با وجود مشاهده وسایل بازی کودکان در دوربین‌های پایانی (همانند نادیده گرفتن کودک در ۲ دقیقه پایانی در <em>کابل</em>)؛ رد ادعای انفجار ثانویه مهمات با داده‌های لرزه‌نگاری (همانند رد ادعای انفجار ثانویه در <em>کابل</em> توسط نیویورک تایمز)؛ و بطلان دفاعیه «اشتباه صادقانه» در صورت نقض استاندارد فرمانده معقول (بند ۵.۱۱ راهنمای حقوق جنگ پنتاگون).</li>
-              <li><strong>۷ تا ۹. مجاورت ساختاری، عدم تناسب ذاتی سلاح و الزام اخطار قبلی (فصول ۴، ۶ و ۷):</strong> مجاورت با تأسیسات نظامی (فاصله ۴۲ متری) تکلیف احتیاط را تشدید می‌کند و حذف مدرسه از لیست حمله‌ممنوع (NSL) و بی‌نظمی در تحویل شیفت (<em>الجینه</em>) تقصیر سازمانی است؛ شلیک سه‌گانه کلاهک‌های ۱۰۰۰ پوندی تاماهاک مکانیسم کشتار محبوس پناهگاه فنلاندی-سوئدی <em>العامریه</em> و بمب ۵۰۰ پوندی <em>ضحیان</em> را بدون اخطار قبلی تکرار کرد.</li>
-              <li><strong>۱۰ تا ۱۲. تمرکز بالادستی مسئولیت، رد مصونیت داخلی و الزام به غرامت کامل دولتی (فصول ۸، ۹ و ۱۰):</strong> تبرئه خدمه پرتاب و تمرکز ۱۰۰ درصدی مسئولیت در بالادست (بند ۸۵ لاهه، <em>ایسایوا</em> و سلول Checkmate در <em>العامریه</em>)؛ بی‌اعتباری تحقیقات بسته AR 15-6؛ و رد پرداخت‌های داوطلبانه <em>ex gratia</em> (<em>کابل</em>) و انکار غرامت (<em>العامریه</em>) به نفع جبران کامل خسارت طبق رأی <em>کارخانه خورزوف</em> و مواد ۳۰ تا ۳۷ ARSIWA.</li>
-              <li><strong>۱۳ تا ۱۶. دکترین‌های اتوبوس دانش‌آموزان ضحیان (پرونده ۱۵ — فصول ۵، ۶، ۷ و ۸):</strong> اثبات کمال مکانیکی از طریق کدهای CAGE قطعات ریتیون (مشابه کد لاکهید مارتین <code>94117</code> در <em>ضحیان</em>)؛ الزام مطلق به لغو حمله در محیط‌های دارای کودک (اقرار رسمی JIAT به تأخیر عملیاتی و نقض قواعد درگیری در <em>ضحیان</em>)؛ مصونیت آمره مدارس و دانش‌آموزان (گزارش دبیرکل A/73/907 و قطعنامه ۲۶۰۱)؛ و مسئولیت دولت‌های ثالث و شرکت‌های تسلیحاتی و نرم‌افزاری (ریتیون، پالانتیر، آنتروپیک) طبق ماده ۱ مشترک ژنو، ماده ۷ معاهده تجارت تسلیحات و ماده ۱۶ ARSIWA (رأی دادگاه استیناف بریتانیا در پرونده <em>CAAT</em>).</li>
+              <li><strong>۷ تا ۹. مجاورت ساختاری، عدم تناسب ذاتی سلاح و الزام اخطار قبلی (فصول ۴، ۶ و ۷):</strong> مجاورت با تأسیسات نظامی (فاصله ۴۲ متری) تکلیف احتیاط را تشدید می‌کند و حذف مدرسه از لیست حمله‌ممنوع (NSL) و بی‌نظمی در تحویل شیفت (<em>الجینه</em>) تقصیر سازمانی است؛ شلیک سه‌گانه کلاهک‌های ۱۰۰۰ پوندی تاماهاک (PBXN-107) مکانیسم کشتار محبوس پناهگاه فنلاندی-سوئدی <em>العامریه</em> و بمب ۵۰۰ پوندی <em>ضحیان</em> را بدون اخطار قبلی تکرار کرد.</li>
+              <li><strong>۱۰ تا ۱۲. تمرکز بالادستی مسئولیت، رد مصونیت داخلی و الزام به غرامت کامل دولتی (فصول ۸، ۹ و ۱۰):</strong> تبرئه خدمه پرتاب و تمرکز ۱۰۰ درصدی مسئولیت در بالادست (بند ۸۵ لاهه، <em>ایسایوا</em> و سلول Checkmate در <em>العامریه</em>)؛ بی‌اعتباری تحقیقات بسته AR 15-6؛ و رد پرداخت‌های داوطلبانه <em>ex gratia</em> (<em>کابل</em>) و انکار غرامت (<em>العامریه</em>) به نفع جبران کامل خسارت (۳۰۰ میلیون دلار) طبق رأی <em>کارخانه خورزوف</em> و مواد ۳۰ تا ۳۷ ARSIWA.</li>
+              <li><strong>۱۳ تا ۱۶. دکترین‌های اتوبوس دانش‌آموزان ضحیان (پرونده ۱۵ — فصول ۵، ۶، ۷ و ۸):</strong> اثبات کمال مکانیکی از طریق کدهای CAGE قطعات ریتیون <code>05047</code> (مشابه کد لاکهید مارتین <code>94117</code> در <em>ضحیان</em>)؛ الزام مطلق به لغو حمله در محیط‌های دارای کودک (اقرار رسمی JIAT به تأخیر عملیاتی و نقض قواعد درگیری در <em>ضحیان</em>)؛ مصونیت آمره مدارس و دانش‌آموزان (گزارش دبیرکل A/73/907 و قطعنامه ۲۶۰۱)؛ و مسئولیت دولت‌های ثالث و شرکت‌های تسلیحاتی و نرم‌افزاری (ریتیون، پالانتیر، آنتروپیک) طبق ماده ۱ مشترک ژنو، ماده ۷ معاهده تجارت تسلیحات و ماده ۱۶ ARSIWA (رأی دادگاه استیناف بریتانیا در پرونده <em>CAAT</em>).</li>
             </ul>
+            <p>۸ تاسع (8 nonies). <strong>چارچوب جامع نوزده پرونده مرجع بین‌المللی (یکپارچه‌سازی کامل مجموعه تطبیقی پرونده‌های ۰۱ تا ۱۹):</strong> هیئت کارشناسان رویه قضایی و یافته‌های تجربی <strong>۱۹ پرونده مرجع بین‌المللی</strong> را در شش محور ساختاری در این پرونده ادغام نموده است: <strong>(۱) قصور در برنامه‌ریزی زمان صلح و بانک‌های اطلاعاتی راکد:</strong> پرونده ۰۱ (<em>سفارت چین در بلگراد</em>)، پرونده ۰۶ (<em>دورا فارمز</em>) و پرونده ۰۸ (<em>پناهگاه العامریه</em>)؛ <strong>(۲) توهم سنسورهای راه دور، ابهام حرارتی FLIR و تله اتوماسیون هوش مصنوعی:</strong> پرونده ۰۲ (<em>تانکرهای قندوز — حنان علیه آلمان</em>)، پرونده ۰۵ (<em>حمله پهپادی کابل</em>) و پرونده ۱۲ (<em>اردوگاه کوریشا</em>)؛ <strong>(۳) جزیره‌ای شدن اطلاعات فرماندهی و نادیده گرفتن تفکیک حریم:</strong> پرونده ۰۴ (<em>مسجد الجینه</em>)، پرونده ۱۴ (<em>بیمارستان عبس یمن</em>) و پرونده ۱۹ (<em>کاروان شامی-یورت</em>)؛ <strong>(۴) عدم تناسب ذاتی تسلیحات سنگین در پناهگاه‌های محصور غیرنظامی:</strong> پرونده ۰۳ (<em>کاتیر-یورت</em>)، پرونده ۱۷ (<em>مدارس شماره ۱۸ و ۲۱ چرنیهیف</em>) و پرونده ۰۸ (<em>العامریه</em>)؛ <strong>(۵) کمین هوایی چندمرحله‌ای علیه دانش‌آموزان در حال تخلیه و امدادگران:</strong> پرونده ۱۱ (<em>مرکز ترومای پزشکان بدون مرز در قندوز</em>)، پرونده ۱۳ (<em>مجتمع مدارس حاس ادلب</em>)، پرونده ۱۶ (<em>دبستان الباره</em>) و پرونده ۱۸ (<em>بازار مستباء</em>)؛ و <strong>(۶) کمال مکانیکی تسلیحات نقطه‌زن و الزام به غرامت دولتی:</strong> پرونده ۰۹ (<em>مقر یونیفیل در قانا</em>)، پرونده ۱۰ (<em>حمله دوم قانا</em>)، پرونده ۰۷ (<em>مدرسه دشت ارچی</em>) و پرونده ۱۵ (<em>اتوبوس دانش‌آموزان ضحیان</em>).</p>
           </div>
         </div>
       </section>
@@ -1413,7 +1450,9 @@
               <span class="clause-heading">Berkeley Protocol Standards, Official Admissions Weight & Master Exhibit Inventory</span>
             </div>
             <p>13–14 bis. All open-source telemetry and digital media were captured, cryptographically signed with SHA-256 hashes, and catalogued in strict compliance with the <strong>Berkeley Protocol on Digital Open Source Investigations (OHCHR, 2020)</strong>. Relying upon the 3D spatial reconstruction methodology established by Forensic Architecture and Bellingcat in <strong>Case 04 (<em>Al-Jina</em>)</strong> and the crater/CAGE forensics in <strong>Case 15 (<em>Dahyan</em>)</strong>, satellite imagery, cadastral registries, and architectural elevations establish that the Shajareh Tayyebeh School formed an independent, self-contained educational sanctuary separated from the adjacent naval depot by a reinforced concrete perimeter wall erected in 2016.</p>
+            <p>14 ter. <strong>Berkeley Protocol Digital Open-Source Verification (Cases 04, 13, 17 & 18 Benchmarks):</strong> In accordance with the digital open-source forensics standards established by UN Commissions of Inquiry and investigative bodies in <strong>Case 04 (<em>Al-Jina Mosque</em>)</strong>, <strong>Case 13 (<em>Hass School Complex</em>)</strong>, <strong>Case 17 (<em>Chernihiv Schools Nos. 18 & 21</em>)</strong>, and <strong>Case 18 (<em>Mastaba Market</em>)</strong>, solar shadow chronolocation, crater photogrammetry, and multi-angle video triangulation linked with SHA-256 cryptographic hashes satisfy the probative admissibility standard of <strong>ICTY Rule 89(C)</strong> and the <strong>Berkeley Protocol (OHCHR, 2020)</strong>.</p>
             <p>15–16 ter. Under <strong>ICTY Rule 89(F)</strong> and customary evidentiary law, formal admissions and statements against interest by official state organs carry heightened probative weight. Anchored in <strong>Case 04 (<em>Al-Jina</em>)</strong>—where USCENTCOM’s AR 15-6 briefing admitted that failing to recognize the religious nature of the struck building was a <em>"preventable error"</em> compounded by shift-changeover irregularities (UN Doc. A/HRC/36/55, ¶ 55)—and <strong>Case 08 (<em>Al-Amiriyah</em>)</strong>—where the DoD formally conceded in Appendix O of its <em>Final Report to Congress</em> (Title V, April 1992, p. O-12) that planners were <em>"unaware that civilians were using the lower levels of the bunker at night"</em>—CENTCOM’s admissions in Minab that target developers relied on unverified pre-2016 DIA files without checking contemporary satellite passes or municipal school registries constitute irrebuttable proof of institutional negligence.</p>
+            <p>16 quater. <strong>Probative Weight of Belligerent Admissions Against Interest (Cases 05, 07 & 15 Benchmarks):</strong> Expanding upon the evidentiary benchmark of <strong>Case 07 (<em>Dasht-e Archi Madrassa</em>, UNAMA 2018)</strong>, <strong>Case 15 (<em>Dahyan School Bus</em>, UN Doc. A/HRC/42/17 & JIAT Statement 2018)</strong>, and <strong>Case 05 (<em>Kabul Drone Strike</em>, CENTCOM Sept 2021)</strong>, where belligerent authorities initially denied civilian casualties before being compelled by open-source and forensic proof to admit targeting failures, official military concessions of reliance on stale target records and absence of civilian harm vetting constitute binding admissions against interest.</p>
             <p>17. The findings rest upon seven certified master exhibit series catalogued in Part II: <code>EXH-SAT-001</code>, <code>EXH-MUN-002</code>, <code>EXH-LAUNCH-003</code>, <code>EXH-CENTCOM-004</code>, <code>EXH-VIC-005</code>, <code>EXH-OSINT-006</code> (including <code>EXH-OSINT-006.3</code> Case 15 Dahyan Dossier), and <code>EXH-UN-008</code> (including <code>EXH-UN-008.1</code> Iran FFMI & <code>EXH-UN-008.2</code> Yemen UN GEE), plus <code>EXH-WIT-007</code> under Rule 75.</p>
           </div>
 
@@ -1423,7 +1462,9 @@
               <span class="clause-heading">استانداردهای پروتکل برکلی، ارزش اثباتی اقاریر دولت و فهرست مستندات مرجع</span>
             </div>
             <p>۱۳–۱۴ مکرر. کلیه مستندات دیجیتال و دورسنجی طبق <strong>پروتکل برکلی در تحقیقات منبع‌باز دیجیتال (OHCHR 2020)</strong> ذخیره و با شناسه هش SHA-256 مهروموم شده‌اند. با تکیه بر روش‌شناسی بازسازی سه‌بعدی فورنالسیک آرکیتکچر و بلینگکت در <strong>پرونده ۰۴ (<em>الجینه</em>)</strong> و جرم‌شناسی قطعات در <strong>پرونده ۱۵ (<em>ضحیان</em>)</strong>، تصاویر ماهواره‌ای و اسناد ثبتی ثابت می‌کنند که دبستان شجره طیبه با دیوار بتنی مسلح سال ۲۰۱۶ به طور کامل از انبار دریایی مجاور تفکیک شده بود.</p>
+            <p>۱۴ سوم (14 ter). <strong>اعتبارسنجی دیجیتال منبع‌باز تحت پروتکل برکلی (پرونده‌های ۰۴، ۱۳، ۱۷ و ۱۸):</strong> بر اساس استانداردهای کمیته‌های تحقیق سازمان ملل در <strong>پرونده ۰۴ (<em>مسجد الجینه</em>)</strong>، <strong>پرونده ۱۳ (<em>مجتمع مدارس حاس</em>)</strong>، <strong>پرونده ۱۷ (<em>مدارس چرنیهیف</em>)</strong> و <strong>پرونده ۱۸ (<em>بازار مستباء</em>)</strong>، زمان‌سنجی سایه خورشیدی، فتوگرامتری دهانه انفجار و مثلث‌بندی ویدیویی همراه با هش SHA-256، استاندارد قابلیت پذیرش ماده ۸۹(C) دادگاه لاهه را کاملاً محقق می‌سازند.</p>
             <p>۱۵–۱۶ سوم. بر اساس ماده ۸۹(F) آیین دادرسی دادگاه لاهه، اقاریر رسمی ارگان‌های دولتی علیه منافع خود بالاترین ارزش اثباتی را دارند. به استناد سابقه <strong>پرونده ۰۴ (<em>الجینه</em>)</strong>—که سنتکام اقرار کرد عدم تشخیص ماهیت مذهبی بنا یک «خطای قابل پیشگیری» ناشی از بی‌نظمی در تعویض شیفت بوده است (A/HRC/36/55، بند ۵۵)—و <strong>پرونده ۰۸ (<em>العامریه</em>)</strong>—که وزارت دفاع آمریکا در پیوست O گزارش نهایی به کنگره (آوریل ۱۹۹۲، ص O-12) رسماً اقرار کرد طراحان هدف «از حضور شبانه غیرنظامیان در طبقات زیرین پناهگاه بی‌اطلاع بودند»—اقرار سنتکام در پرونده میناب مبنی بر اتکا به پوشه‌های منسوخ پیش از ۲۰۱۶ بدون بررسی گذرهای ماهواره‌ای معاصر، دلیل قاطع و غیرقابل‌انکار بر تقصیر سازمانی است.</p>
+            <p>۱۶ چهارم (16 quater). <strong>ارزش اثباتی اقاریر متخاصم علیه منافع خود (پرونده‌های ۰۵، ۰۷ و ۱۵):</strong> با تکیه بر سوابق <strong>پرونده ۰۷ (<em>مدرسه دشت ارچی</em>، یوناما ۲۰۱۸)</strong>، <strong>پرونده ۱۵ (<em>اتوبوس دانش‌آموزان ضحیان</em>، سند A/HRC/42/17 و اقرار JIAT)</strong> و <strong>پرونده ۰۵ (<em>حمله پهپادی کابل</em>)</strong>، اقرار رسمی مقامات نظامی به اتکا بر بانک‌های اطلاعاتی قدیمی و حذف بررسی آسیب به غیرنظامیان، اقرار الزام‌آور علیه منافع خود محسوب می‌شود.</p>
             <p>۱۷. یافته‌های این پرونده بر هفت رده مستندات گواهی‌شده در بخش دوم استوار است: <code>EXH-SAT-001</code>، <code>EXH-MUN-002</code>، <code>EXH-LAUNCH-003</code>، <code>EXH-CENTCOM-004</code>، <code>EXH-VIC-005</code>، <code>EXH-OSINT-006</code> (شامل پرونده تطبیقی ضحیان <code>EXH-OSINT-006.3</code>) و <code>EXH-UN-008</code> (شامل <code>EXH-UN-008.1</code> و <code>EXH-UN-008.2</code>)، به همراه شهادت شهود <code>EXH-WIT-007</code>.</p>
           </div>
         </div>
@@ -1467,6 +1508,7 @@
             </div>
             <p>23–28. <strong>IAC Qualification & Exclusion of NIAC:</strong> Under Common Article 2 of the 1949 Geneva Conventions and Rome Statute Articles 8(2)(a)–(b) (<em>Lubanga</em>, ¶ 539), the deployment of kinetic cruise missiles by the United States against Iranian territory on February 28, 2026, qualifies <em>ipso jure</em> as an <strong>International Armed Conflict (IAC)</strong> from the exact moment of initial weapons launch. Because no non-state armed group was involved on either side of the strike chain, the situation does not engage the "overall control" test (<em>Tadić</em> Appeals Judgment, 1999, ¶ 131; <em>Lubanga</em>, ¶ 541) nor Rome Statute Article 8(2)(f).</p>
             <p>29–30. <strong>Applicable Legal Framework Triggered:</strong> IAC classification activates: (a) the four <strong>Geneva Conventions of 1949</strong> including the grave breaches regime (GC I Art. 50; GC II Art. 51; GC III Art. 130; GC IV Art. 147); (b) <strong>Customary International Humanitarian Law</strong> (ICRC Study Rules 1–161); (c) <strong>Additional Protocol I of 1977</strong> as binding customary law accepted in the US DoD <em>Law of War Manual</em> (§ 1.3), including Distinction (Art. 48), Proportionality (Art. 51(5)(b)), and Feasible Precautions (Art. 57); and (d) the <strong>UN Convention on the Rights of the Child</strong> (Arts. 6, 28, 38) and <strong>Safe Schools Declaration (2015)</strong>.</p>
+            <p>30 bis. <strong>The Compound Non-Severability Principle (Case 14 Benchmark — <em>Abs Rural Hospital</em>, UN Doc. A/HRC/39/43, ¶ 40; MSF 2016; JIAT Case 29):</strong> An attacking force cannot artificially sever a single vehicle or adjacent structure from a protected sanctuary perimeter to justify a high-explosive strike. Even if CENTCOM intended to target the auxiliary shed 42m away, launching three 1,000-lb blast warheads with a 65–85m 5-psi structural collapse radius violated the non-severable protection of the school compound under <strong>AP I Article 57(2)(a)(ii)</strong>.</p>
             <p>31–33. <strong>The Nexus Requirement:</strong> Under <em>Prosecutor v. Kunarac et al.</em> (Appeals Judgment, 2002, §§ 55–59), adopted by the ICC in <em>Lubanga</em> (ICC-01/04-01/06-803, ¶ 288) and <em>Katanga</em> (ICC-01/04-01/07-717, ¶ 380), the operational nexus is indisputable: the three BGM-109 Tomahawk missiles were launched by US naval forces as an integral part of the Day 1 opening wave of "Operation Epic Fury."</p>
           </div>
 
@@ -1477,6 +1519,7 @@
             </div>
             <p>۲۳–۲۸. <strong>احراز مخاصمه بین‌المللی و نفی مخاصمه داخلی:</strong> به موجب ماده ۲ مشترک کنوانسیون‌های چهارگانه ژنو ۱۹۴۹ و بندهای 8(2)(a) و 8(2)(b) اساسنامه رم (رأی <em>لوبانگا</em>، بند ۵۳۹)، شلیک موشک‌های کروز توسط آمریکا به قلمرو ایران در ۱۰ اسفند ۱۴۰۴ از لحظه نخست پرتاب، ماهیتاً یک <strong>مخاصمه مسلحانه بین‌المللی (IAC)</strong> محسوب می‌شود. از آنجا که هیچ گروه مسلح غیردولتی در زنجیره حمله دخالت نداشته است، آزمون «کنترل کلی» (رأی تجدیدنظر <em>تادیچ</em> ۱۹۹۹، بند ۱۳۱) موضوعیت نداشته و مخاصمه تماماً بین‌الدولی است.</p>
             <p>۲۹–۳۰. <strong>چارچوب حقوقی فعال‌شده:</strong> این توصیف قواعد زیر را کاملاً لازم‌الاجرا می‌سازد: (الف) کنوانسیون‌های چهارگانه ژنو ۱۹۴۹ و رژیم نقض‌های فاحش (مواد ۵۰، ۵۱، ۱۳۰ و ۱۴۷)؛ (ب) قواعد عرفی حقوق بشردوستانه (قواعد ۱ تا ۱۶۱ کمیته بین‌المللی صلیب سرخ)؛ (ج) اصول پروتکل الحاقی اول ۱۹۷۷ به عنوان حقوق عرفی الزام‌آور مورد پذیرش در <em>راهنمای حقوق جنگ وزارت دفاع آمریکا</em> (بند ۱.۳) شامل اصل تفکیک (ماده ۴۸)، تناسب (ماده ۵۱) و احتیاطات لازم (ماده ۵۷)؛ و (د) کنوانسیون حقوق کودک (مواد ۶، ۲۸ و ۳۸) و اعلامیه مدارس امن (۲۰۱۵).</p>
+            <p>۳۰ مکرر (30 bis). <strong>اصل عدم تفکیک‌پذیری حریم مصون (پرونده ۱۴ — <em>بیمارستان عبس یمن</em>، سند A/HRC/39/43 بند ۴۰؛ اقرار JIAT):</strong> نیروی مهاجم نمی‌تواند یک سازه مجاور را به طور مصنوعی از حریم یک مرکز آموزشی یا درمانی مصون جدا کند تا شلیک مهمات انفجاری سنگین را توجیه نماید. حتی به فرض هدف قرار دادن سوله انبار در ۴۲ متری، پرتاب سه کلاهک ۱۰۰۰ پوندی با شعاع تخریب سازه‌ای ۶۵ تا ۸۵ متری نقض صریح ماده ۵۷(۲)(a)(ii) پروتکل اول است.</p>
             <p>۳۱–۳۳. <strong>شرط ارتباط عملیاتی (Nexus):</strong> طبق رأی تجدیدنظر <em>کوناراتس</em> (۲۰۰۲، بندهای ۵۵–۵۹) و آرای دیوان کیفری بین‌المللی در <em>لوبانگا</em> (بند ۲۸۸) و <em>کاتانگا</em> (بند ۳۸۰)، ارتباط عملیاتی تردیدناپذیر است: هر سه موشک تاماهاک به عنوان بخشی از موج اول روز نخست «عملیات خشم حماسی» شلیک شده‌اند.</p>
           </div>
         </div>
@@ -1488,11 +1531,13 @@
               <span class="clause-heading">Protected Sanctuary Status & The Absolute Presumption in Doubt (AP I Art. 52(3); Al-Amiriyah)</span>
             </div>
             <p>34–36. Under Geneva Convention IV (Arts. 4, 53), Additional Protocol I Article 52(1) (CIHL Rule 8 & Rule 10), and the Safe Schools Declaration, educational facilities are protected civilian objects <em>par excellence</em>. This status was explicitly reaffirmed by the <strong>UN Independent International Fact-Finding Mission on Iran (UN Doc. A/HRC/63/61, ¶ 48)</strong>, which established that the Shajareh Tayyebeh facility was a <em>"clearly identifiable educational institution dedicated to children,"</em> entirely devoid of military personnel or military objectives.</p>
+            <p>36 bis. <strong>Absolute Prohibition of Directing Attacks Against Educational Sanctuaries (Cases 13, 16 & 17 Benchmarks):</strong> Anchored in <strong>Case 13 (<em>Hass School Complex</em>, UN Doc. A/HRC/34/64, ¶¶ 35–42; UN Doc. S/2020/303)</strong>, <strong>Case 16 (<em>Al-Bara Elementary School</em>, HRW <em>Death from the Sky</em>, 2013)</strong>, and <strong>Case 17 (<em>Chernihiv Schools Nos. 18 & 21</em>, UN Doc. A/77/533)</strong>, directing heavy aerial ordnance onto active primary schools during instructional hours is a grave war crime under <strong>Rome Statute Article 8(2)(b)(ix)</strong> and Customary IHL Rules 7 and 10.</p>
             <div class="quote-box">
               "In case of doubt whether an object which is normally dedicated to civilian purposes, such as a place of worship, a house or other dwelling or a school, is being used to make an effective contribution to military action, it shall be presumed not to be so used." (AP I Art. 52(3))
             </div>
             <p>37–38. Target planners were bound by an affirmative legal obligation to presume that the school was a protected civilian sanctuary. As formally concluded in <strong>UN Doc. A/HRC/63/61 (¶¶ 51–53)</strong>, no verified intelligence existed showing military use; planners acted upon unsubstantiated historical lists.</p>
             <p>38 bis & 38 ter. <strong>The <em>Al-Amiriyah</em> "Double Lock" (Case 08, HRW 1991; Hampson 1993; Greenwood 1993) & <em>Kabul</em> Presumption in Doubt (Case 05, 2021):</strong> Following the destruction of Public Shelter No. 25 in Baghdad, Professor Françoise Hampson established that civilian sanctuaries benefit from a <strong>"double lock"</strong> of protection: (1) the substantive presumption of civilian status under <strong>AP I Art. 52(3)</strong> (confirmed as binding customary law by Sir Christopher Greenwood and codified in the US DoD <em>Law of War Manual</em> § 5.11.4), and (2) the mandatory procedural warning requirement under <strong>AP I Art. 65(2)</strong>. Reinforced by <strong>Case 05 (<em>Kabul Drone Strike</em>)</strong>—where the mandatory rule <em>in dubio pro civitate</em> required presuming Zemari Ahmadi's civilian status despite intelligence inferences—CENTCOM's reliance on stale pre-2016 files in Minab completely fails to overcome the peremptory presumption of civilian protection.</p>
+            <p>38 quater. <strong>Rebuttal of the "Proximity/Human Shield" Pretext (Cases 09, 10 & 12 Benchmarks):</strong> Under <strong>Case 09 (<em>Qana UNIFIL Compound</em>, UN Doc. S/1996/337)</strong>, <strong>Case 10 (<em>Second Qana Strike</em>, UN Doc. A/HRC/3/2, ¶¶ 147–158; HRW <em>Fatal Strikes</em>, 2006)</strong>, and <strong>Case 12 (<em>Koriša Village</em>, ICTY OTP ¶¶ 86–89)</strong>, the presence of military positions in the broader neighborhood or historical military affiliation never strips a civilian building of its protected immunity (**AP I Arts. 50(3) & 51(8)**).</p>
           </div>
 
           <div class="clause-col-fa">
@@ -1501,11 +1546,13 @@
               <span class="clause-heading">مصونیت پناهگاه آموزشی و فرض مطلق غیرنظامی بودن در صورت تردید (ماده ۵۲(۳)؛ سابقه العامریه)</span>
             </div>
             <p>۳۴–۳۶. به موجب مواد ۴ و ۵۳ کنوانسیون چهارم ژنو، ماده ۵۲(۱) پروتکل الحاقی اول (قواعد ۸ و ۱۰ عرفی) و بیانیه مدارس امن، مدارس از بارزترین اعیان غیرنظامی تحت حمایت ویژه هستند. این وضعیت صراحتاً در گزارش <strong>کمیته حقیقت‌یاب سازمان ملل (سند UN Doc. A/HRC/63/61، بند ۴۸)</strong> تأیید شد که دبستان شجره طیبه یک <em>«مؤسسه آموزشی کاملاً قابل شناسایی اختصاص‌یافته به کودکان»</em> و عاری از هرگونه تجهیزات یا پرسنل نظامی بوده است.</p>
+            <p>۳۶ مکرر (36 bis). <strong>ممنوعیت مطلق حمله به پناهگاه‌های آموزشی (پرونده‌های ۱۳، ۱۶ و ۱۷):</strong> به استناد <strong>پرونده ۱۳ (<em>مجتمع مدارس حاس</em>، سند A/HRC/34/64 بندهای ۳۵–۴۲ و S/2020/303)</strong>، <strong>پرونده ۱۶ (<em>دبستان الباره</em>، دیده‌بان حقوق بشر ۲۰۱۳)</strong> و <strong>پرونده ۱۷ (<em>مدارس چرنیهیف</em>، سند A/77/533)</strong>، بمباران مدارس فعال در ساعات درسی جنایت جنگی مستقیم ذیل <strong>ماده 8(2)(b)(ix) اساسنامه رم</strong> است.</p>
             <div class="quote-box">
               «در صورت بروز تردید در این که ساختاری که معمولاً به مقاصد غیرنظامی اختصاص دارد، مانند اماکن مذهبی، منازل یا مدارس، آیا برای مشارکت مؤثر در عملیات نظامی به کار گرفته می‌شود یا خیر، باید فرض شود که برای اهداف نظامی به کار گرفته نمی‌شود.» (ماده ۵۲ بند ۳ پروتکل الحاقی ۱)
             </div>
             <p>۳۷–۳۸. طراحان هدف مکلف بودند فرض را بر مصونیت غیرنظامی مدرسه بگذارند. همان‌گونه که در <strong>سند UN Doc. A/HRC/63/61 (بندهای ۵۱–۵۳)</strong> احراز شده، هیچ اطلاعات معتبری دال بر استفاده نظامی وجود نداشته است.</p>
             <p>۳۸ مکرر و سوم (38 bis & ter). <strong>«قفل دوگانه» پناهگاه العامریه (پرونده ۰۸، همپسون ۱۹۹۳؛ گرینوود ۱۹۹۳) و قاعده احتیاط در تردید کابل (پرونده ۰۵، ۲۰۲۱):</strong> پس از بمباران پناهگاه شماره ۲۵ در بغداد، پروفسور فرانسواز همپسون تثبیت نمود که پناهگاه‌های غیرنظامی از یک <strong>«قفل دوگانه»</strong> حمایتی برخوردارند: (۱) فرض ماهوی غیرنظامی بودن تحت <strong>ماده ۵۲(۳) پروتکل اول</strong> (که توسط سر کریستوفر گرینوود به عنوان حقوق عرفی الزام‌آور تأیید شده و در بند ۵.۱۱.۴ <em>راهنمای حقوق جنگ وزارت دفاع آمریکا</em> نیز به رسمیت شناخته شده است)، و (۲) تضمین شکلی اخطار قبلی اجباری تحت <strong>ماده ۶۵(۲)</strong>. با تقویت این اصل در <strong>پرونده ۰۵ (حمله پهپادی کابل)</strong>، اتکای سنتکام به پرونده‌های منسوخ پیش از ۲۰۱۶ در میناب به هیچ وجه رافع فرض آمره مصونیت غیرنظامی مدرسه نیست.</p>
+            <p>۳۸ چهارم (38 quater). <strong>رد بهانه «مجاورت یا سپر انسانی» (پرونده‌های ۰۹، ۱۰ و ۱۲):</strong> به استناد <strong>پرونده ۰۹ (<em>مقر یونیفیل در قانا</em>، سند S/1996/337)</strong>، <strong>پرونده ۱۰ (<em>حمله دوم قانا</em>، سند A/HRC/3/2 بندهای ۱۴۷–۱۵۸)</strong> و <strong>پرونده ۱۲ (<em>اردوگاه کوریشا</em>، گزارش دادستانی لاهه بندهای ۸۶–۸۹)</strong>، مجاورت جغرافیایی با تأسیسات نظامی یا سابقه تاریخی هرگز مصونیت بنای غیرنظامی را سلب نمی‌کند (مواد ۵۰(۳) و ۵۱(۸) پروتکل اول).</p>
           </div>
         </div>
       </section>
@@ -1528,6 +1575,7 @@
             </div>
             <p>39–40 bis. The <em>Shajareh Tayyebeh Girls' Elementary School</em> is situated along Shahid Beheshti Boulevard in the Taleghani residential neighborhood of Minab, Hormozgan Province (<code>27.1352° N, 57.0805° E</code>, <code>EXH-SAT-001.4</code>). The municipally registered parcel spans <strong>4,250 sq. m</strong> (85m N-S by 50m E-W), comprising: (a) a two-story reinforced concrete classroom building (~1,450 sq. m floor space, eight primary classrooms, library); (b) a ground-floor administrative wing; and (c) an enclosed asphalt courtyard equipped with high-visibility yellow, cyan, and magenta children's playground apparatus and painted basketball/volleyball courts (<code>EXH-SAT-001.3</code>). Access was obtained exclusively through a civilian gate on Shahid Beheshti Blvd, <strong>380 meters</strong> south of the naval station checkpoint.</p>
             <p>41–43 bis. While 2013–2015 satellite imagery (<code>EXH-SAT-001.1</code>) shows the parcel previously lay within the southern administrative buffer of an IRGC Naval Logistics Base, verified Planet Labs and Maxar WorldView-3 imagery from February–August 2016 (<code>EXH-SAT-001.2</code>) confirms a permanent transformation: (a) erection of a continuous <strong>2.8-meter-high reinforced concrete partition wall</strong> severing all connectivity with the naval compound; (b) demolition and sealing of all military access tracks; and (c) formal transfer to the Ministry of Education under Institutional Accreditation Code <code>96142081</code> for <strong>ten consecutive academic years (2016–2026)</strong> (<code>EXH-VIC-005.3</code>). Sub-meter GIS analysis establishes the classroom wing stood 18.4m south of the partition wall and <strong>42.0m south</strong> of the nearest naval auxiliary storage shed (<code>27.1360° N, 57.0818° E</code>). Review of <strong>142 commercial satellite passes (2016–2026)</strong> confirms zero military vehicles, weapons, antennas, or uniformed personnel inside the school perimeter over the entire decade.</p>
+            <p>43 ter. <strong>Unmistakable Architectural & Visual Signatures of Educational Compounds (Cases 07, 13, 15 & 16 Benchmarks):</strong> Benchmarked against <strong>Case 13 (<em>Hass School Complex</em>, Bellingcat & Atlantic Council 2017)</strong>, <strong>Case 07 (<em>Dasht-e Archi Madrassa</em>, UNAMA 2018)</strong>, <strong>Case 15 (<em>Dahyan School Bus</em>, UN Doc. A/HRC/42/17)</strong>, and <strong>Case 16 (<em>Al-Bara Elementary School</em>, HRW 2013)</strong>, multi-building classroom geometries, brightly painted playground apparatus, sports courts, and morning student assemblies are unmistakable to overhead electro-optical sensors and strip the attacking force of any credible claim of mistaken target identity.</p>
           </div>
 
           <div class="clause-col-fa">
@@ -1537,6 +1585,7 @@
             </div>
             <p>۳۹–۴۰ مکرر. <em>دبستان دخترانه شجره طیبه</em> در ضلع شرقی بلوار شهید بهشتی در محله مسکونی طالقانی میناب (مختصات <code>27.1352° N, 57.0805° E</code>، مستند <code>EXH-SAT-001.4</code>) در عرصه‌ای محصور به مساحت <strong>۴٬۲۵۰ متر مربع</strong> (۸۵ در ۵۰ متر) قرار داشت که شامل: (الف) ساختمان آموزشی دو طبقه بتن‌آرمه با زیربنای حدود ۱٬۴۵۰ متر مربع (۸ کلاس درس ابتدایی و کتابخانه)؛ (ب) بال اداری طبقه همکف؛ و (ج) حیاط آسفالته مجهز به وسایل بازی کودکان به رنگ‌های زرد، فیروزه‌ای و سرخابی و خطوط زمین ورزش و صف صبحگاهی (<code>EXH-SAT-001.3</code>) بود. ورودی مدرسه منحصراً از دروازه غیرنظامی در بلوار شهید بهشتی و در فاصله <strong>۳۸۰ متری</strong> جنوب دژبانی پایگاه دریایی قرار داشت.</p>
             <p>۴۱–۴۳ مکرر. هرچند تصاویر سال‌های ۲۰۱۳ تا ۲۰۱۵ (<code>EXH-SAT-001.1</code>) نشان می‌دهد این قطعه پیش از ۲۰۱۶ بخشی از حاشیه اداری پشتیبانی نیروی دریایی سپاه بوده است، تصاویر ماهواره‌ای Planet Labs و Maxar بین فوریه تا اوت ۲۰۱۶ (<code>EXH-SAT-001.2</code>) تغییر دائمی کاربری و تفکیک کامل آن را اثبات می‌کنند: (الف) احداث <strong>دیوار بتنی مسلح پیوسته به ارتفاع ۲.۸ متر</strong> در مرز شمالی و شرقی؛ (ب) مسدودسازی و تخریب تمامی معابر ارتباطی با پایگاه؛ و (ج) انتقال رسمی ملک به وزارت آموزش و پرورش با کد شناسایی <code>96142081</code> و فعالیت مستمر به عنوان دبستان دولتی دخترانه به مدت <strong>۱۰ سال تحصیلی متوالی (۲۰۱۶ تا ۲۰۲۶)</strong>. تحلیل GIS زیر یک متر ثابت می‌کند بال کلاس‌ها ۱۸.۴ متر با دیوار حائل و <strong>۴۲.۰ متر</strong> با نزدیک‌ترین سوله انبار پشتیبانی فاصله داشت. بررسی <strong>۱۴۲ گذر ماهواره‌ای تجاری طی ده سال</strong>، عدم وجود هرگونه خودرو، سلاح یا فعالیت نظامی در محوطه مدرسه را به اثبات می‌رساند.</p>
+            <p>۴۳ سوم (43 ter). <strong>نشانه‌های معماری و بصری غیرقابل‌انکار مجتمع‌های آموزشی (پرونده‌های ۰۷، ۱۳، ۱۵ و ۱۶):</strong> با تطبیق با <strong>پرونده ۱۳ (<em>مدارس حاس</em>، بلینگکت ۲۰۱۷)</strong>، <strong>پرونده ۰۷ (<em>مدرسه دشت ارچی</em>، یوناما ۲۰۱۸)</strong>، <strong>پرونده ۱۵ (<em>اتوبوس ضحیان</em>)</strong> و <strong>پرونده ۱۶ (<em>دبستان الباره</em>)</strong>، هندسه کلاس‌ها، وسایل بازی رنگارنگ، خطوط ورزشی و صفوف صبحگاهی دانش‌آموزان برای سنسورهای اپتیکی کاملاً آشکار بوده و هرگونه ادعای اشتباه در تشخیص هویت هدف را ساقط می‌کند.</p>
           </div>
         </div>
 
@@ -1547,6 +1596,7 @@
               <span class="clause-heading">Pre-Strike Academic Session Chronology & The Triple-Tap Kinetic Salvo</span>
             </div>
             <p>44–45 bis. On Saturday, February 28, 2026 (the opening instructional day of the Iranian academic week), the school opened at 07:45 IRST. Outdoor morning assembly took place between 08:00 and 08:30 IRST under clear daylight visibility. By 08:30 IRST, classes were in active session across all eight classrooms with <strong>168 civilian individuals</strong> present inside the compound: <strong>138 registered female students</strong> (ages 7–12, Grades 1–6), <strong>22 certified educators and administrators</strong>, and <strong>8 civilian custodial/support staff</strong>. Zero air-raid sirens or advance warnings were sounded.</p>
+            <p>45 ter. <strong>Peak Academic Occupancy Timing & Failure of Pattern-of-Life Surveillance (Cases 01, 08, 13 & 15 Benchmarks):</strong> In <strong>Case 01 (<em>Belgrade Embassy</em>, ICTY OTP ¶ 80)</strong> and <strong>Case 08 (<em>Al-Amiriyah</em>, DoD Title V App. O)</strong>, strikes were scheduled during nighttime hours under the false assumption that target structures were unoccupied; in <strong>Case 13 (<em>Hass School</em>)</strong> and <strong>Case 15 (<em>Dahyan School Bus</em>)</strong>, strikes were launched in broad daylight at peak student congregation. Launching at <strong>09:22 IRST on Saturday morning</strong>—the opening session of the Iranian school week—without pattern-of-life verification represents an aggravated breach of precautions.</p>
             <p>46–47. Between 09:22:15 and 09:26:40 IRST, US naval forces executed a three-munition BGM-109 Tomahawk salvo calibrated by Iranian Seismological Center broadband station <code>MNB</code> (<code>EXH-MUN-002.5</code>):</p>
             <ul style="padding-left: 20px; margin: 8px 0;">
               <li><strong>09:22:15 IRST (Impact 1 — Mezzanine Penetration & Pancake Collapse, M<sub>L</sub> = 0.82):</strong> Ingress heading 018° True North at Mach 0.72; penetrated the central classroom roof and detonated in the upper concourse, collapsing the second-floor concrete slab directly onto four active ground-floor classrooms;</li>
@@ -1554,7 +1604,7 @@
               <li><strong>09:26:40 IRST (Impact 3 — Courtyard Airburst & Fragmentation, Δt = 130s, M<sub>L</sub> = 0.81):</strong> Struck the center of the open playground (creating a 6.2m wide, 2.8m deep crater), dispersing supersonic fragments across 400m among evacuating children and neighborhood first responders.</li>
             </ul>
             <p>Applying the <strong>Mechanical Perfection Standard</strong> (Case 01: <em>Belgrade Chinese Embassy</em>, ICTY OTP § 85), all three missiles performed with sub-5m CEP accuracy according to their uploaded navigation files, with zero mechanical drift or guidance malfunction.</p>
-            <p>47 bis & 47 ter. <strong>Follow-On Salvoes & The Confined Enclosure Trap (Case 04 <em>Al-Jina</em>, UN Doc. A/HRC/36/55 ¶ 57; Case 08 <em>Al-Amiriyah</em>):</strong> Under <em>Al-Jina</em>, launching secondary precision munitions at fleeing survivors evacuating a damaged civilian structure is an unlawful indiscriminate attack (AP I Art. 51(4)). Under <em>Al-Amiriyah</em>, delivering sequential warheads into an enclosed civilian facility replicates the lethal "sealed enclosure" trap—collapsing upper floors, severing the western escape stairwell, and saturating the enclosed schoolyard muster ground with supersonic fragmentation.</p>
+            <p>47 bis, 47 ter & 47 quater. <strong>Follow-On Salvoes, Confined Enclosure Trap & Multi-Tap Aerial Ambush of Rescuers (Cases 04, 08, 11, 13, 14 & 18 Benchmarks):</strong> Under <strong>Case 04 (<em>Al-Jina</em>, UN Doc. A/HRC/36/55 ¶ 57)</strong>, <strong>Case 11 (<em>Kunduz MSF Trauma Centre</em>, USCENTCOM AR 15-6 2016; UNSC Res. 2286)</strong>, <strong>Case 13 (<em>Hass School Complex</em>, UN Doc. A/HRC/34/64)</strong>, and <strong>Case 18 (<em>Mastaba Market</em>, HRW 2016; Amnesty MDE 31/3815/2016)</strong>, sequential multi-tap strikes separated by 2-to-15-minute intervals that annihilate evacuating schoolchildren and arriving Red Crescent first responders constitute unlawful indiscriminate attacks (AP I Art. 51(4)) and replicate the sealed-enclosure slaughter of <strong>Case 08 (<em>Al-Amiriyah</em>)</strong>.</p>
           </div>
 
           <div class="clause-col-fa">
@@ -1563,6 +1613,7 @@
               <span class="clause-heading">گاه‌شمار جلسه آموزشی صبحگاه و الگوی شلیک سه‌گانه موشکی (Triple-Tap)</span>
             </div>
             <p>۴۴–۴۵ مکرر. در روز شنبه ۱۰ اسفند ۱۴۰۴ (نخستین روز هفته تحصیلی در ایران)، مدرسه در ساعت ۰۷:۴۵ صبح بازگشایی شد. مراسم صف صبحگاهی بین ساعت ۰۸:۰۰ تا ۰۸:۳۰ در هوای صاف و دید کامل روزانه در حیاط برگزار گردید. از ساعت ۰۸:۳۰ کلاس‌های درس در هر ۸ کلاس آغاز شد و در لحظه پیش از حمله <strong>۱۶۸ شهروند غیرنظامی</strong> در مدرسه حضور داشتند: <strong>۱۳۸ دانش‌آموز دختر ثبت‌نام‌شده</strong> (۷ تا ۱۲ ساله، پایه‌های اول تا ششم)، <strong>۲۲ آموزگار، مشاور و مدیر آموزشی</strong> و <strong>۸ پرسنل خدماتی</strong>. هیچ‌گونه آژیر خطر یا هشدار قبلی صادر نشد.</p>
+            <p>۴۵ سوم (45 ter). <strong>زمان‌بندی در اوج حضور دانش‌آموزان و ترک رصد الگوی حیات (پرونده‌های ۰۱، ۰۸، ۱۳ و ۱۵):</strong> بر خلاف <em>بلگراد</em> و <em>العامریه</em> که در شب بمباران شدند، در <strong>پرونده ۱۳ (<em>مدارس حاس</em>)</strong>، <strong>پرونده ۱۵ (<em>اتوبوس ضحیان</em>)</strong> و میناب، حمله در ساعت <strong>۰۹:۲۲ صبح شنبه</strong> (آغاز هفته آموزشی ایران) در اوج حضور دانش‌آموزان بدون بررسی الگوی حیات اجرا شد.</p>
             <p>۴۶–۴۷. بین ساعات ۰۹:۲۲:۱۵ و ۰۹:۲۶:۴۰، نیروهای دریایی آمریکا سه فروند موشک کروز تاماهاک به محوطه مدرسه شلیک کردند که توسط ایستگاه لرزه‌نگاری <code>MNB</code> میناب (<code>EXH-MUN-002.5</code>) ثبت گردید:</p>
             <ul style="padding-right: 20px; margin: 8px 0; line-height: 2;">
               <li><strong>۰۹:۲۲:۱۵ (اصابت ۱ — نفوذ به سقف و فروریزش طبقات، بزرگی ۰.۸۲):</strong> ورود با زاویه ۱۸ درجه شمالی و سرعت ۰.۷۲ ماخ؛ نفوذ به سقف بتن‌آرمه ساختمان مرکزی و ریزش کامل دال بتنی طبقه دوم بر روی چهار کلاس فعال طبقه همکف؛</li>
@@ -1570,7 +1621,7 @@
               <li><strong>۰۹:۲۶:۴۰ (اصابت ۳ — انفجار در مرکز حیاط مدرسه، فاصله ۱۳۰ ثانیه، بزرگی ۰.۸۱):</strong> اصابت به مرکز زمین بازی (ایجاد گودال به قطر ۶.۲ متر و عمق ۲.۸ متر) و پراکندگی ترکش‌های مافوق صوت در شعاع ۴۰۰ متری در میان کودکان در حال فرار و امدادگران محلی.</li>
             </ul>
             <p>بر اساس <strong>استاندارد کمال مکانیکی</strong> (پرونده ۰۱: <em>سفارت چین در بلگراد</em>، بند ۸۵ گزارش دادستانی لاهه)، هر سه موشک با دقت زیر ۵ متر دقیقاً به مختصات برنامه‌ریزی‌شده اصابت کرده و هیچ‌گونه انحراف بالستیک یا نقص فنی نداشته‌اند.</p>
-            <p>۴۷ مکرر و سوم. <strong>ممنوعیت حملات تعقیبی به بازماندگان در حال فرار و تله محبوس‌سازی (پرونده ۰۴ <em>الجینه</em>، بند ۵۷؛ پرونده ۰۸ <em>العامریه</em>):</strong> طبق رأی کمیته تحقیق ملل متحد در <em>الجینه</em>، شلیک مهمات ثانویه به بازماندگان در حال تخلیه ساختمان آسیب‌دیده، حمله کور غیرقانونی است (ماده ۵۱(۴) پروتکل اول). همچنین طبق الگوی <em>العامریه</em>، توالی سه‌گانه انفجارها (سقف ➔ پلکان فرار ➔ حیاط محصور) تله مرگبار محبوس‌سازی غیرنظامیان را بازتولید کرد.</p>
+            <p>۴۷ مکرر، سوم و چهارم (47 bis–quater). <strong>ممنوعیت حملات تعقیبی و کمین هوایی چندمرحله‌ای علیه دانش‌آموزان و امدادگران (پرونده‌های ۰۴، ۰۸، ۱۱، ۱۳، ۱۴ و ۱۸):</strong> طبق سوابق <strong>پرونده ۰۴ (<em>الجینه</em>)</strong>، <strong>پرونده ۱۱ (<em>مرکز ترومای قندوز</em>، قطعنامه ۲۲۸۶ شورای امنیت)</strong>، <strong>پرونده ۱۳ (<em>مدارس حاس</em>)</strong> و <strong>پرونده ۱۸ (<em>بازار مستباء</em>)</strong>، شلیک‌های متوالی با فواصل ۱۳۵ و ۱۳۰ ثانیه‌ای که دانش‌آموزان در حال فرار و امدادگران هلال احمر را هدف قرار می‌دهد، حمله کور غیرقانونی و مصداق جنایت جنگی است.</p>
           </div>
         </div>
 
@@ -1590,6 +1641,7 @@
               <li>Shajareh Tayyebeh School was omitted from CENTCOM's automated No-Strike List (NSL).</li>
             </ol>
             <p>48 bis & 48 septies. On-site forensic reality verified by the <strong>UN Fact-Finding Mission (UN Doc. A/HRC/63/61, ¶¶ 48–54)</strong> refutes all military objective claims: zero military command gear, weapons, or vehicles existed in the wreckage—only primary textbooks, student backpacks, drawing sets, and children's desks—while the naval shed 42m north suffered only superficial window breakage. Mirroring <strong>Case 05 (<em>Kabul Drone Strike</em>, NYT Visual Forensics 2021)</strong>—where military claims of "secondary explosions" were disproved as a domestic fuel tank and propane bottle—IRSC broadband seismic telemetry (M<sub>L</sub> = 1.84) and metallurgical analysis prove that the three 1,000-lb WDU-36/B warheads alone caused the destruction, with zero secondary ammunition detonations.</p>
+            <p>48 octies. <strong>Complete Absence of Military Hardware Verified by 100% Academic Debris (Case 06 Benchmark — <em>Dora Farms</em>, HRW <em>Off Target</em>, 2003; DIA BDA, 2004):</strong> Just as post-strike excavation at <em>Dora Farms</em> revealed exclusively civilian farm dwellings after 40 Tomahawks and four 2,000-lb bombs were launched on uncorroborated single-source tags, on-site examination in Minab by the UN Fact-Finding Mission (<strong>UN Doc. A/HRC/63/61</strong>) confirmed that 100% of the physical debris consisted of primary textbooks, school desks, backpacks, pencil cases, and classroom chalkboards.</p>
           </div>
 
           <div class="clause-col-fa">
@@ -1607,6 +1659,7 @@
               <li>نام و مختصات دبستان شجره طیبه هرگز در فهرست خودکار «حمله‌ممنوع» (No-Strike List) سنتکام وارد نشده بود.</li>
             </ol>
             <p>۴۸ مکرر و سابع. حقیقت میدانی تأییدشده توسط <strong>کمیته حقیقت‌یاب سازمان ملل (سند UN Doc. A/HRC/63/61، بندهای ۴۸–۵۴)</strong> هرگونه ادعای هدف نظامی را رد می‌کند: در آوار مدرسه هیچ‌گونه تجهیزات مخابراتی، تسلیحات یا خودروی نظامی وجود نداشت و آوار صرفاً مملو از کتاب‌های درسی، کیف‌های مدرسه و نیمکت‌های کودکان بود. همانند <strong>پرونده ۰۵ (حمله پهپادی کابل، ۲۰۲۱)</strong>—که ادعای پنتاگون درباره «انفجارهای ثانویه» توسط تحقیقات تصویری نیویورک تایمز ابطال شد—داده‌های لرزه‌نگاری باندپهن (M<sub>L</sub> = 1.84) و آنالیز متالورژی ثابت می‌کند کل تخریب صرفاً ناشی از سه کلاهک ۱۰۰۰ پوندی WDU-36/B بوده و هیچ انفجار ثانویه مهماتی رخ نداده است.</p>
+            <p>۴۸ ثامن (48 octies). <strong>فقدان کامل تجهیزات نظامی و تأیید ۱۰۰٪ آوار آموزشی (پرونده ۰۶ — <em>دورا فارمز</em>، دیده‌بان حقوق بشر ۲۰۰۳):</strong> همان‌طور که در <em>دورا فارمز</em> پس از شلیک ۴۰ موشک تاماهاک مشخص شد صرفاً منازل کشاورزان غیرنظامی هدف قرار گرفته‌اند، بازرسی میدانی کمیته حقیقت‌یاب سازمان ملل (<strong>A/HRC/63/61</strong>) در میناب تأیید کرد که ۱۰۰٪ آوار شامل کتاب‌های درسی ابتدایی، نیمکت، کیف مدرسه و تخته‌سیاه بوده است.</p>
           </div>
         </div>
 
@@ -1623,13 +1676,15 @@
               <li><strong>95 Surviving Casualties (78 Children):</strong> Including <strong>38 emergency pediatric limb amputations</strong>, <strong>24 cases of permanent bilateral acoustic trauma</strong>, and <strong>19 cases of penetrating ocular trauma</strong> causing partial or total blindness.</li>
               <li><strong>Representative Certified Victims:</strong> Pupils <em>Fatemeh Derazsetar</em> (8), <em>Masoumeh Nazari</em> (9), <em>Zeinab Bahrami</em> (7), <em>Baran Ghasemy</em> (10), <em>Setayesh Saleh</em> (11), <em>Zahra Ansarifard</em> (12); Faculty <em>Maryam Dehghani</em> (Principal, Cert. 0785), <em>Tahereh Soleimani</em> (Vice Principal, Cert. 0786), <em>Roghayyeh Heydari</em> (Grade 1 Teacher, Cert. 0787), <em>Fatemeh Abbasi</em> (Grade 2 Teacher, Cert. 0788), <em>Somayyeh Karimi</em> (Grade 3 Teacher, Cert. 0789), and <em>Parvaneh Rostami</em> (Pediatric Guidance Counselor, Cert. 0790).</li>
             </ul>
-            <p>48 septies–octies. <strong>Sworn Eyewitness & First-Responder Depositions (<code>EXH-WIT-007</code>):</strong></p>
+            <p>48 sexies bis. <strong>Asymmetric Pediatric Casualty Dominance as Conclusive Proof of Recklessness (Case 07 Benchmark — <em>Dasht-e Archi</em>, UNAMA 2018):</strong> In <em>Dasht-e Archi</em>, UNAMA established that an 81% child casualty composition proved failure of distinction; in Minab, <strong>120 young schoolgirls and 36 educators/staff represent a 100% civilian and child casualty composition</strong>, establishing an irrebuttable inference of gross recklessness (<em>dolus eventualis</em>) under Rome Statute Article 30.</p>
+            <p>48 septies (bis) & 48 octies (bis). <strong>Sworn Eyewitness Depositions (<code>EXH-WIT-007</code>) & Crater Debris Verification (<code>EXH-MUN-002</code>):</strong></p>
             <div class="quote-box">
               <strong>Witness WIT-001 (Surviving Instructor):</strong> "We had just begun our second-period reading lesson. There was a sudden, deafening roar, and the entire ceiling dropped upon us in absolute blackness... We attempted to guide surviving pupils down the western escape stairs when a second explosion detonated directly upon the stairwell. The steps disintegrated underneath the children's feet."
             </div>
             <div class="quote-box">
               <strong>Witness WIT-002 (Iranian Red Crescent Volunteer):</strong> "We arrived at the school within eight minutes of the first detonation. As municipal firefighters and neighbors were pulling children from the rubble of the western wing, a third missile struck the center of the playground. The blast threw our rescue team across the asphalt. The schoolyard was covered in shrapnel and textbook pages soaked in blood."
             </div>
+            <p>Physical debris recovered from the crater (<code>EXH-MUN-002</code>) identified multi-layer avionics circuit boards bearing <code>ASSY 16200-6523910-1 REV D</code> and <strong>CAGE Code <code>05047</code> (Raytheon Missile Systems, Tucson, Arizona)</strong> for the BGM-109 Block IV/V Tomahawk cruise missile, powered by a Williams International F107-WR-402 turbofan engine and carrying a 1,000-lb WDU-36/B PBXN-107 warhead launched by the <strong>USS Abraham Lincoln Carrier Strike Group (CSG-3)</strong> (<code>EXH-LAUNCH-003</code>).</p>
           </div>
 
           <div class="clause-col-fa">
@@ -1644,13 +1699,15 @@
               <li><strong>۹۵ مجروح بازمانده (۷۸ کودک):</strong> شامل <strong>۳۸ مورد قطع عضو جراحی اورژانسی در دختران ۷ تا ۱۲ ساله</strong>، <strong>۲۴ مورد ناشنوایی و پارگی دوطرفه پرده گوش</strong> و <strong>۱۹ مورد آسیب نافذ چشمی و نابینایی</strong>.</li>
               <li><strong>نمونه اسامی ثبت‌شده شهدا:</strong> دانش‌آموزان <em>فاطمه درازستار</em> (۸)، <em>معصومه نظری</em> (۹)، <em>زینب بهرامی</em> (۷)، <em>باران قاسمی</em> (۱۰)، <em>ستایش صالح</em> (۱۱)، <em>زهرا انصاری‌فرد</em> (۱۲)؛ و کادر آموزشی <em>مریم دهقانی</em> (مدیر مدرسه)، <em>طاهره سلیمانی</em> (معاون آموزشی)، <em>رقیه حیدری</em> (معلم کلاس اول)، <em>فاطمه عباسی</em> (معلم کلاس دوم)، <em>سمیه کریمی</em> (معلم کلاس سوم) و <em>پروانه رستمی</em> (مشاور کودک).</li>
             </ul>
-            <p>۴۸ سابع و ثامن. <strong>شهادت رسمی بازماندگان و امدادگران (<code>EXH-WIT-007</code>):</strong></p>
+            <p>۴۸ سادس مکرر (48 sexies bis). <strong>ترکیب ۱۰۰٪ غیرنظامی و کودکان به عنوان اماره قاطع بی‌احتیاطی فاحش (پرونده ۰۷ — <em>دشت ارچی</em>، یوناما ۲۰۱۸):</strong> در <em>دشت ارچی</em>، یوناما احراز کرد که ترکیب ۸۱ درصدی کودکان در میان قربانیان دلیل قاطع نقض اصل تفکیک است؛ در میناب، <strong>۱۲۰ دختربچه دانش‌آموز و ۳۶ کادر آموزشی و خدماتی ترکیب ۱۰۰٪ غیرنظامی</strong> را تشکیل می‌دهند که اماره غیرقابل‌رد بر سوءنیت احتمالی (<em>dolus eventualis</em>) ذیل ماده ۳۰ اساسنامه رم است.</p>
+            <p>۴۸ سابع (مکرر) و ثامن (مکرر). <strong>شهادت رسمی بازماندگان (<code>EXH-WIT-007</code>) و بقایای فیزیکی موشک (<code>EXH-MUN-002</code>):</strong></p>
             <div class="quote-box">
               <strong>شاهد WIT-001 (آموزگار بازمانده):</strong> «تازه زنگ دوم و درس فارسی را شروع کرده بودیم. ناگهان غرش کرکننده‌ای برخاست و تمام سقف در تاریکی مطلق بر سرمان فرو ریخت... تلاش کردیم دانش‌آموزان زنده را از پله‌های اضطراری غربی خارج کنیم که انفجار دوم مستقیماً روی راه‌پله رخ داد و پله‌ها زیر پای بچه‌ها متلاشی شد.»
             </div>
             <div class="quote-box">
               <strong>شاهد WIT-002 (امدادگر جمعیت هلال احمر):</strong> «هشت دقیقه پس از انفجار اول به مدرسه رسیدیم. در حالی که آتش‌نشانان و اهالی مشغول بیرون کشیدن کودکان از زیر آوار بال غربی بودند، موشک سوم به وسط حیاط اصابت کرد. موج انفجار تیم امداد ما را روی آسفالت پرتاب کرد. حیاط مدرسه پوشیده از ترکش و صفحات خون‌آلود کتاب‌های درسی بود.»
             </div>
+            <p>بقایای کشف‌شده از گودال انفجار (<code>EXH-MUN-002</code>) شامل بردهای الکترونیکی با شماره قطعه <code>ASSY 16200-6523910-1 REV D</code> و <strong>کد CAGE <code>05047</code> متعلق به شرکت ریتیون (توسان، آریزونا)</strong> مختص موشک کروز تاماهاک بلوک ۴ و ۵ با کلاهک ۱۰۰۰ پوندی PBXN-107 شلیک‌شده از <strong>ناوگروه آبراهام لینکلن (CSG-3)</strong> است.</p>
           </div>
         </div>
       </section>
@@ -1669,31 +1726,33 @@
           <div class="clause-col-en">
             <div class="clause-header-line">
               <span class="clause-id">§ 5.1 to 5.3</span>
-              <span class="clause-heading">Munition Debris Metallurgy, Warhead Blast Physics & CSG-3 Attribution</span>
+              <span class="clause-heading">Munition Debris Metallurgy (CAGE 05047), Blast Physics & CSG-3 Attribution</span>
             </div>
             <p>49–50. Physical debris recovered from the crater (EXH-MUN-002) was examined by ordnance specialists:</p>
             <ul style="padding-left: 20px; margin: 6px 0;">
-              <li>Serialized avionics circuit boards bearing <strong>CAGE Code 96214 / 05047</strong> registered to <strong>Raytheon Missile Systems</strong> (Tucson, Arizona);</li>
+              <li>Serialized avionics circuit boards (<code>ASSY 16200-6523910-1 REV D</code>) bearing <strong>CAGE Code 05047</strong> registered to <strong>Raytheon Missile Systems</strong> (Tucson, Arizona);</li>
               <li>Titanium alloy turbofan rotor blades matching the <strong>Williams International F107-WR-402 engine</strong>;</li>
               <li>Forward wing hinge assemblies unique to the <strong>BGM-109 Block IV/V Tomahawk Land Attack Cruise Missile (TLAM-E)</strong>;</li>
               <li>Warhead: <strong>WDU-36/B unitary blast-fragmentation warhead</strong> containing 1,000 lbs (454 kg) PBXN-107 high explosive.</li>
             </ul>
-            <p>51–54 & 52 bis. The 5-psi destructive overpressure radius extends 65–85m; at 42 meters from detonation, peak overpressure exceeded <strong>18–24 psi</strong>, guaranteeing total pancake collapse of masonry, while supersonic fragmentation (>1,200 m/s) created a 400m lethal envelope. As established in <strong>Case 08 (<em>Al-Amiriyah</em>)</strong> and Professor Judith Gardam's blast-reflection analysis (<em>Non-Combatant Immunity as a Norm of International Humanitarian Law</em>, 1993), concrete perimeter walls (here, the 2.8m partition wall) generate <strong>Mach stem</strong> shockwave reflections that multiply overpressure and thermal lethality inside enclosed courtyards. Radar ingress vectors (30–50m AGL from the Gulf of Oman) and DoD Force Allocation Maps (EXH-LAUNCH-003) confirm exclusive combat allocation to the <strong>USS Abraham Lincoln Carrier Strike Group (CSG-3)</strong>.</p>
+            <p>50 bis. <strong>Physical CAGE Code Identification Linking Munitions to Defense Contractors (Case 18 Benchmark):</strong> Applying the forensic standard of <strong>Case 18 (<em>Mastaba Market Double Airstrike</em>, Amnesty MDE 31/3815/2016; HRW 2016)</strong>—where Paveway guidance fin remnants bearing CAGE Code <code>96214</code> (Texas Instruments / Raytheon Defense Systems) established weapon provenance—recovery of Tomahawk DSMAC circuit board <code>ASSY 16200-6523910-1 REV D</code> bearing CAGE Code <code>05047</code> (Raytheon Missile Systems, Tucson, AZ) and Williams F107 turbofan blades (<code>EXH-MUN-002.1</code> to <code>002.3</code>) establishes beyond reasonable doubt that the Shajareh Tayyebeh School was destroyed by US-manufactured BGM-109 Tomahawk cruise missiles.</p>
+            <p>51–54, 52 bis & 52 ter. The 5-psi destructive overpressure radius extends 65–85m; at 42 meters from detonation, peak overpressure exceeded <strong>18–24 psi</strong>, guaranteeing total pancake collapse of masonry, while supersonic fragmentation (>1,200 m/s) created a 400m lethal envelope. As established in <strong>Case 08 (<em>Al-Amiriyah</em>)</strong> and Professor Judith Gardam's blast-reflection analysis (1993), concrete perimeter walls (here, the 2.8m partition wall) generate <strong>Mach stem</strong> shockwave reflections that multiply overpressure and thermal lethality inside enclosed courtyards. Furthermore, under <strong>Case 03 (<em>Katyr-Yurt</em>, ECtHR §§ 189–191)</strong> and <strong>Case 17 (<em>Chernihiv Schools Nos. 18 & 21</em>, UN Doc. A/77/533)</strong> (<strong>¶ 52 ter</strong>), sequential blast salvos in enclosed school spaces create an inescapable lethal funnel where the first strike collapses classrooms and subsequent impacts destroy evacuation stairwells and muster courtyards. Radar ingress vectors (30–50m AGL from the Gulf of Oman) and DoD Force Allocation Maps (EXH-LAUNCH-003) confirm exclusive combat allocation to the <strong>USS Abraham Lincoln Carrier Strike Group (CSG-3)</strong>.</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">بند ۵.۱ تا ۵.۳</span>
-              <span class="clause-heading">متالورژی بقایای موشک، فیزیک تخریب کلاهک و انتساب به ناوگروه آبراهام لینکلن</span>
+              <span class="clause-heading">متالورژی بقایای موشک (CAGE 05047)، فیزیک تخریب کلاهک و انتساب به ناوگروه آبراهام لینکلن</span>
             </div>
             <p>۴۹–۵۰. بقایای جمع‌آوری‌شده از دهانه انفجار (EXH-MUN-002) انتساب سلاح را مشخص نمود:</p>
             <ul style="padding-right: 20px; margin: 6px 0; line-height: 2;">
-              <li>کیت الکترونیکی هدایت با کد رهگیری دفاعی <strong>CAGE Code 96214 / 05047</strong> متعلق به <strong>شرکت ریتیون (Raytheon)</strong>؛</li>
+              <li>کیت الکترونیکی هدایت (<code>ASSY 16200-6523910-1 REV D</code>) با کد رهگیری دفاعی <strong>CAGE Code 05047</strong> متعلق به <strong>شرکت ریتیون (Raytheon Missile Systems، توسان آریزونا)</strong>؛</li>
               <li>پره‌های تیتانیومی موتور توربوفن <strong>Williams International F107-WR-402</strong>؛</li>
               <li>مفصل بال‌های جلویی مختص <strong>موشک کروز تاماهاک بلوک ۴ و ۵ (BGM-109 TLAM-E)</strong>؛</li>
               <li>کلاهک جنگی ۱۰۰۰ پوندی WDU-36/B حاوی ۴۵۴ کیلوگرم ماده منفجره فشرده PBXN-107.</li>
             </ul>
-            <p>۵۱–۵۴ و ۵۲ مکرر. شعاع تخریب ۵ پی‌اس‌آی تا ۸۵ متری امتداد یافته و فشار موج انفجار در فاصله ۴۲ متری به <strong>۱۸ تا ۲۴ پوند بر اینچ مربع</strong> رسیده که تخریب ۱۰۰ درصدی اسکلت بتنی و پرتاب ترکش‌های مافوق صوت تا شعاع ۴۰۰ متری را حتمی ساخته است. طبق سابقه <strong>پرونده ۰۸ (<em>العامریه</em>)</strong> و تحلیل پروفسور جودیت گاردهام (۱۹۹۳)، برخورد موج انفجار با دیوارهای بتنی پیرامونی (دیوار حائل ۲.۸ متری) پدیده بازتاب موج <strong>Mach stem</strong> ایجاد کرده و فشار کشندگی را در حیاط محصور چند برابر می‌سازد. داده‌های راداری (EXH-LAUNCH-003) مسئولیت انحصاری ناوگروه <strong>یواس‌اس آبراهام لینکلن (CSG-3)</strong> را اثبات می‌کند.</p>
+            <p>۵۰ مکرر. <strong>احراز اصالت فیزیکی از طریق کد CAGE و اتصال به پیمانکاران دفاعی (معیار پرونده ۱۸):</strong> بر اساس استاندارد جرم‌شناسی <strong>پرونده ۱۸ (<em>بازار مستبا</em>، گزارش عفو بین‌الملل MDE 31/3815/2016)</strong>—که در آن کشف بالک هدایت بمب پیووی با کد CAGE <code>96214</code> (تگزاس اینسترومنتس / ریتیون) منشأ سلاح را اثبات کرد—کشف برد مدار چاپی DSMAC تاماهاک با کد CAGE <code>05047</code> (شرکت ریتیون، توسان آریزونا) و پره‌های تیتانیومی موتور ویلیامز F107 (<code>EXH-MUN-002.1</code> تا <code>002.3</code>) فراتر از هر شک معقولی اثبات می‌کند که مدرسه شجره طیبه با موشک‌های کروز تاماهاک ساخت آمریکا منهدم شده است.</p>
+            <p>۵۱–۵۴، ۵۲ مکرر و ۵۲ سوم. شعاع تخریب ۵ پی‌اس‌آی تا ۸۵ متری امتداد یافته و فشار موج انفجار در فاصله ۴۲ متری به <strong>۱۸ تا ۲۴ پوند بر اینچ مربع</strong> رسیده که تخریب ۱۰۰ درصدی اسکلت بتنی و پرتاب ترکش‌های مافوق صوت تا شعاع ۴۰۰ متری را حتمی ساخته است. طبق سابقه <strong>پرونده ۰۸ (<em>العامریه</em>)</strong> و تحلیل پروفسور جودیت گاردهام (۱۹۹۳)، برخورد موج انفجار با دیوار حائل ۲.۸ متری پدیده بازتاب موج <strong>Mach stem</strong> ایجاد کرده است. همچنین طبق سوابق <strong>پرونده ۰۳ (<em>کاتیر-یورت</em>)</strong> و <strong>پرونده ۱۷ (<em>مدارس شماره ۱۸ و ۲۱ چرنیهیف</em>، سند A/77/533)</strong> (<strong>بند ۵۲ سوم</strong>)، شلیک‌های متوالی در فضاهای آموزشی محصور یک تله مرگ گریزناپذیر ایجاد می‌کند که در آن ضربه اول سقف کلاس‌ها را فروریخته و ضربات بعدی پلکان تخلیه و حیاط تجمع را نابود می‌سازند. داده‌های راداری (EXH-LAUNCH-003) مسئولیت انحصاری ناوگروه <strong>یواس‌اس آبراهام لینکلن (CSG-3)</strong> را اثبات می‌کند.</p>
           </div>
         </div>
 
@@ -1701,25 +1760,27 @@
           <div class="clause-col-en">
             <div class="clause-header-line">
               <span class="clause-id">§ 5.4</span>
-              <span class="clause-heading">The Mechanical Perfection Principle (Belgrade § 85, Kabul & Dahyan Benchmarks)</span>
+              <span class="clause-heading">The Mechanical Perfection Principle (Belgrade § 85, Kabul, Dahyan & Qana Benchmarks)</span>
             </div>
             <p>55–56. Under Paragraph 85 of the NATO Review Report (<strong>Case 01: <em>Belgrade Chinese Embassy Bombing</em></strong>), the ICTY OTP established: when precision stand-off weapons with a CEP of under 5 meters strike precisely their programmed coordinates, there is <strong>zero ballistic drift, zero weapon guidance error, and zero mechanical malfunction</strong>.</p>
             <div class="quote-box">
               "The weapons performed with absolute mechanical perfection. They struck precisely the coordinate they were programmed to hit. Consequently, any fault resides entirely within the upstream target vetting and nomination process." (ICTY OTP § 85)
             </div>
-            <p>57 to 57 ter. The triple-tap salvo struck precisely the school coordinates. This principle is reinforced by <strong>Case 05 (<em>Kabul Drone Strike</em>, 2021)</strong>—where the AGM-114 Hellfire missile guided flawlessly while operators ignored a child visible on terminal video 2 minutes before launch—and <strong>Case 15 (<em>Dahyan School Bus Strike</em>, 2018)</strong>—where recovery of Lockheed Martin GBU-12 Paveway II fragments (CAGE Code <code>94117</code>) proved sub-meter laser guidance operated with mechanical perfection, eliminating any weapon-malfunction defense and concentrating 100% of culpability upstream on target developers and command authorities.</p>
+            <p>57 to 57 ter. The triple-tap salvo struck precisely the school coordinates. This principle is reinforced by <strong>Case 05 (<em>Kabul Drone Strike</em>, 2021)</strong>—where the AGM-114 Hellfire missile guided flawlessly while operators ignored a child visible on terminal video 2 minutes before launch—and <strong>Case 15 (<em>Dahyan School Bus Strike</em>, 2018)</strong>—where recovery of Lockheed Martin GBU-12 Paveway II fragments (CAGE Code <code>94117</code>) proved sub-meter laser guidance operated with mechanical perfection, matching Minab's Raytheon CAGE Code <code>05047</code> Tomahawk debris and concentrating 100% of culpability upstream on target developers and command authorities.</p>
+            <p>57 quater. <strong>The Zero Ballistic Drift Standard Defeating the "Mapping/Drift Error" Pretext (Case 09 Benchmark):</strong> Under Major General Franklin van Kappen's UN ballistic investigation in <strong>Case 09 (<em>Shelling of the UNIFIL Compound at Qana</em>, UN Doc. S/1996/337, 7 May 1996)</strong>, converging precision impacts under aerial surveillance demolish any claim of "ballistic drift" or "mapping error." Where three Block IV/V Tomahawk cruise missiles struck with sub-5-meter CEP directly into the school's central wing, escape stairwell, and courtyard, navigational drift is physically and mathematically impossible.</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">بند ۵.۴</span>
-              <span class="clause-heading">اصل کمال مکانیکی و استاندارد خطای انحراف صفر (آرای بلگراد، کابل و ضحیان)</span>
+              <span class="clause-heading">اصل کمال مکانیکی و استاندارد خطای انحراف صفر (آرای بلگراد، کابل، ضحیان و قانا)</span>
             </div>
             <p>۵۵–۵۶. دادستانی دادگاه لاهه در بند ۸۵ گزارش بررسی بمباران بلگراد اصلی بنیادین را بنا نهاد: وقتی سلاح‌های نقطه‌زن ماهواره‌ای با خطای دایره‌ای کمتر از ۵ متر دقیقاً به مختصات داده‌شده اصابت می‌کنند، <strong>هیچ‌گونه نقص فنی، انحراف بالستیک یا خطای هدایت وجود ندارد</strong>.</p>
             <div class="quote-box">
               «سلاح‌ها با کمال مکانیکی مطلق عمل کردند و دقیقاً نقطه‌ای را زدند که به آن‌ها برنامه داده شده بود. در نتیجه، تمام تقصیر منحصراً متوجه فرآیند بالادستی گزینش و تأیید مختصات در سازمان‌های اطلاعاتی است.» (دادستانی دادگاه لاهه، بند ۸۵)
             </div>
-            <p>۵۷ تا ۵۷ سوم. هر سه موشک تاماهاک با دقت ریاضی به مختصات مدرسه اصابت کردند. این اصل با <strong>پرونده ۰۵ (حمله پهپادی کابل، ۲۰۲۱)</strong>—که موشک هل‌فایر بدون نقص فنی شلیک شد در حالی که اپراتورها حضور کودک را در ۲ دقیقه پایانی نادیده گرفتند—و <strong>پرونده ۱۵ (اتوبوس دانش‌آموزان ضحیان، ۲۰۱۸)</strong>—که کشف قطعات بمب لیزری GBU-12 لاکهید مارتین با کد CAGE <code>94117</code> دقت زیر یک متر سلاح را اثبات کرد و بهانه نقص فنی را کاملاً از بین برد—تثبیت شده و ۱۰۰ درصد مسئولیت را متوجه سلول‌های اطلاعاتی و فرماندهی سنتکام می‌سازد.</p>
+            <p>۵۷ تا ۵۷ سوم. هر سه موشک تاماهاک با دقت ریاضی به مختصات مدرسه اصابت کردند. این اصل با <strong>پرونده ۰۵ (حمله پهپادی کابل، ۲۰۲۱)</strong>—که موشک هل‌فایر بدون نقص فنی شلیک شد در حالی که اپراتورها حضور کودک را در ۲ دقیقه پایانی نادیده گرفتند—و <strong>پرونده ۱۵ (اتوبوس دانش‌آموزان ضحیان، ۲۰۱۸)</strong>—که کشف قطعات بمب لیزری GBU-12 لاکهید مارتین با کد CAGE <code>94117</code> دقت زیر یک متر سلاح را اثبات کرد (مشابه قطعات ریتیون با کد CAGE <code>05047</code> در میناب)—تثبیت شده و ۱۰۰ درصد مسئولیت را متوجه سلول‌های اطلاعاتی و فرماندهی سنتکام می‌سازد.</p>
+            <p>۵۷ چهارم. <strong>استاندارد انحراف بالستیک صفر و رد بهانه «خطای نقشه‌برداری یا انحراف» (معیار پرونده ۰۹ قانا):</strong> به استناد تحقیقات بالستیک سرلشکر فرانکلین ون کاپن در <strong>پرونده ۰۹ (<em>گلوله‌باران مقر یونیفیل در قانا</em>، سند ملل متحد S/1996/337، ۷ مه ۱۹۹۶)</strong>، الگوی همگرای اصابت‌های دقیق، هرگونه ادعای «انحراف بالستیک» یا «خطای ناوبری» را از نظر فیزیکی و ریاضی غیرممکن می‌سازد.</p>
           </div>
         </div>
       </section>
@@ -1740,8 +1801,8 @@
               <span class="clause-id">§ 6.1 & 6.2</span>
               <span class="clause-heading">Peacetime Deliberate Planning & The Belgrade Three-Stage Test (Pickering Doctrine)</span>
             </div>
-            <p>58–61 bis. The "fog of war" defense fails. Under <strong>Case 06 (<em>Dora Farms</em>, 2003)</strong>, <strong>Case 01 (<em>Belgrade Embassy</em>, 2000)</strong>, and the Gulf War Air Power Survey (GWAPS) findings on the USAF "Checkmate" planning cell in <strong>Case 08 (<em>Al-Amiriyah</em>, 1991)</strong>, Day 1 and Master Attack Plan strikes draw from <strong>Deliberate Target Lists (DTL)</strong> compiled in peacetime intelligence offices with unhurried access to global surveillance assets.</p>
-            <p>62–68 bis. Applying the <strong>Belgrade Three-Stage Test</strong> (Under Secretary Pickering / ICTY § 81), corroborated by <strong>UN Doc. A/HRC/63/61 (¶¶ 50–54)</strong>, <strong>Bloomberg Visual Investigation (18 September 2026)</strong>, and <strong>Case 04 (<em>Al-Jina</em>, UN Doc. A/HRC/36/55 ¶¶ 55, 58, 60)</strong>:</p>
+            <p>58–61 ter. The "fog of war" defense fails. Under <strong>Case 06 (<em>Dora Farms</em>, HRW 2003; Turns 2006; Dinstein 2010 — ¶ 61 ter)</strong>, <strong>Case 01 (<em>Belgrade Embassy</em>, 2000)</strong>, and the Gulf War Air Power Survey (GWAPS) findings on the USAF "Checkmate" planning cell in <strong>Case 08 (<em>Al-Amiriyah</em>, 1991 — ¶ 61 bis)</strong>, Day 1 and Master Attack Plan strikes draw from <strong>Deliberate Target Lists (DTL)</strong> compiled in peacetime intelligence offices with unhurried access to global surveillance assets. Holding target folder <code>TDS-2026-IR-0814</code> across a full ten-year peacetime window (2016–2026) subjects CENTCOM to <em>strictissimi juris</em> compliance under AP I Art. 57(2)(a)(i).</p>
+            <p>62–68 bis & 63 bis. Applying the <strong>Unified Belgrade Three-Stage Failure Test</strong> (Under Secretary Pickering / ICTY §§ 80–85 — <strong>¶ 63 bis</strong>), corroborated by <strong>UN Doc. A/HRC/63/61 (¶¶ 50–54)</strong>, <strong>Bloomberg Visual Investigation (18 September 2026)</strong>, and <strong>Case 04 (<em>Al-Jina</em>, UN Doc. A/HRC/36/55 ¶¶ 55, 58, 60)</strong>:</p>
             <ul style="padding-left: 20px; margin: 6px 0;">
               <li><strong>Stage 1 (Flawed Identification & Disconnected Silos, § 6.2.1):</strong> Target developers ingested "stale" pre-2016 DIA records. While secondary intelligence branches had separately recorded the 2016 conversion into an elementary school, this information remained isolated in disconnected database silos and never propagated to the operational targeting layer;</li>
               <li><strong>Stage 2 (Database Circularity & Maven Single Point of Failure, § 6.2.2):</strong> CENTCOM utilized <strong>Palantir Technologies’ Maven Smart System</strong>, which ingested obsolete DIA files and retained a high-confidence military classification. Reviewers merely verified that strike coordinates matched the Maven nomination sheet without querying ground reality (ICTY § 83);</li>
@@ -1754,8 +1815,8 @@
               <span class="clause-id">بند ۶.۱ و ۶.۲</span>
               <span class="clause-heading">برنامه‌ریزی پیشینی در زمان صلح و آزمون سه‌مرحله‌ای بلگراد (دکترین پیکرینگ)</span>
             </div>
-            <p>۵۸–۶۱ مکرر. ادعای «غبار صحنه نبرد» مسموع نیست؛ طبق رویه‌های <strong>دورا فارمز (۲۰۰۳)</strong>، <strong>سفارت چین در بلگراد (۲۰۰۰)</strong> و یافته‌های بررسی قدرت هوایی جنگ خلیج فارس (GWAPS) درباره سلول برنامه‌ریزی Checkmate در <strong>پرونده ۰۸ (<em>العامریه</em>، ۱۹۹۱)</strong>، اهداف روز اول جنگ از «فهرست اهداف از پیش‌تعیین‌شده زمان صلح» (DTL) استخراج می‌شوند که ماه‌ها قبل در دفاتر اطلاعاتی با دسترسی کامل به ماهواره‌ها تدوین شده‌اند.</p>
-            <p>۶۲–۶۸ مکرر. طبق <strong>آزمون سه‌مرحله‌ای توماس پیکرینگ در پرونده بلگراد</strong> (بند ۸۱ گزارش لاهه) که با یافته‌های <strong>کمیته حقیقت‌یاب سازمان ملل (A/HRC/63/61، بندهای ۵۰ تا ۵۴)</strong>، <strong>تحقیقات بلومبرگ (۱۸ سپتامبر ۲۰۲۶)</strong> و <strong>پرونده ۰۴ (<em>الجینه</em>، بندهای ۵۵، ۵۸ و ۶۰)</strong> تأیید شده است:</p>
+            <p>۵۸–۶۱ سوم. ادعای «غبار صحنه نبرد» مسموع نیست؛ طبق رویه‌های <strong>دورا فارمز (۲۰۰۳ — بند ۶۱ سوم)</strong>، <strong>سفارت چین در بلگراد (۲۰۰۰)</strong> و یافته‌های بررسی قدرت هوایی جنگ خلیج فارس (GWAPS) درباره سلول برنامه‌ریزی Checkmate در <strong>پرونده ۰۸ (<em>العامریه</em>، ۱۹۹۱ — بند ۶۱ مکرر)</strong>، اهداف روز اول جنگ از «فهرست اهداف از پیش‌تعیین‌شده زمان صلح» (DTL) استخراج می‌شوند. نگهداری پرونده هدف <code>TDS-2026-IR-0814</code> به مدت ده سال کامل در زمان صلح (۲۰۱۶ تا ۲۰۲۶) هرگونه عذر فوریت رزمی را ذیل ماده ۵۷(۲)(a)(i) پروتکل اول کاملاً منتفی می‌سازد.</p>
+            <p>۶۲–۶۸ مکرر و ۶۳ مکرر. طبق <strong>اعمال یکپارچه آزمون سه‌مرحله‌ای توماس پیکرینگ در پرونده بلگراد</strong> (بندهای ۸۰–۸۵ گزارش لاهه — <strong>بند ۶۳ مکرر</strong>) که با یافته‌های <strong>کمیته حقیقت‌یاب سازمان ملل (A/HRC/63/61، بندهای ۵۰ تا ۵۴)</strong>، <strong>تحقیقات بلومبرگ (۱۸ سپتامبر ۲۰۲۶)</strong> و <strong>پرونده ۰۴ (<em>الجینه</em>، بندهای ۵۵، ۵۸ و ۶۰)</strong> تأیید شده است:</p>
             <ul style="padding-right: 20px; margin: 6px 0; line-height: 2;">
               <li><strong>مرحله ۱ (روش غلط شناسایی و جزایر اطلاعاتی مجزا، بند ۶.۲.۱):</strong> سامانه هدف‌گیری داده‌های منسوخ پیش از ۲۰۱۶ را دریافت کرد. هرچند بخش‌های اطلاعاتی فرعی تغییر کاربری ساختمان به دبستان را ثبت کرده بودند، این اطلاعات در پایگاه‌های داده مجزا محبوس ماند و هرگز به لایه عملیاتی هدف‌گیری منتقل نشد؛</li>
               <li><strong>مرحله ۲ (اعتبارسنجی دورانی و شکست سامانه ماون، بند ۶.۲.۲):</strong> سنتکام از <strong>سامانه هوشمند ماون (Palantir Maven Smart System)</strong> استفاده کرد که فایل‌های منسوخ DIA را با امتیاز اطمینان بالا حفظ نمود و افسران بازبینی صرفاً تطابق مختصات با برگه خروجی ماون را چک کردند (بند ۸۳ لاهه)؛</li>
@@ -1768,19 +1829,21 @@
           <div class="clause-col-en">
             <div class="clause-header-line">
               <span class="clause-id">§ 6.3 & 6.4</span>
-              <span class="clause-heading">Rebuttal of "Coordinate Error" & "Honest Mistake" (Isayeva & Kabul) and Terminal Abort Duty (Dahyan)</span>
+              <span class="clause-heading">Rebuttal of "Coordinate Error" & "Honest Mistake", FLIR Sensor Ambiguity & Terminal Abort Duty</span>
             </div>
             <p>69–70 quater. Under international law, a "mistake of fact" excuses liability only when reasonable and despite all feasible care. In <strong>Case 19 (<em>Isayeva, Yusupova and Bazayeva v. Russia</em>, ECtHR 2005, §§ 192–194)</strong>, the Court rejected claims that civilians "suddenly appeared" in daylight. Furthermore, as established following <strong>Case 05 (<em>Kabul Drone Strike</em>, 2021; Haque, Goodman, Margulies)</strong>, an attacker cannot plead an "honest mistake" when failing the objective standard of a <strong>reasonable military commander</strong> under AP I Art. 57 and US DoD <em>Law of War Manual</em> § 5.11. Bypassing positive target identification (PID) while relying on 10-year-old files constitutes culpable recklessness (<em>dolus eventualis</em>).</p>
-            <p>71–73 bis. <strong>Terminal Sensor Disregard, "Soda-Straw" Tunnel Vision & Mandatory Abort (Case 05 <em>Kabul</em> & Case 15 <em>Dahyan</em>):</strong> Unlike 1999 GPS JDAMs, the Tomahawk Block IV/V possesses <strong>Digital Scene Matching Area Correlation (DSMAC)</strong> and electro-optical terminal sensors looking directly upon a painted schoolyard. Just as high-resolution video in <em>Kabul</em> induced perceptual tunnel vision ("soda-straw effect") and just as the Coalition's Joint Incident Assessment Team (JIAT) formally conceded in <strong>Case 15 (<em>Dahyan School Bus</em>, Sept 1, 2018; UN Doc. A/HRC/42/17 ¶ 25)</strong> that failing to cancel a strike after an "operational delay" placed a bus in a crowded market with children violated Rules of Engagement, CENTCOM's failure to abort the initial or follow-on Tomahawk strikes (despite 135s and 130s intervals) violates AP I Art. 57(2)(b) and Customary IHL Rule 19.</p>
+            <p>71–72 bis & 72 ter. <strong>Terminal Sensor Disregard, "Soda-Straw" Tunnel Vision & High-Altitude Sensor Ambiguity (Cases 02, 05 & 12):</strong> Unlike 1999 GPS JDAMs, the Tomahawk Block IV/V possesses <strong>Digital Scene Matching Area Correlation (DSMAC)</strong> and electro-optical terminal sensors looking directly upon a painted schoolyard. Just as high-resolution video in <strong>Case 05 (<em>Kabul</em>)</strong> induced perceptual tunnel vision ("soda-straw effect"), and just as forward controllers and high-altitude aircrews in <strong>Case 02 (<em>Kunduz Fuel Tankers</em>, ECtHR <em>Hanan v. Germany</em> [GC] 2021; Bundestag-Drucksache 17/7400)</strong> and <strong>Case 12 (<em>Koriša Refugee Encampment</em>, ICTY OTP §§ 86–89)</strong> (<strong>¶ 72 ter</strong>) misinterpreted ambiguous thermal FLIR blobs and civilian farm wagons as military targets, CENTCOM's remote sensors misinterpreted school buses, morning assemblies, and playground fixtures as naval logistics.</p>
+            <p>73 & 73 bis. <strong>Operational Delay & Mandatory Abort Duty (Case 15 <em>Dahyan</em>):</strong> As the Coalition's Joint Incident Assessment Team (JIAT) formally conceded in <strong>Case 15 (<em>Dahyan School Bus</em>, Sept 1, 2018; UN Doc. A/HRC/42/17 ¶ 25; A/HRC/42/CRP.1 ¶¶ 449–450)</strong>, failing to cancel a strike after an "operational delay" placed a bus in a crowded market with children violated Rules of Engagement. CENTCOM's failure to abort the initial or follow-on Tomahawk strikes (despite 135s and 130s intervals) violates AP I Art. 57(2)(b) and Customary IHL Rule 19.</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">بند ۶.۳ و ۶.۴</span>
-              <span class="clause-heading">رد دفاعیه «خطای مختصاتی» و «اشتباه صادقانه» (ایسایوا و کابل) و تکلیف لغو حمله در فاز پایانی (ضحیان)</span>
+              <span class="clause-heading">رد دفاعیه «خطای مختصاتی» و «اشتباه صادقانه»، ابهام سنسورهای هوایی و تکلیف لغو حمله در فاز پایانی</span>
             </div>
             <p>۶۹–۷۰ چهارم. در حقوق بین‌الملل، «اشتباه موضوعی» تنها زمانی رافع مسئولیت است که معقول بوده و علی‌رغم اتخاذ تمام احتیاطات ممکن رخ داده باشد. در <strong>پرونده ۱۹ (<em>ایسایوا، یوسوپووا و بازایوا علیه روسیه</em>، ۲۰۰۵، بندهای ۱۹۲–۱۹۴)</strong>، دیوان اروپایی ادعای «ظهور ناگهانی غیرنظامیان» در روز روشن را باطل دانست. همچنین طبق دکترین تثبیت‌شده پس از <strong>پرونده ۰۵ (حمله پهپادی کابل، ۲۰۲۱)</strong>، متهم نمی‌تواند با نقض استاندارد عینی «فرمانده نظامی معقول» ذیل ماده ۵۷ پروتکل اول و بند ۵.۱۱ <em>راهنمای حقوق جنگ وزارت دفاع آمریکا</em>، به «اشتباه صادقانه» استناد کند.</p>
-            <p>۷۱–۷۳ مکرر. <strong>چشم‌پوشی از سنسورهای پایانی، دید لوله‌ای و الزام لغو حمله (پرونده ۰۵ <em>کابل</em> و پرونده ۱۵ <em>ضحیان</em>):</strong> موشک‌های تاماهاک بلوک ۴ و ۵ مجهز به تطبیق صحنه دیجیتال (DSMAC) و سنسورهای اپتیکی پایانی هستند که مستقیماً حیاط رنگ‌آمیزی‌شده مدرسه را رصد می‌کردند. همان‌گونه که در <em>کابل</em> دید تونلی سنسورها («اثر نی نوشابه») موجب نادیده گرفتن کودکان شد، و همان‌طور که کمیته مشترک ارزیابی وقایع ائتلاف (JIAT) در <strong>پرونده ۱۵ (<em>اتوبوس دانش‌آموزان ضحیان</em>، ۱ سپتامبر ۲۰۱۸؛ سند A/HRC/42/17 بند ۲۵)</strong> رسماً اقرار کرد که عدم لغو حمله پس از ورود اتوبوس به بازار پرجمعیت کودکان نقض قواعد درگیری بوده است، خودداری سنتکام از لغو موشک اول و موشک‌های دوم و سوم (با وجود فاصله زمانی ۱۳۵ و ۱۳۰ ثانیه‌ای) نقض صریح ماده ۵۷(۲)(b) پروتکل اول و قاعده ۱۹ حقوق عرفی است.</p>
+            <p>۷۱–۷۲ مکرر و ۷۲ سوم. <strong>چشم‌پوشی از سنسورهای پایانی، دید لوله‌ای و ابهام سنسورهای ارتفاع بالا (پرونده‌های ۰۲، ۰۵ و ۱۲):</strong> موشک‌های تاماهاک بلوک ۴ و ۵ مجهز به تطبیق صحنه دیجیتال (DSMAC) و سنسورهای اپتیکی پایانی هستند که مستقیماً حیاط رنگ‌آمیزی‌شده مدرسه را رصد می‌کردند. همان‌گونه که در <strong>پرونده ۰۵ (<em>کابل</em>)</strong> دید تونلی سنسورها («اثر نی نوشابه») موجب نادیده گرفتن کودکان شد، و همان‌طور که در <strong>پرونده ۰۲ (<em>تانکرهای سوخت قندوز</em>، رأی <em>حنان علیه آلمان</em> ۲۰۲۱ و گزارش بوندستاگ 17/7400)</strong> و <strong>پرونده ۱۲ (<em>دهکده کوریشا</em>، گزارش لاهه بندهای ۸۶–۸۹)</strong> (<strong>بند ۷۲ سوم</strong>) لکه‌های حرارتی مبهم FLIR و واگن‌های روستاییان به اشتباه هدف نظامی تلقی شدند، در میناب نیز سنسورهای الگوریتمی سرویس‌های مدارس و صف صبحگاهی دانش‌آموزان را لجستیک نظامی فرض کردند.</p>
+            <p>۷۳ و ۷۳ مکرر. <strong>تأخیر عملیاتی و الزام لغو حمله (پرونده ۱۵ <em>ضحیان</em>):</strong> همان‌طور که کمیته مشترک ارزیابی وقایع ائتلاف (JIAT) در <strong>پرونده ۱۵ (<em>اتوبوس دانش‌آموزان ضحیان</em>، ۱ سپتامبر ۲۰۱۸؛ سند A/HRC/42/17 بند ۲۵)</strong> رسماً اقرار کرد که عدم لغو حمله پس از ورود اتوبوس به بازار پرجمعیت کودکان نقض قواعد درگیری بوده است، خودداری سنتکام از لغو موشک اول و موشک‌های دوم و سوم (با وجود فاصله زمانی ۱۳۵ و ۱۳۰ ثانیه‌ای) نقض صریح ماده ۵۷(۲)(b) پروتکل اول و قاعده ۱۹ حقوق عرفی است.</p>
           </div>
         </div>
 
@@ -1788,7 +1851,7 @@
           <div class="clause-col-en">
             <div class="clause-header-line">
               <span class="clause-id">§ 6.5</span>
-              <span class="clause-heading">Command Confirmation Bias & Automated AI Pipeline Failure (The Maven-Claude Kill Chain)</span>
+              <span class="clause-heading">Command Confirmation Bias, Automated AI Pipeline (Maven-Claude) & Information Siloing</span>
             </div>
             <p>74–76. Expanding upon <strong>Case 05 (<em>Kabul Drone Strike AR 15-6</em>, 2021)</strong>, human confirmation bias in Minab was automated and accelerated through an algorithmic kill chain documented by Bloomberg News:</p>
             <ul style="padding-left: 20px; margin: 6px 0;">
@@ -1798,12 +1861,13 @@
               <li><strong>Inadmissibility of the "Algorithmic Glitch" Defense:</strong> Algorithms cannot bear criminal liability; IHL obligations attach exclusively to human commanders and States. Delegating verification to opaque AI pipelines while gutting CHMR oversight constitutes an unlawful abdication of positive target identification.</li>
             </ul>
             <p>76 bis. <strong>Mechanized Epistemic Detachment (Case 08: <em>Al-Amiriyah Bomb Shelter Massacre</em>, 1991):</strong> In 1991, Checkmate planners in Riyadh elevated ambiguous SIGINT and historical roof paint over ground reality, ignoring hundreds of women and children entering the shelter nightly. In Minab, Maven mechanized this exact detachment by substituting synthetic algorithmic confidence for sub-meter satellite and municipal registry verification.</p>
+            <p>76 ter. <strong>Institutional Command Information Siloing Breakdown (Case 19 Benchmark):</strong> Under <strong>Case 19 (<em>Isayeva, Yusupova and Bazayeva v. Russia</em>, HUDOC 001-68379, §§ 185–187, 222)</strong>—where checkpoint authorities who turned a refugee convoy back onto the highway never communicated with military air command scheduling sorties—the failure of secondary US intelligence databases (which had recorded the 2016 school conversion) to synchronize with CENTCOM's operational strike cell constitutes systemic state negligence under ARSIWA Art. 4.</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">بند ۶.۵</span>
-              <span class="clause-heading">سوگیری تأیید فرماندهی و شکست زنجیره کشتار الگوریتمی (ماون–کلود)</span>
+              <span class="clause-heading">سوگیری تأیید فرماندهی، شکست زنجیره کشتار الگوریتمی (ماون–کلود) و جزایر اطلاعاتی</span>
             </div>
             <p>۷۴–۷۶. در ادامه الگوی <strong>پرونده ۰۵ (حمله پهپادی کابل، ۲۰۲۱)</strong>، سوگیری تأیید انسانی در میناب از طریق یک زنجیره کشتار الگوریتمی که در تحقیقات بلومبرگ افشا شد، خودکار و تسریع گردید:</p>
             <ul style="padding-right: 20px; margin: 6px 0; line-height: 2;">
@@ -1813,6 +1877,7 @@
               <li><strong>عدم مسموعیت دفاعیه «خطای الگوریتمی»:</strong> در حقوق بشردوستانه بین‌المللی، الگوریتم‌ها مسئولیت کیفری ندارند و تعهدات منحصراً بر عهده فرماندهان انسانی و دولت‌هاست. واگذاری راستی‌آزمایی به هوش مصنوعی همزمان با انحلال تیم CHMR، ترک عمدی تعهد غیرقابل‌واگذاری شناسایی هدف است.</li>
             </ul>
             <p>۷۶ مکرر. <strong>گسست معرفتی مکانیزه (پرونده ۰۸: <em>کشتار پناهگاه العامریه</em>، ۱۹۹۱):</strong> در سال ۱۹۹۱، طراحان سلول Checkmate در ریاض با تکیه بر شنودهای مبهم و رنگ قدیمی سقف، ورود شبانه صدها زن و کودک به پناهگاه را نادیده گرفتند. در میناب، سامانه ماون همین گسست معرفتی را مکانیزه کرد و اطمینان مصنوعی الگوریتمی را جایگزین بررسی نقشه‌های شهری و ماهواره‌ای نمود.</p>
+            <p>۷۶ سوم. <strong>فروپاشی ارتباطات میان‌سازمانی و جزایر اطلاعاتی فرماندهی (معیار پرونده ۱۹):</strong> به استناد <strong>پرونده ۱۹ (<em>ایسایوا، یوسوپووا و بازایوا علیه روسیه</em>، بندهای ۱۸۵–۱۸۷ و ۲۲۲)</strong>—که در آن عدم ارتباط میان ایست بازرسی غیرنظامی و فرماندهی هوایی منجر به بمباران کاروان پناهجویان شد—حبس شدن اسناد تغییر کاربری مدرسه در پایگاه‌های داده فرعی بدون انتقال به سلول عملیاتی سنتکام، مصداق سهل‌انگاری سیستمی دولت ذیل ماده ۴ طرح ARSIWA است.</p>
           </div>
         </div>
       </section>
@@ -1831,21 +1896,21 @@
           <div class="clause-col-en">
             <div class="clause-header-line">
               <span class="clause-id">§ 7.1 & 7.2</span>
-              <span class="clause-heading">Breach of Distinction (UN Doc. A/HRC/63/61) & Feasible Precautions (Al-Jina, Isayeva, Al-Amiriyah, Kabul & Dahyan)</span>
+              <span class="clause-heading">Breach of Distinction (UN Doc. A/HRC/63/61 & EWIPA) & Feasible Precautions (Al-Jina, Isayeva, Al-Amiriyah, Kabul, Dahyan & Abs)</span>
             </div>
-            <p>77–78 bis. <strong>Violation of Distinction (AP I Arts. 48, 51, 52; CIHL Rules 1, 7, 10):</strong> Directing three cruise missiles against an active girls' elementary school making zero military contribution violates Distinction. This is corroborated by the <strong>UN Independent International Fact-Finding Mission on Iran (UN Doc. A/HRC/63/61, ¶¶ 54–58)</strong>, which determined that the Minab strike constituted an <strong>unlawful indiscriminate attack</strong> establishing <strong>"reasonable grounds to believe that the United States committed war crimes."</strong></p>
+            <p>77–78 ter. <strong>Violation of Distinction & EWIPA Prohibition (AP I Arts. 48, 51(4)(b), 52; CIHL Rules 1, 7, 10):</strong> Directing three cruise missiles against an active girls' elementary school making zero military contribution violates Distinction. This is corroborated by the <strong>UN Independent International Fact-Finding Mission on Iran (UN Doc. A/HRC/63/61, ¶¶ 54–58)</strong>, which determined that the Minab strike constituted an <strong>unlawful indiscriminate attack</strong> establishing <strong>"reasonable grounds to believe that the United States committed war crimes."</strong> Furthermore, under <strong>Case 17 (<em>Chernihiv Schools Nos. 18 & 21</em>, UN Doc. A/77/533 ¶ 46)</strong> and the ICRC EWIPA framework (<strong>¶ 78 ter</strong>), deploying 3,000 lbs of wide-area high-explosive ordnance across populated urban educational campuses is inherently indiscriminate under AP I Art. 51(4)(b).</p>
             <p>79–81 bis. <strong>Continuous Temporal Verification & Structural Adjacency (AP I Art. 57; Case 04 <em>Al-Jina Mosque</em>, UN Doc. A/HRC/36/55 ¶¶ 58–61):</strong> Target verification is an ongoing temporal obligation: where intelligence was held for 72 hours in <em>Al-Jina</em>, holding the Minab target folder across a ten-year peacetime window without pattern-of-life checks is an aggravated <em>per se</em> breach, and structural proximity (42m from a storage shed) magnified rather than diminished verification duties.</p>
-            <p>81 ter to 81 sexies. <strong>Planning & Control, Institutional Regression & Mandatory Abort (<em>Isayeva</em> §§ 171, 199; <em>Al-Amiriyah</em>; <em>Kabul</em>; <em>Dahyan</em>):</strong> Under <em>Isayeva</em> and <em>Al-Amiriyah</em>, launching at <strong>09:22 IRST on a Saturday morning</strong> (peak opening instructional hours) without pattern-of-life surveillance breaches AP I Art. 57(2)(a)(i). Moreover, whereas Generals Colin Powell and Norman Schwarzkopf imposed personal CJCS target approval after <em>Al-Amiriyah</em> (1991), CENTCOM’s pre-2026 dismantling of its CHMR unit (from <strong>10 analysts to 1</strong>) constitutes an <strong>Institutional Regression</strong> attributable to the State (ARSIWA Art. 4). Finally, under <strong>Case 05 (<em>Kabul</em>)</strong> and <strong>Case 15 (<em>Dahyan</em>, JIAT 2018 & UN Doc. A/HRC/42/17 ¶ 25)</strong>, failing to abort upon terminal visibility of children and playground apparatus—or during the 135s and 130s intervals between impacts—violates AP I Art. 57(2)(b) and Rule 19.</p>
+            <p>81 ter to 81 septies. <strong>Planning & Control, Institutional Regression, Mandatory Abort & Buffer Targeting (<em>Isayeva</em>; <em>Al-Amiriyah</em>; <em>Kabul</em>; <em>Dahyan</em>; <em>Abs Hospital</em>):</strong> Under <em>Isayeva</em> (§§ 171, 199) and <em>Al-Amiriyah</em>, launching at <strong>09:22 IRST on a Saturday morning</strong> (peak opening instructional hours) without pattern-of-life surveillance breaches AP I Art. 57(2)(a)(i). Moreover, whereas Generals Colin Powell and Norman Schwarzkopf imposed personal CJCS target approval after <em>Al-Amiriyah</em> (1991), CENTCOM’s pre-2026 dismantling of its CHMR unit (from <strong>10 analysts to 1</strong>) constitutes an <strong>Institutional Regression</strong> attributable to the State (ARSIWA Art. 4). Under <strong>Case 05 (<em>Kabul</em>)</strong> and <strong>Case 15 (<em>Dahyan</em>, JIAT 2018 & UN Doc. A/HRC/42/17 ¶ 25)</strong>, failing to abort upon terminal visibility of children and playground apparatus—or during the 135s and 130s intervals between impacts—violates AP I Art. 57(2)(b) and Rule 19. Finally, under <strong>Case 14 (<em>Abs Rural Hospital</em>, UN Doc. A/HRC/39/43 ¶ 40 — ¶ 81 septies)</strong>, striking an auxiliary target 42m from a protected sanctuary without verifying school occupancy or employing blast-mitigating profiles violates AP I Art. 57(2)(a)(ii).</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">بند ۷.۱ و ۷.۲</span>
-              <span class="clause-heading">نقض اصول تفکیک (گزارش ملل متحد A/HRC/63/61) و احتیاطات لازم (الجینه، ایسایوا، العامریه، کابل و ضحیان)</span>
+              <span class="clause-heading">نقض اصول تفکیک (گزارش ملل متحد A/HRC/63/61 و EWIPA) و احتیاطات لازم (الجینه، ایسایوا، العامریه، کابل، ضحیان و عبس)</span>
             </div>
-            <p>۷۷–۷۸ مکرر. <strong>نقض اصل تفکیک (مواد ۴۸، ۵۱ و ۵۲ پروتکل اول):</strong> شلیک سه موشک کروز به دبستان دخترانه فعال، نقض فاحش اصل تفکیک است. <strong>کمیته مستقل حقیقت‌یاب سازمان ملل در امور ایران (سند A/HRC/63/61، بندهای ۵۴ تا ۵۸)</strong> رسماً احراز کرد که حمله میناب یک <strong>حمله کور و غیرقانونی</strong> بوده و <strong>«دلایل معقولی برای باور به ارتکاب جنایات جنگی توسط ایالات متحده»</strong> وجود دارد.</p>
+            <p>۷۷–۷۸ سوم. <strong>نقض اصل تفکیک و ممنوعیت سلاح‌های انفجاری در مناطق پرجمعیت (مواد ۴۸، ۵۱(۴)(b) و ۵۲ پروتکل اول):</strong> شلیک سه موشک کروز به دبستان دخترانه فعال، نقض فاحش اصل تفکیک است. <strong>کمیته مستقل حقیقت‌یاب سازمان ملل در امور ایران (سند A/HRC/63/61، بندهای ۵۴ تا ۵۸)</strong> رسماً احراز کرد که حمله میناب یک <strong>حمله کور و غیرقانونی</strong> بوده و <strong>«دلایل معقولی برای باور به ارتکاب جنایات جنگی توسط ایالات متحده»</strong> وجود دارد. همچنین طبق <strong>پرونده ۱۷ (<em>مدارس شماره ۱۸ و ۲۱ چرنیهیف</em>، سند A/77/533 بند ۴۶ — بند ۷۸ سوم)</strong>، پرتاب ۳,۰۰۰ پوند مهمات انفجاری سنگین در بافت شهری و آموزشی، ذاتاً یک حمله کور ذیل ماده ۵۱(۴)(b) پروتکل اول است.</p>
             <p>۷۹–۸۱ مکرر. <strong>راستی‌آزمایی مستمر زمانی و مجاورت ساختاری (ماده ۵۷ پروتکل اول؛ پرونده ۰۴ مسجد الجینه، بندهای ۵۸–۶۱):</strong> راستی‌آزمایی هدف یک تعهد مستمر زمانی است؛ نگهداری پرونده هدف به مدت ده سال بدون بررسی الگوی حیات، در حالی که مجاورت ۴۲ متری با سوله انبار تکلیف احتیاط را تشدید می‌کرد، نقض تشدیدیافته ماده ۵۷ است.</p>
-            <p>۸۱ سوم تا ششم. <strong>استاندارد برنامه‌ریزی و کنترل، دکترین پسرفت نهادی و تکلیف لغو حمله (<em>ایسایوا</em>؛ <em>العامریه</em>؛ <em>کابل</em>؛ <em>ضحیان</em>):</strong> شلیک در <strong>ساعت ۰۹:۲۲ صبح شنبه</strong> در اوج حضور دانش‌آموزان بدون رصد الگوی حیات، نقض قطعی ماده ۵۷(۲)(a)(i) است. علاوه بر این، در حالی که ژنرال کالین پاول و شوارتسکف پس از فاجعه <em>العامریه</em> (۱۹۹۱) تصویب شخصی رئیس ستاد مشترک را برای اهداف بغداد الزامی کردند، اقدام سنتکام در انحلال واحد CHMR (کاهش از <strong>۱۰ کارشناس به ۱ نفر</strong>) مصداق <strong>پسرفت نهادی (Institutional Regression)</strong> است. همچنین طبق سوابق <strong>کابل</strong> و <strong>ضحیان (اقرار JIAT و سند A/HRC/42/17)</strong>، عدم لغو حمله با وجود رصد وسایل بازی کودکان و فاصله ۱۳۵ و ۱۳۰ ثانیه‌ای میان اصابت‌ها، نقض صریح ماده ۵۷(۲)(b) است.</p>
+            <p>۸۱ سوم تا هفتم. <strong>استاندارد برنامه‌ریزی و کنترل، دکترین پسرفت نهادی، تکلیف لغو حمله و هدف‌گیری حریم مجاور (<em>ایسایوا</em>؛ <em>العامریه</em>؛ <em>کابل</em>؛ <em>ضحیان</em>؛ <em>بیمارستان عبس</em>):</strong> شلیک در <strong>ساعت ۰۹:۲۲ صبح شنبه</strong> در اوج حضور دانش‌آموزان بدون رصد الگوی حیات، نقض قطعی ماده ۵۷(۲)(a)(i) است. علاوه بر این، در حالی که ژنرال کالین پاول و شوارتسکف پس از فاجعه <em>العامریه</em> (۱۹۹۱) تصویب شخصی رئیس ستاد مشترک را برای اهداف بغداد الزامی کردند، اقدام سنتکام در انحلال واحد CHMR (کاهش از <strong>۱۰ کارشناس به ۱ نفر</strong>) مصداق <strong>پسرفت نهادی (Institutional Regression)</strong> است. طبق سوابق <strong>کابل</strong> و <strong>ضحیان (اقرار JIAT و سند A/HRC/42/17)</strong>، عدم لغو حمله با وجود رصد وسایل بازی کودکان و فاصله ۱۳۵ و ۱۳۰ ثانیه‌ای میان اصابت‌ها، نقض صریح ماده ۵۷(۲)(b) است. در نهایت، به استناد <strong>پرونده ۱۴ (<em>بیمارستان عبس</em>، سند A/HRC/39/43 بند ۴۰ — بند ۸۱ هفتم)</strong>، هدف قرار دادن سوله در فاصله ۴۲ متری یک مکان مصون بدون بررسی حضور کودکان، نقض فاحش ماده ۵۷(۲)(a)(ii) پروتکل اول است.</p>
           </div>
         </div>
 
@@ -1853,19 +1918,21 @@
           <div class="clause-col-en">
             <div class="clause-header-line">
               <span class="clause-id">§ 7.3 to 7.5</span>
-              <span class="clause-heading">Gross Disproportionality (Isayeva, Dahyan & Al-Amiriyah), Child Sanctuaries & Double-Lock Warning Breach</span>
+              <span class="clause-heading">Gross Disproportionality (Isayeva, Dahyan & Al-Amiriyah), Child Sanctuaries (Rome Statute Art. 8(2)(b)(ix)) & Double-Lock Warning Breach</span>
             </div>
-            <p>82–84 & 83 bis–ter. <strong>Violation of Proportionality (AP I Art. 51(5)(b); CIHL Rule 14):</strong> Governed by the twin ECtHR judgments of 24 February 2005—<strong>Case 03: <em>Isayeva v. Russia</em> [Katyr-Yurt] (§§ 189–191)</strong> and <strong>Case 19: <em>Isayeva, Yusupova and Bazayeva v. Russia</em> [Shaami-Yurt Convoy] (§§ 195–199)</strong>—and <strong>Case 15: <em>Dahyan School Bus Strike</em> (UN Doc. A/HRC/42/17, 2018)</strong> (establishing that deploying a 500-lb GBU-12 warhead among schoolchildren is grossly disproportionate <em>per se</em>). Detonating three 1,000-lb WDU-36/B warheads (400m fragmentation envelope) 42 meters from an active school replicates the trapped-space slaughter of Public Shelter No. 25 in <strong>Case 08: <em>Al-Amiriyah</em></strong> (constructed by Nordic civil-defence consortium <strong>Perusyhtymä Oy, Finland / ABV, Sweden</strong> for 1,500 civilians): Impact 1 collapsed the classroom roof, Impact 2 destroyed the western evacuation stairwell, and Impact 3 pulverized the courtyard muster ground.</p>
-            <p>85 to 85 quater. <strong>Peremptory Child Sanctuary Immunities & Double-Lock Warning Breach (§ 7.4 & § 7.5):</strong> As codified in the UN Secretary-General's CAAC Report on <strong>Case 15 (<em>Dahyan</em>, UN Doc. A/73/907–S/2019/509, ¶¶ 176–192)</strong> and <strong>Case 05 (<em>Kabul</em>)</strong>, mass-casualty strikes on schoolchildren breach GC IV Art. 24 & 53, AP I Art. 77, UN CRC Arts. 6, 28 & 38, and UNSC Resolutions 1612 and 2601 (2021). Furthermore, under Professor Françoise Hampson's dual-obligation framework in <strong>Case 08 (<em>Al-Amiriyah</em>, 1993)</strong> and CIHL Rule 20, striking a civilian educational sanctuary in session with zero advance warning violates both the general precautionary warning duty (<strong>AP I Art. 57(2)(c)</strong>) and the special civil-shelter procedural guarantee (<strong>AP I Art. 65(2)</strong>).</p>
+            <p>82–84 bis. <strong>Violation of Proportionality (AP I Art. 51(5)(b); CIHL Rule 14):</strong> Governed by the twin ECtHR judgments of 24 February 2005—<strong>Case 03: <em>Isayeva v. Russia</em> [Katyr-Yurt] (§§ 189–191)</strong> and <strong>Case 19: <em>Isayeva, Yusupova and Bazayeva v. Russia</em> [Shaami-Yurt Convoy] (§§ 195–199)</strong> (reaffirmed in <strong>¶ 84 bis</strong>)—and <strong>Case 15: <em>Dahyan School Bus Strike</em> (UN Doc. A/HRC/42/17, 2018)</strong> (establishing that deploying a 500-lb GBU-12 warhead among schoolchildren is grossly disproportionate <em>per se</em>). Detonating three 1,000-lb WDU-36/B warheads (400m fragmentation envelope) 42 meters from an active school replicates the trapped-space slaughter of Public Shelter No. 25 in <strong>Case 08: <em>Al-Amiriyah</em></strong> (constructed by Nordic civil-defence consortium <strong>Perusyhtymä Oy, Finland / ABV, Sweden</strong> for 1,500 civilians): Impact 1 collapsed the classroom roof, Impact 2 destroyed the western evacuation stairwell, and Impact 3 pulverized the courtyard muster ground.</p>
+            <p>85 to 85 quinquies. <strong>Peremptory Child Sanctuary Immunities & Rome Statute Art. 8(2)(b)(ix) (§ 7.4):</strong> As codified in the UN Secretary-General's CAAC Report on <strong>Case 15 (<em>Dahyan</em>, UN Doc. A/73/907–S/2019/509, ¶¶ 176–192)</strong> and <strong>Case 05 (<em>Kabul</em>)</strong>, mass-casualty strikes on schoolchildren breach GC IV Arts. 24 & 53, AP I Art. 77, UN CRC Arts. 6, 28 & 38, and UNSC Resolutions 1612 and 2601 (2021). Furthermore, under <strong>Case 13 (<em>Hass School Complex</em>, UN Doc. A/HRC/34/64)</strong> and <strong>Case 16 (<em>Al-Bara Elementary School</em>, UN Doc. A/HRC/24/46)</strong> (<strong>¶ 85 quinquies</strong>), directing attacks against buildings dedicated to education constitutes an independent war crime under <strong>Rome Statute Article 8(2)(b)(ix)</strong>.</p>
+            <p>85 bis & 85 ter (Ch. VII § 7.5). <strong>Double-Lock Advance Warning Breach (Cases 08 & 10 Benchmarks):</strong> Under Professor Françoise Hampson's dual-obligation framework in <strong>Case 08 (<em>Al-Amiriyah</em>, 1993)</strong>, <strong>Case 10 (<em>Second Qana Residential Strike</em>, UN Doc. S/PRST/2006/35; UN Doc. A/HRC/3/2, ¶¶ 147–158; HRW 2006)</strong>, and CIHL Rule 20, striking a civilian educational sanctuary in session with zero advance warning violates both the general precautionary warning duty (<strong>AP I Art. 57(2)(c)</strong>) and the special civil-shelter procedural guarantee (<strong>AP I Art. 65(2)</strong>).</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">بند ۷.۳ تا ۷.۵</span>
-              <span class="clause-heading">عدم تناسب فاحش (ایسایوا، ضحیان و العامریه)، مصونیت آمره کودکان و نقض اخطار دوگانه</span>
+              <span class="clause-heading">عدم تناسب فاحش (ایسایوا، ضحیان و العامریه)، مصونیت آمره مدارس (ماده 8(2)(b)(ix) اساسنامه رم) و نقض اخطار دوگانه</span>
             </div>
-            <p>۸۲–۸۴ و ۸۳ مکرر–سوم. <strong>نقض اصل تناسب (ماده ۵۱(۵)(b) پروتکل اول):</strong> بر اساس آرای دوگانه دیوان اروپایی در <strong>پرونده‌های ۰۳ و ۱۹ (<em>ایسایوا</em>)</strong> و <strong>پرونده ۱۵ (<em>اتوبوس دانش‌آموزان ضحیان</em>، سند A/HRC/42/17)</strong> (که پرتاب بمب ۵۰۰ پوندی GBU-12 در میان کودکان دانش‌آموز را ذاتاً نامتناسب احراز کرد). انفجار سه کلاهک ۱۰۰۰ پوندی در ۴۲ متری مدرسه، دقیقاً مکانیسم کشتار در فضای محبوس پناهگاه شماره ۲۵ در <strong>پرونده ۰۸ (<em>العامریه</em>)</strong> (ساخته‌شده توسط کنسرسیوم مهندسی فنلاندی-سوئدی <strong>Perusyhtymä Oy / ABV</strong> با ظرفیت ۱,۵۰۰ غیرنظامی) را تکرار کرد: ضربه اول سقف کلاس‌ها را فروریخت، ضربه دوم پلکان خروج اضطراری غربی را منهدم کرد و ضربه سوم حیاط تجمع را درهم کوبید.</p>
-            <p>۸۵ تا ۸۵ چهارم. <strong>مصونیت آمره پناهگاه‌های کودکان و نقض الزام دوگانه اخطار قبلی (بند ۷.۴ و ۷.۵):</strong> به استناد گزارش دبیرکل سازمان ملل درباره کودکان و مخاصمات مسلحانه در <strong>پرونده ۱۵ (<em>ضحیان</em>، سند A/73/907، بندهای ۱۷۶–۱۹۲)</strong> و <strong>پرونده ۰۵ (<em>کابل</em>)</strong>، کشتار دانش‌آموزان ناقض مواد ۲۴ و ۵۳ کنوانسیون چهارم ژنو، ماده ۷۷ پروتکل اول، مواد ۶، ۲۸ و ۳۸ پیمان‌نامه حقوق کودک و قطعنامه‌های ۱۶۱۲ و ۲۶۰۱ شورای امنیت است. همچنین طبق دکترین پروفسور فرانسواز همپسون در <strong>پرونده ۰۸ (<em>العامریه</em>)</strong> و قاعده ۲۰ حقوق عرفی، حمله بدون هشدار قبلی هم تکلیف عام اخطار احتیاطی (<strong>ماده ۵۷(۲)(c)</strong>) و هم تضمین ویژه اماکن پناهگاهی (<strong>ماده ۶۵(۲)</strong>) را نقض کرده است.</p>
+            <p>۸۲–۸۴ مکرر. <strong>نقض اصل تناسب (ماده ۵۱(۵)(b) پروتکل اول):</strong> بر اساس آرای دوگانه دیوان اروپایی در <strong>پرونده‌های ۰۳ و ۱۹ (<em>ایسایوا</em> — بند ۸۴ مکرر)</strong> و <strong>پرونده ۱۵ (<em>اتوبوس دانش‌آموزان ضحیان</em>، سند A/HRC/42/17)</strong> (که پرتاب بمب ۵۰۰ پوندی GBU-12 در میان کودکان دانش‌آموز را ذاتاً نامتناسب احراز کرد). انفجار سه کلاهک ۱۰۰۰ پوندی در ۴۲ متری مدرسه، دقیقاً مکانیسم کشتار در فضای محبوس پناهگاه شماره ۲۵ در <strong>پرونده ۰۸ (<em>العامریه</em>)</strong> (ساخته‌شده توسط کنسرسیوم مهندسی فنلاندی-سوئدی <strong>Perusyhtymä Oy / ABV</strong> با ظرفیت ۱,۵۰۰ غیرنظامی) را تکرار کرد: ضربه اول سقف کلاس‌ها را فروریخت، ضربه دوم پلکان خروج اضطراری غربی را منهدم کرد و ضربه سوم حیاط تجمع را درهم کوبید.</p>
+            <p>۸۵ تا ۸۵ پنجم. <strong>مصونیت آمره پناهگاه‌های کودکان و جنایت جنگی حمله به مدارس (بند ۷.۴):</strong> به استناد گزارش دبیرکل سازمان ملل درباره کودکان و مخاصمات مسلحانه در <strong>پرونده ۱۵ (<em>ضحیان</em>، سند A/73/907، بندهای ۱۷۶–۱۹۲)</strong> و <strong>پرونده ۰۵ (<em>کابل</em>)</strong>، کشتار دانش‌آموزان ناقض مواد ۲۴ و ۵۳ کنوانسیون چهارم ژنو، ماده ۷۷ پروتکل اول، مواد ۶، ۲۸ و ۳۸ پیمان‌نامه حقوق کودک و قطعنامه‌های ۱۶۱۲ و ۲۶۰۱ شورای امنیت است. همچنین طبق سوابق <strong>پرونده ۱۳ (<em>مجتمع مدارس حاس</em>، سند A/HRC/34/64)</strong> و <strong>پرونده ۱۶ (<em>دبستان الباره</em>، سند A/HRC/24/46)</strong> (<strong>بند ۸۵ پنجم</strong>)، حمله به ساختمان‌های آموزشی جرم جنگی مستقل ذیل <strong>ماده 8(2)(b)(ix) اساسنامه رم</strong> محسوب می‌شود.</p>
+            <p>۸۵ مکرر و ۸۵ سوم (بند ۷.۵). <strong>نقض الزام دوگانه اخطار قبلی (معیار پرونده‌های ۰۸ و ۱۰):</strong> طبق دکترین پروفسور فرانسواز همپسون در <strong>پرونده ۰۸ (<em>العامریه</em>)</strong>، <strong>پرونده ۱۰ (<em>بمباران قانای دوم</em>، اسناد S/PRST/2006/35 و A/HRC/3/2 بندهای ۱۴۷–۱۵۸)</strong> و قاعده ۲۰ حقوق عرفی، حمله بدون هشدار قبلی هم تکلیف عام اخطار احتیاطی (<strong>ماده ۵۷(۲)(c)</strong>) و هم تضمین ویژه اماکن پناهگاهی (<strong>ماده ۶۵(۲)</strong>) را نقض کرده است.</p>
           </div>
         </div>
       </section>
@@ -1884,21 +1951,21 @@
           <div class="clause-col-en">
             <div class="clause-header-line">
               <span class="clause-id">§ 8.1 to 8.3</span>
-              <span class="clause-heading">Upstream Liability Concentration (ICTY § 85, Isayeva & Al-Amiriyah), Domestic Impunity & Supplier Complicity</span>
+              <span class="clause-heading">Upstream Liability Concentration (ICTY § 85, Isayeva & Al-Amiriyah), Command Responsibility (Art. 28) & Supplier Complicity (ARSIWA Art. 16)</span>
             </div>
             <p>86–88 ter. <strong>Upstream Concentration of Liability (ICTY § 85, <em>Isayeva</em> & <em>Al-Amiriyah</em> "Checkmate" Parallel):</strong> Naval launch personnel aboard the USS <em>Abraham Lincoln</em> CSG bear zero legal culpability; <strong>100% of institutional and criminal culpability concentrates upstream</strong> upon (i) pre-2016 coordinate nominators, (ii) DIA No-Strike List database managers, (iii) commanders and engineers who deployed the Palantir Maven Smart System without human-in-the-loop safeguards, and (iv) the CENTCOM Target Review Board—mirroring the exoneration of tactical pilots ("Ivanov" and "Petrov") in <em>Isayeva</em> and F-117A aircrews in <em>Al-Amiriyah</em>.</p>
-            <p>89–90 ter. <strong>Superior Command Responsibility & Contrast with Belligerent Admissions (Case 05 <em>Kabul</em> vs. Case 15 <em>Dahyan</em>):</strong> Command responsibility (ICTY Art. 7(3)) is established by slashing the CENTCOM CHMR unit from 10 members to 1 and prioritizing algorithmic velocity (>1,000 Day-1 targets). Whereas even the Coalition's internal JIAT in <strong>Case 15 (<em>Dahyan</em>, Sept 1, 2018)</strong> formally conceded that striking a school bus among children was unjustified, violated ROE, and warranted criminal trials, CENTCOM's AR 15-6 self-exoneration (mirroring the impunity of <strong>Case 05 <em>Kabul</em></strong>, where zero personnel were disciplined) demonstrates a total breakdown of domestic accountability.</p>
-            <p>91 & 91 bis. <strong>State Responsibility & Third-State / Corporate Complicity (ILC ARSIWA Arts. 2, 4, 8, 16, 40, 41; Case 15 <em>Dahyan</em>):</strong> The acts of US Navy, CENTCOM, and DIA organs are directly attributable to the United States (Art. 4), breaching customary IHL as confirmed by <strong>UN Doc. A/HRC/63/61</strong>. Furthermore, under the benchmark of <strong>Case 15 (<em>Dahyan</em>)</strong> and the UK Court of Appeal judgment in <em>R (CAAT) v. Secretary of State for International Trade</em> ([2019] EWCA Civ 1020), supplying precision munitions and algorithmic targeting software (Raytheon, Palantir, Anthropic) to strike pipelines lacking verified civilian harm safeguards engages third-state and corporate complicity under <strong>Common Article 1 GC</strong>, <strong>ATT Article 7</strong>, and <strong>ARSIWA Article 16</strong>.</p>
+            <p>89–90 quater. <strong>Superior Command Responsibility, Operational Planning & Control Standard & Contrast with Belligerent Admissions (Rome Statute Art. 28; <em>McCann v. UK</em>; Cases 03, 05, 15 & 19):</strong> Command responsibility (ICTY Art. 7(3); Rome Statute Art. 28) and the Grand Chamber planning-and-control standard in <em>McCann and Others v. United Kingdom</em> (App. no. 18984/91, §§ 149–150, 194) as applied in <strong>Cases 03 & 19 (<em>Isayeva</em>, § 171 — ¶ 90 quater)</strong> are established by slashing the CENTCOM CHMR unit from 10 members to 1 and prioritizing algorithmic velocity (>1,000 Day-1 targets). Whereas even the Coalition's internal JIAT in <strong>Case 15 (<em>Dahyan</em>, Sept 1, 2018)</strong> formally conceded that striking a school bus among children was unjustified, violated ROE, and warranted criminal trials, CENTCOM's AR 15-6 self-exoneration (mirroring the impunity of <strong>Case 05 <em>Kabul</em></strong>, where zero personnel were disciplined) demonstrates a total breakdown of domestic accountability.</p>
+            <p>91 to 91 ter. <strong>State Responsibility & Third-State / Corporate Complicity (ILC ARSIWA Arts. 2, 4, 8, 16, 40, 41; Cases 15 & 18):</strong> The acts of US Navy, CENTCOM, and DIA organs are directly attributable to the United States (Art. 4), breaching customary IHL as confirmed by <strong>UN Doc. A/HRC/63/61</strong>. Furthermore, under the benchmarks of <strong>Case 15 (<em>Dahyan</em>)</strong>, <strong>Case 18 (<em>Mastaba Market</em>, Amnesty MDE 31/3815/2016; ATT Art. 6 — ¶ 91 ter)</strong>, and the UK Court of Appeal judgment in <em>R (CAAT) v. Secretary of State for International Trade</em> ([2019] EWCA Civ 1020), supplying precision munitions and algorithmic targeting software (Raytheon, Palantir, Anthropic) to strike pipelines lacking verified civilian harm safeguards engages third-state and corporate complicity under <strong>Common Article 1 GC</strong>, <strong>ATT Articles 6 & 7</strong>, and <strong>ARSIWA Article 16</strong>.</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">بند ۸.۱ تا ۸.۳</span>
-              <span class="clause-heading">تمرکز بالادستی مسئولیت (بند ۸۵ لاهه، ایسایوا و العامریه)، رد مصونیت داخلی و معاونت تأمین‌کنندگان</span>
+              <span class="clause-heading">تمرکز بالادستی مسئولیت (بند ۸۵ لاهه، ایسایوا و العامریه)، مسئولیت فرماندهی (ماده ۲۸) و معاونت تأمین‌کنندگان (ماده ۱۶ ARSIWA)</span>
             </div>
             <p>۸۶–۸۸ سوم. <strong>تمرکز بالادستی مسئولیت (بند ۸۵ لاهه، <em>ایسایوا</em> و سلول Checkmate در <em>العامریه</em>):</strong> پرسنل شلیک در ناوگروه آبراهام لینکلن فاقد تقصیرند؛ <strong>۱۰۰ درصد مسئولیت کیفری و سازمانی در بالادست متمرکز است</strong> بر افسران نامزدکننده مختصات، مدیران پایگاه‌داده لیست حمله‌ممنوع در DIA، مهندسان و فرماندهان مستقرکننده سامانه پالانتیر ماون و اعضای هیئت بازبینی هدف سنتکام.</p>
-            <p>۸۹–۹۰ سوم. <strong>مسئولیت فرماندهی مافوق و تقابل اقرار متخاصم با مصونیت داخلی (پرونده ۰۵ <em>کابل</em> در برابر پرونده ۱۵ <em>ضحیان</em>):</strong> در حالی که حتی تیم ارزیابی ائتلاف (JIAT) در <strong>پرونده ۱۵ (<em>اتوبوس ضحیان</em>، ۱ سپتامبر ۲۰۱۸)</strong> رسماً اقرار کرد حمله به اتوبوس کودکان غیرقابل‌توجیه و ناقض قواعد درگیری بوده و خواستار محاکمه کیفری مقصران شد، تبرئه درون‌سازمانی سنتکام در میناب (تکرار الگوی معافیت از مجازات در <strong>پرونده ۰۵ <em>کابل</em></strong> که در آن هیچ افسری محاکمه نشد) فروپاشی کامل پاسخگویی داخلی را اثبات می‌کند.</p>
-            <p>۹۱ و ۹۱ مکرر. <strong>مسئولیت بین‌المللی دولت و مسئولیت دولت‌های ثالث و شرکت‌های تسلیحاتی/نرم‌افزاری (مواد ۲، ۴، ۱۶، ۴۰ و ۴۱ ARSIWA؛ پرونده ۱۵ <em>ضحیان</em>):</strong> اعمال نیروی دریایی، سنتکام و DIA مستقیماً منتسب به دولت آمریکاست (ماده ۴) و نقض قواعد آمره طبق <strong>سند A/HRC/63/61</strong> محرز است. همچنین به استناد سابقه <strong>پرونده ۱۵ (<em>ضحیان</em>)</strong> و حکم دادگاه استیناف بریتانیا در پرونده <em>CAAT</em> ([2019] EWCA Civ 1020)، تأمین تسلیحات هدایت‌شونده و نرم‌افزارهای هدف‌گیری هوش مصنوعی (ریتیون، پالانتیر و آنتروپیک) برای زنجیره کشتاری که فاقد تضمین‌های حفاظت از غیرنظامیان است، موجب تحقق مسئولیت معاونت تحت <strong>ماده ۱ مشترک ژنو</strong>، <strong>ماده ۷ معاهده تجارت تسلیحات (ATT)</strong> و <strong>ماده ۱۶ طرح ARSIWA</strong> می‌گردد.</p>
+            <p>۸۹–۹۰ چهارم. <strong>مسئولیت فرماندهی مافوق، استاندارد برنامه‌ریزی و کنترل و تقابل اقرار متخاصم با مصونیت داخلی (ماده ۲۸ اساسنامه رم؛ <em>مک‌کان علیه بریتانیا</em>؛ پرونده‌های ۰۳، ۰۵، ۱۵ و ۱۹):</strong> طبق ماده ۲۸ اساسنامه رم و رأی هیئت عالی دیوان اروپایی در <em>مک‌کان علیه بریتانیا</em> (بندهای ۱۴۹–۱۵۰ و ۱۹۴) که در <strong>پرونده‌های ۰۳ و ۱۹ (<em>ایسایوا</em>، بند ۱۷۱ — بند ۹۰ چهارم)</strong> اعمال شد، فرماندهان ارشد به دلیل استقرار سامانه تاییدنشده ماون–کلود و انحلال واحد CHMR مستقیماً مسئول‌اند. در حالی که حتی تیم ارزیابی ائتلاف (JIAT) در <strong>پرونده ۱۵ (<em>اتوبوس ضحیان</em>، ۱ سپتامبر ۲۰۱۸)</strong> رسماً اقرار کرد حمله به اتوبوس کودکان غیرقابل‌توجیه و ناقض قواعد درگیری بوده و خواستار محاکمه کیفری مقصران شد، تبرئه درون‌سازمانی سنتکام در میناب (تکرار الگوی معافیت از مجازات در <strong>پرونده ۰۵ <em>کابل</em></strong>) فروپاشی کامل پاسخگویی داخلی را اثبات می‌کند.</p>
+            <p>۹۱ تا ۹۱ سوم. <strong>مسئولیت بین‌المللی دولت و مسئولیت دولت‌های ثالث و شرکت‌های تسلیحاتی/نرم‌افزاری (مواد ۲، ۴، ۱۶، ۴۰ و ۴۱ ARSIWA؛ پرونده‌های ۱۵ و ۱۸):</strong> اعمال نیروی دریایی، سنتکام و DIA مستقیماً منتسب به دولت آمریکاست (ماده ۴) و نقض قواعد آمره طبق <strong>سند A/HRC/63/61</strong> محرز است. همچنین به استناد سوابق <strong>پرونده ۱۵ (<em>ضحیان</em>)</strong>، <strong>پرونده ۱۸ (<em>بازار مستبا</em>، گزارش عفو بین‌الملل MDE 31/3815/2016؛ ماده ۶ معاهده ATT — بند ۹۱ سوم)</strong> و حکم دادگاه استیناف بریتانیا در پرونده <em>CAAT</em> ([2019] EWCA Civ 1020)، تأمین تسلیحات هدایت‌شونده و نرم‌افزارهای هدف‌گیری هوش مصنوعی (ریتیون، پالانتیر و آنتروپیک) برای زنجیره کشتاری که فاقد تضمین‌های حفاظت از غیرنظامیان است، موجب تحقق مسئولیت معاونت تحت <strong>ماده ۱ مشترک ژنو</strong>، <strong>مواد ۶ و ۷ معاهده تجارت تسلیحات (ATT)</strong> و <strong>ماده ۱۶ طرح ARSIWA</strong> می‌گردد.</p>
           </div>
         </div>
       </section>
@@ -1943,60 +2010,154 @@
         <div class="section-header">
           <div class="section-header-left">
             <span class="chapter-tag">Chapter X</span>
-            <h2 class="section-header-title-en">Disposition, Remedial Orders & The Belgrade Reparations Model</h2>
+            <h2 class="section-header-title-en">Disposition, Remedial Orders & Juridical Accountability Regimes ($300M Reparations & ICC Counts 1–5)</h2>
           </div>
-          <div class="section-header-title-fa">قرار نهایی، دستورات جبرانی و الگوی غرامت دولتی بلگراد</div>
+          <div class="section-header-title-fa">قرار نهایی، رژیم جبران خسارت دولتی (۳۰۰ میلیون دلار) و قرار تأیید اتهامات کیفری (ماده ۶۱ اساسنامه رم)</div>
         </div>
 
-        <div class="clause-row">
+        <div class="clause-row" id="chapter-10-1">
           <div class="clause-col-en">
             <div class="clause-header-line">
               <span class="clause-id">§ 10.1 & 10.2</span>
-              <span class="clause-heading">Formal Findings (UN Doc. A/HRC/63/61 Concurrence) & Customary Reparations (Belgrade § 84 & Chorzów Factory)</span>
+              <span class="clause-heading">Declaratory Findings & Section 1: State Financial Liability Regime (Chorzów Factory, Belgrade $32.5M & $300M Valuation)</span>
             </div>
-            <p>96. <strong>Declaratory Findings:</strong> The Panel (1) <strong>FINDS</strong> that Shajareh Tayyebeh School was a protected civilian educational sanctuary; (2) <strong>FINDS</strong> that the strike resulted from upstream target nomination negligence, database circularity, automated AI kill-chain failure, and dismantling of civilian harm review mechanisms; (3) <strong>FINDS</strong>, in full concurrence with the UN Independent International Fact-Finding Mission on Iran (<strong>UN Doc. A/HRC/63/61</strong>), that the strike constituted an unlawful indiscriminate attack amounting to a <strong>war crime</strong>; and (4) <strong>DETERMINES</strong> full attribution to the United States of America.</p>
-            <p>97 to 97 quater. <strong>The Belgrade Reparations Precedent vs. Discretionary Condolences (ARSIWA Arts. 30–37, ICTY § 84 & PCIJ <em>Chorzów Factory</em>):</strong> Applying the 1999 Belgrade precedent (where the US apologized and paid <strong>$32.5 million</strong> in restitution) and the PCIJ <em>Factory at Chorzów</em> standard (1928, Ser. A, No. 17, p. 47), the Panel rejects the unfulfilled discretionary <em>ex gratia</em> condolence model of <strong>Case 05 (<em>Kabul</em>)</strong>, the sovereign-immunity denial of remedy in <strong>Case 08 (<em>Al-Amiriyah</em>)</strong>, and the unimplemented compensation recommendations of <strong>Case 15 (<em>Dahyan</em>)</strong>, demanding binding execution of:</p>
-            <ul style="padding-left: 20px; margin: 8px 0;">
-              <li><strong>Cessation & Non-Repetition (Art. 30):</strong> Immediate binding moratorium on automated AI target nomination platforms (including <strong>Palantir Maven Smart System</strong> and integrated LLM architectures) within 500m of civilian/educational buildings, mandatory un-compressable <strong>72-hour human visual verification</strong> protocols, and full restoration of independent CHMR oversight units;</li>
-              <li><strong>Restitution in Integrum (Art. 35):</strong> Complete state-funded architectural reconstruction of Shajareh Tayyebeh School;</li>
-              <li><strong>Full Compensation (Art. 36):</strong> Direct financial compensation to the legal heirs of all <strong>156 deceased victims</strong> and an independently managed Medical & Psychological Trust Fund for all <strong>95+ wounded survivors</strong>;</li>
-              <li><strong>Satisfaction & Truth (Art. 37):</strong> Official state apology, unredacted public declassification of CENTCOM AR 15-6 records, and full disclosure of the <strong>Maven-Claude targeting log</strong> for February 28, 2026.</li>
-            </ul>
+            <p>96. <strong>Formal Declaratory Determinations (§ 10.1):</strong> The Panel formally determines: <strong>(i)</strong> that the February 28, 2026 triple-tap missile strikes against Shajareh Tayyebeh Girls' Elementary School constituted <strong>grave breaches of the Geneva Conventions of 1949</strong> and <strong>war crimes</strong> under customary international law and the Rome Statute; <strong>(ii)</strong> that detonating 3,000 lbs of PBXN-107 inside an active walled primary school during morning classes constituted an <strong>unlawful indiscriminate attack</strong> breaching Distinction (AP I Arts. 48, 51, 52) and Proportionality (AP I Art. 51(5)(b)); <strong>(iii)</strong> that USCENTCOM command echelons committed gross operational negligence and exhibited conditional intent (<em>dolus eventualis</em>); and <strong>(iv)</strong> that these acts engage the <strong>direct, non-delegable State Responsibility of the United States of America</strong>.</p>
+            <p id="chapter-10-2">97 to 97 ter. <strong>State Financial Liability Regime (PCIJ <em>Chorzów Factory</em>, 1928, Ser. A, No. 17, p. 47; ILC ARSIWA Arts. 30–37):</strong> Rejecting discretionary <em>ex gratia</em> condolences (<strong>Case 05 <em>Kabul</em></strong>) and invoking the binding state reparations precedents of <strong>Case 01 (<em>Belgrade Chinese Embassy Settlement</em>, 1999, 39 ILM 644 — $32.5M paid by the US)</strong> and <strong>Case 09 (<em>Qana UNIFIL Compound</em>, UNGA Res. 51/233, 1997)</strong>, the Panel assesses the itemized financial liability of the United States under Docket <code>PFPJ-2026-IR-001</code> at <strong>$300,000,000 USD</strong>:</p>
+            <div class="table-responsive" style="margin: 10px 0;">
+              <table class="forensic-table">
+                <thead>
+                  <tr>
+                    <th>Reparation Head</th>
+                    <th>Legal Basis (ARSIWA)</th>
+                    <th>Factual / Demographic Parameter</th>
+                    <th>Certified Valuation (USD)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Head A: Material Restitution & Educational Reconstruction</strong></td>
+                    <td><strong>Art. 35</strong> (<em>Restitutio in integrum</em>)</td>
+                    <td>Complete architectural design, seismic construction, multi-hazard civil defense shelter, science labs, digital library, and sports complex</td>
+                    <td style="color: var(--gold); font-weight: 700;">$45,000,000</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Head B: Wrongful Death Compensation</strong></td>
+                    <td><strong>Art. 36</strong> (Financially assessable damage)</td>
+                    <td>Direct wrongful death compensation to certified legal heirs of all <strong>156 deceased victims</strong> (120 schoolgirls, 26 faculty, 10 staff) at $1,000,000 per victim</td>
+                    <td style="color: var(--red-light); font-weight: 700;">$156,000,000</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Head C: Pediatric Medical Rehabilitation & Trauma Trust Fund</strong></td>
+                    <td><strong>Art. 36</strong> (Personal injury & lifetime medical care)</td>
+                    <td>Independently managed trust fund for all <strong>95+ wounded survivors</strong> (38 pediatric amputees, 24 tympanic ruptures, 19 ocular trauma cases) & psychological therapy</td>
+                    <td style="color: var(--gold); font-weight: 700;">$65,000,000</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Head D: Moral Damages & Non-Material Satisfaction</strong></td>
+                    <td><strong>Art. 37</strong> (Satisfaction & symbolic redress)</td>
+                    <td>Civic memorialization park in Minab, perpetual scholarship foundation in the names of the 120 martyred pupils, and independent CHMR research</td>
+                    <td>$34,000,000</td>
+                  </tr>
+                  <tr>
+                    <td><strong>TOTAL STATE FINANCIAL LIABILITY CLAIM</strong></td>
+                    <td><strong>ARSIWA Arts. 31, 35–37</strong></td>
+                    <td><strong>Complete Restitution, Wrongful Death, Medical Trust & Satisfaction</strong></td>
+                    <td style="color: var(--gold-light); font-weight: 800; font-size: 14px;">$300,000,000 USD</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>97 quater. <strong>Cessation & Guarantees of Non-Repetition (ARSIWA Art. 30):</strong> (i) Immediate binding moratorium on automated AI targeting platforms (Palantir Maven and integrated LLMs) within 500m of civilian/educational/medical buildings; (ii) full restoration of independent CHMR units with absolute veto authority; and (iii) formal public state apology and full declassification of AR 15-6 records and targeting telemetry.</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">بند ۱۰.۱ و ۱۰.۲</span>
-              <span class="clause-heading">احرازهای قطعی (همگام با گزارش ملل متحد A/HRC/63/61) و الگوی غرامت دولتی بلگراد و خورزوف</span>
+              <span class="clause-heading">احرازهای اعلامی و بخش اول: رژیم مسئولیت مالی دولت (استاندارد کارخانه خورزوف، سابقه بلگراد و مطالبه ۳۰۰ میلیون دلاری)</span>
             </div>
-            <p>۹۶. <strong>احرازهای اعلامی:</strong> هیئت کارشناسان (۱) <strong>احراز می‌نماید</strong> که دبستان شجره طیبه یک مکان آموزشی غیرنظامی مصون بوده است؛ (۲) <strong>احراز می‌نماید</strong> که حمله نتیجه سهل‌انگاری بالادستی در گزینش هدف، دور باطل پایگاه‌داده، شکست زنجیره کشتار هوش مصنوعی و انحلال سازوکارهای بررسی آسیب به غیرنظامیان بوده است؛ (۳) <strong>احراز می‌نماید</strong>—در همسویی کامل با کمیته مستقل حقیقت‌یاب سازمان ملل در امور ایران (<strong>سند A/HRC/63/61</strong>)—که این حمله یک حمله کور غیرقانونی و مصداق <strong>جنایت جنگی</strong> بوده است؛ و (۴) مسئولیت بین‌المللی کامل دولت ایالات متحده آمریکا را <strong>مسجل می‌داند</strong>.</p>
-            <p>۹۷ تا ۹۷ چهارم. <strong>الگوی غرامت الزام‌آور بلگراد و رأی کارخانه خورزوف در برابر پرداخت‌های داوطلبانه (مواد ۳۰ تا ۳۷ ARSIWA و بند ۸۴ لاهه):</strong> بر مبنای سابقه سال ۱۹۹۹ بلگراد (عذرخواهی رسمی آمریکا و پرداخت <strong>۳۲.۵ میلیون دلار غرامت</strong>) و قاعده آمره دیوان دائمی دادگستری بین‌المللی در <em>کارخانه خورزوف</em> (۱۹۲۸)، هیئت کارشناسان الگوی پرداخت‌های داوطلبانه و محقق‌نشده <em>ex gratia</em> در <strong>پرونده ۰۵ (<em>کابل</em>)</strong>، انکار کامل غرامت در <strong>پرونده ۰۸ (<em>العامریه</em>)</strong> و توصیه‌های اجرا نشده <strong>پرونده ۱۵ (<em>ضحیان</em>)</strong> را رد کرده و اجرای الزام‌آور تعهدات زیر را مطالبه می‌کند:</p>
-            <ul style="padding-right: 20px; margin: 8px 0; line-height: 2;">
-              <li><strong>توقف و تضمین عدم تکرار (ماده ۳۰):</strong> تعلیق فوری و الزام‌آور سامانه‌های هوش مصنوعی نامزدی هدف (از جمله <strong>سامانه پالانتیر ماون</strong> و مدل‌های زبانی بزرگ) در شعاع ۵۰۰ متری مدارس و مراکز درمانی، الزام به پروتکل غیرقابل‌فشرده‌سازی <strong>۷۲ ساعت راستی‌آزمایی بصری انسانی</strong> و احیای کامل واحدهای مستقل CHMR؛</li>
-              <li><strong>اعاده وضع به حال اول (ماده ۳۵):</strong> بازسازی کامل و ایمن دبستان دخترانه شجره طیبه با بودجه دولت آمریکا؛</li>
-              <li><strong>پرداخت غرامت کامل (ماده ۳۶):</strong> پرداخت خسارت مادی و معنوی به ورثه قانونی ۱۶۸ شهید (۱۵۶ متوفای دارای گواهی ثبت‌شده) و تأسیس صندوق مستقل درمانی و روان‌شناختی برای بیش از ۹۵ مجروح بازمانده؛</li>
-              <li><strong>جلب رضایت و کشف حقیقت (ماده ۳۷):</strong> عذرخواهی رسمی دولتی، انتشار بدون سانسور پرونده تحقیقات AR 15-6 سنتکام و افشای کامل <strong>لاگ هدف‌گیری ماون–کلود</strong> در تاریخ ۲۸ فوریه ۲۰۲۶.</li>
-            </ul>
+            <p>۹۶. <strong>احرازهای اعلامی رسمی (بند ۱۰.۱):</strong> هیئت کارشناسان رسماً احراز می‌نماید: <strong>(۱)</strong> حملات موشکی سه‌ضربه‌ای ۲۸ فوریه ۲۰۲۶ علیه دبستان دخترانه شجره طیبه مصداق <strong>نقض فاحش کنوانسیون‌های چهارگانه ژنو ۱۹۴۹</strong> و <strong>جنایت جنگی</strong> ذیل حقوق بین‌الملل عرفی و اساسنامه رم است؛ <strong>(۲)</strong> انفجار ۳,۰۰۰ پوند ماده منفجره PBXN-107 در دبستان محصور در ساعات آغازین کلاس‌ها، یک <strong>حمله کور و غیرقانونی</strong> و نقض اصول تفکیک و تناسب است؛ <strong>(۳)</strong> رده‌های فرماندهی سنتکام با اتکا به فایل‌های ده‌ساله منسوخ، انحلال واحد کاهش آسیب به غیرنظامیان و نادیده گرفتن تصاویر سنسورهای اپتیکی پایانی، مرتکب سهل‌انگاری فاحش عملیاتی با سوءنیت احتمالی (<em>dolus eventualis</em>) شده‌اند؛ و <strong>(۴)</strong> این اعمال <strong>مسئولیت بین‌المللی مستقیم و غیرقابل‌واگذاری دولت ایالات متحده آمریکا</strong> را محقق می‌سازد.</p>
+            <p>۹۷ تا ۹۷ سوم. <strong>رژیم مسئولیت مالی دولت (رأی <em>کارخانه خورزوف</em> ۱۹۲۸ و مواد ۳۰ تا ۳۷ طرح ARSIWA):</strong> با رد قاطع الگوی پرداخت‌های داوطلبانه <em>ex gratia</em> (<strong>پرونده ۰۵ <em>کابل</em></strong>) و به استناد سوابق الزام‌آور پرداخت غرامت دولتی در <strong>پرونده ۰۱ (<em>توافق غرامت سفارت چین در بلگراد</em>، ۱۹۹۹، پرداخت ۳۲.۵ میلیون دلار توسط آمریکا)</strong> و <strong>پرونده ۰۹ (<em>قطعنامه ۵۱/۲۳۳ مجمع عمومی ملل متحد درباره قانا</em>، ۱۹۹۷)</strong>، هیئت حداقل مسئولیت مالی دولت آمریکا را به شرح زیر به مبلغ <strong>۳۰۰,۰۰۰,۰۰۰ دلار آمریکا</strong> ارزیابی و مطالبه می‌کند:</p>
+            <div class="table-responsive" style="margin: 10px 0;">
+              <table class="forensic-table">
+                <thead>
+                  <tr>
+                    <th>سرفصل جبران خسارت</th>
+                    <th>مبنای حقوقی (ARSIWA)</th>
+                    <th>پارامتر موضوعی و جمعیت‌شناختی</th>
+                    <th>ارزش‌گذاری قطعی (دلار آمریکا)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>سرفصل الف: اعاده وضع مادی و بازسازی پردیس آموزشی</strong></td>
+                    <td><strong>ماده ۳۵</strong> (<em>اعاده وضع به حال اول</em>)</td>
+                    <td>طراحی، احداث ضدزلزله و تجهیز پردیس آموزشی پیشرفته جایگزین شامل پناهگاه دفاع غیرنظامی، آزمایشگاه‌ها، کتابخانه دیجیتال و مجموعه ورزشی</td>
+                    <td style="color: var(--gold); font-weight: 700;">$45,000,000</td>
+                  </tr>
+                  <tr>
+                    <td><strong>سرفصل ب: غرامت قتل غیرقانونی (۱۵۶ شهید)</strong></td>
+                    <td><strong>ماده ۳۶</strong> (غرامت خسارات قابل ارزیابی مالی)</td>
+                    <td>پرداخت مستقیم و غیرقابل‌برگشت به ورثه قانونی <strong>۱۵۶ قربانی شهید</strong> (۱۲۰ دانش‌آموز، ۲۶ کادر آموزشی، ۱۰ خدمه) از قرار هر قربانی ۱,۰۰۰,۰۰۰ دلار</td>
+                    <td style="color: var(--red-light); font-weight: 700;">$156,000,000</td>
+                  </tr>
+                  <tr>
+                    <td><strong>سرفصل ج: صندوق بین‌المللی توان‌بخشی پزشکی و ترومای کودکان</strong></td>
+                    <td><strong>ماده ۳۶</strong> (درمان و مراقبت مادام‌العمر مجروحان)</td>
+                    <td>تأسیس صندوق مستقل بین‌المللی برای مراقبت مادام‌العمر جراحی و پروتز <strong>بیش از ۹۵ مجروح بازمانده</strong> (شامل ۳۸ کودک قطع‌عضوشده، ۲۴ آسیب شنوایی و ۱۹ آسیب چشمی)</td>
+                    <td style="color: var(--gold); font-weight: 700;">$65,000,000</td>
+                  </tr>
+                  <tr>
+                    <td><strong>سرفصل د: خسارات معنوی و جلب رضایت غیرمادی</strong></td>
+                    <td><strong>ماده ۳۷</strong> (جلب رضایت و جبران نمادین)</td>
+                    <td>احداث پارک یادمان مدنی در میناب، بنیاد دائمی بورس تحصیلی به نام ۱۲۰ دانش‌آموز شهید و بودجه پژوهش مستقل حفاظت از غیرنظامیان</td>
+                    <td>$34,000,000</td>
+                  </tr>
+                  <tr>
+                    <td><strong>جمع کل مطالبه مسئولیت مالی دولت آمریکا</strong></td>
+                    <td><strong>مواد ۳۱ و ۳۵–۳۷ ARSIWA</strong></td>
+                    <td><strong>اعاده وضع کامل، غرامت شهدا، صندوق درمانی و خسارت معنوی</strong></td>
+                    <td style="color: var(--gold-light); font-weight: 800; font-size: 14px;">$300,000,000 USD</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>۹۷ چهارم. <strong>توقف و تضمین عدم تکرار (ماده ۳۰ ARSIWA):</strong> (۱) تعلیق فوری و الزام‌آور سامانه‌های هدف‌گیری هوش مصنوعی (پالانتیر ماون و مدل‌های زبانی بزرگ) در شعاع ۵۰۰ متری مدارس و مراکز درمانی؛ (۲) احیای کامل واحدهای مستقل CHMR با حق وتوی مطلق؛ و (۳) عذرخواهی رسمی دولتی و انتشار بدون سانسور پرونده AR 15-6 و لاگ‌های تله‌متری هدف‌گیری.</p>
           </div>
         </div>
 
-        <div class="clause-row">
+        <div class="clause-row" id="chapter-10-3">
           <div class="clause-col-en">
             <div class="clause-header-line">
-              <span class="clause-id">§ 10.3 & 10.4</span>
-              <span class="clause-heading">Preservation Orders (EXH-SAT-001 to EXH-UN-008) & Contingent Transmissions</span>
+              <span class="clause-id">§ 10.3 to 10.5</span>
+              <span class="clause-heading">Section 2: ICC Determination of Charges (Art. 61(7) Counts 1–5 & Modes of Liability) & Prosecutorial Transmissions</span>
             </div>
-            <p>98. The Panel ORDERS that verified master evidentiary archives (<code>EXH-SAT-001</code> through <code>EXH-UN-008</code>) remain in permanent tamper-evident custody in Helsinki, Finland, and that duplicate cryptographic archives be transmitted to the <strong>President of the UN Human Rights Council</strong>, the <strong>Secretariat of the Independent International Fact-Finding Mission on Iran</strong> (63rd Regular Session, UN Doc. A/HRC/63/61), and the <strong>IIIM</strong>.</p>
-            <p>99. Failing genuine state reparations, PFPJ ry shall transmit this completed judicial dossier to the <strong>Prosecutor General of Finland</strong> (<em>Valtakunnansyyttäjän toimisto</em>, Rikoslaki Ch. 1 Sec. 12), the <strong>ICC Prosecutor</strong> (Rome Statute Art. 15), and the <strong>German Federal Public Prosecutor General</strong> (<em>Generalbundesanwalt</em>, VStGB § 1).</p>
+            <p>97 quinquies. <strong>ICC Determination of Charges (Rome Statute Art. 61(7) — Substantial Grounds to Believe):</strong></p>
+            <ul style="padding-left: 20px; margin: 6px 0;">
+              <li><strong>COUNT 1 — Intentionally Directing Attacks Against Civilians (Art. 8(2)(b)(i)):</strong> Launching three BGM-109 Tomahawk missiles against a civilian school population with at minimum conditional intent (<em>dolus eventualis</em>) under Art. 30;</li>
+              <li><strong>COUNT 2 — Intentionally Directing Attacks Against Civilian Objects (Art. 8(2)(b)(ii)):</strong> Pulverizing municipal school buildings devoid of military utility without positive target identification;</li>
+              <li><strong>COUNT 3 — Launching an Attack Causing Excessive Incidental Death, Injury, or Damage (Art. 8(2)(b)(iv)):</strong> Detonating 3,000 lbs of high explosives 42m from an active elementary school in the certain knowledge of mass child slaughter;</li>
+              <li><strong>COUNT 4 — Attacking or Bombarding Undefended Buildings (Art. 8(2)(b)(v)):</strong> Bombarding an undefended educational complex open to peaceful municipal access;</li>
+              <li><strong>COUNT 5 — Intentionally Directing Attacks Against Buildings Dedicated to Education (Art. 8(2)(b)(ix)):</strong> Obliterating an accredited educational sanctuary (<em>Hass School</em> Case 13 & <em>Al-Bara</em> Case 16 precedents).</li>
+            </ul>
+            <p>97 sexies. <strong>Modes of Liability (Rome Statute Arts. 25 & 28):</strong> Individual criminal responsibility attaches via: <strong>(1) Art. 25(3)(a)</strong> Direct/Co-Perpetration (target developers & Strike Validation Authorities for <code>TDS-2026-IR-0814</code>); <strong>(2) Art. 25(3)(b)</strong> Ordering/Inducing Day-1 strikes without human-in-the-loop verification; <strong>(3) Art. 25(3)(c)</strong> Aiding/Abetting via automated systems (deploying Palantir Maven with known automation bias while gutting CHMR oversight); and <strong>(4) Art. 28(a) & (b)</strong> Command & Superior Responsibility (USCENTCOM Commander and operational flag officers).</p>
+            <p id="chapter-10-4">98 & 99 (<span id="chapter-10-5">§ 10.4 & § 10.5</span>). <strong>Evidentiary Preservation & Prosecutorial Directions:</strong> Master archives (<code>EXH-SAT-001</code> through <code>EXH-UN-008</code>) remain sealed in Helsinki, Finland under the Berkeley Protocol, with duplicate cryptographic archives transmitted to the <strong>UN HRC President</strong>, the <strong>UN Fact-Finding Mission on Iran</strong> (UN Doc. A/HRC/63/61), and the <strong>IIIM</strong>. PFPJ ry is directed to formally submit this Master Judicial Assessment to the <strong>ICC Prosecutor (Rome Statute Art. 15)</strong>, <strong>OHCHR</strong>, <strong>UN SRSG-CAAC</strong>, and <strong>UNESCO</strong>, while preserving full prosecutorial discretion for universal jurisdiction filings under Finnish Penal Code Ch. 11 and German VStGB § 1.</p>
           </div>
 
           <div class="clause-col-fa">
             <div class="clause-header-line">
-              <span class="clause-id">بند ۱۰.۳ و ۱۰.۴</span>
-              <span class="clause-heading">دستورات حفظ اسناد (EXH-SAT-001 تا EXH-UN-008) و ارسال به دادستانی‌های بین‌المللی</span>
+              <span class="clause-id">بند ۱۰.۳ تا ۱۰.۵</span>
+              <span class="clause-heading">بخش دوم: قرار تأیید اتهامات کیفری به الگوی دیوان کیفری بین‌المللی (اتهامات ۱ تا ۵ ماده ۶۱(۷)) و دستورات ارجاع قضایی</span>
             </div>
-            <p>۹۸. هیئت دستور می‌دهد که آرشیو جامع ادله (<code>EXH-SAT-001</code> تا <code>EXH-UN-008</code>) تحت پروتکل برکلی در مخزن دائمی هلسینکی فنلاند نگهداری شده و نسخه‌های رمزنگاری‌شده به <strong>رئیس شورای حقوق بشر سازمان ملل متحد</strong>، <strong>دبیرخانه کمیته مستقل حقیقت‌یاب در امور ایران</strong> (در ارتباط با اجلاس شصت‌وسوم و سند A/HRC/63/61) و <strong>سازوکار بین‌المللی بی‌طرف و مستقل (IIIM)</strong> تسلیم گردد.</p>
-            <p>۹۹. در صورت استنکاف دولت آمریکا از پاسخگویی و جبران خسارت کامل، این پرونده قضایی رسماً به <strong>دادستان کل فنلاند</strong> (<em>Valtakunnansyyttäjän toimisto</em>)، <strong>دادستان دیوان کیفری بین‌المللی</strong> (ماده ۱۵ اساسنامه رم) و <strong>دادستان کل فدرال آلمان</strong> (<em>Generalbundesanwalt</em>) تسلیم خواهد شد.</p>
+            <p>۹۷ پنجم. <strong>تعیین اتهامات کیفری بر اساس الگوی شعبه مقدماتی دیوان کیفری بین‌المللی (ماده ۶۱(۷) اساسنامه رم — وجود دلایل اساسی برای باور):</strong></p>
+            <ul style="padding-right: 20px; margin: 6px 0; line-height: 2;">
+              <li><strong>اتهام اول — جنایت جنگی هدایت عامدانه حملات علیه غیرنظامیان (ماده 8(2)(b)(i)):</strong> شلیک سه موشک کروز تاماهاک علیه جمعیت دانش‌آموزان و معلمان با تحقق عنصر روانی ماده ۳۰ و سوءنیت احتمالی (<em>dolus eventualis</em>)؛</li>
+              <li><strong>اتهام دوم — جنایت جنگی هدایت عامدانه حملات علیه اموال و ابنیه غیرنظامی (ماده 8(2)(b)(ii)):</strong> انهدام کامل ساختمان‌های مدرسه شهری فاقد هرگونه کاربری نظامی بدون شناسایی مثبت هدف؛</li>
+              <li><strong>اتهام سوم — جنایت جنگی اجرای حمله منجر به تلفات و خسارات جانبی مفرط و نامتناسب (ماده 8(2)(b)(iv)):</strong> انفجار ۳,۰۰۰ پوند ماده منفجره در فاصله ۴۲ متری دبستان فعال با علم قطعی به کشتار جمعی کودکان در شعاع ۱۰۰ متری؛</li>
+              <li><strong>اتهام چهارم — جنایت جنگی حمله یا بمباران ساختمان‌ها و اماکن بی‌دفاع (ماده 8(2)(b)(v)):</strong> بمباران موشکی مجتمع آموزشی کاملاً بی‌دفاع و فاقد هرگونه تأسیسات یا پرسنل نظامی؛</li>
+              <li><strong>اتهام پنجم — جنایت جنگی هدایت عامدانه حملات علیه ساختمان‌های اختصاص‌یافته به آموزش (ماده 8(2)(b)(ix)):</strong> نابودی حریم مقدس آموزشی ثبت‌شده (بر اساس سوابق <em>مدرسه حاس</em> در پرونده ۱۳ و <em>الباره</em> در پرونده ۱۶).</li>
+            </ul>
+            <p>۹۷ ششم. <strong>شیوه‌های مسئولیت کیفری فردی (مواد ۲۵ و ۲۸ اساسنامه رم):</strong> مسئولیت کیفری از چهار طریق محقق است: <strong>(۱) ماده ۲۵(۳)(a)</strong> مباشرت و شرکت در جرم (طراحان پرونده <code>TDS-2026-IR-0814</code> و مراجع تصویب شلیک)؛ <strong>(۲) ماده ۲۵(۳)(b)</strong> صدور دستور اجرای حملات روز اول بدون الزام به راستی‌آزمایی انسانی؛ <strong>(۳) ماده ۲۵(۳)(c)</strong> معاونت و تسهیل از طریق سامانه‌های خودکار (استقرار پالانتیر ماون با سوگیری اتوماسیون شناخته شده همزمان با انحلال واحد CHMR)؛ و <strong>(۴) ماده ۲۸(a) و (b)</strong> مسئولیت فرماندهی و مافوق (فرمانده سنتکام و امیران عملیاتی).</p>
+            <p>۹۸ و ۹۹ (بندهای ۱۰.۴ و ۱۰.۵). <strong>دستورات حفظ ادله و ارجاع به مراجع بین‌المللی:</strong> آرشیو جامع ادله (<code>EXH-SAT-001</code> تا <code>EXH-UN-008</code>) تحت پروتکل برکلی در هلسینکی فنلاند نگهداری شده و نسخه‌های رمزنگاری‌شده به <strong>رئیس شورای حقوق بشر سازمان ملل</strong>، <strong>دبیرخانه کمیته مستقل حقیقت‌یاب در امور ایران</strong> (سند A/HRC/63/61) و <strong>سازوکار IIIM</strong> تسلیم می‌گردد. همچنین این قرار قضایی به <strong>دفتر دادستان دیوان کیفری بین‌المللی (ماده ۱۵ اساسنامه رم)</strong>، <strong>کمیساریای عالی حقوق بشر (OHCHR)</strong>، <strong>نماینده ویژه دبیرکل در امور کودکان و مخاصمات مسلحانه (CAAC)</strong> و <strong>یونسکو</strong> ارسال شده و اختیار کامل تعقیب تحت صلاحیت جهانی (فصل ۱۱ قانون جزای فنلاند و بند ۱ قانون VStGB آلمان) محفوظ می‌ماند.</p>
           </div>
         </div>
       </section>
@@ -2103,7 +2264,7 @@
               <span class="clause-heading">Munitions Forensics, Debris Metallurgy & Hydrodynamic Overpressure</span>
             </div>
             
-            <p><strong>EXH-MUN-002.1 & 002.2 (Raytheon Avionics):</strong> Recovered guidance circuit board fragment <code>ASSY 16200-6523910-1 REV D</code> with CAGE Code <code>96214</code> identifying Raytheon Missile Systems (Tucson, AZ) Tomahawk DSMAC housing.</p>
+            <p><strong>EXH-MUN-002.1 & 002.2 (Raytheon Avionics):</strong> Recovered guidance circuit board fragment <code>ASSY 16200-6523910-1 REV D</code> with CAGE Code <code>05047</code> identifying Raytheon Missile Systems (Tucson, AZ) Tomahawk DSMAC housing.</p>
             <p><strong>EXH-MUN-002.3 (Williams F107 Turbofan):</strong> Integrally bladed titanium rotor (Ti-6Al-4V alloy) matching Williams International F107-WR-402 engine.</p>
             <p><strong>EXH-MUN-002.4 (WDU-36/B Hydrodynamic Blast Propagation Matrix):</strong></p>
 
@@ -2155,7 +2316,7 @@
               <span class="exhibit-code">مستندات MUN</span>
               <span class="clause-heading">جرم‌شناسی تسلیحات، متالورژی بقایا و فیزیک تخریب موج انفجار</span>
             </div>
-            <p><strong>EXH-MUN-002.1 و 002.2 (کیت الکترونیک ریتیون):</strong> کشف برد مدار چاپی موشک تاماهاک با کد انحصاری CAGE 96214 کمپانی ریتیون آمریکا.</p>
+            <p><strong>EXH-MUN-002.1 و 002.2 (کیت الکترونیک ریتیون):</strong> کشف برد مدار چاپی موشک تاماهاک (<code>ASSY 16200-6523910-1 REV D</code>) با کد انحصاری CAGE <code>05047</code> کمپانی ریتیون آمریکا (توسان، آریزونا).</p>
             <p><strong>EXH-MUN-002.3 (موتور ویلیامز F107):</strong> پره‌های تیتانیومی موتور توربوفن Williams F107-WR-402 که منحصراً در موشک تاماهاک به کار می‌رود.</p>
             <p><strong>EXH-MUN-002.4 (جدول هیدرودینامیک موج انفجار):</strong> در فاصله ۴۲ متری مدرسه، فشار تخریبی ۱۸ تا ۲۴ پی‌اس‌آی موجب فروریزش قطعی ۱۰۰٪ سقف و ستون‌ها شده است.</p>
             <p><strong>EXH-MUN-002.5 (ثبت زلزله‌نگاری شلیک سه‌گانه):</strong> ایستگاه لرزه‌نگاری میناب ۳ تکانه ثبت نموده است: ساعت ۰۹:۲۲:۱۵، ۰۹:۲۴:۳۰ و ۰۹:۲۶:۴۰.</p>
@@ -2636,9 +2797,9 @@
           <div class="clause-col-en">
             <div class="clause-header-line">
               <span class="clause-id">INTEGRITY REGISTRY</span>
-              <span class="clause-heading">Cryptographic Verification Manifest (SHA-256 Checksums — 2026-10-19 Edition)</span>
+              <span class="clause-heading">Cryptographic Verification Manifest (SHA-256 Checksums — 2026-10-24 Edition)</span>
             </div>
-            <p>All core documents and media archives deposited in the Permanent Evidence Vault in Helsinki, Finland are verified by immutable SHA-256 checksums:</p>
+            <p>All core documents, exhibit compendia, and comparative benchmark charts deposited in the Permanent Evidence Vault in Helsinki, Finland are verified by immutable SHA-256 checksums:</p>
             
             <div class="table-responsive">
               <table class="forensic-table">
@@ -2654,26 +2815,38 @@
                   <tr>
                     <td><strong>Master Determination Main Report</strong></td>
                     <td><code>PDF</code></td>
-                    <td>1441.6 KB</td>
-                    <td><span style="font-family: var(--font-mono); font-size: 11px;">3adfa53fff059f0eaa8f618ddaf0849fa3202d0bb1c61099f6dc9c3e8f71b785</span></td>
+                    <td>1623.2 KB</td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">b9f3317d7aa2aa3c517ad410329679e58a325672ac9eac55e964f0e08e1514d1</span></td>
                   </tr>
                   <tr>
                     <td><strong>Master Determination Main Report</strong></td>
                     <td><code>DOCX</code></td>
-                    <td>116.0 KB</td>
-                    <td><span style="font-family: var(--font-mono); font-size: 11px;">ecb04ace713e405496f87f3396de07a7aa7a17faf9933a33604f2e8229b69c15</span></td>
+                    <td>133.0 KB</td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">bfc9da2b08bf768c7103ecbe91761c85276f132e0c22511c44d1be68b252c53f</span></td>
                   </tr>
                   <tr>
                     <td><strong>Master Exhibit Dossier Annex</strong></td>
                     <td><code>PDF</code></td>
-                    <td>959.3 KB</td>
-                    <td><span style="font-family: var(--font-mono); font-size: 11px;">ad8aeeee1c9ed74b577ffc4a10943363b93c74378e4db78e6a4d5c07d4f5a0bb</span></td>
+                    <td>959.2 KB</td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">ce2d32035e594b2b5b0b01443703e86ec337e88e7e70edf553d5fdeb80acd4ca</span></td>
                   </tr>
                   <tr>
                     <td><strong>Master Exhibit Dossier Annex</strong></td>
                     <td><code>DOCX</code></td>
                     <td>72.1 KB</td>
-                    <td><span style="font-family: var(--font-mono); font-size: 11px;">3907a78ef5ba32103f0b53d5fa2a4322a8c384979f16a1333c2df40e9cc4f03d</span></td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">792680a4bd50c7171dae6f474c1a86277d198ba0d54794fab716f46f97ee2e23</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Case-Based Legal Benchmark Charts</strong></td>
+                    <td><code>PDF</code></td>
+                    <td>991.8 KB</td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">1123ac3549f1dae4c4655ee49fffa264bbb2bc6603ea0b51135b8e26f9ced22c</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Case-Based Legal Benchmark Charts</strong></td>
+                    <td><code>DOCX</code></td>
+                    <td>109.2 KB</td>
+                    <td><span style="font-family: var(--font-mono); font-size: 11px;">ae7f41629dc55213a7c8e875382b8f7a3afc66a7ac6e12fe6d51376e08feb1aa</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -2683,9 +2856,9 @@
           <div class="clause-col-fa">
             <div class="clause-header-line">
               <span class="clause-id">ثبت اصالت</span>
-              <span class="clause-heading">شناسنامه رمزشناختی و کدهای هش SHA-256 اسناد (ویرایش ۱۹ اکتبر ۲۰۲۶)</span>
+              <span class="clause-heading">شناسنامه رمزشناختی و کدهای هش SHA-256 اسناد (ویرایش ۲۴ اکتبر ۲۰۲۶)</span>
             </div>
-            <p>کلیه بسته‌های اسناد و گزارش‌های رسمی صادره با امضای رمزشناختی SHA-256 مهروموم شده و در سرورهای امن هلسینکی جهت دسترسی محاکم بین‌المللی تودیع گردیده‌اند.</p>
+            <p>کلیه بسته‌های اسناد، پیوست‌های ادله و جداول تطبیقی ۱۹ پرونده بین‌المللی با امضای رمزشناختی SHA-256 مهروموم شده و در سرورهای امن هلسینکی جهت دسترسی محاکم بین‌المللی تودیع گردیده‌اند.</p>
           </div>
         </div>
       </section>
@@ -2871,10 +3044,10 @@
 
             <div class="prec-card">
               <span class="prec-id-badge">CASE 11</span>
-              <h4 class="prec-name">NATO RTS TV Station Strike (Belgrade, 1999)</h4>
-              <div class="prec-forum">ECtHR Decision — Banković v. Belgium (2001)</div>
-              <p class="prec-finding">NATO strike on Belgrade state broadcaster killed 16 civilians; landmark jurisprudence defining civilian objects and framing extraterritorial jurisdictional thresholds later refined in Hanan.</p>
-              <div class="prec-minab-link"><strong>Minab Application:</strong> Reinforces strict legal boundary between civilian objects and military objectives.</div>
+              <h4 class="prec-name">Kunduz MSF Trauma Centre Aerial Bombardment (Afghanistan, 2015)</h4>
+              <div class="prec-forum">USCENTCOM AR 15-6 Report (2016) & UNSC Res. 2286 (2016)</div>
+              <p class="prec-finding">USAF AC-130U gunship attacked MSF trauma hospital for 30 minutes despite GPS No-Strike List registration, killing 42 patients and staff; proves that failing to propagate NSL coordinates to operational strike consoles is systemic command negligence.</p>
+              <div class="prec-minab-link"><strong>Minab Application:</strong> Directly condemns CENTCOM's failure to sync the 2016 school conversion with operational Maven NSL layers.</div>
             </div>
 
             <div class="prec-card">
@@ -2973,19 +3146,18 @@
     // 1. Reading Mode Toggles (Side-by-Side, English, Farsi)
     function setMode(mode) {
       document.body.classList.remove('mode-both', 'mode-en', 'mode-fa');
-      document.getElementById('btnModeBoth').classList.remove('active');
-      document.getElementById('btnModeEn').classList.remove('active');
-      document.getElementById('btnModeFa').classList.remove('active');
+      const btnBoth = document.getElementById('btnModeBoth');
+      if (btnBoth) btnBoth.classList.toggle('active', mode === 'both');
+      document.querySelectorAll('[data-mode-btn]').forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-mode-btn') === mode);
+      });
 
       if (mode === 'both') {
         document.body.classList.add('mode-both');
-        document.getElementById('btnModeBoth').classList.add('active');
       } else if (mode === 'en') {
         document.body.classList.add('mode-en');
-        document.getElementById('btnModeEn').classList.add('active');
       } else if (mode === 'fa') {
         document.body.classList.add('mode-fa');
-        document.getElementById('btnModeFa').classList.add('active');
       }
       localStorage.setItem('pfpj_reader_mode', mode);
     }

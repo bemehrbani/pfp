@@ -103,4 +103,22 @@ Authoritative forensic, legal, and casualty records establishing legal accountab
 | **Case Law Query Pipeline (HUDOC & CourtListener)** | [query_similar_cases.py](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/query_similar_cases.py) | CLI pipeline querying live international jurisprudence (ECtHR HUDOC & US Federal/OLC opinions). |
 | **Full Legal Reports & Judgments Archive (18 Dossiers)** | [full_reports/](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/full_reports/) | Local repository containing full-text judgments (ECtHR Grand Chamber, ICTY OTP) and official UN/NGO inquiry reports for all 18 cases. |
 
+---
+
+## 🤝 6. Network, Board of Trustees & Affiliate NGOs Directory
+Centralized directory of confirmed governance board members, active associates, and partner NGOs (`Network_and_Associates/`).
+
+| Document / Folder | Repository Path | Purpose & Scope |
+| :--- | :--- | :--- |
+| **Master Network Index** | [`Network_and_Associates/README.md`](Network_and_Associates/README.md) | Master directory of confirmed board members, active associates, and affiliate NGOs. |
+| **Statutory Board of Trustees & Inspectors** | [`Network_and_Associates/01_Board_and_Trustees/`](Network_and_Associates/01_Board_and_Trustees/README.md) | Confirmed PRH Founding Board (**Mahdi Farimani**, **Zahra Azhar**, **Dr. Ali Akbar Siapoush**) and Operations Inspectors (**Jussi Simolin**, **Veini Simolin**). |
+| **Dr. Nitin Sawhney Dossier** | [`Network_and_Associates/02_People_and_Associates/Dr_Nitin_Sawhney/`](Network_and_Associates/02_People_and_Associates/Dr_Nitin_Sawhney/profile_and_events.md) | Profile, CRAI-CIS AI in warfare research, Oct 21 Think Corner notes, Oct 25 Cinema Orion schedule, and Nov 20 HXRC panel invitation. |
+| **Dr. Samaneh Moafi Dossier** | [`Network_and_Associates/02_People_and_Associates/Dr_Samaneh_Moafi/`](Network_and_Associates/02_People_and_Associates/Dr_Samaneh_Moafi/profile_and_minab_investigation.md) | Assistant Director of Research at Forensic Architecture & Lead Investigator on Minab (`Ref: 121`); Oct 27 meeting & Nov 20 online speaker dossier. |
+| **Confirmed Helsinki Venue & Parliament Contacts** | [`Network_and_Associates/02_People_and_Associates/Helsinki_Academic_and_Policy_Contacts/`](Network_and_Associates/02_People_and_Associates/Helsinki_Academic_and_Policy_Contacts/README.md) | **Jussi Salonen** (HXRC free venue host), **Johanna Kelhu** (confirmed Nov 5 Parliament meeting), and **Gashaw Bibani**. |
+| **Forensic Architecture** | [`Network_and_Associates/03_Affiliate_and_Partner_NGOs/Forensic_Architecture/`](Network_and_Associates/03_Affiliate_and_Partner_NGOs/Forensic_Architecture/README.md) | Full Minab Investigation 121 team roster, contact channels, and 3D WebXR exhibition collaboration. |
+| **Makan ry** | [`Network_and_Associates/03_Affiliate_and_Partner_NGOs/Makan_ry/`](Network_and_Associates/03_Affiliate_and_Partner_NGOs/Makan_ry/README.md) | Sister Finnish–Iranian peace association, board roster, Nov 5 Parliament meeting, and Nov 20 HXRC co-organization. |
+| **Stop Killer Robots Finland** | [`Network_and_Associates/03_Affiliate_and_Partner_NGOs/Stop_Killer_Robots_Finland/`](Network_and_Associates/03_Affiliate_and_Partner_NGOs/Stop_Killer_Robots_Finland/README.md) | Suomen Sadankomitea / Stop Killer Robots Finland network, Coordinator Kaisu Kinnunen, and Finnish + global coalition membership guide. |
+| **SaferGlobe** | [`Network_and_Associates/03_Affiliate_and_Partner_NGOs/SaferGlobe/`](Network_and_Associates/03_Affiliate_and_Partner_NGOs/SaferGlobe/README.md) | Independent Finnish peace & security think tank (Executive Director Maria Mekri) and AI/arms-control research synergy. |
+
+
 
