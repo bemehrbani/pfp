@@ -645,43 +645,183 @@
       font-weight: 700;
       color: #fca5a5;
     }
+    .strip-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      margin-bottom: 6px;
+      margin-top: 4px;
+    }
+    .strip-section-sub {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: none;
+      color: var(--text-muted);
+    }
     .modal-kids-strip {
       display: flex;
       gap: 10px;
       overflow-x: auto;
-      padding: 6px 0;
+      padding: 6px 2px 10px;
       margin-bottom: 12px;
     }
     .kid-mini-card {
-      flex: 0 0 80px;
+      flex: 0 0 98px;
       text-align: center;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.045);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 9px;
       padding: 6px;
       text-decoration: none;
       color: var(--text);
-      transition: border-color 0.2s;
+      transition: all 0.2s;
+      cursor: pointer;
     }
     .kid-mini-card:hover {
       border-color: var(--gold);
+      background: rgba(212, 168, 83, 0.1);
+      transform: translateY(-2px);
     }
     .kid-mini-card img {
-      width: 62px;
-      height: 62px;
+      width: 84px;
+      height: 104px;
       object-fit: cover;
+      object-position: top center;
       border-radius: 6px;
       display: block;
-      margin: 0 auto 4px;
+      margin: 0 auto 5px;
+      border: 1px solid rgba(212, 168, 83, 0.3);
     }
-    .kid-mini-card span {
+    .kid-mini-card .kid-name {
       display: block;
-      font-size: 0.67rem;
+      font-size: 0.7rem;
+      font-weight: 700;
       line-height: 1.2;
-      color: #e5e7eb;
+      color: #f3f4f6;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    .kid-mini-card .kid-meta {
+      display: block;
+      font-size: 0.62rem;
+      color: var(--gold);
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .drawing-mini-card {
+      flex: 0 0 128px;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 168, 83, 0.28);
+      border-radius: 9px;
+      padding: 6px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    body[dir="rtl"] .drawing-mini-card {
+      text-align: right;
+    }
+    .drawing-mini-card:hover {
+      border-color: var(--gold);
+      background: rgba(212, 168, 83, 0.12);
+      transform: translateY(-2px);
+    }
+    .drawing-mini-card img {
+      width: 100%;
+      height: 82px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .drawing-mini-card .drw-title {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #fef3c7;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .drawing-mini-card .drw-author {
+      display: block;
+      font-size: 0.62rem;
+      color: #9ca3af;
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    /* 3D IN-ROOM PORTRAIT & DRAWING INSPECTOR MODAL */
+    .inspector-card {
+      width: 100%;
+      max-width: 640px;
+      background: rgba(13, 18, 30, 0.97);
+      border: 1px solid rgba(212, 168, 83, 0.55);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+      color: var(--text);
+    }
+    .inspector-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 18px;
+      align-items: start;
+      margin-top: 10px;
+    }
+    .inspector-img-wrap {
+      width: 100%;
+      background: #05070c;
+      border: 1px solid rgba(212, 168, 83, 0.45);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .inspector-img-wrap img {
+      width: 100%;
+      max-height: 310px;
+      object-fit: contain;
+      display: block;
+      background: #080b12;
+    }
+    .inspector-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .inspector-meta-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 7px 10px;
+    }
+    .inspector-meta-pill .lbl {
+      display: block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .inspector-meta-pill .val {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+    @media (max-width: 640px) {
+      .inspector-body { grid-template-columns: 1fr; }
     }
 
     .modal-finding-box {
@@ -852,6 +992,7 @@
           <button class="preset-btn" id="presetBoysArch" data-i18n="presetBoysArch">🌹 Boys' Ceremony Room</button>
           <button class="preset-btn" id="presetStairs" data-i18n="presetStairs">🌈 Rainbow Staircase</button>
           <button class="preset-btn" id="presetGirlsHall" data-i18n="presetGirlsHall">👧 Girls' Upper Hall</button>
+          <button class="preset-btn" id="presetClassGallery" data-i18n="presetClassGallery" style="border-color:rgba(212,168,83,0.65); color:#fde68a;">🖼️ 145 Portraits &amp; 28 Drawings Inside Rooms</button>
           <button class="preset-btn" id="presetCrater" data-i18n="presetCrater">💥 5m Impact Crater</button>
           <button class="preset-btn export-btn" id="btnExportGlb" title="Download 3D .GLB file to import into Spatial.io">📦 Export .GLB (Spatial.io)</button>
           <button class="preset-btn vr-btn" id="enterVrBtn" style="display: none;" data-i18n="enterVrBtn">🥽 Enter WebXR VR</button>
@@ -939,8 +1080,21 @@
         <div class="testimony-author" id="modalTestimonyAuthor"></div>
       </div>
 
-      <!-- Children Portraits Strip for this Wing/Spot -->
+      <!-- Children & Educators Portraits Strip for this Wing/Spot -->
+      <div class="strip-section-header">
+        <span id="modalKidsStripTitle" data-i18n="wingPortraitsTitle">Schoolchildren &amp; Educators of This Wing (v3.0.0 Studio Portraits)</span>
+        <span class="strip-section-sub" id="modalKidsStripCount">Click any portrait for full profile</span>
+      </div>
       <div class="modal-kids-strip" id="modalKidsStrip"></div>
+
+      <!-- Classroom Drawings & Homework Pulled from Rubble in this Wing -->
+      <div id="modalDrawingsStripWrap" style="display:none;">
+        <div class="strip-section-header">
+          <span id="modalDrawingsStripTitle" data-i18n="wingDrawingsTitle">Classroom Drawings &amp; Homework Pulled from This Wing's Rubble</span>
+          <span class="strip-section-sub" data-i18n="wingDrawingsHint">Click to inspect high-res scan</span>
+        </div>
+        <div class="modal-kids-strip" id="modalDrawingsStrip"></div>
+      </div>
 
       <div class="modal-finding-box">
         <div class="finding-label" data-i18n="forensicLabel">Spatial Verification & Legal Determination</div>
@@ -1017,6 +1171,31 @@
     </div>
   </div>
 
+  <!-- 3D In-Room Portrait & Rubble Drawing Inspector Modal -->
+  <div class="modal-backdrop" id="artifactInspectorModal" style="z-index: 350;">
+    <div class="inspector-card" role="dialog" aria-modal="true">
+      <div class="modal-top">
+        <span class="badge-evidence" id="inspectorBadge">3D Classroom Portrait &amp; Artifact Inspector</span>
+        <button class="modal-close" id="inspectorCloseBtn" aria-label="Close inspector">&times;</button>
+      </div>
+      <div class="inspector-body">
+        <div class="inspector-img-wrap">
+          <img id="inspectorImg" src="" alt="Portrait or Rubble Drawing" />
+        </div>
+        <div>
+          <h2 class="modal-title" id="inspectorTitle">Name / Artifact Title</h2>
+          <div class="modal-cat" id="inspectorSubtitle">Subtitle</div>
+          <div class="inspector-meta-grid" id="inspectorMetaGrid"></div>
+          <p class="modal-desc" id="inspectorDesc" style="margin-top:8px;"></p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+            <a id="inspectorPrimaryLink" href="memorial.html" class="vow-cta-btn" style="text-decoration:none; padding:8px 14px; font-size:0.82rem;">Open Full Memorial Profile →</a>
+            <button class="story-nav-btn" id="inspectorFocus3DBtn" style="padding:8px 12px;">🎯 Focus Camera in 3D Room</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Three.js (r128), OrbitControls & GLTFExporter for Spatial.io export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -1024,6 +1203,8 @@
   <!-- Unified Site Navigation & Contact Modal -->
   <script src="site-nav.js"></script>
   <script src="contact-modal.js"></script>
+  <!-- Master Casualty & Rubble Drawings Registry (Dataset v3.0.0) -->
+  <script src="memorial-data.js"></script>
   <!-- Application Logic -->
   <script src="js/reconstruction.js"></script>
 </body>

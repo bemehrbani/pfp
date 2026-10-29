@@ -19,15 +19,19 @@ const I18N_DATA = {
     presetBoysArch: "🌹 Boys' Ceremony Room",
     presetStairs: "🌈 Rainbow Staircase",
     presetGirlsHall: "👧 Girls' Upper Hall",
+    presetClassGallery: "🖼️ 145 Portraits & 28 Drawings Inside Rooms",
     presetCrater: "💥 5m Impact Crater",
     enterVrBtn: "🥽 Enter WebXR VR",
     preStrikeBtn: "☀ Before Strike (School Full of Life)",
     postStrikeBtn: "💥 After Strike (Extent of Damage & 5m Crater)",
-    hotspotsCount: "8 Camera-Aligned Interior & Courtyard Stations Active",
+    hotspotsCount: "8 Stations + 145 3D Portraits & 28 Rubble Drawings Mounted Inside Rooms",
     evidenceBadge: "Forensic Architecture Camera-Aligned Spot",
     forensicLabel: "Spatial Verification & Legal Determination",
     viewInEvidencePortal: "Full Memorial Registry →",
-    controlsHelp: "Click \"🏠 Floorplan Cutaway\" to look inside rooms · WASD / Arrows to walk inside · Click any yellow camera frustum or pulsing pin to watch the exact photo/video on the spot",
+    wingPortraitsTitle: "Schoolchildren & Educators of This Wing (Dataset v3.0.0 Studio Portraits)",
+    wingDrawingsTitle: "Classroom Drawings & Homework Pulled from This Wing's Rubble",
+    wingDrawingsHint: "Click to inspect high-res scan",
+    controlsHelp: "Click \"🏠 Floorplan Cutaway\" or \"🖼️ 145 Portraits\" to look inside rooms · Click any 3D portrait or rubble drawing on the classroom walls to inspect",
     vowBadge: "Global Accountability Petition & Civic Vow",
     vowTitle: "The Minab Accountability Vow",
     vowSubtitle: "November 20 World Children's Day · People for Peace & Justice ry",
@@ -158,15 +162,19 @@ const I18N_DATA = {
     presetBoysArch: "🌹 Poikien juhlahuone",
     presetStairs: "🌈 Sateenkaariportaikko",
     presetGirlsHall: "👧 Tyttöjen yläsali",
+    presetClassGallery: "🖼️ 145 muotokuvaa & 28 piirustusta luokissa",
     presetCrater: "💥 5m iskukraatteri",
     enterVrBtn: "🥽 Avaa WebXR VR",
     preStrikeBtn: "☀ Ennen iskua (Koulu täynnä elämää)",
     postStrikeBtn: "💥 Iskun jälkeen (Tuhot & 5m kraatteri)",
-    hotspotsCount: "8 kamerasovitettua sisä- ja pihapistettä aktiivisena",
+    hotspotsCount: "8 pistettä + 145 muotokuvaa ja 28 piirustusta luokkahuoneiden seinillä",
     evidenceBadge: "Forensic Architecture -kamerasovitettu piste",
     forensicLabel: "Tilallinen varmennus & oikeudellinen johtopäätös",
     viewInEvidencePortal: "Avaa koko muistorekisteri →",
-    controlsHelp: "Klikkaa \"🏠 Pohjapiirrosleikkaus\" nähdäksesi huoneisiin · WASD / Nuolet: kävele · Klikkaa keltaisia kamerakeiloja tai merkkejä",
+    wingPortraitsTitle: "Tämän siiven oppilaat ja opettajat (Dataset v3.0.0 muotokuvat)",
+    wingDrawingsTitle: "Tämän siiven raunioista pelastetut piirustukset ja koulutehtävät",
+    wingDrawingsHint: "Klikkaa nähdäksesi suurennettu kuva",
+    controlsHelp: "Klikkaa \"🏠 Pohjapiirrosleikkaus\" tai \"🖼️ 145 muotokuvaa\" · Klikkaa mitä tahansa 3D-muotokuvaa tai piirustusta luokkien seinillä",
     vowBadge: "Kansainvälinen vetoomus & vastuulupaus",
     vowTitle: "Minabin vastuulupaus",
     vowSubtitle: "20. marraskuuta — Lapsen oikeuksien päivä · People for Peace & Justice ry",
@@ -297,15 +305,19 @@ const I18N_DATA = {
     presetBoysArch: "🌹 اتاق جشن پسران (همکف)",
     presetStairs: "🌈 راه‌پله رنگین‌کمان",
     presetGirlsHall: "👧 سالن دختران (طبقه اول)",
+    presetClassGallery: "🖼️ ۱۴۵ تصویر شهدا و ۲۸ نقاشی داخل کلاس‌ها",
     presetCrater: "💥 گودال ۵ متری انفجار",
     enterVrBtn: "🥽 ورود به واقعیت مجازی VR",
     preStrikeBtn: "☀ پیش از حمله (مدرسه و کلاس‌های پر از زندگی)",
     postStrikeBtn: "💥 پس از حمله (محدوده تخریب و گودال ۵ متری)",
-    hotspotsCount: "۸ ایستگاه منطبق بر عکس‌ها و ویدیوهای واقعی داخل مدرسه فعال است",
+    hotspotsCount: "۸ ایستگاه + ۱۴۵ قاب تصویر دانش‌آموزان و معلمان و ۲۸ نقاشی روی دیوار کلاس‌ها",
     evidenceBadge: "نقطه منطبق‌شده در مدل سه‌بعدی فورنزیک آرکیتکچر",
     forensicLabel: "تطبیق فضایی و مستندات حقوقی",
     viewInEvidencePortal: "مشاهده کامل یادبود شهدا →",
-    controlsHelp: "برای دیدن داخل کلاس‌ها روی «🏠 برش طبقات» کلیک کنید · حرکت با WASD · کلیک روی دوربین‌های زردرنگ برای تماشای ویدیو و عکس هر اتاق",
+    wingPortraitsTitle: "دانش‌آموزان و آموزگاران شهید این بخش از مدرسه (آرشیو نسخه ۳.۰)",
+    wingDrawingsTitle: "نقاشی‌ها و تکالیف بیرون کشیده شده از زیر آوار این کلاس‌ها",
+    wingDrawingsHint: "برای بزرگ‌نمایی روی هر نقاشی کلیک کنید",
+    controlsHelp: "روی «🏠 برش طبقات» یا «🖼️ ۱۴۵ تصویر شهدا» کلیک کنید · روی هر قاب عکس یا نقاشی داخل کلاس‌های سه‌بعدی کلیک کنید",
     vowBadge: "پتیشن جهانی و میثاق دادخواهی میناب",
     vowTitle: "میثاق دادخواهی کودکان میناب",
     vowSubtitle: "۲۰ نوامبر (روز جهانی کودک) · انجمن صلح و عدالت (PFPJ ry)",
@@ -506,6 +518,11 @@ let isAnimatingCamera = false;
 let animationTarget = { pos: null, lookAt: null };
 let clock;
 let childrenList = [];
+let teachersList = [];
+let drawingsList = [];
+let clickable3DArtifacts = [];
+let raycaster, pointerNDC;
+let pointerDownPos = { x: 0, y: 0 };
 let isWalkMode = false;
 let isGuidedTour = false;
 let currentTourIndex = 0;
@@ -526,6 +543,7 @@ function startReconstructionApp() {
   buildEnvironmentAndTerrain();
   buildProceduralSchoolModels();
   loadChildrenAndBuildInWorldMemorial();
+  init3DPortraitRaycaster();
   initHotspots();
   initUIControls();
   initKeyboardWalkControls();
@@ -849,57 +867,696 @@ function buildEnvironmentAndTerrain() {
   memorialBoardsGroup.add(obelisk);
 }
 
-// --- IN-WORLD CHILDREN'S PORTRAIT MEMORIAL BOARDS ---
-function loadChildrenAndBuildInWorldMemorial() {
+// --- IN-WORLD 3D CLASSROOM PORTRAITS (119 STUDENTS + 26 EDUCATORS) & 28 RUBBLE DRAWINGS ---
+function createNameplateTexture(line1Fa, line2En, line3Meta, accentHex) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 76;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#0d1322';
+  ctx.fillRect(0, 0, 256, 76);
+  ctx.strokeStyle = accentHex || '#d4a853';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(2, 2, 252, 72);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#fef3c7';
+  ctx.font = 'bold 17px Tahoma, sans-serif';
+  ctx.fillText((line1Fa || line2En || '').slice(0, 26), 128, 25);
+
+  ctx.fillStyle = '#e2e8f0';
+  ctx.font = '600 13px Inter, sans-serif';
+  ctx.fillText((line2En || '').slice(0, 28), 128, 46);
+
+  ctx.fillStyle = accentHex || '#d4a853';
+  ctx.font = 'bold 12px Inter, sans-serif';
+  ctx.fillText((line3Meta || '').slice(0, 32), 128, 65);
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.needsUpdate = true;
+  return tex;
+}
+
+function createWingBannerIn3D(parentGroup, titleEn, titleFa, x, y, z, rotY, width, bgHex, borderHex) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 768;
+  canvas.height = 110;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = bgHex || 'rgba(13, 19, 34, 0.94)';
+  ctx.fillRect(0, 0, 768, 110);
+  ctx.strokeStyle = borderHex || '#d4a853';
+  ctx.lineWidth = 5;
+  ctx.strokeRect(3, 3, 762, 104);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#fde68a';
+  ctx.font = 'bold 26px Tahoma, sans-serif';
+  ctx.fillText(titleFa, 384, 44);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 20px Inter, sans-serif';
+  ctx.fillText(titleEn, 384, 82);
+
+  const tex = new THREE.CanvasTexture(canvas);
+  const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, width * (110 / 768)), mat);
+  mesh.position.set(x, y, z);
+  mesh.rotation.y = rotY;
+  parentGroup.add(mesh);
+}
+
+function create3DFramedPortraitOnWall(parentGroup, loader, item, x, y, z, rotY, frameW, frameH, borderHex, cutawayMode, wingLabel) {
+  const holder = new THREE.Group();
+  holder.position.set(x, y, z);
+  holder.rotation.y = rotY;
+
+  const backing = new THREE.Mesh(
+    new THREE.BoxGeometry(frameW, frameH, 0.04),
+    new THREE.MeshBasicMaterial({ color: borderHex || 0xd4a853 })
+  );
+  holder.add(backing);
+
+  const innerMat = new THREE.MeshBasicMaterial({ color: 0x1e293b, side: THREE.DoubleSide });
+  const portraitH = frameH * 0.76;
+  const portraitW = frameW * 0.90;
+  const portraitPlane = new THREE.Mesh(new THREE.PlaneGeometry(portraitW, portraitH), innerMat);
+  portraitPlane.position.set(0, frameH * 0.09, 0.026);
+  holder.add(portraitPlane);
+
+  const imgUrl = item.photoPath || item.photo_path || (item.photoGrid ? `images/children/child_${item.photoGrid}.jpg` : null);
+  if (imgUrl) {
+    loader.load(imgUrl, (tex) => {
+      portraitPlane.material = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
+      portraitPlane.material.needsUpdate = true;
+    });
+  }
+
+  const metaText = item.category === 'teacher'
+    ? (item.role || 'Educator')
+    : `Grade ${item.grade || '?'} · Age ${item.age || '?'}`;
+  const labelTex = createNameplateTexture(
+    item.nameFa || item.full_name_fa,
+    item.name || item.full_name_en,
+    metaText,
+    borderHex === 0xf472b6 ? '#f472b6' : '#d4a853'
+  );
+  const labelPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(portraitW, frameH * 0.20),
+    new THREE.MeshBasicMaterial({ map: labelTex, side: THREE.DoubleSide })
+  );
+  labelPlane.position.set(0, -frameH * 0.38, 0.026);
+  holder.add(labelPlane);
+
+  // Compute camera focus point 2.2m in front of the portrait normal
+  const normal = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotY);
+  const focusCam = new THREE.Vector3(x, y + 0.1, z).add(normal.clone().multiplyScalar(2.35));
+  const lookAt = new THREE.Vector3(x, y, z);
+
+  const artifactData = {
+    artifactType: 'victim',
+    item,
+    wingLabel: wingLabel || 'Reconstructed School Interior',
+    focusCam,
+    lookAt,
+    cutawayMode: typeof cutawayMode === 'number' ? cutawayMode : 2
+  };
+  portraitPlane.userData = artifactData;
+  backing.userData = artifactData;
+  labelPlane.userData = artifactData;
+  clickable3DArtifacts.push(portraitPlane, backing, labelPlane);
+
+  parentGroup.add(holder);
+}
+
+function create3DRubbleDrawingOnWall(parentGroup, loader, drw, x, y, z, rotY, frameW, frameH, cutawayMode, wingLabel) {
+  const holder = new THREE.Group();
+  holder.position.set(x, y, z);
+  holder.rotation.y = rotY;
+
+  const borderColor = drw.hasBlastDamage ? 0xef4444 : 0xd4a853;
+  const backing = new THREE.Mesh(
+    new THREE.BoxGeometry(frameW, frameH, 0.04),
+    new THREE.MeshBasicMaterial({ color: borderColor })
+  );
+  holder.add(backing);
+
+  const imgH = frameH * 0.76;
+  const imgW = frameW * 0.91;
+  const artPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(imgW, imgH),
+    new THREE.MeshBasicMaterial({ color: 0x1e293b, side: THREE.DoubleSide })
+  );
+  artPlane.position.set(0, frameH * 0.09, 0.026);
+  holder.add(artPlane);
+
+  loader.load(drw.thumb || drw.image, (tex) => {
+    artPlane.material = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
+    artPlane.material.needsUpdate = true;
+  });
+
+  const labelTex = createNameplateTexture(
+    drw.studentNameFa || 'نقاشی زیر آوار',
+    (drw.title && drw.title.en) ? drw.title.en : drw.id,
+    drw.dateOnPage || 'Rubble Artifact',
+    drw.hasBlastDamage ? '#f87171' : '#fcd34d'
+  );
+  const labelPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(imgW, frameH * 0.20),
+    new THREE.MeshBasicMaterial({ map: labelTex, side: THREE.DoubleSide })
+  );
+  labelPlane.position.set(0, -frameH * 0.38, 0.026);
+  holder.add(labelPlane);
+
+  const normal = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotY);
+  const focusCam = new THREE.Vector3(x, y + 0.1, z).add(normal.clone().multiplyScalar(2.35));
+  const lookAt = new THREE.Vector3(x, y, z);
+
+  const artifactData = {
+    artifactType: 'drawing',
+    item: drw,
+    wingLabel: wingLabel || 'Classroom Rubble Artifact',
+    focusCam,
+    lookAt,
+    cutawayMode: typeof cutawayMode === 'number' ? cutawayMode : 1
+  };
+  artPlane.userData = artifactData;
+  backing.userData = artifactData;
+  labelPlane.userData = artifactData;
+  clickable3DArtifacts.push(artPlane, backing, labelPlane);
+
+  parentGroup.add(holder);
+}
+
+function createClassroomDeskWithDrawing(parentGroup, loader, drw, x, yBase, z, cutawayMode) {
+  const deskGroup = new THREE.Group();
+  deskGroup.position.set(x, yBase, z);
+
+  const woodMat = new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.75 });
+  const top = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.06, 0.68), woodMat);
+  top.position.set(0, 0.68, 0);
+  top.castShadow = true;
+  deskGroup.add(top);
+
+  const bench = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.42, 0.34), woodMat);
+  bench.position.set(0, 0.21, 0.52);
+  deskGroup.add(bench);
+
+  if (drw) {
+    const sheet = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.48, 0.36),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+    );
+    sheet.rotation.x = -Math.PI / 2;
+    sheet.position.set(0, 0.715, 0);
+    deskGroup.add(sheet);
+
+    loader.load(drw.thumb || drw.image, (tex) => {
+      sheet.material = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
+      sheet.material.needsUpdate = true;
+    });
+
+    const artifactData = {
+      artifactType: 'drawing',
+      item: drw,
+      wingLabel: 'Ground Floor Classroom Desk (Recovered from Rubble)',
+      focusCam: new THREE.Vector3(x, yBase + 1.9, z + 1.4),
+      lookAt: new THREE.Vector3(x, yBase + 0.7, z),
+      cutawayMode: cutawayMode || 2
+    };
+    sheet.userData = artifactData;
+    clickable3DArtifacts.push(sheet);
+  }
+
+  parentGroup.add(deskGroup);
+}
+
+function populate3DSchoolPortraitsAndDrawings() {
   const loader = new THREE.TextureLoader();
+  clickable3DArtifacts = [];
+
+  // 1. COURTYARD MEMORIAL STELE WALK (24 Double-Sided Steles around the Vow Shrine)
+  const portraitSample = childrenList.filter(c => c.photoPath).slice(0, 24);
+  const cols = 12;
+  const startX = -16.5;
+  const spacingX = 3.0;
+
+  portraitSample.forEach((child, idx) => {
+    const row = Math.floor(idx / cols);
+    const col = idx % cols;
+    const x = startX + col * spacingX;
+    const z = 19.5 + row * 3.0;
+    const imgUrl = child.photoPath;
+
+    const post = new THREE.Mesh(
+      new THREE.BoxGeometry(1.38, 2.02, 0.12),
+      new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 })
+    );
+    post.position.set(x, 1.18, z);
+    post.rotation.y = Math.PI;
+    post.castShadow = true;
+    memorialBoardsGroup.add(post);
+
+    const border = new THREE.Mesh(
+      new THREE.BoxGeometry(1.44, 2.08, 0.08),
+      new THREE.MeshBasicMaterial({ color: 0xd4a853 })
+    );
+    post.add(border);
+
+    const labelTex = createNameplateTexture(
+      child.nameFa,
+      child.name,
+      `Grade ${child.grade || '?'} · Age ${child.age || '?'}`,
+      '#d4a853'
+    );
+    const frontLabel = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.24, 0.34),
+      new THREE.MeshBasicMaterial({ map: labelTex, side: THREE.DoubleSide })
+    );
+    frontLabel.position.set(0, -0.74, 0.075);
+    post.add(frontLabel);
+
+    const backLabel = frontLabel.clone();
+    backLabel.position.set(0, -0.74, -0.075);
+    backLabel.rotation.y = Math.PI;
+    post.add(backLabel);
+
+    const steleArtifact = {
+      artifactType: 'victim',
+      item: child,
+      wingLabel: 'Courtyard 100 Faces Memorial Walk',
+      focusCam: new THREE.Vector3(x, 1.5, z - 2.6),
+      lookAt: new THREE.Vector3(x, 1.2, z),
+      cutawayMode: 0
+    };
+    post.userData = steleArtifact;
+    clickable3DArtifacts.push(post);
+
+    if (imgUrl) {
+      loader.load(imgUrl, (tex) => {
+        const portraitMesh = new THREE.Mesh(
+          new THREE.PlaneGeometry(1.24, 1.48),
+          new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide })
+        );
+        portraitMesh.position.set(0, 0.18, 0.075);
+        portraitMesh.userData = steleArtifact;
+        post.add(portraitMesh);
+        clickable3DArtifacts.push(portraitMesh);
+
+        const backMesh = portraitMesh.clone();
+        backMesh.position.set(0, 0.18, -0.075);
+        backMesh.rotation.y = Math.PI;
+        backMesh.userData = steleArtifact;
+        post.add(backMesh);
+        clickable3DArtifacts.push(backMesh);
+      });
+    }
+  });
+
+  if (!groundFloorGroup || !firstFloorGroup) return;
+
+  // =========================================================================
+  // 2. GROUND FLOOR WEST WING: BOYS OF GRADES 1, 2 & 3 (55 BOYS WITH PORTRAITS)
+  // =========================================================================
+  const boysGrades1to3 = childrenList.filter(c => c.gender === 'boy' && (c.grade || 1) <= 3 && c.photoPath);
+  createWingBannerIn3D(
+    groundFloorGroup,
+    `GROUND FLOOR WEST CLASSROOMS · BOYS GRADES 1–3 (${boysGrades1to3.length} STUDENTS)`,
+    `کلاس‌های طبقه همکف (بال غربی) · ۵۵ دانش‌آموز پسر پایه‌های اول تا سوم`,
+    -12.75, 3.22, -12.70, 0, 7.6, '#0d1b2a', '#38bdf8'
+  );
+
+  // Place along West Wall (x = -18.74, facing East +X, rotY = Math.PI / 2): 2 rows x 12 cols = 24 portraits
+  let bIdx = 0;
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 12; col++) {
+      if (bIdx >= boysGrades1to3.length) break;
+      const z = -12.1 + col * 1.08;
+      const y = 1.25 + row * 1.18;
+      create3DFramedPortraitOnWall(
+        groundFloorGroup, loader, boysGrades1to3[bIdx++],
+        -18.72, y, z, Math.PI / 2, 0.88, 1.06, 0x38bdf8, 2,
+        'Ground Floor West Wing · Boys Classrooms (Grades 1–3)'
+      );
+    }
+  }
+  // Place along North-West Wall (z = -12.72, facing South +Z, rotY = 0): 2 rows x 9 cols = 18 portraits
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 9; col++) {
+      if (bIdx >= boysGrades1to3.length) break;
+      const x = -17.6 + col * 1.22;
+      const y = 1.25 + row * 1.18;
+      create3DFramedPortraitOnWall(
+        groundFloorGroup, loader, boysGrades1to3[bIdx++],
+        x, y, -12.72, 0, 0.88, 1.06, 0x38bdf8, 2,
+        'Ground Floor North-West Classroom · Boys Grades 1–3'
+      );
+    }
+  }
+  // Place remaining Grade 1–3 boys along South-West Wall (z = 0.72, facing North -Z, rotY = Math.PI) & Cross Partition (z = -5.78, rotY = 0)
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 9; col++) {
+      if (bIdx >= boysGrades1to3.length) break;
+      const x = -17.6 + col * 1.22;
+      const y = 1.25 + row * 1.18;
+      create3DFramedPortraitOnWall(
+        groundFloorGroup, loader, boysGrades1to3[bIdx++],
+        x, y, 0.72, Math.PI, 0.88, 1.06, 0x38bdf8, 2,
+        'Ground Floor South-West Classroom · Boys Grades 1–2'
+      );
+    }
+  }
+
+  // Add 6 Classroom Desks with 1st-Grade Rubble Drawings in the Ground Floor West Classroom
+  const groundDeskDrawings = drawingsList.slice(0, 6);
+  for (let d = 0; d < 6; d++) {
+    const dx = -15.5 + (d % 3) * 2.8;
+    const dz = -4.2 + Math.floor(d / 3) * 2.2;
+    createClassroomDeskWithDrawing(groundFloorGroup, loader, groundDeskDrawings[d], dx, 0.2, dz, 2);
+  }
+
+  // =========================================================================
+  // 3. GROUND FLOOR EAST WING: BOYS OF GRADES 4, 5 & 6 (17 BOYS WITH PORTRAITS)
+  // =========================================================================
+  const boysGrades4to6 = childrenList.filter(c => c.gender === 'boy' && (c.grade || 1) >= 4 && c.photoPath);
+  createWingBannerIn3D(
+    groundFloorGroup,
+    `GROUND FLOOR EAST WING · BOYS GRADES 4–6 & CEREMONY ROOM (${boysGrades4to6.length} STUDENTS)`,
+    `طبقه همکف (بال شرقی) · دانش‌آموزان پسر پایه‌های چهارم تا ششم و اتاق جشن`,
+    12.75, 3.22, -12.70, 0, 7.6, '#0d1b2a', '#d4a853'
+  );
+
+  let b4Idx = 0;
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 10; col++) {
+      if (b4Idx >= boysGrades4to6.length) break;
+      const z = -12.0 + col * 1.18;
+      const y = 1.25 + row * 1.18;
+      create3DFramedPortraitOnWall(
+        groundFloorGroup, loader, boysGrades4to6[b4Idx++],
+        18.72, y, z, -Math.PI / 2, 0.92, 1.08, 0xd4a853, 2,
+        'Ground Floor East Wing · Boys Grades 4–6 & Ceremony Room'
+      );
+    }
+  }
+
+  // =========================================================================
+  // 4. CENTRAL HALL & RAINBOW STAIRCASE: ALL 26 MARTYRED FEMALE EDUCATORS
+  // =========================================================================
+  createWingBannerIn3D(
+    groundFloorGroup,
+    `CENTRAL HALL & RAINBOW STAIRCASE · THE 26 MARTYRED FEMALE EDUCATORS`,
+    `سالن مرکزی و راه‌پله رنگین‌کمان · ۲۶ معلم و مدیر شهیده دبستان شجره طیبه`,
+    0, 3.32, -12.70, 0, 7.2, '#1f122b', '#f472b6'
+  );
+
+  // Mount 13 teachers on Left Hall Wall (x = -6.32, facing East +X) and 13 on Right Hall Wall (x = +6.32, facing West -X)
+  teachersList.forEach((teacher, idx) => {
+    const isLeft = idx < 13;
+    const localIdx = isLeft ? idx : idx - 13;
+    const row = Math.floor(localIdx / 7);
+    const col = localIdx % 7;
+    // Space along Z avoiding purple doors at z = -3.0 and z = -9.0
+    const zSlots = [-0.6, -1.7, -4.3, -5.4, -6.5, -7.6, -10.4];
+    const z = zSlots[col] || (-1.0 - col * 1.4);
+    const y = 1.25 + row * 1.18;
+    const x = isLeft ? -6.32 : 6.32;
+    const rotY = isLeft ? Math.PI / 2 : -Math.PI / 2;
+
+    create3DFramedPortraitOnWall(
+      groundFloorGroup, loader, teacher,
+      x, y, z, rotY, 0.88, 1.06, 0xf472b6, 2,
+      'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators'
+    );
+  });
+
+  // =========================================================================
+  // 5. FIRST FLOOR WEST HALL: ALL 47 MARTYRED SCHOOLGIRLS (GRADES 1–6)
+  // =========================================================================
+  const y1 = 3.6;
+  const girlsAll = childrenList.filter(c => c.gender === 'girl' && c.photoPath);
+  createWingBannerIn3D(
+    firstFloorGroup,
+    `FIRST FLOOR GIRLS' ASSEMBLY HALL · ALL ${girlsAll.length} MARTYRED SCHOOLGIRLS (GRADES 1–6)`,
+    `طبقه اول (سالن بزرگ دختران) · ۴۷ دانش‌آموز دختر شهیده در پایه‌های اول تا ششم`,
+    -13.2, y1 + 3.22, -12.70, 0, 7.8, '#2b1222', '#f472b6'
+  );
+
+  let gIdx = 0;
+  // West Wall of Girls' Hall (x = -18.72, facing East +X): 2 rows x 12 cols = 24 portraits
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 12; col++) {
+      if (gIdx >= girlsAll.length) break;
+      const z = -12.1 + col * 1.08;
+      const y = y1 + 1.25 + row * 1.18;
+      create3DFramedPortraitOnWall(
+        firstFloorGroup, loader, girlsAll[gIdx++],
+        -18.72, y, z, Math.PI / 2, 0.88, 1.06, 0xf472b6, 1,
+        'First Floor West Wing · Girls\' Assembly Hall (Grades 1–6)'
+      );
+    }
+  }
+  // North Wall of Girls' Hall (z = -12.72, facing South +Z): 2 rows x 7 cols = 14 portraits
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 7; col++) {
+      if (gIdx >= girlsAll.length) break;
+      const x = -17.6 + col * 1.32;
+      const y = y1 + 1.25 + row * 1.18;
+      create3DFramedPortraitOnWall(
+        firstFloorGroup, loader, girlsAll[gIdx++],
+        x, y, -12.72, 0, 0.88, 1.06, 0xf472b6, 1,
+        'First Floor Girls\' Hall · North Wall Gallery'
+      );
+    }
+  }
+  // South Wall of Girls' Hall (z = 0.72, facing North -Z): remaining 9 portraits
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 7; col++) {
+      if (gIdx >= girlsAll.length) break;
+      const x = -17.6 + col * 1.32;
+      const y = y1 + 1.25 + row * 1.18;
+      create3DFramedPortraitOnWall(
+        firstFloorGroup, loader, girlsAll[gIdx++],
+        x, y, 0.72, Math.PI, 0.88, 1.06, 0xf472b6, 1,
+        'First Floor Girls\' Hall · South Wall Gallery'
+      );
+    }
+  }
+
+  // =========================================================================
+  // 6. FIRST FLOOR EAST CLASSROOMS: ALL 28 DRAWINGS & HOMEWORK PULLED FROM RUBBLE
+  // =========================================================================
+  createWingBannerIn3D(
+    firstFloorGroup,
+    `FIRST FLOOR CLASSROOMS · 28 DRAWINGS & HOMEWORK PULLED FROM THE RUBBLE`,
+    `کلاس‌های طبقه اول · ۲۸ برگ نقاشی و مشق بیرون کشیده شده از زیر آوار مدرسه`,
+    12.75, y1 + 3.22, -12.70, 0, 7.8, '#1e1b18', '#fcd34d'
+  );
+
+  let dIdx = 0;
+  // East Wall (x = 18.72, facing West -X): 2 rows x 10 cols = 20 drawings
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 10; col++) {
+      if (dIdx >= drawingsList.length) break;
+      const z = -12.0 + col * 1.22;
+      const y = y1 + 1.25 + row * 1.18;
+      create3DRubbleDrawingOnWall(
+        firstFloorGroup, loader, drawingsList[dIdx++],
+        18.72, y, z, -Math.PI / 2, 1.02, 1.06, 1,
+        'First Floor East Classroom · Rubble Drawings & Homework Archive'
+      );
+    }
+  }
+  // North-East Wall (z = -12.72, facing South +Z): remaining 8 drawings
+  for (let col = 0; col < 8; col++) {
+    if (dIdx >= drawingsList.length) break;
+    const x = 7.8 + col * 1.32;
+    const y = y1 + 1.85;
+    create3DRubbleDrawingOnWall(
+      firstFloorGroup, loader, drawingsList[dIdx++],
+      x, y, -12.72, 0, 1.08, 1.12, 1,
+      'First Floor East Classroom · Rubble Drawings & Homework Archive'
+    );
+  }
+}
+
+function loadChildrenAndBuildInWorldMemorial() {
+  if (typeof CHILDREN !== 'undefined' && Array.isArray(CHILDREN) && CHILDREN.length > 0) {
+    childrenList = CHILDREN;
+    teachersList = (typeof TEACHERS !== 'undefined' && Array.isArray(TEACHERS)) ? TEACHERS : [];
+    drawingsList = (typeof DRAWINGS !== 'undefined' && Array.isArray(DRAWINGS)) ? DRAWINGS : [];
+    populate3DSchoolPortraitsAndDrawings();
+    return;
+  }
 
   fetch('children.json')
     .then(r => r.json())
     .then(data => {
-      childrenList = data.filter(c => c.photoGrid);
-      const portraitSample = childrenList.slice(0, 24);
-      const cols = 12;
-      const startX = -16.5;
-      const spacingX = 3.0;
-
-      portraitSample.forEach((child, idx) => {
-        const row = Math.floor(idx / cols);
-        const col = idx % cols;
-        const x = startX + col * spacingX;
-        const z = 19.5 + row * 3.0;
-        const imgUrl = `images/children/child_${child.photoGrid}.jpg`;
-
-        const post = new THREE.Mesh(
-          new THREE.BoxGeometry(1.35, 1.9, 0.12),
-          new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 })
-        );
-        post.position.set(x, 1.15, z);
-        post.rotation.y = Math.PI;
-        post.castShadow = true;
-        memorialBoardsGroup.add(post);
-
-        const border = new THREE.Mesh(
-          new THREE.BoxGeometry(1.42, 1.96, 0.08),
-          new THREE.MeshBasicMaterial({ color: 0xd4a853 })
-        );
-        post.add(border);
-
-        loader.load(imgUrl, (tex) => {
-          const portraitMesh = new THREE.Mesh(
-            new THREE.PlaneGeometry(1.22, 1.55),
-            new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide })
-          );
-          portraitMesh.position.set(0, 0.1, 0.07);
-          post.add(portraitMesh);
-
-          const backMesh = portraitMesh.clone();
-          backMesh.position.set(0, 0.1, -0.07);
-          backMesh.rotation.y = Math.PI;
-          post.add(backMesh);
-        });
-      });
+      childrenList = data.map(c => ({
+        ...c,
+        name: c.name || c.full_name_en,
+        nameFa: c.nameFa || c.full_name_fa,
+        photoPath: c.photoPath || c.photo_path || (c.photoGrid ? `images/children/child_${c.photoGrid}.jpg` : null)
+      }));
+      populate3DSchoolPortraitsAndDrawings();
     })
     .catch(err => console.warn('Could not load children.json for 3D frames:', err));
+}
+
+// --- 3D INTERACTIVE RAYCASTER FOR IN-ROOM PORTRAITS & RUBBLE DRAWINGS ---
+function init3DPortraitRaycaster() {
+  raycaster = new THREE.Raycaster();
+  pointerNDC = new THREE.Vector2();
+  const dom = renderer.domElement;
+
+  dom.addEventListener('pointerdown', (e) => {
+    pointerDownPos.x = e.clientX;
+    pointerDownPos.y = e.clientY;
+  });
+
+  dom.addEventListener('pointermove', (e) => {
+    if (clickable3DArtifacts.length === 0) return;
+    const rect = dom.getBoundingClientRect();
+    pointerNDC.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    pointerNDC.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(pointerNDC, camera);
+    const hits = raycaster.intersectObjects(clickable3DArtifacts, false);
+    dom.style.cursor = (hits.length > 0 && hits[0].object.visible) ? 'pointer' : 'grab';
+  });
+
+  dom.addEventListener('pointerup', (e) => {
+    const dist = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
+    if (dist > 6 || clickable3DArtifacts.length === 0) return;
+
+    const rect = dom.getBoundingClientRect();
+    pointerNDC.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    pointerNDC.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(pointerNDC, camera);
+
+    const hits = raycaster.intersectObjects(clickable3DArtifacts, false);
+    if (hits.length > 0) {
+      const hitObj = hits[0].object;
+      if (hitObj.userData && hitObj.userData.item) {
+        openArtifactInspector(hitObj.userData);
+      }
+    }
+  });
+}
+
+function openArtifactInspector(artifactData) {
+  const modal = document.getElementById('artifactInspectorModal');
+  if (!modal || !artifactData || !artifactData.item) return;
+
+  const isFa = currentLang === 'fa';
+  const isFi = currentLang === 'fi';
+  const item = artifactData.item;
+  const imgEl = document.getElementById('inspectorImg');
+  const titleEl = document.getElementById('inspectorTitle');
+  const subEl = document.getElementById('inspectorSubtitle');
+  const badgeEl = document.getElementById('inspectorBadge');
+  const metaGrid = document.getElementById('inspectorMetaGrid');
+  const descEl = document.getElementById('inspectorDesc');
+  const primaryLink = document.getElementById('inspectorPrimaryLink');
+  const focusBtn = document.getElementById('inspectorFocus3DBtn');
+
+  if (artifactData.artifactType === 'drawing') {
+    badgeEl.textContent = item.hasBlastDamage
+      ? (isFa ? '💥 سند فیزیکی سوراخ‌شده با ترکش در زیر آوار' : '💥 Shrapnel-Torn Rubble Classroom Artifact')
+      : (isFa ? '🎨 نقاشی و تکلیف بیرون کشیده شده از زیر آوار' : '🎨 Classroom Drawing Pulled from the Rubble');
+    imgEl.src = item.image || item.thumb;
+    titleEl.textContent = (item.title && item.title[currentLang]) || (item.title && item.title.en) || item.id;
+    subEl.textContent = isFa
+      ? `${item.studentNameFa || 'دانش‌آموز دبستان شجره طیبه'} · ${item.dateOnPage || ''}`
+      : `${item.studentNameEn || 'Elementary Student'} · ${item.dateOnPage || ''}`;
+
+    metaGrid.innerHTML = `
+      <div class="inspector-meta-pill">
+        <span class="lbl">${isFa ? 'دانش‌آموز' : 'Student / Author'}</span>
+        <span class="val">${isFa ? (item.studentNameFa || '—') : (item.studentNameEn || '—')}</span>
+      </div>
+      <div class="inspector-meta-pill">
+        <span class="lbl">${isFa ? 'تاریخ روی برگه' : 'Date on Sheet'}</span>
+        <span class="val">${item.dateOnPage || 'Winter 1404'}</span>
+      </div>
+      <div class="inspector-meta-pill" style="grid-column: span 2;">
+        <span class="lbl">${isFa ? 'دست‌خط روی برگه' : 'Original Persian Inscription'}</span>
+        <span class="val" dir="rtl">${item.transcriptionFa || '—'}</span>
+      </div>
+    `;
+    descEl.textContent = (item.translation && item.translation[currentLang]) || (item.translation && item.translation.en) || '';
+    if (item.studentId) {
+      primaryLink.href = `child.html?id=${encodeURIComponent(item.studentId)}`;
+      primaryLink.textContent = isFa ? 'مشاهده صفحه یادبود این دانش‌آموز ←' : 'Open Student\'s Memorial Profile →';
+    } else {
+      primaryLink.href = 'memorial.html#drawingsSection';
+      primaryLink.textContent = isFa ? 'مشاهده ۲۸ نقاشی زیر آوار در صفحه یادبود ←' : 'View All 28 Rubble Drawings →';
+    }
+  } else {
+    const isTeacher = item.category === 'teacher';
+    badgeEl.textContent = isTeacher
+      ? (isFa ? '👩‍🏫 آموزگار و کادر آموزشی شهیده (نسخه ۳.۰)' : '👩‍🏫 Martyred Female Educator (Dataset v3.0.0)')
+      : (isFa ? '🧒 دانش‌آموز شهید دبستان شجره طیبه (نسخه ۳.۰)' : '🧒 Martyred Schoolchild (Dataset v3.0.0)');
+    imgEl.src = item.photoPath || item.photo_path || 'images/children/amin-ahmadzade.jpg';
+    const primaryName = isFa ? (item.nameFa || item.name) : (item.name || item.nameFa);
+    const secondaryName = isFa ? (item.name || '') : (item.nameFa || '');
+    titleEl.textContent = secondaryName ? `${primaryName} (${secondaryName})` : primaryName;
+    subEl.textContent = artifactData.wingLabel || (isFa ? (item.roleFa || item.gradeLabelFa) : (item.role || item.gradeLabelEn));
+
+    const dobDisplay = item.birthDateShamsi
+      ? `${item.birthDateShamsi}${item.birthDateGregorian ? ' (' + item.birthDateGregorian + ')' : ''}`
+      : (isTeacher ? (isFa ? 'کادر آموزشی مدرسه' : 'School Faculty') : '—');
+    const gradeOrRole = isFa
+      ? (item.gradeLabelFa || item.roleFa || 'دانش‌آموز')
+      : (item.gradeLabelEn || item.role || 'Student');
+
+    metaGrid.innerHTML = `
+      <div class="inspector-meta-pill">
+        <span class="lbl">${isFa ? 'پایه / سمت' : (isFi ? 'Luokka / Tehtävä' : 'Grade / Role')}</span>
+        <span class="val">${gradeOrRole}</span>
+      </div>
+      <div class="inspector-meta-pill">
+        <span class="lbl">${isFa ? 'سن در زمان شهادت' : (isFi ? 'Ikä' : 'Age')}</span>
+        <span class="val">${item.age ? (isFa ? `${item.age} سال` : `${item.age} years old`) : (isTeacher ? (isFa ? 'فرهنگی شهیده' : 'Educator') : '—')}</span>
+      </div>
+      <div class="inspector-meta-pill">
+        <span class="lbl">${isFa ? 'تاریخ تولد (شمسی / میلادی)' : 'Birth Date (Solar Hijri / Gregorian)'}</span>
+        <span class="val">${dobDisplay}</span>
+      </div>
+      <div class="inspector-meta-pill">
+        <span class="lbl">${isFa ? 'آرامگاه' : 'Burial Location'}</span>
+        <span class="val">${item.burialLocation || 'Minab Martyrs\' Cemetery'}</span>
+      </div>
+    `;
+    descEl.textContent = item.notes || item.biography || '';
+    primaryLink.href = `child.html?id=${encodeURIComponent(item.id)}`;
+    primaryLink.textContent = isFa
+      ? 'مشاهده شناسنامه کامل و صفحه اختصاصی یادبود ←'
+      : (isFi ? 'Avaa koko muistosivu →' : 'Open Full Memorial Profile →');
+  }
+
+  if (focusBtn) {
+    if (artifactData.focusCam && artifactData.lookAt) {
+      focusBtn.style.display = 'inline-flex';
+      focusBtn.onclick = () => {
+        closeArtifactInspector();
+        closeModal();
+        setTemporalCondition(0.0);
+        document.getElementById('timelineSlider').value = 0.0;
+        if (typeof artifactData.cutawayMode === 'number') {
+          setCutawayMode(artifactData.cutawayMode);
+        }
+        triggerCameraAnimation(artifactData.focusCam.clone(), artifactData.lookAt.clone());
+      };
+    } else {
+      focusBtn.style.display = 'none';
+    }
+  }
+
+  modal.classList.add('visible');
+}
+
+function closeArtifactInspector() {
+  const modal = document.getElementById('artifactInspectorModal');
+  if (modal) modal.classList.remove('visible');
 }
 
 // --- VERIFIED TWO-FLOOR WALKABLE SCHOOL ARCHITECTURE (FA INVESTIGATION 121) ---
@@ -1365,23 +2022,110 @@ function showHotspotModal(id) {
     testBox.classList.remove('active');
   }
 
-  // Children Portraits Strip
+  // Wing-Specific Children & Educators Portraits Strip (Dataset v3.0.0)
   const kidsStrip = document.getElementById('modalKidsStrip');
+  const stripCountEl = document.getElementById('modalKidsStripCount');
   kidsStrip.innerHTML = '';
-  if (childrenList.length > 0) {
-    const startIdx = (id.length * 7) % Math.max(1, childrenList.length - 8);
-    const slice = childrenList.slice(startIdx, startIdx + 8);
-    slice.forEach(kid => {
-      const card = document.createElement('a');
-      card.className = 'kid-mini-card';
-      card.href = `child.html?id=${encodeURIComponent(kid.id)}`;
-      const displayName = (currentLang === 'fa' && kid.nameFa) ? kid.nameFa : kid.name;
-      card.innerHTML = `
-        <img src="images/children/child_${kid.photoGrid}.jpg" alt="${displayName}" loading="lazy" />
-        <span>${displayName}</span>
-      `;
-      kidsStrip.appendChild(card);
-    });
+
+  const isFa = currentLang === 'fa';
+  let wingVictims = [];
+  let wingDrawings = [];
+
+  if (id === 'courtyard_lines') {
+    // Teacher Zohreh Shahriyari (who was in the yard) + Grade 1 & 2 pupils
+    const zohreh = teachersList.find(t => t.id === 'zohreh-shahriyari');
+    const g12 = childrenList.filter(c => c.photoPath && (c.grade === 1 || c.grade === 2)).slice(0, 14);
+    wingVictims = zohreh ? [zohreh, ...g12] : g12;
+    wingDrawings = drawingsList.filter(d => ['drawing-01', 'drawing-09', 'drawing-11', 'drawing-14'].includes(d.id));
+  } else if (id === 'boys_flower_arch') {
+    // Ground Floor East Ceremony Room: Boys of Grades 4, 5 & 6 + Grade 1–2 Ceremony Boys
+    wingVictims = childrenList.filter(c => c.gender === 'boy' && c.photoPath && (c.grade >= 4 || c.grade === 1)).slice(0, 18);
+    wingDrawings = drawingsList.filter(d => ['drawing-05', 'drawing-06', 'drawing-07', 'drawing-15', 'drawing-18'].includes(d.id));
+  } else if (id === 'boys_classroom') {
+    // Ground Floor West Classroom: Boys of Grades 1, 2 & 3
+    wingVictims = childrenList.filter(c => c.gender === 'boy' && c.photoPath && c.grade <= 3).slice(0, 20);
+    wingDrawings = drawingsList.filter(d => ['drawing-09', 'drawing-11', 'drawing-13', 'drawing-16', 'drawing-19'].includes(d.id));
+  } else if (id === 'rainbow_staircase') {
+    // Central Rainbow Staircase & Hall: All 26 Female Educators + Principal Fariba Jafari
+    wingVictims = [...teachersList, ...childrenList.filter(c => c.photoPath).slice(0, 6)];
+    wingDrawings = drawingsList.filter(d => ['drawing-04', 'drawing-10', 'drawing-23', 'drawing-24', 'drawing-26'].includes(d.id));
+  } else if (id === 'girls_upper_hall') {
+    // First Floor Girls' School: All 47 Martyred Schoolgirls (prioritizing Baran Ghasemi & Fatemeh Rahdar first)
+    const baran = childrenList.find(c => c.id === 'baran-ghasemy');
+    const fatemehR = childrenList.find(c => c.id === 'fatemeh-rahdar');
+    const otherGirls = childrenList.filter(c => c.gender === 'girl' && c.photoPath && c.id !== 'baran-ghasemy' && c.id !== 'fatemeh-rahdar');
+    wingVictims = [baran, fatemehR, ...otherGirls].filter(Boolean);
+    wingDrawings = drawingsList.filter(d => ['drawing-02', 'drawing-27', 'drawing-03', 'drawing-12', 'drawing-20', 'drawing-23'].includes(d.id));
+  } else if (id === 'crater_damage') {
+    // Central Assembly Hall & Prayer Room Blast Zone
+    wingVictims = [
+      ...teachersList.slice(0, 6),
+      ...childrenList.filter(c => c.photoPath && (c.grade === 3 || c.grade === 4)).slice(0, 14)
+    ];
+    wingDrawings = drawingsList.filter(d => d.hasBlastDamage || ['drawing-16', 'drawing-17', 'drawing-19', 'drawing-21', 'drawing-22'].includes(d.id));
+  } else {
+    // Second Wave / Vow Shrine: Cross-school representation across all 6 grades & educators
+    wingVictims = [
+      ...childrenList.filter(c => c.photoPath).slice(0, 12),
+      ...teachersList.slice(0, 6)
+    ];
+    wingDrawings = drawingsList.slice(0, 8);
+  }
+
+  if (stripCountEl) {
+    stripCountEl.textContent = isFa
+      ? `${wingVictims.length} تصویر استودیویی — برای مشاهده شناسنامه کلیک کنید`
+      : `${wingVictims.length} verified studio portraits · Click any portrait to inspect`;
+  }
+
+  wingVictims.forEach(person => {
+    const card = document.createElement('a');
+    card.className = 'kid-mini-card';
+    card.href = `child.html?id=${encodeURIComponent(person.id)}`;
+    const displayName = (isFa && person.nameFa) ? person.nameFa : person.name;
+    const roleOrGrade = person.category === 'teacher'
+      ? (isFa ? (person.roleFa || 'آموزگار شهیده') : (person.role || 'Educator'))
+      : (isFa
+          ? `پایه ${person.grade || '؟'}${person.age ? ' · ' + person.age + ' ساله' : ''}`
+          : `Grade ${person.grade || '?'}${person.age ? ' · Age ' + person.age : ''}`);
+    const imgSrc = person.photoPath || person.photo_path || 'images/children/amin-ahmadzade.jpg';
+    card.innerHTML = `
+      <img src="${imgSrc}" alt="${displayName}" loading="lazy" />
+      <span class="kid-name">${displayName}</span>
+      <span class="kid-meta">${roleOrGrade}</span>
+    `;
+    kidsStrip.appendChild(card);
+  });
+
+  // Populate Rubble Drawings Strip for this Wing
+  const drwWrap = document.getElementById('modalDrawingsStripWrap');
+  const drwStrip = document.getElementById('modalDrawingsStrip');
+  if (drwWrap && drwStrip) {
+    drwStrip.innerHTML = '';
+    if (wingDrawings.length > 0) {
+      drwWrap.style.display = 'block';
+      wingDrawings.forEach(drw => {
+        const dCard = document.createElement('div');
+        dCard.className = 'drawing-mini-card';
+        const dTitle = (drw.title && drw.title[currentLang]) || (drw.title && drw.title.en) || drw.id;
+        const dAuthor = isFa ? (drw.studentNameFa || 'دانش‌آموز شهید') : (drw.studentNameEn || 'Elementary Student');
+        dCard.innerHTML = `
+          <img src="${drw.thumb || drw.image}" alt="${dTitle}" loading="lazy" />
+          <span class="drw-title">${dTitle}</span>
+          <span class="drw-author">${dAuthor}</span>
+        `;
+        dCard.addEventListener('click', () => {
+          openArtifactInspector({
+            artifactType: 'drawing',
+            item: drw,
+            wingLabel: data.title
+          });
+        });
+        drwStrip.appendChild(dCard);
+      });
+    } else {
+      drwWrap.style.display = 'none';
+    }
   }
 
   document.getElementById('evidenceModal').classList.add('visible');
@@ -1805,9 +2549,48 @@ function initUIControls() {
     selectHotspot('girls_upper_hall');
   });
 
+  const presetClassGalleryBtn = document.getElementById('presetClassGallery');
+  if (presetClassGalleryBtn) {
+    let galleryViewStep = 0;
+    presetClassGalleryBtn.addEventListener('click', () => {
+      closeModal();
+      setTemporalCondition(0.0);
+      document.getElementById('timelineSlider').value = 0.0;
+      galleryViewStep = (galleryViewStep + 1) % 4;
+      if (galleryViewStep === 1) {
+        // View 1: Ground Floor Boys' Classrooms (Grades 1–3) & Desks with Rubble Drawings
+        setCutawayMode(2);
+        triggerCameraAnimation(new THREE.Vector3(-11.5, 2.3, -2.2), new THREE.Vector3(-18.5, 1.8, -4.5));
+      } else if (galleryViewStep === 2) {
+        // View 2: First Floor Girls' Assembly Hall (47 Schoolgirls)
+        setCutawayMode(1);
+        triggerCameraAnimation(new THREE.Vector3(-10.5, 5.9, -2.5), new THREE.Vector3(-18.5, 5.3, -7.0));
+      } else if (galleryViewStep === 3) {
+        // View 3: First Floor North-East Classroom (28 Rubble Drawings & Homework Archive)
+        setCutawayMode(1);
+        triggerCameraAnimation(new THREE.Vector3(11.2, 5.6, -7.4), new THREE.Vector3(18.5, 5.2, -10.2));
+      } else {
+        // View 4: Central Rainbow Staircase Hall (26 Martyred Female Educators)
+        setCutawayMode(2);
+        triggerCameraAnimation(new THREE.Vector3(1.5, 2.35, -1.2), new THREE.Vector3(-6.2, 1.9, -5.5));
+      }
+    });
+  }
+
   document.getElementById('presetCrater').addEventListener('click', () => {
     selectHotspot('crater_damage');
   });
+
+  const inspectorCloseBtn = document.getElementById('inspectorCloseBtn');
+  if (inspectorCloseBtn) {
+    inspectorCloseBtn.addEventListener('click', closeArtifactInspector);
+  }
+  const inspectorModal = document.getElementById('artifactInspectorModal');
+  if (inspectorModal) {
+    inspectorModal.addEventListener('click', (e) => {
+      if (e.target.id === 'artifactInspectorModal') closeArtifactInspector();
+    });
+  }
 
   document.getElementById('btnExportGlb').addEventListener('click', exportSceneToGLB);
 
