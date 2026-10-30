@@ -1467,6 +1467,7 @@
   },
   {
     "id": "minab-hazer-ammar-profile",
+    "sourceUrl": "https://ammaryar.ir/m/xrrob",
     "slug": "minab-hazer-documentary",
     "category": "documentary_profiles",
     "categoryLabel": {
@@ -1477,9 +1478,9 @@
       "en": "Documentary 'Minab; Hazer' (میناب؛ حاضر)",
       "fa": "مستند «میناب؛ حاضر» (روایت یک جنگ)"
     },
-    "producer": "Ammar Film Festival (عماریار)",
-    "runtime": "Streamable on AmmarYar",
-    "resolution": "1080p HD",
+    "producer": "Alireza Zarei / Ammar Film Festival (عماریار)",
+    "runtime": "48:21",
+    "resolution": "720p HD",
     "language": "Farsi",
     "subtitles": [
       "English",
@@ -1487,18 +1488,26 @@
       "Suomi"
     ],
     "year": "2026",
-    "videoUrl": "https://ammaryar.ir/m/xrrob",
-    "poster": "/images/og-evidence.png",
-    "downloadUrl": "https://ammaryar.ir/m/xrrob",
-    "featured": false,
+    "videoUrl": "/media/farsi/04_Minab_Hazer_Documentary.mp4",
+    "poster": "/images/minab-hazer-poster.jpg",
+    "downloadUrl": "/media/farsi/04_Minab_Hazer_Documentary.mp4",
+    "fileSize": "395 MB",
+    "outreachLetter": "/screening_media/OUTREACH_MINAB_HAZER_DOCUMENTARY.md",
+    "featured": true,
     "description": {
-      "en": "Produced under the Ammar Film Festival archive, chronicling the civilian casualty reality of the strike and the collective memory of the Hormozgan community.",
-      "fa": "روایتی مستند از فاجعه حمله به مدرسه شجره طیبه و بازتاب‌های آن در جامعه هرمزگان (قابل دسترسی و مشاهده برخط در سامانه عماریار)."
+      "en": "Directed by Alireza Zarei and produced by Morteza Akhoundi under the Ammar Film Festival archive, this 48-minute feature documentary chronicles the February 28, 2026 strike on Shajareh Tayyebeh Primary School in Minab through firsthand survivor testimonies, family accounts, and ground footage from Hormozgan.",
+      "fa": "مستند بلند ۴۸ دقیقه‌ای «میناب؛ حاضر» به کارگردانی علیرضا زارعی و تهیه‌کنندگی مرتضی آخوندی، روایتی میدانی و جامع از فاجعه حمله ۹ اسفند ۱۴۰۴ به دبستان شجره طیبه میناب، شهادت دانش‌آموزان و معلمان، و روایت‌های دست اول خانواده‌ها و شاهدان عینی در هرمزگان است."
     },
+    "keyFindings": [
+      "Full 48-minute feature documentary directed by Alireza Zarei and produced by Morteza Akhoundi.",
+      "On-the-ground testimonies from bereaved parents, surviving classmates, and emergency responders in Minab.",
+      "Visual documentation of destroyed classrooms, children's schoolbooks, and community mourning ceremonies."
+    ],
     "tags": [
       "Ammar Film",
       "Minab Hazer",
-      "Documentary"
+      "Alireza Zarei",
+      "Feature Documentary"
     ]
   },
   {
