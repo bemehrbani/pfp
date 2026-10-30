@@ -8,9 +8,9 @@
 
 | Date | Channel | Summary | Status |
 | :--- | :--- | :--- | :--- |
-| **14 Oct 2026** | Email (`info@forensic-architecture.org`, `am@forensic-architecture.org`) & LinkedIn | Sent formal collaboration inquiry regarding the **20 Nov 2026** World Children's Day walkable "Before & After" 3D spatial memorial at Helsinki XR Center and 3D asset loan from *Investigation 121*. | Sent |
-| **24 Oct 2026** | Internal Panel Alignment (`Makan ry` / `Sama Barvari`) | Added **Dr. Samaneh Moafi** as Priority #1 Online Speaker option for the **20 Nov 2026** panel (`18:15–19:00 EET`) in message `#1404075` to Moderator Sama Barvari. | Completed |
-| **27 Oct 2026** | Direct Meeting (Online) | Scheduled meeting between **Mahdi Farimani** and **Dr. Samaneh Moafi** to align on 3D spatial collaboration, methodological guidance, and her live online participation on the **20 Nov 2026** panel. | **Confirmed for Tuesday, 27 Oct 2026** |
+| **14 Oct 2026** | Email (`info@forensic-architecture.org`, `am@forensic-architecture.org`) | Sent formal collaboration inquiry regarding the **20 Nov 2026** World Children's Day walkable "Before & After" 3D spatial memorial at Helsinki XR Center and 3D asset loan from *Investigation 121*. Angela Mehta replied same day (`12:26`), looping in `programme@forensic-architecture.org` and `sm@forensic-architecture.org`. | Completed |
+| **22–23 Oct 2026** | Email (`programme@forensic-architecture.org`, `sm@forensic-architecture.org`) | **Isabella Parlamis** proposed and confirmed a Microsoft Teams call for **Wednesday, 28 October 2026 (`15:00–15:45 UK` / `17:00–17:45 EET`)**. | Completed |
+| **28 Oct 2026** | Online Meeting (Teams) + Follow-Up Draft | Constructive meeting held with **Dr. Samaneh Moafi** & **Isabella Parlamis**. FA is checking internally on sharing the 3D model files and noted that screening the Sky News / Full Story Films broadcast documentary requires rightsholder clearance. Follow-up reply drafted in thread (`m.farimany@gmail.com`). | **Meeting Completed · Follow-up Draft Ready** |
 
 ---
 
@@ -18,9 +18,10 @@
 
 | Channel | Address / Handle | Notes |
 | :--- | :--- | :--- |
-| **Official FA Profile** | `https://forensic-architecture.org/about/team/member/samaneh-moafi` | Researcher-in-Charge, Minab Investigation (`Ref: 121`) |
-| **Operations Direct Email** | `am@forensic-architecture.org` | **Angela Mehta** (Head of Operations, credited on Minab Investigation) |
-| **General Inquiry Desk** | `info@forensic-architecture.org` | Mark `ATTN: Dr. Samaneh Moafi & Isabella Parlamis` |
+| **Dr. Samaneh Moafi (Direct Email)** | `sm@forensic-architecture.org` | Researcher-in-Charge, Minab Investigation (`Ref: 121`) |
+| **Isabella Parlamis (Direct / Programmes)** | `ip@forensic-architecture.org` / `programme@forensic-architecture.org` | Operations / Programme Coordinator (Exhibitions & public programmes) |
+| **Angela Mehta (Operations Direct)** | `am@forensic-architecture.org` | Assistant Director / Head of Operations |
+| **General Inquiry Desk** | `info@forensic-architecture.org` | General routing desk |
 | **Goldsmiths CRA Desk** | `cra@gold.ac.uk` | Centre for Research Architecture, Goldsmiths, University of London |
 | **Sister Agency (Forensis)** | `forensis@counter-investigations.org` | Directed by **Robert Trafford** (Minab Editorial Lead; Signal: `@bt89.70`) |
 

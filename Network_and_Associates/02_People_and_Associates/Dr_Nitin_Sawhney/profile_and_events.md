@@ -7,10 +7,13 @@
 - **Co-Founder**, **Global AI Policy Research Network** (`contestations.ai` / `governance.contestations.ai`)
 - **Former Role:** Professor of Practice, Department of Computer Science, **Aalto University** (2020–2025)
 - **Academic Background:** PhD, **MIT Media Lab**; taught in Media Studies at **The New School** and the **MIT Program in Art, Culture and Technology (ACT)**
-- **Websites & Profiles:**
+- **Contact & Profiles:**
+  - Direct Email: `nitin@ethoscollective.ai`
+  - Mobile: `+358 452708868`
   - Personal Website: `https://www.nitinsawhney.org`
   - LinkedIn: `https://www.linkedin.com/in/nitinsawhney`
   - Symposium Platform: `https://governance.contestations.ai`
+- **20 November 2026 Event Status:** **CONFIRMED IN-PERSON PANEL SPEAKER** (`28 Oct 2026` email reply).
 
 ---
 

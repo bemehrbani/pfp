@@ -27,17 +27,17 @@ Forensic Architecture published the authoritative international 3D spatial and v
 
 | Name | Role on Minab Investigation (`Ref: 121`) | Profile / Direct Contact |
 | :--- | :--- | :--- |
-| **Dr. Samaneh Moafi** | **Researcher-in-Charge** & **Assistant Director of Research** | [`../../02_People_and_Associates/Dr_Samaneh_Moafi/profile_and_minab_investigation.md`](../../02_People_and_Associates/Dr_Samaneh_Moafi/profile_and_minab_investigation.md)<br>`https://forensic-architecture.org/about/team/member/samaneh-moafi` |
+| **Dr. Samaneh Moafi** | **Researcher-in-Charge** & **Assistant Director of Research** | [`../../02_People_and_Associates/Dr_Samaneh_Moafi/profile_and_minab_investigation.md`](../../02_People_and_Associates/Dr_Samaneh_Moafi/profile_and_minab_investigation.md)<br>Direct Email: `sm@forensic-architecture.org`<br>`https://forensic-architecture.org/about/team/member/samaneh-moafi` |
 | **Nicholas Masterton** | **Researcher / Technology** (Video spatialisation, camera alignment & 3D workflow) | `https://www.greenspaceindustries.com/GSI_home/GSI_home.html`<br>PGP: `B6BE 158F 226D 2A06 6040 C987 99E5 6546 A4B2 C4E8` |
 | **Elliot Bourne** | **Advanced Researcher** (3D spatial analysis & visual narrative) | `https://forensic-architecture.org/about/team/member/elliot-bourne` |
 | **Jack Parker** | **Assistant Researcher** (3D modeling, spatial design & animation) | `https://forensic-architecture.org/about/team/member/jack-parker` |
 | **Robert Trafford** | **Editorial Lead** & **Assistant Director / Communications** (Director, Forensis e.V.) | Signal: `@bt89.70`<br>Email: `forensis@counter-investigations.org` |
 | **Angela Mehta** | **Project Support** & **Assistant Director / Head of Operations** | Direct Email: `am@forensic-architecture.org` |
-| **Isabella Parlamis** | **Project Support** & **Operations / Programme Coordinator** (Exhibitions & public programmes) | `info@forensic-architecture.org` / `https://contact.forensic-architecture.org/` |
+| **Isabella Parlamis** | **Project Support** & **Operations / Programme Coordinator** (Exhibitions & public programmes) | Direct Email: `ip@forensic-architecture.org` / `programme@forensic-architecture.org` |
 
 ---
 
 ## 3. Current Status & Next Steps
 
-- **14 Oct 2026:** Formal collaboration & 3D asset loan request sent (`info@forensic-architecture.org`, `am@forensic-architecture.org`) and LinkedIn outreach initiated.
-- **Tuesday, 27 Oct 2026:** Scheduled online meeting between **Mahdi Farimani** and **Dr. Samaneh Moafi**.
+- **14 Oct 2026:** Formal collaboration & 3D asset loan request sent (`info@forensic-architecture.org`, `am@forensic-architecture.org`); Angela Mehta looped in `programme@forensic-architecture.org` and `sm@forensic-architecture.org`.
+- **28 Oct 2026 (15:00–15:45 UK / 17:00–17:45 EET):** Constructive online meeting held between **Mahdi Farimani**, **Dr. Samaneh Moafi**, and **Isabella Parlamis**. FA is checking internally on sharing the 3D model files and flagged that screening the Sky News / Full Story Films broadcast documentary requires rightsholder clearance. Follow-up reply drafted in the thread requesting permission for FA's own 7 website clips and a Full Story Films / Sky News contact.

@@ -5,8 +5,9 @@
 | Date | Channel / Venue | Summary | Status |
 | :--- | :--- | :--- | :--- |
 | **21 Oct 2026** | In-Person · University of Helsinki Think Corner (*Tiedekulma*) | Spoke with Dr. Nitin Sawhney at the *Global AI Governance in the Public and Planetary Interest* symposium (`governance.contestations.ai`). He spoke about the Minab school strike tragedy, shared memories of childhood in Tehran, and expressed interest in supporting the initiative. | Completed |
-| **25 Oct 2026** | In-Person · Cinema Orion (`15:00–15:55` Special Talk) | Planned follow-up at the *NAZA: Special Talk with Film Producer Harry Davies* session at Cinema Orion (Eerikinkatu 15, Helsinki). | Upcoming (`Tomorrow`) |
-| **27 Oct 2026** | Formal Email / LinkedIn Invitation | Send formal speaker invitation for the **20 Nov 2026** World Children's Day event (*Voices of Minab: Walk Inside the Reconstructed School*) at Helsinki XR Center (`17:00–19:30 EET`, Panel `18:15–19:00`). | Scheduled |
+| **22 Oct 2026** | Email (`nitin@ethoscollective.ai`) | Forwarded **Maria Mekri** (`maria.mekri@saferglobe.fi`, Executive Director of SaferGlobe) email (`Fwd: The school and a moonshot`) proposing universal-jurisdiction corporate/executive liability for AI defense vendors lacking civilian safeguards (citing the French *Lafarge* ruling). | Completed |
+| **27 Oct 2026** | Email (`m.farimany@gmail.com` → `nitin@ethoscollective.ai`) | Sent formal introduction, Minab dossier links (`https://peopleforpeace.live/draft.html`), and speaker invitation for the **20 Nov 2026** World Children's Day event at Helsinki XR Center (`17:00–19:30 EET`, Panel `18:15–19:00`). | Sent |
+| **28 Oct 2026** | Email Reply (`nitin@ethoscollective.ai`, `+358 452708868`) | **CONFIRMED FOR NOV 20 PANEL:** *"I’m happy to join you for the event on November 20th (looks really interesting) and speak in the panel discussion. Whom else do you plan to invite? I think you can invite Maria on the panel too."* Requested a **PDF version** of the dossier (and suggested sharing it with **Maria Mekri**, CC-ing him). Working at Oodi Library on 28 Oct; traveling to Copenhagen for a conference (`30 Oct – 3 Nov`); happy to meet in person upon return (`4 Nov+`). | **Confirmed Speaker** |
 
 ---
 

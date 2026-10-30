@@ -13,9 +13,9 @@
 
 | Name | Statutory Role | Location | Primary Responsibilities |
 | :--- | :--- | :--- | :--- |
-| **Mahdi Farimani** | **Chairperson** (*Hallituksen puheenjohtaja*) & Founding Member | Helsinki, Finland | Overall association management, Finnish PRH & regulatory compliance, technical & forensic architecture, 3D spatial reconstruction, and Helsinki institutional outreach. |
-| **Zahra Azhar** | **Board Member & Secretary** (*Sihteeri*) / International Legal Lead | The Hague, Netherlands | International criminal law (ICC Article 15 communications, universal jurisdiction), Coalition for the ICC (CICC) & ASP observer status applications, European legal liaison. |
-| **Dr. Ali Akbar Siapoush** | **Board Member** (*Hallituksen jäsen*) & Minute Checker (*Pöytäkirjantarkastaja*) | The Hague, Netherlands | Master Factual Determination Report & 19-case legal benchmark authorship (Chapters II, IX, X), historical & humanitarian scholarship, and international stakeholder engagement. |
+| **Mahdi Farimani** | **Chairperson** (*Hallituksen puheenjohtaja*) & Founding Member | Helsinki, Finland | Overall association management, leading legal filings under Universal Jurisdiction in Finland, managing research operations, 3D spatial reconstruction, and Helsinki institutional outreach (`https://www.linkedin.com/in/mahdifarimani/`). |
+| **Dr. Zahra Azhar** | **Board Member & Secretary** (*Sihteeri*) / International Legal Lead | The Hague, Netherlands | PhD in Public Law (Shahid Beheshti University), researcher at Leiden University, and former legal assistant at the Iran–United States Claims Tribunal (IUSCT) in The Hague. Coordinating liaison with the International Criminal Court (ICC) and NGOs operating in the international criminal justice network in the Netherlands (`https://www.linkedin.com/in/zahra-azhar-0717a545/`). |
+| **Dr. Ali Akbar Siapoush** | **Board Member** (*Hallituksen jäsen*) & Minute Checker (*Pöytäkirjantarkastaja*) | The Hague, Netherlands | PhD in Public International Law (Shahid Beheshti University). Managing academic collaborations, international outreach pipelines, and coordinating the 19-case legal benchmarking research panels (`https://www.linkedin.com/in/ali-akbar-siapoush-b0450240/`). |
 
 ---
 

@@ -13,9 +13,18 @@
 ## 1. Key Contact
 
 - **Kaisu Kinnunen** — **Campaign Coordinator**, Stop Killer Robots Finland / Suomen Sadankomitea
-  - **Direct Email:** `kaisu.kinnunen@sadankomitea.fi`
+  - **Direct Campaign Email:** `kaisu@stopkillerrobots.fi` (also `kaisu.kinnunen@sadankomitea.fi`)
   - **General Network Email:** `info@stopkillerrobots.fi`
-  - **Touchpoint (`21 Oct 2026`):** Spoke on **Panel C (*Responsible AI in Defense Tech, Security and Warfare?*)** at the University of Helsinki Think Corner symposium (`governance.contestations.ai`), presenting on **Digital Dehumanisation** (*"where humans are reduced to data"*). Mahdi Farimani attended her session in person.
+  - **Location:** Based in **Jyväskylä, Finland**
+  - **Touchpoint 1 (`21 Oct 2026`):** Spoke on **Panel C (*Responsible AI in Defense Tech, Security and Warfare?*)** at the University of Helsinki Think Corner symposium (`governance.contestations.ai`), presenting on **Digital Dehumanisation** (*"where humans are reduced to data"*). Mahdi Farimani attended her session in person.
+  - **Touchpoint 2 (`27 Oct 2026`):** PFPJ ry (`3616815-5`) submitted the official Global Coalition NGO membership application on `stopkillerrobots.org` and emailed Kaisu Kinnunen regarding joining the Finnish network and speaking on the **20 November 2026** panel at Helsinki XR Center.
+  - **Touchpoint 3 — Reply Received (`28 Oct 2026, 08:43 EET`):**
+    1. **Finnish Network Membership Welcomed:** Welcomed **People for Peace & Justice ry (`3616815-5`)** into the Stop Killer Robots Finland national network alongside its 6 existing Finnish member organizations (*Aseistakieltäytyjäliitto*, *Naiset Rauhan Puolesta*, *Rauhanliitto*, *Suomen Rauhanpuolustajat*, *Suomen Sadankomitea ry*, and *Tekniikka elämää palvelemaan*) and invited Mahdi to join the Finnish network planning mailing list.
+    2. **Nov 20 Panel & Online Meeting (`Tuesday, 3 Nov 2026`):** Expressed strong interest in the **20 November** panel; since she is based in **Jyväskylä**, she is checking travel to Helsinki for 20 November and proposed an **online meeting on Tuesday, 3 November 2026** to discuss both the network and the Nov 20 event.
+    3. **Action Invitation (`Friday, 30 Oct 2026 at 15:00`):** Invited Mahdi and PFPJ ry / Makan ry to join the **Stop Killer Robots Finland photoshoot in front of the Finnish Parliament House (*Eduskuntatalo*) on Friday, 30 October 2026 at 15:00** as part of the global *"Regulate For Control: Human Control is Hanging by a Thread"* campaign ahead of next month's UN CCW Review Conference (dress code: **black clothing / black shirt**).
+  - **Touchpoint 4 — Meeting Confirmed & Global Video Opportunity (`29 Oct 2026, 08:55 EET`):**
+    1. **CONFIRMED Online Meeting:** Confirmed **Tuesday, 3 November 2026 at 13:00 EET** to review the attached Minab PDF dossier and coordinate PFPJ ry's participation in the Finnish network and her participation in the **20 November** panel.
+    2. **Friday, 30 Oct `15:00` Parliament House Photoshoot & Short English Video:** Invited PFPJ ry / Makan ry campaigners not only for the group photo in front of *Eduskuntatalo*, but also to take individual campaigner photos with *"Stop Killer Robots"* / *"Regulate for Control"* signs and record a **short English video clip** for publication on the **global Stop Killer Robots social media channels** (`https://stopkillerrobots.fi/ajankohtaista-tapahtumat/valokuvatempaus-helsingissa-30102026`).
 
 ---
 
