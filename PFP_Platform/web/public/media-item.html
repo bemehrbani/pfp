@@ -364,17 +364,11 @@
     <!-- Load Metadata Store -->
     <script src="/media-data.js"></script>
     <script>
-        let currentLang = localStorage.getItem('pfp_lang') || 'en';
+        let currentLang = localStorage.getItem('pfp-lang') || localStorage.getItem('pfp_lang') || 'en';
         let activeItem = null;
 
         const i18n = {
             en: {
-                navMemorial: "Memorial",
-                navEvidence: "Evidence",
-                navMultimedia: "Multimedia",
-                navAmplify: "Amplify",
-                navInitiatives: "Initiatives",
-                navAbout: "About",
                 bcLibrary: "Multimedia Library",
                 downloadMp4: "Download Master Video (MP4)",
                 downloadAudio: "Download Audio (OGG)",
@@ -401,12 +395,6 @@
                 copiedMsg: "Direct link copied to clipboard!"
             },
             fa: {
-                navMemorial: "یادبود دیجیتال",
-                navEvidence: "مستندات فنی",
-                navMultimedia: "چندرسانه‌ای",
-                navAmplify: "پژواک عدالت",
-                navInitiatives: "نهادها و سازمان‌ها",
-                navAbout: "درباره انجمن",
                 bcLibrary: "کتابخانه چندرسانه‌ای",
                 downloadMp4: "دانلود مستقیم ویدیو (Full HD)",
                 downloadAudio: "دانلود فایل صوتی (OGG)",
@@ -431,41 +419,67 @@
                 lblLang: "زبان اثر:",
                 lblSubs: "زیرنویس:",
                 copiedMsg: "لینک مستقیم مستند کپی شد!"
+            },
+            fi: {
+                bcLibrary: "Multimediakirjasto",
+                downloadMp4: "Lataa alkuperäinen video (MP4)",
+                downloadAudio: "Lataa äänitiedosto (OGG)",
+                downloadGif: "Lataa korkearesoluutioinen GIF",
+                watchAmmar: "Katso AmmarYar-portaalissa ↗",
+                watchYoutube: "Katso YouTubessa ↗",
+                outreachDoc: "Näytä virallinen esityspyyntö 📋",
+                copyLink: "Kopioi suora linkki",
+                viewEvidence: "Katso todistusaineisto",
+                memorialBtn: "Digitaalinen muistomerkki",
+                headingOverview: "Tutkinnan yleiskatsaus & tiivistelmä",
+                headingFindings: "Keskeiset vahvistetut todisteet & havainnot",
+                headingSpecs: "Tekniset tiedot",
+                headingAdvocacy: "Ihmisoikeusdokumentaatio",
+                txtAdvocacy: "Kaikki tämän kirjaston mediatiedostot on arkistoitu PFPJ ry:n toimesta Helsingissä kansainvälisen humanitaarisen oikeuden ja yleismaailmallisen tuomiovallan mukaista oikeudellista tutkintaa varten.",
+                headingRelated: "Lisää tutkintoja & dokumentteja",
+                btnSource: "Alkuperäinen lähde ↗",
+                lblSource: "Alkuperäinen lähdelinkki:",
+                lblProducer: "Julkaisija / Tekijä:",
+                lblFormat: "Muoto & tarkkuus:",
+                lblDuration: "Kesto:",
+                lblLang: "Kieli:",
+                lblSubs: "Tekstitykset:",
+                copiedMsg: "Suora linkki kopioitu leikepöydälle!"
             }
         };
 
-        function setLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('pfp_lang', lang);
-            document.documentElement.lang = lang;
-            document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-            document.body.className = lang === 'fa' ? 'lang-fa' : '';
-            document.getElementById('lang-toggle-btn').innerText = lang === 'fa' ? 'English' : 'فارسی';
+        function setText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
 
-            const t = i18n[lang];
-            document.getElementById('nav-memorial').innerText = t.navMemorial;
-            document.getElementById('nav-evidence').innerText = t.navEvidence;
-            document.getElementById('nav-multimedia').innerText = t.navMultimedia;
-            document.getElementById('nav-amplify').innerText = t.navAmplify;
-            document.getElementById('nav-initiatives').innerText = t.navInitiatives;
-            document.getElementById('nav-about').innerText = t.navAbout;
-            document.getElementById('bc-library').innerText = t.bcLibrary;
-            document.getElementById('btn-share-text').innerText = t.copyLink;
-            document.getElementById('btn-ev-text').innerText = t.viewEvidence;
-            document.getElementById('btn-mem-text').innerText = t.memorialBtn;
-            document.getElementById('btn-src-text').innerText = t.btnSource;
-            document.getElementById('heading-overview').innerText = t.headingOverview;
-            document.getElementById('heading-findings').innerText = t.headingFindings;
-            document.getElementById('heading-tech-specs').innerText = t.headingSpecs;
-            document.getElementById('heading-advocacy').innerText = t.headingAdvocacy;
-            document.getElementById('txt-advocacy').innerText = t.txtAdvocacy;
-            document.getElementById('heading-related').innerText = t.headingRelated;
-            document.getElementById('lbl-producer').innerText = t.lblProducer;
-            document.getElementById('lbl-format').innerText = t.lblFormat;
-            document.getElementById('lbl-duration').innerText = t.lblDuration;
-            document.getElementById('lbl-lang').innerText = t.lblLang;
-            document.getElementById('lbl-subs').innerText = t.lblSubs;
-            document.getElementById('lbl-source').innerText = t.lblSource;
+        function setLanguage(lang) {
+            const safeLang = i18n[lang] ? lang : 'en';
+            currentLang = safeLang;
+            localStorage.setItem('pfp_lang', safeLang);
+            localStorage.setItem('pfp-lang', safeLang);
+            document.documentElement.lang = safeLang;
+            document.documentElement.dir = safeLang === 'fa' ? 'rtl' : 'ltr';
+            document.body.className = safeLang === 'fa' ? 'lang-fa' : '';
+
+            const t = i18n[safeLang];
+            setText('bc-library', t.bcLibrary);
+            setText('btn-share-text', t.copyLink);
+            setText('btn-ev-text', t.viewEvidence);
+            setText('btn-mem-text', t.memorialBtn);
+            setText('btn-src-text', t.btnSource);
+            setText('heading-overview', t.headingOverview);
+            setText('heading-findings', t.headingFindings);
+            setText('heading-tech-specs', t.headingSpecs);
+            setText('heading-advocacy', t.headingAdvocacy);
+            setText('txt-advocacy', t.txtAdvocacy);
+            setText('heading-related', t.headingRelated);
+            setText('lbl-producer', t.lblProducer);
+            setText('lbl-format', t.lblFormat);
+            setText('lbl-duration', t.lblDuration);
+            setText('lbl-lang', t.lblLang);
+            setText('lbl-subs', t.lblSubs);
+            setText('lbl-source', t.lblSource);
 
             if (activeItem) {
                 renderItem(activeItem);
@@ -477,56 +491,63 @@
         }
 
         function renderItem(item) {
+            if (!item) return;
             activeItem = item;
-            const t = i18n[currentLang];
+            const t = i18n[currentLang] || i18n.en;
             const title = currentLang === 'fa' ? item.title.fa : item.title.en;
             const desc = currentLang === 'fa' ? item.description.fa : item.description.en;
             const catLabel = currentLang === 'fa' ? item.categoryLabel.fa : item.categoryLabel.en;
 
             document.title = `${title} — People for Peace`;
-            document.getElementById('meta-title').innerText = `${title} — People for Peace`;
-            document.getElementById('meta-desc').content = desc;
-            document.getElementById('og-title').content = title;
-            document.getElementById('og-desc').content = desc;
+            setText('meta-title', `${title} — People for Peace`);
+            const metaDesc = document.getElementById('meta-desc');
+            if (metaDesc) metaDesc.content = desc;
+            const ogTitle = document.getElementById('og-title');
+            if (ogTitle) ogTitle.content = title;
+            const ogDesc = document.getElementById('og-desc');
+            if (ogDesc) ogDesc.content = desc;
 
-            document.getElementById('bc-title').innerText = title;
-            document.getElementById('cat-pill').innerText = catLabel;
-            document.getElementById('res-pill').innerText = item.resolution || '1080p Full HD';
-            document.getElementById('lang-pill').innerText = item.language;
-            document.getElementById('content-title').innerText = title;
-            document.getElementById('meta-producer').innerText = `🏢 ${item.producer}`;
-            document.getElementById('meta-runtime').innerText = `⏱️ ${item.runtime}`;
-            document.getElementById('meta-year').innerText = `📅 ${item.year || '2026'}`;
-            document.getElementById('meta-filesize').innerText = item.fileSize ? `📦 ${item.fileSize}` : '';
-            document.getElementById('content-synopsis').innerText = desc;
+            setText('bc-title', title);
+            setText('cat-pill', catLabel);
+            setText('res-pill', item.resolution || '1080p Full HD');
+            setText('lang-pill', `${item.language} (CC: EN/FA/FI)`);
+            setText('content-title', title);
+            setText('meta-producer', `🏢 ${item.producer}`);
+            setText('meta-runtime', `⏱️ ${item.runtime}`);
+            setText('meta-year', `📅 ${item.year || '2026'}`);
+            setText('meta-filesize', item.fileSize ? `📦 ${item.fileSize}` : '');
+            setText('content-synopsis', desc);
 
             // Specs
-            document.getElementById('spec-producer').innerText = item.producer;
-            document.getElementById('spec-res').innerText = item.resolution || '1080p HD';
-            document.getElementById('spec-dur').innerText = item.runtime;
-            document.getElementById('spec-lang').innerText = item.language;
+            setText('spec-producer', item.producer);
+            setText('spec-res', item.resolution || '1080p HD');
+            setText('spec-dur', item.runtime);
+            setText('spec-lang', item.language);
             const subsFormatted = Array.isArray(item.subtitles) ? item.subtitles.join(', ') + ' [CC WebVTT]' : 'English, فارسی, Suomi [CC WebVTT]';
-            document.getElementById('spec-subs').innerText = subsFormatted;
-            document.getElementById('lang-pill').innerText = `${item.language} (CC: EN/FA/FI)`;
+            setText('spec-subs', subsFormatted);
 
             // Source URL populate
             const srcBtn = document.getElementById('src-action-btn');
             const srcRow = document.getElementById('spec-source-row');
             const srcLink = document.getElementById('spec-source-link');
             if (item.sourceUrl) {
-                srcBtn.href = item.sourceUrl;
-                srcBtn.style.display = 'inline-flex';
-                srcRow.style.display = 'flex';
-                try {
-                    const parsed = new URL(item.sourceUrl);
-                    srcLink.innerText = parsed.hostname.replace('www.', '') + ' ↗';
-                } catch (e) {
-                    srcLink.innerText = 'Visit Source ↗';
+                if (srcBtn) {
+                    srcBtn.href = item.sourceUrl;
+                    srcBtn.style.display = 'inline-flex';
                 }
-                srcLink.href = item.sourceUrl;
+                if (srcRow) srcRow.style.display = 'flex';
+                if (srcLink) {
+                    try {
+                        const parsed = new URL(item.sourceUrl);
+                        srcLink.innerText = parsed.hostname.replace('www.', '') + ' ↗';
+                    } catch (e) {
+                        srcLink.innerText = 'Visit Source ↗';
+                    }
+                    srcLink.href = item.sourceUrl;
+                }
             } else {
-                srcBtn.style.display = 'none';
-                srcRow.style.display = 'none';
+                if (srcBtn) srcBtn.style.display = 'none';
+                if (srcRow) srcRow.style.display = 'none';
             }
 
             // Player Render
@@ -540,6 +561,8 @@
                 return match ? match[1] : null;
             };
             const ytId = getYoutubeId(item);
+            const safeVideoUrl = item.videoUrl && item.videoUrl.startsWith('/') ? encodeURI(item.videoUrl) : item.videoUrl;
+            const safeDownloadUrl = item.downloadUrl && item.downloadUrl.startsWith('/') ? encodeURI(item.downloadUrl) : item.downloadUrl;
 
             if (item.isAudio) {
                 mount.innerHTML = `
@@ -547,15 +570,15 @@
                         <div style="font-size: 5rem; margin-bottom: 20px;">🎵</div>
                         <h3 style="color: #fff; margin-bottom: 24px; font-size: 1.4rem;">${title}</h3>
                         <audio controls autoplay style="width: 85%; max-width: 550px;">
-                            <source src="${item.videoUrl}" type="audio/ogg">
+                            <source src="${safeVideoUrl}" type="audio/ogg">
                             Your browser does not support the audio tag.
                         </audio>
                     </div>
                 `;
-                document.getElementById('btn-dl-text').innerText = t.downloadAudio;
+                setText('btn-dl-text', t.downloadAudio);
             } else if (item.isImage) {
-                mount.innerHTML = `<img src="${item.videoUrl}" class="media-img-preview" alt="${title}" />`;
-                document.getElementById('btn-dl-text').innerText = t.downloadGif;
+                mount.innerHTML = `<img src="${safeVideoUrl}" class="media-img-preview" alt="${title}" />`;
+                setText('btn-dl-text', t.downloadGif);
             } else if (ytId) {
                 mount.innerHTML = `
                     <iframe
@@ -568,71 +591,73 @@
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
                     </iframe>
                 `;
-                document.getElementById('btn-dl-text').innerText = t.watchYoutube || 'Watch on YouTube ↗';
+                setText('btn-dl-text', t.watchYoutube || 'Watch on YouTube ↗');
             } else if (item.videoUrl && item.videoUrl.startsWith('http') && !item.videoUrl.endsWith('.mp4')) {
                 mount.innerHTML = `
                     <div style="text-align: center; padding: 70px 20px;">
                         <div style="font-size: 3.5rem; margin-bottom: 16px;">🎬</div>
                         <h3 style="color: #fff; margin-bottom: 16px;">${title}</h3>
                         <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 24px;">Hosted on the official festival stream.</p>
-                        <a href="${item.videoUrl}" target="_blank" class="btn btn-gold">${t.watchAmmar}</a>
+                        <a href="${item.videoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-gold">${t.watchAmmar}</a>
                     </div>
                 `;
-                document.getElementById('btn-dl-text').innerText = t.watchAmmar;
-            } else if (item.videoUrl) {
+                setText('btn-dl-text', t.watchAmmar);
+            } else if (safeVideoUrl) {
                 const ts = Date.now();
                 const enSub = `/media/subtitles/${item.slug}/en.vtt?t=${ts}`;
                 const faSub = `/media/subtitles/${item.slug}/fa.vtt?t=${ts}`;
                 const fiSub = `/media/subtitles/${item.slug}/fi.vtt?t=${ts}`;
                 mount.innerHTML = `
                     <video controls autoplay playsinline crossorigin="anonymous" poster="${item.poster || '/images/og-evidence.png'}">
-                        <source src="${item.videoUrl}" type="video/mp4">
+                        <source src="${safeVideoUrl}" type="video/mp4">
                         <track kind="subtitles" srclang="en" label="English" src="${enSub}" ${currentLang === 'en' ? 'default' : ''}>
                         <track kind="subtitles" srclang="fa" label="فارسی (Farsi)" src="${faSub}" ${currentLang === 'fa' ? 'default' : ''}>
-                        <track kind="subtitles" srclang="fi" label="Suomi (Finnish)" src="${fiSub}">
+                        <track kind="subtitles" srclang="fi" label="Suomi (Finnish)" src="${fiSub}" ${currentLang === 'fi' ? 'default' : ''}>
                         Your browser does not support the video tag.
                     </video>
                 `;
-                document.getElementById('btn-dl-text').innerText = t.downloadMp4;
+                setText('btn-dl-text', t.downloadMp4);
             } else {
                 mount.innerHTML = `
                     <div style="text-align: center; padding: 70px 20px; max-width: 600px;">
                         <div style="font-size: 3.5rem; margin-bottom: 16px;">🎬</div>
                         <h3 style="color: #fff; margin-bottom: 14px;">${title}</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 24px;">Official DEFC Festival Cut. Screener requested via NGO outreach letter.</p>
-                        <a href="/screening_media/OUTREACH_HODA_DOCUMENTARY.md" class="btn btn-gold">${t.outreachDoc}</a>
+                        <a href="/screening_media/OUTREACH_HODA_DOCUMENTARY.md" target="_blank" rel="noopener noreferrer" class="btn btn-gold">${t.outreachDoc}</a>
                     </div>
                 `;
-                document.getElementById('btn-dl-text').innerText = t.outreachDoc;
+                setText('btn-dl-text', t.outreachDoc);
             }
 
-            if (ytId) {
-                dlBtn.href = item.videoUrl && item.videoUrl.includes('youtube') ? item.videoUrl : `https://www.youtube.com/watch?v=${ytId}`;
-                dlBtn.target = "_blank";
-                dlBtn.removeAttribute('download');
-                dlBtn.style.display = 'inline-flex';
-            } else if (item.downloadUrl && !item.downloadUrl.startsWith('http')) {
-                dlBtn.href = item.downloadUrl;
-                dlBtn.removeAttribute('target');
-                dlBtn.setAttribute('download', '');
-                dlBtn.style.display = 'inline-flex';
-            } else if (item.downloadUrl) {
-                dlBtn.href = item.downloadUrl;
-                dlBtn.target = "_blank";
-                dlBtn.removeAttribute('download');
-                dlBtn.style.display = 'inline-flex';
-            } else {
-                dlBtn.style.display = 'none';
+            if (dlBtn) {
+                if (ytId) {
+                    dlBtn.href = item.videoUrl && item.videoUrl.includes('youtube') ? item.videoUrl : `https://www.youtube.com/watch?v=${ytId}`;
+                    dlBtn.target = "_blank";
+                    dlBtn.removeAttribute('download');
+                    dlBtn.style.display = 'inline-flex';
+                } else if (safeDownloadUrl && !safeDownloadUrl.startsWith('http')) {
+                    dlBtn.href = safeDownloadUrl;
+                    dlBtn.removeAttribute('target');
+                    dlBtn.setAttribute('download', '');
+                    dlBtn.style.display = 'inline-flex';
+                } else if (safeDownloadUrl) {
+                    dlBtn.href = safeDownloadUrl;
+                    dlBtn.target = "_blank";
+                    dlBtn.removeAttribute('download');
+                    dlBtn.style.display = 'inline-flex';
+                } else {
+                    dlBtn.style.display = 'none';
+                }
             }
 
             // Findings List
             const findingsWrapper = document.getElementById('findings-wrapper');
             const findingsList = document.getElementById('findings-list');
             if (item.keyFindings && item.keyFindings.length > 0) {
-                findingsWrapper.style.display = 'block';
-                findingsList.innerHTML = item.keyFindings.map(f => `<li>${f}</li>`).join('');
+                if (findingsWrapper) findingsWrapper.style.display = 'block';
+                if (findingsList) findingsList.innerHTML = item.keyFindings.map(f => `<li>${f}</li>`).join('');
             } else {
-                findingsWrapper.style.display = 'none';
+                if (findingsWrapper) findingsWrapper.style.display = 'none';
             }
 
             // Render Related Items
@@ -641,6 +666,7 @@
 
         function renderRelated(currentItem) {
             const container = document.getElementById('related-grid');
+            if (!container) return;
             const sameCategory = PFP_MEDIA_DATA.filter(x => x.id !== currentItem.id && x.category === currentItem.category);
             const otherCategory = PFP_MEDIA_DATA.filter(x => x.id !== currentItem.id && x.category !== currentItem.category);
             const related = [...sameCategory, ...otherCategory].slice(0, 4);
@@ -648,7 +674,7 @@
             container.innerHTML = related.map(item => {
                 const title = currentLang === 'fa' ? item.title.fa : item.title.en;
                 return `
-                    <a href="/media-item.html?v=${item.slug}" class="rel-card">
+                    <a href="/media-item.html?v=${encodeURIComponent(item.slug)}" class="rel-card">
                         <div class="rel-thumb-wrap">
                             <img src="${item.poster || '/images/og-evidence.png'}" alt="${title}" loading="lazy" />
                         </div>
@@ -662,8 +688,9 @@
         }
 
         function copyShareUrl() {
+            const t = i18n[currentLang] || i18n.en;
             navigator.clipboard.writeText(window.location.href).then(() => {
-                alert(i18n[currentLang].copiedMsg);
+                alert(t.copiedMsg);
             });
         }
 
@@ -671,8 +698,8 @@
             const params = new URLSearchParams(window.location.search);
             const targetSlug = params.get('v') || params.get('id');
             const found = PFP_MEDIA_DATA.find(x => x.slug === targetSlug || x.id === targetSlug) || PFP_MEDIA_DATA[0];
+            activeItem = found;
             setLanguage(currentLang);
-            renderItem(found);
         });
     </script>
     <script src="contact-modal.js"></script>

@@ -386,8 +386,9 @@
                 <button class="tab-btn" id="tab-intl" data-category="international" onclick="filterCategory('international')">International OSINT (11)</button>
                 <button class="tab-btn" id="tab-series" data-category="series_minab" onclick="filterCategory('series_minab')">12-Episode Series (12)</button>
                 <button class="tab-btn" id="tab-farsi" data-category="farsi_reports" onclick="filterCategory('farsi_reports')">Field Documentaries (3)</button>
-                <button class="tab-btn" id="tab-audio" data-category="audio_memorials" onclick="filterCategory('audio_memorials')">Audio & Scores</button>
-                <button class="tab-btn" id="tab-visual" data-category="visual_memorials" onclick="filterCategory('visual_memorials')">Visual Memorials</button>
+                <button class="tab-btn" id="tab-cinema" data-category="documentary_profiles" onclick="filterCategory('documentary_profiles')">Feature Cinema (2)</button>
+                <button class="tab-btn" id="tab-audio" data-category="audio_memorials" onclick="filterCategory('audio_memorials')">Audio & Scores (1)</button>
+                <button class="tab-btn" id="tab-visual" data-category="visual_memorials" onclick="filterCategory('visual_memorials')">Visual Memorials (2)</button>
             </div>
             <div class="search-bar-row">
                 <div class="search-input-wrap">
@@ -423,7 +424,7 @@
     <!-- Load Metadata Store -->
     <script src="/media-data.js"></script>
     <script>
-        let currentLang = localStorage.getItem('pfp_lang') || 'en';
+        let currentLang = localStorage.getItem('pfp-lang') || localStorage.getItem('pfp_lang') || 'en';
         let currentCategory = 'all';
 
         const i18n = {
@@ -431,12 +432,6 @@
                 badge: "Investigative Video & Documentary Archive",
                 title: "Multimedia Library",
                 desc: "Explore verified open-source video investigations, the 12-part documentary series, forensic reconstructions, and oral history archives documenting the Minab incident.",
-                navMemorial: "Memorial",
-                navEvidence: "Evidence",
-                navMultimedia: "Multimedia",
-                navAmplify: "Amplify",
-                navInitiatives: "Initiatives",
-                navAbout: "About",
                 statTotal: "Media Files",
                 statIntl: "OSINT Investigations",
                 statSeries: "Series Episodes",
@@ -451,18 +446,20 @@
                 listenNow: "Listen Audio",
                 viewGraphic: "View Graphic",
                 noResults: "No matching investigations found",
-                noResultsDesc: "Try adjusting your search query or selecting a different category."
+                noResultsDesc: "Try adjusting your search query or selecting a different category.",
+                tabAll: "All Media (39)",
+                tabStill: "Still, Minab (8)",
+                tabIntl: "International OSINT (11)",
+                tabSeries: "12-Episode Series (12)",
+                tabFarsi: "Field Documentaries (3)",
+                tabCinema: "Feature Cinema (2)",
+                tabAudio: "Audio & Scores (1)",
+                tabVisual: "Visual Memorials (2)"
             },
             fa: {
                 badge: "آرشیو مستندات تصویری و تحقیقات چندرسانه‌ای",
                 title: "کتابخانه چندرسانه‌ای و مستندات",
                 desc: "مشاهده و دریافت بیش از ۳۹ اثر تصویری، مجموعه مستند «هنوز میناب»، مجموعه ۱۲ قسمتی، بازسازی‌های فنی ماهواره‌ای و آرشیو تاریخ شفاهی فاجعه مدرسه میناب.",
-                navMemorial: "یادبود دیجیتال",
-                navEvidence: "مستندات فنی",
-                navMultimedia: "چندرسانه‌ای",
-                navAmplify: "پژواک عدالت",
-                navInitiatives: "نهادها و سازمان‌ها",
-                navAbout: "درباره انجمن",
                 statTotal: "فایل چندرسانه‌ای",
                 statIntl: "تحقیقات بین‌المللی",
                 statSeries: "قسمت مستند",
@@ -477,47 +474,86 @@
                 listenNow: "شنیدن نوا",
                 viewGraphic: "مشاهده اثر تصویری",
                 noResults: "موردی مطابق با جستجوی شما یافت نشد",
-                noResultsDesc: "لطفاً عبارت جستجو را تغییر دهید یا دسته‌بندی دیگری را انتخاب کنید."
+                noResultsDesc: "لطفاً عبارت جستجو را تغییر دهید یا دسته‌بندی دیگری را انتخاب کنید.",
+                tabAll: "همه آثار (۳۹)",
+                tabStill: "مجموعه «هنوز میناب» (۸)",
+                tabIntl: "تحقیقات بین‌المللی (۱۱)",
+                tabSeries: "مجموعه ۱۲ قسمتی (۱۲)",
+                tabFarsi: "مستندهای میدانی (۳)",
+                tabCinema: "سینمای مستند (۲)",
+                tabAudio: "موسیقی و نواها (۱)",
+                tabVisual: "یادبودهای تصویری (۲)"
+            },
+            fi: {
+                badge: "Tutkiva video- ja dokumenttiarkisto",
+                title: "Multimediakirjasto",
+                desc: "Tutustu vahvistettuihin avoimen lähdekoodin videotutkintoihin, 12-osaiseen dokumenttisarjaan, forensisiin rekonstruktioihin ja suullisen historian arkistoihin Minabin koulun iskusta.",
+                statTotal: "Mediatiedostoa",
+                statIntl: "OSINT-tutkintaa",
+                statSeries: "Dokumenttijaksoa",
+                statHd: "Suorat lataukset",
+                spotTag: "Valittu dokumentti",
+                spotTitle: "Minabin totuus (Englanninkielinen tekstitys)",
+                spotDesc: "Dokumenttiohjaaja Javad Mogoei matkustaa Minabiin kouluiskun jälkeen haastatellen selviytyneitä opettajia, pelastajia ja äitejä, jotka menettivät lapsensa kaksoisiskussa.",
+                spotBtn: "▶ Katso koko dokumentti",
+                searchPlaceholder: "Hae tutkintoja avainsanalla, julkaisijalla tai aiheella...",
+                allLang: "Kaikki kielet",
+                watchNow: "Katso video",
+                listenNow: "Kuuntele äänite",
+                viewGraphic: "Näytä grafiikka",
+                noResults: "Hakua vastaavia dokumentteja ei löytynyt",
+                noResultsDesc: "Kokeile muuttaa hakusanaa tai valita toinen kategoria.",
+                tabAll: "Kaikki media (39)",
+                tabStill: "Still, Minab (8)",
+                tabIntl: "Kansainvälinen OSINT (11)",
+                tabSeries: "12-osainen sarja (12)",
+                tabFarsi: "Kenttädokumentit (3)",
+                tabCinema: "Pitkät dokumentit (2)",
+                tabAudio: "Musiikki & äänitteet (1)",
+                tabVisual: "Visuaaliset muistomerkit (2)"
             }
         };
 
+        function setText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
+
         function setLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('pfp_lang', lang);
-            document.documentElement.lang = lang;
-            document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-            document.body.className = lang === 'fa' ? 'lang-fa' : '';
-            document.getElementById('lang-toggle-btn').innerText = lang === 'fa' ? 'English' : 'فارسی';
+            const safeLang = i18n[lang] ? lang : 'en';
+            currentLang = safeLang;
+            localStorage.setItem('pfp_lang', safeLang);
+            localStorage.setItem('pfp-lang', safeLang);
+            document.documentElement.lang = safeLang;
+            document.documentElement.dir = safeLang === 'fa' ? 'rtl' : 'ltr';
+            document.body.className = safeLang === 'fa' ? 'lang-fa' : '';
 
-            const t = i18n[lang];
-            document.getElementById('hero-badge-text').innerText = t.badge;
-            document.getElementById('hero-title').innerText = t.title;
-            document.getElementById('hero-desc').innerText = t.desc;
-            document.getElementById('nav-memorial').innerText = t.navMemorial;
-            document.getElementById('nav-evidence').innerText = t.navEvidence;
-            document.getElementById('nav-multimedia').innerText = t.navMultimedia;
-            document.getElementById('nav-amplify').innerText = t.navAmplify;
-            document.getElementById('nav-initiatives').innerText = t.navInitiatives;
-            document.getElementById('nav-about').innerText = t.navAbout;
-            document.getElementById('stat-total-lbl').innerText = t.statTotal;
-            document.getElementById('stat-intl-lbl').innerText = t.statIntl;
-            document.getElementById('stat-series-lbl').innerText = t.statSeries;
-            document.getElementById('stat-hd-lbl').innerText = t.statHd;
-            document.getElementById('spot-tag').innerText = t.spotTag;
-            document.getElementById('spot-title').innerText = t.spotTitle;
-            document.getElementById('spot-desc').innerText = t.spotDesc;
-            document.getElementById('spot-btn').innerHTML = `<span>${t.spotBtn}</span>`;
-            document.getElementById('search-input').placeholder = t.searchPlaceholder;
+            const t = i18n[safeLang];
+            setText('hero-badge-text', t.badge);
+            setText('hero-title', t.title);
+            setText('hero-desc', t.desc);
+            setText('stat-total-lbl', t.statTotal);
+            setText('stat-intl-lbl', t.statIntl);
+            setText('stat-series-lbl', t.statSeries);
+            setText('stat-hd-lbl', t.statHd);
+            setText('spot-tag', t.spotTag);
+            setText('spot-title', t.spotTitle);
+            setText('spot-desc', t.spotDesc);
 
-            if (document.getElementById('tab-all')) {
-                document.getElementById('tab-all').innerText = lang === 'fa' ? 'همه آثار (۳۹)' : 'All Media (39)';
-                document.getElementById('tab-still-minab').innerText = lang === 'fa' ? 'مجموعه «هنوز میناب» (۸)' : 'Still, Minab (8)';
-                document.getElementById('tab-intl').innerText = lang === 'fa' ? 'تحقیقات بین‌المللی (۱۱)' : 'International OSINT (11)';
-                document.getElementById('tab-series').innerText = lang === 'fa' ? 'مجموعه ۱۲ قسمتی (۱۲)' : '12-Episode Series (12)';
-                document.getElementById('tab-farsi').innerText = lang === 'fa' ? 'مستندهای میدانی (۳)' : 'Field Documentaries (3)';
-                document.getElementById('tab-audio').innerText = lang === 'fa' ? 'موسیقی و نواها' : 'Audio & Scores';
-                document.getElementById('tab-visual').innerText = lang === 'fa' ? 'یادبودهای تصویری' : 'Visual Memorials';
-            }
+            const spotBtn = document.getElementById('spot-btn');
+            if (spotBtn) spotBtn.innerHTML = `<span>${t.spotBtn}</span>`;
+
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+
+            setText('tab-all', t.tabAll);
+            setText('tab-still-minab', t.tabStill);
+            setText('tab-intl', t.tabIntl);
+            setText('tab-series', t.tabSeries);
+            setText('tab-farsi', t.tabFarsi);
+            setText('tab-cinema', t.tabCinema);
+            setText('tab-audio', t.tabAudio);
+            setText('tab-visual', t.tabVisual);
 
             renderGrid();
         }
@@ -540,8 +576,11 @@
 
         function renderGrid() {
             const grid = document.getElementById('media-grid');
-            const searchVal = document.getElementById('search-input').value.toLowerCase().trim();
-            const langVal = document.getElementById('lang-filter').value;
+            if (!grid) return;
+            const searchInputEl = document.getElementById('search-input');
+            const langFilterEl = document.getElementById('lang-filter');
+            const searchVal = (searchInputEl ? searchInputEl.value : '').toLowerCase().trim();
+            const langVal = langFilterEl ? langFilterEl.value : 'all';
 
             const filtered = PFP_MEDIA_DATA.filter(item => {
                 if (currentCategory !== 'all' && item.category !== currentCategory) return false;
@@ -558,8 +597,8 @@
                 return true;
             });
 
+            const t = i18n[currentLang] || i18n.en;
             if (filtered.length === 0) {
-                const t = i18n[currentLang];
                 grid.innerHTML = `
                     <div class="empty-state">
                         <h3>${t.noResults}</h3>
@@ -569,13 +608,13 @@
                 return;
             }
 
-            const t = i18n[currentLang];
             grid.innerHTML = filtered.map(item => {
                 const title = currentLang === 'fa' ? item.title.fa : item.title.en;
                 const desc = currentLang === 'fa' ? item.description.fa : item.description.en;
                 const catLabel = currentLang === 'fa' ? item.categoryLabel.fa : item.categoryLabel.en;
                 const playIcon = item.isAudio ? '🎵' : (item.isImage ? '👁️' : '▶');
-                const targetUrl = `/media-item.html?v=${item.slug}`;
+                const targetUrl = `/media-item.html?v=${encodeURIComponent(item.slug)}`;
+                const safeDownloadUrl = item.downloadUrl && item.downloadUrl.startsWith('/') ? encodeURI(item.downloadUrl) : item.downloadUrl;
 
                 return `
                     <div class="media-card" id="card-${item.id}">
@@ -596,7 +635,7 @@
                             <div class="card-footer">
                                 <span>${item.language} • ${item.resolution || '1080p'}</span>
                                 <div class="card-actions">
-                                    ${item.downloadUrl && !item.downloadUrl.includes('youtube') ? `<a href="${item.downloadUrl}" download class="icon-btn" title="Download">📥</a>` : (item.youtubeId || (item.videoUrl && item.videoUrl.includes('youtube')) ? `<a href="${item.videoUrl || item.sourceUrl}" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Watch on YouTube">▶</a>` : '')}
+                                    ${safeDownloadUrl && !safeDownloadUrl.includes('youtube') ? `<a href="${safeDownloadUrl}" download class="icon-btn" title="Download">📥</a>` : (item.youtubeId || (item.videoUrl && item.videoUrl.includes('youtube')) ? `<a href="${item.videoUrl || item.sourceUrl}" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Watch on YouTube">▶</a>` : '')}
                                     <a href="${targetUrl}" class="icon-btn" title="Open page">↗</a>
                                 </div>
                             </div>
