@@ -598,3 +598,67 @@ class AnalyticsAPITests(APITestCase):
 
         # Recent activity might contain 'User Registered'
         self.assertEqual(len(response.data['recent_activity']), 1)
+
+
+class WebPageViewAnalyticsTests(APITestCase):
+    """Test lightweight first-party web analytics beacon and summary endpoints."""
+
+    def setUp(self):
+        self.admin_user = User.objects.create_user(
+            username='web_admin',
+            email='webadmin@example.com',
+            password='adminpass123',
+            role=User.Role.ADMIN
+        )
+        self.admin_token = RefreshToken.for_user(self.admin_user)
+
+    def test_record_pageview_beacon_anonymous(self):
+        """Test that anonymous visitors can post pageview and pdf_download beacons without cookies/raw IP storage."""
+        url = reverse('analytics:record_pageview')
+        payload = {
+            'path': '/reconstruction.html',
+            'event_type': 'pageview',
+            'referrer': 'https://peopleforpeace.live/landing.html',
+            'lang': 'en',
+            'screen_width': 1440
+        }
+        response = self.client.post(
+            url,
+            payload,
+            format='json',
+            HTTP_CF_IPCOUNTRY='FI',
+            HTTP_USER_AGENT='Mozilla/5.0 TestBrowser'
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        from apps.analytics.models import PageViewEvent
+        self.assertEqual(PageViewEvent.objects.count(), 1)
+        ev = PageViewEvent.objects.first()
+        self.assertEqual(ev.path, '/reconstruction.html')
+        self.assertEqual(ev.event_type, 'pageview')
+        self.assertEqual(ev.country, 'FI')
+        self.assertEqual(ev.lang, 'en')
+        self.assertEqual(len(ev.visitor_hash), 16)
+
+    def test_web_analytics_summary_endpoint(self):
+        """Test admin web analytics summary aggregation."""
+        beacon_url = reverse('analytics:record_pageview')
+        self.client.post(beacon_url, {'path': '/landing.html', 'event_type': 'pageview'}, format='json', HTTP_CF_IPCOUNTRY='FI')
+        self.client.post(beacon_url, {'path': '/reconstruction.html', 'event_type': 'pageview'}, format='json', HTTP_CF_IPCOUNTRY='SE')
+        self.client.post(beacon_url, {'path': '/docs/minab-report/PFPJ_Minab_Master_Factual_Determination_Report.pdf', 'event_type': 'pdf_download'}, format='json', HTTP_CF_IPCOUNTRY='FI')
+
+        summary_url = reverse('analytics:web_summary')
+        # Anonymous should be rejected
+        unauth_resp = self.client.get(summary_url)
+        self.assertIn(unauth_resp.status_code, [status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN])
+
+        # Admin should receive structured web analytics
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.admin_token.access_token}')
+        resp = self.client.get(summary_url)
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(resp.data['total_pageviews'], 2)
+        self.assertEqual(resp.data['pdf_downloads'], 1)
+        self.assertGreaterEqual(resp.data['unique_visitors'], 1)
+        self.assertIn('top_pages', resp.data)
+        self.assertIn('top_countries', resp.data)
+        self.assertIn('vow_signers_count', resp.data)

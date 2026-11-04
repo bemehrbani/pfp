@@ -423,6 +423,45 @@
       box-shadow: 0 4px 14px rgba(229, 185, 95, 0.3);
     }
 
+    .site-header .vow-cta-btn,
+    .mobile-drawer .vow-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #e5b95f 0%, #c89632 100%);
+      color: #080b11;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(229, 185, 95, 0.28);
+      transition: all var(--pfp-transition);
+    }
+
+    .site-header .vow-cta-btn:hover,
+    .mobile-drawer .vow-cta-btn:hover {
+      transform: translateY(-1px);
+      background: linear-gradient(135deg, #f0c975 0%, #d4a853 100%);
+      box-shadow: 0 6px 22px rgba(229, 185, 95, 0.42);
+      color: #080b11;
+    }
+
+    .site-header .vow-counter-pill,
+    .mobile-drawer .vow-counter-pill {
+      background: rgba(8, 11, 17, 0.22);
+      color: #080b11;
+      padding: 1px 7px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
     .site-header .hamburger-btn {
       display: none;
       width: 40px;
@@ -656,6 +695,11 @@
 
         <div class="nav-actions">
           ${extraRightHTML || ''}
+          <button class="vow-cta-btn" id="openVowBtn" type="button" data-open-vow="true" onclick="if(window.openVowModal){event.preventDefault();window.openVowModal();}">
+            <span>✍️</span>
+            <span data-nav-i18n="signVowBtn">Sign Accountability Vow</span>
+            <span class="vow-counter-pill" id="vowCountBadge" style="display: none;"></span>
+          </button>
           <div class="lang-switch">
             <button type="button" class="lang-btn active" data-pfp-lang="en" onclick="window.__pfpSwitchLang('en')">EN</button>
             <button type="button" class="lang-btn" data-pfp-lang="fa" onclick="window.__pfpSwitchLang('fa')">فارسی</button>
@@ -709,7 +753,11 @@
         </div>
       </div>
 
-      <div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button type="button" class="vow-cta-btn" data-open-vow="true" onclick="if(window.openVowModal){event.preventDefault();if(window.toggleMobileNav)window.toggleMobileNav();window.openVowModal();}" style="width: 100%; justify-content: center; padding: 12px 16px;">
+          <span>✍️</span>
+          <span data-nav-i18n="signVowBtn">Sign Accountability Vow</span>
+        </button>
         <a href="#contact" data-open-contact="true" onclick="if(window.openContactModal){event.preventDefault();if(window.closeMobileNav)window.closeMobileNav();window.openContactModal();}" class="btn-nav-cta" data-nav-i18n="nav_contact" style="width: 100%; justify-content: center;">✉ Contact Association</a>
       </div>
     `;
@@ -834,17 +882,7 @@
     let extraRightHTML = '';
     const info = getActivePageInfo();
 
-    // Preserve Sign Accountability Vow button on reconstruction.html
-    if (info.page === 'reconstruction.html') {
-      const countText = document.getElementById('vowCountBadge')?.textContent || '1,428';
-      extraRightHTML = `
-        <button class="vow-cta-btn" id="openVowBtn" type="button">
-          <span>✍️</span>
-          <span data-nav-i18n="signVowBtn">Sign Accountability Vow</span>
-          <span class="vow-counter-pill" id="vowCountBadge">${countText}</span>
-        </button>
-      `;
-    } else if (info.page === 'draft.html') {
+    if (info.page === 'draft.html') {
       extraRightHTML = `
         <div class="view-mode-selector" title="Switch Reading Mode" style="display:inline-flex; gap:4px;">
           <button type="button" class="mode-btn active" id="btnModeBoth" onclick="setMode('both')" style="font-size:0.75rem; padding:4px 8px;">⚖️ Side-by-Side</button>

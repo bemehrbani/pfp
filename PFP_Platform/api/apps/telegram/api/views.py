@@ -294,6 +294,34 @@ class SendTelegramMessageView(APIView):
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+def get_vow_signatory_count() -> int:
+    """Return verified count of Accountability Vow signatories in ContactSubmission."""
+    from django.db.models import Q
+    return ContactSubmission.objects.filter(
+        Q(role__icontains='Accountability Vow') |
+        Q(message__icontains='ACCOUNTABILITY VOW')
+    ).count()
+
+
+class VowStatsView(APIView):
+    """Public endpoint returning the real Accountability Vow signatory count and badge visibility flag."""
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
+
+    @swagger_auto_schema(
+        operation_description="Get real Accountability Vow signatory count and visibility flag (hidden until >= 100).",
+        responses={200: openapi.Response('Accountability Vow signatory count')}
+    )
+    def get(self, request):
+        count = get_vow_signatory_count()
+        threshold = 100
+        return Response({
+            'count': count,
+            'threshold': threshold,
+            'display_badge': count >= threshold,
+        }, status=status.HTTP_200_OK)
+
+
 class SubmitContactView(APIView):
     """Public endpoint to submit contact and volunteer requests, storing them in the DB and forwarding to Telegram."""
     permission_classes = [permissions.AllowAny]
@@ -321,6 +349,9 @@ class SubmitContactView(APIView):
         name = request.data.get('name')
         email = request.data.get('email')
         contact_handle = (request.data.get('contact_handle') or '').strip()
+        telegram_username = (request.data.get('telegram_username') or '').strip()
+        phone_number = (request.data.get('phone_number') or '').strip()
+        city_country = (request.data.get('city_country') or '').strip()
         role = request.data.get('role', 'General Inquiry')
         message = request.data.get('message')
 
@@ -338,7 +369,19 @@ class SubmitContactView(APIView):
         user_agent = request.META.get('HTTP_USER_AGENT', '')
 
         clean_message = message.strip()
-        notes_text = f"Direct Handle (Telegram/Signal/Phone): {contact_handle}" if contact_handle else ""
+        note_parts = []
+        if telegram_username:
+            note_parts.append(f"Telegram: {telegram_username}")
+        if phone_number:
+            note_parts.append(f"Phone/Signal: {phone_number}")
+        if city_country:
+            note_parts.append(f"City/Country: {city_country}")
+        if contact_handle and contact_handle not in (telegram_username, phone_number):
+            note_parts.append(f"Direct Handle (Telegram/Signal/Phone): {contact_handle}")
+        notes_text = " | ".join(note_parts)
+        combined_handle = " · ".join(
+            [p for p in [telegram_username, phone_number, contact_handle if contact_handle not in (telegram_username, phone_number) else ''] if p]
+        )
 
         # 1. ALWAYS persist submission to database first
         submission = ContactSubmission.objects.create(
@@ -352,13 +395,15 @@ class SubmitContactView(APIView):
         )
 
         # 2. Forward to Telegram if configured
+        vow_count = get_vow_signatory_count()
         if not HAS_TELEGRAM:
             submission.telegram_error = 'telegram package not installed'
             submission.save(update_fields=['telegram_error'])
             return Response({
                 'status': 'success',
                 'message': 'Submission received successfully.',
-                'id': submission.id
+                'id': submission.id,
+                'vow_count': vow_count,
             }, status=status.HTTP_201_CREATED)
 
         bot_token = settings.TELEGRAM_BOT_TOKEN
@@ -402,16 +447,19 @@ class SubmitContactView(APIView):
             return Response({
                 'status': 'success',
                 'message': 'Submission received successfully.',
-                'id': submission.id
+                'id': submission.id,
+                'vow_count': vow_count,
             }, status=status.HTTP_201_CREATED)
 
         # Format Telegram notification message with HTML escaping
-        handle_line = f"📱 <b>Telegram / Signal / Phone:</b> {html.escape(contact_handle)}\n" if contact_handle else ""
+        handle_line = f"📱 <b>Telegram / Signal / Phone:</b> {html.escape(combined_handle)}\n" if combined_handle else ""
+        city_line = f"🌍 <b>City / Country:</b> {html.escape(city_country)}\n" if city_country else ""
         formatted_message = (
             f"<b>📥 New Contact/Support Submission #{submission.id}</b>\n\n"
             f"👤 <b>Name:</b> {html.escape(submission.name)}\n"
             f"✉️ <b>Email:</b> {html.escape(submission.email)}\n"
             f"{handle_line}"
+            f"{city_line}"
             f"🏷️ <b>Interest/Role:</b> {html.escape(submission.role)}\n\n"
             f"📝 <b>Message:</b>\n"
             f"{html.escape(submission.message)}"
@@ -447,7 +495,8 @@ class SubmitContactView(APIView):
             return Response({
                 'status': 'success',
                 'message': 'Submission received and notification sent successfully.',
-                'id': submission.id
+                'id': submission.id,
+                'vow_count': vow_count,
             }, status=status.HTTP_201_CREATED)
 
         except Exception as e:
@@ -457,5 +506,6 @@ class SubmitContactView(APIView):
             return Response({
                 'status': 'success',
                 'message': 'Submission received successfully.',
-                'id': submission.id
+                'id': submission.id,
+                'vow_count': vow_count,
             }, status=status.HTTP_201_CREATED)

@@ -399,4 +399,628 @@
         const roleAttr = trigger.getAttribute('data-contact-role') || trigger.getAttribute('href') || '';
         window.openContactModal(roleAttr);
     });
+
+    // 6. Global Accountability Vow Modal (Site-Wide Main CTA)
+    const VOW_BADGE_THRESHOLD = 100;
+    window.vowSignatoryCount = typeof window.vowSignatoryCount === 'number' ? window.vowSignatoryCount : 0;
+    try { localStorage.removeItem('pfp_vow_count'); } catch (_) {}
+
+    const vowCss = `
+        #vowModal.vow-global-modal {
+            display: none;
+            position: fixed;
+            z-index: 100050;
+            inset: 0;
+            background: rgba(5, 8, 15, 0.86);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        #vowModal.vow-global-modal.visible,
+        #vowModal.modal-backdrop.visible {
+            display: flex;
+        }
+        #vowModal .vow-modal-box {
+            background: #0f1626;
+            border: 1px solid rgba(229, 185, 95, 0.32);
+            border-radius: 16px;
+            padding: 28px 30px;
+            width: 100%;
+            max-width: 680px;
+            color: #f5f3ef;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.72);
+            position: relative;
+            text-align: left;
+            direction: ltr;
+            font-family: 'Source Sans 3', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+        body[dir="rtl"] #vowModal .vow-modal-box,
+        html[dir="rtl"] #vowModal .vow-modal-box {
+            text-align: right;
+            direction: rtl;
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        #vowModal .vow-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        #vowModal .vow-badge-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(229, 185, 95, 0.14);
+            border: 1px solid rgba(229, 185, 95, 0.35);
+            color: #e5b95f;
+        }
+        #vowModal .vow-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 4px 8px;
+        }
+        #vowModal .vow-close-btn:hover {
+            color: #ffffff;
+        }
+        #vowModal .vow-title-h2 {
+            font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin: 0 0 4px 0;
+        }
+        body[dir="rtl"] #vowModal .vow-title-h2,
+        html[dir="rtl"] #vowModal .vow-title-h2 {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        #vowModal .vow-sub-cat {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: #e5b95f;
+            margin-bottom: 14px;
+        }
+        #vowModal .vow-pledge-box {
+            background: rgba(229, 185, 95, 0.07);
+            border: 1px solid rgba(229, 185, 95, 0.25);
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 0.9rem;
+            line-height: 1.62;
+            color: #e2e8f0;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+        #vowModal .vow-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        @media (max-width: 640px) {
+            #vowModal .vow-form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        #vowModal .vow-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        #vowModal .vow-form-grid .vow-field {
+            margin-bottom: 0;
+        }
+        #vowModal .vow-field label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #cbd5e1;
+        }
+        #vowModal .vow-field input,
+        #vowModal .vow-field select,
+        #vowModal .vow-field textarea {
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 8px;
+            padding: 9px 12px;
+            color: #f8fafc;
+            font-size: 0.88rem;
+            font-family: inherit;
+        }
+        #vowModal .vow-field input:focus,
+        #vowModal .vow-field select:focus,
+        #vowModal .vow-field textarea:focus {
+            border-color: #e5b95f;
+            outline: none;
+        }
+        #vowModal .vow-checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            line-height: 1.45;
+            margin: 12px 0 16px;
+            cursor: pointer;
+        }
+        #vowModal .vow-checkbox-row input[type="checkbox"] {
+            margin-top: 3px;
+            accent-color: #e5b95f;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+        #vowModal .vow-submit-btn {
+            width: 100%;
+            padding: 13px 18px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, #e5b95f 0%, #c89632 100%);
+            color: #080b11;
+            font-weight: 800;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 6px 20px rgba(229, 185, 95, 0.3);
+        }
+        #vowModal .vow-submit-btn:hover {
+            background: linear-gradient(135deg, #f0c975 0%, #d4a853 100%);
+            transform: translateY(-1px);
+        }
+        #vowModal .vow-status-msg {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.86rem;
+            text-align: center;
+        }
+    `;
+    const vowStyleEl = document.createElement('style');
+    vowStyleEl.innerHTML = vowCss;
+    document.head.appendChild(vowStyleEl);
+
+    const vowI18n = {
+        en: {
+            badge: "Global Accountability Petition & Civic Vow",
+            title: "The Minab Accountability Vow",
+            subtitle: "November 20 World Children's Day · People for Peace & Justice ry",
+            pledge: "\"Bearing witness to the verified forensic record of Shajareh Tayyebeh Primary School and the lives of the 120+ schoolchildren and 26 educators taken on February 28, 2026, I solemnly vow to stand ready and participate in every lawful civic, investigative, financial, and judicial endeavor to hold every person in the chain of command accountable for this atrocity.\"",
+            nameLabel: "Full Name *",
+            namePlaceholder: "Your full name",
+            emailLabel: "Email Address *",
+            emailPlaceholder: "you@example.com",
+            tgLabel: "Telegram Username (Optional — for Action Mobilization)",
+            tgPlaceholder: "@username",
+            phoneLabel: "Phone / Signal / WhatsApp (Optional — for Action Mobilization)",
+            phonePlaceholder: "+358 40 123 4567",
+            cityLabel: "City & Country *",
+            cityPlaceholder: "Helsinki, Finland",
+            howLabel: "How I Will Take Action for Accountability",
+            optPetitioner: "Public Petitioner & Global Campaigner — Amplify the case & join collective actions",
+            optFinancial: "Financial Support for the Legal Prosecution Campaign — Fund court filings & forensic experts",
+            optLegal: "Legal, Human Rights & Judicial Action — Pro bono counsel & universal jurisdiction",
+            optMedia: "Media, Journalism & Public Amplification — Investigative reporting & translations",
+            optEvent: "Host or Join a Nov 20 World Children's Day Action — Vigil, university panel, or exhibition",
+            optResearch: "Forensic, OSINT & Archival Research — Evidence verification & witness documentation",
+            msgLabel: "Personal Message of Remembrance or Commitment (Optional)",
+            msgPlaceholder: "In memory of the children of Minab...",
+            consent: "I affirm this vow and consent to be contacted by People for Peace & Justice ry when collective legal, parliamentary, financial, or civic actions are mobilized.",
+            submitBtn: "✍️ Sign the Vow & Join the Accountability Registry",
+            submitting: "Recording your Accountability Vow..."
+        },
+        fa: {
+            badge: "پتیشن جهانی و میثاق دادخواهی میناب",
+            title: "میثاق دادخواهی کودکان میناب",
+            subtitle: "۲۰ نوامبر (روز جهانی کودک) · انجمن صلح و عدالت فنلاند (PFPJ ry)",
+            pledge: "«با گواهی بر مستندات راستی‌آزمایی‌شده دبستان شجره طیبه میناب و به یاد بیش از ۱۲۰ کودک دانش‌آموز و ۲۶ آموزگار که در ۹ اسفند ۱۴۰۴ جان باختند، صمیمانه پیمان می‌بندم که در هر تلاش قانونی، مدنی، تحقیقاتی، مالی و قضایی برای پاسخگو کردن تمامی آمران و عاملان این جنایت در سلسله‌مراتب فرماندهی مشارکت و همراهی کنم.»",
+            nameLabel: "نام و نام خانوادگی *",
+            namePlaceholder: "نام کامل شما",
+            emailLabel: "آدرس ایمیل *",
+            emailPlaceholder: "you@example.com",
+            tgLabel: "شناسه تلگرام (اختیاری — جهت هماهنگی اقدامات دادخواهی)",
+            tgPlaceholder: "@username",
+            phoneLabel: "شماره تماس / سیگنال / واتس‌اپ (اختیاری — جهت هماهنگی اقدامات)",
+            phonePlaceholder: "+358 40 123 4567",
+            cityLabel: "شهر و کشور محل سکونت *",
+            cityPlaceholder: "هلسینکی، فنلاند",
+            howLabel: "نحوه همراهی و اقدام من در کارزار دادخواهی",
+            optPetitioner: "امضاکننده عمومی و کنشگر کارزار جهانی — بازنشر مستندات و همراهی در اقدامات جمعی",
+            optFinancial: "حمایت مالی از کارزار پیگرد قضایی بین‌المللی — تأمین هزینه‌های ثبت دادخواست و کارشناسان رسمی",
+            optLegal: "همکاری حقوقی، قضایی و حقوق بشری — وکالت، صلاحیت قضایی جهانی و رایزنی پارلمانی",
+            optMedia: "رسانه، روزنامه‌نگاری و روایت‌گری عمومی — پوشش خبری، مستندسازی و ترجمه",
+            optEvent: "برگزاری یا مشارکت در رویداد ۲۰ نوامبر (روز جهانی کودک) — تجمع، پنل دانشگاهی یا نمایشگاه",
+            optResearch: "پژوهش فنی، اطلاعات متن‌باز (OSINT) و مستندسازی — راستی‌آزمایی شواهد و ثبت شهادت‌ها",
+            msgLabel: "پیام یادبود یا تعهد شخصی (اختیاری)",
+            msgPlaceholder: "به یاد کودکان دبستان شجره طیبه میناب...",
+            consent: "این میثاق را تأیید می‌کنم و موافقم در زمان آغاز اقدامات جمعی حقوقی، پارلمانی، مالی و مدنی با من تماس گرفته شود.",
+            submitBtn: "✍️ ثبت امضا و پیوستن به کارزار جهانی دادخواهی",
+            submitting: "در حال ثبت امضای شما در میثاق دادخواهی..."
+        },
+        fi: {
+            badge: "Kansainvälinen vetoomus & vastuulupaus",
+            title: "Minabin vastuulupaus",
+            subtitle: "20. marraskuuta — Lapsen oikeuksien päivä · People for Peace & Justice ry",
+            pledge: "\"Todistaen Shajareh Tayyebehin peruskoulun vahvistetun forensisen aineiston ja 28.2.2026 surmattujen yli 120 koululaisen ja 26 opettajan kohtalon, lupaan olla valmis osallistumaan kaikkiin laillisiin kansalais-, tutkinta-, rahoitus- ja oikeustoimiin, jotta jokainen komentoketjussa vastuussa oleva saatetaan oikeudenkäyntiin.\"",
+            nameLabel: "Koko nimi *",
+            namePlaceholder: "Koko nimesi",
+            emailLabel: "Sähköpostiosoite *",
+            emailPlaceholder: "you@example.com",
+            tgLabel: "Telegram-käyttäjänimi (Valinnainen — toiminnan koordinointiin)",
+            tgPlaceholder: "@username",
+            phoneLabel: "Puhelin / Signal / WhatsApp (Valinnainen — toiminnan koordinointiin)",
+            phonePlaceholder: "+358 40 123 4567",
+            cityLabel: "Kaupunki & Maa *",
+            cityPlaceholder: "Helsinki, Suomi",
+            howLabel: "Miten osallistun oikeudelliseen vastuuseen saattamiseen",
+            optPetitioner: "Julkinen vetoomuksen allekirjoittaja & kampanjoija — Jaa tietoa ja osallistu yhteisiin toimiin",
+            optFinancial: "Taloudellinen tuki oikeudenkäyntikampanjalle — Tue kansainvälisiä tuomioistuinmaksuja ja asiantuntijoita",
+            optLegal: "Oikeudellinen & ihmisoikeustyö — Juridinen asiantuntijuus, yleinen toimivalta ja päättäjävaikuttaminen",
+            optMedia: "Media, journalismi & viestintä — Tutkiva journalismi, dokumentointi ja käännökset",
+            optEvent: "Järjestä tai liity 20.11. Lapsen oikeuksien päivän tapahtumaan — Muistotilaisuus tai paneeli",
+            optResearch: "Forensinen & OSINT-tutkimus — Todisteiden verifiointi ja arkistointi",
+            msgLabel: "Henkilökohtainen muistoviesti tai sitoumus (Valinnainen)",
+            msgPlaceholder: "Minabin lasten muistolle...",
+            consent: "Vahvistan tämän lupauksen ja suostun siihen, että People for Peace & Justice ry ottaa minuun yhteyttä oikeudellisten, taloudellisten tai kansalaistoimien käynnistyessä.",
+            submitBtn: "✍️ Allekirjoita lupaus & liity rekisteriin",
+            submitting: "Tallennetaan vastuulupaustasi..."
+        }
+    };
+
+    function buildVowModalInnerHTML(vt) {
+        return `
+            <div class="vow-modal-box" role="dialog" aria-modal="true">
+                <div class="vow-top-row">
+                    <span class="vow-badge-tag" id="vowBadgeTag" data-i18n="vowBadge">${vt.badge}</span>
+                    <button type="button" class="vow-close-btn" id="vowCloseBtn" aria-label="Close vow modal">&times;</button>
+                </div>
+                <h2 class="vow-title-h2" id="vowTitleEl" data-i18n="vowTitle">${vt.title}</h2>
+                <div class="vow-sub-cat" id="vowSubEl" data-i18n="vowSubtitle">${vt.subtitle}</div>
+                <div class="vow-pledge-box" id="vowPledgeText" data-i18n="vowPledgeText">${vt.pledge}</div>
+                <form id="vowForm">
+                    <div class="vow-form-grid">
+                        <div class="vow-field">
+                            <label id="vowNameLabelEl" for="vowName" data-i18n="vowNameLabel">${vt.nameLabel}</label>
+                            <input type="text" id="vowName" required placeholder="${vt.namePlaceholder}" />
+                        </div>
+                        <div class="vow-field">
+                            <label id="vowEmailLabelEl" for="vowEmail" data-i18n="vowEmailLabel">${vt.emailLabel}</label>
+                            <input type="email" id="vowEmail" required placeholder="${vt.emailPlaceholder}" dir="ltr" />
+                        </div>
+                    </div>
+                    <div class="vow-form-grid">
+                        <div class="vow-field">
+                            <label id="vowTgLabelEl" for="vowTelegram" data-i18n="vowTgLabel">${vt.tgLabel}</label>
+                            <input type="text" id="vowTelegram" placeholder="${vt.tgPlaceholder}" dir="ltr" />
+                        </div>
+                        <div class="vow-field">
+                            <label id="vowPhoneLabelEl" for="vowPhone" data-i18n="vowPhoneLabel">${vt.phoneLabel}</label>
+                            <input type="tel" id="vowPhone" placeholder="${vt.phonePlaceholder}" dir="ltr" />
+                        </div>
+                    </div>
+                    <div class="vow-form-grid">
+                        <div class="vow-field">
+                            <label id="vowCityLabelEl" for="vowCity" data-i18n="vowCityLabel">${vt.cityLabel}</label>
+                            <input type="text" id="vowCity" required placeholder="${vt.cityPlaceholder}" />
+                        </div>
+                        <div class="vow-field">
+                            <label id="vowHowLabelEl" for="vowContribution" data-i18n="vowHowLabel">${vt.howLabel}</label>
+                            <select id="vowContribution">
+                                <option value="Accountability Vow — Public Petitioner & Campaigner" id="vowOptPetitioner">${vt.optPetitioner}</option>
+                                <option value="Accountability Vow — Financial Support (Legal Prosecution)" id="vowOptFinancial">${vt.optFinancial}</option>
+                                <option value="Accountability Vow — Legal & Judicial Counsel" id="vowOptLegal">${vt.optLegal}</option>
+                                <option value="Accountability Vow — Media, Documentary & XR" id="vowOptMedia">${vt.optMedia}</option>
+                                <option value="Accountability Vow — Event Organizer (Nov 20 Hub)" id="vowOptEvent">${vt.optEvent}</option>
+                                <option value="Accountability Vow — Forensic & OSINT Research" id="vowOptResearch">${vt.optResearch}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="vow-field">
+                        <label id="vowMsgLabelEl" for="vowMessage" data-i18n="vowMessageLabel">${vt.msgLabel}</label>
+                        <textarea id="vowMessage" rows="2" placeholder="${vt.msgPlaceholder}"></textarea>
+                    </div>
+                    <label class="vow-checkbox-row">
+                        <input type="checkbox" id="vowCheckbox" required checked />
+                        <span id="vowConsentTextEl" data-i18n="vowConsentText">${vt.consent}</span>
+                    </label>
+                    <button type="submit" class="vow-submit-btn" id="vowSubmitBtn" data-i18n="vowSubmitBtn">${vt.submitBtn}</button>
+                    <div class="vow-status-msg" id="vowStatusMsg"></div>
+                </form>
+            </div>
+        `;
+    }
+
+    function ensureVowModal() {
+        const vt = vowI18n[getLang()] || vowI18n.en;
+        let vowModalEl = document.getElementById('vowModal');
+        if (!vowModalEl) {
+            vowModalEl = document.createElement('div');
+            vowModalEl.id = 'vowModal';
+            vowModalEl.className = 'vow-global-modal';
+            vowModalEl.innerHTML = buildVowModalInnerHTML(vt);
+            document.body.appendChild(vowModalEl);
+        } else if (!document.getElementById('vowTelegram')) {
+            vowModalEl.classList.add('vow-global-modal');
+            vowModalEl.innerHTML = buildVowModalInnerHTML(vt);
+        }
+
+        const closeBtn = document.getElementById('vowCloseBtn');
+        if (closeBtn && !closeBtn.__pfpBound) {
+            closeBtn.__pfpBound = true;
+            closeBtn.addEventListener('click', function() {
+                window.closeVowModal();
+            });
+        }
+        if (!vowModalEl.__pfpBackdropBound) {
+            vowModalEl.__pfpBackdropBound = true;
+            vowModalEl.addEventListener('click', function(e) {
+                if (e.target === vowModalEl) {
+                    window.closeVowModal();
+                }
+            });
+        }
+        const formEl = document.getElementById('vowForm');
+        if (formEl && !formEl.__pfpBound) {
+            formEl.__pfpBound = true;
+            formEl.addEventListener('submit', window.submitVowForm);
+        }
+        return vowModalEl;
+    }
+
+    function refreshVowModalLanguage() {
+        const vt = vowI18n[getLang()] || vowI18n.en;
+        const setTxt = function(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = text;
+        };
+        setTxt('vowBadgeTag', vt.badge);
+        setTxt('vowTitleEl', vt.title);
+        setTxt('vowSubEl', vt.subtitle);
+        setTxt('vowPledgeText', vt.pledge);
+        setTxt('vowNameLabelEl', vt.nameLabel);
+        setTxt('vowEmailLabelEl', vt.emailLabel);
+        setTxt('vowTgLabelEl', vt.tgLabel);
+        setTxt('vowPhoneLabelEl', vt.phoneLabel);
+        setTxt('vowCityLabelEl', vt.cityLabel);
+        setTxt('vowHowLabelEl', vt.howLabel);
+        setTxt('vowOptPetitioner', vt.optPetitioner);
+        setTxt('vowOptFinancial', vt.optFinancial);
+        setTxt('vowOptLegal', vt.optLegal);
+        setTxt('vowOptMedia', vt.optMedia);
+        setTxt('vowOptEvent', vt.optEvent);
+        setTxt('vowOptResearch', vt.optResearch);
+        setTxt('vowMsgLabelEl', vt.msgLabel);
+        setTxt('vowConsentTextEl', vt.consent);
+        setTxt('vowSubmitBtn', vt.submitBtn);
+
+        const nameIn = document.getElementById('vowName');
+        if (nameIn) nameIn.placeholder = vt.namePlaceholder;
+        const emailIn = document.getElementById('vowEmail');
+        if (emailIn) emailIn.placeholder = vt.emailPlaceholder;
+        const tgIn = document.getElementById('vowTelegram');
+        if (tgIn) tgIn.placeholder = vt.tgPlaceholder;
+        const phoneIn = document.getElementById('vowPhone');
+        if (phoneIn) phoneIn.placeholder = vt.phonePlaceholder;
+        const cityIn = document.getElementById('vowCity');
+        if (cityIn) cityIn.placeholder = vt.cityPlaceholder;
+        const msgIn = document.getElementById('vowMessage');
+        if (msgIn) msgIn.placeholder = vt.msgPlaceholder;
+    }
+
+    window.updateVowBadge = function() {
+        const count = typeof window.vowSignatoryCount === 'number' ? window.vowSignatoryCount : 0;
+        document.querySelectorAll('#vowCountBadge, .vow-counter-pill').forEach(function(badge) {
+            if (count >= VOW_BADGE_THRESHOLD) {
+                badge.textContent = count.toLocaleString();
+                badge.style.display = 'inline-block';
+            } else {
+                badge.textContent = '';
+                badge.style.display = 'none';
+            }
+        });
+    };
+
+    window.openVowModal = function(roleHint) {
+        const modalEl = ensureVowModal();
+        refreshVowModalLanguage();
+        const statusEl = document.getElementById('vowStatusMsg');
+        if (statusEl) statusEl.style.display = 'none';
+        const submitBtn = document.getElementById('vowSubmitBtn');
+        if (submitBtn) submitBtn.disabled = false;
+
+        if (roleHint) {
+            const selectEl = document.getElementById('vowContribution');
+            if (selectEl) {
+                const r = String(roleHint).toLowerCase();
+                if (r.includes('finan') || r.includes('fund') || r.includes('donat') || r.includes('prosecut')) {
+                    selectEl.value = 'Accountability Vow — Financial Support (Legal Prosecution)';
+                } else if (r.includes('legal') || r.includes('judic')) {
+                    selectEl.value = 'Accountability Vow — Legal & Judicial Counsel';
+                } else if (r.includes('media') || r.includes('journal')) {
+                    selectEl.value = 'Accountability Vow — Media, Documentary & XR';
+                } else if (r.includes('event') || r.includes('nov')) {
+                    selectEl.value = 'Accountability Vow — Event Organizer (Nov 20 Hub)';
+                } else if (r.includes('osint') || r.includes('research') || r.includes('forensic')) {
+                    selectEl.value = 'Accountability Vow — Forensic & OSINT Research';
+                }
+            }
+        }
+
+        modalEl.classList.add('visible');
+        if (typeof window.__pfpTrackEvent === 'function') {
+            window.__pfpTrackEvent('vow_open');
+        }
+    };
+
+    window.closeVowModal = function() {
+        const modalEl = document.getElementById('vowModal');
+        if (modalEl) modalEl.classList.remove('visible');
+    };
+
+    window.submitVowForm = async function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        const vt = vowI18n[getLang()] || vowI18n.en;
+        const name = (document.getElementById('vowName')?.value || '').trim();
+        const email = (document.getElementById('vowEmail')?.value || '').trim();
+        const telegram_username = (document.getElementById('vowTelegram')?.value || '').trim();
+        const phone_number = (document.getElementById('vowPhone')?.value || '').trim();
+        const city = (document.getElementById('vowCity')?.value || '').trim();
+        const role = document.getElementById('vowContribution')?.value || 'Accountability Vow — Public Petitioner & Campaigner';
+        const personalMsg = (document.getElementById('vowMessage')?.value || '').trim();
+        const statusEl = document.getElementById('vowStatusMsg');
+        const submitBtn = document.getElementById('vowSubmitBtn');
+
+        if (statusEl) {
+            statusEl.style.display = 'block';
+            statusEl.style.background = 'rgba(255,255,255,0.06)';
+            statusEl.style.color = '#f0ebe3';
+            statusEl.textContent = vt.submitting;
+        }
+        if (submitBtn) submitBtn.disabled = true;
+
+        const contact_handle = [telegram_username, phone_number].filter(Boolean).join(' | ');
+        const fullMessage = [
+            '[MINAB ACCOUNTABILITY VOW — NOV 20 HYBRID EVENT]',
+            `City/Country: ${city}`,
+            telegram_username ? `Telegram: ${telegram_username}` : null,
+            phone_number ? `Phone/Signal: ${phone_number}` : null,
+            `Action Role: ${role}`,
+            'Pledge: Affirmed solemn vow to participate in holding every person in the chain of command accountable.',
+            `Note: ${personalMsg || 'Signed via peopleforpeace.live Accountability Vow.'}`
+        ].filter(Boolean).join('\n');
+
+        let apiUrl = '/api/telegram/submit-contact/';
+        if (window.location.protocol === 'file:' || window.location.port === '8090') {
+            apiUrl = 'http://localhost:8000/api/telegram/submit-contact/';
+        }
+
+        try {
+            const resp = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    telegram_username: telegram_username,
+                    phone_number: phone_number,
+                    city_country: city,
+                    contact_handle: contact_handle,
+                    role: role,
+                    message: fullMessage
+                })
+            });
+            if (!resp.ok) throw new Error('API fallback');
+            const data = await resp.json();
+            if (typeof data.vow_count === 'number') {
+                window.vowSignatoryCount = data.vow_count;
+            } else {
+                window.vowSignatoryCount += 1;
+            }
+        } catch (_) {
+            window.vowSignatoryCount += 1;
+        }
+
+        window.updateVowBadge();
+        if (typeof window.__pfpTrackEvent === 'function') {
+            window.__pfpTrackEvent('vow_signed');
+        }
+
+        if (statusEl) {
+            statusEl.style.background = 'rgba(16, 185, 129, 0.18)';
+            statusEl.style.color = '#6ee7b7';
+            const countSuffix = window.vowSignatoryCount >= VOW_BADGE_THRESHOLD ? ` (#${window.vowSignatoryCount.toLocaleString()})` : '';
+            statusEl.textContent = `✓ Thank you, ${name}. Your Accountability Vow${countSuffix} has been recorded.`;
+        }
+        const formEl = document.getElementById('vowForm');
+        if (formEl) formEl.reset();
+        setTimeout(function() {
+            if (submitBtn) submitBtn.disabled = false;
+            window.closeVowModal();
+            if (statusEl) statusEl.style.display = 'none';
+        }, 2800);
+    };
+
+    ensureVowModal();
+
+    // Sync real Vow signatory count on startup (kept hidden until >= 100)
+    (async function fetchGlobalVowStats() {
+        try {
+            if (window.location.protocol === 'file:') return;
+            const resp = await fetch('/api/telegram/vow-stats/');
+            if (resp.ok) {
+                const data = await resp.json();
+                if (typeof data.count === 'number') {
+                    window.vowSignatoryCount = data.count;
+                }
+            }
+        } catch (_) {}
+        window.updateVowBadge();
+    })();
+
+    // Global click delegation for all Accountability Vow triggers across all pages
+    document.addEventListener('click', function(e) {
+        const vowTrigger = e.target.closest('[data-open-vow], [data-vow-role], a[href="#vow"], #openVowBtn');
+        if (!vowTrigger) return;
+        e.preventDefault();
+        if (typeof window.closeMobileNav === 'function') {
+            window.closeMobileNav();
+        }
+        const roleHint = vowTrigger.getAttribute('data-vow-role') || '';
+        window.openVowModal(roleHint);
+    });
+
+    // 7. Lightweight First-Party Web Analytics Beacon (Zero cookies, GDPR-compliant)
+    window.__pfpTrackEvent = function(eventType, customPath) {
+        try {
+            if (window.location.protocol === 'file:') return;
+            const payload = JSON.stringify({
+                path: customPath || window.location.pathname || '/',
+                event_type: eventType || 'pageview',
+                referrer: document.referrer || '',
+                lang: getLang(),
+                screen_width: window.innerWidth || null
+            });
+            const url = '/api/analytics/pageview/';
+            if (navigator.sendBeacon) {
+                const blob = new Blob([payload], { type: 'application/json' });
+                navigator.sendBeacon(url, blob);
+            } else {
+                fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: payload,
+                    keepalive: true
+                }).catch(function() {});
+            }
+        } catch (_) {}
+    };
+
+    if (!window.__pfpPageviewSent) {
+        window.__pfpPageviewSent = true;
+        window.__pfpTrackEvent('pageview');
+
+        document.addEventListener('click', function(e) {
+            const pdfLink = e.target.closest('a[href$=".pdf"], a[href*=".pdf?"]');
+            if (pdfLink) {
+                const href = pdfLink.getAttribute('href') || '';
+                window.__pfpTrackEvent('pdf_download', href);
+            }
+        });
+    }
 })();

@@ -766,3 +766,66 @@ class SubmitContactViewTests(APITestCase):
         response = self.client.post(self.url, incomplete_payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(ContactSubmission.objects.count(), 0)
+
+    def test_submit_vow_persists_telegram_phone_and_financial_support_role(self):
+        """Test that signing the Accountability Vow persists telegram_username, phone_number, city_country, and financial support role."""
+        vow_payload = {
+            'name': 'Sara Lindqvist',
+            'email': 'sara@example.fi',
+            'telegram_username': '@saralindqvist',
+            'phone_number': '+358 40 555 0199',
+            'city_country': 'Helsinki, Finland',
+            'role': 'Accountability Vow — Financial Support (Legal Prosecution)',
+            'message': '[MINAB ACCOUNTABILITY VOW]\nPledge affirmed.'
+        }
+        with override_settings(TELEGRAM_BOT_TOKEN='', TELEGRAM_NOTIFICATIONS_CHAT_ID=''):
+            response = self.client.post(self.url, vow_payload, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['vow_count'], 1)
+        submission = ContactSubmission.objects.get(id=response.data['id'])
+        self.assertEqual(submission.role, 'Accountability Vow — Financial Support (Legal Prosecution)')
+        self.assertIn('@saralindqvist', submission.notes)
+        self.assertIn('+358 40 555 0199', submission.notes)
+        self.assertIn('Helsinki, Finland', submission.notes)
+
+
+
+class VowStatsViewTests(APITestCase):
+    """Test public Accountability Vow signatory counter endpoint."""
+
+    def test_vow_stats_returns_real_count_and_threshold_flag(self):
+        """Test that vow-stats counts only Accountability Vow submissions and hides badge below 100."""
+        url = reverse('telegram:vow_stats')
+
+        # 0 signatories initially
+        resp0 = self.client.get(url)
+        self.assertEqual(resp0.status_code, status.HTTP_200_OK)
+        self.assertEqual(resp0.data['count'], 0)
+        self.assertEqual(resp0.data['threshold'], 100)
+        self.assertFalse(resp0.data['display_badge'])
+
+        # Create 2 Vow signatories and 1 general contact inquiry
+        ContactSubmission.objects.create(
+            name='Signer One',
+            email='one@example.org',
+            role='Accountability Vow Signatory — Public Petitioner',
+            message='[MINAB ACCOUNTABILITY VOW — NOV 20 HYBRID EVENT]\nCity/Country: Helsinki, Finland'
+        )
+        ContactSubmission.objects.create(
+            name='Signer Two',
+            email='two@example.org',
+            role='Accountability Vow Signatory — Legal / Human Rights',
+            message='[MINAB ACCOUNTABILITY VOW — NOV 20 HYBRID EVENT]\nCity/Country: Oslo, Norway'
+        )
+        ContactSubmission.objects.create(
+            name='General User',
+            email='general@example.org',
+            role='General Inquiry',
+            message='General question about the association.'
+        )
+
+        resp2 = self.client.get(url)
+        self.assertEqual(resp2.status_code, status.HTTP_200_OK)
+        self.assertEqual(resp2.data['count'], 2)
+        self.assertFalse(resp2.data['display_badge'])

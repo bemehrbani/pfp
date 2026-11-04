@@ -148,3 +148,70 @@ class AnalyticsSnapshot(models.Model):
 
     def __str__(self):
         return f'{self.snapshot_type} snapshot for {self.snapshot_date}'
+
+
+class PageViewEvent(models.Model):
+    """
+    Lightweight, cookie-free first-party web analytics event.
+    Stores salted daily visitor hash instead of raw visitor IP.
+    """
+    class EventType(models.TextChoices):
+        PAGEVIEW = 'pageview', _('Pageview')
+        PDF_DOWNLOAD = 'pdf_download', _('PDF Download')
+        VOW_OPEN = 'vow_open', _('Accountability Vow Modal Opened')
+        VOW_SIGNED = 'vow_signed', _('Accountability Vow Signed')
+
+    path = models.CharField(
+        max_length=255,
+        help_text=_('Normalized page or document path')
+    )
+    event_type = models.CharField(
+        max_length=32,
+        choices=EventType.choices,
+        default=EventType.PAGEVIEW,
+        help_text=_('Type of web event')
+    )
+    referrer = models.CharField(
+        max_length=500,
+        blank=True,
+        default='',
+        help_text=_('HTTP referrer URL')
+    )
+    country = models.CharField(
+        max_length=8,
+        blank=True,
+        default='',
+        help_text=_('Two-letter country code from Cloudflare CF-IPCountry')
+    )
+    lang = models.CharField(
+        max_length=16,
+        blank=True,
+        default='',
+        help_text=_('Active UI or browser language')
+    )
+    screen_width = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        help_text=_('Viewport width in pixels')
+    )
+    visitor_hash = models.CharField(
+        max_length=32,
+        blank=True,
+        default='',
+        help_text=_('Salted daily SHA-256 visitor hash (no raw IP stored)')
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Page View Event')
+        verbose_name_plural = _('Page View Events')
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['event_type', 'created_at']),
+            models.Index(fields=['path', 'created_at']),
+            models.Index(fields=['visitor_hash']),
+            models.Index(fields=['created_at']),
+        ]
+
+    def __str__(self):
+        return f'{self.event_type} {self.path} ({self.country or "XX"}) at {self.created_at}'

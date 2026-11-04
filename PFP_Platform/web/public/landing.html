@@ -434,6 +434,42 @@
             box-shadow: 0 4px 14px rgba(229, 185, 95, 0.3);
         }
 
+        .vow-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, #e5b95f 0%, #c89632 100%);
+            color: #080b11;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(229, 185, 95, 0.28);
+            transition: all var(--transition);
+        }
+
+        .vow-cta-btn:hover {
+            transform: translateY(-1px);
+            background: linear-gradient(135deg, #f0c975 0%, #d4a853 100%);
+            box-shadow: 0 6px 22px rgba(229, 185, 95, 0.42);
+            color: #080b11;
+        }
+
+        .vow-counter-pill {
+            background: rgba(8, 11, 17, 0.22);
+            color: #080b11;
+            padding: 1px 7px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
         /* Hamburger Button (Mobile) */
         .hamburger-btn {
             display: none;
@@ -1600,8 +1636,14 @@
                 </li>
             </ul>
 
-            <!-- Right Controls: Language & Contact -->
+            <!-- Right Controls: Accountability Vow Main CTA, Language & Contact -->
             <div class="nav-actions">
+                <button type="button" class="vow-cta-btn" id="openVowBtn" data-open-vow="true">
+                    <span>✍️</span>
+                    <span data-i18n="signVowBtn">Sign Accountability Vow</span>
+                    <span class="vow-counter-pill" id="vowCountBadge" style="display: none;"></span>
+                </button>
+
                 <div class="lang-switch">
                     <button class="lang-btn active" onclick="setLang('en')">EN</button>
                     <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
@@ -1653,8 +1695,12 @@
             </div>
         </div>
 
-        <div>
-            <a href="#contact" data-open-contact="true" class="btn-card-action btn-card-primary" data-i18n="nav_contact" style="width: 100%;">✉ Contact Association</a>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button type="button" class="vow-cta-btn" data-open-vow="true" style="width: 100%; padding: 12px 16px;">
+                <span>✍️</span>
+                <span data-i18n="signVowBtn">Sign Accountability Vow</span>
+            </button>
+            <a href="#contact" data-open-contact="true" class="btn-card-action btn-card-secondary" data-i18n="nav_contact" style="width: 100%;">✉ Contact Association</a>
         </div>
     </div>
 
@@ -1685,7 +1731,11 @@
 
             <!-- Actions -->
             <div class="hero-actions">
-                <a href="draft.html" class="btn-hero-primary" data-i18n="hero_cta_report">
+                <a href="#vow" data-open-vow="true" class="btn-hero-primary" data-i18n="hero_cta_vow">
+                    <span>✍️</span>
+                    <span data-i18n="hero_cta_vow_text">Sign Accountability Vow</span>
+                </a>
+                <a href="draft.html" class="btn-hero-secondary" data-i18n="hero_cta_report">
                     <span>⚖️</span>
                     <span data-i18n="hero_cta_report_text">Explore Minab Case File</span>
                 </a>
@@ -1921,14 +1971,14 @@
                     <a href="evidence.html" class="btn-card-action btn-card-secondary" data-i18n="cta_evidence_btn">📁 Access Evidence Portal</a>
                 </div>
 
-                <!-- CTA 2: Support Legal Fund -->
+                <!-- CTA 2: Support Legal Prosecution Fund -->
                 <div class="action-card">
                     <div class="action-card-header">
                         <span class="action-card-icon">⚖️</span>
-                        <h3 class="action-card-title" data-i18n="cta_fund_title">Support Litigation Fund</h3>
-                        <p class="action-card-desc" data-i18n="cta_fund_desc">Support the association's legal expenses, covering international court filing fees, notary translation costs, and hiring expert military witnesses.</p>
+                        <h3 class="action-card-title" data-i18n="cta_fund_title">Fund the Legal Prosecution Campaign</h3>
+                        <p class="action-card-desc" data-i18n="cta_fund_desc">Pledge financial support for international criminal filings, certified translations, forensic munitions analysis, and victim legal representation.</p>
                     </div>
-                    <a href="#contact" data-contact-role="Litigation Fund Contributor" class="btn-card-action btn-card-primary" data-i18n="cta_fund_btn">🪙 Register Donation</a>
+                    <a href="#vow" data-vow-role="financial" class="btn-card-action btn-card-primary" data-i18n="cta_fund_btn">✍️ Sign Vow &amp; Pledge Support</a>
                 </div>
 
                 <!-- CTA 3: Review Technical Annex -->
@@ -2016,6 +2066,8 @@
                 nav_multimedia: "Multimedia",
                 nav_about: "About",
                 nav_contact: "✉ Contact",
+                signVowBtn: "Sign Accountability Vow",
+                hero_cta_vow_text: "Sign Accountability Vow",
                 dropdown_report_title: "Case Determination",
                 dropdown_report_desc: "Full 10-chapter factual finding & IAC analysis",
                 dropdown_recon_title: "3D Strike Reconstruction",
@@ -2096,9 +2148,9 @@
                 cta_evidence_title: "Submit Case Evidence",
                 cta_evidence_desc: "Help us expand the factual record. Share geolocated images, fragmentation analyses, or survivor accounts with our legal documentation team.",
                 cta_evidence_btn: "📁 Access Evidence Portal",
-                cta_fund_title: "Support Litigation Fund",
-                cta_fund_desc: "Support the association's legal expenses, covering international court filing fees, notary translation costs, and hiring expert military witnesses.",
-                cta_fund_btn: "🪙 Register Donation",
+                cta_fund_title: "Fund the Legal Prosecution Campaign",
+                cta_fund_desc: "Pledge financial support for international criminal filings, certified translations, forensic munitions analysis, and victim legal representation.",
+                cta_fund_btn: "✍️ Sign Vow & Pledge Support",
                 cta_annex_title: "Review Case Precedents",
                 cta_annex_desc: "Review the 10 similarity factors and 18 historical precedents (Belgrade, Kabul, Kunduz) drafted by our academic advisory panel.",
                 cta_annex_btn: "📖 View Technical Annex",
@@ -2117,6 +2169,8 @@
                 nav_multimedia: "چندرسانه‌ای",
                 nav_about: "درباره انجمن",
                 nav_contact: "✉ تماس با ما",
+                signVowBtn: "امضای میثاق دادخواهی",
+                hero_cta_vow_text: "امضای میثاق دادخواهی",
                 dropdown_report_title: "گزارش نهایی سانحه",
                 dropdown_report_desc: "بررسی حقوقی و شواهد در ۱۰ فصل",
                 dropdown_recon_title: "بازسازی سه‌بعدی سانحه",
@@ -2197,9 +2251,9 @@
                 cta_evidence_title: "ارسال مدارک و شواهد",
                 cta_evidence_desc: "به تکمیل مستندات پرونده کمک کنید. تصاویر، تحلیل‌های ترکش یا روایت‌های مستقیم خود را با تیم مستندسازی حقوقی ما به اشتراک بگذارید.",
                 cta_evidence_btn: "📁 ورود به پرتال مستندات",
-                cta_fund_title: "حمایت از صندوق حقوقی",
-                cta_fund_desc: "تأمین هزینه‌های دادخواست قضایی، ترجمه‌های رسمی اسناد حقوقی و هزینه‌های مربوط به احضار کارشناسان نظامی بین‌المللی.",
-                cta_fund_btn: "🪙 ثبت مشارکت مالی",
+                cta_fund_title: "حمایت مالی از کارزار پیگرد قضایی",
+                cta_fund_desc: "مشارکت در تأمین هزینه‌های ثبت دادخواست‌های بین‌المللی، ترجمه‌های رسمی، کارشناسی فنی تسلیحات و وکالت خانواده‌های قربانیان.",
+                cta_fund_btn: "✍️ امضای میثاق و اعلام حمایت مالی",
                 cta_annex_title: "بررسی پرونده‌های مشابه",
                 cta_annex_desc: "بررسی ۱۰ فاکتور شباهت فنی و ۱۸ پرونده تاریخی مشابه (کابل، قندوز، بلگراد) تهیه شده توسط مشاوران علمی انجمن.",
                 cta_annex_btn: "📖 مشاهده پیوست فنی",
@@ -2218,6 +2272,8 @@
                 nav_multimedia: "Multimedia",
                 nav_about: "Tietoa",
                 nav_contact: "✉ Ota yhteyttä",
+                signVowBtn: "Allekirjoita vastuulupaus",
+                hero_cta_vow_text: "Allekirjoita vastuulupaus",
                 dropdown_report_title: "Tapausseloste",
                 dropdown_report_desc: "10-osainen tosiseikkojen selvitys & IAC-analyysi",
                 dropdown_recon_title: "3D-rekonstruktio",
@@ -2298,9 +2354,9 @@
                 cta_evidence_title: "Lähetä tapauksen todistusaineistoa",
                 cta_evidence_desc: "Auta meitä laajentamaan tosiseikkojen kirjaamista. Jaa paikannettuja kuvia, sirpaleanalyysejä tai eloonjääneiden kertomuksia oikeudelliselle tiimillemme.",
                 cta_evidence_btn: "📁 Avaa todisteiden portaali",
-                cta_fund_title: "Tue oikeudenkäyntirahastoa",
-                cta_fund_desc: "Tue yhdistyksen oikeudenkäyntikuluja, jotka kattavat kansainväliset tuomioistuinmaksut, viralliset käännöskulut ja asiantuntevien sotilastodistajien palkkaamisen.",
-                cta_fund_btn: "🪙 Rekisteröi lahjoitus",
+                cta_fund_title: "Tue oikeudenkäyntikampanjaa",
+                cta_fund_desc: "Tue kansainvälisiä rikosoikeudellisia hakemuksia, virallisia käännöksiä, forensista asetutkintaa ja uhrien oikeudellista edustusta.",
+                cta_fund_btn: "✍️ Allekirjoita lupaus & tue",
                 cta_annex_title: "Tarkastele oikeustapauksia",
                 cta_annex_desc: "Tutustu akateemisen neuvonantajapaneelimme laatimiin 10 samankaltaisuustekijään ja 18 historialliseen ennakkotapaukseen (Belgrad, Kabul, Kunduz).",
                 cta_annex_btn: "📖 Näytä tekninen liite",
@@ -2502,7 +2558,7 @@
 
     <!-- Data dependencies -->
     <script src="memorial-data.js"></script>
-    <script src="contact-modal.js"></script>
+    <script src="contact-modal.js?v=20261104"></script>
 
 </body>
 

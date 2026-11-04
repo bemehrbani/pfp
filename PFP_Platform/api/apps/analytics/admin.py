@@ -3,7 +3,7 @@ Admin configuration for Analytics app.
 """
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from .models import ActivityLog, AnalyticsSnapshot
+from .models import ActivityLog, AnalyticsSnapshot, PageViewEvent
 
 
 @admin.register(ActivityLog)
@@ -85,4 +85,21 @@ class AnalyticsSnapshotAdmin(admin.ModelAdmin):
 
     def has_change_permission(self, request, obj=None):
         """Analytics snapshots should not be edited."""
+        return False
+
+
+@admin.register(PageViewEvent)
+class PageViewEventAdmin(admin.ModelAdmin):
+    """Admin interface for first-party PageViewEvent telemetry."""
+
+    list_display = ('event_type', 'path', 'country', 'lang', 'visitor_hash', 'created_at')
+    list_filter = ('event_type', 'country', 'lang', 'created_at')
+    search_fields = ('path', 'referrer', 'country', 'visitor_hash')
+    readonly_fields = ('path', 'event_type', 'referrer', 'country', 'lang', 'screen_width', 'visitor_hash', 'created_at')
+    date_hierarchy = 'created_at'
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
         return False

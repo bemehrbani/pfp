@@ -35,13 +35,21 @@ const I18N_DATA = {
     vowBadge: "Global Accountability Petition & Civic Vow",
     vowTitle: "The Minab Accountability Vow",
     vowSubtitle: "November 20 World Children's Day · People for Peace & Justice ry",
-    vowPledgeText: "\"Having walked through the reconstructed halls of Shajareh Tayyebeh Primary School and witnessed the lives of the 120+ schoolchildren and 26 educators taken on February 28, 2026, I solemnly vow to stand ready and participate in every lawful civic, investigative, and judicial endeavor to hold every person in the chain of command responsible for this atrocity.\"",
+    vowPledgeText: "\"Bearing witness to the verified forensic record of Shajareh Tayyebeh Primary School and the lives of the 120+ schoolchildren and 26 educators taken on February 28, 2026, I solemnly vow to stand ready and participate in every lawful civic, investigative, financial, and judicial endeavor to hold every person in the chain of command accountable for this atrocity.\"",
     vowNameLabel: "Full Name *",
     vowEmailLabel: "Email Address *",
+    vowTgLabel: "Telegram Username (Optional — for Action Mobilization)",
+    vowPhoneLabel: "Phone / Signal / WhatsApp (Optional — for Action Mobilization)",
     vowCityLabel: "City & Country *",
-    vowHowLabel: "How I Will Contribute to Accountability",
+    vowHowLabel: "How I Will Take Action for Accountability",
+    vowOptPetitioner: "Public Petitioner & Global Campaigner — Amplify the case & join collective actions",
+    vowOptFinancial: "Financial Support for the Legal Prosecution Campaign — Fund court filings & forensic experts",
+    vowOptLegal: "Legal, Human Rights & Judicial Action — Pro bono counsel & universal jurisdiction",
+    vowOptMedia: "Media, Journalism & Public Amplification — Investigative reporting & translations",
+    vowOptEvent: "Host or Join a Nov 20 World Children's Day Action — Vigil, university panel, or exhibition",
+    vowOptResearch: "Forensic, OSINT & Archival Research — Evidence verification & witness documentation",
     vowMessageLabel: "Personal Message of Remembrance or Commitment (Optional)",
-    vowConsentText: "I affirm this vow and consent to be contacted by People for Peace & Justice ry when collective legal, parliamentary, or civic actions are mobilized.",
+    vowConsentText: "I affirm this vow and consent to be contacted by People for Peace & Justice ry when collective legal, parliamentary, financial, or civic actions are mobilized.",
     vowSubmitBtn: "✍️ Sign the Vow & Join the Accountability Registry",
     hotspots: {
       courtyard_lines: {
@@ -178,13 +186,21 @@ const I18N_DATA = {
     vowBadge: "Kansainvälinen vetoomus & vastuulupaus",
     vowTitle: "Minabin vastuulupaus",
     vowSubtitle: "20. marraskuuta — Lapsen oikeuksien päivä · People for Peace & Justice ry",
-    vowPledgeText: "\"Kuljettuani Shajareh Tayyebehin peruskoulun rekonstruoiduissa tiloissa ja nähtyäni 28.2.2026 surmattujen yli 120 koululaisen ja 26 opettajan kohtalon, lupaan olla valmis osallistumaan kaikkiin laillisiin kansalais-, tutkinta- ja oikeustoimiin, jotta jokainen tähän julmuuteen syyllistynyt saatetaan vastuuseen.\"",
+    vowPledgeText: "\"Todistaen Shajareh Tayyebehin peruskoulun vahvistetun forensisen aineiston ja 28.2.2026 surmattujen yli 120 koululaisen ja 26 opettajan kohtalon, lupaan olla valmis osallistumaan kaikkiin laillisiin kansalais-, tutkinta-, rahoitus- ja oikeustoimiin, jotta jokainen komentoketjussa vastuussa oleva saatetaan oikeudenkäyntiin.\"",
     vowNameLabel: "Koko nimi *",
     vowEmailLabel: "Sähköpostiosoite *",
+    vowTgLabel: "Telegram-käyttäjänimi (Valinnainen — toiminnan koordinointiin)",
+    vowPhoneLabel: "Puhelin / Signal / WhatsApp (Valinnainen — toiminnan koordinointiin)",
     vowCityLabel: "Kaupunki & Maa *",
-    vowHowLabel: "Miten voin osallistua vastuuseen saattamiseen",
-    vowMessageLabel: "Henkilökohtainen muistoviesti (Valinnainen)",
-    vowConsentText: "Vahvistan tämän lupauksen ja suostun siihen, että People for Peace & Justice ry ottaa minuun yhteyttä yhteisten toimien käynnistyessä.",
+    vowHowLabel: "Miten osallistun oikeudelliseen vastuuseen saattamiseen",
+    vowOptPetitioner: "Julkinen vetoomuksen allekirjoittaja & kampanjoija — Jaa tietoa ja osallistu yhteisiin toimiin",
+    vowOptFinancial: "Taloudellinen tuki oikeudenkäyntikampanjalle — Tue kansainvälisiä tuomioistuinmaksuja ja asiantuntijoita",
+    vowOptLegal: "Oikeudellinen & ihmisoikeustyö — Juridinen asiantuntijuus, yleinen toimivalta ja päättäjävaikuttaminen",
+    vowOptMedia: "Media, journalismi & viestintä — Tutkiva journalismi, dokumentointi ja käännökset",
+    vowOptEvent: "Järjestä tai liity 20.11. Lapsen oikeuksien päivän tapahtumaan — Muistotilaisuus tai paneeli",
+    vowOptResearch: "Forensinen & OSINT-tutkimus — Todisteiden verifiointi ja arkistointi",
+    vowMessageLabel: "Henkilökohtainen muistoviesti tai sitoumus (Valinnainen)",
+    vowConsentText: "Vahvistan tämän lupauksen ja suostun siihen, että People for Peace & Justice ry ottaa minuun yhteyttä oikeudellisten, taloudellisten tai kansalaistoimien käynnistyessä.",
     vowSubmitBtn: "✍️ Allekirjoita lupaus & liity rekisteriin",
     hotspots: {
       courtyard_lines: {
@@ -320,14 +336,22 @@ const I18N_DATA = {
     controlsHelp: "روی «🏠 برش طبقات» یا «🖼️ ۱۴۵ تصویر شهدا» کلیک کنید · روی هر قاب عکس یا نقاشی داخل کلاس‌های سه‌بعدی کلیک کنید",
     vowBadge: "پتیشن جهانی و میثاق دادخواهی میناب",
     vowTitle: "میثاق دادخواهی کودکان میناب",
-    vowSubtitle: "۲۰ نوامبر (روز جهانی کودک) · انجمن صلح و عدالت (PFPJ ry)",
-    vowPledgeText: "«پس از گام برداشتن در کلاس‌ها و راهروهای بازسازی‌شده دبستان شجره طیبه میناب و مشاهده تصاویر و زندگی بیش از ۱۲۰ کودک دانش‌آموز و ۲۶ آموزگار که در ۹ اسفند ۱۴۰۴ جان باختند، صمیمانه پیمان می‌بندم که در هر تلاش قانونی، مدنی، تحقیقاتی و قضایی برای پاسخگو کردن تمامی آمران و عاملان این جنایت مشارکت و همراهی کنم.»",
+    vowSubtitle: "۲۰ نوامبر (روز جهانی کودک) · انجمن صلح و عدالت فنلاند (PFPJ ry)",
+    vowPledgeText: "«با گواهی بر مستندات راستی‌آزمایی‌شده دبستان شجره طیبه میناب و به یاد بیش از ۱۲۰ کودک دانش‌آموز و ۲۶ آموزگار که در ۹ اسفند ۱۴۰۴ جان باختند، صمیمانه پیمان می‌بندم که در هر تلاش قانونی، مدنی، تحقیقاتی، مالی و قضایی برای پاسخگو کردن تمامی آمران و عاملان این جنایت در سلسله‌مراتب فرماندهی مشارکت و همراهی کنم.»",
     vowNameLabel: "نام و نام خانوادگی *",
     vowEmailLabel: "آدرس ایمیل *",
+    vowTgLabel: "شناسه تلگرام (اختیاری — جهت هماهنگی اقدامات دادخواهی)",
+    vowPhoneLabel: "شماره تماس / سیگنال / واتس‌اپ (اختیاری — جهت هماهنگی اقدامات)",
     vowCityLabel: "شهر و کشور محل سکونت *",
-    vowHowLabel: "نحوه همراهی و مشارکت من در دادخواهی",
+    vowHowLabel: "نحوه همراهی و اقدام من در کارزار دادخواهی",
+    vowOptPetitioner: "امضاکننده عمومی و کنشگر کارزار جهانی — بازنشر مستندات و همراهی در اقدامات جمعی",
+    vowOptFinancial: "حمایت مالی از کارزار پیگرد قضایی بین‌المللی — تأمین هزینه‌های ثبت دادخواست و کارشناسان رسمی",
+    vowOptLegal: "همکاری حقوقی، قضایی و حقوق بشری — وکالت، صلاحیت قضایی جهانی و رایزنی پارلمانی",
+    vowOptMedia: "رسانه، روزنامه‌نگاری و روایت‌گری عمومی — پوشش خبری، مستندسازی و ترجمه",
+    vowOptEvent: "برگزاری یا مشارکت در رویداد ۲۰ نوامبر (روز جهانی کودک) — تجمع، پنل دانشگاهی یا نمایشگاه",
+    vowOptResearch: "پژوهش فنی، اطلاعات متن‌باز (OSINT) و مستندسازی — راستی‌آزمایی شواهد و ثبت شهادت‌ها",
     vowMessageLabel: "پیام یادبود یا تعهد شخصی (اختیاری)",
-    vowConsentText: "این میثاق را تأیید می‌کنم و موافقم در زمان آغاز اقدامات جمعی حقوقی، پارلمانی و مدنی با من تماس گرفته شود.",
+    vowConsentText: "این میثاق را تأیید می‌کنم و موافقم در زمان آغاز اقدامات جمعی حقوقی، پارلمانی، مالی و مدنی با من تماس گرفته شود.",
     vowSubmitBtn: "✍️ ثبت امضا و پیوستن به کارزار جهانی دادخواهی",
     hotspots: {
       courtyard_lines: {
@@ -528,7 +552,8 @@ let isGuidedTour = false;
 let currentTourIndex = 0;
 let voiceNarrationEnabled = true;
 const moveKeys = { forward: false, backward: false, left: false, right: false };
-let vowSignatoryCount = parseInt(localStorage.getItem('pfp_vow_count') || '1428', 10);
+const VOW_BADGE_THRESHOLD = 100;
+let vowSignatoryCount = 0;
 
 // --- INITIALIZATION ---
 function startReconstructionApp() {
@@ -536,8 +561,10 @@ function startReconstructionApp() {
     setTimeout(startReconstructionApp, 100);
     return;
   }
+  try { localStorage.removeItem('pfp_vow_count'); } catch (_) {}
   clock = new THREE.Clock();
   updateVowBadge();
+  fetchRealVowCount();
   initI18n();
   initThreeEngine();
   buildEnvironmentAndTerrain();
@@ -557,8 +584,35 @@ if (document.readyState === 'loading') {
 }
 
 function updateVowBadge() {
+  window.vowSignatoryCount = vowSignatoryCount;
   const badge = document.getElementById('vowCountBadge');
-  if (badge) badge.textContent = vowSignatoryCount.toLocaleString();
+  if (!badge) return;
+  if (vowSignatoryCount >= VOW_BADGE_THRESHOLD) {
+    badge.textContent = vowSignatoryCount.toLocaleString();
+    badge.style.display = 'inline-block';
+  } else {
+    badge.textContent = '';
+    badge.style.display = 'none';
+  }
+}
+
+async function fetchRealVowCount() {
+  let statsUrl = '/api/telegram/vow-stats/';
+  if (window.location.protocol === 'file:' || window.location.port === '8090') {
+    statsUrl = 'http://localhost:8000/api/telegram/vow-stats/';
+  }
+  try {
+    const resp = await fetch(statsUrl, { cache: 'no-store' });
+    if (resp.ok) {
+      const data = await resp.json();
+      if (typeof data.count === 'number') {
+        vowSignatoryCount = data.count;
+        updateVowBadge();
+      }
+    }
+  } catch (_) {
+    updateVowBadge();
+  }
 }
 
 // --- LOCALIZATION HANDLER ---
@@ -2397,6 +2451,9 @@ function exportSceneToGLB() {
 // --- ACCOUNTABILITY VOW & PETITION MODAL LOGIC ---
 function openVowModal() {
   document.getElementById('vowModal').classList.add('visible');
+  if (typeof window.__pfpTrackEvent === 'function') {
+    window.__pfpTrackEvent('vow_open');
+  }
 }
 
 function closeVowModal() {
@@ -2405,8 +2462,13 @@ function closeVowModal() {
 
 async function submitVowForm(e) {
   e.preventDefault();
+  if (typeof window.submitVowForm === 'function' && window.submitVowForm !== submitVowForm) {
+    return window.submitVowForm(e);
+  }
   const name = document.getElementById('vowName').value.trim();
   const email = document.getElementById('vowEmail').value.trim();
+  const telegram_username = (document.getElementById('vowTelegram')?.value || '').trim();
+  const phone_number = (document.getElementById('vowPhone')?.value || '').trim();
   const city = document.getElementById('vowCity').value.trim();
   const role = document.getElementById('vowContribution').value;
   const personalMsg = document.getElementById('vowMessage').value.trim();
@@ -2419,7 +2481,16 @@ async function submitVowForm(e) {
   statusEl.textContent = 'Recording your Accountability Vow...';
   submitBtn.disabled = true;
 
-  const fullMessage = `[MINAB ACCOUNTABILITY VOW — NOV 20 HYBRID EVENT]\nCity/Country: ${city}\nPledge: Affirmed solemn vow to participate in holding every person in the chain of command accountable.\nNote: ${personalMsg || 'Signed from 3D Spatial School Reconstruction.'}`;
+  const contact_handle = [telegram_username, phone_number].filter(Boolean).join(' | ');
+  const fullMessage = [
+    '[MINAB ACCOUNTABILITY VOW — NOV 20 HYBRID EVENT]',
+    `City/Country: ${city}`,
+    telegram_username ? `Telegram: ${telegram_username}` : null,
+    phone_number ? `Phone/Signal: ${phone_number}` : null,
+    `Action Role: ${role}`,
+    'Pledge: Affirmed solemn vow to participate in holding every person in the chain of command accountable.',
+    `Note: ${personalMsg || 'Signed from 3D Spatial School Reconstruction.'}`
+  ].filter(Boolean).join('\n');
 
   let apiUrl = '/api/telegram/submit-contact/';
   if (window.location.protocol === 'file:' || window.location.port === '8090') {
@@ -2430,22 +2501,40 @@ async function submitVowForm(e) {
     const resp = await fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, role, message: fullMessage })
+      body: JSON.stringify({
+        name,
+        email,
+        telegram_username,
+        phone_number,
+        city_country: city,
+        contact_handle,
+        role,
+        message: fullMessage
+      })
     });
     if (!resp.ok) throw new Error('API fallback');
+    const data = await resp.json();
+    if (typeof data.vow_count === 'number') {
+      vowSignatoryCount = data.vow_count;
+      window.vowSignatoryCount = data.vow_count;
+    } else {
+      vowSignatoryCount += 1;
+      window.vowSignatoryCount = vowSignatoryCount;
+    }
   } catch (_) {
-    const localVows = JSON.parse(localStorage.getItem('pfp_local_vows') || '[]');
-    localVows.push({ name, email, city, role, personalMsg, ts: new Date().toISOString() });
-    localStorage.setItem('pfp_local_vows', JSON.stringify(localVows));
+    vowSignatoryCount += 1;
+    window.vowSignatoryCount = vowSignatoryCount;
   }
 
-  vowSignatoryCount += 1;
-  localStorage.setItem('pfp_vow_count', String(vowSignatoryCount));
   updateVowBadge();
+  if (typeof window.__pfpTrackEvent === 'function') {
+    window.__pfpTrackEvent('vow_signed');
+  }
 
   statusEl.style.background = 'rgba(16, 185, 129, 0.18)';
   statusEl.style.color = '#6ee7b7';
-  statusEl.textContent = `✓ Thank you, ${name}. Your Accountability Vow (#${vowSignatoryCount.toLocaleString()}) has been recorded.`;
+  const countSuffix = vowSignatoryCount >= VOW_BADGE_THRESHOLD ? ` (#${vowSignatoryCount.toLocaleString()})` : '';
+  statusEl.textContent = `✓ Thank you, ${name}. Your Accountability Vow${countSuffix} has been recorded.`;
   document.getElementById('vowForm').reset();
   submitBtn.disabled = false;
 

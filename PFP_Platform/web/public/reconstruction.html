@@ -972,7 +972,7 @@
           <button class="vow-cta-btn" id="openVowBtn">
             <span>✍️</span>
             <span data-i18n="signVowBtn">Sign Accountability Vow</span>
-            <span class="vow-counter-pill" id="vowCountBadge">1,428</span>
+            <span class="vow-counter-pill" id="vowCountBadge" style="display: none;"></span>
           </button>
 
           <div class="lang-switcher">
@@ -1123,7 +1123,7 @@
       <div class="modal-cat" data-i18n="vowSubtitle">November 20 World Children's Day · People for Peace & Justice ry</div>
 
       <div class="vow-pledge-box" id="vowPledgeText" data-i18n="vowPledgeText">
-        "Having walked through the reconstructed halls of Shajareh Tayyebeh Primary School and witnessed the lives of the 120+ schoolchildren and 26 educators taken on February 28, 2026, I solemnly vow to stand ready and participate in every lawful civic, investigative, and judicial endeavor to hold every person in the chain of command responsible for this atrocity."
+        "Bearing witness to the verified forensic record of Shajareh Tayyebeh Primary School and the lives of the 120+ schoolchildren and 26 educators taken on February 28, 2026, I solemnly vow to stand ready and participate in every lawful civic, investigative, financial, and judicial endeavor to hold every person in the chain of command accountable for this atrocity."
       </div>
 
       <form id="vowForm">
@@ -1134,23 +1134,35 @@
           </div>
           <div class="vow-field">
             <label data-i18n="vowEmailLabel">Email Address *</label>
-            <input type="email" id="vowEmail" required placeholder="you@example.com" />
+            <input type="email" id="vowEmail" required placeholder="you@example.com" dir="ltr" />
           </div>
         </div>
 
         <div class="vow-form-grid">
           <div class="vow-field">
-            <label data-i18n="vowCityLabel">City & Country (e.g., Helsinki, Finland) *</label>
+            <label data-i18n="vowTgLabel">Telegram Username (Optional — for Action Mobilization)</label>
+            <input type="text" id="vowTelegram" placeholder="@username" dir="ltr" />
+          </div>
+          <div class="vow-field">
+            <label data-i18n="vowPhoneLabel">Phone / Signal / WhatsApp (Optional — for Action Mobilization)</label>
+            <input type="tel" id="vowPhone" placeholder="+358 40 123 4567" dir="ltr" />
+          </div>
+        </div>
+
+        <div class="vow-form-grid">
+          <div class="vow-field">
+            <label data-i18n="vowCityLabel">City &amp; Country (e.g., Helsinki, Finland) *</label>
             <input type="text" id="vowCity" required placeholder="Helsinki, Finland" />
           </div>
           <div class="vow-field">
-            <label data-i18n="vowHowLabel">How I Can Contribute to Accountability</label>
+            <label data-i18n="vowHowLabel">How I Will Take Action for Accountability</label>
             <select id="vowContribution">
-              <option value="Accountability Vow Signatory — Public Petitioner">Public Petitioner & Global Campaigner</option>
-              <option value="Accountability Vow Signatory — Legal / Human Rights">Legal, Human Rights & Judicial Action</option>
-              <option value="Accountability Vow Signatory — Media / Journalism / XR">Media, Documentary & Spatial XR Amplification</option>
-              <option value="Accountability Vow Signatory — Organizing Satellite Event">Host / Join a Nov 20 World Children's Day Hub</option>
-              <option value="Accountability Vow Signatory — Researcher / OSINT">OSINT & Forensic Research Support</option>
+              <option value="Accountability Vow — Public Petitioner & Campaigner" data-i18n="vowOptPetitioner">Public Petitioner &amp; Global Campaigner — Amplify the case &amp; join collective actions</option>
+              <option value="Accountability Vow — Financial Support (Legal Prosecution)" data-i18n="vowOptFinancial">Financial Support for the Legal Prosecution Campaign — Fund court filings &amp; forensic experts</option>
+              <option value="Accountability Vow — Legal & Judicial Counsel" data-i18n="vowOptLegal">Legal, Human Rights &amp; Judicial Action — Pro bono counsel &amp; universal jurisdiction</option>
+              <option value="Accountability Vow — Media, Documentary & XR" data-i18n="vowOptMedia">Media, Journalism &amp; Public Amplification — Investigative reporting &amp; translations</option>
+              <option value="Accountability Vow — Event Organizer (Nov 20 Hub)" data-i18n="vowOptEvent">Host or Join a Nov 20 World Children's Day Action — Vigil, university panel, or exhibition</option>
+              <option value="Accountability Vow — Forensic & OSINT Research" data-i18n="vowOptResearch">Forensic, OSINT &amp; Archival Research — Evidence verification &amp; witness documentation</option>
             </select>
           </div>
         </div>
@@ -1162,10 +1174,10 @@
 
         <label class="vow-checkbox-row">
           <input type="checkbox" id="vowCheckbox" required checked />
-          <span data-i18n="vowConsentText">I affirm this vow and consent to be contacted by People for Peace & Justice ry when collective legal, parliamentary, or civic actions are mobilized.</span>
+          <span data-i18n="vowConsentText">I affirm this vow and consent to be contacted by People for Peace &amp; Justice ry when collective legal, parliamentary, financial, or civic actions are mobilized.</span>
         </label>
 
-        <button type="submit" class="vow-submit-btn" id="vowSubmitBtn" data-i18n="vowSubmitBtn">✍️ Sign the Vow & Join the Accountability Registry</button>
+        <button type="submit" class="vow-submit-btn" id="vowSubmitBtn" data-i18n="vowSubmitBtn">✍️ Sign the Vow &amp; Join the Accountability Registry</button>
         <div class="vow-status-msg" id="vowStatusMsg"></div>
       </form>
     </div>
@@ -1201,11 +1213,11 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"></script>
   <!-- Unified Site Navigation & Contact Modal -->
-  <script src="site-nav.js"></script>
-  <script src="contact-modal.js"></script>
+  <script src="site-nav.js?v=20261104"></script>
+  <script src="contact-modal.js?v=20261104"></script>
   <!-- Master Casualty & Rubble Drawings Registry (Dataset v3.0.0) -->
   <script src="memorial-data.js"></script>
   <!-- Application Logic -->
-  <script src="js/reconstruction.js"></script>
+  <script src="js/reconstruction.js?v=20261104"></script>
 </body>
 </html>

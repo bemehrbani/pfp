@@ -16,6 +16,10 @@ urlpatterns = [
     # System analytics (admin only)
     path('system/', views.SystemAnalyticsView.as_view(), name='system_analytics'),
 
+    # Lightweight first-party web analytics beacon (public) & summary (admin)
+    path('pageview/', views.RecordPageViewView.as_view(), name='record_pageview'),
+    path('web-summary/', views.WebAnalyticsSummaryView.as_view(), name='web_summary'),
+
     # General analytics endpoint
     path('', views.SystemAnalyticsView.as_view(), name='analytics_overview'),
 ]
