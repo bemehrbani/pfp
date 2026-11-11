@@ -2457,7 +2457,7 @@ function playSpotNarration(hotspotId) {
   if (!voiceNarrationEnabled) return;
 
   const langPrefix = ['en', 'fa', 'fi'].includes(currentLang) ? currentLang : 'en';
-  const narrationVersion = '20261111';
+  const narrationVersion = '20261111c';
   const primarySrc = `media/narration/${langPrefix}_${hotspotId}.mp3?v=${narrationVersion}`;
   const fallbackSrc = `media/narration/en_${hotspotId}.mp3?v=${narrationVersion}`;
 
