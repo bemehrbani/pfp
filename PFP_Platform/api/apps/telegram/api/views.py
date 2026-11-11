@@ -300,7 +300,40 @@ def get_vow_signatory_count() -> int:
     return ContactSubmission.objects.filter(
         Q(role__icontains='Accountability Vow') |
         Q(message__icontains='ACCOUNTABILITY VOW')
-    ).count()
+    ).exclude(status=ContactSubmission.Status.ARCHIVED).count()
+
+
+def normalize_submission_roles(has_roles_key: bool, raw_roles, fallback_role) -> tuple[list[str], str]:
+    """Normalize multi-select roles array and build a 500-char human-readable role summary."""
+    if has_roles_key:
+        if not isinstance(raw_roles, list):
+            raise ValueError('roles must be a list of strings')
+        cleaned: list[str] = []
+        for item in raw_roles[:20]:
+            text = str(item or '').strip()[:150]
+            if text and text not in cleaned:
+                cleaned.append(text)
+        if not cleaned:
+            raise ValueError('Please select at least one action role')
+    else:
+        single = str(fallback_role or '').strip()[:500] or 'General Inquiry'
+        cleaned = [single[:150]]
+
+    if len(cleaned) == 1:
+        summary = cleaned[0][:500]
+    elif any(item.startswith('Accountability Vow') for item in cleaned):
+        short_labels = []
+        for item in cleaned:
+            for prefix in ('Accountability Vow — ', 'Accountability Vow - '):
+                if item.startswith(prefix):
+                    item = item[len(prefix):].strip()
+                    break
+            short_labels.append(item)
+        summary = ('Accountability Vow — ' + ' | '.join(short_labels))[:500]
+    else:
+        summary = ' | '.join(cleaned)[:500]
+
+    return cleaned, summary
 
 
 class VowStatsView(APIView):
@@ -335,11 +368,16 @@ class SubmitContactView(APIView):
                 'name': openapi.Schema(type=openapi.TYPE_STRING, description='Submitter name'),
                 'email': openapi.Schema(type=openapi.TYPE_STRING, description='Submitter email'),
                 'contact_handle': openapi.Schema(type=openapi.TYPE_STRING, description='Optional Telegram @username or Signal/Phone'),
-                'role': openapi.Schema(type=openapi.TYPE_STRING, description='Role or interest (e.g. Volunteer, Scholar)'),
+                'role': openapi.Schema(type=openapi.TYPE_STRING, description='Role or interest summary'),
+                'roles': openapi.Schema(
+                    type=openapi.TYPE_ARRAY,
+                    items=openapi.Schema(type=openapi.TYPE_STRING),
+                    description='Optional list of multi-selected action roles'
+                ),
                 'message': openapi.Schema(type=openapi.TYPE_STRING, description='Message body'),
             }
         ),
-        responses={200: openapi.Response('Submission saved and forwarded successfully')}
+        responses={201: openapi.Response('Submission saved and forwarded successfully')}
     )
     def post(self, request):
         """Save contact form submission to database and forward to Telegram."""
@@ -353,11 +391,24 @@ class SubmitContactView(APIView):
         phone_number = (request.data.get('phone_number') or '').strip()
         city_country = (request.data.get('city_country') or '').strip()
         role = request.data.get('role', 'General Inquiry')
+        has_roles_key = 'roles' in request.data
+        raw_roles = request.data.get('roles')
         message = request.data.get('message')
 
         if not name or not email or not message:
             return Response({
                 'error': 'name, email, and message are required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            normalized_roles, role_summary = normalize_submission_roles(
+                has_roles_key=has_roles_key,
+                raw_roles=raw_roles,
+                fallback_role=role,
+            )
+        except ValueError as exc:
+            return Response({
+                'error': str(exc)
             }, status=status.HTTP_400_BAD_REQUEST)
 
         # Extract client IP and User-Agent for auditing
@@ -387,7 +438,8 @@ class SubmitContactView(APIView):
         submission = ContactSubmission.objects.create(
             name=name.strip(),
             email=email.strip(),
-            role=role.strip() if role else 'General Inquiry',
+            role=role_summary,
+            roles=normalized_roles,
             message=clean_message,
             notes=notes_text,
             ip_address=ip_address,
@@ -454,13 +506,19 @@ class SubmitContactView(APIView):
         # Format Telegram notification message with HTML escaping
         handle_line = f"📱 <b>Telegram / Signal / Phone:</b> {html.escape(combined_handle)}\n" if combined_handle else ""
         city_line = f"🌍 <b>City / Country:</b> {html.escape(city_country)}\n" if city_country else ""
+        if len(submission.roles) > 1:
+            roles_bullets = "\n".join(f"  • {html.escape(r)}" for r in submission.roles)
+            role_section = f"🏷️ <b>Selected Actions ({len(submission.roles)}):</b>\n{roles_bullets}\n\n"
+        else:
+            role_section = f"🏷️ <b>Interest/Role:</b> {html.escape(submission.role)}\n\n"
+
         formatted_message = (
             f"<b>📥 New Contact/Support Submission #{submission.id}</b>\n\n"
             f"👤 <b>Name:</b> {html.escape(submission.name)}\n"
             f"✉️ <b>Email:</b> {html.escape(submission.email)}\n"
             f"{handle_line}"
             f"{city_line}"
-            f"🏷️ <b>Interest/Role:</b> {html.escape(submission.role)}\n\n"
+            f"{role_section}"
             f"📝 <b>Message:</b>\n"
             f"{html.escape(submission.message)}"
         )

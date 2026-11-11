@@ -624,7 +624,7 @@
       inset: 0;
       background: rgba(10, 14, 23, 0.78);
       backdrop-filter: blur(10px);
-      z-index: 100;
+      z-index: 100050;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1024,9 +1024,78 @@
       font-size: 0.88rem;
       font-family: inherit;
     }
-    .vow-field input:focus, .vow-field select:focus, .vow-field textarea:focus {
+    .vow-field input:focus-visible, .vow-field select:focus-visible, .vow-field textarea:focus-visible {
       border-color: var(--gold);
-      outline: none;
+      outline: 2px solid var(--gold);
+      outline-offset: 1px;
+    }
+    .vow-roles-fieldset {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px 12px;
+      margin: 2px 0 12px;
+      background: rgba(10, 14, 23, 0.6);
+      min-inline-size: 0;
+      color-scheme: dark;
+    }
+    .vow-roles-fieldset[aria-invalid="true"] {
+      border-color: #f87171;
+    }
+    .vow-roles-legend {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #e5e7eb;
+      padding-inline: 6px;
+    }
+    .vow-roles-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin: 0 0 8px;
+    }
+    .vow-roles-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .vow-role-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-block-size: 44px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(10, 14, 23, 0.82);
+      color: #e5e7eb;
+      font-size: 0.84rem;
+      line-height: 1.4;
+      cursor: pointer;
+      transition: border-color 0.16s ease, background-color 0.16s ease;
+      text-align: start;
+    }
+    .vow-role-option:hover {
+      border-color: var(--border-gold);
+      background: rgba(212, 168, 83, 0.08);
+    }
+    .vow-role-option.is-checked,
+    .vow-role-option:has(input[type="checkbox"]:checked) {
+      border-color: rgba(212, 168, 83, 0.7);
+      background: rgba(212, 168, 83, 0.14);
+      color: #ffffff;
+    }
+    .vow-role-option input[type="checkbox"] {
+      accent-color: var(--gold);
+      inline-size: 1.15rem;
+      block-size: 1.15rem;
+      margin: 0;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .vow-role-option input[type="checkbox"]:focus-visible,
+    .vow-checkbox-row input[type="checkbox"]:focus-visible,
+    .vow-submit-btn:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
     }
     .vow-checkbox-row {
       display: flex;
@@ -1249,65 +1318,83 @@
         "Bearing witness to the verified forensic record of Shajareh Tayyebeh Primary School and the lives of the 120+ schoolchildren and 26 educators taken on February 28, 2026, I solemnly vow to stand ready and participate in every lawful civic, investigative, financial, and judicial endeavor to hold every person in the chain of command accountable for this atrocity."
       </div>
 
-      <form id="vowForm">
+      <form id="vowForm" method="post" action="/api/telegram/submit-contact/">
         <div class="vow-form-grid">
           <div class="vow-field">
-            <label data-i18n="vowNameLabel">Full Name *</label>
-            <input type="text" id="vowName" required placeholder="Your full name" />
+            <label for="vowName" data-i18n="vowNameLabel">Full Name *</label>
+            <input type="text" id="vowName" name="name" autocomplete="name" required placeholder="Your full name" />
           </div>
           <div class="vow-field">
-            <label data-i18n="vowEmailLabel">Email Address *</label>
-            <input type="email" id="vowEmail" required placeholder="you@example.com" dir="ltr" />
+            <label for="vowEmail" data-i18n="vowEmailLabel">Email Address *</label>
+            <input type="email" id="vowEmail" name="email" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false" required placeholder="you@example.com" dir="ltr" />
           </div>
         </div>
 
         <div class="vow-form-grid">
           <div class="vow-field">
-            <label data-i18n="vowTgLabel">Telegram Username (Optional — for Action Mobilization)</label>
-            <input type="text" id="vowTelegram" placeholder="@username" dir="ltr" />
+            <label for="vowTelegram" data-i18n="vowTgLabel">Telegram Username (Optional — for Action Mobilization)</label>
+            <input type="text" id="vowTelegram" name="telegram_username" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="@username" dir="ltr" />
           </div>
           <div class="vow-field">
-            <label data-i18n="vowPhoneLabel">Phone / Signal / WhatsApp (Optional — for Action Mobilization)</label>
-            <input type="tel" id="vowPhone" placeholder="+358 40 123 4567" dir="ltr" />
+            <label for="vowPhone" data-i18n="vowPhoneLabel">Phone / Signal / WhatsApp (Optional — for Action Mobilization)</label>
+            <input type="tel" id="vowPhone" name="phone_number" autocomplete="tel" placeholder="+358 40 123 4567" dir="ltr" />
           </div>
         </div>
 
-        <div class="vow-form-grid">
-          <div class="vow-field">
-            <label data-i18n="vowCityLabel">City &amp; Country (e.g., Helsinki, Finland) *</label>
-            <input type="text" id="vowCity" required placeholder="Helsinki, Finland" />
-          </div>
-          <div class="vow-field">
-            <label data-i18n="vowHowLabel">How I Will Take Action for Accountability</label>
-            <select id="vowContribution">
-              <option value="Accountability Vow — Public Petitioner & Campaigner" data-i18n="vowOptPetitioner">Public Petitioner &amp; Global Campaigner — Amplify the case &amp; join collective actions</option>
-              <option value="Accountability Vow — Financial Support (Legal Prosecution)" data-i18n="vowOptFinancial">Financial Support for the Legal Prosecution Campaign — Fund court filings &amp; forensic experts</option>
-              <option value="Accountability Vow — Legal & Judicial Counsel" data-i18n="vowOptLegal">Legal, Human Rights &amp; Judicial Action — Pro bono counsel &amp; universal jurisdiction</option>
-              <option value="Accountability Vow — Media, Documentary & XR" data-i18n="vowOptMedia">Media, Journalism &amp; Public Amplification — Investigative reporting &amp; translations</option>
-              <option value="Accountability Vow — Event Organizer (Nov 20 Hub)" data-i18n="vowOptEvent">Host or Join a Nov 20 World Children's Day Action — Vigil, university panel, or exhibition</option>
-              <option value="Accountability Vow — Forensic & OSINT Research" data-i18n="vowOptResearch">Forensic, OSINT &amp; Archival Research — Evidence verification &amp; witness documentation</option>
-            </select>
-          </div>
+        <div class="vow-field" style="margin-bottom: 12px;">
+          <label for="vowCity" data-i18n="vowCityLabel">City &amp; Country *</label>
+          <input type="text" id="vowCity" name="city_country" autocomplete="address-level2" required placeholder="Helsinki, Finland" />
         </div>
+
+        <fieldset class="vow-roles-fieldset" id="vowContributionGroup" aria-describedby="vowHowHintEl">
+          <legend class="vow-roles-legend" id="vowHowLabelEl" data-i18n="vowHowLabel">How I Will Take Action for Accountability *</legend>
+          <p class="vow-roles-hint" id="vowHowHintEl" data-i18n="vowHowHint">Select one or more ways you wish to contribute</p>
+          <div class="vow-roles-grid">
+            <label class="vow-role-option is-checked" for="vowCheckPetitioner">
+              <input type="checkbox" id="vowCheckPetitioner" name="vowContribution" value="Accountability Vow — Public Petitioner & Campaigner" checked />
+              <span id="vowOptPetitioner" data-i18n="vowOptPetitioner">Public Petitioner &amp; Global Campaigner — Amplify the case &amp; join collective actions</span>
+            </label>
+            <label class="vow-role-option" for="vowCheckFinancial">
+              <input type="checkbox" id="vowCheckFinancial" name="vowContribution" value="Accountability Vow — Financial Support (Legal Prosecution)" />
+              <span id="vowOptFinancial" data-i18n="vowOptFinancial">Financial Support for the Legal Prosecution Campaign — Fund court filings &amp; forensic experts</span>
+            </label>
+            <label class="vow-role-option" for="vowCheckLegal">
+              <input type="checkbox" id="vowCheckLegal" name="vowContribution" value="Accountability Vow — Legal & Judicial Counsel" />
+              <span id="vowOptLegal" data-i18n="vowOptLegal">Legal, Human Rights &amp; Judicial Action — Pro bono counsel &amp; universal jurisdiction</span>
+            </label>
+            <label class="vow-role-option" for="vowCheckMedia">
+              <input type="checkbox" id="vowCheckMedia" name="vowContribution" value="Accountability Vow — Media, Documentary & XR" />
+              <span id="vowOptMedia" data-i18n="vowOptMedia">Media, Journalism &amp; Public Amplification — Investigative reporting &amp; translations</span>
+            </label>
+            <label class="vow-role-option" for="vowCheckEvent">
+              <input type="checkbox" id="vowCheckEvent" name="vowContribution" value="Accountability Vow — Event Organizer (Nov 20 Hub)" />
+              <span id="vowOptEvent" data-i18n="vowOptEvent">Host or Join a Nov 20 World Children's Day Action — Vigil, university panel, or exhibition</span>
+            </label>
+            <label class="vow-role-option" for="vowCheckResearch">
+              <input type="checkbox" id="vowCheckResearch" name="vowContribution" value="Accountability Vow — Forensic & OSINT Research" />
+              <span id="vowOptResearch" data-i18n="vowOptResearch">Forensic, OSINT &amp; Archival Research — Evidence verification &amp; witness documentation</span>
+            </label>
+          </div>
+        </fieldset>
 
         <div class="vow-field">
-          <label data-i18n="vowMessageLabel">Personal Message of Remembrance or Commitment (Optional)</label>
-          <textarea id="vowMessage" rows="2" placeholder="In memory of the children of Minab..."></textarea>
+          <label for="vowMessage" data-i18n="vowMessageLabel">Personal Message of Remembrance or Commitment (Optional)</label>
+          <textarea id="vowMessage" name="message" rows="2" placeholder="In memory of the children of Minab..."></textarea>
         </div>
 
-        <label class="vow-checkbox-row">
-          <input type="checkbox" id="vowCheckbox" required checked />
+        <label class="vow-checkbox-row" for="vowCheckbox">
+          <input type="checkbox" id="vowCheckbox" name="consent" required checked />
           <span data-i18n="vowConsentText">I affirm this vow and consent to be contacted by People for Peace &amp; Justice ry when collective legal, parliamentary, financial, or civic actions are mobilized.</span>
         </label>
 
         <button type="submit" class="vow-submit-btn" id="vowSubmitBtn" data-i18n="vowSubmitBtn">✍️ Sign the Vow &amp; Join the Accountability Registry</button>
-        <div class="vow-status-msg" id="vowStatusMsg"></div>
+        <div class="vow-status-msg" id="vowStatusMsg" role="status" aria-live="polite"></div>
       </form>
     </div>
   </div>
 
   <!-- 3D In-Room Portrait & Rubble Drawing Inspector Modal -->
-  <div class="modal-backdrop" id="artifactInspectorModal" style="z-index: 350;">
+  <div class="modal-backdrop" id="artifactInspectorModal" style="z-index: 100100;">
     <div class="inspector-card" role="dialog" aria-modal="true">
       <div class="modal-top">
         <span class="badge-evidence" id="inspectorBadge">3D Classroom Portrait &amp; Artifact Inspector</span>
@@ -1337,10 +1424,10 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"></script>
   <!-- Unified Site Navigation & Contact Modal -->
   <script src="site-nav.js?v=20261104"></script>
-  <script src="contact-modal.js?v=20261104"></script>
+  <script src="contact-modal.js?v=20261111"></script>
   <!-- Master Casualty & Rubble Drawings Registry (Dataset v3.0.0) -->
   <script src="memorial-data.js"></script>
   <!-- Application Logic -->
-  <script src="js/reconstruction.js?v=20261111"></script>
+  <script src="js/reconstruction.js?v=20261111b"></script>
 </body>
 </html>

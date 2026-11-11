@@ -198,9 +198,14 @@ class ContactSubmission(models.Model):
         verbose_name=_('Email Address')
     )
     role = models.CharField(
-        max_length=150,
+        max_length=500,
         default='General Inquiry',
         verbose_name=_('Role / Area of Interest')
+    )
+    roles = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name=_('Selected Roles / Actions')
     )
     message = models.TextField(
         verbose_name=_('Message')

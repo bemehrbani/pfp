@@ -785,9 +785,80 @@ class SubmitContactViewTests(APITestCase):
         self.assertEqual(response.data['vow_count'], 1)
         submission = ContactSubmission.objects.get(id=response.data['id'])
         self.assertEqual(submission.role, 'Accountability Vow — Financial Support (Legal Prosecution)')
+        self.assertEqual(
+            submission.roles,
+            ['Accountability Vow — Financial Support (Legal Prosecution)']
+        )
         self.assertIn('@saralindqvist', submission.notes)
         self.assertIn('+358 40 555 0199', submission.notes)
         self.assertIn('Helsinki, Finland', submission.notes)
+
+    @patch('telegram.Bot')
+    def test_submit_vow_multi_select_all_six_roles_persists_without_truncation(self, mock_bot_class):
+        """Test selecting all 6 Accountability Vow roles persists structured roles list and passes full_clean()."""
+        mock_bot = MagicMock()
+        mock_bot_class.return_value = mock_bot
+        mock_bot.send_message = AsyncMock()
+
+        all_six_roles = [
+            'Accountability Vow — Public Petitioner & Campaigner',
+            'Accountability Vow — Financial Support (Legal Prosecution)',
+            'Accountability Vow — Legal & Judicial Counsel',
+            'Accountability Vow — Media, Documentary & XR',
+            'Accountability Vow — Event Organizer (Nov 20 Hub)',
+            'Accountability Vow — Forensic & OSINT Research',
+        ]
+        vow_payload = {
+            'name': 'Mina Rahimi',
+            'email': 'mina@example.fi',
+            'telegram_username': '@minarahimi',
+            'phone_number': '+358 40 111 2233',
+            'city_country': 'Helsinki, Finland',
+            'roles': all_six_roles,
+            'message': '[MINAB ACCOUNTABILITY VOW — NOV 20 HYBRID EVENT]\nPledge affirmed.'
+        }
+
+        with override_settings(
+            TELEGRAM_BOT_TOKEN='test_bot_token',
+            TELEGRAM_NOTIFICATIONS_CHAT_ID='-100987654321'
+        ):
+            response = self.client.post(self.url, vow_payload, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['vow_count'], 1)
+
+        submission = ContactSubmission.objects.get(id=response.data['id'])
+        submission.full_clean()
+        self.assertEqual(submission.roles, all_six_roles)
+        self.assertTrue(submission.role.startswith('Accountability Vow — '))
+        self.assertLessEqual(len(submission.role), 500)
+        for short_label in [
+            'Public Petitioner & Campaigner',
+            'Financial Support (Legal Prosecution)',
+            'Legal & Judicial Counsel',
+            'Media, Documentary & XR',
+            'Event Organizer (Nov 20 Hub)',
+            'Forensic & OSINT Research',
+        ]:
+            self.assertIn(short_label, submission.role)
+
+        mock_bot.send_message.assert_called_once()
+        tg_text = mock_bot.send_message.call_args[1]['text']
+        self.assertIn('Public Petitioner &amp; Campaigner', tg_text)
+        self.assertIn('Forensic &amp; OSINT Research', tg_text)
+
+    def test_submit_vow_rejects_empty_roles_array(self):
+        """Test that passing an explicit empty roles list returns 400 Bad Request."""
+        payload = {
+            'name': 'Mina Rahimi',
+            'email': 'mina@example.fi',
+            'roles': [],
+            'message': '[MINAB ACCOUNTABILITY VOW]\nPledge affirmed.'
+        }
+        response = self.client.post(self.url, payload, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(ContactSubmission.objects.count(), 0)
+
 
 
 

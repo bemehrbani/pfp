@@ -41,7 +41,11 @@ const I18N_DATA = {
     vowTgLabel: "Telegram Username (Optional — for Action Mobilization)",
     vowPhoneLabel: "Phone / Signal / WhatsApp (Optional — for Action Mobilization)",
     vowCityLabel: "City & Country *",
-    vowHowLabel: "How I Will Take Action for Accountability",
+    vowHowLabel: "How I Will Take Action for Accountability *",
+    vowHowHint: "Select one or more ways you wish to contribute",
+    vowSelectError: "Please select at least one way to take action.",
+    vowSubmitError: "Could not save your Accountability Vow right now. Please check your connection and try again.",
+    vowSuccessMsg: "✓ Thank you, {name}. Your Accountability Vow{count} has been recorded.",
     vowOptPetitioner: "Public Petitioner & Global Campaigner — Amplify the case & join collective actions",
     vowOptFinancial: "Financial Support for the Legal Prosecution Campaign — Fund court filings & forensic experts",
     vowOptLegal: "Legal, Human Rights & Judicial Action — Pro bono counsel & universal jurisdiction",
@@ -192,7 +196,11 @@ const I18N_DATA = {
     vowTgLabel: "Telegram-käyttäjänimi (Valinnainen — toiminnan koordinointiin)",
     vowPhoneLabel: "Puhelin / Signal / WhatsApp (Valinnainen — toiminnan koordinointiin)",
     vowCityLabel: "Kaupunki & Maa *",
-    vowHowLabel: "Miten osallistun oikeudelliseen vastuuseen saattamiseen",
+    vowHowLabel: "Miten osallistun oikeudelliseen vastuuseen saattamiseen *",
+    vowHowHint: "Voit valita yhden tai useamman osallistumistavan",
+    vowSelectError: "Valitse vähintään yksi osallistumistapa.",
+    vowSubmitError: "Tallennus epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.",
+    vowSuccessMsg: "✓ Kiitos, {name}. Vastuulupauksesi{count} on tallennettu.",
     vowOptPetitioner: "Julkinen vetoomuksen allekirjoittaja & kampanjoija — Jaa tietoa ja osallistu yhteisiin toimiin",
     vowOptFinancial: "Taloudellinen tuki oikeudenkäyntikampanjalle — Tue kansainvälisiä tuomioistuinmaksuja ja asiantuntijoita",
     vowOptLegal: "Oikeudellinen & ihmisoikeustyö — Juridinen asiantuntijuus, yleinen toimivalta ja päättäjävaikuttaminen",
@@ -343,7 +351,11 @@ const I18N_DATA = {
     vowTgLabel: "شناسه تلگرام (اختیاری — جهت هماهنگی اقدامات دادخواهی)",
     vowPhoneLabel: "شماره تماس / سیگنال / واتس‌اپ (اختیاری — جهت هماهنگی اقدامات)",
     vowCityLabel: "شهر و کشور محل سکونت *",
-    vowHowLabel: "نحوه همراهی و اقدام من در کارزار دادخواهی",
+    vowHowLabel: "نحوه همراهی و اقدام من در کارزار دادخواهی *",
+    vowHowHint: "می‌توانید یک یا چند مورد را هم‌زمان انتخاب کنید",
+    vowSelectError: "لطفاً دست‌کم یک مورد از روش‌های همراهی را انتخاب کنید.",
+    vowSubmitError: "ثبت امضا با خطا روبه‌رو شد. لطفاً اتصال اینترنت را بررسی کرده و دوباره تلاش کنید.",
+    vowSuccessMsg: "✓ سپاسگزاریم {name}؛ امضای شما در میثاق دادخواهی{count} با موفقیت ثبت شد.",
     vowOptPetitioner: "امضاکننده عمومی و کنشگر کارزار جهانی — بازنشر مستندات و همراهی در اقدامات جمعی",
     vowOptFinancial: "حمایت مالی از کارزار پیگرد قضایی بین‌المللی — تأمین هزینه‌های ثبت دادخواست و کارشناسان رسمی",
     vowOptLegal: "همکاری حقوقی، قضایی و حقوق بشری — وکالت، صلاحیت قضایی جهانی و رایزنی پارلمانی",
@@ -2666,7 +2678,51 @@ function exportSceneToGLB() {
 }
 
 // --- ACCOUNTABILITY VOW & PETITION MODAL LOGIC ---
+function syncReconstructionVowRolesUI() {
+  document.querySelectorAll('#vowContributionGroup .vow-role-option').forEach(lbl => {
+    const cb = lbl.querySelector('input[type="checkbox"]');
+    lbl.classList.toggle('is-checked', Boolean(cb && cb.checked));
+  });
+}
+
+function getReconstructionSelectedVowRoles() {
+  const groupEl = document.getElementById('vowContributionGroup');
+  if (groupEl) {
+    return Array.from(groupEl.querySelectorAll('input[name="vowContribution"]:checked'))
+      .map(cb => cb.value)
+      .filter(Boolean);
+  }
+  const legacySelect = document.getElementById('vowContribution');
+  return legacySelect && legacySelect.value ? [legacySelect.value] : [];
+}
+
+function formatReconstructionVowSummary(rolesList) {
+  if (!rolesList || rolesList.length === 0) {
+    return 'Accountability Vow — Public Petitioner & Campaigner';
+  }
+  if (rolesList.length === 1) return rolesList[0];
+  const shortLabels = rolesList.map(r => String(r).replace(/^Accountability Vow\s*[—-]\s*/, '').trim());
+  return ('Accountability Vow — ' + shortLabels.join(' | ')).slice(0, 500);
+}
+
 function openVowModal() {
+  const statusEl = document.getElementById('vowStatusMsg');
+  if (statusEl) statusEl.style.display = 'none';
+  const groupEl = document.getElementById('vowContributionGroup');
+  if (groupEl) {
+    groupEl.removeAttribute('aria-invalid');
+    if (!groupEl.__reconChangeBound) {
+      groupEl.__reconChangeBound = true;
+      groupEl.addEventListener('change', () => {
+        syncReconstructionVowRolesUI();
+        if (getReconstructionSelectedVowRoles().length > 0 && groupEl.getAttribute('aria-invalid') === 'true') {
+          groupEl.removeAttribute('aria-invalid');
+          if (statusEl) statusEl.style.display = 'none';
+        }
+      });
+    }
+  }
+  syncReconstructionVowRolesUI();
   document.getElementById('vowModal').classList.add('visible');
   if (typeof window.__pfpTrackEvent === 'function') {
     window.__pfpTrackEvent('vow_open');
@@ -2679,18 +2735,31 @@ function closeVowModal() {
 
 async function submitVowForm(e) {
   e.preventDefault();
-  if (typeof window.submitVowForm === 'function' && window.submitVowForm !== submitVowForm) {
-    return window.submitVowForm(e);
-  }
+  const t = I18N_DATA[currentLang] || I18N_DATA.en;
   const name = document.getElementById('vowName').value.trim();
   const email = document.getElementById('vowEmail').value.trim();
   const telegram_username = (document.getElementById('vowTelegram')?.value || '').trim();
   const phone_number = (document.getElementById('vowPhone')?.value || '').trim();
   const city = document.getElementById('vowCity').value.trim();
-  const role = document.getElementById('vowContribution').value;
+  const selectedRoles = getReconstructionSelectedVowRoles();
   const personalMsg = document.getElementById('vowMessage').value.trim();
   const statusEl = document.getElementById('vowStatusMsg');
   const submitBtn = document.getElementById('vowSubmitBtn');
+  const groupEl = document.getElementById('vowContributionGroup');
+
+  if (selectedRoles.length === 0) {
+    if (groupEl) groupEl.setAttribute('aria-invalid', 'true');
+    statusEl.style.display = 'block';
+    statusEl.style.background = 'rgba(239, 68, 68, 0.16)';
+    statusEl.style.color = '#fca5a5';
+    statusEl.textContent = t.vowSelectError || 'Please select at least one way to take action.';
+    const firstCb = groupEl ? groupEl.querySelector('input[type="checkbox"]') : null;
+    if (firstCb) firstCb.focus();
+    return;
+  }
+  if (groupEl) groupEl.removeAttribute('aria-invalid');
+
+  const roleSummary = formatReconstructionVowSummary(selectedRoles);
 
   statusEl.style.display = 'block';
   statusEl.style.background = 'rgba(255,255,255,0.06)';
@@ -2699,12 +2768,15 @@ async function submitVowForm(e) {
   submitBtn.disabled = true;
 
   const contact_handle = [telegram_username, phone_number].filter(Boolean).join(' | ');
+  const rolesBulletText = selectedRoles.map(item => `  - ${item}`).join('\n');
   const fullMessage = [
     '[MINAB ACCOUNTABILITY VOW — NOV 20 HYBRID EVENT]',
     `City/Country: ${city}`,
     telegram_username ? `Telegram: ${telegram_username}` : null,
     phone_number ? `Phone/Signal: ${phone_number}` : null,
-    `Action Role: ${role}`,
+    selectedRoles.length > 1
+      ? `Action Roles (${selectedRoles.length}):\n${rolesBulletText}`
+      : `Action Role: ${roleSummary}`,
     'Pledge: Affirmed solemn vow to participate in holding every person in the chain of command accountable.',
     `Note: ${personalMsg || 'Signed from 3D Spatial School Reconstruction.'}`
   ].filter(Boolean).join('\n');
@@ -2725,12 +2797,20 @@ async function submitVowForm(e) {
         phone_number,
         city_country: city,
         contact_handle,
-        role,
+        role: roleSummary,
+        roles: selectedRoles,
         message: fullMessage
       })
     });
-    if (!resp.ok) throw new Error('API fallback');
-    const data = await resp.json();
+    let data = {};
+    try {
+      data = await resp.json();
+    } catch (_) {}
+
+    if (!resp.ok) {
+      throw new Error(data.error || data.message || `HTTP ${resp.status}`);
+    }
+
     if (typeof data.vow_count === 'number') {
       vowSignatoryCount = data.vow_count;
       window.vowSignatoryCount = data.vow_count;
@@ -2739,8 +2819,12 @@ async function submitVowForm(e) {
       window.vowSignatoryCount = vowSignatoryCount;
     }
   } catch (_) {
-    vowSignatoryCount += 1;
-    window.vowSignatoryCount = vowSignatoryCount;
+    submitBtn.disabled = false;
+    statusEl.style.display = 'block';
+    statusEl.style.background = 'rgba(239, 68, 68, 0.16)';
+    statusEl.style.color = '#fca5a5';
+    statusEl.textContent = t.vowSubmitError || 'Could not save your Accountability Vow right now. Please try again.';
+    return;
   }
 
   updateVowBadge();
@@ -2751,8 +2835,15 @@ async function submitVowForm(e) {
   statusEl.style.background = 'rgba(16, 185, 129, 0.18)';
   statusEl.style.color = '#6ee7b7';
   const countSuffix = vowSignatoryCount >= VOW_BADGE_THRESHOLD ? ` (#${vowSignatoryCount.toLocaleString()})` : '';
-  statusEl.textContent = `✓ Thank you, ${name}. Your Accountability Vow${countSuffix} has been recorded.`;
+  statusEl.textContent = (t.vowSuccessMsg || '✓ Thank you, {name}. Your Accountability Vow{count} has been recorded.')
+    .replace('{name}', name)
+    .replace('{count}', countSuffix);
   document.getElementById('vowForm').reset();
+  const defaultCb = document.getElementById('vowCheckPetitioner');
+  if (defaultCb) defaultCb.checked = true;
+  const consentCb = document.getElementById('vowCheckbox');
+  if (consentCb) consentCb.checked = true;
+  syncReconstructionVowRolesUI();
   submitBtn.disabled = false;
 
   setTimeout(() => {
@@ -2935,12 +3026,29 @@ function initUIControls() {
 
   document.getElementById('btnExportGlb').addEventListener('click', exportSceneToGLB);
 
-  document.getElementById('openVowBtn').addEventListener('click', openVowModal);
-  document.getElementById('vowCloseBtn').addEventListener('click', closeVowModal);
-  document.getElementById('vowModal').addEventListener('click', (e) => {
-    if (e.target.id === 'vowModal') closeVowModal();
+  document.querySelectorAll('#openVowBtn').forEach(btn => {
+    if (!btn.__pfpReconVowBound) {
+      btn.__pfpReconVowBound = true;
+      btn.addEventListener('click', () => openVowModal());
+    }
   });
-  document.getElementById('vowForm').addEventListener('submit', submitVowForm);
+  const vowCloseEl = document.getElementById('vowCloseBtn');
+  if (vowCloseEl && !vowCloseEl.__pfpBound) {
+    vowCloseEl.__pfpBound = true;
+    vowCloseEl.addEventListener('click', closeVowModal);
+  }
+  const vowModalEl = document.getElementById('vowModal');
+  if (vowModalEl && !vowModalEl.__pfpBackdropBound) {
+    vowModalEl.__pfpBackdropBound = true;
+    vowModalEl.addEventListener('click', (e) => {
+      if (e.target.id === 'vowModal') closeVowModal();
+    });
+  }
+  const vowFormEl = document.getElementById('vowForm');
+  if (vowFormEl && !vowFormEl.__pfpBound) {
+    vowFormEl.__pfpBound = true;
+    vowFormEl.addEventListener('submit', submitVowForm);
+  }
 
   const vrBtn = document.getElementById('enterVrBtn');
   if ('xr' in navigator) {

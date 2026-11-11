@@ -427,10 +427,11 @@
             background: #0f1626;
             border: 1px solid rgba(229, 185, 95, 0.32);
             border-radius: 16px;
-            padding: 28px 30px;
+            padding: 24px 28px;
             width: 100%;
-            max-width: 680px;
+            max-width: 720px;
             color: #f5f3ef;
+            color-scheme: dark;
             box-shadow: 0 24px 64px rgba(0, 0, 0, 0.72);
             position: relative;
             text-align: left;
@@ -542,11 +543,128 @@
             font-size: 0.88rem;
             font-family: inherit;
         }
-        #vowModal .vow-field input:focus,
-        #vowModal .vow-field select:focus,
-        #vowModal .vow-field textarea:focus {
+        #vowModal .vow-field input:focus-visible,
+        #vowModal .vow-field select:focus-visible,
+        #vowModal .vow-field textarea:focus-visible {
             border-color: #e5b95f;
-            outline: none;
+            outline: 2px solid #e5b95f;
+            outline-offset: 1px;
+        }
+        #vowModal .vow-roles-fieldset {
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 10px;
+            padding: 10px 12px 12px;
+            margin: 2px 0 12px;
+            background: rgba(15, 23, 42, 0.55);
+            min-inline-size: 0;
+        }
+        #vowModal .vow-roles-fieldset[aria-invalid="true"] {
+            border-color: #f87171;
+        }
+        #vowModal .vow-roles-legend {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            padding-inline: 6px;
+        }
+        #vowModal .vow-roles-hint {
+            font-size: 0.76rem;
+            color: #94a3b8;
+            margin: 0 0 8px;
+        }
+        #vowModal .vow-roles-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        #vowModal .vow-role-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-block-size: 44px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.85);
+            color: #e2e8f0;
+            font-size: 0.84rem;
+            line-height: 1.4;
+            cursor: pointer;
+            transition: border-color 0.16s ease, background-color 0.16s ease;
+            text-align: start;
+        }
+        #vowModal .vow-role-option:hover {
+            border-color: rgba(229, 185, 95, 0.45);
+            background: rgba(229, 185, 95, 0.06);
+        }
+        #vowModal .vow-role-option.is-checked,
+        #vowModal .vow-role-option:has(input[type="checkbox"]:checked) {
+            border-color: rgba(229, 185, 95, 0.65);
+            background: rgba(229, 185, 95, 0.12);
+            color: #f8fafc;
+        }
+        #vowModal .vow-role-option input[type="checkbox"] {
+            accent-color: #e5b95f;
+            inline-size: 1.15rem;
+            block-size: 1.15rem;
+            margin: 0;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        #vowModal .vow-role-option input[type="checkbox"]:focus-visible,
+        #vowModal .vow-checkbox-row input[type="checkbox"]:focus-visible,
+        #vowModal .vow-submit-btn:focus-visible,
+        #vowModal .vow-close-btn:focus-visible {
+            outline: 2px solid #e5b95f;
+            outline-offset: 2px;
+        }
+        @supports not (accent-color: #e5b95f) {
+            #vowModal .vow-role-option input[type="checkbox"] {
+                position: absolute !important;
+                clip-path: inset(50%) !important;
+                overflow: hidden !important;
+                width: 1px !important;
+                height: 1px !important;
+                margin: -1px !important;
+                padding: 0 !important;
+                border: 0 !important;
+                white-space: nowrap !important;
+            }
+            #vowModal .vow-role-option {
+                position: relative;
+                padding-inline-start: 2.2rem;
+            }
+            #vowModal .vow-role-option input[type="checkbox"] + span::before {
+                content: "";
+                position: absolute;
+                inset-inline-start: 0.75rem;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 1.1rem;
+                height: 1.1rem;
+                border: 2px solid #94a3b8;
+                border-radius: 4px;
+                background: #0f172a;
+                box-sizing: border-box;
+            }
+            #vowModal .vow-role-option input[type="checkbox"]:checked + span::before {
+                background: #e5b95f;
+                border-color: #e5b95f;
+            }
+            #vowModal .vow-role-option input[type="checkbox"]:checked + span::after {
+                content: "✓";
+                position: absolute;
+                inset-inline-start: 0.92rem;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #080b11;
+                font-weight: 800;
+                font-size: 0.82rem;
+            }
+            #vowModal .vow-role-option input[type="checkbox"]:focus-visible + span::before {
+                outline: 2px solid #e5b95f;
+                outline-offset: 2px;
+            }
         }
         #vowModal .vow-checkbox-row {
             display: flex;
@@ -612,7 +730,8 @@
             phonePlaceholder: "+358 40 123 4567",
             cityLabel: "City & Country *",
             cityPlaceholder: "Helsinki, Finland",
-            howLabel: "How I Will Take Action for Accountability",
+            howLabel: "How I Will Take Action for Accountability *",
+            howHint: "Select one or more ways you wish to contribute",
             optPetitioner: "Public Petitioner & Global Campaigner — Amplify the case & join collective actions",
             optFinancial: "Financial Support for the Legal Prosecution Campaign — Fund court filings & forensic experts",
             optLegal: "Legal, Human Rights & Judicial Action — Pro bono counsel & universal jurisdiction",
@@ -623,7 +742,10 @@
             msgPlaceholder: "In memory of the children of Minab...",
             consent: "I affirm this vow and consent to be contacted by People for Peace & Justice ry when collective legal, parliamentary, financial, or civic actions are mobilized.",
             submitBtn: "✍️ Sign the Vow & Join the Accountability Registry",
-            submitting: "Recording your Accountability Vow..."
+            submitting: "Recording your Accountability Vow...",
+            selectError: "Please select at least one way to take action.",
+            submitError: "Could not save your Accountability Vow right now. Please check your connection and try again.",
+            successMsg: "✓ Thank you, {name}. Your Accountability Vow{count} has been recorded."
         },
         fa: {
             badge: "پتیشن جهانی و میثاق دادخواهی میناب",
@@ -640,7 +762,8 @@
             phonePlaceholder: "+358 40 123 4567",
             cityLabel: "شهر و کشور محل سکونت *",
             cityPlaceholder: "هلسینکی، فنلاند",
-            howLabel: "نحوه همراهی و اقدام من در کارزار دادخواهی",
+            howLabel: "نحوه همراهی و اقدام من در کارزار دادخواهی *",
+            howHint: "می‌توانید یک یا چند مورد را هم‌زمان انتخاب کنید",
             optPetitioner: "امضاکننده عمومی و کنشگر کارزار جهانی — بازنشر مستندات و همراهی در اقدامات جمعی",
             optFinancial: "حمایت مالی از کارزار پیگرد قضایی بین‌المللی — تأمین هزینه‌های ثبت دادخواست و کارشناسان رسمی",
             optLegal: "همکاری حقوقی، قضایی و حقوق بشری — وکالت، صلاحیت قضایی جهانی و رایزنی پارلمانی",
@@ -651,7 +774,10 @@
             msgPlaceholder: "به یاد کودکان دبستان شجره طیبه میناب...",
             consent: "این میثاق را تأیید می‌کنم و موافقم در زمان آغاز اقدامات جمعی حقوقی، پارلمانی، مالی و مدنی با من تماس گرفته شود.",
             submitBtn: "✍️ ثبت امضا و پیوستن به کارزار جهانی دادخواهی",
-            submitting: "در حال ثبت امضای شما در میثاق دادخواهی..."
+            submitting: "در حال ثبت امضای شما در میثاق دادخواهی...",
+            selectError: "لطفاً دست‌کم یک مورد از روش‌های همراهی را انتخاب کنید.",
+            submitError: "ثبت امضا با خطا روبه‌رو شد. لطفاً اتصال اینترنت را بررسی کرده و دوباره تلاش کنید.",
+            successMsg: "✓ سپاسگزاریم {name}؛ امضای شما در میثاق دادخواهی{count} با موفقیت ثبت شد."
         },
         fi: {
             badge: "Kansainvälinen vetoomus & vastuulupaus",
@@ -668,7 +794,8 @@
             phonePlaceholder: "+358 40 123 4567",
             cityLabel: "Kaupunki & Maa *",
             cityPlaceholder: "Helsinki, Suomi",
-            howLabel: "Miten osallistun oikeudelliseen vastuuseen saattamiseen",
+            howLabel: "Miten osallistun oikeudelliseen vastuuseen saattamiseen *",
+            howHint: "Voit valita yhden tai useamman osallistumistavan",
             optPetitioner: "Julkinen vetoomuksen allekirjoittaja & kampanjoija — Jaa tietoa ja osallistu yhteisiin toimiin",
             optFinancial: "Taloudellinen tuki oikeudenkäyntikampanjalle — Tue kansainvälisiä tuomioistuinmaksuja ja asiantuntijoita",
             optLegal: "Oikeudellinen & ihmisoikeustyö — Juridinen asiantuntijuus, yleinen toimivalta ja päättäjävaikuttaminen",
@@ -679,13 +806,50 @@
             msgPlaceholder: "Minabin lasten muistolle...",
             consent: "Vahvistan tämän lupauksen ja suostun siihen, että People for Peace & Justice ry ottaa minuun yhteyttä oikeudellisten, taloudellisten tai kansalaistoimien käynnistyessä.",
             submitBtn: "✍️ Allekirjoita lupaus & liity rekisteriin",
-            submitting: "Tallennetaan vastuulupaustasi..."
+            submitting: "Tallennetaan vastuulupaustasi...",
+            selectError: "Valitse vähintään yksi osallistumistapa.",
+            submitError: "Tallennus epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.",
+            successMsg: "✓ Kiitos, {name}. Vastuulupauksesi{count} on tallennettu."
         }
     };
 
+    function syncVowRoleCheckedStyles() {
+        document.querySelectorAll('#vowContributionGroup .vow-role-option').forEach(function(lbl) {
+            const cb = lbl.querySelector('input[type="checkbox"]');
+            lbl.classList.toggle('is-checked', Boolean(cb && cb.checked));
+        });
+    }
+
+    function getSelectedVowRoles() {
+        const groupEl = document.getElementById('vowContributionGroup');
+        if (groupEl) {
+            return Array.from(groupEl.querySelectorAll('input[name="vowContribution"]:checked'))
+                .map(function(cb) { return cb.value; })
+                .filter(Boolean);
+        }
+        const legacySelect = document.getElementById('vowContribution');
+        if (legacySelect && legacySelect.value) {
+            return [legacySelect.value];
+        }
+        return [];
+    }
+
+    function formatVowRolesSummary(rolesList) {
+        if (!rolesList || rolesList.length === 0) {
+            return 'Accountability Vow — Public Petitioner & Campaigner';
+        }
+        if (rolesList.length === 1) {
+            return rolesList[0];
+        }
+        const shortLabels = rolesList.map(function(r) {
+            return String(r).replace(/^Accountability Vow\s*[—-]\s*/, '').trim();
+        });
+        return ('Accountability Vow — ' + shortLabels.join(' | ')).slice(0, 500);
+    }
+
     function buildVowModalInnerHTML(vt) {
         return `
-            <div class="vow-modal-box" role="dialog" aria-modal="true">
+            <div class="vow-modal-box" role="dialog" aria-modal="true" aria-labelledby="vowTitleEl">
                 <div class="vow-top-row">
                     <span class="vow-badge-tag" id="vowBadgeTag" data-i18n="vowBadge">${vt.badge}</span>
                     <button type="button" class="vow-close-btn" id="vowCloseBtn" aria-label="Close vow modal">&times;</button>
@@ -693,54 +857,71 @@
                 <h2 class="vow-title-h2" id="vowTitleEl" data-i18n="vowTitle">${vt.title}</h2>
                 <div class="vow-sub-cat" id="vowSubEl" data-i18n="vowSubtitle">${vt.subtitle}</div>
                 <div class="vow-pledge-box" id="vowPledgeText" data-i18n="vowPledgeText">${vt.pledge}</div>
-                <form id="vowForm">
+                <form id="vowForm" method="post" action="/api/telegram/submit-contact/">
                     <div class="vow-form-grid">
                         <div class="vow-field">
                             <label id="vowNameLabelEl" for="vowName" data-i18n="vowNameLabel">${vt.nameLabel}</label>
-                            <input type="text" id="vowName" required placeholder="${vt.namePlaceholder}" />
+                            <input type="text" id="vowName" name="name" autocomplete="name" required placeholder="${vt.namePlaceholder}" />
                         </div>
                         <div class="vow-field">
                             <label id="vowEmailLabelEl" for="vowEmail" data-i18n="vowEmailLabel">${vt.emailLabel}</label>
-                            <input type="email" id="vowEmail" required placeholder="${vt.emailPlaceholder}" dir="ltr" />
+                            <input type="email" id="vowEmail" name="email" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false" required placeholder="${vt.emailPlaceholder}" dir="ltr" />
                         </div>
                     </div>
                     <div class="vow-form-grid">
                         <div class="vow-field">
                             <label id="vowTgLabelEl" for="vowTelegram" data-i18n="vowTgLabel">${vt.tgLabel}</label>
-                            <input type="text" id="vowTelegram" placeholder="${vt.tgPlaceholder}" dir="ltr" />
+                            <input type="text" id="vowTelegram" name="telegram_username" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="${vt.tgPlaceholder}" dir="ltr" />
                         </div>
                         <div class="vow-field">
                             <label id="vowPhoneLabelEl" for="vowPhone" data-i18n="vowPhoneLabel">${vt.phoneLabel}</label>
-                            <input type="tel" id="vowPhone" placeholder="${vt.phonePlaceholder}" dir="ltr" />
-                        </div>
-                    </div>
-                    <div class="vow-form-grid">
-                        <div class="vow-field">
-                            <label id="vowCityLabelEl" for="vowCity" data-i18n="vowCityLabel">${vt.cityLabel}</label>
-                            <input type="text" id="vowCity" required placeholder="${vt.cityPlaceholder}" />
-                        </div>
-                        <div class="vow-field">
-                            <label id="vowHowLabelEl" for="vowContribution" data-i18n="vowHowLabel">${vt.howLabel}</label>
-                            <select id="vowContribution">
-                                <option value="Accountability Vow — Public Petitioner & Campaigner" id="vowOptPetitioner">${vt.optPetitioner}</option>
-                                <option value="Accountability Vow — Financial Support (Legal Prosecution)" id="vowOptFinancial">${vt.optFinancial}</option>
-                                <option value="Accountability Vow — Legal & Judicial Counsel" id="vowOptLegal">${vt.optLegal}</option>
-                                <option value="Accountability Vow — Media, Documentary & XR" id="vowOptMedia">${vt.optMedia}</option>
-                                <option value="Accountability Vow — Event Organizer (Nov 20 Hub)" id="vowOptEvent">${vt.optEvent}</option>
-                                <option value="Accountability Vow — Forensic & OSINT Research" id="vowOptResearch">${vt.optResearch}</option>
-                            </select>
+                            <input type="tel" id="vowPhone" name="phone_number" autocomplete="tel" placeholder="${vt.phonePlaceholder}" dir="ltr" />
                         </div>
                     </div>
                     <div class="vow-field">
-                        <label id="vowMsgLabelEl" for="vowMessage" data-i18n="vowMessageLabel">${vt.msgLabel}</label>
-                        <textarea id="vowMessage" rows="2" placeholder="${vt.msgPlaceholder}"></textarea>
+                        <label id="vowCityLabelEl" for="vowCity" data-i18n="vowCityLabel">${vt.cityLabel}</label>
+                        <input type="text" id="vowCity" name="city_country" autocomplete="address-level2" required placeholder="${vt.cityPlaceholder}" />
                     </div>
-                    <label class="vow-checkbox-row">
-                        <input type="checkbox" id="vowCheckbox" required checked />
+                    <fieldset class="vow-roles-fieldset" id="vowContributionGroup" aria-describedby="vowHowHintEl">
+                        <legend class="vow-roles-legend" id="vowHowLabelEl" data-i18n="vowHowLabel">${vt.howLabel}</legend>
+                        <p class="vow-roles-hint" id="vowHowHintEl" data-i18n="vowHowHint">${vt.howHint}</p>
+                        <div class="vow-roles-grid">
+                            <label class="vow-role-option is-checked" for="vowCheckPetitioner">
+                                <input type="checkbox" id="vowCheckPetitioner" name="vowContribution" value="Accountability Vow — Public Petitioner & Campaigner" checked />
+                                <span id="vowOptPetitioner" data-i18n="vowOptPetitioner">${vt.optPetitioner}</span>
+                            </label>
+                            <label class="vow-role-option" for="vowCheckFinancial">
+                                <input type="checkbox" id="vowCheckFinancial" name="vowContribution" value="Accountability Vow — Financial Support (Legal Prosecution)" />
+                                <span id="vowOptFinancial" data-i18n="vowOptFinancial">${vt.optFinancial}</span>
+                            </label>
+                            <label class="vow-role-option" for="vowCheckLegal">
+                                <input type="checkbox" id="vowCheckLegal" name="vowContribution" value="Accountability Vow — Legal & Judicial Counsel" />
+                                <span id="vowOptLegal" data-i18n="vowOptLegal">${vt.optLegal}</span>
+                            </label>
+                            <label class="vow-role-option" for="vowCheckMedia">
+                                <input type="checkbox" id="vowCheckMedia" name="vowContribution" value="Accountability Vow — Media, Documentary & XR" />
+                                <span id="vowOptMedia" data-i18n="vowOptMedia">${vt.optMedia}</span>
+                            </label>
+                            <label class="vow-role-option" for="vowCheckEvent">
+                                <input type="checkbox" id="vowCheckEvent" name="vowContribution" value="Accountability Vow — Event Organizer (Nov 20 Hub)" />
+                                <span id="vowOptEvent" data-i18n="vowOptEvent">${vt.optEvent}</span>
+                            </label>
+                            <label class="vow-role-option" for="vowCheckResearch">
+                                <input type="checkbox" id="vowCheckResearch" name="vowContribution" value="Accountability Vow — Forensic & OSINT Research" />
+                                <span id="vowOptResearch" data-i18n="vowOptResearch">${vt.optResearch}</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <div class="vow-field">
+                        <label id="vowMsgLabelEl" for="vowMessage" data-i18n="vowMessageLabel">${vt.msgLabel}</label>
+                        <textarea id="vowMessage" name="message" rows="2" placeholder="${vt.msgPlaceholder}"></textarea>
+                    </div>
+                    <label class="vow-checkbox-row" for="vowCheckbox">
+                        <input type="checkbox" id="vowCheckbox" name="consent" required checked />
                         <span id="vowConsentTextEl" data-i18n="vowConsentText">${vt.consent}</span>
                     </label>
                     <button type="submit" class="vow-submit-btn" id="vowSubmitBtn" data-i18n="vowSubmitBtn">${vt.submitBtn}</button>
-                    <div class="vow-status-msg" id="vowStatusMsg"></div>
+                    <div class="vow-status-msg" id="vowStatusMsg" role="status" aria-live="polite"></div>
                 </form>
             </div>
         `;
@@ -755,7 +936,7 @@
             vowModalEl.className = 'vow-global-modal';
             vowModalEl.innerHTML = buildVowModalInnerHTML(vt);
             document.body.appendChild(vowModalEl);
-        } else if (!document.getElementById('vowTelegram')) {
+        } else if (!document.getElementById('vowContributionGroup')) {
             vowModalEl.classList.add('vow-global-modal');
             vowModalEl.innerHTML = buildVowModalInnerHTML(vt);
         }
@@ -780,6 +961,19 @@
             formEl.__pfpBound = true;
             formEl.addEventListener('submit', window.submitVowForm);
         }
+        const groupEl = document.getElementById('vowContributionGroup');
+        if (groupEl && !groupEl.__pfpChangeBound) {
+            groupEl.__pfpChangeBound = true;
+            groupEl.addEventListener('change', function() {
+                syncVowRoleCheckedStyles();
+                if (getSelectedVowRoles().length > 0 && groupEl.getAttribute('aria-invalid') === 'true') {
+                    groupEl.removeAttribute('aria-invalid');
+                    const statusEl = document.getElementById('vowStatusMsg');
+                    if (statusEl) statusEl.style.display = 'none';
+                }
+            });
+        }
+        syncVowRoleCheckedStyles();
         return vowModalEl;
     }
 
@@ -799,6 +993,7 @@
         setTxt('vowPhoneLabelEl', vt.phoneLabel);
         setTxt('vowCityLabelEl', vt.cityLabel);
         setTxt('vowHowLabelEl', vt.howLabel);
+        setTxt('vowHowHintEl', vt.howHint);
         setTxt('vowOptPetitioner', vt.optPetitioner);
         setTxt('vowOptFinancial', vt.optFinancial);
         setTxt('vowOptLegal', vt.optLegal);
@@ -841,26 +1036,33 @@
         refreshVowModalLanguage();
         const statusEl = document.getElementById('vowStatusMsg');
         if (statusEl) statusEl.style.display = 'none';
+        const groupEl = document.getElementById('vowContributionGroup');
+        if (groupEl) groupEl.removeAttribute('aria-invalid');
         const submitBtn = document.getElementById('vowSubmitBtn');
         if (submitBtn) submitBtn.disabled = false;
 
         if (roleHint) {
-            const selectEl = document.getElementById('vowContribution');
-            if (selectEl) {
-                const r = String(roleHint).toLowerCase();
-                if (r.includes('finan') || r.includes('fund') || r.includes('donat') || r.includes('prosecut')) {
-                    selectEl.value = 'Accountability Vow — Financial Support (Legal Prosecution)';
-                } else if (r.includes('legal') || r.includes('judic')) {
-                    selectEl.value = 'Accountability Vow — Legal & Judicial Counsel';
-                } else if (r.includes('media') || r.includes('journal')) {
-                    selectEl.value = 'Accountability Vow — Media, Documentary & XR';
-                } else if (r.includes('event') || r.includes('nov')) {
-                    selectEl.value = 'Accountability Vow — Event Organizer (Nov 20 Hub)';
-                } else if (r.includes('osint') || r.includes('research') || r.includes('forensic')) {
-                    selectEl.value = 'Accountability Vow — Forensic & OSINT Research';
-                }
+            const r = String(roleHint).toLowerCase();
+            let targetCheckboxId = '';
+            if (r.includes('finan') || r.includes('fund') || r.includes('donat') || r.includes('prosecut')) {
+                targetCheckboxId = 'vowCheckFinancial';
+            } else if (r.includes('legal') || r.includes('judic')) {
+                targetCheckboxId = 'vowCheckLegal';
+            } else if (r.includes('media') || r.includes('journal')) {
+                targetCheckboxId = 'vowCheckMedia';
+            } else if (r.includes('event') || r.includes('nov')) {
+                targetCheckboxId = 'vowCheckEvent';
+            } else if (r.includes('osint') || r.includes('research') || r.includes('forensic')) {
+                targetCheckboxId = 'vowCheckResearch';
+            } else if (r.includes('petition') || r.includes('campaign')) {
+                targetCheckboxId = 'vowCheckPetitioner';
+            }
+            if (targetCheckboxId) {
+                const cb = document.getElementById(targetCheckboxId);
+                if (cb) cb.checked = true;
             }
         }
+        syncVowRoleCheckedStyles();
 
         modalEl.classList.add('visible');
         if (typeof window.__pfpTrackEvent === 'function') {
@@ -881,10 +1083,27 @@
         const telegram_username = (document.getElementById('vowTelegram')?.value || '').trim();
         const phone_number = (document.getElementById('vowPhone')?.value || '').trim();
         const city = (document.getElementById('vowCity')?.value || '').trim();
-        const role = document.getElementById('vowContribution')?.value || 'Accountability Vow — Public Petitioner & Campaigner';
+        const selectedRoles = getSelectedVowRoles();
         const personalMsg = (document.getElementById('vowMessage')?.value || '').trim();
         const statusEl = document.getElementById('vowStatusMsg');
         const submitBtn = document.getElementById('vowSubmitBtn');
+        const groupEl = document.getElementById('vowContributionGroup');
+
+        if (selectedRoles.length === 0) {
+            if (groupEl) groupEl.setAttribute('aria-invalid', 'true');
+            if (statusEl) {
+                statusEl.style.display = 'block';
+                statusEl.style.background = 'rgba(239, 68, 68, 0.16)';
+                statusEl.style.color = '#fca5a5';
+                statusEl.textContent = vt.selectError;
+            }
+            const firstCb = groupEl ? groupEl.querySelector('input[type="checkbox"]') : null;
+            if (firstCb) firstCb.focus();
+            return;
+        }
+        if (groupEl) groupEl.removeAttribute('aria-invalid');
+
+        const roleSummary = formatVowRolesSummary(selectedRoles);
 
         if (statusEl) {
             statusEl.style.display = 'block';
@@ -895,12 +1114,15 @@
         if (submitBtn) submitBtn.disabled = true;
 
         const contact_handle = [telegram_username, phone_number].filter(Boolean).join(' | ');
+        const rolesBulletText = selectedRoles.map(function(item) { return '  - ' + item; }).join('\n');
         const fullMessage = [
             '[MINAB ACCOUNTABILITY VOW — NOV 20 HYBRID EVENT]',
             `City/Country: ${city}`,
             telegram_username ? `Telegram: ${telegram_username}` : null,
             phone_number ? `Phone/Signal: ${phone_number}` : null,
-            `Action Role: ${role}`,
+            selectedRoles.length > 1
+                ? `Action Roles (${selectedRoles.length}):\n${rolesBulletText}`
+                : `Action Role: ${roleSummary}`,
             'Pledge: Affirmed solemn vow to participate in holding every person in the chain of command accountable.',
             `Note: ${personalMsg || 'Signed via peopleforpeace.live Accountability Vow.'}`
         ].filter(Boolean).join('\n');
@@ -921,19 +1143,34 @@
                     phone_number: phone_number,
                     city_country: city,
                     contact_handle: contact_handle,
-                    role: role,
+                    role: roleSummary,
+                    roles: selectedRoles,
                     message: fullMessage
                 })
             });
-            if (!resp.ok) throw new Error('API fallback');
-            const data = await resp.json();
+            let data = {};
+            try {
+                data = await resp.json();
+            } catch (_) {}
+
+            if (!resp.ok) {
+                throw new Error(data.error || data.message || `HTTP ${resp.status}`);
+            }
+
             if (typeof data.vow_count === 'number') {
                 window.vowSignatoryCount = data.vow_count;
             } else {
                 window.vowSignatoryCount += 1;
             }
-        } catch (_) {
-            window.vowSignatoryCount += 1;
+        } catch (err) {
+            if (submitBtn) submitBtn.disabled = false;
+            if (statusEl) {
+                statusEl.style.display = 'block';
+                statusEl.style.background = 'rgba(239, 68, 68, 0.16)';
+                statusEl.style.color = '#fca5a5';
+                statusEl.textContent = vt.submitError;
+            }
+            return;
         }
 
         window.updateVowBadge();
@@ -945,10 +1182,19 @@
             statusEl.style.background = 'rgba(16, 185, 129, 0.18)';
             statusEl.style.color = '#6ee7b7';
             const countSuffix = window.vowSignatoryCount >= VOW_BADGE_THRESHOLD ? ` (#${window.vowSignatoryCount.toLocaleString()})` : '';
-            statusEl.textContent = `✓ Thank you, ${name}. Your Accountability Vow${countSuffix} has been recorded.`;
+            statusEl.textContent = vt.successMsg
+                .replace('{name}', name)
+                .replace('{count}', countSuffix);
         }
         const formEl = document.getElementById('vowForm');
-        if (formEl) formEl.reset();
+        if (formEl) {
+            formEl.reset();
+            const defaultCb = document.getElementById('vowCheckPetitioner');
+            if (defaultCb) defaultCb.checked = true;
+            const consentCb = document.getElementById('vowCheckbox');
+            if (consentCb) consentCb.checked = true;
+            syncVowRoleCheckedStyles();
+        }
         setTimeout(function() {
             if (submitBtn) submitBtn.disabled = false;
             window.closeVowModal();

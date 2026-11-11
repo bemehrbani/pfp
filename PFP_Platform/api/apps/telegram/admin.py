@@ -81,9 +81,10 @@ class ContactSubmissionAdmin(admin.ModelAdmin):
         'id', 'name', 'email', 'role', 'status',
         'telegram_sent', 'created_at'
     )
-    list_filter = ('status', 'telegram_sent', 'role', 'created_at')
-    search_fields = ('name', 'email', 'message', 'notes')
+    list_filter = ('status', 'telegram_sent', 'created_at')
+    search_fields = ('name', 'email', 'role', 'message', 'notes')
     list_editable = ('status',)
+    actions = ('export_as_csv',)
     readonly_fields = (
         'created_at', 'updated_at', 'ip_address',
         'user_agent', 'telegram_sent', 'telegram_error'
@@ -92,7 +93,7 @@ class ContactSubmissionAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'email', 'role', 'status')
+            'fields': ('name', 'email', 'role', 'roles', 'status')
         }),
         (_('Submission Content'), {
             'fields': ('message',)
@@ -109,3 +110,32 @@ class ContactSubmissionAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+    @admin.action(description=_('Export selected submissions to CSV'))
+    def export_as_csv(self, request, queryset):
+        """Export selected ContactSubmission records as UTF-8 CSV."""
+        import csv
+        from django.http import HttpResponse
+
+        response = HttpResponse(content_type='text/csv; charset=utf-8')
+        response['Content-Disposition'] = 'attachment; filename="contact_submissions.csv"'
+        writer = csv.writer(response)
+        writer.writerow([
+            'id', 'created_at', 'name', 'email', 'status',
+            'role_summary', 'selected_roles', 'notes', 'message', 'telegram_sent'
+        ])
+        for sub in queryset:
+            selected_roles = ' ; '.join(sub.roles) if isinstance(sub.roles, list) else ''
+            writer.writerow([
+                sub.id,
+                sub.created_at.isoformat() if sub.created_at else '',
+                sub.name,
+                sub.email,
+                sub.status,
+                sub.role,
+                selected_roles,
+                sub.notes,
+                sub.message,
+                sub.telegram_sent,
+            ])
+        return response
