@@ -39,6 +39,8 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
+      position: fixed;
+      inset: 0;
       width: 100%; height: 100%;
       overflow: hidden;
       background: var(--bg);
@@ -52,9 +54,10 @@
 
     /* WebGL Canvas Viewport */
     #canvasContainer {
-      position: absolute;
+      position: fixed;
       inset: 0;
       width: 100%; height: 100%;
+      overflow: hidden;
       z-index: 1;
     }
     #canvasContainer canvas {
@@ -250,42 +253,144 @@
       color: #ff9d94;
     }
 
-    /* GUIDED STORY NARRATOR BANNER */
+    /* WALKTHROUGH MODE CHROME TRANSITIONS (COMPOSITOR-ONLY) */
+    body .site-header,
+    .top-subrow,
+    .hud-bottom,
+    .hotspot-pin {
+      transition:
+        opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+        translate 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.walkthrough-mode .site-header,
+    body.walkthrough-mode .hud-header,
+    body.walkthrough-mode .top-subrow {
+      opacity: 0;
+      translate: 0 -28px;
+      pointer-events: none;
+    }
+    body.walkthrough-mode .hud-bottom {
+      opacity: 0;
+      translate: 0 28px;
+      pointer-events: none;
+    }
+    body.walkthrough-mode .hotspot-pin {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* NORDIC MINIMALIST WALKTHROUGH CINEMA PILL */
     .story-banner {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      translate: -50% 0;
+      z-index: 45;
+      width: min(580px, calc(100vw - 32px));
+      background: rgba(10, 14, 23, 0.74);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 168, 83, 0.30);
+      border-radius: 999px;
+      padding: 9px 12px 11px 18px;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+      pointer-events: auto;
+      opacity: 1;
+      transition:
+        display 0.35s,
+        opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        translate 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-behavior: allow-discrete;
+    }
+    @starting-style {
+      .story-banner {
+        opacity: 0;
+        translate: -50% 18px;
+      }
+    }
+    .story-banner:where([hidden], [data-closing]) {
+      opacity: 0;
+      translate: -50% 18px;
+      pointer-events: none;
+    }
+    .story-banner[hidden] {
       display: none;
-      align-self: center;
-      max-width: 760px;
-      width: 100%;
-      background: rgba(14, 20, 32, 0.95);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border-gold);
-      border-radius: 14px;
-      padding: 14px 20px;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
-      margin-top: 8px;
     }
-    .story-banner.visible {
-      display: block;
-    }
-    .story-step-header {
+    .story-pill-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
-      flex-wrap: wrap;
-      gap: 8px;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .story-pill-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      min-width: 0;
+      flex: 1;
     }
     .story-step-badge {
       font-family: var(--font-mono);
-      font-size: 0.74rem;
+      font-size: 0.72rem;
+      font-weight: 600;
       color: var(--gold);
-      text-transform: uppercase;
       letter-spacing: 0.06em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .story-title {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #f8fafc;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    body[dir="rtl"] .story-title {
+      font-family: var(--font-rtl);
     }
     .story-controls {
       display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+      transition: opacity 0.4s ease;
+    }
+    body.walkthrough-idle .story-controls:not(:hover):not(:focus-within) {
+      opacity: 0.28;
+    }
+    .story-icon-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .story-icon-btn:hover,
+    .story-icon-btn:focus-visible {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+      outline: none;
+    }
+    body[dir="rtl"] .story-chevron-btn {
+      transform: scaleX(-1);
+    }
+    .story-exit-btn {
+      background: rgba(196, 86, 74, 0.16);
+      border-color: rgba(196, 86, 74, 0.38);
+      color: #fca5a5;
     }
     .story-nav-btn {
       background: rgba(255, 255, 255, 0.08);
@@ -301,32 +406,55 @@
       background: var(--gold);
       color: var(--bg);
     }
-    .story-body-flex {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      margin-top: 6px;
+    .story-progress-track {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.09);
+      overflow: hidden;
+      pointer-events: none;
     }
-    .story-thumb {
-      width: 128px;
-      height: 74px;
-      object-fit: cover;
-      border-radius: 7px;
-      border: 1px solid var(--border-gold);
-      flex-shrink: 0;
-      cursor: pointer;
+    .story-progress-fill {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #d4a853 0%, #fde68a 100%);
+      transform-origin: left center;
+      transform: scaleX(0);
     }
-    .story-title {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 3px;
+    body[dir="rtl"] .story-progress-fill {
+      transform-origin: right center;
     }
-    .story-text {
-      font-size: 0.85rem;
-      color: #d1d5db;
-      line-height: 1.48;
+
+    /* PURE CINEMA VIDEO EXPORT MODE (HIDES INTERACTIVE BUTTONS) */
+    body.cinema-export .story-banner {
+      width: max-content;
+      max-width: calc(100vw - 40px);
+      padding: 9px 24px 11px;
+    }
+    body.cinema-export .story-controls {
+      display: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body .site-header,
+      .top-subrow,
+      .hud-bottom,
+      .hotspot-pin,
+      .story-banner {
+        translate: none;
+        transition-duration: 0.12s;
+      }
+      .story-banner,
+      .story-banner:where([hidden], [data-closing]) {
+        translate: -50% 0;
+      }
+      @starting-style {
+        .story-banner {
+          translate: -50% 0;
+        }
+      }
     }
 
     /* BOTTOM CONTROLS & TIMELINE SCRUBBER */
@@ -945,7 +1073,8 @@
       .presets-bar { overflow-x: auto; max-width: 100%; }
       .vow-form-grid, .modal-media-grid { grid-template-columns: 1fr; }
       .pin-tooltip { display: none; }
-      .story-thumb { display: none; }
+      .story-banner { bottom: 14px; padding: 8px 10px 10px 14px; border-radius: 20px; }
+      .story-title { font-size: 0.84rem; }
     }
   </style>
 </head>
@@ -998,32 +1127,6 @@
           <button class="preset-btn vr-btn" id="enterVrBtn" style="display: none;" data-i18n="enterVrBtn">🥽 Enter WebXR VR</button>
         </div>
       </div>
-
-      <!-- Guided Audio-Visual Story Banner -->
-      <div class="story-banner" id="storyBanner">
-        <div class="story-step-header">
-          <span class="story-step-badge" id="storyStepBadge">STOP 1 OF 8 · COURTYARD ASSEMBLY LINES</span>
-          <div class="story-controls">
-            <button class="story-nav-btn" id="btnStoryPrev">◀ Prev</button>
-            <button class="story-nav-btn" id="btnStoryAudio">🔊 Female Voice On</button>
-            <select id="narrationSpeedSelect" class="story-nav-btn" style="background:rgba(15,23,42,0.9); color:#e2e8f0; cursor:pointer;" title="Voiceover Pace">
-              <option value="0.86">0.85× Slow &amp; Sorrowful</option>
-              <option value="0.94" selected>0.95× Calm &amp; Gentle</option>
-              <option value="1.0">1.00× Normal Pace</option>
-            </select>
-            <button class="story-nav-btn" id="btnStoryVideo">🎬 Open Spot Video &amp; Photo</button>
-            <button class="story-nav-btn" id="btnStoryNext">Next ▶</button>
-            <button class="story-nav-btn" id="btnStoryClose">✕</button>
-          </div>
-        </div>
-        <div class="story-body-flex">
-          <img id="storyThumbImg" class="story-thumb" src="images/fa_spots/spot_assembly_lines.jpg" alt="Spot preview" />
-          <div>
-            <div class="story-title" id="storyTitle">Morning Assembly in the Schoolyard</div>
-            <p class="story-text" id="storyText">Walk across the six yellow morning assembly lines where children aged 6 to 13 lined up before entering their classrooms.</p>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Bottom Timeline Scrubber -->
@@ -1045,6 +1148,26 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- Clean Bottom-Center Walkthrough Cinema Pill -->
+  <div class="story-banner" id="storyBanner" hidden>
+    <div class="story-pill-row">
+      <div class="story-pill-meta">
+        <span class="story-step-badge" id="storyStepBadge">01 / 08</span>
+        <span class="story-title" id="storyTitle">Morning Assembly in the Schoolyard</span>
+      </div>
+      <div class="story-controls" id="storyControls">
+        <button type="button" class="story-icon-btn story-chevron-btn" id="btnStoryPrev" aria-label="Previous station" title="Previous station">‹</button>
+        <button type="button" class="story-icon-btn" id="btnStoryAudio" aria-label="Pause voiceover" title="Pause voiceover">⏸</button>
+        <button type="button" class="story-icon-btn story-chevron-btn" id="btnStoryNext" aria-label="Next station" title="Next station">›</button>
+        <button type="button" class="story-icon-btn" id="btnStoryVideo" aria-label="Open archival evidence" title="Open archival evidence">ⓘ</button>
+        <button type="button" class="story-icon-btn story-exit-btn" id="btnStoryClose" aria-label="Exit walkthrough" title="Exit walkthrough (Esc)">✕</button>
+      </div>
+    </div>
+    <div class="story-progress-track" aria-hidden="true">
+      <div class="story-progress-fill" id="storyProgressFill"></div>
+    </div>
   </div>
 
   <!-- On-The-Spot Evidence, Video & Camera-Aligned Photo Modal -->
@@ -1218,6 +1341,6 @@
   <!-- Master Casualty & Rubble Drawings Registry (Dataset v3.0.0) -->
   <script src="memorial-data.js"></script>
   <!-- Application Logic -->
-  <script src="js/reconstruction.js?v=20261104"></script>
+  <script src="js/reconstruction.js?v=20261111"></script>
 </body>
 </html>

@@ -467,65 +467,113 @@ const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'courtyard_lines',
     temporal: 0.0,
-    cutawayMode: 0, // Full building
-    camPos: [16, 2.4, 15],
-    lookAt: [4, 2.0, 0],
+    cutawayMode: 0,
+    camPos: [17.5, 3.2, 16.8],
+    lookAt: [4.5, 1.8, 1.5],
+    waypoints: [
+      { camPos: [17.5, 3.2, 16.8], lookAt: [4.5, 1.8, 1.5] },
+      { camPos: [11.5, 2.3, 12.2], lookAt: [1.5, 2.0, 0.5] },
+      { camPos: [5.8, 2.1, 8.0], lookAt: [-1.0, 2.1, -2.5] }
+    ],
+    shortBadge: { en: "01 / 08", fi: "01 / 08", fa: "۰۱ / ۰۸" },
     badge: { en: "STOP 1 OF 8 · COURTYARD YELLOW ASSEMBLY LINES", fi: "PISTE 1/8 · KOULUPIHAN AAMURIVIT", fa: "ایستگاه ۱ از ۸ · خطوط زرد صف صبحگاهی در حیاط" }
   },
   {
     hotspotId: 'boys_flower_arch',
     temporal: 0.0,
-    cutawayMode: 2, // Ground floor cutaway so room is open & bright
-    camPos: [8, 2.2, -1.5],
-    lookAt: [12, 1.8, -5.8],
+    cutawayMode: 2,
+    camPos: [8.4, 2.4, 0.1],
+    lookAt: [12.8, 1.85, -5.6],
+    waypoints: [
+      { camPos: [8.4, 2.4, 0.1], lookAt: [12.8, 1.85, -5.6] },
+      { camPos: [11.2, 2.1, -1.6], lookAt: [13.2, 1.85, -5.6] },
+      { camPos: [13.6, 2.15, -2.4], lookAt: [18.7, 1.85, -3.6] }
+    ],
+    shortBadge: { en: "02 / 08", fi: "02 / 08", fa: "۰۲ / ۰۸" },
     badge: { en: "STOP 2 OF 8 · GROUND FLOOR: BOYS' CEREMONY ROOM (ROSE ARCHES)", fi: "PISTE 2/8 · ALAKERTA: POIKIEN JUHLAHUONE", fa: "ایستگاه ۲ از ۸ · طبقه همکف: اتاق جشن پسران (طاق گل رز)" }
   },
   {
     hotspotId: 'boys_classroom',
     temporal: 0.0,
-    cutawayMode: 2, // Ground floor cutaway
-    camPos: [-8, 2.2, -1.5],
-    lookAt: [-13, 1.8, -5.8],
+    cutawayMode: 2,
+    camPos: [-11.8, 4.3, -1.6],
+    lookAt: [-13.5, 1.1, -4.0],
+    waypoints: [
+      { camPos: [-11.8, 4.3, -1.6], lookAt: [-13.5, 1.1, -4.0] },
+      { camPos: [-10.5, 4.2, -6.2], lookAt: [-13.2, 1.85, -12.2] },
+      { camPos: [-10.8, 2.15, -7.6], lookAt: [-15.2, 1.85, -12.2] }
+    ],
+    shortBadge: { en: "03 / 08", fi: "03 / 08", fa: "۰۳ / ۰۸" },
     badge: { en: "STOP 3 OF 8 · GROUND FLOOR: BOYS' CLASSROOM (CLAPPING & SINGING)", fi: "PISTE 3/8 · ALAKERTA: POIKIEN LUOKKAHUONE", fa: "ایستگاه ۳ از ۸ · طبقه همکف: کلاس درس پسران" }
   },
   {
     hotspotId: 'rainbow_staircase',
     temporal: 0.0,
-    cutawayMode: 2, // Ground floor cutaway showing staircase
-    camPos: [-1, 2.2, -2.2],
-    lookAt: [-1, 2.3, -9.5],
+    cutawayMode: 2,
+    camPos: [1.8, 2.35, -0.4],
+    lookAt: [-2.8, 1.9, -6.2],
+    waypoints: [
+      { camPos: [1.8, 2.35, -0.4], lookAt: [-2.8, 1.9, -6.2] },
+      { camPos: [0.0, 2.15, -2.2], lookAt: [0.0, 2.1, -8.5] },
+      { camPos: [-1.8, 2.35, -3.6], lookAt: [2.6, 2.0, -7.8] }
+    ],
+    shortBadge: { en: "04 / 08", fi: "04 / 08", fa: "۰۴ / ۰۸" },
     badge: { en: "STOP 4 OF 8 · THE RAINBOW STAIRCASE & PURPLE DOORS", fi: "PISTE 4/8 · SATEENKAARIPORTAIKKO", fa: "ایستگاه ۴ از ۸ · راه‌پله رنگین‌کمان و درهای بنفش" }
   },
   {
     hotspotId: 'girls_upper_hall',
     temporal: 0.0,
-    cutawayMode: 1, // First floor cutaway showing upper rooms
-    camPos: [-9, 6.0, -1.0],
-    lookAt: [-14, 5.2, -6.5],
+    cutawayMode: 1,
+    camPos: [-9.2, 6.0, -0.6],
+    lookAt: [-13.5, 5.3, -8.5],
+    waypoints: [
+      { camPos: [-9.2, 6.0, -0.6], lookAt: [-13.5, 5.3, -8.5] },
+      { camPos: [-11.5, 5.65, -2.8], lookAt: [-16.5, 5.35, -9.5] },
+      { camPos: [-13.2, 5.55, -4.2], lookAt: [-18.7, 5.35, -7.2] }
+    ],
+    shortBadge: { en: "05 / 08", fi: "05 / 08", fa: "۰۵ / ۰۸" },
     badge: { en: "STOP 5 OF 8 · FIRST FLOOR: GIRLS' ASSEMBLY HALL & PINK/GREEN ROOMS", fi: "PISTE 5/8 · YLÄKERTA: TYTTÖJEN SALI", fa: "ایستگاه ۵ از ۸ · طبقه اول: سالن بزرگ دختران و کلاس‌های صورتی/سبز" }
   },
   {
     hotspotId: 'crater_damage',
     temporal: 1.0,
     cutawayMode: 0,
-    camPos: [-18, 14.0, 14.0],
-    lookAt: [-4, 2.0, -6.0],
+    camPos: [-22.0, 15.5, 15.0],
+    lookAt: [-4.5, 2.0, -6.0],
+    waypoints: [
+      { camPos: [-22.0, 15.5, 15.0], lookAt: [-4.5, 2.0, -6.0] },
+      { camPos: [-11.5, 10.5, 12.5], lookAt: [-2.8, 1.8, -5.8] },
+      { camPos: [-3.5, 6.2, 8.2], lookAt: [-2.5, 2.0, -5.6] }
+    ],
+    shortBadge: { en: "06 / 08", fi: "06 / 08", fa: "۰۶ / ۰۸" },
     badge: { en: "STOP 6 OF 8 · 11:22 AM STRIKE: 5M CRATER & EXTENT OF COLLAPSE", fi: "PISTE 6/8 · KLO 11.22 ISKU: 5M KRAATTERI", fa: "ایستگاه ۶ از ۸ · ساعت ۱۱:۲۲: گودال ۵ متری و محدوده تخریب" }
   },
   {
     hotspotId: 'second_wave',
     temporal: 1.0,
     cutawayMode: 0,
-    camPos: [20, 8.0, 16.0],
-    lookAt: [3.5, 1.5, 2.1],
+    camPos: [8.0, 6.5, 16.5],
+    lookAt: [-1.0, 2.5, -3.0],
+    waypoints: [
+      { camPos: [8.0, 6.5, 16.5], lookAt: [-1.0, 2.5, -3.0] },
+      { camPos: [18.5, 7.8, 16.5], lookAt: [4.0, 2.0, 1.5] },
+      { camPos: [25.5, 9.2, 13.5], lookAt: [6.0, 2.2, -2.0] }
+    ],
+    shortBadge: { en: "07 / 08", fi: "07 / 08", fa: "۰۷ / ۰۸" },
     badge: { en: "STOP 7 OF 8 · 2:30 PM SECOND WAVE & TOMAHAWK EVIDENCE", fi: "PISTE 7/8 · KLO 14.30 TOINEN ISKUAALTO", fa: "ایستگاه ۷ از ۸ · ساعت ۱۴:۳۰: موج دوم حملات و شواهد تاماهاک" }
   },
   {
     hotspotId: 'vow_shrine',
     temporal: 0.0,
     cutawayMode: 1,
-    camPos: [0, 2.2, 16.5],
-    lookAt: [0, 2.2, 9.0],
+    camPos: [0.0, 2.8, 25.2],
+    lookAt: [0.0, 1.9, 13.5],
+    waypoints: [
+      { camPos: [0.0, 2.8, 25.2], lookAt: [0.0, 1.9, 13.5] },
+      { camPos: [0.0, 2.35, 18.5], lookAt: [0.0, 2.1, 10.5] },
+      { camPos: [0.0, 2.15, 15.2], lookAt: [0.0, 2.15, 10.5] }
+    ],
+    shortBadge: { en: "08 / 08", fi: "08 / 08", fa: "۰۸ / ۰۸" },
     badge: { en: "STOP 8 OF 8 · THE ACCOUNTABILITY VOW SHRINE", fi: "PISTE 8/8 · VASTUULUPAUKSEN MUISTOMERKKI", fa: "ایستگاه ۸ از ۸ · یادمان میثاق دادخواهی — ثبت پیمان جهانی" }
   }
 ];
@@ -685,6 +733,12 @@ function initThreeEngine() {
   controls.minDistance = 0.8;
   controls.maxDistance = 140;
   controls.target.set(0, 3.0, -3);
+  controls.addEventListener('start', () => {
+    if (isGuidedTour) {
+      tourManualCameraOverride = true;
+      isAnimatingCamera = false;
+    }
+  });
 
   const hemiLight = new THREE.HemisphereLight(0xfff9f0, 0x263042, 0.88);
   hemiLight.position.set(0, 55, 0);
@@ -2196,9 +2250,126 @@ function closeModal() {
 
 // --- CALM, KIND & SORROWFUL FEMALE VOICEOVER ENGINE + GENTLE AMBIENT PAD ---
 let narrationAudio = null;
-let narrationRate = 0.94;
+let narrationRate = 1.0;
 let ambientAudioCtx = null;
 let ambientGainNode = null;
+let guidedTourAutoAdvanceTimer = null;
+let tourManualCameraOverride = false;
+let tourStepStartTime = 0;
+let walkthroughIdleTimer = null;
+let supportsDisplayTransition;
+
+function canTransitionDisplay() {
+  if (supportsDisplayTransition !== undefined) return supportsDisplayTransition;
+  if (!window.CSS?.supports?.('transition-behavior', 'allow-discrete') || !document.body) {
+    supportsDisplayTransition = false;
+    return false;
+  }
+  const probe = document.createElement('div');
+  probe.style.cssText = 'transition: display 1s allow-discrete !important; display: block;';
+  document.body.appendChild(probe);
+  getComputedStyle(probe).display;
+  probe.style.display = 'none';
+  supportsDisplayTransition = getComputedStyle(probe).display === 'block';
+  probe.remove();
+  return supportsDisplayTransition;
+}
+
+function showStoryBanner() {
+  const el = document.getElementById('storyBanner');
+  if (!el) return;
+  el.removeAttribute('data-closing');
+  el.hidden = false;
+}
+
+async function hideStoryBanner() {
+  const el = document.getElementById('storyBanner');
+  if (!el || el.hidden) return;
+  if (canTransitionDisplay()) {
+    el.hidden = true;
+    return;
+  }
+  el.setAttribute('data-closing', '');
+  const animations = typeof el.getAnimations === 'function' ? el.getAnimations() : [];
+  if (animations.length > 0) {
+    await Promise.race([
+      Promise.allSettled(animations.map((a) => a.finished)),
+      new Promise((r) => setTimeout(r, 450))
+    ]);
+  }
+  if (el.hasAttribute('data-closing')) {
+    el.removeAttribute('data-closing');
+    el.hidden = true;
+  }
+}
+
+function resetWalkthroughIdleTimer() {
+  document.body.classList.remove('walkthrough-idle');
+  if (walkthroughIdleTimer) {
+    clearTimeout(walkthroughIdleTimer);
+    walkthroughIdleTimer = null;
+  }
+  if (!isGuidedTour) return;
+  walkthroughIdleTimer = setTimeout(() => {
+    const isPlaying = narrationAudio && !narrationAudio.paused;
+    if (isGuidedTour && isPlaying) {
+      document.body.classList.add('walkthrough-idle');
+    }
+  }, 3500);
+}
+
+function updateStoryAudioButtonUI(isPlaying) {
+  const btn = document.getElementById('btnStoryAudio');
+  if (!btn) return;
+  if (isPlaying) {
+    btn.textContent = '⏸';
+    btn.setAttribute('aria-label', 'Pause voiceover');
+    btn.setAttribute('title', 'Pause voiceover');
+  } else {
+    btn.textContent = '▶';
+    btn.setAttribute('aria-label', 'Play voiceover');
+    btn.setAttribute('title', 'Play voiceover');
+  }
+}
+
+function setWalkthroughProgress(progress) {
+  const fill = document.getElementById('storyProgressFill');
+  if (!fill) return;
+  const clamped = Math.max(0, Math.min(1, progress || 0));
+  fill.style.transform = `scaleX(${clamped.toFixed(4)})`;
+}
+
+function sampleGuidedTourCamera(stopIndex, rawProgress) {
+  const stop = GUIDED_TOUR_STOPS[stopIndex];
+  if (!stop) return null;
+  const pts = Array.isArray(stop.waypoints) && stop.waypoints.length >= 2
+    ? stop.waypoints
+    : [{ camPos: stop.camPos, lookAt: stop.lookAt }, { camPos: stop.camPos, lookAt: stop.lookAt }];
+
+  const p = Math.max(0, Math.min(1, rawProgress || 0));
+  // Cosine ease-in-out for calm museum motion
+  const eased = 0.5 - 0.5 * Math.cos(Math.PI * p);
+  const scaled = eased * (pts.length - 1);
+  const segIdx = Math.min(pts.length - 2, Math.floor(scaled));
+  const localT = scaled - segIdx;
+  const segEase = 0.5 - 0.5 * Math.cos(Math.PI * localT);
+
+  const a = pts[segIdx];
+  const b = pts[segIdx + 1];
+  const pos = new THREE.Vector3(
+    THREE.MathUtils.lerp(a.camPos[0], b.camPos[0], segEase),
+    THREE.MathUtils.lerp(a.camPos[1], b.camPos[1], segEase),
+    THREE.MathUtils.lerp(a.camPos[2], b.camPos[2], segEase)
+  );
+  const lookAt = new THREE.Vector3(
+    THREE.MathUtils.lerp(a.lookAt[0], b.lookAt[0], segEase),
+    THREE.MathUtils.lerp(a.lookAt[1], b.lookAt[1], segEase),
+    THREE.MathUtils.lerp(a.lookAt[2], b.lookAt[2], segEase)
+  );
+  return { pos, lookAt };
+}
+window.sampleGuidedTourCamera = sampleGuidedTourCamera;
+window.setWalkthroughProgress = setWalkthroughProgress;
 
 function startMemorialAmbientPad() {
   try {
@@ -2250,6 +2421,10 @@ function stopMemorialAmbientPad() {
 }
 
 function stopSpotNarration() {
+  if (guidedTourAutoAdvanceTimer) {
+    clearTimeout(guidedTourAutoAdvanceTimer);
+    guidedTourAutoAdvanceTimer = null;
+  }
   if (narrationAudio) {
     narrationAudio.pause();
     narrationAudio.currentTime = 0;
@@ -2258,6 +2433,7 @@ function stopSpotNarration() {
     window.speechSynthesis.cancel();
   }
   stopMemorialAmbientPad();
+  updateStoryAudioButtonUI(false);
   const listenBtn = document.getElementById('modalListenBtn');
   if (listenBtn) {
     listenBtn.textContent = '🎧 Listen to Room Voiceover';
@@ -2269,8 +2445,9 @@ function playSpotNarration(hotspotId) {
   if (!voiceNarrationEnabled) return;
 
   const langPrefix = ['en', 'fa', 'fi'].includes(currentLang) ? currentLang : 'en';
-  const primarySrc = `media/narration/${langPrefix}_${hotspotId}.mp3`;
-  const fallbackSrc = `media/narration/en_${hotspotId}.mp3`;
+  const narrationVersion = '20261111';
+  const primarySrc = `media/narration/${langPrefix}_${hotspotId}.mp3?v=${narrationVersion}`;
+  const fallbackSrc = `media/narration/en_${hotspotId}.mp3?v=${narrationVersion}`;
 
   if (!narrationAudio) {
     narrationAudio = new Audio();
@@ -2278,7 +2455,7 @@ function playSpotNarration(hotspotId) {
 
   const speedSelect = document.getElementById('narrationSpeedSelect');
   if (speedSelect) {
-    narrationRate = parseFloat(speedSelect.value) || 0.94;
+    narrationRate = parseFloat(speedSelect.value) || 1.0;
   }
 
   narrationAudio.src = primarySrc;
@@ -2287,6 +2464,8 @@ function playSpotNarration(hotspotId) {
   if ('webkitPreservesPitch' in narrationAudio) narrationAudio.webkitPreservesPitch = true;
 
   startMemorialAmbientPad();
+  updateStoryAudioButtonUI(true);
+  resetWalkthroughIdleTimer();
 
   const listenBtn = document.getElementById('modalListenBtn');
   if (listenBtn) {
@@ -2295,8 +2474,23 @@ function playSpotNarration(hotspotId) {
 
   narrationAudio.onended = () => {
     stopMemorialAmbientPad();
+    updateStoryAudioButtonUI(false);
+    setWalkthroughProgress(1);
+    document.body.classList.remove('walkthrough-idle');
     if (listenBtn) {
       listenBtn.textContent = '🎧 Listen to Room Voiceover';
+    }
+    if (isGuidedTour && !document.getElementById('evidenceModal')?.classList.contains('visible')) {
+      guidedTourAutoAdvanceTimer = setTimeout(() => {
+        if (!isGuidedTour) return;
+        if (currentTourIndex < GUIDED_TOUR_STOPS.length - 1) {
+          currentTourIndex += 1;
+          renderGuidedTourStep(currentTourIndex, true);
+        } else {
+          stopGuidedTour();
+          openVowModal();
+        }
+      }, 1400);
     }
   };
 
@@ -2310,6 +2504,7 @@ function playSpotNarration(hotspotId) {
 
   narrationAudio.play().catch(() => {
     stopMemorialAmbientPad();
+    updateStoryAudioButtonUI(false);
   });
 }
 
@@ -2317,15 +2512,30 @@ function playSpotNarration(hotspotId) {
 function startGuidedTour() {
   isGuidedTour = true;
   currentTourIndex = 0;
+  tourManualCameraOverride = false;
+  closeModal();
+  closeVowModal();
+  closeArtifactInspector();
+  document.body.classList.add('walkthrough-mode');
+  if (markersGroup) markersGroup.visible = false;
   document.getElementById('btnGuidedTour').classList.add('active');
-  document.getElementById('storyBanner').classList.add('visible');
+  showStoryBanner();
+  resetWalkthroughIdleTimer();
   renderGuidedTourStep(0, true);
 }
 
 function stopGuidedTour() {
   isGuidedTour = false;
+  tourManualCameraOverride = false;
+  if (walkthroughIdleTimer) {
+    clearTimeout(walkthroughIdleTimer);
+    walkthroughIdleTimer = null;
+  }
+  document.body.classList.remove('walkthrough-mode', 'walkthrough-idle');
+  if (markersGroup) markersGroup.visible = true;
   document.getElementById('btnGuidedTour').classList.remove('active');
-  document.getElementById('storyBanner').classList.remove('visible');
+  hideStoryBanner();
+  setWalkthroughProgress(0);
   stopSpotNarration();
 }
 
@@ -2334,6 +2544,10 @@ function renderGuidedTourStep(idx, speakNow) {
   if (!stop) return;
   const t = I18N_DATA[currentLang] || I18N_DATA.en;
   const hData = t.hotspots[stop.hotspotId];
+
+  tourManualCameraOverride = false;
+  tourStepStartTime = performance.now();
+  setWalkthroughProgress(0);
 
   setTemporalCondition(stop.temporal);
   document.getElementById('timelineSlider').value = stop.temporal;
@@ -2346,17 +2560,20 @@ function renderGuidedTourStep(idx, speakNow) {
     new THREE.Vector3(stop.lookAt[0], stop.lookAt[1], stop.lookAt[2])
   );
 
-  document.getElementById('storyStepBadge').textContent = stop.badge[currentLang] || stop.badge.en;
-  document.getElementById('storyTitle').textContent = hData.title;
-  document.getElementById('storyText').textContent = `${hData.desc}`;
-  const thumb = document.getElementById('storyThumbImg');
-  if (thumb && hData.spotImg) {
-    thumb.src = hData.spotImg;
-    thumb.onclick = () => showHotspotModal(stop.hotspotId);
+  const badgeEl = document.getElementById('storyStepBadge');
+  if (badgeEl) {
+    const shortBadge = stop.shortBadge && (stop.shortBadge[currentLang] || stop.shortBadge.en);
+    badgeEl.textContent = shortBadge || (stop.badge[currentLang] || stop.badge.en);
+  }
+  const titleEl = document.getElementById('storyTitle');
+  if (titleEl && hData) {
+    titleEl.textContent = hData.title.replace(/^[0-9۰-۹]+\.\s*/, '');
   }
 
   if (speakNow && voiceNarrationEnabled) {
     playSpotNarration(stop.hotspotId);
+  } else {
+    updateStoryAudioButtonUI(false);
   }
 }
 
@@ -2572,6 +2789,7 @@ function initUIControls() {
 
   document.getElementById('btnStoryNext').addEventListener('click', () => {
     if (currentTourIndex === GUIDED_TOUR_STOPS.length - 1) {
+      stopGuidedTour();
       openVowModal();
     } else {
       currentTourIndex += 1;
@@ -2579,20 +2797,56 @@ function initUIControls() {
     }
   });
 
-  document.getElementById('btnStoryAudio').addEventListener('click', (e) => {
-    voiceNarrationEnabled = !voiceNarrationEnabled;
-    e.target.textContent = voiceNarrationEnabled ? '🔊 Female Voice On' : '🔇 Voice Muted';
-    if (!voiceNarrationEnabled) {
-      stopSpotNarration();
-    } else {
-      renderGuidedTourStep(currentTourIndex, true);
+  document.getElementById('btnStoryAudio').addEventListener('click', () => {
+    resetWalkthroughIdleTimer();
+    const stop = GUIDED_TOUR_STOPS[currentTourIndex];
+    if (narrationAudio && !narrationAudio.paused) {
+      narrationAudio.pause();
+      stopMemorialAmbientPad();
+      updateStoryAudioButtonUI(false);
+    } else if (narrationAudio && narrationAudio.src && narrationAudio.currentTime > 0 && !narrationAudio.ended) {
+      voiceNarrationEnabled = true;
+      startMemorialAmbientPad();
+      narrationAudio.play().catch(() => {});
+      updateStoryAudioButtonUI(true);
+    } else if (stop) {
+      voiceNarrationEnabled = true;
+      playSpotNarration(stop.hotspotId);
+    }
+  });
+
+  ['pointermove', 'pointerdown', 'keydown'].forEach((evtName) => {
+    window.addEventListener(evtName, () => {
+      if (isGuidedTour) resetWalkthroughIdleTimer();
+    }, { passive: true });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const inspector = document.getElementById('artifactInspectorModal');
+    if (inspector && inspector.classList.contains('visible')) {
+      closeArtifactInspector();
+      return;
+    }
+    const evModal = document.getElementById('evidenceModal');
+    if (evModal && evModal.classList.contains('visible')) {
+      closeModal();
+      return;
+    }
+    const vModal = document.getElementById('vowModal');
+    if (vModal && vModal.classList.contains('visible')) {
+      closeVowModal();
+      return;
+    }
+    if (isGuidedTour) {
+      stopGuidedTour();
     }
   });
 
   const speedSelect = document.getElementById('narrationSpeedSelect');
   if (speedSelect) {
     speedSelect.addEventListener('change', (e) => {
-      narrationRate = parseFloat(e.target.value) || 0.94;
+      narrationRate = parseFloat(e.target.value) || 1.0;
       if (narrationAudio) {
         narrationAudio.playbackRate = narrationRate;
       }
@@ -2607,8 +2861,6 @@ function initUIControls() {
         stopSpotNarration();
       } else {
         voiceNarrationEnabled = true;
-        const audioToggle = document.getElementById('btnStoryAudio');
-        if (audioToggle) audioToggle.textContent = '🔊 Female Voice On';
         playSpotNarration(activeHotspotId);
       }
     });
@@ -2747,7 +2999,29 @@ function animate() {
   const delta = clock.getDelta();
   applyKeyboardMovement(delta);
 
-  if (isAnimatingCamera && animationTarget.pos) {
+  if (isGuidedTour) {
+    let tourProgress = 0;
+    if (narrationAudio && Number.isFinite(narrationAudio.duration) && narrationAudio.duration > 0) {
+      tourProgress = narrationAudio.currentTime / narrationAudio.duration;
+    } else if (tourStepStartTime > 0) {
+      tourProgress = Math.min(1, (performance.now() - tourStepStartTime) / 60000);
+    }
+    setWalkthroughProgress(tourProgress);
+
+    if (isAnimatingCamera && animationTarget.pos) {
+      camera.position.lerp(animationTarget.pos, 0.06);
+      controls.target.lerp(animationTarget.lookAt, 0.06);
+      if (camera.position.distanceTo(animationTarget.pos) < 0.25) {
+        isAnimatingCamera = false;
+      }
+    } else if (!tourManualCameraOverride) {
+      const sampled = sampleGuidedTourCamera(currentTourIndex, tourProgress);
+      if (sampled) {
+        camera.position.lerp(sampled.pos, 0.045);
+        controls.target.lerp(sampled.lookAt, 0.055);
+      }
+    }
+  } else if (isAnimatingCamera && animationTarget.pos) {
     camera.position.lerp(animationTarget.pos, 0.06);
     controls.target.lerp(animationTarget.lookAt, 0.06);
 
