@@ -372,7 +372,7 @@
 
     <!-- ====== LANGUAGE BAR ====== -->
     <header class="site-header" id="pfpSiteHeader"></header>
-    <script src="site-nav.js?v=20261104"></script>
+    <script src="site-nav.js?v=20261110"></script>
 
     <!-- ====== HERO ====== -->
     <section class="hero">
@@ -406,6 +406,7 @@
         <div class="footer-links">
             <a href="landing.html" data-i18n="nav_home">Home</a>
             <a href="about.html" data-i18n="nav_about">About Us</a>
+            <a href="events.html" data-i18n="nav_events">Events</a>
             <a href="memorial.html" data-i18n="nav_memorial">Memorial</a>
             <a href="mothers.html">Mothers & Families</a>
             <a href="evidence.html" data-i18n="nav_evidence">Evidence</a>
@@ -421,6 +422,24 @@
     <script>
         // TRILINGUAL DATA
         const DATA = {
+            hxrc_minab: {
+                id: "hxrc_minab",
+                cat: "advocacy",
+                links: [
+                    { labelKey: "btn_event_page", url: "events.html", primary: true, internal: true },
+                    { labelKey: "btn_register_onton", url: "https://app.onton.live/events/fd4da784-28f0-4dd0-9ba7-ede105af9a9a", primary: false },
+                    {
+                        labelKey: "btn_makan_event",
+                        url: "https://makanry.fi/en/events/voices-of-minab-hxrc",
+                        urlByLang: {
+                            en: "https://makanry.fi/en/events/voices-of-minab-hxrc",
+                            fa: "https://makanry.fi/fa/events/voices-of-minab-hxrc",
+                            fi: "https://makanry.fi/fi/events/voices-of-minab-hxrc"
+                        },
+                        primary: false
+                    }
+                ]
+            },
             stars: {
                 id: "stars",
                 cat: "youth-art",
@@ -486,6 +505,7 @@
                 logo: "☮ PFPJ ry",
                 nav_home: "Home",
                 nav_about: "About Us",
+                nav_events: "Events",
                 nav_memorial: "Minab Memorial",
                 nav_evidence: "Forensic Evidence",
                 nav_annex: "Technical Annex",
@@ -503,6 +523,13 @@
                 footer_copy: "People for Peace & Justice ry (Helsinki, Finland) · Business ID: 3616815-5 · Established 2026",
                 
                 // Card Details
+                hxrc_minab_title: "Voices of Minab — Helsinki XR Center Coalition (20 Nov 2026)",
+                hxrc_minab_desc: "A joint UN World Children's Day exhibition, 3D forensic school walkthrough, and expert panel at Helsinki XR Center (HXRC), co-organized by Pomegroup Studio (3370210-5), People for Peace & Justice ry (3616815-5), and Makan ry (3599693-6).",
+                hxrc_minab_act1: "Interactive 3D spatial reconstruction of the Shajareh Tayyebeh school compound alongside the '100 Faces of Peace' portrait gallery.",
+                hxrc_minab_act2: "Expert panel (18:15–19:00 EET) with Dr. Nitin Sawhney, Maria Mekri, Kaisu Kinnunen, Dr. Ali Akbar Siapoush, and Mahdi Farimani, moderated by Sama M. Barvari.",
+                hxrc_minab_cat: "Legal & Advocacy",
+                hxrc_minab_type: "Helsinki Coalition Event",
+
                 stars_title: "Stars of Minab (Setareh-haye Minab)",
                 stars_desc: "An international youth-led coalition and campaign dedicated to preserving the memory of the elementary school students killed in the strike. The organization utilizes narrative art and media to represent the children as stars whose light continues to reach the world.",
                 stars_act1: "Organizing the international exhibition 'Children of Minab Still Draw the Sun' featuring recovered children's artwork and tributes.",
@@ -568,12 +595,16 @@
                 btn_hrw: "HRW site",
                 btn_congressional_records: "Congressional Records",
                 btn_ohchr: "OHCHR site",
-                btn_news_archive: "News Archive"
+                btn_news_archive: "News Archive",
+                btn_event_page: "Event Program & Details",
+                btn_register_onton: "Free RSVP (ONTON)",
+                btn_makan_event: "Makan ry Partner Page"
             },
             fa: {
                 logo: "☮ PFPJ ry",
                 nav_home: "خانه",
                 nav_about: "درباره ما",
+                nav_events: "رویدادها",
                 nav_memorial: "یادبود میناب",
                 nav_evidence: "مستندات فنی",
                 nav_annex: "پیوست فنی",
@@ -591,6 +622,13 @@
                 footer_copy: "سازمان مردم برای صلح و عدالت (PFPJ ry) هلسینکی فنلاند · شناسه ثبتی: 3616815-5 · تاسیس ۲۰۲۶",
                 
                 // Card Details
+                hxrc_minab_title: "روایت میناب — ائتلاف مرکز هلسینکی XR (۲۰ نوامبر ۲۰۲۶)",
+                hxrc_minab_desc: "نمایشگاه مشترک روز جهانی کودک سازمان ملل، بازدید سه‌بعدی از بازسازی مدرسه و پنل تخصصی در مرکز Helsinki XR Center با همکاری Pomegroup Studio (3370210-5)، انجمن مردم برای صلح و عدالت PFPJ ry (3616815-5) و انجمن ماکان Makan ry (3599693-6).",
+                hxrc_minab_act1: "بازسازی فضایی و تعاملی سه‌بعدی مدرسه شجره طیبه در کنار گالری پرتره «۱۰۰ چهره صلح».",
+                hxrc_minab_act2: "پنل تخصصی (۱۸:۱۵ تا ۱۹:۰۰) با حضور دکتر نیتین ساونی، ماریا مکری، کایسو کینونن، دکتر علی‌اکبر سیاپوش و مهدی فریمانی با مدیریت سما م. باروری.",
+                hxrc_minab_cat: "حقوقی و دادخواهی",
+                hxrc_minab_type: "رویداد ائتلاف هلسینکی",
+
                 stars_title: "ستاره‌های میناب (Setareh-haye Minab)",
                 stars_desc: "یک ائتلاف و کمپین بین‌المللی تحت رهبری جوانان که برای حفظ نام و یاد دانش‌آموزان جان‌باخته در حمله به مدرسه شجره طیبه میناب فعالیت می‌کند. این گروه با استفاده از هنر روایی و رسانه، دانش‌آموزان را به عنوان ستاره‌هایی به تصویر می‌کشد که نور آن‌ها هرگز خاموش نمی‌شود.",
                 stars_act1: "برگزاری نمایشگاه بین‌المللی «کودکان میناب هنوز خورشید را نقاشی می‌کنند» با نمایش آثار هنری به‌جامانده از کودکان.",
@@ -656,12 +694,16 @@
                 btn_hrw: "سایت دیدبان حقوق بشر",
                 btn_congressional_records: "اسناد کنگره",
                 btn_ohchr: "سایت OHCHR",
-                btn_news_archive: "آرشیو اخبار"
+                btn_news_archive: "آرشیو اخبار",
+                btn_event_page: "برنامه و جزئیات رویداد",
+                btn_register_onton: "ثبت‌نام رایگان (ONTON)",
+                btn_makan_event: "صفحه رویداد در ماکان"
             },
             fi: {
                 logo: "☮ PFPJ ry",
                 nav_home: "Koti",
                 nav_about: "Tietoa meistä",
+                nav_events: "Tapahtumat",
                 nav_memorial: "Minabin muistomerkki",
                 nav_evidence: "Forensinen todistusaineisto",
                 nav_annex: "Tekninen liite",
@@ -679,6 +721,13 @@
                 footer_copy: "People for Peace & Justice ry (Helsinki, Suomi) · Y-tunnus: 3616815-5 · Perustettu 2026",
                 
                 // Card Details
+                hxrc_minab_title: "Minabin äänet — Helsinki XR Center -yhteistilaisuus (20.11.2026)",
+                hxrc_minab_desc: "YK:n lapsen oikeuksien päivän näyttely, interaktiivinen 3D-koulumallinnus ja asiantuntijapaneeli Helsinki XR Centerissä (HXRC). Järjestäjinä Pomegroup Studio (3370210-5), People for Peace & Justice ry (3616815-5) ja Makan ry (3599693-6).",
+                hxrc_minab_act1: "Interaktiivinen 3D-tilamallinnus Shajareh Tayyebeh -koulusta sekä '100 rauhan kasvoa' -muotokuvanäyttely.",
+                hxrc_minab_act2: "Asiantuntijapaneeli (klo 18.15–19.00) — puhujina dosentti Nitin Sawhney, Maria Mekri, Kaisu Kinnunen, FT Ali Akbar Siapoush ja Mahdi Farimani, juontajana Sama M. Barvari.",
+                hxrc_minab_cat: "Oikeudellinen & Vaikuttaminen",
+                hxrc_minab_type: "Helsingin yhteistapahtuma",
+
                 stars_title: "Stars of Minab (Setareh-haye Minab)",
                 stars_desc: "Kansainvälinen nuorten johtama koalitio ja kampanja, joka on omistettu iskussa menehtyneiden lasten muiston säilyttämiselle. Järjestö käyttää taidetta ja mediaa kuvatakseen lapset tähtinä, joiden valo saavuttaa maailman.",
                 stars_act1: "Kansainvälisen 'Children of Minab Still Draw the Sun' -taidenäyttelyn järjestäminen menehtyneiden lasten piirustuksista.",
@@ -744,7 +793,10 @@
                 btn_hrw: "HRW:n sivusto",
                 btn_congressional_records: "Kongressin asiakirjat",
                 btn_ohchr: "OHCHR:n sivusto",
-                btn_news_archive: "Uutisarkisto"
+                btn_news_archive: "Uutisarkisto",
+                btn_event_page: "Ohjelma & tapahtumatiedot",
+                btn_register_onton: "Ilmainen ilmoittautuminen (ONTON)",
+                btn_makan_event: "Makan ry:n tapahtumasivu"
             }
         };
 
@@ -813,15 +865,18 @@
                 item.links.forEach(link => {
                     const btnLabel = translations[currentLang][link.labelKey] || "Link";
                     const btnClass = link.primary ? "btn-primary" : "btn-secondary";
+                    const resolvedUrl = (link.urlByLang && link.urlByLang[currentLang]) ? link.urlByLang[currentLang] : link.url;
+                    const targetAttrs = link.internal ? "" : ' target="_blank" rel="noopener"';
+                    const arrowGlyph = link.internal ? "→" : "↗";
                     buttonsHtml += `
-                        <a href="${link.url}" target="_blank" rel="noopener" class="action-btn ${btnClass}">
-                            ${btnLabel} ↗
+                        <a href="${resolvedUrl}"${targetAttrs} class="action-btn ${btnClass}">
+                            ${btnLabel} ${arrowGlyph}
                         </a>
                     `;
                 });
 
                 html += `
-                    <div class="directory-card" data-category="${item.cat}" id="card-${item.id}">
+                    <article class="directory-card" data-category="${item.cat}" id="card-${item.id}">
                         <div class="card-top">
                             <div>
                                 <h2 class="card-title">${title}</h2>
@@ -841,7 +896,7 @@
                         <div class="card-actions">
                             ${buttonsHtml}
                         </div>
-                    </div>
+                    </article>
                 `;
             }
             grid.innerHTML = html;

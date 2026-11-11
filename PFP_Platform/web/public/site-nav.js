@@ -11,6 +11,7 @@
       nav_case_file: "Case File",
       nav_memorial: "Memorial",
       nav_multimedia: "Multimedia",
+      nav_events: "Events",
       nav_about: "About",
       nav_contact: "✉ Contact",
       dropdown_report_title: "Case Determination",
@@ -39,6 +40,7 @@
       nav_case_file: "پرونده حقوقی",
       nav_memorial: "یادبود شهیدان",
       nav_multimedia: "چندرسانه‌ای",
+      nav_events: "رویدادها",
       nav_about: "درباره انجمن",
       nav_contact: "✉ تماس با ما",
       dropdown_report_title: "گزارش نهایی سانحه",
@@ -67,6 +69,7 @@
       nav_case_file: "Oikeustapaus",
       nav_memorial: "Muistomerkki",
       nav_multimedia: "Multimedia",
+      nav_events: "Tapahtumat",
       nav_about: "Tietoa",
       nav_contact: "✉ Ota yhteyttä",
       dropdown_report_title: "Tapausseloste",
@@ -215,7 +218,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 14px;
+      padding: 8px 11px;
       font-size: 0.92rem;
       font-weight: 500;
       color: var(--pfp-text-secondary);
@@ -227,13 +230,22 @@
 
     .site-header .nav-link:hover,
     .site-header .nav-link.active,
+    .site-header .nav-link[aria-current="page"],
     .site-header .nav-item:hover > .nav-link {
       color: var(--pfp-text-primary);
       background: rgba(255, 255, 255, 0.04);
     }
 
-    .site-header .nav-link.active {
+    .site-header .nav-link.active,
+    .site-header .nav-link[aria-current="page"] {
       color: var(--pfp-gold);
+      box-shadow: inset 0 -2px 0 var(--pfp-gold);
+    }
+
+    .site-header :where(a:any-link, button):focus-visible,
+    .mobile-drawer :where(a:any-link, button):focus-visible {
+      outline: 2px solid var(--pfp-gold);
+      outline-offset: 2px;
     }
 
     .site-header .nav-link .caret {
@@ -536,20 +548,67 @@
     }
 
     .mobile-link:hover,
-    .mobile-link.active {
+    .mobile-link.active,
+    .mobile-link[aria-current="page"] {
       background: rgba(229, 185, 95, 0.1);
       color: var(--pfp-gold);
     }
 
-    @media (max-width: 1080px) {
-      .site-header .nav-menu {
+    .mobile-link[aria-current="page"] {
+      border-inline-start: 3px solid var(--pfp-gold);
+    }
+
+    @media (max-width: 1180px) {
+      .site-header .nav-menu,
+      .site-header .primary-nav {
         display: none;
       }
       .site-header .hamburger-btn {
         display: inline-flex;
       }
+      .site-header .btn-nav-cta {
+        display: none;
+      }
       .site-header .nav-container {
         padding: 0 18px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-header .nav-container {
+        padding: 0 14px;
+        gap: 8px;
+      }
+      .site-header .brand-logo {
+        gap: 8px;
+      }
+      .site-header .brand-emblem {
+        width: 32px;
+        height: 32px;
+        font-size: 1.05rem;
+      }
+      .site-header .brand-title {
+        font-size: 0.95rem;
+      }
+      .site-header .brand-subtitle,
+      .site-header .vow-cta-btn {
+        display: none;
+      }
+      .site-header .nav-actions {
+        gap: 8px;
+      }
+      .site-header .lang-switch {
+        padding: 2px;
+      }
+      .site-header .lang-btn {
+        padding: 4px 7px;
+        font-size: 0.74rem;
+      }
+      .site-header .hamburger-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+        flex-shrink: 0;
       }
     }
 
@@ -566,6 +625,7 @@
     const memorialPages = ['memorial.html', 'child.html', 'mothers.html'];
     const aboutPages = ['about.html', 'initiatives.html', 'association_index.html'];
     const multiPages = ['multimedia.html', 'media-item.html'];
+    const eventPages = ['events.html', 'events', 'voices-of-minab-hxrc'];
 
     return {
       page: path,
@@ -573,6 +633,7 @@
       isCase: casePages.includes(path),
       isMemorial: memorialPages.includes(path),
       isMultimedia: multiPages.includes(path),
+      isEvents: eventPages.includes(path),
       isAbout: aboutPages.includes(path)
     };
   }
@@ -584,119 +645,125 @@
     return `
       <div class="nav-container">
         <a href="landing.html" class="brand-logo">
-          <div class="brand-emblem">☮</div>
+          <div class="brand-emblem" aria-hidden="true">☮</div>
           <div class="brand-text">
             <span class="brand-title">PFPJ ry</span>
             <span class="brand-subtitle" data-nav-i18n="logo_sub">Legal Accountability</span>
           </div>
         </a>
 
-        <ul class="nav-menu">
-          <li class="nav-item">
-            <a href="landing.html" class="nav-link ${info.isHome ? 'active' : ''}" data-nav-i18n="nav_home">Home</a>
-          </li>
+        <nav class="primary-nav" aria-label="Primary">
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="landing.html" class="nav-link ${info.isHome ? 'active' : ''}"${info.isHome ? ' aria-current="page"' : ''} data-nav-i18n="nav_home">Home</a>
+            </li>
 
-          <li class="nav-item has-dropdown">
-            <a href="draft.html" class="nav-link ${info.isCase ? 'active' : ''}">
-              <span data-nav-i18n="nav_case_file">Case File</span>
-              <span class="caret">▼</span>
-            </a>
-            <div class="dropdown-menu">
-              <a href="draft.html" class="dropdown-item ${p === 'draft.html' || p === 'report.html' ? 'active' : ''}">
-                <span class="dropdown-icon">⚖️</span>
-                <div class="dropdown-text">
-                  <span class="dropdown-title" data-nav-i18n="dropdown_report_title">Case Determination</span>
-                  <span class="dropdown-desc" data-nav-i18n="dropdown_report_desc">Full 10-chapter factual finding &amp; IAC analysis</span>
-                </div>
-                <span class="dropdown-badge">ICC</span>
+            <li class="nav-item has-dropdown">
+              <a href="draft.html" class="nav-link ${info.isCase ? 'active' : ''}">
+                <span data-nav-i18n="nav_case_file">Case File</span>
+                <span class="caret" aria-hidden="true">▼</span>
               </a>
-              <a href="reconstruction.html" class="dropdown-item ${p === 'reconstruction.html' ? 'active' : ''}">
-                <span class="dropdown-icon">✦</span>
-                <div class="dropdown-text">
-                  <span class="dropdown-title" data-nav-i18n="dropdown_recon_title">3D Strike Reconstruction</span>
-                  <span class="dropdown-desc" data-nav-i18n="dropdown_recon_desc">Interactive school rooms, footage &amp; impact physics</span>
-                </div>
-              </a>
-              <a href="evidence.html" class="dropdown-item ${p === 'evidence.html' ? 'active' : ''}">
-                <span class="dropdown-icon">📁</span>
-                <div class="dropdown-text">
-                  <span class="dropdown-title" data-nav-i18n="dropdown_evidence_title">Forensic Evidence</span>
-                  <span class="dropdown-desc" data-nav-i18n="dropdown_evidence_desc">OSINT, satellite imagery &amp; weapon shells</span>
-                </div>
-              </a>
-              <a href="similarity_annex.html" class="dropdown-item ${p === 'similarity_annex.html' || p === 'similarity_factors.html' ? 'active' : ''}">
-                <span class="dropdown-icon">📄</span>
-                <div class="dropdown-text">
-                  <span class="dropdown-title" data-nav-i18n="dropdown_annex_title">Technical Annex</span>
-                  <span class="dropdown-desc" data-nav-i18n="dropdown_annex_desc">10 similarity factors &amp; 18 legal precedents</span>
-                </div>
-              </a>
-              <a href="sources.html" class="dropdown-item ${p === 'sources.html' ? 'active' : ''}">
-                <span class="dropdown-icon">📑</span>
-                <div class="dropdown-text">
-                  <span class="dropdown-title" data-nav-i18n="dropdown_sources_title">Primary Sources</span>
-                  <span class="dropdown-desc" data-nav-i18n="dropdown_sources_desc">Declassified records, UN docs &amp; testimonies</span>
-                </div>
-              </a>
-            </div>
-          </li>
+              <div class="dropdown-menu">
+                <a href="draft.html" class="dropdown-item ${p === 'draft.html' || p === 'report.html' ? 'active' : ''}"${p === 'draft.html' || p === 'report.html' ? ' aria-current="page"' : ''}>
+                  <span class="dropdown-icon" aria-hidden="true">⚖️</span>
+                  <div class="dropdown-text">
+                    <span class="dropdown-title" data-nav-i18n="dropdown_report_title">Case Determination</span>
+                    <span class="dropdown-desc" data-nav-i18n="dropdown_report_desc">Full 10-chapter factual finding &amp; IAC analysis</span>
+                  </div>
+                  <span class="dropdown-badge">ICC</span>
+                </a>
+                <a href="reconstruction.html" class="dropdown-item ${p === 'reconstruction.html' ? 'active' : ''}"${p === 'reconstruction.html' ? ' aria-current="page"' : ''}>
+                  <span class="dropdown-icon" aria-hidden="true">✦</span>
+                  <div class="dropdown-text">
+                    <span class="dropdown-title" data-nav-i18n="dropdown_recon_title">3D Strike Reconstruction</span>
+                    <span class="dropdown-desc" data-nav-i18n="dropdown_recon_desc">Interactive school rooms, footage &amp; impact physics</span>
+                  </div>
+                </a>
+                <a href="evidence.html" class="dropdown-item ${p === 'evidence.html' ? 'active' : ''}"${p === 'evidence.html' ? ' aria-current="page"' : ''}>
+                  <span class="dropdown-icon" aria-hidden="true">📁</span>
+                  <div class="dropdown-text">
+                    <span class="dropdown-title" data-nav-i18n="dropdown_evidence_title">Forensic Evidence</span>
+                    <span class="dropdown-desc" data-nav-i18n="dropdown_evidence_desc">OSINT, satellite imagery &amp; weapon shells</span>
+                  </div>
+                </a>
+                <a href="similarity_annex.html" class="dropdown-item ${p === 'similarity_annex.html' || p === 'similarity_factors.html' ? 'active' : ''}"${p === 'similarity_annex.html' || p === 'similarity_factors.html' ? ' aria-current="page"' : ''}>
+                  <span class="dropdown-icon" aria-hidden="true">📄</span>
+                  <div class="dropdown-text">
+                    <span class="dropdown-title" data-nav-i18n="dropdown_annex_title">Technical Annex</span>
+                    <span class="dropdown-desc" data-nav-i18n="dropdown_annex_desc">10 similarity factors &amp; 18 legal precedents</span>
+                  </div>
+                </a>
+                <a href="sources.html" class="dropdown-item ${p === 'sources.html' ? 'active' : ''}"${p === 'sources.html' ? ' aria-current="page"' : ''}>
+                  <span class="dropdown-icon" aria-hidden="true">📑</span>
+                  <div class="dropdown-text">
+                    <span class="dropdown-title" data-nav-i18n="dropdown_sources_title">Primary Sources</span>
+                    <span class="dropdown-desc" data-nav-i18n="dropdown_sources_desc">Declassified records, UN docs &amp; testimonies</span>
+                  </div>
+                </a>
+              </div>
+            </li>
 
-          <li class="nav-item has-dropdown">
-            <a href="memorial.html" class="nav-link ${info.isMemorial ? 'active' : ''}">
-              <span data-nav-i18n="nav_memorial">Memorial</span>
-              <span class="caret">▼</span>
-            </a>
-            <div class="dropdown-menu">
-              <a href="memorial.html" class="dropdown-item ${p === 'memorial.html' || p === 'child.html' ? 'active' : ''}">
-                <span class="dropdown-icon">🕊️</span>
-                <div class="dropdown-text">
-                  <span class="dropdown-title" data-nav-i18n="dropdown_memorial_title">Minab Victims Register</span>
-                  <span class="dropdown-desc" data-nav-i18n="dropdown_memorial_desc">Biographies and memorial wall for 156 victims</span>
-                </div>
-                <span class="dropdown-badge">156</span>
+            <li class="nav-item has-dropdown">
+              <a href="memorial.html" class="nav-link ${info.isMemorial ? 'active' : ''}">
+                <span data-nav-i18n="nav_memorial">Memorial</span>
+                <span class="caret" aria-hidden="true">▼</span>
               </a>
-              <a href="mothers.html" class="dropdown-item ${p === 'mothers.html' ? 'active' : ''}">
-                <span class="dropdown-icon">🥀</span>
-                <div class="dropdown-text">
-                  <span class="dropdown-title" data-nav-i18n="dropdown_mothers_title">Mothers &amp; Families</span>
-                  <span class="dropdown-desc" data-nav-i18n="dropdown_mothers_desc">Survivor accounts and family cluster testimonies</span>
-                </div>
-              </a>
-            </div>
-          </li>
+              <div class="dropdown-menu">
+                <a href="memorial.html" class="dropdown-item ${p === 'memorial.html' || p === 'child.html' ? 'active' : ''}"${p === 'memorial.html' ? ' aria-current="page"' : ''}>
+                  <span class="dropdown-icon" aria-hidden="true">🕊️</span>
+                  <div class="dropdown-text">
+                    <span class="dropdown-title" data-nav-i18n="dropdown_memorial_title">Minab Victims Register</span>
+                    <span class="dropdown-desc" data-nav-i18n="dropdown_memorial_desc">Biographies and memorial wall for 156 victims</span>
+                  </div>
+                  <span class="dropdown-badge">156</span>
+                </a>
+                <a href="mothers.html" class="dropdown-item ${p === 'mothers.html' ? 'active' : ''}"${p === 'mothers.html' ? ' aria-current="page"' : ''}>
+                  <span class="dropdown-icon" aria-hidden="true">🥀</span>
+                  <div class="dropdown-text">
+                    <span class="dropdown-title" data-nav-i18n="dropdown_mothers_title">Mothers &amp; Families</span>
+                    <span class="dropdown-desc" data-nav-i18n="dropdown_mothers_desc">Survivor accounts and family cluster testimonies</span>
+                  </div>
+                </a>
+              </div>
+            </li>
 
-          <li class="nav-item">
-            <a href="multimedia.html" class="nav-link ${info.isMultimedia ? 'active' : ''}" data-nav-i18n="nav_multimedia">Multimedia</a>
-          </li>
+            <li class="nav-item">
+              <a href="multimedia.html" class="nav-link ${info.isMultimedia ? 'active' : ''}"${p === 'multimedia.html' ? ' aria-current="page"' : ''} data-nav-i18n="nav_multimedia">Multimedia</a>
+            </li>
 
-          <li class="nav-item has-dropdown">
-            <a href="about.html" class="nav-link ${info.isAbout ? 'active' : ''}">
-              <span data-nav-i18n="nav_about">About</span>
-              <span class="caret">▼</span>
-            </a>
-            <div class="dropdown-menu">
-              <a href="about.html" class="dropdown-item ${p === 'about.html' ? 'active' : ''}">
-                <span class="dropdown-icon">🏛️</span>
-                <div class="dropdown-text">
-                  <span class="dropdown-title" data-nav-i18n="dropdown_about_title">PFPJ ry Association</span>
-                  <span class="dropdown-desc" data-nav-i18n="dropdown_about_desc">Finnish registry, governance &amp; legal mandate</span>
-                </div>
+            <li class="nav-item">
+              <a href="events.html" class="nav-link ${info.isEvents ? 'active' : ''}"${info.isEvents ? ' aria-current="page"' : ''} data-nav-i18n="nav_events">Events</a>
+            </li>
+
+            <li class="nav-item has-dropdown">
+              <a href="about.html" class="nav-link ${info.isAbout ? 'active' : ''}">
+                <span data-nav-i18n="nav_about">About</span>
+                <span class="caret" aria-hidden="true">▼</span>
               </a>
-              <a href="initiatives.html" class="dropdown-item ${p === 'initiatives.html' ? 'active' : ''}">
-                <span class="dropdown-icon">🌐</span>
-                <div class="dropdown-text">
-                  <span class="dropdown-title" data-nav-i18n="dropdown_initiatives_title">Global Initiatives</span>
-                  <span class="dropdown-desc" data-nav-i18n="dropdown_initiatives_desc">International coalitions &amp; ICC communications</span>
-                </div>
-              </a>
-            </div>
-          </li>
-        </ul>
+              <div class="dropdown-menu">
+                <a href="about.html" class="dropdown-item ${p === 'about.html' ? 'active' : ''}"${p === 'about.html' ? ' aria-current="page"' : ''}>
+                  <span class="dropdown-icon" aria-hidden="true">🏛️</span>
+                  <div class="dropdown-text">
+                    <span class="dropdown-title" data-nav-i18n="dropdown_about_title">PFPJ ry Association</span>
+                    <span class="dropdown-desc" data-nav-i18n="dropdown_about_desc">Finnish registry, governance &amp; legal mandate</span>
+                  </div>
+                </a>
+                <a href="initiatives.html" class="dropdown-item ${p === 'initiatives.html' ? 'active' : ''}"${p === 'initiatives.html' ? ' aria-current="page"' : ''}>
+                  <span class="dropdown-icon" aria-hidden="true">🌐</span>
+                  <div class="dropdown-text">
+                    <span class="dropdown-title" data-nav-i18n="dropdown_initiatives_title">Global Initiatives</span>
+                    <span class="dropdown-desc" data-nav-i18n="dropdown_initiatives_desc">International coalitions &amp; ICC communications</span>
+                  </div>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
 
         <div class="nav-actions">
           ${extraRightHTML || ''}
           <button class="vow-cta-btn" id="openVowBtn" type="button" data-open-vow="true" onclick="if(window.openVowModal){event.preventDefault();window.openVowModal();}">
-            <span>✍️</span>
+            <span aria-hidden="true">✍️</span>
             <span data-nav-i18n="signVowBtn">Sign Accountability Vow</span>
             <span class="vow-counter-pill" id="vowCountBadge" style="display: none;"></span>
           </button>
@@ -708,7 +775,7 @@
 
           <a href="#contact" data-open-contact="true" onclick="if(window.openContactModal){event.preventDefault();window.openContactModal();}" class="btn-nav-cta" data-nav-i18n="nav_contact">✉ Contact</a>
 
-          <button type="button" class="hamburger-btn" id="mobileToggle" aria-label="Toggle navigation" onclick="window.toggleMobileNav()">☰</button>
+          <button type="button" class="hamburger-btn" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false" onclick="window.toggleMobileNav()"><span aria-hidden="true">☰</span></button>
         </div>
       </div>
     `;
@@ -721,8 +788,9 @@
       <div class="mobile-group">
         <div class="mobile-group-title">Navigation</div>
         <div class="mobile-links">
-          <a href="landing.html" class="mobile-link ${info.isHome ? 'active' : ''}" data-nav-i18n="nav_home">Home</a>
-          <a href="multimedia.html" class="mobile-link ${info.isMultimedia ? 'active' : ''}" data-nav-i18n="nav_multimedia">Multimedia</a>
+          <a href="landing.html" class="mobile-link ${info.isHome ? 'active' : ''}"${info.isHome ? ' aria-current="page"' : ''} data-nav-i18n="nav_home">Home</a>
+          <a href="events.html" class="mobile-link ${info.isEvents ? 'active' : ''}"${info.isEvents ? ' aria-current="page"' : ''} data-nav-i18n="nav_events">Events</a>
+          <a href="multimedia.html" class="mobile-link ${info.isMultimedia ? 'active' : ''}"${p === 'multimedia.html' ? ' aria-current="page"' : ''} data-nav-i18n="nav_multimedia">Multimedia</a>
         </div>
       </div>
 
@@ -806,7 +874,10 @@
     const btn = document.getElementById('mobileToggle');
     if (!drawer) return;
     const isOpen = drawer.classList.toggle('open');
-    if (btn) btn.textContent = isOpen ? '✕' : '☰';
+    if (btn) {
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      btn.innerHTML = `<span aria-hidden="true">${isOpen ? '✕' : '☰'}</span>`;
+    }
   };
 
   function bindDropdownInteractions(headerEl) {
@@ -855,12 +926,15 @@
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 1080) {
+      if (window.innerWidth > 1180) {
         const drawer = document.getElementById('mobileDrawer');
         const btn = document.getElementById('mobileToggle');
         if (drawer && drawer.classList.contains('open')) {
           drawer.classList.remove('open');
-          if (btn) btn.textContent = '☰';
+          if (btn) {
+            btn.setAttribute('aria-expanded', 'false');
+            btn.innerHTML = '<span aria-hidden="true">☰</span>';
+          }
         }
       }
     });

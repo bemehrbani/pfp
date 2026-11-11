@@ -229,7 +229,7 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 8px 14px;
+            padding: 8px 11px;
             font-size: 0.92rem;
             font-weight: 500;
             color: var(--text-secondary);
@@ -240,13 +240,16 @@
 
         .nav-link:hover,
         .nav-link.active,
+        .nav-link[aria-current="page"],
         .nav-item:hover > .nav-link {
             color: var(--text-primary);
             background: rgba(255, 255, 255, 0.04);
         }
 
-        .nav-link.active {
+        .nav-link.active,
+        .nav-link[aria-current="page"] {
             color: var(--accent-gold);
+            box-shadow: inset 0 -2px 0 var(--accent-gold);
         }
 
         .nav-link .caret {
@@ -540,11 +543,12 @@
         }
 
         .mobile-link:hover,
-        .mobile-link.active {
+        .mobile-link.active,
+        .mobile-link[aria-current="page"] {
             color: var(--accent-gold);
         }
 
-        @media (max-width: 1080px) {
+        @media (max-width: 1180px) {
             .nav-menu {
                 display: none;
             }
@@ -857,6 +861,100 @@
         @media (max-width: 500px) {
             .stats-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+           UPCOMING FLAGSHIP EVENT SPOTLIGHT (NOV 20 HXRC)
+           ============================================================ */
+        .event-spotlight-section {
+            padding: 72px 24px;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .event-spotlight-card {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(229, 185, 95, 0.10) 0%, var(--bg-card) 58%);
+            border: 1px solid var(--accent-gold-border);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            display: grid;
+            grid-template-columns: 1.4fr 0.72fr;
+            gap: 36px;
+            align-items: center;
+            box-shadow: var(--shadow-elevation);
+        }
+
+        .event-spotlight-card > img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-medium);
+            display: block;
+        }
+
+        .event-spotlight-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 14px;
+            border-radius: var(--radius-full);
+            background: var(--accent-gold-dim);
+            border: 1px solid var(--accent-gold-border);
+            color: var(--accent-gold);
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        body[dir="rtl"] .event-spotlight-kicker {
+            letter-spacing: 0;
+        }
+
+        .event-spotlight-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.65rem, 3vw, 2.3rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .event-spotlight-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 14px;
+        }
+
+        .event-spotlight-desc {
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .event-spotlight-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 920px) {
+            .event-spotlight-card {
+                grid-template-columns: 1fr;
+                padding: 26px;
+            }
+            .event-spotlight-card > img {
+                max-width: 420px;
             }
         }
 
@@ -1532,7 +1630,7 @@
             <!-- Desktop Nav Menu -->
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="landing.html" class="nav-link active" data-i18n="nav_home">Home</a>
+                    <a href="landing.html" class="nav-link active" aria-current="page" data-i18n="nav_home">Home</a>
                 </li>
 
                 <!-- Case File Dropdown -->
@@ -1611,6 +1709,11 @@
                     <a href="multimedia.html" class="nav-link" data-i18n="nav_multimedia">Multimedia</a>
                 </li>
 
+                <!-- Events -->
+                <li class="nav-item">
+                    <a href="events.html" class="nav-link" data-i18n="nav_events">Events</a>
+                </li>
+
                 <!-- About Dropdown -->
                 <li class="nav-item has-dropdown">
                     <a href="about.html" class="nav-link">
@@ -1663,7 +1766,8 @@
         <div class="mobile-group">
             <div class="mobile-group-title">Navigation</div>
             <div class="mobile-links">
-                <a href="landing.html" class="mobile-link active" data-i18n="nav_home">Home</a>
+                <a href="landing.html" class="mobile-link active" aria-current="page" data-i18n="nav_home">Home</a>
+                <a href="events.html" class="mobile-link" data-i18n="nav_events">Events</a>
                 <a href="multimedia.html" class="mobile-link" data-i18n="nav_multimedia">Multimedia</a>
             </div>
         </div>
@@ -1751,6 +1855,8 @@
 
             <!-- Context Breadcrumbs -->
             <div class="hero-quick-links">
+                <a href="#upcoming-events" class="hero-quick-link" data-i18n="quick_event">20 Nov Helsinki Event</a>
+                <span>·</span>
                 <a href="#why" class="hero-quick-link" data-i18n="quick_incident">Incident Overview</a>
                 <span>·</span>
                 <a href="#evidence-strategy" class="hero-quick-link" data-i18n="quick_strategy">Three Pillars of Legal Action</a>
@@ -1789,6 +1895,32 @@
                 <div class="stat-sub" data-i18n="stat_jurisdiction_sub">International Criminal Jurisdiction</div>
             </div>
         </div>
+    </section>
+
+    <!-- ====== UPCOMING FLAGSHIP EVENT SPOTLIGHT (NOV 20 HXRC) ====== -->
+    <section class="event-spotlight-section" id="upcoming-events">
+        <article class="event-spotlight-card">
+            <div>
+                <div class="event-spotlight-kicker">
+                    <span class="badge-dot" aria-hidden="true"></span>
+                    <span data-i18n="evt_spot_kicker">Upcoming Helsinki Event · UN World Children’s Day</span>
+                </div>
+                <h2 class="event-spotlight-title display-font" data-i18n="evt_spot_title">Voices of Minab: Walk Inside the Reconstructed School</h2>
+                <div class="event-spotlight-meta">
+                    <span data-i18n="evt_spot_date">📅 Friday, 20 November 2026 · 17:00–19:00 EET (Doors 16:45)</span>
+                    <span data-i18n="evt_spot_venue">📍 Helsinki XR Center (HXRC), 3rd Floor · Hämeentie 135 A</span>
+                </div>
+                <p class="event-spotlight-desc" data-i18n="evt_spot_desc">
+                    Co-organized by Pomegroup Studio (3370210-5), People for Peace &amp; Justice ry (3616815-5), and Makan ry (3599693-6). Experience the walkable 3D school reconstruction, verified documentary screening, and live expert panel moderated by Sama M. Barvari with Dr. Nitin Sawhney, Maria Mekri, Kaisu Kinnunen, Dr. Ali Akbar Siapoush, and Mahdi Farimani. Free entry (60 seats + online stream).
+                </p>
+                <div class="event-spotlight-actions">
+                    <a href="https://app.onton.live/events/fd4da784-28f0-4dd0-9ba7-ede105af9a9a" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-primary" data-i18n="evt_spot_btn_web">🎟️ Reserve Free Seat — Web</a>
+                    <a href="https://t.me/theontonbot/event?startapp=fd4da784-28f0-4dd0-9ba7-ede105af9a9a" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-secondary" data-i18n="evt_spot_btn_tg">✈️ Register on Telegram</a>
+                    <a href="events.html" class="btn-card-action btn-card-secondary" data-i18n="evt_spot_btn_details">Full Program &amp; Speakers →</a>
+                </div>
+            </div>
+            <img src="images/events/voices-of-minab-cover-square.jpg" width="1080" height="1080" loading="lazy" alt="Voices of Minab — 20 November 2026 at Helsinki XR Center" />
+        </article>
     </section>
 
     <!-- ====== MEMORIAL TRIBUTE ====== -->
@@ -2041,6 +2173,7 @@
                 <div>
                     <h4 class="footer-col-title" data-i18n="footer_col_association">Association</h4>
                     <ul class="footer-links-list">
+                        <li><a href="events.html" data-i18n="nav_events">Events</a></li>
                         <li><a href="about.html" data-i18n="nav_about">About PFPJ ry</a></li>
                         <li><a href="initiatives.html" data-i18n="nav_initiatives">Global Initiatives</a></li>
                         <li><a href="#contact" data-open-contact="true" data-i18n="footer_contact">Contact Us</a></li>
@@ -2064,8 +2197,19 @@
                 nav_case_file: "Case File",
                 nav_memorial: "Memorial",
                 nav_multimedia: "Multimedia",
+                nav_events: "Events",
                 nav_about: "About",
+                nav_initiatives: "Global Initiatives",
                 nav_contact: "✉ Contact",
+                quick_event: "20 Nov Helsinki Event",
+                evt_spot_kicker: "Upcoming Helsinki Event · UN World Children’s Day",
+                evt_spot_title: "Voices of Minab: Walk Inside the Reconstructed School",
+                evt_spot_date: "📅 Friday, 20 November 2026 · 17:00–19:00 EET (Doors 16:45)",
+                evt_spot_venue: "📍 Helsinki XR Center (HXRC), 3rd Floor · Hämeentie 135 A",
+                evt_spot_desc: "Co-organized by Pomegroup Studio (3370210-5), People for Peace & Justice ry (3616815-5), and Makan ry (3599693-6). Experience the walkable 3D school reconstruction, verified documentary screening, and live expert panel moderated by Sama M. Barvari with Dr. Nitin Sawhney, Maria Mekri, Kaisu Kinnunen, Dr. Ali Akbar Siapoush, and Mahdi Farimani. Free entry (60 seats + online stream).",
+                evt_spot_btn_web: "🎟️ Reserve Free Seat — Web",
+                evt_spot_btn_tg: "✈️ Register on Telegram",
+                evt_spot_btn_details: "Full Program & Speakers →",
                 signVowBtn: "Sign Accountability Vow",
                 hero_cta_vow_text: "Sign Accountability Vow",
                 dropdown_report_title: "Case Determination",
@@ -2167,8 +2311,19 @@
                 nav_case_file: "پرونده حقوقی",
                 nav_memorial: "یادبود شهیدان",
                 nav_multimedia: "چندرسانه‌ای",
+                nav_events: "رویدادها",
                 nav_about: "درباره انجمن",
+                nav_initiatives: "ابتکارات جهانی",
                 nav_contact: "✉ تماس با ما",
+                quick_event: "رویداد ۲۰ نوامبر هلسینکی",
+                evt_spot_kicker: "رویداد پیش‌رو در هلسینکی · روز جهانی کودک",
+                evt_spot_title: "روایت میناب: قدم زدن در مدرسه بازسازی‌شده",
+                evt_spot_date: "📅 جمعه ۲۰ نوامبر ۲۰۲۶ · ساعت ۱۷:۰۰ تا ۱۹:۰۰ (بازگشایی درها ۱۶:۴۵)",
+                evt_spot_venue: "📍 مرکز XR هلسینکی (HXRC)، طبقه سوم · Hämeentie 135 A",
+                evt_spot_desc: "به همت استودیو پوم‌گروپ (3370210-5)، انجمن مردم برای صلح و عدالت (3616815-5) و انجمن ماکان (3599693-6). تجربه مدل سه‌بعدی قابل پیاده‌روی مدرسه، اکران مستندهای تحقیقی و پنل تخصصی به مدیریت سما م. بارواری با حضور دکتر نیتین ساوینی، ماریا مکری، کایسو کینونن، دکتر علی‌اکبر سیاپوش و مهدی فریمانی. ورود رایگان (۶۰ صندلی + پخش آنلاین).",
+                evt_spot_btn_web: "🎟️ ثبت‌نام رایگان — وب",
+                evt_spot_btn_tg: "✈️ ثبت‌نام در تلگرام",
+                evt_spot_btn_details: "مشاهده برنامه کامل و سخنرانان ←",
                 signVowBtn: "امضای میثاق دادخواهی",
                 hero_cta_vow_text: "امضای میثاق دادخواهی",
                 dropdown_report_title: "گزارش نهایی سانحه",
@@ -2270,8 +2425,19 @@
                 nav_case_file: "Oikeustapaus",
                 nav_memorial: "Muistomerkki",
                 nav_multimedia: "Multimedia",
+                nav_events: "Tapahtumat",
                 nav_about: "Tietoa",
+                nav_initiatives: "Globaalit aloitteet",
                 nav_contact: "✉ Ota yhteyttä",
+                quick_event: "20.11. Helsingin tapahtuma",
+                evt_spot_kicker: "Tuleva Helsingin tapahtuma · YK:n lapsen oikeuksien päivä",
+                evt_spot_title: "Minabin äänet: Astu sisään uudelleenrakennettuun kouluun",
+                evt_spot_date: "📅 Perjantai 20.11.2026 · klo 17.00–19.00 EET (Ovet klo 16.45)",
+                evt_spot_venue: "📍 Helsinki XR Center (HXRC), 3. krs · Hämeentie 135 A",
+                evt_spot_desc: "Järjestäjinä Pomegroup Studio (3370210-5), People for Peace & Justice ry (3616815-5) ja Makan ry (3599693-6). Koe käveltävä 3D-koulurekonstruktio, dokumenttinäytös ja asiantuntijapaneeli Sama M. Barvarin johdolla (dos. Nitin Sawhney, Maria Mekri, Kaisu Kinnunen, tri Ali Akbar Siapoush ja Mahdi Farimani). Vapaa pääsy (60 paikkaa + verkkolähetys).",
+                evt_spot_btn_web: "🎟️ Varaa maksuton paikka — Web",
+                evt_spot_btn_tg: "✈️ Ilmoittaudu Telegramissa",
+                evt_spot_btn_details: "Koko ohjelma & panelistit →",
                 signVowBtn: "Allekirjoita vastuulupaus",
                 hero_cta_vow_text: "Allekirjoita vastuulupaus",
                 dropdown_report_title: "Tapausseloste",
@@ -2411,7 +2577,7 @@
 
         // Close mobile drawer on resize
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 1080) {
+            if (window.innerWidth > 1180) {
                 const drawer = document.getElementById('mobileDrawer');
                 const btn = document.getElementById('mobileToggle');
                 if (drawer && drawer.classList.contains('open')) {
