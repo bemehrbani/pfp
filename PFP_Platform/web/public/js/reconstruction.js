@@ -626,6 +626,7 @@ function startReconstructionApp() {
   updateVowBadge();
   fetchRealVowCount();
   initI18n();
+  initWalkthroughPipManifest();
   initThreeEngine();
   buildEnvironmentAndTerrain();
   buildProceduralSchoolModels();
@@ -677,17 +678,35 @@ async function fetchRealVowCount() {
 
 // --- LOCALIZATION HANDLER ---
 function initI18n() {
+  const params = new URLSearchParams(window.location.search);
+  const urlVoice = params.get('voice');
+  const urlLang = params.get('lang');
   const saved = localStorage.getItem('pfp_lang');
-  if (saved && ['en', 'fi', 'fa'].includes(saved)) {
+
+  if (urlVoice && NARRATOR_PROFILES[urlVoice]) {
+    activeVoiceProfile = urlVoice;
+    preferredVoiceByLang[NARRATOR_PROFILES[urlVoice].lang] = urlVoice;
+    currentLang = NARRATOR_PROFILES[urlVoice].lang;
+  } else if (urlLang && ['en', 'fi', 'fa'].includes(urlLang)) {
+    currentLang = urlLang;
+    activeVoiceProfile = currentLang === 'fa' ? preferredVoiceByLang.fa : preferredVoiceByLang.en;
+  } else if (saved && ['en', 'fi', 'fa'].includes(saved)) {
     currentLang = saved;
+    activeVoiceProfile = currentLang === 'fa' ? preferredVoiceByLang.fa : preferredVoiceByLang.en;
   }
   applyTranslations();
+  updateNarratorButtonsUI();
 }
 
 function setLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('pfp_lang', lang);
+  const targetLangBucket = lang === 'fa' ? 'fa' : 'en';
+  if (!NARRATOR_PROFILES[activeVoiceProfile] || NARRATOR_PROFILES[activeVoiceProfile].lang !== targetLangBucket) {
+    activeVoiceProfile = preferredVoiceByLang[targetLangBucket];
+  }
   applyTranslations();
+  updateNarratorButtonsUI();
   updateHotspotLabels();
   if (activeHotspotId) {
     showHotspotModal(activeHotspotId);
@@ -1917,6 +1936,60 @@ function buildProceduralSchoolModels() {
   craterCircleRing.position.set(-2.5, 0.45, -6);
   postStrikeModelGroup.add(craterCircleRing);
 
+  // Exact 5.0m Blast Diameter Inner Forensic Ring (r = 2.50m) + Orthogonal Scale Axis + Ground Plaque
+  const exactFiveMeterRing = new THREE.Mesh(
+    new THREE.RingGeometry(2.42, 2.56, 64),
+    new THREE.MeshBasicMaterial({ color: 0xef4444, side: THREE.DoubleSide, transparent: true, opacity: 0.92 })
+  );
+  exactFiveMeterRing.rotation.x = -Math.PI / 2;
+  exactFiveMeterRing.position.set(-2.5, 0.48, -6);
+  postStrikeModelGroup.add(exactFiveMeterRing);
+
+  const craterAxisPts = [
+    new THREE.Vector3(-5.0, 0.49, -6.0),
+    new THREE.Vector3(0.0, 0.49, -6.0),
+    new THREE.Vector3(-2.5, 0.49, -8.5),
+    new THREE.Vector3(-2.5, 0.49, -3.5)
+  ];
+  const craterAxisLines = new THREE.LineSegments(
+    new THREE.BufferGeometry().setFromPoints(craterAxisPts),
+    new THREE.LineBasicMaterial({ color: 0xfca5a5, transparent: true, opacity: 0.72 })
+  );
+  postStrikeModelGroup.add(craterAxisLines);
+
+  const scaleCanvas = document.createElement('canvas');
+  scaleCanvas.width = 512;
+  scaleCanvas.height = 88;
+  const sCtx = scaleCanvas.getContext('2d');
+  sCtx.fillStyle = 'rgba(15, 18, 28, 0.92)';
+  sCtx.fillRect(0, 0, 512, 88);
+  sCtx.strokeStyle = '#ef4444';
+  sCtx.lineWidth = 4;
+  sCtx.strokeRect(2, 2, 508, 84);
+  sCtx.textAlign = 'center';
+  sCtx.fillStyle = '#fca5a5';
+  sCtx.font = 'bold 22px Inter, sans-serif';
+  sCtx.fillText('Ø 5.0 m IMPACT CRATER · CENTRAL HALL', 256, 36);
+  sCtx.fillStyle = '#fef2f2';
+  sCtx.font = 'bold 21px Tahoma, sans-serif';
+  sCtx.fillText('قطر دهانه گودال انفجار: ۵ متر (مرکز سالن مدرسه)', 256, 68);
+  const scaleTex = new THREE.CanvasTexture(scaleCanvas);
+  const scaleBadge = new THREE.Mesh(
+    new THREE.PlaneGeometry(4.2, 0.72),
+    new THREE.MeshBasicMaterial({ map: scaleTex, side: THREE.DoubleSide })
+  );
+  scaleBadge.position.set(-2.5, 4.15, -5.5);
+  postStrikeModelGroup.add(scaleBadge);
+
+  const scaleLeaderLine = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-2.5, 0.5, -5.5),
+      new THREE.Vector3(-2.5, 3.79, -5.5)
+    ]),
+    new THREE.LineBasicMaterial({ color: 0xef4444, transparent: true, opacity: 0.75 })
+  );
+  postStrikeModelGroup.add(scaleLeaderLine);
+
   // Collapsed West Wing & Central Assembly Rubble Slabs
   for (let i = 0; i < 36; i++) {
     const rx = -18 + Math.random() * 19;
@@ -2260,16 +2333,370 @@ function closeModal() {
   activeHotspotId = null;
 }
 
-// --- CALM, KIND & SORROWFUL FEMALE VOICEOVER ENGINE + GENTLE AMBIENT PAD ---
+// --- MULTI-NARRATOR HUMAN VOICEOVER + REAL ARCHIVAL SCHOOL ECHOES + ROOM ATMOSPHERE ENGINE ---
 let narrationAudio = null;
+let archivalAudio = null;
+let narrationPhase = 'idle'; // 'idle' | 'archival' | 'delay' | 'voice'
+let narrationPhaseTimer = null;
+let activeNarrationHotspot = null;
 let narrationRate = 1.0;
 let ambientAudioCtx = null;
 let ambientGainNode = null;
+let ambientPadFilter = null;
+let ambientOscillators = [];
+let ambientBreezeGain = null;
+let ambientBreezeFilter = null;
+let ambientBirdTimer = null;
 let guidedTourAutoAdvanceTimer = null;
 let tourManualCameraOverride = false;
 let tourStepStartTime = 0;
 let walkthroughIdleTimer = null;
 let supportsDisplayTransition;
+let deterministicWalkthroughRender = false;
+let activePipReelUrl = '';
+const pipBlobCache = new Map();
+
+const NARRATOR_PROFILES = {
+  mostafa_fa: {
+    id: 'mostafa_fa',
+    lang: 'fa',
+    prefix: 'fa',
+    dir: 'voices/mostafa_fa',
+    fallbackDir: 'voices/leila_fa',
+    hudLabel: { en: 'Voice: Mostafa (FA)', fa: 'راوی: مصطفی جلالی', fi: 'Ääni: Mostafa (FA)' },
+    shortLabel: { en: '🎙️ Mostafa', fa: '🎙️ مصطفی جلالی', fi: '🎙️ Mostafa' }
+  },
+  leila_fa: {
+    id: 'leila_fa',
+    lang: 'fa',
+    prefix: 'fa',
+    dir: 'voices/leila_fa',
+    fallbackDir: 'voices/mostafa_fa',
+    hudLabel: { en: 'Voice: Leila (FA)', fa: 'راوی: لیلا غضنفری', fi: 'Ääni: Leila (FA)' },
+    shortLabel: { en: '🎙️ Leila', fa: '🎙️ لیلا غضنفری', fi: '🎙️ Leila' }
+  },
+  leila_en: {
+    id: 'leila_en',
+    lang: 'en',
+    prefix: 'en',
+    dir: 'voices/leila_en',
+    fallbackDir: 'voices/leila_en',
+    hudLabel: { en: 'Voice: Leila (EN)', fa: 'راوی: لیلا (EN)', fi: 'Ääni: Leila (EN)' },
+    shortLabel: { en: '🎙️ Leila', fa: '🎙️ لیلا (EN)', fi: '🎙️ Leila' }
+  },
+  ali_en: {
+    id: 'ali_en',
+    lang: 'en',
+    prefix: 'en',
+    dir: 'voices/ali_en',
+    fallbackDir: 'voices/leila_en',
+    hudLabel: { en: 'Voice: Ali (EN)', fa: 'راوی: علی (EN)', fi: 'Ääni: Ali (EN)' },
+    shortLabel: { en: '🎙️ Ali', fa: '🎙️ علی (EN)', fi: '🎙️ Ali' }
+  }
+};
+
+let activeVoiceProfile = 'leila_en';
+const preferredVoiceByLang = {
+  fa: 'mostafa_fa',
+  en: 'leila_en'
+};
+
+function updateNarratorButtonsUI() {
+  const prof = NARRATOR_PROFILES[activeVoiceProfile] || NARRATOR_PROFILES.leila_en;
+  const labelText = prof.hudLabel[currentLang] || prof.hudLabel.en;
+  const hudLbl = document.getElementById('hudNarratorLabel');
+  if (hudLbl) hudLbl.textContent = labelText;
+  const subLbl = document.getElementById('subrowNarratorLabel');
+  if (subLbl) subLbl.textContent = labelText;
+  const storyBtn = document.getElementById('btnStoryNarrator');
+  if (storyBtn) {
+    storyBtn.textContent = prof.shortLabel[currentLang] || prof.shortLabel.en;
+  }
+}
+
+function setNarratorProfile(profileId, restartAudio = true) {
+  const prof = NARRATOR_PROFILES[profileId];
+  if (!prof) return;
+  activeVoiceProfile = profileId;
+  preferredVoiceByLang[prof.lang] = profileId;
+  if (prof.lang === 'fa' && currentLang !== 'fa') {
+    currentLang = 'fa';
+    localStorage.setItem('pfp_lang', 'fa');
+    applyTranslations();
+    updateHotspotLabels();
+  } else if (prof.lang === 'en' && currentLang === 'fa') {
+    currentLang = 'en';
+    localStorage.setItem('pfp_lang', 'en');
+    applyTranslations();
+    updateHotspotLabels();
+  }
+  updateNarratorButtonsUI();
+  if (restartAudio && isGuidedTour) {
+    const stop = GUIDED_TOUR_STOPS[currentTourIndex];
+    if (stop) playSpotNarration(stop.hotspotId);
+  } else if (restartAudio && activeNarrationHotspot && isSpotAudioPlaying()) {
+    playSpotNarration(activeNarrationHotspot);
+  }
+}
+window.setNarratorProfile = setNarratorProfile;
+
+function cycleNarratorForCurrentLanguage() {
+  if (currentLang === 'fa') {
+    const nextFa = activeVoiceProfile === 'mostafa_fa' ? 'leila_fa' : 'mostafa_fa';
+    setNarratorProfile(nextFa, true);
+  } else {
+    const nextEn = activeVoiceProfile === 'leila_en' ? 'ali_en' : 'leila_en';
+    setNarratorProfile(nextEn, true);
+  }
+}
+
+const WALKTHROUGH_VISUAL_CONFIG = {
+  courtyard_lines: {
+    phase: 'pre',
+    stamp: {
+      en: 'FEB 28, 2026 · MORNING BEFORE THE STRIKE · MINAB SCHOOLYARD',
+      fa: '۹ اسفند ۱۴۰۴ · صبح پیش از حمله · حیاط دبستان شجره طیبه میناب',
+      fi: '28.2.2026 · AAMU ENNEN ISKUA · MINABIN KOULUPIHA'
+    },
+    pipReel: 'media/fa/real_inserts/reel_01_courtyard.mp4',
+    pipBadge: { en: 'VERIFIED ARCHIVE FOOTAGE', fa: 'تصاویر مستند و آرشیوی مدرسه', fi: 'VARMENNETTU ARKISTOKUVA' },
+    pipCaption: {
+      en: 'Yellow morning assembly lines & pastel courtyard walls before the strike',
+      fa: 'خطوط زرد صف صبحگاهی و دیوارهای رنگی حیاط مدرسه پیش از حمله',
+      fi: 'Koulupihan keltaiset aamurivit ja pastellisävyinen muuri ennen iskua'
+    },
+    quote: {
+      tone: 'pre',
+      text: {
+        en: '"When the first missile hit, teacher Ms. Shahriari ran toward a classroom to bring her students out — then the second hit."',
+        fa: '«وقتی موشک اول اصابت کرد، خانم شهریاری به سمت کلاس دوید تا شاگردانش را بیرون بیاورد که موشک دوم فرود آمد.»',
+        fi: '"Kun ensimmäinen ohjus osui, opettaja Shahriari juoksi luokkaan pelastamaan oppilaitaan — silloin toinen osui."'
+      },
+      author: {
+        en: '— Wajiheh Zakari, Teacher at Shajareh Tayyebeh School',
+        fa: '— وجیهه ذاکری، آموزگار دبستان شجره طیبه',
+        fi: '— Wajiheh Zakari, koulun opettaja'
+      }
+    }
+  },
+  boys_flower_arch: {
+    phase: 'pre',
+    stamp: {
+      en: 'GROUND FLOOR · BOYS\' CEREMONY ROOM · BEFORE THE STRIKE',
+      fa: 'طبقه همکف · اتاق جشن پسران · روزهای روشن پیش از حمله',
+      fi: 'ALAKERTA · POIKIEN JUHLAHUONE · ENNEN ISKUA'
+    },
+    pipReel: 'media/fa/real_inserts/reel_02_boys_arch.mp4',
+    pipBadge: { en: 'CAMERA-MATCHED SCHOOL ARCHIVE', fa: 'آرشیو مدرسه · منطبق بر اتاق سه‌بعدی', fi: 'KOULUN ARKISTOKUVA' },
+    pipCaption: {
+      en: 'Boys in royal blue uniforms celebrating beneath red rose arches',
+      fa: 'دانش‌آموزان پسر با لباس فرم آبی در جشن مدرسه زیر طاق گل‌های رز',
+      fi: 'Sinipukuiset koulupojat juhlimassa punaisten ruusukaarten alla'
+    }
+  },
+  boys_classroom: {
+    phase: 'pre',
+    stamp: {
+      en: 'GROUND FLOOR WEST · BOYS\' CLASSROOM · JAN–FEB 2026',
+      fa: 'طبقه همکف (بال غربی) · کلاس درس پسران · زمستان ۱۴۰۴',
+      fi: 'ALAKERTA · POIKIEN LUOKKAHUONE · TALVI 2026'
+    },
+    pipReel: 'media/fa/real_inserts/reel_03_boys_classroom.mp4',
+    pipBadge: { en: 'BEFORE & AFTER IN THE SAME ROOM', fa: 'تصویر واقعی کلاس پیش و پس از حمله', fi: 'ENNEN JA JÄLKEEN SAMASSA LUOKASSA' },
+    pipCaption: {
+      en: '35+ boys clapping & singing together — and the same sky-blue room after the strike',
+      fa: 'هم‌خوانی و دست زدن بیش از ۳۵ دانش‌آموز پسر — و همان کلاس آبی پس از حمله',
+      fi: 'Yli 35 poikaa taputtamassa ja laulamassa — ja sama sininen luokka iskun jälkeen'
+    }
+  },
+  rainbow_staircase: {
+    phase: 'pre',
+    stamp: {
+      en: 'CENTRAL HALL · RAINBOW STAIRCASE & PURPLE DOORS',
+      fa: 'سالن مرکزی · راه‌پله رنگین‌کمان و درهای بنفش کلاس‌ها',
+      fi: 'KESKUSSALI · SATEENKAARIPORTAIKKO JA VIOLETIT OVET'
+    },
+    pipReel: 'media/fa/real_inserts/reel_04_rainbow_stairs.mp4',
+    pipBadge: { en: 'VERIFIED SCHOOL ARCHIVE', fa: 'آرشیو راستی‌آزمایی‌شده مدرسه', fi: 'VARMENNETTU KOULUARKISTO' },
+    pipCaption: {
+      en: 'Teachers welcoming girls at the rainbow stairs & children coloring workbooks',
+      fa: 'استقبال معلمان در پای پله‌های رنگین‌کمان و رنگ‌آمیزی دفتر مشق کودکان',
+      fi: 'Opettajat vastassa sateenkaariportailla ja lapset värittämässä vihkojaan'
+    },
+    quote: {
+      tone: 'strike',
+      text: {
+        en: '"I stretched out my hand to pull my books toward myself — then the second strike hit and I was thrown under the rubble."',
+        fa: '«دستم را دراز کردم تا کتاب‌هایم را به سمت خودم بکشم که موج بعدی اصابت کرد و زیر آوار رفتم.»',
+        fi: '"Ojensin käteni vetääkseni kirjani luokseni — sitten toinen isku osui ja jäin raunioiden alle."'
+      },
+      author: {
+        en: '— Parastesh Zaeri, 11-year-old survivor (her 8-year-old brother Ali Asghar was killed)',
+        fa: '— پرستش زائری، دانش‌آموز ۱۱ ساله بازمانده (خواهر شهید ۸ ساله علی‌اصغر زائری)',
+        fi: '— Parastesh Zaeri, 11-vuotias selviytyjä'
+      }
+    }
+  },
+  girls_upper_hall: {
+    phase: 'pre',
+    stamp: {
+      en: 'FIRST FLOOR WEST · GIRLS\' PRIMARY SCHOOL ASSEMBLY HALL',
+      fa: 'طبقه اول (بال غربی) · سالن بزرگ و کلاس‌های دبستان دخترانه',
+      fi: 'YLÄKERTA · TYTTÖKOULUN SUURI SALI'
+    },
+    pipReel: 'media/fa/real_inserts/reel_05_girls_hall.mp4',
+    pipBadge: { en: 'CAMERA-MATCHED UPPER FLOOR', fa: 'تصاویر واقعی طبقه اول دخترانه', fi: 'YLÄKERRAN ARKISTOKUVA' },
+    pipCaption: {
+      en: '80+ schoolgirls in white headscarves seated shoulder-to-shoulder on the green carpet',
+      fa: 'حضور بیش از ۸۰ دانش‌آموز دختر در کنار دوستانشان روی فرش سبز طبقه اول',
+      fi: 'Yli 80 koulutyttöä istumassa vierekkäin yläkerran vihreällä matolla'
+    }
+  },
+  crater_damage: {
+    phase: 'strike',
+    stamp: {
+      en: 'FEB 28, 2026 · 11:22 AM — DIRECT CRUISE MISSILE IMPACT (Ø 5m)',
+      fa: '۹ اسفند ۱۴۰۴ · ساعت ۱۱:۲۲ صبح — اصابت مستقیم موشک کروز و گودال ۵ متری',
+      fi: '28.2.2026 · KLO 11.22 — SUORA RISTEILYOHJUSOSUMA (5m KRAATTERI)'
+    },
+    pipReel: 'media/fa/real_inserts/reel_06_crater.mp4',
+    pipBadge: { en: 'ON-SITE POST-STRIKE FOOTAGE', fa: 'تصاویر میدانی محل فروریزش و گودال ۵ متری', fi: 'KUVAMATERIAALI ISKUPAIKALTA' },
+    pipCaption: {
+      en: 'Sheared two-story central hall, 5-meter crater & a child\'s pink ball left in the dust',
+      fa: 'برش دو طبقه فروریخته سالن مرکزی، گودال ۵ متری و توپ صورتی به‌جامانده در خاک',
+      fi: 'Romahtanut kaksikerroksinen keskussali, 5 metrin kraatteri ja lapsen pallo pölyssä'
+    },
+    quote: {
+      tone: 'strike',
+      text: {
+        en: '156 civilians killed — including 120+ young schoolchildren and 26 female educators inside these two floors.',
+        fa: 'شهادت ۱۵۶ غیرنظامی — از جمله بیش از ۱۲۰ کودک دانش‌آموز و ۲۶ آموزگار در همین دو طبقه.',
+        fi: '156 siviiliä sai surmansa — heidän joukossaan yli 120 koululaista ja 26 opettajaa.'
+      },
+      author: {
+        en: '— Verified Casualty & Forensic Spatial Record (Investigation 121 / PFPJ ry)',
+        fa: '— مستندات راستی‌آزمایی‌شده مکانی و فهرست جامع شهدا (PFPJ ry)',
+        fi: '— Varmennettu uhri- ja paikkatietorekisteri (PFPJ ry)'
+      }
+    }
+  },
+  second_wave: {
+    phase: 'strike',
+    stamp: {
+      en: 'FEB 28, 2026 · 02:30 PM — SECOND STRIKE WAVE ON FAMILIES & RESCUERS',
+      fa: '۹ اسفند ۱۴۰۴ · ساعت ۱۴:۳۰ — موج دوم موشک‌های تاماهاک میان مادران و امدادگران',
+      fi: '28.2.2026 · KLO 14.30 — TOINEN ISKUAALTO PERHEIDEN JA PELASTAJIEN KESKELLE'
+    },
+    pipReel: 'media/fa/real_inserts/reel_07_second_wave.mp4',
+    pipBadge: { en: 'VERIFIED INCIDENT FOOTAGE', fa: 'ویدیوهای مستند لحظه اصابت و حیاط مدرسه', fi: 'VARMENNETTU TAPAHTUMAVIDEO' },
+    pipCaption: {
+      en: 'Cruise missile descending & hundreds of mothers and rescuers in the smoke-filled yard',
+      fa: 'فرود موشک کروز و حضور صدها مادر و امدادگر در حیاط پر از دود و غبار مدرسه',
+      fi: 'Risteilyohjus syöksymässä ja satoja äitejä sekä pelastajia savuisella koulupihalla'
+    },
+    quote: {
+      tone: 'strike',
+      text: {
+        en: '"All the mothers and families were in the crowded yard... Red Crescent rescuers grabbed my hand saying we were being targeted again."',
+        fa: '«همه مادرها در حیاط شلوغ مدرسه بودند... نیروهای هلال‌احمر دستم را کشیدند که منطقه دوباره هدف قرار گرفته است.»',
+        fi: '"Kaikki äidit ja perheet olivat täydellä pihalla... Punaisen Puolikuun pelastajat vetivät minut turvaan."'
+      },
+      author: {
+        en: '— Khadija Ahmedizadeh, Mother of 9-year-old Mohammad Taha Jafari',
+        fa: '— خدیجه احمدی‌زاده، مادر داغدار دانش‌آموز ۹ ساله محمدطه جعفری',
+        fi: '— Khadija Ahmedizadeh, 9-vuotiaan Mohammad Taha Jafarin äiti'
+      }
+    }
+  },
+  vow_shrine: {
+    phase: 'memorial',
+    stamp: {
+      en: 'SHAJAREH TAYYEBEH MEMORIAL · GLOBAL ACCOUNTABILITY VOW',
+      fa: 'یادمان دبستان شجره طیبه · میثاق جهانی دادخواهی کودکان میناب',
+      fi: 'SHAJAREH TAYYEBEHIN MUISTOMERKKI · KANSAINVÄLINEN VASTUULUPAUS'
+    },
+    pipReel: 'media/fa/real_inserts/reel_08_memorial.mp4',
+    pipBadge: { en: 'REMEMBRANCE & ACCOUNTABILITY', fa: 'یادبود و میثاق دادخواهی', fi: 'MUISTO JA OIKEUDELLINEN VASTUU' },
+    pipCaption: {
+      en: 'A grieving father holding his child\'s schoolbag & portrait before the ruined classrooms',
+      fa: 'پدر داغدار با کیف مدرسه و تصویر فرزندش در برابر کلاس‌های فروریخته دبستان',
+      fi: 'Sureva isä pitelemässä lapsensa koulureppua ja muotokuvaa raunioiden edessä'
+    }
+  }
+};
+
+async function initWalkthroughPipManifest() {
+  try {
+    const resp = await fetch('media/walkthrough_pip/manifest.json', { cache: 'no-store' });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    const stationsMap = (data && data.stations) ? data.stations : data;
+    if (!stationsMap || typeof stationsMap !== 'object') return;
+    Object.keys(WALKTHROUGH_VISUAL_CONFIG).forEach((hotspotId) => {
+      const extCfg = stationsMap[hotspotId];
+      if (!extCfg) return;
+      if (typeof extCfg.video === 'string' && extCfg.video.trim()) {
+        WALKTHROUGH_VISUAL_CONFIG[hotspotId].pipReel = extCfg.video.trim();
+      }
+      if (extCfg.caption && typeof extCfg.caption === 'object') {
+        WALKTHROUGH_VISUAL_CONFIG[hotspotId].pipCaption = {
+          ...WALKTHROUGH_VISUAL_CONFIG[hotspotId].pipCaption,
+          ...extCfg.caption
+        };
+      }
+    });
+  } catch (_) {
+    // Track 2 manifest is optional; built-in verified reels remain active.
+  }
+}
+
+async function resolvePipVideoSrc(reelUrl) {
+  if (!reelUrl) return '';
+  if (pipBlobCache.has(reelUrl)) return pipBlobCache.get(reelUrl);
+  try {
+    const resp = await fetch(reelUrl);
+    if (!resp.ok) return reelUrl;
+    const blob = await resp.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    pipBlobCache.set(reelUrl, blobUrl);
+    return blobUrl;
+  } catch (_) {
+    return reelUrl;
+  }
+}
+
+async function preloadAllWalkthroughPipBlobs() {
+  const urls = Object.values(WALKTHROUGH_VISUAL_CONFIG).map((c) => c.pipReel).filter(Boolean);
+  await Promise.all(urls.map((u) => resolvePipVideoSrc(u)));
+}
+window.preloadAllWalkthroughPipBlobs = preloadAllWalkthroughPipBlobs;
+
+const SPOT_ARCHIVAL_AUDIO = {
+  courtyard_lines:   { file: 'courtyard_lines.mp3',   expectedDur: 6.65 },
+  boys_flower_arch:  { file: 'boys_flower_arch.mp3',  expectedDur: 11.18 },
+  boys_classroom:    { file: 'boys_classroom.mp3',    expectedDur: 6.75 },
+  rainbow_staircase: { file: 'rainbow_staircase.mp3', expectedDur: 7.00 },
+  girls_upper_hall:  { file: 'girls_upper_hall.mp3',  expectedDur: 6.25 },
+  vow_shrine:        { file: 'vow_shrine.mp3',        expectedDur: 7.40 }
+};
+
+const ROOM_ATMOSPHERE_PROFILES = {
+  courtyard_lines:   { freqs: [130.81, 174.61, 196.00, 261.63], padGain: 0.011, padCutoff: 380, breezeFreq: 430, breezeQ: 0.65, breezeGain: 0.015, birdGain: 0.0042, chime: false },
+  boys_flower_arch:  { freqs: [130.81, 164.81, 196.00, 246.94], padGain: 0.011, padCutoff: 320, breezeFreq: 290, breezeQ: 0.80, breezeGain: 0.007, birdGain: 0.0020, chime: false },
+  boys_classroom:    { freqs: [130.81, 164.81, 196.00, 246.94], padGain: 0.011, padCutoff: 310, breezeFreq: 270, breezeQ: 0.85, breezeGain: 0.006, birdGain: 0.0016, chime: false },
+  rainbow_staircase: { freqs: [130.81, 155.56, 196.00, 233.08], padGain: 0.014, padCutoff: 280, breezeFreq: 240, breezeQ: 0.90, breezeGain: 0.006, birdGain: 0.0,    chime: false },
+  girls_upper_hall:  { freqs: [130.81, 155.56, 196.00, 233.08], padGain: 0.014, padCutoff: 290, breezeFreq: 250, breezeQ: 0.85, breezeGain: 0.006, birdGain: 0.0,    chime: false },
+  crater_damage:     { freqs: [65.41,  130.81, 155.56, 196.00], padGain: 0.020, padCutoff: 260, breezeFreq: 205, breezeQ: 0.95, breezeGain: 0.019, birdGain: 0.0,    chime: false },
+  second_wave:       { freqs: [65.41,  130.81, 155.56, 196.00], padGain: 0.020, padCutoff: 250, breezeFreq: 195, breezeQ: 1.00, breezeGain: 0.020, birdGain: 0.0,    chime: false },
+  vow_shrine:        { freqs: [130.81, 164.81, 196.00, 246.94], padGain: 0.016, padCutoff: 350, breezeFreq: 330, breezeQ: 0.75, breezeGain: 0.011, birdGain: 0.0022, chime: true  }
+};
+
+function isSpotAudioPlaying() {
+  if (narrationPhase === 'archival' && archivalAudio && !archivalAudio.paused) return true;
+  if (narrationPhase === 'delay') return true;
+  if (narrationPhase === 'voice' && narrationAudio && !narrationAudio.paused) return true;
+  return false;
+}
 
 function canTransitionDisplay() {
   if (supportsDisplayTransition !== undefined) return supportsDisplayTransition;
@@ -2287,16 +2714,20 @@ function canTransitionDisplay() {
   return supportsDisplayTransition;
 }
 
-function showStoryBanner() {
-  const el = document.getElementById('storyBanner');
+function showAnimatedOverlay(el) {
   if (!el) return;
+  el.style.transition = '';
+  el.style.opacity = '';
+  el.style.translate = '';
   el.removeAttribute('data-closing');
   el.hidden = false;
 }
 
-async function hideStoryBanner() {
-  const el = document.getElementById('storyBanner');
+async function hideAnimatedOverlay(el) {
   if (!el || el.hidden) return;
+  el.style.transition = '';
+  el.style.opacity = '';
+  el.style.translate = '';
   if (canTransitionDisplay()) {
     el.hidden = true;
     return;
@@ -2315,6 +2746,216 @@ async function hideStoryBanner() {
   }
 }
 
+function showStoryBanner() {
+  showAnimatedOverlay(document.getElementById('storyBanner'));
+}
+
+async function hideStoryBanner() {
+  await hideAnimatedOverlay(document.getElementById('storyBanner'));
+}
+
+async function ensurePipVideoLoadedForHotspot(hotspotId, autoPlayLive) {
+  const vCfg = WALKTHROUGH_VISUAL_CONFIG[hotspotId];
+  const pipVideo = document.getElementById('walkthroughPipVideo');
+  if (!vCfg || !vCfg.pipReel || !pipVideo) return;
+
+  if (activePipReelUrl !== vCfg.pipReel) {
+    activePipReelUrl = vCfg.pipReel;
+    const resolvedSrc = await resolvePipVideoSrc(vCfg.pipReel);
+    if (activePipReelUrl !== vCfg.pipReel) return;
+    pipVideo.src = resolvedSrc;
+    pipVideo.load();
+    await new Promise((resolve) => {
+      if (pipVideo.readyState >= 1) {
+        resolve();
+        return;
+      }
+      const done = () => {
+        pipVideo.removeEventListener('loadeddata', done);
+        pipVideo.removeEventListener('loadedmetadata', done);
+        pipVideo.removeEventListener('error', done);
+        resolve();
+      };
+      pipVideo.addEventListener('loadeddata', done);
+      pipVideo.addEventListener('loadedmetadata', done);
+      pipVideo.addEventListener('error', done);
+      setTimeout(done, 1500);
+    });
+  }
+
+  if (autoPlayLive) {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) {
+      pipVideo.play().catch(() => {});
+    } else {
+      pipVideo.pause();
+    }
+  }
+}
+
+function applyWalkthroughStationOverlays(stopIdx) {
+  const stop = GUIDED_TOUR_STOPS[stopIdx];
+  if (!stop) return;
+  const vCfg = WALKTHROUGH_VISUAL_CONFIG[stop.hotspotId];
+  if (!vCfg) return;
+
+  const stampEl = document.getElementById('walkthroughContextStamp');
+  const stampTxt = document.getElementById('walkthroughContextText');
+  if (stampEl && stampTxt) {
+    stampEl.setAttribute('data-phase', vCfg.phase || 'pre');
+    stampTxt.textContent = (vCfg.stamp && (vCfg.stamp[currentLang] || vCfg.stamp.en)) || '';
+  }
+
+  const pipBadge = document.getElementById('walkthroughPipBadge');
+  const pipCap = document.getElementById('walkthroughPipCaption');
+  if (pipBadge && vCfg.pipBadge) {
+    pipBadge.textContent = vCfg.pipBadge[currentLang] || vCfg.pipBadge.en;
+  }
+  if (pipCap && vCfg.pipCaption) {
+    pipCap.textContent = vCfg.pipCaption[currentLang] || vCfg.pipCaption.en;
+  }
+
+  const quoteEl = document.getElementById('walkthroughQuoteCallout');
+  const quoteTxt = document.getElementById('walkthroughQuoteText');
+  const quoteAuth = document.getElementById('walkthroughQuoteAuthor');
+  if (quoteEl && quoteTxt && quoteAuth) {
+    if (vCfg.quote) {
+      quoteEl.setAttribute('data-tone', vCfg.quote.tone || 'pre');
+      quoteTxt.textContent = vCfg.quote.text[currentLang] || vCfg.quote.text.en;
+      quoteAuth.textContent = vCfg.quote.author[currentLang] || vCfg.quote.author.en;
+    } else {
+      quoteTxt.textContent = '';
+      quoteAuth.textContent = '';
+      quoteEl.hidden = true;
+    }
+  }
+}
+
+function updateWalkthroughVisualOverlaysLive(stopIdx, progress) {
+  if (!isGuidedTour || deterministicWalkthroughRender) return;
+  const stop = GUIDED_TOUR_STOPS[stopIdx];
+  if (!stop) return;
+  const vCfg = WALKTHROUGH_VISUAL_CONFIG[stop.hotspotId];
+  if (!vCfg) return;
+
+  const stampEl = document.getElementById('walkthroughContextStamp');
+  if (stampEl && stampEl.hidden) {
+    showAnimatedOverlay(stampEl);
+  }
+
+  const pipCard = document.getElementById('walkthroughPipCard');
+  const pipVideo = document.getElementById('walkthroughPipVideo');
+  const shouldShowPip = Boolean(vCfg.pipReel) && progress >= 0.09 && progress <= 0.88;
+  if (pipCard) {
+    if (shouldShowPip && (pipCard.hidden || pipCard.hasAttribute('data-closing'))) {
+      showAnimatedOverlay(pipCard);
+      ensurePipVideoLoadedForHotspot(stop.hotspotId, true);
+    } else if (!shouldShowPip && !pipCard.hidden && !pipCard.hasAttribute('data-closing')) {
+      if (pipVideo) pipVideo.pause();
+      hideAnimatedOverlay(pipCard);
+    }
+  }
+
+  const quoteEl = document.getElementById('walkthroughQuoteCallout');
+  const shouldShowQuote = Boolean(vCfg.quote) && progress >= 0.48 && progress <= 0.86;
+  if (quoteEl) {
+    if (shouldShowQuote && (quoteEl.hidden || quoteEl.hasAttribute('data-closing'))) {
+      showAnimatedOverlay(quoteEl);
+    } else if (!shouldShowQuote && !quoteEl.hidden && !quoteEl.hasAttribute('data-closing')) {
+      hideAnimatedOverlay(quoteEl);
+    }
+  }
+}
+
+function smoothWindowAlpha(p, inStart, inEnd, outStart, outEnd) {
+  if (p <= inStart || p >= outEnd) return 0;
+  if (p < inEnd) {
+    const t = (p - inStart) / Math.max(0.0001, inEnd - inStart);
+    return 0.5 - 0.5 * Math.cos(Math.PI * t);
+  }
+  if (p > outStart) {
+    const t = (outEnd - p) / Math.max(0.0001, outEnd - outStart);
+    return 0.5 - 0.5 * Math.cos(Math.PI * t);
+  }
+  return 1;
+}
+
+async function syncWalkthroughVisualsAtProgress(stopIdx, progress, totalStationSec) {
+  deterministicWalkthroughRender = true;
+  const stop = GUIDED_TOUR_STOPS[stopIdx];
+  if (!stop) return;
+  const vCfg = WALKTHROUGH_VISUAL_CONFIG[stop.hotspotId];
+  applyWalkthroughStationOverlays(stopIdx);
+
+  const stampEl = document.getElementById('walkthroughContextStamp');
+  if (stampEl) {
+    const sAlpha = smoothWindowAlpha(progress, 0.0, 0.04, 0.95, 1.0);
+    stampEl.removeAttribute('data-closing');
+    stampEl.style.transition = 'none';
+    if (sAlpha <= 0.002) {
+      stampEl.hidden = true;
+    } else {
+      stampEl.hidden = false;
+      stampEl.style.opacity = sAlpha.toFixed(3);
+      stampEl.style.translate = `0 ${((1 - sAlpha) * -8).toFixed(1)}px`;
+    }
+  }
+
+  const pipCard = document.getElementById('walkthroughPipCard');
+  const pipVideo = document.getElementById('walkthroughPipVideo');
+  if (pipCard && pipVideo && vCfg && vCfg.pipReel) {
+    const pAlpha = smoothWindowAlpha(progress, 0.09, 0.14, 0.83, 0.88);
+    pipCard.removeAttribute('data-closing');
+    pipCard.style.transition = 'none';
+    if (pAlpha <= 0.002) {
+      pipCard.hidden = true;
+    } else {
+      pipCard.hidden = false;
+      pipCard.style.opacity = pAlpha.toFixed(3);
+      pipCard.style.translate = '0 0';
+      await ensurePipVideoLoadedForHotspot(stop.hotspotId, false);
+      pipVideo.pause();
+      const dur = (Number.isFinite(pipVideo.duration) && pipVideo.duration > 0.2) ? pipVideo.duration : 14.0;
+      const elapsedSec = Math.max(0, (progress - 0.09) * (totalStationSec || 55.0));
+      const targetTime = Math.min(dur - 0.05, elapsedSec % Math.max(0.5, dur - 0.05));
+      if (Math.abs((pipVideo.currentTime || 0) - targetTime) > 0.025) {
+        await new Promise((resolve) => {
+          const onSeeked = () => {
+            pipVideo.removeEventListener('seeked', onSeeked);
+            resolve();
+          };
+          pipVideo.addEventListener('seeked', onSeeked);
+          try {
+            pipVideo.currentTime = targetTime;
+          } catch (_) {
+            pipVideo.removeEventListener('seeked', onSeeked);
+            resolve();
+          }
+          setTimeout(() => {
+            pipVideo.removeEventListener('seeked', onSeeked);
+            resolve();
+          }, 120);
+        });
+      }
+    }
+  }
+
+  const quoteEl = document.getElementById('walkthroughQuoteCallout');
+  if (quoteEl) {
+    quoteEl.removeAttribute('data-closing');
+    quoteEl.style.transition = 'none';
+    const qAlpha = (vCfg && vCfg.quote) ? smoothWindowAlpha(progress, 0.48, 0.53, 0.82, 0.87) : 0;
+    if (qAlpha <= 0.002) {
+      quoteEl.hidden = true;
+    } else {
+      quoteEl.hidden = false;
+      quoteEl.style.opacity = qAlpha.toFixed(3);
+      quoteEl.style.translate = `-50% ${((1 - qAlpha) * 8).toFixed(1)}px`;
+    }
+  }
+}
+window.syncWalkthroughVisualsAtProgress = syncWalkthroughVisualsAtProgress;
+
 function resetWalkthroughIdleTimer() {
   document.body.classList.remove('walkthrough-idle');
   if (walkthroughIdleTimer) {
@@ -2323,8 +2964,7 @@ function resetWalkthroughIdleTimer() {
   }
   if (!isGuidedTour) return;
   walkthroughIdleTimer = setTimeout(() => {
-    const isPlaying = narrationAudio && !narrationAudio.paused;
-    if (isGuidedTour && isPlaying) {
+    if (isGuidedTour && isSpotAudioPlaying()) {
       document.body.classList.add('walkthrough-idle');
     }
   }, 3500);
@@ -2383,41 +3023,160 @@ function sampleGuidedTourCamera(stopIndex, rawProgress) {
 window.sampleGuidedTourCamera = sampleGuidedTourCamera;
 window.setWalkthroughProgress = setWalkthroughProgress;
 
-function startMemorialAmbientPad() {
+function scheduleMorningBirdsong(birdGainTarget) {
+  if (ambientBirdTimer) {
+    clearTimeout(ambientBirdTimer);
+    ambientBirdTimer = null;
+  }
+  if (!birdGainTarget || birdGainTarget <= 0 || !ambientAudioCtx) return;
+
+  const triggerChirp = () => {
+    if (!ambientAudioCtx || ambientAudioCtx.state !== 'running' || !isSpotAudioPlaying()) return;
+    try {
+      const now = ambientAudioCtx.currentTime;
+      const notes = [2480 + Math.random() * 260, 2860 + Math.random() * 280];
+      notes.forEach((baseFreq, i) => {
+        const t0 = now + i * 0.16;
+        const osc = ambientAudioCtx.createOscillator();
+        const g = ambientAudioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(baseFreq, t0);
+        osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.14, t0 + 0.07);
+        osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.96, t0 + 0.14);
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.linearRampToValueAtTime(birdGainTarget, t0 + 0.03);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.15);
+        osc.connect(g);
+        g.connect(ambientAudioCtx.destination);
+        osc.start(t0);
+        osc.stop(t0 + 0.17);
+      });
+    } catch (_) {}
+    ambientBirdTimer = setTimeout(triggerChirp, 4800 + Math.random() * 3400);
+  };
+
+  ambientBirdTimer = setTimeout(triggerChirp, 1600 + Math.random() * 1800);
+}
+
+function triggerMemorialBellHarmonic() {
+  if (!ambientAudioCtx) return;
   try {
+    const now = ambientAudioCtx.currentTime;
+    [523.25, 783.99].forEach((freq, idx) => {
+      const osc = ambientAudioCtx.createOscillator();
+      const g = ambientAudioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      const peak = idx === 0 ? 0.011 : 0.0045;
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.linearRampToValueAtTime(peak, now + 0.08);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
+      osc.connect(g);
+      g.connect(ambientAudioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 4.4);
+    });
+  } catch (_) {}
+}
+
+function startMemorialAmbientPad(hotspotId) {
+  try {
+    const profile = ROOM_ATMOSPHERE_PROFILES[hotspotId] || ROOM_ATMOSPHERE_PROFILES.rainbow_staircase;
     if (!ambientAudioCtx) {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextClass) return;
       ambientAudioCtx = new AudioContextClass();
 
       ambientGainNode = ambientAudioCtx.createGain();
-      ambientGainNode.gain.setValueAtTime(0.001, ambientAudioCtx.currentTime);
+      ambientGainNode.gain.setValueAtTime(0.0001, ambientAudioCtx.currentTime);
 
-      const filter = ambientAudioCtx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(340, ambientAudioCtx.currentTime);
+      ambientPadFilter = ambientAudioCtx.createBiquadFilter();
+      ambientPadFilter.type = 'lowpass';
+      ambientPadFilter.frequency.setValueAtTime(profile.padCutoff, ambientAudioCtx.currentTime);
 
-      // Warm, sorrowful C-minor cello/pad chord (C3, Eb3, G3, Bb3)
-      const freqs = [130.81, 155.56, 196.00, 233.08];
-      freqs.forEach((f, idx) => {
+      ambientOscillators = profile.freqs.map((f, idx) => {
         const osc = ambientAudioCtx.createOscillator();
         osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
         osc.frequency.setValueAtTime(f, ambientAudioCtx.currentTime);
         const oscGain = ambientAudioCtx.createGain();
-        oscGain.gain.setValueAtTime(idx === 0 ? 0.35 : 0.18, ambientAudioCtx.currentTime);
+        oscGain.gain.setValueAtTime(idx === 0 ? 0.34 : 0.17, ambientAudioCtx.currentTime);
         osc.connect(oscGain);
-        oscGain.connect(filter);
+        oscGain.connect(ambientPadFilter);
         osc.start();
+        return osc;
       });
 
-      filter.connect(ambientGainNode);
+      ambientPadFilter.connect(ambientGainNode);
       ambientGainNode.connect(ambientAudioCtx.destination);
+
+      // Gentle filtered courtyard breeze / room air buffer (4s pink-filtered loop)
+      const sampleRate = ambientAudioCtx.sampleRate || 44100;
+      const bufLen = sampleRate * 4;
+      const noiseBuf = ambientAudioCtx.createBuffer(1, bufLen, sampleRate);
+      const out = noiseBuf.getChannelData(0);
+      let b0 = 0, b1 = 0, b2 = 0;
+      for (let i = 0; i < bufLen; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.99765 * b0 + white * 0.0990460;
+        b1 = 0.96300 * b1 + white * 0.2965164;
+        b2 = 0.57000 * b2 + white * 1.0526913;
+        out[i] = (b0 + b1 + b2 + white * 0.1848) * 0.12;
+      }
+      // Crossfade loop seam smoothly
+      const fadeSamples = Math.floor(sampleRate * 0.15);
+      for (let i = 0; i < fadeSamples; i++) {
+        const t = i / fadeSamples;
+        out[i] = out[i] * t + out[bufLen - fadeSamples + i] * (1 - t);
+      }
+
+      const noiseSrc = ambientAudioCtx.createBufferSource();
+      noiseSrc.buffer = noiseBuf;
+      noiseSrc.loop = true;
+
+      ambientBreezeFilter = ambientAudioCtx.createBiquadFilter();
+      ambientBreezeFilter.type = 'bandpass';
+      ambientBreezeFilter.frequency.setValueAtTime(profile.breezeFreq, ambientAudioCtx.currentTime);
+      ambientBreezeFilter.Q.setValueAtTime(profile.breezeQ, ambientAudioCtx.currentTime);
+
+      ambientBreezeGain = ambientAudioCtx.createGain();
+      ambientBreezeGain.gain.setValueAtTime(0.0001, ambientAudioCtx.currentTime);
+
+      noiseSrc.connect(ambientBreezeFilter);
+      ambientBreezeFilter.connect(ambientBreezeGain);
+      ambientBreezeGain.connect(ambientAudioCtx.destination);
+      noiseSrc.start();
     }
+
     if (ambientAudioCtx.state === 'suspended') {
       ambientAudioCtx.resume();
     }
-    ambientGainNode.gain.cancelScheduledValues(ambientAudioCtx.currentTime);
-    ambientGainNode.gain.linearRampToValueAtTime(0.022, ambientAudioCtx.currentTime + 1.8);
+
+    const now = ambientAudioCtx.currentTime;
+    ambientOscillators.forEach((osc, idx) => {
+      const targetFreq = profile.freqs[idx] || profile.freqs[0];
+      osc.frequency.cancelScheduledValues(now);
+      osc.frequency.exponentialRampToValueAtTime(Math.max(40, targetFreq), now + 1.2);
+    });
+    if (ambientPadFilter) {
+      ambientPadFilter.frequency.cancelScheduledValues(now);
+      ambientPadFilter.frequency.linearRampToValueAtTime(profile.padCutoff, now + 1.2);
+    }
+    if (ambientGainNode) {
+      ambientGainNode.gain.cancelScheduledValues(now);
+      ambientGainNode.gain.linearRampToValueAtTime(profile.padGain, now + 1.6);
+    }
+    if (ambientBreezeFilter && ambientBreezeGain) {
+      ambientBreezeFilter.frequency.cancelScheduledValues(now);
+      ambientBreezeFilter.frequency.linearRampToValueAtTime(profile.breezeFreq, now + 1.2);
+      ambientBreezeFilter.Q.setValueAtTime(profile.breezeQ, now);
+      ambientBreezeGain.gain.cancelScheduledValues(now);
+      ambientBreezeGain.gain.linearRampToValueAtTime(profile.breezeGain, now + 1.6);
+    }
+
+    scheduleMorningBirdsong(profile.birdGain);
+    if (profile.chime) {
+      triggerMemorialBellHarmonic();
+    }
   } catch (_) {
     // Ignore WebAudio restrictions if any
   }
@@ -2425,11 +3184,89 @@ function startMemorialAmbientPad() {
 
 function stopMemorialAmbientPad() {
   try {
-    if (ambientAudioCtx && ambientGainNode) {
-      ambientGainNode.gain.cancelScheduledValues(ambientAudioCtx.currentTime);
-      ambientGainNode.gain.linearRampToValueAtTime(0.0001, ambientAudioCtx.currentTime + 1.2);
+    if (ambientBirdTimer) {
+      clearTimeout(ambientBirdTimer);
+      ambientBirdTimer = null;
+    }
+    if (ambientAudioCtx) {
+      const now = ambientAudioCtx.currentTime;
+      if (ambientGainNode) {
+        ambientGainNode.gain.cancelScheduledValues(now);
+        ambientGainNode.gain.linearRampToValueAtTime(0.0001, now + 1.0);
+      }
+      if (ambientBreezeGain) {
+        ambientBreezeGain.gain.cancelScheduledValues(now);
+        ambientBreezeGain.gain.linearRampToValueAtTime(0.0001, now + 1.0);
+      }
     }
   } catch (_) {}
+}
+
+function pauseSpotNarration() {
+  if (narrationPhaseTimer) {
+    clearTimeout(narrationPhaseTimer);
+    narrationPhaseTimer = null;
+    narrationPhase = 'voice';
+  }
+  if (archivalAudio && !archivalAudio.paused) {
+    archivalAudio.pause();
+  }
+  if (narrationAudio && !narrationAudio.paused) {
+    narrationAudio.pause();
+  }
+  stopMemorialAmbientPad();
+  updateStoryAudioButtonUI(false);
+  const listenBtn = document.getElementById('modalListenBtn');
+  if (listenBtn) {
+    listenBtn.textContent = '🎧 Listen to Room Voiceover';
+  }
+}
+
+function resumeSpotNarration(fallbackHotspotId) {
+  const hotspotId = activeNarrationHotspot || fallbackHotspotId;
+  if (!hotspotId) return;
+  voiceNarrationEnabled = true;
+
+  if (narrationPhase === 'archival' && archivalAudio && archivalAudio.src && !archivalAudio.ended) {
+    startMemorialAmbientPad(hotspotId);
+    archivalAudio.play().catch(() => {});
+    updateStoryAudioButtonUI(true);
+    return;
+  }
+  if (narrationPhase === 'voice' && narrationAudio && narrationAudio.src && !narrationAudio.ended) {
+    startMemorialAmbientPad(hotspotId);
+    narrationAudio.play().catch(() => {});
+    updateStoryAudioButtonUI(true);
+    return;
+  }
+  playSpotNarration(hotspotId);
+}
+
+function getGuidedTourAudioProgress() {
+  const stop = GUIDED_TOUR_STOPS[currentTourIndex];
+  const hotspotId = activeNarrationHotspot || (stop && stop.hotspotId) || '';
+  const archCfg = SPOT_ARCHIVAL_AUDIO[hotspotId];
+  const archDur = archCfg
+    ? (archivalAudio && Number.isFinite(archivalAudio.duration) && archivalAudio.duration > 0 ? archivalAudio.duration : archCfg.expectedDur)
+    : ((hotspotId === 'crater_damage' || hotspotId === 'second_wave') ? 1.1 : 0);
+  const voiceDur = (narrationAudio && Number.isFinite(narrationAudio.duration) && narrationAudio.duration > 0)
+    ? narrationAudio.duration
+    : 55;
+  const totalDur = Math.max(1, archDur + voiceDur);
+
+  if (narrationPhase === 'archival' && archivalAudio) {
+    return Math.min(1, (archivalAudio.currentTime || 0) / totalDur);
+  }
+  if (narrationPhase === 'delay') {
+    return Math.min(1, archDur / totalDur);
+  }
+  if (narrationPhase === 'voice' && narrationAudio) {
+    return Math.min(1, (archDur + (narrationAudio.currentTime || 0)) / totalDur);
+  }
+  if (tourStepStartTime > 0) {
+    return Math.min(1, (performance.now() - tourStepStartTime) / 60000);
+  }
+  return 0;
 }
 
 function stopSpotNarration() {
@@ -2437,7 +3274,21 @@ function stopSpotNarration() {
     clearTimeout(guidedTourAutoAdvanceTimer);
     guidedTourAutoAdvanceTimer = null;
   }
+  if (narrationPhaseTimer) {
+    clearTimeout(narrationPhaseTimer);
+    narrationPhaseTimer = null;
+  }
+  narrationPhase = 'idle';
+  activeNarrationHotspot = null;
+  if (archivalAudio) {
+    archivalAudio.onended = null;
+    archivalAudio.onerror = null;
+    archivalAudio.pause();
+    archivalAudio.currentTime = 0;
+  }
   if (narrationAudio) {
+    narrationAudio.onended = null;
+    narrationAudio.onerror = null;
     narrationAudio.pause();
     narrationAudio.currentTime = 0;
   }
@@ -2456,13 +3307,17 @@ function playSpotNarration(hotspotId) {
   stopSpotNarration();
   if (!voiceNarrationEnabled) return;
 
-  const langPrefix = ['en', 'fa', 'fi'].includes(currentLang) ? currentLang : 'en';
-  const narrationVersion = '20261111c';
-  const primarySrc = `media/narration/${langPrefix}_${hotspotId}.mp3?v=${narrationVersion}`;
-  const fallbackSrc = `media/narration/en_${hotspotId}.mp3?v=${narrationVersion}`;
+  activeNarrationHotspot = hotspotId;
+  const prof = NARRATOR_PROFILES[activeVoiceProfile] || (currentLang === 'fa' ? NARRATOR_PROFILES.mostafa_fa : NARRATOR_PROFILES.leila_en);
+  const narrationVersion = '20261112a';
+  const primarySrc = `media/narration/${prof.dir}/${prof.prefix}_${hotspotId}.mp3?v=${narrationVersion}`;
+  const fallbackSrc = `media/narration/${prof.fallbackDir || 'voices/leila_en'}/${prof.prefix}_${hotspotId}.mp3?v=${narrationVersion}`;
 
   if (!narrationAudio) {
     narrationAudio = new Audio();
+  }
+  if (!archivalAudio) {
+    archivalAudio = new Audio();
   }
 
   const speedSelect = document.getElementById('narrationSpeedSelect');
@@ -2470,12 +3325,14 @@ function playSpotNarration(hotspotId) {
     narrationRate = parseFloat(speedSelect.value) || 1.0;
   }
 
+  narrationAudio.preload = 'auto';
   narrationAudio.src = primarySrc;
   narrationAudio.playbackRate = narrationRate;
   if ('preservesPitch' in narrationAudio) narrationAudio.preservesPitch = true;
   if ('webkitPreservesPitch' in narrationAudio) narrationAudio.webkitPreservesPitch = true;
+  narrationAudio.load();
 
-  startMemorialAmbientPad();
+  startMemorialAmbientPad(hotspotId);
   updateStoryAudioButtonUI(true);
   resetWalkthroughIdleTimer();
 
@@ -2485,6 +3342,7 @@ function playSpotNarration(hotspotId) {
   }
 
   narrationAudio.onended = () => {
+    narrationPhase = 'idle';
     stopMemorialAmbientPad();
     updateStoryAudioButtonUI(false);
     setWalkthroughProgress(1);
@@ -2510,19 +3368,52 @@ function playSpotNarration(hotspotId) {
     if (narrationAudio.src.indexOf(fallbackSrc) === -1) {
       narrationAudio.src = fallbackSrc;
       narrationAudio.playbackRate = narrationRate;
-      narrationAudio.play().catch(() => {});
+      if (narrationPhase === 'voice') {
+        narrationAudio.play().catch(() => {});
+      }
     }
   };
 
-  narrationAudio.play().catch(() => {
-    stopMemorialAmbientPad();
-    updateStoryAudioButtonUI(false);
-  });
+  const launchVoiceover = () => {
+    if (activeNarrationHotspot !== hotspotId) return;
+    narrationPhase = 'voice';
+    narrationAudio.playbackRate = narrationRate;
+    narrationAudio.play().catch(() => {
+      narrationPhase = 'idle';
+      stopMemorialAmbientPad();
+      updateStoryAudioButtonUI(false);
+    });
+  };
+
+  const archivalCfg = SPOT_ARCHIVAL_AUDIO[hotspotId];
+  if (archivalCfg) {
+    narrationPhase = 'archival';
+    archivalAudio.src = `media/narration/archival/${archivalCfg.file}?v=${narrationVersion}`;
+    archivalAudio.volume = 0.88;
+    archivalAudio.playbackRate = 1.0;
+    archivalAudio.onended = () => {
+      if (activeNarrationHotspot !== hotspotId) return;
+      narrationPhase = 'delay';
+      narrationPhaseTimer = setTimeout(launchVoiceover, 380);
+    };
+    archivalAudio.onerror = () => {
+      if (activeNarrationHotspot !== hotspotId) return;
+      launchVoiceover();
+    };
+    archivalAudio.play().catch(() => {
+      launchVoiceover();
+    });
+  } else {
+    // Solemn aftermath silence with soft courtyard wind before narration begins
+    narrationPhase = 'delay';
+    narrationPhaseTimer = setTimeout(launchVoiceover, 1100);
+  }
 }
 
 // --- GUIDED 8-STOP INTERIOR & COURTYARD TOUR ---
 function startGuidedTour() {
   isGuidedTour = true;
+  deterministicWalkthroughRender = false;
   currentTourIndex = 0;
   tourManualCameraOverride = false;
   closeModal();
@@ -2538,6 +3429,7 @@ function startGuidedTour() {
 
 function stopGuidedTour() {
   isGuidedTour = false;
+  deterministicWalkthroughRender = false;
   tourManualCameraOverride = false;
   if (walkthroughIdleTimer) {
     clearTimeout(walkthroughIdleTimer);
@@ -2546,6 +3438,11 @@ function stopGuidedTour() {
   document.body.classList.remove('walkthrough-mode', 'walkthrough-idle');
   if (markersGroup) markersGroup.visible = true;
   document.getElementById('btnGuidedTour').classList.remove('active');
+  const pipVideo = document.getElementById('walkthroughPipVideo');
+  if (pipVideo) pipVideo.pause();
+  hideAnimatedOverlay(document.getElementById('walkthroughContextStamp'));
+  hideAnimatedOverlay(document.getElementById('walkthroughPipCard'));
+  hideAnimatedOverlay(document.getElementById('walkthroughQuoteCallout'));
   hideStoryBanner();
   setWalkthroughProgress(0);
   stopSpotNarration();
@@ -2560,6 +3457,16 @@ function renderGuidedTourStep(idx, speakNow) {
   tourManualCameraOverride = false;
   tourStepStartTime = performance.now();
   setWalkthroughProgress(0);
+  applyWalkthroughStationOverlays(idx);
+
+  if (!deterministicWalkthroughRender) {
+    const pipCard = document.getElementById('walkthroughPipCard');
+    const quoteEl = document.getElementById('walkthroughQuoteCallout');
+    if (pipCard) pipCard.hidden = true;
+    if (quoteEl) quoteEl.hidden = true;
+    showAnimatedOverlay(document.getElementById('walkthroughContextStamp'));
+    ensurePipVideoLoadedForHotspot(stop.hotspotId, false);
+  }
 
   setTemporalCondition(stop.temporal);
   document.getElementById('timelineSlider').value = stop.temporal;
@@ -2864,6 +3771,22 @@ function initUIControls() {
     else startGuidedTour();
   });
 
+  const btnHudNarrator = document.getElementById('btnHudNarrator');
+  if (btnHudNarrator) {
+    btnHudNarrator.addEventListener('click', cycleNarratorForCurrentLanguage);
+  }
+  const btnSubrowNarrator = document.getElementById('btnSubrowNarrator');
+  if (btnSubrowNarrator) {
+    btnSubrowNarrator.addEventListener('click', cycleNarratorForCurrentLanguage);
+  }
+  const btnStoryNarrator = document.getElementById('btnStoryNarrator');
+  if (btnStoryNarrator) {
+    btnStoryNarrator.addEventListener('click', () => {
+      resetWalkthroughIdleTimer();
+      cycleNarratorForCurrentLanguage();
+    });
+  }
+
   document.getElementById('btnCutaway').addEventListener('click', () => {
     setTemporalCondition(0.0);
     document.getElementById('timelineSlider').value = 0.0;
@@ -2891,18 +3814,10 @@ function initUIControls() {
   document.getElementById('btnStoryAudio').addEventListener('click', () => {
     resetWalkthroughIdleTimer();
     const stop = GUIDED_TOUR_STOPS[currentTourIndex];
-    if (narrationAudio && !narrationAudio.paused) {
-      narrationAudio.pause();
-      stopMemorialAmbientPad();
-      updateStoryAudioButtonUI(false);
-    } else if (narrationAudio && narrationAudio.src && narrationAudio.currentTime > 0 && !narrationAudio.ended) {
-      voiceNarrationEnabled = true;
-      startMemorialAmbientPad();
-      narrationAudio.play().catch(() => {});
-      updateStoryAudioButtonUI(true);
+    if (isSpotAudioPlaying()) {
+      pauseSpotNarration();
     } else if (stop) {
-      voiceNarrationEnabled = true;
-      playSpotNarration(stop.hotspotId);
+      resumeSpotNarration(stop.hotspotId);
     }
   });
 
@@ -2948,7 +3863,7 @@ function initUIControls() {
   if (modalListenBtn) {
     modalListenBtn.addEventListener('click', () => {
       if (!activeHotspotId) return;
-      if (narrationAudio && !narrationAudio.paused) {
+      if (isSpotAudioPlaying()) {
         stopSpotNarration();
       } else {
         voiceNarrationEnabled = true;
@@ -3107,14 +4022,10 @@ function animate() {
   const delta = clock.getDelta();
   applyKeyboardMovement(delta);
 
-  if (isGuidedTour) {
-    let tourProgress = 0;
-    if (narrationAudio && Number.isFinite(narrationAudio.duration) && narrationAudio.duration > 0) {
-      tourProgress = narrationAudio.currentTime / narrationAudio.duration;
-    } else if (tourStepStartTime > 0) {
-      tourProgress = Math.min(1, (performance.now() - tourStepStartTime) / 60000);
-    }
+  if (isGuidedTour && !deterministicWalkthroughRender) {
+    const tourProgress = getGuidedTourAudioProgress();
     setWalkthroughProgress(tourProgress);
+    updateWalkthroughVisualOverlaysLive(currentTourIndex, tourProgress);
 
     if (isAnimatingCamera && animationTarget.pos) {
       camera.position.lerp(animationTarget.pos, 0.06);

@@ -1,0 +1,100 @@
+{
+  "defaultByLang": {
+    "fa": "mostafa_fa",
+    "en": "leila_en",
+    "fi": "leila_en"
+  },
+  "profiles": {
+    "mostafa_fa": {
+      "id": "mostafa_fa",
+      "lang": "fa",
+      "prefix": "fa",
+      "narratorNameEn": "Mostafa Jalali",
+      "narratorNameFa": "مصطفی جلالی",
+      "label": {
+        "en": "FA · Mostafa",
+        "fa": "فارسی · مصطفی جلالی",
+        "fi": "FA · Mostafa"
+      },
+      "stationsCount": 8,
+      "durations": {
+        "courtyard_lines": 57.36,
+        "boys_flower_arch": 49.0,
+        "boys_classroom": 48.48,
+        "rainbow_staircase": 55.49,
+        "girls_upper_hall": 45.45,
+        "crater_damage": 46.76,
+        "second_wave": 52.33,
+        "vow_shrine": 50.71
+      }
+    },
+    "leila_fa": {
+      "id": "leila_fa",
+      "lang": "fa",
+      "prefix": "fa",
+      "narratorNameEn": "Leila Ghazanfari",
+      "narratorNameFa": "لیلا غضنفری",
+      "label": {
+        "en": "FA · Leila",
+        "fa": "فارسی · لیلا غضنفری",
+        "fi": "FA · Leila"
+      },
+      "stationsCount": 8,
+      "durations": {
+        "courtyard_lines": 67.3,
+        "boys_flower_arch": 59.3,
+        "boys_classroom": 57.45,
+        "rainbow_staircase": 68.15,
+        "girls_upper_hall": 58.05,
+        "crater_damage": 57.45,
+        "second_wave": 55.95,
+        "vow_shrine": 65.0
+      }
+    },
+    "leila_en": {
+      "id": "leila_en",
+      "lang": "en",
+      "prefix": "en",
+      "narratorNameEn": "Leila Ghazanfari",
+      "narratorNameFa": "لیلا غضنفری (انگلیسی)",
+      "label": {
+        "en": "EN · Leila",
+        "fa": "انگلیسی · لیلا",
+        "fi": "EN · Leila"
+      },
+      "stationsCount": 8,
+      "durations": {
+        "courtyard_lines": 62.85,
+        "boys_flower_arch": 50.95,
+        "boys_classroom": 52.7,
+        "rainbow_staircase": 63.8,
+        "girls_upper_hall": 50.95,
+        "crater_damage": 55.9,
+        "second_wave": 52.45,
+        "vow_shrine": 49.0
+      }
+    },
+    "ali_en": {
+      "id": "ali_en",
+      "lang": "en",
+      "prefix": "en",
+      "narratorNameEn": "Ali",
+      "narratorNameFa": "علی (انگلیسی)",
+      "label": {
+        "en": "EN · Ali",
+        "fa": "انگلیسی · علی",
+        "fi": "EN · Ali"
+      },
+      "stationsCount": 6,
+      "fallbackProfile": "leila_en",
+      "durations": {
+        "courtyard_lines": 50.4,
+        "boys_flower_arch": 41.4,
+        "boys_classroom": 46.2,
+        "rainbow_staircase": 49.05,
+        "girls_upper_hall": 49.21,
+        "crater_damage": 50.45
+      }
+    }
+  }
+}

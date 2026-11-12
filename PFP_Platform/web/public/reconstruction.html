@@ -437,22 +437,294 @@
       display: none;
     }
 
+    /* NARRATOR VOICE SELECTOR PILL */
+    .voice-pill-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-gold);
+      color: #fde68a;
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .voice-pill-btn:hover,
+    .voice-pill-btn:focus-visible {
+      background: var(--gold);
+      color: var(--bg);
+      outline: none;
+    }
+    .story-voice-btn {
+      height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      background: rgba(212, 168, 83, 0.14);
+      border: 1px solid rgba(212, 168, 83, 0.36);
+      color: #fde68a;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background var(--transition), color var(--transition);
+    }
+    .story-voice-btn:hover,
+    .story-voice-btn:focus-visible {
+      background: var(--gold);
+      color: var(--bg);
+      outline: none;
+    }
+
+    /* NORDIC MINIMALIST WALKTHROUGH DOCUMENTARY OVERLAYS */
+    .walkthrough-context-stamp {
+      position: fixed;
+      top: 22px;
+      inset-inline-start: 26px;
+      z-index: 44;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(10, 14, 23, 0.62);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 999px;
+      padding: 6px 14px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.42);
+      pointer-events: none;
+      opacity: 1;
+      translate: 0 0;
+      transition:
+        display 0.35s,
+        opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        translate 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-behavior: allow-discrete;
+    }
+    .stamp-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(212, 168, 83, 0.85);
+      flex-shrink: 0;
+    }
+    .walkthrough-context-stamp[data-phase="strike"] {
+      border-color: rgba(239, 68, 68, 0.38);
+      background: rgba(18, 12, 16, 0.72);
+    }
+    .walkthrough-context-stamp[data-phase="strike"] .stamp-dot {
+      background: #ef4444;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.9);
+    }
+    .walkthrough-context-stamp[data-phase="memorial"] {
+      border-color: rgba(212, 168, 83, 0.42);
+    }
+    .stamp-text {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #e2e8f0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-inline-size: min(620px, calc(100vw - 380px));
+    }
+    body[dir="rtl"] .stamp-text {
+      font-family: var(--font-rtl);
+      letter-spacing: 0;
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .walkthrough-pip-card {
+      position: fixed;
+      top: 22px;
+      inset-inline-end: 26px;
+      z-index: 44;
+      width: 312px;
+      background: rgba(10, 14, 23, 0.76);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(212, 168, 83, 0.34);
+      border-radius: 13px;
+      padding: 8px;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.62);
+      pointer-events: none;
+      opacity: 1;
+      translate: 0 0;
+      transition:
+        display 0.42s,
+        opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        translate 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-behavior: allow-discrete;
+    }
+    .pip-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 0 3px 5px;
+    }
+    .pip-badge-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    body[dir="rtl"] .pip-badge-label {
+      font-family: var(--font-rtl);
+      letter-spacing: 0;
+      font-size: 0.68rem;
+    }
+    .pip-video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #06090f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .pip-video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pip-caption {
+      margin-top: 6px;
+      padding: 0 3px 1px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      line-height: 1.35;
+      color: #f1f5f9;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .walkthrough-quote-callout {
+      position: fixed;
+      bottom: 78px;
+      left: 50%;
+      translate: -50% 0;
+      z-index: 44;
+      width: max-content;
+      max-width: min(560px, calc(100vw - 36px));
+      background: rgba(10, 14, 23, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-inline-start: 3px solid var(--gold);
+      border-radius: 10px;
+      padding: 8px 15px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.50);
+      pointer-events: none;
+      opacity: 1;
+      transition:
+        display 0.38s,
+        opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+        translate 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-behavior: allow-discrete;
+    }
+    .walkthrough-quote-callout[data-tone="strike"] {
+      border-inline-start-color: #ef4444;
+    }
+    .quote-callout-text {
+      font-size: 0.80rem;
+      font-style: italic;
+      line-height: 1.42;
+      color: #f8fafc;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    body[dir="rtl"] .quote-callout-text {
+      font-style: normal;
+      font-size: 0.81rem;
+    }
+    .quote-callout-author {
+      margin-top: 3px;
+      font-size: 0.69rem;
+      font-weight: 600;
+      color: #fcd34d;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .walkthrough-quote-callout[data-tone="strike"] .quote-callout-author {
+      color: #fca5a5;
+    }
+
+    @starting-style {
+      .walkthrough-context-stamp {
+        opacity: 0;
+        translate: 0 -12px;
+      }
+      .walkthrough-pip-card {
+        opacity: 0;
+        translate: 0 -14px;
+      }
+      .walkthrough-quote-callout {
+        opacity: 0;
+        translate: -50% 12px;
+      }
+    }
+    .walkthrough-context-stamp:where([hidden], [data-closing]) {
+      opacity: 0;
+      translate: 0 -12px;
+    }
+    .walkthrough-pip-card:where([hidden], [data-closing]) {
+      opacity: 0;
+      translate: 0 -14px;
+    }
+    .walkthrough-quote-callout:where([hidden], [data-closing]) {
+      opacity: 0;
+      translate: -50% 12px;
+    }
+    .walkthrough-context-stamp[hidden],
+    .walkthrough-pip-card[hidden],
+    .walkthrough-quote-callout[hidden] {
+      display: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       body .site-header,
       .top-subrow,
       .hud-bottom,
       .hotspot-pin,
-      .story-banner {
+      .story-banner,
+      .walkthrough-context-stamp,
+      .walkthrough-pip-card,
+      .walkthrough-quote-callout {
         translate: none;
         transition-duration: 0.12s;
       }
       .story-banner,
-      .story-banner:where([hidden], [data-closing]) {
+      .story-banner:where([hidden], [data-closing]),
+      .walkthrough-quote-callout,
+      .walkthrough-quote-callout:where([hidden], [data-closing]) {
         translate: -50% 0;
       }
       @starting-style {
-        .story-banner {
+        .story-banner,
+        .walkthrough-quote-callout {
           translate: -50% 0;
+        }
+        .walkthrough-context-stamp,
+        .walkthrough-pip-card {
+          translate: none;
         }
       }
     }
@@ -1144,6 +1416,10 @@
       .pin-tooltip { display: none; }
       .story-banner { bottom: 14px; padding: 8px 10px 10px 14px; border-radius: 20px; }
       .story-title { font-size: 0.84rem; }
+      .walkthrough-context-stamp { top: 12px; inset-inline-start: 12px; padding: 5px 10px; }
+      .walkthrough-pip-card { top: 50px; inset-inline-end: 12px; width: 210px; padding: 6px; }
+      .pip-caption { font-size: 0.68rem; }
+      .walkthrough-quote-callout { bottom: 68px; padding: 6px 12px; }
     }
   </style>
 </head>
@@ -1167,6 +1443,11 @@
         </div>
 
         <div class="hud-header-right">
+          <button type="button" class="voice-pill-btn" id="btnHudNarrator" title="Switch human narrator voice">
+            <span>🎙️</span>
+            <span id="hudNarratorLabel">Voice: Leila (EN)</span>
+          </button>
+
           <button class="vow-cta-btn" id="openVowBtn">
             <span>✍️</span>
             <span data-i18n="signVowBtn">Sign Accountability Vow</span>
@@ -1181,10 +1462,14 @@
         </div>
       </header>
 
-      <!-- Sub-bar: Guided Tour + Cutaway Floors + Walk Inside + Presets + Spatial.io GLB Export -->
+      <!-- Sub-bar: Guided Tour + Narrator Selector + Cutaway Floors + Walk Inside + Presets + Spatial.io GLB Export -->
       <div class="top-subrow">
         <div class="presets-bar">
           <button class="preset-btn tour-btn" id="btnGuidedTour" data-i18n="guidedTourBtn">🎧 Walk Inside & Listen: 8-Stop Tour</button>
+          <button type="button" class="voice-pill-btn" id="btnSubrowNarrator" title="Switch human narrator voice">
+            <span>🎙️</span>
+            <span id="subrowNarratorLabel">Voice: Leila (EN)</span>
+          </button>
           <button class="preset-btn cutaway-btn" id="btnCutaway" data-i18n="cutawayBtn">🏠 Floorplan Cutaway: All Floors</button>
           <button class="preset-btn" id="btnWalkMode" data-i18n="walkModeBtn">🚶 Walk Inside (WASD)</button>
           <button class="preset-btn" id="presetBoysArch" data-i18n="presetBoysArch">🌹 Boys' Ceremony Room</button>
@@ -1219,6 +1504,29 @@
 
   </div>
 
+  <!-- Walkthrough Forensic Time & Location Stamp -->
+  <div class="walkthrough-context-stamp" id="walkthroughContextStamp" data-phase="pre" hidden>
+    <span class="stamp-dot" aria-hidden="true"></span>
+    <span class="stamp-text" id="walkthroughContextText">FEB 28, 2026 · MORNING BEFORE THE STRIKE · MINAB SCHOOL</span>
+  </div>
+
+  <!-- Walkthrough Synchronized Live-Action Archival Footage PiP -->
+  <div class="walkthrough-pip-card" id="walkthroughPipCard" hidden>
+    <div class="pip-badge-row">
+      <span class="pip-badge-label" id="walkthroughPipBadge">VERIFIED ARCHIVE FOOTAGE</span>
+    </div>
+    <div class="pip-video-frame">
+      <video id="walkthroughPipVideo" width="320" height="180" muted playsinline loop preload="none"></video>
+    </div>
+    <div class="pip-caption" id="walkthroughPipCaption"></div>
+  </div>
+
+  <!-- Walkthrough Firsthand Witness Testimony Callout -->
+  <div class="walkthrough-quote-callout" id="walkthroughQuoteCallout" data-tone="pre" hidden>
+    <div class="quote-callout-text" id="walkthroughQuoteText"></div>
+    <div class="quote-callout-author" id="walkthroughQuoteAuthor"></div>
+  </div>
+
   <!-- Clean Bottom-Center Walkthrough Cinema Pill -->
   <div class="story-banner" id="storyBanner" hidden>
     <div class="story-pill-row">
@@ -1227,6 +1535,7 @@
         <span class="story-title" id="storyTitle">Morning Assembly in the Schoolyard</span>
       </div>
       <div class="story-controls" id="storyControls">
+        <button type="button" class="story-voice-btn" id="btnStoryNarrator" title="Switch narrator voice">🎙️ Leila</button>
         <button type="button" class="story-icon-btn story-chevron-btn" id="btnStoryPrev" aria-label="Previous station" title="Previous station">‹</button>
         <button type="button" class="story-icon-btn" id="btnStoryAudio" aria-label="Pause voiceover" title="Pause voiceover">⏸</button>
         <button type="button" class="story-icon-btn story-chevron-btn" id="btnStoryNext" aria-label="Next station" title="Next station">›</button>
@@ -1428,6 +1737,6 @@
   <!-- Master Casualty & Rubble Drawings Registry (Dataset v3.0.0) -->
   <script src="memorial-data.js"></script>
   <!-- Application Logic -->
-  <script src="js/reconstruction.js?v=20261111c"></script>
+  <script src="js/reconstruction.js?v=20261112a"></script>
 </body>
 </html>
