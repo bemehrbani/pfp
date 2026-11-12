@@ -480,12 +480,12 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'courtyard_lines',
     temporal: 0.0,
     cutawayMode: 0,
-    camPos: [17.5, 3.2, 16.8],
-    lookAt: [4.5, 1.8, 1.5],
+    camPos: [4.5, 3.2, 14.5],
+    lookAt: [20.0, 1.8, 6.5],
     waypoints: [
-      { camPos: [17.5, 3.2, 16.8], lookAt: [4.5, 1.8, 1.5] },
-      { camPos: [11.5, 2.3, 12.2], lookAt: [1.5, 2.0, 0.5] },
-      { camPos: [5.8, 2.1, 8.0], lookAt: [-1.0, 2.1, -2.5] }
+      { camPos: [4.5, 3.2, 14.5], lookAt: [20.0, 1.8, 6.5] },
+      { camPos: [7.2, 2.1, 9.5], lookAt: [26.0, 1.7, 5.8] },
+      { camPos: [3.5, 2.2, 11.0], lookAt: [-1.0, 2.4, 1.2] }
     ],
     shortBadge: { en: "01 / 08", fi: "01 / 08", fa: "۰۱ / ۰۸" },
     badge: { en: "STOP 1 OF 8 · COURTYARD YELLOW ASSEMBLY LINES", fi: "PISTE 1/8 · KOULUPIHAN AAMURIVIT", fa: "ایستگاه ۱ از ۸ · خطوط زرد صف صبحگاهی در حیاط" }
@@ -494,12 +494,12 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'boys_flower_arch',
     temporal: 0.0,
     cutawayMode: 2,
-    camPos: [8.4, 2.4, 0.1],
-    lookAt: [12.8, 1.85, -5.6],
+    camPos: [1.5, 2.45, -4.3],
+    lookAt: [4.5, 1.85, -7.8],
     waypoints: [
-      { camPos: [8.4, 2.4, 0.1], lookAt: [12.8, 1.85, -5.6] },
-      { camPos: [11.2, 2.1, -1.6], lookAt: [13.2, 1.85, -5.6] },
-      { camPos: [13.6, 2.15, -2.4], lookAt: [18.7, 1.85, -3.6] }
+      { camPos: [1.5, 2.45, -4.3], lookAt: [4.5, 1.85, -7.8] },
+      { camPos: [3.8, 2.1, -4.3], lookAt: [4.2, 1.85, -7.8] },
+      { camPos: [6.1, 2.15, -4.6], lookAt: [1.5, 1.85, -6.8] }
     ],
     shortBadge: { en: "02 / 08", fi: "02 / 08", fa: "۰۲ / ۰۸" },
     badge: { en: "STOP 2 OF 8 · GROUND FLOOR: BOYS' CEREMONY ROOM (ROSE ARCHES)", fi: "PISTE 2/8 · ALAKERTA: POIKIEN JUHLAHUONE", fa: "ایستگاه ۲ از ۸ · طبقه همکف: اتاق جشن پسران (طاق گل رز)" }
@@ -508,12 +508,12 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'boys_classroom',
     temporal: 0.0,
     cutawayMode: 2,
-    camPos: [-11.8, 4.3, -1.6],
-    lookAt: [-13.5, 1.1, -4.0],
+    camPos: [-13.3, 2.35, 1.6],
+    lookAt: [-17.8, 1.65, -1.6],
     waypoints: [
-      { camPos: [-11.8, 4.3, -1.6], lookAt: [-13.5, 1.1, -4.0] },
-      { camPos: [-10.5, 4.2, -6.2], lookAt: [-13.2, 1.85, -12.2] },
-      { camPos: [-10.8, 2.15, -7.6], lookAt: [-15.2, 1.85, -12.2] }
+      { camPos: [-13.3, 2.35, 1.6], lookAt: [-17.8, 1.65, -1.6] },
+      { camPos: [-13.5, 2.15, 0.2], lookAt: [-18.0, 1.65, -1.2] },
+      { camPos: [-14.2, 2.10, -1.4], lookAt: [-18.2, 1.65, 0.8] }
     ],
     shortBadge: { en: "03 / 08", fi: "03 / 08", fa: "۰۳ / ۰۸" },
     badge: { en: "STOP 3 OF 8 · GROUND FLOOR: BOYS' CLASSROOM (CLAPPING & SINGING)", fi: "PISTE 3/8 · ALAKERTA: POIKIEN LUOKKAHUONE", fa: "ایستگاه ۳ از ۸ · طبقه همکف: کلاس درس پسران" }
@@ -522,12 +522,12 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'rainbow_staircase',
     temporal: 0.0,
     cutawayMode: 2,
-    camPos: [1.8, 2.35, -0.4],
-    lookAt: [-2.8, 1.9, -6.2],
+    camPos: [-1.8, 2.35, -1.5],
+    lookAt: [-1.8, 2.0, -9.5],
     waypoints: [
-      { camPos: [1.8, 2.35, -0.4], lookAt: [-2.8, 1.9, -6.2] },
-      { camPos: [0.0, 2.15, -2.2], lookAt: [0.0, 2.1, -8.5] },
-      { camPos: [-1.8, 2.35, -3.6], lookAt: [2.6, 2.0, -7.8] }
+      { camPos: [-1.8, 2.35, -1.5], lookAt: [-1.8, 2.0, -9.5] },
+      { camPos: [-1.8, 2.15, -4.2], lookAt: [-1.6, 2.1, -10.2] },
+      { camPos: [-4.6, 2.25, -5.2], lookAt: [-0.5, 2.0, -8.5] }
     ],
     shortBadge: { en: "04 / 08", fi: "04 / 08", fa: "۰۴ / ۰۸" },
     badge: { en: "STOP 4 OF 8 · THE RAINBOW STAIRCASE & PURPLE DOORS", fi: "PISTE 4/8 · SATEENKAARIPORTAIKKO", fa: "ایستگاه ۴ از ۸ · راه‌پله رنگین‌کمان و درهای بنفش" }
@@ -536,12 +536,12 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'girls_upper_hall',
     temporal: 0.0,
     cutawayMode: 1,
-    camPos: [-9.2, 6.0, -0.6],
-    lookAt: [-13.5, 5.3, -8.5],
+    camPos: [-12.3, 5.95, 1.4],
+    lookAt: [-16.5, 5.25, -8.5],
     waypoints: [
-      { camPos: [-9.2, 6.0, -0.6], lookAt: [-13.5, 5.3, -8.5] },
-      { camPos: [-11.5, 5.65, -2.8], lookAt: [-16.5, 5.35, -9.5] },
-      { camPos: [-13.2, 5.55, -4.2], lookAt: [-18.7, 5.35, -7.2] }
+      { camPos: [-12.3, 5.95, 1.4], lookAt: [-16.5, 5.25, -8.5] },
+      { camPos: [-12.4, 5.65, -2.5], lookAt: [-17.5, 5.30, -9.2] },
+      { camPos: [-13.2, 5.55, -6.2], lookAt: [-18.5, 5.30, -6.5] }
     ],
     shortBadge: { en: "05 / 08", fi: "05 / 08", fa: "۰۵ / ۰۸" },
     badge: { en: "STOP 5 OF 8 · FIRST FLOOR: GIRLS' ASSEMBLY HALL & PINK/GREEN ROOMS", fi: "PISTE 5/8 · YLÄKERTA: TYTTÖJEN SALI", fa: "ایستگاه ۵ از ۸ · طبقه اول: سالن بزرگ دختران و کلاس‌های صورتی/سبز" }
@@ -550,12 +550,12 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'crater_damage',
     temporal: 1.0,
     cutawayMode: 0,
-    camPos: [-22.0, 15.5, 15.0],
-    lookAt: [-4.5, 2.0, -6.0],
+    camPos: [-22.0, 15.5, 14.0],
+    lookAt: [-2.0, 2.2, -5.5],
     waypoints: [
-      { camPos: [-22.0, 15.5, 15.0], lookAt: [-4.5, 2.0, -6.0] },
-      { camPos: [-11.5, 10.5, 12.5], lookAt: [-2.8, 1.8, -5.8] },
-      { camPos: [-3.5, 6.2, 8.2], lookAt: [-2.5, 2.0, -5.6] }
+      { camPos: [-22.0, 15.5, 14.0], lookAt: [-2.0, 2.2, -5.5] },
+      { camPos: [-13.5, 6.8, -2.5], lookAt: [2.0, 2.5, -5.8] },
+      { camPos: [-8.8, 2.5, -5.5], lookAt: [3.5, 2.4, -5.5] }
     ],
     shortBadge: { en: "06 / 08", fi: "06 / 08", fa: "۰۶ / ۰۸" },
     badge: { en: "STOP 6 OF 8 · 11:22 AM STRIKE: 5M CRATER & EXTENT OF COLLAPSE", fi: "PISTE 6/8 · KLO 11.22 ISKU: 5M KRAATTERI", fa: "ایستگاه ۶ از ۸ · ساعت ۱۱:۲۲: گودال ۵ متری و محدوده تخریب" }
@@ -564,12 +564,12 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'second_wave',
     temporal: 1.0,
     cutawayMode: 0,
-    camPos: [8.0, 6.5, 16.5],
+    camPos: [8.0, 7.0, 16.0],
     lookAt: [-1.0, 2.5, -3.0],
     waypoints: [
-      { camPos: [8.0, 6.5, 16.5], lookAt: [-1.0, 2.5, -3.0] },
-      { camPos: [18.5, 7.8, 16.5], lookAt: [4.0, 2.0, 1.5] },
-      { camPos: [25.5, 9.2, 13.5], lookAt: [6.0, 2.2, -2.0] }
+      { camPos: [8.0, 7.0, 16.0], lookAt: [-1.0, 2.5, -3.0] },
+      { camPos: [18.5, 8.5, 15.5], lookAt: [4.0, 2.2, 1.5] },
+      { camPos: [26.0, 10.5, 14.0], lookAt: [6.0, 2.4, -2.0] }
     ],
     shortBadge: { en: "07 / 08", fi: "07 / 08", fa: "۰۷ / ۰۸" },
     badge: { en: "STOP 7 OF 8 · 2:30 PM SECOND WAVE & TOMAHAWK EVIDENCE", fi: "PISTE 7/8 · KLO 14.30 TOINEN ISKUAALTO", fa: "ایستگاه ۷ از ۸ · ساعت ۱۴:۳۰: موج دوم حملات و شواهد تاماهاک" }
@@ -578,12 +578,12 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'vow_shrine',
     temporal: 0.0,
     cutawayMode: 1,
-    camPos: [0.0, 2.8, 25.2],
-    lookAt: [0.0, 1.9, 13.5],
+    camPos: [-1.5, 2.85, 26.2],
+    lookAt: [-1.5, 1.95, 13.5],
     waypoints: [
-      { camPos: [0.0, 2.8, 25.2], lookAt: [0.0, 1.9, 13.5] },
-      { camPos: [0.0, 2.35, 18.5], lookAt: [0.0, 2.1, 10.5] },
-      { camPos: [0.0, 2.15, 15.2], lookAt: [0.0, 2.15, 10.5] }
+      { camPos: [-1.5, 2.85, 26.2], lookAt: [-1.5, 1.95, 13.5] },
+      { camPos: [-1.5, 2.35, 18.8], lookAt: [-1.5, 2.10, 10.5] },
+      { camPos: [-1.5, 2.15, 14.8], lookAt: [-1.5, 2.15, 10.5] }
     ],
     shortBadge: { en: "08 / 08", fi: "08 / 08", fa: "۰۸ / ۰۸" },
     badge: { en: "STOP 8 OF 8 · THE ACCOUNTABILITY VOW SHRINE", fi: "PISTE 8/8 · VASTUULUPAUKSEN MUISTOMERKKI", fa: "ایستگاه ۸ از ۸ · یادمان میثاق دادخواهی — ثبت پیمان جهانی" }
@@ -824,12 +824,10 @@ function createCameraAlignedPhotoInSpace(parentGroup, photoUrl, camPos, photoPos
   const group = new THREE.Group();
   const loader = new THREE.TextureLoader();
 
-  // 1. Yellow Wireframe Frustum Pyramid (matching Forensic Architecture's yellow camera cones)
   const yellowLineMat = new THREE.LineBasicMaterial({ color: 0xe5e059 });
   const hw = width / 2;
   const hh = height / 2;
 
-  // Frame rectangle corners in local space of photoPos
   const corners = [
     new THREE.Vector3(-hw, -hh, 0),
     new THREE.Vector3(hw, -hh, 0),
@@ -840,14 +838,23 @@ function createCameraAlignedPhotoInSpace(parentGroup, photoUrl, camPos, photoPos
   const frameGroup = new THREE.Group();
   frameGroup.position.set(photoPos[0], photoPos[1], photoPos[2]);
   frameGroup.rotation.y = rotY;
+  frameGroup.userData = { photoUrl, feature: 'camera_aligned_photo' };
 
-  // Outer yellow border
   const borderPts = [...corners, corners[0]];
   const borderGeo = new THREE.BufferGeometry().setFromPoints(borderPts);
   frameGroup.add(new THREE.Line(borderGeo, yellowLineMat));
 
-  // Pyramid rays from camera apex to photo corners
-  const localCam = new THREE.Vector3(0, 0, 2.2);
+  // Compute true camera apex in local space of frameGroup
+  const worldDelta = new THREE.Vector3(
+    camPos[0] - photoPos[0],
+    camPos[1] - photoPos[1],
+    camPos[2] - photoPos[2]
+  );
+  const localCam = worldDelta.applyAxisAngle(new THREE.Vector3(0, 1, 0), -rotY);
+  if (localCam.lengthSq() < 0.25) {
+    localCam.set(0, 0, 2.2);
+  }
+
   const rayPts = [];
   corners.forEach(c => {
     rayPts.push(localCam, c);
@@ -855,7 +862,6 @@ function createCameraAlignedPhotoInSpace(parentGroup, photoUrl, camPos, photoPos
   const rayGeo = new THREE.BufferGeometry().setFromPoints(rayPts);
   frameGroup.add(new THREE.LineSegments(rayGeo, yellowLineMat));
 
-  // Load actual school archive image onto the plane
   loader.load(photoUrl, (tex) => {
     const mat = new THREE.MeshBasicMaterial({
       map: tex,
@@ -869,130 +875,655 @@ function createCameraAlignedPhotoInSpace(parentGroup, photoUrl, camPos, photoPos
 
   group.add(frameGroup);
   parentGroup.add(group);
+  return frameGroup;
 }
 
-// --- TERRAIN, COURTYARD YELLOW ASSEMBLY LINES, PASTEL WALLS & VOW SHRINE ---
+// --- PROCEDURAL SCHOOL MURALS & SURFACE TEXTURES (MATCHING ON-SITE ARCHIVE FOOTAGE) ---
+let cachedMuralTextures = null;
+function getSchoolMuralTextures() {
+  if (cachedMuralTextures) return cachedMuralTextures;
+
+  // 1. East Wing Front Dado Mural: Boy reading on flying carpet + red/yellow tulips + butterflies (Mehr News / Abbas Zakeri)
+  const eastCanvas = document.createElement('canvas');
+  eastCanvas.width = 1024;
+  eastCanvas.height = 384;
+  const ec = eastCanvas.getContext('2d');
+  const skyGrad = ec.createLinearGradient(0, 0, 0, 384);
+  skyGrad.addColorStop(0, '#89c0d6');
+  skyGrad.addColorStop(0.68, '#9fd0c4');
+  skyGrad.addColorStop(1, '#4f9160');
+  ec.fillStyle = skyGrad;
+  ec.fillRect(0, 0, 1024, 384);
+
+  // Meadow grass blades along bottom
+  ec.fillStyle = '#3b7a4c';
+  for (let gx = 0; gx < 1024; gx += 12) {
+    ec.beginPath();
+    ec.moveTo(gx, 384);
+    ec.lineTo(gx + 6, 336 - (gx % 24));
+    ec.lineTo(gx + 12, 384);
+    ec.fill();
+  }
+
+  // Tulips on left & right
+  const tulipSpots = [55, 115, 175, 240, 310, 385, 455, 855, 925, 980];
+  const tulipColors = ['#d9383a', '#e86f88', '#eab308', '#d9383a', '#ec4899', '#eab308', '#d9383a', '#f59e0b', '#d9383a', '#ec4899'];
+  tulipSpots.forEach((tx, idx) => {
+    const stemTop = 250 + (idx % 3) * 18;
+    ec.strokeStyle = '#2d6a3e';
+    ec.lineWidth = 6;
+    ec.beginPath();
+    ec.moveTo(tx, 380);
+    ec.quadraticCurveTo(tx - 6, 320, tx, stemTop);
+    ec.stroke();
+
+    ec.fillStyle = tulipColors[idx % tulipColors.length];
+    ec.beginPath();
+    ec.arc(tx, stemTop - 6, 18, 0, Math.PI, false);
+    ec.lineTo(tx - 18, stemTop - 26);
+    ec.lineTo(tx - 6, stemTop - 14);
+    ec.lineTo(tx, stemTop - 28);
+    ec.lineTo(tx + 6, stemTop - 14);
+    ec.lineTo(tx + 18, stemTop - 26);
+    ec.closePath();
+    ec.fill();
+  });
+
+  // Golden patterned reading carpet (right-center)
+  ec.save();
+  ec.translate(685, 295);
+  ec.rotate(-0.12);
+  ec.fillStyle = '#d97706';
+  ec.strokeStyle = '#fef3c7';
+  ec.lineWidth = 5;
+  ec.beginPath();
+  ec.moveTo(-110, 20);
+  ec.lineTo(95, -5);
+  ec.lineTo(125, 42);
+  ec.lineTo(-85, 62);
+  ec.closePath();
+  ec.fill();
+  ec.stroke();
+  ec.restore();
+
+  // Child in yellow shirt kneeling & reading open book
+  ec.fillStyle = '#64748b'; // trousers
+  ec.beginPath();
+  ec.ellipse(705, 286, 36, 18, -0.1, 0, Math.PI * 2);
+  ec.fill();
+  ec.fillStyle = '#eab308'; // yellow shirt
+  ec.beginPath();
+  ec.roundRect(675, 205, 54, 68, 14);
+  ec.fill();
+  ec.fillStyle = '#f6d5b0'; // face
+  ec.beginPath();
+  ec.arc(702, 168, 34, 0, Math.PI * 2);
+  ec.fill();
+  ec.fillStyle = '#4a2e1b'; // hair
+  ec.beginPath();
+  ec.arc(702, 156, 35, Math.PI * 0.95, Math.PI * 2.05);
+  ec.fill();
+  // Open white book on lectern/hands
+  ec.fillStyle = '#ffffff';
+  ec.strokeStyle = '#475569';
+  ec.lineWidth = 3;
+  ec.beginPath();
+  ec.moveTo(640, 245);
+  ec.lineTo(682, 255);
+  ec.lineTo(682, 282);
+  ec.lineTo(640, 272);
+  ec.closePath();
+  ec.fill();
+  ec.stroke();
+
+  // White & golden butterflies
+  [[585, 130, '#f59e0b'], [775, 145, '#f8fafc'], [625, 92, '#fde047'], [825, 195, '#fb923c']].forEach(([bx, by, bCol]) => {
+    ec.fillStyle = bCol;
+    ec.strokeStyle = '#334155';
+    ec.lineWidth = 2;
+    ec.beginPath();
+    ec.ellipse(bx - 12, by - 6, 14, 10, -0.4, 0, Math.PI * 2);
+    ec.ellipse(bx + 12, by - 6, 14, 10, 0.4, 0, Math.PI * 2);
+    ec.fill();
+    ec.stroke();
+  });
+  const eastMuralTex = new THREE.CanvasTexture(eastCanvas);
+
+  // 2. Yellow Courtyard Dividing Wall Panel with Large Red Tulip (x = +19..+23.6)
+  const tulipCanvas = document.createElement('canvas');
+  tulipCanvas.width = 512;
+  tulipCanvas.height = 384;
+  const tc = tulipCanvas.getContext('2d');
+  tc.fillStyle = '#e0c53a';
+  tc.fillRect(0, 0, 512, 384);
+  tc.strokeStyle = '#3f7d3c';
+  tc.lineWidth = 10;
+  tc.beginPath();
+  tc.moveTo(350, 384);
+  tc.quadraticCurveTo(332, 265, 348, 175);
+  tc.stroke();
+  tc.fillStyle = '#4d8b44';
+  tc.beginPath();
+  tc.ellipse(376, 295, 36, 16, -0.6, 0, Math.PI * 2);
+  tc.fill();
+  tc.fillStyle = '#c92a2a';
+  tc.beginPath();
+  tc.arc(348, 155, 42, 0, Math.PI, false);
+  tc.lineTo(306, 105);
+  tc.lineTo(334, 130);
+  tc.lineTo(348, 96);
+  tc.lineTo(362, 130);
+  tc.lineTo(390, 105);
+  tc.closePath();
+  tc.fill();
+  const yellowTulipTex = new THREE.CanvasTexture(tulipCanvas);
+
+  // 3. Main Gate Mint Wall with Colored Pencils & Persian Letters (pip01b_01)
+  const gateCanvas = document.createElement('canvas');
+  gateCanvas.width = 512;
+  gateCanvas.height = 512;
+  const gc = gateCanvas.getContext('2d');
+  gc.fillStyle = '#bfe3d0';
+  gc.fillRect(0, 0, 512, 512);
+  // Left brick quoins
+  for (let by = 16; by < 496; by += 76) {
+    gc.fillStyle = '#c84b31';
+    gc.fillRect(10, by, 34, 52);
+  }
+  // Colored pencils
+  function drawPencil(x, y, ang, bodyHex) {
+    gc.save();
+    gc.translate(x, y);
+    gc.rotate(ang);
+    gc.fillStyle = bodyHex;
+    gc.strokeStyle = '#1e293b';
+    gc.lineWidth = 4;
+    gc.fillRect(-22, -70, 44, 140);
+    gc.strokeRect(-22, -70, 44, 140);
+    gc.fillStyle = '#fde68a';
+    gc.beginPath();
+    gc.moveTo(-22, -70);
+    gc.lineTo(0, -118);
+    gc.lineTo(22, -70);
+    gc.closePath();
+    gc.fill();
+    gc.stroke();
+    gc.fillStyle = bodyHex;
+    gc.beginPath();
+    gc.moveTo(-8, -100);
+    gc.lineTo(0, -118);
+    gc.lineTo(8, -100);
+    gc.closePath();
+    gc.fill();
+    gc.restore();
+  }
+  drawPencil(165, 315, 0.52, '#60a5fa');
+  drawPencil(305, 165, -0.68, '#f472b6');
+  drawPencil(410, 330, -0.25, '#facc15');
+  gc.fillStyle = '#eab308';
+  gc.strokeStyle = '#1e293b';
+  gc.lineWidth = 4;
+  gc.font = 'bold 92px Tahoma, sans-serif';
+  gc.fillText('آ ب', 235, 390);
+  gc.strokeText('آ ب', 235, 390);
+  const pencilGateTex = new THREE.CanvasTexture(gateCanvas);
+
+  // 4. Portico Column Texture: White upper + subtle Iranian tricolor diagonal bands on lower half
+  const colCanvas = document.createElement('canvas');
+  colCanvas.width = 256;
+  colCanvas.height = 512;
+  const cc = colCanvas.getContext('2d');
+  cc.fillStyle = '#edeff2';
+  cc.fillRect(0, 0, 256, 512);
+  cc.save();
+  cc.beginPath();
+  cc.rect(0, 230, 256, 282);
+  cc.clip();
+  cc.fillStyle = '#3b8c58';
+  cc.beginPath();
+  cc.moveTo(0, 250);
+  cc.lineTo(256, 195);
+  cc.lineTo(256, 290);
+  cc.lineTo(0, 345);
+  cc.closePath();
+  cc.fill();
+  cc.fillStyle = '#f8fafc';
+  cc.beginPath();
+  cc.moveTo(0, 345);
+  cc.lineTo(256, 290);
+  cc.lineTo(256, 395);
+  cc.lineTo(0, 450);
+  cc.closePath();
+  cc.fill();
+  cc.fillStyle = '#c43e3e';
+  cc.beginPath();
+  cc.moveTo(0, 450);
+  cc.lineTo(256, 395);
+  cc.lineTo(256, 512);
+  cc.lineTo(0, 512);
+  cc.closePath();
+  cc.fill();
+  // Small red emblem mark in white band
+  cc.fillStyle = '#b91c1c';
+  cc.beginPath();
+  cc.arc(128, 368, 15, 0, Math.PI * 2);
+  cc.fill();
+  cc.restore();
+  const porticoColTex = new THREE.CanvasTexture(colCanvas);
+
+  // 5. Rear Dinosaur Height-Chart Mural (hd/f_051.jpg)
+  const dinoCanvas = document.createElement('canvas');
+  dinoCanvas.width = 512;
+  dinoCanvas.height = 384;
+  const dc = dinoCanvas.getContext('2d');
+  dc.fillStyle = '#e5c4d3';
+  dc.fillRect(0, 0, 512, 384);
+  // Height chart ruler
+  dc.fillStyle = '#f4a4b8';
+  dc.fillRect(390, 60, 44, 290);
+  dc.strokeStyle = '#9d174d';
+  dc.lineWidth = 3;
+  for (let ry = 75; ry < 340; ry += 22) {
+    dc.beginPath();
+    dc.moveTo(390, ry);
+    dc.lineTo(414, ry);
+    dc.stroke();
+  }
+  // Friendly green brontosaurus silhouette
+  dc.fillStyle = '#2f855a';
+  dc.beginPath();
+  dc.ellipse(275, 290, 62, 36, 0, 0, Math.PI * 2);
+  dc.fill();
+  dc.lineWidth = 26;
+  dc.strokeStyle = '#2f855a';
+  dc.lineCap = 'round';
+  dc.beginPath();
+  dc.moveTo(322, 275);
+  dc.quadraticCurveTo(350, 170, 355, 95);
+  dc.stroke();
+  dc.beginPath();
+  dc.ellipse(372, 92, 24, 16, 0.1, 0, Math.PI * 2);
+  dc.fill();
+  dc.beginPath();
+  dc.moveTo(215, 292);
+  dc.quadraticCurveTo(165, 285, 148, 245);
+  dc.stroke();
+  dc.fillRect(235, 315, 18, 48);
+  dc.fillRect(300, 315, 18, 48);
+  const dinoWallTex = new THREE.CanvasTexture(dinoCanvas);
+
+  // 6. East Perimeter Pastel Yellow Tree Mural (pip01a_03)
+  const treeMuralCanvas = document.createElement('canvas');
+  treeMuralCanvas.width = 512;
+  treeMuralCanvas.height = 384;
+  const tmc = treeMuralCanvas.getContext('2d');
+  tmc.fillStyle = '#dfd688';
+  tmc.fillRect(0, 0, 512, 384);
+  tmc.fillStyle = '#6b4f35';
+  tmc.fillRect(242, 220, 28, 130);
+  tmc.fillStyle = '#4d7c58';
+  tmc.beginPath();
+  tmc.arc(256, 165, 78, 0, Math.PI * 2);
+  tmc.fill();
+  const eastTreeMuralTex = new THREE.CanvasTexture(treeMuralCanvas);
+
+  // 7. Post-Strike Window Smoke Scorch Plume (pip03b_01)
+  const scorchCanvas = document.createElement('canvas');
+  scorchCanvas.width = 256;
+  scorchCanvas.height = 256;
+  const sc = scorchCanvas.getContext('2d');
+  const sGrad = sc.createRadialGradient(128, 175, 12, 128, 115, 115);
+  sGrad.addColorStop(0, 'rgba(20, 20, 22, 0.85)');
+  sGrad.addColorStop(0.55, 'rgba(38, 36, 34, 0.45)');
+  sGrad.addColorStop(1, 'rgba(38, 36, 34, 0.0)');
+  sc.fillStyle = sGrad;
+  sc.fillRect(0, 0, 256, 256);
+  const scorchTex = new THREE.CanvasTexture(scorchCanvas);
+
+  cachedMuralTextures = {
+    eastMuralTex,
+    yellowTulipTex,
+    pencilGateTex,
+    porticoColTex,
+    dinoWallTex,
+    eastTreeMuralTex,
+    scorchTex
+  };
+  return cachedMuralTextures;
+}
+
+// --- TERRAIN, 3 WALLED COURTYARDS, 90°-ALIGNED ASSEMBLY LINES, STRIPED SHED & VOW SHRINE ---
 function buildEnvironmentAndTerrain() {
-  const groundGeo = new THREE.PlaneGeometry(160, 140, 16, 16);
-  const groundMat = new THREE.MeshStandardMaterial({ color: 0x22252a, roughness: 0.9, metalness: 0.1 });
+  const murals = getSchoolMuralTextures();
+
+  // Outer surroundings plane
+  const groundGeo = new THREE.PlaneGeometry(190, 165, 16, 16);
+  const groundMat = new THREE.MeshStandardMaterial({ color: 0x20242b, roughness: 0.92, metalness: 0.06 });
   const ground = new THREE.Mesh(groundGeo, groundMat);
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
   terrainGroup.add(ground);
 
-  // Main Courtyard Asphalt
-  const yardGeo = new THREE.PlaneGeometry(68, 48);
-  const yardMat = new THREE.MeshStandardMaterial({ color: 0x363b44, roughness: 0.82 });
-  const yard = new THREE.Mesh(yardGeo, yardMat);
-  yard.rotation.x = -Math.PI / 2;
-  yard.position.set(0, 0.02, 4);
-  yard.receiveShadow = true;
-  terrainGroup.add(yard);
+  // 1) SE Main Boys' Courtyard Asphalt (X: -8.4..+42.5, Z: +2.4..+30.0)
+  const boysYard = new THREE.Mesh(
+    new THREE.PlaneGeometry(50.9, 27.6),
+    new THREE.MeshStandardMaterial({ color: 0x3b4049, roughness: 0.84 })
+  );
+  boysYard.rotation.x = -Math.PI / 2;
+  boysYard.position.set(17.05, 0.02, 16.2);
+  boysYard.receiveShadow = true;
+  terrainGroup.add(boysYard);
+
+  // 2) SW Girls' School Yard Surface (X: -34.0..-8.4, Z: -19.5..+30.0)
+  const girlsYard = new THREE.Mesh(
+    new THREE.PlaneGeometry(25.6, 49.5),
+    new THREE.MeshStandardMaterial({ color: 0x464a42, roughness: 0.86 })
+  );
+  girlsYard.rotation.x = -Math.PI / 2;
+  girlsYard.position.set(-21.2, 0.02, 5.25);
+  girlsYard.receiveShadow = true;
+  terrainGroup.add(girlsYard);
+
+  // 3) NE Walled Pre-School Yard Surface (X: +19.0..+42.5, Z: -18.5..+2.4)
+  const preSchoolYard = new THREE.Mesh(
+    new THREE.PlaneGeometry(23.5, 20.9),
+    new THREE.MeshStandardMaterial({ color: 0x4b5347, roughness: 0.86 })
+  );
+  preSchoolYard.rotation.x = -Math.PI / 2;
+  preSchoolYard.position.set(30.75, 0.02, -8.05);
+  preSchoolYard.receiveShadow = true;
+  terrainGroup.add(preSchoolYard);
+
+  // 4) NW Rear Staircase & Shade Alley (X: -19.0..+19.0, Z: -19.5..-12.8)
+  const rearAlley = new THREE.Mesh(
+    new THREE.PlaneGeometry(38.0, 6.8),
+    new THREE.MeshStandardMaterial({ color: 0x353a42, roughness: 0.86 })
+  );
+  rearAlley.rotation.x = -Math.PI / 2;
+  rearAlley.position.set(0, 0.02, -16.1);
+  rearAlley.receiveShadow = true;
+  terrainGroup.add(rearAlley);
 
   // ========================================================
-  // VERIFIED COURTYARD MARKINGS (FA 01_reconstruction 00:35)
-  // 1. Six Parallel Yellow Assembly Lines + Yellow Standing Circles inside Green Border
+  // VERIFIED COURTYARD MARKINGS (FA 01_reconstruction & Real Archive Footage)
+  // Six Parallel Yellow Morning Assembly Lines running ALONG +X (parallel to front facade),
+  // with 6 yellow standing circles on the -X (portico-facing) edge inside a green border!
   // ========================================================
   const assemblyGroup = new THREE.Group();
-  assemblyGroup.position.set(13, 0.04, 8.5);
+  assemblyGroup.name = "Courtyard_Assembly_Lines";
+  assemblyGroup.position.set(16.5, 0.04, 8.25);
 
-  const greenBorderMat = new THREE.MeshBasicMaterial({ color: 0x3b6e4c, side: THREE.DoubleSide });
-  const yellowMarkMat = new THREE.MeshBasicMaterial({ color: 0xd9cf52, side: THREE.DoubleSide });
+  const greenBorderMat = new THREE.MeshBasicMaterial({ color: 0x346747, side: THREE.DoubleSide });
+  const yellowMarkMat = new THREE.MeshBasicMaterial({ color: 0xdccf4e, side: THREE.DoubleSide });
 
-  // Outer green rectangle border (10m x 12m)
-  const gTop = new THREE.Mesh(new THREE.PlaneGeometry(10.4, 0.25), greenBorderMat);
-  gTop.rotation.x = -Math.PI / 2; gTop.position.set(0, 0, -6);
-  assemblyGroup.add(gTop);
-  const gBot = new THREE.Mesh(new THREE.PlaneGeometry(10.4, 0.25), greenBorderMat);
-  gBot.rotation.x = -Math.PI / 2; gBot.position.set(0, 0, 6);
-  assemblyGroup.add(gBot);
+  const boxW = 14.8; // along X (x = 9.1..23.9)
+  const boxD = 8.6;  // along Z (z = 3.95..12.55)
+  const bNorth = new THREE.Mesh(new THREE.PlaneGeometry(boxW, 0.22), greenBorderMat);
+  bNorth.rotation.x = -Math.PI / 2; bNorth.position.set(0, 0, -boxD / 2);
+  assemblyGroup.add(bNorth);
+  const bSouth = new THREE.Mesh(new THREE.PlaneGeometry(boxW, 0.22), greenBorderMat);
+  bSouth.rotation.x = -Math.PI / 2; bSouth.position.set(0, 0, boxD / 2);
+  assemblyGroup.add(bSouth);
+  const bWest = new THREE.Mesh(new THREE.PlaneGeometry(0.22, boxD), greenBorderMat);
+  bWest.rotation.x = -Math.PI / 2; bWest.position.set(-boxW / 2, 0, 0);
+  assemblyGroup.add(bWest);
+  const bEast = new THREE.Mesh(new THREE.PlaneGeometry(0.22, boxD), greenBorderMat);
+  bEast.rotation.x = -Math.PI / 2; bEast.position.set(boxW / 2, 0, 0);
+  assemblyGroup.add(bEast);
 
   for (let i = 0; i < 6; i++) {
-    const lx = -4.2 + i * 1.68;
-    // Yellow line
-    const yLine = new THREE.Mesh(new THREE.PlaneGeometry(0.22, 11.6), yellowMarkMat);
+    const lz = -3.5 + i * 1.40;
+    const yLine = new THREE.Mesh(new THREE.PlaneGeometry(13.4, 0.19), yellowMarkMat);
     yLine.rotation.x = -Math.PI / 2;
-    yLine.position.set(lx, 0.005, 0);
+    yLine.position.set(0.35, 0.005, lz);
+    yLine.userData = { feature: 'assembly_yellow_line' };
     assemblyGroup.add(yLine);
 
-    // Yellow standing circle at the head of each line (facing school)
-    const yDot = new THREE.Mesh(new THREE.CircleGeometry(0.32, 20), yellowMarkMat);
+    // Standing circle at the -X (portico-facing) head of each line
+    const yDot = new THREE.Mesh(new THREE.CircleGeometry(0.30, 24), yellowMarkMat);
     yDot.rotation.x = -Math.PI / 2;
-    yDot.position.set(lx - 0.45, 0.006, -5.2);
+    yDot.position.set(-6.65, 0.006, lz);
     assemblyGroup.add(yDot);
   }
   terrainGroup.add(assemblyGroup);
 
-  // 2. White Circular Play Marking with Star (FA 02_progression)
+  // SW Girls' Yard White Circular Play Marking with Inner Cross/Star
   const whiteLineMat = new THREE.MeshBasicMaterial({ color: 0xcbd5e1, side: THREE.DoubleSide });
-  const playRing = new THREE.Mesh(new THREE.RingGeometry(2.8, 2.95, 32), whiteLineMat);
+  const playGroup = new THREE.Group();
+  playGroup.position.set(-16.0, 0.04, 12.5);
+  const playRing = new THREE.Mesh(new THREE.RingGeometry(2.75, 2.92, 40), whiteLineMat);
   playRing.rotation.x = -Math.PI / 2;
-  playRing.position.set(-14, 0.04, 11);
-  terrainGroup.add(playRing);
+  playGroup.add(playRing);
+  for (let a = 0; a < 4; a++) {
+    const spoke = new THREE.Mesh(new THREE.PlaneGeometry(5.5, 0.11), whiteLineMat);
+    spoke.rotation.x = -Math.PI / 2;
+    spoke.rotation.z = (a * Math.PI) / 4;
+    playGroup.add(spoke);
+  }
+  terrainGroup.add(playGroup);
 
-  // 3. Courtyard Perimeter Wall with Pastel Yellow, Mint Green, White & Sky Blue Panels (rec_04.jpg)
-  const wallMat = new THREE.MeshStandardMaterial({ color: 0xdbe0e6, roughness: 0.85 });
-  const wallHeight = 2.6;
-  const wallThickness = 0.45;
+  // SE White-Lined Mini Football Pitch + 2 Goalposts (X: 27.2..40.2, Z: 14.2..26.8)
+  const pitchGroup = new THREE.Group();
+  pitchGroup.position.set(33.7, 0.04, 20.5);
+  pitchGroup.userData = { feature: 'football_pitch' };
+  const pW = 12.6, pD = 12.2;
+  [
+    [pW, 0.12, 0, -pD / 2],
+    [pW, 0.12, 0, pD / 2],
+    [0.12, pD, -pW / 2, 0],
+    [0.12, pD, pW / 2, 0],
+    [pW, 0.10, 0, 0]
+  ].forEach(([w, d, px, pz]) => {
+    const ln = new THREE.Mesh(new THREE.PlaneGeometry(w, d), whiteLineMat);
+    ln.rotation.x = -Math.PI / 2;
+    ln.position.set(px, 0, pz);
+    pitchGroup.add(ln);
+  });
+  const pitchCircle = new THREE.Mesh(new THREE.RingGeometry(1.65, 1.77, 32), whiteLineMat);
+  pitchCircle.rotation.x = -Math.PI / 2;
+  pitchGroup.add(pitchCircle);
 
-  // North (Rear) Wall
-  const nWall = new THREE.Mesh(new THREE.BoxGeometry(68, wallHeight, wallThickness), wallMat);
-  nWall.position.set(0, wallHeight / 2, -19.5);
-  terrainGroup.add(nWall);
+  const goalMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.4, metalness: 0.4 });
+  [-pD / 2, pD / 2].forEach((gz) => {
+    const gPostL = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.85, 8), goalMat);
+    gPostL.position.set(-1.35, 0.92, gz);
+    const gPostR = gPostL.clone();
+    gPostR.position.set(1.35, 0.92, gz);
+    const gBar = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 2.75, 8), goalMat);
+    gBar.rotation.z = Math.PI / 2;
+    gBar.position.set(0, 1.85, gz);
+    pitchGroup.add(gPostL, gPostR, gBar);
+  });
+  terrainGroup.add(pitchGroup);
 
-  // South Wall
-  const sWall = new THREE.Mesh(new THREE.BoxGeometry(68, wallHeight, wallThickness), wallMat);
-  sWall.position.set(0, wallHeight / 2, 27.5);
-  terrainGroup.add(sWall);
+  // Central White/Mint-Curbed Planted Tree Island (X: 5.2..24.5, Z: 15.2..26.8)
+  const planterGroup = new THREE.Group();
+  planterGroup.position.set(14.85, 0, 21.0);
+  planterGroup.userData = { feature: 'curbed_tree_island' };
+  const curbOuter = new THREE.Mesh(
+    new THREE.BoxGeometry(19.2, 0.28, 11.4),
+    new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.75 })
+  );
+  curbOuter.position.set(0, 0.14, 0);
+  curbOuter.receiveShadow = true;
+  planterGroup.add(curbOuter);
 
-  // East Wall with alternating Pastel Yellow, Mint Green & White panels (visible in rec_04.jpg)
-  const eWall = new THREE.Mesh(new THREE.BoxGeometry(wallThickness, wallHeight, 47), wallMat);
-  eWall.position.set(34, wallHeight / 2, 4);
-  terrainGroup.add(eWall);
+  const planterSoil = new THREE.Mesh(
+    new THREE.BoxGeometry(18.5, 0.30, 10.7),
+    new THREE.MeshStandardMaterial({ color: 0x3b4d3b, roughness: 0.95 })
+  );
+  planterSoil.position.set(0, 0.15, 0);
+  planterSoil.receiveShadow = true;
+  planterGroup.add(planterSoil);
 
-  const pastelPalette = [0xd8d896, 0x9ec4a5, 0xf1f5f9, 0x9ec4a5, 0xd8d896, 0x8ab8c9];
-  for (let i = 0; i < 6; i++) {
-    const pPanel = new THREE.Mesh(
-      new THREE.BoxGeometry(0.08, 2.3, 5.5),
-      new THREE.MeshStandardMaterial({ color: pastelPalette[i], roughness: 0.7 })
-    );
-    pPanel.position.set(33.72, 1.25, -12 + i * 6.0);
-    terrainGroup.add(pPanel);
+  const trunkMat = new THREE.MeshStandardMaterial({ color: 0x5c4033, roughness: 0.9 });
+  const canopyFoliageMat = new THREE.MeshStandardMaterial({ color: 0x3f6a49, roughness: 0.85 });
+  [[-6.2, -2.5, 1.0], [0.8, -3.0, 1.15], [6.4, -0.5, 0.95], [-2.5, 3.0, 1.05]].forEach(([tx, tz, sc]) => {
+    const tGrp = new THREE.Group();
+    tGrp.position.set(tx, 0.28, tz);
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.18 * sc, 0.26 * sc, 2.2 * sc, 8), trunkMat);
+    trunk.position.y = 1.1 * sc;
+    trunk.castShadow = true;
+    tGrp.add(trunk);
+    const crown = new THREE.Mesh(new THREE.DodecahedronGeometry(1.55 * sc, 1), canopyFoliageMat);
+    crown.position.y = 2.85 * sc;
+    crown.scale.set(1.15, 0.82, 1.15);
+    crown.castShadow = true;
+    tGrp.add(crown);
+    planterGroup.add(tGrp);
+  });
+  terrainGroup.add(planterGroup);
+
+  // ========================================================
+  // COURTYARD DIVIDING & PERIMETER WALLS
+  // ========================================================
+  const wallMat = new THREE.MeshStandardMaterial({ color: 0xe2e6ec, roughness: 0.85 });
+  const wallH = 2.65;
+  const wallT = 0.36;
+
+  function addCourtyardWall(w, h, d, x, y, z, mat, featureTag, isSolid = true) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || wallMat);
+    m.position.set(x, y, z);
+    m.castShadow = true;
+    m.receiveShadow = true;
+    m.userData = { isSolidWall: isSolid };
+    if (featureTag) m.userData.feature = featureTag;
+    terrainGroup.add(m);
+    return m;
   }
 
-  // Red & White Striped Corner Shed / Gatehouse (visible in rec_04.jpg)
-  const shed = new THREE.Mesh(
-    new THREE.BoxGeometry(5.5, 3.0, 4.0),
-    new THREE.MeshStandardMaterial({ color: 0xc84b31, roughness: 0.7 })
+  // 1. Co-Linear +X Pastel Dividing Wall (Z = +2.4, X = +19.0..+42.0) separating Boys' Yard & NE Pre-School Yard
+  addCourtyardWall(23.0, wallH, wallT, 30.5, wallH / 2, 2.4, wallMat, 'plus_x_pastel_wall', true);
+  const plusXPanelMats = [
+    new THREE.MeshStandardMaterial({ map: murals.yellowTulipTex, roughness: 0.78 }),
+    new THREE.MeshStandardMaterial({ color: 0x9ec4a5, roughness: 0.78 }),
+    new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.78 }),
+    new THREE.MeshStandardMaterial({ color: 0x9ec4a5, roughness: 0.78 }),
+    new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.78 })
+  ];
+  for (let i = 0; i < 5; i++) {
+    const px = 21.3 + i * 4.55;
+    const panel = new THREE.Mesh(new THREE.BoxGeometry(4.35, 2.35, 0.06), plusXPanelMats[i]);
+    panel.position.set(px, 1.25, 2.60);
+    terrainGroup.add(panel);
+  }
+
+  // 2. NE Pre-School Yard Rear (-Z = -18.5) & East (+X = +42.5) Walls + Open Double Mint Gates
+  addCourtyardWall(7.2, wallH, wallT, 22.6, wallH / 2, -18.5, wallMat, null, true);
+  addCourtyardWall(12.1, wallH, wallT, 36.45, wallH / 2, -18.5, wallMat, null, true);
+  const mintGateMat = new THREE.MeshStandardMaterial({ color: 0x9ec4a5, roughness: 0.55, metalness: 0.25 });
+  const preGateL = new THREE.Mesh(new THREE.BoxGeometry(2.05, 2.45, 0.10), mintGateMat);
+  preGateL.position.set(26.2, 1.25, -19.4);
+  preGateL.rotation.y = Math.PI / 2.2;
+  const preGateR = new THREE.Mesh(new THREE.BoxGeometry(2.05, 2.45, 0.10), mintGateMat);
+  preGateR.position.set(30.4, 1.25, -19.4);
+  preGateR.rotation.y = -Math.PI / 2.2;
+  terrainGroup.add(preGateL, preGateR);
+  addCourtyardWall(wallT, wallH, 20.9, 42.5, wallH / 2, -8.05, wallMat, null, true);
+
+  // 3. Red & White Horizontally Striped 4-Door Washroom / Drinking-Fountain Shed at East end of +X wall (facing -X)
+  const shedGroup = new THREE.Group();
+  shedGroup.position.set(41.3, 0, 5.5);
+  shedGroup.userData = { feature: 'striped_washroom_shed', isSolidWall: true };
+  const shedRedMat = new THREE.MeshStandardMaterial({ color: 0xc23b2b, roughness: 0.72 });
+  const shedWhiteMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.72 });
+  const shedDarkDoor = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
+
+  const shedBody = new THREE.Mesh(new THREE.BoxGeometry(2.4, 2.85, 6.1), shedRedMat);
+  shedBody.position.set(0, 1.425, 0);
+  shedBody.castShadow = true;
+  shedBody.receiveShadow = true;
+  shedBody.userData = { isSolidWall: true };
+  shedGroup.add(shedBody);
+
+  const shedRoof = new THREE.Mesh(new THREE.BoxGeometry(2.7, 0.30, 6.3), shedWhiteMat);
+  shedRoof.position.set(-0.08, 2.98, 0);
+  shedGroup.add(shedRoof);
+
+  // Horizontal white stripes across -X front face
+  [0.65, 1.45, 2.25].forEach((sy) => {
+    const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.16, 6.12), shedWhiteMat);
+    stripe.position.set(-1.21, sy, 0);
+    shedGroup.add(stripe);
+  });
+  // 4 recessed doorways facing -X down the yellow assembly lines
+  [-2.1, -0.7, 0.7, 2.1].forEach((dz) => {
+    const doorRecess = new THREE.Mesh(new THREE.BoxGeometry(0.10, 2.05, 0.76), shedDarkDoor);
+    doorRecess.position.set(-1.22, 1.05, dz);
+    const doorFrame = new THREE.Mesh(new THREE.BoxGeometry(0.08, 2.18, 0.90), shedWhiteMat);
+    doorFrame.position.set(-1.20, 1.10, dz);
+    shedGroup.add(doorFrame, doorRecess);
+  });
+  terrainGroup.add(shedGroup);
+
+  // 4. East Boys' Courtyard Perimeter Wall (X = +42.5, Z = +8.5..+30.0) with Sky-Blue, Mint & Tree-Mural Panels
+  addCourtyardWall(wallT, wallH, 21.5, 42.5, wallH / 2, 19.25, wallMat, null, true);
+  const eastPerimMats = [
+    new THREE.MeshStandardMaterial({ color: 0x4b93b8, roughness: 0.78 }),
+    new THREE.MeshStandardMaterial({ color: 0x8ec3b0, roughness: 0.78 }),
+    new THREE.MeshStandardMaterial({ map: murals.eastTreeMuralTex, roughness: 0.78 }),
+    new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.78 })
+  ];
+  for (let i = 0; i < 4; i++) {
+    const ep = new THREE.Mesh(new THREE.BoxGeometry(0.06, 2.35, 4.9), eastPerimMats[i]);
+    ep.position.set(42.28, 1.25, 11.4 + i * 5.1);
+    terrainGroup.add(ep);
+  }
+
+  // 5. SW Girls' Yard Dividing Wall (X = -8.4, Z = +2.4..+30.0) + Concrete Entry Canopy (projecting into SW Girls' Yard)
+  addCourtyardWall(wallT, wallH, 27.6, -8.4, wallH / 2, 16.2, wallMat, 'sw_girls_dividing_wall', true);
+  const swCanopy = new THREE.Mesh(
+    new THREE.BoxGeometry(3.2, 0.16, 3.2),
+    new THREE.MeshStandardMaterial({ color: 0xdbe2ea, roughness: 0.75 })
   );
-  shed.position.set(30.5, 1.5, 24.5);
-  terrainGroup.add(shed);
+  swCanopy.position.set(-10.0, 2.72, 4.0);
+  swCanopy.castShadow = true;
+  terrainGroup.add(swCanopy);
 
-  // West Wall
-  const wWall = new THREE.Mesh(new THREE.BoxGeometry(wallThickness, wallHeight, 47), wallMat);
-  wWall.position.set(-34, wallHeight / 2, 4);
-  terrainGroup.add(wWall);
+  // 6. South Perimeter Wall (Z = +30.0) & Main Gate with Colored-Pencil Mural (X = -4.2..+1.0 open entrance)
+  addCourtyardWall(29.8, wallH, wallT, -19.1, wallH / 2, 30.0, wallMat, null, true);
+  addCourtyardWall(41.5, wallH, wallT, 21.75, wallH / 2, 30.0, wallMat, null, true);
+
+  const pencilGatePanel = new THREE.Mesh(
+    new THREE.BoxGeometry(3.6, 2.65, 0.44),
+    new THREE.MeshStandardMaterial({ map: murals.pencilGateTex, roughness: 0.72 })
+  );
+  pencilGatePanel.position.set(2.8, 1.35, 30.0);
+  pencilGatePanel.userData = { feature: 'pencil_main_gate', isSolidWall: true };
+  terrainGroup.add(pencilGatePanel);
+
+  // Y-shaped security light post atop main gate pier (pip01b_01)
+  const poleMat = new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 });
+  const gPole = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.95, 8), poleMat);
+  gPole.position.set(1.25, 3.15, 30.0);
+  terrainGroup.add(gPole);
+
+  // 7. Outer West Wall (X = -34.0) & North-West Rear Alley Wall (Z = -19.5, X = -34.0..+19.0)
+  addCourtyardWall(wallT, wallH, 49.5, -34.0, wallH / 2, 5.25, wallMat, null, true);
+  addCourtyardWall(53.0, wallH, wallT, -7.5, wallH / 2, -19.5, wallMat, null, true);
 
   // ==========================================
-  // CENTRAL ACCOUNTABILITY VOW SHRINE / OBELISK
+  // CENTRAL ACCOUNTABILITY VOW SHRINE / OBELISK (Aligned on Central Portico & Gate Axis X = -1.5)
   // ==========================================
+  const shrineX = -1.5;
+  const shrineZ = 10.5;
   const shrinePedestal = new THREE.Mesh(
-    new THREE.CylinderGeometry(2.0, 2.4, 0.42, 24),
+    new THREE.CylinderGeometry(1.85, 2.25, 0.42, 24),
     new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, metalness: 0.5 })
   );
-  shrinePedestal.position.set(0, 0.21, 10.5);
+  shrinePedestal.position.set(shrineX, 0.21, shrineZ);
   memorialBoardsGroup.add(shrinePedestal);
 
   const goldRing = new THREE.Mesh(
-    new THREE.RingGeometry(2.1, 2.35, 32),
+    new THREE.RingGeometry(1.95, 2.20, 32),
     new THREE.MeshBasicMaterial({ color: 0xd4a853, side: THREE.DoubleSide })
   );
   goldRing.rotation.x = -Math.PI / 2;
-  goldRing.position.set(0, 0.05, 10.5);
+  goldRing.position.set(shrineX, 0.05, shrineZ);
   memorialBoardsGroup.add(goldRing);
 
   const obelisk = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.32, 0.6, 3.4, 8),
+    new THREE.CylinderGeometry(0.30, 0.58, 3.4, 8),
     new THREE.MeshStandardMaterial({
       color: 0xd4a853,
       emissive: 0xd4a853,
@@ -1001,7 +1532,7 @@ function buildEnvironmentAndTerrain() {
       roughness: 0.25
     })
   );
-  obelisk.position.set(0, 2.1, 10.5);
+  obelisk.position.set(shrineX, 2.1, shrineZ);
   obelisk.castShadow = true;
   memorialBoardsGroup.add(obelisk);
 }
@@ -1064,7 +1595,7 @@ function createWingBannerIn3D(parentGroup, titleEn, titleFa, x, y, z, rotY, widt
   parentGroup.add(mesh);
 }
 
-function create3DFramedPortraitOnWall(parentGroup, loader, item, x, y, z, rotY, frameW, frameH, borderHex, cutawayMode, wingLabel) {
+function create3DFramedPortraitOnWall(parentGroup, loader, item, x, y, z, rotY, frameW, frameH, borderHex, cutawayMode, wingLabel, focusDist) {
   const holder = new THREE.Group();
   holder.position.set(x, y, z);
   holder.rotation.y = rotY;
@@ -1106,9 +1637,9 @@ function create3DFramedPortraitOnWall(parentGroup, loader, item, x, y, z, rotY, 
   labelPlane.position.set(0, -frameH * 0.38, 0.026);
   holder.add(labelPlane);
 
-  // Compute camera focus point 2.2m in front of the portrait normal
+  const dist = typeof focusDist === 'number' ? focusDist : 1.85;
   const normal = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotY);
-  const focusCam = new THREE.Vector3(x, y + 0.1, z).add(normal.clone().multiplyScalar(2.35));
+  const focusCam = new THREE.Vector3(x, y + 0.08, z).add(normal.clone().multiplyScalar(dist));
   const lookAt = new THREE.Vector3(x, y, z);
 
   const artifactData = {
@@ -1127,7 +1658,7 @@ function create3DFramedPortraitOnWall(parentGroup, loader, item, x, y, z, rotY, 
   parentGroup.add(holder);
 }
 
-function create3DRubbleDrawingOnWall(parentGroup, loader, drw, x, y, z, rotY, frameW, frameH, cutawayMode, wingLabel) {
+function create3DRubbleDrawingOnWall(parentGroup, loader, drw, x, y, z, rotY, frameW, frameH, cutawayMode, wingLabel, focusDist) {
   const holder = new THREE.Group();
   holder.position.set(x, y, z);
   holder.rotation.y = rotY;
@@ -1166,8 +1697,9 @@ function create3DRubbleDrawingOnWall(parentGroup, loader, drw, x, y, z, rotY, fr
   labelPlane.position.set(0, -frameH * 0.38, 0.026);
   holder.add(labelPlane);
 
+  const dist = typeof focusDist === 'number' ? focusDist : 1.95;
   const normal = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotY);
-  const focusCam = new THREE.Vector3(x, y + 0.1, z).add(normal.clone().multiplyScalar(2.35));
+  const focusCam = new THREE.Vector3(x, y + 0.08, z).add(normal.clone().multiplyScalar(dist));
   const lookAt = new THREE.Vector3(x, y, z);
 
   const artifactData = {
@@ -1189,24 +1721,43 @@ function create3DRubbleDrawingOnWall(parentGroup, loader, drw, x, y, z, rotY, fr
 function createClassroomDeskWithDrawing(parentGroup, loader, drw, x, yBase, z, cutawayMode) {
   const deskGroup = new THREE.Group();
   deskGroup.position.set(x, yBase, z);
+  deskGroup.userData = { feature: 'classroom_desk' };
 
   const woodMat = new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.75 });
-  const top = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.06, 0.68), woodMat);
+  const frameMetalMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.55, metalness: 0.4 });
+
+  const top = new THREE.Mesh(new THREE.BoxGeometry(1.12, 0.05, 0.58), woodMat);
   top.position.set(0, 0.68, 0);
   top.castShadow = true;
   deskGroup.add(top);
 
-  const bench = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.42, 0.34), woodMat);
-  bench.position.set(0, 0.21, 0.52);
+  // 4 Desk Frame Legs + Book Shelf
+  [[-0.50, -0.23], [0.50, -0.23], [-0.50, 0.23], [0.50, 0.23]].forEach(([lx, lz]) => {
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.66, 0.045), frameMetalMat);
+    leg.position.set(lx, 0.33, lz);
+    leg.castShadow = true;
+    deskGroup.add(leg);
+  });
+
+  const bench = new THREE.Mesh(new THREE.BoxGeometry(1.12, 0.045, 0.32), woodMat);
+  bench.position.set(0, 0.40, 0.50);
+  bench.castShadow = true;
   deskGroup.add(bench);
+
+  // 2 Bench Legs + Stretcher
+  [-0.48, 0.48].forEach((bx) => {
+    const bLeg = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.39, 0.28), frameMetalMat);
+    bLeg.position.set(bx, 0.195, 0.50);
+    deskGroup.add(bLeg);
+  });
 
   if (drw) {
     const sheet = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.48, 0.36),
+      new THREE.PlaneGeometry(0.46, 0.34),
       new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
     );
     sheet.rotation.x = -Math.PI / 2;
-    sheet.position.set(0, 0.715, 0);
+    sheet.position.set(0, 0.712, 0);
     deskGroup.add(sheet);
 
     loader.load(drw.thumb || drw.image, (tex) => {
@@ -1218,7 +1769,7 @@ function createClassroomDeskWithDrawing(parentGroup, loader, drw, x, yBase, z, c
       artifactType: 'drawing',
       item: drw,
       wingLabel: 'Ground Floor Classroom Desk (Recovered from Rubble)',
-      focusCam: new THREE.Vector3(x, yBase + 1.9, z + 1.4),
+      focusCam: new THREE.Vector3(x, yBase + 1.75, z + 1.25),
       lookAt: new THREE.Vector3(x, yBase + 0.7, z),
       cutawayMode: cutawayMode || 2
     };
@@ -1233,30 +1784,27 @@ function populate3DSchoolPortraitsAndDrawings() {
   const loader = new THREE.TextureLoader();
   clickable3DArtifacts = [];
 
-  // 1. COURTYARD MEMORIAL STELE WALK (24 Double-Sided Steles around the Vow Shrine)
+  // 1. COURTYARD MEMORIAL AVENUE (24 Double-Sided Steles flanking the Central Vow Shrine Walk at X = -5.2 & X = +2.2)
   const portraitSample = childrenList.filter(c => c.photoPath).slice(0, 24);
-  const cols = 12;
-  const startX = -16.5;
-  const spacingX = 3.0;
-
   portraitSample.forEach((child, idx) => {
-    const row = Math.floor(idx / cols);
-    const col = idx % cols;
-    const x = startX + col * spacingX;
-    const z = 19.5 + row * 3.0;
+    const isLeft = idx < 12;
+    const slot = isLeft ? idx : idx - 12;
+    const x = isLeft ? -5.2 : 2.2;
+    const z = 13.0 + slot * 1.20;
+    const rotY = isLeft ? Math.PI / 2 : -Math.PI / 2;
     const imgUrl = child.photoPath;
 
     const post = new THREE.Mesh(
-      new THREE.BoxGeometry(1.38, 2.02, 0.12),
+      new THREE.BoxGeometry(0.96, 1.88, 0.10),
       new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 })
     );
-    post.position.set(x, 1.18, z);
-    post.rotation.y = Math.PI;
+    post.position.set(x, 1.08, z);
+    post.rotation.y = rotY;
     post.castShadow = true;
     memorialBoardsGroup.add(post);
 
     const border = new THREE.Mesh(
-      new THREE.BoxGeometry(1.44, 2.08, 0.08),
+      new THREE.BoxGeometry(1.02, 1.94, 0.07),
       new THREE.MeshBasicMaterial({ color: 0xd4a853 })
     );
     post.add(border);
@@ -1268,14 +1816,14 @@ function populate3DSchoolPortraitsAndDrawings() {
       '#d4a853'
     );
     const frontLabel = new THREE.Mesh(
-      new THREE.PlaneGeometry(1.24, 0.34),
+      new THREE.PlaneGeometry(0.88, 0.30),
       new THREE.MeshBasicMaterial({ map: labelTex, side: THREE.DoubleSide })
     );
-    frontLabel.position.set(0, -0.74, 0.075);
+    frontLabel.position.set(0, -0.68, 0.065);
     post.add(frontLabel);
 
     const backLabel = frontLabel.clone();
-    backLabel.position.set(0, -0.74, -0.075);
+    backLabel.position.set(0, -0.68, -0.065);
     backLabel.rotation.y = Math.PI;
     post.add(backLabel);
 
@@ -1283,8 +1831,8 @@ function populate3DSchoolPortraitsAndDrawings() {
       artifactType: 'victim',
       item: child,
       wingLabel: 'Courtyard 100 Faces Memorial Walk',
-      focusCam: new THREE.Vector3(x, 1.5, z - 2.6),
-      lookAt: new THREE.Vector3(x, 1.2, z),
+      focusCam: new THREE.Vector3(-1.5, 1.45, z),
+      lookAt: new THREE.Vector3(x, 1.15, z),
       cutawayMode: 0
     };
     post.userData = steleArtifact;
@@ -1293,16 +1841,16 @@ function populate3DSchoolPortraitsAndDrawings() {
     if (imgUrl) {
       loader.load(imgUrl, (tex) => {
         const portraitMesh = new THREE.Mesh(
-          new THREE.PlaneGeometry(1.24, 1.48),
+          new THREE.PlaneGeometry(0.88, 1.32),
           new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide })
         );
-        portraitMesh.position.set(0, 0.18, 0.075);
+        portraitMesh.position.set(0, 0.18, 0.065);
         portraitMesh.userData = steleArtifact;
         post.add(portraitMesh);
         clickable3DArtifacts.push(portraitMesh);
 
         const backMesh = portraitMesh.clone();
-        backMesh.position.set(0, 0.18, -0.075);
+        backMesh.position.set(0, 0.18, -0.065);
         backMesh.rotation.y = Math.PI;
         backMesh.userData = steleArtifact;
         post.add(backMesh);
@@ -1314,86 +1862,123 @@ function populate3DSchoolPortraitsAndDrawings() {
   if (!groundFloorGroup || !firstFloorGroup) return;
 
   // =========================================================================
-  // 2. GROUND FLOOR WEST WING: BOYS OF GRADES 1, 2 & 3 (55 BOYS WITH PORTRAITS)
+  // 2. GROUND FLOOR WEST WING: BOYS OF GRADES 1, 2 & 3 (55 BOYS ON PARTITION-SAFE WALLS)
   // =========================================================================
   const boysGrades1to3 = childrenList.filter(c => c.gender === 'boy' && (c.grade || 1) <= 3 && c.photoPath);
   createWingBannerIn3D(
     groundFloorGroup,
     `GROUND FLOOR WEST CLASSROOMS · BOYS GRADES 1–3 (${boysGrades1to3.length} STUDENTS)`,
     `کلاس‌های طبقه همکف (بال غربی) · ۵۵ دانش‌آموز پسر پایه‌های اول تا سوم`,
-    -12.75, 3.22, -12.70, 0, 7.6, '#0d1b2a', '#38bdf8'
+    -15.8, 3.25, -2.30, 0, 5.8, '#0d1b2a', '#38bdf8'
   );
 
-  // Place along West Wall (x = -18.74, facing East +X, rotY = Math.PI / 2): 2 rows x 12 cols = 24 portraits
   let bIdx = 0;
+  // A) Mid-West Classroom North & South Interior Partitions (X: -18.3..-13.3, Z = -7.38 facing +Z & Z = -2.72 facing -Z): 24 portraits
   for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 12; col++) {
+    for (let col = 0; col < 6; col++) {
       if (bIdx >= boysGrades1to3.length) break;
-      const z = -12.1 + col * 1.08;
-      const y = 1.25 + row * 1.18;
+      const px = -18.1 + col * 0.94;
+      const py = 1.22 + row * 1.12;
       create3DFramedPortraitOnWall(
         groundFloorGroup, loader, boysGrades1to3[bIdx++],
-        -18.72, y, z, Math.PI / 2, 0.88, 1.06, 0x38bdf8, 2,
-        'Ground Floor West Wing · Boys Classrooms (Grades 1–3)'
+        px, py, -7.38, 0, 0.80, 0.98, 0x38bdf8, 2,
+        'Ground Floor West Wing · Boys Classrooms (Grades 1–3)', 1.75
       );
     }
   }
-  // Place along North-West Wall (z = -12.72, facing South +Z, rotY = 0): 2 rows x 9 cols = 18 portraits
   for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 9; col++) {
+    for (let col = 0; col < 6; col++) {
       if (bIdx >= boysGrades1to3.length) break;
-      const x = -17.6 + col * 1.22;
-      const y = 1.25 + row * 1.18;
+      const px = -18.1 + col * 0.94;
+      const py = 1.22 + row * 1.12;
       create3DFramedPortraitOnWall(
         groundFloorGroup, loader, boysGrades1to3[bIdx++],
-        x, y, -12.72, 0, 0.88, 1.06, 0x38bdf8, 2,
-        'Ground Floor North-West Classroom · Boys Grades 1–3'
+        px, py, -2.72, Math.PI, 0.80, 0.98, 0x38bdf8, 2,
+        'Ground Floor West Wing · Boys Classrooms (Grades 1–3)', 1.75
       );
     }
   }
-  // Place remaining Grade 1–3 boys along South-West Wall (z = 0.72, facing North -Z, rotY = Math.PI) & Cross Partition (z = -5.78, rotY = 0)
+  // B) SW Singing Boys' Classroom North Partition (Z = -2.28 facing +Z, X: -18.1..-13.4): 12 portraits
   for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 9; col++) {
+    for (let col = 0; col < 6; col++) {
       if (bIdx >= boysGrades1to3.length) break;
-      const x = -17.6 + col * 1.22;
-      const y = 1.25 + row * 1.18;
+      const px = -18.1 + col * 0.94;
+      const py = 1.22 + row * 1.12;
       create3DFramedPortraitOnWall(
         groundFloorGroup, loader, boysGrades1to3[bIdx++],
-        x, y, 0.72, Math.PI, 0.88, 1.06, 0x38bdf8, 2,
-        'Ground Floor South-West Classroom · Boys Grades 1–2'
+        px, py, -2.28, 0, 0.80, 0.98, 0x38bdf8, 2,
+        'Ground Floor South-West Classroom · Boys Grades 1–2', 1.75
+      );
+    }
+  }
+  // C) NW Classroom North Wall (Z = -12.72 facing +Z, X: -18.1..-13.4) & South-Inner Classroom Wall (X = -6.72 facing -X): remaining 19 portraits
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 6; col++) {
+      if (bIdx >= boysGrades1to3.length) break;
+      const px = -18.1 + col * 0.94;
+      const py = 1.22 + row * 1.12;
+      create3DFramedPortraitOnWall(
+        groundFloorGroup, loader, boysGrades1to3[bIdx++],
+        px, py, -12.72, 0, 0.80, 0.98, 0x38bdf8, 2,
+        'Ground Floor North-West Classroom · Boys Grades 1–3', 1.75
+      );
+    }
+  }
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 6; col++) {
+      if (bIdx >= boysGrades1to3.length) break;
+      const pz = -5.0 + col * 1.12;
+      const py = 1.22 + row * 1.12;
+      create3DFramedPortraitOnWall(
+        groundFloorGroup, loader, boysGrades1to3[bIdx++],
+        -6.72, py, pz, -Math.PI / 2, 0.80, 0.98, 0x38bdf8, 2,
+        'Ground Floor South-Inner Classroom · Boys Grades 2–3', 1.65
       );
     }
   }
 
-  // Add 6 Classroom Desks with 1st-Grade Rubble Drawings in the Ground Floor West Classroom
+  // Add 6 Legged Classroom Desks with 1st-Grade Rubble Drawings inside Mid-West Classroom (X: -18.8..-12.8, Z: -7.4..-2.7)
   const groundDeskDrawings = drawingsList.slice(0, 6);
   for (let d = 0; d < 6; d++) {
-    const dx = -15.5 + (d % 3) * 2.8;
-    const dz = -4.2 + Math.floor(d / 3) * 2.2;
+    const dx = -17.3 + (d % 3) * 1.65;
+    const dz = -5.9 + Math.floor(d / 3) * 1.85;
     createClassroomDeskWithDrawing(groundFloorGroup, loader, groundDeskDrawings[d], dx, 0.2, dz, 2);
   }
 
   // =========================================================================
-  // 3. GROUND FLOOR EAST WING: BOYS OF GRADES 4, 5 & 6 (17 BOYS WITH PORTRAITS)
+  // 3. GROUND FLOOR EAST WING: BOYS OF GRADES 4, 5 & 6 (17 BOYS IN CEREMONY & EAST ROOMS)
   // =========================================================================
   const boysGrades4to6 = childrenList.filter(c => c.gender === 'boy' && (c.grade || 1) >= 4 && c.photoPath);
   createWingBannerIn3D(
     groundFloorGroup,
     `GROUND FLOOR EAST WING · BOYS GRADES 4–6 & CEREMONY ROOM (${boysGrades4to6.length} STUDENTS)`,
     `طبقه همکف (بال شرقی) · دانش‌آموزان پسر پایه‌های چهارم تا ششم و اتاق جشن`,
-    12.75, 3.22, -12.70, 0, 7.6, '#0d1b2a', '#d4a853'
+    3.75, 3.25, -8.18, 0, 6.4, '#0d1b2a', '#d4a853'
   );
 
   let b4Idx = 0;
+  // Mount along South & East Interior Partitions of Ceremony Room (X: 0.6..6.8, Z = -3.82 facing -Z) & SE Classroom Partition (Z = -2.98 facing +Z)
   for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 10; col++) {
+    for (let col = 0; col < 6; col++) {
       if (b4Idx >= boysGrades4to6.length) break;
-      const z = -12.0 + col * 1.18;
-      const y = 1.25 + row * 1.18;
+      const px = 0.95 + col * 1.05;
+      const py = 1.22 + row * 1.12;
       create3DFramedPortraitOnWall(
         groundFloorGroup, loader, boysGrades4to6[b4Idx++],
-        18.72, y, z, -Math.PI / 2, 0.92, 1.08, 0xd4a853, 2,
-        'Ground Floor East Wing · Boys Grades 4–6 & Ceremony Room'
+        px, py, -3.82, Math.PI, 0.84, 1.02, 0xd4a853, 2,
+        'Ground Floor East Wing · Boys Grades 4–6 & Ceremony Room', 1.75
+      );
+    }
+  }
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 5; col++) {
+      if (b4Idx >= boysGrades4to6.length) break;
+      const px = 12.2 + col * 1.25;
+      const py = 1.22 + row * 1.12;
+      create3DFramedPortraitOnWall(
+        groundFloorGroup, loader, boysGrades4to6[b4Idx++],
+        px, py, -2.98, 0, 0.84, 1.02, 0xd4a853, 2,
+        'Ground Floor East Wing · Boys Grades 4–6 Classroom', 1.75
       );
     }
   }
@@ -1405,31 +1990,42 @@ function populate3DSchoolPortraitsAndDrawings() {
     groundFloorGroup,
     `CENTRAL HALL & RAINBOW STAIRCASE · THE 26 MARTYRED FEMALE EDUCATORS`,
     `سالن مرکزی و راه‌پله رنگین‌کمان · ۲۶ معلم و مدیر شهیده دبستان شجره طیبه`,
-    0, 3.32, -12.70, 0, 7.2, '#1f122b', '#f472b6'
+    -1.9, 3.30, -8.02, 0, 5.6, '#1f122b', '#f472b6'
   );
 
-  // Mount 13 teachers on Left Hall Wall (x = -6.32, facing East +X) and 13 on Right Hall Wall (x = +6.32, facing West -X)
+  // Mount 13 educators on West Central Hall walls (X = -6.28, Z = -3.9..-7.6 & X = -3.38, Z = -0.3..-2.9)
+  // and 13 educators on East Central Hall wall (X = -0.18, Z = -0.2..-7.5), avoiding all purple doors
+  const leftHallSlots = [
+    [-3.38, -0.5], [-3.38, -1.5], [-3.38, -2.5],
+    [-6.28, -4.1], [-6.28, -5.1], [-6.28, -6.1], [-6.28, -7.2]
+  ];
+  const rightHallZ = [-0.4, -1.45, -2.5, -4.4, -5.45, -6.5, -7.45];
+
   teachersList.forEach((teacher, idx) => {
     const isLeft = idx < 13;
     const localIdx = isLeft ? idx : idx - 13;
     const row = Math.floor(localIdx / 7);
     const col = localIdx % 7;
-    // Space along Z avoiding purple doors at z = -3.0 and z = -9.0
-    const zSlots = [-0.6, -1.7, -4.3, -5.4, -6.5, -7.6, -10.4];
-    const z = zSlots[col] || (-1.0 - col * 1.4);
-    const y = 1.25 + row * 1.18;
-    const x = isLeft ? -6.32 : 6.32;
-    const rotY = isLeft ? Math.PI / 2 : -Math.PI / 2;
-
-    create3DFramedPortraitOnWall(
-      groundFloorGroup, loader, teacher,
-      x, y, z, rotY, 0.88, 1.06, 0xf472b6, 2,
-      'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators'
-    );
+    const py = 1.22 + row * 1.12;
+    if (isLeft) {
+      const [lx, lz] = leftHallSlots[col] || [-6.28, -4.5];
+      create3DFramedPortraitOnWall(
+        groundFloorGroup, loader, teacher,
+        lx, py, lz, Math.PI / 2, 0.82, 0.98, 0xf472b6, 2,
+        'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators', 1.55
+      );
+    } else {
+      const rz = rightHallZ[col] || -4.5;
+      create3DFramedPortraitOnWall(
+        groundFloorGroup, loader, teacher,
+        -0.18, py, rz, -Math.PI / 2, 0.82, 0.98, 0xf472b6, 2,
+        'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators', 1.55
+      );
+    }
   });
 
   // =========================================================================
-  // 5. FIRST FLOOR WEST HALL: ALL 47 MARTYRED SCHOOLGIRLS (GRADES 1–6)
+  // 5. FIRST FLOOR WEST GIRLS' ASSEMBLY HALL: ALL 47 MARTYRED SCHOOLGIRLS (X: -19.0..-11.5, Z: +2.4..-13.0)
   // =========================================================================
   const y1 = 3.6;
   const girlsAll = childrenList.filter(c => c.gender === 'girl' && c.photoPath);
@@ -1437,84 +2033,87 @@ function populate3DSchoolPortraitsAndDrawings() {
     firstFloorGroup,
     `FIRST FLOOR GIRLS' ASSEMBLY HALL · ALL ${girlsAll.length} MARTYRED SCHOOLGIRLS (GRADES 1–6)`,
     `طبقه اول (سالن بزرگ دختران) · ۴۷ دانش‌آموز دختر شهیده در پایه‌های اول تا ششم`,
-    -13.2, y1 + 3.22, -12.70, 0, 7.8, '#2b1222', '#f472b6'
+    -15.25, y1 + 3.22, -12.70, 0, 6.8, '#2b1222', '#f472b6'
   );
 
   let gIdx = 0;
-  // West Wall of Girls' Hall (x = -18.72, facing East +X): 2 rows x 12 cols = 24 portraits
+  // East Hall Partition (X = -11.72 facing -X into Hall, avoiding pink double doors at Z = -5.8): 10 slots x 2 rows = 20 portraits
+  const girlsEastZ = [-12.0, -10.9, -9.8, -8.7, -7.6, -3.9, -2.8, -1.7, -0.6, 0.6, 1.6];
   for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 12; col++) {
+    for (let col = 0; col < girlsEastZ.length; col++) {
       if (gIdx >= girlsAll.length) break;
-      const z = -12.1 + col * 1.08;
-      const y = y1 + 1.25 + row * 1.18;
       create3DFramedPortraitOnWall(
         firstFloorGroup, loader, girlsAll[gIdx++],
-        -18.72, y, z, Math.PI / 2, 0.88, 1.06, 0xf472b6, 1,
-        'First Floor West Wing · Girls\' Assembly Hall (Grades 1–6)'
+        -11.72, y1 + 1.22 + row * 1.12, girlsEastZ[col], -Math.PI / 2, 0.82, 0.98, 0xf472b6, 1,
+        'First Floor West Wing · Girls\' Assembly Hall (Grades 1–6)', 2.1
       );
     }
   }
-  // North Wall of Girls' Hall (z = -12.72, facing South +Z): 2 rows x 7 cols = 14 portraits
+  // West Wall window-free bays (X = -18.72 facing +X, Z = -9.6..-4.4 & -1.8..0.0) + North/South walls below high slits: remaining 25 portraits
+  const girlsWestZ = [-9.6, -8.6, -6.9, -5.9, -4.9, -1.6, -0.6];
   for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 7; col++) {
+    for (let col = 0; col < girlsWestZ.length; col++) {
       if (gIdx >= girlsAll.length) break;
-      const x = -17.6 + col * 1.32;
-      const y = y1 + 1.25 + row * 1.18;
       create3DFramedPortraitOnWall(
         firstFloorGroup, loader, girlsAll[gIdx++],
-        x, y, -12.72, 0, 0.88, 1.06, 0xf472b6, 1,
-        'First Floor Girls\' Hall · North Wall Gallery'
+        -18.72, y1 + 1.22 + row * 1.12, girlsWestZ[col], Math.PI / 2, 0.82, 0.98, 0xf472b6, 1,
+        'First Floor West Wing · Girls\' Assembly Hall (Grades 1–6)', 2.1
       );
     }
   }
-  // South Wall of Girls' Hall (z = 0.72, facing North -Z): remaining 9 portraits
-  for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 7; col++) {
-      if (gIdx >= girlsAll.length) break;
-      const x = -17.6 + col * 1.32;
-      const y = y1 + 1.25 + row * 1.18;
-      create3DFramedPortraitOnWall(
-        firstFloorGroup, loader, girlsAll[gIdx++],
-        x, y, 0.72, Math.PI, 0.88, 1.06, 0xf472b6, 1,
-        'First Floor Girls\' Hall · South Wall Gallery'
-      );
-    }
+  for (let col = 0; col < 6; col++) {
+    if (gIdx >= girlsAll.length) break;
+    create3DFramedPortraitOnWall(
+      firstFloorGroup, loader, girlsAll[gIdx++],
+      -17.8 + col * 1.05, y1 + 1.15, -12.72, 0, 0.82, 0.96, 0xf472b6, 1,
+      'First Floor Girls\' Hall · North Wall Gallery', 2.1
+    );
+  }
+  for (let col = 0; col < 6; col++) {
+    if (gIdx >= girlsAll.length) break;
+    create3DFramedPortraitOnWall(
+      firstFloorGroup, loader, girlsAll[gIdx++],
+      -17.8 + col * 1.05, y1 + 1.15, 2.12, Math.PI, 0.82, 0.96, 0xf472b6, 1,
+      'First Floor Girls\' Hall · South Wall Gallery', 2.1
+    );
   }
 
   // =========================================================================
-  // 6. FIRST FLOOR EAST CLASSROOMS: ALL 28 DRAWINGS & HOMEWORK PULLED FROM RUBBLE
+  // 6. FIRST FLOOR NE CLASSROOM: ALL 28 DRAWINGS & HOMEWORK PULLED FROM RUBBLE (X: +8.5..+19.0, Z: -7.4..-13.0)
   // =========================================================================
   createWingBannerIn3D(
     firstFloorGroup,
     `FIRST FLOOR CLASSROOMS · 28 DRAWINGS & HOMEWORK PULLED FROM THE RUBBLE`,
     `کلاس‌های طبقه اول · ۲۸ برگ نقاشی و مشق بیرون کشیده شده از زیر آوار مدرسه`,
-    12.75, y1 + 3.22, -12.70, 0, 7.8, '#1e1b18', '#fcd34d'
+    13.75, y1 + 3.22, -7.64, Math.PI, 7.4, '#1e1b18', '#fcd34d'
   );
 
   let dIdx = 0;
-  // East Wall (x = 18.72, facing West -X): 2 rows x 10 cols = 20 drawings
+  // South Partition of NE Archive Classroom (Z = -7.64 facing -Z into NE room, X = 9.3..18.1): 2 rows x 9 cols = 18 drawings
   for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 10; col++) {
+    for (let col = 0; col < 9; col++) {
       if (dIdx >= drawingsList.length) break;
-      const z = -12.0 + col * 1.22;
-      const y = y1 + 1.25 + row * 1.18;
+      const dx = 9.35 + col * 1.06;
+      const dy = y1 + 1.18 + row * 1.08;
       create3DRubbleDrawingOnWall(
         firstFloorGroup, loader, drawingsList[dIdx++],
-        18.72, y, z, -Math.PI / 2, 1.02, 1.06, 1,
-        'First Floor East Classroom · Rubble Drawings & Homework Archive'
+        dx, dy, -7.64, Math.PI, 0.92, 0.98, 1,
+        'First Floor North-East Classroom · Rubble Drawings & Homework Archive', 1.95
       );
     }
   }
-  // North-East Wall (z = -12.72, facing South +Z): remaining 8 drawings
-  for (let col = 0; col < 8; col++) {
-    if (dIdx >= drawingsList.length) break;
-    const x = 7.8 + col * 1.32;
-    const y = y1 + 1.85;
-    create3DRubbleDrawingOnWall(
-      firstFloorGroup, loader, drawingsList[dIdx++],
-      x, y, -12.72, 0, 1.08, 1.12, 1,
-      'First Floor East Classroom · Rubble Drawings & Homework Archive'
-    );
+  // West Partition of NE Archive Classroom (X = +8.72 facing +X into NE room, Z = -8.2..-12.2): 2 rows x 5 cols = 10 drawings
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 5; col++) {
+      if (dIdx >= drawingsList.length) break;
+      const dz = -8.25 - col * 0.96;
+      const dy = y1 + 1.18 + row * 1.08;
+      create3DRubbleDrawingOnWall(
+        firstFloorGroup, loader, drawingsList[dIdx++],
+        8.72, dy, dz, Math.PI / 2, 0.86, 0.98, 1,
+        'First Floor North-East Classroom · Rubble Drawings & Homework Archive', 1.95
+      );
+    }
   }
 }
 
@@ -1698,7 +2297,7 @@ function closeArtifactInspector() {
   if (modal) modal.classList.remove('visible');
 }
 
-// --- VERIFIED TWO-FLOOR WALKABLE SCHOOL ARCHITECTURE (FA INVESTIGATION 121) ---
+// --- VERIFIED TWO-FLOOR WALKABLE SCHOOL ARCHITECTURE (FA INVESTIGATION 121 & ARCHIVE FOOTAGE) ---
 function buildProceduralSchoolModels() {
   groundFloorGroup = new THREE.Group();
   groundFloorGroup.name = "Ground_Floor_Boys_School";
@@ -1712,250 +2311,785 @@ function buildProceduralSchoolModels() {
   preStrikeModelGroup.add(roofGroup);
 
   const floorH = 3.6;
+  const murals = getSchoolMuralTextures();
 
-  // Verified Materials from FA Video Frames (rec_03, rec_05, rec_08, rec_12, rec_17, rec_18, rec_21, rec_25, rec_26)
+  // Verified Materials from FA-121 Blueprints & On-Site Archive Photos
   const whiteWall = new THREE.MeshStandardMaterial({ color: 0xedeff2, roughness: 0.82 });
+  const westGreyWall = new THREE.MeshStandardMaterial({ color: 0x9aa1aa, roughness: 0.84 });
   const floorGrey = new THREE.MeshStandardMaterial({ color: 0x9ca3af, roughness: 0.85 });
-  const floorGreen = new THREE.MeshStandardMaterial({ color: 0x5c7a62, roughness: 0.8 }); // Girls assembly & boys carpet floor
-  const tealWall = new THREE.MeshStandardMaterial({ color: 0x5d8c96, roughness: 0.75 }); // Boys flower arch room
-  const skyBlueWall = new THREE.MeshStandardMaterial({ color: 0x8ab8c9, roughness: 0.75 }); // Boys classroom & right facade
-  const mintGreenWall = new THREE.MeshStandardMaterial({ color: 0x9ec4a5, roughness: 0.75 }); // Facade lower band
-  const yellowFacade = new THREE.MeshStandardMaterial({ color: 0xd8d278, roughness: 0.75 }); // Left facade lower band
-  const pinkWall = new THREE.MeshStandardMaterial({ color: 0xc86d8a, roughness: 0.75 }); // Girls upper classrooms
-  const sageGreenWall = new THREE.MeshStandardMaterial({ color: 0x668768, roughness: 0.75 }); // Girls lower dado
-  const purpleDoorMat = new THREE.MeshStandardMaterial({ color: 0x7c3f9c, roughness: 0.5 }); // Signature purple doors!
-  const canopyGreenMat = new THREE.MeshStandardMaterial({ color: 0x9ab596, roughness: 0.7 }); // Rear shade roof
+  const floorGreen = new THREE.MeshStandardMaterial({ color: 0x5c7a62, roughness: 0.80 });
+  const floorBrown = new THREE.MeshStandardMaterial({ color: 0x9c7b56, roughness: 0.82 });
+  const floorLilac = new THREE.MeshStandardMaterial({ color: 0xa5a1bd, roughness: 0.82 });
+  const tealWall = new THREE.MeshStandardMaterial({ color: 0x4f8694, roughness: 0.76 });
+  const rearTealExt = new THREE.MeshStandardMaterial({ color: 0x3b7687, roughness: 0.78 });
+  const skyBlueWall = new THREE.MeshStandardMaterial({ color: 0x88b8cb, roughness: 0.76 });
+  const mintGreenWall = new THREE.MeshStandardMaterial({ color: 0x9ec4a5, roughness: 0.76 });
+  const yellowFacade = new THREE.MeshStandardMaterial({ color: 0xd8d278, roughness: 0.76 });
+  const pinkWall = new THREE.MeshStandardMaterial({ color: 0xd4839d, roughness: 0.76 });
+  const sageGreenWall = new THREE.MeshStandardMaterial({ color: 0x7fa382, roughness: 0.76 });
+  const purpleDoorMat = new THREE.MeshStandardMaterial({ color: 0x8b4ca8, roughness: 0.50 });
+  const pinkDoorMat = new THREE.MeshStandardMaterial({ color: 0xd16b97, roughness: 0.52 });
+  const blueMetalMat = new THREE.MeshStandardMaterial({ color: 0x1d4ed8, roughness: 0.48, metalness: 0.25 });
+  const terracottaStairMat = new THREE.MeshStandardMaterial({ color: 0xc98a86, roughness: 0.78 });
+  const canopyGreenMat = new THREE.MeshStandardMaterial({ color: 0x7d9c78, roughness: 0.72 });
+  const sunshadeMat = new THREE.MeshStandardMaterial({ color: 0xe2e6ec, roughness: 0.78 });
+  const darkGlassMat = new THREE.MeshBasicMaterial({ color: 0x111827 });
+  const porticoColMat = new THREE.MeshStandardMaterial({ map: murals.porticoColTex, roughness: 0.74 });
+  const eastMuralMat = new THREE.MeshStandardMaterial({ map: murals.eastMuralTex, roughness: 0.76 });
+  const dinoMuralMat = new THREE.MeshStandardMaterial({ map: murals.dinoWallTex, roughness: 0.78 });
+  const brownDadoMat = new THREE.MeshStandardMaterial({ color: 0x78533a, roughness: 0.78 });
 
-  // Helper to add a wall segment
-  function addWall(group, w, h, d, x, y, z, mat) {
+  // Solid structural/partition wall helper (tracked for camera collision audit)
+  function addSolidWall(group, w, h, d, x, y, z, mat, extraData) {
     const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || whiteWall);
     m.position.set(x, y, z);
     m.castShadow = true;
     m.receiveShadow = true;
+    m.userData = Object.assign({ isSolidWall: true }, extraData || {});
     group.add(m);
     return m;
   }
 
-  // Helper to add a signature Purple Door with dark transom window above (rec_05.jpg, rec_17.jpg, rec_22.jpg)
+  // Non-blocking slab, dado paint band, or trim helper
+  function addSlabOrTrim(group, w, h, d, x, y, z, mat, extraData) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || whiteWall);
+    m.position.set(x, y, z);
+    m.castShadow = true;
+    m.receiveShadow = true;
+    if (extraData) m.userData = extraData;
+    group.add(m);
+    return m;
+  }
+
+  // Two-tone classroom partition helper (Sage lower dado + Pink upper wall, matching FA-121 1st Floor)
+  function addTwoToneWall(group, w, totalH, d, x, yBase, z, lowerMat, upperMat) {
+    const dadoH = 1.45;
+    const upperH = totalH - dadoH;
+    addSolidWall(group, w, dadoH, d, x, yBase + dadoH / 2, z, lowerMat || sageGreenWall);
+    addSolidWall(group, w, upperH, d, x, yBase + dadoH + upperH / 2, z, upperMat || pinkWall);
+  }
+
+  // Signature Purple Classroom Door + Dark Transom Window
   function addPurpleDoor(group, x, yBase, z, rotY) {
     const dGroup = new THREE.Group();
     dGroup.position.set(x, yBase, z);
     dGroup.rotation.y = rotY;
-    const door = new THREE.Mesh(new THREE.BoxGeometry(1.15, 2.1, 0.18), purpleDoorMat);
-    door.position.set(0, 1.05, 0);
+    const door = new THREE.Mesh(new THREE.BoxGeometry(1.06, 2.08, 0.28), purpleDoorMat);
+    door.position.set(0, 1.04, 0);
     dGroup.add(door);
-    const transom = new THREE.Mesh(
-      new THREE.BoxGeometry(1.15, 0.55, 0.19),
-      new THREE.MeshBasicMaterial({ color: 0x111827 })
-    );
-    transom.position.set(0, 2.4, 0);
+    const transom = new THREE.Mesh(new THREE.BoxGeometry(1.06, 0.50, 0.29), darkGlassMat);
+    transom.position.set(0, 2.38, 0);
     dGroup.add(transom);
     group.add(dGroup);
   }
 
-  // =========================================================
-  // 1. GROUND FLOOR (BOYS' SCHOOL & PRE-SCHOOL — rec_26.jpg)
-  // Footprint: X from -19 to +19 (38m), Z from -13 to +1 (14m)
-  // =========================================================
-  // Ground floor slab
-  addWall(groundFloorGroup, 38, 0.2, 14, 0, 0.1, -6, floorGrey);
-  // Green carpet zones in west classroom & east ceremony room
-  addWall(groundFloorGroup, 11, 0.22, 6.2, -13, 0.11, -9.5, floorGreen);
-  addWall(groundFloorGroup, 11, 0.22, 6.2, 13, 0.11, -3.0, tealWall);
+  // Recessed Dark-Glazed Exterior Window with White Mullions, Security Grille & Optional Sunshade Brow
+  function addExteriorWindow(group, x, y, z, rotY, w, h, mullions, hasSunshade, depthOverride) {
+    const winGroup = new THREE.Group();
+    winGroup.position.set(x, y, z);
+    winGroup.rotation.y = rotY;
+    winGroup.userData = { feature: 'exterior_window' };
 
-  // Exterior Perimeter Walls (Ground Floor)
-  // South Facade (Left wing, Central recessed entry, Right wing)
-  addWall(groundFloorGroup, 13, floorH, 0.35, -12.5, floorH / 2, 1.0, whiteWall);
-  // Left wing Yellow exterior dado band (rec_03.jpg)
-  addWall(groundFloorGroup, 13.1, 1.6, 0.38, -12.5, 0.8, 1.02, yellowFacade);
+    const d = depthOverride || 0.44;
+    const glass = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), darkGlassMat);
+    winGroup.add(glass);
 
-  addWall(groundFloorGroup, 13, floorH, 0.35, 12.5, floorH / 2, 1.0, whiteWall);
-  // Right wing Sky-Blue & Mint-Green exterior dado bands (rec_03.jpg, rec_04.jpg)
-  addWall(groundFloorGroup, 6.5, 2.2, 0.38, 9.2, 1.1, 1.02, skyBlueWall);
-  addWall(groundFloorGroup, 6.5, 1.2, 0.39, 15.7, 0.6, 1.02, mintGreenWall);
-  addWall(groundFloorGroup, 6.5, 1.0, 0.38, 15.7, 1.7, 1.02, skyBlueWall);
+    const sill = new THREE.Mesh(new THREE.BoxGeometry(w + 0.14, 0.07, d + 0.05), sunshadeMat);
+    sill.position.set(0, -h / 2 - 0.02, 0);
+    winGroup.add(sill);
 
-  // 4-Column Front Porch Portico (rec_03.jpg)
-  for (const colX of [-5.2, -1.8, 1.8, 5.2]) {
-    addWall(groundFloorGroup, 0.65, floorH, 0.65, colX, floorH / 2, 3.6, whiteWall);
+    const head = new THREE.Mesh(new THREE.BoxGeometry(w + 0.10, 0.06, d + 0.03), whiteWall);
+    head.position.set(0, h / 2 + 0.02, 0);
+    winGroup.add(head);
+
+    const mCount = typeof mullions === 'number' ? mullions : 2;
+    for (let i = 1; i <= mCount; i++) {
+      const mx = -w / 2 + (w * i) / (mCount + 1);
+      const bar = new THREE.Mesh(new THREE.BoxGeometry(0.055, h, d + 0.03), whiteWall);
+      bar.position.set(mx, 0, 0);
+      winGroup.add(bar);
+    }
+
+    if (h >= 0.9) {
+      const transBar = new THREE.Mesh(new THREE.BoxGeometry(w, 0.045, d + 0.03), whiteWall);
+      transBar.position.set(0, h * 0.18, 0);
+      winGroup.add(transBar);
+    }
+
+    if (hasSunshade) {
+      const brow = new THREE.Mesh(new THREE.BoxGeometry(w + 0.48, 0.10, 0.50), sunshadeMat);
+      brow.position.set(0, h / 2 + 0.11, 0.24);
+      brow.castShadow = true;
+      winGroup.add(brow);
+    }
+
+    group.add(winGroup);
+    return winGroup;
   }
-  // Portico flat canopy slab
-  addWall(groundFloorGroup, 13.2, 0.45, 3.4, 0, floorH + 0.1, 2.3, whiteWall);
 
-  // West, East, and North (Rear) Ground Floor Walls
-  addWall(groundFloorGroup, 0.35, floorH, 14, -19, floorH / 2, -6, whiteWall);
-  addWall(groundFloorGroup, 0.35, floorH, 14, 19, floorH / 2, -6, whiteWall);
-  addWall(groundFloorGroup, 38, floorH, 0.35, 0, floorH / 2, -13, skyBlueWall);
+  // =====================================================================
+  // 1. GROUND FLOOR (BOYS' SCHOOL & PRE-SCHOOL — FA-121 Stepped Envelope)
+  // West Wing: X [-19.0, -7.2], Z [-13.0, +2.4] (15.4m deep)
+  // Central Recessed Bay: X [-7.2, +7.2], Z [-13.0, +0.5] (13.5m deep) + Portico to Z = +4.85
+  // East Wing: X [+7.2, +19.0], Z [-13.0, +2.4] (15.4m deep)
+  // =====================================================================
+  addSlabOrTrim(groundFloorGroup, 11.8, 0.20, 15.4, -13.1, 0.10, -5.3, floorGrey);
+  addSlabOrTrim(groundFloorGroup, 14.4, 0.20, 13.5, 0.0, 0.10, -6.25, floorGrey);
+  addSlabOrTrim(groundFloorGroup, 14.4, 0.16, 4.35, 0.0, 0.08, 2.675, floorGrey);
+  addSlabOrTrim(groundFloorGroup, 11.8, 0.20, 15.4, 13.1, 0.10, -5.3, floorGrey);
 
-  // Interior Ground Floor Partition Walls (forming Central Assembly Hall + 6 Classrooms — rec_26.jpg)
-  addWall(groundFloorGroup, 0.25, floorH, 14, -6.5, floorH / 2, -6, skyBlueWall);
-  addWall(groundFloorGroup, 0.25, floorH, 14, 6.5, floorH / 2, -6, tealWall);
-  // Cross partitions in West & East wings
-  addWall(groundFloorGroup, 12.5, floorH, 0.25, -12.75, floorH / 2, -6, skyBlueWall);
-  addWall(groundFloorGroup, 12.5, floorH, 0.25, 12.75, floorH / 2, -6, tealWall);
+  // SW Singing Boys' Green Carpet Classroom Floor (X: -18.8..-12.7, Z: -2.4..+2.25)
+  addSlabOrTrim(
+    groundFloorGroup, 6.1, 0.03, 4.65, -15.75, 0.215, -0.075, floorGreen,
+    { feature: 'sw_boys_green_carpet' }
+  );
+  // Ceremony Room Floor Accent (X: 0.1..+7.4, Z: -8.3..-3.7)
+  addSlabOrTrim(groundFloorGroup, 7.2, 0.025, 4.5, 3.7, 0.212, -6.0, tealWall);
 
-  // Purple Classroom Doors along Ground Floor Central Assembly Hall (rec_05.jpg, rec_17.jpg)
-  addPurpleDoor(groundFloorGroup, -6.35, 0.2, -3.0, Math.PI / 2);
-  addPurpleDoor(groundFloorGroup, -6.35, 0.2, -9.0, Math.PI / 2);
-  addPurpleDoor(groundFloorGroup, 6.35, 0.2, -3.0, -Math.PI / 2);
-  addPurpleDoor(groundFloorGroup, 6.35, 0.2, -9.0, -Math.PI / 2);
-  addPurpleDoor(groundFloorGroup, -3.2, 0.2, -11.5, 0);
-  addPurpleDoor(groundFloorGroup, 3.2, 0.2, -11.5, 0);
+  const extT = 0.34;
+  // South Facade — West Projecting Wing (Z = +2.4, X = -19.0..-7.2) + Step Return (X = -7.2, Z = +0.5..+2.4)
+  addSolidWall(groundFloorGroup, 11.8, floorH, extT, -13.1, floorH / 2, 2.4, whiteWall);
+  addSolidWall(groundFloorGroup, extT, floorH, 1.9, -7.2, floorH / 2, 1.45, whiteWall);
+  addSlabOrTrim(groundFloorGroup, 11.84, 1.95, 0.06, -13.1, 0.98, 2.59, yellowFacade);
+  addSlabOrTrim(groundFloorGroup, 0.06, 1.95, 1.92, -7.01, 0.98, 1.45, yellowFacade);
 
-  // =========================================================
-  // THE RAINBOW STAIRCASE (Connecting Ground & First Floor — rec_17.jpg)
-  // =========================================================
-  const rainbowColors = [0xeab308, 0x3b82f6, 0xec4899, 0x22c55e, 0xeab308, 0x3b82f6, 0xef4444, 0x22c55e, 0xec4899, 0xeab308];
-  for (let s = 0; s < 10; s++) {
-    const stepMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(2.4, 0.34, 0.45),
-      new THREE.MeshStandardMaterial({ color: rainbowColors[s], roughness: 0.5 })
+  // South Facade — Central Recessed Ground Wall (Z = +0.5, X = -7.2..+7.2, open doorway X = -2.3..+0.1)
+  addSolidWall(
+    groundFloorGroup, 4.9, floorH, extT, -4.75, floorH / 2, 0.5, whiteWall,
+    { wallRole: 'central_front_recess' }
+  );
+  addSlabOrTrim(
+    groundFloorGroup, 2.4, 0.75, extT, -1.1, 3.225, 0.5, whiteWall,
+    { wallRole: 'central_front_recess' }
+  );
+  addSolidWall(
+    groundFloorGroup, 7.1, floorH, extT, 3.65, floorH / 2, 0.5, whiteWall,
+    { wallRole: 'central_front_recess' }
+  );
+  // Sky-blue & mint dado behind portico
+  addSlabOrTrim(groundFloorGroup, 4.85, 2.15, 0.05, -4.75, 1.08, 0.69, skyBlueWall);
+  addSlabOrTrim(groundFloorGroup, 7.05, 2.15, 0.05, 3.65, 1.08, 0.69, skyBlueWall);
+  // Glazed central entrance side frames
+  addSlabOrTrim(groundFloorGroup, 0.12, 2.85, 0.38, -2.24, 1.425, 0.5, purpleDoorMat);
+  addSlabOrTrim(groundFloorGroup, 0.12, 2.85, 0.38, 0.04, 1.425, 0.5, purpleDoorMat);
+
+  // South Facade — East Projecting Wing (Z = +2.4, X = +7.2..+19.0, open secondary entrance X = +10.8..+12.2)
+  addSolidWall(groundFloorGroup, extT, floorH, 1.9, 7.2, floorH / 2, 1.45, whiteWall);
+  addSolidWall(groundFloorGroup, 3.6, floorH, extT, 9.0, floorH / 2, 2.4, whiteWall);
+  addSlabOrTrim(groundFloorGroup, 1.4, 0.62, extT, 11.5, 3.29, 2.4, whiteWall);
+  addSolidWall(groundFloorGroup, 6.8, floorH, extT, 15.6, floorH / 2, 2.4, whiteWall);
+  // East Wing Dados: Sky-blue left bay + Purple secondary doorway frame + Boy-Reading-on-Carpet & Tulips Mural right bay!
+  addSlabOrTrim(groundFloorGroup, 0.06, 2.25, 1.92, 7.01, 1.125, 1.45, skyBlueWall);
+  addSlabOrTrim(groundFloorGroup, 3.58, 2.25, 0.05, 9.0, 1.125, 2.59, skyBlueWall);
+  addSlabOrTrim(groundFloorGroup, 0.12, 2.98, 0.40, 10.84, 1.49, 2.42, purpleDoorMat);
+  addSlabOrTrim(groundFloorGroup, 0.12, 2.98, 0.40, 12.16, 1.49, 2.42, purpleDoorMat);
+  addSlabOrTrim(groundFloorGroup, 6.78, 2.28, 0.05, 15.6, 1.14, 2.59, eastMuralMat);
+  // Continuous ground-floor concrete sunshade ledge across East Wing (ref_02b_facade_real.jpg)
+  addSlabOrTrim(groundFloorGroup, 8.3, 0.10, 0.52, 14.75, 3.06, 2.66, sunshadeMat);
+
+  // 4-Column Front Portico (colX = [-6.8, -2.3, +2.3, +6.8], Z = +4.4) + Flat Canopy Slab
+  for (const colX of [-6.8, -2.3, 2.3, 6.8]) {
+    addSolidWall(groundFloorGroup, 0.62, floorH, 0.62, colX, floorH / 2, 4.4, porticoColMat);
+  }
+  addSlabOrTrim(groundFloorGroup, 16.0, 0.42, 2.45, 0.0, floorH + 0.21, 3.625, whiteWall);
+  addSlabOrTrim(groundFloorGroup, 14.4, 0.42, 1.95, 0.0, floorH + 0.21, 1.475, whiteWall);
+
+  // West (-X = -19.0, grey finish), East (+X = +19.0), and North (-Z = -13.0) Ground Floor Perimeter Walls
+  addSolidWall(groundFloorGroup, extT, floorH, 15.4, -19.0, floorH / 2, -5.3, westGreyWall);
+  addSolidWall(groundFloorGroup, extT, floorH, 15.4, 19.0, floorH / 2, -5.3, whiteWall);
+  addSolidWall(groundFloorGroup, 38.0, floorH, extT, 0.0, floorH / 2, -13.0, whiteWall);
+
+  // NW Rear Corner Horizontal Pink / Charcoal / Teal Stripes & Center-West Teal Exterior Finish (ref_04a_rear_fa.jpg)
+  addSlabOrTrim(groundFloorGroup, 6.4, 0.68, 0.05, -15.8, 0.34, -13.19, pinkWall);
+  addSlabOrTrim(groundFloorGroup, 6.4, 0.68, 0.05, -15.8, 1.02, -13.19, new THREE.MeshStandardMaterial({ color: 0x333840, roughness: 0.85 }));
+  addSlabOrTrim(groundFloorGroup, 6.4, 0.72, 0.05, -15.8, 1.72, -13.19, rearTealExt);
+  addSlabOrTrim(groundFloorGroup, 8.8, 2.45, 0.05, -8.2, 1.225, -13.19, rearTealExt);
+
+  // Ground Floor Exterior Windows (All 4 Sides)
+  // Front (+Z): West 3 vertical windows, Central 2 flanking windows, East triple windows + upper louvers
+  addExteriorWindow(groundFloorGroup, -9.8, 1.75, 2.4, 0, 2.35, 1.35, 2, true, 0.48);
+  addExteriorWindow(groundFloorGroup, -15.8, 2.55, 2.4, 0, 1.85, 0.58, 3, false, 0.48);
+  addExteriorWindow(groundFloorGroup, -4.8, 1.75, 0.5, 0, 1.95, 1.45, 1, false, 0.46);
+  addExteriorWindow(groundFloorGroup, 2.8, 1.75, 0.5, 0, 1.95, 1.45, 1, false, 0.46);
+  addExteriorWindow(groundFloorGroup, 9.0, 1.65, 2.4, 0, 1.95, 1.20, 2, false, 0.48);
+  addExteriorWindow(groundFloorGroup, 13.7, 1.42, 2.4, 0, 1.95, 1.15, 2, false, 0.48);
+  addExteriorWindow(groundFloorGroup, 13.7, 2.66, 2.4, 0, 1.95, 0.50, 1, false, 0.48);
+  addExteriorWindow(groundFloorGroup, 16.9, 2.42, 2.4, 0, 2.55, 0.96, 3, false, 0.48);
+  // West (-X): 3 square classroom windows (ref_06_first_cutaway_fa.jpg)
+  addExteriorWindow(groundFloorGroup, -19.0, 1.55, 0.0, -Math.PI / 2, 1.15, 1.15, 1, false);
+  addExteriorWindow(groundFloorGroup, -19.0, 1.55, -5.2, -Math.PI / 2, 1.15, 1.15, 1, false);
+  addExteriorWindow(groundFloorGroup, -19.0, 1.55, -10.5, -Math.PI / 2, 1.15, 1.15, 1, false);
+  // East (+X): 3 classroom windows with sunshade brows (ref_02b_facade_real.jpg)
+  addExteriorWindow(groundFloorGroup, 19.0, 1.75, -0.4, Math.PI / 2, 1.85, 1.25, 2, true);
+  addExteriorWindow(groundFloorGroup, 19.0, 1.75, -5.8, Math.PI / 2, 1.85, 1.25, 2, true);
+  addExteriorWindow(groundFloorGroup, 19.0, 1.75, -10.7, Math.PI / 2, 1.65, 1.15, 1, true);
+  // North (-Z): Pre-school windows under green canopy + high clerestory vents above portrait line
+  addExteriorWindow(groundFloorGroup, 3.2, 1.75, -13.0, Math.PI, 1.85, 1.15, 2, false);
+  addExteriorWindow(groundFloorGroup, 8.2, 1.75, -13.0, Math.PI, 1.85, 1.15, 2, false);
+  addExteriorWindow(groundFloorGroup, 14.5, 2.55, -13.0, Math.PI, 2.10, 0.58, 3, false);
+
+  // =====================================================================
+  // GROUND FLOOR INTERIOR PARTITIONS (FA-121 Blueprint — ref_05b_ground_ortho_fa.jpg)
+  // =====================================================================
+  const partT = 0.24;
+  // A) West Wing Classrooms (SW Green-Carpet Room, Mid-West Desk Room, NW Room) & Corridor
+  addSolidWall(groundFloorGroup, 6.25, floorH, partT, -15.725, floorH / 2, -2.5, skyBlueWall);
+  addSolidWall(groundFloorGroup, 6.25, floorH, partT, -15.725, floorH / 2, -7.6, skyBlueWall);
+  addSolidWall(groundFloorGroup, partT, floorH, 15.1, -12.6, floorH / 2, -5.35, skyBlueWall);
+  addPurpleDoor(groundFloorGroup, -12.6, 0.2, -0.2, Math.PI / 2);
+  addPurpleDoor(groundFloorGroup, -12.6, 0.2, -5.0, Math.PI / 2);
+  addPurpleDoor(groundFloorGroup, -12.6, 0.2, -10.2, Math.PI / 2);
+
+  // South-Inner Classroom (X: -10.6..-6.5, Z: -5.6..+2.25) & Two Small North Rooms (Z: -13.0..-9.0)
+  addSolidWall(groundFloorGroup, partT, floorH, 7.85, -10.6, floorH / 2, -1.675, skyBlueWall);
+  addSolidWall(groundFloorGroup, 4.1, floorH, partT, -8.55, floorH / 2, -5.6, skyBlueWall);
+  addSolidWall(groundFloorGroup, partT, floorH, 7.85, -6.5, floorH / 2, -1.675, skyBlueWall);
+  addPurpleDoor(groundFloorGroup, -10.6, 0.2, -2.2, -Math.PI / 2);
+
+  addSolidWall(groundFloorGroup, 8.8, floorH, partT, -8.2, floorH / 2, -9.0, whiteWall);
+  addSolidWall(groundFloorGroup, partT, floorH, 4.0, -8.2, floorH / 2, -11.0, skyBlueWall);
+  addPurpleDoor(groundFloorGroup, -10.2, 0.2, -9.0, 0);
+  addPurpleDoor(groundFloorGroup, -6.0, 0.2, -9.0, 0);
+
+  // B) Central Assembly Hall (X: -6.5..0.0) & Front-Left Office (X: -6.5..-3.56, Z: -3.4..+0.5)
+  addSolidWall(groundFloorGroup, 0.22, floorH, 3.9, -3.56, floorH / 2, -1.45, whiteWall);
+  addSolidWall(groundFloorGroup, 2.94, floorH, partT, -5.03, floorH / 2, -3.4, whiteWall);
+  addSolidWall(groundFloorGroup, partT, floorH, 4.8, -6.5, floorH / 2, -5.8, whiteWall);
+  addSolidWall(groundFloorGroup, 0.22, floorH, 8.7, 0.02, floorH / 2, -3.85, whiteWall);
+  // Purple door between Educator portrait bays at Z = -3.45 on East Central Hall wall
+  addPurpleDoor(groundFloorGroup, 0.02, 0.2, -3.45, -Math.PI / 2);
+
+  // C) Enclosed Rainbow Stairwell (X: -3.8..0.0, Z: -13.0..-8.2) + Flanking Purple Doors (M4)
+  const rainbowStairGroup = new THREE.Group();
+  rainbowStairGroup.name = "Enclosed_Rainbow_Stairwell";
+  rainbowStairGroup.userData = { feature: 'enclosed_rainbow_stairwell' };
+
+  addSolidWall(rainbowStairGroup, 2.7, floorH, partT, -5.15, floorH / 2, -8.2, whiteWall);
+  addSolidWall(rainbowStairGroup, 2.6, floorH, partT, 1.32, floorH / 2, -8.2, whiteWall);
+  addSlabOrTrim(rainbowStairGroup, 3.8, 0.65, partT, -1.9, 3.275, -8.2, whiteWall);
+  addPurpleDoor(rainbowStairGroup, -5.1, 0.2, -8.2, 0);
+  addPurpleDoor(rainbowStairGroup, 1.3, 0.2, -8.2, 0);
+
+  addSolidWall(rainbowStairGroup, 0.22, floorH, 4.8, -3.8, floorH / 2, -10.6, whiteWall);
+  addSolidWall(rainbowStairGroup, 0.22, floorH, 4.8, 0.02, floorH / 2, -10.6, whiteWall);
+
+  // 12 Rainbow Treads rising North (Z: -8.35..-12.55, Y: 0.32..3.52)
+  const rainbowColors = [
+    0xeab308, 0x3b82f6, 0xec4899, 0x22c55e, 0xeab308, 0x3b82f6,
+    0xef4444, 0x22c55e, 0xec4899, 0xeab308, 0x38bdf8, 0xf43f5e
+  ];
+  for (let s = 0; s < 12; s++) {
+    const tread = new THREE.Mesh(
+      new THREE.BoxGeometry(2.15, 0.29, 0.38),
+      new THREE.MeshStandardMaterial({ color: rainbowColors[s], roughness: 0.48 })
     );
-    stepMesh.position.set(0, 0.35 + s * 0.34, -8.5 - s * 0.42);
-    groundFloorGroup.add(stepMesh);
+    tread.position.set(-1.35, 0.34 + s * 0.29, -8.38 - s * 0.37);
+    tread.castShadow = true;
+    rainbowStairGroup.add(tread);
   }
+  // Brown diagonal dado & paper roses on right stairwell wall + Red metal handrail on left (ref_07a_rainbow_stairs.jpg)
+  const dadoSlope = new THREE.Mesh(new THREE.BoxGeometry(0.05, 1.15, 4.4), brownDadoMat);
+  dadoSlope.position.set(-0.12, 1.75, -10.5);
+  dadoSlope.rotation.x = 0.64;
+  rainbowStairGroup.add(dadoSlope);
 
-  // Rear Green Shade Canopy & Exterior Staircase (rec_15.jpg)
-  const rearCanopy = new THREE.Mesh(new THREE.BoxGeometry(15, 0.18, 5.5), canopyGreenMat);
-  rearCanopy.position.set(9.5, 3.5, -15.8);
-  groundFloorGroup.add(rearCanopy);
+  const handrail = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.035, 0.035, 4.8, 8),
+    new THREE.MeshStandardMaterial({ color: 0xb91c1c, roughness: 0.4, metalness: 0.5 })
+  );
+  handrail.position.set(-2.48, 2.35, -10.45);
+  handrail.rotation.x = Math.PI / 2 - 0.64;
+  rainbowStairGroup.add(handrail);
+  groundFloorGroup.add(rainbowStairGroup);
 
-  // Camera-Aligned Photos in Ground Floor Rooms (with Yellow Wireframe Camera Frustums!)
-  // 1) Boys under Red Rose Arches (East Ground Room — rec_08.jpg)
+  // D) East Wing Classrooms, Boys' Flower Arch Ceremony Room & NE Pre-School Suite
+  addSolidWall(groundFloorGroup, 7.48, floorH, partT, 3.76, floorH / 2, -3.6, tealWall);
+  addSolidWall(groundFloorGroup, 7.48, floorH, partT, 3.76, floorH / 2, -8.4, tealWall);
+  addSolidWall(groundFloorGroup, partT, floorH, 8.9, 7.5, floorH / 2, -3.95, tealWall);
+  addPurpleDoor(groundFloorGroup, 7.5, 0.2, -6.0, -Math.PI / 2);
+
+  // Two Decorative Red-Rose Ceremony Arches inside Boys' Ceremony Room (spot_boys_flower_arch.jpg)
+  [-5.9, -7.2].forEach((az) => {
+    const archTorus = new THREE.Mesh(
+      new THREE.TorusGeometry(1.55, 0.11, 10, 24, Math.PI),
+      new THREE.MeshStandardMaterial({ color: 0xbe123c, roughness: 0.65 })
+    );
+    archTorus.position.set(3.8, 1.45, az);
+    groundFloorGroup.add(archTorus);
+  });
+
+  // Secondary East Entrance Corridor & SE / Mid-East Classrooms (X: +11.2..+19.0)
+  addSolidWall(groundFloorGroup, partT, floorH, 10.8, 11.2, floorH / 2, -3.0, whiteWall);
+  addSolidWall(groundFloorGroup, 7.8, floorH, partT, 15.1, floorH / 2, -3.2, tealWall);
+  addSolidWall(groundFloorGroup, 11.5, floorH, partT, 13.25, floorH / 2, -8.4, whiteWall);
+  addSolidWall(groundFloorGroup, partT, floorH, 4.6, 9.5, floorH / 2, -10.7, whiteWall);
+  addPurpleDoor(groundFloorGroup, 11.2, 0.2, -0.6, Math.PI / 2);
+  addPurpleDoor(groundFloorGroup, 11.2, 0.2, -5.8, Math.PI / 2);
+  addPurpleDoor(groundFloorGroup, 5.2, 0.2, -8.4, 0);
+  addPurpleDoor(groundFloorGroup, 13.5, 0.2, -8.4, 0);
+
+  // =====================================================================
+  // REAR EXTERIOR GIRLS' STAIRCASE, BLUE DINOSAUR GATE & SLOPED GREEN CANOPY (M2 — ref_04a_rear_fa.jpg)
+  // =====================================================================
+  const rearStairGroup = new THREE.Group();
+  rearStairGroup.name = "Rear_Exterior_Girls_Staircase_And_Canopy";
+  rearStairGroup.userData = { feature: 'rear_girls_exterior_stairs' };
+
+  // Top concrete landing outside 1st-Floor Blue Door (X: -5.5..-3.8, Z: -15.35..-13.0, Y = 3.55)
+  addSlabOrTrim(rearStairGroup, 1.75, 0.24, 2.35, -4.65, 3.50, -14.18, terracottaStairMat);
+  // Support wall below landing
+  addSlabOrTrim(rearStairGroup, 1.75, 3.45, 0.24, -4.65, 1.725, -15.25, pinkWall);
+
+  // 13 Terracotta-Pink Exterior Treads rising East (X: -9.8 -> -5.5, Z: -15.2..-13.2)
+  for (let rs = 0; rs < 13; rs++) {
+    const stepH = (rs + 1) * (3.50 / 13);
+    const tread = new THREE.Mesh(
+      new THREE.BoxGeometry(0.36, stepH, 2.05),
+      terracottaStairMat
+    );
+    tread.position.set(-9.75 + rs * 0.33, stepH / 2, -14.20);
+    tread.castShadow = true;
+    tread.receiveShadow = true;
+    rearStairGroup.add(tread);
+  }
+  // White tubular stair railing along outer North edge (Z = -15.2)
+  const rearRail = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.035, 0.035, 5.4, 8),
+    new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.45, metalness: 0.45 })
+  );
+  rearRail.position.set(-7.6, 2.65, -15.20);
+  rearRail.rotation.z = -0.68;
+  rearStairGroup.add(rearRail);
+
+  // Rear Alley Partition Wall (X = -3.8, Z = -19.5..-13.0) with Blue Metal Gate & Green Dinosaur Height-Chart Mural!
+  addSlabOrTrim(rearStairGroup, 0.26, 2.45, 2.2, -3.8, 1.225, -14.1, pinkWall);
+  addSlabOrTrim(rearStairGroup, 0.28, 2.45, 1.45, -3.8, 1.225, -15.65, dinoMuralMat);
+  addSlabOrTrim(rearStairGroup, 3.2, 2.45, 0.06, -1.9, 1.225, -13.20, dinoMuralMat);
+  const blueRearGate = new THREE.Mesh(new THREE.BoxGeometry(0.12, 2.35, 1.85), blueMetalMat);
+  blueRearGate.position.set(-3.8, 1.18, -17.30);
+  rearStairGroup.add(blueRearGate);
+  addSlabOrTrim(rearStairGroup, 0.26, 2.45, 1.3, -3.8, 1.225, -18.85, pinkWall);
+
+  // Pitched / Sloped Green Corrugated Pre-School Canopy (X: -3.6..+11.5, Z: -18.6..-13.0, Y: 3.55 -> 2.85)
+  const slopedCanopy = new THREE.Mesh(new THREE.BoxGeometry(15.1, 0.12, 5.75), canopyGreenMat);
+  slopedCanopy.position.set(3.95, 3.22, -15.82);
+  slopedCanopy.rotation.x = -0.125;
+  slopedCanopy.castShadow = true;
+  rearStairGroup.add(slopedCanopy);
+
+  const postSteelMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.5, metalness: 0.6 });
+  [-3.2, 1.6, 6.4, 11.2].forEach((px) => {
+    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 2.88, 8), postSteelMat);
+    post.position.set(px, 1.44, -18.45);
+    rearStairGroup.add(post);
+  });
+  groundFloorGroup.add(rearStairGroup);
+
+  // Camera-Aligned Forensic Photos in Ground Floor Rooms (Un-mirrored, true room coordinates!)
+  // 1) Boys under Red Rose Arches (Center-East Ceremony Room — X: 0..+7.5, Z: -8.4..-3.6)
   createCameraAlignedPhotoInSpace(
     groundFloorGroup,
     'images/fa_spots/spot_boys_flower_arch.jpg',
-    [11, 1.8, -1.5],
-    [12.5, 1.85, -5.6],
+    [3.6, 1.80, -4.2],
+    [3.8, 1.80, -7.85],
     0,
-    4.2,
-    2.4
+    4.1,
+    2.35
   );
 
-  // 2) Boys Clapping & Singing in Classroom (West Ground Room — rec_12.jpg)
+  // 2) Boys Clapping & Singing on Green Carpet (SW Classroom — X: -19.0..-12.6, Z: -2.5..+2.4)
   createCameraAlignedPhotoInSpace(
     groundFloorGroup,
     'images/fa_spots/spot_boys_classroom.jpg',
-    [-11, 1.8, -6.5],
-    [-12.8, 1.85, -12.4],
-    0,
-    4.4,
-    2.5
+    [-13.5, 1.80, 0.3],
+    [-18.25, 1.75, -0.3],
+    Math.PI / 2,
+    4.1,
+    2.35
   );
 
-  // 3) Teachers & Girls at the Rainbow Staircase (Central Hall — rec_17.jpg)
+  // 3) Teachers & Girls at the Rainbow Staircase (Central Hall looking North into Stairwell)
   createCameraAlignedPhotoInSpace(
     groundFloorGroup,
     'images/fa_spots/spot_rainbow_stairs.jpg',
-    [0, 1.8, -4.5],
-    [0, 1.85, -7.8],
+    [-1.8, 1.80, -4.0],
+    [-1.85, 1.85, -8.05],
     0,
-    3.8,
-    2.2
+    3.6,
+    2.15
   );
 
-  // =========================================================
-  // 2. FIRST FLOOR (GIRLS' PRIMARY SCHOOL — rec_25.jpg)
-  // =========================================================
+  // =====================================================================
+  // 2. FIRST FLOOR (GIRLS' PRIMARY SCHOOL — FA-121 Blueprint, ref_06_first_cutaway_fa.jpg)
+  // =====================================================================
   const y1 = floorH;
-  // First floor slab (with stairwell opening)
-  addWall(firstFloorGroup, 16, 0.22, 14, -11, y1, -6, floorGreen); // Girls' West Hall has green floor (rec_21, rec_25)
-  addWall(firstFloorGroup, 16, 0.22, 14, 11, y1, -6, floorGrey);
-  addWall(firstFloorGroup, 6, 0.22, 7.5, 0, y1, -2.25, floorGrey);
+  // Stepped First Floor Slabs (leaving stairwell opening at X: -3.8..0.0, Z: -13.0..-8.0)
+  addSlabOrTrim(firstFloorGroup, 7.5, 0.22, 15.4, -15.25, y1, -5.3, floorGreen); // West Girls' Assembly Hall
+  addSlabOrTrim(firstFloorGroup, 4.3, 0.22, 15.4, -9.35, y1, -5.3, floorGrey);
+  addSlabOrTrim(firstFloorGroup, 14.4, 0.22, 8.5, 0.0, y1, -3.75, floorGrey);
+  addSlabOrTrim(firstFloorGroup, 3.4, 0.22, 5.0, -5.5, y1, -10.5, floorGrey);
+  addSlabOrTrim(firstFloorGroup, 8.5, 0.22, 5.0, 4.25, y1, -10.5, floorGrey);
+  addSlabOrTrim(firstFloorGroup, 10.5, 0.22, 5.6, 13.75, y1, -10.2, floorBrown); // NE Rubble Archive Room (tan/brown floor)
+  addSlabOrTrim(firstFloorGroup, 11.8, 0.22, 9.8, 13.1, y1, -2.5, floorGrey);
+  addSlabOrTrim(firstFloorGroup, 5.8, 0.03, 5.0, 10.6, y1 + 0.12, -4.8, floorLilac);
 
-  // Exterior First Floor Walls (Crisp White — rec_03.jpg, rec_25.jpg)
-  addWall(firstFloorGroup, 38, floorH, 0.35, 0, y1 + floorH / 2, 1.0, whiteWall);
-  addWall(firstFloorGroup, 38, floorH, 0.35, 0, y1 + floorH / 2, -13.0, whiteWall);
-  addWall(firstFloorGroup, 0.35, floorH, 14, -19, y1 + floorH / 2, -6, whiteWall);
-  addWall(firstFloorGroup, 0.35, floorH, 14, 19, y1 + floorH / 2, -6, whiteWall);
+  // Exterior First Floor Stepped Walls (Crisp White — Y = 3.6..7.2)
+  addSolidWall(firstFloorGroup, 11.8, floorH, extT, -13.1, y1 + floorH / 2, 2.4, whiteWall);
+  addSolidWall(firstFloorGroup, extT, floorH, 1.9, -7.2, y1 + floorH / 2, 1.45, whiteWall);
+  addSolidWall(firstFloorGroup, 14.4, floorH, extT, 0.0, y1 + floorH / 2, 0.5, whiteWall);
+  addSolidWall(firstFloorGroup, extT, floorH, 1.9, 7.2, y1 + floorH / 2, 1.45, whiteWall);
+  addSolidWall(firstFloorGroup, 11.8, floorH, extT, 13.1, y1 + floorH / 2, 2.4, whiteWall);
 
-  // Interior First Floor Partitions: Pink & Sage Green Classrooms + Girls' Large West Assembly Hall (rec_18.jpg, rec_21.jpg, rec_25.jpg)
-  addWall(firstFloorGroup, 0.25, floorH, 14, -7.5, y1 + floorH / 2, -6, pinkWall);
-  addWall(firstFloorGroup, 0.25, floorH, 14, 6.5, y1 + floorH / 2, -6, whiteWall);
+  addSolidWall(firstFloorGroup, extT, floorH, 15.4, -19.0, y1 + floorH / 2, -5.3, whiteWall);
+  addSolidWall(firstFloorGroup, extT, floorH, 15.4, 19.0, y1 + floorH / 2, -5.3, whiteWall);
+  addSolidWall(firstFloorGroup, 38.0, floorH, extT, 0.0, y1 + floorH / 2, -13.0, whiteWall);
 
-  // Pink upper + Sage Green lower classroom walls (rec_18.jpg, rec_25.jpg)
-  addWall(firstFloorGroup, 7.0, 1.6, 0.25, -4.0, y1 + 0.8, -1.5, sageGreenWall);
-  addWall(firstFloorGroup, 7.0, 2.0, 0.25, -4.0, y1 + 2.6, -1.5, pinkWall);
-  addWall(firstFloorGroup, 12.5, floorH, 0.25, 12.75, y1 + floorH / 2, -6, pinkWall);
+  // Blue First-Floor Rear Exterior Door onto Girls' Staircase Landing (X = -4.6, Z = -13.0 — ref_04a_rear_fa.jpg)
+  const blueUpperDoor = new THREE.Mesh(new THREE.BoxGeometry(1.12, 2.15, 0.42), blueMetalMat);
+  blueUpperDoor.position.set(-4.65, y1 + 1.15, -13.0);
+  firstFloorGroup.add(blueUpperDoor);
 
-  // Purple Classroom Doors on First Floor (rec_22.jpg, rec_25.jpg)
-  addPurpleDoor(firstFloorGroup, -7.35, y1 + 0.1, -4.0, Math.PI / 2);
-  addPurpleDoor(firstFloorGroup, 6.35, y1 + 0.1, -3.5, -Math.PI / 2);
-  addPurpleDoor(firstFloorGroup, 6.35, y1 + 0.1, -9.0, -Math.PI / 2);
+  // First Floor Exterior Windows & Projecting Sunshade Brows (All 4 Sides — ref_02a, ref_04a, ref_06)
+  // Front (+Z): West Wing slits & window, Central 3 multi-pane classroom windows above portico, East 3 slits + scorched bay + corner 4-pane
+  addExteriorWindow(firstFloorGroup, -16.2, y1 + 2.25, 2.4, 0, 2.15, 0.62, 3, false);
+  addExteriorWindow(firstFloorGroup, -12.8, y1 + 1.65, 2.4, 0, 1.55, 0.95, 1, false);
+  addExteriorWindow(firstFloorGroup, -9.6, y1 + 2.05, 2.4, 0, 2.25, 1.45, 2, true);
+  addExteriorWindow(firstFloorGroup, -4.8, y1 + 1.75, 0.5, 0, 1.95, 1.35, 1, false);
+  addExteriorWindow(firstFloorGroup, -0.6, y1 + 1.75, 0.5, 0, 3.15, 1.35, 3, false);
+  addExteriorWindow(firstFloorGroup, 4.1, y1 + 1.75, 0.5, 0, 1.95, 1.35, 1, false);
+  addExteriorWindow(firstFloorGroup, 9.3, y1 + 2.05, 2.4, 0, 2.25, 1.45, 2, true);
+  addExteriorWindow(firstFloorGroup, 12.3, y1 + 2.55, 2.4, 0, 1.05, 0.95, 1, false);
+  addExteriorWindow(firstFloorGroup, 14.0, y1 + 1.75, 2.4, 0, 1.95, 1.20, 2, false);
+  addExteriorWindow(firstFloorGroup, 16.9, y1 + 2.45, 2.4, 0, 2.65, 1.10, 3, false);
+  addSlabOrTrim(firstFloorGroup, 7.2, 0.11, 0.52, 15.2, y1 + 3.12, 2.66, sunshadeMat);
+
+  // West (-X): Stepped square windows positioned in portrait-free bays (Z = +1.0, -2.6, -3.4, -11.4)
+  addExteriorWindow(firstFloorGroup, -19.0, y1 + 1.35, 1.0, -Math.PI / 2, 0.95, 0.95, 1, false);
+  addExteriorWindow(firstFloorGroup, -19.0, y1 + 1.95, -2.55, -Math.PI / 2, 0.80, 0.80, 0, false);
+  addExteriorWindow(firstFloorGroup, -19.0, y1 + 1.40, -3.40, -Math.PI / 2, 0.80, 0.80, 0, false);
+  addExteriorWindow(firstFloorGroup, -19.0, y1 + 1.75, -11.4, -Math.PI / 2, 1.05, 1.05, 1, false);
+
+  // East (+X): Upper classroom windows + sunshade brows
+  addExteriorWindow(firstFloorGroup, 19.0, y1 + 1.95, -0.4, Math.PI / 2, 1.85, 1.20, 2, true);
+  addExteriorWindow(firstFloorGroup, 19.0, y1 + 1.95, -5.6, Math.PI / 2, 1.85, 1.20, 2, true);
+  addExteriorWindow(firstFloorGroup, 19.0, y1 + 2.35, -10.6, Math.PI / 2, 2.05, 0.70, 3, true);
+
+  // North (-Z): High ventilation slits in NW Girls' Hall (above portrait row y1+1.15) + North classroom windows
+  addExteriorWindow(firstFloorGroup, -16.2, y1 + 2.55, -13.0, Math.PI, 2.15, 0.62, 2, false);
+  addExteriorWindow(firstFloorGroup, -12.9, y1 + 2.55, -13.0, Math.PI, 1.20, 0.62, 1, false);
+  addExteriorWindow(firstFloorGroup, -8.8, y1 + 1.85, -13.0, Math.PI, 1.45, 1.10, 1, false);
+  addExteriorWindow(firstFloorGroup, 2.2, y1 + 2.15, -13.0, Math.PI, 1.55, 1.05, 1, false);
+  addExteriorWindow(firstFloorGroup, 6.4, y1 + 2.15, -13.0, Math.PI, 1.55, 1.05, 1, false);
+  addExteriorWindow(firstFloorGroup, 13.8, y1 + 2.45, -13.0, Math.PI, 2.45, 0.68, 3, false);
+
+  // =====================================================================
+  // FIRST FLOOR INTERIOR PARTITIONS (Girls' Hall, Central E-W Spine Corridor, Pink/Sage Rooms & NE Archive)
+  // =====================================================================
+  // 1) Girls' West Assembly Hall East Partition (X = -11.5, open Pink Double Doors at Z = -5.8)
+  addSolidWall(firstFloorGroup, partT, floorH, 6.2, -11.5, y1 + floorH / 2, -9.9, whiteWall);
+  addSolidWall(firstFloorGroup, partT, floorH, 7.2, -11.5, y1 + floorH / 2, -1.2, whiteWall);
+  addSlabOrTrim(firstFloorGroup, partT, 0.95, 2.0, -11.5, y1 + 3.125, -5.8, whiteWall);
+  // Open Pink Double Doors swinging into Girls' Assembly Hall (ref_06_first_cutaway_fa.jpg)
+  const pinkDoorL = new THREE.Mesh(new THREE.BoxGeometry(0.92, 2.25, 0.10), pinkDoorMat);
+  pinkDoorL.position.set(-11.95, y1 + 1.20, -6.65);
+  pinkDoorL.rotation.y = 0.25;
+  const pinkDoorR = new THREE.Mesh(new THREE.BoxGeometry(0.92, 2.25, 0.10), pinkDoorMat);
+  pinkDoorR.position.set(-11.95, y1 + 1.20, -4.95);
+  pinkDoorR.rotation.y = -0.25;
+  firstFloorGroup.add(pinkDoorL, pinkDoorR);
+
+  // 2) Central E-W Spine Corridor (X: -11.5..+8.5, Z: -7.4..-4.6)
+  const spineGroup = new THREE.Group();
+  spineGroup.name = "First_Floor_Central_Spine_Corridor";
+  spineGroup.userData = { feature: 'first_floor_spine_corridor' };
+
+  // South Corridor Wall (Z = -4.6, X = -11.5..+7.5) + Purple Doors
+  addTwoToneWall(spineGroup, 19.0, floorH, partT, -2.0, y1, -4.6, sageGreenWall, whiteWall);
+  [-9.1, -4.2, 1.0, 5.5].forEach((dx) => addPurpleDoor(spineGroup, dx, y1 + 0.1, -4.6, 0));
+
+  // North Corridor Wall (Z = -7.4, X = -11.5..-3.8 & X = 0.0..+19.0) + Purple Doors
+  addTwoToneWall(spineGroup, 7.7, floorH, partT, -7.65, y1, -7.4, sageGreenWall, whiteWall);
+  addSolidWall(spineGroup, 19.0, floorH, partT, 9.5, y1 + floorH / 2, -7.4, whiteWall);
+  [-9.6, -5.3, 2.1, 6.2, 8.05].forEach((dx) => addPurpleDoor(spineGroup, dx, y1 + 0.1, -7.4, 0));
+  firstFloorGroup.add(spineGroup);
+
+  // 3) South Classroom Cross-Partitions (Pink & Sage Green — ref_06_first_cutaway_fa.jpg)
+  addTwoToneWall(firstFloorGroup, partT, floorH, 5.1, -6.8, y1, -2.05, sageGreenWall, pinkWall);
+  addTwoToneWall(firstFloorGroup, partT, floorH, 5.1, -1.6, y1, -2.05, sageGreenWall, pinkWall);
+  addTwoToneWall(firstFloorGroup, partT, floorH, 5.1, 3.6, y1, -2.05, sageGreenWall, whiteWall);
+  addSolidWall(firstFloorGroup, partT, floorH, 9.8, 7.5, y1 + floorH / 2, -2.5, whiteWall);
+
+  // 4) North Classroom Cross-Partitions + Stairwell Upper Guard Walls + NE Rubble Archive West Wall (X = +8.5)
+  addTwoToneWall(firstFloorGroup, partT, floorH, 5.6, -7.8, y1, -10.2, sageGreenWall, pinkWall);
+  addSolidWall(firstFloorGroup, 0.22, floorH, 5.6, -3.8, y1 + floorH / 2, -10.2, whiteWall);
+  addSolidWall(firstFloorGroup, 0.22, floorH, 5.6, 0.02, y1 + floorH / 2, -10.2, whiteWall);
+  addTwoToneWall(firstFloorGroup, partT, floorH, 5.6, 4.2, y1, -10.2, sageGreenWall, pinkWall);
+  // NE Archive West Partition (X = +8.5, Z = -13.0..-7.85, leaving vestibule entry from door at X = 8.05)
+  addSolidWall(firstFloorGroup, 0.22, floorH, 5.15, 8.5, y1 + floorH / 2, -10.425, whiteWall);
+
+  // 5) East Wing Classroom Cross-Partitions (X: +7.5..+19.0, Z: -7.4..+2.4)
+  addSolidWall(firstFloorGroup, 11.5, floorH, partT, 13.25, y1 + floorH / 2, -2.2, whiteWall);
+  addSolidWall(firstFloorGroup, partT, floorH, 5.2, 13.5, y1 + floorH / 2, -4.8, whiteWall);
+  addPurpleDoor(firstFloorGroup, 7.5, y1 + 0.1, -5.8, -Math.PI / 2);
+  addPurpleDoor(firstFloorGroup, 10.5, y1 + 0.1, -2.2, 0);
 
   // Camera-Aligned Photo in First Floor Girls' Assembly Hall (80+ schoolgirls seated — rec_21.jpg)
   createCameraAlignedPhotoInSpace(
     firstFloorGroup,
     'images/fa_spots/spot_girls_assembly.jpg',
-    [-11, y1 + 1.8, -2.0],
-    [-13.2, y1 + 1.85, -8.5],
-    0,
-    4.8,
-    2.7
+    [-12.5, y1 + 1.85, -1.2],
+    [-15.6, y1 + 1.80, -8.8],
+    0.35,
+    4.6,
+    2.6
   );
 
-  // =========================================================
-  // 3. ROOF & PARAPET GROUP (Toggled by Cutaway Button)
-  // =========================================================
+  // =====================================================================
+  // 3. STEPPED ROOF, PARAPET, STAIRWELL PENTHOUSE, SKYLIGHT & TELECOM MAST (M3)
+  // =====================================================================
   const yRoof = floorH * 2;
-  addWall(roofGroup, 38.4, 0.35, 14.4, 0, yRoof + 0.15, -6, whiteWall);
-  // Stairwell roof penthouse box (visible in rec_01.jpg, rec_15.jpg)
-  addWall(roofGroup, 5.5, 1.8, 4.2, -1.5, yRoof + 0.9, -10.2, whiteWall);
+  // Stepped Roof Slabs
+  addSlabOrTrim(roofGroup, 12.1, 0.30, 15.7, -13.15, yRoof + 0.15, -5.3, whiteWall);
+  addSlabOrTrim(roofGroup, 14.4, 0.30, 13.8, 0.0, yRoof + 0.15, -6.25, whiteWall);
+  addSlabOrTrim(roofGroup, 12.1, 0.30, 15.7, 13.15, yRoof + 0.15, -5.3, whiteWall);
 
-  // =========================================================
-  // 4. POST-STRIKE GEOMETRY + FA YELLOW "EXTENT OF DAMAGE" BOX (rec_29.jpg & 07_impact_crater.mp4)
-  // =========================================================
-  const ruinedConcrete = new THREE.MeshStandardMaterial({ color: 0x47423d, roughness: 1.0 });
-  const debrisMat = new THREE.MeshStandardMaterial({ color: 0x575049, roughness: 0.95 });
+  // Perimeter 0.65m Parapet Walls tracing stepped footprint (Y = 7.50..8.15)
+  const pH = 0.65;
+  const pY = yRoof + 0.30 + pH / 2;
+  addSlabOrTrim(roofGroup, 12.1, pH, 0.30, -13.15, pY, 2.42, whiteWall);
+  addSlabOrTrim(roofGroup, 0.30, pH, 1.95, -7.2, pY, 1.45, whiteWall);
+  addSlabOrTrim(roofGroup, 14.4, pH, 0.30, 0.0, pY, 0.52, whiteWall);
+  addSlabOrTrim(roofGroup, 0.30, pH, 1.95, 7.2, pY, 1.45, whiteWall);
+  addSlabOrTrim(roofGroup, 12.1, pH, 0.30, 13.15, pY, 2.42, whiteWall);
+  addSlabOrTrim(roofGroup, 0.30, pH, 15.7, -19.05, pY, -5.3, whiteWall);
+  addSlabOrTrim(roofGroup, 0.30, pH, 15.7, 19.05, pY, -5.3, whiteWall);
+  addSlabOrTrim(roofGroup, 38.4, pH, 0.30, 0.0, pY, -13.02, whiteWall);
 
-  // Standing Right (East) Wing (partially intact as shown in rec_29.jpg & sheet_07_crater.jpg)
-  const eastStanding = new THREE.Mesh(new THREE.BoxGeometry(17, floorH * 2, 14), whiteWall);
-  eastStanding.position.set(10.5, floorH, -6);
-  eastStanding.castShadow = true; eastStanding.receiveShadow = true;
-  postStrikeModelGroup.add(eastStanding);
+  // Stairwell Roof Penthouse Box (X: -4.0..+0.4, Z: -12.8..-8.0, Y: 7.50..9.35 — ref_04a_rear_fa.jpg)
+  addSlabOrTrim(roofGroup, 4.4, 1.85, 4.8, -1.8, yRoof + 0.30 + 0.925, -10.4, whiteWall);
+  // Central Roof Skylight / Hatch Curb (X = -1.6, Z = -5.4)
+  addSlabOrTrim(roofGroup, 1.55, 0.42, 1.55, -1.6, yRoof + 0.51, -5.4, sunshadeMat);
 
-  // Standing Front Portico Columns (survived at front edge — rec_29.jpg)
-  for (const colX of [-1.8, 1.8, 5.2]) {
-    const c = new THREE.Mesh(new THREE.BoxGeometry(0.65, floorH, 0.65), whiteWall);
-    c.position.set(colX, floorH / 2, 3.6);
+  // White Steel Lattice Telecom Mast (X = +5.6, Z = -4.2, Y = 7.50..17.65m — ref_01_aerial_fa.jpg & ref_04a_rear_fa.jpg)
+  const mastGroup = new THREE.Group();
+  mastGroup.position.set(5.6, yRoof + 0.30, -4.2);
+  const mastMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.45, metalness: 0.45 });
+  const mastH = 9.4;
+  const halfSpan = 0.26;
+  [[-halfSpan, -halfSpan], [halfSpan, -halfSpan], [-halfSpan, halfSpan], [halfSpan, halfSpan]].forEach(([cx, cz]) => {
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.036, mastH, 6), mastMat);
+    leg.position.set(cx, mastH / 2, cz);
+    mastGroup.add(leg);
+  });
+  for (let tier = 0; tier < 10; tier++) {
+    const ty = 0.45 + tier * 0.92;
+    const braceA = new THREE.Mesh(new THREE.BoxGeometry(halfSpan * 2.1, 0.03, 0.03), mastMat);
+    braceA.position.set(0, ty, halfSpan);
+    const braceB = braceA.clone();
+    braceB.position.set(0, ty, -halfSpan);
+    const braceC = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.03, halfSpan * 2.1), mastMat);
+    braceC.position.set(halfSpan, ty, 0);
+    const braceD = braceC.clone();
+    braceD.position.set(-halfSpan, ty, 0);
+    const diag = new THREE.Mesh(new THREE.BoxGeometry(halfSpan * 2.6, 0.025, 0.025), mastMat);
+    diag.position.set(0, ty + 0.45, halfSpan);
+    diag.rotation.z = (tier % 2 === 0 ? 1 : -1) * 0.72;
+    mastGroup.add(braceA, braceB, braceC, braceD, diag);
+  }
+  const mastTip = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.022, 1.35, 6), mastMat);
+  mastTip.position.set(0, mastH + 0.55, 0);
+  mastGroup.add(mastTip);
+  roofGroup.add(mastGroup);
+
+  // =====================================================================
+  // 4. POST-STRIKE MODEL: SURVIVING EAST WING, EXPOSED 2-STORY SHEAR,
+  //    4 SURVIVING PORTICO COLUMNS, L-SHAPED DAMAGE VOLUME & 5M CRATER (H4, L2)
+  //    Verified against ref_02b_facade_real.jpg, ref_08_damage_extent_fa.jpg & ref_09a/b
+  // =====================================================================
+  const ruinedConcrete = new THREE.MeshStandardMaterial({ color: 0x4b4640, roughness: 0.98 });
+  const debrisMat = new THREE.MeshStandardMaterial({ color: 0x696259, roughness: 0.94 });
+  const rebarMat = new THREE.MeshStandardMaterial({ color: 0x3b2f2a, roughness: 0.65, metalness: 0.55 });
+  const yellowColMat = new THREE.MeshStandardMaterial({ color: 0xdccf68, roughness: 0.78 });
+
+  // A) Surviving Detailed East Wing (X: +4.5..+19.0, Z: -13.0..+2.4)
+  // Floor & Roof Slabs
+  addSlabOrTrim(postStrikeModelGroup, 14.5, 0.22, 13.5, 11.75, 0.11, -6.25, floorGrey);
+  addSlabOrTrim(postStrikeModelGroup, 11.8, 0.22, 1.9, 13.1, 0.11, 1.45, floorGrey);
+  addSlabOrTrim(postStrikeModelGroup, 14.5, 0.24, 13.5, 11.75, y1, -6.25, floorGrey);
+  addSlabOrTrim(postStrikeModelGroup, 11.8, 0.24, 1.9, 13.1, y1, 1.45, floorGrey);
+  addSlabOrTrim(postStrikeModelGroup, 14.7, 0.30, 13.7, 11.75, yRoof + 0.15, -6.25, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 12.0, 0.30, 2.0, 13.1, yRoof + 0.15, 1.45, whiteWall);
+  // East Wing Parapet
+  addSlabOrTrim(postStrikeModelGroup, 12.0, pH, 0.30, 13.1, pY, 2.42, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 0.30, pH, 15.7, 19.02, pY, -5.3, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 14.7, pH, 0.30, 11.75, pY, -13.02, whiteWall);
+
+  // Surviving East Wing Exterior Walls, Mural, Windows & Post-Strike Smoke Scorch Plume (ref_02b_facade_real.jpg)
+  addSlabOrTrim(postStrikeModelGroup, extT, floorH * 2, 1.9, 7.2, floorH, 1.45, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 3.6, floorH * 2, extT, 9.0, floorH, 2.4, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 1.4, floorH + 0.62, extT, 11.5, y1 + 1.49, 2.4, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 6.8, floorH * 2, extT, 15.6, floorH, 2.4, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, extT, floorH * 2, 15.4, 19.0, floorH, -5.3, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 14.5, floorH * 2, extT, 11.75, floorH, -13.0, whiteWall);
+
+  addSlabOrTrim(postStrikeModelGroup, 3.58, 2.25, 0.05, 9.0, 1.125, 2.59, skyBlueWall);
+  addSlabOrTrim(postStrikeModelGroup, 6.78, 2.28, 0.05, 15.6, 1.14, 2.59, eastMuralMat);
+  addSlabOrTrim(postStrikeModelGroup, 8.3, 0.10, 0.52, 14.75, 3.06, 2.66, sunshadeMat);
+  addSlabOrTrim(postStrikeModelGroup, 7.2, 0.11, 0.52, 15.2, y1 + 3.12, 2.66, sunshadeMat);
+
+  addExteriorWindow(postStrikeModelGroup, 9.0, 1.65, 2.4, 0, 1.95, 1.20, 2, false, 0.48);
+  addExteriorWindow(postStrikeModelGroup, 13.7, 1.42, 2.4, 0, 1.95, 1.15, 2, false, 0.48);
+  addExteriorWindow(postStrikeModelGroup, 16.9, 2.42, 2.4, 0, 2.55, 0.96, 3, false, 0.48);
+  addExteriorWindow(postStrikeModelGroup, 9.3, y1 + 2.05, 2.4, 0, 2.25, 1.45, 2, true);
+  addExteriorWindow(postStrikeModelGroup, 14.0, y1 + 1.75, 2.4, 0, 1.95, 1.20, 2, false);
+  addExteriorWindow(postStrikeModelGroup, 16.9, y1 + 2.45, 2.4, 0, 2.65, 1.10, 3, false);
+  addExteriorWindow(postStrikeModelGroup, 19.0, 1.75, -0.4, Math.PI / 2, 1.85, 1.25, 2, true);
+  addExteriorWindow(postStrikeModelGroup, 19.0, y1 + 1.95, -0.4, Math.PI / 2, 1.85, 1.20, 2, true);
+  addExteriorWindow(postStrikeModelGroup, 19.0, 1.75, -5.8, Math.PI / 2, 1.85, 1.25, 2, true);
+  addExteriorWindow(postStrikeModelGroup, 19.0, y1 + 1.95, -5.6, Math.PI / 2, 1.85, 1.20, 2, true);
+
+  // Black Smoke Soot Scorch Plume above 1st-Floor East Window (ref_02b_facade_real.jpg)
+  const scorchPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(2.6, 2.1),
+    new THREE.MeshBasicMaterial({ map: murals.scorchTex, transparent: true, depthWrite: false })
+  );
+  scorchPlane.position.set(14.0, y1 + 2.48, 2.60);
+  postStrikeModelGroup.add(scorchPlane);
+
+  // B) Exposed 2-Story Sheared Cross-Section & Surviving North Stairwell Core (ref_08, ref_09a, ref_09b)
+  const shearGroup = new THREE.Group();
+  shearGroup.name = "Exposed_Two_Story_Shear_Cross_Section";
+  shearGroup.userData = { feature: 'exposed_shear_cross_section' };
+
+  // Surviving North Stairwell Core (X: -3.8..+4.5, Z: -13.0..-8.2)
+  addSlabOrTrim(shearGroup, 8.3, floorH * 2, extT, 0.35, floorH, -13.0, whiteWall);
+  addSlabOrTrim(shearGroup, 0.28, floorH * 2, 4.8, -3.8, floorH, -10.6, whiteWall);
+  addSlabOrTrim(shearGroup, 8.3, 0.24, 4.8, 0.35, y1, -10.6, floorGrey);
+  // Sloped Pre-school rear canopy survived behind North wall (visible in ref_08_damage_extent_fa.jpg!)
+  const postRearCanopy = new THREE.Mesh(new THREE.BoxGeometry(14.0, 0.12, 5.4), canopyGreenMat);
+  postRearCanopy.position.set(4.2, 3.22, -15.7);
+  postRearCanopy.rotation.x = -0.12;
+  shearGroup.add(postRearCanopy);
+
+  // Exposed North-Facing Crater Wall (Z = -8.2, X: -3.8..+4.5): Ground Teal/White + Upper Pink/Sage + Purple Doors!
+  addSlabOrTrim(shearGroup, 8.3, 1.5, 0.26, 0.35, 0.75, -8.2, tealWall);
+  addSlabOrTrim(shearGroup, 8.3, 2.1, 0.26, 0.35, 2.55, -8.2, whiteWall);
+  addSlabOrTrim(shearGroup, 8.3, 1.45, 0.26, 0.35, y1 + 0.725, -8.2, sageGreenWall);
+  addSlabOrTrim(shearGroup, 8.3, 2.15, 0.26, 0.35, y1 + 2.525, -8.2, pinkWall);
+  addPurpleDoor(shearGroup, -2.1, y1 + 0.12, -8.2, 0);
+  addPurpleDoor(shearGroup, 1.6, y1 + 0.12, -8.2, 0);
+
+  // Exposed East-Facing Crater Shear Wall (X = +4.5, Z = -8.2..+0.5): Ground Teal + Upper Pink/Sage + Purple Doors + Yellow/Purple Column!
+  addSlabOrTrim(shearGroup, 0.28, 1.55, 8.7, 4.5, 0.775, -3.85, tealWall);
+  addSlabOrTrim(shearGroup, 0.28, 2.05, 8.7, 4.5, 2.575, -3.85, whiteWall);
+  addSlabOrTrim(shearGroup, 0.28, 1.45, 8.7, 4.5, y1 + 0.725, -3.85, sageGreenWall);
+  addSlabOrTrim(shearGroup, 0.28, 2.15, 8.7, 4.5, y1 + 2.525, -3.85, pinkWall);
+  addPurpleDoor(shearGroup, 4.5, 0.2, -5.8, -Math.PI / 2);
+  addPurpleDoor(shearGroup, 4.5, y1 + 0.12, -5.8, -Math.PI / 2);
+  addPurpleDoor(shearGroup, 4.5, y1 + 0.12, -2.2, -Math.PI / 2);
+
+  // Cylindrical Yellow & Purple Corner Column visible in ref_09a_crater_photo_fa.jpg
+  const shearCylUpper = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 1.65, 16), yellowColMat);
+  shearCylUpper.position.set(4.15, y1 + 1.45, -7.85);
+  const shearCylBand = new THREE.Mesh(new THREE.CylinderGeometry(0.43, 0.43, 0.58, 16), purpleDoorMat);
+  shearCylBand.position.set(4.15, y1 + 0.38, -7.85);
+  shearGroup.add(shearCylUpper, shearCylBand);
+
+  // Jagged Sheared Concrete Floor Slab Ledge + Hanging Rebar Rods anchored into Crater Shear Walls
+  const shearedSlabMat = new THREE.MeshStandardMaterial({ color: 0x7b756d, roughness: 0.92 });
+  [
+    [-1.8, -8.02, 0.24, 0.08],
+    [1.4, -8.02, 0.22, -0.14],
+    [4.28, -6.3, 0.08, 0.30],
+    [4.28, -3.2, 0.06, 0.26],
+    [4.28, -0.8, 0.10, 0.22]
+  ].forEach(([sx, sz, rotX, rotZ], idx) => {
+    const brokenSlab = new THREE.Mesh(new THREE.BoxGeometry(1.85, 0.20, 1.05), shearedSlabMat);
+    brokenSlab.position.set(sx, y1 - 0.12, sz);
+    brokenSlab.rotation.set(rotX, idx * 0.18, rotZ);
+    shearGroup.add(brokenSlab);
+
+    for (let r = 0; r < 3; r++) {
+      const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 1.35, 6), rebarMat);
+      rod.position.set(sx - 0.3 + r * 0.3, y1 - 0.78, sz + 0.12);
+      rod.rotation.z = (r - 1) * 0.20;
+      shearGroup.add(rod);
+    }
+  });
+  postStrikeModelGroup.add(shearGroup);
+
+  // C) All 4 Surviving Tricolor Front Portico Columns + Canopy + Shattered Open-Sky Front Shell (ref_02b & ref_08)
+  for (const colX of [-6.8, -2.3, 2.3, 6.8]) {
+    const c = new THREE.Mesh(new THREE.BoxGeometry(0.62, floorH, 0.62), porticoColMat);
+    c.position.set(colX, floorH / 2, 4.4);
+    c.castShadow = true;
+    c.userData = { feature: 'post_portico_col' };
     postStrikeModelGroup.add(c);
   }
+  addSlabOrTrim(postStrikeModelGroup, 15.6, 0.40, 2.45, 0.2, floorH + 0.20, 3.625, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 11.8, 0.40, 1.95, 1.3, floorH + 0.20, 1.475, whiteWall);
+  // Standing shattered central front facade wall shell with open sky behind broken window frame (ref_02b left side!)
+  addSlabOrTrim(postStrikeModelGroup, 9.8, floorH, 0.34, 2.3, floorH / 2, 0.5, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 1.6, 2.7, 0.34, -4.2, y1 + 1.35, 0.5, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 1.6, 2.5, 0.34, -1.2, y1 + 1.25, 0.5, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 3.4, 0.65, 0.34, -2.7, y1 + 2.35, 0.5, whiteWall);
+  addSlabOrTrim(postStrikeModelGroup, 5.8, floorH, 0.34, 4.3, y1 + floorH / 2, 0.5, whiteWall);
+  addExteriorWindow(postStrikeModelGroup, 4.1, y1 + 1.75, 0.5, 0, 1.95, 1.35, 1, false);
 
-  // 5-Meter Impact Crater in the Central Assembly Hall (sheet_07_crater.jpg)
-  const craterRim = new THREE.Mesh(new THREE.TorusGeometry(2.8, 0.65, 12, 28), ruinedConcrete);
-  craterRim.rotation.x = -Math.PI / 2;
-  craterRim.position.set(-2.5, 0.3, -6);
-  postStrikeModelGroup.add(craterRim);
+  // D) Sunken Rubble-Lined 5-Meter Blast Crater Pit at (-2.5, 0, -5.5) + Forensic Scale Rings & Plaque
+  const craterPitFloor = new THREE.Mesh(
+    new THREE.CircleGeometry(2.52, 32),
+    new THREE.MeshStandardMaterial({ color: 0x1c1a18, roughness: 1.0 })
+  );
+  craterPitFloor.rotation.x = -Math.PI / 2;
+  craterPitFloor.position.set(-2.5, 0.04, -5.5);
+  postStrikeModelGroup.add(craterPitFloor);
 
-  // Yellow Circle around the 5m Impact Crater (matching FA's yellow crater circle in sheet_07_crater.jpg)
+  for (let seg = 0; seg < 18; seg++) {
+    const ang = (seg / 18) * Math.PI * 2;
+    const rad = 2.52 + (seg % 3) * 0.14;
+    const rimChunk = new THREE.Mesh(
+      new THREE.DodecahedronGeometry(0.48 + (seg % 2) * 0.12, 0),
+      seg % 2 === 0 ? ruinedConcrete : debrisMat
+    );
+    rimChunk.scale.set(1.35, 0.52, 1.05);
+    rimChunk.position.set(
+      -2.5 + Math.cos(ang) * rad,
+      0.19 + (seg % 3) * 0.05,
+      -5.5 + Math.sin(ang) * rad
+    );
+    rimChunk.rotation.set(0.25 * Math.sin(ang), -ang, 0.25 * Math.cos(ang));
+    rimChunk.castShadow = true;
+    rimChunk.receiveShadow = true;
+    postStrikeModelGroup.add(rimChunk);
+  }
+
   const craterCircleRing = new THREE.Mesh(
-    new THREE.RingGeometry(3.1, 3.28, 36),
+    new THREE.RingGeometry(3.05, 3.24, 40),
     new THREE.MeshBasicMaterial({ color: 0xe5e059, side: THREE.DoubleSide })
   );
   craterCircleRing.rotation.x = -Math.PI / 2;
-  craterCircleRing.position.set(-2.5, 0.45, -6);
+  craterCircleRing.position.set(-2.5, 0.45, -5.5);
   postStrikeModelGroup.add(craterCircleRing);
 
-  // Exact 5.0m Blast Diameter Inner Forensic Ring (r = 2.50m) + Orthogonal Scale Axis + Ground Plaque
   const exactFiveMeterRing = new THREE.Mesh(
     new THREE.RingGeometry(2.42, 2.56, 64),
     new THREE.MeshBasicMaterial({ color: 0xef4444, side: THREE.DoubleSide, transparent: true, opacity: 0.92 })
   );
   exactFiveMeterRing.rotation.x = -Math.PI / 2;
-  exactFiveMeterRing.position.set(-2.5, 0.48, -6);
+  exactFiveMeterRing.position.set(-2.5, 0.48, -5.5);
   postStrikeModelGroup.add(exactFiveMeterRing);
 
   const craterAxisPts = [
-    new THREE.Vector3(-5.0, 0.49, -6.0),
-    new THREE.Vector3(0.0, 0.49, -6.0),
-    new THREE.Vector3(-2.5, 0.49, -8.5),
-    new THREE.Vector3(-2.5, 0.49, -3.5)
+    new THREE.Vector3(-5.0, 0.49, -5.5),
+    new THREE.Vector3(0.0, 0.49, -5.5),
+    new THREE.Vector3(-2.5, 0.49, -8.0),
+    new THREE.Vector3(-2.5, 0.49, -3.0)
   ];
-  const craterAxisLines = new THREE.LineSegments(
+  postStrikeModelGroup.add(new THREE.LineSegments(
     new THREE.BufferGeometry().setFromPoints(craterAxisPts),
     new THREE.LineBasicMaterial({ color: 0xfca5a5, transparent: true, opacity: 0.72 })
-  );
-  postStrikeModelGroup.add(craterAxisLines);
+  ));
 
   const scaleCanvas = document.createElement('canvas');
   scaleCanvas.width = 512;
@@ -1978,53 +3112,100 @@ function buildProceduralSchoolModels() {
     new THREE.PlaneGeometry(4.2, 0.72),
     new THREE.MeshBasicMaterial({ map: scaleTex, side: THREE.DoubleSide })
   );
-  scaleBadge.position.set(-2.5, 4.15, -5.5);
+  scaleBadge.position.set(-2.5, 4.35, -5.5);
   postStrikeModelGroup.add(scaleBadge);
 
-  const scaleLeaderLine = new THREE.Line(
+  postStrikeModelGroup.add(new THREE.Line(
     new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(-2.5, 0.5, -5.5),
-      new THREE.Vector3(-2.5, 3.79, -5.5)
+      new THREE.Vector3(-2.5, 3.99, -5.5)
     ]),
     new THREE.LineBasicMaterial({ color: 0xef4444, transparent: true, opacity: 0.75 })
-  );
-  postStrikeModelGroup.add(scaleLeaderLine);
+  ));
 
-  // Collapsed West Wing & Central Assembly Rubble Slabs
-  for (let i = 0; i < 36; i++) {
-    const rx = -18 + Math.random() * 19;
-    const rz = -12.5 + Math.random() * 13;
-    const size = 0.6 + Math.random() * 1.4;
-    const chunk = new THREE.Mesh(new THREE.BoxGeometry(size * 1.4, size * 0.45, size), debrisMat);
-    chunk.position.set(rx, size * 0.35, rz);
-    chunk.rotation.set((Math.random() - 0.5) * 0.6, Math.random() * Math.PI, (Math.random() - 0.5) * 0.6);
-    chunk.castShadow = true;
-    postStrikeModelGroup.add(chunk);
+  // E) Deterministic Layered Concrete Rubble Slabs in Collapsed West Wing & Central Zone (Zero Math.random jitter!)
+  const rubbleSpecs = [
+    [-17.2, -11.2, 2.8, 0.32, 2.1, 0.22, 0.4, -0.18],
+    [-14.4, -10.8, 3.2, 0.28, 2.4, -0.25, 1.1, 0.20],
+    [-11.2, -11.4, 2.5, 0.35, 1.9, 0.18, 2.1, -0.28],
+    [-8.4, -10.2, 2.9, 0.30, 2.2, -0.32, 0.7, 0.24],
+    [-17.0, -7.2, 3.4, 0.28, 2.5, 0.28, 1.8, 0.16],
+    [-13.6, -6.8, 3.0, 0.34, 2.3, -0.20, 2.5, -0.22],
+    [-9.8, -6.4, 2.7, 0.30, 2.0, 0.30, 0.9, 0.19],
+    [-16.8, -3.2, 3.3, 0.30, 2.4, -0.24, 1.4, -0.15],
+    [-13.2, -2.8, 2.9, 0.32, 2.1, 0.21, 2.8, 0.25],
+    [-9.5, -2.4, 2.6, 0.28, 1.9, -0.18, 0.5, -0.24],
+    [-16.5, 0.6, 3.1, 0.28, 2.2, 0.19, 2.2, 0.14],
+    [-12.8, 0.8, 2.8, 0.32, 2.0, -0.26, 1.2, -0.20],
+    [-8.9, 0.5, 2.4, 0.30, 1.8, 0.22, 2.6, 0.18],
+    [-5.8, -2.2, 2.6, 0.28, 2.0, -0.28, 0.8, 0.22],
+    [0.8, -2.4, 2.5, 0.30, 1.9, 0.26, 1.9, -0.25],
+    [2.4, -6.2, 2.2, 0.32, 1.7, -0.35, 1.1, 0.30],
+    [-0.4, -7.2, 2.1, 0.28, 1.6, 0.32, 2.4, -0.18],
+    [-5.6, -6.8, 2.3, 0.30, 1.8, -0.22, 0.3, 0.28]
+  ];
+  rubbleSpecs.forEach(([rx, rz, rw, rh, rd, rxRot, ryRot, rzRot], idx) => {
+    const slab = new THREE.Mesh(
+      new THREE.BoxGeometry(rw, rh, rd),
+      idx % 3 === 0 ? ruinedConcrete : debrisMat
+    );
+    slab.position.set(rx, 0.36 + (idx % 3) * 0.22, rz);
+    slab.rotation.set(rxRot, ryRot, rzRot);
+    slab.castShadow = true;
+    slab.receiveShadow = true;
+    postStrikeModelGroup.add(slab);
+  });
+
+  // F) True L-Shaped Yellow "Extent of Damage" Volume + Clean Perimeter Wireframe (matching ref_08_damage_extent_fa.jpg!)
+  // Polygon in XZ: (-19.1, +2.5) -> (-6.9, +2.5) -> (-6.9, +0.6) -> (+4.5, +0.6) -> (+4.5, -8.2) -> (-3.8, -8.2) -> (-3.8, -13.1) -> (-19.1, -13.1)
+  const dmgTopY = floorH * 2 + 0.45;
+  const dmgPolyXZ = [
+    [-19.1, 2.5],
+    [-6.9, 2.5],
+    [-6.9, 0.6],
+    [4.5, 0.6],
+    [4.5, -8.2],
+    [-3.8, -8.2],
+    [-3.8, -13.1],
+    [-19.1, -13.1]
+  ];
+  const dmgShape = new THREE.Shape();
+  dmgShape.moveTo(dmgPolyXZ[0][0], -dmgPolyXZ[0][1]);
+  for (let i = 1; i < dmgPolyXZ.length; i++) {
+    dmgShape.lineTo(dmgPolyXZ[i][0], -dmgPolyXZ[i][1]);
   }
+  dmgShape.closePath();
 
-  // Yellow Wireframe "Extent of Damage" Bounding Volume (matching rec_29.jpg!)
-  const dmgBoxGeo = new THREE.BoxGeometry(21.5, floorH * 2 + 0.4, 14.6);
-  const dmgEdges = new THREE.EdgesGeometry(dmgBoxGeo);
-  const dmgWire = new THREE.LineSegments(dmgEdges, new THREE.LineBasicMaterial({ color: 0xe5e059 }));
-  dmgWire.position.set(-8.5, floorH, -6);
-  postStrikeModelGroup.add(dmgWire);
-
+  const dmgExtrude = new THREE.ExtrudeGeometry(dmgShape, { depth: dmgTopY, bevelEnabled: false });
+  dmgExtrude.rotateX(-Math.PI / 2);
   const dmgFill = new THREE.Mesh(
-    dmgBoxGeo,
-    new THREE.MeshBasicMaterial({ color: 0xe5e059, transparent: true, opacity: 0.12, depthWrite: false })
+    dmgExtrude,
+    new THREE.MeshBasicMaterial({ color: 0xe5e059, transparent: true, opacity: 0.13, depthWrite: false, side: THREE.DoubleSide })
   );
-  dmgFill.position.copy(dmgWire.position);
   postStrikeModelGroup.add(dmgFill);
 
-  // Camera-Aligned Post-Strike Crater Photogrammetry Frame inside the Crater
+  const wirePts = [];
+  for (let i = 0; i < dmgPolyXZ.length; i++) {
+    const [x1, z1] = dmgPolyXZ[i];
+    const [x2, z2] = dmgPolyXZ[(i + 1) % dmgPolyXZ.length];
+    wirePts.push(new THREE.Vector3(x1, 0.08, z1), new THREE.Vector3(x2, 0.08, z2));
+    wirePts.push(new THREE.Vector3(x1, dmgTopY, z1), new THREE.Vector3(x2, dmgTopY, z2));
+    wirePts.push(new THREE.Vector3(x1, 0.08, z1), new THREE.Vector3(x1, dmgTopY, z1));
+  }
+  postStrikeModelGroup.add(new THREE.LineSegments(
+    new THREE.BufferGeometry().setFromPoints(wirePts),
+    new THREE.LineBasicMaterial({ color: 0xe5e059 })
+  ));
+
+  // G) Camera-Aligned Post-Strike Crater Photogrammetry Frame (Facing West across Crater -> East Exposed Shear!)
   createCameraAlignedPhotoInSpace(
     postStrikeModelGroup,
     'images/fa_spots/spot_crater_photo.jpg',
-    [-2.5, 2.5, 1.0],
-    [-2.5, 2.2, -5.5],
-    0,
-    5.0,
-    2.8
+    [-8.8, 2.35, -5.5],
+    [0.8, 2.30, -5.5],
+    -Math.PI / 2,
+    5.1,
+    2.85
   );
 }
 
@@ -2051,16 +3232,16 @@ function setCutawayMode(mode) {
   }
 }
 
-// --- 8 CAMERA-ALIGNED HOTSPOTS ---
+// --- 8 CAMERA-ALIGNED HOTSPOTS (SYNCHRONIZED TO ALIGNED ROOMS & COURTYARDS) ---
 const HOTSPOT_CONFIGS = [
-  { id: 'courtyard_lines', icon: '1', pos: [13, 1.2, 8.5], presetCam: [18, 4.5, 18], target: [8, 1.5, 2], cutaway: 0 },
-  { id: 'boys_flower_arch', icon: '2', pos: [12.5, 2.2, -4.5], presetCam: [9, 4.2, 2], target: [12.5, 1.8, -5.6], cutaway: 2 },
-  { id: 'boys_classroom', icon: '3', pos: [-12.8, 2.2, -10.5], presetCam: [-9, 4.2, -3], target: [-12.8, 1.8, -11.5], cutaway: 2 },
-  { id: 'rainbow_staircase', icon: '4', pos: [0, 2.4, -7.8], presetCam: [0, 3.8, -1.5], target: [0, 2.0, -8.5], cutaway: 2 },
-  { id: 'girls_upper_hall', icon: '5', pos: [-13.2, 5.8, -7.5], presetCam: [-8, 8.5, 2], target: [-13.2, 5.2, -7.5], cutaway: 1 },
-  { id: 'crater_damage', icon: '6', pos: [-2.5, 3.2, -6.0], presetCam: [-16, 13, 12], target: [-4, 2.0, -6], cutaway: 0 },
-  { id: 'second_wave', icon: '7', pos: [18, 2.5, 14.0], presetCam: [26, 8, 22], target: [8, 1.5, 4], cutaway: 0 },
-  { id: 'vow_shrine', icon: '✍️', pos: [0, 3.8, 10.5], presetCam: [0, 2.4, 17.5], target: [0, 2.0, 10.5], isVow: true, cutaway: 1 }
+  { id: 'courtyard_lines', icon: '1', pos: [15.5, 1.2, 8.25], presetCam: [5.5, 2.8, 12.0], target: [22.0, 1.6, 6.5], cutaway: 0 },
+  { id: 'boys_flower_arch', icon: '2', pos: [3.8, 2.1, -6.0], presetCam: [2.2, 4.4, -0.5], target: [4.0, 1.8, -6.5], cutaway: 2 },
+  { id: 'boys_classroom', icon: '3', pos: [-15.8, 2.1, -0.2], presetCam: [-11.8, 4.3, 3.8], target: [-16.2, 1.6, -1.0], cutaway: 2 },
+  { id: 'rainbow_staircase', icon: '4', pos: [-1.8, 2.3, -8.4], presetCam: [-1.8, 2.25, -3.2], target: [-1.8, 2.0, -9.8], cutaway: 2 },
+  { id: 'girls_upper_hall', icon: '5', pos: [-15.2, 5.6, -5.5], presetCam: [-9.5, 8.6, 3.5], target: [-15.2, 5.2, -5.5], cutaway: 1 },
+  { id: 'crater_damage', icon: '6', pos: [-2.5, 3.2, -5.5], presetCam: [-18.0, 13.5, 12.0], target: [-1.5, 2.2, -5.5], cutaway: 0 },
+  { id: 'second_wave', icon: '7', pos: [18.0, 2.5, 11.5], presetCam: [26.0, 9.5, 22.0], target: [6.0, 2.2, 1.0], cutaway: 0 },
+  { id: 'vow_shrine', icon: '✍️', pos: [-1.5, 3.8, 10.5], presetCam: [-1.5, 2.4, 18.0], target: [-1.5, 2.0, 10.5], isVow: true, cutaway: 1 }
 ];
 
 function initHotspots() {
@@ -2072,9 +3253,10 @@ function initHotspots() {
     cfg.targetVec = new THREE.Vector3(cfg.target[0], cfg.target[1], cfg.target[2]);
 
     const markerMesh = new THREE.Mesh(
-      new THREE.SphereGeometry(0.35, 16, 16),
-      new THREE.MeshBasicMaterial({ color: cfg.isVow ? 0x10b981 : 0xd4a853, transparent: true, opacity: 0.9 })
+      new THREE.SphereGeometry(0.11, 12, 12),
+      new THREE.MeshBasicMaterial({ color: cfg.isVow ? 0x10b981 : 0xd4a853, transparent: true, opacity: cfg.isVow ? 0.0 : 0.42 })
     );
+    markerMesh.visible = !cfg.isVow;
     markerMesh.position.copy(cfg.posVec);
     markersGroup.add(markerMesh);
     cfg.mesh = markerMesh;
@@ -3505,7 +4687,7 @@ function toggleWalkMode() {
     setTemporalCondition(0.0);
     document.getElementById('timelineSlider').value = 0.0;
     setCutawayMode(2); // Open ground floor rooms for immediate walking inside!
-    triggerCameraAnimation(new THREE.Vector3(0, 1.85, 4.5), new THREE.Vector3(0, 1.85, -8.5));
+    triggerCameraAnimation(new THREE.Vector3(-1.2, 1.85, 6.2), new THREE.Vector3(-1.2, 1.85, -8.5));
   } else {
     setCutawayMode(0);
     triggerCameraAnimation(new THREE.Vector3(28, 22, 34), new THREE.Vector3(0, 3.0, -3));
@@ -3907,19 +5089,19 @@ function initUIControls() {
       if (galleryViewStep === 1) {
         // View 1: Ground Floor Boys' Classrooms (Grades 1–3) & Desks with Rubble Drawings
         setCutawayMode(2);
-        triggerCameraAnimation(new THREE.Vector3(-11.5, 2.3, -2.2), new THREE.Vector3(-18.5, 1.8, -4.5));
+        triggerCameraAnimation(new THREE.Vector3(-13.2, 2.45, -3.0), new THREE.Vector3(-18.2, 1.65, -5.4));
       } else if (galleryViewStep === 2) {
         // View 2: First Floor Girls' Assembly Hall (47 Schoolgirls)
         setCutawayMode(1);
-        triggerCameraAnimation(new THREE.Vector3(-10.5, 5.9, -2.5), new THREE.Vector3(-18.5, 5.3, -7.0));
+        triggerCameraAnimation(new THREE.Vector3(-12.4, 5.85, -1.8), new THREE.Vector3(-18.2, 5.25, -7.5));
       } else if (galleryViewStep === 3) {
         // View 3: First Floor North-East Classroom (28 Rubble Drawings & Homework Archive)
         setCutawayMode(1);
-        triggerCameraAnimation(new THREE.Vector3(11.2, 5.6, -7.4), new THREE.Vector3(18.5, 5.2, -10.2));
+        triggerCameraAnimation(new THREE.Vector3(17.2, 5.7, -11.8), new THREE.Vector3(10.5, 5.2, -8.2));
       } else {
         // View 4: Central Rainbow Staircase Hall (26 Martyred Female Educators)
         setCutawayMode(2);
-        triggerCameraAnimation(new THREE.Vector3(1.5, 2.35, -1.2), new THREE.Vector3(-6.2, 1.9, -5.5));
+        triggerCameraAnimation(new THREE.Vector3(-1.4, 2.35, -3.8), new THREE.Vector3(-6.0, 1.9, -6.2));
       }
     });
   }
