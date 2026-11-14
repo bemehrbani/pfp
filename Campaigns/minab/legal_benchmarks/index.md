@@ -1,7 +1,7 @@
-# Master Index: Legal Benchmarks Database
+# Master Index: Legal Benchmarks & Universal Jurisdiction Database
 > **Folder Domicile:** `Campaigns/minab/legal_benchmarks/`  
 > **Prepared for:** People for Peace & Justice ry (PFPJ ry)  
-> **Latest Revision:** July 3, 2026
+> **Latest Revision:** November 14, 2026
 
 This database compiles publicly available court judgments, prosecutorial findings, and independent commissions of inquiry regarding military targeting errors and precision strikes. It is structured to help our legal team select, cross-reference, and benchmark arguments for the final court-ready dossier on the **Minab School Strike (Feb 28, 2026)**.
 
@@ -148,4 +148,17 @@ The following 12 reports form our extended comparative registry, identifying fur
 *   **Context:** Russian Su-25 jets fired twelve heavy S-24 blast missiles (blast radius 300–800m) into a civilian refugee convoy on the Rostov–Baku highway, killing dozens of civilians and Red Cross personnel.
 *   **Precedent:** Establishes the authoritative standard for **planning and control of military operations**, rules that deploying wide-envelope blast munitions into civilian environments is **inherently disproportionate**, and establishes the **autonomous procedural duty to investigate** lethal strikes.
 *   **URL:** [ECtHR HUDOC Portal - Isayeva, Yusupova and Bazayeva Judgment](https://hudoc.echr.coe.int/eng?i=001-68379)
-*   **Full Report Dossier:** [case_19_case_of_isayeva_yusupova_and_bazayeva_v_russia_full_judgment.md](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/full_reports/case_19_case_of_isayeva_yusupova_and_bazayeva_v_russia_full_judgment.md)
+*   **Full Report Dossier:** [case_19_case_of_isayeva_yusupova_and_bazayeva_v_russia_full_judgment.md](full_reports/case_19_case_of_isayeva_yusupova_and_bazayeva_v_russia_full_judgment.md)
+
+---
+
+## 3. Master Compendia, Late-2026 Outcome Survey & Universal Jurisdiction Dossiers
+
+| Document | Repository Path | Scope & Legal Utility |
+| :--- | :--- | :--- |
+| **Comprehensive 19-Case Benchmark Compendium** | [`COMPREHENSIVE_BENCHMARKING_ALL_19_CASES.md`](COMPREHENSIVE_BENCHMARKING_ALL_19_CASES.md) | Exhaustive two-chart judicial compendium covering **all 19 cases** (190 verified primary citations + paragraph-by-paragraph integration matrix into `FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md`). |
+| **Master Final Situation Survey (`PFPJ-2026-SURVEY-019`)** | [`FINAL_SITUATION_SURVEY_ALL_19_CASES.md`](FINAL_SITUATION_SURVEY_ALL_19_CASES.md) & [`cases_survey_data.json`](cases_survey_data.json) | Longitudinal late-2026 judicial, investigative, accountability, and reparation audit across all 19 benchmark cases. |
+| **Universal Jurisdiction Master Legal Survey (`Addendum 03`)** | [`universal_jurisdiction_war_crimes_minab_report.md`](universal_jurisdiction_war_crimes_minab_report.md) | Comparative statutory survey across 8 domestic UJ regimes (DE, SE, CH, FR, AR, NL, UK, FI), 8 landmark domestic UJ trials, functional immunity & § 153f StPO subsidiarity rebuttals, and Two-Track litigation roadmap. |
+| **Top-Cited Literature on 8 Landmark UJ Cases** | [`top_cited_literature_landmark_uj_cases.md`](top_cited_literature_landmark_uj_cases.md) | Bibliographic survey of 80 foundational treatises and peer-reviewed papers (Top 10 per each of the 8 landmark domestic UJ cases). |
+| **European UJ Top-20 Literature & Open-Access Survey** | [`european_universal_jurisdiction_top20_with_links_and_oa.md`](european_universal_jurisdiction_top20_with_links_and_oa.md) | 100 landmark European UJ scholarly works across Germany, Sweden, Switzerland, France, and UK/Spain with active DOIs and Open Access tags. |
+
