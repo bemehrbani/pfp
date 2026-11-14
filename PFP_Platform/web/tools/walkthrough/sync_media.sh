@@ -30,6 +30,14 @@ fetch_asset "media/audio/Whistle MOP.ogg"
 fetch_asset "media/walkthrough_pip/manifest.json"
 
 for clip in \
+  01_sync_morning_queue 01_sync_porch_still \
+  02_sync_playroom_memories 02_sync_rose_arch_photo \
+  03_sync_boys_carpet_clapping 03_sync_faces_and_drawings \
+  04_sync_stairs_welcome 04_sync_stairwell_collapse \
+  05_sync_80_girls_hall 05_sync_desks_and_notebooks \
+  06_sync_crater_comparison 06_sync_mothers_bags_and_drawings \
+  07_sync_barehands_rescue 07_sync_tomahawk_then_smoke \
+  08_sync_echo_of_rooms 08_sync_justice_vow \
   01_courtyard_lines_01 01_courtyard_lines_02 01_courtyard_football_and_flags \
   02_boys_flower_arch_01 02_boys_flower_arch_02 02_boys_playroom_prestrike \
   03_boys_classroom_01 03_boys_classroom_02 03_boys_fieldtrip_and_class \
@@ -43,6 +51,7 @@ for clip in \
 done
 
 for il in \
+  interlude_02_rose_arch_and_mahan \
   interlude_01_rose_arch_singing \
   interlude_02_mahan_mothers_day \
   interlude_03_boys_classroom_laughter \
