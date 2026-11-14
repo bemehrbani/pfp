@@ -479,6 +479,55 @@
       outline: none;
     }
 
+    /* EXPLICIT MULTI-NARRATOR SEGMENTED CHOOSER (MOSTAFA · LEILA · ALI) */
+    .voice-chooser-seg {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(10, 14, 23, 0.72);
+      border: 1px solid var(--border-gold);
+      border-radius: 999px;
+      padding: 2px 4px 2px 8px;
+      white-space: nowrap;
+    }
+    .voice-chooser-seg .vc-icon {
+      font-size: 0.76rem;
+      margin-inline-end: 2px;
+    }
+    .voice-opt-btn {
+      background: transparent;
+      border: none;
+      color: #cbd5e1;
+      font-family: inherit;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+    .voice-opt-btn:hover {
+      color: #fde68a;
+      background: rgba(212, 168, 83, 0.14);
+    }
+    .voice-opt-btn.active {
+      background: var(--gold);
+      color: var(--bg);
+      font-weight: 700;
+    }
+    .story-voice-seg {
+      padding: 2px 3px 2px 7px;
+      background: rgba(212, 168, 83, 0.10);
+      border-color: rgba(212, 168, 83, 0.36);
+    }
+    .story-voice-seg .voice-opt-btn {
+      font-size: 0.69rem;
+      padding: 3px 7px;
+    }
+    body.recording-mode .story-controls {
+      display: none !important;
+    }
+
     /* NORDIC MINIMALIST WALKTHROUGH DOCUMENTARY OVERLAYS */
     .walkthrough-context-stamp {
       position: fixed;
@@ -615,19 +664,19 @@
 
     .walkthrough-quote-callout {
       position: fixed;
-      bottom: 78px;
-      left: 50%;
-      translate: -50% 0;
+      top: 66px;
+      left: 24px;
+      translate: 0 0;
       z-index: 44;
       width: max-content;
-      max-width: min(560px, calc(100vw - 36px));
-      background: rgba(10, 14, 23, 0.72);
+      max-width: min(440px, calc(100vw - 48px));
+      background: rgba(10, 14, 23, 0.78);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border: 1px solid rgba(255, 255, 255, 0.10);
       border-inline-start: 3px solid var(--gold);
       border-radius: 10px;
-      padding: 8px 15px;
+      padding: 9px 15px;
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.50);
       pointer-events: none;
       opacity: 1;
@@ -636,6 +685,10 @@
         opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1),
         translate 0.38s cubic-bezier(0.22, 1, 0.36, 1);
       transition-behavior: allow-discrete;
+    }
+    body[dir="rtl"] .walkthrough-quote-callout {
+      left: auto;
+      right: 24px;
     }
     .walkthrough-quote-callout[data-tone="strike"] {
       border-inline-start-color: #ef4444;
@@ -678,7 +731,7 @@
       }
       .walkthrough-quote-callout {
         opacity: 0;
-        translate: -50% 12px;
+        translate: 0 -10px;
       }
     }
     .walkthrough-context-stamp:where([hidden], [data-closing]) {
@@ -691,12 +744,298 @@
     }
     .walkthrough-quote-callout:where([hidden], [data-closing]) {
       opacity: 0;
-      translate: -50% 12px;
+      translate: 0 -10px;
     }
     .walkthrough-context-stamp[hidden],
     .walkthrough-pip-card[hidden],
     .walkthrough-quote-callout[hidden] {
       display: none;
+    }
+
+    /* PROLOGUE, CINEMA WITNESS INTERLUDES & EPILOGUE CARDS */
+    .cinema-bookend-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px 24px;
+      background: radial-gradient(ellipse at center, rgba(10, 14, 23, 0.72) 0%, rgba(5, 8, 14, 0.92) 100%);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 1;
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+    .cinema-bookend-overlay[hidden] {
+      display: none;
+    }
+    .cinema-bookend-overlay.is-fading {
+      opacity: 0;
+    }
+    .bookend-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    body[dir="rtl"] .bookend-kicker {
+      font-family: var(--font-rtl);
+      letter-spacing: 0.02em;
+      font-size: 0.85rem;
+    }
+    .bookend-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3.6vw, 3.05rem);
+      font-weight: 700;
+      color: #f8fafc;
+      line-height: 1.22;
+      max-width: 860px;
+      text-shadow: 0 6px 28px rgba(0, 0, 0, 0.65);
+    }
+    body[dir="rtl"] .bookend-title {
+      font-family: var(--font-rtl);
+    }
+    .bookend-coords {
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      margin-top: 12px;
+      letter-spacing: 0.06em;
+    }
+    .bookend-divider {
+      width: 68px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto;
+    }
+    .bookend-note {
+      font-size: 1.02rem;
+      font-weight: 400;
+      color: #e2e8f0;
+      max-width: 660px;
+      line-height: 1.6;
+      font-style: italic;
+    }
+    body[dir="rtl"] .bookend-note {
+      font-style: normal;
+      line-height: 1.85;
+    }
+
+    .cinema-interlude-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 58;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 24px 26px;
+      background: radial-gradient(ellipse at center, rgba(7, 10, 17, 0.86) 0%, rgba(3, 5, 10, 0.95) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      opacity: 1;
+      transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cinema-interlude-overlay[hidden] {
+      display: none;
+    }
+    .cinema-interlude-overlay.is-fading {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .interlude-topbar {
+      width: min(980px, calc(100vw - 48px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .interlude-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .interlude-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 12px rgba(212, 168, 83, 0.85);
+      flex-shrink: 0;
+    }
+    .cinema-interlude-overlay[data-tone="strike"] .interlude-dot {
+      background: #ef4444;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.85);
+    }
+    .interlude-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fde68a;
+    }
+    .cinema-interlude-overlay[data-tone="strike"] .interlude-kicker {
+      color: #fca5a5;
+    }
+    body[dir="rtl"] .interlude-kicker {
+      font-family: var(--font-rtl);
+      letter-spacing: 0;
+      font-size: 0.82rem;
+    }
+    .interlude-skip-btn {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #cbd5e1;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .interlude-skip-btn:hover {
+      background: rgba(212, 168, 83, 0.2);
+      border-color: var(--gold);
+      color: #fff;
+    }
+    body.recording-mode .interlude-skip-btn {
+      display: none !important;
+    }
+    .interlude-stage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #04060b;
+      border-radius: 14px;
+      border: 1px solid rgba(212, 168, 83, 0.34);
+      box-shadow: 0 24px 72px rgba(0, 0, 0, 0.82), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+    .cinema-interlude-overlay[data-tone="strike"] .interlude-stage {
+      border-color: rgba(239, 68, 68, 0.38);
+    }
+    /* True-aspect museum frames — zero blurred pillarboxes */
+    .cinema-interlude-overlay[data-aspect="landscape"] .interlude-stage {
+      width: min(960px, 84vw);
+      aspect-ratio: 16 / 9;
+      max-height: 68vh;
+    }
+    .cinema-interlude-overlay[data-aspect="classic"] .interlude-stage {
+      height: min(68vh, 640px);
+      aspect-ratio: 4 / 3;
+      max-width: 88vw;
+    }
+    .cinema-interlude-overlay[data-aspect="portrait"] .interlude-stage {
+      height: min(72vh, 690px);
+      aspect-ratio: 4 / 5;
+      max-width: 88vw;
+    }
+    .cinema-interlude-overlay[data-aspect="portrait34"] .interlude-stage {
+      height: min(72vh, 690px);
+      aspect-ratio: 3 / 4;
+      max-width: 88vw;
+    }
+    .cinema-interlude-overlay[data-aspect="tall"] .interlude-stage {
+      height: min(74vh, 710px);
+      aspect-ratio: 9 / 14.5;
+      max-width: 88vw;
+    }
+    .interlude-stage video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .interlude-rupture-card {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      padding: 24px;
+      text-align: center;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .interlude-rupture-card[hidden] {
+      display: none;
+    }
+    .interlude-rupture-time {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      letter-spacing: 0.18em;
+      color: #ef4444;
+      margin-bottom: 10px;
+    }
+    .interlude-rupture-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+      color: #f8fafc;
+      font-weight: 600;
+    }
+    body[dir="rtl"] .interlude-rupture-title {
+      font-family: var(--font-rtl);
+    }
+    .interlude-progress-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.12);
+      z-index: 5;
+    }
+    .interlude-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), #fde68a);
+      transition: width 0.15s linear;
+    }
+    .cinema-interlude-overlay[data-tone="strike"] .interlude-progress-fill {
+      background: linear-gradient(90deg, #dc2626, #fca5a5);
+    }
+    .interlude-subtitle-wrap {
+      margin-top: 14px;
+      min-height: 54px;
+      max-width: min(860px, calc(100vw - 40px));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .interlude-subtitle-primary {
+      font-size: clamp(0.98rem, 1.45vw, 1.18rem);
+      font-weight: 600;
+      line-height: 1.48;
+      color: #ffffff;
+      background: rgba(8, 11, 19, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      padding: 8px 18px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+    }
+    .interlude-subtitle-primary:empty {
+      display: none;
+    }
+    .interlude-context-line {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: #94a3b8;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1445,7 +1784,7 @@
         <div class="hud-header-right">
           <button type="button" class="voice-pill-btn" id="btnHudNarrator" title="Switch human narrator voice">
             <span>🎙️</span>
-            <span id="hudNarratorLabel">Voice: Leila (EN)</span>
+            <span id="hudNarratorLabel">Voice: Mostafa (EN)</span>
           </button>
 
           <button class="vow-cta-btn" id="openVowBtn">
@@ -1466,9 +1805,15 @@
       <div class="top-subrow">
         <div class="presets-bar">
           <button class="preset-btn tour-btn" id="btnGuidedTour" data-i18n="guidedTourBtn">🎧 Walk Inside & Listen: 8-Stop Tour</button>
-          <button type="button" class="voice-pill-btn" id="btnSubrowNarrator" title="Switch human narrator voice">
+          <div class="voice-chooser-seg" id="subrowVoiceChooser" role="group" aria-label="Choose narrator voice">
+            <span class="vc-icon" aria-hidden="true">🎙️</span>
+            <button type="button" class="voice-opt-btn active" data-voice-slot="mostafa" onclick="selectNarratorByActor('mostafa')">Mostafa</button>
+            <button type="button" class="voice-opt-btn" data-voice-slot="leila" onclick="selectNarratorByActor('leila')">Leila</button>
+            <button type="button" class="voice-opt-btn" data-voice-slot="ali" onclick="selectNarratorByActor('ali')">Ali</button>
+          </div>
+          <button type="button" class="voice-pill-btn" id="btnSubrowNarrator" title="Switch human narrator voice" style="display:none;">
             <span>🎙️</span>
-            <span id="subrowNarratorLabel">Voice: Leila (EN)</span>
+            <span id="subrowNarratorLabel">Voice: Mostafa (EN)</span>
           </button>
           <button class="preset-btn cutaway-btn" id="btnCutaway" data-i18n="cutawayBtn">🏠 Floorplan Cutaway: All Floors</button>
           <button class="preset-btn" id="btnWalkMode" data-i18n="walkModeBtn">🚶 Walk Inside (WASD)</button>
@@ -1498,7 +1843,7 @@
       </div>
 
       <div class="help-hint" id="controlsHintText" data-i18n="controlsHelp">
-        Click "🏠 Floorplan Cutaway" to look inside rooms · WASD / Arrows to walk inside · Click any yellow camera frustum or pulsing pin to watch the exact photo/video on the spot
+        Click "🎧 Walk Inside &amp; Listen" for the 8-stop narrated tour with in-room 3D videos &amp; photos · Click any 3D portrait or rubble drawing on the walls to inspect
       </div>
     </div>
 
@@ -1527,6 +1872,49 @@
     <div class="quote-callout-author" id="walkthroughQuoteAuthor"></div>
   </div>
 
+  <!-- Prologue Opening Title Card -->
+  <div class="cinema-bookend-overlay" id="walkthroughPrologueOverlay" hidden>
+    <div class="bookend-kicker" id="prologueKicker">FORENSIC SPATIAL RECONSTRUCTION &amp; LIVING ARCHIVE</div>
+    <h2 class="bookend-title" id="prologueTitle">Shajareh Tayyebeh Primary School</h2>
+    <div class="bookend-coords" id="prologueCoords">27°08′43″N 57°05′02″E · Minab, Hormozgan · February 28, 2026</div>
+    <div class="bookend-divider" aria-hidden="true"></div>
+    <p class="bookend-note" id="prologueNote">Every photograph, child's voice, and eyewitness video inside these rooms was recorded in this school before and on the day of the strike.</p>
+  </div>
+
+  <!-- Between-Narrations Cinema Witness Interlude Player (Full Video + Authentic Sound) -->
+  <div class="cinema-interlude-overlay" id="cinemaInterludeOverlay" data-aspect="portrait" data-tone="pre" hidden>
+    <div class="interlude-topbar">
+      <div class="interlude-meta">
+        <span class="interlude-dot" aria-hidden="true"></span>
+        <span class="interlude-kicker" id="interludeKicker">LIVING SCHOOL ARCHIVE · ORIGINAL SOUND</span>
+      </div>
+      <button type="button" class="interlude-skip-btn" id="btnSkipInterlude">Skip Interlude ›</button>
+    </div>
+    <div class="interlude-stage">
+      <video id="cinemaInterludeVideo" playsinline preload="auto"></video>
+      <div class="interlude-rupture-card" id="interludeRuptureCard" hidden>
+        <div class="interlude-rupture-time" id="interludeRuptureTime">SATURDAY · FEBRUARY 28, 2026 · 10:45 AM</div>
+        <div class="interlude-rupture-title" id="interludeRuptureTitle">First Cruise Missile Strike on Shajareh Tayyebeh School</div>
+      </div>
+      <div class="interlude-progress-track" aria-hidden="true">
+        <div class="interlude-progress-fill" id="interludeProgressFill"></div>
+      </div>
+    </div>
+    <div class="interlude-subtitle-wrap">
+      <div class="interlude-subtitle-primary" id="interludeSubtitleText"></div>
+      <div class="interlude-context-line" id="interludeContextLine"></div>
+    </div>
+  </div>
+
+  <!-- Epilogue Closing Dedication Card -->
+  <div class="cinema-bookend-overlay" id="walkthroughEpilogueOverlay" hidden>
+    <div class="bookend-kicker" id="epilogueKicker">IN REMEMBRANCE &amp; PURSUIT OF JUSTICE</div>
+    <h2 class="bookend-title" id="epilogueTitle">120 Schoolchildren &amp; 26 Educators</h2>
+    <div class="bookend-coords" id="epilogueCoords">Shajareh Tayyebeh Primary School · Minab · February 28, 2026</div>
+    <div class="bookend-divider" aria-hidden="true"></div>
+    <p class="bookend-note" id="epilogueNote">Stand beside their families and sign the Global Accountability Vow — peopleforpeace.live</p>
+  </div>
+
   <!-- Clean Bottom-Center Walkthrough Cinema Pill -->
   <div class="story-banner" id="storyBanner" hidden>
     <div class="story-pill-row">
@@ -1535,7 +1923,13 @@
         <span class="story-title" id="storyTitle">Morning Assembly in the Schoolyard</span>
       </div>
       <div class="story-controls" id="storyControls">
-        <button type="button" class="story-voice-btn" id="btnStoryNarrator" title="Switch narrator voice">🎙️ Leila</button>
+        <div class="voice-chooser-seg story-voice-seg" id="storyVoiceChooser" role="group" aria-label="Choose narrator voice">
+          <span class="vc-icon" aria-hidden="true">🎙️</span>
+          <button type="button" class="voice-opt-btn active" data-voice-slot="mostafa" onclick="selectNarratorByActor('mostafa')">Mostafa</button>
+          <button type="button" class="voice-opt-btn" data-voice-slot="leila" onclick="selectNarratorByActor('leila')">Leila</button>
+          <button type="button" class="voice-opt-btn" data-voice-slot="ali" onclick="selectNarratorByActor('ali')">Ali</button>
+        </div>
+        <button type="button" class="story-voice-btn" id="btnStoryNarrator" title="Switch narrator voice" style="display:none;">🎙️ Mostafa</button>
         <button type="button" class="story-icon-btn story-chevron-btn" id="btnStoryPrev" aria-label="Previous station" title="Previous station">‹</button>
         <button type="button" class="story-icon-btn" id="btnStoryAudio" aria-label="Pause voiceover" title="Pause voiceover">⏸</button>
         <button type="button" class="story-icon-btn story-chevron-btn" id="btnStoryNext" aria-label="Next station" title="Next station">›</button>
@@ -1727,6 +2121,9 @@
     </div>
   </div>
 
+  <!-- Offscreen Active Decoder Pool for In-World 3D Wall Video Screens -->
+  <div id="inWorldVideoPool" aria-hidden="true" style="position:fixed; left:0; top:0; width:2px; height:2px; opacity:0.001; pointer-events:none; overflow:hidden; z-index:-1;"></div>
+
   <!-- Three.js (r128), OrbitControls & GLTFExporter for Spatial.io export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -1737,6 +2134,6 @@
   <!-- Master Casualty & Rubble Drawings Registry (Dataset v3.0.0) -->
   <script src="memorial-data.js"></script>
   <!-- Application Logic -->
-  <script src="js/reconstruction.js?v=20261112b"></script>
+  <script src="js/reconstruction.js?v=20261114b"></script>
 </body>
 </html>

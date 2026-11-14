@@ -1,8 +1,8 @@
 {
   "defaultByLang": {
     "fa": "mostafa_fa",
-    "en": "leila_en",
-    "fi": "leila_en"
+    "en": "mostafa_en",
+    "fi": "mostafa_en"
   },
   "profiles": {
     "mostafa_fa": {
@@ -26,6 +26,29 @@
         "crater_damage": 46.76,
         "second_wave": 52.33,
         "vow_shrine": 50.71
+      }
+    },
+    "mostafa_en": {
+      "id": "mostafa_en",
+      "lang": "en",
+      "prefix": "en",
+      "narratorNameEn": "Mostafa Jalali",
+      "narratorNameFa": "مصطفی جلالی (انگلیسی)",
+      "label": {
+        "en": "EN · Mostafa",
+        "fa": "انگلیسی · مصطفی جلالی",
+        "fi": "EN · Mostafa"
+      },
+      "stationsCount": 8,
+      "durations": {
+        "courtyard_lines": 50.27,
+        "boys_flower_arch": 41.95,
+        "boys_classroom": 42.19,
+        "rainbow_staircase": 52.43,
+        "girls_upper_hall": 45.48,
+        "crater_damage": 48.43,
+        "second_wave": 47.57,
+        "vow_shrine": 47.07
       }
     },
     "leila_fa": {

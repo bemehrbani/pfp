@@ -1105,7 +1105,1242 @@ const PFP_MEDIA_DATA = [
       fa: "اثر تصویری طراحی‌شده جهت پخش در سالن‌های اکران، مراسم شمع‌افروزی و یادبودهای بین‌المللی در اروپا."
     },
     tags: ["Projection", "Eyes That Ask", "Memorial Vigils"]
-  }
+  },
+
+  // ==========================================
+  // 8. MINAB SCHOOL & EYEWITNESS RAW ARCHIVE (36 ITEMS)
+  // ==========================================
+  {
+      "id": "minab-eyewitness-01",
+      "slug": "minab-eyewitness-01",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Alphabet Lesson & Young Mahan's Mother's Day Greeting ('I Love You, Beautiful Mother')",
+          "fa": "تدریس نشانه «آ» و پیام کودکانه ماهان برای روز مادر («دوستت دارم مادر قشنگم»)"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:25",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_01_1406522.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_01_1406522.jpg",
+      "fileSize": "2.5 MB",
+      "featured": false,
+      "description": {
+          "en": "Ground-floor sky-blue classroom recording featuring raw, unedited audio of young student Mahan holding his handmade craft and telling his mother: 'Hello my beautiful mother, happy Mother's Day, I love you — from your son Mahan.'",
+          "fa": "فیلم کلاسی از تدریس نشانه «آ» در کلاس آبی‌رنگ پسران که در آن «ماهان» کوچک با صدای کودکانه و واقعی خود رو به دوربین می‌گوید: «سلام مادر قشنگم، امروز روزت مبارک باشه، دوستت دارم مادر قشنگم، از طرف پسرت ماهان.»"
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Raw Classroom Audio",
+          "Mahan",
+          "Mother's Day",
+          "Boys School"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_01_1406522.mp4"
+  },
+  {
+      "id": "minab-eyewitness-02",
+      "slug": "minab-eyewitness-02",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Final First-Grade Classroom Photos Sent to Mothers Moments Before Impact",
+          "fa": "آخرین تصاویر کلاس اول ابتدایی ارسالی معلم شهید در گروه مادران لحظاتی پیش از اصابت موشک"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:09",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_02_1406537.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_02_1406537.jpg",
+      "fileSize": "0.5 MB",
+      "featured": false,
+      "description": {
+          "en": "Photographs captured inside the first-grade girls' classroom by their teacher and shared in the mothers' group chat minutes before the February 28, 2026 strike.",
+          "fa": "تصاویر ثبت‌شده توسط معلم شهید پایه اول ابتدایی از دانش‌آموزان دختر پشت نیمکت‌های سبز که دقایقی پیش از حمله موشکی ۹ اسفند ۱۴۰۴ در گروه مادران ارسال شده بود."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "First Grade",
+          "Pre-Strike Classroom",
+          "Final Moments",
+          "Girls School"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_02_1406537.mp4"
+  },
+  {
+      "id": "minab-eyewitness-03",
+      "slug": "minab-eyewitness-03",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "The Final Match — Schoolboys Playing Football on the Morning of February 28",
+          "fa": "آخرین بازی — فوتبال دانش‌آموزان دبستان شجره طیبه در صبح روز حادثه"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:46",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_03_1406521.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_03_1406521.jpg",
+      "fileSize": "5.5 MB",
+      "featured": false,
+      "description": {
+          "en": "Footage recorded on the sports pitch beside Shajareh Tayyebeh School showing boys playing football on the morning of the February 28, 2026 attack.",
+          "fa": "تصاویر ثبت‌شده از آخرین بازی فوتبال دانش‌آموزان پسر دبستان شجره طیبه میناب در زمین ورزشی مدرسه پیش از وقوع حمله."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Football Pitch",
+          "Day of Strike",
+          "Boys School"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_03_1406521.mp4"
+  },
+  {
+      "id": "minab-eyewitness-04",
+      "slug": "minab-eyewitness-04",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Unedited Classroom Laughter — Boys Playing Science Game at Green Desks",
+          "fa": "خنده‌های بی‌وقفه کودکانه در کلاس درس پسران پشت نیمکت‌های سبز (صدای طبیعی)"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:35",
+      "resolution": "720×720",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_04_1406525.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_04_1406525.jpg",
+      "fileSize": "7.4 MB",
+      "featured": false,
+      "description": {
+          "en": "Raw, unedited classroom recording with natural audio: Shajareh Tayyebeh schoolboys at lime-green desks burst into joyful laughter during a playful classroom activity with their teacher.",
+          "fa": "فیلم خام با صدای کاملاً طبیعی و بدون موسیقی از شوخی و خنده‌های کودکانه دانش‌آموزان پسر پشت نیمکت‌های سبز کلاس درس به همراه آموزگارشان."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Raw Classroom Audio",
+          "Boys School",
+          "Living Memory"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_04_1406525.mp4"
+  },
+  {
+      "id": "minab-eyewitness-05",
+      "slug": "minab-eyewitness-05",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "On-Site Spatial Testimony at the Sheared Central Staircase (Raw Field Audio)",
+          "fa": "روایت میدانی در برابر راه‌پله مرکزی منهدم‌شده از تفکیک طبقات و اصابت دو موشک"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:38",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_05_1406505.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_05_1406505.jpg",
+      "fileSize": "13.1 MB",
+      "featured": false,
+      "description": {
+          "en": "Unedited 38-second field walkthrough with clear Persian narration standing directly before the sheared central stairwell, confirming the girls' upper floor, boys' ground floor, central staircase impact point, and the second strike on gathered families.",
+          "fa": "گزارش میدانی ۳۸ ثانیه‌ای با صدای مستقیم از مقابل راه‌پله فروریخته مرکزی که چیدمان طبقه بالای دختران، طبقه همکف پسران، محل اصابت موشک اول به راه‌پله و اصابت موشک دوم به تجمع خانواده‌ها را نشان می‌دهد."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Spatial Verification",
+          "Central Staircase",
+          "Double-Tap",
+          "Raw Eyewitness Audio"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_05_1406505.mp4"
+  },
+  {
+      "id": "minab-eyewitness-06",
+      "slug": "minab-eyewitness-06",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Raw Courtyard Phone Video Minutes After Impact — Torn Pages & Cries for Classmates",
+          "fa": "فیلم خام تلفن همراه در حیاط پر از دود دبستان دقایقی پس از اصابت موشک"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:17",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_06_1406519.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_06_1406519.jpg",
+      "fileSize": "15.8 MB",
+      "featured": false,
+      "description": {
+          "en": "Unedited citizen phone video with raw on-site audio recorded inside the dust-choked schoolyard minutes after the strike: torn homework sheets cover the ground while families rush toward the smoking ruins calling out names.",
+          "fa": "ویدیوی خام شهروندی با صدای طبیعی صحنه در دقایق نخست پس از حمله؛ برگه‌های پراکنده دفتر مشق روی خاک حیاط، دود سیاه و فریاد خانواده‌ها در جستجوی کودکان."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "First Minutes",
+          "Raw Eyewitness Audio",
+          "Courtyard",
+          "Primary Evidence"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_06_1406519.mp4"
+  },
+  {
+      "id": "minab-eyewitness-07",
+      "slug": "minab-eyewitness-07",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Before & After the Strike — Shajareh Tayyebeh Playroom & Ball-Pit",
+          "fa": "خانه بازی دبستان شجره طیبه — مقایسه پیش از انفجار و پس از فروریختن سقف"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:37",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_07_1406523.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_07_1406523.jpg",
+      "fileSize": "5.5 MB",
+      "featured": false,
+      "description": {
+          "en": "Direct visual comparison showing preschool and primary children jumping happily in the school's mural-painted playroom and ball-pit before February 28, followed by the exact same painted wall buried beneath collapsed roof beams.",
+          "fa": "مقایسه تکان‌دهنده از شادی کودکان در «خانه بازی» رنگارنگ دبستان شجره طیبه پیش از حمله و ویرانه همان اتاق با نقاشی‌های دیواری در زیر تیرآهن و آوار پس از انفجار."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Before & After",
+          "Playroom",
+          "Spatial Verification"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_07_1406523.mp4"
+  },
+  {
+      "id": "minab-eyewitness-08",
+      "slug": "minab-eyewitness-08",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Pink-Door Classroom Group Photo Under Rainbow Balloons — Only Four Children Survived",
+          "fa": "عکس دسته‌جمعی دانش‌آموزان در کلاس درِ صورتی — تنها ۴ کودک از این جمع زنده ماندند"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "800×450",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_08_1406490.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_08_1406490.jpg",
+      "fileSize": "0.1 MB",
+      "featured": false,
+      "description": {
+          "en": "Pre-strike group photograph of fourteen young schoolgirls and their teacher standing beneath rainbow balloons inside a classroom with pink doors; eyewitness family records confirm only four children in this photograph survived the February 28 strike.",
+          "fa": "عکس یادگاری چهارده دانش‌آموز دختر و معلمشان زیر بادکنک‌های رنگی در کلاس با درهای صورتی؛ به گواهی خانواده‌ها تنها ۴ نفر از کودکان حاضر در این عکس از حمله موشکی زنده ماندند."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Class Photo",
+          "Survivors & Martyrs",
+          "Girls School",
+          "Primary Evidence"
+      ],
+      "isImage": true
+  },
+  {
+      "id": "minab-eyewitness-09",
+      "slug": "minab-eyewitness-09",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Aerial Drone Footage — Over One Hundred Graves Prepared Side by Side & Mass Funeral",
+          "fa": "تصویر هوایی تکان‌دهنده از حفر صدها مزار کوچک در کنار هم و تشییع پیکر کودکان میناب"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:38",
+      "resolution": "716×1274",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_09_1406491.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_09_1406491.jpg",
+      "fileSize": "10.4 MB",
+      "featured": false,
+      "description": {
+          "en": "Overhead drone video documenting two long rows of freshly excavated graves prepared side by side for the schoolchildren and educators of Shajareh Tayyebeh, followed by thousands of mourners gathering around them.",
+          "fa": "ویدیوی هوایی از ردیف‌های طولانی مزارهای کوچک آماده‌شده در کنار یکدیگر برای دانش‌آموزان و معلمان دبستان شجره طیبه و حضور هزاران نفر از مردم سوگوار در مراسم خاکسپاری."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Aerial Footage",
+          "Mass Funeral",
+          "Cemetery",
+          "Primary Scale Evidence"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_09_1406491.mp4"
+  },
+  {
+      "id": "minab-eyewitness-10",
+      "slug": "minab-eyewitness-10",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Young Surviving Sisters Reyhaneh & Mastaneh Looking Back at Their Burning School",
+          "fa": "نگاه بهت‌زده «ریحانه» و «مستانه» در میان گردوغبار به ویرانه مدرسه‌شان"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:06",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_10_1406506.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_10_1406506.jpg",
+      "fileSize": "0.7 MB",
+      "featured": false,
+      "description": {
+          "en": "Raw eyewitness phone clip capturing two tiny surviving schoolgirls, Reyhaneh and Mastaneh, covered in grey blast dust as crowds run toward the smoking school behind them.",
+          "fa": "فیلم خام لحظات نخست پس از انفجار از دو دانش‌آموز خردسال بازمانده، «ریحانه» و «مستانه»، با چهره‌های خاک‌آلود در برابر دود و ویرانه مدرسه‌شان."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Child Survivors",
+          "First Minutes",
+          "Raw Eyewitness Audio"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_10_1406506.mp4"
+  },
+  {
+      "id": "minab-eyewitness-11",
+      "slug": "minab-eyewitness-11",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Rows of Recovered Children's Shoes, Backpacks & Homework Laid Out on Carpets",
+          "fa": "ردیف کفش‌های کوچک، کیف‌ها و دفترهای مشق کودکان بر روی فرش برای شناسایی"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:10",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_11_1406509.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_11_1406509.jpg",
+      "fileSize": "2.4 MB",
+      "featured": false,
+      "description": {
+          "en": "Heartbreaking interior documentation showing dozens of small dusty school shoes, pastel backpacks, and open homework notebooks arranged in rows on carpets so families could identify their children.",
+          "fa": "تصاویری تکان‌دهنده از ده‌ها جفت کفش کوچک خاکی، کوله‌پشتی و کتاب‌های درسی به‌جامانده از دانش‌آموزان که برای شناسایی توسط والدین کنار هم چیده شده‌اند."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Recovered Belongings",
+          "Children's Shoes",
+          "Aftermath"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_11_1406509.mp4"
+  },
+  {
+      "id": "minab-eyewitness-12",
+      "slug": "minab-eyewitness-12",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Recovering a Child's 'MY HEART' Backpack & Torn Notebooks from Rubble",
+          "fa": "بیرون کشیدن کوله‌پشتی «MY HEART» و دفترهای مشق کودک از زیر آوار"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:28",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_12_1406534.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_12_1406534.jpg",
+      "fileSize": "5.6 MB",
+      "featured": false,
+      "description": {
+          "en": "On-site footage of rescuers lifting a dust-covered school backpack stamped 'MY HEART' and shrapnel-torn homework notebooks from the collapsed classroom slabs.",
+          "fa": "تصاویر میدانی از بیرون آوردن کیف مدرسه خاک‌گرفته یک کودک با نوشته MY HEART و کتاب و دفترهای پاره‌شده از میان آوار کلاس‌های درس."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Schoolbags",
+          "Rubble Recovery",
+          "Physical Evidence",
+          "Aftermath"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_12_1406534.mp4"
+  },
+  {
+      "id": "minab-eyewitness-13",
+      "slug": "minab-eyewitness-13",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Child's Dust-Covered Sneaker Lifted from Crushed Classroom Concrete",
+          "fa": "بیرون آوردن کفش کوچک خاک‌گرفته دانش‌آموز از میان بتن و آوار کلاس"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:46",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_13_1406532.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_13_1406532.jpg",
+      "fileSize": "17.6 MB",
+      "featured": false,
+      "description": {
+          "en": "Close-up on-site documentation of gloved rescue workers uncovering a small grey sneaker buried among shattered concrete blocks of the school.",
+          "fa": "نمای نزدیک از دستان امدادگران هنگام بیرون آوردن یک لنگه کفش کوچک خاک‌گرفته دانش‌آموز از لابه‌لای سنگ و بتن کلاس‌های فروریخته."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Recovered Belongings",
+          "Child's Shoe",
+          "Rubble Forensics"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_13_1406532.mp4"
+  },
+  {
+      "id": "minab-eyewitness-14",
+      "slug": "minab-eyewitness-14",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Bereaved Mothers Sitting Atop the Collapsed Classroom Rubble Mound",
+          "fa": "مادران سیاه‌پوش نشسته بر تل آوار کلاس‌های فروریخته در جستجوی فرزندان"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:14",
+      "resolution": "1280×720",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_14_1406504.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_14_1406504.jpg",
+      "fileSize": "5.0 MB",
+      "featured": false,
+      "description": {
+          "en": "Wide 16:9 field recording showing black-clad Minab mothers sitting directly on the mound of crushed concrete where the classrooms stood, digging through stones with their bare hands.",
+          "fa": "نمای افقی از مادران داغدار میناب که بر روی تپه‌ای از بتن و آوار کلاس‌های درس نشسته و با دست خالی خاک‌ها را کنار می‌زنند."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Mothers of Minab",
+          "Aftermath",
+          "Rubble"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_14_1406504.mp4"
+  },
+  {
+      "id": "minab-eyewitness-15",
+      "slug": "minab-eyewitness-15",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Pre-Strike Walkthrough of Intact Classrooms, Pink Doors, Gate & Prayer Room",
+          "fa": "تصاویر پیش از حمله از درهای صورتی کلاس‌ها، حیاط، نمازخانه و سردر دبستان دخترانه"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:25",
+      "resolution": "964×720",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_15_1406530.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_15_1406530.jpg",
+      "fileSize": "2.3 MB",
+      "featured": false,
+      "description": {
+          "en": "Archival video showing the intact architecture of Shajareh Tayyebeh Girls' Primary School: pink classroom doors with paper flowers, painted courtyard murals, school gate signage, and carpeted prayer hall.",
+          "fa": "گزارش تصویری پیش از حادثه از فضای داخلی و بیرونی دبستان دخترانه شجره طیبه شامل درهای صورتی کلاس‌ها، نقاشی‌های حیاط، تابلوی سردر و نمازخانه مدرسه."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Spatial Verification",
+          "School Architecture",
+          "Pre-Strike"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_15_1406530.mp4"
+  },
+  {
+      "id": "minab-eyewitness-16",
+      "slug": "minab-eyewitness-16",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "First-Grade Water Festival — Girls in Blue Paper Crowns Inside Pink-Door Room",
+          "fa": "جشن آب پایه اول — هم‌خوانی دختران با تاج‌های کاغذی آبی در کلاس درِ صورتی"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:26",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_16_1406524.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_16_1406524.jpg",
+      "fileSize": "7.2 MB",
+      "featured": false,
+      "description": {
+          "en": "Pre-strike classroom recording of first-grade girls seated on blue chairs wearing handmade water-drop paper crowns inside a classroom with pink doors.",
+          "fa": "فیلم آرشیوی از جشن کلاسی دانش‌آموزان دختر کلاس اول با کاردستی قطره‌های آب در اتاقی با درهای صورتی در دبستان شجره طیبه."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "First Grade",
+          "Girls School",
+          "Spatial Verification"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_16_1406524.mp4"
+  },
+  {
+      "id": "minab-eyewitness-17",
+      "slug": "minab-eyewitness-17",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Schoolgirls Waving Flags in the Sunny Courtyard Beside Wall Murals",
+          "fa": "صف صبحگاهی و لبخند دختران دانش‌آموز در حیاط دبستان کنار نقاشی‌های دیواری"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:26",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_17_1406528.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_17_1406528.jpg",
+      "fileSize": "6.3 MB",
+      "featured": false,
+      "description": {
+          "en": "Pre-strike school archive footage walking along a line of smiling Shajareh Tayyebeh schoolgirls waving small flags in the courtyard.",
+          "fa": "فیلم آرشیوی مدرسه از صف پرشور و لبخند دانش‌آموزان دختر در حیاط دبستان شجره طیبه در کنار نقاشی‌های کودکانه دیوار."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Courtyard",
+          "Morning Assembly",
+          "Girls School"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_17_1406528.mp4"
+  },
+  {
+      "id": "minab-eyewitness-18",
+      "slug": "minab-eyewitness-18",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "The Final Field Trip — Shajareh Tayyebeh Schoolboys' Excursion",
+          "fa": "آخرین اردوی دانش‌آموزان پسر دبستان شجره طیبه میناب"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "2:20",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_18_1406533.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_18_1406533.jpg",
+      "fileSize": "23.1 MB",
+      "featured": false,
+      "description": {
+          "en": "Two-minute archival recording of Shajareh Tayyebeh schoolboys laughing, riding the school bus, and visiting a local greenhouse on their final school excursion before February 28, 2026 (shared with families' permission).",
+          "fa": "فیلم یادگاری دو دقیقه‌ای از آخرین اردوی تفریحی دانش‌آموزان پسر دبستان شجره طیبه میناب در اتوبوس و گلخانه پیش از فاجعه ۹ اسفند (منتشرشده با اجازه خانواده‌های شهدا)."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "School Excursion",
+          "Boys School",
+          "Pre-Strike Life"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_18_1406533.mp4"
+  },
+  {
+      "id": "minab-eyewitness-19",
+      "slug": "minab-eyewitness-19",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "First Responders & Residents Climbing Smoking Classroom Rubble",
+          "fa": "تلاش شهروندان با دست خالی بر فراز آوار در حال سوختن کلاس‌ها در دقایق نخست"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:08",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_19_1406518.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_19_1406518.jpg",
+      "fileSize": "6.9 MB",
+      "featured": false,
+      "description": {
+          "en": "Raw citizen phone clip with unedited audio showing local residents climbing onto the fractured concrete slabs immediately after the strike while black smoke rises behind them.",
+          "fa": "فیلم خام مردمی از حضور شتابان اهالی میناب بر روی تخته‌سنگ‌های فروریخته مدرسه در دقایق اولیه پس از انفجار."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "First Minutes",
+          "Rescue Efforts",
+          "Raw Eyewitness Audio"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_19_1406518.mp4"
+  },
+  {
+      "id": "minab-eyewitness-20",
+      "slug": "minab-eyewitness-20",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Mother Clutching Recovered Schoolbooks Beside Collapsed Concrete Slabs",
+          "fa": "مادر داغدار با کتاب‌های درسی فرزندش در آغوش بر روی آوار مدرسه"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:22",
+      "resolution": "480×854",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_20_1406508.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_20_1406508.jpg",
+      "fileSize": "2.7 MB",
+      "featured": false,
+      "description": {
+          "en": "On-site video of a black-clad mother standing among broken concrete beams clutching recovered schoolbooks and folders while crowds search the upper rubble.",
+          "fa": "حضور مادر داغدار در میان ستون‌ها و سقف فروریخته دبستان در حالی که کتاب‌ها و پوشه‌های پیداشده از زیر آوار را در آغوش گرفته است."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Mothers of Minab",
+          "Rubble Search",
+          "Aftermath"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_20_1406508.mp4"
+  },
+  {
+      "id": "minab-eyewitness-21",
+      "slug": "minab-eyewitness-21",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Sifting Classroom Rubble by Hand in Search of Remains & Shrapnel",
+          "fa": "جستجوی وجب‌به‌وجب خاک و آوار مدرسه با دست توسط خانواده‌ها و امدادگران"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:35",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_21_1406507.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_21_1406507.jpg",
+      "fileSize": "6.6 MB",
+      "featured": false,
+      "description": {
+          "en": "Close-up field footage of volunteers and bereaved relatives carefully sifting fine rubble dust and metal shrapnel fragments inside the destroyed school compound.",
+          "fa": "تصاویر نزدیک از جستجوی دقیق خاک، سنگ‌ریزه‌ها و ترکش‌ها در محل کلاس‌های تخریب‌شده دبستان شجره طیبه."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Rubble Forensics",
+          "Shrapnel",
+          "Aftermath"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_21_1406507.mp4"
+  },
+  {
+      "id": "minab-eyewitness-22",
+      "slug": "minab-eyewitness-22",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Portraits of Childhood — Martyred Schoolgirls on Bus Trip & in Class",
+          "fa": "قاب‌های کودکی — تصاویر یادگاری دختران شهید در اردو و کلاس درس"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:42",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_22_1406529.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_22_1406529.jpg",
+      "fileSize": "5.4 MB",
+      "featured": false,
+      "description": {
+          "en": "Archival photographs and clips of young Shajareh Tayyebeh schoolgirls smiling with storybooks, backpacks, and classmates prior to the attack.",
+          "fa": "مجموعه تصاویر و لحظات به‌جامانده از دانش‌آموزان دختر دبستان شجره طیبه در اردوی دانش‌آموزی و پشت نیمکت‌های کلاس."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Girls School",
+          "Student Portraits",
+          "Memorial"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_22_1406529.mp4"
+  },
+  {
+      "id": "minab-eyewitness-23",
+      "slug": "minab-eyewitness-23",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Schoolgirls Playing Clapping Games During Courtyard Recess",
+          "fa": "بازی و شادی دختران دانش‌آموز در زنگ تفریح حیاط مدرسه"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:18",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_23_1406531.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_23_1406531.jpg",
+      "fileSize": "1.3 MB",
+      "featured": false,
+      "description": {
+          "en": "Pre-strike clip of Shajareh Tayyebeh schoolgirls in green uniforms and white headscarves playing hand-clapping games together in the schoolyard.",
+          "fa": "تصویری از زنگ تفریح و بازی کودکانه دانش‌آموزان دختر دبستان شجره طیبه در حیاط مدرسه پیش از حمله."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Girls School",
+          "Recess",
+          "Pre-Strike Life"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_23_1406531.mp4"
+  },
+  {
+      "id": "minab-eyewitness-24",
+      "slug": "minab-eyewitness-24",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Young Student's Birthday Smile & Memorial Portrait",
+          "fa": "لبخند جشن تولد دانش‌آموز شهید دبستان میناب و قاب یادبود او"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:13",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_24_1406535.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_24_1406535.jpg",
+      "fileSize": "3.0 MB",
+      "featured": false,
+      "description": {
+          "en": "Archive clip contrasting a young Shajareh Tayyebeh schoolboy blowing out candles on a football birthday cake with his framed memorial portrait.",
+          "fa": "ویدیوی کوتاهی از شادی کودکانه یکی از دانش‌آموزان پسر دبستان میناب در جشن تولدش در کنار قاب تصویر یادبود او پس از شهادت."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Student Tribute",
+          "Pre-Strike Life",
+          "Memorial"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_24_1406535.mp4"
+  },
+  {
+      "id": "minab-eyewitness-25",
+      "slug": "minab-eyewitness-25",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Wide View of the Sheared Two-Story School Facade Draped in Mourning Cloth",
+          "fa": "نمای کامل برش دوطبقه ساختمان منهدم‌شده دبستان شجره طیبه میناب"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "0:26",
+      "resolution": "720×1280",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_25_1406520.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_25_1406520.jpg",
+      "fileSize": "3.5 MB",
+      "featured": false,
+      "description": {
+          "en": "Wide exterior recording of the bombed two-story school building showing the complete collapse of the central hall and western classrooms.",
+          "fa": "نمای باز از ساختمان دوطبقه آسیب‌دیده دبستان شجره طیبه که وسعت تخریب سالن میانی و کلاس‌ها را نشان می‌دهد."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Structural Damage",
+          "Aftermath",
+          "Spatial Verification"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_25_1406520.mp4"
+  },
+  {
+      "id": "minab-eyewitness-26",
+      "slug": "minab-eyewitness-26",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Archival Montage of Shajareh Tayyebeh Schoolgirls in Courtyard & Corridors",
+          "fa": "مجموعه تصاویر آرشیوی دانش‌آموزان دختر در حیاط و راهروهای دبستان میناب"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "1:25",
+      "resolution": "592×1052",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_26_1406526.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_26_1406526.jpg",
+      "fileSize": "6.2 MB",
+      "featured": false,
+      "description": {
+          "en": "Extended compilation of pre-strike school clips showing girls gathered in the sunny courtyard, beside murals, and on the morning assembly lines.",
+          "fa": "مجموعه‌ای از ویدیوهای کوتاه آرشیوی پیش از حمله از حضور و هم‌خوانی دانش‌آموزان دختر در حیاط و خط‌کشی صف صبحگاهی دبستان."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Girls School",
+          "Courtyard",
+          "School Archive"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_26_1406526.mp4"
+  },
+  {
+      "id": "minab-eyewitness-27",
+      "slug": "minab-eyewitness-27",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Bereaved Minab Mothers & Fathers Holding Portraits in Collective Mourning",
+          "fa": "سوگواری مادران و پدران داغدار مینابی با قاب‌عکس فرزندان در دست"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "1:24",
+      "resolution": "1276×720",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_27_1406527.mp4",
+      "poster": "/media/raw_eyewitness/posters/minab_ew_27_1406527.jpg",
+      "fileSize": "11.8 MB",
+      "featured": false,
+      "description": {
+          "en": "Documentary footage of grieving mothers and fathers in Minab embracing and holding framed portraits of their schoolchildren.",
+          "fa": "تصاویری از گردهمایی سوگواری خانواده‌ها، پدران و مادران داغدار میناب در حالی که قاب‌عکس کودکان شهیدشان را در آغوش گرفته‌اند."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Bereaved Families",
+          "Mothers of Minab",
+          "Memorial"
+      ],
+      "videoUrl": "/media/raw_eyewitness/minab_ew_27_1406527.mp4"
+  },
+  {
+      "id": "minab-eyewitness-28",
+      "slug": "minab-eyewitness-28",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Lone Mother Sitting in Candlelight Before the Sheared Two-Story Ruins",
+          "fa": "مادری تنها در برابر شکاف دوطبقه ساختمان ویران‌شده دبستان در شب"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "1080×810",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_28_1406493.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_28_1406493.jpg",
+      "fileSize": "0.2 MB",
+      "featured": false,
+      "description": {
+          "en": "Striking night photograph of a single black-clad woman sitting quietly with a candle at the foot of the sheared two-story central stairwell of Shajareh Tayyebeh School.",
+          "fa": "عکسی تکان‌دهنده از نشستن خاموش یک مادر سیاه‌پوش با شمعی روشن در پای شکاف عظیم دوطبقه دبستان شجره طیبه در شب."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Mothers of Minab",
+          "Night Vigil",
+          "Central Staircase"
+      ],
+      "isImage": true
+  },
+  {
+      "id": "minab-eyewitness-29",
+      "slug": "minab-eyewitness-29",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Wall of Eyes — Street Memorial Mural of the Minab Schoolchildren",
+          "fa": "دیوارنگاره «چشمان منتظر» — نگاه کودکان شهید دبستان میناب بر دیوار شهر"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "1080×810",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_29_1406495.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_29_1406495.jpg",
+      "fileSize": "0.2 MB",
+      "featured": false,
+      "description": {
+          "en": "Photograph of a long exterior perimeter wall lined with close-up photographic panels of the eyes of the martyred Minab schoolchildren.",
+          "fa": "تصویر دیوارنگاره یادبود در میناب که چشمان معصوم کودکان شهید دبستان شجره طیبه را در قاب‌های پیاپی به تصویر کشیده است."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Eyes Memorial",
+          "Public Mural",
+          "Photo Evidence"
+      ],
+      "isImage": true
+  },
+  {
+      "id": "minab-eyewitness-30",
+      "slug": "minab-eyewitness-30",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "'THEIR BLOOD DEMANDS JUSTICE, NOT SILENCE' — Vigil Placard at the Bombed School",
+          "fa": "پلاکارد «خون آنان عدالت می‌طلبد، نه سکوت» در کنار ویرانه سرخ‌فام دبستان"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "1080×810",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_30_1406497.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_30_1406497.jpg",
+      "fileSize": "0.1 MB",
+      "featured": false,
+      "description": {
+          "en": "Photograph taken at the illuminated ruins of Shajareh Tayyebeh School featuring a handwritten English placard reading 'THEIR BLOOD DEMANDS JUSTICE, NOT SILENCE' beside portraits on the rubble.",
+          "fa": "تصویری از محل ویرانه‌های نورپردازی‌شده دبستان شجره طیبه با دست‌نوشته انگلیسی «خون آنان عدالت می‌طلبد، نه سکوت» در کنار قاب‌عکس کودکان."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Accountability",
+          "Justice Vigil",
+          "Photo Evidence"
+      ],
+      "isImage": true
+  },
+  {
+      "id": "minab-eyewitness-31",
+      "slug": "minab-eyewitness-31",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Framed Portraits of Martyred Children Placed Atop Broken Classroom Concrete",
+          "fa": "قاب‌عکس‌های کودکان شهید بر روی تکه‌سنگ‌ها و آوار کلاس‌های درس"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "1080×810",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_31_1406498.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_31_1406498.jpg",
+      "fileSize": "0.3 MB",
+      "featured": false,
+      "description": {
+          "en": "Close-up photograph of framed portraits of martyred Shajareh Tayyebeh schoolgirls and schoolboys resting on shattered concrete slabs during a dusk vigil.",
+          "fa": "نمای نزدیک از قاب‌عکس‌های دانش‌آموزان دختر و پسر شهید که در مراسم یادبود شبانه بر روی سنگ‌ها و آوار کلاس چیده شده است."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Vigil",
+          "Student Portraits",
+          "School Ruins"
+      ],
+      "isImage": true
+  },
+  {
+      "id": "minab-eyewitness-32",
+      "slug": "minab-eyewitness-32",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Rows of Children's Graves & Portraits in the Minab Martyrs' Cemetery",
+          "fa": "ردیف مزارهای کودکان دانش‌آموز با قاب‌عکس‌هایشان در گلزار شهدای میناب"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "1080×810",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_32_1406492.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_32_1406492.jpg",
+      "fileSize": "0.3 MB",
+      "featured": false,
+      "description": {
+          "en": "Photograph showing parallel rows of white graves for the schoolchildren of Shajareh Tayyebeh, each marked with the child's portrait.",
+          "fa": "تصویری از ردیف‌های به‌هم‌پیوسته مزار دانش‌آموزان شهید دبستان شجره طیبه میناب با قاب‌عکس‌های کودکان بر هر مزار."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Cemetery",
+          "Memorial",
+          "Photo Evidence"
+      ],
+      "isImage": true
+  },
+  {
+      "id": "minab-eyewitness-33",
+      "slug": "minab-eyewitness-33",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Dusk Photograph of the Collapsed Western Wing & Twisted Rebar",
+          "fa": "نمای شامگاهی از بال غربی فروریخته و میلگردهای درهم‌پیچیده دبستان"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "1080×810",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_33_1406494.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_33_1406494.jpg",
+      "fileSize": "0.2 MB",
+      "featured": false,
+      "description": {
+          "en": "Wide dusk photograph showing the red-lit interior void of the sheared school building and tangled steel reinforcement bars in the foreground.",
+          "fa": "نمای باز شامگاهی از بخش فروریخته ساختمان مدرسه و انبوه بتن و میلگردهای متلاشی‌شده در پیش‌زمینه."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Structural Damage",
+          "Dusk Vigil",
+          "Photo Evidence"
+      ],
+      "isImage": true
+  },
+  {
+      "id": "minab-eyewitness-34",
+      "slug": "minab-eyewitness-34",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Memorial Banner of All Martyred Students & Teachers Draped Over School Ruins",
+          "fa": "بنر بزرگ تصاویر شهدای دانش‌آموز و معلم بر نمای باقی‌مانده دبستان شجره طیبه"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "1080×811",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_34_1406499.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_34_1406499.jpg",
+      "fileSize": "0.1 MB",
+      "featured": false,
+      "description": {
+          "en": "Daylight photograph of the surviving eastern wing of Shajareh Tayyebeh School draped with a giant banner bearing the portraits of the martyred children and educators.",
+          "fa": "تصویر روز از ساختمان نیمه‌ویران دبستان شجره طیبه که بنر بزرگی از چهره دانش‌آموزان و آموزگاران شهید بر آن آویخته شده است."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Memorial Banner",
+          "School Ruins",
+          "Photo Evidence"
+      ],
+      "isImage": true
+  },
+  {
+      "id": "minab-eyewitness-35",
+      "slug": "minab-eyewitness-35",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Roadside Sign Marking the Site of the Shajareh Tayyebeh School Massacre",
+          "fa": "تابلوی راهنمای محل شهادت دانش‌آموزان دبستان شجره طیبه در میناب"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "1080×810",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_35_1406496.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_35_1406496.jpg",
+      "fileSize": "0.2 MB",
+      "featured": false,
+      "description": {
+          "en": "Photograph of the public roadside sign in Minab directing visitors and mourners to the site of the Shajareh Tayyebeh Primary School strike.",
+          "fa": "تصویر تابلوی «مقتل شهدای مدرسه شجره طیبه میناب» در مسیر منتهی به ساختمان مدرسه."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Minab",
+          "Site Documentation",
+          "Photo Evidence"
+      ],
+      "isImage": true
+  },
+  {
+      "id": "minab-eyewitness-36",
+      "slug": "minab-eyewitness-36",
+      "category": "eyewitness",
+      "categoryLabel": {
+          "en": "Eyewitness & School Archive",
+          "fa": "آرشیو مدرسه و روایت شاهدان"
+      },
+      "title": {
+          "en": "Classroom Whiteboard Portrait — 'Hope & Iran'",
+          "fa": "تصویر یادگاری پای تخته کلاس درس دبستان شجره طیبه"
+      },
+      "producer": "Minab School & Eyewitness Archive",
+      "runtime": "Photo",
+      "resolution": "689×534",
+      "language": "Farsi",
+      "year": "2026",
+      "downloadUrl": "/media/raw_eyewitness/minab_ew_36_1406536.jpg",
+      "poster": "/media/raw_eyewitness/minab_ew_36_1406536.jpg",
+      "fileSize": "0.1 MB",
+      "featured": false,
+      "description": {
+          "en": "Pre-strike classroom photograph of a young Shajareh Tayyebeh schoolboy and his mother/educator beside the Persian alphabet lesson on the whiteboard.",
+          "fa": "تصویر یادگاری پیش از حمله از دانش‌آموز خردسال در کنار تخته سفید کلاس درس دبستان شجره طیبه میناب."
+      },
+      "tags": [
+          "Eyewitness Archive",
+          "Minab School",
+          "Classroom Photo",
+          "Boys School",
+          "Pre-Strike"
+      ],
+      "isImage": true
+  },
 ];
 
 if (typeof module !== 'undefined' && module.exports) {

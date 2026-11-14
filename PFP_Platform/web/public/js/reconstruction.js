@@ -474,18 +474,23 @@ const I18N_DATA = {
   }
 };
 
-// --- 8-STOP GUIDED INTERIOR & COURTYARD TOUR SEQUENCE ---
+// --- 8-STOP GUIDED INTERIOR & COURTYARD TOUR SEQUENCE (TIMED TO SPOKEN SCRIPT & IN-WORLD 3D SCREENS) ---
 const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'courtyard_lines',
     temporal: 0.0,
     cutawayMode: 0,
-    camPos: [4.5, 3.2, 14.5],
-    lookAt: [20.0, 1.8, 6.5],
+    camPos: [4.5, 2.75, 13.8],
+    lookAt: [3.2, 2.05, 4.0],
     waypoints: [
-      { camPos: [4.5, 3.2, 14.5], lookAt: [20.0, 1.8, 6.5] },
-      { camPos: [7.2, 2.1, 9.5], lookAt: [26.0, 1.7, 5.8] },
-      { camPos: [3.5, 2.2, 11.0], lookAt: [-1.0, 2.4, 1.2] }
+      { t: 0.00, camPos: [4.5, 2.75, 13.8], lookAt: [3.2, 2.05, 4.0] },
+      { t: 0.16, camPos: [14.2, 2.15, 9.6], lookAt: [19.5, 1.35, 5.2] },
+      { t: 0.25, camPos: [23.2, 1.84, 7.8], lookAt: [25.6, 1.72, 2.74] },
+      { t: 0.44, camPos: [24.4, 1.80, 7.4], lookAt: [25.85, 1.72, 2.74] },
+      { t: 0.57, camPos: [11.6, 1.62, 7.4], lookAt: [8.25, 1.36, 4.15] },
+      { t: 0.68, camPos: [10.4, 1.56, 6.8], lookAt: [7.6, 1.45, 3.6] },
+      { t: 0.77, camPos: [-2.4, 1.74, 6.8], lookAt: [-8.12, 1.66, 6.55] },
+      { t: 1.00, camPos: [-3.1, 1.72, 6.6], lookAt: [-8.12, 1.66, 6.55] }
     ],
     shortBadge: { en: "01 / 08", fi: "01 / 08", fa: "۰۱ / ۰۸" },
     badge: { en: "STOP 1 OF 8 · COURTYARD YELLOW ASSEMBLY LINES", fi: "PISTE 1/8 · KOULUPIHAN AAMURIVIT", fa: "ایستگاه ۱ از ۸ · خطوط زرد صف صبحگاهی در حیاط" }
@@ -494,12 +499,15 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'boys_flower_arch',
     temporal: 0.0,
     cutawayMode: 2,
-    camPos: [1.5, 2.45, -4.3],
-    lookAt: [4.5, 1.85, -7.8],
+    camPos: [3.62, 1.72, -4.35],
+    lookAt: [3.62, 1.54, -8.04],
     waypoints: [
-      { camPos: [1.5, 2.45, -4.3], lookAt: [4.5, 1.85, -7.8] },
-      { camPos: [3.8, 2.1, -4.3], lookAt: [4.2, 1.85, -7.8] },
-      { camPos: [6.1, 2.15, -4.6], lookAt: [1.5, 1.85, -6.8] }
+      { t: 0.00, camPos: [3.62, 1.72, -4.35], lookAt: [3.62, 1.54, -8.04] },
+      { t: 0.22, camPos: [3.62, 1.66, -4.60], lookAt: [3.62, 1.54, -8.04] },
+      { t: 0.36, camPos: [3.62, 1.60, -4.85], lookAt: [3.62, 1.52, -8.04] },
+      { t: 0.62, camPos: [3.62, 1.58, -5.08], lookAt: [3.62, 1.50, -8.04] },
+      { t: 0.76, camPos: [2.50, 1.62, -6.40], lookAt: [0.22, 1.56, -6.40] },
+      { t: 1.00, camPos: [2.32, 1.60, -6.40], lookAt: [0.22, 1.56, -6.40] }
     ],
     shortBadge: { en: "02 / 08", fi: "02 / 08", fa: "۰۲ / ۰۸" },
     badge: { en: "STOP 2 OF 8 · GROUND FLOOR: BOYS' CEREMONY ROOM (ROSE ARCHES)", fi: "PISTE 2/8 · ALAKERTA: POIKIEN JUHLAHUONE", fa: "ایستگاه ۲ از ۸ · طبقه همکف: اتاق جشن پسران (طاق گل رز)" }
@@ -508,12 +516,15 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'boys_classroom',
     temporal: 0.0,
     cutawayMode: 2,
-    camPos: [-13.3, 2.35, 1.6],
-    lookAt: [-17.8, 1.65, -1.6],
+    camPos: [-13.35, 2.02, -0.95],
+    lookAt: [-17.3, 1.52, 1.15],
     waypoints: [
-      { camPos: [-13.3, 2.35, 1.6], lookAt: [-17.8, 1.65, -1.6] },
-      { camPos: [-13.5, 2.15, 0.2], lookAt: [-18.0, 1.65, -1.2] },
-      { camPos: [-14.2, 2.10, -1.4], lookAt: [-18.2, 1.65, 0.8] }
+      { t: 0.00, camPos: [-13.35, 2.02, -0.95], lookAt: [-17.3, 1.52, 1.15] },
+      { t: 0.19, camPos: [-14.20, 1.76, -0.65], lookAt: [-17.15, 1.62, 2.18] },
+      { t: 0.34, camPos: [-15.25, 1.60, 0.05], lookAt: [-18.73, 1.52, 0.00] },
+      { t: 0.60, camPos: [-15.55, 1.56, -0.04], lookAt: [-18.73, 1.52, 0.00] },
+      { t: 0.74, camPos: [-14.55, 1.52, -1.05], lookAt: [-14.65, 1.36, 2.15] },
+      { t: 1.00, camPos: [-14.72, 1.52, -0.88], lookAt: [-14.70, 1.36, 2.15] }
     ],
     shortBadge: { en: "03 / 08", fi: "03 / 08", fa: "۰۳ / ۰۸" },
     badge: { en: "STOP 3 OF 8 · GROUND FLOOR: BOYS' CLASSROOM (CLAPPING & SINGING)", fi: "PISTE 3/8 · ALAKERTA: POIKIEN LUOKKAHUONE", fa: "ایستگاه ۳ از ۸ · طبقه همکف: کلاس درس پسران" }
@@ -522,12 +533,16 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'rainbow_staircase',
     temporal: 0.0,
     cutawayMode: 2,
-    camPos: [-1.8, 2.35, -1.5],
-    lookAt: [-1.8, 2.0, -9.5],
+    camPos: [-1.65, 2.05, -2.35],
+    lookAt: [-1.55, 1.72, -9.80],
     waypoints: [
-      { camPos: [-1.8, 2.35, -1.5], lookAt: [-1.8, 2.0, -9.5] },
-      { camPos: [-1.8, 2.15, -4.2], lookAt: [-1.6, 2.1, -10.2] },
-      { camPos: [-4.6, 2.25, -5.2], lookAt: [-0.5, 2.0, -8.5] }
+      { t: 0.00, camPos: [-1.65, 2.05, -2.35], lookAt: [-1.55, 1.72, -9.80] },
+      { t: 0.18, camPos: [-1.65, 1.84, -4.35], lookAt: [-1.55, 1.62, -10.20] },
+      { t: 0.33, camPos: [-3.55, 1.60, -4.35], lookAt: [-4.55, 1.54, -7.25] },
+      { t: 0.50, camPos: [-3.75, 1.58, -4.55], lookAt: [-4.60, 1.54, -7.25] },
+      { t: 0.60, camPos: [-2.20, 1.44, -5.35], lookAt: [-1.40, 0.92, -8.30] },
+      { t: 0.73, camPos: [-4.85, 1.60, -6.42], lookAt: [-5.03, 1.56, -3.58] },
+      { t: 1.00, camPos: [-4.95, 1.58, -6.22], lookAt: [-5.03, 1.56, -3.58] }
     ],
     shortBadge: { en: "04 / 08", fi: "04 / 08", fa: "۰۴ / ۰۸" },
     badge: { en: "STOP 4 OF 8 · THE RAINBOW STAIRCASE & PURPLE DOORS", fi: "PISTE 4/8 · SATEENKAARIPORTAIKKO", fa: "ایستگاه ۴ از ۸ · راه‌پله رنگین‌کمان و درهای بنفش" }
@@ -536,12 +551,14 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'girls_upper_hall',
     temporal: 0.0,
     cutawayMode: 1,
-    camPos: [-12.3, 5.95, 1.4],
-    lookAt: [-16.5, 5.25, -8.5],
+    camPos: [-12.45, 5.55, -1.60],
+    lookAt: [-15.55, 5.15, -9.20],
     waypoints: [
-      { camPos: [-12.3, 5.95, 1.4], lookAt: [-16.5, 5.25, -8.5] },
-      { camPos: [-12.4, 5.65, -2.5], lookAt: [-17.5, 5.30, -9.2] },
-      { camPos: [-13.2, 5.55, -6.2], lookAt: [-18.5, 5.30, -6.5] }
+      { t: 0.00, camPos: [-12.45, 5.55, -1.60], lookAt: [-15.55, 5.15, -9.20] },
+      { t: 0.30, camPos: [-15.15, 5.22, -6.15], lookAt: [-15.25, 5.20, -10.35] },
+      { t: 0.52, camPos: [-14.85, 4.88, -6.55], lookAt: [-15.28, 4.78, -10.35] },
+      { t: 0.68, camPos: [-15.30, 5.22, -4.35], lookAt: [-15.25, 5.22, -0.15] },
+      { t: 1.00, camPos: [-15.20, 5.20, -3.95], lookAt: [-15.25, 5.22, -0.15] }
     ],
     shortBadge: { en: "05 / 08", fi: "05 / 08", fa: "۰۵ / ۰۸" },
     badge: { en: "STOP 5 OF 8 · FIRST FLOOR: GIRLS' ASSEMBLY HALL & PINK/GREEN ROOMS", fi: "PISTE 5/8 · YLÄKERTA: TYTTÖJEN SALI", fa: "ایستگاه ۵ از ۸ · طبقه اول: سالن بزرگ دختران و کلاس‌های صورتی/سبز" }
@@ -550,12 +567,14 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'crater_damage',
     temporal: 1.0,
     cutawayMode: 0,
-    camPos: [-22.0, 15.5, 14.0],
-    lookAt: [-2.0, 2.2, -5.5],
+    camPos: [-16.5, 11.8, 9.5],
+    lookAt: [-1.8, 2.0, -5.2],
     waypoints: [
-      { camPos: [-22.0, 15.5, 14.0], lookAt: [-2.0, 2.2, -5.5] },
-      { camPos: [-13.5, 6.8, -2.5], lookAt: [2.0, 2.5, -5.8] },
-      { camPos: [-8.8, 2.5, -5.5], lookAt: [3.5, 2.4, -5.5] }
+      { t: 0.00, camPos: [-16.5, 11.8, 9.5], lookAt: [-1.8, 2.0, -5.2] },
+      { t: 0.18, camPos: [-2.05, 2.35, -4.45], lookAt: [2.95, 1.94, -4.45] },
+      { t: 0.44, camPos: [-1.55, 2.22, -4.45], lookAt: [2.95, 1.94, -4.45] },
+      { t: 0.65, camPos: [-0.85, 2.04, -2.05], lookAt: [-0.85, 1.92, -6.75] },
+      { t: 1.00, camPos: [-0.85, 1.98, -2.35], lookAt: [-0.85, 1.92, -6.75] }
     ],
     shortBadge: { en: "06 / 08", fi: "06 / 08", fa: "۰۶ / ۰۸" },
     badge: { en: "STOP 6 OF 8 · 11:22 AM STRIKE: 5M CRATER & EXTENT OF COLLAPSE", fi: "PISTE 6/8 · KLO 11.22 ISKU: 5M KRAATTERI", fa: "ایستگاه ۶ از ۸ · ساعت ۱۱:۲۲: گودال ۵ متری و محدوده تخریب" }
@@ -564,12 +583,14 @@ const GUIDED_TOUR_STOPS = [
     hotspotId: 'second_wave',
     temporal: 1.0,
     cutawayMode: 0,
-    camPos: [8.0, 7.0, 16.0],
-    lookAt: [-1.0, 2.5, -3.0],
+    camPos: [25.5, 5.1, 13.8],
+    lookAt: [13.5, 2.5, 2.6],
     waypoints: [
-      { camPos: [8.0, 7.0, 16.0], lookAt: [-1.0, 2.5, -3.0] },
-      { camPos: [18.5, 8.5, 15.5], lookAt: [4.0, 2.2, 1.5] },
-      { camPos: [26.0, 10.5, 14.0], lookAt: [6.0, 2.4, -2.0] }
+      { t: 0.00, camPos: [25.5, 5.1, 13.8], lookAt: [13.5, 2.5, 2.6] },
+      { t: 0.27, camPos: [21.5, 2.12, 8.75], lookAt: [22.75, 1.98, 3.10] },
+      { t: 0.54, camPos: [21.2, 2.06, 8.30], lookAt: [22.75, 1.98, 3.10] },
+      { t: 0.64, camPos: [13.65, 1.84, 10.75], lookAt: [13.50, 1.72, 5.55] },
+      { t: 1.00, camPos: [13.55, 1.78, 10.20], lookAt: [13.50, 1.74, 5.55] }
     ],
     shortBadge: { en: "07 / 08", fi: "07 / 08", fa: "۰۷ / ۰۸" },
     badge: { en: "STOP 7 OF 8 · 2:30 PM SECOND WAVE & TOMAHAWK EVIDENCE", fi: "PISTE 7/8 · KLO 14.30 TOINEN ISKUAALTO", fa: "ایستگاه ۷ از ۸ · ساعت ۱۴:۳۰: موج دوم حملات و شواهد تاماهاک" }
@@ -577,13 +598,17 @@ const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'vow_shrine',
     temporal: 0.0,
-    cutawayMode: 1,
-    camPos: [-1.5, 2.85, 26.2],
-    lookAt: [-1.5, 1.95, 13.5],
+    cutawayMode: 0,
+    camPos: [-1.5, 2.35, 23.2],
+    lookAt: [-1.5, 2.05, 9.5],
     waypoints: [
-      { camPos: [-1.5, 2.85, 26.2], lookAt: [-1.5, 1.95, 13.5] },
-      { camPos: [-1.5, 2.35, 18.8], lookAt: [-1.5, 2.10, 10.5] },
-      { camPos: [-1.5, 2.15, 14.8], lookAt: [-1.5, 2.15, 10.5] }
+      { t: 0.00, camPos: [-1.5, 2.35, 23.2], lookAt: [-1.5, 2.05, 9.5] },
+      { t: 0.17, camPos: [-2.85, 1.92, 13.85], lookAt: [-4.35, 1.86, 9.65] },
+      { t: 0.42, camPos: [-3.05, 1.88, 13.45], lookAt: [-4.45, 1.86, 9.65] },
+      { t: 0.53, camPos: [-0.15, 1.92, 13.85], lookAt: [1.35, 1.86, 9.65] },
+      { t: 0.78, camPos: [0.05, 1.88, 13.45], lookAt: [1.45, 1.86, 9.65] },
+      { t: 0.88, camPos: [-1.5, 2.52, 19.4], lookAt: [-1.5, 1.88, 9.5] },
+      { t: 1.00, camPos: [-1.5, 2.48, 18.8], lookAt: [-1.5, 1.88, 9.5] }
     ],
     shortBadge: { en: "08 / 08", fi: "08 / 08", fa: "۰۸ / ۰۸" },
     badge: { en: "STOP 8 OF 8 · THE ACCOUNTABILITY VOW SHRINE", fi: "PISTE 8/8 · VASTUULUPAUKSEN MUISTOMERKKI", fa: "ایستگاه ۸ از ۸ · یادمان میثاق دادخواهی — ثبت پیمان جهانی" }
@@ -636,6 +661,17 @@ function startReconstructionApp() {
   initUIControls();
   initKeyboardWalkControls();
   animate();
+
+  const bootParams = new URLSearchParams(window.location.search);
+  if (bootParams.get('recording') === '1') {
+    document.body.classList.add('recording-mode');
+  }
+  if (bootParams.get('autostart') === '1') {
+    document.body.classList.add('walkthrough-mode');
+    setTimeout(() => {
+      if (!isGuidedTour) startGuidedTour();
+    }, 1200);
+  }
 }
 
 if (document.readyState === 'loading') {
@@ -706,8 +742,10 @@ function setLanguage(lang) {
     activeVoiceProfile = preferredVoiceByLang[targetLangBucket];
   }
   applyTranslations();
+  applyBookendTexts();
   updateNarratorButtonsUI();
   updateHotspotLabels();
+  refreshInWorldScreensLanguage();
   if (activeHotspotId) {
     showHotspotModal(activeHotspotId);
   }
@@ -1285,6 +1323,23 @@ function buildEnvironmentAndTerrain() {
     yDot.position.set(-6.65, 0.006, lz);
     assemblyGroup.add(yDot);
   }
+
+  // Children's Morning Schoolbags resting beside the yellow standing circles (matching Station 1 script)
+  const bagColors = [0xf472b6, 0x38bdf8, 0xfacc15, 0x34d399];
+  [-3.5, -2.1, -0.7, 0.7].forEach((lz, bIdx) => {
+    const bagGrp = new THREE.Group();
+    bagGrp.position.set(-7.18, 0.0, lz + 0.22);
+    bagGrp.rotation.y = 0.35 + (bIdx % 2) * 0.28;
+    const bagMat = new THREE.MeshStandardMaterial({ color: bagColors[bIdx], roughness: 0.65 });
+    const pocketMat = new THREE.MeshStandardMaterial({ color: 0xfef3c7, roughness: 0.72 });
+    const body = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.36, 0.17), bagMat);
+    body.position.y = 0.18;
+    body.castShadow = true;
+    const pocket = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.16, 0.05), pocketMat);
+    pocket.position.set(0, 0.12, 0.10);
+    bagGrp.add(body, pocket);
+    assemblyGroup.add(bagGrp);
+  });
   terrainGroup.add(assemblyGroup);
 
   // SW Girls' Yard White Circular Play Marking with Inner Cross/Star
@@ -1535,6 +1590,43 @@ function buildEnvironmentAndTerrain() {
   obelisk.position.set(shrineX, 2.1, shrineZ);
   obelisk.castShadow = true;
   memorialBoardsGroup.add(obelisk);
+
+  // Makan Nasiri's Small Red-Soled Sneaker Resting on Red Roses at Base of Vow Shrine (Station 8 Tribute)
+  const roseCaseGroup = new THREE.Group();
+  roseCaseGroup.position.set(shrineX, 0.42, shrineZ + 1.55);
+  const plinthBox = new THREE.Mesh(
+    new THREE.BoxGeometry(0.76, 0.28, 0.54),
+    new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.45, metalness: 0.35 })
+  );
+  plinthBox.position.y = -0.14;
+  roseCaseGroup.add(plinthBox);
+  const roseMat = new THREE.MeshStandardMaterial({ color: 0xbe123c, roughness: 0.65 });
+  for (let rx = -0.24; rx <= 0.25; rx += 0.12) {
+    for (let rz = -0.14; rz <= 0.15; rz += 0.14) {
+      const rose = new THREE.Mesh(new THREE.DodecahedronGeometry(0.055, 0), roseMat);
+      rose.position.set(rx, 0.04, rz);
+      roseCaseGroup.add(rose);
+    }
+  }
+  const sneakerSole = new THREE.Mesh(
+    new THREE.BoxGeometry(0.22, 0.035, 0.095),
+    new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.6 })
+  );
+  sneakerSole.position.set(0, 0.09, 0);
+  sneakerSole.rotation.y = 0.25;
+  const sneakerUpper = new THREE.Mesh(
+    new THREE.BoxGeometry(0.19, 0.075, 0.088),
+    new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.72 })
+  );
+  sneakerUpper.position.set(-0.01, 0.135, 0);
+  sneakerUpper.rotation.y = 0.25;
+  const glassVitrine = new THREE.Mesh(
+    new THREE.BoxGeometry(0.68, 0.26, 0.46),
+    new THREE.MeshStandardMaterial({ color: 0xe0f2fe, transparent: true, opacity: 0.22, roughness: 0.15 })
+  );
+  glassVitrine.position.y = 0.13;
+  roseCaseGroup.add(sneakerSole, sneakerUpper, glassVitrine);
+  memorialBoardsGroup.add(roseCaseGroup);
 }
 
 // --- IN-WORLD 3D CLASSROOM PORTRAITS (119 STUDENTS + 26 EDUCATORS) & 28 RUBBLE DRAWINGS ---
@@ -1859,6 +1951,23 @@ function populate3DSchoolPortraitsAndDrawings() {
     }
   });
 
+  // Devoted 2nd-Grade Teacher Ms. Zohreh Shahriyari Courtyard Stand (Station 1: stood in the yard & ran toward classrooms)
+  const zohrehTeacher = teachersList.find(t => t.id === 'zohreh-shahriyari');
+  if (zohrehTeacher) {
+    const standLegsMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.48, metalness: 0.42 });
+    [-0.36, 0.36].forEach((lx) => {
+      const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.026, 0.032, 1.25, 10), standLegsMat);
+      leg.position.set(8.25 + lx * Math.cos(0.35), 0.625, 4.15 - lx * Math.sin(0.35));
+      leg.castShadow = true;
+      preStrikeModelGroup.add(leg);
+    });
+    create3DFramedPortraitOnWall(
+      preStrikeModelGroup, loader, zohrehTeacher,
+      8.25, 1.38, 4.15, 0.35, 1.02, 1.24, 0xd4a853, 0,
+      'Morning Schoolyard · Martyred 2nd-Grade Teacher Zohreh Shahriyari & Unborn Son', 2.25
+    );
+  }
+
   if (!groundFloorGroup || !firstFloorGroup) return;
 
   // =========================================================================
@@ -2033,7 +2142,7 @@ function populate3DSchoolPortraitsAndDrawings() {
     firstFloorGroup,
     `FIRST FLOOR GIRLS' ASSEMBLY HALL · ALL ${girlsAll.length} MARTYRED SCHOOLGIRLS (GRADES 1–6)`,
     `طبقه اول (سالن بزرگ دختران) · ۴۷ دانش‌آموز دختر شهیده در پایه‌های اول تا ششم`,
-    -15.25, y1 + 3.22, -12.70, 0, 6.8, '#2b1222', '#f472b6'
+    -15.25, y1 + 3.48, -12.70, 0, 6.8, '#2b1222', '#f472b6'
   );
 
   let gIdx = 0;
@@ -2600,22 +2709,123 @@ function buildProceduralSchoolModels() {
   handrail.position.set(-2.48, 2.35, -10.45);
   handrail.rotation.x = Math.PI / 2 - 0.64;
   rainbowStairGroup.add(handrail);
+
+  // Colorful 3D Paper Flowers rising along both stairwell walls (Station 4 script)
+  const flowerPalette = [0xf472b6, 0xfacc15, 0x38bdf8, 0xfb7185, 0x4ade80, 0xc084fc];
+  for (let f = 0; f < 8; f++) {
+    const fz = -8.55 - f * 0.48;
+    const fy = 1.15 + f * 0.28;
+    const fMat = new THREE.MeshBasicMaterial({ color: flowerPalette[f % flowerPalette.length] });
+    const centerMat = new THREE.MeshBasicMaterial({ color: 0xfef08a });
+    [-3.66, -0.10].forEach((fx, sideIdx) => {
+      const fGrp = new THREE.Group();
+      fGrp.position.set(fx, fy, fz);
+      fGrp.rotation.y = sideIdx === 0 ? Math.PI / 2 : -Math.PI / 2;
+      for (let p = 0; p < 5; p++) {
+        const ang = (p / 5) * Math.PI * 2;
+        const petal = new THREE.Mesh(new THREE.CircleGeometry(0.075, 12), fMat);
+        petal.position.set(Math.cos(ang) * 0.085, Math.sin(ang) * 0.085, 0.005);
+        fGrp.add(petal);
+      }
+      const core = new THREE.Mesh(new THREE.CircleGeometry(0.045, 12), centerMat);
+      core.position.z = 0.01;
+      fGrp.add(core);
+      rainbowStairGroup.add(fGrp);
+    });
+  }
+
+  // Welcoming Tray of Sweets on Small Stand + Parastesh's Fallen Schoolbooks at Foot of Rainbow Stairs (Station 4 script)
+  const sweetStand = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.24, 0.20, 0.72, 14),
+    new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.6 })
+  );
+  sweetStand.position.set(-2.78, 0.56, -8.02);
+  const sweetTray = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.28, 0.24, 0.04, 18),
+    new THREE.MeshStandardMaterial({ color: 0xd4a853, metalness: 0.65, roughness: 0.3 })
+  );
+  sweetTray.position.set(-2.78, 0.94, -8.02);
+  rainbowStairGroup.add(sweetStand, sweetTray);
+  for (let sw = 0; sw < 7; sw++) {
+    const swAng = (sw / 7) * Math.PI * 2;
+    const candy = new THREE.Mesh(
+      new THREE.SphereGeometry(0.036, 8, 8),
+      new THREE.MeshStandardMaterial({ color: flowerPalette[sw % flowerPalette.length], roughness: 0.4 })
+    );
+    candy.position.set(-2.78 + Math.cos(swAng) * 0.12, 0.975, -8.02 + Math.sin(swAng) * 0.12);
+    rainbowStairGroup.add(candy);
+  }
+
+  // Parastesh's Schoolbooks & Colored Pencils at Foot of Rainbow Stairs
+  [
+    [-1.48, 0.225, -7.88, 0.24, 0x38bdf8],
+    [-1.18, 0.225, -7.76, -0.38, 0xf472b6],
+    [-1.32, 0.252, -7.92, 0.62, 0xfacc15]
+  ].forEach(([bx, by, bz, brot, bcol]) => {
+    const bk = new THREE.Mesh(
+      new THREE.BoxGeometry(0.26, 0.028, 0.19),
+      new THREE.MeshStandardMaterial({ color: bcol, roughness: 0.65 })
+    );
+    bk.position.set(bx, by, bz);
+    bk.rotation.y = brot;
+    rainbowStairGroup.add(bk);
+  });
   groundFloorGroup.add(rainbowStairGroup);
 
   // D) East Wing Classrooms, Boys' Flower Arch Ceremony Room & NE Pre-School Suite
   addSolidWall(groundFloorGroup, 7.48, floorH, partT, 3.76, floorH / 2, -3.6, tealWall);
   addSolidWall(groundFloorGroup, 7.48, floorH, partT, 3.76, floorH / 2, -8.4, tealWall);
   addSolidWall(groundFloorGroup, partT, floorH, 8.9, 7.5, floorH / 2, -3.95, tealWall);
+  // Calm teal inner wall finish on West wall of Ceremony Room (X = 0.14)
+  addSlabOrTrim(groundFloorGroup, 0.03, floorH - 0.15, 4.54, 0.145, floorH / 2, -6.0, tealWall);
   addPurpleDoor(groundFloorGroup, 7.5, 0.2, -6.0, -Math.PI / 2);
 
-  // Two Decorative Red-Rose Ceremony Arches inside Boys' Ceremony Room (spot_boys_flower_arch.jpg)
-  [-5.9, -7.2].forEach((az) => {
-    const archTorus = new THREE.Mesh(
-      new THREE.TorusGeometry(1.55, 0.11, 10, 24, Math.PI),
-      new THREE.MeshStandardMaterial({ color: 0xbe123c, roughness: 0.65 })
+  // Pink Window Security Grilles inside Boys' Ceremony Room (matching Station 2 script: "calm teal-blue walls and pink window grilles")
+  const pinkGrilleMat = new THREE.MeshStandardMaterial({ color: 0xf472b6, roughness: 0.45, metalness: 0.35 });
+  function addPinkGrilledRoomWindow(x, y, z, rotY, w, h) {
+    const wg = new THREE.Group();
+    wg.position.set(x, y, z);
+    wg.rotation.y = rotY;
+    const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.12, h + 0.12, 0.06), whiteWall);
+    const pane = new THREE.Mesh(
+      new THREE.PlaneGeometry(w, h),
+      new THREE.MeshBasicMaterial({ color: 0xbae6fd })
     );
-    archTorus.position.set(3.8, 1.45, az);
+    pane.position.z = 0.035;
+    wg.add(frame, pane);
+    for (let gx = -w * 0.36; gx <= w * 0.37; gx += w * 0.24) {
+      const vBar = new THREE.Mesh(new THREE.CylinderGeometry(0.014, 0.014, h, 8), pinkGrilleMat);
+      vBar.position.set(gx, 0, 0.055);
+      wg.add(vBar);
+    }
+    [-h * 0.26, 0, h * 0.26].forEach((gy) => {
+      const hBar = new THREE.Mesh(new THREE.CylinderGeometry(0.014, 0.014, w, 8), pinkGrilleMat);
+      hBar.rotation.z = Math.PI / 2;
+      hBar.position.set(0, gy, 0.055);
+      wg.add(hBar);
+    });
+    groundFloorGroup.add(wg);
+  }
+  addPinkGrilledRoomWindow(7.35, 1.86, -7.35, -Math.PI / 2, 1.25, 1.05);
+  addPinkGrilledRoomWindow(0.17, 1.86, -4.62, Math.PI / 2, 1.18, 1.02);
+
+  // Two Decorative Red-Rose Ceremony Arches inside Boys' Ceremony Room (centered on X = 3.62 clear of stairwell wall at X = 2.62 & door at X = 5.2)
+  [-5.65, -7.15].forEach((az) => {
+    const archTorus = new THREE.Mesh(
+      new THREE.TorusGeometry(1.34, 0.095, 12, 28, Math.PI),
+      new THREE.MeshStandardMaterial({ color: 0xbe123c, roughness: 0.62 })
+    );
+    archTorus.position.set(3.62, 1.44, az);
     groundFloorGroup.add(archTorus);
+    // Individual red roses & green leaves along the arch
+    for (let ra = 0.12; ra <= Math.PI - 0.12; ra += 0.28) {
+      const blossom = new THREE.Mesh(
+        new THREE.DodecahedronGeometry(0.082, 0),
+        new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.55 })
+      );
+      blossom.position.set(3.62 + Math.cos(ra) * 1.34, 1.44 + Math.sin(ra) * 1.34, az + 0.06);
+      groundFloorGroup.add(blossom);
+    }
   });
 
   // Secondary East Entrance Corridor & SE / Mid-East Classrooms (X: +11.2..+19.0)
@@ -2685,39 +2895,44 @@ function buildProceduralSchoolModels() {
   });
   groundFloorGroup.add(rearStairGroup);
 
-  // Camera-Aligned Forensic Photos in Ground Floor Rooms (Un-mirrored, true room coordinates!)
-  // 1) Boys under Red Rose Arches (Center-East Ceremony Room — X: 0..+7.5, Z: -8.4..-3.6)
-  createCameraAlignedPhotoInSpace(
-    groundFloorGroup,
-    'images/fa_spots/spot_boys_flower_arch.jpg',
-    [3.6, 1.80, -4.2],
-    [3.8, 1.80, -7.85],
-    0,
-    4.1,
-    2.35
-  );
+  // Sky-Blue Inner South Wall + Paper Hot-Air Balloons & Colorful Paper Crayons inside SW Boys' Classroom (Station 3 script)
+  const creamDadoMat = new THREE.MeshStandardMaterial({ color: 0xfef3c7, roughness: 0.80 });
+  addSlabOrTrim(groundFloorGroup, 6.08, 1.02, 0.03, -15.76, 0.72, 2.21, creamDadoMat);
+  addSlabOrTrim(groundFloorGroup, 6.08, 2.28, 0.03, -15.76, 2.37, 2.21, skyBlueWall);
 
-  // 2) Boys Clapping & Singing on Green Carpet (SW Classroom — X: -19.0..-12.6, Z: -2.5..+2.4)
-  createCameraAlignedPhotoInSpace(
-    groundFloorGroup,
-    'images/fa_spots/spot_boys_classroom.jpg',
-    [-13.5, 1.80, 0.3],
-    [-18.25, 1.75, -0.3],
-    Math.PI / 2,
-    4.1,
-    2.35
-  );
-
-  // 3) Teachers & Girls at the Rainbow Staircase (Central Hall looking North into Stairwell)
-  createCameraAlignedPhotoInSpace(
-    groundFloorGroup,
-    'images/fa_spots/spot_rainbow_stairs.jpg',
-    [-1.8, 1.80, -4.0],
-    [-1.85, 1.85, -8.05],
-    0,
-    3.6,
-    2.15
-  );
+  // Handmade Paper Hot-Air Balloons & Colorful Crayons placed on sky-blue classroom walls
+  function addPaperBalloonAndCrayons(group, x, y, z, rotY) {
+    const decoGrp = new THREE.Group();
+    decoGrp.position.set(x, y, z);
+    decoGrp.rotation.y = rotY;
+    [
+      [-0.65, 0.22, 0xf43f5e, 0xfacc15],
+      [0.0, 0.34, 0x38bdf8, 0xf472b6],
+      [0.62, 0.18, 0x4ade80, 0xfb923c]
+    ].forEach(([bx, by, c1, c2]) => {
+      const balloon = new THREE.Mesh(new THREE.CircleGeometry(0.22, 20), new THREE.MeshBasicMaterial({ color: c1 }));
+      balloon.position.set(bx, by, 0.01);
+      const stripe = new THREE.Mesh(new THREE.PlaneGeometry(0.14, 0.38), new THREE.MeshBasicMaterial({ color: c2 }));
+      stripe.position.set(bx, by, 0.015);
+      const basket = new THREE.Mesh(new THREE.PlaneGeometry(0.11, 0.09), new THREE.MeshBasicMaterial({ color: 0xb45309 }));
+      basket.position.set(bx, by - 0.31, 0.012);
+      decoGrp.add(balloon, stripe, basket);
+    });
+    const crayonCols = [0xef4444, 0xf97316, 0xeab308, 0x22c55e, 0x3b82f6, 0xa855f7];
+    crayonCols.forEach((cc, idx) => {
+      const cx = -0.72 + idx * 0.28;
+      const cy = -0.34;
+      const cBody = new THREE.Mesh(new THREE.PlaneGeometry(0.11, 0.36), new THREE.MeshBasicMaterial({ color: cc }));
+      cBody.position.set(cx, cy, 0.012);
+      const cTip = new THREE.Mesh(new THREE.ConeGeometry(0.056, 0.11, 3), new THREE.MeshBasicMaterial({ color: cc }));
+      cTip.position.set(cx, cy + 0.235, 0.012);
+      cTip.rotation.y = Math.PI / 6;
+      decoGrp.add(cBody, cTip);
+    });
+    group.add(decoGrp);
+  }
+  addPaperBalloonAndCrayons(groundFloorGroup, -17.15, 1.62, 2.18, Math.PI);
+  addPaperBalloonAndCrayons(groundFloorGroup, -12.76, 1.66, -1.48, -Math.PI / 2);
 
   // =====================================================================
   // 2. FIRST FLOOR (GIRLS' PRIMARY SCHOOL — FA-121 Blueprint, ref_06_first_cutaway_fa.jpg)
@@ -2833,16 +3048,46 @@ function buildProceduralSchoolModels() {
   addPurpleDoor(firstFloorGroup, 7.5, y1 + 0.1, -5.8, -Math.PI / 2);
   addPurpleDoor(firstFloorGroup, 10.5, y1 + 0.1, -2.2, 0);
 
-  // Camera-Aligned Photo in First Floor Girls' Assembly Hall (80+ schoolgirls seated — rec_21.jpg)
-  createCameraAlignedPhotoInSpace(
-    firstFloorGroup,
-    'images/fa_spots/spot_girls_assembly.jpg',
-    [-12.5, y1 + 1.85, -1.2],
-    [-15.6, y1 + 1.80, -8.8],
-    0.35,
-    4.6,
-    2.6
-  );
+  // Soft-Pink & Light-Green Wall Trim + Open Homework Notebooks & Colored Pencils on Girls' Upper Hall Carpet (Station 5 script)
+  addSlabOrTrim(firstFloorGroup, 0.04, 0.38, 14.8, -18.80, y1 + 2.85, -5.3, pinkWall);
+  addSlabOrTrim(firstFloorGroup, 0.04, 0.38, 14.8, -11.65, y1 + 2.85, -5.3, sageGreenWall);
+  const notebookSpecs = [
+    [-16.1, -8.4, 0.22, 0xf472b6], [-15.3, -8.6, -0.18, 0x38bdf8],
+    [-14.4, -8.3, 0.35, 0x4ade80], [-16.0, -7.4, -0.28, 0xfacc15],
+    [-15.1, -7.5, 0.14, 0xc084fc], [-14.3, -7.2, -0.32, 0xfb7185],
+    [-15.7, -6.5, 0.40, 0x38bdf8], [-14.8, -6.4, -0.15, 0xf472b6]
+  ];
+  notebookSpecs.forEach(([nx, nz, nrot, coverCol]) => {
+    const nbGrp = new THREE.Group();
+    nbGrp.position.set(nx, y1 + 0.125, nz);
+    nbGrp.rotation.y = nrot;
+    const cover = new THREE.Mesh(
+      new THREE.BoxGeometry(0.36, 0.016, 0.25),
+      new THREE.MeshStandardMaterial({ color: coverCol, roughness: 0.7 })
+    );
+    const pages = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.33, 0.22),
+      new THREE.MeshBasicMaterial({ color: 0xfefce8 })
+    );
+    pages.rotation.x = -Math.PI / 2;
+    pages.position.y = 0.011;
+    const pencilA = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.008, 0.008, 0.19, 6),
+      new THREE.MeshBasicMaterial({ color: 0xef4444 })
+    );
+    pencilA.rotation.z = Math.PI / 2;
+    pencilA.rotation.y = 0.35;
+    pencilA.position.set(0.22, 0.012, 0.04);
+    const pencilB = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.008, 0.008, 0.19, 6),
+      new THREE.MeshBasicMaterial({ color: 0x22c55e })
+    );
+    pencilB.rotation.z = Math.PI / 2;
+    pencilB.rotation.y = -0.22;
+    pencilB.position.set(0.24, 0.012, -0.04);
+    nbGrp.add(cover, pages, pencilA, pencilB);
+    firstFloorGroup.add(nbGrp);
+  });
 
   // =====================================================================
   // 3. STEPPED ROOF, PARAPET, STAIRWELL PENTHOUSE, SKYLIGHT & TELECOM MAST (M3)
@@ -3112,13 +3357,13 @@ function buildProceduralSchoolModels() {
     new THREE.PlaneGeometry(4.2, 0.72),
     new THREE.MeshBasicMaterial({ map: scaleTex, side: THREE.DoubleSide })
   );
-  scaleBadge.position.set(-2.5, 4.35, -5.5);
+  scaleBadge.position.set(-2.5, 5.35, -5.5);
   postStrikeModelGroup.add(scaleBadge);
 
   postStrikeModelGroup.add(new THREE.Line(
     new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(-2.5, 0.5, -5.5),
-      new THREE.Vector3(-2.5, 3.99, -5.5)
+      new THREE.Vector3(-2.5, 4.99, -5.5)
     ]),
     new THREE.LineBasicMaterial({ color: 0xef4444, transparent: true, opacity: 0.75 })
   ));
@@ -3197,16 +3442,78 @@ function buildProceduralSchoolModels() {
     new THREE.LineBasicMaterial({ color: 0xe5e059 })
   ));
 
-  // G) Camera-Aligned Post-Strike Crater Photogrammetry Frame (Facing West across Crater -> East Exposed Shear!)
-  createCameraAlignedPhotoInSpace(
-    postStrikeModelGroup,
-    'images/fa_spots/spot_crater_photo.jpg',
-    [-8.8, 2.35, -5.5],
-    [0.8, 2.30, -5.5],
-    -Math.PI / 2,
-    5.1,
-    2.85
-  );
+  // G) Dust-Covered Pastel Schoolbags & Shrapnel-Pierced Homework Sheets in Rubble around 5m Crater (Station 6 script)
+  const dustyBagPalette = [0xc08497, 0x7ea8be, 0xcab87a, 0x8fb399, 0xb88ca8];
+  [
+    [-4.6, 0.44, -4.8, 0.5],
+    [-3.4, 0.42, -3.1, -0.4],
+    [-1.3, 0.44, -3.2, 0.8],
+    [0.3, 0.46, -4.5, -0.7],
+    [-1.8, 0.40, -7.1, 0.3]
+  ].forEach(([bx, by, bz, brot], idx) => {
+    const dBag = new THREE.Mesh(
+      new THREE.BoxGeometry(0.32, 0.22, 0.25),
+      new THREE.MeshStandardMaterial({ color: dustyBagPalette[idx], roughness: 0.92 })
+    );
+    dBag.position.set(bx, by, bz);
+    dBag.rotation.set(0.25, brot, -0.18);
+    dBag.castShadow = true;
+    postStrikeModelGroup.add(dBag);
+  });
+  [
+    [-3.9, 0.36, -3.8, 0.4], [-2.6, 0.35, -2.9, -0.5], [-0.8, 0.36, -3.6, 0.9],
+    [0.5, 0.38, -5.2, -0.3], [-1.1, 0.35, -6.5, 0.2], [-3.1, 0.34, -6.8, 1.1]
+  ].forEach(([px, py, pz, prot]) => {
+    const tornPage = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.30, 0.22),
+      new THREE.MeshBasicMaterial({ color: 0xe7e5e4, side: THREE.DoubleSide })
+    );
+    tornPage.rotation.x = -Math.PI / 2 + 0.08;
+    tornPage.rotation.z = prot;
+    tornPage.position.set(px, py, pz);
+    postStrikeModelGroup.add(tornPage);
+  });
+
+  // H) 3D Green School Desk Displaying Recovered US Tomahawk Guidance Subassemblies in Courtyard (Station 7 script & clip 07_B)
+  const forensicDeskGroup = new THREE.Group();
+  forensicDeskGroup.position.set(13.50, 0.02, 7.35);
+  forensicDeskGroup.rotation.y = 0.08;
+  const greenDeskMat = new THREE.MeshStandardMaterial({ color: 0x2f6f4e, roughness: 0.62 });
+  const deskSteelMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.5, metalness: 0.45 });
+  const alloyMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.38, metalness: 0.72 });
+  const charredAlloyMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.55, metalness: 0.58 });
+  const pcbMat = new THREE.MeshStandardMaterial({ color: 0x166534, roughness: 0.5, metalness: 0.3 });
+
+  const fTop = new THREE.Mesh(new THREE.BoxGeometry(1.55, 0.06, 0.72), greenDeskMat);
+  fTop.position.set(0, 0.76, 0);
+  fTop.castShadow = true;
+  forensicDeskGroup.add(fTop);
+  [[-0.70, -0.29], [0.70, -0.29], [-0.70, 0.29], [0.70, 0.29]].forEach(([lx, lz]) => {
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.74, 0.05), deskSteelMat);
+    leg.position.set(lx, 0.37, lz);
+    forensicDeskGroup.add(leg);
+  });
+  // Recovered Tomahawk guidance ring, actuator housing & Ball Aerospace / MADE IN USA electronics subassembly
+  const guidanceRing = new THREE.Mesh(new THREE.CylinderGeometry(0.21, 0.23, 0.18, 20), alloyMat);
+  guidanceRing.position.set(-0.38, 0.88, -0.02);
+  guidanceRing.rotation.z = 0.22;
+  const pcbUnit = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.09, 0.20), pcbMat);
+  pcbUnit.position.set(0.06, 0.835, 0.04);
+  const finBlade = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.03, 0.19), charredAlloyMat);
+  finBlade.position.set(0.46, 0.815, -0.04);
+  finBlade.rotation.y = -0.35;
+  finBlade.rotation.z = 0.14;
+  const tagMat = new THREE.MeshBasicMaterial({ color: 0xfacc15 });
+  [-0.56, -0.08, 0.34].forEach((tx) => {
+    const evTag = new THREE.Mesh(new THREE.ConeGeometry(0.045, 0.09, 4), tagMat);
+    evTag.position.set(tx, 0.835, 0.22);
+    forensicDeskGroup.add(evTag);
+  });
+  forensicDeskGroup.add(guidanceRing, pcbUnit, finBlade);
+  postStrikeModelGroup.add(forensicDeskGroup);
+
+  // I) Mount All 16 Verified 1080p Pre-Strike & Incident Videos/Photos Directly Inside the 3D School Architecture
+  buildAllInWorldWalkthroughScreens();
 }
 
 // --- CYCLE FLOORPLAN CUTAWAY (0 = Full, 1 = First Floor Cutaway, 2 = Ground Floor Cutaway) ---
@@ -3515,9 +3822,12 @@ function closeModal() {
   activeHotspotId = null;
 }
 
-// --- MULTI-NARRATOR HUMAN VOICEOVER + REAL ARCHIVAL SCHOOL ECHOES + ROOM ATMOSPHERE ENGINE ---
+// --- MULTI-NARRATOR HUMAN VOICEOVER + CONTINUOUS BACKGROUND SCORE + IN-WORLD 3D VIDEO SCREENS ---
 let narrationAudio = null;
 let archivalAudio = null;
+let backgroundScoreAudio = null;
+let backgroundScoreFadeTimer = null;
+let backgroundScoreTargetVol = 0.0;
 let narrationPhase = 'idle'; // 'idle' | 'archival' | 'delay' | 'voice'
 let narrationPhaseTimer = null;
 let activeNarrationHotspot = null;
@@ -3537,10 +3847,770 @@ let supportsDisplayTransition;
 let deterministicWalkthroughRender = false;
 let activePipReelUrl = '';
 const pipBlobCache = new Map();
+const inWorldScreens = [];
+let activeInWorldRunKey = '';
+
+const IN_WORLD_SCREEN_SPECS = [
+  // Station 1: Courtyard Morning Lines (mounted in preStrikeModelGroup so post-strike yard stays clean)
+  {
+    id: '01_A', hotspotId: 'courtyard_lines', slot: 'A', groupKey: 'preStrike',
+    file: '01_courtyard_lines_01', durationSec: 11.0, cueStartP: 0.22, cueEndP: 0.50,
+    pos: [25.85, 1.90, 2.74], rotY: 0, w: 4.10, h: 2.31, hasLegs: false,
+    badge: {
+      en: 'SATELLITE RECORD (2018–2025) & MORNING QUEUE',
+      fi: 'SATELLIITTIHISTORIA JA AAMUJONO (2018–2025)',
+      fa: 'تاریخچه ماهواره‌ای (۱۳۹۷–۱۴۰۴) و صف صبحگاهی حیاط'
+    },
+    caption: {
+      en: 'Satellite history of the painted yellow morning assembly lines paired with the school\'s own courtyard queue photo.',
+      fi: 'Satelliittihistoria keltaisista aamunavausviivoista sekä koulun oma valokuva oppilaista pihajonossa.',
+      fa: 'تاریخچه ماهواره‌ای خط‌کشی زرد صف صبحگاهی در کنار عکس رسمی صف دانش‌آموزان در حیاط دبستان شجره طیبه.'
+    }
+  },
+  {
+    id: '01_B', hotspotId: 'courtyard_lines', slot: 'B', groupKey: 'preStrike',
+    file: '01_courtyard_football_and_flags', durationSec: 14.0, cueStartP: 0.72, cueEndP: 1.00,
+    pos: [-8.12, 1.84, 6.55], rotY: Math.PI / 2, w: 3.80, h: 2.14, hasLegs: false,
+    badge: {
+      en: 'MORNING OF FEB 28 · THE FINAL FOOTBALL MATCH & YARD',
+      fi: '28.2. AAMU · POIKIEN VIIMEINEN JALKAPALLO-OTTELU',
+      fa: 'صبح ۹ اسفند ۱۴۰۴ · آخرین بازی فوتبال در زمین ورزشی حیاط'
+    },
+    caption: {
+      en: 'Boys playing their final football match on the school pitch that morning, paired with schoolgirls waving flags in the yard.',
+      fi: 'Pojat pelaamassa viimeistä jalkapallo-otteluaan koulun kentällä sekä koulutyttöjä vilkuttamassa aurinkoisella pihalla.',
+      fa: 'آخرین بازی فوتبال دانش‌آموزان پسر در زمین ورزشی مدرسه در صبح حادثه و لبخند دختران دانش‌آموز در حیاط آفتابی.'
+    }
+  },
+  // Station 2: Ground-Floor Boys' Ceremony Room & Colorful Playroom
+  {
+    id: '02_A', hotspotId: 'boys_flower_arch', slot: 'A', groupKey: 'groundFloor',
+    file: '02_boys_playroom_prestrike', durationSec: 13.0, cueStartP: 0.24, cueEndP: 0.66,
+    pos: [3.62, 1.54, -8.04], rotY: 0, w: 1.90, h: 1.07, hasLegs: false,
+    badge: {
+      en: 'GROUND FLOOR ARCHIVE · PLAYROOM & BALL-PIT BEFORE STRIKE',
+      fi: 'ALAKERTA · LEIKKIHUONE JA PALLOMERI ENNEN ISKUA',
+      fa: 'آرشیو طبقه همکف · خانه بازی و شادی کودکان پیش از حمله'
+    },
+    caption: {
+      en: 'Preschool and primary children laughing and jumping inside Shajareh Tayyebeh\'s mural-painted playroom and ball-pit.',
+      fi: 'Esikoululaiset ja alakoululaiset leikkimässä koulun värikkäässä leikkihuoneessa ja pallomeressä ennen iskua.',
+      fa: 'شادی و بازی نوآموزان و دانش‌آموزان خردسال در «خانه بازی» رنگارنگ دبستان شجره طیبه پیش از انفجار.'
+    }
+  },
+  {
+    id: '02_B', hotspotId: 'boys_flower_arch', slot: 'B', groupKey: 'groundFloor',
+    file: '02_boys_flower_arch_02', durationSec: 9.0, cueStartP: 0.70, cueEndP: 1.00,
+    pos: [0.22, 1.60, -6.40], rotY: Math.PI / 2, w: 2.24, h: 1.26, hasLegs: false,
+    badge: {
+      en: 'DEC 2025 – JAN 2026 · STUDENT COUNCIL VOTE',
+      fi: 'JOULU 2025 – TAMMI 2026 · OPPILASKUNTAVAALIT',
+      fa: 'آذر و دی ۱۴۰۴ · انتخابات شورای دانش‌آموزی پسران'
+    },
+    caption: {
+      en: 'Official pre-strike photos of Shajareh Tayyebeh boys voting in their student council and lined up in the yard.',
+      fi: 'Koulun viralliset kuvat poikien oppilaskuntavaaleista ja aamukokoontumisesta ennen iskua.',
+      fa: 'تصاویر پیش از حمله از انتخابات شورای دانش‌آموزی و اجتماع صبحگاهی پسران دبستان شجره طیبه.'
+    }
+  },
+  // Station 3: Ground-Floor West Boys' Classroom (Sky-Blue Walls & Green Carpet)
+  {
+    id: '03_A', hotspotId: 'boys_classroom', slot: 'A', groupKey: 'groundFloor',
+    file: '03_boys_classroom_01', durationSec: 10.0, cueStartP: 0.25, cueEndP: 0.65,
+    pos: [-18.73, 1.58, 0.00], rotY: Math.PI / 2, w: 2.68, h: 1.51, hasLegs: false,
+    badge: {
+      en: 'JAN 2026 · SKY-BLUE BOYS\' CLASSROOM',
+      fi: 'TAMMIKUU 2026 · POIKIEN TAIVAANSININEN LUOKKA',
+      fa: 'دی ۱۴۰۴ · کلاس آبی‌آسمانی پسران بر موکت سبز'
+    },
+    caption: {
+      en: 'Over thirty-five boys clapping and singing on green classroom carpets, followed by boys studying at sky-blue desks.',
+      fi: 'Yli kolmekymmentäviisi poikaa taputtamassa ja laulamassa vihreällä matolla sekä opiskelemassa taivaansinisessä luokassa.',
+      fa: 'بیش از سی‌وپنج دانش‌آموز پسر در حال دست‌زدن و هم‌خوانی بر موکت سبز کلاس و تحصیل پشت نیمکت‌های آبی‌آسمانی.'
+    }
+  },
+  {
+    id: '03_B', hotspotId: 'boys_classroom', slot: 'B', groupKey: 'groundFloor',
+    file: '03_boys_fieldtrip_and_class', durationSec: 13.0, cueStartP: 0.69, cueEndP: 1.00,
+    pos: [-14.45, 1.48, 2.15], rotY: Math.PI, w: 2.48, h: 1.40, hasLegs: false,
+    badge: {
+      en: 'FINAL SCHOOL EXCURSION & WHITEBOARD PORTRAIT',
+      fi: 'VIIMEINEN LUOKKARETKI JA LUOKKAKUVA TAULULLA',
+      fa: 'آخرین اردوی دانش‌آموزی پسران و یادگاری پای تخته کلاس'
+    },
+    caption: {
+      en: 'Shajareh Tayyebeh schoolboys smiling together on their final field trip, paired with a pre-strike whiteboard portrait.',
+      fi: 'Shajareh Tayyebehin pojat viimeisellä luokkaretkellään sekä muotokuva luokan valkotaulun edessä ennen iskua.',
+      fa: 'لبخند پسران دبستان شجره طیبه در آخرین اردوی مدرسه در کنار تصویر یادگاری پای تخته کلاس درس.'
+    }
+  },
+  // Station 4: Central Hall & Enclosed Rainbow Staircase
+  {
+    id: '04_A', hotspotId: 'rainbow_staircase', slot: 'A', groupKey: 'groundFloor',
+    file: '04_rainbow_staircase_01', durationSec: 11.0, cueStartP: 0.24, cueEndP: 0.58,
+    pos: [-4.60, 1.58, -7.25], rotY: 0.28, w: 2.46, h: 1.38, hasLegs: true, legFloorY: 0.20,
+    badge: {
+      en: 'NOV 2025 – JAN 2026 · RAINBOW STAIRS & EDUCATORS',
+      fi: 'MARRAS 2025 – TAMMI 2026 · SATEENKAARIPORTAAT',
+      fa: 'آبان تا دی ۱۴۰۴ · پله‌های رنگین‌کمانی و استقبال معلمان'
+    },
+    caption: {
+      en: 'Schoolgirls singing together during recess and teachers welcoming students down the rainbow-painted central stairs.',
+      fi: 'Koulutytöt laulamassa välitunnilla ja opettajat vastaanottamassa oppilaita sateenkaaren väreihin maalatuissa portaissa.',
+      fa: 'هم‌خوانی دانش‌آموزان دختر در زنگ تفریح و استقبال آموزگاران بر پله‌های رنگین‌کمانی راهروی میانی.'
+    }
+  },
+  {
+    id: '04_B', hotspotId: 'rainbow_staircase', slot: 'B', groupKey: 'groundFloor',
+    file: '04_intact_doors_and_gate', durationSec: 13.0, cueStartP: 0.66, cueEndP: 1.00,
+    pos: [-5.03, 1.60, -3.58], rotY: Math.PI, w: 2.50, h: 1.41, hasLegs: false,
+    badge: {
+      en: 'INTACT ARCHITECTURE · FLOWER DOORS, GATE & STAIRS',
+      fi: 'EHJÄ KOULURAKENNUS · KUKKAOVET, PORTTI JA PORTAAT',
+      fa: 'معماری پیش از حمله · درهای گل‌دار کلاس‌ها، سردر و پله‌ها'
+    },
+    caption: {
+      en: 'Pre-strike walkthrough of the flower-decorated classroom doors, painted school gate, prayer hall, and stairs.',
+      fi: 'Kierros ehjässä koulussa ennen iskua: kukkakoristellut luokanovet, maalattu kouluportti ja portaat.',
+      fa: 'تصاویر پیش از حادثه از درهای تزیین‌شده کلاس‌ها، سردر نقاشی‌شده دبستان دخترانه و راه‌پله مدرسه.'
+    }
+  },
+  // Station 5: First-Floor Girls' Primary School Assembly Hall
+  {
+    id: '05_A', hotspotId: 'girls_upper_hall', slot: 'A', groupKey: 'firstFloor',
+    file: '05_girls_upper_hall_01', durationSec: 11.0, cueStartP: 0.22, cueEndP: 0.58,
+    pos: [-15.25, 5.06, -10.35], rotY: 0, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 3.71,
+    badge: {
+      en: 'JAN 7–8, 2026 · 80+ GIRLS IN UPPER ASSEMBLY HALL',
+      fi: '7.–8.1.2026 · YLI 80 TYTTÖÄ YLÄKERRAN SALISSA',
+      fa: '۱۷ و ۱۸ دی ۱۴۰۴ · بیش از ۸۰ دانش‌آموز دختر و معلمان'
+    },
+    caption: {
+      en: 'Over eighty schoolgirls in white headscarves on the upper-floor green carpet, followed by the school\'s female educators.',
+      fi: 'Yli kahdeksankymmentä valkohuivista koulutyttöä yläkerran vihreällä matolla sekä koulun opettajia tammikuussa 2026.',
+      fa: 'بیش از هشتاد دانش‌آموز دختر با مقنعه سفید بر فرش سبز سالن طبقه بالا و تصویر آموزگاران دبستان در دی‌ماه ۱۴۰۴.'
+    }
+  },
+  {
+    id: '05_B', hotspotId: 'girls_upper_hall', slot: 'B', groupKey: 'firstFloor',
+    file: '05_pink_room_only_four_survived', durationSec: 13.0, cueStartP: 0.62, cueEndP: 1.00,
+    pos: [-15.25, 5.12, -0.15], rotY: Math.PI, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 3.71,
+    badge: {
+      en: 'PINK-DOOR CLASSROOM · ONLY FOUR GIRLS IN PHOTO SURVIVED',
+      fi: 'VAALEANPUNAINEN LUOKKA · VAIN NELJÄ TYTÖISTÄ SELVISI',
+      fa: 'کلاس درِ صورتی · تنها ۴ کودک از این عکس یادگاری زنده ماندند'
+    },
+    caption: {
+      en: 'Group photo under rainbow balloons from which only four girls survived, paired with first-graders in blue paper crowns.',
+      fi: 'Luokkakuva ilmapallojen alla, jonka oppilaista vain neljä selvisi hengissä, sekä ekaluokkalaisia paperikruunuissa.',
+      fa: 'عکس دسته‌جمعی زیر بادکنک‌های رنگی که تنها چهار دانش‌آموز آن زنده ماندند، در کنار جشن آب کلاس اول.'
+    }
+  },
+  // Station 6: 11:22 AM Direct Cruise Missile Impact & 5m Crater
+  {
+    id: '06_A', hotspotId: 'crater_damage', slot: 'A', groupKey: 'postStrike',
+    file: '06_crater_damage_01', durationSec: 12.0, cueStartP: 0.15, cueEndP: 0.56,
+    pos: [2.95, 1.98, -4.45], rotY: -Math.PI / 2, w: 3.60, h: 2.02, hasLegs: true, legFloorY: 0.15,
+    badge: {
+      en: 'SKYSAT SATELLITE SLIDER & RED CRESCENT RESCUE',
+      fi: 'SKYSAT-SATELLIITTIVERTAILU JA PELASTUSTYÖT',
+      fa: 'مقایسه ماهواره‌ای SkySat و عملیات آواربرداری هلال‌احمر'
+    },
+    caption: {
+      en: 'Before-and-after satellite comparison over the collapsed western wing, followed by rescuers digging through concrete slabs.',
+      fi: 'Satelliittivertailu ennen ja jälkeen iskun sortuneen länsisiiven päällä sekä pelastajia raivaamassa betonilaattoja.',
+      fa: 'مقایسه ماهواره‌ای پیش و پس از حمله بر فراز بال غربی فروریخته و تلاش امدادگران برای کنارزدن آوار کلاس‌ها.'
+    }
+  },
+  {
+    id: '06_B', hotspotId: 'crater_damage', slot: 'B', groupKey: 'postStrike',
+    file: '06_mothers_rubble_and_backpack', durationSec: 13.5, cueStartP: 0.60, cueEndP: 1.00,
+    pos: [-0.85, 1.96, -6.75], rotY: 0, w: 3.55, h: 2.00, hasLegs: true, legFloorY: 0.15,
+    badge: {
+      en: 'MOTHERS ATOP RUBBLE & RECOVERED "MY HEART" BACKPACK',
+      fi: 'ÄIDIT RAUNIOILLA JA LÖYDETTY "MY HEART" -KOULUREPPU',
+      fa: 'مادران نشسته بر تل آوار و کیف خاک‌گرفته «MY HEART»'
+    },
+    caption: {
+      en: 'Bereaved mothers sitting directly atop the collapsed classroom slabs and rescuers lifting a child\'s "MY HEART" backpack.',
+      fi: 'Surevia äitejä istumassa sortuneiden luokkien raunioilla sekä pelastajien nostama lapsen "MY HEART" -koulureppu.',
+      fa: 'مادران سیاه‌پوش نشسته بر آوار کلاس‌های فروریخته و بیرون کشیدن کوله‌پشتی کودک با نوشته MY HEART از زیر سنگ‌ها.'
+    }
+  },
+  // Station 7: 2:30 PM Second Wave & Recovered US Tomahawk Munitions Evidence
+  {
+    id: '07_A', hotspotId: 'second_wave', slot: 'A', groupKey: 'postStrike',
+    file: '07_second_wave_01', durationSec: 11.5, cueStartP: 0.23, cueEndP: 0.58,
+    pos: [22.75, 2.04, 3.10], rotY: -0.18, w: 4.15, h: 2.33, hasLegs: true, legFloorY: 0.02,
+    badge: {
+      en: 'VERIFIED STRIKE VIDEO · US BGM-109 TOMAHAWK DESCENT',
+      fi: 'VARMENNETTU ISKUVIDEO · US BGM-109 TOMAHAWK -OHJUS',
+      fa: 'فیلم راستی‌آزمایی‌شده · شیرجه موشک کروز تاماهاوک آمریکا'
+    },
+    caption: {
+      en: 'Slow-motion capture of a US Tomahawk cruise missile diving steeply into the compound, matched to its cruciform wings.',
+      fi: 'Hidastettu tallenne yhdysvaltalaisen Tomahawk-risteilyohjuksen syöksystä alueelle sekä sen siipirakenteen tunnistus.',
+      fa: 'تصویر آهسته شیرجه مستقیم موشک کروز تاماهاوک آمریکایی به درون مجموعه و تطبیق بالچه‌های میانی آن.'
+    }
+  },
+  {
+    id: '07_B', hotspotId: 'second_wave', slot: 'B', groupKey: 'postStrike',
+    file: '07_second_wave_02', durationSec: 13.5, cueStartP: 0.61, cueEndP: 1.00,
+    pos: [13.50, 2.16, 5.55], rotY: 0, w: 3.75, h: 2.05, hasLegs: true, legFloorY: 0.02,
+    badge: {
+      en: 'ON-SITE MUNITIONS INSPECTION · BALL AEROSPACE / MADE IN USA',
+      fi: 'PAIKAN PÄÄLLÄ TUTKITUT OSAT · BALL AEROSPACE / MADE IN USA',
+      fa: 'بازرسی قطعات هدایت تاماهاوک · Ball Aerospace / ساخت آمریکا'
+    },
+    caption: {
+      en: 'Recovered US Tomahawk guidance electronics on a green school desk and macro plates stamped Ball Aerospace and MADE IN USA.',
+      fi: 'Koulun pulpetille asetetut Tomahawk-ohjuksen ohjausosat sekä lähikuvat Ball Aerospace- ja MADE IN USA -tyyppikilvistä.',
+      fa: 'قطعات هدایت موشک تاماهاوک روی نیمکت سبز در برابر مدرسه بمباران‌شده و پلاک‌های نزدیک Ball Aerospace و ساخت آمریکا.'
+    }
+  },
+  // Station 8: Accountability Vow Shrine & Tribute Boards
+  {
+    id: '08_A', hotspotId: 'vow_shrine', slot: 'A', groupKey: 'memorial',
+    file: '08_vow_shrine_01', durationSec: 12.5, cueStartP: 0.14, cueEndP: 0.47,
+    pos: [-4.45, 1.92, 9.65], rotY: 0.30, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 0.02,
+    badge: {
+      en: 'MINAB MOTHERS & MAKAN NASIRI\'S RECOVERED SNEAKER',
+      fi: 'MINABIN ÄIDIT JA MAKAN NASIRIN PELASTETTU KENKÄ',
+      fa: 'مادران میناب و کفش خاکی کوچک ماکان نصیری بر گل‌های سرخ'
+    },
+    caption: {
+      en: 'Mothers in Minab holding framed portraits of the schoolchildren, followed by young Makan Nasiri\'s sneaker resting on roses.',
+      fi: 'Minabin äidit pitelemässä koululaisten kehystettyjä muotokuvia sekä pikku Makan Nasirin kenkä ruusujen keskellä.',
+      fa: 'مادران مینابی با قاب‌عکس‌های دانش‌آموزان در دست و کفش خاکی کوچک ماکان نصیری در جعبه یادبود گل‌های سرخ.'
+    }
+  },
+  {
+    id: '08_B', hotspotId: 'vow_shrine', slot: 'B', groupKey: 'memorial',
+    file: '08_eyes_and_justice_vigil', durationSec: 13.6, cueStartP: 0.49, cueEndP: 0.88,
+    pos: [1.45, 1.92, 9.65], rotY: -0.30, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 0.02,
+    badge: {
+      en: 'WALL OF EYES & VIGIL AT THE RUINS · "DEMANDS JUSTICE"',
+      fi: 'LASTEN SILMIEN MUURI JA MUISTOVARTIO RAUNIOILLA',
+      fa: 'دیوارنگاره چشمان کودکان و پلاکارد «خون آنان عدالت می‌طلبد»'
+    },
+    caption: {
+      en: 'Street mural of the children\'s eyes, framed portraits resting on rubble, and "THEIR BLOOD DEMANDS JUSTICE, NOT SILENCE".',
+      fi: 'Seinämaalaus lasten silmistä, kehystetyt kuvat raunioilla ja kyltti "THEIR BLOOD DEMANDS JUSTICE, NOT SILENCE".',
+      fa: 'دیوارنگاره نگاه کودکان، قاب‌عکس‌ها بر روی سنگ‌های کلاس و دست‌نوشته «خون آنان عدالت می‌طلبد، نه سکوت».'
+    }
+  }
+];
+
+function wrapCanvasCaptionLines(ctx, text, maxWidth, maxLines) {
+  const words = String(text || '').trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return [];
+  const lines = [];
+  let current = words[0];
+  for (let i = 1; i < words.length; i++) {
+    const candidate = current + ' ' + words[i];
+    if (ctx.measureText(candidate).width <= maxWidth) {
+      current = candidate;
+    } else {
+      lines.push(current);
+      current = words[i];
+      if (lines.length >= maxLines - 1) {
+        for (let j = i + 1; j < words.length; j++) {
+          const nextTry = current + ' ' + words[j];
+          if (ctx.measureText(nextTry).width <= maxWidth - 18) {
+            current = nextTry;
+          } else {
+            current += '…';
+            break;
+          }
+        }
+        break;
+      }
+    }
+  }
+  if (lines.length < maxLines && current) {
+    lines.push(current);
+  }
+  return lines;
+}
+
+function renderInWorldPlaqueCanvas(screen) {
+  if (!screen || !screen.plaqueCanvas) return;
+  const canvas = screen.plaqueCanvas;
+  const ctx = canvas.getContext('2d');
+  const isFa = currentLang === 'fa';
+  const langKey = ['en', 'fi', 'fa'].includes(currentLang) ? currentLang : 'en';
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(11, 16, 28, 0.96)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.strokeStyle = screen.isFocal ? '#facc15' : '#94a3b8';
+  ctx.lineWidth = screen.isFocal ? 4 : 2.5;
+  ctx.strokeRect(3, 3, canvas.width - 6, canvas.height - 6);
+
+  ctx.direction = isFa ? 'rtl' : 'ltr';
+  ctx.textAlign = 'center';
+
+  const badgeStr = (screen.spec.badge && (screen.spec.badge[langKey] || screen.spec.badge.en)) || '';
+  const capStr = (screen.spec.caption && (screen.spec.caption[langKey] || screen.spec.caption.en)) || '';
+
+  ctx.fillStyle = screen.isFocal ? '#fde047' : '#e2c074';
+  ctx.font = isFa ? '700 20px Tahoma, sans-serif' : '700 18px Inter, system-ui, sans-serif';
+  ctx.fillText(badgeStr, canvas.width / 2, 34);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = isFa ? '500 22px Tahoma, sans-serif' : '500 21px Inter, system-ui, sans-serif';
+  const wrapped = wrapCanvasCaptionLines(ctx, capStr, canvas.width - 56, 2);
+  if (wrapped.length === 1) {
+    ctx.fillText(wrapped[0], canvas.width / 2, 86);
+  } else if (wrapped.length >= 2) {
+    ctx.fillText(wrapped[0], canvas.width / 2, 74);
+    ctx.fillText(wrapped[1], canvas.width / 2, 108);
+  }
+
+  if (screen.plaqueTex) {
+    screen.plaqueTex.needsUpdate = true;
+  }
+}
+
+function drawPosterToInWorldScreen(screen) {
+  if (!screen || !screen.screenCtx) return;
+  const ctx = screen.screenCtx;
+  if (screen.posterLoaded && screen.posterImg) {
+    try {
+      ctx.drawImage(screen.posterImg, 0, 0, 1280, 720);
+      screen.canvasTex.needsUpdate = true;
+      return;
+    } catch (_) {}
+  }
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(0, 0, 1280, 720);
+  screen.canvasTex.needsUpdate = true;
+}
+
+function drawVideoToInWorldScreen(screen) {
+  if (!screen || !screen.videoEl || !screen.screenCtx) return false;
+  if (screen.videoEl.readyState >= 2 && screen.videoEl.videoWidth > 0) {
+    try {
+      screen.screenCtx.drawImage(screen.videoEl, 0, 0, 1280, 720);
+      screen.canvasTex.needsUpdate = true;
+      return true;
+    } catch (_) {}
+  }
+  return false;
+}
+
+function setInWorldScreenFocalState(screen, isFocal) {
+  if (!screen || screen.isFocal === isFocal) return;
+  screen.isFocal = isFocal;
+  if (screen.accentBarMat) {
+    screen.accentBarMat.color.setHex(isFocal ? 0xfacc15 : 0x94a3b8);
+  }
+  if (screen.innerTrimMat) {
+    screen.innerTrimMat.color.setHex(isFocal ? 0xeab308 : 0x64748b);
+  }
+  renderInWorldPlaqueCanvas(screen);
+}
+
+function buildAllInWorldWalkthroughScreens() {
+  inWorldScreens.length = 0;
+  const groupLookup = {
+    preStrike: preStrikeModelGroup,
+    groundFloor: groundFloorGroup,
+    firstFloor: firstFloorGroup,
+    postStrike: postStrikeModelGroup,
+    memorial: memorialBoardsGroup
+  };
+  const bezelMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.55, metalness: 0.35 });
+  const legMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.50, metalness: 0.55 });
+
+  IN_WORLD_SCREEN_SPECS.forEach((spec) => {
+    const parentGroup = groupLookup[spec.groupKey] || preStrikeModelGroup;
+    if (!parentGroup) return;
+
+    const root = new THREE.Group();
+    root.name = `InWorldScreen_${spec.id}`;
+    root.position.set(spec.pos[0], spec.pos[1], spec.pos[2]);
+    root.rotation.y = spec.rotY || 0;
+    root.userData = { feature: 'in_world_video_screen', screenId: spec.id, hotspotId: spec.hotspotId };
+
+    // Architectural Matte Slate Frame + Inner Brass Trim + Top Gallery Light Bar
+    const outerFrame = new THREE.Mesh(
+      new THREE.BoxGeometry(spec.w + 0.11, spec.h + 0.11, 0.045),
+      bezelMat
+    );
+    outerFrame.castShadow = true;
+    root.add(outerFrame);
+
+    const innerTrimMat = new THREE.MeshBasicMaterial({ color: 0x64748b });
+    const innerTrim = new THREE.Mesh(
+      new THREE.BoxGeometry(spec.w + 0.028, spec.h + 0.028, 0.050),
+      innerTrimMat
+    );
+    root.add(innerTrim);
+
+    const accentBarMat = new THREE.MeshBasicMaterial({ color: 0x94a3b8 });
+    const accentBar = new THREE.Mesh(
+      new THREE.BoxGeometry(spec.w * 0.94, 0.028, 0.058),
+      accentBarMat
+    );
+    accentBar.position.set(0, spec.h / 2 + 0.040, 0.006);
+    root.add(accentBar);
+
+    // 1280x720 CanvasTexture Display Plane (toneMapped: false preserves crisp documentary exposure)
+    const screenCanvas = document.createElement('canvas');
+    screenCanvas.width = 1280;
+    screenCanvas.height = 720;
+    const screenCtx = screenCanvas.getContext('2d');
+    screenCtx.fillStyle = '#0f172a';
+    screenCtx.fillRect(0, 0, 1280, 720);
+
+    const canvasTex = new THREE.CanvasTexture(screenCanvas);
+    const screenMat = new THREE.MeshBasicMaterial({
+      map: canvasTex,
+      side: THREE.FrontSide,
+      toneMapped: false
+    });
+    const screenPlane = new THREE.Mesh(new THREE.PlaneGeometry(spec.w, spec.h), screenMat);
+    screenPlane.position.set(0, 0, 0.028);
+    root.add(screenPlane);
+
+    // Architectural Caption Plaque directly beneath screen
+    const plaqueCanvas = document.createElement('canvas');
+    plaqueCanvas.width = 1024;
+    plaqueCanvas.height = 136;
+    const plaqueTex = new THREE.CanvasTexture(plaqueCanvas);
+    const plaqueW = Math.min(spec.w * 0.94, 3.10);
+    const plaqueH = plaqueW * (136 / 1024);
+    const plaqueBacking = new THREE.Mesh(
+      new THREE.BoxGeometry(plaqueW + 0.04, plaqueH + 0.03, 0.032),
+      bezelMat
+    );
+    const plaqueY = -spec.h / 2 - 0.055 - plaqueH / 2 - 0.035;
+    plaqueBacking.position.set(0, plaqueY, 0.004);
+    root.add(plaqueBacking);
+
+    const plaqueMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(plaqueW, plaqueH),
+      new THREE.MeshBasicMaterial({ map: plaqueTex, side: THREE.FrontSide, toneMapped: false })
+    );
+    plaqueMesh.position.set(0, plaqueY, 0.023);
+    root.add(plaqueMesh);
+
+    // Freestanding Museum Stanchion Legs (when not flush-mounted on a full wall)
+    if (spec.hasLegs) {
+      const floorLocalY = (typeof spec.legFloorY === 'number' ? spec.legFloorY : 0.02) - spec.pos[1];
+      const frameBottomY = -spec.h / 2 - 0.055;
+      const legLen = Math.max(0.15, frameBottomY - floorLocalY);
+      const legOffsetX = Math.max(0.55, spec.w * 0.34);
+      [-legOffsetX, legOffsetX].forEach((lx) => {
+        const post = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.032, legLen, 10), legMat);
+        post.position.set(lx, floorLocalY + legLen / 2, -0.01);
+        post.castShadow = true;
+        const base = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.025, 0.32), legMat);
+        base.position.set(lx, floorLocalY + 0.0125, -0.01);
+        root.add(post, base);
+      });
+    }
+
+    parentGroup.add(root);
+
+    const screenRecord = {
+      id: spec.id,
+      hotspotId: spec.hotspotId,
+      slot: spec.slot,
+      spec,
+      root,
+      screenCanvas,
+      screenCtx,
+      canvasTex,
+      plaqueCanvas,
+      plaqueTex,
+      accentBarMat,
+      innerTrimMat,
+      posterUrl: `media/walkthrough_pip/posters/${spec.file}.jpg`,
+      videoUrl: `media/walkthrough_pip/${spec.file}.mp4`,
+      posterImg: null,
+      posterLoaded: false,
+      videoEl: null,
+      videoReadyPromise: null,
+      cueStartedInLiveRun: false,
+      isFocal: false
+    };
+
+    renderInWorldPlaqueCanvas(screenRecord);
+
+    const pImg = new Image();
+    pImg.decoding = 'async';
+    pImg.onload = () => {
+      screenRecord.posterImg = pImg;
+      screenRecord.posterLoaded = true;
+      if (!screenRecord.videoEl || screenRecord.videoEl.paused) {
+        drawPosterToInWorldScreen(screenRecord);
+      }
+    };
+    pImg.src = screenRecord.posterUrl;
+
+    inWorldScreens.push(screenRecord);
+  });
+}
+
+function refreshInWorldScreensLanguage() {
+  inWorldScreens.forEach((screen) => {
+    renderInWorldPlaqueCanvas(screen);
+  });
+}
+
+function ensureInWorldScreenVideoElement(screen) {
+  if (!screen) return Promise.resolve(null);
+  if (screen.videoReadyPromise) {
+    return screen.videoReadyPromise;
+  }
+  let pool = document.getElementById('inWorldVideoPool');
+  if (!pool && document.body) {
+    pool = document.createElement('div');
+    pool.id = 'inWorldVideoPool';
+    pool.setAttribute('aria-hidden', 'true');
+    pool.style.cssText = 'position:fixed;left:0;bottom:0;width:2px;height:2px;opacity:0.001;pointer-events:none;overflow:hidden;z-index:-1;';
+    document.body.appendChild(pool);
+  }
+  const vid = document.createElement('video');
+  vid.muted = true;
+  vid.defaultMuted = true;
+  vid.playsInline = true;
+  vid.setAttribute('playsinline', '');
+  vid.setAttribute('webkit-playsinline', '');
+  vid.loop = true;
+  vid.preload = 'auto';
+  vid.width = 320;
+  vid.height = 180;
+  if (pool) pool.appendChild(vid);
+  screen.videoEl = vid;
+
+  screen.videoReadyPromise = resolvePipVideoSrc(screen.videoUrl).then((resolvedSrc) => new Promise((resolve) => {
+    vid.src = resolvedSrc || screen.videoUrl;
+    if (vid.readyState >= 2) {
+      resolve(vid);
+      return;
+    }
+    const finish = () => {
+      vid.removeEventListener('loadeddata', finish);
+      vid.removeEventListener('canplay', finish);
+      vid.removeEventListener('error', finish);
+      resolve(vid);
+    };
+    vid.addEventListener('loadeddata', finish);
+    vid.addEventListener('canplay', finish);
+    vid.addEventListener('error', finish);
+    try { vid.load(); } catch (_) {}
+    setTimeout(finish, 2200);
+  }));
+  return screen.videoReadyPromise;
+}
+
+function pauseAllInWorldVideos(restorePoster = false) {
+  inWorldScreens.forEach((screen) => {
+    screen.cueStartedInLiveRun = false;
+    setInWorldScreenFocalState(screen, false);
+    if (screen.videoEl && !screen.videoEl.paused) {
+      screen.videoEl.pause();
+    }
+    if (restorePoster) {
+      drawPosterToInWorldScreen(screen);
+    }
+  });
+}
+
+function updateInWorldScreensLive(activeHotspotIdForScreens, progress) {
+  if (deterministicWalkthroughRender) return;
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const runKey = `${isGuidedTour ? 'tour' : 'spot'}:${activeHotspotIdForScreens || 'none'}`;
+  if (runKey !== activeInWorldRunKey) {
+    activeInWorldRunKey = runKey;
+    inWorldScreens.forEach((sc) => {
+      sc.cueStartedInLiveRun = false;
+      if (sc.hotspotId !== activeHotspotIdForScreens) {
+        setInWorldScreenFocalState(sc, false);
+        if (sc.videoEl && !sc.videoEl.paused) {
+          sc.videoEl.pause();
+        }
+      } else {
+        ensureInWorldScreenVideoElement(sc);
+      }
+    });
+  }
+
+  if (!activeHotspotIdForScreens) return;
+
+  inWorldScreens.forEach((sc) => {
+    if (sc.hotspotId !== activeHotspotIdForScreens) return;
+    const p = isGuidedTour ? progress : 0.35;
+    const isCueWindow = isGuidedTour
+      ? (p >= sc.spec.cueStartP && p <= sc.spec.cueEndP)
+      : true;
+    setInWorldScreenFocalState(sc, isCueWindow);
+
+    if (prefersReduced) {
+      if (sc.videoEl && !sc.videoEl.paused) sc.videoEl.pause();
+      drawPosterToInWorldScreen(sc);
+      return;
+    }
+
+    ensureInWorldScreenVideoElement(sc);
+    const vid = sc.videoEl;
+    if (!vid) return;
+
+    const shouldPlayNow = !isGuidedTour || p >= sc.spec.cueStartP;
+    if (shouldPlayNow) {
+      if (!sc.cueStartedInLiveRun && vid.readyState >= 1) {
+        sc.cueStartedInLiveRun = true;
+        try { vid.currentTime = 0.04; } catch (_) {}
+      }
+      if (isSpotAudioPlaying() && vid.paused) {
+        vid.play().catch(() => {});
+      } else if (!isSpotAudioPlaying() && !vid.paused) {
+        vid.pause();
+      }
+      drawVideoToInWorldScreen(sc);
+    } else {
+      if (!vid.paused) vid.pause();
+      if (vid.readyState >= 2) {
+        if (Math.abs((vid.currentTime || 0) - 0.04) > 0.08) {
+          try { vid.currentTime = 0.04; } catch (_) {}
+        }
+        drawVideoToInWorldScreen(sc);
+      } else {
+        drawPosterToInWorldScreen(sc);
+      }
+    }
+  });
+}
+
+async function seekInWorldScreensDeterministic(hotspotId, progress, totalStationSec) {
+  const stationScreens = inWorldScreens.filter((s) => s.hotspotId === hotspotId);
+  inWorldScreens.forEach((s) => {
+    if (s.hotspotId !== hotspotId) {
+      setInWorldScreenFocalState(s, false);
+      if (s.videoEl && !s.videoEl.paused) s.videoEl.pause();
+    }
+  });
+
+  await Promise.all(stationScreens.map(async (sc) => {
+    const isFocal = progress >= sc.spec.cueStartP && progress <= sc.spec.cueEndP;
+    setInWorldScreenFocalState(sc, isFocal);
+
+    const vid = await ensureInWorldScreenVideoElement(sc);
+    if (!vid) {
+      drawPosterToInWorldScreen(sc);
+      return;
+    }
+    if (!vid.paused) vid.pause();
+
+    const dur = (Number.isFinite(vid.duration) && vid.duration > 0.4)
+      ? vid.duration
+      : (sc.spec.durationSec || 11.0);
+    const safeDur = Math.max(0.8, dur - 0.08);
+    let targetTime = 0.45;
+    if (progress >= sc.spec.cueStartP) {
+      const elapsedOnCue = Math.max(0, (progress - sc.spec.cueStartP) * (totalStationSec || 60.0));
+      const loopSpan = Math.max(0.6, safeDur - 0.40);
+      targetTime = Math.min(safeDur, 0.40 + (elapsedOnCue % loopSpan));
+    }
+
+    if (Math.abs((vid.currentTime || 0) - targetTime) > 0.022) {
+      await new Promise((resolve) => {
+        const onSeeked = () => {
+          vid.removeEventListener('seeked', onSeeked);
+          resolve();
+        };
+        vid.addEventListener('seeked', onSeeked);
+        try {
+          vid.currentTime = targetTime;
+        } catch (_) {
+          vid.removeEventListener('seeked', onSeeked);
+          resolve();
+        }
+        setTimeout(() => {
+          vid.removeEventListener('seeked', onSeeked);
+          resolve();
+        }, 160);
+      });
+    }
+
+    if (!drawVideoToInWorldScreen(sc)) {
+      drawPosterToInWorldScreen(sc);
+    }
+  }));
+}
+
+function rampBackgroundScoreVolume(targetVol) {
+  backgroundScoreTargetVol = Math.max(0, Math.min(1, targetVol));
+  if (!backgroundScoreAudio) return;
+  if (backgroundScoreFadeTimer) {
+    clearInterval(backgroundScoreFadeTimer);
+    backgroundScoreFadeTimer = null;
+  }
+  backgroundScoreFadeTimer = setInterval(() => {
+    if (!backgroundScoreAudio) {
+      clearInterval(backgroundScoreFadeTimer);
+      backgroundScoreFadeTimer = null;
+      return;
+    }
+    const cur = backgroundScoreAudio.volume;
+    const diff = backgroundScoreTargetVol - cur;
+    if (Math.abs(diff) <= 0.02) {
+      backgroundScoreAudio.volume = backgroundScoreTargetVol;
+      if (backgroundScoreTargetVol <= 0.001 && !backgroundScoreAudio.paused) {
+        backgroundScoreAudio.pause();
+      }
+      clearInterval(backgroundScoreFadeTimer);
+      backgroundScoreFadeTimer = null;
+    } else {
+      backgroundScoreAudio.volume = Math.max(0, Math.min(1, cur + Math.sign(diff) * 0.036));
+    }
+  }, 24);
+}
+
+function ensureBackgroundScorePlaying(phase = 'voice') {
+  if (!voiceNarrationEnabled) return;
+  if (!backgroundScoreAudio) {
+    backgroundScoreAudio = new Audio('media/audio/memorial_ambient_loop.mp3?v=20261112c');
+    backgroundScoreAudio.loop = true;
+    backgroundScoreAudio.preload = 'auto';
+    backgroundScoreAudio.volume = 0.04;
+  }
+  const volByPhase = {
+    archival: 0.21,
+    delay: 0.34,
+    transition: 0.35,
+    voice: 0.27
+  };
+  const desired = volByPhase[phase] !== undefined ? volByPhase[phase] : 0.27;
+  if (backgroundScoreAudio.paused) {
+    backgroundScoreAudio.play().catch(() => {});
+  }
+  rampBackgroundScoreVolume(desired);
+}
+
+function pauseBackgroundScore(resetToStart = false) {
+  if (!backgroundScoreAudio) return;
+  if (resetToStart) {
+    if (backgroundScoreFadeTimer) {
+      clearInterval(backgroundScoreFadeTimer);
+      backgroundScoreFadeTimer = null;
+    }
+    backgroundScoreAudio.pause();
+    try { backgroundScoreAudio.currentTime = 0; } catch (_) {}
+    backgroundScoreAudio.volume = 0.04;
+    return;
+  }
+  rampBackgroundScoreVolume(0.0);
+}
 
 const NARRATOR_PROFILES = {
   mostafa_fa: {
     id: 'mostafa_fa',
+    actor: 'mostafa',
     lang: 'fa',
     prefix: 'fa',
     dir: 'voices/mostafa_fa',
@@ -3548,8 +4618,19 @@ const NARRATOR_PROFILES = {
     hudLabel: { en: 'Voice: Mostafa (FA)', fa: 'راوی: مصطفی جلالی', fi: 'Ääni: Mostafa (FA)' },
     shortLabel: { en: '🎙️ Mostafa', fa: '🎙️ مصطفی جلالی', fi: '🎙️ Mostafa' }
   },
+  mostafa_en: {
+    id: 'mostafa_en',
+    actor: 'mostafa',
+    lang: 'en',
+    prefix: 'en',
+    dir: 'voices/mostafa_en',
+    fallbackDir: 'voices/leila_en',
+    hudLabel: { en: 'Voice: Mostafa (EN)', fa: 'راوی: مصطفی جلالی (EN)', fi: 'Ääni: Mostafa (EN)' },
+    shortLabel: { en: '🎙️ Mostafa', fa: '🎙️ مصطفی (EN)', fi: '🎙️ Mostafa' }
+  },
   leila_fa: {
     id: 'leila_fa',
+    actor: 'leila',
     lang: 'fa',
     prefix: 'fa',
     dir: 'voices/leila_fa',
@@ -3559,6 +4640,7 @@ const NARRATOR_PROFILES = {
   },
   leila_en: {
     id: 'leila_en',
+    actor: 'leila',
     lang: 'en',
     prefix: 'en',
     dir: 'voices/leila_en',
@@ -3568,6 +4650,7 @@ const NARRATOR_PROFILES = {
   },
   ali_en: {
     id: 'ali_en',
+    actor: 'ali',
     lang: 'en',
     prefix: 'en',
     dir: 'voices/ali_en',
@@ -3577,14 +4660,14 @@ const NARRATOR_PROFILES = {
   }
 };
 
-let activeVoiceProfile = 'leila_en';
+let activeVoiceProfile = 'mostafa_en';
 const preferredVoiceByLang = {
   fa: 'mostafa_fa',
-  en: 'leila_en'
+  en: 'mostafa_en'
 };
 
 function updateNarratorButtonsUI() {
-  const prof = NARRATOR_PROFILES[activeVoiceProfile] || NARRATOR_PROFILES.leila_en;
+  const prof = NARRATOR_PROFILES[activeVoiceProfile] || NARRATOR_PROFILES.mostafa_en;
   const labelText = prof.hudLabel[currentLang] || prof.hudLabel.en;
   const hudLbl = document.getElementById('hudNarratorLabel');
   if (hudLbl) hudLbl.textContent = labelText;
@@ -3594,7 +4677,36 @@ function updateNarratorButtonsUI() {
   if (storyBtn) {
     storyBtn.textContent = prof.shortLabel[currentLang] || prof.shortLabel.en;
   }
+
+  const slotLabels = {
+    mostafa: currentLang === 'fa' ? 'مصطفی' : 'Mostafa',
+    leila: currentLang === 'fa' ? 'لیلا' : 'Leila',
+    ali: currentLang === 'fa' ? 'علی (EN)' : 'Ali'
+  };
+  document.querySelectorAll('[data-voice-slot]').forEach((btn) => {
+    const slot = btn.getAttribute('data-voice-slot');
+    if (slotLabels[slot]) btn.textContent = slotLabels[slot];
+    // In Persian mode, hide Ali (English-only) or allow switching; show Mostafa & Leila in FA, all 3 in EN/FI
+    if (slot === 'ali') {
+      btn.style.display = currentLang === 'fa' ? 'none' : '';
+    }
+    btn.classList.toggle('active', prof.actor === slot);
+  });
 }
+
+function selectNarratorByActor(actor) {
+  resetWalkthroughIdleTimer();
+  if (currentLang === 'fa') {
+    if (actor === 'mostafa') setNarratorProfile('mostafa_fa', true);
+    else if (actor === 'leila') setNarratorProfile('leila_fa', true);
+    else if (actor === 'ali') setNarratorProfile('ali_en', true);
+  } else {
+    if (actor === 'mostafa') setNarratorProfile('mostafa_en', true);
+    else if (actor === 'leila') setNarratorProfile('leila_en', true);
+    else if (actor === 'ali') setNarratorProfile('ali_en', true);
+  }
+}
+window.selectNarratorByActor = selectNarratorByActor;
 
 function setNarratorProfile(profileId, restartAudio = true) {
   const prof = NARRATOR_PROFILES[profileId];
@@ -3627,7 +4739,9 @@ function cycleNarratorForCurrentLanguage() {
     const nextFa = activeVoiceProfile === 'mostafa_fa' ? 'leila_fa' : 'mostafa_fa';
     setNarratorProfile(nextFa, true);
   } else {
-    const nextEn = activeVoiceProfile === 'leila_en' ? 'ali_en' : 'leila_en';
+    const order = ['mostafa_en', 'leila_en', 'ali_en'];
+    const curIdx = order.indexOf(activeVoiceProfile);
+    const nextEn = order[(curIdx + 1) % order.length];
     setNarratorProfile(nextEn, true);
   }
 }
@@ -3848,18 +4962,296 @@ async function resolvePipVideoSrc(reelUrl) {
 }
 
 async function preloadAllWalkthroughPipBlobs() {
-  const urls = Object.values(WALKTHROUGH_VISUAL_CONFIG).map((c) => c.pipReel).filter(Boolean);
-  await Promise.all(urls.map((u) => resolvePipVideoSrc(u)));
+  const pipUrls = Object.values(WALKTHROUGH_VISUAL_CONFIG).map((c) => c.pipReel).filter(Boolean);
+  const screenUrls = IN_WORLD_SCREEN_SPECS.map((s) => `media/walkthrough_pip/${s.file}.mp4`);
+  const interludeUrls = Object.values(WALKTHROUGH_INTERLUDES).map((c) => c.src);
+  const all = Array.from(new Set([...pipUrls, ...screenUrls, ...interludeUrls]));
+  await Promise.all(all.map((u) => resolvePipVideoSrc(u)));
 }
 window.preloadAllWalkthroughPipBlobs = preloadAllWalkthroughPipBlobs;
 
-const SPOT_ARCHIVAL_AUDIO = {
-  courtyard_lines:   { file: 'courtyard_lines.mp3',   expectedDur: 6.65 },
-  boys_flower_arch:  { file: 'boys_flower_arch.mp3',  expectedDur: 11.18 },
-  boys_classroom:    { file: 'boys_classroom.mp3',    expectedDur: 6.75 },
-  rainbow_staircase: { file: 'rainbow_staircase.mp3', expectedDur: 7.00 },
-  girls_upper_hall:  { file: 'girls_upper_hall.mp3',  expectedDur: 6.25 },
-  vow_shrine:        { file: 'vow_shrine.mp3',        expectedDur: 7.40 }
+// Detached audio-only intros are replaced by synchronized full-focus video+sound Cinema Interludes between stations
+const SPOT_ARCHIVAL_AUDIO = {};
+
+const WALKTHROUGH_BOOKENDS = {
+  prologue: {
+    durationMs: 5200,
+    kicker: {
+      en: 'FORENSIC SPATIAL RECONSTRUCTION & LIVING ARCHIVE',
+      fa: 'بازسازی فضایی مستند و آرشیو زنده مدرسه میناب',
+      fi: 'FORENSINEN TILAREKONSTRUKTIO JA ELÄVÄ ARKISTO'
+    },
+    title: {
+      en: 'Shajareh Tayyebeh Primary School',
+      fa: 'دبستان شجره طیبه میناب',
+      fi: 'Shajareh Tayyebehin alakoulu'
+    },
+    coords: {
+      en: '27°08′43″N 57°05′02″E · Minab, Hormozgan · February 28, 2026',
+      fa: 'میناب، استان هرمزگان · شنبه ۹ اسفند ۱۴۰۴ (۲۸ فوریه ۲۰۲۶)',
+      fi: '27°08′43″N 57°05′02″E · Minab · 28. helmikuuta 2026'
+    },
+    note: {
+      en: 'Every photograph, child\'s voice, and eyewitness video inside these rooms was recorded in this school before and on the day of the strike.',
+      fa: 'تمامی عکس‌ها، صدای کودکان و ویدیوهای درون این اتاق‌ها، پیش از حمله و در روز حادثه در همین دبستان ثبت شده‌اند.',
+      fi: 'Jokainen valokuva, lapsen ääni ja silminnäkijävideo näissä huoneissa on tallennettu tässä koulussa ennen iskua ja iskun päivänä.'
+    }
+  },
+  epilogue: {
+    durationMs: 7000,
+    kicker: {
+      en: 'IN REMEMBRANCE & PURSUIT OF JUSTICE',
+      fa: 'به یاد کودکان میناب و در مسیر دادخواهی',
+      fi: 'MUISToksi JA OIKEUDENMUKAISUUDEN PUOLESTA'
+    },
+    title: {
+      en: '120 Schoolchildren & 26 Educators',
+      fa: '۱۲۰ دانش‌آموز خردسال و ۲۶ آموزگار',
+      fi: '120 koululaista ja 26 opettajaa'
+    },
+    coords: {
+      en: 'Shajareh Tayyebeh Primary School · Minab · February 28, 2026',
+      fa: 'دبستان شجره طیبه میناب · ۹ اسفند ۱۴۰۴',
+      fi: 'Shajareh Tayyebehin alakoulu · Minab · 28.2.2026'
+    },
+    note: {
+      en: 'Stand beside their families and sign the Global Accountability Vow — peopleforpeace.live',
+      fa: 'در کنار خانواده‌هایشان بایستید و «میثاق جهانی دادخواهی میناب» را امضا کنید — peopleforpeace.live',
+      fi: 'Seiso perheiden rinnalla ja allekirjoita vastuulupaus — peopleforpeace.live'
+    }
+  },
+  skipBtn: {
+    en: 'Skip Interlude ›',
+    fa: 'عبور از ویدیو ›',
+    fi: 'Ohita välivideo ›'
+  }
+};
+
+// 6 Deliberate Between-Narrations Cinema Witness Interludes (Full Video + Authentic Diegetic Sound)
+const WALKTHROUGH_INTERLUDES = {
+  courtyard_lines: {
+    id: 'interlude_01',
+    src: 'media/walkthrough_interludes/interlude_01_rose_arch_singing.mp4',
+    aspect: 'landscape',
+    tone: 'pre',
+    kicker: {
+      en: 'GROUND FLOOR CEREMONY ROOM · ORIGINAL CLASSROOM AUDIO',
+      fa: 'اتاق جشن طبقه همکف · صدای واقعی هم‌خوانی دانش‌آموزان پسر',
+      fi: 'ALAKERRAN JUHLAHUONE · ALKUPERÄINEN LUOKKAÄÄNI'
+    },
+    context: {
+      en: 'Shajareh Tayyebeh schoolboys in royal-blue uniforms singing together beneath the red rose arches weeks before the strike',
+      fa: 'هم‌خوانی پسران دانش‌آموز با لباس فرم آبی در زیر دو طاق گل سرخ، چند هفته پیش از حمله',
+      fi: 'Koulupojat sinisissä koulupuvuissaan laulamassa punaisten ruusukaarien alla viikkoja ennen iskua'
+    },
+    cues: [
+      {
+        s: 0.2, e: 4.3,
+        en: '♪ "I am happy, joyful, and smiling..."',
+        fa: '♪ «خوشحال و شاد و خندانم...»',
+        fi: '♪ "Olen iloinen, onnellinen ja hymyilevä..."'
+      },
+      {
+        s: 4.3, e: 7.4,
+        en: '♪ "...I know the precious worth of life..."',
+        fa: '♪ «...قدر دنیا رو می‌دانم...»',
+        fi: '♪ "...tiedän elämän kallisarvoisuuden..."'
+      },
+      {
+        s: 7.4, e: 11.3,
+        en: '♪ "...laughter rises upon my lips."',
+        fa: '♪ «...خنده سر می‌دهد لب‌های من.»',
+        fi: '♪ "...nauru kohoaa huulilleni."'
+      }
+    ]
+  },
+  boys_flower_arch: {
+    id: 'interlude_02',
+    src: 'media/walkthrough_interludes/interlude_02_mahan_mothers_day.mp4',
+    aspect: 'portrait34',
+    tone: 'pre',
+    kicker: {
+      en: 'GROUND FLOOR CLASSROOM · MAHAN\'S VOICE FOR MOTHER\'S DAY',
+      fa: 'کلاس درس طبقه همکف · پیام کودکانه «ماهان» برای روز مادر (صدای طبیعی)',
+      fi: 'ALAKERRAN LUOKKA · PIKKU MAHANIN ÄITIENPÄIVÄTERVEHDYS'
+    },
+    context: {
+      en: 'Alphabet lesson ("Ā") in the ground-floor boys\' classroom — young student Mahan speaking into his teacher\'s phone',
+      fa: 'تدریس نشانه «آ» در کلاس پسران — پیام مستقیم ماهان کوچک رو به دوربین معلم برای مادرش',
+      fi: 'Aakkostunti poikien luokassa — pikku Mahan puhuu opettajan kameralle äidilleen'
+    },
+    cues: [
+      {
+        s: 0.0, e: 4.0,
+        en: '"Hello, my beautiful mother — happy Mother\'s Day to you today, mother."',
+        fa: '«سلام مادر قشنگم؛ امروز روزت رو بهت تبریک می‌گم مادر.»',
+        fi: '"Hei kaunis äitini — hyvää äitienpäivää sinulle tänään, äiti."'
+      },
+      {
+        s: 4.0, e: 8.2,
+        en: '"I love you, my beautiful mother — from your son, Mahan."',
+        fa: '«دوستت دارم مادر قشنگم... از طرف پسرت، ماهان.»',
+        fi: '"Rakastan sinua, kaunis äitini — pojaltasi Mahanilta."'
+      },
+      {
+        s: 8.2, e: 11.1,
+        en: 'Holding handmade pomegranate crafts for the Persian letter "Ā"',
+        fa: 'همراه با کاردستی‌های کودکانه انار برای یادگیری نشانه «آ»',
+        fi: 'Oppilaiden askartelemat granaattiomenat kirjaimen "Ā" oppitunnilla'
+      }
+    ]
+  },
+  boys_classroom: {
+    id: 'interlude_03',
+    src: 'media/walkthrough_interludes/interlude_03_boys_classroom_laughter.mp4',
+    aspect: 'classic',
+    tone: 'pre',
+    kicker: {
+      en: 'UNEDITED CLASSROOM AUDIO · CHILDHOOD LAUGHTER AT GREEN DESKS',
+      fa: 'صدای کاملاً طبیعی و بدون ویرایش · خنده‌های کودکانه پشت نیمکت‌های سبز',
+      fi: 'ALKUPERÄINEN LUOKKAÄÄNI · POIKIEN NAURU VIHREILLÄ PULPETEILLA'
+    },
+    context: {
+      en: 'Raw classroom recording inside Shajareh Tayyebeh Boys\' School — unedited laughter during a playful science activity',
+      fa: 'فیلم خام کلاسی از شوخی و خنده‌های بی‌وقفه دانش‌آموزان پسر با آموزگارشان در دبستان شجره طیبه',
+      fi: 'Muokkaamaton luokkahuonetallenne poikien ilosta ja naurusta opettajansa kanssa'
+    },
+    cues: [
+      {
+        s: 0.4, e: 15.1,
+        en: '[Unedited classroom audio: young boys laughing and cheering together at their green desks]',
+        fa: '[صدای واقعی کلاس: خنده‌ها و شادی کودکانه دانش‌آموزان پسر پشت نیمکت‌های سبز]',
+        fi: '[Alkuperäinen luokkaääni: pienten koulupoikien iloinen nauru luokkahuoneessa]'
+      }
+    ]
+  },
+  girls_upper_hall: {
+    id: 'interlude_04',
+    src: 'media/walkthrough_interludes/interlude_04_the_hinge_1045am.mp4',
+    aspect: 'portrait',
+    tone: 'strike',
+    ruptureWindow: {
+      s: 8.2, e: 10.7,
+      time: {
+        en: 'SATURDAY · FEBRUARY 28, 2026 · FIRST STRIKE',
+        fa: 'شنبه ۹ اسفند ۱۴۰۴ · لحظه اصابت نخستین موشک',
+        fi: 'LAUANTAI · 28. HELMIKUUTA 2026 · ENSIMMÄINEN ISKU'
+      },
+      title: {
+        en: 'Direct Cruise Missile Impact on Shajareh Tayyebeh Primary School',
+        fa: 'اصابت مستقیم موشک کروز به دبستان شجره طیبه میناب',
+        fi: 'Risteilyohjuksen suora osuma Shajareh Tayyebehin alakouluun'
+      }
+    },
+    kicker: {
+      en: 'FINAL MINUTES IN 1ST GRADE → FIRST MINUTES IN THE COURTYARD',
+      fa: 'آخرین عکس کلاس اول پیش از انفجار ← دقایق نخست در حیاط پر از دود',
+      fi: 'EKALUOKAN VIIMEISET HETKET → ENSIMMÄISET MINUUTIT KOULUPIHALLA'
+    },
+    context: {
+      en: 'Photos sent by the 1st-grade teacher to the mothers\' group minutes before impact, followed by raw citizen courtyard video',
+      fa: 'تصاویر ارسالی معلم شهید کلاس اول در گروه مادران دقایقی پیش از حمله، و فیلم خام حیاط مدرسه بلافاصله پس از اصابت',
+      fi: 'Ekaluokan opettajan äideille lähettämät viimeiset kuvat juuri ennen iskua sekä silminnäkijävideo pihalta iskun jälkeen'
+    },
+    cues: [
+      {
+        s: 0.2, e: 8.0,
+        en: 'Final photographs sent by the first-grade teacher to the mothers\' chat group — minutes before the strike',
+        fa: 'آخرین عکس‌های دانش‌آموزان کلاس اول که معلم شهید دقایقی پیش از اصابت موشک در گروه مادران فرستاد',
+        fi: 'Ekaluokan opettajan äitien ryhmään lähettämät viimeiset valokuvat — minuutteja ennen ohjusiskua'
+      },
+      {
+        s: 11.0, e: 16.5,
+        en: '[Raw courtyard audio — torn homework sheets cover the dust as families rush toward the smoking classrooms]',
+        fa: '[صدای خام صحنه — برگه‌های پراکنده دفتر مشق روی خاک حیاط و دویدن خانواده‌ها به سوی دود سیاه کلاس‌ها]',
+        fi: '[Alkuperäinen pihaääni — repeytyneitä koulutehtäviä maassa perheiden ryntäillessä savuaville luokille]'
+      },
+      {
+        s: 16.5, e: 22.8,
+        en: 'Voice crying out in the courtyard: "Mohaddeseh!..."',
+        fa: 'فریاد مضطرب در حیاط مدرسه: «محدثه!...»',
+        fi: 'Hätääntynyt huuto koulupihalla: "Mohaddeseh!..."'
+      }
+    ]
+  },
+  crater_damage: {
+    id: 'interlude_05',
+    src: 'media/walkthrough_interludes/interlude_05_staircase_witness_and_shoes.mp4',
+    aspect: 'tall',
+    tone: 'strike',
+    kicker: {
+      en: 'ON-SITE SPATIAL TESTIMONY · SHEARED STAIRCASE & RECOVERED SHOES',
+      fa: 'شهادت میدانی در برابر راه‌پله منهدم‌شده و ردیف کفش‌های کوچک کودکان',
+      fi: 'PAIKAN PÄÄLLÄ KUVATTU TODISTUS · SORTUNUT PORTAIKKO JA LASTEN KENGÄT'
+    },
+    context: {
+      en: 'Unedited field narration before the sheared central stairwell, followed by recovered children\'s shoes laid out on carpets',
+      fa: 'گزارش میدانی بدون ویرایش از مقابل راه‌پله فروریخته مرکزی، و ردیف کفش‌ها و کیف‌های به‌جامانده دانش‌آموزان',
+      fi: 'Muokkaamaton kenttätodistus sortuneen keskusportaikon edessä sekä matolle järjestetyt lasten kengät ja reput'
+    },
+    cues: [
+      {
+        s: 0.3, e: 6.8,
+        en: '"This staircase you see right here — the first missile struck squarely in the center of the building."',
+        fa: '«این راه‌پله‌ای که اینجا می‌بینید، موشک اول قشنگ خورده وسط ساختمان، این سمت.»',
+        fi: '"Tämä portaikko, jonka näet tässä — ensimmäinen ohjus osui suoraan rakennuksen keskelle."'
+      },
+      {
+        s: 6.8, e: 15.2,
+        en: '"The upper floor was the girls\' school, and the ground floor was the boys\' school, with two separate courtyards."',
+        fa: '«طبقه بالا مدرسه دخترانه بوده، طبقه پایین مدرسه پسرانه بوده با دو تا حیاط مجزا به این شکل.»',
+        fi: '"Yläkerrassa oli tyttöjen koulu ja alakerrassa poikien koulu, joilla oli kaksi erillistä pihaa."'
+      },
+      {
+        s: 15.2, e: 27.9,
+        en: '"After the first missile hit the staircase, the second missile struck where the children and mothers had gathered — families who came to save their children were killed."',
+        fa: '«بعد از اصابت موشک اول به راه‌پله، موشک دوم زد توی تجمع بچه‌ها؛ مادرهایی که آمده بودند بچه‌ها را ببرند شهید شدند...»',
+        fi: '"Ensimmäisen ohjuksen jälkeen toinen ohjus iski sinne, minne lapset ja heitä hakemaan tulleet äidit olivat kokoontuneet."'
+      },
+      {
+        s: 28.4, e: 35.8,
+        en: 'Dozens of recovered small shoes, pastel schoolbags, and homework notebooks laid out in rows for parents to identify',
+        fa: 'ده‌ها جفت کفش کوچک خاکی، کیف و دفتر مشق دانش‌آموزان که برای شناسایی توسط مادران و پدران بر روی فرش چیده شده است',
+        fi: 'Kymmeniä raunioista löydettyjä pieniä kenkiä, koulureppuja ja vihkoja järjestettynä vanhempien tunnistettavaksi'
+      }
+    ]
+  },
+  second_wave: {
+    id: 'interlude_06',
+    src: 'media/walkthrough_interludes/interlude_06_survivors_and_150_graves.mp4',
+    aspect: 'portrait',
+    tone: 'strike',
+    kicker: {
+      en: 'HUMAN TOLL · CHILD SURVIVORS, RECOVERED SNEAKER & 150+ GRAVES',
+      fa: 'ابعاد انسانی فاجعه · کودکان بازمانده، کفش زیر آوار و ردیف مزارهای کوچک',
+      fi: 'INHIMILLINEN HINTA · SELVIYTYNEET LAPSET, PIENI KENKÄ JA YLI 150 HAUTAA'
+    },
+    context: {
+      en: 'Surviving sisters Reyhaneh & Mastaneh, a child\'s sneaker lifted from concrete, and aerial view of the cemetery in Minab (scored with "Melody of Peace")',
+      fa: 'نگاه بهت‌زده ریحانه و مستانه، کفش کوچک بیرون‌آمده از زیر بتن، و نمای هوایی مزارهای کودکان میناب (همراه با نوای «ملودی صلح»)',
+      fi: 'Selviytyneet sisarukset Reyhaneh ja Mastaneh, raunioista nostettu lapsen kenkä sekä ilmakuva Minabin hautausmaalta'
+    },
+    cues: [
+      {
+        s: 0.2, e: 5.4,
+        en: 'Young surviving sisters Reyhaneh and Mastaneh, covered in blast dust, looking back toward their burning school',
+        fa: '«ریحانه» و «مستانه»، دو دانش‌آموز خردسال بازمانده، در میان گردوغبار به ویرانه مدرسه‌شان نگاه می‌کنند',
+        fi: 'Pienet selviytyneet sisarukset Reyhaneh ja Mastaneh katsovat pölyn peittäminä palavaa kouluaan'
+      },
+      {
+        s: 5.5, e: 11.9,
+        en: 'A rescuer\'s gloved hand gently lifts a child\'s dust-covered sneaker from the shattered classroom concrete',
+        fa: 'دستان امدادگر، کفش کوچک خاک‌گرفته یکی از کودکان را از میان سنگ و بتن کلاس بیرون می‌آورد',
+        fi: 'Pelastajan käsi nostaa varovasti lapsen pölyisen kengän murskaantuneen luokkahuoneen betonin keskeltä'
+      },
+      {
+        s: 12.0, e: 21.3,
+        en: 'Over one hundred small graves excavated side by side in Minab as thousands gather to lay the children to rest',
+        fa: 'بیش از صد مزار کوچک حفرشده در کنار یکدیگر در میناب و حضور هزاران سوگوار برای بدرقه کودکان شجره طیبه',
+        fi: 'Yli sata vierekkäin kaivettua pientä hautaa Minabissa tuhansien saattajien kokoontuessa hyvästelemään lapset'
+      }
+    ]
+  }
 };
 
 const ROOM_ATMOSPHERE_PROFILES = {
@@ -4025,21 +5417,16 @@ function updateWalkthroughVisualOverlaysLive(stopIdx, progress) {
     showAnimatedOverlay(stampEl);
   }
 
+  // Separate 2D floating PiP frame is permanently disabled — videos play directly inside the 3D school architecture
   const pipCard = document.getElementById('walkthroughPipCard');
   const pipVideo = document.getElementById('walkthroughPipVideo');
-  const shouldShowPip = Boolean(vCfg.pipReel) && progress >= 0.09 && progress <= 0.88;
-  if (pipCard) {
-    if (shouldShowPip && (pipCard.hidden || pipCard.hasAttribute('data-closing'))) {
-      showAnimatedOverlay(pipCard);
-      ensurePipVideoLoadedForHotspot(stop.hotspotId, true);
-    } else if (!shouldShowPip && !pipCard.hidden && !pipCard.hasAttribute('data-closing')) {
-      if (pipVideo) pipVideo.pause();
-      hideAnimatedOverlay(pipCard);
-    }
+  if (pipCard && !pipCard.hidden) {
+    if (pipVideo && !pipVideo.paused) pipVideo.pause();
+    pipCard.hidden = true;
   }
 
   const quoteEl = document.getElementById('walkthroughQuoteCallout');
-  const shouldShowQuote = Boolean(vCfg.quote) && progress >= 0.48 && progress <= 0.86;
+  const shouldShowQuote = Boolean(vCfg.quote) && progress >= 0.54 && progress <= 0.68;
   if (quoteEl) {
     if (shouldShowQuote && (quoteEl.hidden || quoteEl.hasAttribute('data-closing'))) {
       showAnimatedOverlay(quoteEl);
@@ -4064,9 +5451,39 @@ function smoothWindowAlpha(p, inStart, inEnd, outStart, outEnd) {
 
 async function syncWalkthroughVisualsAtProgress(stopIdx, progress, totalStationSec) {
   deterministicWalkthroughRender = true;
+  isGuidedTour = true;
+  isAnimatingCamera = false;
+  tourManualCameraOverride = false;
+  currentTourIndex = stopIdx;
+
   const stop = GUIDED_TOUR_STOPS[stopIdx];
   if (!stop) return;
+  const t = I18N_DATA[currentLang] || I18N_DATA.en;
+  const hData = t.hotspots && t.hotspots[stop.hotspotId];
   const vCfg = WALKTHROUGH_VISUAL_CONFIG[stop.hotspotId];
+
+  document.body.classList.add('walkthrough-mode');
+  if (markersGroup) markersGroup.visible = false;
+  showStoryBanner();
+
+  setTemporalCondition(stop.temporal);
+  const sliderEl = document.getElementById('timelineSlider');
+  if (sliderEl) sliderEl.value = stop.temporal;
+  if (stop.temporal < 0.5 && typeof stop.cutawayMode === 'number') {
+    setCutawayMode(stop.cutawayMode);
+  }
+
+  const badgeEl = document.getElementById('storyStepBadge');
+  if (badgeEl) {
+    const shortBadge = stop.shortBadge && (stop.shortBadge[currentLang] || stop.shortBadge.en);
+    badgeEl.textContent = shortBadge || (stop.badge[currentLang] || stop.badge.en);
+  }
+  const titleEl = document.getElementById('storyTitle');
+  if (titleEl && hData) {
+    titleEl.textContent = hData.title.replace(/^[0-9۰-۹]+\.\s*/, '');
+  }
+
+  setWalkthroughProgress(progress);
   applyWalkthroughStationOverlays(stopIdx);
 
   const stampEl = document.getElementById('walkthroughContextStamp');
@@ -4083,50 +5500,17 @@ async function syncWalkthroughVisualsAtProgress(stopIdx, progress, totalStationS
     }
   }
 
+  // Keep separate 2D floating PiP frame permanently hidden
   const pipCard = document.getElementById('walkthroughPipCard');
-  const pipVideo = document.getElementById('walkthroughPipVideo');
-  if (pipCard && pipVideo && vCfg && vCfg.pipReel) {
-    const pAlpha = smoothWindowAlpha(progress, 0.09, 0.14, 0.83, 0.88);
-    pipCard.removeAttribute('data-closing');
-    pipCard.style.transition = 'none';
-    if (pAlpha <= 0.002) {
-      pipCard.hidden = true;
-    } else {
-      pipCard.hidden = false;
-      pipCard.style.opacity = pAlpha.toFixed(3);
-      pipCard.style.translate = '0 0';
-      await ensurePipVideoLoadedForHotspot(stop.hotspotId, false);
-      pipVideo.pause();
-      const dur = (Number.isFinite(pipVideo.duration) && pipVideo.duration > 0.2) ? pipVideo.duration : 14.0;
-      const elapsedSec = Math.max(0, (progress - 0.09) * (totalStationSec || 55.0));
-      const targetTime = Math.min(dur - 0.05, elapsedSec % Math.max(0.5, dur - 0.05));
-      if (Math.abs((pipVideo.currentTime || 0) - targetTime) > 0.025) {
-        await new Promise((resolve) => {
-          const onSeeked = () => {
-            pipVideo.removeEventListener('seeked', onSeeked);
-            resolve();
-          };
-          pipVideo.addEventListener('seeked', onSeeked);
-          try {
-            pipVideo.currentTime = targetTime;
-          } catch (_) {
-            pipVideo.removeEventListener('seeked', onSeeked);
-            resolve();
-          }
-          setTimeout(() => {
-            pipVideo.removeEventListener('seeked', onSeeked);
-            resolve();
-          }, 120);
-        });
-      }
-    }
+  if (pipCard) {
+    pipCard.hidden = true;
   }
 
   const quoteEl = document.getElementById('walkthroughQuoteCallout');
   if (quoteEl) {
     quoteEl.removeAttribute('data-closing');
     quoteEl.style.transition = 'none';
-    const qAlpha = (vCfg && vCfg.quote) ? smoothWindowAlpha(progress, 0.48, 0.53, 0.82, 0.87) : 0;
+    const qAlpha = (vCfg && vCfg.quote) ? smoothWindowAlpha(progress, 0.45, 0.49, 0.60, 0.64) : 0;
     if (qAlpha <= 0.002) {
       quoteEl.hidden = true;
     } else {
@@ -4135,6 +5519,17 @@ async function syncWalkthroughVisualsAtProgress(stopIdx, progress, totalStationS
       quoteEl.style.translate = `-50% ${((1 - qAlpha) * 8).toFixed(1)}px`;
     }
   }
+
+  const sampled = sampleGuidedTourCamera(stopIdx, progress);
+  if (sampled) {
+    camera.position.copy(sampled.pos);
+    controls.target.copy(sampled.lookAt);
+    controls.update();
+  }
+
+  await seekInWorldScreensDeterministic(stop.hotspotId, progress, totalStationSec || 60.0);
+  updateHotspotPositions();
+  renderer.render(scene, camera);
 }
 window.syncWalkthroughVisualsAtProgress = syncWalkthroughVisualsAtProgress;
 
@@ -4178,18 +5573,37 @@ function sampleGuidedTourCamera(stopIndex, rawProgress) {
   if (!stop) return null;
   const pts = Array.isArray(stop.waypoints) && stop.waypoints.length >= 2
     ? stop.waypoints
-    : [{ camPos: stop.camPos, lookAt: stop.lookAt }, { camPos: stop.camPos, lookAt: stop.lookAt }];
+    : [{ t: 0.0, camPos: stop.camPos, lookAt: stop.lookAt }, { t: 1.0, camPos: stop.camPos, lookAt: stop.lookAt }];
 
   const p = Math.max(0, Math.min(1, rawProgress || 0));
-  // Cosine ease-in-out for calm museum motion
-  const eased = 0.5 - 0.5 * Math.cos(Math.PI * p);
-  const scaled = eased * (pts.length - 1);
-  const segIdx = Math.min(pts.length - 2, Math.floor(scaled));
-  const localT = scaled - segIdx;
-  const segEase = 0.5 - 0.5 * Math.cos(Math.PI * localT);
+  let a = pts[0];
+  let b = pts[pts.length - 1];
+  let localT = 0;
 
-  const a = pts[segIdx];
-  const b = pts[segIdx + 1];
+  if (typeof pts[0].t === 'number') {
+    let segIdx = pts.length - 2;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const tNext = typeof pts[i + 1].t === 'number' ? pts[i + 1].t : ((i + 1) / (pts.length - 1));
+      if (p <= tNext || i === pts.length - 2) {
+        segIdx = i;
+        break;
+      }
+    }
+    a = pts[segIdx];
+    b = pts[segIdx + 1];
+    const t0 = typeof a.t === 'number' ? a.t : 0;
+    const t1 = typeof b.t === 'number' ? b.t : 1;
+    localT = THREE.MathUtils.clamp((p - t0) / Math.max(0.0001, t1 - t0), 0, 1);
+  } else {
+    const eased = 0.5 - 0.5 * Math.cos(Math.PI * p);
+    const scaled = eased * (pts.length - 1);
+    const segIdx = Math.min(pts.length - 2, Math.floor(scaled));
+    a = pts[segIdx];
+    b = pts[segIdx + 1];
+    localT = scaled - segIdx;
+  }
+
+  const segEase = 0.5 - 0.5 * Math.cos(Math.PI * localT);
   const pos = new THREE.Vector3(
     THREE.MathUtils.lerp(a.camPos[0], b.camPos[0], segEase),
     THREE.MathUtils.lerp(a.camPos[1], b.camPos[1], segEase),
@@ -4396,6 +5810,8 @@ function pauseSpotNarration() {
   if (narrationAudio && !narrationAudio.paused) {
     narrationAudio.pause();
   }
+  pauseBackgroundScore(false);
+  pauseAllInWorldVideos(false);
   stopMemorialAmbientPad();
   updateStoryAudioButtonUI(false);
   const listenBtn = document.getElementById('modalListenBtn');
@@ -4410,12 +5826,14 @@ function resumeSpotNarration(fallbackHotspotId) {
   voiceNarrationEnabled = true;
 
   if (narrationPhase === 'archival' && archivalAudio && archivalAudio.src && !archivalAudio.ended) {
+    ensureBackgroundScorePlaying('archival');
     startMemorialAmbientPad(hotspotId);
     archivalAudio.play().catch(() => {});
     updateStoryAudioButtonUI(true);
     return;
   }
   if (narrationPhase === 'voice' && narrationAudio && narrationAudio.src && !narrationAudio.ended) {
+    ensureBackgroundScorePlaying('voice');
     startMemorialAmbientPad(hotspotId);
     narrationAudio.play().catch(() => {});
     updateStoryAudioButtonUI(true);
@@ -4430,7 +5848,7 @@ function getGuidedTourAudioProgress() {
   const archCfg = SPOT_ARCHIVAL_AUDIO[hotspotId];
   const archDur = archCfg
     ? (archivalAudio && Number.isFinite(archivalAudio.duration) && archivalAudio.duration > 0 ? archivalAudio.duration : archCfg.expectedDur)
-    : ((hotspotId === 'crater_damage' || hotspotId === 'second_wave') ? 1.1 : 0);
+    : 0.85;
   const voiceDur = (narrationAudio && Number.isFinite(narrationAudio.duration) && narrationAudio.duration > 0)
     ? narrationAudio.duration
     : 55;
@@ -4451,7 +5869,8 @@ function getGuidedTourAudioProgress() {
   return 0;
 }
 
-function stopSpotNarration() {
+function stopSpotNarration(opts = {}) {
+  const keepBackground = Boolean(opts && opts.keepBackground);
   if (guidedTourAutoAdvanceTimer) {
     clearTimeout(guidedTourAutoAdvanceTimer);
     guidedTourAutoAdvanceTimer = null;
@@ -4477,7 +5896,11 @@ function stopSpotNarration() {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
   }
-  stopMemorialAmbientPad();
+  if (!keepBackground) {
+    pauseBackgroundScore(true);
+    pauseAllInWorldVideos(true);
+    stopMemorialAmbientPad();
+  }
   updateStoryAudioButtonUI(false);
   const listenBtn = document.getElementById('modalListenBtn');
   if (listenBtn) {
@@ -4485,13 +5908,195 @@ function stopSpotNarration() {
   }
 }
 
+let activeInterludeState = null; // { cfg, onDone, timer }
+let bookendTimer = null;
+
+function emitTourTimelineEvent(type, extra = {}) {
+  if (!window.__tourEvents) window.__tourEvents = [];
+  window.__tourEvents.push(Object.assign({ type, name: type, t: performance.now() }, extra));
+}
+
+function applyBookendTexts() {
+  const lang = currentLang || 'en';
+  const p = WALKTHROUGH_BOOKENDS.prologue;
+  const e = WALKTHROUGH_BOOKENDS.epilogue;
+  const setTxt = (id, dict) => {
+    const el = document.getElementById(id);
+    if (el && dict) el.textContent = dict[lang] || dict.en;
+  };
+  setTxt('prologueKicker', p.kicker);
+  setTxt('prologueTitle', p.title);
+  setTxt('prologueCoords', p.coords);
+  setTxt('prologueNote', p.note);
+  setTxt('epilogueKicker', e.kicker);
+  setTxt('epilogueTitle', e.title);
+  setTxt('epilogueCoords', e.coords);
+  setTxt('epilogueNote', e.note);
+  setTxt('btnSkipInterlude', WALKTHROUGH_BOOKENDS.skipBtn);
+}
+
+function hideAllBookendsAndInterludes() {
+  if (bookendTimer) {
+    clearTimeout(bookendTimer);
+    bookendTimer = null;
+  }
+  const pro = document.getElementById('walkthroughPrologueOverlay');
+  const epi = document.getElementById('walkthroughEpilogueOverlay');
+  if (pro) { pro.classList.remove('is-fading'); pro.hidden = true; }
+  if (epi) { epi.classList.remove('is-fading'); epi.hidden = true; }
+
+  const ov = document.getElementById('cinemaInterludeOverlay');
+  const vid = document.getElementById('cinemaInterludeVideo');
+  const rup = document.getElementById('interludeRuptureCard');
+  if (vid) {
+    vid.onended = null;
+    vid.onerror = null;
+    vid.ontimeupdate = null;
+    try { vid.pause(); } catch (_) {}
+  }
+  if (rup) rup.hidden = true;
+  if (ov) { ov.classList.remove('is-fading'); ov.hidden = true; }
+  if (activeInterludeState && activeInterludeState.timer) {
+    clearTimeout(activeInterludeState.timer);
+  }
+  activeInterludeState = null;
+}
+
+function finishActiveInterlude() {
+  if (!activeInterludeState) return;
+  const doneCb = activeInterludeState.onDone;
+  if (activeInterludeState.timer) clearTimeout(activeInterludeState.timer);
+  activeInterludeState = null;
+
+  const ov = document.getElementById('cinemaInterludeOverlay');
+  const vid = document.getElementById('cinemaInterludeVideo');
+  if (vid) {
+    vid.onended = null;
+    vid.onerror = null;
+    vid.ontimeupdate = null;
+    try { vid.pause(); } catch (_) {}
+  }
+  if (ov) {
+    ov.classList.add('is-fading');
+    setTimeout(() => {
+      if (!activeInterludeState && ov) {
+        ov.hidden = true;
+        ov.classList.remove('is-fading');
+      }
+    }, 440);
+  }
+  if (typeof doneCb === 'function') {
+    setTimeout(() => {
+      if (isGuidedTour) doneCb();
+    }, 360);
+  }
+}
+
+async function playCinemaInterlude(afterHotspotId, onDone) {
+  const cfg = WALKTHROUGH_INTERLUDES[afterHotspotId];
+  if (!cfg || !isGuidedTour) {
+    if (typeof onDone === 'function') onDone();
+    return;
+  }
+
+  hideAllBookendsAndInterludes();
+  applyBookendTexts();
+
+  const lang = currentLang || 'en';
+  const ov = document.getElementById('cinemaInterludeOverlay');
+  const vid = document.getElementById('cinemaInterludeVideo');
+  const kickerEl = document.getElementById('interludeKicker');
+  const subEl = document.getElementById('interludeSubtitleText');
+  const ctxEl = document.getElementById('interludeContextLine');
+  const progEl = document.getElementById('interludeProgressFill');
+  const rupEl = document.getElementById('interludeRuptureCard');
+  const rupTimeEl = document.getElementById('interludeRuptureTime');
+  const rupTitleEl = document.getElementById('interludeRuptureTitle');
+
+  if (!ov || !vid) {
+    if (typeof onDone === 'function') onDone();
+    return;
+  }
+
+  // Hide station HUD stamps while full-focus Witness Interlude holds the stage
+  hideAnimatedOverlay(document.getElementById('walkthroughContextStamp'));
+  hideAnimatedOverlay(document.getElementById('walkthroughQuoteCallout'));
+  pauseAllInWorldVideos(false);
+  stopMemorialAmbientPad();
+  rampBackgroundScoreVolume(0.015);
+
+  ov.setAttribute('data-aspect', cfg.aspect || 'portrait');
+  ov.setAttribute('data-tone', cfg.tone || 'pre');
+  if (kickerEl) kickerEl.textContent = (cfg.kicker && (cfg.kicker[lang] || cfg.kicker.en)) || '';
+  if (ctxEl) ctxEl.textContent = (cfg.context && (cfg.context[lang] || cfg.context.en)) || '';
+  if (subEl) subEl.textContent = '';
+  if (progEl) progEl.style.width = '0%';
+  if (rupEl) rupEl.hidden = true;
+
+  const resolvedUrl = await resolvePipVideoSrc(cfg.src);
+  if (!isGuidedTour) return;
+
+  vid.src = resolvedUrl || cfg.src;
+  vid.muted = false;
+  vid.volume = voiceNarrationEnabled ? 1.0 : 0.0;
+  vid.currentTime = 0;
+
+  activeInterludeState = { cfg, onDone, timer: null };
+  ov.classList.remove('is-fading');
+  ov.hidden = false;
+
+  vid.ontimeupdate = () => {
+    const cur = vid.currentTime || 0;
+    const dur = (Number.isFinite(vid.duration) && vid.duration > 0) ? vid.duration : 15;
+    if (progEl) {
+      progEl.style.width = `${Math.min(100, (cur / dur) * 100).toFixed(1)}%`;
+    }
+    if (cfg.ruptureWindow && rupEl) {
+      const inRup = cur >= cfg.ruptureWindow.s && cur <= cfg.ruptureWindow.e;
+      rupEl.hidden = !inRup;
+      if (inRup) {
+        if (rupTimeEl) rupTimeEl.textContent = cfg.ruptureWindow.time[lang] || cfg.ruptureWindow.time.en;
+        if (rupTitleEl) rupTitleEl.textContent = cfg.ruptureWindow.title[lang] || cfg.ruptureWindow.title.en;
+        // Silently switch the 3D school behind the curtain to post-strike rubble right at the strike moment!
+        if (damageSliderValue < 0.5) {
+          setTemporalCondition(1.0);
+          const sl = document.getElementById('timelineSlider');
+          if (sl) sl.value = 1.0;
+        }
+      }
+    }
+    if (subEl && Array.isArray(cfg.cues)) {
+      const cue = cfg.cues.find((c) => cur >= c.s && cur <= c.e);
+      subEl.textContent = cue ? (cue[lang] || cue.en || '') : '';
+    }
+  };
+
+  vid.onended = () => finishActiveInterlude();
+  vid.onerror = () => finishActiveInterlude();
+
+  // Safety timeout fallback in case browser stalls video end event
+  activeInterludeState.timer = setTimeout(() => {
+    finishActiveInterlude();
+  }, 48000);
+
+  vid.play().then(() => {
+    emitTourTimelineEvent('interlude_start', { interludeId: cfg.id, afterHotspotId, src: cfg.src });
+  }).catch(() => {
+    // Autoplay blocked if muted=false without gesture; retry muted so visual interlude still plays
+    vid.muted = true;
+    vid.play().then(() => {
+      emitTourTimelineEvent('interlude_start', { interludeId: cfg.id, afterHotspotId, src: cfg.src, mutedFallback: true });
+    }).catch(() => finishActiveInterlude());
+  });
+}
+
 function playSpotNarration(hotspotId) {
-  stopSpotNarration();
+  stopSpotNarration({ keepBackground: true });
   if (!voiceNarrationEnabled) return;
 
   activeNarrationHotspot = hotspotId;
-  const prof = NARRATOR_PROFILES[activeVoiceProfile] || (currentLang === 'fa' ? NARRATOR_PROFILES.mostafa_fa : NARRATOR_PROFILES.leila_en);
-  const narrationVersion = '20261112a';
+  const prof = NARRATOR_PROFILES[activeVoiceProfile] || (currentLang === 'fa' ? NARRATOR_PROFILES.mostafa_fa : NARRATOR_PROFILES.mostafa_en);
+  const narrationVersion = '20261114b';
   const primarySrc = `media/narration/${prof.dir}/${prof.prefix}_${hotspotId}.mp3?v=${narrationVersion}`;
   const fallbackSrc = `media/narration/${prof.fallbackDir || 'voices/leila_en'}/${prof.prefix}_${hotspotId}.mp3?v=${narrationVersion}`;
 
@@ -4525,7 +6130,6 @@ function playSpotNarration(hotspotId) {
 
   narrationAudio.onended = () => {
     narrationPhase = 'idle';
-    stopMemorialAmbientPad();
     updateStoryAudioButtonUI(false);
     setWalkthroughProgress(1);
     document.body.classList.remove('walkthrough-idle');
@@ -4533,16 +6137,53 @@ function playSpotNarration(hotspotId) {
       listenBtn.textContent = '🎧 Listen to Room Voiceover';
     }
     if (isGuidedTour && !document.getElementById('evidenceModal')?.classList.contains('visible')) {
-      guidedTourAutoAdvanceTimer = setTimeout(() => {
-        if (!isGuidedTour) return;
-        if (currentTourIndex < GUIDED_TOUR_STOPS.length - 1) {
-          currentTourIndex += 1;
-          renderGuidedTourStep(currentTourIndex, true);
-        } else {
-          stopGuidedTour();
-          openVowModal();
+      const hasInterlude = Boolean(WALKTHROUGH_INTERLUDES[hotspotId]);
+      if (currentTourIndex < GUIDED_TOUR_STOPS.length - 1) {
+        if (!hasInterlude) {
+          ensureBackgroundScorePlaying('transition');
         }
-      }, 1400);
+        guidedTourAutoAdvanceTimer = setTimeout(() => {
+          if (!isGuidedTour) return;
+          const advanceNext = () => {
+            if (!isGuidedTour) return;
+            currentTourIndex += 1;
+            renderGuidedTourStep(currentTourIndex, true);
+          };
+          if (hasInterlude) {
+            playCinemaInterlude(hotspotId, advanceNext);
+          } else {
+            advanceNext();
+          }
+        }, 900);
+      } else {
+        // Station 8 finished -> Play 7s solemn Epilogue Dedication Coda before opening Vow Modal
+        ensureBackgroundScorePlaying('transition');
+        rampBackgroundScoreVolume(0.38);
+        guidedTourAutoAdvanceTimer = setTimeout(() => {
+          if (!isGuidedTour) return;
+          applyBookendTexts();
+          const epi = document.getElementById('walkthroughEpilogueOverlay');
+          hideStoryBanner();
+          hideAnimatedOverlay(document.getElementById('walkthroughContextStamp'));
+          if (epi) {
+            epi.classList.remove('is-fading');
+            epi.hidden = false;
+          }
+          emitTourTimelineEvent('epilogue_start', { durationMs: WALKTHROUGH_BOOKENDS.epilogue.durationMs });
+          bookendTimer = setTimeout(() => {
+            if (epi) epi.classList.add('is-fading');
+            setTimeout(() => {
+              emitTourTimelineEvent('tour_complete', {});
+              stopGuidedTour();
+              openVowModal();
+            }, 650);
+          }, WALKTHROUGH_BOOKENDS.epilogue.durationMs);
+        }, 900);
+      }
+    } else {
+      pauseBackgroundScore(true);
+      pauseAllInWorldVideos(true);
+      stopMemorialAmbientPad();
     }
   };
 
@@ -4559,9 +6200,13 @@ function playSpotNarration(hotspotId) {
   const launchVoiceover = () => {
     if (activeNarrationHotspot !== hotspotId) return;
     narrationPhase = 'voice';
+    ensureBackgroundScorePlaying('voice');
     narrationAudio.playbackRate = narrationRate;
-    narrationAudio.play().catch(() => {
+    narrationAudio.play().then(() => {
+      emitTourTimelineEvent('station_voice_start', { hotspotId, profile: activeVoiceProfile });
+    }).catch(() => {
       narrationPhase = 'idle';
+      pauseBackgroundScore(false);
       stopMemorialAmbientPad();
       updateStoryAudioButtonUI(false);
     });
@@ -4570,12 +6215,14 @@ function playSpotNarration(hotspotId) {
   const archivalCfg = SPOT_ARCHIVAL_AUDIO[hotspotId];
   if (archivalCfg) {
     narrationPhase = 'archival';
+    ensureBackgroundScorePlaying('archival');
     archivalAudio.src = `media/narration/archival/${archivalCfg.file}?v=${narrationVersion}`;
     archivalAudio.volume = 0.88;
     archivalAudio.playbackRate = 1.0;
     archivalAudio.onended = () => {
       if (activeNarrationHotspot !== hotspotId) return;
       narrationPhase = 'delay';
+      ensureBackgroundScorePlaying('delay');
       narrationPhaseTimer = setTimeout(launchVoiceover, 380);
     };
     archivalAudio.onerror = () => {
@@ -4586,9 +6233,10 @@ function playSpotNarration(hotspotId) {
       launchVoiceover();
     });
   } else {
-    // Solemn aftermath silence with soft courtyard wind before narration begins
+    // Gentle 850ms room-tone breath as the camera settles into the room before voiceover begins
     narrationPhase = 'delay';
-    narrationPhaseTimer = setTimeout(launchVoiceover, 1100);
+    ensureBackgroundScorePlaying('delay');
+    narrationPhaseTimer = setTimeout(launchVoiceover, 850);
   }
 }
 
@@ -4598,21 +6246,53 @@ function startGuidedTour() {
   deterministicWalkthroughRender = false;
   currentTourIndex = 0;
   tourManualCameraOverride = false;
+  hideAllBookendsAndInterludes();
   closeModal();
   closeVowModal();
   closeArtifactInspector();
   document.body.classList.add('walkthrough-mode');
   if (markersGroup) markersGroup.visible = false;
   document.getElementById('btnGuidedTour').classList.add('active');
-  showStoryBanner();
   resetWalkthroughIdleTimer();
-  renderGuidedTourStep(0, true);
+
+  // Set sunlit pre-strike courtyard aerial pose behind the Prologue Title Card
+  setTemporalCondition(0.0);
+  const sl = document.getElementById('timelineSlider');
+  if (sl) sl.value = 0.0;
+  setCutawayMode(0);
+  camera.position.set(7.5, 9.2, 22.5);
+  controls.target.set(2.5, 2.0, 2.5);
+  controls.update();
+  triggerCameraAnimation(new THREE.Vector3(4.5, 2.75, 13.8), new THREE.Vector3(3.2, 2.05, 4.0));
+
+  applyBookendTexts();
+  const pro = document.getElementById('walkthroughPrologueOverlay');
+  if (pro) {
+    pro.classList.remove('is-fading');
+    pro.hidden = false;
+  }
+  ensureBackgroundScorePlaying('delay');
+  startMemorialAmbientPad('courtyard_lines');
+  emitTourTimelineEvent('prologue_start', { durationMs: WALKTHROUGH_BOOKENDS.prologue.durationMs });
+
+  bookendTimer = setTimeout(() => {
+    if (!isGuidedTour) return;
+    if (pro) pro.classList.add('is-fading');
+    setTimeout(() => {
+      if (pro) { pro.hidden = true; pro.classList.remove('is-fading'); }
+      if (!isGuidedTour) return;
+      showStoryBanner();
+      renderGuidedTourStep(0, true);
+    }, 620);
+  }, WALKTHROUGH_BOOKENDS.prologue.durationMs);
 }
 
 function stopGuidedTour() {
   isGuidedTour = false;
   deterministicWalkthroughRender = false;
   tourManualCameraOverride = false;
+  activeInWorldRunKey = '';
+  hideAllBookendsAndInterludes();
   if (walkthroughIdleTimer) {
     clearTimeout(walkthroughIdleTimer);
     walkthroughIdleTimer = null;
@@ -4627,7 +6307,7 @@ function stopGuidedTour() {
   hideAnimatedOverlay(document.getElementById('walkthroughQuoteCallout'));
   hideStoryBanner();
   setWalkthroughProgress(0);
-  stopSpotNarration();
+  stopSpotNarration({ keepBackground: false });
 }
 
 function renderGuidedTourStep(idx, speakNow) {
@@ -4647,7 +6327,12 @@ function renderGuidedTourStep(idx, speakNow) {
     if (pipCard) pipCard.hidden = true;
     if (quoteEl) quoteEl.hidden = true;
     showAnimatedOverlay(document.getElementById('walkthroughContextStamp'));
-    ensurePipVideoLoadedForHotspot(stop.hotspotId, false);
+    inWorldScreens.forEach((sc) => {
+      if (sc.hotspotId === stop.hotspotId) {
+        sc.cueStartedInLiveRun = false;
+        ensureInWorldScreenVideoElement(sc);
+      }
+    });
   }
 
   setTemporalCondition(stop.temporal);
@@ -4978,12 +6663,27 @@ function initUIControls() {
     }
   });
 
+  const btnSkipInterlude = document.getElementById('btnSkipInterlude');
+  if (btnSkipInterlude) {
+    btnSkipInterlude.addEventListener('click', () => {
+      finishActiveInterlude();
+    });
+  }
+
   document.getElementById('btnStoryPrev').addEventListener('click', () => {
+    hideAllBookendsAndInterludes();
+    showStoryBanner();
     currentTourIndex = (currentTourIndex - 1 + GUIDED_TOUR_STOPS.length) % GUIDED_TOUR_STOPS.length;
     renderGuidedTourStep(currentTourIndex, true);
   });
 
   document.getElementById('btnStoryNext').addEventListener('click', () => {
+    if (activeInterludeState) {
+      finishActiveInterlude();
+      return;
+    }
+    hideAllBookendsAndInterludes();
+    showStoryBanner();
     if (currentTourIndex === GUIDED_TOUR_STOPS.length - 1) {
       stopGuidedTour();
       openVowModal();
@@ -5208,26 +6908,34 @@ function animate() {
     const tourProgress = getGuidedTourAudioProgress();
     setWalkthroughProgress(tourProgress);
     updateWalkthroughVisualOverlaysLive(currentTourIndex, tourProgress);
+    const activeStop = GUIDED_TOUR_STOPS[currentTourIndex];
+    updateInWorldScreensLive(activeStop ? activeStop.hotspotId : null, tourProgress);
 
     if (isAnimatingCamera && animationTarget.pos) {
-      camera.position.lerp(animationTarget.pos, 0.06);
-      controls.target.lerp(animationTarget.lookAt, 0.06);
-      if (camera.position.distanceTo(animationTarget.pos) < 0.25) {
+      camera.position.lerp(animationTarget.pos, 0.08);
+      controls.target.lerp(animationTarget.lookAt, 0.08);
+      if (camera.position.distanceTo(animationTarget.pos) < 0.35) {
         isAnimatingCamera = false;
       }
     } else if (!tourManualCameraOverride) {
       const sampled = sampleGuidedTourCamera(currentTourIndex, tourProgress);
       if (sampled) {
-        camera.position.lerp(sampled.pos, 0.045);
-        controls.target.lerp(sampled.lookAt, 0.055);
+        const smoothAlpha = 1 - Math.exp(-5.2 * Math.min(Math.max(delta, 0.008), 0.05));
+        camera.position.lerp(sampled.pos, smoothAlpha);
+        controls.target.lerp(sampled.lookAt, smoothAlpha);
       }
     }
-  } else if (isAnimatingCamera && animationTarget.pos) {
-    camera.position.lerp(animationTarget.pos, 0.06);
-    controls.target.lerp(animationTarget.lookAt, 0.06);
+  } else if (!deterministicWalkthroughRender) {
+    if (isSpotAudioPlaying() && activeNarrationHotspot) {
+      updateInWorldScreensLive(activeNarrationHotspot, 0.35);
+    }
+    if (isAnimatingCamera && animationTarget.pos) {
+      camera.position.lerp(animationTarget.pos, 0.06);
+      controls.target.lerp(animationTarget.lookAt, 0.06);
 
-    if (camera.position.distanceTo(animationTarget.pos) < 0.25) {
-      isAnimatingCamera = false;
+      if (camera.position.distanceTo(animationTarget.pos) < 0.25) {
+        isAnimatingCamera = false;
+      }
     }
   }
 

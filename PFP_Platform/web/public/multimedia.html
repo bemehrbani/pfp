@@ -381,7 +381,7 @@
         <!-- Search & Category Filters -->
         <div class="controls-panel">
             <div class="filter-tabs" id="category-tabs">
-                <button class="tab-btn active" id="tab-all" data-category="all" onclick="filterCategory('all')">All Media (39)</button>
+                <button class="tab-btn active" id="tab-all" data-category="all" onclick="filterCategory('all')">All Media (75)</button>
                 <button class="tab-btn" id="tab-still-minab" data-category="still_minab" onclick="filterCategory('still_minab')">Still, Minab (8)</button>
                 <button class="tab-btn" id="tab-intl" data-category="international" onclick="filterCategory('international')">International OSINT (11)</button>
                 <button class="tab-btn" id="tab-series" data-category="series_minab" onclick="filterCategory('series_minab')">12-Episode Series (12)</button>
@@ -389,6 +389,7 @@
                 <button class="tab-btn" id="tab-cinema" data-category="documentary_profiles" onclick="filterCategory('documentary_profiles')">Feature Cinema (2)</button>
                 <button class="tab-btn" id="tab-audio" data-category="audio_memorials" onclick="filterCategory('audio_memorials')">Audio & Scores (1)</button>
                 <button class="tab-btn" id="tab-visual" data-category="visual_memorials" onclick="filterCategory('visual_memorials')">Visual Memorials (2)</button>
+                <button class="tab-btn" id="tab-eyewitness" data-category="eyewitness" onclick="filterCategory('eyewitness')">Eyewitness & School Archive (36)</button>
             </div>
             <div class="search-bar-row">
                 <div class="search-input-wrap">
@@ -422,7 +423,7 @@
     </footer>
 
     <!-- Load Metadata Store -->
-    <script src="/media-data.js?v=20261030"></script>
+    <script src="/media-data.js?v=20261114"></script>
     <script>
         let currentLang = localStorage.getItem('pfp-lang') || localStorage.getItem('pfp_lang') || 'en';
         let currentCategory = 'all';
@@ -447,14 +448,15 @@
                 viewGraphic: "View Graphic",
                 noResults: "No matching investigations found",
                 noResultsDesc: "Try adjusting your search query or selecting a different category.",
-                tabAll: "All Media (39)",
+                tabAll: "All Media (75)",
                 tabStill: "Still, Minab (8)",
                 tabIntl: "International OSINT (11)",
                 tabSeries: "12-Episode Series (12)",
                 tabFarsi: "Field Documentaries (3)",
                 tabCinema: "Feature Cinema (2)",
                 tabAudio: "Audio & Scores (1)",
-                tabVisual: "Visual Memorials (2)"
+                tabVisual: "Visual Memorials (2)",
+                tabEyewitness: "Eyewitness & School Archive (36)"
             },
             fa: {
                 badge: "آرشیو مستندات تصویری و تحقیقات چندرسانه‌ای",
@@ -475,14 +477,15 @@
                 viewGraphic: "مشاهده اثر تصویری",
                 noResults: "موردی مطابق با جستجوی شما یافت نشد",
                 noResultsDesc: "لطفاً عبارت جستجو را تغییر دهید یا دسته‌بندی دیگری را انتخاب کنید.",
-                tabAll: "همه آثار (۳۹)",
+                tabAll: "همه آثار (۷۵)",
                 tabStill: "مجموعه «هنوز میناب» (۸)",
                 tabIntl: "تحقیقات بین‌المللی (۱۱)",
                 tabSeries: "مجموعه ۱۲ قسمتی (۱۲)",
                 tabFarsi: "مستندهای میدانی (۳)",
                 tabCinema: "سینمای مستند (۲)",
                 tabAudio: "موسیقی و نواها (۱)",
-                tabVisual: "یادبودهای تصویری (۲)"
+                tabVisual: "یادبودهای تصویری (۲)",
+                tabEyewitness: "آرشیو مدرسه و روایت شاهدان (۳۶)"
             },
             fi: {
                 badge: "Tutkiva video- ja dokumenttiarkisto",
@@ -503,14 +506,15 @@
                 viewGraphic: "Näytä grafiikka",
                 noResults: "Hakua vastaavia dokumentteja ei löytynyt",
                 noResultsDesc: "Kokeile muuttaa hakusanaa tai valita toinen kategoria.",
-                tabAll: "Kaikki media (39)",
+                tabAll: "Kaikki media (75)",
                 tabStill: "Still, Minab (8)",
                 tabIntl: "Kansainvälinen OSINT (11)",
                 tabSeries: "12-osainen sarja (12)",
                 tabFarsi: "Kenttädokumentit (3)",
                 tabCinema: "Pitkät dokumentit (2)",
                 tabAudio: "Musiikki & äänitteet (1)",
-                tabVisual: "Visuaaliset muistomerkit (2)"
+                tabVisual: "Visuaaliset muistomerkit (2)",
+                tabEyewitness: "Silminnäkijä- ja kouluarkisto (36)"
             }
         };
 
@@ -554,6 +558,7 @@
             setText('tab-cinema', t.tabCinema);
             setText('tab-audio', t.tabAudio);
             setText('tab-visual', t.tabVisual);
+            setText('tab-eyewitness', t.tabEyewitness);
 
             renderGrid();
         }
