@@ -1,0 +1,204 @@
+/**
+ * ES Module entry point for the Shajareh Tayyebeh Primary School 3D Spatial Reconstruction.
+ * Wires cross-module callbacks, registers backwards-compatible `window` shims for
+ * `site-nav.js`, `contact-modal.js`, and Playwright Director's Cut exporters (`record_tour.mjs`),
+ * and starts the Three.js render loop.
+ */
+import { appState } from './state.js';
+import { GUIDED_TOUR_STOPS } from './data/tour-config.js';
+import {
+  initI18n,
+  setLanguage,
+  selectNarratorByActor,
+  setNarratorProfile,
+} from './data/i18n.js';
+import { initThreeEngine, setTemporalCondition } from './engine/core.js';
+import {
+  sampleGuidedTourCamera,
+  sampleGuidedTourCameraCoords,
+  initKeyboardWalkControls,
+  applyKeyboardMovement,
+  stepCameraFrame,
+} from './engine/camera-rig.js';
+import {
+  buildEnvironmentAndTerrain,
+  buildProceduralSchoolModels,
+  setCutawayMode,
+} from './scene/school-world.js';
+import {
+  loadChildrenAndBuildInWorldMemorial,
+  init3DPortraitRaycaster,
+} from './scene/memorial-gallery.js';
+import {
+  refreshInWorldScreensLanguage,
+  updateInWorldScreensLive,
+} from './scene/in-world-screens.js';
+import {
+  initWalkthroughPipManifest,
+  resolvePipVideoSrc,
+  preloadAllWalkthroughPipBlobs,
+  isSpotAudioPlaying,
+  getGuidedTourAudioProgress,
+  applyBookendTexts,
+  playSpotNarration,
+  resetWalkthroughIdleTimer,
+  setWalkthroughProgress,
+  updateWalkthroughVisualOverlaysLive,
+  syncWalkthroughVisualsAtProgress,
+  startGuidedTour,
+  stopGuidedTour,
+  renderGuidedTourStep,
+} from './tour/tour-director.js';
+import {
+  openArtifactInspector,
+  closeArtifactInspector,
+  initHotspots,
+  updateHotspotLabels,
+  updateHotspotPositions,
+  showHotspotModal,
+  closeModal,
+  updateVowBadge,
+  fetchRealVowCount,
+  openVowModal,
+  closeVowModal,
+  initUIControls,
+} from './ui/hud-modals-vow.js';
+
+appState.callbacks = {
+  setCutawayMode,
+  applyBookendTexts,
+  updateHotspotLabels,
+  updateHotspotPositions,
+  refreshInWorldScreensLanguage,
+  showHotspotModal,
+  closeModal,
+  openVowModal,
+  closeVowModal,
+  openArtifactInspector,
+  closeArtifactInspector,
+  renderGuidedTourStep,
+  resetWalkthroughIdleTimer,
+  playSpotNarration,
+  isSpotAudioPlaying,
+  resolvePipVideoSrc,
+};
+
+let resolveReconReady = null;
+const reconReadyPromise = new Promise((resolve) => {
+  resolveReconReady = resolve;
+});
+
+export function animate() {
+  requestAnimationFrame(animate);
+  if (!appState.clock || !appState.renderer || !appState.scene || !appState.camera) return;
+
+  const rawDelta = appState.clock.getDelta();
+  const delta = Math.min(Math.max(rawDelta, 0), 0.1);
+  applyKeyboardMovement(delta);
+
+  let tourProgress = 0;
+  if (appState.isGuidedTour && !appState.deterministicWalkthroughRender) {
+    tourProgress = getGuidedTourAudioProgress();
+    setWalkthroughProgress(tourProgress);
+    updateWalkthroughVisualOverlaysLive(appState.currentTourIndex, tourProgress);
+    const activeStop = GUIDED_TOUR_STOPS[appState.currentTourIndex];
+    updateInWorldScreensLive(activeStop ? activeStop.hotspotId : null, tourProgress);
+  } else if (!appState.deterministicWalkthroughRender) {
+    if (isSpotAudioPlaying() && appState.activeNarrationHotspot) {
+      updateInWorldScreensLive(appState.activeNarrationHotspot, 0.35);
+    }
+  }
+
+  stepCameraFrame(delta, tourProgress);
+
+  if (appState.controls) appState.controls.update();
+  updateHotspotPositions();
+  appState.renderer.render(appState.scene, appState.camera);
+}
+
+export function startReconstructionApp() {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+  if (typeof THREE === 'undefined') {
+    setTimeout(startReconstructionApp, 100);
+    return;
+  }
+
+  const bootParams = new URLSearchParams(window.location.search);
+  appState.recordingMode = bootParams.get('recording') === '1';
+
+  try {
+    localStorage.removeItem('pfp_vow_count');
+  } catch (_) {}
+
+  appState.clock = new THREE.Clock();
+  updateVowBadge();
+  fetchRealVowCount();
+  initI18n();
+  initWalkthroughPipManifest();
+  initThreeEngine();
+  buildEnvironmentAndTerrain();
+  buildProceduralSchoolModels();
+  loadChildrenAndBuildInWorldMemorial();
+  init3DPortraitRaycaster();
+  initHotspots();
+  initUIControls();
+  initKeyboardWalkControls();
+  animate();
+
+  if (appState.recordingMode) {
+    document.body.classList.add('recording-mode');
+  }
+  if (bootParams.get('autostart') === '1') {
+    document.body.classList.add('walkthrough-mode');
+    setTimeout(() => {
+      if (!appState.isGuidedTour) startGuidedTour();
+    }, 1200);
+  }
+
+  if (resolveReconReady) resolveReconReady(appState);
+}
+
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  // Backwards-compatible globals for site-nav.js, contact-modal.js, and Playwright render tools
+  window.setLanguage = setLanguage;
+  window.selectNarratorByActor = selectNarratorByActor;
+  window.setNarratorProfile = setNarratorProfile;
+  window.setTemporalCondition = setTemporalCondition;
+  window.closeModal = closeModal;
+  window.openVowModal = openVowModal;
+  window.closeVowModal = closeVowModal;
+  window.startGuidedTour = startGuidedTour;
+  window.stopGuidedTour = stopGuidedTour;
+  window.preloadAllWalkthroughPipBlobs = preloadAllWalkthroughPipBlobs;
+  window.sampleGuidedTourCamera = sampleGuidedTourCamera;
+  window.setWalkthroughProgress = setWalkthroughProgress;
+  window.syncWalkthroughVisualsAtProgress = syncWalkthroughVisualsAtProgress;
+
+  window.__reconReady = reconReadyPromise;
+  window.PFPRecon = {
+    state: appState,
+    setLanguage,
+    selectNarratorByActor,
+    setNarratorProfile,
+    setTemporalCondition,
+    setCutawayMode,
+    startGuidedTour,
+    stopGuidedTour,
+    sampleGuidedTourCamera,
+    sampleGuidedTourCameraCoords,
+    syncWalkthroughVisualsAtProgress,
+    preloadAllWalkthroughPipBlobs,
+    openVowModal,
+    closeVowModal,
+    showHotspotModal,
+    closeModal,
+    openArtifactInspector,
+    closeArtifactInspector,
+  };
+
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', startReconstructionApp);
+  } else {
+    startReconstructionApp();
+  }
+}

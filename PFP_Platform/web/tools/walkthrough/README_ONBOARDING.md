@@ -1,5 +1,5 @@
 # Minab Primary School 3D Spatial Walkthrough & Director's Cut Renderer
-### Developer Onboarding Guide (`reconstruction.html` + `js/reconstruction.js`)
+### Developer Onboarding Guide (`reconstruction.html` + `js/reconstruction/`)
 
 Welcome! This guide covers the architecture, media pipeline, and headless 1080p60/4K video export workflow for the **Shajareh Tayyebeh Primary School 3D Spatial Reconstruction & Memorial Walkthrough** ahead of the **November 20, 2026 World Children's Day** premiere at **Helsinki XR Center (HXRC)**.
 
@@ -29,8 +29,12 @@ python3 -m http.server 8123
 
 | File / Directory | Purpose |
 |---|---|
-| `reconstruction.html` | Full-viewport WebGL canvas, HUD controls, segmented narrator chooser (`Mostafa · Leila · Ali`), Prologue/Epilogue bookends, and Cinema Witness Interlude overlay (`16:9`, `4:3`, `3:4`, `4:5`, `9:16` true-aspect frames). |
-| `js/reconstruction.js` | Three.js (`r128`) spatial engine: procedural pre-strike & post-strike 2-floor school geometry, 145 student/teacher 3D framed portraits, 28 rubble drawings, `GUIDED_TOUR_STOPS` camera spline waypoints, `IN_WORLD_SCREEN_SPECS` 3D wall video screens, `NARRATOR_PROFILES`, and `WALKTHROUGH_INTERLUDES`. |
+| `reconstruction.html` & `css/reconstruction.css` | Full-viewport WebGL canvas, HUD controls, segmented narrator chooser (`Mostafa · Leila · Ali`), Prologue/Epilogue bookends, Cinema Witness Interlude overlay (`16:9`, `4:3`, `3:4`, `4:5`, `9:16` true-aspect frames), and extracted stylesheet. |
+| `js/reconstruction/main.js` & `state.js` | ES module entry point, `requestAnimationFrame` loop, `window.PFPRecon` / Playwright shims, and shared `appState` container. |
+| `js/reconstruction/engine/core.js` & `camera-rig.js` | Three.js (`r128`) renderer, ACES Filmic exposure, directional/hemisphere lighting, pre/post-strike visibility, WebXR session setup, waypoint spline interpolation, and WASD navigation. |
+| `js/reconstruction/scene/school-world.js`, `memorial-gallery.js` & `in-world-screens.js` | Procedural pre-strike & post-strike 2-floor school geometry, courtyard murals, 145 student/teacher 3D framed portraits, 28 rubble drawings, and lazy-decoded 3D wall video screens. |
+| `js/reconstruction/data/tour-config.js` & `i18n.js` | Declarative `GUIDED_TOUR_STOPS` camera spline waypoints, `IN_WORLD_SCREEN_SPECS`, `WALKTHROUGH_INTERLUDES`, trilingual (`EN`/`FI`/`FA`) copy, and `NARRATOR_PROFILES`. |
+| `js/reconstruction/tour/tour-director.js` & `ui/hud-modals-vow.js` | Cancel-safe 8-station Director's Cut state machine, WebAudio room atmosphere, live HTTP 206 vs. recording-mode Blob media loader, Evidence/Inspector/Vow modals, and Spatial.io `.glb` export. |
 | `media/narration/voices/` | Human & studio narrator profiles tracked in Git (`mostafa_en` **[Default EN]**, `leila_en`, `ali_en`, `mostafa_fa` **[Default FA]**, `leila_fa`) + `manifest.json`. |
 | `media/walkthrough_interludes/` | 6 mastered between-narration Cinema Witness Interlude `.mp4` reels (loudness-normalized diegetic audio, watermarks removed, social-media music stripped where needed). |
 | `media/walkthrough_pip/` | 23 muted 720p/1080p `.mp4` reels + posters mounted directly onto the 3D classroom/courtyard walls (`IN_WORLD_SCREEN_SPECS`). |
