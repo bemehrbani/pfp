@@ -52,7 +52,7 @@ export const appState = {
   pointerNDC: null,
   pointerDownPos: { x: 0, y: 0 },
 
-  // Ctrl (Cmd on macOS) + drag "look around"
+  // Right-drag "look around"
   lookDragPointerId: null,
   lookDragLastX: 0,
   lookDragLastY: 0,

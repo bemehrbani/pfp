@@ -297,7 +297,7 @@ export function updateHotspotPositions() {
 
   // Project with the camera matrix of the frame that is about to be rendered.
   // camera.matrixWorldInverse is otherwise one render late, which made every pin
-  // swing and land in the wrong place while a Ctrl + drag look rotated the camera
+  // swing and land in the wrong place while a right-drag look rotated the camera
   // in place (OrbitControls damping hid the same one-frame error while orbiting).
   const cam = appState.camera;
   cam.updateMatrixWorld();

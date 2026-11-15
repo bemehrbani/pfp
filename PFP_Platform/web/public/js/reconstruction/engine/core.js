@@ -43,6 +43,13 @@ export function initThreeEngine() {
   controls.maxPolarAngle = Math.PI / 2 - 0.01;
   controls.minDistance = 0.8;
   controls.maxDistance = 140;
+  // Left drag orbits, middle drag pans, right drag looks around in place (camera-rig.js
+  // intercepts the right button before OrbitControls sees it).
+  controls.mouseButtons = {
+    LEFT: THREE.MOUSE.ROTATE,
+    MIDDLE: THREE.MOUSE.PAN,
+    RIGHT: THREE.MOUSE.PAN,
+  };
   controls.target.set(0, 3.0, -3);
   controls.addEventListener('start', () => {
     if (appState.isGuidedTour) {

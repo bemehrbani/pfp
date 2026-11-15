@@ -1,6 +1,6 @@
 /**
  * Guided Tour waypoint camera spline sampler, camera target transitions,
- * Ctrl + drag look-around, and first-person WASD / Arrow flight with Q/E height
+ * right-drag look-around, and first-person WASD / Arrow flight with Q/E height
  * (free-fly only; walk mode stays pinned to eye level).
  */
 import { appState } from '../state.js';
@@ -98,10 +98,10 @@ export function triggerCameraAnimation(newPos, newLookAt) {
   appState.animationTarget.lookAt = newLookAt;
 }
 
-// Ctrl (Cmd on macOS) + drag look-around. The camera turns in place by orbiting
-// its OrbitControls target around the camera position, which keeps the pivot, the
-// orbit radius, wheel zoom, panning and the next orbit drag anchored to whatever
-// the user is looking at instead of the stale scene centre.
+// Right-button look-around. The camera turns in place by orbiting its OrbitControls
+// target around the camera position, which keeps the pivot, the orbit radius, wheel
+// zoom, panning and the next left-button orbit drag anchored to whatever the user is
+// looking at instead of the stale scene centre.
 
 /** Maximum pitch (radians) the look may add above or below level. */
 export const LOOK_ELEVATION_LIMIT = Math.PI / 2 - 0.02;
@@ -231,18 +231,19 @@ export function initKeyboardWalkControls() {
 }
 
 /**
- * Installs the Ctrl + drag look gesture. The pointer-down is intercepted in the
- * capture phase on `window` so OrbitControls never enters its own rotate / pan /
- * dolly state for this gesture; the drag then pivots the orbit target around the
- * camera, which turns the camera in place.
+ * Installs the right-button look gesture. The pointer-down is intercepted in the
+ * capture phase on `window` so OrbitControls never enters its own pan / rotate state
+ * for this gesture; the drag then pivots the orbit target around the camera, which
+ * turns the camera in place. Right-drag is the gesture because it needs no modifier:
+ * Ctrl/Cmd + drag is undiscoverable, turns into a right-click on macOS, and does not
+ * exist on touch screens.
  */
-export function initCtrlLookControls() {
+export function initLookControls() {
   if (typeof window === 'undefined' || !appState.renderer) return;
   const dom = appState.renderer.domElement;
   if (!dom) return;
 
-  const wantsLook = (e) =>
-    (e.ctrlKey || e.metaKey) && (e.button === 0 || e.button === 1 || e.button === 2);
+  const wantsLook = (e) => e.button === 2;
 
   const endLookGesture = (pointerId) => {
     const activeId = appState.lookDragPointerId;
