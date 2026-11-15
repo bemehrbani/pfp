@@ -411,9 +411,16 @@ export function pauseAllInWorldVideos(restorePoster = false) {
 
 export function resolveInWorldCueWindow(spec) {
   if (!spec) return { start: 0, end: 1 };
-  const isFa = appState.currentLang === 'fa';
-  const start = isFa && typeof spec.cueStartPFa === 'number' ? spec.cueStartPFa : spec.cueStartP;
-  const end = isFa && typeof spec.cueEndPFa === 'number' ? spec.cueEndPFa : spec.cueEndP;
+  const lang = appState.currentLang;
+  let start = spec.cueStartP;
+  let end = spec.cueEndP;
+  if (lang === 'fa') {
+    if (typeof spec.cueStartPFa === 'number') start = spec.cueStartPFa;
+    if (typeof spec.cueEndPFa === 'number') end = spec.cueEndPFa;
+  } else if (lang === 'fi') {
+    if (typeof spec.cueStartPFi === 'number') start = spec.cueStartPFi;
+    if (typeof spec.cueEndPFi === 'number') end = spec.cueEndPFi;
+  }
   return {
     start: typeof start === 'number' && Number.isFinite(start) ? start : 0,
     end: typeof end === 'number' && Number.isFinite(end) ? end : 1,

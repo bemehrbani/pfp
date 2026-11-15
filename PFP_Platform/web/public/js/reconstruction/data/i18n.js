@@ -473,6 +473,16 @@ export const I18N_DATA = {
 };
 
 export const NARRATOR_PROFILES = {
+  mostafa_fi: {
+    id: 'mostafa_fi',
+    actor: 'mostafa',
+    lang: 'fi',
+    prefix: 'fi',
+    dir: 'voices/mostafa_fi',
+    fallbackDir: '.',
+    hudLabel: { en: 'Voice: Mostafa (FI)', fa: 'راوی: مصطفی جلالی (FI)', fi: 'Ääni: Mostafa (FI)' },
+    shortLabel: { en: '🎙️ Mostafa', fa: '🎙️ مصطفی (FI)', fi: '🎙️ Mostafa' }
+  },
   mostafa_fa: {
     id: 'mostafa_fa',
     actor: 'mostafa',
@@ -542,11 +552,11 @@ export function initI18n() {
   } else if (urlLang && ['en', 'fi', 'fa'].includes(urlLang)) {
     appState.currentLang = urlLang;
     appState.activeVoiceProfile =
-      appState.currentLang === 'fa' ? appState.preferredVoiceByLang.fa : appState.preferredVoiceByLang.en;
+      appState.preferredVoiceByLang[appState.currentLang] || appState.preferredVoiceByLang.en;
   } else if (saved && ['en', 'fi', 'fa'].includes(saved)) {
     appState.currentLang = saved;
     appState.activeVoiceProfile =
-      appState.currentLang === 'fa' ? appState.preferredVoiceByLang.fa : appState.preferredVoiceByLang.en;
+      appState.preferredVoiceByLang[appState.currentLang] || appState.preferredVoiceByLang.en;
   }
   applyTranslations();
   updateNarratorButtonsUI();
@@ -595,8 +605,10 @@ export function updateNarratorButtonsUI() {
   document.querySelectorAll('[data-voice-slot]').forEach((btn) => {
     const slot = btn.getAttribute('data-voice-slot');
     if (slot && slotLabels[slot]) btn.textContent = slotLabels[slot];
-    if (slot === 'ali') {
-      btn.style.display = lang === 'fa' ? 'none' : '';
+    if (slot === 'leila') {
+      btn.style.display = lang === 'fi' ? 'none' : '';
+    } else if (slot === 'ali') {
+      btn.style.display = lang === 'fa' || lang === 'fi' ? 'none' : '';
     }
     btn.classList.toggle('active', prof.actor === slot);
   });
@@ -609,10 +621,11 @@ export function setLanguage(lang) {
     if (typeof localStorage !== 'undefined') localStorage.setItem('pfp_lang', lang);
   } catch (_) {}
 
-  const targetLangBucket = lang === 'fa' ? 'fa' : 'en';
+  const targetLangBucket = ['fa', 'fi', 'en'].includes(lang) ? lang : 'en';
   const curProf = NARRATOR_PROFILES[appState.activeVoiceProfile];
   if (!curProf || curProf.lang !== targetLangBucket) {
-    appState.activeVoiceProfile = appState.preferredVoiceByLang[targetLangBucket];
+    appState.activeVoiceProfile =
+      appState.preferredVoiceByLang[targetLangBucket] || appState.preferredVoiceByLang.en;
   }
 
   applyTranslations();
@@ -634,18 +647,10 @@ export function setNarratorProfile(profileId, restartAudio = true) {
   appState.activeVoiceProfile = profileId;
   appState.preferredVoiceByLang[prof.lang] = profileId;
 
-  if (prof.lang === 'fa' && appState.currentLang !== 'fa') {
-    appState.currentLang = 'fa';
+  if (prof.lang && prof.lang !== appState.currentLang) {
+    appState.currentLang = prof.lang;
     try {
-      if (typeof localStorage !== 'undefined') localStorage.setItem('pfp_lang', 'fa');
-    } catch (_) {}
-    applyTranslations();
-    appState.callbacks.updateHotspotLabels?.();
-    appState.callbacks.refreshInWorldScreensLanguage?.();
-  } else if (prof.lang === 'en' && appState.currentLang === 'fa') {
-    appState.currentLang = 'en';
-    try {
-      if (typeof localStorage !== 'undefined') localStorage.setItem('pfp_lang', 'en');
+      if (typeof localStorage !== 'undefined') localStorage.setItem('pfp_lang', prof.lang);
     } catch (_) {}
     applyTranslations();
     appState.callbacks.updateHotspotLabels?.();
@@ -667,6 +672,10 @@ export function selectNarratorByActor(actor) {
     if (actor === 'mostafa') setNarratorProfile('mostafa_fa', true);
     else if (actor === 'leila') setNarratorProfile('leila_fa', true);
     else if (actor === 'ali') setNarratorProfile('ali_en', true);
+  } else if (appState.currentLang === 'fi') {
+    if (actor === 'mostafa') setNarratorProfile('mostafa_fi', true);
+    else if (actor === 'leila') setNarratorProfile('leila_en', true);
+    else if (actor === 'ali') setNarratorProfile('ali_en', true);
   } else {
     if (actor === 'mostafa') setNarratorProfile('mostafa_en', true);
     else if (actor === 'leila') setNarratorProfile('leila_en', true);
@@ -678,6 +687,8 @@ export function cycleNarratorForCurrentLanguage() {
   if (appState.currentLang === 'fa') {
     const nextFa = appState.activeVoiceProfile === 'mostafa_fa' ? 'leila_fa' : 'mostafa_fa';
     setNarratorProfile(nextFa, true);
+  } else if (appState.currentLang === 'fi') {
+    setNarratorProfile('mostafa_fi', true);
   } else {
     const order = ['mostafa_en', 'leila_en', 'ali_en'];
     const curIdx = order.indexOf(appState.activeVoiceProfile);

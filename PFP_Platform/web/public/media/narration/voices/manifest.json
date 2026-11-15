@@ -2,9 +2,32 @@
   "defaultByLang": {
     "fa": "mostafa_fa",
     "en": "mostafa_en",
-    "fi": "mostafa_en"
+    "fi": "mostafa_fi"
   },
   "profiles": {
+    "mostafa_fi": {
+      "id": "mostafa_fi",
+      "lang": "fi",
+      "prefix": "fi",
+      "narratorNameEn": "Mostafa Jalali",
+      "narratorNameFa": "مصطفی جلالی (فنلاندی)",
+      "label": {
+        "en": "FI · Mostafa",
+        "fa": "فنلاندی · مصطفی جلالی",
+        "fi": "FI · Mostafa"
+      },
+      "stationsCount": 8,
+      "durations": {
+        "courtyard_lines": 59.6,
+        "boys_flower_arch": 42.1,
+        "boys_classroom": 46.1,
+        "rainbow_staircase": 63.1,
+        "girls_upper_hall": 49.6,
+        "crater_damage": 52.7,
+        "second_wave": 53.0,
+        "vow_shrine": 56.15
+      }
+    },
     "mostafa_fa": {
       "id": "mostafa_fa",
       "lang": "fa",

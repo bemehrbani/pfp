@@ -170,7 +170,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 1: Courtyard Morning Lines (mounted in preStrikeModelGroup so post-strike yard stays clean)
   {
     id: '01_A', hotspotId: 'courtyard_lines', slot: 'A', groupKey: 'preStrike',
-    file: '01_sync_morning_queue', durationSec: 27.4, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587,
+    file: '01_sync_morning_queue', durationSec: 27.4, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
     pos: [25.85, 1.90, 2.74], rotY: 0, w: 4.10, h: 2.31, hasLegs: false,
     badge: {
       en: 'MORNING QUEUE · SIX YELLOW LINES & SCHOOLBAGS',
@@ -185,7 +185,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '01_B', hotspotId: 'courtyard_lines', slot: 'B', groupKey: 'preStrike',
-    file: '01_sync_porch_still', durationSec: 23.0, cueStartP: 0.539, cueEndP: 0.991, cueStartPFa: 0.587, cueEndPFa: 0.975,
+    file: '01_sync_porch_still', durationSec: 23.0, cueStartP: 0.539, cueEndP: 0.991, cueStartPFa: 0.587, cueEndPFa: 0.975, cueStartPFi: 0.513, cueEndPFi: 0.987,
     pos: [-8.12, 1.84, 6.55], rotY: Math.PI / 2, w: 3.80, h: 2.14, hasLegs: false,
     badge: {
       en: 'SCHOOLYARD ON FEB 28 · GATE, CLASSROOMS & FIRST STRIKE SMOKE',
@@ -201,7 +201,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 2: Ground-Floor Boys' Ceremony Room & Colorful Playroom
   {
     id: '02_A', hotspotId: 'boys_flower_arch', slot: 'A', groupKey: 'groundFloor',
-    file: '02_sync_playroom_memories', durationSec: 24.0, cueStartP: 0.0, cueEndP: 0.403, cueStartPFa: 0.0, cueEndPFa: 0.407,
+    file: '02_sync_playroom_memories', durationSec: 24.0, cueStartP: 0.0, cueEndP: 0.403, cueStartPFa: 0.0, cueEndPFa: 0.407, cueStartPFi: 0.0, cueEndPFi: 0.430,
     pos: [3.62, 1.54, -8.04], rotY: 0, w: 1.90, h: 1.07, hasLegs: false,
     badge: {
       en: 'GROUND FLOOR · PLAYROOM & CHILDHOOD MEMORIES',
@@ -216,11 +216,11 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '02_B', hotspotId: 'boys_flower_arch', slot: 'B', groupKey: 'groundFloor',
-    file: '02_sync_rose_arch_photo', durationSec: 32.0, cueStartP: 0.403, cueEndP: 0.989, cueStartPFa: 0.407, cueEndPFa: 0.972,
+    file: '02_sync_rose_arch_photo', durationSec: 32.0, cueStartP: 0.403, cueEndP: 0.989, cueStartPFa: 0.407, cueEndPFa: 0.972, cueStartPFi: 0.430, cueEndPFi: 0.980,
     pos: [0.22, 1.60, -6.40], rotY: Math.PI / 2, w: 2.24, h: 1.26, hasLegs: false,
     badge: {
       en: 'ROSE ARCH PHOTO · TWELVE BOYS IN ROYAL-BLUE UNIFORMS',
-      fi: 'RUUSUKAARIVALOKUVA · KAKSITOISTA POIKAA SINISISSÄ KoulUPUVUISSA',
+      fi: 'RUUSUKAARIVALOKUVA · KAKSITOISTA POIKAA SINISISSÄ KOULUPUVUISSA',
       fa: 'عکس طاق گل رز · دوازده پسر با لباس فرم آبی'
     },
     caption: {
@@ -232,7 +232,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 3: Ground-Floor West Boys' Classroom (Sky-Blue Walls & Green Carpet)
   {
     id: '03_A', hotspotId: 'boys_classroom', slot: 'A', groupKey: 'groundFloor',
-    file: '03_sync_boys_carpet_clapping', durationSec: 27.6, cueStartP: 0.0, cueEndP: 0.754, cueStartPFa: 0.0, cueEndPFa: 0.721,
+    file: '03_sync_boys_carpet_clapping', durationSec: 27.6, cueStartP: 0.0, cueEndP: 0.754, cueStartPFa: 0.0, cueEndPFa: 0.721, cueStartPFi: 0.0, cueEndPFi: 0.738,
     pos: [-18.73, 1.58, 0.00], rotY: Math.PI / 2, w: 2.68, h: 1.51, hasLegs: false,
     badge: {
       en: 'SKY-BLUE CLASSROOM · 35+ BOYS CLAPPING ON CARPETS',
@@ -247,7 +247,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '03_B', hotspotId: 'boys_classroom', slot: 'B', groupKey: 'groundFloor',
-    file: '03_sync_faces_and_drawings', durationSec: 23.8, cueStartP: 0.754, cueEndP: 0.991, cueStartPFa: 0.721, cueEndPFa: 0.968,
+    file: '03_sync_faces_and_drawings', durationSec: 23.8, cueStartP: 0.754, cueEndP: 0.991, cueStartPFa: 0.721, cueEndPFa: 0.968, cueStartPFi: 0.738, cueEndPFi: 0.985,
     pos: [-14.45, 1.48, 2.15], rotY: Math.PI, w: 2.48, h: 1.40, hasLegs: false,
     badge: {
       en: 'THEIR FACES & THE DRAWINGS THEY LEFT BEHIND',
@@ -263,7 +263,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 4: Central Hall & Enclosed Rainbow Staircase
   {
     id: '04_A', hotspotId: 'rainbow_staircase', slot: 'A', groupKey: 'groundFloor',
-    file: '04_sync_stairs_welcome', durationSec: 26.4, cueStartP: 0.0, cueEndP: 0.572, cueStartPFa: 0.0, cueEndPFa: 0.576,
+    file: '04_sync_stairs_welcome', durationSec: 26.4, cueStartP: 0.0, cueEndP: 0.572, cueStartPFa: 0.0, cueEndPFa: 0.576, cueStartPFi: 0.0, cueEndPFi: 0.613,
     pos: [-4.45, 1.58, -7.35], rotY: 0.35, w: 2.46, h: 1.38, hasLegs: true, legFloorY: 0.20,
     badge: {
       en: 'RAINBOW STAIRS · TEACHERS WELCOME WITH TRAYS OF SWEETS',
@@ -278,7 +278,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '04_B', hotspotId: 'rainbow_staircase', slot: 'B', groupKey: 'groundFloor',
-    file: '04_sync_stairwell_collapse', durationSec: 27.4, cueStartP: 0.572, cueEndP: 0.968, cueStartPFa: 0.576, cueEndPFa: 0.968,
+    file: '04_sync_stairwell_collapse', durationSec: 27.4, cueStartP: 0.572, cueEndP: 0.968, cueStartPFa: 0.576, cueEndPFa: 0.968, cueStartPFi: 0.613, cueEndPFi: 0.989,
     pos: [-5.03, 1.60, -3.58], rotY: Math.PI, w: 2.50, h: 1.41, hasLegs: false,
     badge: {
       en: 'THE COLLAPSE · PRINCIPAL SANGARZADEH FELL DOWN THESE STAIRS',
@@ -294,7 +294,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 5: First-Floor Girls' Primary School Assembly Hall
   {
     id: '05_A', hotspotId: 'girls_upper_hall', slot: 'A', groupKey: 'firstFloor',
-    file: '05_sync_80_girls_hall', durationSec: 30.0, cueStartP: 0.0, cueEndP: 0.588, cueStartPFa: 0.0, cueEndPFa: 0.635,
+    file: '05_sync_80_girls_hall', durationSec: 30.0, cueStartP: 0.0, cueEndP: 0.588, cueStartPFa: 0.0, cueEndPFa: 0.635, cueStartPFi: 0.0, cueEndPFi: 0.594,
     pos: [-15.25, 5.06, -10.35], rotY: 0, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 3.71,
     badge: {
       en: '80+ SCHOOLGIRLS IN THE UPPER ASSEMBLY HALL',
@@ -309,7 +309,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '05_B', hotspotId: 'girls_upper_hall', slot: 'B', groupKey: 'firstFloor',
-    file: '05_sync_desks_and_notebooks', durationSec: 26.1, cueStartP: 0.588, cueEndP: 0.975, cueStartPFa: 0.635, cueEndPFa: 0.973,
+    file: '05_sync_desks_and_notebooks', durationSec: 26.1, cueStartP: 0.588, cueEndP: 0.975, cueStartPFa: 0.635, cueEndPFa: 0.973, cueStartPFi: 0.594, cueEndPFi: 0.985,
     pos: [-15.25, 5.12, -0.15], rotY: Math.PI, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 3.71,
     badge: {
       en: 'HOMEWORK NOTEBOOKS & COLORED PENCILS',
@@ -325,7 +325,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 6: 11:22 AM Direct Cruise Missile Impact & 5m Crater
   {
     id: '06_A', hotspotId: 'crater_damage', slot: 'A', groupKey: 'postStrike',
-    file: '06_sync_crater_comparison', durationSec: 28.2, cueStartP: 0.0, cueEndP: 0.514, cueStartPFa: 0.0, cueEndPFa: 0.532,
+    file: '06_sync_crater_comparison', durationSec: 28.2, cueStartP: 0.0, cueEndP: 0.514, cueStartPFa: 0.0, cueEndPFa: 0.532, cueStartPFi: 0.0, cueEndPFi: 0.475,
     pos: [2.95, 1.98, -4.45], rotY: -Math.PI / 2, w: 3.60, h: 2.02, hasLegs: true, legFloorY: 0.15,
     badge: {
       en: '5-METER CRATER · BEFORE & AFTER COMPARISON',
@@ -340,7 +340,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '06_B', hotspotId: 'crater_damage', slot: 'B', groupKey: 'postStrike',
-    file: '06_sync_mothers_bags_and_drawings', durationSec: 32.2, cueStartP: 0.514, cueEndP: 0.977, cueStartPFa: 0.532, cueEndPFa: 0.957,
+    file: '06_sync_mothers_bags_and_drawings', durationSec: 32.2, cueStartP: 0.514, cueEndP: 0.977, cueStartPFa: 0.532, cueEndPFa: 0.957, cueStartPFi: 0.475, cueEndPFi: 0.984,
     pos: [-0.85, 1.96, -6.75], rotY: 0, w: 3.55, h: 2.00, hasLegs: true, legFloorY: 0.15,
     badge: {
       en: 'MOTHERS, SCHOOLBAGS & 28 SHRAPNEL-PIERCED DRAWINGS',
@@ -356,7 +356,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 7: 2:30 PM Second Wave & Recovered US Tomahawk Munitions Evidence
   {
     id: '07_A', hotspotId: 'second_wave', slot: 'A', groupKey: 'postStrike',
-    file: '07_sync_barehands_rescue', durationSec: 24.5, cueStartP: 0.0, cueEndP: 0.400, cueStartPFa: 0.0, cueEndPFa: 0.401,
+    file: '07_sync_barehands_rescue', durationSec: 24.5, cueStartP: 0.0, cueEndP: 0.400, cueStartPFa: 0.0, cueEndPFa: 0.401, cueStartPFi: 0.0, cueEndPFi: 0.411,
     pos: [22.75, 2.04, 3.10], rotY: -0.18, w: 4.15, h: 2.33, hasLegs: true, legFloorY: 0.02,
     badge: {
       en: 'MOTHERS & RESCUERS DIGGING WITH BARE HANDS',
@@ -371,7 +371,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '07_B', hotspotId: 'second_wave', slot: 'B', groupKey: 'postStrike',
-    file: '07_sync_tomahawk_then_smoke', durationSec: 35.6, cueStartP: 0.400, cueEndP: 0.984, cueStartPFa: 0.401, cueEndPFa: 0.969,
+    file: '07_sync_tomahawk_then_smoke', durationSec: 35.6, cueStartP: 0.400, cueEndP: 0.984, cueStartPFa: 0.401, cueEndPFa: 0.969, cueStartPFi: 0.411, cueEndPFi: 0.984,
     pos: [13.50, 2.16, 5.55], rotY: 0, w: 3.75, h: 2.05, hasLegs: true, legFloorY: 0.02,
     badge: {
       en: '2:30 PM SECOND WAVE · TOMAHAWK & BLACK SMOKE',
@@ -387,7 +387,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 8: Accountability Vow Shrine & Tribute Boards
   {
     id: '08_A', hotspotId: 'vow_shrine', slot: 'A', groupKey: 'memorial',
-    file: '08_sync_echo_of_rooms', durationSec: 34.4, cueStartP: 0.435, cueEndP: 0.665, cueStartPFa: 0.465, cueEndPFa: 0.724,
+    file: '08_sync_echo_of_rooms', durationSec: 34.4, cueStartP: 0.435, cueEndP: 0.665, cueStartPFa: 0.465, cueEndPFa: 0.724, cueStartPFi: 0.427, cueEndPFi: 0.715,
     pos: [-4.45, 1.92, 9.65], rotY: 0.30, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 0.02,
     badge: {
       en: 'WALK THROUGH THEIR CLASSROOMS · HEAR THEIR VOICES',
@@ -402,7 +402,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '08_B', hotspotId: 'vow_shrine', slot: 'B', groupKey: 'memorial',
-    file: '08_sync_justice_vow', durationSec: 26.3, cueStartP: 0.665, cueEndP: 0.988, cueStartPFa: 0.724, cueEndPFa: 0.992,
+    file: '08_sync_justice_vow', durationSec: 26.3, cueStartP: 0.665, cueEndP: 0.988, cueStartPFa: 0.724, cueEndPFa: 0.992, cueStartPFi: 0.715, cueEndPFi: 0.991,
     pos: [1.45, 1.92, 9.65], rotY: -0.30, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 0.02,
     badge: {
       en: 'SIGN THE MINAB ACCOUNTABILITY VOW',
@@ -627,7 +627,7 @@ export const WALKTHROUGH_BOOKENDS = {
     kicker: {
       en: 'IN REMEMBRANCE & PURSUIT OF JUSTICE',
       fa: 'به یاد کودکان میناب و در مسیر دادخواهی',
-      fi: 'MUISToksi JA OIKEUDENMUKAISUUDEN PUOLESTA'
+      fi: 'MUISTOKSI JA OIKEUDENMUKAISUUDEN PUOLESTA'
     },
     title: {
       en: '120 Schoolchildren & 26 Educators',

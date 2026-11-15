@@ -19,6 +19,7 @@ PROFILE_MAP = {
     'ali_en':     ('voices/ali_en',     'en'),
     'mostafa_fa': ('voices/mostafa_fa', 'fa'),
     'leila_fa':   ('voices/leila_fa',   'fa'),
+    'mostafa_fi': ('voices/mostafa_fi', 'fi'),
 }
 
 def load_stereo(path: Path, sr: int = SR) -> np.ndarray:
@@ -59,7 +60,7 @@ def main():
     total_samples = int(round(vid_dur * SR))
     mix = np.zeros((total_samples, 2), dtype='<f4')
 
-    default_prof = 'mostafa_fa' if lang == 'fa' else 'mostafa_en'
+    default_prof = {'fa': 'mostafa_fa', 'fi': 'mostafa_fi'}.get(lang, 'mostafa_en')
 
     amb_env = np.zeros(total_samples, dtype='<f4')
     fade_in_n = int(1.6 * SR)

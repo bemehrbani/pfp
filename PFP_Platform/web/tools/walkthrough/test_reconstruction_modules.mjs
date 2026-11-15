@@ -189,11 +189,13 @@ test('6. Camera spline, cue window, smoothWindowAlpha, and Vow summary helpers p
   assert.deepEqual(s1.pos, [5.8, 2.35, 11.4]);
   assert.deepEqual(s1.lookAt, [12.5, 0.75, 8.0]);
 
-  const spec = { cueStartP: 0.1, cueEndP: 0.5, cueStartPFa: 0.2, cueEndPFa: 0.7 };
+  const spec = { cueStartP: 0.1, cueEndP: 0.5, cueStartPFa: 0.2, cueEndPFa: 0.7, cueStartPFi: 0.15, cueEndPFi: 0.6 };
   appState.currentLang = 'en';
   assert.deepEqual(resolveInWorldCueWindow(spec), { start: 0.1, end: 0.5 });
   appState.currentLang = 'fa';
   assert.deepEqual(resolveInWorldCueWindow(spec), { start: 0.2, end: 0.7 });
+  appState.currentLang = 'fi';
+  assert.deepEqual(resolveInWorldCueWindow(spec), { start: 0.15, end: 0.6 });
   appState.currentLang = 'en';
 
   assert.equal(smoothWindowAlpha(0.5, 0.1, 0.2, 0.8, 0.9), 1);
@@ -233,3 +235,32 @@ test('7. Nginx configs disable stale caching on /js/reconstruction/ and /css/rec
     assert.doesNotMatch(txt, mojibakeRe, `Mojibake sequence detected in ${path.relative(REPO_ROOT, f)}`);
   }
 });
+
+test('8. Finnish (mostafa_fi) narrator profile, manifest, and all 8 audio files are present and wired', async () => {
+  const { appState } = await importReconModule('state.js');
+  const { NARRATOR_PROFILES, setLanguage } = await importReconModule('data/i18n.js');
+  const { GUIDED_TOUR_STOPS } = await importReconModule('data/tour-config.js');
+
+  assert.ok(NARRATOR_PROFILES.mostafa_fi, 'mostafa_fi profile must exist');
+  assert.equal(NARRATOR_PROFILES.mostafa_fi.lang, 'fi');
+  assert.equal(NARRATOR_PROFILES.mostafa_fi.dir, 'voices/mostafa_fi');
+
+  const voicesManifest = JSON.parse(
+    fs.readFileSync(path.join(PUB_DIR, 'media/narration/voices/manifest.json'), 'utf8')
+  );
+  assert.equal(voicesManifest.defaultByLang.fi, 'mostafa_fi');
+  assert.equal(voicesManifest.profiles.mostafa_fi.stationsCount, 8);
+
+  for (const stop of GUIDED_TOUR_STOPS) {
+    const mp3 = path.join(PUB_DIR, `media/narration/voices/mostafa_fi/fi_${stop.hotspotId}.mp3`);
+    assert.ok(fs.existsSync(mp3), `Missing Finnish voiceover: ${mp3}`);
+    assert.ok(fs.statSync(mp3).size > 500000, `Unexpectedly small Finnish MP3: ${mp3}`);
+  }
+
+  setLanguage('fi');
+  assert.equal(appState.currentLang, 'fi');
+  assert.equal(appState.activeVoiceProfile, 'mostafa_fi');
+  setLanguage('en');
+  assert.equal(appState.activeVoiceProfile, 'mostafa_en');
+});
+

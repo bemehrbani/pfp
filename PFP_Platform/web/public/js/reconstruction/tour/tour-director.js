@@ -1129,10 +1129,18 @@ export function playSpotNarration(hotspotId) {
   appState.activeNarrationHotspot = hotspotId;
   const prof =
     NARRATOR_PROFILES[appState.activeVoiceProfile] ||
-    (appState.currentLang === 'fa' ? NARRATOR_PROFILES.mostafa_fa : NARRATOR_PROFILES.mostafa_en);
-  const narrationVersion = '20261114b';
+    (appState.currentLang === 'fa'
+      ? NARRATOR_PROFILES.mostafa_fa
+      : appState.currentLang === 'fi'
+        ? NARRATOR_PROFILES.mostafa_fi
+        : NARRATOR_PROFILES.mostafa_en);
+  const narrationVersion = '20261115a';
   const primarySrc = `media/narration/${prof.dir}/${prof.prefix}_${hotspotId}.mp3?v=${narrationVersion}`;
-  const fallbackSrc = `media/narration/${prof.fallbackDir || 'voices/leila_en'}/${prof.prefix}_${hotspotId}.mp3?v=${narrationVersion}`;
+  const fallbackBase =
+    prof.fallbackDir === '.'
+      ? 'media/narration'
+      : `media/narration/${prof.fallbackDir || 'voices/leila_en'}`;
+  const fallbackSrc = `${fallbackBase}/${prof.prefix}_${hotspotId}.mp3?v=${narrationVersion}`;
 
   if (!appState.narrationAudio) {
     appState.narrationAudio = new Audio();

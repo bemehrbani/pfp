@@ -12,6 +12,7 @@ export const appState = {
   preferredVoiceByLang: {
     fa: 'mostafa_fa',
     en: 'mostafa_en',
+    fi: 'mostafa_fi',
   },
 
   // Three.js core objects
