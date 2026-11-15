@@ -5,6 +5,7 @@
  */
 import { appState } from '../state.js';
 import {
+  MEDIA_ASSET_VERSION,
   GUIDED_TOUR_STOPS,
   IN_WORLD_SCREEN_SPECS,
   WALKTHROUGH_VISUAL_CONFIG,
@@ -197,12 +198,17 @@ export async function preloadUrlsBounded(urls, worker, concurrency = 4) {
   await Promise.all(runners);
 }
 
+function withMediaVersion(url) {
+  if (!url) return '';
+  return url.includes('?') ? url : `${url}?v=${MEDIA_ASSET_VERSION}`;
+}
+
 export async function preloadAllWalkthroughPipBlobs() {
   const pipUrls = Object.values(WALKTHROUGH_VISUAL_CONFIG)
-    .map((c) => c.pipReel)
+    .map((c) => withMediaVersion(c.pipReel))
     .filter(Boolean);
-  const screenUrls = IN_WORLD_SCREEN_SPECS.map((s) => `media/walkthrough_pip/${s.file}.mp4`);
-  const interludeUrls = Object.values(WALKTHROUGH_INTERLUDES).map((c) => c.src);
+  const screenUrls = IN_WORLD_SCREEN_SPECS.map((s) => `media/walkthrough_pip/${s.file}.mp4?v=${MEDIA_ASSET_VERSION}`);
+  const interludeUrls = Object.values(WALKTHROUGH_INTERLUDES).map((c) => withMediaVersion(c.src));
   const all = Array.from(new Set([...pipUrls, ...screenUrls, ...interludeUrls]));
   const prevMode = appState.recordingMode;
   appState.recordingMode = true;
@@ -1047,10 +1053,11 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
   if (progEl) progEl.style.width = '0%';
   if (rupEl) rupEl.hidden = true;
 
-  const resolvedUrl = await resolvePipVideoSrc(cfg.src);
+  const versionedSrc = withMediaVersion(cfg.src);
+  const resolvedUrl = await resolvePipVideoSrc(versionedSrc);
   if (!appState.isGuidedTour || (run && !isTourRunActive(run))) return;
 
-  vid.src = resolvedUrl || cfg.src;
+  vid.src = resolvedUrl || versionedSrc;
   vid.muted = false;
   vid.volume = appState.voiceNarrationEnabled ? 1.0 : 0.0;
   vid.currentTime = 0;

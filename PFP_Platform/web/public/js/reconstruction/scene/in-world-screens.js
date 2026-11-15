@@ -11,7 +11,7 @@
  *   while preserving their frozen end-frame or poster on the 3D wall.
  */
 import { appState } from '../state.js';
-import { IN_WORLD_SCREEN_SPECS } from '../data/tour-config.js';
+import { IN_WORLD_SCREEN_SPECS, MEDIA_ASSET_VERSION } from '../data/tour-config.js';
 
 const MAX_POOLED_VIDEO_DECODERS = 4;
 
@@ -273,8 +273,8 @@ export function buildAllInWorldWalkthroughScreens() {
       plaqueTex,
       accentBarMat,
       innerTrimMat,
-      posterUrl: `media/walkthrough_pip/posters/${spec.file}.jpg`,
-      videoUrl: `media/walkthrough_pip/${spec.file}.mp4`,
+      posterUrl: `media/walkthrough_pip/posters/${spec.file}.jpg?v=${MEDIA_ASSET_VERSION}`,
+      videoUrl: `media/walkthrough_pip/${spec.file}.mp4?v=${MEDIA_ASSET_VERSION}`,
       posterTex: null,
       posterLoaded: false,
       videoEl: null,

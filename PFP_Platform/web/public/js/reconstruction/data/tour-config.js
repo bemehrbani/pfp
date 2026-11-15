@@ -3,6 +3,8 @@
  * Cinema Witness Interludes, bookends, and room atmosphere profiles.
  */
 
+export const MEDIA_ASSET_VERSION = '20261115a';
+
 export const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'courtyard_lines',
