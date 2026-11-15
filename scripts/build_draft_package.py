@@ -43,7 +43,43 @@ WEB_REPORT_DIR = os.path.join(BASE_DIR, "PFP_Platform", "web", "public", "docs",
 
 MAIN_REPORT_SRC = os.path.join(DOCS_DIR, "FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md")
 ANNEX_DOC_SRC = os.path.join(DOCS_DIR, "MASTER_EXHIBIT_DOSSIER.md")
-CHARTS_DOC_SRC = os.path.join(BENCHMARKS_DIR, "COMPREHENSIVE_BENCHMARKING_REMAINING_15_CASES.md")
+CHARTS_DOC_SRC = os.path.join(BENCHMARKS_DIR, "COMPREHENSIVE_BENCHMARKING_ALL_19_CASES.md")
+SURVEY_DOC_SRC = os.path.join(BENCHMARKS_DIR, "FINAL_SITUATION_SURVEY_ALL_19_CASES.md")
+UJ_DOC_SRC = os.path.join(BENCHMARKS_DIR, "universal_jurisdiction_war_crimes_minab_report.md")
+
+
+DOC_META = {
+    "main": (
+        "PFPJ-2026-IR-001",
+        "DOCKET NO.: PFPJ-2026-IR-001",
+        "Minab Factual Determination & Legal Assessment",
+        "EXPERT JUDICIAL DETERMINATION & COMPREHENSIVE LEGAL ASSESSMENT",
+    ),
+    "annex": (
+        "PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM",
+        "DOCKET NO.: PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM",
+        "Master Exhibit Dossier & Evidentiary Compendium",
+        "MASTER EXHIBIT DOSSIER & EVIDENTIARY COMPENDIUM",
+    ),
+    "charts": (
+        "PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS",
+        "DOCKET NO.: PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS",
+        "Case-Based Legal Benchmark Compendium (All 19 Cases)",
+        "CASE-BASED LEGAL BENCHMARK COMPENDIUM (ALL 19 CASES)",
+    ),
+    "survey": (
+        "PFPJ-2026-SURVEY-019",
+        "DOCKET NO.: PFPJ-2026-SURVEY-019",
+        "Master Judicial & Procedural Survey of All 19 Benchmark Cases",
+        "MASTER JUDICIAL & PROCEDURAL SURVEY OF ALL 19 BENCHMARK CASES",
+    ),
+    "uj": (
+        "PFPJ-2026-IR-001 / ADDENDUM 03 (UNIVERSAL JURISDICTION)",
+        "DOCKET NO.: PFPJ-2026-IR-001 / ADDENDUM 03",
+        "Universal Jurisdiction & Strategic Litigation Dossier",
+        "UNIVERSAL JURISDICTION FOR WAR CRIMES & STRATEGIC LITIGATION DOSSIER",
+    ),
+}
 
 
 # -----------------------------------------------------------------------------
@@ -240,12 +276,7 @@ def compile_markdown_to_docx(md_path, docx_path, production_date, doc_type="main
         footer = section.footer
         fp = footer.paragraphs[0]
         fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        if doc_type == "main":
-            docket_tag = "PFPJ-2026-IR-001"
-        elif doc_type == "annex":
-            docket_tag = "PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
-        else:
-            docket_tag = "PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS"
+        docket_tag = DOC_META.get(doc_type, DOC_META["charts"])[0]
         frun = fp.add_run(f"CONFIDENTIAL · PEOPLE FOR PEACE & JUSTICE RY · DOCKET {docket_tag} · DRAFT DATE: {production_date}")
         frun.font.name = 'Calibri'
         frun.font.size = Pt(8)
@@ -257,15 +288,7 @@ def compile_markdown_to_docx(md_path, docx_path, production_date, doc_type="main
     normal_style.font.size = Pt(10)
     normal_style.font.color.rgb = RGBColor(0x1E, 0x29, 0x3B)
 
-    if doc_type == "main":
-        docket_num = "DOCKET NO.: PFPJ-2026-IR-001"
-        doc_title = "Minab Factual Determination & Legal Assessment"
-    elif doc_type == "annex":
-        docket_num = "DOCKET NO.: PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
-        doc_title = "Master Exhibit Dossier & Evidentiary Compendium"
-    else:
-        docket_num = "DOCKET NO.: PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS"
-        doc_title = "Case-Based Legal Benchmark Compendium (Cases 01–19)"
+    _, docket_num, doc_title, _ = DOC_META.get(doc_type, DOC_META["charts"])
 
     # Add Prominent Top Callout Banner
     add_callout_banner(doc, production_date, docket_num, doc_title)
@@ -342,6 +365,33 @@ def compile_markdown_to_docx(md_path, docx_path, production_date, doc_type="main
         # Skip anchor tags
         if stripped.startswith("<a id=") or stripped.startswith("</a>"):
             i += 1
+            continue
+
+        # Handle fenced code / diagram blocks
+        if stripped.startswith("```"):
+            fence_lang = stripped[3:].strip().lower()
+            fence_lines = []
+            i += 1
+            while i < n and not lines[i].strip().startswith("```"):
+                fence_lines.append(lines[i].rstrip("\r\n"))
+                i += 1
+            if i < n:
+                i += 1
+            if fence_lang != "mermaid" and fence_lines:
+                tbl_code = doc.add_table(rows=1, cols=1)
+                tbl_code.alignment = WD_TABLE_ALIGNMENT.CENTER
+                c_cell = tbl_code.cell(0, 0)
+                set_cell_background(c_cell, "F8FAFC")
+                set_cell_margins(c_cell, top=100, bottom=100, left=140, right=140)
+                set_cell_borders(c_cell, top="single", bottom="single", left="single", right="single", color="CBD5E1", sz="4")
+                cp = c_cell.paragraphs[0]
+                cp.paragraph_format.space_before = Pt(0)
+                cp.paragraph_format.space_after = Pt(0)
+                cp.paragraph_format.line_spacing = 1.05
+                crun = cp.add_run("\n".join(fence_lines))
+                crun.font.name = 'Consolas'
+                crun.font.size = Pt(8)
+                crun.font.color.rgb = RGBColor(0x1E, 0x29, 0x3B)
             continue
 
         # Blank lines
@@ -514,19 +564,14 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
     with open(md_path, 'r', encoding='utf-8') as f:
         text = f.read()
 
-    if doc_type == "main":
-        docket_tag = "DOCKET NO.: PFPJ-2026-IR-001"
-        doc_title = "EXPERT JUDICIAL DETERMINATION & COMPREHENSIVE LEGAL ASSESSMENT"
-    elif doc_type == "annex":
-        docket_tag = "DOCKET NO.: PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
-        doc_title = "MASTER EXHIBIT DOSSIER & EVIDENTIARY COMPENDIUM"
-    else:
-        docket_tag = "DOCKET NO.: PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS"
-        doc_title = "CASE-BASED LEGAL BENCHMARK COMPENDIUM (CASES 01–19)"
+    _, docket_tag, _, doc_title = DOC_META.get(doc_type, DOC_META["charts"])
 
     lines = text.splitlines()
     html_parts = []
     in_table = False
+    in_fence = False
+    fence_lang = ""
+    fence_lines = []
     table_rows = []
 
     def flush_html_table():
@@ -569,6 +614,26 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
             continue
 
         stripped = line.strip()
+
+        if in_fence:
+            if stripped.startswith("```"):
+                in_fence = False
+                if fence_lang != "mermaid" and fence_lines:
+                    escaped_code = "\n".join(fence_lines).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                    html_parts.append(f'<pre style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:4px;padding:10px 12px;font-size:7.8pt;line-height:1.35;overflow-x:auto;page-break-inside:avoid;"><code>{escaped_code}</code></pre>')
+                fence_lines = []
+                fence_lang = ""
+            else:
+                fence_lines.append(line.rstrip("\r\n"))
+            continue
+
+        if stripped.startswith("```"):
+            if in_table:
+                html_parts.append(flush_html_table())
+            in_fence = True
+            fence_lang = stripped[3:].strip().lower()
+            fence_lines = []
+            continue
 
         # Tables
         if stripped.startswith("|") and stripped.endswith("|"):
@@ -892,12 +957,7 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
 # -----------------------------------------------------------------------------
 def compile_html_to_pdf(html_content, pdf_path, production_date, doc_type="main"):
     """Compiles HTML into an A4 PDF with running headers, footers, and draft tags."""
-    if doc_type == "main":
-        docket_tag = "DOCKET PFPJ-2026-IR-001"
-    elif doc_type == "annex":
-        docket_tag = "DOCKET PFPJ-2026-IR-001 / EXHIBIT COMPENDIUM"
-    else:
-        docket_tag = "DOCKET PFPJ-2026-IR-001 / CASE BENCHMARK CHARTS"
+    docket_tag = "DOCKET " + DOC_META.get(doc_type, DOC_META["charts"])[0]
     
     header_template = """
     <div style="font-size: 7.5pt; font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #b91c1c; font-weight: 700; width: 100%; text-align: center; border-bottom: 1px solid #fecaca; padding-bottom: 3px; margin: 0 16mm;">
@@ -1090,7 +1150,7 @@ def main():
     print(f"Target Version Directory: {version_dir}")
     print("=" * 70)
 
-    for src in (MAIN_REPORT_SRC, ANNEX_DOC_SRC, CHARTS_DOC_SRC):
+    for src in (MAIN_REPORT_SRC, ANNEX_DOC_SRC, CHARTS_DOC_SRC, SURVEY_DOC_SRC, UJ_DOC_SRC):
         if not os.path.exists(src):
             print(f"Error: Source document not found at {src}", file=sys.stderr)
             sys.exit(1)
@@ -1103,58 +1163,92 @@ def main():
     annex_docx = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}{tag_file}_Draft.docx")
     annex_pdf = os.path.join(version_dir, f"PFPJ_Minab_Master_Exhibit_Dossier_Annex_{production_date}{tag_file}_Draft.pdf")
 
-    # 3. Case Benchmark Charts Filenames
+    # 3. Case Benchmark Charts Filenames (All 19 Cases)
     charts_docx = os.path.join(version_dir, f"PFPJ_Minab_Case_Based_Legal_Benchmark_Charts_{production_date}{tag_file}.docx")
     charts_pdf = os.path.join(version_dir, f"PFPJ_Minab_Case_Based_Legal_Benchmark_Charts_{production_date}{tag_file}.pdf")
 
+    # 4. 19-Case Final Procedural Situation Survey Filenames
+    survey_docx = os.path.join(version_dir, f"PFPJ_Minab_19_Cases_Final_Situation_Survey_{production_date}{tag_file}.docx")
+    survey_pdf = os.path.join(version_dir, f"PFPJ_Minab_19_Cases_Final_Situation_Survey_{production_date}{tag_file}.pdf")
+
+    # 5. Universal Jurisdiction Master Dossier Filenames
+    uj_docx = os.path.join(version_dir, f"PFPJ_Minab_Universal_Jurisdiction_Dossier_{production_date}{tag_file}.docx")
+    uj_pdf = os.path.join(version_dir, f"PFPJ_Minab_Universal_Jurisdiction_Dossier_{production_date}{tag_file}.pdf")
+
     if args.docx_only:
-        print("\n[1/3] Compiling Main Report (Word Document)...")
+        print("\n[1/5] Compiling Main Report (Word Document)...")
         compile_markdown_to_docx(MAIN_REPORT_SRC, main_docx, production_date, doc_type="main")
 
-        print("\n[2/3] Compiling Annex Document (Word Document)...")
+        print("\n[2/5] Compiling Annex Document (Word Document)...")
         compile_markdown_to_docx(ANNEX_DOC_SRC, annex_docx, production_date, doc_type="annex")
 
-        print("\n[3/3] Compiling Case Benchmark Charts (Word Document)...")
+        print("\n[3/5] Compiling 19-Case Benchmark Charts (Word Document)...")
         compile_markdown_to_docx(CHARTS_DOC_SRC, charts_docx, production_date, doc_type="charts")
 
-        print("\n[4/4] Generating Package Manifest & Verification Hashes...")
+        print("\n[4/5] Compiling 19-Case Final Situation Survey (Word Document)...")
+        compile_markdown_to_docx(SURVEY_DOC_SRC, survey_docx, production_date, doc_type="survey")
+
+        print("\n[5/5] Compiling Universal Jurisdiction Dossier (Word Document)...")
+        compile_markdown_to_docx(UJ_DOC_SRC, uj_docx, production_date, doc_type="uj")
+
+        print("\nGenerating Package Manifest & Verification Hashes...")
         doc_records = [
             ("Main Report", "DOCX", os.path.basename(main_docx), os.path.getsize(main_docx), calculate_sha256(main_docx)),
             ("Annex Document", "DOCX", os.path.basename(annex_docx), os.path.getsize(annex_docx), calculate_sha256(annex_docx)),
-            ("Case Benchmark Charts", "DOCX", os.path.basename(charts_docx), os.path.getsize(charts_docx), calculate_sha256(charts_docx)),
+            ("Case Benchmark Charts (19 Cases)", "DOCX", os.path.basename(charts_docx), os.path.getsize(charts_docx), calculate_sha256(charts_docx)),
+            ("19-Case Final Situation Survey", "DOCX", os.path.basename(survey_docx), os.path.getsize(survey_docx), calculate_sha256(survey_docx)),
+            ("Universal Jurisdiction Dossier", "DOCX", os.path.basename(uj_docx), os.path.getsize(uj_docx), calculate_sha256(uj_docx)),
         ]
         generate_manifest(version_dir, production_date, doc_records)
         generate_drafts_readme(drafts_root)
     else:
-        print("\n[1/6] Compiling Main Report (Word Document)...")
+        print("\n[1/10] Compiling Main Report (Word Document)...")
         compile_markdown_to_docx(MAIN_REPORT_SRC, main_docx, production_date, doc_type="main")
 
-        print("\n[2/6] Compiling Main Report (PDF Document)...")
+        print("\n[2/10] Compiling Main Report (PDF Document)...")
         main_html = markdown_to_html(MAIN_REPORT_SRC, production_date, doc_type="main")
         compile_html_to_pdf(main_html, main_pdf, production_date, doc_type="main")
 
-        print("\n[3/6] Compiling Annex Document (Word Document)...")
+        print("\n[3/10] Compiling Annex Document (Word Document)...")
         compile_markdown_to_docx(ANNEX_DOC_SRC, annex_docx, production_date, doc_type="annex")
 
-        print("\n[4/6] Compiling Annex Document (PDF Document)...")
+        print("\n[4/10] Compiling Annex Document (PDF Document)...")
         annex_html = markdown_to_html(ANNEX_DOC_SRC, production_date, doc_type="annex")
         compile_html_to_pdf(annex_html, annex_pdf, production_date, doc_type="annex")
 
-        print("\n[5/6] Compiling Case Benchmark Charts (Word Document)...")
+        print("\n[5/10] Compiling 19-Case Benchmark Charts (Word Document)...")
         compile_markdown_to_docx(CHARTS_DOC_SRC, charts_docx, production_date, doc_type="charts")
 
-        print("\n[6/6] Compiling Case Benchmark Charts (PDF Document)...")
+        print("\n[6/10] Compiling 19-Case Benchmark Charts (PDF Document)...")
         charts_html = markdown_to_html(CHARTS_DOC_SRC, production_date, doc_type="charts")
         compile_html_to_pdf(charts_html, charts_pdf, production_date, doc_type="charts")
 
-        print("\n[7/7] Generating Package Manifest & Verification Hashes...")
+        print("\n[7/10] Compiling 19-Case Final Situation Survey (Word Document)...")
+        compile_markdown_to_docx(SURVEY_DOC_SRC, survey_docx, production_date, doc_type="survey")
+
+        print("\n[8/10] Compiling 19-Case Final Situation Survey (PDF Document)...")
+        survey_html = markdown_to_html(SURVEY_DOC_SRC, production_date, doc_type="survey")
+        compile_html_to_pdf(survey_html, survey_pdf, production_date, doc_type="survey")
+
+        print("\n[9/10] Compiling Universal Jurisdiction Dossier (Word Document)...")
+        compile_markdown_to_docx(UJ_DOC_SRC, uj_docx, production_date, doc_type="uj")
+
+        print("\n[10/10] Compiling Universal Jurisdiction Dossier (PDF Document)...")
+        uj_html = markdown_to_html(UJ_DOC_SRC, production_date, doc_type="uj")
+        compile_html_to_pdf(uj_html, uj_pdf, production_date, doc_type="uj")
+
+        print("\nGenerating Package Manifest & Verification Hashes...")
         doc_records = [
             ("Main Report", "DOCX", os.path.basename(main_docx), os.path.getsize(main_docx), calculate_sha256(main_docx)),
             ("Main Report", "PDF", os.path.basename(main_pdf), os.path.getsize(main_pdf), calculate_sha256(main_pdf)),
             ("Annex Document", "DOCX", os.path.basename(annex_docx), os.path.getsize(annex_docx), calculate_sha256(annex_docx)),
             ("Annex Document", "PDF", os.path.basename(annex_pdf), os.path.getsize(annex_pdf), calculate_sha256(annex_pdf)),
-            ("Case Benchmark Charts", "DOCX", os.path.basename(charts_docx), os.path.getsize(charts_docx), calculate_sha256(charts_docx)),
-            ("Case Benchmark Charts", "PDF", os.path.basename(charts_pdf), os.path.getsize(charts_pdf), calculate_sha256(charts_pdf)),
+            ("Case Benchmark Charts (19 Cases)", "DOCX", os.path.basename(charts_docx), os.path.getsize(charts_docx), calculate_sha256(charts_docx)),
+            ("Case Benchmark Charts (19 Cases)", "PDF", os.path.basename(charts_pdf), os.path.getsize(charts_pdf), calculate_sha256(charts_pdf)),
+            ("19-Case Final Situation Survey", "DOCX", os.path.basename(survey_docx), os.path.getsize(survey_docx), calculate_sha256(survey_docx)),
+            ("19-Case Final Situation Survey", "PDF", os.path.basename(survey_pdf), os.path.getsize(survey_pdf), calculate_sha256(survey_pdf)),
+            ("Universal Jurisdiction Dossier", "DOCX", os.path.basename(uj_docx), os.path.getsize(uj_docx), calculate_sha256(uj_docx)),
+            ("Universal Jurisdiction Dossier", "PDF", os.path.basename(uj_pdf), os.path.getsize(uj_pdf), calculate_sha256(uj_pdf)),
         ]
         generate_manifest(version_dir, production_date, doc_records)
         generate_drafts_readme(drafts_root)
@@ -1164,10 +1258,14 @@ def main():
         shutil.copy2(main_docx, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Master_Factual_Determination_Report.docx"))
         shutil.copy2(annex_docx, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Master_Exhibit_Dossier_Annex.docx"))
         shutil.copy2(charts_docx, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Case_Based_Legal_Benchmark_Charts.docx"))
+        shutil.copy2(survey_docx, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_19_Cases_Final_Situation_Survey.docx"))
+        shutil.copy2(uj_docx, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Universal_Jurisdiction_Dossier.docx"))
         if not args.docx_only:
             shutil.copy2(main_pdf, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Master_Factual_Determination_Report.pdf"))
             shutil.copy2(annex_pdf, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Master_Exhibit_Dossier_Annex.pdf"))
             shutil.copy2(charts_pdf, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Case_Based_Legal_Benchmark_Charts.pdf"))
+            shutil.copy2(survey_pdf, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_19_Cases_Final_Situation_Survey.pdf"))
+            shutil.copy2(uj_pdf, os.path.join(WEB_REPORT_DIR, "PFPJ_Minab_Universal_Jurisdiction_Dossier.pdf"))
         shutil.copy2(os.path.join(version_dir, "PACKAGE_MANIFEST.md"), os.path.join(WEB_REPORT_DIR, "PACKAGE_MANIFEST.md"))
         print(f"\n  [WEB MIRROR OK] Synced canonical packages and manifest to: {WEB_REPORT_DIR}")
 

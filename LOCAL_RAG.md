@@ -5,7 +5,7 @@
 > **Business ID (Y-tunnus):** 3616815-5  
 > **Live Domain:** [https://peopleforpeace.live](https://peopleforpeace.live)  
 > **Primary Campaign:** Justice for Minab Children & Mothers (*Shajareh Tayyebeh Elementary Airstrike*)  
-> **Last Synchronized:** September 2026
+> **Last Synchronized:** November 2026
 
 ---
 
@@ -95,7 +95,11 @@
   - [`index.md`](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/index.md): Master index of 19 international benchmarks and 10 similarity factors.
   - [`query_similar_cases.py`](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/query_similar_cases.py): Live CLI query tool connecting to ECtHR HUDOC API and CourtListener US Case Law API.
   - [`fetch_all_full_reports.py`](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/fetch_all_full_reports.py): Automated pipeline for downloading and assembling full-text reports, UN inquiry findings, and court decisions.
-  - [`full_reports/`](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/full_reports/): Complete full-text case reports, official UN CoI/UNAMA/UN GEE reports, and unabridged ECtHR/ICTY judgments for all 19 benchmark cases.
+  - [`full_reports/`](Campaigns/minab/legal_benchmarks/full_reports/): Complete full-text case reports, official UN CoI/UNAMA/UN GEE reports, and unabridged ECtHR/ICTY judgments for all 19 benchmark cases.
+  - [`COMPREHENSIVE_BENCHMARKING_ALL_19_CASES.md`](Campaigns/minab/legal_benchmarks/COMPREHENSIVE_BENCHMARKING_ALL_19_CASES.md): Full 19-case juridical benchmark charts (190 citations) and paragraph mapping into `FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md`.
+  - [`FINAL_SITUATION_SURVEY_ALL_19_CASES.md`](Campaigns/minab/legal_benchmarks/FINAL_SITUATION_SURVEY_ALL_19_CASES.md) & [`cases_survey_data.json`](Campaigns/minab/legal_benchmarks/cases_survey_data.json): Master late-2026 judicial, investigative, accountability, and reparation survey across all 19 benchmark cases (`PFPJ-2026-SURVEY-019`).
+  - [`universal_jurisdiction_war_crimes_minab_report.md`](Campaigns/minab/legal_benchmarks/universal_jurisdiction_war_crimes_minab_report.md): Comparative Universal Jurisdiction statutory survey across 8 jurisdictions, 8 domestic UJ case precedents, immunity/subsidiarity rebuttals, and Two-Track litigation roadmap (`Addendum 03`).
+  - [`top_cited_literature_landmark_uj_cases.md`](Campaigns/minab/legal_benchmarks/top_cited_literature_landmark_uj_cases.md) & [`european_universal_jurisdiction_top20_with_links_and_oa.md`](Campaigns/minab/legal_benchmarks/european_universal_jurisdiction_top20_with_links_and_oa.md): Exhaustive scholarly literature surveys (80 + 100 foundational works with active links and OA availability).
   - Individual case studies: [Belgrade Embassy](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/case_01_belgrade_embassy.md), [Kunduz Tankers (Hanan v. Germany)](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/case_02_kunduz_tankers.md), [Katyr-Yurt (Isayeva v. Russia)](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/case_03_katyr_yurt.md), [Shaami-Yurt Convoy (Isayeva, Yusupova and Bazayeva v. Russia)](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/case_19_shaami_yurt_convoy.md), [Al-Jina Mosque](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/case_04_al_jina_mosque.md), [Kabul Drone](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/case_05_kabul_drone.md), [Dora Farms](file:///Users/mahdifarimani/Documents/PFP/Campaigns/minab/legal_benchmarks/case_06_dora_farms.md).
 
 ### B. Association Governance & Legal Filings (`PFPJ_Ry/` & `web/public/legal/jfmc-2026/`)
