@@ -755,7 +755,7 @@ export function populate3DSchoolPortraitsAndDrawings() {
   createWingBannerIn3D(
     groundFloorGroup,
     `GROUND FLOOR WEST CLASSROOMS: BOYS GRADES 1–3 (${boysGrades1to3.length} STUDENTS)`,
-    `کلاس‌های طبقه همکف (بال غربی): ۵۵ دانش‌آموز پسر پایه‌های اول تا سوم`,
+    `کلاس‌های طبقه همکف (بال غربی): ۴۸ دانش‌آموز پسر پایه‌های اول تا سوم`,
     -15.8,
     3.25,
     -2.3,
@@ -1018,7 +1018,7 @@ export function populate3DSchoolPortraitsAndDrawings() {
   const girlsAll = childrenList.filter((c) => c.gender === 'girl' && c.photoPath);
   createWingBannerIn3D(
     firstFloorGroup,
-    `FIRST FLOOR GIRLS' ASSEMBLY HALL: ALL ${girlsAll.length} MARTYRED SCHOOLGIRLS (GRADES 1–6)`,
+    `FIRST FLOOR GIRLS' ASSEMBLY HALL: ALL 47 MARTYRED SCHOOLGIRLS (GRADES 1–6)`,
     `طبقه اول (سالن بزرگ دختران): ۴۷ دانش‌آموز دختر شهیده در پایه‌های اول تا ششم`,
     -15.25,
     y1 + 3.48,

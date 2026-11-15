@@ -2772,8 +2772,8 @@ const CHILDREN = [
         "identificationMethod": "visual",
         "burialLocation": "Minab Martyrs' Cemetery, Hormozgan",
         "photoGrid": null,
-        "photoPath": null,
-        "photoUrl": null,
+        "photoPath": "images/children/adrina-pegah.jpg",
+        "photoUrl": "https://peopleforpeace.live/images/children/adrina-pegah.jpg",
         "notes": "1st Grade Student (born 1397/09/18 / 2018-12-09, age 7). First-grade student who survived the immediate strike but succumbed to severe blast and burn injuries days later in the PICU at Hazrat Abolfazl Hospital.",
         "linkedDrawings": [],
         "sources": [
