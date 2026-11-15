@@ -4,6 +4,10 @@
  */
 import { appState } from '../state.js';
 import { buildAllInWorldWalkthroughScreens } from './in-world-screens.js';
+import {
+  createPaintedPlasterMaterial,
+  wallBoxGeometry,
+} from './painted-plaster-material.js';
 
 /** Persian and English faces for painted signs; both are loaded by reconstruction.html. */
 const FA_CANVAS_FONT = '"Vazirmatn", Tahoma, sans-serif';
@@ -548,12 +552,12 @@ export function buildEnvironmentAndTerrain() {
   // ========================================================
   // COURTYARD DIVIDING & PERIMETER WALLS
   // ========================================================
-  const wallMat = new THREE.MeshStandardMaterial({ color: 0xe2e6ec, roughness: 0.85 });
+  const wallMat = createPaintedPlasterMaterial(0xe2e6ec);
   const wallH = 2.65;
   const wallT = 0.36;
 
   function addCourtyardWall(w, h, d, x, y, z, mat, featureTag, isSolid = true) {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || wallMat);
+    const m = new THREE.Mesh(wallBoxGeometry(w, h, d, mat || wallMat), mat || wallMat);
     m.position.set(x, y, z);
     m.castShadow = true;
     m.receiveShadow = true;
@@ -655,13 +659,13 @@ export function buildEnvironmentAndTerrain() {
   addCourtyardWall(29.8, wallH, wallT, -19.1, wallH / 2, 30.0, wallMat, null, true);
   addCourtyardWall(41.5, wallH, wallT, 21.75, wallH / 2, 30.0, wallMat, null, true);
 
-  const pencilGatePanel = new THREE.Mesh(
-    new THREE.BoxGeometry(3.6, 2.65, 0.44),
-    new THREE.MeshStandardMaterial({ map: murals.pencilGateTex, roughness: 0.72 })
-  );
-  pencilGatePanel.position.set(2.8, 1.35, 30.0);
-  pencilGatePanel.userData = { feature: 'pencil_main_gate', isSolidWall: true };
-  terrainGroup.add(pencilGatePanel);
+  // const pencilGatePanel = new THREE.Mesh(
+  //   new THREE.BoxGeometry(3.6, 2.65, 0.44),
+  //   new THREE.MeshStandardMaterial({ map: murals.pencilGateTex, roughness: 0.72 })
+  // );
+  // pencilGatePanel.position.set(2.8, 1.35, 30.0);
+  // pencilGatePanel.userData = { feature: 'pencil_main_gate', isSolidWall: true };
+  // terrainGroup.add(pencilGatePanel);
 
   // Y-shaped security light post atop main gate pier (pip01b_01)
   const poleMat = new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 });
@@ -765,19 +769,22 @@ export function buildProceduralSchoolModels() {
   const murals = getSchoolMuralTextures();
 
   // Verified Materials from FA-121 Blueprints & On-Site Archive Photos
-  const whiteWall = new THREE.MeshStandardMaterial({ color: 0xedeff2, roughness: 0.82 });
-  const westGreyWall = new THREE.MeshStandardMaterial({ color: 0x9aa1aa, roughness: 0.84 });
+  const whiteWall = createPaintedPlasterMaterial(0xedeff2);
+  const westGreyWall = createPaintedPlasterMaterial(0x9aa1aa);
   const floorGrey = new THREE.MeshStandardMaterial({ color: 0x9ca3af, roughness: 0.85 });
   const floorGreen = new THREE.MeshStandardMaterial({ color: 0x5c7a62, roughness: 0.80 });
   const floorBrown = new THREE.MeshStandardMaterial({ color: 0x9c7b56, roughness: 0.82 });
   const floorLilac = new THREE.MeshStandardMaterial({ color: 0xa5a1bd, roughness: 0.82 });
-  const tealWall = new THREE.MeshStandardMaterial({ color: 0x4f8694, roughness: 0.76 });
-  const rearTealExt = new THREE.MeshStandardMaterial({ color: 0x3b7687, roughness: 0.78 });
-  const skyBlueWall = new THREE.MeshStandardMaterial({ color: 0x88b8cb, roughness: 0.76 });
-  const mintGreenWall = new THREE.MeshStandardMaterial({ color: 0x9ec4a5, roughness: 0.76 });
-  const yellowFacade = new THREE.MeshStandardMaterial({ color: 0xd8d278, roughness: 0.76 });
-  const pinkWall = new THREE.MeshStandardMaterial({ color: 0xd4839d, roughness: 0.76 });
-  const sageGreenWall = new THREE.MeshStandardMaterial({ color: 0x7fa382, roughness: 0.76 });
+  const tealWall = createPaintedPlasterMaterial(0x4f8694);
+  const rearTealExt = createPaintedPlasterMaterial(0x3b7687);
+  const skyBlueWall = createPaintedPlasterMaterial(0x88b8cb);
+  const mintGreenWall = createPaintedPlasterMaterial(0x9ec4a5);
+  const yellowFacade = createPaintedPlasterMaterial(0xd8d278);
+  const pinkWall = createPaintedPlasterMaterial(0xd4839d);
+  const sageGreenWall = createPaintedPlasterMaterial(0x7fa382);
+  // Sills, window mullions and trims are too narrow for a 2 m texture tile, so
+  // they keep the flat whitewash colour.
+  const trimWhiteMat = new THREE.MeshStandardMaterial({ color: 0xedeff2, roughness: 0.82 });
   const purpleDoorMat = new THREE.MeshStandardMaterial({ color: 0x8b4ca8, roughness: 0.50 });
   const pinkDoorMat = new THREE.MeshStandardMaterial({ color: 0xd16b97, roughness: 0.52 });
   const blueMetalMat = new THREE.MeshStandardMaterial({ color: 0x1d4ed8, roughness: 0.48, metalness: 0.25 });
@@ -787,7 +794,7 @@ export function buildProceduralSchoolModels() {
   const darkGlassMat = new THREE.MeshBasicMaterial({ color: 0x111827 });
   const eastMuralMat = new THREE.MeshStandardMaterial({ map: murals.eastMuralTex, roughness: 0.76 });
   const dinoMuralMat = new THREE.MeshStandardMaterial({ map: murals.dinoWallTex, roughness: 0.78 });
-  const brownDadoMat = new THREE.MeshStandardMaterial({ color: 0x78533a, roughness: 0.78 });
+  const brownDadoMat = createPaintedPlasterMaterial(0x78533a);
   // The flag goes on the yard-facing face only; every other face and the caps stay plain
   // whitewash. BoxGeometry material order is +X, -X, +Y, -Y, +Z, -Z.
   const porticoColMat = new THREE.MeshStandardMaterial({ map: murals.porticoColTex, roughness: 0.74 });
@@ -816,7 +823,7 @@ export function buildProceduralSchoolModels() {
 
   // Solid structural/partition wall helper (tracked for camera collision audit)
   function addSolidWall(group, w, h, d, x, y, z, mat, extraData) {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || whiteWall);
+    const m = new THREE.Mesh(wallBoxGeometry(w, h, d, mat || whiteWall), mat || whiteWall);
     m.position.set(x, y, z);
     m.castShadow = true;
     m.receiveShadow = true;
@@ -827,7 +834,7 @@ export function buildProceduralSchoolModels() {
 
   // Non-blocking slab, dado paint band, or trim helper
   function addSlabOrTrim(group, w, h, d, x, y, z, mat, extraData) {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || whiteWall);
+    const m = new THREE.Mesh(wallBoxGeometry(w, h, d, mat || whiteWall), mat || whiteWall);
     m.position.set(x, y, z);
     m.castShadow = true;
     m.receiveShadow = true;
@@ -873,20 +880,20 @@ export function buildProceduralSchoolModels() {
     sill.position.set(0, -h / 2 - 0.02, 0);
     winGroup.add(sill);
 
-    const head = new THREE.Mesh(new THREE.BoxGeometry(w + 0.10, 0.06, d + 0.03), whiteWall);
+    const head = new THREE.Mesh(new THREE.BoxGeometry(w + 0.10, 0.06, d + 0.03), trimWhiteMat);
     head.position.set(0, h / 2 + 0.02, 0);
     winGroup.add(head);
 
     const mCount = typeof mullions === 'number' ? mullions : 2;
     for (let i = 1; i <= mCount; i++) {
       const mx = -w / 2 + (w * i) / (mCount + 1);
-      const bar = new THREE.Mesh(new THREE.BoxGeometry(0.055, h, d + 0.03), whiteWall);
+      const bar = new THREE.Mesh(new THREE.BoxGeometry(0.055, h, d + 0.03), trimWhiteMat);
       bar.position.set(mx, 0, 0);
       winGroup.add(bar);
     }
 
     if (h >= 0.9) {
-      const transBar = new THREE.Mesh(new THREE.BoxGeometry(w, 0.045, d + 0.03), whiteWall);
+      const transBar = new THREE.Mesh(new THREE.BoxGeometry(w, 0.045, d + 0.03), trimWhiteMat);
       transBar.position.set(0, h * 0.18, 0);
       winGroup.add(transBar);
     }
@@ -1063,7 +1070,7 @@ export function buildProceduralSchoolModels() {
     rainbowStairGroup.add(tread);
   }
   // Brown diagonal dado & paper roses on right stairwell wall + Red metal handrail on left (ref_07a_rainbow_stairs.jpg)
-  const dadoSlope = new THREE.Mesh(new THREE.BoxGeometry(0.05, 1.15, 4.4), brownDadoMat);
+  const dadoSlope = new THREE.Mesh(wallBoxGeometry(0.05, 1.15, 4.4, brownDadoMat), brownDadoMat);
   dadoSlope.position.set(-0.12, 1.75, -10.5);
   dadoSlope.rotation.x = 0.64;
   rainbowStairGroup.add(dadoSlope);
@@ -1152,7 +1159,7 @@ export function buildProceduralSchoolModels() {
     const wg = new THREE.Group();
     wg.position.set(x, y, z);
     wg.rotation.y = rotY;
-    const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.12, h + 0.12, 0.06), whiteWall);
+    const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.12, h + 0.12, 0.06), trimWhiteMat);
     const pane = new THREE.Mesh(
       new THREE.PlaneGeometry(w, h),
       new THREE.MeshBasicMaterial({ color: 0xbae6fd })
