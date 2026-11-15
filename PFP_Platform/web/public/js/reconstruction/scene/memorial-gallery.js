@@ -6,6 +6,18 @@
  * hundreds of duplicate WebGL geometry buffers while preserving identical vertex layout.
  */
 import { appState } from '../state.js';
+import {
+  FRAME_BACKING_DEPTH,
+  FRAME_DECAL_GAP,
+  FRAME_IMAGE_Z,
+  FRAME_LABEL_Z,
+  FRAME_STACK_STEP,
+  FRAME_IMAGE_CENTER_Y,
+  FRAME_IMAGE_HEIGHT,
+  FRAME_LABEL_HEIGHT,
+  FRAME_LABEL_CENTER_Y,
+  makeDecalMaterial,
+} from './frame-stack.js';
 
 const boxGeoCache = new Map();
 const planeGeoCache = new Map();
@@ -87,6 +99,82 @@ export function createWingBannerIn3D(parentGroup, titleEn, titleFa, x, y, z, rot
   parentGroup.add(mesh);
 }
 
+/**
+ * Builds a wall-mounted frame: backing box, photo / drawing decal, nameplate decal.
+ * Shared by the portrait and drawing builders; layering comes from frame-stack.js.
+ */
+function buildFramedWallItem(parentGroup, loader, opts) {
+  const {
+    item,
+    x,
+    y,
+    z,
+    rotY,
+    frameW,
+    frameH,
+    borderHex,
+    imageWidthFactor,
+    imageUrl,
+    nameplateTexture,
+    artifactType,
+    wingLabel,
+    cutawayMode,
+    focusDist,
+  } = opts;
+
+  const holder = new THREE.Group();
+  holder.position.set(x, y, z);
+  holder.rotation.y = rotY;
+
+  const backing = new THREE.Mesh(
+    getSharedBoxGeo(frameW, frameH, FRAME_BACKING_DEPTH),
+    new THREE.MeshBasicMaterial({ color: borderHex })
+  );
+  holder.add(backing);
+
+  const imageW = frameW * imageWidthFactor;
+  const imageH = frameH * FRAME_IMAGE_HEIGHT;
+  const imagePlane = new THREE.Mesh(
+    getSharedPlaneGeo(imageW, imageH),
+    makeDecalMaterial({ color: 0x1e293b })
+  );
+  imagePlane.position.set(0, frameH * FRAME_IMAGE_CENTER_Y, FRAME_IMAGE_Z);
+  holder.add(imagePlane);
+
+  if (imageUrl) {
+    loader.load(imageUrl, (tex) => {
+      imagePlane.material = makeDecalMaterial({ map: tex });
+      imagePlane.material.needsUpdate = true;
+    });
+  }
+
+  const labelPlane = new THREE.Mesh(
+    getSharedPlaneGeo(imageW, frameH * FRAME_LABEL_HEIGHT),
+    makeDecalMaterial({ map: nameplateTexture })
+  );
+  labelPlane.position.set(0, frameH * FRAME_LABEL_CENTER_Y, FRAME_LABEL_Z);
+  holder.add(labelPlane);
+
+  const normal = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotY);
+  const focusCam = new THREE.Vector3(x, y + 0.08, z).add(normal.clone().multiplyScalar(focusDist));
+  const lookAt = new THREE.Vector3(x, y, z);
+
+  const artifactData = {
+    artifactType,
+    item,
+    wingLabel,
+    focusCam,
+    lookAt,
+    cutawayMode,
+  };
+  imagePlane.userData = artifactData;
+  backing.userData = artifactData;
+  labelPlane.userData = artifactData;
+  appState.clickable3DArtifacts.push(imagePlane, backing, labelPlane);
+
+  parentGroup.add(holder);
+}
+
 export function create3DFramedPortraitOnWall(
   parentGroup,
   loader,
@@ -102,68 +190,36 @@ export function create3DFramedPortraitOnWall(
   wingLabel,
   focusDist
 ) {
-  const holder = new THREE.Group();
-  holder.position.set(x, y, z);
-  holder.rotation.y = rotY;
-
-  const backing = new THREE.Mesh(
-    getSharedBoxGeo(frameW, frameH, 0.04),
-    new THREE.MeshBasicMaterial({ color: borderHex || 0xd4a853 })
-  );
-  holder.add(backing);
-
-  const innerMat = new THREE.MeshBasicMaterial({ color: 0x1e293b, side: THREE.DoubleSide });
-  const portraitH = frameH * 0.76;
-  const portraitW = frameW * 0.9;
-  const portraitPlane = new THREE.Mesh(getSharedPlaneGeo(portraitW, portraitH), innerMat);
-  portraitPlane.position.set(0, frameH * 0.09, 0.026);
-  holder.add(portraitPlane);
-
-  const imgUrl =
+  const imageUrl =
     item.photoPath || item.photo_path || (item.photoGrid ? `images/children/child_${item.photoGrid}.jpg` : null);
-  if (imgUrl) {
-    loader.load(imgUrl, (tex) => {
-      portraitPlane.material = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
-      portraitPlane.material.needsUpdate = true;
-    });
-  }
-
   const metaText =
     item.category === 'teacher'
       ? item.role || 'Educator'
       : `Grade ${item.grade || '?'} · Age ${item.age || '?'}`;
-  const labelTex = createNameplateTexture(
+  const nameplateTexture = createNameplateTexture(
     item.nameFa || item.full_name_fa,
     item.name || item.full_name_en,
     metaText,
     borderHex === 0xf472b6 ? '#f472b6' : '#d4a853'
   );
-  const labelPlane = new THREE.Mesh(
-    getSharedPlaneGeo(portraitW, frameH * 0.2),
-    new THREE.MeshBasicMaterial({ map: labelTex, side: THREE.DoubleSide })
-  );
-  labelPlane.position.set(0, -frameH * 0.38, 0.026);
-  holder.add(labelPlane);
 
-  const dist = typeof focusDist === 'number' ? focusDist : 1.85;
-  const normal = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotY);
-  const focusCam = new THREE.Vector3(x, y + 0.08, z).add(normal.clone().multiplyScalar(dist));
-  const lookAt = new THREE.Vector3(x, y, z);
-
-  const artifactData = {
-    artifactType: 'victim',
+  buildFramedWallItem(parentGroup, loader, {
     item,
+    x,
+    y,
+    z,
+    rotY,
+    frameW,
+    frameH,
+    borderHex: borderHex || 0xd4a853,
+    imageWidthFactor: 0.9,
+    imageUrl,
+    nameplateTexture,
+    artifactType: 'victim',
     wingLabel: wingLabel || 'Reconstructed School Interior',
-    focusCam,
-    lookAt,
     cutawayMode: typeof cutawayMode === 'number' ? cutawayMode : 2,
-  };
-  portraitPlane.userData = artifactData;
-  backing.userData = artifactData;
-  labelPlane.userData = artifactData;
-  appState.clickable3DArtifacts.push(portraitPlane, backing, labelPlane);
-
-  parentGroup.add(holder);
+    focusDist: typeof focusDist === 'number' ? focusDist : 1.85,
+  });
 }
 
 export function create3DRubbleDrawingOnWall(
@@ -180,63 +236,30 @@ export function create3DRubbleDrawingOnWall(
   wingLabel,
   focusDist
 ) {
-  const holder = new THREE.Group();
-  holder.position.set(x, y, z);
-  holder.rotation.y = rotY;
-
-  const borderColor = drw.hasBlastDamage ? 0xef4444 : 0xd4a853;
-  const backing = new THREE.Mesh(
-    getSharedBoxGeo(frameW, frameH, 0.04),
-    new THREE.MeshBasicMaterial({ color: borderColor })
-  );
-  holder.add(backing);
-
-  const imgH = frameH * 0.76;
-  const imgW = frameW * 0.91;
-  const artPlane = new THREE.Mesh(
-    getSharedPlaneGeo(imgW, imgH),
-    new THREE.MeshBasicMaterial({ color: 0x1e293b, side: THREE.DoubleSide })
-  );
-  artPlane.position.set(0, frameH * 0.09, 0.026);
-  holder.add(artPlane);
-
-  loader.load(drw.thumb || drw.image, (tex) => {
-    artPlane.material = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
-    artPlane.material.needsUpdate = true;
-  });
-
-  const labelTex = createNameplateTexture(
+  const nameplateTexture = createNameplateTexture(
     drw.studentNameFa || 'نقاشی زیر آوار',
     drw.title && drw.title.en ? drw.title.en : drw.id,
     drw.dateOnPage || 'Rubble Artifact',
     drw.hasBlastDamage ? '#f87171' : '#fcd34d'
   );
-  const labelPlane = new THREE.Mesh(
-    getSharedPlaneGeo(imgW, frameH * 0.2),
-    new THREE.MeshBasicMaterial({ map: labelTex, side: THREE.DoubleSide })
-  );
-  labelPlane.position.set(0, -frameH * 0.38, 0.026);
-  holder.add(labelPlane);
 
-  const dist = typeof focusDist === 'number' ? focusDist : 1.95;
-  const normal = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotY);
-  const focusCam = new THREE.Vector3(x, y + 0.08, z).add(normal.clone().multiplyScalar(dist));
-  const lookAt = new THREE.Vector3(x, y, z);
-
-  const artifactData = {
-    artifactType: 'drawing',
+  buildFramedWallItem(parentGroup, loader, {
     item: drw,
+    x,
+    y,
+    z,
+    rotY,
+    frameW,
+    frameH,
+    borderHex: drw.hasBlastDamage ? 0xef4444 : 0xd4a853,
+    imageWidthFactor: 0.91,
+    imageUrl: drw.thumb || drw.image,
+    nameplateTexture,
+    artifactType: 'drawing',
     wingLabel: wingLabel || 'Classroom Rubble Artifact',
-    focusCam,
-    lookAt,
     cutawayMode: typeof cutawayMode === 'number' ? cutawayMode : 1,
-  };
-  artPlane.userData = artifactData;
-  backing.userData = artifactData;
-  labelPlane.userData = artifactData;
-  appState.clickable3DArtifacts.push(artPlane, backing, labelPlane);
-
-  parentGroup.add(holder);
+    focusDist: typeof focusDist === 'number' ? focusDist : 1.95,
+  });
 }
 
 export function createClassroomDeskWithDrawing(parentGroup, loader, drw, x, yBase, z, cutawayMode) {
@@ -276,16 +299,17 @@ export function createClassroomDeskWithDrawing(parentGroup, loader, drw, x, yBas
   });
 
   if (drw) {
+    // Desk surface sits at y = 0.705; float the sheet clear of it.
     const sheet = new THREE.Mesh(
       getSharedPlaneGeo(0.46, 0.34),
-      new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+      makeDecalMaterial({ color: 0xffffff })
     );
     sheet.rotation.x = -Math.PI / 2;
-    sheet.position.set(0, 0.712, 0);
+    sheet.position.set(0, 0.705 + FRAME_DECAL_GAP, 0);
     deskGroup.add(sheet);
 
     loader.load(drw.thumb || drw.image, (tex) => {
-      sheet.material = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
+      sheet.material = makeDecalMaterial({ map: tex });
       sheet.material.needsUpdate = true;
     });
 
@@ -318,6 +342,10 @@ export function populate3DSchoolPortraitsAndDrawings() {
   } = appState;
 
   // 1. COURTYARD MEMORIAL AVENUE (24 Double-Sided Steles flanking the Central Vow Shrine Walk at X = -5.2 & X = +2.2)
+  // Decals ride FRAME_DECAL_GAP off the post's +/-0.05 faces, one stack step apart.
+  const STELE_FACE_Z = 0.05;
+  const STELE_LABEL_Z = STELE_FACE_Z + FRAME_DECAL_GAP;
+  const STELE_PORTRAIT_Z = STELE_LABEL_Z + FRAME_STACK_STEP;
   const portraitSample = childrenList.filter((c) => c.photoPath).slice(0, 24);
   portraitSample.forEach((child, idx) => {
     const isLeft = idx < 12;
@@ -350,13 +378,13 @@ export function populate3DSchoolPortraitsAndDrawings() {
     );
     const frontLabel = new THREE.Mesh(
       getSharedPlaneGeo(0.88, 0.3),
-      new THREE.MeshBasicMaterial({ map: labelTex, side: THREE.DoubleSide })
+      makeDecalMaterial({ map: labelTex })
     );
-    frontLabel.position.set(0, -0.68, 0.065);
+    frontLabel.position.set(0, -0.68, STELE_LABEL_Z);
     post.add(frontLabel);
 
     const backLabel = frontLabel.clone();
-    backLabel.position.set(0, -0.68, -0.065);
+    backLabel.position.set(0, -0.68, -STELE_LABEL_Z);
     backLabel.rotation.y = Math.PI;
     post.add(backLabel);
 
@@ -375,15 +403,15 @@ export function populate3DSchoolPortraitsAndDrawings() {
       loader.load(imgUrl, (tex) => {
         const portraitMesh = new THREE.Mesh(
           getSharedPlaneGeo(0.88, 1.32),
-          new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide })
+          makeDecalMaterial({ map: tex })
         );
-        portraitMesh.position.set(0, 0.18, 0.065);
+        portraitMesh.position.set(0, 0.18, STELE_PORTRAIT_Z);
         portraitMesh.userData = steleArtifact;
         post.add(portraitMesh);
         appState.clickable3DArtifacts.push(portraitMesh);
 
         const backMesh = portraitMesh.clone();
-        backMesh.position.set(0, 0.18, -0.065);
+        backMesh.position.set(0, 0.18, -STELE_PORTRAIT_Z);
         backMesh.rotation.y = Math.PI;
         backMesh.userData = steleArtifact;
         post.add(backMesh);
