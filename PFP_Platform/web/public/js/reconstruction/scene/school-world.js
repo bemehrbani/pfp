@@ -218,48 +218,51 @@ export function getSchoolMuralTextures() {
     pencilGateTex.needsUpdate = true;
   });
 
-  // 4. Portico Column Texture: White upper + subtle Iranian tricolor diagonal bands on lower half
+  // 4. Portico Column Texture: the tricolor flag wrapped round the shaft.
+  // Only the yard-facing face of a column is painted (see porticoColMats below), so the
+  // canvas is one 0.62 m face wide and the full column tall.
+  const COL_FACE_M = 0.62;
+  const COL_H_M = 3.6; // portico column height, matching floorH
   const colCanvas = document.createElement('canvas');
-  colCanvas.width = 256;
-  colCanvas.height = 512;
+  colCanvas.width = 512;
+  colCanvas.height = 2048;
   const cc = colCanvas.getContext('2d');
-  cc.fillStyle = '#edeff2';
-  cc.fillRect(0, 0, 256, 512);
-  cc.save();
-  cc.beginPath();
-  cc.rect(0, 230, 256, 282);
-  cc.clip();
-  cc.fillStyle = '#3b8c58';
-  cc.beginPath();
-  cc.moveTo(0, 250);
-  cc.lineTo(256, 195);
-  cc.lineTo(256, 290);
-  cc.lineTo(0, 345);
-  cc.closePath();
-  cc.fill();
-  cc.fillStyle = '#f8fafc';
-  cc.beginPath();
-  cc.moveTo(0, 345);
-  cc.lineTo(256, 290);
-  cc.lineTo(256, 395);
-  cc.lineTo(0, 450);
-  cc.closePath();
-  cc.fill();
-  cc.fillStyle = '#c43e3e';
-  cc.beginPath();
-  cc.moveTo(0, 450);
-  cc.lineTo(256, 395);
-  cc.lineTo(256, 512);
-  cc.lineTo(0, 512);
-  cc.closePath();
-  cc.fill();
-  // Small red emblem mark in white band
-  cc.fillStyle = '#b91c1c';
-  cc.beginPath();
-  cc.arc(128, 368, 15, 0, Math.PI * 2);
-  cc.fill();
-  cc.restore();
+  const colPxY = (m) => colCanvas.height - (m * colCanvas.height) / COL_H_M;
+
+  // Three equal bands, green over white over red, tilted so a turn of the shaft climbs
+  // 0.4 m. Green runs out to the canopy and red to the ground rather than stopping short.
+  const COL_BAND_M = COL_H_M / 3;
+  const COL_RISE_M = 0.4;
+  const flagEdge = (band, s) => COL_BAND_M * band + (COL_RISE_M * s) / COL_FACE_M;
+  const fillBand = (bottomM, topM, fill) => {
+    cc.fillStyle = fill;
+    cc.beginPath();
+    cc.moveTo(0, colPxY(bottomM(0)));
+    cc.lineTo(colCanvas.width, colPxY(bottomM(COL_FACE_M)));
+    cc.lineTo(colCanvas.width, colPxY(topM(COL_FACE_M)));
+    cc.lineTo(0, colPxY(topM(0)));
+    cc.closePath();
+    cc.fill();
+  };
+  fillBand(() => 0, (s) => flagEdge(1, s), '#c8393c');
+  fillBand((s) => flagEdge(1, s), (s) => flagEdge(2, s), '#fbfcfd');
+  fillBand((s) => flagEdge(2, s), () => COL_H_M, '#2f8a52');
+
+  // Hairline along each band edge: the white band needs it to read against pale whitewash.
+  cc.strokeStyle = 'rgba(22, 30, 38, 0.24)';
+  cc.lineWidth = 3;
+  for (const band of [1, 2]) {
+    cc.beginPath();
+    cc.moveTo(0, colPxY(flagEdge(band, 0)));
+    cc.lineTo(colCanvas.width, colPxY(flagEdge(band, COL_FACE_M)));
+    cc.stroke();
+  }
+
   const porticoColTex = new THREE.CanvasTexture(colCanvas);
+  const colCaps = appState.renderer && appState.renderer.capabilities;
+  if (colCaps) {
+    porticoColTex.anisotropy = Math.max(1, Math.min(colCaps.getMaxAnisotropy(), 8));
+  }
 
   // 5. Rear Dinosaur Height-Chart Mural (hd/f_051.jpg)
   const dinoCanvas = document.createElement('canvas');
@@ -782,10 +785,34 @@ export function buildProceduralSchoolModels() {
   const canopyGreenMat = new THREE.MeshStandardMaterial({ color: 0x7d9c78, roughness: 0.72 });
   const sunshadeMat = new THREE.MeshStandardMaterial({ color: 0xe2e6ec, roughness: 0.78 });
   const darkGlassMat = new THREE.MeshBasicMaterial({ color: 0x111827 });
-  const porticoColMat = new THREE.MeshStandardMaterial({ map: murals.porticoColTex, roughness: 0.74 });
   const eastMuralMat = new THREE.MeshStandardMaterial({ map: murals.eastMuralTex, roughness: 0.76 });
   const dinoMuralMat = new THREE.MeshStandardMaterial({ map: murals.dinoWallTex, roughness: 0.78 });
   const brownDadoMat = new THREE.MeshStandardMaterial({ color: 0x78533a, roughness: 0.78 });
+  // The flag goes on the yard-facing face only; every other face and the caps stay plain
+  // whitewash. BoxGeometry material order is +X, -X, +Y, -Y, +Z, -Z.
+  const porticoColMat = new THREE.MeshStandardMaterial({ map: murals.porticoColTex, roughness: 0.74 });
+  const porticoColPlainMat = new THREE.MeshStandardMaterial({ color: 0xe7eaed, roughness: 0.74 });
+  const porticoColMats = [
+    porticoColPlainMat,
+    porticoColPlainMat,
+    porticoColPlainMat,
+    porticoColPlainMat,
+    porticoColMat,
+    porticoColPlainMat,
+  ];
+
+  // All eight standing and surviving columns are identical, so one geometry serves them all.
+  const porticoColGeo = new THREE.BoxGeometry(0.62, floorH, 0.62);
+
+  function addPorticoColumn(group, x, y, z, extraData) {
+    const col = new THREE.Mesh(porticoColGeo, porticoColMats);
+    col.position.set(x, y, z);
+    col.castShadow = true;
+    col.receiveShadow = true;
+    col.userData = Object.assign({ isSolidWall: true }, extraData || {});
+    group.add(col);
+    return col;
+  }
 
   // Solid structural/partition wall helper (tracked for camera collision audit)
   function addSolidWall(group, w, h, d, x, y, z, mat, extraData) {
@@ -937,7 +964,7 @@ export function buildProceduralSchoolModels() {
 
   // 4-Column Front Portico (colX = [-6.8, -2.3, +2.3, +6.8], Z = +4.4) + Flat Canopy Slab
   for (const colX of [-6.8, -2.3, 2.3, 6.8]) {
-    addSolidWall(groundFloorGroup, 0.62, floorH, 0.62, colX, floorH / 2, 4.4, porticoColMat);
+    addPorticoColumn(groundFloorGroup, colX, floorH / 2, 4.4);
   }
   addSlabOrTrim(groundFloorGroup, 16.0, 0.42, 2.45, 0.0, floorH + 0.21, 3.625, whiteWall);
   addSlabOrTrim(groundFloorGroup, 14.4, 0.42, 1.95, 0.0, floorH + 0.21, 1.475, whiteWall);
@@ -1604,11 +1631,7 @@ export function buildProceduralSchoolModels() {
 
   // C) All 4 Surviving Tricolor Front Portico Columns + Canopy + Shattered Open-Sky Front Shell (ref_02b & ref_08)
   for (const colX of [-6.8, -2.3, 2.3, 6.8]) {
-    const c = new THREE.Mesh(new THREE.BoxGeometry(0.62, floorH, 0.62), porticoColMat);
-    c.position.set(colX, floorH / 2, 4.4);
-    c.castShadow = true;
-    c.userData = { feature: 'post_portico_col' };
-    postStrikeModelGroup.add(c);
+    addPorticoColumn(postStrikeModelGroup, colX, floorH / 2, 4.4, { feature: 'post_portico_col' });
   }
   addSlabOrTrim(postStrikeModelGroup, 15.6, 0.40, 2.45, 0.2, floorH + 0.20, 3.625, whiteWall);
   addSlabOrTrim(postStrikeModelGroup, 11.8, 0.40, 1.95, 1.3, floorH + 0.20, 1.475, whiteWall);
