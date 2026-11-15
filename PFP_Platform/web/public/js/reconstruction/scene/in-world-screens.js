@@ -16,6 +16,19 @@ import { FRAME_DECAL_GAP, makeDecalMaterial } from './frame-stack.js';
 
 const MAX_POOLED_VIDEO_DECODERS = 4;
 
+/**
+ * Plaque faces. Vazirmatn and Source Sans 3 are the page's RTL and body fonts and
+ * reconstruction.html already loads them; canvas text does not fetch them on its own,
+ * so the plaque captions are repainted once the faces resolve.
+ */
+const PLAQUE_FA_FONT = '"Vazirmatn", Tahoma, sans-serif';
+const PLAQUE_EN_FONT = '"Source Sans 3", "Segoe UI", system-ui, sans-serif';
+
+const PLAQUE_FA_BADGE_SPEC = `700 20px ${PLAQUE_FA_FONT}`;
+const PLAQUE_FA_CAPTION_SPEC = `500 22px ${PLAQUE_FA_FONT}`;
+const PLAQUE_EN_BADGE_SPEC = `700 18px ${PLAQUE_EN_FONT}`;
+const PLAQUE_EN_CAPTION_SPEC = `500 21px ${PLAQUE_EN_FONT}`;
+
 export function wrapCanvasCaptionLines(ctx, text, maxWidth, maxLines) {
   const words = String(text || '')
     .trim()
@@ -74,11 +87,11 @@ export function renderInWorldPlaqueCanvas(screen) {
   const capStr = (screen.spec.caption && (screen.spec.caption[langKey] || screen.spec.caption.en)) || '';
 
   ctx.fillStyle = screen.isFocal ? '#fde047' : '#e2c074';
-  ctx.font = isFa ? '700 20px Tahoma, sans-serif' : '700 18px Inter, system-ui, sans-serif';
+  ctx.font = isFa ? PLAQUE_FA_BADGE_SPEC : PLAQUE_EN_BADGE_SPEC;
   ctx.fillText(badgeStr, canvas.width / 2, 34);
 
   ctx.fillStyle = '#f8fafc';
-  ctx.font = isFa ? '500 22px Tahoma, sans-serif' : '500 21px Inter, system-ui, sans-serif';
+  ctx.font = isFa ? PLAQUE_FA_CAPTION_SPEC : PLAQUE_EN_CAPTION_SPEC;
   const wrapped = wrapCanvasCaptionLines(ctx, capStr, canvas.width - 56, 2);
   if (wrapped.length === 1) {
     ctx.fillText(wrapped[0], canvas.width / 2, 86);
@@ -304,6 +317,27 @@ export function buildAllInWorldWalkthroughScreens() {
 
     appState.inWorldScreens.push(screenRecord);
   });
+
+  repaintPlaquesWhenFontsReady();
+}
+
+/**
+ * Canvas text does not trigger a webfont download, so plaques painted at boot keep the
+ * fallback face. Repaint them once the plaque faces resolve.
+ */
+function repaintPlaquesWhenFontsReady() {
+  if (typeof document === 'undefined' || !document.fonts || !document.fonts.load) return;
+  const specs = [
+    { font: PLAQUE_FA_BADGE_SPEC, text: 'س' },
+    { font: PLAQUE_FA_CAPTION_SPEC, text: 'س' },
+    { font: PLAQUE_EN_BADGE_SPEC, text: 'A' },
+    { font: PLAQUE_EN_CAPTION_SPEC, text: 'A' },
+  ];
+  try {
+    Promise.all(specs.map((s) => document.fonts.load(s.font, s.text)))
+      .then(() => refreshInWorldScreensLanguage())
+      .catch(() => {});
+  } catch (_) {}
 }
 
 export function refreshInWorldScreensLanguage() {

@@ -5,6 +5,23 @@
 import { appState } from '../state.js';
 import { buildAllInWorldWalkthroughScreens } from './in-world-screens.js';
 
+/** Persian and English faces for painted signs; both are loaded by reconstruction.html. */
+const FA_CANVAS_FONT = '"Vazirmatn", Tahoma, sans-serif';
+const EN_CANVAS_FONT = '"Source Sans 3", "Segoe UI", system-ui, sans-serif';
+
+/**
+ * Canvas text does not trigger a webfont download, so a sign painted at boot can keep the
+ * fallback face. Re-run its text pass once the requested faces are available.
+ */
+function repaintCanvasWhenFontsReady(fonts, repaint) {
+  if (typeof document === 'undefined' || !document.fonts || !document.fonts.load) return;
+  try {
+    Promise.all(fonts.map((f) => document.fonts.load(f.font, f.text || ' ')))
+      .then(() => repaint())
+      .catch(() => {});
+  } catch (_) {}
+}
+
 let cachedMuralTextures = null;
 export function getSchoolMuralTextures() {
   if (cachedMuralTextures) return cachedMuralTextures;
@@ -186,13 +203,20 @@ export function getSchoolMuralTextures() {
   drawPencil(165, 315, 0.52, '#60a5fa');
   drawPencil(305, 165, -0.68, '#f472b6');
   drawPencil(410, 330, -0.25, '#facc15');
-  gc.fillStyle = '#eab308';
-  gc.strokeStyle = '#1e293b';
-  gc.lineWidth = 4;
-  gc.font = 'bold 92px Tahoma, sans-serif';
-  gc.fillText('آ ب', 235, 390);
-  gc.strokeText('آ ب', 235, 390);
+  const drawGateLetters = () => {
+    gc.fillStyle = '#eab308';
+    gc.strokeStyle = '#1e293b';
+    gc.lineWidth = 4;
+    gc.font = `bold 92px ${FA_CANVAS_FONT}`;
+    gc.fillText('آ ب', 235, 390);
+    gc.strokeText('آ ب', 235, 390);
+  };
+  drawGateLetters();
   const pencilGateTex = new THREE.CanvasTexture(gateCanvas);
+  repaintCanvasWhenFontsReady([{ font: `bold 92px ${FA_CANVAS_FONT}`, text: 'آ ب' }], () => {
+    drawGateLetters();
+    pencilGateTex.needsUpdate = true;
+  });
 
   // 4. Portico Column Texture: White upper + subtle Iranian tricolor diagonal bands on lower half
   const colCanvas = document.createElement('canvas');
@@ -1661,13 +1685,37 @@ export function buildProceduralSchoolModels() {
   sCtx.lineWidth = 4;
   sCtx.strokeRect(2, 2, 508, 84);
   sCtx.textAlign = 'center';
-  sCtx.fillStyle = '#fca5a5';
-  sCtx.font = 'bold 22px Inter, sans-serif';
-  sCtx.fillText('Ø 5.0 m IMPACT CRATER · CENTRAL HALL', 256, 36);
-  sCtx.fillStyle = '#fef2f2';
-  sCtx.font = 'bold 21px Tahoma, sans-serif';
-  sCtx.fillText('قطر دهانه گودال انفجار: ۵ متر (مرکز سالن مدرسه)', 256, 68);
+  const CRATER_EN_TEXT = 'Ø 5.0 m IMPACT CRATER · CENTRAL HALL';
+  const CRATER_FA_TEXT = 'قطر دهانه گودال انفجار: ۵ متر (مرکز سالن مدرسه)';
+  const drawCraterLabels = () => {
+    sCtx.direction = 'ltr';
+    sCtx.fillStyle = '#fca5a5';
+    sCtx.font = `700 22px ${EN_CANVAS_FONT}`;
+    sCtx.fillText(CRATER_EN_TEXT, 256, 36);
+
+    sCtx.direction = 'rtl';
+    sCtx.fillStyle = '#fef2f2';
+    let faPx = 21;
+    sCtx.font = `700 ${faPx}px ${FA_CANVAS_FONT}`;
+    // Vazirmatn runs wider than the fallback face on this single unwrapped line.
+    while (faPx > 15 && sCtx.measureText(CRATER_FA_TEXT).width > 472) {
+      faPx -= 1;
+      sCtx.font = `700 ${faPx}px ${FA_CANVAS_FONT}`;
+    }
+    sCtx.fillText(CRATER_FA_TEXT, 256, 68);
+  };
+  drawCraterLabels();
   const scaleTex = new THREE.CanvasTexture(scaleCanvas);
+  repaintCanvasWhenFontsReady(
+    [
+      { font: `700 22px ${EN_CANVAS_FONT}`, text: 'IMPACT' },
+      { font: `700 21px ${FA_CANVAS_FONT}`, text: 'قطر' },
+    ],
+    () => {
+      drawCraterLabels();
+      scaleTex.needsUpdate = true;
+    }
+  );
   const scaleBadge = new THREE.Mesh(
     new THREE.PlaneGeometry(4.2, 0.72),
     new THREE.MeshBasicMaterial({ map: scaleTex, side: THREE.DoubleSide })
