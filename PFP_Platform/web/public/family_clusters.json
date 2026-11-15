@@ -4,18 +4,19 @@
     "family_surname_en": "Zakeri",
     "family_surname_fa": "ذاکری",
     "mother_id": "moth-fatemeh-zakeri",
-    "total_killed": 7,
+    "total_killed": 8,
     "total_injured": 0,
     "member_ids": [
       "asra-zakeri",
       "salma-zakeri",
       "reyhaneh-zakeri",
-      "asma-zakeri",
       "sina-zakeri",
-      "mahdiyeh-zakerikhah",
+      "mahdi-zakeri",
+      "hananeh-zakerikhahan",
+      "narges-zakeri",
       "mohammad-zakeri-parent"
     ],
-    "description": "Prominent Minab lineage suffering 6+ casualties among elementary school children and adult parent rescuer.",
+    "description": "Prominent Minab lineage suffering 8 casualties across elementary grades (Asra, Salma, Reyhaneh, Sina, Mahdi, Hananeh), educator Narges Zakeri, and rescuing father Mohammad Zakeri.",
     "sources": [
       "SRC-BONYAD-003",
       "SRC-LMO-001"
@@ -23,7 +24,7 @@
   },
   {
     "cluster_id": "FAM-SADEGHI",
-    "family_surname_en": "Solhizadeh-Sadeghi",
+    "family_surname_en": "Solhizadeh / Sadeghi",
     "family_surname_fa": "صلحی‌زاده / صادقی",
     "mother_id": "moth-neda-solhizadeh",
     "total_killed": 3,
@@ -34,7 +35,7 @@
       "nila-sadeghi",
       "hamid-sadeghi-parent"
     ],
-    "description": "Teacher-mother Neda Solhizadeh, father Hamid Sadeghi, and 11-year-old son Hami Sadeghi were martyred; survived by 10-year-old daughter Nila Sadeghi.",
+    "description": "Teacher-mother Neda Solhizadeh, father Hamid Sadeghi, and 5th-grade son Hami Sadeghi were martyred; survived by 4th-grade daughter Nila Sadeghi.",
     "sources": [
       "EVD-VIC-005",
       "SRC-BONYAD-003"
@@ -42,8 +43,8 @@
   },
   {
     "cluster_id": "FAM-SHAHRIYARI",
-    "family_surname_en": "Shahriyari",
-    "family_surname_fa": "شهریاری",
+    "family_surname_en": "Shahriyari / Shirgir",
+    "family_surname_fa": "شهریاری / شیرگیر",
     "mother_id": "moth-zohreh-shahriyari",
     "total_killed": 2,
     "total_injured": 0,
@@ -51,7 +52,7 @@
       "zohreh-shahriyari",
       "unborn-fetus-shahriyari"
     ],
-    "description": "Pregnant teacher Zohreh Shahriyari and her 6-month unborn son Mohammad-Ali.",
+    "description": "Pregnant 2nd-grade teacher Zohreh Shahriyari and her 6-month unborn son Mohammad Shirgir (محمد شیرگیر).",
     "sources": [
       "SRC-PROS-002",
       "SRC-LMO-001"
@@ -60,7 +61,7 @@
   {
     "cluster_id": "FAM-KARYANIPAK",
     "family_surname_en": "Karyanipak",
-    "family_surname_fa": "کاریانی‌پاک",
+    "family_surname_fa": "کریانی‌پاک",
     "mother_id": "moth-karyanipak",
     "total_killed": 3,
     "total_injured": 0,
@@ -69,7 +70,7 @@
       "mohammad-ali-karyanipak",
       "ali-karyanipak-parent"
     ],
-    "description": "Two brothers (Ali-Akbar and Mohammad-Ali) and their rescuing father Ali Karyanipak.",
+    "description": "Two brothers (3rd-grader Ali-Akbar and 2nd-grader Mohammad-Ali Karyanipak) and their rescuing father Ali Karyanipak.",
     "sources": [
       "SRC-BONYAD-003",
       "SRC-LMO-001"
@@ -80,15 +81,17 @@
     "family_surname_en": "Ahmadzadeh",
     "family_surname_fa": "احمدزاده",
     "mother_id": "moth-mohaddeseh-falahat",
-    "total_killed": 4,
+    "total_killed": 6,
     "total_injured": 0,
     "member_ids": [
       "athena-ahmadzadeh",
       "amin-ahmadzade",
-      "arad-ahmadzadeh",
+      "arad-ahmadizadeh",
+      "motahareh-ahmadzadeh",
+      "mahdieh-ahmadzadeh",
       "hassan-ahmadzadeh-parent"
     ],
-    "description": "Three sibling children (Athena, Amin, and Arad) and their father Hassan Ahmadzadeh.",
+    "description": "Extended Ahmadzadeh family children across Grades 1, 2, 4, and 6 and rescuing father Hassan Ahmadzadeh.",
     "sources": [
       "SRC-LMO-001",
       "SRC-PROS-002"
@@ -96,8 +99,8 @@
   },
   {
     "cluster_id": "FAM-AHMADI",
-    "family_surname_en": "Ahmadi",
-    "family_surname_fa": "احمدی",
+    "family_surname_en": "Ahmadi Tifkani",
+    "family_surname_fa": "احمدی طیفکانی",
     "mother_id": "moth-ahmadi-siblings",
     "total_killed": 2,
     "total_injured": 0,
@@ -105,7 +108,7 @@
       "hanieh-ahmadi",
       "sobhan-ahmadi"
     ],
-    "description": "Siblings Sobhan and Hanieh Ahmadi.",
+    "description": "Siblings Sobhan Ahmadi Tifkani (4th grade) and Hanieh Ahmadi Tifkani (1st grade).",
     "sources": [
       "SRC-BONYAD-003",
       "SRC-PROS-002"
@@ -116,14 +119,13 @@
     "family_surname_en": "Raeisi",
     "family_surname_fa": "رئیسی",
     "mother_id": "moth-raeisi-siblings",
-    "total_killed": 3,
+    "total_killed": 2,
     "total_injured": 0,
     "member_ids": [
       "asna-raeisi",
-      "mohammad-hatam-raeisi",
-      "hossein-raeisi-parent"
+      "mohammad-hatam-raeisi"
     ],
-    "description": "Sister Asna and brother Mohammad-Hatam Raeisi, along with their father Hossein Raeisi.",
+    "description": "6th-grade sister Asna Raeisi and 4th-grade brother Mohammad-Hesam Raeisi.",
     "sources": [
       "SRC-LMO-001",
       "SRC-BONYAD-003"
@@ -142,7 +144,7 @@
       "zahra-bahrami",
       "mahna-bahrami"
     ],
-    "description": "Four children from the extended Bahrami household in Minab.",
+    "description": "Four children from the extended Bahrami household in Minab across Grades 1, 2, 4, and 6.",
     "sources": [
       "SRC-BONYAD-003",
       "SRC-LMO-001"
@@ -150,15 +152,15 @@
   },
   {
     "cluster_id": "FAM-NASIRI",
-    "family_surname_en": "Nasiri",
-    "family_surname_fa": "نصیری",
+    "family_surname_en": "Nasiri Khouzani",
+    "family_surname_fa": "نصیری خوزانی",
     "mother_id": "moth-atiyeh-rahinezhad",
-    "total_killed": 0,
+    "total_killed": 1,
     "total_injured": 0,
     "member_ids": [
       "makan-nasiri"
     ],
-    "description": "7-year-old active gymnast Makan Nasiri (Unmarked Martyr / شهید بی‌نشان).",
+    "description": "7-year-old 1st-grade gymnast Makan Nasiri Khouzani (Unrecovered Martyr / شهید ولی شناسایی نشده).",
     "sources": [
       "SRC-GYM-004",
       "SRC-LMO-001"

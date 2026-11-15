@@ -31,7 +31,6 @@ PAIRINGS = [
     ("Parsa_Mokhtar_34.jpg", "dream_doctor", "Doctor", "Parsa"),
     ("Zahra_Sharafi_24.jpg", "dream_teacher", "Teacher", "Zahra"),
     ("Amirali_Jadav_71.jpg", "dream_engineer", "Engineer", "Amirali"),
-    ("Asma_Zakeri_41.jpg", "dream_artist", "Artist", "Asma"),
     ("Sobhan_Ahmai_47.jpg", "dream_scientist", "Scientist", "Sobhan"),
 ]
 

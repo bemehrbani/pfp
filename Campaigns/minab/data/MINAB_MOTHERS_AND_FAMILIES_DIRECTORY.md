@@ -98,12 +98,10 @@ graph TD
         MZ[Mother Zakeri / Mokhtar & Gahhar Zakeri]:::mother
         AZ[Asra Zakeri - Grade 4]:::martyr
         SZ[Salma Zakeri - Grade 1]:::martyr
-        AsmZ[Asma Zakeri]:::martyr
         RZ[Reyhaneh Zakeri]:::martyr
         SinZ[Sina Zakeri]:::martyr
         MZ --> AZ
         MZ --> SZ
-        MZ --> AsmZ
         MZ --> RZ
         MZ --> SinZ
     end
@@ -152,10 +150,9 @@ graph TD
 * **Identified Child Martyrs:**
   1. **Asra Zakeri (اسرا ذاکری)** — 4th Grade.
   2. **Salma Zakeri (سلما ذاکری)** — 1st Grade (7 years old).
-  3. **Asma Zakeri (اسما ذاکری)** — Primary Student.
-  4. **Reyhaneh Zakeri (ریحانه ذاکری)** — Primary Student.
-  5. **Sina Zakeri (سینا ذاکری)** — Primary Student.
-* **Context:** The Zakeri clan is an established family in the Minab rural district. Multiple households sent their daughters and sons to Shajareh Tayyebeh. On the morning of the bombing, the mother of Asra and Salma prepared both girls for school together. Within hours, the family home was turned into a joint mourning hall for five cousins and sisters.
+  3. **Reyhaneh Zakeri (ریحانه ذاکری)** — Primary Student.
+  4. **Sina Zakeri (سینا ذاکری)** — Primary Student.
+* **Context:** The Zakeri clan is an established family in the Minab rural district. Multiple households sent their daughters and sons to Shajareh Tayyebeh. On the morning of the bombing, the mother of Asra and Salma prepared both girls for school together. Within hours, the family home was turned into a joint mourning hall for the cousins and sisters.
 
 > **Paternal & Maternal Recollection — Mokhtar Zakeri:**  
 > *"Salma had just started first grade; she was so proud of learning to write her own name and her sister Asra's name. That morning, their mother combed their hair, tied matching ribbons, and sent them out the door. We received two small shrouds back. No household can endure the silence left when five children are extinguished together."*
@@ -368,7 +365,6 @@ The following structured matrix compiles verified family clusters, maternal ties
 | **CLUST-02** | Zohreh Shahriyari | Baby Mohammad-Ali | محمدعلی (جنین) | 6 mo. gest. | Unborn Child | Officially enrolled in martyr casualty registry | **Martyr (Unborn)** |
 | **CLUST-03** | Mother & Mokhtar / Gahhar Zakeri | Asra Zakeri | اسرا ذاکری | ~10 yrs (Gr 4) | Sister / Daughter | Visual & clothing confirmation (`r01_c07`) | **Martyr (Child)** |
 | **CLUST-03** | Mother & Mokhtar Zakeri | Salma Zakeri | سلما ذاکری | 7 yrs (Gr 1) | Sister / Daughter | Recovered from prayer hall (`r02_c09`) | **Martyr (Child)** |
-| **CLUST-03** | Extended Zakeri Clan | Asma Zakeri | اسما ذاکری | Primary | Cousin / Relative | Grid position `r02_c07` | **Martyr (Child)** |
 | **CLUST-03** | Extended Zakeri Clan | Reyhaneh Zakeri | ریحانه ذاکری | Primary | Cousin / Relative | Grid position `r01_c00` | **Martyr (Child)** |
 | **CLUST-03** | Extended Zakeri Clan | Sina Zakeri | سینا ذاکری | Primary | Cousin / Relative | Grid position `r03_c08` | **Martyr (Child)** |
 | **CLUST-04** | Atiyeh Rahinezhad & Cyrus Nasiri | Makan Nasiri | ماکان نصیری | 7 yrs (Gr 1) | Only Son | Body unrecovered; left shoe & sweater found; "Unmarked Martyr" | **Martyr (Child)** |

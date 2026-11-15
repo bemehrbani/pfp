@@ -190,7 +190,7 @@
         },
         "filename": {
           "type": ["string", "null"],
-          "description": "Standardized photo filename (e.g. Asma_Zakeri_41.jpg)."
+          "description": "Standardized photo filename (e.g. asra-zakeri.jpg)."
         },
         "match_confidence": {
           "type": ["string", "null"],
@@ -215,7 +215,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique victim identifier (e.g., 'VIC-001', 'asma-zakeri').",
+          "description": "Unique victim identifier (e.g., 'VIC-001', 'asra-zakeri').",
           "pattern": "^[A-Za-z0-9_.-]+$"
         },
         "full_name_en": {
