@@ -17,6 +17,9 @@ import {
   sampleGuidedTourCamera,
   sampleGuidedTourCameraCoords,
   initKeyboardWalkControls,
+  initCtrlLookControls,
+  syncOrbitPolarLimit,
+  clampCameraAboveGround,
   applyKeyboardMovement,
   stepCameraFrame,
 } from './engine/camera-rig.js';
@@ -111,7 +114,13 @@ export function animate() {
 
   stepCameraFrame(delta, tourProgress);
 
-  if (appState.controls) appState.controls.update();
+  if (appState.controls) {
+    // The Ctrl + drag look pivots the orbit target around the camera, so the polar
+    // clamp has to allow an upward aim and the camera must stay above the ground.
+    syncOrbitPolarLimit();
+    appState.controls.update();
+    clampCameraAboveGround();
+  }
   updateHotspotPositions();
   appState.renderer.render(appState.scene, appState.camera);
 }
@@ -143,6 +152,7 @@ export function startReconstructionApp() {
   initHotspots();
   initUIControls();
   initKeyboardWalkControls();
+  initCtrlLookControls();
   animate();
 
   if (appState.recordingMode) {

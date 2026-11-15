@@ -295,6 +295,14 @@ export function updateHotspotPositions() {
   const height = container.clientHeight;
   if (!tempProjVec) tempProjVec = new THREE.Vector3();
 
+  // Project with the camera matrix of the frame that is about to be rendered.
+  // camera.matrixWorldInverse is otherwise one render late, which made every pin
+  // swing and land in the wrong place while a Ctrl + drag look rotated the camera
+  // in place (OrbitControls damping hid the same one-frame error while orbiting).
+  const cam = appState.camera;
+  cam.updateMatrixWorld();
+  cam.matrixWorldInverse.copy(cam.matrixWorld).invert();
+
   const currentTourStopId =
     appState.isGuidedTour && GUIDED_TOUR_STOPS[appState.currentTourIndex]
       ? GUIDED_TOUR_STOPS[appState.currentTourIndex].hotspotId
@@ -322,7 +330,7 @@ export function updateHotspotPositions() {
     }
 
     tempProjVec.copy(cfg.posVec);
-    tempProjVec.project(appState.camera);
+    tempProjVec.project(cam);
 
     if (tempProjVec.z > 1.0) {
       cfg.domElement.style.display = 'none';

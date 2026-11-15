@@ -41,7 +41,7 @@ export const appState = {
   isAnimatingCamera: false,
   animationTarget: { pos: null, lookAt: null },
   isWalkMode: false,
-  moveKeys: { forward: false, backward: false, left: false, right: false },
+  moveKeys: { forward: false, backward: false, left: false, right: false, up: false, down: false },
 
   // Casualties, educators & rubble artifacts registry
   childrenList: [],
@@ -51,6 +51,11 @@ export const appState = {
   raycaster: null,
   pointerNDC: null,
   pointerDownPos: { x: 0, y: 0 },
+
+  // Ctrl (Cmd on macOS) + drag "look around"
+  lookDragPointerId: null,
+  lookDragLastX: 0,
+  lookDragLastY: 0,
 
   // Vow signatory badge state
   vowSignatoryCount: 0,

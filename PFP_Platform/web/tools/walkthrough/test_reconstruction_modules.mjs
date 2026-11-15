@@ -264,3 +264,37 @@ test('8. Finnish (mostafa_fi) narrator profile, manifest, and all 8 audio files 
   assert.equal(appState.activeVoiceProfile, 'mostafa_en');
 });
 
+test('9. Ctrl + drag look pivots the orbit target around the camera, keeping radius and clamping pitch', async () => {
+  const { rotateTargetAroundCamera, LOOK_ELEVATION_LIMIT } = await importReconModule('engine/camera-rig.js');
+
+  const camera = { x: 0, y: 0, z: 10 };
+  const target = { x: 0, y: 0, z: 0 };
+  const height = 1000;
+  const step = (Math.PI * 2 * 10) / 1000; // 10 px of drag at a 1000 px viewport
+  const radiusOf = (p) => Math.hypot(p.x - camera.x, p.y - camera.y, p.z - camera.z);
+
+  // Drag right turns the view right: the pivot swings toward +X on the same radius.
+  const right = rotateTargetAroundCamera(camera, target, 10, 0, height);
+  assert.ok(Math.abs(right.x - 10 * Math.sin(step)) < 1e-9);
+  assert.ok(Math.abs(right.z - (10 - 10 * Math.cos(step))) < 1e-9);
+  assert.ok(Math.abs(radiusOf(right) - 10) < 1e-9);
+
+  // Drag down turns the view down: the pivot drops below the camera.
+  const down = rotateTargetAroundCamera(camera, target, 0, 10, height);
+  assert.ok(down.y < 0);
+  assert.ok(Math.abs(down.y - -10 * Math.sin(step)) < 1e-9);
+
+  // Drag up aims the camera at the sky: the pivot rises above the camera.
+  const up = rotateTargetAroundCamera(camera, target, 0, -10, height);
+  assert.ok(up.y > 0);
+
+  // Pitch clamps at the elevation limit instead of flipping over the camera.
+  const flipped = rotateTargetAroundCamera(camera, target, 0, 5000, height);
+  assert.ok(Math.abs(flipped.y - -10 * Math.sin(LOOK_ELEVATION_LIMIT)) < 1e-9);
+  assert.ok(Math.abs(radiusOf(flipped) - 10) < 1e-9);
+
+  // A collapsed radius (camera on target) must not produce NaN.
+  const collapsed = rotateTargetAroundCamera(camera, { x: 0, y: 0, z: 9.99999 }, 200, 200, height);
+  assert.deepEqual(collapsed, { x: 0, y: 0, z: 9.99999 });
+});
+
