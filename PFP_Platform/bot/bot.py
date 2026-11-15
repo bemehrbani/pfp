@@ -105,7 +105,15 @@ class PFPCampaignBot:
                 storm_tweet_handlers,
                 # Simplified Flow handlers
                 simplified_handlers,
-                text_message_handler, unknown_command_handler
+                text_message_handler, unknown_command_handler,
+                # Core pillar handlers (Memorial, Multimedia, Evidence, Events & About)
+                memorial_menu_handler, memorial_candle_handler,
+                memorial_pagination_handler, victim_detail_handler,
+                multimedia_menu_handler, multimedia_category_handler,
+                media_detail_handler,
+                evidence_menu_handler, evidence_chapter_handler,
+                events_menu_handler, event_detail_handler,
+                event_do_rsvp_handler, about_pfp_handler
             )
 
             # Import dashboard auth handler
