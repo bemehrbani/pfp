@@ -7,6 +7,8 @@
  * here so every frame shares one stack.
  */
 
+import * as THREE from 'three';
+
 /** Thickness of the solid backing box every frame is hung on. */
 export const FRAME_BACKING_DEPTH = 0.04;
 

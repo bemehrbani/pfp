@@ -1,7 +1,7 @@
 /**
  * Shared application state container for the Shajareh Tayyebeh 3D Spatial Reconstruction.
  * Keeps all mutable engine, scene, media, and tour references in one inspectable place
- * without referencing browser globals (`window`, `document`, `THREE`) at module import time.
+ * without touching the DOM at module import time.
  */
 
 export const VOW_BADGE_THRESHOLD = 100;

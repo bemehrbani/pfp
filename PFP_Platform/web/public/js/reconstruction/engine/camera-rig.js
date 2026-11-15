@@ -3,6 +3,8 @@
  * right-drag look-around, and first-person WASD / Arrow flight with Q/E height
  * (free-fly only; walk mode stays pinned to eye level).
  */
+import * as THREE from 'three';
+
 import { appState } from '../state.js';
 import { GUIDED_TOUR_STOPS } from '../data/tour-config.js';
 import { setTemporalCondition } from './core.js';
@@ -18,7 +20,8 @@ function lerpScalar(a, b, t) {
 }
 
 /**
- * Pure waypoint interpolation helper (safe to run in Node tests without `THREE`).
+ * Pure waypoint interpolation helper: returns plain coordinate arrays, so it needs no
+ * renderer and stays usable from Node-side tooling.
  * @param {number} stopIndex
  * @param {number} rawProgress
  * @returns {{ pos: [number, number, number], lookAt: [number, number, number] } | null}
@@ -85,7 +88,6 @@ export function sampleGuidedTourCameraCoords(stopIndex, rawProgress) {
 export function sampleGuidedTourCamera(stopIndex, rawProgress) {
   const coords = sampleGuidedTourCameraCoords(stopIndex, rawProgress);
   if (!coords) return null;
-  if (typeof THREE === 'undefined') return coords;
   return {
     pos: new THREE.Vector3(coords.pos[0], coords.pos[1], coords.pos[2]),
     lookAt: new THREE.Vector3(coords.lookAt[0], coords.lookAt[1], coords.lookAt[2]),

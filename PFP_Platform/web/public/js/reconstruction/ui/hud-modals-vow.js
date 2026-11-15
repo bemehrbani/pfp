@@ -5,6 +5,9 @@
  * Uses programmatic DOM construction (`createElement` + `textContent` + `replaceChildren`)
  * everywhere — zero raw HTML string sinks.
  */
+import * as THREE from 'three';
+import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+
 import { appState, VOW_BADGE_THRESHOLD } from '../state.js';
 import { GUIDED_TOUR_STOPS, HOTSPOT_CONFIGS } from '../data/tour-config.js';
 import {
@@ -827,34 +830,32 @@ export async function submitVowForm(e) {
   }, 2600);
 }
 
-export function exportSceneToGLB() {
-  if (typeof THREE === 'undefined' || typeof THREE.GLTFExporter === 'undefined') {
-    alert('GLTFExporter is still loading. Please try again in a moment.');
-    return;
-  }
+export async function exportSceneToGLB() {
   if (!appState.terrainGroup || !appState.preStrikeModelGroup) return;
 
-  const exporter = new THREE.GLTFExporter();
+  const exporter = new GLTFExporter();
   const exportGroup = new THREE.Group();
   exportGroup.name = 'Minab_Shajareh_Tayyebeh_School_SpatialIO';
   exportGroup.add(appState.terrainGroup.clone());
   exportGroup.add(appState.preStrikeModelGroup.clone());
 
-  exporter.parse(
-    exportGroup,
-    (result) => {
-      const blob = new Blob([result], { type: 'model/gltf-binary' });
-      const objUrl = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = objUrl;
-      link.download = 'minab_shajareh_tayyebeh_spatial.glb';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(objUrl), 5000);
-    },
-    { binary: true }
-  );
+  let glb;
+  try {
+    glb = await exporter.parseAsync(exportGroup, { binary: true });
+  } catch (err) {
+    alert('3D export failed: ' + (err && err.message ? err.message : err));
+    return;
+  }
+
+  const blob = new Blob([glb], { type: 'model/gltf-binary' });
+  const objUrl = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = objUrl;
+  link.download = 'minab_shajareh_tayyebeh_spatial.glb';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(objUrl), 5000);
 }
 
 export function initUIControls() {

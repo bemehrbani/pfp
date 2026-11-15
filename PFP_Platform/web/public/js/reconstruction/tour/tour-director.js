@@ -3,6 +3,8 @@
  * cancel-safe run gate (`AbortController` + timer tracking), WebAudio room atmosphere,
  * background score ducking, and live HTTP 206 vs. bounded recording-mode PiP loading.
  */
+import * as THREE from 'three';
+
 import { appState } from '../state.js';
 import {
   MEDIA_ASSET_VERSION,

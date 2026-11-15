@@ -8,30 +8,31 @@
  * and roughness variation come from the textures.
  */
 
+import * as THREE from 'three';
+
 /** One texture tile spans this many metres, so grain density stays plausible. */
 export const PLASTER_TILE_METRES = 2.0;
 
 const PLASTER_TEXTURE_DIR = 'textures/plaster/';
-const PLASTER_MAP_FILES = {
-  map: 'painted_plaster_wall_diff_1k.jpg',
-  normalMap: 'painted_plaster_wall_nor_gl_1k.png',
-  roughnessMap: 'painted_plaster_wall_rough_1k.png',
+const PLASTER_MAPS = {
+  map: { file: 'painted_plaster_wall_diff_1k.jpg', color: true },
+  normalMap: { file: 'painted_plaster_wall_nor_gl_1k.png', color: false },
+  roughnessMap: { file: 'painted_plaster_wall_rough_1k.png', color: false },
 };
 
 let cachedPlasterMaps = null;
 
 /**
- * The renderer writes linear output and never decodes sRGB colour maps, so the
- * diffuse map is left undecoded to match the flat palette it replaces. Decoding
- * this map without also switching the renderer's output colourspace would
- * darken every wall against the rest of the scene.
+ * Loads the three maps once. The diffuse carries painted colour and is decoded as sRGB;
+ * the normal and roughness maps carry direction and scalar data, so they stay linear.
  */
 function loadPlasterMaps() {
   if (cachedPlasterMaps) return cachedPlasterMaps;
   const loader = new THREE.TextureLoader();
   cachedPlasterMaps = {};
-  Object.keys(PLASTER_MAP_FILES).forEach((slot) => {
-    const tex = loader.load(PLASTER_TEXTURE_DIR + PLASTER_MAP_FILES[slot]);
+  Object.entries(PLASTER_MAPS).forEach(([slot, spec]) => {
+    const tex = loader.load(PLASTER_TEXTURE_DIR + spec.file);
+    if (spec.color) tex.colorSpace = THREE.SRGBColorSpace;
     tex.wrapS = THREE.RepeatWrapping;
     tex.wrapT = THREE.RepeatWrapping;
     tex.anisotropy = 4;

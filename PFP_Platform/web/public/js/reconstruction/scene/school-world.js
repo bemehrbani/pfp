@@ -2,6 +2,8 @@
  * Procedural Minab courtyard murals, terrain, Vow Shrine obelisk,
  * and two-floor Shajareh Tayyebeh school pre/post-strike 3D architecture.
  */
+import * as THREE from 'three';
+
 import { appState } from '../state.js';
 import { buildAllInWorldWalkthroughScreens } from './in-world-screens.js';
 import {
@@ -24,6 +26,13 @@ function repaintCanvasWhenFontsReady(fonts, repaint) {
       .then(() => repaint())
       .catch(() => {});
   } catch (_) {}
+}
+
+/** Canvas murals and painted signs are colour maps, so each one is decoded as sRGB. */
+function canvasColorTexture(canvas) {
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
 }
 
 let cachedMuralTextures = null;
@@ -134,7 +143,7 @@ export function getSchoolMuralTextures() {
     ec.fill();
     ec.stroke();
   });
-  const eastMuralTex = new THREE.CanvasTexture(eastCanvas);
+  const eastMuralTex = canvasColorTexture(eastCanvas);
 
   // 2. Yellow Courtyard Dividing Wall Panel with Large Red Tulip (x = +19..+23.6)
   const tulipCanvas = document.createElement('canvas');
@@ -163,7 +172,7 @@ export function getSchoolMuralTextures() {
   tc.lineTo(390, 105);
   tc.closePath();
   tc.fill();
-  const yellowTulipTex = new THREE.CanvasTexture(tulipCanvas);
+  const yellowTulipTex = canvasColorTexture(tulipCanvas);
 
   // 3. Main Gate Mint Wall with Colored Pencils & Persian Letters (pip01b_01)
   const gateCanvas = document.createElement('canvas');
@@ -216,7 +225,7 @@ export function getSchoolMuralTextures() {
     gc.strokeText('آ ب', 235, 390);
   };
   drawGateLetters();
-  const pencilGateTex = new THREE.CanvasTexture(gateCanvas);
+  const pencilGateTex = canvasColorTexture(gateCanvas);
   repaintCanvasWhenFontsReady([{ font: `bold 92px ${FA_CANVAS_FONT}`, text: 'آ ب' }], () => {
     drawGateLetters();
     pencilGateTex.needsUpdate = true;
@@ -262,10 +271,9 @@ export function getSchoolMuralTextures() {
     cc.stroke();
   }
 
-  const porticoColTex = new THREE.CanvasTexture(colCanvas);
-  const colCaps = appState.renderer && appState.renderer.capabilities;
-  if (colCaps) {
-    porticoColTex.anisotropy = Math.max(1, Math.min(colCaps.getMaxAnisotropy(), 8));
+  const porticoColTex = canvasColorTexture(colCanvas);
+  if (appState.renderer) {
+    porticoColTex.anisotropy = Math.max(1, Math.min(appState.renderer.getMaxAnisotropy(), 8));
   }
 
   // 5. Rear Dinosaur Height-Chart Mural (hd/f_051.jpg)
@@ -307,7 +315,7 @@ export function getSchoolMuralTextures() {
   dc.stroke();
   dc.fillRect(235, 315, 18, 48);
   dc.fillRect(300, 315, 18, 48);
-  const dinoWallTex = new THREE.CanvasTexture(dinoCanvas);
+  const dinoWallTex = canvasColorTexture(dinoCanvas);
 
   // 6. East Perimeter Pastel Yellow Tree Mural (pip01a_03)
   const treeMuralCanvas = document.createElement('canvas');
@@ -322,7 +330,7 @@ export function getSchoolMuralTextures() {
   tmc.beginPath();
   tmc.arc(256, 165, 78, 0, Math.PI * 2);
   tmc.fill();
-  const eastTreeMuralTex = new THREE.CanvasTexture(treeMuralCanvas);
+  const eastTreeMuralTex = canvasColorTexture(treeMuralCanvas);
 
   // 7. Post-Strike Window Smoke Scorch Plume (pip03b_01)
   const scorchCanvas = document.createElement('canvas');
@@ -335,7 +343,7 @@ export function getSchoolMuralTextures() {
   sGrad.addColorStop(1, 'rgba(38, 36, 34, 0.0)');
   sc.fillStyle = sGrad;
   sc.fillRect(0, 0, 256, 256);
-  const scorchTex = new THREE.CanvasTexture(scorchCanvas);
+  const scorchTex = canvasColorTexture(scorchCanvas);
 
   cachedMuralTextures = {
     eastMuralTex,
@@ -1735,7 +1743,7 @@ export function buildProceduralSchoolModels() {
     sCtx.fillText(CRATER_FA_TEXT, 256, 68);
   };
   drawCraterLabels();
-  const scaleTex = new THREE.CanvasTexture(scaleCanvas);
+  const scaleTex = canvasColorTexture(scaleCanvas);
   repaintCanvasWhenFontsReady(
     [
       { font: `700 22px ${EN_CANVAS_FONT}`, text: 'IMPACT' },

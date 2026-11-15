@@ -10,6 +10,8 @@
  * - Inactive rooms release excess offscreen `<video>` elements (`<= 4` active decoders)
  *   while preserving their frozen end-frame or poster on the 3D wall.
  */
+import * as THREE from 'three';
+
 import { appState } from '../state.js';
 import { IN_WORLD_SCREEN_SPECS, MEDIA_ASSET_VERSION } from '../data/tour-config.js';
 import { FRAME_DECAL_GAP, makeDecalMaterial } from './frame-stack.js';
@@ -122,6 +124,7 @@ function ensureInWorldScreenCanvas(screen) {
     screen.screenCanvas = screenCanvas;
     screen.screenCtx = screenCtx;
     screen.canvasTex = new THREE.CanvasTexture(screenCanvas);
+    screen.canvasTex.colorSpace = THREE.SRGBColorSpace;
   }
   return screen.screenCtx;
 }
@@ -245,6 +248,7 @@ export function buildAllInWorldWalkthroughScreens() {
     plaqueCanvas.width = 1024;
     plaqueCanvas.height = 136;
     const plaqueTex = new THREE.CanvasTexture(plaqueCanvas);
+    plaqueTex.colorSpace = THREE.SRGBColorSpace;
     const plaqueW = Math.min(spec.w * 0.94, 3.1);
     const plaqueH = plaqueW * (136 / 1024);
     const plaqueBacking = new THREE.Mesh(
@@ -308,6 +312,7 @@ export function buildAllInWorldWalkthroughScreens() {
     renderInWorldPlaqueCanvas(screenRecord);
 
     posterLoader.load(screenRecord.posterUrl, (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace;
       screenRecord.posterTex = tex;
       screenRecord.posterLoaded = true;
       if (!screenRecord.usingCanvasTex) {

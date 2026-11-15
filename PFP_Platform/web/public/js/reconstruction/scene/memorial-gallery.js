@@ -5,6 +5,8 @@
  * Reuses shared BoxGeometry / PlaneGeometry caches by exact dimensions to eliminate
  * hundreds of duplicate WebGL geometry buffers while preserving identical vertex layout.
  */
+import * as THREE from 'three';
+
 import { appState } from '../state.js';
 import {
   FRAME_BACKING_DEPTH,
@@ -59,14 +61,17 @@ const EN_FONT_STACK = '"Source Sans 3", "Segoe UI", system-ui, sans-serif';
  * detail at glyph scale.
  */
 function textureAnisotropy() {
-  const caps = appState.renderer && appState.renderer.capabilities;
-  if (!caps) return 1;
-  return Math.max(1, Math.min(caps.getMaxAnisotropy(), 8));
+  if (!appState.renderer) return 1;
+  return Math.max(1, Math.min(appState.renderer.getMaxAnisotropy(), 8));
 }
 
-/** Applies the shared filtering settings to a canvas- or photo-authored decal texture. */
-function sharpenDecalTexture(tex) {
+/**
+ * Prepares a canvas- or photo-authored decal: sRGB decoding, then the shared filtering and
+ * anisotropy. Every decal here is painted colour, never a data map.
+ */
+function prepareDecalTexture(tex) {
   if (!tex) return tex;
+  tex.colorSpace = THREE.SRGBColorSpace;
   tex.anisotropy = textureAnisotropy();
   tex.generateMipmaps = true;
   tex.minFilter = THREE.LinearMipmapLinearFilter;
@@ -229,7 +234,7 @@ export function createNameplateTexture(line1Fa, line2En, line3Meta, accentHex, p
   paintNameplate(canvas, line1Fa, line2En, line3Meta, accentHex);
 
   const tex = new THREE.CanvasTexture(canvas);
-  sharpenDecalTexture(tex);
+  prepareDecalTexture(tex);
 
   const s = canvas.height / NAMEPLATE_DESIGN_HEIGHT;
   repaintWhenFontsReady(
@@ -338,7 +343,7 @@ export function createWingBannerIn3D(parentGroup, titleEn, titleFa, x, y, z, rot
   paintWingBanner(canvas, titleEn, titleFa, bgHex, borderHex);
 
   const tex = new THREE.CanvasTexture(canvas);
-  sharpenDecalTexture(tex);
+  prepareDecalTexture(tex);
 
   // Banner text is a sign, not lit geometry: keep the painted colours exactly as authored
   // instead of letting the scene's ACES tone mapping wash the glyphs toward grey.
@@ -423,7 +428,7 @@ function buildFramedWallItem(parentGroup, loader, opts) {
 
   if (imageUrl) {
     loader.load(imageUrl, (tex) => {
-      sharpenDecalTexture(tex);
+      prepareDecalTexture(tex);
       if (containsWholeImage) {
         containDecalTexture(tex, imagePlane, imageW, imageH);
       } else {
@@ -604,7 +609,7 @@ export function createClassroomDeskWithDrawing(parentGroup, loader, drw, x, yBas
     deskGroup.add(sheet);
 
     loader.load(drw.thumb || drw.image, (tex) => {
-      sharpenDecalTexture(tex);
+      prepareDecalTexture(tex);
       containDecalTexture(tex, sheet, 0.46, 0.34);
       sheet.material = makeDecalMaterial({ map: tex });
       sheet.material.needsUpdate = true;
@@ -700,7 +705,7 @@ export function populate3DSchoolPortraitsAndDrawings() {
 
     if (imgUrl) {
       loader.load(imgUrl, (tex) => {
-        sharpenDecalTexture(tex);
+        prepareDecalTexture(tex);
         const portraitMesh = new THREE.Mesh(
           getSharedPlaneGeo(0.88, 1.32),
           makeDecalMaterial({ map: tex })
