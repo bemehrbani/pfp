@@ -888,8 +888,8 @@ export function populate3DSchoolPortraitsAndDrawings() {
   const boysGrades4to6 = childrenList.filter((c) => c.gender === 'boy' && (c.grade || 1) >= 4 && c.photoPath);
   createWingBannerIn3D(
     groundFloorGroup,
-    `GROUND FLOOR EAST WING · BOYS GRADES 4–6 & CEREMONY ROOM (${boysGrades4to6.length} STUDENTS)`,
-    `طبقه همکف (بال شرقی) · دانش‌آموزان پسر پایه‌های چهارم تا ششم و اتاق جشن`,
+    `GROUND FLOOR EAST WING: BOYS GRADES 4–6 & CEREMONY ROOM (${boysGrades4to6.length} STUDENTS)`,
+    `طبقه همکف (بال شرقی): دانش‌آموزان پسر پایه‌های چهارم تا ششم و اتاق جشن`,
     3.75,
     3.25,
     -8.18,
@@ -950,7 +950,7 @@ export function populate3DSchoolPortraitsAndDrawings() {
     groundFloorGroup,
     `CENTRAL HALL & RAINBOW STAIRCASE: THE 26 MARTYRED FEMALE EDUCATORS`,
     `سالن مرکزی و راه‌پله رنگین‌کمان: ۲۶ معلم و مدیر شهیده دبستان شجره طیبه`,
-    -1.9,
+    -3.2,
     3.3,
     -8.02,
     0,
