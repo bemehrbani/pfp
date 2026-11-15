@@ -38,3 +38,8 @@ Mandatory rules for all AI coding agents and contributors working in `bemehrbani
 ## 5. Strict Legal Citation & Evidentiary Verification
 - Never fabricate, guess, or extrapolate legal citations, UN document numbers, tribunal case names, paragraph numbers (`¶` / `§`), or forensic identifiers (e.g., CAGE codes, munitions serials, coordinates).
 - Every benchmark precedent cited in `FACTUAL_DETERMINATION_AND_COMPLAINT_MASTER.md` must match the verified primary source dossiers in `Campaigns/minab/legal_benchmarks/` (`case_01` through `case_19`, `benchmarked_facts_cases_01_to_19.md`, and `COMPREHENSIVE_BENCHMARKING_REMAINING_15_CASES.md`).
+
+## 6. Production Push Guardrail & Multi-Agent Isolation
+- Pushes to `main` or the `deploy` remote are gated by `.git/hooks/pre-push`. Never set `BYPASS_DEPLOY_GUARDRAIL=1` unless the user has explicitly validated staging and approved pushing to production.
+- Before every `git commit`, inspect `git diff --cached --stat` to ensure no unrelated files staged by another concurrent agent are bundled. When running multiple agents in parallel, prefer isolated `git worktree` checkouts.
+
