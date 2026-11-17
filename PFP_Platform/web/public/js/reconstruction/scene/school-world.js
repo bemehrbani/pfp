@@ -2,8 +2,38 @@
  * Procedural Minab courtyard murals, terrain, Vow Shrine obelisk,
  * and two-floor Shajareh Tayyebeh school pre/post-strike 3D architecture.
  */
+import * as THREE from 'three';
+
 import { appState } from '../state.js';
 import { buildAllInWorldWalkthroughScreens } from './in-world-screens.js';
+import {
+  createPaintedPlasterMaterial,
+  wallBoxGeometry,
+} from './painted-plaster-material.js';
+
+/** Persian and English faces for painted signs; both are loaded by reconstruction.html. */
+const FA_CANVAS_FONT = '"Vazirmatn", Tahoma, sans-serif';
+const EN_CANVAS_FONT = '"Source Sans 3", "Segoe UI", system-ui, sans-serif';
+
+/**
+ * Canvas text does not trigger a webfont download, so a sign painted at boot can keep the
+ * fallback face. Re-run its text pass once the requested faces are available.
+ */
+function repaintCanvasWhenFontsReady(fonts, repaint) {
+  if (typeof document === 'undefined' || !document.fonts || !document.fonts.load) return;
+  try {
+    Promise.all(fonts.map((f) => document.fonts.load(f.font, f.text || ' ')))
+      .then(() => repaint())
+      .catch(() => {});
+  } catch (_) {}
+}
+
+/** Canvas murals and painted signs are colour maps, so each one is decoded as sRGB. */
+function canvasColorTexture(canvas) {
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
 
 let cachedMuralTextures = null;
 export function getSchoolMuralTextures() {
@@ -113,7 +143,7 @@ export function getSchoolMuralTextures() {
     ec.fill();
     ec.stroke();
   });
-  const eastMuralTex = new THREE.CanvasTexture(eastCanvas);
+  const eastMuralTex = canvasColorTexture(eastCanvas);
 
   // 2. Yellow Courtyard Dividing Wall Panel with Large Red Tulip (x = +19..+23.6)
   const tulipCanvas = document.createElement('canvas');
@@ -142,7 +172,7 @@ export function getSchoolMuralTextures() {
   tc.lineTo(390, 105);
   tc.closePath();
   tc.fill();
-  const yellowTulipTex = new THREE.CanvasTexture(tulipCanvas);
+  const yellowTulipTex = canvasColorTexture(tulipCanvas);
 
   // 3. Main Gate Mint Wall with Colored Pencils & Persian Letters (pip01b_01)
   const gateCanvas = document.createElement('canvas');
@@ -186,56 +216,65 @@ export function getSchoolMuralTextures() {
   drawPencil(165, 315, 0.52, '#60a5fa');
   drawPencil(305, 165, -0.68, '#f472b6');
   drawPencil(410, 330, -0.25, '#facc15');
-  gc.fillStyle = '#eab308';
-  gc.strokeStyle = '#1e293b';
-  gc.lineWidth = 4;
-  gc.font = 'bold 92px Tahoma, sans-serif';
-  gc.fillText('آ ب', 235, 390);
-  gc.strokeText('آ ب', 235, 390);
-  const pencilGateTex = new THREE.CanvasTexture(gateCanvas);
+  const drawGateLetters = () => {
+    gc.fillStyle = '#eab308';
+    gc.strokeStyle = '#1e293b';
+    gc.lineWidth = 4;
+    gc.font = `bold 92px ${FA_CANVAS_FONT}`;
+    gc.fillText('آ ب', 235, 390);
+    gc.strokeText('آ ب', 235, 390);
+  };
+  drawGateLetters();
+  const pencilGateTex = canvasColorTexture(gateCanvas);
+  repaintCanvasWhenFontsReady([{ font: `bold 92px ${FA_CANVAS_FONT}`, text: 'آ ب' }], () => {
+    drawGateLetters();
+    pencilGateTex.needsUpdate = true;
+  });
 
-  // 4. Portico Column Texture: White upper + subtle Iranian tricolor diagonal bands on lower half
+  // 4. Portico Column Texture: the tricolor flag wrapped round the shaft.
+  // Only the yard-facing face of a column is painted (see porticoColMats below), so the
+  // canvas is one 0.62 m face wide and the full column tall.
+  const COL_FACE_M = 0.62;
+  const COL_H_M = 3.6; // portico column height, matching floorH
   const colCanvas = document.createElement('canvas');
-  colCanvas.width = 256;
-  colCanvas.height = 512;
+  colCanvas.width = 512;
+  colCanvas.height = 2048;
   const cc = colCanvas.getContext('2d');
-  cc.fillStyle = '#edeff2';
-  cc.fillRect(0, 0, 256, 512);
-  cc.save();
-  cc.beginPath();
-  cc.rect(0, 230, 256, 282);
-  cc.clip();
-  cc.fillStyle = '#3b8c58';
-  cc.beginPath();
-  cc.moveTo(0, 250);
-  cc.lineTo(256, 195);
-  cc.lineTo(256, 290);
-  cc.lineTo(0, 345);
-  cc.closePath();
-  cc.fill();
-  cc.fillStyle = '#f8fafc';
-  cc.beginPath();
-  cc.moveTo(0, 345);
-  cc.lineTo(256, 290);
-  cc.lineTo(256, 395);
-  cc.lineTo(0, 450);
-  cc.closePath();
-  cc.fill();
-  cc.fillStyle = '#c43e3e';
-  cc.beginPath();
-  cc.moveTo(0, 450);
-  cc.lineTo(256, 395);
-  cc.lineTo(256, 512);
-  cc.lineTo(0, 512);
-  cc.closePath();
-  cc.fill();
-  // Small red emblem mark in white band
-  cc.fillStyle = '#b91c1c';
-  cc.beginPath();
-  cc.arc(128, 368, 15, 0, Math.PI * 2);
-  cc.fill();
-  cc.restore();
-  const porticoColTex = new THREE.CanvasTexture(colCanvas);
+  const colPxY = (m) => colCanvas.height - (m * colCanvas.height) / COL_H_M;
+
+  // Three equal bands, green over white over red, tilted so a turn of the shaft climbs
+  // 0.4 m. Green runs out to the canopy and red to the ground rather than stopping short.
+  const COL_BAND_M = COL_H_M / 3;
+  const COL_RISE_M = 0.4;
+  const flagEdge = (band, s) => COL_BAND_M * band + (COL_RISE_M * s) / COL_FACE_M;
+  const fillBand = (bottomM, topM, fill) => {
+    cc.fillStyle = fill;
+    cc.beginPath();
+    cc.moveTo(0, colPxY(bottomM(0)));
+    cc.lineTo(colCanvas.width, colPxY(bottomM(COL_FACE_M)));
+    cc.lineTo(colCanvas.width, colPxY(topM(COL_FACE_M)));
+    cc.lineTo(0, colPxY(topM(0)));
+    cc.closePath();
+    cc.fill();
+  };
+  fillBand(() => 0, (s) => flagEdge(1, s), '#c8393c');
+  fillBand((s) => flagEdge(1, s), (s) => flagEdge(2, s), '#fbfcfd');
+  fillBand((s) => flagEdge(2, s), () => COL_H_M, '#2f8a52');
+
+  // Hairline along each band edge: the white band needs it to read against pale whitewash.
+  cc.strokeStyle = 'rgba(22, 30, 38, 0.24)';
+  cc.lineWidth = 3;
+  for (const band of [1, 2]) {
+    cc.beginPath();
+    cc.moveTo(0, colPxY(flagEdge(band, 0)));
+    cc.lineTo(colCanvas.width, colPxY(flagEdge(band, COL_FACE_M)));
+    cc.stroke();
+  }
+
+  const porticoColTex = canvasColorTexture(colCanvas);
+  if (appState.renderer) {
+    porticoColTex.anisotropy = Math.max(1, Math.min(appState.renderer.getMaxAnisotropy(), 8));
+  }
 
   // 5. Rear Dinosaur Height-Chart Mural (hd/f_051.jpg)
   const dinoCanvas = document.createElement('canvas');
@@ -276,7 +315,7 @@ export function getSchoolMuralTextures() {
   dc.stroke();
   dc.fillRect(235, 315, 18, 48);
   dc.fillRect(300, 315, 18, 48);
-  const dinoWallTex = new THREE.CanvasTexture(dinoCanvas);
+  const dinoWallTex = canvasColorTexture(dinoCanvas);
 
   // 6. East Perimeter Pastel Yellow Tree Mural (pip01a_03)
   const treeMuralCanvas = document.createElement('canvas');
@@ -291,7 +330,7 @@ export function getSchoolMuralTextures() {
   tmc.beginPath();
   tmc.arc(256, 165, 78, 0, Math.PI * 2);
   tmc.fill();
-  const eastTreeMuralTex = new THREE.CanvasTexture(treeMuralCanvas);
+  const eastTreeMuralTex = canvasColorTexture(treeMuralCanvas);
 
   // 7. Post-Strike Window Smoke Scorch Plume (pip03b_01)
   const scorchCanvas = document.createElement('canvas');
@@ -304,7 +343,7 @@ export function getSchoolMuralTextures() {
   sGrad.addColorStop(1, 'rgba(38, 36, 34, 0.0)');
   sc.fillStyle = sGrad;
   sc.fillRect(0, 0, 256, 256);
-  const scorchTex = new THREE.CanvasTexture(scorchCanvas);
+  const scorchTex = canvasColorTexture(scorchCanvas);
 
   cachedMuralTextures = {
     eastMuralTex,
@@ -521,12 +560,12 @@ export function buildEnvironmentAndTerrain() {
   // ========================================================
   // COURTYARD DIVIDING & PERIMETER WALLS
   // ========================================================
-  const wallMat = new THREE.MeshStandardMaterial({ color: 0xe2e6ec, roughness: 0.85 });
+  const wallMat = createPaintedPlasterMaterial(0xe2e6ec);
   const wallH = 2.65;
   const wallT = 0.36;
 
   function addCourtyardWall(w, h, d, x, y, z, mat, featureTag, isSolid = true) {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || wallMat);
+    const m = new THREE.Mesh(wallBoxGeometry(w, h, d, mat || wallMat), mat || wallMat);
     m.position.set(x, y, z);
     m.castShadow = true;
     m.receiveShadow = true;
@@ -628,13 +667,13 @@ export function buildEnvironmentAndTerrain() {
   addCourtyardWall(29.8, wallH, wallT, -19.1, wallH / 2, 30.0, wallMat, null, true);
   addCourtyardWall(41.5, wallH, wallT, 21.75, wallH / 2, 30.0, wallMat, null, true);
 
-  const pencilGatePanel = new THREE.Mesh(
-    new THREE.BoxGeometry(3.6, 2.65, 0.44),
-    new THREE.MeshStandardMaterial({ map: murals.pencilGateTex, roughness: 0.72 })
-  );
-  pencilGatePanel.position.set(2.8, 1.35, 30.0);
-  pencilGatePanel.userData = { feature: 'pencil_main_gate', isSolidWall: true };
-  terrainGroup.add(pencilGatePanel);
+  // const pencilGatePanel = new THREE.Mesh(
+  //   new THREE.BoxGeometry(3.6, 2.65, 0.44),
+  //   new THREE.MeshStandardMaterial({ map: murals.pencilGateTex, roughness: 0.72 })
+  // );
+  // pencilGatePanel.position.set(2.8, 1.35, 30.0);
+  // pencilGatePanel.userData = { feature: 'pencil_main_gate', isSolidWall: true };
+  // terrainGroup.add(pencilGatePanel);
 
   // Y-shaped security light post atop main gate pier (pip01b_01)
   const poleMat = new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 });
@@ -738,19 +777,22 @@ export function buildProceduralSchoolModels() {
   const murals = getSchoolMuralTextures();
 
   // Verified Materials from FA-121 Blueprints & On-Site Archive Photos
-  const whiteWall = new THREE.MeshStandardMaterial({ color: 0xedeff2, roughness: 0.82 });
-  const westGreyWall = new THREE.MeshStandardMaterial({ color: 0x9aa1aa, roughness: 0.84 });
+  const whiteWall = createPaintedPlasterMaterial(0xedeff2);
+  const westGreyWall = createPaintedPlasterMaterial(0x9aa1aa);
   const floorGrey = new THREE.MeshStandardMaterial({ color: 0x9ca3af, roughness: 0.85 });
   const floorGreen = new THREE.MeshStandardMaterial({ color: 0x5c7a62, roughness: 0.80 });
   const floorBrown = new THREE.MeshStandardMaterial({ color: 0x9c7b56, roughness: 0.82 });
   const floorLilac = new THREE.MeshStandardMaterial({ color: 0xa5a1bd, roughness: 0.82 });
-  const tealWall = new THREE.MeshStandardMaterial({ color: 0x4f8694, roughness: 0.76 });
-  const rearTealExt = new THREE.MeshStandardMaterial({ color: 0x3b7687, roughness: 0.78 });
-  const skyBlueWall = new THREE.MeshStandardMaterial({ color: 0x88b8cb, roughness: 0.76 });
-  const mintGreenWall = new THREE.MeshStandardMaterial({ color: 0x9ec4a5, roughness: 0.76 });
-  const yellowFacade = new THREE.MeshStandardMaterial({ color: 0xd8d278, roughness: 0.76 });
-  const pinkWall = new THREE.MeshStandardMaterial({ color: 0xd4839d, roughness: 0.76 });
-  const sageGreenWall = new THREE.MeshStandardMaterial({ color: 0x7fa382, roughness: 0.76 });
+  const tealWall = createPaintedPlasterMaterial(0x4f8694);
+  const rearTealExt = createPaintedPlasterMaterial(0x3b7687);
+  const skyBlueWall = createPaintedPlasterMaterial(0x88b8cb);
+  const mintGreenWall = createPaintedPlasterMaterial(0x9ec4a5);
+  const yellowFacade = createPaintedPlasterMaterial(0xd8d278);
+  const pinkWall = createPaintedPlasterMaterial(0xd4839d);
+  const sageGreenWall = createPaintedPlasterMaterial(0x7fa382);
+  // Sills, window mullions and trims are too narrow for a 2 m texture tile, so
+  // they keep the flat whitewash colour.
+  const trimWhiteMat = new THREE.MeshStandardMaterial({ color: 0xedeff2, roughness: 0.82 });
   const purpleDoorMat = new THREE.MeshStandardMaterial({ color: 0x8b4ca8, roughness: 0.50 });
   const pinkDoorMat = new THREE.MeshStandardMaterial({ color: 0xd16b97, roughness: 0.52 });
   const blueMetalMat = new THREE.MeshStandardMaterial({ color: 0x1d4ed8, roughness: 0.48, metalness: 0.25 });
@@ -758,14 +800,38 @@ export function buildProceduralSchoolModels() {
   const canopyGreenMat = new THREE.MeshStandardMaterial({ color: 0x7d9c78, roughness: 0.72 });
   const sunshadeMat = new THREE.MeshStandardMaterial({ color: 0xe2e6ec, roughness: 0.78 });
   const darkGlassMat = new THREE.MeshBasicMaterial({ color: 0x111827 });
-  const porticoColMat = new THREE.MeshStandardMaterial({ map: murals.porticoColTex, roughness: 0.74 });
   const eastMuralMat = new THREE.MeshStandardMaterial({ map: murals.eastMuralTex, roughness: 0.76 });
   const dinoMuralMat = new THREE.MeshStandardMaterial({ map: murals.dinoWallTex, roughness: 0.78 });
-  const brownDadoMat = new THREE.MeshStandardMaterial({ color: 0x78533a, roughness: 0.78 });
+  const brownDadoMat = createPaintedPlasterMaterial(0x78533a);
+  // The flag goes on the yard-facing face only; every other face and the caps stay plain
+  // whitewash. BoxGeometry material order is +X, -X, +Y, -Y, +Z, -Z.
+  const porticoColMat = new THREE.MeshStandardMaterial({ map: murals.porticoColTex, roughness: 0.74 });
+  const porticoColPlainMat = new THREE.MeshStandardMaterial({ color: 0xe7eaed, roughness: 0.74 });
+  const porticoColMats = [
+    porticoColPlainMat,
+    porticoColPlainMat,
+    porticoColPlainMat,
+    porticoColPlainMat,
+    porticoColMat,
+    porticoColPlainMat,
+  ];
+
+  // All eight standing and surviving columns are identical, so one geometry serves them all.
+  const porticoColGeo = new THREE.BoxGeometry(0.62, floorH, 0.62);
+
+  function addPorticoColumn(group, x, y, z, extraData) {
+    const col = new THREE.Mesh(porticoColGeo, porticoColMats);
+    col.position.set(x, y, z);
+    col.castShadow = true;
+    col.receiveShadow = true;
+    col.userData = Object.assign({ isSolidWall: true }, extraData || {});
+    group.add(col);
+    return col;
+  }
 
   // Solid structural/partition wall helper (tracked for camera collision audit)
   function addSolidWall(group, w, h, d, x, y, z, mat, extraData) {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || whiteWall);
+    const m = new THREE.Mesh(wallBoxGeometry(w, h, d, mat || whiteWall), mat || whiteWall);
     m.position.set(x, y, z);
     m.castShadow = true;
     m.receiveShadow = true;
@@ -776,7 +842,7 @@ export function buildProceduralSchoolModels() {
 
   // Non-blocking slab, dado paint band, or trim helper
   function addSlabOrTrim(group, w, h, d, x, y, z, mat, extraData) {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || whiteWall);
+    const m = new THREE.Mesh(wallBoxGeometry(w, h, d, mat || whiteWall), mat || whiteWall);
     m.position.set(x, y, z);
     m.castShadow = true;
     m.receiveShadow = true;
@@ -822,20 +888,20 @@ export function buildProceduralSchoolModels() {
     sill.position.set(0, -h / 2 - 0.02, 0);
     winGroup.add(sill);
 
-    const head = new THREE.Mesh(new THREE.BoxGeometry(w + 0.10, 0.06, d + 0.03), whiteWall);
+    const head = new THREE.Mesh(new THREE.BoxGeometry(w + 0.10, 0.06, d + 0.03), trimWhiteMat);
     head.position.set(0, h / 2 + 0.02, 0);
     winGroup.add(head);
 
     const mCount = typeof mullions === 'number' ? mullions : 2;
     for (let i = 1; i <= mCount; i++) {
       const mx = -w / 2 + (w * i) / (mCount + 1);
-      const bar = new THREE.Mesh(new THREE.BoxGeometry(0.055, h, d + 0.03), whiteWall);
+      const bar = new THREE.Mesh(new THREE.BoxGeometry(0.055, h, d + 0.03), trimWhiteMat);
       bar.position.set(mx, 0, 0);
       winGroup.add(bar);
     }
 
     if (h >= 0.9) {
-      const transBar = new THREE.Mesh(new THREE.BoxGeometry(w, 0.045, d + 0.03), whiteWall);
+      const transBar = new THREE.Mesh(new THREE.BoxGeometry(w, 0.045, d + 0.03), trimWhiteMat);
       transBar.position.set(0, h * 0.18, 0);
       winGroup.add(transBar);
     }
@@ -913,7 +979,7 @@ export function buildProceduralSchoolModels() {
 
   // 4-Column Front Portico (colX = [-6.8, -2.3, +2.3, +6.8], Z = +4.4) + Flat Canopy Slab
   for (const colX of [-6.8, -2.3, 2.3, 6.8]) {
-    addSolidWall(groundFloorGroup, 0.62, floorH, 0.62, colX, floorH / 2, 4.4, porticoColMat);
+    addPorticoColumn(groundFloorGroup, colX, floorH / 2, 4.4);
   }
   addSlabOrTrim(groundFloorGroup, 16.0, 0.42, 2.45, 0.0, floorH + 0.21, 3.625, whiteWall);
   addSlabOrTrim(groundFloorGroup, 14.4, 0.42, 1.95, 0.0, floorH + 0.21, 1.475, whiteWall);
@@ -1012,7 +1078,7 @@ export function buildProceduralSchoolModels() {
     rainbowStairGroup.add(tread);
   }
   // Brown diagonal dado & paper roses on right stairwell wall + Red metal handrail on left (ref_07a_rainbow_stairs.jpg)
-  const dadoSlope = new THREE.Mesh(new THREE.BoxGeometry(0.05, 1.15, 4.4), brownDadoMat);
+  const dadoSlope = new THREE.Mesh(wallBoxGeometry(0.05, 1.15, 4.4, brownDadoMat), brownDadoMat);
   dadoSlope.position.set(-0.12, 1.75, -10.5);
   dadoSlope.rotation.x = 0.64;
   rainbowStairGroup.add(dadoSlope);
@@ -1101,7 +1167,7 @@ export function buildProceduralSchoolModels() {
     const wg = new THREE.Group();
     wg.position.set(x, y, z);
     wg.rotation.y = rotY;
-    const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.12, h + 0.12, 0.06), whiteWall);
+    const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.12, h + 0.12, 0.06), trimWhiteMat);
     const pane = new THREE.Mesh(
       new THREE.PlaneGeometry(w, h),
       new THREE.MeshBasicMaterial({ color: 0xbae6fd })
@@ -1580,11 +1646,7 @@ export function buildProceduralSchoolModels() {
 
   // C) All 4 Surviving Tricolor Front Portico Columns + Canopy + Shattered Open-Sky Front Shell (ref_02b & ref_08)
   for (const colX of [-6.8, -2.3, 2.3, 6.8]) {
-    const c = new THREE.Mesh(new THREE.BoxGeometry(0.62, floorH, 0.62), porticoColMat);
-    c.position.set(colX, floorH / 2, 4.4);
-    c.castShadow = true;
-    c.userData = { feature: 'post_portico_col' };
-    postStrikeModelGroup.add(c);
+    addPorticoColumn(postStrikeModelGroup, colX, floorH / 2, 4.4, { feature: 'post_portico_col' });
   }
   addSlabOrTrim(postStrikeModelGroup, 15.6, 0.40, 2.45, 0.2, floorH + 0.20, 3.625, whiteWall);
   addSlabOrTrim(postStrikeModelGroup, 11.8, 0.40, 1.95, 1.3, floorH + 0.20, 1.475, whiteWall);
@@ -1661,13 +1723,37 @@ export function buildProceduralSchoolModels() {
   sCtx.lineWidth = 4;
   sCtx.strokeRect(2, 2, 508, 84);
   sCtx.textAlign = 'center';
-  sCtx.fillStyle = '#fca5a5';
-  sCtx.font = 'bold 22px Inter, sans-serif';
-  sCtx.fillText('Ø 5.0 m IMPACT CRATER · CENTRAL HALL', 256, 36);
-  sCtx.fillStyle = '#fef2f2';
-  sCtx.font = 'bold 21px Tahoma, sans-serif';
-  sCtx.fillText('قطر دهانه گودال انفجار: ۵ متر (مرکز سالن مدرسه)', 256, 68);
-  const scaleTex = new THREE.CanvasTexture(scaleCanvas);
+  const CRATER_EN_TEXT = 'Ø 5.0 m IMPACT CRATER · CENTRAL HALL';
+  const CRATER_FA_TEXT = 'قطر دهانه گودال انفجار: ۵ متر (مرکز سالن مدرسه)';
+  const drawCraterLabels = () => {
+    sCtx.direction = 'ltr';
+    sCtx.fillStyle = '#fca5a5';
+    sCtx.font = `700 22px ${EN_CANVAS_FONT}`;
+    sCtx.fillText(CRATER_EN_TEXT, 256, 36);
+
+    sCtx.direction = 'rtl';
+    sCtx.fillStyle = '#fef2f2';
+    let faPx = 21;
+    sCtx.font = `700 ${faPx}px ${FA_CANVAS_FONT}`;
+    // Vazirmatn runs wider than the fallback face on this single unwrapped line.
+    while (faPx > 15 && sCtx.measureText(CRATER_FA_TEXT).width > 472) {
+      faPx -= 1;
+      sCtx.font = `700 ${faPx}px ${FA_CANVAS_FONT}`;
+    }
+    sCtx.fillText(CRATER_FA_TEXT, 256, 68);
+  };
+  drawCraterLabels();
+  const scaleTex = canvasColorTexture(scaleCanvas);
+  repaintCanvasWhenFontsReady(
+    [
+      { font: `700 22px ${EN_CANVAS_FONT}`, text: 'IMPACT' },
+      { font: `700 21px ${FA_CANVAS_FONT}`, text: 'قطر' },
+    ],
+    () => {
+      drawCraterLabels();
+      scaleTex.needsUpdate = true;
+    }
+  );
   const scaleBadge = new THREE.Mesh(
     new THREE.PlaneGeometry(4.2, 0.72),
     new THREE.MeshBasicMaterial({ map: scaleTex, side: THREE.DoubleSide })

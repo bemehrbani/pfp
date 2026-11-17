@@ -528,22 +528,6 @@
     "notes": null
   },
   {
-    "id": "asma-zakeri",
-    "name": "Asma Zakeri",
-    "nameFa": "اسما ذاکری",
-    "age": null,
-    "gender": "girl",
-    "father": null,
-    "motherId": null,
-    "motherName": null,
-    "motherNameFa": null,
-    "familyClusterId": "FAM-ZAKERI",
-    "familyClusterName": "Zakeri",
-    "identificationMethod": "dna",
-    "photoGrid": "r02_c07",
-    "notes": null
-  },
-  {
     "id": "setayesh-alihoseini",
     "name": "Setayesh Alihoseini",
     "nameFa": "ستایش علی‌حسینی",

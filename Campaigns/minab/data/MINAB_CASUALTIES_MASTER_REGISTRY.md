@@ -13,7 +13,7 @@
 
 | Casualty Category | Official Count | Gender Breakdown | Identification & Portrait Status |
 | :--- | :---: | :---: | :--- |
-| **Student Martyrs (دانش‌آموزان شهید)** | **120** | 73 Boys, 47 Girls | 118 Identified (`شهید`) + 2 Unrecovered (`شهید ولی شناسایی نشده`: Makan Nasiri Khouzani & Mohammad-Taha Jafari); 119 Studio Portraits |
+| **Student Martyrs (دانش‌آموزان شهید)** | **120** | 73 Boys, 47 Girls | 118 Identified (`شهید`) + 2 Unrecovered (`شهید ولی شناسایی نشده`: Makan Nasiri Khouzani & Mohammad-Taha Jafari); 120 Studio Portraits |
 | — *Grade 1 (پایه اول)* | 28 | 15 Boys, 13 Girls | 27 Identified + 1 Unrecovered (`Makan Nasiri Khouzani`) |
 | — *Grade 2 (پایه دوم)* | 27 | 19 Boys, 8 Girls | 27 Identified |
 | — *Grade 3 (پایه سوم)* | 15 | 12 Boys, 3 Girls | 15 Identified |
@@ -116,7 +116,7 @@
 | 82 | **Mohana Bahrami Ravangi** | محنا بهرامی راونگی | Grade 4 | Girl | `1393/06/28` | `2014-09-19` | 11 | Martyred (شهید) | `mahna-bahrami.jpg` |
 | 83 | **Zahra Behrouzi** | زهرا بهروزی | Grade 3 | Girl | `1396/05/19` | `2017-08-10` | 8 | Martyred (شهید) | `nazanin-zahra-behroozi.jpg` |
 | 84 | **Zoha Pasand** | ضحا پسند | Grade 2 | Girl | `1396/09/20` | `2017-12-11` | 8 | Martyred (شهید) | `zoha-pasand.jpg` |
-| 85 | **Adrina Pegah** | آدرینا پگاه | Grade 1 | Girl | `1397/09/18` | `2018-12-09` | 7 | Martyred (شهید) | — |
+| 85 | **Adrina Pegah** | آدرینا پگاه | Grade 1 | Girl | `1397/09/18` | `2018-12-09` | 7 | Martyred (شهید) | `adrina-pegah.jpg` |
 | 86 | **Athena Chamalinejad** | آتنا چملی نژاد | Grade 1 | Girl | `1398/03/13` | `2019-06-03` | 6 | Martyred (شهید) | `athena-chamaninejad.jpg` |
 | 87 | **Fatemeh Dorazehi** | فاطمه درازهی | Grade 2 | Girl | `1396/11/10` | `2018-01-30` | 8 | Martyred (شهید) | `fatemeh-dorazehi.jpg` |
 | 88 | **Khadijeh Darvishi** | خدیجه درویشی | Grade 4 | Girl | `1395/05/21` | `2016-08-11` | 9 | Martyred (شهید) | `khadijeh-darvishi.jpg` |

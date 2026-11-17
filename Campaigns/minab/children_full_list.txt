@@ -36,7 +36,6 @@ ChildIndex	BorderIndex	Filename	Name	NameSource	NeedsCorrection
 34	38	2ezZa_Habashia_38.jpg	2ezZa Habashia	extracted	NO
 35	39	li_Zareie_ghola_39.jpg	li Zareie ghola	extracted	NO
 36	40	لطنظ_طعمطعغأة_40.jpg	لطنظ طعمطعغأة	extracted	NO
-37	41	Asma_Zakeri_41.jpg	‘Asma Zakeri	extracted	NO
 38	42	ayesh_Alihosse_42.jpg	ayesh Alihosse	extracted	NO
 39	43	اعكات7_دمطاأتك_43.jpg	اعكات7 دمطاأتك	extracted	NO
 40	44	ا_تمطةتط_جمع6م_44.jpg	ا تمطةتط جمع6م	extracted	NO

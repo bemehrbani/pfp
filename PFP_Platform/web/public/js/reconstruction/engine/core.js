@@ -1,14 +1,17 @@
 /**
- * Three.js (r128) WebGL renderer, lighting, top-level scene groups,
+ * Three.js WebGPU renderer (WebGL 2 fallback), lighting, top-level scene groups,
  * pre/post-strike temporal visibility, WebXR entry, and frustum photo helper.
  */
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
 import { appState } from '../state.js';
 
 /**
  * Initializes the Three.js scene, camera, ACES Filmic renderer, OrbitControls,
  * lighting rig, and structural floor/memorial groups.
  */
-export function initThreeEngine() {
+export async function initThreeEngine() {
   const container = document.getElementById('canvasContainer');
   if (!container) return;
   const width = container.clientWidth || window.innerWidth;
@@ -21,15 +24,18 @@ export function initThreeEngine() {
   const camera = new THREE.PerspectiveCamera(48, width / height, 0.25, 1000);
   camera.position.set(28, 22, 34);
 
-  const renderer = new THREE.WebGLRenderer({
+  const renderer = new THREE.WebGPURenderer({
     antialias: true,
     alpha: false,
     powerPreference: 'high-performance',
   });
+  // Acquires the GPU device (or the WebGL 2 fallback backend) before any resource is built.
+  await renderer.init();
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  // The node renderer implements PCF and VSM only; PCFSoft is mapped to PCF with a warning.
+  renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.22;
   if (renderer.xr) {
@@ -37,12 +43,19 @@ export function initThreeEngine() {
   }
   container.appendChild(renderer.domElement);
 
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.06;
   controls.maxPolarAngle = Math.PI / 2 - 0.01;
   controls.minDistance = 0.8;
   controls.maxDistance = 140;
+  // Left drag orbits, middle drag pans, right drag looks around in place (camera-rig.js
+  // intercepts the right button before OrbitControls sees it).
+  controls.mouseButtons = {
+    LEFT: THREE.MOUSE.ROTATE,
+    MIDDLE: THREE.MOUSE.PAN,
+    RIGHT: THREE.MOUSE.PAN,
+  };
   controls.target.set(0, 3.0, -3);
   controls.addEventListener('start', () => {
     if (appState.isGuidedTour) {
@@ -51,11 +64,13 @@ export function initThreeEngine() {
     }
   });
 
-  const hemiLight = new THREE.HemisphereLight(0xfff9f0, 0x263042, 0.88);
+  // Light units are physical (three r155+); the π factor maps this rig's 0..1 brightness
+  // scale onto them, keeping the courtyard exposure that the tour framing was built around.
+  const hemiLight = new THREE.HemisphereLight(0xfff9f0, 0x263042, 0.88 * Math.PI);
   hemiLight.position.set(0, 55, 0);
   scene.add(hemiLight);
 
-  const sunLight = new THREE.DirectionalLight(0xfff3db, 1.35);
+  const sunLight = new THREE.DirectionalLight(0xfff3db, 1.35 * Math.PI);
   sunLight.position.set(28, 58, 24);
   sunLight.castShadow = true;
   sunLight.shadow.mapSize.width = 2048;
@@ -200,6 +215,8 @@ export function createCameraAlignedPhotoInSpace(parentGroup, photoUrl, camPos, p
   frameGroup.add(new THREE.LineSegments(rayGeo, yellowLineMat));
 
   loader.load(photoUrl, (tex) => {
+    // Archive stills are authored in sRGB; tone mapping needs the linear values.
+    tex.colorSpace = THREE.SRGBColorSpace;
     const mat = new THREE.MeshBasicMaterial({
       map: tex,
       side: THREE.DoubleSide,

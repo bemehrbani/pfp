@@ -4,6 +4,8 @@
  * `site-nav.js`, `contact-modal.js`, and Playwright Director's Cut exporters (`record_tour.mjs`),
  * and starts the Three.js render loop.
  */
+import * as THREE from 'three';
+
 import { appState } from './state.js';
 import { GUIDED_TOUR_STOPS } from './data/tour-config.js';
 import {
@@ -17,6 +19,9 @@ import {
   sampleGuidedTourCamera,
   sampleGuidedTourCameraCoords,
   initKeyboardWalkControls,
+  initLookControls,
+  syncOrbitPolarLimit,
+  clampCameraAboveGround,
   applyKeyboardMovement,
   stepCameraFrame,
 } from './engine/camera-rig.js';
@@ -111,17 +116,19 @@ export function animate() {
 
   stepCameraFrame(delta, tourProgress);
 
-  if (appState.controls) appState.controls.update();
+  if (appState.controls) {
+    // The right-drag look pivots the orbit target around the camera, so the polar
+    // clamp has to allow an upward aim and the camera must stay above the ground.
+    syncOrbitPolarLimit();
+    appState.controls.update();
+    clampCameraAboveGround();
+  }
   updateHotspotPositions();
   appState.renderer.render(appState.scene, appState.camera);
 }
 
-export function startReconstructionApp() {
+export async function startReconstructionApp() {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
-  if (typeof THREE === 'undefined') {
-    setTimeout(startReconstructionApp, 100);
-    return;
-  }
 
   const bootParams = new URLSearchParams(window.location.search);
   appState.recordingMode = bootParams.get('recording') === '1';
@@ -135,7 +142,12 @@ export function startReconstructionApp() {
   fetchRealVowCount();
   initI18n();
   initWalkthroughPipManifest();
-  initThreeEngine();
+  try {
+    await initThreeEngine();
+  } catch (err) {
+    console.error('3D renderer could not start:', err);
+    return;
+  }
   buildEnvironmentAndTerrain();
   buildProceduralSchoolModels();
   loadChildrenAndBuildInWorldMemorial();
@@ -143,6 +155,7 @@ export function startReconstructionApp() {
   initHotspots();
   initUIControls();
   initKeyboardWalkControls();
+  initLookControls();
   animate();
 
   if (appState.recordingMode) {

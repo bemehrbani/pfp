@@ -379,16 +379,23 @@
   <!-- Offscreen Active Decoder Pool for In-World 3D Wall Video Screens -->
   <div id="inWorldVideoPool" aria-hidden="true" style="position:fixed; left:0; top:0; width:2px; height:2px; opacity:0.001; pointer-events:none; overflow:hidden; z-index:-1;"></div>
 
-  <!-- Three.js (r128), OrbitControls & GLTFExporter for Spatial.io export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"></script>
+  <!-- Three.js r187 on the WebGPU renderer, which falls back to a WebGL 2 backend when the
+       browser has no WebGPU adapter. The import map has to precede every module script so
+       that `three` and `three/addons/` resolve inside the modules. -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.webgpu.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+      }
+    }
+  </script>
   <!-- Unified Site Navigation & Contact Modal -->
   <script src="site-nav.js?v=20261104"></script>
   <script src="contact-modal.js?v=20261111"></script>
   <!-- Master Casualty & Rubble Drawings Registry (Dataset v3.0.0) -->
   <script src="memorial-data.js"></script>
   <!-- Application Logic -->
-  <script type="module" src="js/reconstruction/main.js?v=20261115"></script>
+  <script type="module" src="js/reconstruction/main.js?v=20261116b"></script>
 </body>
 </html>

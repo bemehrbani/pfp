@@ -10,10 +10,26 @@
  * - Inactive rooms release excess offscreen `<video>` elements (`<= 4` active decoders)
  *   while preserving their frozen end-frame or poster on the 3D wall.
  */
+import * as THREE from 'three';
+
 import { appState } from '../state.js';
 import { IN_WORLD_SCREEN_SPECS, MEDIA_ASSET_VERSION } from '../data/tour-config.js';
+import { FRAME_DECAL_GAP, makeDecalMaterial } from './frame-stack.js';
 
 const MAX_POOLED_VIDEO_DECODERS = 4;
+
+/**
+ * Plaque faces. Vazirmatn and Source Sans 3 are the page's RTL and body fonts and
+ * reconstruction.html already loads them; canvas text does not fetch them on its own,
+ * so the plaque captions are repainted once the faces resolve.
+ */
+const PLAQUE_FA_FONT = '"Vazirmatn", Tahoma, sans-serif';
+const PLAQUE_EN_FONT = '"Source Sans 3", "Segoe UI", system-ui, sans-serif';
+
+const PLAQUE_FA_BADGE_SPEC = `700 20px ${PLAQUE_FA_FONT}`;
+const PLAQUE_FA_CAPTION_SPEC = `500 22px ${PLAQUE_FA_FONT}`;
+const PLAQUE_EN_BADGE_SPEC = `700 18px ${PLAQUE_EN_FONT}`;
+const PLAQUE_EN_CAPTION_SPEC = `500 21px ${PLAQUE_EN_FONT}`;
 
 export function wrapCanvasCaptionLines(ctx, text, maxWidth, maxLines) {
   const words = String(text || '')
@@ -73,11 +89,11 @@ export function renderInWorldPlaqueCanvas(screen) {
   const capStr = (screen.spec.caption && (screen.spec.caption[langKey] || screen.spec.caption.en)) || '';
 
   ctx.fillStyle = screen.isFocal ? '#fde047' : '#e2c074';
-  ctx.font = isFa ? '700 20px Tahoma, sans-serif' : '700 18px Inter, system-ui, sans-serif';
+  ctx.font = isFa ? PLAQUE_FA_BADGE_SPEC : PLAQUE_EN_BADGE_SPEC;
   ctx.fillText(badgeStr, canvas.width / 2, 34);
 
   ctx.fillStyle = '#f8fafc';
-  ctx.font = isFa ? '500 22px Tahoma, sans-serif' : '500 21px Inter, system-ui, sans-serif';
+  ctx.font = isFa ? PLAQUE_FA_CAPTION_SPEC : PLAQUE_EN_CAPTION_SPEC;
   const wrapped = wrapCanvasCaptionLines(ctx, capStr, canvas.width - 56, 2);
   if (wrapped.length === 1) {
     ctx.fillText(wrapped[0], canvas.width / 2, 86);
@@ -108,6 +124,7 @@ function ensureInWorldScreenCanvas(screen) {
     screen.screenCanvas = screenCanvas;
     screen.screenCtx = screenCtx;
     screen.canvasTex = new THREE.CanvasTexture(screenCanvas);
+    screen.canvasTex.colorSpace = THREE.SRGBColorSpace;
   }
   return screen.screenCtx;
 }
@@ -179,6 +196,13 @@ export function buildAllInWorldWalkthroughScreens() {
   const legMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.5, metalness: 0.55 });
   const posterLoader = new THREE.TextureLoader();
 
+  // Screen and plaque decals ride FRAME_DECAL_GAP in front of their backing.
+  const INNER_TRIM_DEPTH = 0.05;
+  const SCREEN_PLANE_Z = INNER_TRIM_DEPTH / 2 + FRAME_DECAL_GAP;
+  const PLAQUE_BACKING_DEPTH = 0.032;
+  const PLAQUE_BACKING_Z = 0.004;
+  const PLAQUE_PLANE_Z = PLAQUE_BACKING_Z + PLAQUE_BACKING_DEPTH / 2 + FRAME_DECAL_GAP;
+
   IN_WORLD_SCREEN_SPECS.forEach((spec) => {
     const parentGroup = groupLookup[spec.groupKey] || appState.preStrikeModelGroup;
     if (!parentGroup) return;
@@ -196,9 +220,9 @@ export function buildAllInWorldWalkthroughScreens() {
     outerFrame.castShadow = true;
     root.add(outerFrame);
 
-    const innerTrimMat = new THREE.MeshBasicMaterial({ color: 0x64748b });
+    const innerTrimMat = makeDecalMaterial({ color: 0x64748b, side: THREE.FrontSide });
     const innerTrim = new THREE.Mesh(
-      new THREE.BoxGeometry(spec.w + 0.028, spec.h + 0.028, 0.05),
+      new THREE.BoxGeometry(spec.w + 0.028, spec.h + 0.028, INNER_TRIM_DEPTH),
       innerTrimMat
     );
     root.add(innerTrim);
@@ -211,34 +235,35 @@ export function buildAllInWorldWalkthroughScreens() {
     accentBar.position.set(0, spec.h / 2 + 0.04, 0.006);
     root.add(accentBar);
 
-    const screenMat = new THREE.MeshBasicMaterial({
+    const screenMat = makeDecalMaterial({
       color: 0x0f172a,
       side: THREE.FrontSide,
       toneMapped: false,
     });
     const screenPlane = new THREE.Mesh(new THREE.PlaneGeometry(spec.w, spec.h), screenMat);
-    screenPlane.position.set(0, 0, 0.028);
+    screenPlane.position.set(0, 0, SCREEN_PLANE_Z);
     root.add(screenPlane);
 
     const plaqueCanvas = document.createElement('canvas');
     plaqueCanvas.width = 1024;
     plaqueCanvas.height = 136;
     const plaqueTex = new THREE.CanvasTexture(plaqueCanvas);
+    plaqueTex.colorSpace = THREE.SRGBColorSpace;
     const plaqueW = Math.min(spec.w * 0.94, 3.1);
     const plaqueH = plaqueW * (136 / 1024);
     const plaqueBacking = new THREE.Mesh(
-      new THREE.BoxGeometry(plaqueW + 0.04, plaqueH + 0.03, 0.032),
+      new THREE.BoxGeometry(plaqueW + 0.04, plaqueH + 0.03, PLAQUE_BACKING_DEPTH),
       bezelMat
     );
     const plaqueY = -spec.h / 2 - 0.055 - plaqueH / 2 - 0.035;
-    plaqueBacking.position.set(0, plaqueY, 0.004);
+    plaqueBacking.position.set(0, plaqueY, PLAQUE_BACKING_Z);
     root.add(plaqueBacking);
 
     const plaqueMesh = new THREE.Mesh(
       new THREE.PlaneGeometry(plaqueW, plaqueH),
-      new THREE.MeshBasicMaterial({ map: plaqueTex, side: THREE.FrontSide, toneMapped: false })
+      makeDecalMaterial({ map: plaqueTex, side: THREE.FrontSide, toneMapped: false })
     );
-    plaqueMesh.position.set(0, plaqueY, 0.023);
+    plaqueMesh.position.set(0, plaqueY, PLAQUE_PLANE_Z);
     root.add(plaqueMesh);
 
     if (spec.hasLegs) {
@@ -287,6 +312,7 @@ export function buildAllInWorldWalkthroughScreens() {
     renderInWorldPlaqueCanvas(screenRecord);
 
     posterLoader.load(screenRecord.posterUrl, (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace;
       screenRecord.posterTex = tex;
       screenRecord.posterLoaded = true;
       if (!screenRecord.usingCanvasTex) {
@@ -296,6 +322,27 @@ export function buildAllInWorldWalkthroughScreens() {
 
     appState.inWorldScreens.push(screenRecord);
   });
+
+  repaintPlaquesWhenFontsReady();
+}
+
+/**
+ * Canvas text does not trigger a webfont download, so plaques painted at boot keep the
+ * fallback face. Repaint them once the plaque faces resolve.
+ */
+function repaintPlaquesWhenFontsReady() {
+  if (typeof document === 'undefined' || !document.fonts || !document.fonts.load) return;
+  const specs = [
+    { font: PLAQUE_FA_BADGE_SPEC, text: 'س' },
+    { font: PLAQUE_FA_CAPTION_SPEC, text: 'س' },
+    { font: PLAQUE_EN_BADGE_SPEC, text: 'A' },
+    { font: PLAQUE_EN_CAPTION_SPEC, text: 'A' },
+  ];
+  try {
+    Promise.all(specs.map((s) => document.fonts.load(s.font, s.text)))
+      .then(() => refreshInWorldScreensLanguage())
+      .catch(() => {});
+  } catch (_) {}
 }
 
 export function refreshInWorldScreensLanguage() {
