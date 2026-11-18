@@ -59,18 +59,23 @@ export const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'boys_classroom',
     temporal: 0.0,
-    cutawayMode: 2,
-    camPos: [-13.35, 2.02, -0.95],
-    lookAt: [-17.3, 1.52, 1.15],
+    // Mode 1 keeps the first floor (the classroom's ceiling); only the roof is hidden.
+    cutawayMode: 1,
+    smoothSpline: true,
+    // Level camera at 1.6 m. Room is x -18.83..-10.72, z -2.38..2.23. Slow dolly east toward 03_A on the east
+    // wall (gaze fixed on it, so no rotation), hold, then one smooth 90 deg turn (east to south, spread over
+    // 0.58..0.82 with the gaze sweeping an arc about 4.5 m out) to 03_B on the south wall, and hold.
+    camPos: [-16.6, 1.6, 0.0],
+    lookAt: [-10.8, 1.6, 0.0],
     waypoints: [
-      { t: 0.00, camPos: [-14.73, 1.66, 0.00], lookAt: [-18.73, 1.55, 0.00] },
-      { t: 0.16, camPos: [-13.95, 1.70, -1.65], lookAt: [-18.00, 1.60, 0.85] },
-      { t: 0.34, camPos: [-13.95, 1.70, -1.65], lookAt: [-18.00, 1.60, 0.85] },
-      { t: 0.44, camPos: [-14.73, 1.66, 0.00], lookAt: [-18.73, 1.58, 0.00] },
-      { t: 0.64, camPos: [-14.73, 1.66, 0.00], lookAt: [-18.73, 1.58, 0.00] },
-      { t: 0.75, camPos: [-14.70, 1.60, -0.35], lookAt: [-15.40, 1.45, -2.50] },
-      { t: 0.84, camPos: [-14.45, 1.60, -1.75], lookAt: [-14.45, 1.48, 2.15] },
-      { t: 1.00, camPos: [-14.45, 1.60, -1.75], lookAt: [-14.45, 1.48, 2.15] }
+      { t: 0.00, camPos: [-16.6, 1.6, 0.0], lookAt: [-10.8, 1.6, 0.0] },
+      { t: 0.30, camPos: [-15.2, 1.6, 0.0], lookAt: [-10.8, 1.6, 0.0] },
+      { t: 0.58, camPos: [-15.2, 1.6, 0.0], lookAt: [-10.8, 1.6, 0.0] },
+      { t: 0.65, camPos: [-14.9, 1.6, -0.40], lookAt: [-10.58, 1.6, 1.22] },
+      { t: 0.71, camPos: [-14.4, 1.6, -0.85], lookAt: [-11.15, 1.6, 2.50] },
+      { t: 0.77, camPos: [-13.9, 1.6, -1.25], lookAt: [-12.33, 1.6, 3.15] },
+      { t: 0.83, camPos: [-13.4, 1.6, -1.60], lookAt: [-13.4, 1.6, 2.20] },
+      { t: 1.00, camPos: [-13.4, 1.6, -1.60], lookAt: [-13.4, 1.6, 2.20] }
     ],
     shortBadge: { en: "03 / 08", fi: "03 / 08", fa: "۰۳ / ۰۸" },
     badge: { en: "STOP 3 OF 8 · GROUND FLOOR: BOYS' CLASSROOM (CLAPPING & SINGING)", fi: "PISTE 3/8 · ALAKERTA: POIKIEN LUOKKAHUONE", fa: "ایستگاه ۳ از ۸ · طبقه همکف: کلاس درس پسران" }
@@ -211,7 +216,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '01_D', hotspotId: 'courtyard_lines', slot: 'D', groupKey: 'preStrike',
-    images: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `media/walkthrough_pip/yard/yard_photo_0${n}.jpg`),
+    images: Array.from({ length: 11 }, (_, i) => `media/walkthrough_pip/yard/yard_photo_${String(i + 1).padStart(2, '0')}.jpg`),
     slideSec: 3.5, style: 'stele', noPoster: true, noPlaque: true,
     durationSec: 28, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
     pos: [25.00, 1.54, 12.05], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
@@ -265,7 +270,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '02_D', hotspotId: 'boys_flower_arch', slot: 'D', groupKey: 'groundFloor',
-    images: Array.from({ length: 13 }, (_, i) => `media/walkthrough_pip/hall/hall_photo_${String(i + 14).padStart(2, '0')}.jpg`),
+    images: Array.from({ length: 14 }, (_, i) => `media/walkthrough_pip/hall/hall_photo_${String(i + 14).padStart(2, '0')}.jpg`),
     slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
     durationSec: 39.0, cueStartP: 0.0, cueEndP: 0.989, cueStartPFa: 0.0, cueEndPFa: 0.972, cueStartPFi: 0.0, cueEndPFi: 0.980,
     pos: [0.08, 1.49, -7.23], rotY: -0.50, w: 1.60, h: 2.10, hasLegs: false,
@@ -274,33 +279,19 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 3: Ground-Floor West Boys' Classroom (Sky-Blue Walls & Green Carpet)
   {
     id: '03_A', hotspotId: 'boys_classroom', slot: 'A', groupKey: 'groundFloor',
-    file: '03_sync_boys_carpet_clapping', durationSec: 27.6, cueStartP: 0.0, cueEndP: 0.754, cueStartPFa: 0.0, cueEndPFa: 0.721, cueStartPFi: 0.0, cueEndPFi: 0.738,
-    pos: [-18.73, 1.58, 0.00], rotY: Math.PI / 2, w: 2.68, h: 1.51, hasLegs: false,
-    badge: {
-      en: 'SKY-BLUE CLASSROOM · 35+ BOYS CLAPPING ON CARPETS',
-      fi: 'TAIVAANSININEN LUOKKA · YLI 35 POIKAA TAPUTTAMASSA',
-      fa: 'کلاس آبی‌آسمانی · دست‌زدن بیش از ۳۵ پسر بر موکت سبز'
-    },
-    caption: {
-      en: 'More than thirty-five boys sitting side by side on the green carpets, clapping their hands joyfully and singing together.',
-      fi: 'Yli kolmekymmentäviisi poikaa istumassa vierekkäin vihreillä matoilla, taputtaen ja laulaen yhdessä.',
-      fa: 'بیش از سی‌وپنج دانش‌آموز پسر کنار هم بر موکت سبز نشسته و با شادی دست می‌زنند و هم‌خوانی می‌کنند.'
-    }
+    images: Array.from({ length: 13 }, (_, i) => `media/walkthrough_pip/classroom/classroom_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    slideSec: 3.0, noPoster: true, noPlaque: true,
+    durationSec: 37.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-10.84, 1.60, 0.00], rotY: -Math.PI / 2, w: 2.60, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '03_B', hotspotId: 'boys_classroom', slot: 'B', groupKey: 'groundFloor',
-    file: '03_sync_faces_and_drawings', durationSec: 23.8, cueStartP: 0.754, cueEndP: 0.991, cueStartPFa: 0.721, cueEndPFa: 0.968, cueStartPFi: 0.738, cueEndPFi: 0.985,
-    pos: [-14.45, 1.48, 2.15], rotY: Math.PI, w: 2.48, h: 1.40, hasLegs: false,
-    badge: {
-      en: 'THEIR FACES & THE DRAWINGS THEY LEFT BEHIND',
-      fi: 'HEIDÄN KASVONSA JA SEINILLE JÄÄNEET PIIRUSTUKSET',
-      fa: 'چهره‌هایشان و نقاشی‌های به‌جامانده بر دیوار'
-    },
-    caption: {
-      en: 'A quiet moment to look at the boys\' faces and the drawings they left behind on these classroom walls.',
-      fi: 'Hiljainen hetki katsoa poikien kasvoja ja piirustuksia, jotka jäivät näiden luokkahuoneiden seinille.',
-      fa: 'لحظه‌ای آرام برای نگاه به چهره پسران و نقاشی‌های به‌جامانده بر دیوار همین کلاس.'
-    }
+    images: Array.from({ length: 10 }, (_, i) => `media/walkthrough_pip/classroom/classroom_photo_${String(i + 14).padStart(2, '0')}.jpg`),
+    slideSec: 3.0, noPoster: true, noPlaque: true,
+    durationSec: 37.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-13.40, 1.60, 2.15], rotY: Math.PI, w: 2.60, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 4: Central Hall & Enclosed Rainbow Staircase
   {
@@ -723,24 +714,9 @@ export const WALKTHROUGH_INTERLUDES = {
     src: 'media/walkthrough_interludes/interlude_03_boys_classroom_laughter.mp4',
     aspect: 'classic',
     tone: 'pre',
-    kicker: {
-      en: 'UNEDITED CLASSROOM AUDIO · CHILDHOOD LAUGHTER AT GREEN DESKS',
-      fa: 'صدای کاملاً طبیعی و بدون ویرایش · خنده‌های کودکانه پشت نیمکت‌های سبز',
-      fi: 'ALKUPERÄINEN LUOKKAÄÄNI · POIKIEN NAURU VIHREILLÄ PULPETEILLA'
-    },
-    context: {
-      en: 'Raw classroom recording inside Shajareh Tayyebeh Boys\' School — unedited laughter during a playful science activity',
-      fa: 'فیلم خام کلاسی از شوخی و خنده‌های بی‌وقفه دانش‌آموزان پسر با آموزگارشان در دبستان شجره طیبه',
-      fi: 'Muokkaamaton luokkahuonetallenne poikien ilosta ja naurusta opettajansa kanssa'
-    },
-    cues: [
-      {
-        s: 0.4, e: 15.1,
-        en: '[Unedited classroom audio: young boys laughing and cheering together at their green desks]',
-        fa: '[صدای واقعی کلاس: خنده‌ها و شادی کودکانه دانش‌آموزان پسر پشت نیمکت‌های سبز]',
-        fi: '[Alkuperäinen luokkaääni: pienten koulupoikien iloinen nauru luokkahuoneessa]'
-      }
-    ]
+    kicker: { en: '', fa: '', fi: '' },
+    context: { en: '', fa: '', fi: '' },
+    cues: []
   },
   girls_upper_hall: {
     id: 'interlude_04',
