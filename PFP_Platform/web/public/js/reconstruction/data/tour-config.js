@@ -34,7 +34,8 @@ export const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'boys_flower_arch',
     temporal: 0.0,
-    cutawayMode: 2,
+    // Mode 1 keeps the first floor (the hall's ceiling) so no sky shows overhead; only the roof is hidden.
+    cutawayMode: 1,
     // Station 2 now stands in the ground-floor central hall where the rainbow stairs begin:
     // 02_A on the north wall (G-33) west of the stair mouth, 02_B on the hall face of G-20.
     camPos: [-3.85, 1.72, -4.85],
@@ -175,7 +176,7 @@ export const GUIDED_TOUR_STOPS = [
 
 export const HOTSPOT_CONFIGS = [
   { id: 'courtyard_lines', icon: '1', pos: [15.5, 1.2, 8.25], presetCam: [5.5, 2.8, 12.0], target: [22.0, 1.6, 6.5], cutaway: 0 },
-  { id: 'boys_flower_arch', icon: '2', pos: [-1.0, 2.1, -7.0], presetCam: [-2.4, 3.6, -2.0], target: [-1.0, 1.7, -6.5], cutaway: 2 },
+  { id: 'boys_flower_arch', icon: '2', pos: [-1.0, 2.1, -7.0], presetCam: [-2.4, 3.6, -2.0], target: [-1.0, 1.7, -6.5], cutaway: 1 },
   { id: 'boys_classroom', icon: '3', pos: [-15.8, 2.1, -0.2], presetCam: [-11.8, 4.3, 3.8], target: [-16.2, 1.6, -1.0], cutaway: 2 },
   { id: 'rainbow_staircase', icon: '4', pos: [-1.4, 5.8, -8.4], presetCam: [-1.4, 5.3, -4.2], target: [-1.4, 4.7, -9.8], cutaway: 1 },
   { id: 'girls_upper_hall', icon: '5', pos: [-15.2, 5.6, -5.5], presetCam: [-9.5, 8.6, 3.5], target: [-15.2, 5.2, -5.5], cutaway: 1 },
