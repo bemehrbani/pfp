@@ -980,9 +980,11 @@ export function buildProceduralSchoolModels() {
   // Upper half-landing: a slab only, so the rear door below keeps its full height
   addSlabOrTrim(firstFloorGroup, 3.22, 0.25, UP_LANDING_Z + 12.83, STAIR_MID_X, UP_LANDING_Y - 0.125, (UP_LANDING_Z - 12.83) / 2, stairUndersideMat, { feature: 'stair_upper_landing' });
   // Dividing wall between the upper flights, up to the roof
+  // Ends 2 cm north of z = -8.6: flight C's first step is tucked 2 cm into this wall and its front face
+  // at z = -8.6 would otherwise be coplanar with the wall's end face (z-fighting sliver).
   addSolidWall(
-    firstFloorGroup, 0.22, ROOF_TOP_Y - STAIR_FIRST_Y, -8.6 - UP_LANDING_Z,
-    STAIR_MID_X, (ROOF_TOP_Y + STAIR_FIRST_Y) / 2, (UP_LANDING_Z - 8.6) / 2, whiteWall,
+    firstFloorGroup, 0.22, ROOF_TOP_Y - STAIR_FIRST_Y, -8.62 - UP_LANDING_Z,
+    STAIR_MID_X, (ROOF_TOP_Y + STAIR_FIRST_Y) / 2, (UP_LANDING_Z - 8.62) / 2, whiteWall,
     { feature: 'stair_upper_dividing_wall' }
   );
   addCeilingSlab(firstFloorGroup, 10.5, 0.22, 5.6, 13.75, y1, -10.2, floorBrown); // NE Rubble Archive Room (tan/brown floor)
@@ -1038,6 +1040,11 @@ export function buildProceduralSchoolModels() {
   addSlabOrTrim(roofGroup, 0.22, headH, 4.4, -2.24, ROOF_TOP_Y + headH / 2, -10.8, whiteWall);
   addSlabOrTrim(roofGroup, 0.22, headH, 4.4, 1.2, ROOF_TOP_Y + headH / 2, -10.8, whiteWall);
   addSlabOrTrim(roofGroup, 3.66, 0.25, 4.4, -0.52, ROOF_TOP_Y + headH + 0.125, -10.8, whiteWall);
+  // Closed north end of the head-house. Without it, looking up the stairwell from the first-floor hall showed
+  // sky through the open north face above the parapet (8.15..9.8 m). It starts at the roof slab's underside
+  // (7.2 m, not 7.5) so there is no 0.3 m slot under it where the F-08 wall top (7.2) ends. It sits between the side walls (3.26 m,
+  // tucked 2 cm into each) and 2 cm in from their north faces, so no faces are coplanar. South stays open.
+  addSlabOrTrim(roofGroup, 3.26, headH + 0.3, 0.20, -0.52, ROOF_TOP_Y - 0.3 + (headH + 0.3) / 2, -12.88, whiteWall);
   // Central Roof Skylight / Hatch Curb (X = -1.6, Z = -5.4)
   addSlabOrTrim(roofGroup, 1.55, 0.42, 1.55, -1.6, yRoof + 0.51, -5.4, sunshadeMat);
 

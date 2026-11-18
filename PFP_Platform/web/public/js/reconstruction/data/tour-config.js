@@ -82,24 +82,22 @@ export const GUIDED_TOUR_STOPS = [
   },
   {
     hotspotId: 'rainbow_staircase',
+    smoothSpline: true,
     temporal: 0.0,
-    cutawayMode: 1,
-    // First-floor central hall at the top of the rainbow stairs (slab top y = 3.71, eye ~ +1.5 m).
-    camPos: [-1.45, 5.30, -4.60],
-    lookAt: [-1.30, 4.60, -10.00],
+    // Mode 0 keeps the roof, so the first-floor hall has its ceiling (mode 1 hid the roof slabs).
+    cutawayMode: 0,
+    // First-floor central hall (slab top y = 3.71). Level camera at 1.6 m (y = 5.31), gaze at the
+    // same height. Top-level camPos/lookAt equal the first waypoint, so there is no jump.
+    // Two steles (04_A, 04_B) stand in a row in front of the stairwell mouth (z = -7.9), centred
+    // on the mouth (x = -0.52). The camera starts 5 m back to the east aimed at the row centre,
+    // walks west to (-0.52, -3.8) by 40%, and holds there with both steles in view (outer edges
+    // about 36 deg off axis of the 38 deg half-FOV, 4.1 m away).
+    camPos: [2.80, 5.31, -3.80],
+    lookAt: [-0.52, 5.31, -7.90],
     waypoints: [
-      // 04_A (teachers with sweets) stands on legs at (2.0, -7.3), right beside the stair mouth: view it from the south-west.
-      { t: 0.00, camPos: [-1.00, 5.20, -4.50], lookAt: [2.00, 5.10, -7.30] },
-      { t: 0.14, camPos: [-1.00, 5.20, -4.50], lookAt: [2.00, 5.10, -7.30] },
-      // Stairwell mouth: look north into the well, over the rainbow flights.
-      { t: 0.22, camPos: [-1.30, 5.35, -5.60], lookAt: [-1.30, 4.55, -10.00] },
-      { t: 0.38, camPos: [-1.30, 5.35, -5.60], lookAt: [-1.30, 4.55, -10.00] },
-      // Down onto the top treads of the west flight, where the principal fell.
-      { t: 0.45, camPos: [-1.38, 5.05, -6.50], lookAt: [-1.38, 3.45, -9.70] },
-      { t: 0.53, camPos: [-1.38, 5.05, -6.50], lookAt: [-1.38, 3.45, -9.70] },
-      // 04_B (stairwell collapse) is wall-mounted on the south wall at (-2.3, -3.45): face it from the north.
-      { t: 0.60, camPos: [-2.30, 5.20, -6.65], lookAt: [-2.30, 5.15, -3.45] },
-      { t: 1.00, camPos: [-2.30, 5.20, -6.65], lookAt: [-2.30, 5.15, -3.45] }
+      { t: 0.00, camPos: [2.80, 5.31, -3.80], lookAt: [-0.52, 5.31, -7.90] },
+      { t: 0.40, camPos: [-0.52, 5.31, -3.80], lookAt: [-0.52, 5.31, -7.90] },
+      { t: 1.00, camPos: [-0.52, 5.31, -3.80], lookAt: [-0.52, 5.31, -7.90] }
     ],
     shortBadge: { en: "04 / 08", fi: "04 / 08", fa: "۰۴ / ۰۸" },
     badge: { en: "STOP 4 OF 8 · THE RAINBOW STAIRCASE & PURPLE DOORS", fi: "PISTE 4/8 · SATEENKAARIPORTAIKKO", fa: "ایستگاه ۴ از ۸ · راه‌پله رنگین‌کمان و درهای بنفش" }
@@ -107,7 +105,7 @@ export const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'girls_upper_hall',
     temporal: 0.0,
-    cutawayMode: 1,
+    cutawayMode: 0,
     camPos: [-12.45, 5.55, -1.60],
     lookAt: [-15.55, 5.15, -9.20],
     waypoints: [
@@ -216,7 +214,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '01_D', hotspotId: 'courtyard_lines', slot: 'D', groupKey: 'preStrike',
-    images: Array.from({ length: 11 }, (_, i) => `media/walkthrough_pip/yard/yard_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    images: Array.from({ length: 14 }, (_, i) => `media/walkthrough_pip/yard/yard_photo_${String(i + 1).padStart(2, '0')}.jpg`),
     slideSec: 3.5, style: 'stele', noPoster: true, noPlaque: true,
     durationSec: 28, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
     pos: [25.00, 1.54, 12.05], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
@@ -294,37 +292,28 @@ export const IN_WORLD_SCREEN_SPECS = [
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 4: Central Hall & Enclosed Rainbow Staircase
+  // Two photo-slideshow steles (no plaque text) side by side in front of the stairwell mouth,
+  // facing south into the hall. Media lives in media/walkthrough_pip/stairs/ (29 photos: 01-17
+  // on 04_A, 18-29 on 04_B). The slab stands on the first-floor slab (top y = 3.71): pos y =
+  // 3.74 + (h + 0.2) / 2. Centres are 1.75 m either side of the mouth centre (x = -0.52).
   {
     id: '04_A', hotspotId: 'rainbow_staircase', slot: 'A', groupKey: 'firstFloor',
-    file: '04_sync_stairs_welcome', durationSec: 26.4, cueStartP: 0.0, cueEndP: 0.572, cueStartPFa: 0.0, cueEndPFa: 0.576, cueStartPFi: 0.0, cueEndPFi: 0.613,
-    // On legs in the first-floor hall beside the top of the stairs (slab top y = 3.71, frame centre +1.38 m).
-    pos: [2.00, 5.09, -7.30], rotY: -0.45, w: 2.46, h: 1.38, hasLegs: true, legFloorY: 3.71,
-    badge: {
-      en: 'RAINBOW STAIRS · TEACHERS WELCOME WITH TRAYS OF SWEETS',
-      fi: 'SATEENKAARIPORTAAT · OPETTAJAT VASTAASSA MAKEISIN',
-      fa: 'پله‌های رنگین‌کمان · استقبال معلمان با سینی شیرینی'
-    },
-    caption: {
-      en: 'Teachers standing at the foot of the rainbow stairs with trays of sweets, beside the purple classroom doors and paper flowers.',
-      fi: 'Opettajat seisomassa sateenkaariportaiden juurella makeistarjottimineen purppuraovien ja paperikukkien vieressä.',
-      fa: 'معلمان در پای پله‌های رنگین‌کمان با سینی‌های شیرینی، کنار درهای بنفش کلاس‌ها و گل‌های کاغذی.'
-    }
+    images: Array.from({ length: 17 }, (_, i) => `media/walkthrough_pip/stairs/stairs_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 26.4, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-2.27, 4.94, -7.90], rotY: 0, w: 2.20, h: 2.20, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '04_B', hotspotId: 'rainbow_staircase', slot: 'B', groupKey: 'firstFloor',
-    file: '04_sync_stairwell_collapse', durationSec: 27.4, cueStartP: 0.572, cueEndP: 0.968, cueStartPFa: 0.576, cueEndPFa: 0.968, cueStartPFi: 0.613, cueEndPFi: 0.989,
-    // Wall-mounted on the first-floor hall's south wall (F-10), in the gap between the west and middle doors.
-    pos: [-2.30, 5.11, -3.45], rotY: Math.PI, w: 2.50, h: 1.41, hasLegs: false,
-    badge: {
-      en: 'THE COLLAPSE · PRINCIPAL SANGARZADEH FELL DOWN THESE STAIRS',
-      fi: 'ROMAHDUS · REHTORI SANGARZADEH PUTOSI PORTAISSA',
-      fa: 'لحظه فروریختن · خانم سنگرزاده از همین پله‌ها افتاد'
-    },
-    caption: {
-      en: 'The stairwell where the blast threw principal Ms. Sangarzadeh down the stairs, and the roof collapsed above the children.',
-      fi: 'Portaikko, jossa räjähdys paiskasi rehtori Sangarzadehin alas portaita ja katto romahti lasten päälle.',
-      fa: 'راه‌پله‌ای که موج انفجار خانم سنگرزاده را از آن پایین انداخت و سقف بر سر کودکان فروریخت.'
-    }
+    images: [
+      ...Array.from({ length: 11 }, (_, i) => `media/walkthrough_pip/stairs/stairs_photo_${String(i + 18).padStart(2, '0')}.jpg`),
+      'media/walkthrough_pip/stairs/stairs_photo_29.png'
+    ],
+    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 27.4, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [1.23, 4.94, -7.90], rotY: 0, w: 2.20, h: 2.20, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 5: First-Floor Girls' Primary School Assembly Hall
   {

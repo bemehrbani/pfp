@@ -75,8 +75,6 @@ export const FIRST_FLOOR_WALLS = [
       { type: 'window', at: 21.2, w: 1.55, h: 1.05, sill: 1.625, mullions: 1 },
       { type: 'window', at: 25.4, w: 1.55, h: 1.05, sill: 1.625, mullions: 1 },
       { type: 'window', at: 32.8, w: 2.45, h: 0.68, sill: 2.11, mullions: 3 },
-      // Top of the rear staircase door (G-08 opening starts at 1.955 m, a 2.1 m door ends at 4.055 m)
-      { type: 'hole', at: 18.48, w: 1.1, h: 0.46, sill: 0 },
     ],
   },
 
