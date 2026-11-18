@@ -868,7 +868,7 @@ export function populate3DSchoolPortraitsAndDrawings() {
         groundFloorGroup,
         loader,
         boysGrades1to3[bIdx++],
-        -6.72,
+        -7.42,
         py,
         pz,
         -Math.PI / 2,
@@ -908,7 +908,7 @@ export function populate3DSchoolPortraitsAndDrawings() {
   for (let row = 0; row < 2; row++) {
     for (let col = 0; col < 6; col++) {
       if (b4Idx >= boysGrades4to6.length) break;
-      const px = 0.95 + col * 1.05;
+      const px = 2.05 + col * 0.95;
       const py = 1.22 + row * 1.12;
       create3DFramedPortraitOnWall(
         groundFloorGroup,
@@ -927,28 +927,35 @@ export function populate3DSchoolPortraitsAndDrawings() {
       );
     }
   }
-  for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 5; col++) {
-      if (b4Idx >= boysGrades4to6.length) break;
-      const px = 12.2 + col * 1.25;
-      const py = 1.22 + row * 1.12;
-      create3DFramedPortraitOnWall(
-        groundFloorGroup,
-        loader,
-        boysGrades4to6[b4Idx++],
-        px,
-        py,
-        -2.98,
-        0,
-        0.84,
-        1.02,
-        0xd4a853,
-        2,
-        'Ground Floor East Wing · Boys Grades 4–6 Classroom',
-        1.75
-      );
-    }
-  }
+  // Remaining grade 4-6 boys stand in the schoolyard on posts, in one row just south of the
+  // morning assembly lines (the lines' green border ends at Z = 12.55), facing north.
+  const yardFrames = boysGrades4to6.slice(b4Idx, b4Idx + 10);
+  const yardPostMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.48, metalness: 0.42 });
+  yardFrames.forEach((child, i) => {
+    const fx = 16.5 + (i - (yardFrames.length - 1) / 2) * 1.3;
+    const fz = 13.8;
+    [-0.3, 0.3].forEach((lx) => {
+      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.026, 0.032, 1.3, 10), yardPostMat);
+      post.position.set(fx + lx, 0.65, fz + 0.07);
+      post.castShadow = true;
+      preStrikeModelGroup.add(post);
+    });
+    create3DFramedPortraitOnWall(
+      preStrikeModelGroup,
+      loader,
+      child,
+      fx,
+      1.38,
+      fz,
+      Math.PI,
+      0.84,
+      1.02,
+      0xd4a853,
+      2,
+      'Schoolyard · Boys Grades 4–6',
+      2.25
+    );
+  });
 
   // 4. CENTRAL HALL & RAINBOW STAIRCASE: ALL 26 MARTYRED FEMALE EDUCATORS
   createWingBannerIn3D(
@@ -1004,7 +1011,7 @@ export function populate3DSchoolPortraitsAndDrawings() {
         groundFloorGroup,
         loader,
         teacher,
-        -0.18,
+        1.0,
         py,
         rz,
         -Math.PI / 2,

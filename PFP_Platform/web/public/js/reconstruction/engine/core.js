@@ -18,7 +18,14 @@ export async function initThreeEngine() {
   const height = container.clientHeight || window.innerHeight;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0a0e17);
+  scene.background = new THREE.Color(0x0a0e17); // fallback until the skybox loads
+  // Skybox: six cube faces (+X, -X, +Y, -Y, +Z, -Z) from images/sky/sky_122_2k/.
+  new THREE.CubeTextureLoader()
+    .setPath('images/sky/sky_122_2k/')
+    .load(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'], (cube) => {
+      cube.colorSpace = THREE.SRGBColorSpace;
+      scene.background = cube;
+    }, undefined, (err) => console.warn('Skybox failed to load', err));
   scene.fog = new THREE.FogExp2(0x0a0e17, 0.0055);
 
   const camera = new THREE.PerspectiveCamera(48, width / height, 0.25, 1000);
@@ -131,29 +138,21 @@ export function onWindowResize() {
 }
 
 /**
- * Switches between pre-strike (0.0) and post-strike (1.0) school models.
+ * Toggles between the pre-strike (0) and post-strike (1) school models. Any value of 0.5 or
+ * more counts as post-strike; the two models are never shown together.
  * @param {number} val
  */
 export function setTemporalCondition(val) {
-  const clamped = Math.max(0.0, Math.min(1.0, Number(val) || 0.0));
-  appState.damageSliderValue = clamped;
+  const isPost = (Number(val) || 0) >= 0.5;
+  appState.damageSliderValue = isPost ? 1.0 : 0.0;
 
   const { preStrikeModelGroup, postStrikeModelGroup } = appState;
   if (preStrikeModelGroup && postStrikeModelGroup) {
-    if (clamped < 0.05) {
-      preStrikeModelGroup.visible = true;
-      postStrikeModelGroup.visible = false;
-    } else if (clamped > 0.95) {
-      preStrikeModelGroup.visible = false;
-      postStrikeModelGroup.visible = true;
-    } else {
-      preStrikeModelGroup.visible = true;
-      postStrikeModelGroup.visible = true;
-    }
+    preStrikeModelGroup.visible = !isPost;
+    postStrikeModelGroup.visible = isPost;
   }
 
   if (typeof document !== 'undefined') {
-    const isPost = clamped >= 0.5;
     const preBtn = document.getElementById('btnStatePre');
     const postBtn = document.getElementById('btnStatePost');
     if (preBtn) preBtn.classList.toggle('active', !isPost);

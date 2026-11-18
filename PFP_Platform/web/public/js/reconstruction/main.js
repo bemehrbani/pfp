@@ -38,6 +38,7 @@ import {
   refreshInWorldScreensLanguage,
   updateInWorldScreensLive,
 } from './scene/in-world-screens.js';
+import { initWallInspector } from './scene/wall-inspector.js';
 import {
   initWalkthroughPipManifest,
   resolvePipVideoSrc,
@@ -152,6 +153,7 @@ export async function startReconstructionApp() {
   buildProceduralSchoolModels();
   loadChildrenAndBuildInWorldMemorial();
   init3DPortraitRaycaster();
+  initWallInspector();
   initHotspots();
   initUIControls();
   initKeyboardWalkControls();
