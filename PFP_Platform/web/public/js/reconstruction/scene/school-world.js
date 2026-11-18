@@ -710,16 +710,18 @@ export function buildProceduralSchoolModels() {
   // partitions all come from GROUND_FLOOR_WALLS (ground-floor-walls.js). Open the page with
   // ?walls=1 to see each wall's ID in the scene.
   // =====================================================================
-  const pinkGrilleMat = new THREE.MeshStandardMaterial({ color: 0xf472b6, roughness: 0.45, metalness: 0.35 });
+  // Grille bars use the classroom-door pink (same material), so the window and the doors match.
+  const pinkGrilleMat = purpleDoorMat;
   // Pink security-grilled inner window (Station 2 script: "calm teal-blue walls and pink window grilles")
   function addPinkGrilledRoomWindow(group, x, y, z, rotY, w, h) {
     const wg = new THREE.Group();
     wg.position.set(x, y, z);
     wg.rotation.y = rotY;
-    const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.12, h + 0.12, 0.06), trimWhiteMat);
+    // Door-pink frame and black glass (was white trim and sky-blue glass)
+    const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.12, h + 0.12, 0.06), purpleDoorMat);
     const pane = new THREE.Mesh(
       new THREE.PlaneGeometry(w, h),
-      new THREE.MeshBasicMaterial({ color: 0xbae6fd })
+      new THREE.MeshBasicMaterial({ color: 0x050507 })
     );
     pane.position.z = 0.035;
     wg.add(frame, pane);

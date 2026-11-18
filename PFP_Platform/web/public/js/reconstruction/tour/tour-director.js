@@ -212,7 +212,9 @@ export async function preloadAllWalkthroughPipBlobs() {
   const screenUrls = IN_WORLD_SCREEN_SPECS.filter((s) => !s.images).map(
     (s) => `media/walkthrough_pip/${s.file}.mp4?v=${MEDIA_ASSET_VERSION}`
   );
-  const interludeUrls = Object.values(WALKTHROUGH_INTERLUDES).map((c) => withMediaVersion(c.src));
+  const interludeUrls = Object.values(WALKTHROUGH_INTERLUDES)
+    .flatMap((c) => (Array.isArray(c.playlist) ? c.playlist.map((p) => p.src) : [c.src]))
+    .map((src) => withMediaVersion(src));
   const all = Array.from(new Set([...pipUrls, ...screenUrls, ...interludeUrls]));
   const prevMode = appState.recordingMode;
   appState.recordingMode = true;
@@ -1057,11 +1059,16 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
   if (progEl) progEl.style.width = '0%';
   if (rupEl) rupEl.hidden = true;
 
-  const versionedSrc = withMediaVersion(cfg.src);
-  const resolvedUrl = await resolvePipVideoSrc(versionedSrc);
+  // An interlude is one clip (cfg.src) or a playlist of clips played back to back (cfg.playlist).
+  const clips = Array.isArray(cfg.playlist) && cfg.playlist.length
+    ? cfg.playlist
+    : [{ src: cfg.src, aspect: cfg.aspect }];
+  const firstUrl = withMediaVersion(clips[0].src);
+  const firstResolved = await resolvePipVideoSrc(firstUrl);
   if (!appState.isGuidedTour || (run && !isTourRunActive(run))) return;
 
-  vid.src = resolvedUrl || versionedSrc;
+  vid.src = firstResolved || firstUrl;
+  if (clips[0].aspect) ov.setAttribute('data-aspect', clips[0].aspect);
   vid.muted = false;
   vid.volume = appState.voiceNarrationEnabled ? 1.0 : 0.0;
   vid.currentTime = 0;
@@ -1095,7 +1102,23 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
     }
   };
 
-  vid.onended = () => finishActiveInterlude();
+  let clipIdx = 0;
+  const playNextClip = async () => {
+    clipIdx += 1;
+    if (clipIdx >= clips.length) {
+      finishActiveInterlude();
+      return;
+    }
+    const url = withMediaVersion(clips[clipIdx].src);
+    const resolved = await resolvePipVideoSrc(url);
+    if (!appState.activeInterludeState || appState.activeInterludeState.cfg !== cfg) return;
+    if (clips[clipIdx].aspect) ov.setAttribute('data-aspect', clips[clipIdx].aspect);
+    if (progEl) progEl.style.width = '0%';
+    vid.src = resolved || url;
+    vid.currentTime = 0;
+    vid.play().catch(() => finishActiveInterlude());
+  };
+  vid.onended = () => { playNextClip(); };
   vid.onerror = () => finishActiveInterlude();
 
   appState.activeInterludeState.timer = run

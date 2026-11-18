@@ -217,7 +217,8 @@ export function buildWalls(defs, ctx) {
         ctx.addDoor(group, x, op.base ?? DOOR_BASE, 0, 0, DOOR_THICKNESS, op.w ?? DOOR_W);
       } else if (op.type === 'grille') {
         const s = sideSign(rotY, op.side);
-        ctx.addGrille(group, x, op.y, s * (T / 2 + 0.04), s > 0 ? 0 : Math.PI, op.w, op.h);
+        // Sunk into the wall: the frame is buried and only the glass and bars stand slightly proud.
+        ctx.addGrille(group, x, op.y, s * (T / 2 - 0.02), s > 0 ? 0 : Math.PI, op.w, op.h);
       } else if (op.type === 'doorway' && op.frame) {
         const fmat = ctx.mats[op.frame];
         for (const jx of [op.at - op.w / 2 + 0.035, op.at + op.w / 2 - 0.035]) {

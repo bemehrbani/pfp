@@ -35,15 +35,22 @@ export const GUIDED_TOUR_STOPS = [
     hotspotId: 'boys_flower_arch',
     temporal: 0.0,
     cutawayMode: 2,
-    camPos: [3.62, 1.72, -4.35],
-    lookAt: [3.62, 1.54, -8.04],
+    // Station 2 now stands in the ground-floor central hall where the rainbow stairs begin:
+    // 02_A on the north wall (G-33) west of the stair mouth, 02_B on the hall face of G-20.
+    camPos: [-3.85, 1.72, -4.85],
+    lookAt: [-3.85, 1.54, -8.82],
     waypoints: [
-      { t: 0.00, camPos: [3.62, 1.66, -4.04], lookAt: [3.62, 1.54, -8.04] },
-      { t: 0.16, camPos: [3.62, 1.62, -4.55], lookAt: [3.62, 1.54, -8.04] },
-      { t: 0.28, camPos: [5.55, 1.66, -4.30], lookAt: [0.17, 1.80, -4.62] },
-      { t: 0.42, camPos: [5.55, 1.66, -6.40], lookAt: [0.22, 1.60, -6.40] },
-      { t: 0.68, camPos: [4.55, 1.64, -6.40], lookAt: [0.22, 1.60, -6.40] },
-      { t: 1.00, camPos: [4.55, 1.64, -6.40], lookAt: [0.22, 1.60, -6.40] }
+      { t: 0.00, camPos: [-3.85, 1.66, -5.00], lookAt: [-3.85, 1.54, -8.82] },
+      { t: 0.16, camPos: [-3.85, 1.62, -4.60], lookAt: [-3.85, 1.54, -8.82] },
+      // One smooth turn to a hold at (-6.5, -5.4), 3.5 m further back and west than the first version,
+      // aimed 22 deg north of east so the turn from 02_A is smaller. 02_B and both photo steles stay
+      // in view: bearings span -30..+10 deg against a gaze at -22 deg, so the worst edge is 32 deg off
+      // axis of the ~38 deg half-FOV. Camera is 0.7 m past the end of G-13 (x = -7.2) and north of G-18.
+      // Eye and gaze level at 1.62 m.
+      { t: 0.26, camPos: [-4.90, 1.62, -5.00], lookAt: [-2.60, 1.62, -7.80] },
+      { t: 0.42, camPos: [-6.50, 1.62, -5.40], lookAt: [-1.86, 1.62, -7.27] },
+      { t: 0.68, camPos: [-6.50, 1.62, -5.40], lookAt: [-1.86, 1.62, -7.27] },
+      { t: 1.00, camPos: [-6.50, 1.62, -5.40], lookAt: [-1.86, 1.62, -7.27] }
     ],
     shortBadge: { en: "02 / 08", fi: "02 / 08", fa: "۰۲ / ۰۸" },
     badge: { en: "STOP 2 OF 8 · GROUND FLOOR: BOYS' CEREMONY ROOM (ROSE ARCHES)", fi: "PISTE 2/8 · ALAKERTA: POIKIEN JUHLAHUONE", fa: "ایستگاه ۲ از ۸ · طبقه همکف: اتاق جشن پسران (طاق گل رز)" }
@@ -70,18 +77,23 @@ export const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'rainbow_staircase',
     temporal: 0.0,
-    cutawayMode: 2,
-    camPos: [-1.65, 2.05, -2.35],
-    lookAt: [-1.55, 1.72, -9.80],
+    cutawayMode: 1,
+    // First-floor central hall at the top of the rainbow stairs (slab top y = 3.71, eye ~ +1.5 m).
+    camPos: [-1.45, 5.30, -4.60],
+    lookAt: [-1.30, 4.60, -10.00],
     waypoints: [
-      { t: 0.00, camPos: [-3.30, 1.66, -4.05], lookAt: [-4.45, 1.58, -7.35] },
-      { t: 0.14, camPos: [-3.30, 1.66, -4.05], lookAt: [-4.45, 1.58, -7.35] },
-      { t: 0.22, camPos: [-1.55, 1.92, -6.20], lookAt: [-1.50, 1.35, -10.00] },
-      { t: 0.38, camPos: [-1.55, 1.92, -6.20], lookAt: [-1.50, 1.35, -10.00] },
-      { t: 0.45, camPos: [-2.60, 1.48, -5.40], lookAt: [-2.78, 0.96, -8.02] },
-      { t: 0.53, camPos: [-2.60, 1.48, -5.40], lookAt: [-2.78, 0.96, -8.02] },
-      { t: 0.60, camPos: [-5.03, 1.64, -6.65], lookAt: [-5.03, 1.58, -3.58] },
-      { t: 1.00, camPos: [-5.03, 1.64, -6.65], lookAt: [-5.03, 1.58, -3.58] }
+      // 04_A (teachers with sweets) stands on legs at (2.0, -7.3), right beside the stair mouth: view it from the south-west.
+      { t: 0.00, camPos: [-1.00, 5.20, -4.50], lookAt: [2.00, 5.10, -7.30] },
+      { t: 0.14, camPos: [-1.00, 5.20, -4.50], lookAt: [2.00, 5.10, -7.30] },
+      // Stairwell mouth: look north into the well, over the rainbow flights.
+      { t: 0.22, camPos: [-1.30, 5.35, -5.60], lookAt: [-1.30, 4.55, -10.00] },
+      { t: 0.38, camPos: [-1.30, 5.35, -5.60], lookAt: [-1.30, 4.55, -10.00] },
+      // Down onto the top treads of the west flight, where the principal fell.
+      { t: 0.45, camPos: [-1.38, 5.05, -6.50], lookAt: [-1.38, 3.45, -9.70] },
+      { t: 0.53, camPos: [-1.38, 5.05, -6.50], lookAt: [-1.38, 3.45, -9.70] },
+      // 04_B (stairwell collapse) is wall-mounted on the south wall at (-2.3, -3.45): face it from the north.
+      { t: 0.60, camPos: [-2.30, 5.20, -6.65], lookAt: [-2.30, 5.15, -3.45] },
+      { t: 1.00, camPos: [-2.30, 5.20, -6.65], lookAt: [-2.30, 5.15, -3.45] }
     ],
     shortBadge: { en: "04 / 08", fi: "04 / 08", fa: "۰۴ / ۰۸" },
     badge: { en: "STOP 4 OF 8 · THE RAINBOW STAIRCASE & PURPLE DOORS", fi: "PISTE 4/8 · SATEENKAARIPORTAIKKO", fa: "ایستگاه ۴ از ۸ · راه‌پله رنگین‌کمان و درهای بنفش" }
@@ -163,9 +175,9 @@ export const GUIDED_TOUR_STOPS = [
 
 export const HOTSPOT_CONFIGS = [
   { id: 'courtyard_lines', icon: '1', pos: [15.5, 1.2, 8.25], presetCam: [5.5, 2.8, 12.0], target: [22.0, 1.6, 6.5], cutaway: 0 },
-  { id: 'boys_flower_arch', icon: '2', pos: [3.8, 2.1, -6.0], presetCam: [2.2, 4.4, -0.5], target: [4.0, 1.8, -6.5], cutaway: 2 },
+  { id: 'boys_flower_arch', icon: '2', pos: [-1.0, 2.1, -7.0], presetCam: [-2.4, 3.6, -2.0], target: [-1.0, 1.7, -6.5], cutaway: 2 },
   { id: 'boys_classroom', icon: '3', pos: [-15.8, 2.1, -0.2], presetCam: [-11.8, 4.3, 3.8], target: [-16.2, 1.6, -1.0], cutaway: 2 },
-  { id: 'rainbow_staircase', icon: '4', pos: [-1.8, 2.3, -8.4], presetCam: [-1.8, 2.25, -3.2], target: [-1.8, 2.0, -9.8], cutaway: 2 },
+  { id: 'rainbow_staircase', icon: '4', pos: [-1.4, 5.8, -8.4], presetCam: [-1.4, 5.3, -4.2], target: [-1.4, 4.7, -9.8], cutaway: 1 },
   { id: 'girls_upper_hall', icon: '5', pos: [-15.2, 5.6, -5.5], presetCam: [-9.5, 8.6, 3.5], target: [-15.2, 5.2, -5.5], cutaway: 1 },
   { id: 'crater_damage', icon: '6', pos: [-2.5, 3.2, -5.5], presetCam: [-18.0, 13.5, 12.0], target: [-1.5, 2.2, -5.5], cutaway: 0 },
   { id: 'second_wave', icon: '7', pos: [18.0, 2.5, 11.5], presetCam: [26.0, 9.5, 22.0], target: [6.0, 2.2, 1.0], cutaway: 0 },
@@ -220,33 +232,43 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 2: Ground-Floor Boys' Ceremony Room & Colorful Playroom
   {
     id: '02_A', hotspotId: 'boys_flower_arch', slot: 'A', groupKey: 'groundFloor',
-    file: '02_sync_playroom_memories', durationSec: 24.0, cueStartP: 0.0, cueEndP: 0.403, cueStartPFa: 0.0, cueEndPFa: 0.407, cueStartPFi: 0.0, cueEndPFi: 0.430,
-    pos: [3.62, 1.54, -8.04], rotY: 0, w: 1.90, h: 1.07, hasLegs: false,
-    badge: {
-      en: 'GROUND FLOOR · PLAYROOM & CHILDHOOD MEMORIES',
-      fi: 'ALAKERTA · LEIKKIHUONE JA LAPSUUDEN MUISTOT',
-      fa: 'طبقه همکف · خانه بازی و خاطرات کودکی'
-    },
-    caption: {
-      en: 'Pre-school children laughing inside the mural-painted playroom and ball-pit, and the room\'s Mother\'s Day and book fair memories.',
-      fi: 'Esikoululaiset nauramassa kuvitetussa leikkihuoneessa ja pallomeressä sekä huoneen äitienpäivä- ja kirjamessumuistot.',
-      fa: 'خنده نوآموزان در «خانه بازی» رنگارنگ و خاطرات جشن روز مادر و نمایشگاه کتاب همین اتاق.'
-    }
+    file: '02_sync_playroom_memories', loop: true, noPlaque: true,
+    durationSec: 24.0, cueStartP: 0.0, cueEndP: 0.403, cueStartPFa: 0.0, cueEndPFa: 0.407, cueStartPFi: 0.0, cueEndPFi: 0.430,
+    // Wall-mounted on the hall's north wall (G-33), between the door (x -6.53..-5.47) and the stair mouth (x -2.24)
+    pos: [-3.85, 1.54, -8.82], rotY: 0, w: 2.70, h: 1.52, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '02_B', hotspotId: 'boys_flower_arch', slot: 'B', groupKey: 'groundFloor',
-    file: '02_sync_rose_arch_photo', durationSec: 32.0, cueStartP: 0.403, cueEndP: 0.989, cueStartPFa: 0.407, cueEndPFa: 0.972, cueStartPFi: 0.430, cueEndPFi: 0.980,
-    pos: [0.22, 1.60, -6.40], rotY: Math.PI / 2, w: 2.24, h: 1.26, hasLegs: false,
-    badge: {
-      en: 'ROSE ARCH PHOTO · TWELVE BOYS IN ROYAL-BLUE UNIFORMS',
-      fi: 'RUUSUKAARIVALOKUVA · KAKSITOISTA POIKAA SINISISSÄ KOULUPUVUISSA',
-      fa: 'عکس طاق گل رز · دوازده پسر با لباس فرم آبی'
-    },
-    caption: {
-      en: 'The teacher\'s photograph of twelve little boys in royal-blue uniforms standing proudly beneath two arches of red roses.',
-      fi: 'Opettajan valokuva kahdestatoista pienestä pojasta sinisissä koulupuvuissaan seisomassa kahden punaisen ruusukaaren alla.',
-      fa: 'عکس معلم از دوازده پسر کوچک با لباس فرم آبی که با غرور زیر دو طاق گل سرخ ایستاده‌اند.'
-    }
+    // Still photo (2538x1633, aspect 1.554) in media/walkthrough_pip/hall/; one image, so it just holds.
+    images: ['media/walkthrough_pip/hall/hall_photo_window.png'], slideSec: 30, noPoster: true, noPlaque: true,
+    durationSec: 32.0, cueStartP: 0.403, cueEndP: 0.989, cueStartPFa: 0.407, cueEndPFa: 0.972, cueStartPFi: 0.430, cueEndPFi: 0.980,
+    // Wall-mounted on the central-hall (west) face of G-20, facing west into the hall. Fits between the
+    // inner window (z -7.69..-6.51) and the boys' portrait frames (from z -3.92).
+    pos: [1.06, 1.60, -5.20], rotY: -Math.PI / 2, w: 2.40, h: 1.545, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  // Two photo steles standing on the hall floor just south of the stair mouth (x -2.24..1.2), in
+  // one straight row: both turned 0.5 rad toward the viewer, with their centres on the slabs' own long
+  // axis (direction (0.878, 0.479) in x/z), 1.95 m apart, so the slabs are collinear end to end. The row
+  // runs from the stair-mouth corner toward the window wall. Stele style, no legs, no plaque. 26 photos in media/walkthrough_pip/hall/, 13 per
+  // stele, letterboxed. Slab is w + 0.12 by h + 0.2 and stands on the 0.2 m floor:
+  // y = 0.2 + 0.14 + (h + 0.2) / 2 = 1.49. They run for the whole stop.
+  {
+    id: '02_C', hotspotId: 'boys_flower_arch', slot: 'C', groupKey: 'groundFloor',
+    images: Array.from({ length: 13 }, (_, i) => `media/walkthrough_pip/hall/hall_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 39.0, cueStartP: 0.0, cueEndP: 0.989, cueStartPFa: 0.0, cueEndPFa: 0.972, cueStartPFi: 0.0, cueEndPFi: 0.980,
+    pos: [-1.64, 1.49, -8.17], rotY: -0.50, w: 1.60, h: 2.10, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
+    id: '02_D', hotspotId: 'boys_flower_arch', slot: 'D', groupKey: 'groundFloor',
+    images: Array.from({ length: 13 }, (_, i) => `media/walkthrough_pip/hall/hall_photo_${String(i + 14).padStart(2, '0')}.jpg`),
+    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 39.0, cueStartP: 0.0, cueEndP: 0.989, cueStartPFa: 0.0, cueEndPFa: 0.972, cueStartPFi: 0.0, cueEndPFi: 0.980,
+    pos: [0.08, 1.49, -7.23], rotY: -0.50, w: 1.60, h: 2.10, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 3: Ground-Floor West Boys' Classroom (Sky-Blue Walls & Green Carpet)
   {
@@ -281,9 +303,10 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   // Station 4: Central Hall & Enclosed Rainbow Staircase
   {
-    id: '04_A', hotspotId: 'rainbow_staircase', slot: 'A', groupKey: 'groundFloor',
+    id: '04_A', hotspotId: 'rainbow_staircase', slot: 'A', groupKey: 'firstFloor',
     file: '04_sync_stairs_welcome', durationSec: 26.4, cueStartP: 0.0, cueEndP: 0.572, cueStartPFa: 0.0, cueEndPFa: 0.576, cueStartPFi: 0.0, cueEndPFi: 0.613,
-    pos: [-4.45, 1.58, -7.35], rotY: 0.35, w: 2.46, h: 1.38, hasLegs: true, legFloorY: 0.20,
+    // On legs in the first-floor hall beside the top of the stairs (slab top y = 3.71, frame centre +1.38 m).
+    pos: [2.00, 5.09, -7.30], rotY: -0.45, w: 2.46, h: 1.38, hasLegs: true, legFloorY: 3.71,
     badge: {
       en: 'RAINBOW STAIRS · TEACHERS WELCOME WITH TRAYS OF SWEETS',
       fi: 'SATEENKAARIPORTAAT · OPETTAJAT VASTAASSA MAKEISIN',
@@ -296,9 +319,10 @@ export const IN_WORLD_SCREEN_SPECS = [
     }
   },
   {
-    id: '04_B', hotspotId: 'rainbow_staircase', slot: 'B', groupKey: 'groundFloor',
+    id: '04_B', hotspotId: 'rainbow_staircase', slot: 'B', groupKey: 'firstFloor',
     file: '04_sync_stairwell_collapse', durationSec: 27.4, cueStartP: 0.572, cueEndP: 0.968, cueStartPFa: 0.576, cueEndPFa: 0.968, cueStartPFi: 0.613, cueEndPFi: 0.989,
-    pos: [-5.03, 1.60, -3.58], rotY: Math.PI, w: 2.50, h: 1.41, hasLegs: false,
+    // Wall-mounted on the first-floor hall's south wall (F-10), in the gap between the west and middle doors.
+    pos: [-2.30, 5.11, -3.45], rotY: Math.PI, w: 2.50, h: 1.41, hasLegs: false,
     badge: {
       en: 'THE COLLAPSE · PRINCIPAL SANGARZADEH FELL DOWN THESE STAIRS',
       fi: 'ROMAHDUS · REHTORI SANGARZADEH PUTOSI PORTAISSA',
@@ -674,7 +698,14 @@ export const WALKTHROUGH_BOOKENDS = {
 export const WALKTHROUGH_INTERLUDES = {
   boys_flower_arch: {
     id: 'interlude_02',
-    src: 'media/walkthrough_interludes/interlude_02_rose_arch_and_mahan.mp4',
+    src: 'media/walkthrough_interludes/interlude_02_boys_hall.mp4',
+    // Two clips played back to back: the boys' hall clip, then Mahan's Mother's Day message
+    // (the old combined interlude_02_rose_arch_and_mahan.mp4 was rose-arch singing + Mahan).
+    // Each clip sets its own stage aspect (16:9 hall clip, 3:4 portrait Mahan clip).
+    playlist: [
+      { src: 'media/walkthrough_interludes/interlude_02_boys_hall.mp4', aspect: 'landscape' },
+      { src: 'media/walkthrough_interludes/interlude_02_mahan_mothers_day.mp4', aspect: 'portrait34' }
+    ],
     aspect: 'classic',
     tone: 'pre',
     kicker: {

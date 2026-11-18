@@ -153,8 +153,10 @@ export const GROUND_FLOOR_WALLS = [
     id: 'G-20', note: 'Central hall east wall / ceremony room west wall',
     from: [1.2, -8.2], to: [1.2, 0.5], t: 0.22,
     openings: [
-      { type: 'grille', at: 3.58, side: 'E', y: 1.86, w: 1.18, h: 1.02 },
-      { type: 'door', at: 4.75 },
+      // Inner window on the central-hall (west) face, north of the station-2 video frame (02_B)
+      { type: 'grille', at: 1.1, side: 'W', y: 1.86, w: 1.18, h: 1.02 },
+      // Door close to the main entrance (z = -0.3)
+      { type: 'door', at: 7.9 },
     ],
   },
   { id: 'G-22', note: 'Rainbow stairwell, west wall (stops at G-33)', from: [-2.24, -13.0], to: [-2.24, -9.0], t: 0.22 },
@@ -171,7 +173,7 @@ export const GROUND_FLOOR_WALLS = [
     id: 'G-26', note: 'Ceremony room east wall, continues to the front wall',
     from: [7.5, -8.4], to: [7.5, 0.5],
     openings: [
-      { type: 'grille', at: 1.05, side: 'W', y: 1.86, w: 1.25, h: 1.05 },
+      // (Grille window removed: station 2 moved to the central hall.)
       { type: 'door', at: 2.4 },
     ],
   },

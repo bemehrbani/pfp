@@ -898,40 +898,49 @@ export function populate3DSchoolPortraitsAndDrawings() {
 
   // 3. GROUND FLOOR EAST WING: BOYS OF GRADES 4, 5 & 6
   const boysGrades4to6 = childrenList.filter((c) => c.gender === 'boy' && (c.grade || 1) >= 4 && c.photoPath);
-  createWingBannerIn3D(
-    groundFloorGroup,
-    `GROUND FLOOR EAST WING: BOYS GRADES 4–6 & CEREMONY ROOM (${boysGrades4to6.length} STUDENTS)`,
-    `طبقه همکف (بال شرقی): دانش‌آموزان پسر پایه‌های چهارم تا ششم و اتاق جشن`,
-    3.75,
-    3.25,
-    -8.18,
-    0,
-    6.4,
-    '#0d1b2a',
-    '#d4a853'
-  );
+  // Banner hidden for now. Station 2 lives in the ground-floor central hall (where the rainbow stairs
+  // start); it ran along the hall face of G-20 (x = 1.09), above the frames, facing west.
+  // createWingBannerIn3D(
+  //   groundFloorGroup,
+  //   `GROUND FLOOR EAST WING: BOYS GRADES 4–6 & CEREMONY ROOM (${boysGrades4to6.length} STUDENTS)`,
+  //   `طبقه همکف (بال شرقی): دانش‌آموزان پسر پایه‌های چهارم تا ششم و اتاق جشن`,
+  //   1.07,
+  //   3.25,
+  //   -4.9,
+  //   -Math.PI / 2,
+  //   6.4,
+  //   '#0d1b2a',
+  //   '#d4a853'
+  // );
 
+  // Two columns of frames facing each other across the hall: G-20's west face (x = 1.09, facing west)
+  // and G-17's east face (x = -3.45, facing east).
   let b4Idx = 0;
-  for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 6; col++) {
-      if (b4Idx >= boysGrades4to6.length) break;
-      const px = 2.05 + col * 0.95;
-      const py = 1.22 + row * 1.12;
-      create3DFramedPortraitOnWall(
-        groundFloorGroup,
-        loader,
-        boysGrades4to6[b4Idx++],
-        px,
-        py,
-        -3.82,
-        Math.PI,
-        0.84,
-        1.02,
-        0xd4a853,
-        2,
-        'Ground Floor East Wing · Boys Grades 4–6 & Ceremony Room',
-        1.75
-      );
+  const boysHallWalls = [
+    // G-20: between the 02_B frame (z -6.42..-4.18) and the door near the entrance (z -0.83..0.23)
+    { x: 1.06, rotY: -Math.PI / 2, zs: [-3.5, -2.5, -1.5] },
+    { x: -3.42, rotY: Math.PI / 2, zs: [-2.3, -1.3, -0.3] },
+  ];
+  for (const wall of boysHallWalls) {
+    for (let col = 0; col < 3; col++) {
+      for (let row = 0; row < 2; row++) {
+        if (b4Idx >= boysGrades4to6.length) break;
+        create3DFramedPortraitOnWall(
+          groundFloorGroup,
+          loader,
+          boysGrades4to6[b4Idx++],
+          wall.x,
+          1.22 + row * 1.12,
+          wall.zs[col],
+          wall.rotY,
+          0.84,
+          1.02,
+          0xd4a853,
+          2,
+          'Ground Floor Central Hall · Boys Grades 4–6',
+          1.75
+        );
+      }
     }
   }
   // Remaining grade 4-6 boys stand in the schoolyard as steles, in one row just south of the
@@ -951,71 +960,59 @@ export function populate3DSchoolPortraitsAndDrawings() {
   });
 
   // 4. CENTRAL HALL & RAINBOW STAIRCASE: ALL 26 MARTYRED FEMALE EDUCATORS
+  // The staircase station lives in the FIRST-FLOOR central hall (x -7.8..7.5, z -8.6..-3.3), at the
+  // top of the rainbow stairs. Slab top is y = 3.71, so the frame heights below are measured from
+  // the first-floor group origin exactly like the Girls' Hall frames further down (y1 = 3.6).
+  const yStairHall = 3.6;
   createWingBannerIn3D(
-    groundFloorGroup,
+    firstFloorGroup,
     `CENTRAL HALL & RAINBOW STAIRCASE: THE 26 MARTYRED FEMALE EDUCATORS`,
     `سالن مرکزی و راه‌پله رنگین‌کمان: ۲۶ معلم و مدیر شهیده دبستان شجره طیبه`,
-    -3.2,
-    3.3,
-    -8.02,
+    -5.02,
+    yStairHall + 3.3,
+    -8.43,
     0,
-    5.6,
+    5.2,
     '#1f122b',
     '#f472b6'
   );
 
-  const leftHallSlots = [
-    [-3.38, -0.5],
-    [-3.38, -1.5],
-    [-3.38, -2.5],
-    [-6.28, -4.1],
-    [-6.28, -5.1],
-    [-6.28, -6.1],
-    [-6.28, -7.2],
+  // Wall columns for the educators, each a stack of two frames (rows at +1.22 m and +2.34 m).
+  // Only wall stretches clear of doors are used (doors are 1.06 m wide: F-10 at x = -4.75 / 0.15 / 5.05,
+  // F-11 at x = -5.5, F-12 at x = 2.1). The south-wall gap x -4.22..-0.38 is left free for the
+  // wall-mounted video 04_B. Filled in this order, so the educators nearest the stairs come first.
+  //   north wall (F-12, east of stairwell) faces south: z = -8.6 + 0.12 wall half + 0.03
+  //   south wall (F-10) faces north:                    z = -3.3 - 0.12 - 0.03
+  const NORTH_Z = -8.45;
+  const SOUTH_Z = -3.45;
+  const teacherCols = [
+    ...[3.2, 4.3, 5.4, 6.5, 7.6].map((x) => ({ x, z: NORTH_Z, rotY: 0 })), // F-12, east of the stairs
+    ...[1.5, 2.6, 3.7].map((x) => ({ x, z: SOUTH_Z, rotY: Math.PI })), // F-10, between the middle and east doors
+    { x: 6.54, z: SOUTH_Z, rotY: Math.PI }, // F-10, east of the east door
+    { x: -6.24, z: SOUTH_Z, rotY: Math.PI }, // F-10, west of the west door
+    { x: -3.43, z: NORTH_Z, rotY: 0 }, // F-11, between the NW-room door and the stairwell
+    { x: -7.19, z: NORTH_Z, rotY: 0 }, // F-11, west of the NW-room door
+    { x: -4.45, z: NORTH_Z, rotY: 0 }, // F-11, right beside the -3.43 column (door edge is x = -4.97)
   ];
-  const rightHallZ = [-0.4, -1.45, -2.5, -4.4, -5.45, -6.5, -7.45];
 
   teachersList.forEach((teacher, idx) => {
-    const isLeft = idx < 13;
-    const localIdx = isLeft ? idx : idx - 13;
-    const row = Math.floor(localIdx / 7);
-    const col = localIdx % 7;
-    const py = 1.22 + row * 1.12;
-    if (isLeft) {
-      const [lx, lz] = leftHallSlots[col] || [-6.28, -4.5];
-      create3DFramedPortraitOnWall(
-        groundFloorGroup,
-        loader,
-        teacher,
-        lx,
-        py,
-        lz,
-        Math.PI / 2,
-        0.82,
-        0.98,
-        0xf472b6,
-        2,
-        'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators',
-        1.55
-      );
-    } else {
-      const rz = rightHallZ[col] || -4.5;
-      create3DFramedPortraitOnWall(
-        groundFloorGroup,
-        loader,
-        teacher,
-        1.0,
-        py,
-        rz,
-        -Math.PI / 2,
-        0.82,
-        0.98,
-        0xf472b6,
-        2,
-        'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators',
-        1.55
-      );
-    }
+    const slot = teacherCols[Math.floor(idx / 2)] || teacherCols[teacherCols.length - 1];
+    const row = idx % 2;
+    create3DFramedPortraitOnWall(
+      firstFloorGroup,
+      loader,
+      teacher,
+      slot.x,
+      yStairHall + 1.22 + row * 1.12,
+      slot.z,
+      slot.rotY,
+      0.82,
+      0.98,
+      0xf472b6,
+      1,
+      'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators',
+      1.75
+    );
   });
 
   // 5. FIRST FLOOR WEST GIRLS' ASSEMBLY HALL: ALL 47 MARTYRED SCHOOLGIRLS
