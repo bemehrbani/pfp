@@ -182,12 +182,13 @@ test('6. Camera spline, cue window, smoothWindowAlpha, and Vow summary helpers p
   const { formatReconstructionVowSummary } = await importReconModule('ui/hud-modals-vow.js');
 
   const s0 = sampleGuidedTourCameraCoords(0, 0);
-  assert.deepEqual(s0.pos, [4.5, 2.75, 13.8]);
-  assert.deepEqual(s0.lookAt, [10.5, 1.3, 7.5]);
+  assert.deepEqual(s0.pos, [9.0, 1.9, 8.25]);
+  assert.deepEqual(s0.lookAt, [25.0, 1.9, 8.25]);
 
-  const s1 = sampleGuidedTourCameraCoords(0, 0.14);
-  assert.deepEqual(s1.pos, [5.8, 2.35, 11.4]);
-  assert.deepEqual(s1.lookAt, [12.5, 0.75, 8.0]);
+  // Stop 1 uses the smooth (Hermite) spline, so a waypoint is hit to within float rounding.
+  const s1 = sampleGuidedTourCameraCoords(0, 0.34);
+  [16.0, 1.9, 8.25].forEach((v, i) => assert.ok(Math.abs(s1.pos[i] - v) < 1e-9));
+  [25.0, 1.9, 8.25].forEach((v, i) => assert.ok(Math.abs(s1.lookAt[i] - v) < 1e-9));
 
   const spec = { cueStartP: 0.1, cueEndP: 0.5, cueStartPFa: 0.2, cueEndPFa: 0.7, cueStartPFi: 0.15, cueEndPFi: 0.6 };
   appState.currentLang = 'en';

@@ -98,6 +98,9 @@ export const GROUND_FLOOR_WALLS = [
       { type: 'window', at: 22.2, w: 1.85, h: 1.15, sill: 1.175, mullions: 2 },
       { type: 'window', at: 27.2, w: 1.85, h: 1.15, sill: 1.175, mullions: 2 },
       { type: 'window', at: 33.5, w: 2.1, h: 0.58, sill: 2.26, mullions: 3 },
+      // Rear staircase door at the stairwell half-landing (X = -0.52, floor at Y = 1.955); its top
+      // continues through F-08 above. Keep in sync with STAIR_LANDING_Y in school-world.js.
+      { type: 'hole', at: 18.48, w: 1.1, h: 1.7, sill: 1.955 },
     ],
   },
 
@@ -128,7 +131,7 @@ export const GROUND_FLOOR_WALLS = [
   },
   {
     id: 'G-33', note: 'North room beside the stairs, south wall (between G-16 and G-22)',
-    from: [-8.2, -9.0], to: [-3.8, -9.0],
+    from: [-8.2, -9.0], to: [-2.24, -9.0],
     openings: [{ type: 'door', at: 2.2 }],
   },
   { id: 'G-16', note: 'Between the two small north rooms', from: [-8.2, -13.0], to: [-8.2, -9.0] },
@@ -154,7 +157,7 @@ export const GROUND_FLOOR_WALLS = [
       { type: 'door', at: 4.75 },
     ],
   },
-  { id: 'G-22', note: 'Rainbow stairwell, west wall (stops at G-33)', from: [-3.8, -13.0], to: [-3.8, -9.0], t: 0.22 },
+  { id: 'G-22', note: 'Rainbow stairwell, west wall (stops at G-33)', from: [-2.24, -13.0], to: [-2.24, -9.0], t: 0.22 },
   { id: 'G-23', note: 'Rainbow stairwell, east wall', from: [1.2, -13.0], to: [1.2, -8.2], t: 0.22 },
 
   // ---------------------------------------------------------------- East wing

@@ -630,6 +630,88 @@ export function createClassroomDeskWithDrawing(parentGroup, loader, drw, x, yBas
   parentGroup.add(deskGroup);
 }
 
+/**
+ * Courtyard stele: dark slate slab with a gold rim, a portrait and a nameplate on both faces.
+ * Used by the Memorial Avenue and by the schoolyard row beside the assembly lines.
+ * Decals ride FRAME_DECAL_GAP off the slab's +/-0.05 faces, one stack step apart.
+ */
+function createCourtyardStele(parentGroup, loader, child, { x, z, rotY, wingLabel, focusCam, lookAt }) {
+  const isTeacher = child.category === 'teacher';
+  const STELE_FACE_Z = 0.05;
+  const STELE_LABEL_Z = STELE_FACE_Z + FRAME_DECAL_GAP;
+  const STELE_PORTRAIT_Z = STELE_LABEL_Z + FRAME_STACK_STEP;
+  const imgUrl =
+    child.photoPath || child.photo_path || (child.photoGrid ? `images/children/child_${child.photoGrid}.jpg` : null);
+
+  const post = new THREE.Mesh(
+    getSharedBoxGeo(0.96, 1.88, 0.1),
+    new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 })
+  );
+  post.position.set(x, 1.08, z);
+  post.rotation.y = rotY;
+  post.castShadow = true;
+  parentGroup.add(post);
+
+  const border = new THREE.Mesh(
+    getSharedBoxGeo(1.02, 1.94, 0.07),
+    new THREE.MeshBasicMaterial({ color: 0xd4a853 })
+  );
+  post.add(border);
+
+  const labelTex = createNameplateTexture(
+    child.nameFa || child.full_name_fa,
+    child.name || child.full_name_en,
+    isTeacher ? child.role || 'Educator' : `Grade ${child.grade || '?'} · Age ${child.age || '?'}`,
+    '#d4a853',
+    0.88,
+    0.3
+  );
+  const frontLabel = new THREE.Mesh(
+    getSharedPlaneGeo(0.88, 0.3),
+    makeDecalMaterial({ map: labelTex, toneMapped: false })
+  );
+  frontLabel.position.set(0, -0.68, STELE_LABEL_Z);
+  post.add(frontLabel);
+
+  const backLabel = frontLabel.clone();
+  backLabel.position.set(0, -0.68, -STELE_LABEL_Z);
+  backLabel.rotation.y = Math.PI;
+  post.add(backLabel);
+
+  const steleArtifact = {
+    artifactType: 'victim',
+    item: child,
+    wingLabel,
+    focusCam,
+    lookAt,
+    cutawayMode: 0,
+  };
+  post.userData = steleArtifact;
+  appState.clickable3DArtifacts.push(post);
+
+  if (imgUrl) {
+    loader.load(imgUrl, (tex) => {
+      prepareDecalTexture(tex);
+      const portraitMesh = new THREE.Mesh(
+        getSharedPlaneGeo(0.88, 1.32),
+        makeDecalMaterial({ map: tex })
+      );
+      coverDecalTexture(tex, 0.88 / 1.32, 0);
+      portraitMesh.position.set(0, 0.18, STELE_PORTRAIT_Z);
+      portraitMesh.userData = steleArtifact;
+      post.add(portraitMesh);
+      appState.clickable3DArtifacts.push(portraitMesh);
+
+      const backMesh = portraitMesh.clone();
+      backMesh.position.set(0, 0.18, -STELE_PORTRAIT_Z);
+      backMesh.rotation.y = Math.PI;
+      backMesh.userData = steleArtifact;
+      post.add(backMesh);
+      appState.clickable3DArtifacts.push(backMesh);
+    });
+  }
+}
+
 export function populate3DSchoolPortraitsAndDrawings() {
   const loader = new THREE.TextureLoader();
   appState.clickable3DArtifacts = [];
@@ -644,113 +726,38 @@ export function populate3DSchoolPortraitsAndDrawings() {
   } = appState;
 
   // 1. COURTYARD MEMORIAL AVENUE (24 Double-Sided Steles flanking the Central Vow Shrine Walk at X = -5.2 & X = +2.2)
-  // Decals ride FRAME_DECAL_GAP off the post's +/-0.05 faces, one stack step apart.
-  const STELE_FACE_Z = 0.05;
-  const STELE_LABEL_Z = STELE_FACE_Z + FRAME_DECAL_GAP;
-  const STELE_PORTRAIT_Z = STELE_LABEL_Z + FRAME_STACK_STEP;
   const portraitSample = childrenList.filter((c) => c.photoPath).slice(0, 24);
   portraitSample.forEach((child, idx) => {
     const isLeft = idx < 12;
     const slot = isLeft ? idx : idx - 12;
     const x = isLeft ? -5.2 : 2.2;
     const z = 13.0 + slot * 1.2;
-    const rotY = isLeft ? Math.PI / 2 : -Math.PI / 2;
-    const imgUrl = child.photoPath;
-
-    const post = new THREE.Mesh(
-      getSharedBoxGeo(0.96, 1.88, 0.1),
-      new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 })
-    );
-    post.position.set(x, 1.08, z);
-    post.rotation.y = rotY;
-    post.castShadow = true;
-    memorialBoardsGroup.add(post);
-
-    const border = new THREE.Mesh(
-      getSharedBoxGeo(1.02, 1.94, 0.07),
-      new THREE.MeshBasicMaterial({ color: 0xd4a853 })
-    );
-    post.add(border);
-
-    const labelTex = createNameplateTexture(
-      child.nameFa,
-      child.name,
-      `Grade ${child.grade || '?'} · Age ${child.age || '?'}`,
-      '#d4a853',
-      0.88,
-      0.3
-    );
-    const frontLabel = new THREE.Mesh(
-      getSharedPlaneGeo(0.88, 0.3),
-      makeDecalMaterial({ map: labelTex, toneMapped: false })
-    );
-    frontLabel.position.set(0, -0.68, STELE_LABEL_Z);
-    post.add(frontLabel);
-
-    const backLabel = frontLabel.clone();
-    backLabel.position.set(0, -0.68, -STELE_LABEL_Z);
-    backLabel.rotation.y = Math.PI;
-    post.add(backLabel);
-
-    const steleArtifact = {
-      artifactType: 'victim',
-      item: child,
+    createCourtyardStele(memorialBoardsGroup, loader, child, {
+      x,
+      z,
+      rotY: isLeft ? Math.PI / 2 : -Math.PI / 2,
       wingLabel: 'Courtyard 100 Faces Memorial Walk',
       focusCam: new THREE.Vector3(-1.5, 1.45, z),
       lookAt: new THREE.Vector3(x, 1.15, z),
-      cutawayMode: 0,
-    };
-    post.userData = steleArtifact;
-    appState.clickable3DArtifacts.push(post);
-
-    if (imgUrl) {
-      loader.load(imgUrl, (tex) => {
-        prepareDecalTexture(tex);
-        const portraitMesh = new THREE.Mesh(
-          getSharedPlaneGeo(0.88, 1.32),
-          makeDecalMaterial({ map: tex })
-        );
-        coverDecalTexture(tex, 0.88 / 1.32, 0);
-        portraitMesh.position.set(0, 0.18, STELE_PORTRAIT_Z);
-        portraitMesh.userData = steleArtifact;
-        post.add(portraitMesh);
-        appState.clickable3DArtifacts.push(portraitMesh);
-
-        const backMesh = portraitMesh.clone();
-        backMesh.position.set(0, 0.18, -STELE_PORTRAIT_Z);
-        backMesh.rotation.y = Math.PI;
-        backMesh.userData = steleArtifact;
-        post.add(backMesh);
-        appState.clickable3DArtifacts.push(backMesh);
-      });
-    }
+    });
   });
 
   // Devoted 2nd-Grade Teacher Ms. Zohreh Shahriyari Courtyard Stand (Station 1)
   const zohrehTeacher = teachersList.find((t) => t.id === 'zohreh-shahriyari');
   if (zohrehTeacher) {
-    const standLegsMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.48, metalness: 0.42 });
-    [-0.36, 0.36].forEach((lx) => {
-      const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.026, 0.032, 1.25, 10), standLegsMat);
-      leg.position.set(8.25 + lx * Math.cos(0.35), 0.625, 4.15 - lx * Math.sin(0.35));
-      leg.castShadow = true;
-      preStrikeModelGroup.add(leg);
+    // Same stele as the Memorial Avenue, standing in line with the 01_B screen stele
+    // (x = 8.0, z = 9.5, tour-config.js) and facing east over the assembly lines.
+    const tx = 8.0;
+    const tz = 7.9;
+    const tRot = Math.PI / 2;
+    createCourtyardStele(preStrikeModelGroup, loader, zohrehTeacher, {
+      x: tx,
+      z: tz,
+      rotY: tRot,
+      wingLabel: 'Morning Schoolyard · Martyred 2nd-Grade Teacher Zohreh Shahriyari & Unborn Son',
+      focusCam: new THREE.Vector3(tx + 2.25, 1.45, tz),
+      lookAt: new THREE.Vector3(tx, 1.15, tz),
     });
-    create3DFramedPortraitOnWall(
-      preStrikeModelGroup,
-      loader,
-      zohrehTeacher,
-      8.25,
-      1.38,
-      4.15,
-      0.35,
-      1.02,
-      1.24,
-      0xd4a853,
-      0,
-      'Morning Schoolyard · Martyred 2nd-Grade Teacher Zohreh Shahriyari & Unborn Son',
-      2.25
-    );
   }
 
   if (!groundFloorGroup || !firstFloorGroup) return;
@@ -927,34 +934,20 @@ export function populate3DSchoolPortraitsAndDrawings() {
       );
     }
   }
-  // Remaining grade 4-6 boys stand in the schoolyard on posts, in one row just south of the
+  // Remaining grade 4-6 boys stand in the schoolyard as steles, in one row just south of the
   // morning assembly lines (the lines' green border ends at Z = 12.55), facing north.
   const yardFrames = boysGrades4to6.slice(b4Idx, b4Idx + 10);
-  const yardPostMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.48, metalness: 0.42 });
   yardFrames.forEach((child, i) => {
     const fx = 16.5 + (i - (yardFrames.length - 1) / 2) * 1.3;
     const fz = 13.8;
-    [-0.3, 0.3].forEach((lx) => {
-      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.026, 0.032, 1.3, 10), yardPostMat);
-      post.position.set(fx + lx, 0.65, fz + 0.07);
-      post.castShadow = true;
-      preStrikeModelGroup.add(post);
+    createCourtyardStele(preStrikeModelGroup, loader, child, {
+      x: fx,
+      z: fz,
+      rotY: Math.PI,
+      wingLabel: 'Schoolyard · Boys Grades 4–6',
+      focusCam: new THREE.Vector3(fx, 1.45, fz - 2.25),
+      lookAt: new THREE.Vector3(fx, 1.15, fz),
     });
-    create3DFramedPortraitOnWall(
-      preStrikeModelGroup,
-      loader,
-      child,
-      fx,
-      1.38,
-      fz,
-      Math.PI,
-      0.84,
-      1.02,
-      0xd4a853,
-      2,
-      'Schoolyard · Boys Grades 4–6',
-      2.25
-    );
   });
 
   // 4. CENTRAL HALL & RAINBOW STAIRCASE: ALL 26 MARTYRED FEMALE EDUCATORS

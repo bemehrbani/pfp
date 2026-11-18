@@ -20,6 +20,46 @@ function lerpScalar(a, b, t) {
 }
 
 /**
+ * Smooth (no stop-and-go) waypoint sampling for stops that set `smoothSpline`.
+ * Cubic Hermite on each channel with finite-difference tangents, so the camera keeps moving
+ * through waypoints instead of easing to a halt at each one. A waypoint that repeats its
+ * neighbour's value is a deliberate hold: its tangent is zero so the camera settles there,
+ * and the first and last waypoints also start and end at rest.
+ */
+function hermiteChannel(pts, key, axis, p) {
+  const n = pts.length;
+  let i = n - 2;
+  for (let k = 0; k < n - 1; k++) {
+    if (p <= pts[k + 1].t) {
+      i = k;
+      break;
+    }
+  }
+  const tangent = (j) => {
+    if (j <= 0 || j >= n - 1) return 0;
+    const prev = pts[j - 1][key][axis];
+    const cur = pts[j][key][axis];
+    const next = pts[j + 1][key][axis];
+    if (prev === cur || cur === next) return 0;
+    return (next - prev) / (pts[j + 1].t - pts[j - 1].t);
+  };
+  const t0 = pts[i].t;
+  const t1 = pts[i + 1].t;
+  const h = Math.max(0.0001, t1 - t0);
+  const s = clampUnit((p - t0) / h);
+  const p0 = pts[i][key][axis];
+  const p1 = pts[i + 1][key][axis];
+  const s2 = s * s;
+  const s3 = s2 * s;
+  return (
+    (2 * s3 - 3 * s2 + 1) * p0 +
+    (s3 - 2 * s2 + s) * h * tangent(i) +
+    (-2 * s3 + 3 * s2) * p1 +
+    (s3 - s2) * h * tangent(i + 1)
+  );
+}
+
+/**
  * Pure waypoint interpolation helper: returns plain coordinate arrays, so it needs no
  * renderer and stays usable from Node-side tooling.
  * @param {number} stopIndex
@@ -38,6 +78,13 @@ export function sampleGuidedTourCameraCoords(stopIndex, rawProgress) {
         ];
 
   const p = clampUnit(rawProgress);
+  if (stop.smoothSpline && pts.every((w) => typeof w.t === 'number')) {
+    const axes = [0, 1, 2];
+    return {
+      pos: axes.map((ax) => hermiteChannel(pts, 'camPos', ax, p)),
+      lookAt: axes.map((ax) => hermiteChannel(pts, 'lookAt', ax, p)),
+    };
+  }
   let a = pts[0];
   let b = pts[pts.length - 1];
   let localT = 0;

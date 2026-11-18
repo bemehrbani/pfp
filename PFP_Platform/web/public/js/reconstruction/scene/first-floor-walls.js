@@ -14,12 +14,6 @@ const FLOOR_Y = 3.6;
 const DOOR_BASE = 0.1;
 const door = (at) => ({ type: 'door', at, base: DOOR_BASE });
 
-/** Sage-green dado on both faces of a wall; `axis` is the direction the wall runs along. */
-const dado = (axis) => {
-  const sides = axis === 'x' ? ['N', 'S'] : ['E', 'W'];
-  return sides.map((side) => ({ side, mat: 'sage', y0: 0, y1: 1.45, t: 0.03 }));
-};
-
 export const FIRST_FLOOR_WALLS = [
   // ---------------------------------------------------------------- Exterior envelope
   {
@@ -81,51 +75,84 @@ export const FIRST_FLOOR_WALLS = [
       { type: 'window', at: 21.2, w: 1.55, h: 1.05, sill: 1.625, mullions: 1 },
       { type: 'window', at: 25.4, w: 1.55, h: 1.05, sill: 1.625, mullions: 1 },
       { type: 'window', at: 32.8, w: 2.45, h: 0.68, sill: 2.11, mullions: 3 },
+      // Top of the rear staircase door (G-08 opening starts at 1.955 m, a 2.1 m door ends at 4.055 m)
+      { type: 'hole', at: 18.48, w: 1.1, h: 0.46, sill: 0 },
     ],
   },
 
   // ---------------------------------------------------------------- Girls' hall and west wing
+  // The middle of the floor is one big hall (x -7.8..7.5, z -8.6..-3.3), bounded north by the shallow
+  // north rooms, which end at z = -8.6, level with the top of the stairs. At each end a narrow hallway:
+  //   west  x -11.5..-7.8, z -6.5..-4.5, between the two pink rooms, to the big west room through F-09;
+  //   east  x 7.5..11.33, z -7.4..-5.2, to the door into the NE archive room.
   {
-    id: 'F-09', note: "Girls' west assembly hall, east partition (open double-door gap at Z = -5.8)",
+    id: 'F-09', note: "Girls' west assembly hall, east partition (open double-door gap centred in the west hallway, Z = -5.5)",
     from: [-11.5, -13.0], to: [-11.5, 2.4], y0: FLOOR_Y,
-    openings: [{ type: 'doorway', at: 7.2, w: 2.0, h: 2.65 }],
+    openings: [{ type: 'doorway', at: 7.5, w: 1.8, h: 2.65 }],
   },
   {
-    id: 'F-10', note: 'Spine corridor, south wall',
-    from: [-11.5, -4.6], to: [7.5, -4.6], y0: FLOOR_Y, liners: dado('x'),
-    openings: [door(2.4), door(7.3), door(12.5), door(17.0)],
+    id: 'F-10', note: 'Hall, south wall (pink room and three classrooms)',
+    from: [-7.2, -3.3], to: [7.5, -3.3], y0: FLOOR_Y,
+    openings: [door(2.45), door(7.35), door(12.25)],
   },
   {
-    id: 'F-11', note: 'Spine corridor, north wall, west of the stairwell',
-    from: [-11.5, -7.4], to: [-3.8, -7.4], y0: FLOOR_Y, liners: dado('x'),
-    openings: [door(1.9), door(6.2)],
+    id: 'F-28', note: 'West hallway, south wall (north wall of the SW pink room, which reaches further north than the classrooms)',
+    from: [-11.5, -4.5], to: [-7.2, -4.5], y0: FLOOR_Y,
+    openings: [door(3.3)],
   },
   {
-    id: 'F-12', note: 'Spine corridor, north wall, east of the stairwell',
-    from: [0.0, -7.4], to: [19.0, -7.4], y0: FLOOR_Y,
-    openings: [door(2.1), door(6.2), door(8.05)],
+    id: 'F-11', note: 'Hall, north wall, west of the stairwell (shallow room, z -13..-8.6, level with the top of the stairs)',
+    from: [-7.8, -8.6], to: [-2.24, -8.6], y0: FLOOR_Y,
+    openings: [door(2.3)],
+  },
+  {
+    id: 'F-12', note: 'Hall, north wall, east of the stairwell (one shallow room, z -13..-8.6, running east to the NE archive room wall F-23)',
+    from: [1.2, -8.6], to: [8.5, -8.6], y0: FLOOR_Y,
+    openings: [door(0.9)],
+  },
+  {
+    id: 'F-27', note: 'East hallway and east classrooms, north wall (south wall of the NE archive room)',
+    from: [8.5, -7.4], to: [19.0, -7.4], y0: FLOOR_Y,
+    openings: [door(1.0)],
+  },
+  {
+    id: 'F-25', note: 'West hallway, north wall (south wall of the NW pink room)',
+    from: [-11.5, -6.5], to: [-7.8, -6.5], y0: FLOOR_Y,
   },
 
   // ---------------------------------------------------------------- South classrooms
-  { id: 'F-13', note: 'South classroom partition, west', from: [-6.8, -4.6], to: [-6.8, 0.5], y0: FLOOR_Y, mat: 'pink', liners: dado('z') },
-  { id: 'F-14', note: 'South classroom partition, middle', from: [-1.6, -4.6], to: [-1.6, 0.5], y0: FLOOR_Y, mat: 'pink', liners: dado('z') },
-  { id: 'F-15', note: 'South classroom partition, east', from: [3.6, -4.6], to: [3.6, 0.5], y0: FLOOR_Y, liners: dado('z') },
+  { id: 'F-13', note: 'South classroom partition, west (continues as the west step return)', from: [-7.2, -4.5], to: [-7.2, 0.5], y0: FLOOR_Y },
+  { id: 'F-14', note: 'South classroom partition, middle', from: [-2.3, -3.3], to: [-2.3, 0.5], y0: FLOOR_Y },
+  { id: 'F-15', note: 'South classroom partition, east', from: [2.6, -3.3], to: [2.6, 0.5], y0: FLOOR_Y },
   {
-    id: 'F-16', note: 'East wing classroom west wall',
-    from: [7.5, -7.4], to: [7.5, 2.4], y0: FLOOR_Y,
-    openings: [door(1.6)],
+    id: 'F-16', note: 'East wing classroom 1, west wall (door onto the hall)',
+    from: [7.5, -5.2], to: [7.5, 2.4], y0: FLOOR_Y,
+    openings: [door(1.0)],
+  },
+  // The east wing is classroom 1 (x 7.5..11.33, starting at the east hallway, z = -5.2) and one big
+  // classroom (x 11.33..19) running from the north wall F-27.
+  {
+    id: 'F-26', note: 'East wing classroom 1, north wall (south side of the east hallway)',
+    from: [7.5, -5.2], to: [11.33, -5.2], y0: FLOOR_Y,
   },
   {
-    id: 'F-17', note: 'East wing classroom cross wall',
-    from: [7.5, -2.2], to: [19.0, -2.2], y0: FLOOR_Y,
-    openings: [door(3.0)],
+    id: 'F-17', note: 'East wing, partition between classroom 1 and the big classroom',
+    from: [11.33, -7.4], to: [11.33, 2.4], y0: FLOOR_Y,
+    // End of the east hallway (z = -6.3) into classroom 2, and classroom 1 <-> 2 (z = -3.9)
+    openings: [door(1.1), door(3.5)],
   },
-  { id: 'F-18', note: 'East wing classroom partition', from: [13.5, -7.4], to: [13.5, -2.2], y0: FLOOR_Y },
 
   // ---------------------------------------------------------------- North classrooms and stairwell
-  { id: 'F-19', note: 'North classroom partition, west', from: [-7.8, -13.0], to: [-7.8, -7.4], y0: FLOOR_Y, mat: 'pink', liners: dado('z') },
-  { id: 'F-20', note: 'Stairwell upper guard wall, west', from: [-3.8, -13.0], to: [-3.8, -7.4], t: 0.22, y0: FLOOR_Y },
-  { id: 'F-21', note: 'Stairwell upper guard wall, east', from: [0.02, -13.0], to: [0.02, -7.4], t: 0.22, y0: FLOOR_Y },
-  { id: 'F-22', note: 'North classroom partition, east', from: [4.2, -13.0], to: [4.2, -7.4], y0: FLOOR_Y, mat: 'pink', liners: dado('z') },
-  { id: 'F-23', note: 'NE rubble archive, west partition', from: [8.5, -13.0], to: [8.5, -7.85], t: 0.22, y0: FLOOR_Y },
+  {
+    id: 'F-19', note: 'NW pink room, east wall',
+    from: [-7.8, -13.0], to: [-7.8, -6.5], y0: FLOOR_Y,
+    openings: [door(5.4)], // faces east, onto the hall
+  },
+  { id: 'F-20', note: 'Stairwell upper guard wall, west', from: [-2.24, -13.0], to: [-2.24, -8.6], t: 0.22, y0: FLOOR_Y },
+  { id: 'F-21', note: 'Stairwell upper guard wall, east (stacks on G-23)', from: [1.2, -13.0], to: [1.2, -8.6], t: 0.22, y0: FLOOR_Y },
+  {
+    id: 'F-23', note: 'NE rubble archive, west wall (door from the hall at z = -8.0)',
+    from: [8.5, -13.0], to: [8.5, -7.4], t: 0.22, y0: FLOOR_Y,
+    openings: [door(5.0)],
+  },
 ];

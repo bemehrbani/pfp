@@ -107,18 +107,43 @@ export function renderInWorldPlaqueCanvas(screen) {
   }
 }
 
+const SCREEN_CANVAS_W = 1280;
+
+/**
+ * Backing-canvas height for a screen. Stele screens use their own aspect so the texture maps
+ * 1:1 onto the plane; every other screen keeps the 16:9 canvas.
+ */
+function screenCanvasHeight(screen) {
+  const { w, h, style } = screen.spec;
+  return style === 'stele' ? Math.round((SCREEN_CANVAS_W * h) / w) : 720;
+}
+
+/**
+ * Letterbox (contain) fit: draws `src` as large as fits inside the canvas without changing
+ * its aspect ratio, on a dark backdrop, so nothing is stretched or cropped.
+ */
+function drawContained(ctx, src, srcW, srcH, cw, ch) {
+  ctx.fillStyle = '#0b0f1a';
+  ctx.fillRect(0, 0, cw, ch);
+  if (!srcW || !srcH) return;
+  const scale = Math.min(cw / srcW, ch / srcH);
+  const dw = srcW * scale;
+  const dh = srcH * scale;
+  ctx.drawImage(src, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+}
+
 function ensureInWorldScreenCanvas(screen) {
   if (!screen) return null;
   if (!screen.screenCanvas) {
     const screenCanvas = document.createElement('canvas');
-    screenCanvas.width = 1280;
-    screenCanvas.height = 720;
+    screenCanvas.width = SCREEN_CANVAS_W;
+    screenCanvas.height = screenCanvasHeight(screen);
     const screenCtx = screenCanvas.getContext('2d');
     screenCtx.fillStyle = '#0f172a';
-    screenCtx.fillRect(0, 0, 1280, 720);
+    screenCtx.fillRect(0, 0, screenCanvas.width, screenCanvas.height);
     if (screen.posterTex && screen.posterTex.image) {
       try {
-        screenCtx.drawImage(screen.posterTex.image, 0, 0, 1280, 720);
+        screenCtx.drawImage(screen.posterTex.image, 0, 0, screenCanvas.width, screenCanvas.height);
       } catch (_) {}
     }
     screen.screenCanvas = screenCanvas;
@@ -134,7 +159,9 @@ export function drawPosterToInWorldScreen(screen) {
   if (screen.posterLoaded && screen.posterTex) {
     if (screen.screenCtx && screen.posterTex.image) {
       try {
-        screen.screenCtx.drawImage(screen.posterTex.image, 0, 0, 1280, 720);
+        screen.screenCtx.drawImage(
+          screen.posterTex.image, 0, 0, screen.screenCanvas.width, screen.screenCanvas.height
+        );
         if (screen.canvasTex) screen.canvasTex.needsUpdate = true;
       } catch (_) {}
     }
@@ -157,7 +184,10 @@ export function drawVideoToInWorldScreen(screen) {
     const ctx = ensureInWorldScreenCanvas(screen);
     if (!ctx) return false;
     try {
-      ctx.drawImage(screen.videoEl, 0, 0, 1280, 720);
+      drawContained(
+        ctx, screen.videoEl, screen.videoEl.videoWidth, screen.videoEl.videoHeight,
+        screen.screenCanvas.width, screen.screenCanvas.height
+      );
       screen.canvasTex.needsUpdate = true;
       if (screen.screenMat.map !== screen.canvasTex) {
         screen.screenMat.color.setHex(0xffffff);
@@ -169,6 +199,49 @@ export function drawVideoToInWorldScreen(screen) {
     } catch (_) {}
   }
   return false;
+}
+
+/**
+ * Photo-slideshow screens (spec.images) have no <video>: the slides are painted onto the
+ * same 1280x720 canvas texture a video would use, each held for spec.slideSec seconds.
+ */
+function ensureSlideshowImages(screen) {
+  if (!screen.slideImages) {
+    screen.slideImages = screen.spec.images.map((url) => {
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = `${url}?v=${MEDIA_ASSET_VERSION}`;
+      return img;
+    });
+  }
+  return screen.slideImages;
+}
+
+export function drawSlideshowToInWorldScreen(screen, elapsedSec) {
+  if (!screen || !screen.screenMat || !screen.spec.images) return false;
+  const imgs = ensureSlideshowImages(screen);
+  const ctx = ensureInWorldScreenCanvas(screen);
+  if (!ctx || imgs.length === 0) return false;
+  const slideSec = screen.spec.slideSec || 3.5;
+  const idx = Math.floor(Math.max(0, elapsedSec) / slideSec) % imgs.length;
+  const img = imgs[idx];
+  if (!img.complete || !img.naturalWidth) return false;
+  try {
+    drawContained(
+      ctx, img, img.naturalWidth, img.naturalHeight,
+      screen.screenCanvas.width, screen.screenCanvas.height
+    );
+  } catch (_) {
+    return false;
+  }
+  screen.canvasTex.needsUpdate = true;
+  if (screen.screenMat.map !== screen.canvasTex) {
+    screen.screenMat.color.setHex(0xffffff);
+    screen.screenMat.map = screen.canvasTex;
+    screen.screenMat.needsUpdate = true;
+  }
+  screen.usingCanvasTex = true;
+  return true;
 }
 
 export function setInWorldScreenFocalState(screen, isFocal) {
@@ -213,27 +286,50 @@ export function buildAllInWorldWalkthroughScreens() {
     root.rotation.y = spec.rotY || 0;
     root.userData = { feature: 'in_world_video_screen', screenId: spec.id, hotspotId: spec.hotspotId };
 
-    const outerFrame = new THREE.Mesh(
-      new THREE.BoxGeometry(spec.w + 0.11, spec.h + 0.11, 0.045),
-      bezelMat
-    );
-    outerFrame.castShadow = true;
-    root.add(outerFrame);
+    const isStele = spec.style === 'stele';
+    let innerTrimMat = null;
+    let accentBarMat = null;
+    let screenPlaneZ = SCREEN_PLANE_Z;
 
-    const innerTrimMat = makeDecalMaterial({ color: 0x64748b, side: THREE.FrontSide });
-    const innerTrim = new THREE.Mesh(
-      new THREE.BoxGeometry(spec.w + 0.028, spec.h + 0.028, INNER_TRIM_DEPTH),
-      innerTrimMat
-    );
-    root.add(innerTrim);
+    if (isStele) {
+      // Same look as the Courtyard Memorial Avenue steles: dark slate slab with a gold rim,
+      // standing on the ground (slab bottom at y = 0.14, so spec.pos[1] = 0.14 + slabH / 2).
+      const STELE_SLAB_DEPTH = 0.1;
+      const slab = new THREE.Mesh(
+        new THREE.BoxGeometry(spec.w + 0.12, spec.h + 0.2, STELE_SLAB_DEPTH),
+        new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 })
+      );
+      slab.castShadow = true;
+      root.add(slab);
+      const rim = new THREE.Mesh(
+        new THREE.BoxGeometry(spec.w + 0.18, spec.h + 0.26, 0.07),
+        new THREE.MeshBasicMaterial({ color: 0xd4a853 })
+      );
+      root.add(rim);
+      screenPlaneZ = STELE_SLAB_DEPTH / 2 + FRAME_DECAL_GAP;
+    } else {
+      const outerFrame = new THREE.Mesh(
+        new THREE.BoxGeometry(spec.w + 0.11, spec.h + 0.11, 0.045),
+        bezelMat
+      );
+      outerFrame.castShadow = true;
+      root.add(outerFrame);
 
-    const accentBarMat = new THREE.MeshBasicMaterial({ color: 0x94a3b8 });
-    const accentBar = new THREE.Mesh(
-      new THREE.BoxGeometry(spec.w * 0.94, 0.028, 0.058),
-      accentBarMat
-    );
-    accentBar.position.set(0, spec.h / 2 + 0.04, 0.006);
-    root.add(accentBar);
+      innerTrimMat = makeDecalMaterial({ color: 0x64748b, side: THREE.FrontSide });
+      const innerTrim = new THREE.Mesh(
+        new THREE.BoxGeometry(spec.w + 0.028, spec.h + 0.028, INNER_TRIM_DEPTH),
+        innerTrimMat
+      );
+      root.add(innerTrim);
+
+      accentBarMat = new THREE.MeshBasicMaterial({ color: 0x94a3b8 });
+      const accentBar = new THREE.Mesh(
+        new THREE.BoxGeometry(spec.w * 0.94, 0.028, 0.058),
+        accentBarMat
+      );
+      accentBar.position.set(0, spec.h / 2 + 0.04, 0.006);
+      root.add(accentBar);
+    }
 
     const screenMat = makeDecalMaterial({
       color: 0x0f172a,
@@ -241,30 +337,36 @@ export function buildAllInWorldWalkthroughScreens() {
       toneMapped: false,
     });
     const screenPlane = new THREE.Mesh(new THREE.PlaneGeometry(spec.w, spec.h), screenMat);
-    screenPlane.position.set(0, 0, SCREEN_PLANE_Z);
+    screenPlane.position.set(0, 0, screenPlaneZ);
     root.add(screenPlane);
 
-    const plaqueCanvas = document.createElement('canvas');
-    plaqueCanvas.width = 1024;
-    plaqueCanvas.height = 136;
-    const plaqueTex = new THREE.CanvasTexture(plaqueCanvas);
-    plaqueTex.colorSpace = THREE.SRGBColorSpace;
-    const plaqueW = Math.min(spec.w * 0.94, 3.1);
-    const plaqueH = plaqueW * (136 / 1024);
-    const plaqueBacking = new THREE.Mesh(
-      new THREE.BoxGeometry(plaqueW + 0.04, plaqueH + 0.03, PLAQUE_BACKING_DEPTH),
-      bezelMat
-    );
-    const plaqueY = -spec.h / 2 - 0.055 - plaqueH / 2 - 0.035;
-    plaqueBacking.position.set(0, plaqueY, PLAQUE_BACKING_Z);
-    root.add(plaqueBacking);
+    // spec.noPlaque: bare frame, no caption plaque underneath (plaqueCanvas stays null,
+    // which renderInWorldPlaqueCanvas treats as "nothing to paint").
+    let plaqueCanvas = null;
+    let plaqueTex = null;
+    if (!spec.noPlaque) {
+      plaqueCanvas = document.createElement('canvas');
+      plaqueCanvas.width = 1024;
+      plaqueCanvas.height = 136;
+      plaqueTex = new THREE.CanvasTexture(plaqueCanvas);
+      plaqueTex.colorSpace = THREE.SRGBColorSpace;
+      const plaqueW = Math.min(spec.w * 0.94, 3.1);
+      const plaqueH = plaqueW * (136 / 1024);
+      const plaqueBacking = new THREE.Mesh(
+        new THREE.BoxGeometry(plaqueW + 0.04, plaqueH + 0.03, PLAQUE_BACKING_DEPTH),
+        bezelMat
+      );
+      const plaqueY = -spec.h / 2 - 0.055 - plaqueH / 2 - 0.035;
+      plaqueBacking.position.set(0, plaqueY, PLAQUE_BACKING_Z);
+      root.add(plaqueBacking);
 
-    const plaqueMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(plaqueW, plaqueH),
-      makeDecalMaterial({ map: plaqueTex, side: THREE.FrontSide, toneMapped: false })
-    );
-    plaqueMesh.position.set(0, plaqueY, PLAQUE_PLANE_Z);
-    root.add(plaqueMesh);
+      const plaqueMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(plaqueW, plaqueH),
+        makeDecalMaterial({ map: plaqueTex, side: THREE.FrontSide, toneMapped: false })
+      );
+      plaqueMesh.position.set(0, plaqueY, PLAQUE_PLANE_Z);
+      root.add(plaqueMesh);
+    }
 
     if (spec.hasLegs) {
       const floorLocalY = (typeof spec.legFloorY === 'number' ? spec.legFloorY : 0.02) - spec.pos[1];
@@ -298,8 +400,11 @@ export function buildAllInWorldWalkthroughScreens() {
       plaqueTex,
       accentBarMat,
       innerTrimMat,
-      posterUrl: `media/walkthrough_pip/posters/${spec.file}.jpg?v=${MEDIA_ASSET_VERSION}`,
-      videoUrl: `media/walkthrough_pip/${spec.file}.mp4?v=${MEDIA_ASSET_VERSION}`,
+      posterUrl: spec.noPoster ? null : `media/walkthrough_pip/posters/${spec.file}.jpg?v=${MEDIA_ASSET_VERSION}`,
+      videoUrl: spec.images ? null : `media/walkthrough_pip/${spec.file}.mp4?v=${MEDIA_ASSET_VERSION}`,
+      slideImages: null,
+      slideElapsed: 0,
+      slideLastMs: 0,
       posterTex: null,
       posterLoaded: false,
       videoEl: null,
@@ -311,14 +416,16 @@ export function buildAllInWorldWalkthroughScreens() {
 
     renderInWorldPlaqueCanvas(screenRecord);
 
-    posterLoader.load(screenRecord.posterUrl, (tex) => {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      screenRecord.posterTex = tex;
-      screenRecord.posterLoaded = true;
-      if (!screenRecord.usingCanvasTex) {
-        drawPosterToInWorldScreen(screenRecord);
-      }
-    });
+    if (screenRecord.posterUrl) {
+      posterLoader.load(screenRecord.posterUrl, (tex) => {
+        tex.colorSpace = THREE.SRGBColorSpace;
+        screenRecord.posterTex = tex;
+        screenRecord.posterLoaded = true;
+        if (!screenRecord.usingCanvasTex) {
+          drawPosterToInWorldScreen(screenRecord);
+        }
+      });
+    }
 
     appState.inWorldScreens.push(screenRecord);
   });
@@ -381,7 +488,7 @@ function releaseInactiveInWorldDecoders(keepHotspotId) {
 }
 
 export function ensureInWorldScreenVideoElement(screen) {
-  if (!screen || typeof document === 'undefined') return Promise.resolve(null);
+  if (!screen || typeof document === 'undefined' || !screen.videoUrl) return Promise.resolve(null);
   screen.lastUsedAt = typeof performance !== 'undefined' ? performance.now() : Date.now();
   if (screen.videoReadyPromise) {
     return screen.videoReadyPromise;
@@ -404,7 +511,7 @@ export function ensureInWorldScreenVideoElement(screen) {
   vid.playsInline = true;
   vid.setAttribute('playsinline', '');
   vid.setAttribute('webkit-playsinline', '');
-  vid.loop = !appState.isGuidedTour;
+  vid.loop = Boolean(screen.spec.loop) || !appState.isGuidedTour;
   vid.preload = 'auto';
   vid.width = 320;
   vid.height = 180;
@@ -508,6 +615,24 @@ export function updateInWorldScreensLive(activeHotspotIdForScreens, progress) {
     const isCueWindow = isGuidedTour ? p >= cue.start && p <= cue.end : true;
     setInWorldScreenFocalState(sc, isCueWindow);
 
+    if (sc.spec.images) {
+      // Slideshow clock: starts when the cue opens and only advances while narration plays,
+      // mirroring how the muted videos pause with the audio.
+      const nowMs = performance.now();
+      const shouldRun = !isGuidedTour || p >= cue.start;
+      if (!prefersReduced && shouldRun) {
+        if (!sc.cueStartedInLiveRun) {
+          sc.cueStartedInLiveRun = true;
+          sc.slideElapsed = 0;
+          sc.slideLastMs = nowMs;
+        }
+        if (audioPlaying) sc.slideElapsed += (nowMs - sc.slideLastMs) / 1000;
+        sc.slideLastMs = nowMs;
+      }
+      drawSlideshowToInWorldScreen(sc, prefersReduced || !shouldRun ? 0 : sc.slideElapsed);
+      return;
+    }
+
     if (prefersReduced) {
       if (sc.videoEl && !sc.videoEl.paused) sc.videoEl.pause();
       drawPosterToInWorldScreen(sc);
@@ -517,7 +642,7 @@ export function updateInWorldScreensLive(activeHotspotIdForScreens, progress) {
     ensureInWorldScreenVideoElement(sc);
     const vid = sc.videoEl;
     if (!vid) return;
-    vid.loop = !isGuidedTour;
+    vid.loop = Boolean(sc.spec.loop) || !isGuidedTour;
 
     const shouldPlayNow = !isGuidedTour || p >= cue.start;
     if (shouldPlayNow) {
@@ -565,6 +690,14 @@ export async function seekInWorldScreensDeterministic(hotspotId, progress, total
       const isFocal = progress >= cue.start && progress <= cue.end;
       setInWorldScreenFocalState(sc, isFocal);
 
+      if (sc.spec.images) {
+        const elapsed = progress >= cue.start ? (progress - cue.start) * (totalStationSec || 60.0) : 0;
+        const imgs = ensureSlideshowImages(sc);
+        await Promise.all(imgs.map((img) => (img.decode ? img.decode().catch(() => {}) : null)));
+        drawSlideshowToInWorldScreen(sc, elapsed);
+        return;
+      }
+
       const vid = await ensureInWorldScreenVideoElement(sc);
       if (!vid) {
         drawPosterToInWorldScreen(sc);
@@ -581,7 +714,8 @@ export async function seekInWorldScreensDeterministic(hotspotId, progress, total
       let targetTime = 0.45;
       if (progress >= cue.start) {
         const elapsedOnCue = Math.max(0, (progress - cue.start) * (totalStationSec || 60.0));
-        targetTime = Math.min(safeDur, 0.4 + elapsedOnCue);
+        // spec.loop screens wrap around like they do live; the rest hold their last frame.
+        targetTime = sc.spec.loop ? (0.4 + elapsedOnCue) % safeDur : Math.min(safeDur, 0.4 + elapsedOnCue);
       }
 
       if (Math.abs((vid.currentTime || 0) - targetTime) > 0.022) {

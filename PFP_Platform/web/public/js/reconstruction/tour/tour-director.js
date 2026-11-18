@@ -209,7 +209,9 @@ export async function preloadAllWalkthroughPipBlobs() {
   const pipUrls = Object.values(WALKTHROUGH_VISUAL_CONFIG)
     .map((c) => withMediaVersion(c.pipReel))
     .filter(Boolean);
-  const screenUrls = IN_WORLD_SCREEN_SPECS.map((s) => `media/walkthrough_pip/${s.file}.mp4?v=${MEDIA_ASSET_VERSION}`);
+  const screenUrls = IN_WORLD_SCREEN_SPECS.filter((s) => !s.images).map(
+    (s) => `media/walkthrough_pip/${s.file}.mp4?v=${MEDIA_ASSET_VERSION}`
+  );
   const interludeUrls = Object.values(WALKTHROUGH_INTERLUDES).map((c) => withMediaVersion(c.src));
   const all = Array.from(new Set([...pipUrls, ...screenUrls, ...interludeUrls]));
   const prevMode = appState.recordingMode;

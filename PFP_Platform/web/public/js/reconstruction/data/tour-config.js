@@ -8,19 +8,25 @@ export const MEDIA_ASSET_VERSION = '20261115a';
 export const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'courtyard_lines',
+    smoothSpline: true,
     temporal: 0.0,
     cutawayMode: 0,
-    camPos: [4.5, 2.75, 13.8],
-    lookAt: [3.2, 2.05, 4.0],
+    camPos: [9.0, 1.90, 8.25],
+    lookAt: [25.0, 1.90, 8.25],
     waypoints: [
-      { t: 0.00, camPos: [4.5, 2.75, 13.8], lookAt: [10.5, 1.30, 7.5] },
-      { t: 0.14, camPos: [5.8, 2.35, 11.4], lookAt: [12.5, 0.75, 8.0] },
-      { t: 0.28, camPos: [14.0, 2.10, 8.2], lookAt: [25.85, 1.65, 2.74] },
-      { t: 0.42, camPos: [25.85, 1.95, 6.7], lookAt: [25.85, 1.85, 2.74] },
-      { t: 0.56, camPos: [11.6, 1.62, 7.4], lookAt: [8.25, 1.36, 4.15] },
-      { t: 0.68, camPos: [10.4, 1.56, 6.8], lookAt: [7.6, 1.45, 3.6] },
-      { t: 0.78, camPos: [-3.95, 1.88, 6.55], lookAt: [-8.12, 1.75, 6.55] },
-      { t: 1.00, camPos: [-3.95, 1.88, 6.55], lookAt: [-8.12, 1.75, 6.55] }
+      // Level camera: eye height and gaze height are fixed at 1.9 m for the whole stop (no
+      // pitch, no bobbing). The stop starts at (9, 8.25), 16 m back from the east steles; the
+      // tour-start fly-in targets camPos/lookAt above, which equal this first waypoint, so
+      // there is no jump. A slow straight walk in to (16, 8.25), a hold with all four east
+      // steles in view, then one turn east -> south -> west.
+      { t: 0.00, camPos: [9.0, 1.90, 8.25], lookAt: [25.0, 1.90, 8.25] },
+      { t: 0.34, camPos: [16.0, 1.90, 8.25], lookAt: [25.0, 1.90, 8.25] },
+      { t: 0.56, camPos: [16.0, 1.90, 8.25], lookAt: [25.0, 1.90, 8.25] },
+      { t: 0.6125, camPos: [16.0, 1.90, 8.50], lookAt: [24.0, 1.90, 14.50] },
+      { t: 0.665, camPos: [16.0, 1.90, 8.90], lookAt: [17.5, 1.90, 19.50] },
+      { t: 0.7175, camPos: [15.8, 1.90, 9.30], lookAt: [9.0, 1.90, 15.00] },
+      { t: 0.77, camPos: [15.5, 1.90, 9.00], lookAt: [8.0, 1.90, 8.90] },
+      { t: 1.00, camPos: [12.5, 1.90, 9.00], lookAt: [8.0, 1.90, 8.90] }
     ],
     shortBadge: { en: "01 / 08", fi: "01 / 08", fa: "۰۱ / ۰۸" },
     badge: { en: "STOP 1 OF 8 · COURTYARD YELLOW ASSEMBLY LINES", fi: "PISTE 1/8 · KOULUPIHAN AAMURIVIT", fa: "ایستگاه ۱ از ۸ · خطوط زرد صف صبحگاهی در حیاط" }
@@ -168,35 +174,48 @@ export const HOTSPOT_CONFIGS = [
 
 export const IN_WORLD_SCREEN_SPECS = [
   // Station 1: Courtyard Morning Lines (mounted in preStrikeModelGroup so post-strike yard stays clean)
+  // Yard steles, all facing the yard. They copy the Courtyard Memorial Avenue steles (dark
+  // slab, gold rim, on the ground): style 'stele', no plaque, no poster. The media area is
+  // letterboxed inside the slab, never stretched. Media lives in media/walkthrough_pip/yard/.
+  // EAST: three steles in a row at x = 25.0 facing west over the lines (A, C, D), with the
+  // 16:9 video stele (E) stacked on top of the middle one. The row starts south of the pastel
+  // dividing wall (Z = 2.4) and stays clear of the yard portrait steles (Z = 13.8, X <= 22.8).
+  // WEST: the schoolyard still-photo stele (01_B) with Ms. Shahriyari's stele beside it,
+  // in one line at x = 8.0 facing east (the teacher's is built in memorial-gallery.js).
   {
     id: '01_A', hotspotId: 'courtyard_lines', slot: 'A', groupKey: 'preStrike',
-    file: '01_sync_morning_queue', durationSec: 27.4, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
-    pos: [25.85, 1.90, 2.74], rotY: 0, w: 4.10, h: 2.31, hasLegs: false,
-    badge: {
-      en: 'MORNING QUEUE · SIX YELLOW LINES & SCHOOLBAGS',
-      fi: 'AAMUJONO · KUUSI KELTAISTA VIIVAA JA KOULUREPUT',
-      fa: 'صف صبحگاهی · شش خط زرد و کیف‌های مدرسه'
-    },
-    caption: {
-      en: 'Six bright yellow morning assembly lines with their standing circles, and the children\'s schoolbags resting beside them.',
-      fi: 'Kuusi kirkkaankeltaista aamunavausviivaa seisontaympyröineen sekä lasten koulureput niiden vieressä.',
-      fa: 'شش خط زرد صف صبحگاهی با دایره‌های ایستادن و کیف‌های مدرسه کودکان در کنار آن‌ها.'
-    }
+    file: 'yard/yard_video_01', style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 30, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
+    pos: [25.00, 1.54, 4.45], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
+    id: '01_C', hotspotId: 'courtyard_lines', slot: 'C', groupKey: 'preStrike',
+    file: 'yard/yard_video_02', style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 30, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
+    pos: [25.00, 1.54, 8.25], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
+    id: '01_D', hotspotId: 'courtyard_lines', slot: 'D', groupKey: 'preStrike',
+    images: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `media/walkthrough_pip/yard/yard_photo_0${n}.jpg`),
+    slideSec: 3.5, style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 28, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
+    pos: [25.00, 1.54, 12.05], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
+    id: '01_E', hotspotId: 'courtyard_lines', slot: 'E', groupKey: 'preStrike',
+    file: 'yard/yard_video_03', style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 30, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
+    pos: [25.00, 3.93, 8.25], rotY: -Math.PI / 2, w: 3.00, h: 1.69, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '01_B', hotspotId: 'courtyard_lines', slot: 'B', groupKey: 'preStrike',
-    file: '01_sync_porch_still', durationSec: 23.0, cueStartP: 0.539, cueEndP: 0.991, cueStartPFa: 0.587, cueEndPFa: 0.975, cueStartPFi: 0.513, cueEndPFi: 0.987,
-    pos: [-8.12, 1.84, 6.55], rotY: Math.PI / 2, w: 3.80, h: 2.14, hasLegs: false,
-    badge: {
-      en: 'SCHOOLYARD ON FEB 28 · GATE, CLASSROOMS & FIRST STRIKE SMOKE',
-      fi: 'KOULUPIHA 28.2. · PORTTI, LUOKAT JA ENSIMMÄISEN ISKUN SAVU',
-      fa: 'حیاط دبستان در ۹ اسفند · سردر، کلاس‌ها و دود نخستین اصابت'
-    },
-    caption: {
-      en: 'The schoolyard and painted gate on the morning of February 28, where Ms. Zohreh Shahriari ran toward the classrooms as the strikes hit.',
-      fi: 'Koulupiha ja maalattu portti 28. helmikuuta aamulla, kun opettaja Zohreh Shahriari juoksi kohti luokkia iskujen osuessa.',
-      fa: 'حیاط و سردر مدرسه در صبح ۹ اسفند، جایی که خانم زهره شهریاری هنگام اصابت موشک‌ها به سوی کلاس‌ها دوید.'
-    }
+    file: 'yard/yard_video_04', loop: true, style: 'stele', noPoster: true, noPlaque: true, durationSec: 30.0, cueStartP: 0.539, cueEndP: 0.991, cueStartPFa: 0.587, cueEndPFa: 0.975, cueStartPFi: 0.513, cueEndPFi: 0.987,
+    pos: [8.00, 1.49, 9.50], rotY: Math.PI / 2, w: 1.40, h: 2.50, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 2: Ground-Floor Boys' Ceremony Room & Colorful Playroom
   {

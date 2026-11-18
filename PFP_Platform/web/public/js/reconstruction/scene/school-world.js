@@ -535,14 +535,12 @@ export function buildProceduralSchoolModels() {
   const floorGrey = new THREE.MeshStandardMaterial({ color: 0x9ca3af, roughness: 0.85 });
   const floorGreen = new THREE.MeshStandardMaterial({ color: 0x5c7a62, roughness: 0.80 });
   const floorBrown = new THREE.MeshStandardMaterial({ color: 0x9c7b56, roughness: 0.82 });
-  const floorLilac = new THREE.MeshStandardMaterial({ color: 0xa5a1bd, roughness: 0.82 });
   const tealWall = createPaintedPlasterMaterial(0x4f8694);
   const rearTealExt = createPaintedPlasterMaterial(0x3b7687);
   const skyBlueWall = createPaintedPlasterMaterial(0x88b8cb);
   const mintGreenWall = createPaintedPlasterMaterial(0x9ec4a5);
   const yellowFacade = createPaintedPlasterMaterial(0xd8d278);
   const pinkWall = createPaintedPlasterMaterial(0xd4839d);
-  const sageGreenWall = createPaintedPlasterMaterial(0x7fa382);
   // Sills, window mullions and trims are too narrow for a 2 m texture tile, so
   // they keep the flat whitewash colour.
   const trimWhiteMat = new THREE.MeshStandardMaterial({ color: 0xedeff2, roughness: 0.82 });
@@ -604,17 +602,18 @@ export function buildProceduralSchoolModels() {
 
   // Two-tone classroom partition helper (Sage lower dado + Pink upper wall, matching FA-121 1st Floor)
   // Signature pink classroom door + Dark Transom Window
-  function addPurpleDoor(group, x, yBase, z, rotY, depth = 0.28, openTransom = false) {
+  function addPurpleDoor(group, x, yBase, z, rotY, depth = 0.28, openTransom = false, width = 1.06) {
     const dGroup = new THREE.Group();
     dGroup.position.set(x, yBase, z);
     dGroup.rotation.y = rotY;
-    const door = new THREE.Mesh(new THREE.BoxGeometry(1.06, 2.08, depth), purpleDoorMat);
+    // The leaf is 2 cm wider than the hole cut for it, so its edges sit inside the jambs.
+    const door = new THREE.Mesh(new THREE.BoxGeometry(width + 0.04, 2.08, depth), purpleDoorMat);
     door.position.set(0, 1.04, 0);
     dGroup.add(door);
     // Doors in cut walls (see buildWalls) leave the transom as an open hole; doors set into
     // solid walls keep the dark pane.
     if (!openTransom) {
-      const transom = new THREE.Mesh(new THREE.BoxGeometry(1.06, 0.50, depth + 0.01), darkGlassMat);
+      const transom = new THREE.Mesh(new THREE.BoxGeometry(width, 0.50, depth + 0.01), darkGlassMat);
       transom.position.set(0, 2.38, 0);
       dGroup.add(transom);
     }
@@ -757,7 +756,7 @@ export function buildProceduralSchoolModels() {
     },
     addWindow: (g, x, y, z, rotY, w, h, mullions, sunshade, depth) =>
       addExteriorWindow(g, x, y, z, rotY, w, h, mullions, sunshade, depth, true),
-    addDoor: (g, x, yBase, z, rotY, depth) => addPurpleDoor(g, x, yBase, z, rotY, depth, true),
+    addDoor: (g, x, yBase, z, rotY, depth, width) => addPurpleDoor(g, x, yBase, z, rotY, depth, true, width),
     addGrille: addPinkGrilledRoomWindow,
   };
   appState.wallRegistry = buildWalls(GROUND_FLOOR_WALLS, groundWallCtx);
@@ -767,49 +766,80 @@ export function buildProceduralSchoolModels() {
   rainbowStairGroup.name = "Enclosed_Rainbow_Stairwell";
   rainbowStairGroup.userData = { feature: 'enclosed_rainbow_stairwell' };
 
-  // 12 Rainbow Treads rising North (Z: -8.35..-12.55, Y: 0.32..3.52) — bottom 5 match narration: yellow, blue, pink, green, red
-  const rainbowColors = [
-    0xeab308, 0x3b82f6, 0xec4899, 0x22c55e, 0xef4444, 0x3b82f6,
-    0xef4444, 0x22c55e, 0xec4899, 0xeab308, 0x38bdf8, 0xf43f5e
-  ];
-  for (let s = 0; s < 12; s++) {
-    const tread = new THREE.Mesh(
-      new THREE.BoxGeometry(2.15, 0.29, 0.38),
-      new THREE.MeshStandardMaterial({ color: rainbowColors[s], roughness: 0.48 })
-    );
-    tread.position.set(-1.35, 0.34 + s * 0.29, -8.38 - s * 0.37);
-    tread.castShadow = true;
-    rainbowStairGroup.add(tread);
-  }
-  // Brown diagonal dado & paper roses on right stairwell wall (ref_07a_rainbow_stairs.jpg)
-  const dadoSlope = new THREE.Mesh(wallBoxGeometry(0.05, 1.15, 4.4, brownDadoMat), brownDadoMat);
-  dadoSlope.position.set(-0.12, 1.75, -10.5);
-  dadoSlope.rotation.x = 0.64;
-  rainbowStairGroup.add(dadoSlope);
+  // Split-level (switchback) stairwell. Two flights of 9 steps, side by side, meet at a half-landing
+  // against the north wall; the rear exterior staircase enters that landing through a door in G-08.
+  //   Flight A (east, x -0.41..1.09): hall, z = -8.6 -> -11.3, rises north to the half-landing.
+  //   Half-landing (full width, z -11.3..-12.83) at STAIR_LANDING_Y, exactly half way up.
+  //   Flight B (west, x -2.13..-0.63): rises south from the landing to the first-floor slab.
+  //   A 0.22 m wall (x = -0.52) divides the flights.
+  // Slab tops: ground 0.20 (slab centre 0.10, h 0.20), first floor 3.71 (slab centre 3.60, h 0.22).
+  const STAIR_GROUND_Y = 0.2;
+  const STAIR_FIRST_Y = floorH + 0.11;
+  const STAIR_LANDING_Y = (STAIR_GROUND_Y + STAIR_FIRST_Y) / 2; // 1.955
+  const STAIR_STEPS = 9;
+  const STAIR_RISE = (STAIR_LANDING_Y - STAIR_GROUND_Y) / STAIR_STEPS; // 0.195 m
+  const STAIR_RUN = 0.30;
+  // Stairwell interior is x -2.13..1.09: two 1.5 m flights with a 0.22 m wall between them.
+  // West wall G-22 / F-20 sits at x = -2.24, east wall G-23 / F-21 at x = 1.2.
+  const STAIR_FLIGHT_W = 1.5;
+  const STAIR_MID_X = -0.52; // centre of the dividing wall and of the landing
+  const STAIR_LANDING_Z = -8.6 - STAIR_STEPS * STAIR_RUN; // -11.3: where flight A ends and flight B starts
+  const STAIR_A_X = 0.34; // east flight, x -0.41..1.09
+  const STAIR_B_X = -1.38; // west flight, x -2.13..-0.63
 
-  // Colorful 3D Paper Flowers rising along both stairwell walls (Station 4 script)
-  const flowerPalette = [0xf472b6, 0xfacc15, 0x38bdf8, 0xfb7185, 0x4ade80, 0xfda4af];
-  for (let f = 0; f < 8; f++) {
-    const fz = -8.55 - f * 0.48;
-    const fy = 1.15 + f * 0.28;
-    const fMat = new THREE.MeshBasicMaterial({ color: flowerPalette[f % flowerPalette.length] });
-    const centerMat = new THREE.MeshBasicMaterial({ color: 0xfef08a });
-    [-3.66, 1.08].forEach((fx, sideIdx) => {
-      const fGrp = new THREE.Group();
-      fGrp.position.set(fx, fy, fz);
-      fGrp.rotation.y = sideIdx === 0 ? Math.PI / 2 : -Math.PI / 2;
-      for (let p = 0; p < 5; p++) {
-        const ang = (p / 5) * Math.PI * 2;
-        const petal = new THREE.Mesh(new THREE.CircleGeometry(0.075, 12), fMat);
-        petal.position.set(Math.cos(ang) * 0.085, Math.sin(ang) * 0.085, 0.005);
-        fGrp.add(petal);
-      }
-      const core = new THREE.Mesh(new THREE.CircleGeometry(0.045, 12), centerMat);
-      core.position.z = 0.01;
-      fGrp.add(core);
-      rainbowStairGroup.add(fGrp);
-    });
+  // Rainbow treads — bottom 5 match narration: yellow, blue, pink, green, red
+  const rainbowColors = [0xeab308, 0x3b82f6, 0xec4899, 0x22c55e, 0xef4444, 0x3b82f6, 0xef4444, 0x22c55e, 0xec4899];
+  // Undersides face down, away from the sun and the shadow-casting lights, so ordinary plaster renders near
+  // black there. A flat, self-lit off-white keeps them reading as clean white.
+  const stairUndersideMat = new THREE.MeshStandardMaterial({ color: 0xf2f2f2, emissive: 0xdcdcdc, emissiveIntensity: 0.85, roughness: 0.95 });
+
+  // One flight: STAIR_STEPS rainbow step blocks (each exactly one riser tall) plus a flat white soffit panel
+  // under the whole flight, so from below you see one white sloped surface instead of the steps.
+  // The flight is 4 cm wider than the gap it fills, so its sides tuck 2 cm into the walls on both sides
+  // instead of sharing a plane with them (that shared plane z-fought on the top step).
+  function addStairFlight(x, startZ, dirZ, baseY, group = rainbowStairGroup, rise = STAIR_RISE) {
+    const w = STAIR_FLIGHT_W + 0.04;
+    for (let s = 0; s < STAIR_STEPS; s++) {
+      const topY = baseY + (s + 1) * rise;
+      const tread = new THREE.Mesh(
+        new THREE.BoxGeometry(w, rise, STAIR_RUN),
+        new THREE.MeshStandardMaterial({ color: rainbowColors[s], roughness: 0.48 })
+      );
+      tread.position.set(x, topY - rise / 2, startZ + dirZ * (s + 0.5) * STAIR_RUN);
+      tread.castShadow = true;
+      tread.receiveShadow = true;
+      group.add(tread);
+    }
+    // Soffit: the plane through the lowest corners of the step blocks, pushed 2.5 cm lower.
+    const planLen = STAIR_STEPS * STAIR_RUN;
+    const angle = Math.atan2(STAIR_STEPS * rise, planLen);
+    const soffit = new THREE.Mesh(
+      wallBoxGeometry(w, 0.05, Math.hypot(planLen, STAIR_STEPS * rise), stairUndersideMat),
+      stairUndersideMat
+    );
+    soffit.position.set(x, baseY - rise + (STAIR_STEPS * rise) / 2 - 0.025, startZ + (dirZ * planLen) / 2);
+    soffit.rotation.x = dirZ < 0 ? angle : -angle; // +X rotation lifts the -Z end
+    soffit.receiveShadow = true;
+    group.add(soffit);
   }
+  addStairFlight(STAIR_A_X, -8.6, -1, STAIR_GROUND_Y);
+  addStairFlight(STAIR_B_X, STAIR_LANDING_Z, +1, STAIR_LANDING_Y);
+
+  // Half-landing: a solid block from the ground slab up to STAIR_LANDING_Y across the full stairwell width.
+  addSlabOrTrim(
+    rainbowStairGroup, 3.22, STAIR_LANDING_Y - STAIR_GROUND_Y, 12.83 + STAIR_LANDING_Z,
+    STAIR_MID_X, (STAIR_LANDING_Y + STAIR_GROUND_Y) / 2, (STAIR_LANDING_Z - 12.83) / 2, stairUndersideMat,
+    { feature: 'stair_half_landing' }
+  );
+
+  // Dividing wall between the two flights, from the landing edge to the foot of flight A (ground to the first-floor slab).
+  // The part above the first floor is a guard wall, added with the first-floor slabs below.
+  const midWallLen = -8.6 - STAIR_LANDING_Z; // 2.7
+  addSolidWall(
+    rainbowStairGroup, 0.22, STAIR_FIRST_Y - STAIR_GROUND_Y, midWallLen,
+    STAIR_MID_X, (STAIR_FIRST_Y + STAIR_GROUND_Y) / 2, STAIR_LANDING_Z + midWallLen / 2, whiteWall,
+    { feature: 'stair_dividing_wall' }
+  );
 
   groundFloorGroup.add(rainbowStairGroup);
 
@@ -820,41 +850,63 @@ export function buildProceduralSchoolModels() {
   rearStairGroup.name = "Rear_Exterior_Girls_Staircase_And_Canopy";
   rearStairGroup.userData = { feature: 'rear_girls_exterior_stairs' };
 
-  // Top concrete landing outside 1st-Floor Blue Door (X: -5.5..-3.8, Z: -15.35..-13.0, Y = 3.55)
-  addSlabOrTrim(rearStairGroup, 1.75, 0.24, 2.35, -4.65, 3.50, -14.18, terracottaStairMat);
-  // Support wall below landing
-  addSlabOrTrim(rearStairGroup, 1.75, 3.45, 0.24, -4.65, 1.725, -15.25, pinkWall);
+  // The staircase now ends at the half-landing door in the north wall (G-08 / F-08, x = -1.3), at
+  // STAIR_LANDING_Y. From that door you see flight A going down to the hall and flight B going up.
+  const REAR_DOOR_X = STAIR_MID_X;
+  const REAR_ALLEY_Y = 0.02; // rear alley plane height
+  const REAR_STEPS = 9;
+  const REAR_RISE = (STAIR_LANDING_Y - REAR_ALLEY_Y) / REAR_STEPS; // ~0.215 m
+  const REAR_RUN = 0.30;
+  const REAR_W = 1.83;
+  const REAR_LANDING_X0 = REAR_DOOR_X - 1.1; // landing spans x -2.4..-0.2
+  const REAR_LANDING_Z = -13.17 - REAR_W / 2; // outer face of the 0.34 m wall -> 1.83 m deep
 
-  // 13 Terracotta-Pink Exterior Treads rising East (X: -9.8 -> -5.5, Z: -15.2..-13.2)
-  for (let rs = 0; rs < 13; rs++) {
-    const stepH = (rs + 1) * (3.50 / 13);
+  // Outside landing in front of the door: solid pink block topped by a terracotta slab
+  addSlabOrTrim(rearStairGroup, 2.2, STAIR_LANDING_Y - REAR_ALLEY_Y - 0.08, REAR_W, REAR_DOOR_X, (STAIR_LANDING_Y - 0.08 + REAR_ALLEY_Y) / 2, REAR_LANDING_Z, pinkWall);
+  addSlabOrTrim(rearStairGroup, 2.2, 0.08, REAR_W, REAR_DOOR_X, STAIR_LANDING_Y - 0.04, REAR_LANDING_Z, terracottaStairMat);
+
+  // 9 Terracotta-Pink Exterior Treads rising East toward the landing (X: -5.1 -> -2.4); the 9th is flush with it
+  for (let rs = 0; rs < REAR_STEPS; rs++) {
+    const topY = REAR_ALLEY_Y + (rs + 1) * REAR_RISE;
+    const h = topY - REAR_ALLEY_Y;
     const tread = new THREE.Mesh(
-      new THREE.BoxGeometry(0.36, stepH, 2.05),
+      new THREE.BoxGeometry(REAR_RUN, h, REAR_W),
       terracottaStairMat
     );
-    tread.position.set(-9.75 + rs * 0.33, stepH / 2, -14.20);
+    tread.position.set(REAR_LANDING_X0 - (REAR_STEPS - rs - 0.5) * REAR_RUN, REAR_ALLEY_Y + h / 2, REAR_LANDING_Z);
     tread.castShadow = true;
     tread.receiveShadow = true;
     rearStairGroup.add(tread);
   }
-  // White tubular stair railing along outer North edge (Z = -15.2)
-  // Rear Alley Partition Wall (X = -3.8, Z = -19.5..-13.0) with Blue Metal Gate
-  addSlabOrTrim(rearStairGroup, 0.26, 2.45, 2.2, -3.8, 1.225, -14.1, pinkWall);
+
+  // Open blue metal door in the half-landing doorway, hinged on the west jamb, swung out onto the landing
+  const rearDoorPivot = new THREE.Group();
+  rearDoorPivot.position.set(REAR_DOOR_X - 0.5, STAIR_LANDING_Y + 1.05, -13.2);
+  rearDoorPivot.rotation.y = 1.9;
+  const rearDoorLeaf = new THREE.Mesh(new THREE.BoxGeometry(1.0, 2.1, 0.06), blueMetalMat);
+  rearDoorLeaf.position.set(0.5, 0, 0);
+  rearDoorLeaf.castShadow = true;
+  rearDoorPivot.add(rearDoorLeaf);
+  rearStairGroup.add(rearDoorPivot);
+
+  // Rear Alley Partition Wall (X = -3.8, Z = -19.5..-15.2) with Blue Metal Gate. The stairs now
+  // run through its southern end (z -13..-15.2), so that stretch is gone.
   addSlabOrTrim(rearStairGroup, 0.26, 2.45, 1.175, -3.8, 1.225, -15.7875, pinkWall);
   const blueRearGate = new THREE.Mesh(new THREE.BoxGeometry(0.12, 2.35, 1.85), blueMetalMat);
   blueRearGate.position.set(-3.8, 1.18, -17.30);
   rearStairGroup.add(blueRearGate);
   addSlabOrTrim(rearStairGroup, 0.26, 2.45, 1.275, -3.8, 1.225, -18.8625, pinkWall);
 
-  // Pitched / Sloped Green Corrugated Pre-School Canopy (X: -3.6..+11.5, Z: -18.6..-13.0, Y: 3.55 -> 2.85)
-  const slopedCanopy = new THREE.Mesh(new THREE.BoxGeometry(15.1, 0.12, 5.75), canopyGreenMat);
-  slopedCanopy.position.set(3.95, 3.22, -15.82);
+  // Pitched / Sloped Green Corrugated Pre-School Canopy (X: +0.9..+11.5, Z: -18.6..-13.0, Y: 3.55 -> 2.85).
+  // It starts east of the stair landing (x -1.62..0.58) so it does not cut across the new doorway.
+  const slopedCanopy = new THREE.Mesh(new THREE.BoxGeometry(10.6, 0.12, 5.75), canopyGreenMat);
+  slopedCanopy.position.set(6.2, 3.22, -15.82);
   slopedCanopy.rotation.x = -0.125;
   slopedCanopy.castShadow = true;
   rearStairGroup.add(slopedCanopy);
 
   const postSteelMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.5, metalness: 0.6 });
-  [-3.2, 1.6, 6.4, 11.2].forEach((px) => {
+  [1.6, 6.4, 11.2].forEach((px) => {
     const post = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 2.88, 8), postSteelMat);
     post.position.set(px, 1.44, -18.45);
     rearStairGroup.add(post);
@@ -869,41 +921,54 @@ export function buildProceduralSchoolModels() {
   addSlabOrTrim(firstFloorGroup, 7.5, 0.22, 15.4, -15.25, y1, -5.3, floorGreen); // West Girls' Assembly Hall
   addSlabOrTrim(firstFloorGroup, 4.3, 0.22, 15.4, -9.35, y1, -5.3, floorGrey);
   addSlabOrTrim(firstFloorGroup, 14.4, 0.22, 8.5, 0.0, y1, -3.75, floorGrey);
-  addSlabOrTrim(firstFloorGroup, 3.4, 0.22, 5.0, -5.5, y1, -10.5, floorGrey);
-  addSlabOrTrim(firstFloorGroup, 8.5, 0.22, 5.0, 4.25, y1, -10.5, floorGrey);
+  addSlabOrTrim(firstFloorGroup, 4.96, 0.22, 5.0, -4.72, y1, -10.5, floorGrey); // ends at X = -2.24, the stairwell west wall (G-22 / F-20)
+  addSlabOrTrim(firstFloorGroup, 7.3, 0.22, 5.0, 4.85, y1, -10.5, floorGrey); // starts at X = 1.2, the stairwell east wall (G-23 / F-21)
+  // Stair arrival: flight B's top step ends at z = -8.6 (landing z -11.3 + 9 steps x 0.3 m) and the slab starts
+  // exactly there; any overlap would z-fight with the step's top face.
+  addSlabOrTrim(firstFloorGroup, 3.44, 0.22, 0.6, -0.52, y1, -8.3, floorGrey);
+  // Fills the gap between the central slab (ends z = -8.0 at x = 7.2) and the east-wing slab (starts z = -7.4)
+  addSlabOrTrim(firstFloorGroup, 1.3, 0.22, 0.6, 7.85, y1, -7.7, floorGrey);
+
+  // Upper switchback to the roof, stacked over the lower one (same footprint, 9 + 9 steps):
+  //   Flight C (east): from the first floor at z = -8.6, rises north to the upper half-landing.
+  //   Flight D (west): from the landing, rises south to the roof slab at z = -8.6.
+  // The stair-to-roof opening in the roof slab and the head-house over it are built with the roof below.
+  const ROOF_TOP_Y = floorH * 2 + 0.3;
+  const UP_LANDING_Y = (STAIR_FIRST_Y + ROOF_TOP_Y) / 2;
+  const UP_RISE = (UP_LANDING_Y - STAIR_FIRST_Y) / STAIR_STEPS;
+  const UP_LANDING_Z = -8.6 - STAIR_STEPS * STAIR_RUN; // -11.3
+  addStairFlight(STAIR_A_X, -8.6, -1, STAIR_FIRST_Y, firstFloorGroup, UP_RISE);
+  addStairFlight(STAIR_B_X, UP_LANDING_Z, +1, UP_LANDING_Y, firstFloorGroup, UP_RISE);
+  // Upper half-landing: a slab only, so the rear door below keeps its full height
+  addSlabOrTrim(firstFloorGroup, 3.22, 0.25, UP_LANDING_Z + 12.83, STAIR_MID_X, UP_LANDING_Y - 0.125, (UP_LANDING_Z - 12.83) / 2, stairUndersideMat, { feature: 'stair_upper_landing' });
+  // Dividing wall between the upper flights, up to the roof
+  addSolidWall(
+    firstFloorGroup, 0.22, ROOF_TOP_Y - STAIR_FIRST_Y, -8.6 - UP_LANDING_Z,
+    STAIR_MID_X, (ROOF_TOP_Y + STAIR_FIRST_Y) / 2, (UP_LANDING_Z - 8.6) / 2, whiteWall,
+    { feature: 'stair_upper_dividing_wall' }
+  );
   addSlabOrTrim(firstFloorGroup, 10.5, 0.22, 5.6, 13.75, y1, -10.2, floorBrown); // NE Rubble Archive Room (tan/brown floor)
   addSlabOrTrim(firstFloorGroup, 11.8, 0.22, 9.8, 13.1, y1, -2.5, floorGrey);
-  addSlabOrTrim(firstFloorGroup, 5.8, 0.03, 5.0, 10.6, y1 + 0.12, -4.8, floorLilac);
 
   // First-floor walls, windows and doors all come from FIRST_FLOOR_WALLS (first-floor-walls.js),
   // built the same way as the ground floor so openings cut real holes through the walls.
   const firstFloorWallCtx = {
     ...groundWallCtx,
     parents: { default: firstFloorGroup },
-    mats: { ...groundWallCtx.mats, sage: sageGreenWall },
   };
   appState.wallRegistry.push(...buildWalls(FIRST_FLOOR_WALLS, firstFloorWallCtx));
 
   // Sunshade slab above the east-wing windows
   addSlabOrTrim(firstFloorGroup, 7.2, 0.11, 0.52, 15.2, y1 + 3.12, 2.66, sunshadeMat);
 
-  // Blue First-Floor Rear Exterior Door onto Girls' Staircase Landing (X = -4.6, Z = -13.0 — ref_04a_rear_fa.jpg)
-  const blueUpperDoor = new THREE.Mesh(new THREE.BoxGeometry(1.12, 2.15, 0.42), blueMetalMat);
-  blueUpperDoor.position.set(-4.65, y1 + 1.15, -13.0);
-  firstFloorGroup.add(blueUpperDoor);
-
   // Open Pink Double Doors swinging into Girls' Assembly Hall, in the F-09 gap (ref_06_first_cutaway_fa.jpg)
   const pinkDoorL = new THREE.Mesh(new THREE.BoxGeometry(0.92, 2.25, 0.10), pinkDoorMat);
-  pinkDoorL.position.set(-11.95, y1 + 1.20, -6.65);
+  pinkDoorL.position.set(-11.95, y1 + 1.20, -6.35);
   pinkDoorL.rotation.y = 0.25;
   const pinkDoorR = new THREE.Mesh(new THREE.BoxGeometry(0.92, 2.25, 0.10), pinkDoorMat);
-  pinkDoorR.position.set(-11.95, y1 + 1.20, -4.95);
+  pinkDoorR.position.set(-11.95, y1 + 1.20, -4.65);
   pinkDoorR.rotation.y = -0.25;
   firstFloorGroup.add(pinkDoorL, pinkDoorR);
-
-  // Soft-Pink & Light-Green Wall Trim
-  addSlabOrTrim(firstFloorGroup, 0.04, 0.38, 14.8, -18.80, y1 + 2.85, -5.3, pinkWall);
-  addSlabOrTrim(firstFloorGroup, 0.04, 0.38, 14.8, -11.65, y1 + 2.85, -5.3, sageGreenWall);
 
   // =====================================================================
   // 3. STEPPED ROOF, PARAPET, STAIRWELL PENTHOUSE, SKYLIGHT & TELECOM MAST (M3)
@@ -911,7 +976,10 @@ export function buildProceduralSchoolModels() {
   const yRoof = floorH * 2;
   // Stepped Roof Slabs
   addSlabOrTrim(roofGroup, 12.1, 0.30, 15.7, -13.15, yRoof + 0.15, -5.3, whiteWall);
-  addSlabOrTrim(roofGroup, 14.4, 0.30, 13.8, 0.0, yRoof + 0.15, -6.25, whiteWall);
+  // Centre roof slab, with an opening over the stairwell (x -2.24..1.2, z -13.15..-8.6) where the roof stairs come out
+  addSlabOrTrim(roofGroup, 4.96, 0.30, 13.8, -4.72, yRoof + 0.15, -6.25, whiteWall);
+  addSlabOrTrim(roofGroup, 6.0, 0.30, 13.8, 4.2, yRoof + 0.15, -6.25, whiteWall);
+  addSlabOrTrim(roofGroup, 3.44, 0.30, 9.25, -0.52, yRoof + 0.15, -3.975, whiteWall);
   addSlabOrTrim(roofGroup, 12.1, 0.30, 15.7, 13.15, yRoof + 0.15, -5.3, whiteWall);
 
   // Perimeter 0.65m Parapet Walls tracing stepped footprint (Y = 7.50..8.15)
@@ -926,8 +994,12 @@ export function buildProceduralSchoolModels() {
   addSlabOrTrim(roofGroup, 0.30, pH, 15.7, 19.05, pY, -5.3, whiteWall);
   addSlabOrTrim(roofGroup, 38.4, pH, 0.30, 0.0, pY, -13.02, whiteWall);
 
-  // Stairwell Roof Penthouse Box (X: -4.0..+0.4, Z: -12.8..-8.0, Y: 7.50..9.35 — ref_04a_rear_fa.jpg)
-  addSlabOrTrim(roofGroup, 4.4, 1.85, 4.8, -1.8, yRoof + 0.30 + 0.925, -10.4, whiteWall);
+  // Stairwell head-house over the roof opening: side walls and a flat cap, open to the south where the
+  // stairs come out. Walls stand on the stairwell walls below (x = -2.24 and x = 1.2).
+  const headH = 2.3;
+  addSlabOrTrim(roofGroup, 0.22, headH, 4.4, -2.24, ROOF_TOP_Y + headH / 2, -10.8, whiteWall);
+  addSlabOrTrim(roofGroup, 0.22, headH, 4.4, 1.2, ROOF_TOP_Y + headH / 2, -10.8, whiteWall);
+  addSlabOrTrim(roofGroup, 3.66, 0.25, 4.4, -0.52, ROOF_TOP_Y + headH + 0.125, -10.8, whiteWall);
   // Central Roof Skylight / Hatch Curb (X = -1.6, Z = -5.4)
   addSlabOrTrim(roofGroup, 1.55, 0.42, 1.55, -1.6, yRoof + 0.51, -5.4, sunshadeMat);
 
@@ -1039,7 +1111,7 @@ export function buildProceduralSchoolModels() {
     { ...groundWallCtx, parents: { default: postStrikeModelGroup } }
   );
   buildWalls(
-    ['F-10', 'F-12', 'F-16', 'F-17', 'F-18', 'F-23']
+    ['F-10', 'F-16', 'F-17', 'F-23', 'F-26', 'F-27']
       .map((id) => clipFromX(FIRST_FLOOR_WALLS.find((d) => d.id === id))),
     { ...firstFloorWallCtx, parents: { default: postStrikeModelGroup } }
   );

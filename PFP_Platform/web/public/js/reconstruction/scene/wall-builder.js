@@ -10,7 +10,7 @@
  *   { type: 'window',   at, w, h, sill, mullions?, sunshade?, depth? }  cut + glazed window
  *   { type: 'doorway',  at, w, h, frame? }                              walk-through gap
  *   { type: 'hole',     at, w, h, sill? }                               plain rectangular cut
- *   { type: 'door',     at, base? }                                          purple door; open hole above it, liners cut to its full height
+ *   { type: 'door',     at, base?, w? }                                      pink door (w defaults to 1.06); open hole above it, liners cut to its full height
  *   { type: 'grille',   at, w, h, y, side }                             pink-grilled inner window, no cut
  *
  * Liners are thin paint/mural panels on one face:
@@ -51,9 +51,10 @@ function sideSign(rotY, side) {
   return Math.sin(rotY) * v[0] + Math.cos(rotY) * v[1] >= 0 ? 1 : -1;
 }
 
-// Purple door + transom footprint (see addPurpleDoor in school-world.js): 1.06 m wide,
+// Pink door + transom footprint (see addPurpleDoor in school-world.js): 1.06 m wide,
 // from the floor to the top of the transom.
 const DOOR_W = 1.06;
+const DOOR_THICKNESS = 0.05; // the leaf is a thin panel centred in the hole, not as thick as the wall
 const DOOR_BASE = 0.2; // default height of a door above the wall's base
 const DOOR_LEAF_H = 2.08;
 const TRANSOM_H = 0.5; // the open gap above the door leaf
@@ -65,18 +66,21 @@ const TRANSOM_H = 0.5; // the open gap above the door leaf
 function doorLinerCut(op) {
   if (op.type !== 'door') return null;
   const base = op.base ?? DOOR_BASE;
-  return { a0: op.at - DOOR_W / 2, a1: op.at + DOOR_W / 2, y0: 0, y1: base + DOOR_LEAF_H + TRANSOM_H + 0.05 };
+  const w = op.w ?? DOOR_W;
+  return { a0: op.at - w / 2, a1: op.at + w / 2, y0: 0, y1: base + DOOR_LEAF_H + TRANSOM_H + 0.05 };
 }
 
 /** The [along0, along1] x [y0, y1] rectangle an opening removes, or null for a non-cutting one. */
 function cutRect(op, wallH) {
-  // The transom above a door is a real hole through the wall, so you can see through it.
+  // A door removes the wall from its threshold to above the transom: the leaf fills the lower part
+  // and the transom stays open, so there is no wall geometry hidden inside the door.
   if (op.type === 'door') {
     const base = op.base ?? DOOR_BASE;
+    const w = op.w ?? DOOR_W;
     return {
-      a0: op.at - DOOR_W / 2,
-      a1: op.at + DOOR_W / 2,
-      y0: base + DOOR_LEAF_H,
+      a0: op.at - w / 2,
+      a1: op.at + w / 2,
+      y0: base,
       y1: Math.min(base + DOOR_LEAF_H + TRANSOM_H + 0.05, wallH),
     };
   }
@@ -209,8 +213,8 @@ export function buildWalls(defs, ctx) {
       if (op.type === 'window') {
         ctx.addWindow(group, x, (op.sill || 0) + op.h / 2, 0, outRot, op.w, op.h, op.mullions ?? 2, !!op.sunshade, op.depth ?? T + 0.01);
       } else if (op.type === 'door') {
-        // Slightly deeper than the wall so the door shows on both faces of any wall thickness.
-        ctx.addDoor(group, x, op.base ?? DOOR_BASE, 0, 0, T + 0.01);
+        // A thin panel centred in the wall, 2 cm wider than the hole so its edges are tucked into the jambs.
+        ctx.addDoor(group, x, op.base ?? DOOR_BASE, 0, 0, DOOR_THICKNESS, op.w ?? DOOR_W);
       } else if (op.type === 'grille') {
         const s = sideSign(rotY, op.side);
         ctx.addGrille(group, x, op.y, s * (T / 2 + 0.04), s > 0 ? 0 : Math.PI, op.w, op.h);
