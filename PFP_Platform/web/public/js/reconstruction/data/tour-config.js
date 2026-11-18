@@ -663,49 +663,9 @@ export const WALKTHROUGH_INTERLUDES = {
       fa: 'طبقه همکف · هم‌خوانی زیر طاق گل رز و پیام روز مادر ماهان',
       fi: 'ALAKERTA · RUUSUKAARILAULU JA PIKKU MAHANIN ÄITIENPÄIVÄVIESTI'
     },
-    context: {
-      en: 'Schoolboys in royal-blue uniforms singing beneath the red rose arches, then young Mahan speaking into his teacher\'s phone for Mother\'s Day',
-      fa: 'هم‌خوانی پسران با لباس فرم آبی زیر طاق گل سرخ، سپس پیام کودکانه ماهان رو به دوربین معلم برای روز مادر',
-      fi: 'Koulupojat sinisissä koulupuvuissaan laulamassa punaisten ruusukaarien alla sekä pikku Mahan puhumassa opettajan kameralle äidilleen'
-    },
-    cues: [
-      {
-        s: 0.2, e: 4.3,
-        en: '♪ "I am happy, joyful, and smiling..."',
-        fa: '♪ «خوشحال و شاد و خندانم...»',
-        fi: '♪ "Olen iloinen, onnellinen ja hymyilevä..."'
-      },
-      {
-        s: 4.3, e: 7.4,
-        en: '♪ "...I know the precious worth of life..."',
-        fa: '♪ «...قدر دنیا رو می‌دانم...»',
-        fi: '♪ "...tiedän elämän kallisarvoisuuden..."'
-      },
-      {
-        s: 7.4, e: 11.3,
-        en: '♪ "...laughter rises upon my lips."',
-        fa: '♪ «...خنده سر می‌دهد لب‌های من.»',
-        fi: '♪ "...nauru kohoaa huulilleni."'
-      },
-      {
-        s: 11.6, e: 15.6,
-        en: '"Hello, my beautiful mother — happy Mother\'s Day to you today, mother."',
-        fa: '«سلام مادر قشنگم؛ امروز روزت رو بهت تبریک می‌گم مادر.»',
-        fi: '"Hei kaunis äitini — hyvää äitienpäivää sinulle tänään, äiti."'
-      },
-      {
-        s: 15.6, e: 19.8,
-        en: '"I love you, my beautiful mother — from your son, Mahan."',
-        fa: '«دوستت دارم مادر قشنگم... از طرف پسرت، ماهان.»',
-        fi: '"Rakastan sinua, kaunis äitini — pojaltasi Mahanilta."'
-      },
-      {
-        s: 19.8, e: 22.4,
-        en: 'Holding handmade pomegranate crafts for the Persian letter "Ā"',
-        fa: 'همراه با کاردستی‌های کودکانه انار برای یادگیری نشانه «آ»',
-        fi: 'Oppilaiden askartelemat granaattiomenat kirjaimen "Ā" oppitunnilla'
-      }
-    ]
+    context: { en: '', fa: '', fi: '' },
+    // Subtitles intentionally removed: the previous cues did not match the footage.
+    cues: []
   },
   boys_classroom: {
     id: 'interlude_03',
