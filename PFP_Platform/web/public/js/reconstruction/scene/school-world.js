@@ -12,6 +12,7 @@ import { buildWalls } from './wall-builder.js';
 import { cornerExtensions } from './wall-joints.js';
 import {
   createPaintedPlasterMaterial,
+  plasterBoxGeometry,
   wallBoxGeometry,
 } from './painted-plaster-material.js';
 
@@ -589,6 +590,29 @@ export function buildProceduralSchoolModels() {
     return m;
   }
 
+  // One plaster finish for every ceiling: the underside of the first-floor slabs (ground-floor
+  // ceiling) and of the roof slabs (first-floor ceiling), and the soffits under the stairs.
+  // Undersides face away from the sun and the shadow-casting lights, so plain plaster would
+  // render near black there; the emissive term (modulated by the plaster grain) keeps it a
+  // clean light off-white without flattening the texture.
+  const ceilingPlaster = createPaintedPlasterMaterial(0xe6e2dc);
+  // Warm grey, matching the lit wall plaster; a cool emissive made ceilings look blue next to the walls.
+  ceilingPlaster.emissive = new THREE.Color(0x938d85);
+  ceilingPlaster.emissiveMap = ceilingPlaster.map;
+
+  // Slab whose underside is the shared ceiling plaster; `topMat` finishes the top and the edges.
+  // BoxGeometry material order is +X, -X, +Y, -Y, +Z, -Z, so the ceiling is index 3.
+  function addCeilingSlab(group, w, h, d, x, y, z, topMat, extraData) {
+    const mats = [topMat, topMat, topMat, ceilingPlaster, topMat, topMat];
+    const m = new THREE.Mesh(plasterBoxGeometry(w, h, d), mats);
+    m.position.set(x, y, z);
+    m.castShadow = true;
+    m.receiveShadow = true;
+    if (extraData) m.userData = extraData;
+    group.add(m);
+    return m;
+  }
+
   // Non-blocking slab, dado paint band, or trim helper
   function addSlabOrTrim(group, w, h, d, x, y, z, mat, extraData) {
     const m = new THREE.Mesh(wallBoxGeometry(w, h, d, mat || whiteWall), mat || whiteWall);
@@ -689,9 +713,11 @@ export function buildProceduralSchoolModels() {
   addSlabOrTrim(groundFloorGroup, 14.4, 0.16, 4.35, 0.0, 0.08, 2.675, floorGrey);
   addSlabOrTrim(groundFloorGroup, 11.8, 0.20, 15.4, 13.1, 0.10, -5.3, floorGrey);
 
-  // SW Singing Boys' Green Carpet Classroom Floor (X: -18.8..-12.7, Z: -2.4..+2.25)
+  // SW Singing Boys' Green Carpet Classroom Floor. The room runs from the west wall (G-06) to the
+  // corridor wall G-12 (x = -10.6) and from G-09 (z = -2.5) to the south facade (G-01, z = 2.4), so
+  // the carpet covers all of it; its edges tuck into those walls.
   addSlabOrTrim(
-    groundFloorGroup, 6.1, 0.03, 4.65, -15.75, 0.215, -0.075, floorGreen,
+    groundFloorGroup, 8.3, 0.03, 4.8, -14.75, 0.215, -0.1, floorGreen,
     { feature: 'sw_boys_green_carpet' }
   );
   // Exterior / partition thicknesses, still used by the first floor and the post-strike ruins.
@@ -702,8 +728,8 @@ export function buildProceduralSchoolModels() {
   for (const colX of [-6.8, -2.3, 2.3, 6.8]) {
     addPorticoColumn(groundFloorGroup, colX, floorH / 2, 4.4);
   }
-  addSlabOrTrim(groundFloorGroup, 16.0, 0.42, 2.45, 0.0, floorH + 0.21, 3.625, whiteWall);
-  addSlabOrTrim(groundFloorGroup, 14.4, 0.42, 1.95, 0.0, floorH + 0.21, 1.475, whiteWall);
+  addCeilingSlab(groundFloorGroup, 16.0, 0.42, 2.45, 0.0, floorH + 0.21, 3.625, whiteWall);
+  addCeilingSlab(groundFloorGroup, 14.4, 0.42, 1.95, 0.0, floorH + 0.21, 1.475, whiteWall);
 
   // =====================================================================
   // GROUND FLOOR WALLS — exterior envelope, facade finishes, windows, doors and interior
@@ -791,9 +817,8 @@ export function buildProceduralSchoolModels() {
 
   // Rainbow treads — bottom 5 match narration: yellow, blue, pink, green, red
   const rainbowColors = [0xeab308, 0x3b82f6, 0xec4899, 0x22c55e, 0xef4444, 0x3b82f6, 0xef4444, 0x22c55e, 0xec4899];
-  // Undersides face down, away from the sun and the shadow-casting lights, so ordinary plaster renders near
-  // black there. A flat, self-lit off-white keeps them reading as clean white.
-  const stairUndersideMat = new THREE.MeshStandardMaterial({ color: 0xf2f2f2, emissive: 0xdcdcdc, emissiveIntensity: 0.85, roughness: 0.95 });
+  // Everything you see from underneath the stairs (soffits, landing blocks) uses the shared ceiling plaster.
+  const stairUndersideMat = ceilingPlaster;
 
   // One flight: STAIR_STEPS rainbow step blocks (each exactly one riser tall) plus a flat white soffit panel
   // under the whole flight, so from below you see one white sloped surface instead of the steps.
@@ -812,15 +837,26 @@ export function buildProceduralSchoolModels() {
       tread.receiveShadow = true;
       group.add(tread);
     }
-    // Soffit: the plane through the lowest corners of the step blocks, pushed 2.5 cm lower.
+    // Soffit: its visible underside is the plane through the lowest (back-bottom) corners of the
+    // step blocks, so it touches every step instead of hanging below them. The slab is a box
+    // sheared along the flight, which keeps both ends vertical: the low end meets the floor or
+    // the half-landing block flush and the high end meets the next floor slab flush. (A tilted
+    // box has slanted ends, which left slivers of tread and a white lip at the ceiling.)
     const planLen = STAIR_STEPS * STAIR_RUN;
-    const angle = Math.atan2(STAIR_STEPS * rise, planLen);
-    const soffit = new THREE.Mesh(
-      wallBoxGeometry(w, 0.05, Math.hypot(planLen, STAIR_STEPS * rise), stairUndersideMat),
-      stairUndersideMat
-    );
-    soffit.position.set(x, baseY - rise + (STAIR_STEPS * rise) / 2 - 0.025, startZ + (dirZ * planLen) / 2);
-    soffit.rotation.x = dirZ < 0 ? angle : -angle; // +X rotation lifts the -Z end
+    const slope = rise / STAIR_RUN;
+    const thickness = rise * 0.9; // stays inside the step blocks at the back, so no coplanar faces
+    const soffitGeo = wallBoxGeometry(w, thickness, planLen, stairUndersideMat);
+    const lift = dirZ < 0 ? -slope : slope; // y rises toward the high end of the flight
+    soffitGeo.applyMatrix4(new THREE.Matrix4().set(
+      1, 0, 0, 0,
+      0, 1, lift, 0,
+      0, 0, 1, 0,
+      0, 0, 0, 1
+    ));
+    soffitGeo.computeVertexNormals();
+    const soffit = new THREE.Mesh(soffitGeo, stairUndersideMat);
+    // Underside height at mid-flight is baseY - rise + 4.5 rise; the box centre sits half its thickness above it.
+    soffit.position.set(x, baseY + (STAIR_STEPS / 2 - 1) * rise + thickness / 2, startZ + (dirZ * planLen) / 2);
     soffit.receiveShadow = true;
     group.add(soffit);
   }
@@ -920,16 +956,16 @@ export function buildProceduralSchoolModels() {
   // =====================================================================
   const y1 = floorH;
   // Stepped First Floor Slabs (leaving stairwell opening at X: -3.8..0.0, Z: -13.0..-8.0)
-  addSlabOrTrim(firstFloorGroup, 7.5, 0.22, 15.4, -15.25, y1, -5.3, floorGreen); // West Girls' Assembly Hall
-  addSlabOrTrim(firstFloorGroup, 4.3, 0.22, 15.4, -9.35, y1, -5.3, floorGrey);
-  addSlabOrTrim(firstFloorGroup, 14.4, 0.22, 8.5, 0.0, y1, -3.75, floorGrey);
-  addSlabOrTrim(firstFloorGroup, 4.96, 0.22, 5.0, -4.72, y1, -10.5, floorGrey); // ends at X = -2.24, the stairwell west wall (G-22 / F-20)
-  addSlabOrTrim(firstFloorGroup, 7.3, 0.22, 5.0, 4.85, y1, -10.5, floorGrey); // starts at X = 1.2, the stairwell east wall (G-23 / F-21)
+  addCeilingSlab(firstFloorGroup, 7.5, 0.22, 15.4, -15.25, y1, -5.3, floorGreen); // West Girls' Assembly Hall
+  addCeilingSlab(firstFloorGroup, 4.3, 0.22, 15.4, -9.35, y1, -5.3, floorGrey);
+  addCeilingSlab(firstFloorGroup, 14.4, 0.22, 8.5, 0.0, y1, -3.75, floorGrey);
+  addCeilingSlab(firstFloorGroup, 4.96, 0.22, 5.0, -4.72, y1, -10.5, floorGrey); // ends at X = -2.24, the stairwell west wall (G-22 / F-20)
+  addCeilingSlab(firstFloorGroup, 7.3, 0.22, 5.0, 4.85, y1, -10.5, floorGrey); // starts at X = 1.2, the stairwell east wall (G-23 / F-21)
   // Stair arrival: flight B's top step ends at z = -8.6 (landing z -11.3 + 9 steps x 0.3 m) and the slab starts
   // exactly there; any overlap would z-fight with the step's top face.
-  addSlabOrTrim(firstFloorGroup, 3.44, 0.22, 0.6, -0.52, y1, -8.3, floorGrey);
+  addCeilingSlab(firstFloorGroup, 3.44, 0.22, 0.6, -0.52, y1, -8.3, floorGrey);
   // Fills the gap between the central slab (ends z = -8.0 at x = 7.2) and the east-wing slab (starts z = -7.4)
-  addSlabOrTrim(firstFloorGroup, 1.3, 0.22, 0.6, 7.85, y1, -7.7, floorGrey);
+  addCeilingSlab(firstFloorGroup, 1.3, 0.22, 0.6, 7.85, y1, -7.7, floorGrey);
 
   // Upper switchback to the roof, stacked over the lower one (same footprint, 9 + 9 steps):
   //   Flight C (east): from the first floor at z = -8.6, rises north to the upper half-landing.
@@ -949,8 +985,8 @@ export function buildProceduralSchoolModels() {
     STAIR_MID_X, (ROOF_TOP_Y + STAIR_FIRST_Y) / 2, (UP_LANDING_Z - 8.6) / 2, whiteWall,
     { feature: 'stair_upper_dividing_wall' }
   );
-  addSlabOrTrim(firstFloorGroup, 10.5, 0.22, 5.6, 13.75, y1, -10.2, floorBrown); // NE Rubble Archive Room (tan/brown floor)
-  addSlabOrTrim(firstFloorGroup, 11.8, 0.22, 9.8, 13.1, y1, -2.5, floorGrey);
+  addCeilingSlab(firstFloorGroup, 10.5, 0.22, 5.6, 13.75, y1, -10.2, floorBrown); // NE Rubble Archive Room (tan/brown floor)
+  addCeilingSlab(firstFloorGroup, 11.8, 0.22, 9.8, 13.1, y1, -2.5, floorGrey);
 
   // First-floor walls, windows and doors all come from FIRST_FLOOR_WALLS (first-floor-walls.js),
   // built the same way as the ground floor so openings cut real holes through the walls.
@@ -977,12 +1013,12 @@ export function buildProceduralSchoolModels() {
   // =====================================================================
   const yRoof = floorH * 2;
   // Stepped Roof Slabs
-  addSlabOrTrim(roofGroup, 12.1, 0.30, 15.7, -13.15, yRoof + 0.15, -5.3, whiteWall);
+  addCeilingSlab(roofGroup, 12.1, 0.30, 15.7, -13.15, yRoof + 0.15, -5.3, whiteWall);
   // Centre roof slab, with an opening over the stairwell (x -2.24..1.2, z -13.15..-8.6) where the roof stairs come out
-  addSlabOrTrim(roofGroup, 4.96, 0.30, 13.8, -4.72, yRoof + 0.15, -6.25, whiteWall);
-  addSlabOrTrim(roofGroup, 6.0, 0.30, 13.8, 4.2, yRoof + 0.15, -6.25, whiteWall);
-  addSlabOrTrim(roofGroup, 3.44, 0.30, 9.25, -0.52, yRoof + 0.15, -3.975, whiteWall);
-  addSlabOrTrim(roofGroup, 12.1, 0.30, 15.7, 13.15, yRoof + 0.15, -5.3, whiteWall);
+  addCeilingSlab(roofGroup, 4.96, 0.30, 13.8, -4.72, yRoof + 0.15, -6.25, whiteWall);
+  addCeilingSlab(roofGroup, 6.0, 0.30, 13.8, 4.2, yRoof + 0.15, -6.25, whiteWall);
+  addCeilingSlab(roofGroup, 3.44, 0.30, 9.25, -0.52, yRoof + 0.15, -3.975, whiteWall);
+  addCeilingSlab(roofGroup, 12.1, 0.30, 15.7, 13.15, yRoof + 0.15, -5.3, whiteWall);
 
   // Perimeter 0.65m Parapet Walls tracing stepped footprint (Y = 7.50..8.15)
   const pH = 0.65;

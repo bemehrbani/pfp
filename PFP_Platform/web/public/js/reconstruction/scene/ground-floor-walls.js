@@ -22,7 +22,9 @@ export const GROUND_FLOOR_WALLS = [
     ],
     openings: [
       { type: 'window', at: 3.2, w: 1.85, h: 0.58, sill: 2.26, mullions: 3 },
-      { type: 'window', at: 9.2, w: 2.35, h: 1.35, sill: 1.075, mullions: 2, sunshade: true },
+      // Centred in the south-inner classroom, between G-12 (x = -10.6) and G-02 (x = -7.2). At 9.2 it
+      // straddled G-12, so half of it looked straight onto that wall.
+      { type: 'window', at: 10.1, w: 2.35, h: 1.35, sill: 1.075, mullions: 2, sunshade: true },
     ],
   },
   {
