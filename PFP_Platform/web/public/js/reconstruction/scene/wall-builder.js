@@ -217,6 +217,20 @@ export function buildWalls(defs, ctx) {
       } else if (op.type === 'door') {
         // A thin panel centred in the wall, 2 cm wider than the hole so its edges are tucked into the jambs.
         ctx.addDoor(group, x, op.base ?? DOOR_BASE, 0, 0, DOOR_THICKNESS, op.w ?? DOOR_W);
+        // Pink frame lining the inside of the hole (threshold to above the transom): two jambs and a
+        // head, all within the cut rectangle and as deep as the wall, so nothing sticks out of it.
+        const frameMat = ctx.mats.purpleDoor;
+        if (frameMat) {
+          const cut = cutRect(op, H);
+          const FW = 0.05; // frame bar width
+          const cw = cut.a1 - cut.a0;
+          const ch = cut.y1 - cut.y0;
+          const tagF = { wallId: def.id };
+          for (const s of [-1, 1]) {
+            addBox(group, frameMat, FW, ch - FW, T, x + s * (cw / 2 - FW / 2), cut.y0 + (ch - FW) / 2, 0, tagF, false);
+          }
+          addBox(group, frameMat, cw, FW, T, x, cut.y1 - FW / 2, 0, tagF, false);
+        }
       } else if (op.type === 'grille') {
         const s = sideSign(rotY, op.side);
         // Sunk into the wall: the frame is buried and only the glass and bars stand slightly proud.
