@@ -169,6 +169,12 @@ export async function initThreeEngine() {
     .load(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'], (cube) => {
       cube.colorSpace = THREE.SRGBColorSpace;
       scene.background = cube;
+      // Image-based lighting from the same sky: the renderer prefilters the cube map itself.
+      // It supplies the soft indirect fill that shaded interior walls otherwise lack (the sun
+      // is blocked there and the hemisphere light alone is flat). Kept low so the courtyard
+      // exposure the tour framing was built around does not shift much.
+      scene.environment = cube;
+      scene.environmentIntensity = 0.5;
     }, undefined, (err) => console.warn('Skybox failed to load', err));
   scene.fog = new THREE.FogExp2(0x0a0e17, 0.0055);
 
@@ -217,7 +223,11 @@ export async function initThreeEngine() {
 
   // Light units are physical (three r155+); the π factor maps this rig's 0..1 brightness
   // scale onto them, keeping the courtyard exposure that the tour framing was built around.
-  const hemiLight = new THREE.HemisphereLight(0xfff9f0, 0x263042, 0.88 * Math.PI);
+  // The ground colour is the light that walls receive from below, i.e. sun bounced off floors
+  // and courtyard. A warm plaster/dust tone reads as bounce light; the old cold dark blue
+  // (0x263042) left shaded interior walls near black. Sky intensity is trimmed slightly because
+  // the environment map (see skybox load above) now adds fill on top.
+  const hemiLight = new THREE.HemisphereLight(0xfff9f0, 0x8a7a68, 0.75 * Math.PI);
   hemiLight.position.set(0, 55, 0);
   scene.add(hemiLight);
 
