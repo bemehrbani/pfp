@@ -49,13 +49,6 @@ export function getSchoolMuralTextures() {
   gateCanvas.width = 512;
   gateCanvas.height = 512;
   const gc = gateCanvas.getContext('2d');
-  gc.fillStyle = '#bfe3d0';
-  gc.fillRect(0, 0, 512, 512);
-  // Left brick quoins
-  for (let by = 16; by < 496; by += 76) {
-    gc.fillStyle = '#c84b31';
-    gc.fillRect(10, by, 34, 52);
-  }
   // Colored pencils
   function drawPencil(x, y, ang, bodyHex) {
     gc.save();
@@ -83,10 +76,19 @@ export function getSchoolMuralTextures() {
     gc.fill();
     gc.restore();
   }
-  drawPencil(165, 315, 0.52, '#60a5fa');
-  drawPencil(305, 165, -0.68, '#f472b6');
-  drawPencil(410, 330, -0.25, '#facc15');
+  // Repaints the whole canvas (background, quoins, pencils, letters) so a font-ready repaint
+  // replaces the fallback-face glyphs instead of overlapping them.
   const drawGateLetters = () => {
+    gc.fillStyle = '#bfe3d0';
+    gc.fillRect(0, 0, 512, 512);
+    // Left brick quoins
+    for (let by = 16; by < 496; by += 76) {
+      gc.fillStyle = '#c84b31';
+      gc.fillRect(10, by, 34, 52);
+    }
+    drawPencil(165, 315, 0.52, '#60a5fa');
+    drawPencil(305, 165, -0.68, '#f472b6');
+    drawPencil(410, 330, -0.25, '#facc15');
     gc.fillStyle = '#eab308';
     gc.strokeStyle = '#1e293b';
     gc.lineWidth = 4;
@@ -1297,15 +1299,17 @@ export function buildProceduralSchoolModels() {
   scaleCanvas.width = 512;
   scaleCanvas.height = 88;
   const sCtx = scaleCanvas.getContext('2d');
-  sCtx.fillStyle = 'rgba(15, 18, 28, 0.92)';
-  sCtx.fillRect(0, 0, 512, 88);
-  sCtx.strokeStyle = '#ef4444';
-  sCtx.lineWidth = 4;
-  sCtx.strokeRect(2, 2, 508, 84);
-  sCtx.textAlign = 'center';
   const CRATER_EN_TEXT = 'Ø 5.0 m IMPACT CRATER · CENTRAL HALL';
   const CRATER_FA_TEXT = 'قطر دهانه گودال انفجار: ۵ متر (مرکز سالن مدرسه)';
   const drawCraterLabels = () => {
+    // Clear and repaint the background first so a font-ready repaint does not overlap glyphs.
+    sCtx.clearRect(0, 0, 512, 88);
+    sCtx.fillStyle = 'rgba(15, 18, 28, 0.92)';
+    sCtx.fillRect(0, 0, 512, 88);
+    sCtx.strokeStyle = '#ef4444';
+    sCtx.lineWidth = 4;
+    sCtx.strokeRect(2, 2, 508, 84);
+    sCtx.textAlign = 'center';
     sCtx.direction = 'ltr';
     sCtx.fillStyle = '#fca5a5';
     sCtx.font = `700 22px ${EN_CANVAS_FONT}`;
@@ -1404,8 +1408,14 @@ export function buildProceduralSchoolModels() {
   dmgExtrude.rotateX(-Math.PI / 2);
   const dmgFill = new THREE.Mesh(
     dmgExtrude,
-    new THREE.MeshBasicMaterial({ color: 0xe5e059, transparent: true, opacity: 0.13, depthWrite: false, side: THREE.DoubleSide })
+    // polygonOffset pushes the tint behind coplanar opaque surfaces (slab tops/undersides, parapet and
+    // wall faces) so it cannot z-fight with them; it draws after all opaque geometry.
+    new THREE.MeshBasicMaterial({
+      color: 0xe5e059, transparent: true, opacity: 0.08, depthWrite: false, side: THREE.DoubleSide,
+      polygonOffset: true, polygonOffsetFactor: 2, polygonOffsetUnits: 4
+    })
   );
+  dmgFill.renderOrder = 10;
   // Lifted off the ground plane so its bottom face does not z-fight with it.
   dmgFill.position.y = 0.05;
   postStrikeModelGroup.add(dmgFill);
