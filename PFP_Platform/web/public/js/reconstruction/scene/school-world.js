@@ -1442,17 +1442,21 @@ export function buildProceduralSchoolModels() {
   });
 
   // F) True L-Shaped Yellow "Extent of Damage" Volume + Clean Perimeter Wireframe (matching ref_08_damage_extent_fa.jpg!)
-  // Polygon in XZ: (-19.1, +2.5) -> (-6.9, +2.5) -> (-6.9, +0.6) -> (+4.5, +0.6) -> (+4.5, -8.2) -> (-3.8, -8.2) -> (-3.8, -13.1) -> (-19.1, -13.1)
+  // Reference polygon in XZ (before the 0.5 m inset below): (-19.1, +2.5) -> (-6.9, +2.5) -> (-6.9, +0.6) -> (+4.5, +0.6) -> (+4.5, -8.2) -> (-3.8, -8.2) -> (-3.8, -13.1) -> (-19.1, -13.1)
   const dmgTopY = floorH * 2 + 0.45;
+  // The reference outline runs along the wall lines (z = 2.5 / -13.1 sit on the front parapet and north
+  // wall, x = 4.5 is the shear plane where surviving walls end, x = -3.8 is the stairwell wall). Drawn
+  // there, the tint and wireframe cut through the middle of those walls, so every edge is inset
+  // 0.5 m toward the inside of the volume to keep it clear of the wall faces.
   const dmgPolyXZ = [
-    [-19.1, 2.5],
-    [-6.9, 2.5],
-    [-6.9, 0.6],
-    [4.5, 0.6],
-    [4.5, -8.2],
-    [-3.8, -8.2],
-    [-3.8, -13.1],
-    [-19.1, -13.1]
+    [-18.6, 2.0],
+    [-7.4, 2.0],
+    [-7.4, 0.1],
+    [4.0, 0.1],
+    [4.0, -7.7],
+    [-4.3, -7.7],
+    [-4.3, -12.6],
+    [-18.6, -12.6]
   ];
   const dmgShape = new THREE.Shape();
   dmgShape.moveTo(dmgPolyXZ[0][0], -dmgPolyXZ[0][1]);
