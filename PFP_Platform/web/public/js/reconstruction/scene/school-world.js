@@ -9,6 +9,16 @@ import { GROUND_FLOOR_WALLS } from './ground-floor-walls.js';
 import { FIRST_FLOOR_WALLS } from './first-floor-walls.js';
 import { buildAllInWorldWalkthroughScreens } from './in-world-screens.js';
 import { buildWalls } from './wall-builder.js';
+import { asphaltPlaneGeometry, createAsphaltMaterial } from './asphalt-material.js?v=20261119i';
+import { createGraniteFloorMaterial } from './granite-floor-material.js?v=20261119i';
+import { createStairMaterial, STAIR_TILE_METRES } from './stair-material.js?v=20261119m';
+import { createDoorMaterial, doorBoxGeometry } from './door-material.js?v=20261119n';
+import { boxProjectUVs, createRubbleMaterial } from './rubble-material.js?v=20261119o';
+import {
+  createPrayerCarpetMaterial,
+  isPrayerCarpetMaterial,
+  prayerCarpetBoxGeometry,
+} from './prayer-carpet-material.js?v=20261119l';
 import { cornerExtensions } from './wall-joints.js';
 import {
   createPaintedPlasterMaterial,
@@ -161,17 +171,22 @@ export function buildEnvironmentAndTerrain() {
   const murals = getSchoolMuralTextures();
 
   // Outer surroundings plane
-  const groundGeo = new THREE.PlaneGeometry(190, 165, 16, 16);
-  const groundMat = new THREE.MeshStandardMaterial({ color: 0x20242b, roughness: 0.92, metalness: 0.06 });
+  // Only a ~12 m apron around the compound walls (X -34..42.7, Z -19.7..30.2), not the old 190 x 165 m
+  // field: X -46..55, Z -32..42.
+  const groundGeo = new THREE.PlaneGeometry(101, 74, 16, 16);
+  // Same asphalt as the yards (matte, darkened, anti-repeat; sampled in world space so the surface
+  // runs on seamlessly past the yard planes).
+  const groundMat = createAsphaltMaterial();
   const ground = new THREE.Mesh(groundGeo, groundMat);
   ground.rotation.x = -Math.PI / 2;
+  ground.position.set(4.5, 0, 5); // plane centre for X -46..55, Z -32..42
   ground.receiveShadow = true;
   terrainGroup.add(ground);
 
   // 1) SE Main Boys' Courtyard Asphalt (X: -17.0..+42.5, Z: +2.4..+30.0)
   const boysYard = new THREE.Mesh(
-    new THREE.PlaneGeometry(59.5, 27.6),
-    new THREE.MeshStandardMaterial({ color: 0x3b4049, roughness: 0.84 })
+    asphaltPlaneGeometry(59.5, 27.6),
+    createAsphaltMaterial()
   );
   boysYard.rotation.x = -Math.PI / 2;
   boysYard.position.set(12.75, 0.02, 16.2);
@@ -180,8 +195,8 @@ export function buildEnvironmentAndTerrain() {
 
   // 2) SW Girls' School Yard Surface (X: -34.0..-17.0, Z: -19.5..+30.0)
   const girlsYard = new THREE.Mesh(
-    new THREE.PlaneGeometry(17.0, 49.5),
-    new THREE.MeshStandardMaterial({ color: 0x464a42, roughness: 0.86 })
+    asphaltPlaneGeometry(17.0, 49.5),
+    createAsphaltMaterial()
   );
   girlsYard.rotation.x = -Math.PI / 2;
   girlsYard.position.set(-25.5, 0.02, 5.25);
@@ -190,8 +205,8 @@ export function buildEnvironmentAndTerrain() {
 
   // 3) NE Walled Pre-School Yard Surface (X: +19.0..+42.5, Z: -18.5..+2.4)
   const preSchoolYard = new THREE.Mesh(
-    new THREE.PlaneGeometry(23.5, 20.9),
-    new THREE.MeshStandardMaterial({ color: 0x4b5347, roughness: 0.86 })
+    asphaltPlaneGeometry(23.5, 20.9),
+    createAsphaltMaterial()
   );
   preSchoolYard.rotation.x = -Math.PI / 2;
   preSchoolYard.position.set(30.75, 0.02, -8.05);
@@ -200,8 +215,8 @@ export function buildEnvironmentAndTerrain() {
 
   // 4) Rear Staircase & Shade Alley (X: -17.0..+19.0, Z: -19.5..-12.8; west of -17.0 is the girls' yard)
   const rearAlley = new THREE.Mesh(
-    new THREE.PlaneGeometry(36.0, 6.8),
-    new THREE.MeshStandardMaterial({ color: 0x353a42, roughness: 0.86 })
+    asphaltPlaneGeometry(36.0, 6.8),
+    createAsphaltMaterial()
   );
   rearAlley.rotation.x = -Math.PI / 2;
   // Starts at X = -17.0 so it does not overlap the girls' yard plane at the same height.
@@ -345,7 +360,13 @@ export function buildEnvironmentAndTerrain() {
   }
 
   // 1. Co-Linear +X Pastel Dividing Wall (Z = +2.4, X = +19.0..+42.0) separating Boys' Yard & NE Pre-School Yard
-  addCourtyardWall(23.0, wallH, wallT, 30.5, wallH / 2, 2.4, wallMat, 'plus_x_pastel_wall', true);
+  // It runs from the school's east wall centre-line (x = 19.0) to the inner face of the x = 42.5
+  // perimeter wall (42.5 - wallT / 2); it used to stop at 42.0 and left a 0.32 m gap at that corner.
+  const DIVIDER_END_X = 42.5 - wallT / 2;
+  addCourtyardWall(DIVIDER_END_X - 19.0, wallH, wallT, (19.0 + DIVIDER_END_X) / 2, wallH / 2, 2.4, wallMat, 'plus_x_pastel_wall', true);
+  // It butts into the perimeter wall (a T junction), so keep it out of the corner-closing pass below:
+  // its end sits within the corner tolerance of that wall's end and would grow stray caps.
+  courtyardWalls.pop();
 
   // 2. NE Pre-School Yard Rear (-Z = -18.5) & East (+X = +42.5) Walls + Open Double Mint Gates
   addCourtyardWall(7.2, wallH, wallT, 22.6, wallH / 2, -18.5, wallMat, null, true);
@@ -362,7 +383,9 @@ export function buildEnvironmentAndTerrain() {
 
   // 3. Red & White Horizontally Striped 4-Door Washroom / Drinking-Fountain Shed at East end of +X wall (facing -X)
   const shedGroup = new THREE.Group();
-  shedGroup.position.set(41.3, 0, 5.5);
+  // Fills the gap in the x = 42.5 perimeter wall: back flush with the wall's outer face
+  // (42.5 + wallT / 2) and z span 2.4..8.5, exactly where the wall segments on each side end.
+  shedGroup.position.set(42.5 + wallT / 2 - 1.2, 0, 5.45);
   shedGroup.userData = { feature: 'striped_washroom_shed', isSolidWall: true };
   const shedRedMat = new THREE.MeshStandardMaterial({ color: 0xc23b2b, roughness: 0.72 });
   const shedWhiteMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.72 });
@@ -535,9 +558,12 @@ export function buildProceduralSchoolModels() {
   // Verified Materials from FA-121 Blueprints & On-Site Archive Photos
   const whiteWall = createPaintedPlasterMaterial(0xedeff2);
   const westGreyWall = createPaintedPlasterMaterial(0x9aa1aa);
-  const floorGrey = new THREE.MeshStandardMaterial({ color: 0x9ca3af, roughness: 0.85 });
-  const floorGreen = new THREE.MeshStandardMaterial({ color: 0x5c7a62, roughness: 0.80 });
-  const floorBrown = new THREE.MeshStandardMaterial({ color: 0x9c7b56, roughness: 0.82 });
+  // Interior floors are granite tile; the tint keeps each room's blueprint floor colour.
+  const floorGrey = createGraniteFloorMaterial(0xf4f6f8);
+  const floorBrown = createGraniteFloorMaterial(0xf0dcc4);
+  // The two green-floored rooms (station 3 boys' classroom, station 5 girls' upper hall) are
+  // carpeted with the prayer rug, repeated both ways.
+  const floorCarpetGreen = createPrayerCarpetMaterial();
   const tealWall = createPaintedPlasterMaterial(0x4f8694);
   const rearTealExt = createPaintedPlasterMaterial(0x3b7687);
   const skyBlueWall = createPaintedPlasterMaterial(0x88b8cb);
@@ -548,9 +574,12 @@ export function buildProceduralSchoolModels() {
   // they keep the flat whitewash colour.
   const trimWhiteMat = new THREE.MeshStandardMaterial({ color: 0xedeff2, roughness: 0.82 });
   const purpleDoorMat = new THREE.MeshStandardMaterial({ color: 0xd16b97, roughness: 0.52 }); // classroom doors are pink; the name is historical
-  const pinkDoorMat = new THREE.MeshStandardMaterial({ color: 0xd16b97, roughness: 0.52 });
+  // Door leaves (classroom doors and the first-floor double doors) are oak veneer. The verified
+  // classroom-door pink stays as a tint, so the leaves read as pink-stained wood; use 0xffffff
+  // for natural oak. Frames, window grilles and doorway surrounds keep the flat pink above.
+  const doorLeafMat = createDoorMaterial(0xd16b97);
   const blueMetalMat = new THREE.MeshStandardMaterial({ color: 0x1d4ed8, roughness: 0.48, metalness: 0.25 });
-  const terracottaStairMat = new THREE.MeshStandardMaterial({ color: 0xc98a86, roughness: 0.78 });
+  const terracottaStairMat = createStairMaterial(0xc98a86);
   const canopyGreenMat = new THREE.MeshStandardMaterial({ color: 0x7d9c78, roughness: 0.72 });
   const sunshadeMat = new THREE.MeshStandardMaterial({ color: 0xe2e6ec, roughness: 0.78 });
   const darkGlassMat = new THREE.MeshBasicMaterial({ color: 0x111827 });
@@ -606,7 +635,8 @@ export function buildProceduralSchoolModels() {
   // BoxGeometry material order is +X, -X, +Y, -Y, +Z, -Z, so the ceiling is index 3.
   function addCeilingSlab(group, w, h, d, x, y, z, topMat, extraData) {
     const mats = [topMat, topMat, topMat, ceilingPlaster, topMat, topMat];
-    const m = new THREE.Mesh(plasterBoxGeometry(w, h, d), mats);
+    const geo = isPrayerCarpetMaterial(topMat) ? prayerCarpetBoxGeometry(w, h, d) : plasterBoxGeometry(w, h, d);
+    const m = new THREE.Mesh(geo, mats);
     m.position.set(x, y, z);
     m.castShadow = true;
     m.receiveShadow = true;
@@ -617,7 +647,10 @@ export function buildProceduralSchoolModels() {
 
   // Non-blocking slab, dado paint band, or trim helper
   function addSlabOrTrim(group, w, h, d, x, y, z, mat, extraData) {
-    const m = new THREE.Mesh(wallBoxGeometry(w, h, d, mat || whiteWall), mat || whiteWall);
+    const geo = isPrayerCarpetMaterial(mat)
+      ? prayerCarpetBoxGeometry(w, h, d)
+      : wallBoxGeometry(w, h, d, mat || whiteWall);
+    const m = new THREE.Mesh(geo, mat || whiteWall);
     m.position.set(x, y, z);
     m.castShadow = true;
     m.receiveShadow = true;
@@ -633,8 +666,11 @@ export function buildProceduralSchoolModels() {
     dGroup.position.set(x, yBase, z);
     dGroup.rotation.y = rotY;
     // The leaf is 2 cm wider than the hole cut for it, so its edges sit inside the jambs.
-    const door = new THREE.Mesh(new THREE.BoxGeometry(width + 0.04, 2.08, depth), purpleDoorMat);
-    door.position.set(0, 1.04, 0);
+    // The bottom is sunk 2 cm below yBase so it is buried in the wall strip / floor underneath
+    // instead of sharing a coplanar face with it (that caused z-fighting along the door bottoms).
+    const DOOR_SINK = 0.02;
+    const door = new THREE.Mesh(doorBoxGeometry(width + 0.04, 2.08 + DOOR_SINK, depth), doorLeafMat);
+    door.position.set(0, (2.08 - DOOR_SINK) / 2, 0);
     dGroup.add(door);
     // Doors in cut walls (see buildWalls) leave the transom as an open hole; doors set into
     // solid walls keep the dark pane.
@@ -719,7 +755,7 @@ export function buildProceduralSchoolModels() {
   // corridor wall G-12 (x = -10.6) and from G-09 (z = -2.5) to the south facade (G-01, z = 2.4), so
   // the carpet covers all of it; its edges tuck into those walls.
   addSlabOrTrim(
-    groundFloorGroup, 8.3, 0.03, 4.8, -14.75, 0.215, -0.1, floorGreen,
+    groundFloorGroup, 8.3, 0.03, 4.8, -14.75, 0.215, -0.1, floorCarpetGreen,
     { feature: 'sw_boys_green_carpet' }
   );
   // Exterior / partition thicknesses, still used by the first floor and the post-strike ruins.
@@ -829,9 +865,10 @@ export function buildProceduralSchoolModels() {
     const w = STAIR_FLIGHT_W + 0.04;
     for (let s = 0; s < STAIR_STEPS; s++) {
       const topY = baseY + (s + 1) * rise;
+      // Plastered-concrete texture, tinted with the narration colour for this step.
       const tread = new THREE.Mesh(
-        new THREE.BoxGeometry(w, rise, STAIR_RUN),
-        new THREE.MeshStandardMaterial({ color: rainbowColors[s], roughness: 0.48 })
+        plasterBoxGeometry(w, rise, STAIR_RUN, STAIR_TILE_METRES),
+        createStairMaterial(rainbowColors[s])
       );
       tread.position.set(x, topY - rise / 2, startZ + dirZ * (s + 0.5) * STAIR_RUN);
       tread.castShadow = true;
@@ -909,7 +946,7 @@ export function buildProceduralSchoolModels() {
     const topY = REAR_ALLEY_Y + (rs + 1) * REAR_RISE;
     const h = topY - REAR_ALLEY_Y;
     const tread = new THREE.Mesh(
-      new THREE.BoxGeometry(REAR_RUN, h, REAR_W),
+      plasterBoxGeometry(REAR_RUN, h, REAR_W, STAIR_TILE_METRES),
       terracottaStairMat
     );
     tread.position.set(REAR_LANDING_X0 - (REAR_STEPS - rs - 0.5) * REAR_RUN, REAR_ALLEY_Y + h / 2, REAR_LANDING_Z);
@@ -957,7 +994,7 @@ export function buildProceduralSchoolModels() {
   // =====================================================================
   const y1 = floorH;
   // Stepped First Floor Slabs (leaving stairwell opening at X: -3.8..0.0, Z: -13.0..-8.0)
-  addCeilingSlab(firstFloorGroup, 7.5, 0.22, 15.4, -15.25, y1, -5.3, floorGreen); // West Girls' Assembly Hall
+  addCeilingSlab(firstFloorGroup, 7.5, 0.22, 15.4, -15.25, y1, -5.3, floorCarpetGreen); // West Girls' Assembly Hall (prayer-rug carpet)
   addCeilingSlab(firstFloorGroup, 4.3, 0.22, 15.4, -9.35, y1, -5.3, floorGrey);
   addCeilingSlab(firstFloorGroup, 14.4, 0.22, 8.5, 0.0, y1, -3.75, floorGrey);
   addCeilingSlab(firstFloorGroup, 4.96, 0.22, 5.0, -4.72, y1, -10.5, floorGrey); // ends at X = -2.24, the stairwell west wall (G-22 / F-20)
@@ -1003,10 +1040,10 @@ export function buildProceduralSchoolModels() {
   addSlabOrTrim(firstFloorGroup, 7.2, 0.11, 0.52, 15.2, y1 + 3.12, 2.66, sunshadeMat);
 
   // Open Pink Double Doors swinging into Girls' Assembly Hall, in the F-09 gap (ref_06_first_cutaway_fa.jpg)
-  const pinkDoorL = new THREE.Mesh(new THREE.BoxGeometry(0.92, 2.25, 0.10), pinkDoorMat);
+  const pinkDoorL = new THREE.Mesh(doorBoxGeometry(0.92, 2.25, 0.10), doorLeafMat);
   pinkDoorL.position.set(-11.95, y1 + 1.20, -6.35);
   pinkDoorL.rotation.y = 0.25;
-  const pinkDoorR = new THREE.Mesh(new THREE.BoxGeometry(0.92, 2.25, 0.10), pinkDoorMat);
+  const pinkDoorR = new THREE.Mesh(doorBoxGeometry(0.92, 2.25, 0.10), doorLeafMat);
   pinkDoorR.position.set(-11.95, y1 + 1.20, -4.65);
   pinkDoorR.rotation.y = -0.25;
   firstFloorGroup.add(pinkDoorL, pinkDoorR);
@@ -1085,16 +1122,41 @@ export function buildProceduralSchoolModels() {
   //    4 SURVIVING PORTICO COLUMNS, L-SHAPED DAMAGE VOLUME & 5M CRATER (H4, L2)
   //    Verified against ref_02b_facade_real.jpg, ref_08_damage_extent_fa.jpg & ref_09a/b
   // =====================================================================
-  const ruinedConcrete = new THREE.MeshStandardMaterial({ color: 0x4b4640, roughness: 0.98 });
-  const debrisMat = new THREE.MeshStandardMaterial({ color: 0x696259, roughness: 0.94 });
+  // Post-strike concrete, stone and debris share one rough-concrete texture set; each keeps its
+  // own dark dusty tint (see rubble-material.js).
+  const ruinedConcrete = createRubbleMaterial(0x4b4640);
+  const debrisMat = createRubbleMaterial(0x696259);
   const rebarMat = new THREE.MeshStandardMaterial({ color: 0x3b2f2a, roughness: 0.65, metalness: 0.55 });
+
+  // Raw concrete for the cut edges of the floor slabs. Only the walking surface is tiled; the
+  // sides of a slab are bare concrete, which after the strike is exposed along the shear line.
+  const slabEdgeMat = createRubbleMaterial(0x7b756d);
+  // The walls that survive the strike are clipped at the shear line (X = 4.5), so their cut end
+  // faces lie exactly in the plane of the slab edge faces there, and the two z-fight. Pushing the
+  // edge material back in depth makes the wall win wherever they coincide; where there is no wall
+  // the edge is still the nearest surface, so it is unaffected. Same offset as the damage tint.
+  slabEdgeMat.polygonOffset = true;
+  slabEdgeMat.polygonOffsetFactor = 2;
+  slabEdgeMat.polygonOffsetUnits = 4;
+
+  // Floor slab with granite on the top and underside and rubble concrete on the four edge faces.
+  // BoxGeometry material order is +X, -X, +Y, -Y, +Z, -Z.
+  function addFloorSlabRubbleEdges(group, w, h, d, x, y, z, topMat) {
+    const mats = [slabEdgeMat, slabEdgeMat, topMat, topMat, slabEdgeMat, slabEdgeMat];
+    const m = new THREE.Mesh(plasterBoxGeometry(w, h, d), mats);
+    m.position.set(x, y, z);
+    m.castShadow = true;
+    m.receiveShadow = true;
+    group.add(m);
+    return m;
+  }
 
   // A) Surviving Detailed East Wing (X: +4.5..+19.0, Z: -13.0..+2.4)
   // Floor & Roof Slabs
-  addSlabOrTrim(postStrikeModelGroup, 14.5, 0.22, 13.5, 11.75, 0.11, -6.25, floorGrey);
-  addSlabOrTrim(postStrikeModelGroup, 11.8, 0.22, 1.9, 13.1, 0.11, 1.45, floorGrey);
-  addSlabOrTrim(postStrikeModelGroup, 14.5, 0.24, 13.5, 11.75, y1, -6.25, floorGrey);
-  addSlabOrTrim(postStrikeModelGroup, 11.8, 0.24, 1.9, 13.1, y1, 1.45, floorGrey);
+  addFloorSlabRubbleEdges(postStrikeModelGroup, 14.5, 0.22, 13.5, 11.75, 0.11, -6.25, floorGrey);
+  addFloorSlabRubbleEdges(postStrikeModelGroup, 11.8, 0.22, 1.9, 13.1, 0.11, 1.45, floorGrey);
+  addFloorSlabRubbleEdges(postStrikeModelGroup, 14.5, 0.24, 13.5, 11.75, y1, -6.25, floorGrey);
+  addFloorSlabRubbleEdges(postStrikeModelGroup, 11.8, 0.24, 1.9, 13.1, y1, 1.45, floorGrey);
   addSlabOrTrim(postStrikeModelGroup, 14.7, 0.30, 13.7, 11.75, yRoof + 0.15, -6.25, whiteWall);
   addSlabOrTrim(postStrikeModelGroup, 12.0, 0.30, 2.0, 13.1, yRoof + 0.15, 1.45, whiteWall);
   // East Wing Parapet
@@ -1170,7 +1232,7 @@ export function buildProceduralSchoolModels() {
   // Surviving North Stairwell Core (X: -3.8..+4.5, Z: -13.0..-8.2)
   addSlabOrTrim(shearGroup, 8.3, floorH * 2, extT, 0.35, floorH, -13.0, whiteWall);
   addSlabOrTrim(shearGroup, 0.28, floorH * 2, 4.8, -3.8, floorH, -10.6, whiteWall);
-  addSlabOrTrim(shearGroup, 8.3, 0.24, 4.8, 0.35, y1, -10.6, floorGrey);
+  addFloorSlabRubbleEdges(shearGroup, 8.3, 0.24, 4.8, 0.35, y1, -10.6, floorGrey);
   // Sloped Pre-school rear canopy survived behind North wall (visible in ref_08_damage_extent_fa.jpg!)
   const postRearCanopy = new THREE.Mesh(new THREE.BoxGeometry(14.0, 0.12, 5.4), canopyGreenMat);
   postRearCanopy.position.set(4.2, 3.22, -15.7);
@@ -1178,7 +1240,7 @@ export function buildProceduralSchoolModels() {
   shearGroup.add(postRearCanopy);
 
   // Jagged Sheared Concrete Floor Slab Ledge + Hanging Rebar Rods anchored into Crater Shear Walls
-  const shearedSlabMat = new THREE.MeshStandardMaterial({ color: 0x7b756d, roughness: 0.92 });
+  const shearedSlabMat = slabEdgeMat;
   [
     [-1.8, -8.02, 0.24, 0.08],
     [1.4, -8.02, 0.22, -0.14],
@@ -1186,7 +1248,7 @@ export function buildProceduralSchoolModels() {
     [4.28, -3.2, 0.06, 0.26],
     [4.28, -0.8, 0.10, 0.22]
   ].forEach(([sx, sz, rotX, rotZ], idx) => {
-    const brokenSlab = new THREE.Mesh(new THREE.BoxGeometry(1.85, 0.20, 1.05), shearedSlabMat);
+    const brokenSlab = new THREE.Mesh(boxProjectUVs(new THREE.BoxGeometry(1.85, 0.20, 1.05)), shearedSlabMat);
     brokenSlab.position.set(sx, y1 - 0.12, sz);
     brokenSlab.rotation.set(rotX, idx * 0.18, rotZ);
     shearGroup.add(brokenSlab);
@@ -1241,8 +1303,8 @@ export function buildProceduralSchoolModels() {
 
   // D) Sunken Rubble-Lined 5-Meter Blast Crater Pit at (-2.5, 0, -5.5) + Forensic Scale Rings & Plaque
   const craterPitFloor = new THREE.Mesh(
-    new THREE.CircleGeometry(2.52, 32),
-    new THREE.MeshStandardMaterial({ color: 0x1c1a18, roughness: 1.0 })
+    boxProjectUVs(new THREE.CircleGeometry(2.52, 32)),
+    createRubbleMaterial(0x1c1a18)
   );
   craterPitFloor.rotation.x = -Math.PI / 2;
   craterPitFloor.position.set(-2.5, 0.06, -5.5);
@@ -1252,7 +1314,7 @@ export function buildProceduralSchoolModels() {
     const ang = (seg / 18) * Math.PI * 2;
     const rad = 2.52 + (seg % 3) * 0.14;
     const rimChunk = new THREE.Mesh(
-      new THREE.DodecahedronGeometry(0.48 + (seg % 2) * 0.12, 0),
+      boxProjectUVs(new THREE.DodecahedronGeometry(0.48 + (seg % 2) * 0.12, 0)),
       seg % 2 === 0 ? ruinedConcrete : debrisMat
     );
     rimChunk.scale.set(1.35, 0.52, 1.05);
@@ -1369,7 +1431,7 @@ export function buildProceduralSchoolModels() {
   ];
   rubbleSpecs.forEach(([rx, rz, rw, rh, rd, rxRot, ryRot, rzRot], idx) => {
     const slab = new THREE.Mesh(
-      new THREE.BoxGeometry(rw, rh, rd),
+      boxProjectUVs(new THREE.BoxGeometry(rw, rh, rd)),
       idx % 3 === 0 ? ruinedConcrete : debrisMat
     );
     slab.position.set(rx, 0.36 + (idx % 3) * 0.22, rz);
@@ -1428,37 +1490,8 @@ export function buildProceduralSchoolModels() {
     new THREE.LineBasicMaterial({ color: 0xe5e059 })
   ));
 
-  // G) Dust-Covered Pastel Schoolbags & Shrapnel-Pierced Homework Sheets in Rubble around 5m Crater (Station 6 script)
-  const dustyBagPalette = [0xc08497, 0x7ea8be, 0xcab87a, 0x8fb399, 0xb88ca8];
-  [
-    [-4.6, 0.44, -4.8, 0.5],
-    [-3.4, 0.42, -3.1, -0.4],
-    [-1.3, 0.44, -3.2, 0.8],
-    [0.3, 0.46, -4.5, -0.7],
-    [-1.8, 0.40, -7.1, 0.3]
-  ].forEach(([bx, by, bz, brot], idx) => {
-    const dBag = new THREE.Mesh(
-      new THREE.BoxGeometry(0.32, 0.22, 0.25),
-      new THREE.MeshStandardMaterial({ color: dustyBagPalette[idx], roughness: 0.92 })
-    );
-    dBag.position.set(bx, by, bz);
-    dBag.rotation.set(0.25, brot, -0.18);
-    dBag.castShadow = true;
-    postStrikeModelGroup.add(dBag);
-  });
-  [
-    [-3.9, 0.36, -3.8, 0.4], [-2.6, 0.35, -2.9, -0.5], [-0.8, 0.36, -3.6, 0.9],
-    [0.5, 0.38, -5.2, -0.3], [-1.1, 0.35, -6.5, 0.2], [-3.1, 0.34, -6.8, 1.1]
-  ].forEach(([px, py, pz, prot]) => {
-    const tornPage = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.30, 0.22),
-      new THREE.MeshBasicMaterial({ color: 0xe7e5e4, side: THREE.DoubleSide })
-    );
-    tornPage.rotation.x = -Math.PI / 2 + 0.08;
-    tornPage.rotation.z = prot;
-    tornPage.position.set(px, py, pz);
-    postStrikeModelGroup.add(tornPage);
-  });
+  // G) (Removed) The pastel schoolbag boxes and the white torn homework sheets that used to sit in
+  // the rubble around the crater were plain untextured props; the Station 6 narration covers them.
 
   // I) Mount All 16 Verified 1080p Pre-Strike & Incident Videos/Photos Directly Inside the 3D School Architecture
   buildAllInWorldWalkthroughScreens();

@@ -80,7 +80,9 @@ function cutRect(op, wallH) {
     return {
       a0: op.at - w / 2,
       a1: op.at + w / 2,
-      y0: base,
+      // 4 cm under the threshold: the solid strip below the door then tops out inside the floor slab
+      // instead of sharing the slab's top plane (which z-fought along the door bottoms).
+      y0: Math.max(base - 0.04, 0),
       y1: Math.min(base + DOOR_LEAF_H + TRANSOM_H + 0.05, wallH),
     };
   }
