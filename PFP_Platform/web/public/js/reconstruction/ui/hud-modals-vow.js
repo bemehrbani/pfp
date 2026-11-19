@@ -30,6 +30,7 @@ import {
   startGuidedTour,
   stopGuidedTour,
   jumpGuidedTourStep,
+  advanceGuidedTourStep,
 } from '../tour/tour-director.js';
 
 function createInspectorMetaPill(label, value, opts = {}) {
@@ -944,7 +945,7 @@ export function initUIControls() {
         stopGuidedTour();
         openVowModal();
       } else {
-        jumpGuidedTourStep(appState.currentTourIndex + 1);
+        advanceGuidedTourStep(appState.currentTourIndex + 1);
       }
     });
   }

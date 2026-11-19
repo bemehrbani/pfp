@@ -104,18 +104,20 @@ export const GUIDED_TOUR_STOPS = [
   },
   {
     hotspotId: 'girls_upper_hall',
+    smoothSpline: true,
     temporal: 0.0,
     cutawayMode: 0,
-    camPos: [-12.45, 5.55, -1.60],
-    lookAt: [-15.55, 5.15, -9.20],
+    // Girls' assembly hall (slab top y = 3.71, x -19..-11.5, z -13..2.4). Level camera at 1.6 m
+    // (y = 5.31), gaze at the same height. Two prayer-room steles (05_A, 05_B) stand side by side
+    // at z = -10.5 facing south, centred on the hall (x = -15.25). The camera starts 10.5 m back
+    // aimed at the pair, walks north to z = -5.0 by 40% (5.5 m from the steles) and holds there.
+    // Top-level camPos/lookAt equal the first waypoint, so there is no jump.
+    camPos: [-15.25, 5.31, 0.00],
+    lookAt: [-15.25, 5.31, -10.50],
     waypoints: [
-      { t: 0.00, camPos: [-15.25, 5.16, -6.35], lookAt: [-15.25, 4.88, -10.35] },
-      { t: 0.18, camPos: [-15.00, 5.30, -1.60], lookAt: [-15.00, 5.20, -8.60] },
-      { t: 0.32, camPos: [-15.00, 5.30, -1.60], lookAt: [-15.00, 5.20, -8.60] },
-      { t: 0.40, camPos: [-15.25, 5.16, -6.35], lookAt: [-15.25, 4.88, -10.35] },
-      { t: 0.55, camPos: [-15.25, 5.16, -6.35], lookAt: [-15.25, 4.88, -10.35] },
-      { t: 0.62, camPos: [-15.25, 5.16, -4.15], lookAt: [-15.25, 5.12, -0.15] },
-      { t: 1.00, camPos: [-15.25, 5.16, -4.15], lookAt: [-15.25, 5.12, -0.15] }
+      { t: 0.00, camPos: [-15.25, 5.31, 0.00], lookAt: [-15.25, 5.31, -10.50] },
+      { t: 0.40, camPos: [-15.25, 5.31, -5.00], lookAt: [-15.25, 5.31, -10.50] },
+      { t: 1.00, camPos: [-15.25, 5.31, -5.00], lookAt: [-15.25, 5.31, -10.50] }
     ],
     shortBadge: { en: "05 / 08", fi: "05 / 08", fa: "۰۵ / ۰۸" },
     badge: { en: "STOP 5 OF 8 · FIRST FLOOR: GIRLS' ASSEMBLY HALL & PINK/GREEN ROOMS", fi: "PISTE 5/8 · YLÄKERTA: TYTTÖJEN SALI", fa: "ایستگاه ۵ از ۸ · طبقه اول: سالن بزرگ دختران و کلاس‌های صورتی/سبز" }
@@ -293,8 +295,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   // Station 4: Central Hall & Enclosed Rainbow Staircase
   // Two photo-slideshow steles (no plaque text) side by side in front of the stairwell mouth,
-  // facing south into the hall. Media lives in media/walkthrough_pip/stairs/ (29 photos: 01-17
-  // on 04_A, 18-29 on 04_B). The slab stands on the first-floor slab (top y = 3.71): pos y =
+  // facing south into the hall. Media lives in media/walkthrough_pip/stairs/ (30 photos: 01-17
+  // on 04_A, 18-30 on 04_B). The slab stands on the first-floor slab (top y = 3.71): pos y =
   // 3.74 + (h + 0.2) / 2. Centres are 1.75 m either side of the mouth centre (x = -0.52).
   {
     id: '04_A', hotspotId: 'rainbow_staircase', slot: 'A', groupKey: 'firstFloor',
@@ -308,43 +310,34 @@ export const IN_WORLD_SCREEN_SPECS = [
     id: '04_B', hotspotId: 'rainbow_staircase', slot: 'B', groupKey: 'firstFloor',
     images: [
       ...Array.from({ length: 11 }, (_, i) => `media/walkthrough_pip/stairs/stairs_photo_${String(i + 18).padStart(2, '0')}.jpg`),
-      'media/walkthrough_pip/stairs/stairs_photo_29.png'
+      'media/walkthrough_pip/stairs/stairs_photo_29.png',
+      'media/walkthrough_pip/stairs/stairs_photo_30.jpg'
     ],
     slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
-    durationSec: 27.4, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    durationSec: 30.4, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
     pos: [1.23, 4.94, -7.90], rotY: 0, w: 2.20, h: 2.20, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
-  // Station 5: First-Floor Girls' Primary School Assembly Hall
+  // Station 5: First-Floor Girls' Assembly Hall (prayer room photos)
+  // Two photo-slideshow steles (2.6 x 2.6, no plaque text) side by side, facing south, centred on the
+  // hall (x = -15.25), 3.4 m apart (gap 0.68 m, 0.64 m clear of each side wall). Media lives in
+  // media/walkthrough_pip/girls_prayer_room/ (39 photos: 01-19 on 05_A, 20-39 on 05_B). Slab stands on
+  // the first-floor slab (top y = 3.71): pos y = 3.74 + (h + 0.2) / 2.
   {
     id: '05_A', hotspotId: 'girls_upper_hall', slot: 'A', groupKey: 'firstFloor',
-    file: '05_sync_80_girls_hall', durationSec: 30.0, cueStartP: 0.0, cueEndP: 0.588, cueStartPFa: 0.0, cueEndPFa: 0.635, cueStartPFi: 0.0, cueEndPFi: 0.594,
-    pos: [-15.25, 5.06, -10.35], rotY: 0, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 3.71,
-    badge: {
-      en: '80+ SCHOOLGIRLS IN THE UPPER ASSEMBLY HALL',
-      fi: 'YLI 80 KOULUTYTTÖÄ YLÄKERRAN SALISSA',
-      fa: 'بیش از ۸۰ دانش‌آموز دختر در سالن بزرگ طبقه بالا'
-    },
-    caption: {
-      en: 'A teacher\'s photograph of more than eighty schoolgirls in white headscarves sitting shoulder to shoulder on the green carpet.',
-      fi: 'Opettajan valokuva yli kahdeksastakymmenestä valkohuivisesta koulutytöstä istumassa vierekkäin vihreällä matolla.',
-      fa: 'عکس معلم از بیش از هشتاد دانش‌آموز دختر با مقنعه سفید که شانه‌به‌شانه بر فرش سبز نشسته‌اند.'
-    }
+    images: Array.from({ length: 19 }, (_, i) => `media/walkthrough_pip/girls_prayer_room/prayer_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 57.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-16.95, 5.14, -10.50], rotY: 0, w: 2.60, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '05_B', hotspotId: 'girls_upper_hall', slot: 'B', groupKey: 'firstFloor',
-    file: '05_sync_desks_and_notebooks', durationSec: 26.1, cueStartP: 0.588, cueEndP: 0.975, cueStartPFa: 0.635, cueEndPFa: 0.973, cueStartPFi: 0.594, cueEndPFi: 0.985,
-    pos: [-15.25, 5.12, -0.15], rotY: Math.PI, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 3.71,
-    badge: {
-      en: 'HOMEWORK NOTEBOOKS & COLORED PENCILS',
-      fi: 'KOTITEHTÄVÄVIHKOT JA VÄRIKYNÄT',
-      fa: 'دفترهای مشق باز و مدادهای رنگی'
-    },
-    caption: {
-      en: 'Seven-, eight- and nine-year-old girls sitting beside their closest friends with open homework notebooks and colored pencils.',
-      fi: 'Seitsemän-, kahdeksan- ja yhdeksänvuotiaat tytöt istumassa ystäviensä vieressä vihkot auki ja värikynät kädessään.',
-      fa: 'دختران هفت، هشت و نه ساله کنار نزدیک‌ترین دوستانشان با دفترهای مشق باز و مدادهای رنگی.'
-    }
+    images: Array.from({ length: 20 }, (_, i) => `media/walkthrough_pip/girls_prayer_room/prayer_photo_${String(i + 20).padStart(2, '0')}.jpg`),
+    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    durationSec: 57.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-13.55, 5.14, -10.50], rotY: 0, w: 2.60, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 6: 11:22 AM Direct Cruise Missile Impact & 5m Crater
   {
@@ -730,31 +723,8 @@ export const WALKTHROUGH_INTERLUDES = {
       fa: 'آخرین عکس کلاس اول پیش از انفجار ← دقایق نخست در حیاط پر از دود',
       fi: 'EKALUOKAN VIIMEISET HETKET → ENSIMMÄISET MINUUTIT KOULUPIHALLA'
     },
-    context: {
-      en: 'Photos sent by the 1st-grade teacher to the mothers\' group minutes before impact, followed by raw citizen courtyard video',
-      fa: 'تصاویر ارسالی معلم شهید کلاس اول در گروه مادران دقایقی پیش از حمله، و فیلم خام حیاط مدرسه بلافاصله پس از اصابت',
-      fi: 'Ekaluokan opettajan äideille lähettämät viimeiset kuvat juuri ennen iskua sekä silminnäkijävideo pihalta iskun jälkeen'
-    },
-    cues: [
-      {
-        s: 0.2, e: 8.0,
-        en: 'Final photographs sent by the first-grade teacher to the mothers\' chat group — minutes before the strike',
-        fa: 'آخرین عکس‌های دانش‌آموزان کلاس اول که معلم شهید دقایقی پیش از اصابت موشک در گروه مادران فرستاد',
-        fi: 'Ekaluokan opettajan äitien ryhmään lähettämät viimeiset valokuvat — minuutteja ennen ohjusiskua'
-      },
-      {
-        s: 11.0, e: 16.5,
-        en: '[Raw courtyard audio — torn homework sheets cover the dust as families rush toward the smoking classrooms]',
-        fa: '[صدای خام صحنه — برگه‌های پراکنده دفتر مشق روی خاک حیاط و دویدن خانواده‌ها به سوی دود سیاه کلاس‌ها]',
-        fi: '[Alkuperäinen pihaääni — repeytyneitä koulutehtäviä maassa perheiden ryntäillessä savuaville luokille]'
-      },
-      {
-        s: 16.5, e: 22.8,
-        en: 'Voice crying out in the courtyard: "Mohaddeseh!..."',
-        fa: 'فریاد مضطرب در حیاط مدرسه: «محدثه!...»',
-        fi: 'Hätääntynyt huuto koulupihalla: "Mohaddeseh!..."'
-      }
-    ]
+    context: { en: '', fa: '', fi: '' },
+    cues: []
   },
   crater_damage: {
     id: 'interlude_05',

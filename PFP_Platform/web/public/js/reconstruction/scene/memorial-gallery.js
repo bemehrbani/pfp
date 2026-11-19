@@ -1018,18 +1018,19 @@ export function populate3DSchoolPortraitsAndDrawings() {
   // 5. FIRST FLOOR WEST GIRLS' ASSEMBLY HALL: ALL 47 MARTYRED SCHOOLGIRLS
   const y1 = 3.6;
   const girlsAll = childrenList.filter((c) => c.gender === 'girl' && c.photoPath);
-  createWingBannerIn3D(
-    firstFloorGroup,
-    `FIRST FLOOR GIRLS' ASSEMBLY HALL: ALL 47 MARTYRED SCHOOLGIRLS (GRADES 1–6)`,
-    `طبقه اول (سالن بزرگ دختران): ۴۷ دانش‌آموز دختر شهیده در پایه‌های اول تا ششم`,
-    -15.25,
-    y1 + 3.48,
-    -12.7,
-    0,
-    6.8,
-    '#2b1222',
-    '#f472b6'
-  );
+  // Banner hidden for Station 5 (it hung on the north wall at z = -12.7, above the prayer-room steles).
+  // createWingBannerIn3D(
+  //   firstFloorGroup,
+  //   `FIRST FLOOR GIRLS' ASSEMBLY HALL: ALL 47 MARTYRED SCHOOLGIRLS (GRADES 1–6)`,
+  //   `طبقه اول (سالن بزرگ دختران): ۴۷ دانش‌آموز دختر شهیده در پایه‌های اول تا ششم`,
+  //   -15.25,
+  //   y1 + 3.48,
+  //   -12.7,
+  //   0,
+  //   6.8,
+  //   '#2b1222',
+  //   '#f472b6'
+  // );
 
   let gIdx = 0;
   const girlsEastZ = [-12.0, -10.9, -9.8, -8.7, -7.6, -3.9, -2.8, -1.7, -0.6, 0.6, 1.6];

@@ -1414,6 +1414,27 @@ export function jumpGuidedTourStep(nextIdx) {
   renderGuidedTourStep(nextIdx, true);
 }
 
+/**
+ * "Next station" button: like jumpGuidedTourStep, but when moving forward one stop from a stop that
+ * has a cinema interlude, play the interlude first (as the automatic advance does).
+ */
+export function advanceGuidedTourStep(nextIdx) {
+  const cur = GUIDED_TOUR_STOPS[appState.currentTourIndex];
+  const hasInterlude = Boolean(cur && WALKTHROUGH_INTERLUDES[cur.hotspotId]);
+  if (!hasInterlude || nextIdx !== appState.currentTourIndex + 1) {
+    jumpGuidedTourStep(nextIdx);
+    return;
+  }
+  beginNewTourRun();
+  appState.isGuidedTour = true;
+  stopSpotNarration({ keepBackground: true });
+  playCinemaInterlude(cur.hotspotId, () => {
+    if (!appState.isGuidedTour) return;
+    appState.currentTourIndex = nextIdx;
+    renderGuidedTourStep(nextIdx, true);
+  });
+}
+
 export function renderGuidedTourStep(idx, speakNow) {
   const stop = GUIDED_TOUR_STOPS[idx];
   if (!stop) return;
