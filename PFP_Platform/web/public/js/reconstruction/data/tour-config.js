@@ -670,6 +670,17 @@ export const WALKTHROUGH_BOOKENDS = {
 };
 
 export const WALKTHROUGH_INTERLUDES = {
+  // Between station 1 and 2 (keyed by the stop it follows). 164 s, so maxSec raises the 48 s watchdog.
+  courtyard_lines: {
+    id: 'interlude_01',
+    src: 'media/walkthrough_interludes/interlude_01_intro.mp4',
+    maxSec: 180,
+    aspect: 'landscape',
+    tone: 'pre',
+    kicker: { en: '', fa: '', fi: '' },
+    context: { en: '', fa: '', fi: '' },
+    cues: []
+  },
   boys_flower_arch: {
     id: 'interlude_02',
     src: 'media/walkthrough_interludes/interlude_02_boys_hall.mp4',
@@ -700,29 +711,14 @@ export const WALKTHROUGH_INTERLUDES = {
     context: { en: '', fa: '', fi: '' },
     cues: []
   },
+  // Between station 5 and 6. 15 s, no text. (The old interlude_04_the_hinge_1045am.mp4 with its
+  // "FIRST STRIKE" card is no longer referenced.)
   girls_upper_hall: {
     id: 'interlude_04',
-    src: 'media/walkthrough_interludes/interlude_04_the_hinge_1045am.mp4',
-    aspect: 'portrait',
-    tone: 'strike',
-    ruptureWindow: {
-      s: 8.2, e: 10.7,
-      time: {
-        en: 'SATURDAY · FEBRUARY 28, 2026 · FIRST STRIKE',
-        fa: 'شنبه ۹ اسفند ۱۴۰۴ · لحظه اصابت نخستین موشک',
-        fi: 'LAUANTAI · 28. HELMIKUUTA 2026 · ENSIMMÄINEN ISKU'
-      },
-      title: {
-        en: 'Direct Cruise Missile Impact on Shajareh Tayyebeh Primary School',
-        fa: 'اصابت مستقیم موشک کروز به دبستان شجره طیبه میناب',
-        fi: 'Risteilyohjuksen suora osuma Shajareh Tayyebehin alakouluun'
-      }
-    },
-    kicker: {
-      en: 'FINAL MINUTES IN 1ST GRADE → FIRST MINUTES IN THE COURTYARD',
-      fa: 'آخرین عکس کلاس اول پیش از انفجار ← دقایق نخست در حیاط پر از دود',
-      fi: 'EKALUOKAN VIIMEISET HETKET → ENSIMMÄISET MINUUTIT KOULUPIHALLA'
-    },
+    src: 'media/walkthrough_interludes/interlude_01_girls_prayer_room.mp4',
+    aspect: 'landscape',
+    tone: 'pre',
+    kicker: { en: '', fa: '', fi: '' },
     context: { en: '', fa: '', fi: '' },
     cues: []
   },

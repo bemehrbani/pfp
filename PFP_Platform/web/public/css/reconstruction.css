@@ -833,10 +833,10 @@ body[dir="rtl"] .bookend-note {
   pointer-events: none;
 }
 .interlude-topbar {
-  width: min(980px, calc(100vw - 48px));
+  width: calc(100vw - 48px);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 14px;
   margin-bottom: 12px;
 }
@@ -909,31 +909,30 @@ body.recording-mode .interlude-skip-btn {
 .cinema-interlude-overlay[data-tone="strike"] .interlude-stage {
   border-color: rgba(239, 68, 68, 0.38);
 }
-/* True-aspect museum frames — zero blurred pillarboxes */
+/* True-aspect museum frames, nearly full screen. 130px reserves the top bar, the subtitle strip and padding. */
 .cinema-interlude-overlay[data-aspect="landscape"] .interlude-stage {
-  width: min(960px, 84vw);
+  width: min(calc(100vw - 48px), calc((100vh - 130px) * 16 / 9));
   aspect-ratio: 16 / 9;
-  max-height: 68vh;
 }
 .cinema-interlude-overlay[data-aspect="classic"] .interlude-stage {
-  height: min(68vh, 640px);
+  height: calc(100vh - 130px);
   aspect-ratio: 4 / 3;
-  max-width: 88vw;
+  max-width: calc(100vw - 48px);
 }
 .cinema-interlude-overlay[data-aspect="portrait"] .interlude-stage {
-  height: min(72vh, 690px);
+  height: calc(100vh - 130px);
   aspect-ratio: 4 / 5;
-  max-width: 88vw;
+  max-width: calc(100vw - 48px);
 }
 .cinema-interlude-overlay[data-aspect="portrait34"] .interlude-stage {
-  height: min(72vh, 690px);
+  height: calc(100vh - 130px);
   aspect-ratio: 3 / 4;
-  max-width: 88vw;
+  max-width: calc(100vw - 48px);
 }
 .cinema-interlude-overlay[data-aspect="tall"] .interlude-stage {
-  height: min(74vh, 710px);
+  height: calc(100vh - 130px);
   aspect-ratio: 9 / 14.5;
-  max-width: 88vw;
+  max-width: calc(100vw - 48px);
 }
 .interlude-stage video {
   width: 100%;

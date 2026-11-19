@@ -1122,8 +1122,8 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
   vid.onerror = () => finishActiveInterlude();
 
   appState.activeInterludeState.timer = run
-    ? scheduleTourTimer(run, 48000, () => finishActiveInterlude())
-    : setTimeout(() => finishActiveInterlude(), 48000);
+    ? scheduleTourTimer(run, (cfg.maxSec || 48) * 1000, () => finishActiveInterlude())
+    : setTimeout(() => finishActiveInterlude(), (cfg.maxSec || 48) * 1000);
 
   vid
     .play()
