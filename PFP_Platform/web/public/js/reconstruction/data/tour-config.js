@@ -132,10 +132,10 @@ export const GUIDED_TOUR_STOPS = [
       { t: 0.00, camPos: [-16.5, 11.8, 9.5], lookAt: [-1.8, 2.0, -5.2] },
       { t: 0.14, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 1.25, -4.75] },
       { t: 0.32, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 1.25, -4.75] },
-      { t: 0.40, camPos: [-1.80, 2.25, -4.45], lookAt: [2.95, 1.95, -4.45] },
-      { t: 0.50, camPos: [-1.80, 2.25, -4.45], lookAt: [2.95, 1.95, -4.45] },
-      { t: 0.58, camPos: [-0.85, 2.15, -1.65], lookAt: [-0.85, 1.65, -6.75] },
-      { t: 1.00, camPos: [-0.85, 2.15, -1.65], lookAt: [-0.85, 1.65, -6.75] }
+      { t: 0.40, camPos: [-1.80, 2.50, -4.45], lookAt: [2.95, 2.50, -4.45] },
+      { t: 0.50, camPos: [-1.80, 2.50, -4.45], lookAt: [2.95, 2.50, -4.45] },
+      { t: 0.58, camPos: [-0.85, 2.50, -1.65], lookAt: [-0.85, 2.50, -6.75] },
+      { t: 1.00, camPos: [-0.85, 2.50, -1.65], lookAt: [-0.85, 2.50, -6.75] }
     ],
     shortBadge: { en: "06 / 08", fi: "06 / 08", fa: "۰۶ / ۰۸" },
     badge: { en: "STOP 6 OF 8 · 11:22 AM STRIKE: 5M CRATER & EXTENT OF COLLAPSE", fi: "PISTE 6/8 · KLO 11.22 ISKU: 5M KRAATTERI", fa: "ایستگاه ۶ از ۸ · ساعت ۱۱:۲۲: گودال ۵ متری و محدوده تخریب" }
@@ -343,7 +343,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '06_A', hotspotId: 'crater_damage', slot: 'A', groupKey: 'postStrike',
     file: '06_sync_crater_comparison', durationSec: 28.2, cueStartP: 0.0, cueEndP: 0.514, cueStartPFa: 0.0, cueEndPFa: 0.532, cueStartPFi: 0.0, cueEndPFi: 0.475,
-    pos: [2.95, 1.98, -4.45], rotY: -Math.PI / 2, w: 3.60, h: 2.02, hasLegs: true, legFloorY: 0.15,
+    pos: [2.95, 2.53, -4.45], rotY: -Math.PI / 2, w: 3.60, h: 2.02, hasLegs: false,
     badge: {
       en: '5-METER CRATER · BEFORE & AFTER COMPARISON',
       fi: '5 METRIN KRAATTERI · ENNEN JA JÄLKEEN -VERTAILU',
@@ -358,7 +358,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '06_B', hotspotId: 'crater_damage', slot: 'B', groupKey: 'postStrike',
     file: '06_sync_mothers_bags_and_drawings', durationSec: 32.2, cueStartP: 0.514, cueEndP: 0.977, cueStartPFa: 0.532, cueEndPFa: 0.957, cueStartPFi: 0.475, cueEndPFi: 0.984,
-    pos: [-0.85, 1.96, -6.75], rotY: 0, w: 3.55, h: 2.00, hasLegs: true, legFloorY: 0.15,
+    pos: [-0.85, 2.51, -6.75], rotY: 0, w: 3.55, h: 2.00, hasLegs: false,
     badge: {
       en: 'MOTHERS, SCHOOLBAGS & 28 SHRAPNEL-PIERCED DRAWINGS',
       fi: 'ÄIDIT, KOULUREPUT JA 28 SIRPALEIDEN LÄVISTÄMÄÄ PIIRUSTUSTA',
@@ -725,6 +725,13 @@ export const WALKTHROUGH_INTERLUDES = {
   crater_damage: {
     id: 'interlude_05',
     src: 'media/walkthrough_interludes/interlude_05_staircase_witness_and_shoes.mp4',
+    // Two clips back to back: the staircase testimony (tall, subtitled), then the 16:9 sky clip.
+    // The sky clip is ~688 s, so maxSec raises the 48 s watchdog. Cues belong to clip 0 only.
+    playlist: [
+      { src: 'media/walkthrough_interludes/interlude_05_staircase_witness_and_shoes.mp4', aspect: 'tall' },
+      { src: 'media/walkthrough_interludes/interlude_05_sky_hq.mp4', aspect: 'landscape', noPreload: true }
+    ],
+    maxSec: 800,
     aspect: 'tall',
     tone: 'strike',
     kicker: {
@@ -732,11 +739,7 @@ export const WALKTHROUGH_INTERLUDES = {
       fa: 'شهادت میدانی در برابر راه‌پله منهدم‌شده و ردیف کفش‌های کوچک کودکان',
       fi: 'PAIKAN PÄÄLLÄ KUVATTU TODISTUS · SORTUNUT PORTAIKKO JA LASTEN KENGÄT'
     },
-    context: {
-      en: 'Unedited field narration before the sheared central stairwell, followed by recovered children\'s shoes laid out on carpets',
-      fa: 'گزارش میدانی بدون ویرایش از مقابل راه‌پله فروریخته مرکزی، و ردیف کفش‌ها و کیف‌های به‌جامانده دانش‌آموزان',
-      fi: 'Muokkaamaton kenttätodistus sortuneen keskusportaikon edessä sekä matolle järjestetyt lasten kengät ja reput'
-    },
+    context: { en: '', fa: '', fi: '' },
     cues: [
       {
         s: 0.3, e: 6.8,
@@ -767,6 +770,13 @@ export const WALKTHROUGH_INTERLUDES = {
   second_wave: {
     id: 'interlude_06',
     src: 'media/walkthrough_interludes/interlude_06_survivors_and_150_graves.mp4',
+    // Two clips back to back: survivors and graves (portrait, subtitled), then the 16:9 Minab bombing
+    // clip (~106 s). maxSec raises the 48 s watchdog. Cues belong to clip 0 only.
+    playlist: [
+      { src: 'media/walkthrough_interludes/interlude_06_survivors_and_150_graves.mp4', aspect: 'portrait' },
+      { src: 'media/walkthrough_interludes/interlude_06_minab_bombing.mp4', aspect: 'landscape' }
+    ],
+    maxSec: 180,
     aspect: 'portrait',
     tone: 'strike',
     kicker: {
@@ -774,11 +784,7 @@ export const WALKTHROUGH_INTERLUDES = {
       fa: 'ابعاد انسانی فاجعه · کودکان بازمانده، کفش زیر آوار و ردیف مزارهای کوچک',
       fi: 'INHIMILLINEN HINTA · SELVIYTYNEET LAPSET, PIENI KENKÄ JA YLI 150 HAUTAA'
     },
-    context: {
-      en: 'Surviving sisters Reyhaneh & Mastaneh, a child\'s sneaker lifted from concrete, and aerial view of the cemetery in Minab',
-      fa: 'نگاه بهت‌زده ریحانه و مستانه، کفش کوچک بیرون‌آمده از زیر بتن، و نمای هوایی مزارهای کودکان میناب',
-      fi: 'Selviytyneet sisarukset Reyhaneh ja Mastaneh, raunioista nostettu lapsen kenkä sekä ilmakuva Minabin hautausmaalta'
-    },
+    context: { en: '', fa: '', fi: '' },
     cues: [
       {
         s: 0.2, e: 5.4,
@@ -799,6 +805,17 @@ export const WALKTHROUGH_INTERLUDES = {
         fi: 'Yli sata vierekkäin kaivettua pientä hautaa Minabissa tuhansien saattajien kokoontuessa hyvästelemään lapset'
       }
     ]
+  },
+  // After the last station (vow_shrine), before the epilogue card and the vow. ~98 s, no text.
+  vow_shrine: {
+    id: 'interlude_07',
+    src: 'media/walkthrough_interludes/interlude_07_still_minab.mp4',
+    maxSec: 150,
+    aspect: 'landscape',
+    tone: 'pre',
+    kicker: { en: '', fa: '', fi: '' },
+    context: { en: '', fa: '', fi: '' },
+    cues: []
   }
 };
 

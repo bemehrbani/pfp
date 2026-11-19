@@ -213,7 +213,8 @@ export async function preloadAllWalkthroughPipBlobs() {
     (s) => `media/walkthrough_pip/${s.file}.mp4?v=${MEDIA_ASSET_VERSION}`
   );
   const interludeUrls = Object.values(WALKTHROUGH_INTERLUDES)
-    .flatMap((c) => (Array.isArray(c.playlist) ? c.playlist.map((p) => p.src) : [c.src]))
+    // Clips flagged noPreload (very large files) stream on demand instead of being held in memory as blobs.
+    .flatMap((c) => (Array.isArray(c.playlist) ? c.playlist.filter((p) => !p.noPreload).map((p) => p.src) : [c.src]))
     .map((src) => withMediaVersion(src));
   const all = Array.from(new Set([...pipUrls, ...screenUrls, ...interludeUrls]));
   const prevMode = appState.recordingMode;
@@ -984,6 +985,14 @@ export function hideAllBookendsAndInterludes() {
   appState.activeInterludeState = null;
 }
 
+/** Skip button: on a multi-clip interlude still on an earlier clip, jump to the next clip; otherwise end it. */
+export function skipInterludeClip() {
+  const st = appState.activeInterludeState;
+  if (!st) return;
+  if (typeof st.skipClip === 'function' && st.skipClip()) return;
+  finishActiveInterlude();
+}
+
 export function finishActiveInterlude() {
   if (!appState.activeInterludeState) return;
   const { onDone, timer, run } = appState.activeInterludeState;
@@ -1073,7 +1082,7 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
   vid.volume = appState.voiceNarrationEnabled ? 1.0 : 0.0;
   vid.currentTime = 0;
 
-  appState.activeInterludeState = { cfg, onDone, timer: null, run };
+  appState.activeInterludeState = { cfg, onDone, timer: null, run, skipClip: null };
   ov.classList.remove('is-fading');
   ov.hidden = false;
 
@@ -1097,7 +1106,8 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
       }
     }
     if (subEl && Array.isArray(cfg.cues)) {
-      const cue = cfg.cues.find((c) => cur >= c.s && cur <= c.e);
+      // A cue belongs to one playlist clip (cue.clip, default 0) so clip 2 does not replay clip 1 subtitles.
+      const cue = cfg.cues.find((c) => (c.clip || 0) === clipIdx && cur >= c.s && cur <= c.e);
       subEl.textContent = cue ? cue[lang] || cue.en || '' : '';
     }
   };
@@ -1119,6 +1129,12 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
     vid.play().catch(() => finishActiveInterlude());
   };
   vid.onended = () => { playNextClip(); };
+  // Skip button hook: while clips remain, skip only the current one (see skipInterludeClip).
+  appState.activeInterludeState.skipClip = () => {
+    if (clipIdx >= clips.length - 1) return false;
+    playNextClip();
+    return true;
+  };
   vid.onerror = () => finishActiveInterlude();
 
   appState.activeInterludeState.timer = run
@@ -1233,10 +1249,13 @@ export function playSpotNarration(hotspotId) {
           }
         });
       } else {
-        ensureBackgroundScorePlaying('transition');
-        rampBackgroundScoreVolume(0.38);
         appState.guidedTourAutoAdvanceTimer = scheduleScoped(900, () => {
           if (!appState.isGuidedTour) return;
+          // Last station: optional closing interlude video first, then the epilogue card and the vow.
+          const showEpilogue = () => {
+          if (!appState.isGuidedTour) return;
+          ensureBackgroundScorePlaying('transition');
+          rampBackgroundScoreVolume(0.38);
           applyBookendTexts();
           const epi = document.getElementById('walkthroughEpilogueOverlay');
           hideStoryBanner();
@@ -1256,6 +1275,12 @@ export function playSpotNarration(hotspotId) {
               appState.callbacks.openVowModal?.();
             });
           });
+          };
+          if (hasInterlude) {
+            playCinemaInterlude(hotspotId, showEpilogue);
+          } else {
+            showEpilogue();
+          }
         });
       }
     } else {

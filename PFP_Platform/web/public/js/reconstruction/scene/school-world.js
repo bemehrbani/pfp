@@ -1339,19 +1339,15 @@ export function buildProceduralSchoolModels() {
     }
   );
   const scaleBadge = new THREE.Mesh(
-    new THREE.PlaneGeometry(4.2, 0.72),
+    new THREE.PlaneGeometry(3.6, 3.6 * (88 / 512)),
     new THREE.MeshBasicMaterial({ map: scaleTex, side: THREE.DoubleSide })
   );
-  scaleBadge.position.set(-2.5, 5.35, -5.5);
+  // Station 6: the crater banner sits on top of tour frame 06_A (x = 2.95, centre y = 2.53, h = 2.02,
+  // top edge near y = 3.6), same width as the frame, facing west. It used to float over the crater
+  // on a leader line; the line is gone because the banner no longer sits above the crater.
+  scaleBadge.position.set(2.93, 4.0, -4.45);
+  scaleBadge.rotation.y = -Math.PI / 2;
   postStrikeModelGroup.add(scaleBadge);
-
-  postStrikeModelGroup.add(new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(-2.5, 0.5, -5.5),
-      new THREE.Vector3(-2.5, 4.99, -5.5)
-    ]),
-    new THREE.LineBasicMaterial({ color: 0xef4444, transparent: true, opacity: 0.75 })
-  ));
 
   // E) Deterministic Layered Concrete Rubble Slabs in Collapsed West Wing & Central Zone (Zero Math.random jitter!)
   const rubbleSpecs = [

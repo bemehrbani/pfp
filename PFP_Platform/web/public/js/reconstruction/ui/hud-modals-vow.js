@@ -27,6 +27,7 @@ import {
   playSpotNarration,
   resetWalkthroughIdleTimer,
   finishActiveInterlude,
+  skipInterludeClip,
   startGuidedTour,
   stopGuidedTour,
   jumpGuidedTourStep,
@@ -921,7 +922,7 @@ export function initUIControls() {
   const btnSkipInterlude = document.getElementById('btnSkipInterlude');
   if (btnSkipInterlude) {
     btnSkipInterlude.addEventListener('click', () => {
-      finishActiveInterlude();
+      skipInterludeClip();
     });
   }
 
