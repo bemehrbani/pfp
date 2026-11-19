@@ -148,8 +148,8 @@ export const GUIDED_TOUR_STOPS = [
     lookAt: [13.5, 2.5, 2.6],
     waypoints: [
       { t: 0.00, camPos: [25.5, 5.1, 13.8], lookAt: [13.5, 2.5, 2.6] },
-      { t: 0.12, camPos: [21.5, 2.12, 8.75], lookAt: [22.75, 1.98, 3.10] },
-      { t: 0.30, camPos: [21.2, 2.06, 8.30], lookAt: [22.75, 1.98, 3.10] },
+      { t: 0.12, camPos: [19.2, 2.10, 10.60], lookAt: [19.0, 1.98, 5.55] },
+      { t: 0.30, camPos: [19.0, 2.04, 10.20], lookAt: [19.0, 1.98, 5.55] },
       { t: 0.42, camPos: [13.65, 1.84, 10.75], lookAt: [13.50, 1.72, 5.55] },
       { t: 0.64, camPos: [13.55, 1.78, 10.20], lookAt: [13.50, 1.74, 5.55] },
       { t: 1.00, camPos: [13.55, 1.78, 10.20], lookAt: [13.50, 1.74, 5.55] }
@@ -161,18 +161,12 @@ export const GUIDED_TOUR_STOPS = [
     hotspotId: 'vow_shrine',
     temporal: 0.0,
     cutawayMode: 0,
-    camPos: [-1.5, 2.35, 23.2],
-    lookAt: [-1.5, 2.05, 9.5],
+    camPos: [-1.5, 1.9, 27.0],
+    lookAt: [-1.5, 1.9, 9.65],
     waypoints: [
-      { t: 0.00, camPos: [-1.5, 2.35, 23.2], lookAt: [-1.5, 1.85, 11.0] },
-      { t: 0.18, camPos: [-2.40, 1.85, 16.0], lookAt: [-5.20, 1.40, 15.0] },
-      { t: 0.32, camPos: [-0.60, 1.85, 16.0], lookAt: [2.20, 1.40, 15.0] },
-      { t: 0.44, camPos: [-2.95, 1.90, 13.65], lookAt: [-4.45, 1.88, 9.65] },
-      { t: 0.60, camPos: [-2.95, 1.90, 13.65], lookAt: [-4.45, 1.88, 9.65] },
-      { t: 0.68, camPos: [-0.05, 1.90, 13.65], lookAt: [1.45, 1.88, 9.65] },
-      { t: 0.82, camPos: [-0.05, 1.90, 13.65], lookAt: [1.45, 1.88, 9.65] },
-      { t: 0.90, camPos: [-1.5, 2.48, 18.8], lookAt: [-1.5, 1.88, 9.5] },
-      { t: 1.00, camPos: [-1.5, 2.48, 18.8], lookAt: [-1.5, 1.88, 9.5] }
+      { t: 0.00, camPos: [-1.5, 1.90, 27.0], lookAt: [-1.5, 1.90, 9.65] },
+      { t: 0.40, camPos: [-1.5, 1.90, 18.2], lookAt: [-1.5, 1.90, 9.65] },
+      { t: 1.00, camPos: [-1.5, 1.90, 18.2], lookAt: [-1.5, 1.90, 9.65] }
     ],
     shortBadge: { en: "08 / 08", fi: "08 / 08", fa: "۰۸ / ۰۸" },
     badge: { en: "STOP 8 OF 8 · THE ACCOUNTABILITY VOW SHRINE", fi: "PISTE 8/8 · VASTUULUPAUKSEN MUISTOMERKKI", fa: "ایستگاه ۸ از ۸ · یادمان میثاق دادخواهی — ثبت پیمان جهانی" }
@@ -374,7 +368,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '07_A', hotspotId: 'second_wave', slot: 'A', groupKey: 'postStrike',
     file: '07_sync_barehands_rescue', durationSec: 24.5, cueStartP: 0.0, cueEndP: 0.400, cueStartPFa: 0.0, cueEndPFa: 0.401, cueStartPFi: 0.0, cueEndPFi: 0.411,
-    pos: [22.75, 2.04, 3.10], rotY: -0.18, w: 4.15, h: 2.33, hasLegs: true, legFloorY: 0.02,
+    pos: [19.00, 2.04, 5.55], rotY: 0, w: 4.15, h: 2.33, hasLegs: true, legFloorY: 0.02,
     badge: {
       en: 'MOTHERS & RESCUERS DIGGING WITH BARE HANDS',
       fi: 'ÄIDIT JA PELASTAJAT KAIVAMASSA PALJAIN KÄSIN',
@@ -404,8 +398,11 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 8: Accountability Vow Shrine & Tribute Boards
   {
     id: '08_A', hotspotId: 'vow_shrine', slot: 'A', groupKey: 'memorial',
-    file: '08_sync_echo_of_rooms', durationSec: 34.4, cueStartP: 0.435, cueEndP: 0.665, cueStartPFa: 0.465, cueEndPFa: 0.724, cueStartPFi: 0.427, cueEndPFi: 0.715,
-    pos: [-4.45, 1.92, 9.65], rotY: 0.30, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 0.02,
+    images: Array.from({ length: 10 }, (_, i) => `media/walkthrough_pip/shrine/shrine_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    slideSec: 3.4, style: 'stele', noPoster: true, noPlaque: true,
+    // Slideshow runs from the start of the station to its end (wraps after the last photo).
+    durationSec: 34.4, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
+    pos: [-4.60, 1.79, 9.65], rotY: 0.30, w: 3.10, h: 3.10, hasLegs: false,
     badge: {
       en: 'WALK THROUGH THEIR CLASSROOMS · HEAR THEIR VOICES',
       fi: 'KULJE HEIDÄN LUOKKIENSA LÄPI · KUULE HEIDÄN ÄÄNENSÄ',
@@ -418,9 +415,23 @@ export const IN_WORLD_SCREEN_SPECS = [
     }
   },
   {
+    id: '08_C', hotspotId: 'vow_shrine', slot: 'C', groupKey: 'memorial',
+    file: 'shrine/shrine_video_01', loop: true, style: 'stele', noPoster: true, noPlaque: true,
+    // Plays on repeat from the start of the station to its end.
+    durationSec: 52.7, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
+    // Midway between the two big frames (x -1.5), set 0.5 m behind their row (z 9.65), facing south. This is the
+    // vow shrine's spot, so the shrine is hidden while stop 8 plays (tour-director.js).
+    // 720x1280 portrait, so 9:16. Stele: pos y = 0.14 + (h + 0.2) / 2.
+    pos: [-1.50, 1.565, 9.15], rotY: 0, w: 1.49, h: 2.65, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
     id: '08_B', hotspotId: 'vow_shrine', slot: 'B', groupKey: 'memorial',
-    file: '08_sync_justice_vow', durationSec: 26.3, cueStartP: 0.665, cueEndP: 0.988, cueStartPFa: 0.724, cueEndPFa: 0.992, cueStartPFi: 0.715, cueEndPFi: 0.991,
-    pos: [1.45, 1.92, 9.65], rotY: -0.30, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 0.02,
+    images: Array.from({ length: 36 }, (_, i) => `media/walkthrough_pip/shrine/shrine_vow_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    slideSec: 3.5, style: 'stele', noPoster: true, noPlaque: true,
+    // Slideshow runs from the start of the station to its end (wraps after the last photo).
+    durationSec: 26.3, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
+    pos: [1.60, 1.555, 9.65], rotY: -0.30, w: 3.95, h: 2.63, hasLegs: false,
     badge: {
       en: 'SIGN THE MINAB ACCOUNTABILITY VOW',
       fi: 'ALLEKIRJOITA MINABIN VASTUULUPAUS',

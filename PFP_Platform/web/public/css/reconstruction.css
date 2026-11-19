@@ -899,6 +899,7 @@ body.recording-mode .interlude-skip-btn {
 /* CLEAN CAPTURE (?recording=1 / ?clean=1, toggle with H): film-only screen.
    Subtitles, interlude video, PiP and quote callout are intentionally kept. */
 body.clean-capture .interlude-skip-btn,
+body.clean-capture .hotspot-pin,
 body.clean-capture.walkthrough-mode .story-banner,
 body.clean-capture.walkthrough-mode .walkthrough-context-stamp,
 body.clean-capture.walkthrough-mode .hud-layer {

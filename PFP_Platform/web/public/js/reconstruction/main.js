@@ -176,14 +176,18 @@ export async function startReconstructionApp() {
   // Clean-capture: hides every tour overlay that is not part of the film
   // (bottom pill, top-left stamp, skip button) for screen recording.
   // ?recording=1 or ?clean=1 starts with it on; press H to toggle at any time.
-  if (appState.recordingMode || bootParams.get('clean') === '1') {
-    document.body.classList.add('clean-capture');
-  }
+  // The 3D vow shrine is scene geometry (not DOM), so it needs a visibility sync.
+  const setCleanCapture = (on) => {
+    document.body.classList.toggle('clean-capture', on);
+    const shrine = appState.scene.getObjectByName('Vow_Shrine_3D');
+    if (shrine) shrine.visible = !on;
+  };
+  setCleanCapture(appState.recordingMode || bootParams.get('clean') === '1');
   window.addEventListener('keydown', (e) => {
     if ((e.key !== 'h' && e.key !== 'H') || e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
     const t = e.target;
     if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
-    document.body.classList.toggle('clean-capture');
+    setCleanCapture(!document.body.classList.contains('clean-capture'));
   });
   if (bootParams.get('autostart') === '1') {
     document.body.classList.add('walkthrough-mode');

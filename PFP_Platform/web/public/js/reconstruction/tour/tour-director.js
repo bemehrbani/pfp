@@ -368,6 +368,20 @@ export async function hideStoryBanner() {
   await hideAnimatedOverlay(document.getElementById('storyBanner'));
 }
 
+/**
+ * Station 8 puts a video frame on the vow shrine's own spot (between the two big frames), so the
+ * obelisk, its base and the roses are hidden while that stop plays and restored on any other stop
+ * or when the tour ends. Clean-capture mode (H key) keeps the shrine hidden either way.
+ */
+function syncShrineVisibilityForStop(stopIdx) {
+  const shrine = appState.scene && appState.scene.getObjectByName('Vow_Shrine_3D');
+  if (!shrine) return;
+  const stop = typeof stopIdx === 'number' ? GUIDED_TOUR_STOPS[stopIdx] : null;
+  const hideForStop = Boolean(appState.isGuidedTour && stop && stop.hotspotId === 'vow_shrine');
+  const clean = typeof document !== 'undefined' && document.body.classList.contains('clean-capture');
+  shrine.visible = !hideForStop && !clean;
+}
+
 function applyWalkthroughStationOverlays(stopIdx) {
   if (typeof document === 'undefined') return;
   const stop = GUIDED_TOUR_STOPS[stopIdx];
@@ -1418,6 +1432,7 @@ export function stopGuidedTour() {
   appState.deterministicWalkthroughRender = false;
   appState.tourManualCameraOverride = false;
   appState.activeInWorldRunKey = '';
+  syncShrineVisibilityForStop(null);
   hideAllBookendsAndInterludes();
 
   if (appState.walkthroughIdleTimer) {
@@ -1480,6 +1495,7 @@ export function renderGuidedTourStep(idx, speakNow) {
   appState.tourManualCameraOverride = false;
   appState.tourStepStartTime = typeof performance !== 'undefined' ? performance.now() : Date.now();
   setWalkthroughProgress(0);
+  syncShrineVisibilityForStop(idx);
   applyWalkthroughStationOverlays(idx);
 
   if (!appState.deterministicWalkthroughRender && typeof document !== 'undefined') {

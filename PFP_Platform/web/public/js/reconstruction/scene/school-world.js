@@ -469,12 +469,16 @@ export function buildEnvironmentAndTerrain() {
   // ==========================================
   const shrineX = -1.5;
   const shrineZ = 10.5;
+  // Named group so clean-capture mode (main.js) can hide the whole shrine at runtime.
+  const vowShrineGroup = new THREE.Group();
+  vowShrineGroup.name = 'Vow_Shrine_3D';
+  memorialBoardsGroup.add(vowShrineGroup);
   const shrinePedestal = new THREE.Mesh(
     new THREE.CylinderGeometry(1.85, 2.25, 0.42, 24),
     new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, metalness: 0.5 })
   );
   shrinePedestal.position.set(shrineX, 0.21, shrineZ);
-  memorialBoardsGroup.add(shrinePedestal);
+  vowShrineGroup.add(shrinePedestal);
 
   const goldRing = new THREE.Mesh(
     new THREE.RingGeometry(1.95, 2.20, 32),
@@ -482,7 +486,7 @@ export function buildEnvironmentAndTerrain() {
   );
   goldRing.rotation.x = -Math.PI / 2;
   goldRing.position.set(shrineX, 0.05, shrineZ);
-  memorialBoardsGroup.add(goldRing);
+  vowShrineGroup.add(goldRing);
 
   const obelisk = new THREE.Mesh(
     new THREE.CylinderGeometry(0.30, 0.58, 3.4, 8),
@@ -496,7 +500,7 @@ export function buildEnvironmentAndTerrain() {
   );
   obelisk.position.set(shrineX, 2.1, shrineZ);
   obelisk.castShadow = true;
-  memorialBoardsGroup.add(obelisk);
+  vowShrineGroup.add(obelisk);
 
   // Makan Nasiri's Small Red-Soled Sneaker Resting on Red Roses at Base of Vow Shrine (Station 8 Tribute)
   const roseCaseGroup = new THREE.Group();
@@ -533,7 +537,7 @@ export function buildEnvironmentAndTerrain() {
   );
   glassVitrine.position.y = 0.13;
   roseCaseGroup.add(sneakerSole, sneakerUpper, glassVitrine);
-  memorialBoardsGroup.add(roseCaseGroup);
+  vowShrineGroup.add(roseCaseGroup);
 }
 
 export function buildProceduralSchoolModels() {
