@@ -33,8 +33,6 @@ export const appState = {
   groundFloorGroup: null,
   firstFloorGroup: null,
   roofGroup: null,
-  // Data-driven ground-floor walls: [{ def, group, length }] from wall-builder.js
-  wallRegistry: [],
   cutawayState: 0,
   damageSliderValue: 0.0,
 

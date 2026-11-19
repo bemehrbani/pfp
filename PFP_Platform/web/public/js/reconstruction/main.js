@@ -14,7 +14,11 @@ import {
   selectNarratorByActor,
   setNarratorProfile,
 } from './data/i18n.js';
-import { initThreeEngine, setTemporalCondition } from './engine/core.js';
+import {
+  initThreeEngine,
+  setTemporalCondition,
+  useFrontFaceShadowCasters,
+} from './engine/core.js';
 import {
   sampleGuidedTourCamera,
   sampleGuidedTourCameraCoords,
@@ -38,7 +42,6 @@ import {
   refreshInWorldScreensLanguage,
   updateInWorldScreensLive,
 } from './scene/in-world-screens.js';
-import { initWallInspector } from './scene/wall-inspector.js';
 import {
   initWalkthroughPipManifest,
   resolvePipVideoSrc,
@@ -155,9 +158,9 @@ export async function startReconstructionApp() {
   }
   buildEnvironmentAndTerrain();
   buildProceduralSchoolModels();
+  useFrontFaceShadowCasters(appState.scene);
   loadChildrenAndBuildInWorldMemorial();
   init3DPortraitRaycaster();
-  initWallInspector();
   initHotspots();
   initUIControls();
   initKeyboardWalkControls();

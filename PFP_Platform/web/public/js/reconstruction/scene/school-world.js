@@ -735,8 +735,7 @@ export function buildProceduralSchoolModels() {
 
   // =====================================================================
   // GROUND FLOOR WALLS — exterior envelope, facade finishes, windows, doors and interior
-  // partitions all come from GROUND_FLOOR_WALLS (ground-floor-walls.js). Open the page with
-  // ?walls=1 to see each wall's ID in the scene.
+  // partitions all come from GROUND_FLOOR_WALLS (ground-floor-walls.js).
   // =====================================================================
   // Grille bars use the classroom-door pink (same material), so the window and the doors match.
   const pinkGrilleMat = purpleDoorMat;
@@ -789,7 +788,7 @@ export function buildProceduralSchoolModels() {
     addDoor: (g, x, yBase, z, rotY, depth, width) => addPurpleDoor(g, x, yBase, z, rotY, depth, true, width),
     addGrille: addPinkGrilledRoomWindow,
   };
-  appState.wallRegistry = buildWalls(GROUND_FLOOR_WALLS, groundWallCtx);
+  buildWalls(GROUND_FLOOR_WALLS, groundWallCtx);
 
   // C) Rainbow Stairwell props (X: -3.8..0.0, Z: -13.0..-8.2), open to the hall; its walls are G-22 / G-23.
   const rainbowStairGroup = new THREE.Group();
@@ -998,7 +997,7 @@ export function buildProceduralSchoolModels() {
     ...groundWallCtx,
     parents: { default: firstFloorGroup },
   };
-  appState.wallRegistry.push(...buildWalls(FIRST_FLOOR_WALLS, firstFloorWallCtx));
+  buildWalls(FIRST_FLOOR_WALLS, firstFloorWallCtx);
 
   // Sunshade slab above the east-wing windows
   addSlabOrTrim(firstFloorGroup, 7.2, 0.11, 0.52, 15.2, y1 + 3.12, 2.66, sunshadeMat);

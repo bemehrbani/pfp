@@ -55,6 +55,26 @@ function fitSunShadowToSite(sunLight, scene) {
   cam.updateProjectionMatrix();
 }
 
+/**
+ * Makes every shadow-casting mesh write its FRONT faces into the shadow map.
+ *
+ * three's default is to render back faces. For a slab that stores the depth of its underside,
+ * which is exactly the plane the wall tops and ceiling joints touch, so those contact points
+ * compare equal to the stored depth and let sun leak in as a bright line along the ceiling
+ * edges. Front faces store the slab's top surface instead, leaving the full slab thickness
+ * between the stored depth and the contact plane. Call once after the geometry is built.
+ */
+export function useFrontFaceShadowCasters(root) {
+  root.traverse((obj) => {
+    if (!obj.isMesh || !obj.castShadow) return;
+    const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+    for (const mat of mats) {
+      if (mat && mat.side === THREE.FrontSide) mat.shadowSide = THREE.FrontSide;
+    }
+  });
+  requestSunShadowRefresh();
+}
+
 /** Re-renders the (otherwise static) sun shadow map on the next frame. */
 export function requestSunShadowRefresh() {
   if (appState.sunLight) appState.sunLight.shadow.needsUpdate = true;

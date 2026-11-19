@@ -3,8 +3,7 @@
  *
  * Coordinates are world metres on the floor plan: +X east, +Z south (the schoolyard side).
  * `from` / `to` are the wall's centre-line end points; `at` on an opening is the distance
- * from `from` to the opening's centre. Open the page with `?walls=1` to see every ID in the
- * scene and click a wall for its numbers.
+ * from `from` to the opening's centre.
  *
  * G-01..G-08 are the exterior envelope; G-09 onward are interior partitions, west to east.
  * This is the original FA-121 layout, converted one-to-one from the hand-placed boxes.
