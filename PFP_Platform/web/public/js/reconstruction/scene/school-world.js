@@ -1469,6 +1469,8 @@ export function setCutawayMode(mode) {
   appState.cutawayState = ((mode % 3) + 3) % 3;
   const { cutawayState, roofGroup, firstFloorGroup, groundFloorGroup, currentLang } = appState;
   const btn = typeof document !== 'undefined' ? document.getElementById('btnCutaway') : null;
+  // Roof/floor visibility changes what casts shadow; the sun shadow map is static otherwise.
+  if (appState.sunLight) appState.sunLight.shadow.needsUpdate = true;
 
   if (cutawayState === 0) {
     if (roofGroup) roofGroup.visible = true;

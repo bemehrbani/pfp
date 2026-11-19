@@ -125,6 +125,10 @@ export function animate() {
     clampCameraAboveGround();
   }
   updateHotspotPositions();
+  if (appState.shadowWarmupFrames > 0 && appState.sunLight) {
+    appState.shadowWarmupFrames -= 1;
+    appState.sunLight.shadow.needsUpdate = true;
+  }
   appState.renderer.render(appState.scene, appState.camera);
 }
 

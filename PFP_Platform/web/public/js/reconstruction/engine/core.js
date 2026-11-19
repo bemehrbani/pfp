@@ -7,6 +7,59 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import { appState } from '../state.js';
 
+// Bounding box of everything that casts or receives sun shadow: the three walled yards
+// (X -34..42.5, Z -19.5..30) plus a margin, and the building height (roof and parapets
+// stay under ~14 units). Update this if the site layout in school-world.js grows.
+const SITE_SHADOW_BOUNDS = new THREE.Box3(
+  new THREE.Vector3(-36, -0.5, -22),
+  new THREE.Vector3(44.5, 14, 32)
+);
+const SUN_DIRECTION = new THREE.Vector3(28, 58, 24).normalize();
+
+/**
+ * Aims the sun at the site centre and sizes its orthographic shadow frustum to the site's
+ * eight bounding-box corners as seen from the light, so no shadow-map texels are wasted on
+ * empty ground around the school.
+ */
+function fitSunShadowToSite(sunLight, scene) {
+  const center = SITE_SHADOW_BOUNDS.getCenter(new THREE.Vector3());
+  sunLight.target.position.copy(center);
+  scene.add(sunLight.target);
+  sunLight.position.copy(center).addScaledVector(SUN_DIRECTION, 80);
+
+  const lightView = new THREE.OrthographicCamera();
+  lightView.position.copy(sunLight.position);
+  lightView.lookAt(center);
+  lightView.updateMatrixWorld(true);
+
+  const { min, max } = SITE_SHADOW_BOUNDS;
+  const view = new THREE.Box3();
+  const corner = new THREE.Vector3();
+  for (const x of [min.x, max.x]) {
+    for (const y of [min.y, max.y]) {
+      for (const z of [min.z, max.z]) {
+        view.expandByPoint(corner.set(x, y, z).applyMatrix4(lightView.matrixWorldInverse));
+      }
+    }
+  }
+
+  const cam = sunLight.shadow.camera;
+  const pad = 1;
+  cam.left = view.min.x - pad;
+  cam.right = view.max.x + pad;
+  cam.bottom = view.min.y - pad;
+  cam.top = view.max.y + pad;
+  // View space looks down -Z, so nearer points have larger z.
+  cam.near = Math.max(0.5, -view.max.z - pad);
+  cam.far = -view.min.z + pad;
+  cam.updateProjectionMatrix();
+}
+
+/** Re-renders the (otherwise static) sun shadow map on the next frame. */
+export function requestSunShadowRefresh() {
+  if (appState.sunLight) appState.sunLight.shadow.needsUpdate = true;
+}
+
 /**
  * Initializes the Three.js scene, camera, ACES Filmic renderer, OrbitControls,
  * lighting rig, and structural floor/memorial groups.
@@ -78,17 +131,22 @@ export async function initThreeEngine() {
   scene.add(hemiLight);
 
   const sunLight = new THREE.DirectionalLight(0xfff3db, 1.35 * Math.PI);
-  sunLight.position.set(28, 58, 24);
   sunLight.castShadow = true;
-  sunLight.shadow.mapSize.width = 2048;
-  sunLight.shadow.mapSize.height = 2048;
-  sunLight.shadow.camera.near = 10;
-  sunLight.shadow.camera.far = 150;
-  sunLight.shadow.camera.left = -45;
-  sunLight.shadow.camera.right = 45;
-  sunLight.shadow.camera.top = 45;
-  sunLight.shadow.camera.bottom = -45;
-  sunLight.shadow.bias = -0.0005;
+  sunLight.shadow.mapSize.width = 4096;
+  sunLight.shadow.mapSize.height = 4096;
+  // A small depth bias plus a normal-offset bias: the normal offset stops self-shadow acne
+  // without the large negative depth bias that detached shadows from the thin walls (light
+  // leaking at wall bases and corners).
+  sunLight.shadow.bias = -0.0002;
+  sunLight.shadow.normalBias = 0.04;
+  fitSunShadowToSite(sunLight, scene);
+  // The sun and all shadow casters are static, so the map is only re-rendered on demand
+  // (see requestSunShadowRefresh) rather than every frame. That is what pays for the 4096 map.
+  sunLight.shadow.autoUpdate = false;
+  sunLight.shadow.needsUpdate = true;
+  appState.sunLight = sunLight;
+  // Scene content is built after this point, so keep refreshing for the first few seconds.
+  appState.shadowWarmupFrames = 240;
   scene.add(sunLight);
 
   const terrainGroup = new THREE.Group();
@@ -150,6 +208,7 @@ export function setTemporalCondition(val) {
   if (preStrikeModelGroup && postStrikeModelGroup) {
     preStrikeModelGroup.visible = !isPost;
     postStrikeModelGroup.visible = isPost;
+    requestSunShadowRefresh();
   }
 
   if (typeof document !== 'undefined') {

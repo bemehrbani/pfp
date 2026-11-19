@@ -652,6 +652,21 @@ function triggerMemorialBellHarmonic() {
   } catch (_) {}
 }
 
+/**
+ * Ramp an AudioParam from its *current* value to `target`.
+ * Plain cancelScheduledValues(now) + rampToValueAtTime has no anchor event: if the param's
+ * initial setValueAtTime was queued in the same tick (ctx.currentTime hasn't advanced), it gets
+ * cancelled and the ramp starts from the param default (gain = 1.0), causing a loud sweep on
+ * first tour entry. Holding the current value as an explicit event avoids that.
+ */
+function anchoredRamp(param, target, now, endTime, exponential = false) {
+  const current = param.value;
+  param.cancelScheduledValues(now);
+  param.setValueAtTime(current, now);
+  if (exponential) param.exponentialRampToValueAtTime(target, endTime);
+  else param.linearRampToValueAtTime(target, endTime);
+}
+
 export function startMemorialAmbientPad(hotspotId) {
   if (typeof window === 'undefined') return;
   try {
@@ -663,20 +678,22 @@ export function startMemorialAmbientPad(hotspotId) {
       appState.ambientAudioCtx = ctx;
 
       const gainNode = ctx.createGain();
-      gainNode.gain.setValueAtTime(0.0001, ctx.currentTime);
+      // Set the intrinsic value (not a scheduled event): a scheduled event can be cancelled before
+      // the audio thread applies it, leaving the default gain of 1.0 (loud first-entry burst).
+      gainNode.gain.value = 0.0001;
       appState.ambientGainNode = gainNode;
 
       const padFilter = ctx.createBiquadFilter();
       padFilter.type = 'lowpass';
-      padFilter.frequency.setValueAtTime(profile.padCutoff, ctx.currentTime);
+      padFilter.frequency.value = profile.padCutoff;
       appState.ambientPadFilter = padFilter;
 
       appState.ambientOscillators = profile.freqs.map((f, idx) => {
         const osc = ctx.createOscillator();
         osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
-        osc.frequency.setValueAtTime(f, ctx.currentTime);
+        osc.frequency.value = f;
         const oscGain = ctx.createGain();
-        oscGain.gain.setValueAtTime(idx === 0 ? 0.34 : 0.17, ctx.currentTime);
+        oscGain.gain.value = idx === 0 ? 0.34 : 0.17;
         osc.connect(oscGain);
         oscGain.connect(padFilter);
         osc.start();
@@ -712,12 +729,12 @@ export function startMemorialAmbientPad(hotspotId) {
 
       const breezeFilter = ctx.createBiquadFilter();
       breezeFilter.type = 'bandpass';
-      breezeFilter.frequency.setValueAtTime(profile.breezeFreq, ctx.currentTime);
-      breezeFilter.Q.setValueAtTime(profile.breezeQ, ctx.currentTime);
+      breezeFilter.frequency.value = profile.breezeFreq;
+      breezeFilter.Q.value = profile.breezeQ;
       appState.ambientBreezeFilter = breezeFilter;
 
       const breezeGain = ctx.createGain();
-      breezeGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      breezeGain.gain.value = 0.0001;
       appState.ambientBreezeGain = breezeGain;
 
       noiseSrc.connect(breezeFilter);
@@ -734,23 +751,18 @@ export function startMemorialAmbientPad(hotspotId) {
     const now = ctx.currentTime;
     appState.ambientOscillators.forEach((osc, idx) => {
       const targetFreq = profile.freqs[idx] || profile.freqs[0];
-      osc.frequency.cancelScheduledValues(now);
-      osc.frequency.exponentialRampToValueAtTime(Math.max(40, targetFreq), now + 1.2);
+      anchoredRamp(osc.frequency, Math.max(40, targetFreq), now, now + 1.2, true);
     });
     if (appState.ambientPadFilter) {
-      appState.ambientPadFilter.frequency.cancelScheduledValues(now);
-      appState.ambientPadFilter.frequency.linearRampToValueAtTime(profile.padCutoff, now + 1.2);
+      anchoredRamp(appState.ambientPadFilter.frequency, profile.padCutoff, now, now + 1.2);
     }
     if (appState.ambientGainNode) {
-      appState.ambientGainNode.gain.cancelScheduledValues(now);
-      appState.ambientGainNode.gain.linearRampToValueAtTime(profile.padGain, now + 1.6);
+      anchoredRamp(appState.ambientGainNode.gain, profile.padGain, now, now + 1.6);
     }
     if (appState.ambientBreezeFilter && appState.ambientBreezeGain) {
-      appState.ambientBreezeFilter.frequency.cancelScheduledValues(now);
-      appState.ambientBreezeFilter.frequency.linearRampToValueAtTime(profile.breezeFreq, now + 1.2);
+      anchoredRamp(appState.ambientBreezeFilter.frequency, profile.breezeFreq, now, now + 1.2);
       appState.ambientBreezeFilter.Q.setValueAtTime(profile.breezeQ, now);
-      appState.ambientBreezeGain.gain.cancelScheduledValues(now);
-      appState.ambientBreezeGain.gain.linearRampToValueAtTime(profile.breezeGain, now + 1.6);
+      anchoredRamp(appState.ambientBreezeGain.gain, profile.breezeGain, now, now + 1.6);
     }
 
     scheduleMorningBirdsong(profile.birdGain);
@@ -770,12 +782,10 @@ export function stopMemorialAmbientPad() {
     if (ctx) {
       const now = ctx.currentTime;
       if (appState.ambientGainNode) {
-        appState.ambientGainNode.gain.cancelScheduledValues(now);
-        appState.ambientGainNode.gain.linearRampToValueAtTime(0.0001, now + 1.0);
+        anchoredRamp(appState.ambientGainNode.gain, 0.0001, now, now + 1.0);
       }
       if (appState.ambientBreezeGain) {
-        appState.ambientBreezeGain.gain.cancelScheduledValues(now);
-        appState.ambientBreezeGain.gain.linearRampToValueAtTime(0.0001, now + 1.0);
+        anchoredRamp(appState.ambientBreezeGain.gain, 0.0001, now, now + 1.0);
       }
     }
   } catch (_) {}
