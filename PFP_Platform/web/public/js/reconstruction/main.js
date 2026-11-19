@@ -15,7 +15,9 @@ import {
   setNarratorProfile,
 } from './data/i18n.js';
 import {
+  initAmbientOcclusion,
   initThreeEngine,
+  renderFrame,
   setTemporalCondition,
   useFrontFaceShadowCasters,
 } from './engine/core.js';
@@ -132,7 +134,7 @@ export function animate() {
     appState.shadowWarmupFrames -= 1;
     appState.sunLight.shadow.needsUpdate = true;
   }
-  appState.renderer.render(appState.scene, appState.camera);
+  renderFrame();
 }
 
 export async function startReconstructionApp() {
@@ -159,6 +161,7 @@ export async function startReconstructionApp() {
   buildEnvironmentAndTerrain();
   buildProceduralSchoolModels();
   useFrontFaceShadowCasters(appState.scene);
+  await initAmbientOcclusion();
   loadChildrenAndBuildInWorldMemorial();
   init3DPortraitRaycaster();
   initHotspots();

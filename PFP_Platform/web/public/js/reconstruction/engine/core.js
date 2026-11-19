@@ -75,6 +75,77 @@ export function useFrontFaceShadowCasters(root) {
   requestSunShadowRefresh();
 }
 
+/**
+ * Sets up GTAO ambient occlusion through a post-processing RenderPipeline, with temporal
+ * reprojection anti-aliasing (TRAA).
+ *
+ * GTAO's sampling noise is fixed to the screen, so on its own it shimmers over moving
+ * geometry. Temporal filtering makes the noise pattern change every frame, and TRAA then
+ * averages those frames along each pixel's motion, which converges to smooth occlusion.
+ * TRAA also anti-aliases the whole image (it replaces MSAA inside this pipeline).
+ *
+ * `?ao=0` turns it off, `?ao=debug` shows the raw AO buffer, `?traa=0` keeps AO but skips the
+ * temporal pass (noisy, for comparison), `?aoStrength=n` sets the contrast. The AO darkens
+ * the final image (direct sun and emissive surfaces included). On any setup failure the plain
+ * renderer path stays in use.
+ */
+export async function initAmbientOcclusion() {
+  const params = new URLSearchParams(window.location.search);
+  const mode = params.get('ao');
+  if (mode === '0' || !appState.renderer) return;
+  try {
+    const [tsl, aoModule, traaModule] = await Promise.all([
+      import('three/tsl'),
+      import('three/addons/tsl/display/GTAONode.js'),
+      import('three/addons/tsl/display/TRAANode.js'),
+    ]);
+    const { pass, mrt, output, normalView, velocity, screenUV } = tsl;
+    const { scene, camera, renderer } = appState;
+    const useTraa = params.get('traa') !== '0' && mode !== 'debug';
+
+    // One geometry pass writes colour, view-space normals and motion vectors. MSAA must be off
+    // for TRAA, so the pass gets 0 samples instead of inheriting the renderer's 4.
+    const scenePass = pass(scene, camera, { samples: 0 });
+    scenePass.setMRT(mrt({ output, normal: normalView, velocity }));
+    const sceneColor = scenePass.getTextureNode('output');
+    const sceneNormal = scenePass.getTextureNode('normal');
+    const sceneVelocity = scenePass.getTextureNode('velocity');
+    const sceneDepth = scenePass.getTextureNode('depth');
+
+    const aoPass = aoModule.ao(sceneDepth, sceneNormal, camera);
+    aoPass.useTemporalFiltering = useTraa; // rotate the sample pattern each frame for TRAA to average
+    aoPass.radius.value = 0.7; // world units: room corners and wall/ceiling joints
+    aoPass.samples.value = 16;
+    aoPass.thickness.value = 1;
+
+    // Tune the contrast of the occlusion; >1 deepens creases, <1 softens them.
+    const strength = Number(params.get('aoStrength')) || 1.4;
+    const aoValue = aoPass.getTextureNode().sample(screenUV).r.pow(strength);
+
+    // The AO is multiplied into the finished scene colour as a post-process. (Feeding it to the
+    // materials through `builtinAOContext` makes the AO pass render while the scene pass is
+    // still writing its target, which WebGPU rejects as a usage conflict.)
+    const lit = sceneColor.mul(aoValue);
+
+    const pipeline = new THREE.RenderPipeline(renderer);
+    if (mode === 'debug') pipeline.outputNode = aoValue; // white = open, dark = occluded
+    else pipeline.outputNode = useTraa ? traaModule.traa(lit, sceneDepth, sceneVelocity, camera) : lit;
+    appState.renderPipeline = pipeline;
+    console.info('[AO] GTAO pipeline active', { mode: mode || 'default', traa: useTraa, strength });
+  } catch (err) {
+    console.warn('Ambient occlusion unavailable, rendering without it', err);
+    appState.renderPipeline = null;
+  }
+}
+
+/** Renders one frame, through the AO pipeline when it is active. */
+export function renderFrame() {
+  const { renderPipeline, renderer, scene, camera } = appState;
+  // WebXR presents through its own stereo camera rig, which the post pipeline does not drive.
+  if (renderPipeline && !renderer.xr?.isPresenting) renderPipeline.render();
+  else renderer.render(scene, camera);
+}
+
 /** Re-renders the (otherwise static) sun shadow map on the next frame. */
 export function requestSunShadowRefresh() {
   if (appState.sunLight) appState.sunLight.shadow.needsUpdate = true;

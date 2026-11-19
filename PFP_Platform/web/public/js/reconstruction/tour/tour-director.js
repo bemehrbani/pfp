@@ -17,7 +17,7 @@ import {
   ROOM_ATMOSPHERE_PROFILES,
 } from '../data/tour-config.js';
 import { I18N_DATA, NARRATOR_PROFILES } from '../data/i18n.js';
-import { setTemporalCondition } from '../engine/core.js';
+import { renderFrame, setTemporalCondition } from '../engine/core.js';
 import { sampleGuidedTourCamera, triggerCameraAnimation } from '../engine/camera-rig.js';
 import { setCutawayMode } from '../scene/school-world.js';
 import {
@@ -560,7 +560,7 @@ export async function syncWalkthroughVisualsAtProgress(stopIdx, progress, totalS
   await seekInWorldScreensDeterministic(stop.hotspotId, progress, totalStationSec || 60.0);
   appState.callbacks.updateHotspotPositions?.();
   if (appState.renderer && appState.scene && appState.camera) {
-    appState.renderer.render(appState.scene, appState.camera);
+    renderFrame();
   }
 }
 
