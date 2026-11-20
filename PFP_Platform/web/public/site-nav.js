@@ -13,7 +13,7 @@
       nav_multimedia: "Multimedia",
       nav_events: "Events",
       nav_about: "About",
-      nav_contact: "✉ Contact",
+      nav_contact: "Contact",
       dropdown_report_title: "Case Determination",
       dropdown_report_desc: "Full 10-chapter factual finding & IAC analysis",
       dropdown_recon_title: "3D Strike Reconstruction",
@@ -42,7 +42,7 @@
       nav_multimedia: "چندرسانه‌ای",
       nav_events: "رویدادها",
       nav_about: "درباره انجمن",
-      nav_contact: "✉ تماس با ما",
+      nav_contact: "تماس با ما",
       dropdown_report_title: "گزارش نهایی سانحه",
       dropdown_report_desc: "بررسی حقوقی و شواهد در ۱۰ فصل",
       dropdown_recon_title: "بازسازی سه‌بعدی سانحه",
@@ -71,7 +71,7 @@
       nav_multimedia: "Multimedia",
       nav_events: "Tapahtumat",
       nav_about: "Tietoa",
-      nav_contact: "✉ Ota yhteyttä",
+      nav_contact: "Ota yhteyttä",
       dropdown_report_title: "Tapausseloste",
       dropdown_report_desc: "10-osainen tosiseikkojen selvitys & IAC-analyysi",
       dropdown_recon_title: "3D-rekonstruktio",
@@ -157,14 +157,20 @@
       width: 38px;
       height: 38px;
       border-radius: 6px;
-      background: linear-gradient(135deg, rgba(229, 185, 95, 0.2), rgba(229, 185, 95, 0.05));
+      background: rgba(11, 18, 32, 0.92);
       border: 1px solid var(--pfp-gold-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--pfp-gold);
-      font-size: 1.25rem;
+      padding: 3px;
       transition: all var(--pfp-transition);
+    }
+
+    .site-header .brand-emblem img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .site-header .brand-logo:hover .brand-emblem {
@@ -645,7 +651,9 @@
     return `
       <div class="nav-container">
         <a href="landing.html" class="brand-logo">
-          <div class="brand-emblem" aria-hidden="true">☮</div>
+          <div class="brand-emblem" aria-hidden="true">
+            <img src="images/logo/pfpj-crest-dark.svg" alt="" width="32" height="32" />
+          </div>
           <div class="brand-text">
             <span class="brand-title">PFPJ ry</span>
             <span class="brand-subtitle" data-nav-i18n="logo_sub">Legal Accountability</span>

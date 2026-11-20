@@ -203,8 +203,12 @@
         }
     };
 
-    // Get current language from document element or globally set variable
+    // Get current language from URL param, global variable, localStorage, or document element
     function getLang() {
+        try {
+            const qLang = (new URLSearchParams(window.location.search).get('lang') || '').toLowerCase();
+            if (['en', 'fa', 'fi'].includes(qLang)) return qLang;
+        } catch (_) {}
         if (typeof currentLang !== 'undefined' && ['en', 'fa', 'fi'].includes(currentLang)) return currentLang;
         try {
             const saved = localStorage.getItem('pfp-lang') || localStorage.getItem('pfp_lang');
@@ -418,6 +422,7 @@
             justify-content: center;
             padding: 20px;
             overflow-y: auto;
+            overscroll-behavior: contain;
         }
         #vowModal.vow-global-modal.visible,
         #vowModal.modal-backdrop.visible {
@@ -439,6 +444,7 @@
             font-family: 'Source Sans 3', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             max-height: 92vh;
             overflow-y: auto;
+            overscroll-behavior: contain;
         }
         body[dir="rtl"] #vowModal .vow-modal-box,
         html[dir="rtl"] #vowModal .vow-modal-box {
@@ -1230,6 +1236,49 @@
         const roleHint = vowTrigger.getAttribute('data-vow-role') || '';
         window.openVowModal(roleHint);
     });
+
+    // Escape key dismisses Vow modal on desktop/keyboards
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modalEl = document.getElementById('vowModal');
+            if (modalEl && modalEl.classList.contains('visible')) {
+                window.closeVowModal();
+            }
+        }
+    });
+
+    // Auto-open Accountability Vow modal from QR / deep link (?vow=1 or #vow)
+    function checkAndAutoOpenVowFromUrl() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const hash = (window.location.hash || '').toLowerCase();
+            const vowParam = (params.get('vow') || '').toLowerCase();
+            const shouldOpen =
+                hash === '#vow' ||
+                hash === '#sign-vow' ||
+                vowParam === '1' ||
+                vowParam === 'true' ||
+                vowParam === 'open';
+            if (!shouldOpen) return;
+
+            const qLang = (params.get('lang') || '').toLowerCase();
+            if (['en', 'fa', 'fi'].includes(qLang)) {
+                try { localStorage.setItem('pfp-lang', qLang); } catch (_) {}
+                if (typeof window.setLang === 'function') window.setLang(qLang);
+                else if (typeof window.setLanguage === 'function') window.setLanguage(qLang);
+            }
+
+            const roleHint = params.get('role') || '';
+            window.openVowModal(roleHint);
+        } catch (_) {}
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', checkAndAutoOpenVowFromUrl);
+    } else {
+        setTimeout(checkAndAutoOpenVowFromUrl, 0);
+    }
+    window.addEventListener('hashchange', checkAndAutoOpenVowFromUrl);
 
     // 7. Lightweight First-Party Web Analytics Beacon (Zero cookies, GDPR-compliant)
     window.__pfpTrackEvent = function(eventType, customPath) {

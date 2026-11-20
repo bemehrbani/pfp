@@ -1,6 +1,14 @@
-# People for Peace Campaign Program Manager
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="PFPJ_Ry/branding/PFPJ_Partner_Logo_Kit/02_For_Dark_Background/PFPJ_Horizontal_Logo_For_Dark_BG.svg">
+    <source media="(prefers-color-scheme: light)" srcset="PFPJ_Ry/branding/PFPJ_Partner_Logo_Kit/01_For_Light_Background/PFPJ_Horizontal_Logo_For_Light_BG.svg">
+    <img alt="People for Peace & Justice ry" src="PFPJ_Ry/branding/PFPJ_Partner_Logo_Kit/01_For_Light_Background/PFPJ_Horizontal_Logo_For_Light_BG.svg" height="84">
+  </picture>
+</p>
 
-A comprehensive system for managing "People for Peace" campaigns, helping Campaign Managers create, run, analyze, and expand campaigns using Telegram BOT, Groups, and Channels. The system facilitates attracting, organizing, cooperating, and crowdsourcing campaign tasks to achieve campaign goals.
+# People for Peace & Justice ry (PFPJ ry) — Platform & Campaign Repository
+
+Official monorepo for **People for Peace & Justice ry** (Helsinki, Finland · PRH Business ID: `3616815-5` · [peopleforpeace.live](https://peopleforpeace.live)), housing forensic legal investigations, the public investigative portal, and the volunteer campaign coordination platform.
 
 ## Project Status: Phase 2 - Campaign Management ✅
 

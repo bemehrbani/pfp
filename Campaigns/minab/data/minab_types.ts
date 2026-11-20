@@ -104,7 +104,7 @@ export interface PhotoGridCoordinates {
   row?: number | null;
   /** Column index in the visual mosaic grid layout */
   col?: number | null;
-  /** Standardized filename of the portrait (e.g. Asma_Zakeri_41.jpg) */
+  /** Standardized filename of the portrait (e.g. asra-zakeri.jpg) */
   filename?: string | null;
   /** Confidence rating of name-to-photo extraction */
   match_confidence?: MatchConfidence | null;
@@ -164,7 +164,7 @@ export interface MotherQuote {
  * Individual record of a direct victim, casualty, or survivor of the Minab strike.
  */
 export interface Victim {
-  /** Unique identifier (e.g., 'VIC-001', 'asma-zakeri') */
+  /** Unique identifier (e.g., 'VIC-001', 'asra-zakeri') */
   id: string;
   /** Full standardized name in Latin transliteration */
   full_name_en: string;

@@ -340,7 +340,7 @@ def broadcast_task_completion(campaign_id: int, task_title: str, task_type: str,
     hashtags = campaign.twitter_hashtags or ''
 
     text = (
-        f'🕊️ <b>People for Peace</b>\n'
+        f'🕊️ <b>People for Peace &amp; Justice ry</b>\n'
         f'━━━━━━━━━━━━━━━━━━━\n'
         f'{icon} <b>A volunteer just {action}!</b>\n'
     )
@@ -382,7 +382,7 @@ def broadcast_volunteer_joined(campaign_id: int):
     target = campaign.target_members or '∞'
 
     text = (
-        f'🕊️ <b>People for Peace</b>\n'
+        f'🕊️ <b>People for Peace &amp; Justice ry</b>\n'
         f'━━━━━━━━━━━━━━━━━━━\n'
         f'👋 <b>A new activist joined the movement!</b>\n'
         f'We are now <b>{count}</b> strong! (Target: {target})\n'
@@ -413,7 +413,7 @@ def broadcast_campaign_update(update_id: int):
         return
 
     text = (
-        f'🕊️ <b>People for Peace</b>\n'
+        f'🕊️ <b>People for Peace &amp; Justice ry</b>\n'
         f'━━━━━━━━━━━━━━━━━━━\n'
         f'📢 <b>{campaign_update.title}</b>\n\n'
         f'{campaign_update.content}\n'
@@ -454,7 +454,7 @@ def broadcast_milestone(campaign_id: int, metric: str, current: int, target: int
     label = metric_labels.get(metric, metric)
 
     text = (
-        f'🕊️ <b>People for Peace</b>\n'
+        f'🕊️ <b>People for Peace &amp; Justice ry</b>\n'
         f'━━━━━━━━━━━━━━━━━━━\n'
         f'🎉 <b>MILESTONE REACHED!</b>\n\n'
         f'{percentage}% of our {label} goal!\n'
@@ -804,7 +804,7 @@ def _refresh_single_dashboard(campaign, token: str):
     progress = campaign.progress_percentage()
 
     lines = [
-        '🕊️ <b>People for Peace</b>',
+        '🕊️ <b>People for Peace &amp; Justice ry</b>',
         '━━━━━━━━━━━━━━━━━━━',
         '',
         f'📢 <b>{_esc_html(campaign.name)}</b>',
@@ -839,7 +839,7 @@ def _refresh_single_dashboard(campaign, token: str):
         ' · 📄 <a href="https://peopleforpeace.live/evidence.html">Evidence</a>'
         ' · 📊 <a href="https://peopleforpeace.live/data.html">Data</a>',
         '',
-        '🕊️ <b>People for Peace</b> · <a href="https://peopleforpeace.live">peopleforpeace.live</a>',
+        '🕊️ <b>People for Peace &amp; Justice ry</b> · <a href="https://peopleforpeace.live">peopleforpeace.live</a>',
         f'🔄 Last updated: {timestamp}',
     ])
 

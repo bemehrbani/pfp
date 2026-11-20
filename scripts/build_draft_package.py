@@ -126,7 +126,22 @@ def set_cell_borders(cell, top="none", bottom="none", left="none", right="none",
     tcPr.append(tcBorders)
 
 def add_callout_banner(doc, production_date, docket_no, doc_title):
-    """Creates a prominent 'WORKING DRAFT' banner at the top of the Word doc."""
+    """Adds official PFPJ ry Horizontal Logo Masthead + 'WORKING DRAFT' banner at the top of the Word doc."""
+    logo_png = os.path.join(
+        BASE_DIR,
+        "PFPJ_Ry",
+        "branding",
+        "PFPJ_Partner_Logo_Kit",
+        "01_For_Light_Background",
+        "PFPJ_Horizontal_Logo_For_Light_BG_Transparent.png",
+    )
+    if os.path.exists(logo_png):
+        p_logo = doc.add_paragraph()
+        p_logo.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_logo.paragraph_format.space_before = Pt(0)
+        p_logo.paragraph_format.space_after = Pt(10)
+        p_logo.add_run().add_picture(logo_png, width=Inches(3.5))
+
     tbl = doc.add_table(rows=1, cols=1)
     tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
     cell = tbl.cell(0, 0)
@@ -714,6 +729,24 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
 
     content_html = "\n".join(html_parts)
 
+    logo_svg_path = os.path.join(
+        BASE_DIR,
+        "PFPJ_Ry",
+        "branding",
+        "PFPJ_Partner_Logo_Kit",
+        "01_For_Light_Background",
+        "PFPJ_Horizontal_Logo_For_Light_BG.svg",
+    )
+    masthead_html = ""
+    if os.path.exists(logo_svg_path):
+        with open(logo_svg_path, "rb") as lf:
+            b64_svg = base64.b64encode(lf.read()).decode("ascii")
+        masthead_html = (
+            f'<div style="text-align:center;margin:0 0 14px 0;padding-bottom:10px;border-bottom:1px solid #e2e8f0;">'
+            f'<img src="data:image/svg+xml;base64,{b64_svg}" alt="People for Peace &amp; Justice ry" style="height:56px;width:auto;" />'
+            f'</div>'
+        )
+
     full_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -931,6 +964,8 @@ def markdown_to_html(md_path, production_date, doc_type="main"):
 </head>
 <body>
   <div class="watermark-overlay">WORKING DRAFT — PRIVATELY SHARED FOR FEEDBACK</div>
+
+  {masthead_html}
 
   <div class="draft-banner">
     <div class="draft-banner-title">⚠️  WORKING DRAFT — PRIVATELY SHARED FOR FEEDBACK</div>

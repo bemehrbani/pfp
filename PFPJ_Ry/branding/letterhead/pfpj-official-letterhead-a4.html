@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>Official Correspondence Letterhead — People for Peace &amp; Justice ry</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    :root {
+      color-scheme: light;
+      --ink-obsidian: #0B1220;
+      --ink-body: #1E293B;
+      --ink-muted: #526075;
+      --brass-gold: #A6761E;
+      --brass-rule: rgba(166, 118, 30, 0.36);
+      --paper-cream: #FFFFFF;
+      --font-serif: 'Palatino', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+      --font-sans: 'Avenir Next', 'Optima', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: #E8E6E1;
+      color: var(--ink-body);
+      font-family: var(--font-serif);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .sheet-a4 {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 18mm 22mm 16mm;
+      background: var(--paper-cream);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 18px 50px rgba(11, 18, 32, 0.14);
+      overflow: hidden;
+    }
+
+    @media print {
+      html, body {
+        background: #FFFFFF;
+      }
+      .sheet-a4 {
+        margin: 0;
+        box-shadow: none;
+        height: 297mm;
+      }
+    }
+
+    /* Subtle Watermark Crest in Lower Margin */
+    .watermark-crest {
+      position: absolute;
+      right: 16mm;
+      bottom: 24mm;
+      width: 78mm;
+      height: 78mm;
+      opacity: 0.038;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top Gold Accent Hairline */
+    .top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3.2mm;
+      background: linear-gradient(90deg, #0B1220 0%, #0B1220 74%, #C5953A 74%, #E5B95F 100%);
+    }
+
+    /* Institutional Header */
+    .lh-header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12mm;
+      padding-bottom: 5.5mm;
+      border-bottom: 0.35mm solid var(--brass-rule);
+    }
+
+    .lh-logo {
+      height: 17.5mm;
+      width: auto;
+      display: block;
+    }
+
+    .lh-registry {
+      text-align: right;
+      font-family: var(--font-sans);
+      font-size: 7.8pt;
+      line-height: 1.55;
+      color: var(--ink-muted);
+    }
+
+    .lh-registry strong {
+      color: var(--ink-obsidian);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* Reference Metadata Strip */
+    .lh-meta {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 6mm;
+      margin-top: 5.5mm;
+      padding-bottom: 5mm;
+      border-bottom: 0.2mm solid rgba(11, 18, 32, 0.10);
+      font-family: var(--font-sans);
+      font-size: 8pt;
+    }
+
+    .meta-label {
+      display: block;
+      font-size: 6.6pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--brass-gold);
+      margin-bottom: 1mm;
+    }
+
+    .meta-value {
+      color: var(--ink-obsidian);
+      font-weight: 500;
+    }
+
+    /* Correspondence Body */
+    .lh-body {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      padding-top: 9mm;
+      font-size: 10.5pt;
+      line-height: 1.68;
+      color: var(--ink-body);
+    }
+
+    .recipient-block {
+      font-family: var(--font-sans);
+      font-size: 9.5pt;
+      line-height: 1.5;
+      color: var(--ink-obsidian);
+      margin-bottom: 8mm;
+    }
+
+    .subject-line {
+      font-family: var(--font-sans);
+      font-size: 10pt;
+      font-weight: 700;
+      color: var(--ink-obsidian);
+      letter-spacing: 0.01em;
+      margin-bottom: 6mm;
+      padding-left: 3.5mm;
+      border-left: 0.8mm solid var(--brass-gold);
+    }
+
+    .lh-body p {
+      margin-bottom: 4.5mm;
+      text-align: justify;
+    }
+
+    .signature-row {
+      margin-top: 11mm;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12mm;
+    }
+
+    .sig-block {
+      font-family: var(--font-sans);
+      font-size: 9.5pt;
+      line-height: 1.45;
+      color: var(--ink-obsidian);
+    }
+
+    .sig-line {
+      width: 58mm;
+      border-top: 0.25mm solid rgba(11, 18, 32, 0.35);
+      padding-top: 2.2mm;
+      margin-top: 12mm;
+    }
+
+    .sig-role {
+      font-size: 8.2pt;
+      color: var(--ink-muted);
+    }
+
+    .official-seal-stamp {
+      width: 27mm;
+      height: 27mm;
+      opacity: 0.88;
+    }
+
+    /* Statutory Footer */
+    .lh-footer {
+      position: relative;
+      z-index: 1;
+      padding-top: 4mm;
+      border-top: 0.3mm solid var(--brass-rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 7.3pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.03em;
+    }
+
+    .lh-footer span strong {
+      color: var(--ink-obsidian);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <article class="sheet-a4">
+    <div class="top-bar" aria-hidden="true"></div>
+    <img class="watermark-crest" src="../svg/pfpj-mark-crest-mono-black.svg" alt="" aria-hidden="true" />
+
+    <div>
+      <header class="lh-header">
+        <img class="lh-logo" src="../svg/pfpj-lockup-horizontal-light.svg" alt="People for Peace &amp; Justice ry" />
+        <div class="lh-registry">
+          <strong>People for Peace &amp; Justice ry</strong><br />
+          Business ID (Y-tunnus): 3616815-5<br />
+          Domicile: Helsinki, Finland<br />
+          info@peopleforpeace.live · peopleforpeace.live
+        </div>
+      </header>
+
+      <section class="lh-meta" aria-label="Document metadata">
+        <div>
+          <span class="meta-label">Reference</span>
+          <span class="meta-value">PFPJ/2026/EXEC-001</span>
+        </div>
+        <div>
+          <span class="meta-label">Date &amp; Place</span>
+          <span class="meta-value">19 November 2026 · Helsinki</span>
+        </div>
+        <div>
+          <span class="meta-label">Mandate</span>
+          <span class="meta-value">International Legal Accountability</span>
+        </div>
+      </section>
+
+      <main class="lh-body">
+        <div class="recipient-block">
+          <strong>Office of the Prosecutor / Diplomatic Mission / Institutional Partner</strong><br />
+          International Legal &amp; Human Rights Mechanisms<br />
+          The Hague / Geneva / Helsinki
+        </div>
+
+        <div class="subject-line">
+          Subject: Official Institutional Communication — Evidentiary Documentation &amp; Civilian Protection Mandate
+        </div>
+
+        <p>
+          Dear Colleagues,
+        </p>
+        <p>
+          <strong>People for Peace &amp; Justice ry (PFPJ ry)</strong> is a non-profit human rights and legal accountability association registered in Helsinki, Finland (Finnish Patent and Registration Office, Business ID <code>3616815-5</code>). In accordance with § 2 of our Articles of Association, our work focuses on evidentiary documentation of grave violations against children and civilians, victim representation support, and cooperation with international judicial mechanisms.
+        </p>
+        <p>
+          Please replace this specimen body copy with the formal text of your institutional letter, legal transmittal cover note, or board resolution. Print or export directly to A4 PDF using browser print (<code>Cmd+P</code> / <code>Ctrl+P</code> → Save as PDF, Margins: None, Background graphics: Enabled).
+        </p>
+
+        <div class="signature-row">
+          <div class="sig-block">
+            Respectfully submitted,
+            <div class="sig-line">
+              <strong>Board of Trustees</strong><br />
+              <span class="sig-role">People for Peace &amp; Justice ry · Helsinki, Finland</span>
+            </div>
+          </div>
+          <img class="official-seal-stamp" src="../svg/pfpj-seal-official-light.svg" alt="Official Seal of People for Peace &amp; Justice ry" />
+        </div>
+      </main>
+    </div>
+
+    <footer class="lh-footer">
+      <span><strong>People for Peace &amp; Justice ry</strong> · Rekisteröity yhdistys (PRH 3616815-5) · Kotipaikka: Helsinki</span>
+      <span>peopleforpeace.live · info@peopleforpeace.live</span>
+    </footer>
+  </article>
+</body>
+</html>

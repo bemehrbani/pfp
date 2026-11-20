@@ -31,11 +31,11 @@
     "id": "moth-zohreh-shahriyari",
     "full_name_en": "Zohreh Shahriyari",
     "full_name_fa": "زهره شهریاری",
-    "spouse_name": "Mohammad Shahriyari",
+    "spouse_name": "Mohammad Shirgir",
     "is_casualty": true,
     "status": "killed",
     "profession": "2nd Grade Elementary Teacher",
-    "narrative_summary": "Beloved 2nd-grade teacher who was 6 months pregnant with her first son (Mohammad-Ali). She sheltered children under desks during the initial strike. Identified by her engraved gold wedding band.",
+    "narrative_summary": "Beloved 2nd-grade teacher who was 6 months pregnant with her first son, Mohammad Shirgir (محمد شیرگیر). She sheltered children under desks during the initial strike and was identified by her engraved gold wedding band.",
     "quotes": [
       "She carried the next generation in her womb while protecting the children of Minab."
     ],
@@ -93,8 +93,10 @@
     ],
     "other_family_member_ids": [
       "reyhaneh-zakeri",
-      "asma-zakeri",
       "sina-zakeri",
+      "mahdi-zakeri",
+      "hananeh-zakerikhahan",
+      "narges-zakeri",
       "mohammad-zakeri-parent"
     ],
     "family_cluster_id": "FAM-ZAKERI",

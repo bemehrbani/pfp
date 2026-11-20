@@ -164,8 +164,8 @@ def build_dataset():
             "status": "survived",
             "profession": "School Teacher & Children's Rights Advocate",
             "narrative_summary": {
-                "en": "Maryam Zakeri lost three daughters (Asma, Asra, Salma), her niece Reyhaneh, and her son Sina in the strike. She has become the leading spokesperson for the Bereaved Mothers of Minab Coalition, demanding universal accountability and criminal proceedings before European courts.",
-                "fa": "مریم ذاکری سه دختر خود (اسما، اسرا، سلما)، برادرزاده‌اش ریحانه و پسرش سینا را در این حمله از دست داد. او به عنوان سخنگوی اصلی مادران داغدار میناب، پیگیر محاکمه عاملان این جنایت در دادگاه‌های بین‌المللی است."
+                "en": "Maryam Zakeri lost two daughters (Asra, Salma), her niece Reyhaneh, and her son Sina in the strike. She has become the leading spokesperson for the Bereaved Mothers of Minab Coalition, demanding universal accountability and criminal proceedings before European courts.",
+                "fa": "مریم ذاکری دو دختر خود (اسرا، سلما)، برادرزاده‌اش ریحانه و پسرش سینا را در این حمله از دست داد. او به عنوان سخنگوی اصلی مادران داغدار میناب، پیگیر محاکمه عاملان این جنایت در دادگاه‌های بین‌المللی است."
             },
             "quotes": [
                 {
@@ -177,7 +177,6 @@ def build_dataset():
                 }
             ],
             "children_ids": [
-                "VIC-006-ASMA-ZAKERI",
                 "VIC-007-ASRA-ZAKERI",
                 "VIC-013-REYHANEH-ZAKERI",
                 "VIC-034-SALMA-ZAKERI",
@@ -534,10 +533,9 @@ def build_dataset():
             "family_surname_en": "Zakeri",
             "family_surname_fa": "ذاکری",
             "mother_id": "MOM-ZAKERI-01",
-            "total_killed": 5,
+            "total_killed": 4,
             "total_injured": 0,
             "member_ids": [
-                "VIC-006-ASMA-ZAKERI",
                 "VIC-007-ASRA-ZAKERI",
                 "VIC-013-REYHANEH-ZAKERI",
                 "VIC-034-SALMA-ZAKERI",
@@ -545,8 +543,8 @@ def build_dataset():
                 "MOM-ZAKERI-01"
             ],
             "description": {
-                "en": "The Zakeri family endured a catastrophic loss of five young children across Grade 1, Grade 2, and Kindergarten.",
-                "fa": "خانواده ذاکری متحمل شهادت ۵ کودک خردسال در پایه‌های اول، دوم و پیش‌دبستانی شدند."
+                "en": "The Zakeri family endured a catastrophic loss of four young children across Grade 1 and Kindergarten.",
+                "fa": "خانواده ذاکری متحمل شهادت ۴ کودک خردسال در پایه اول و پیش‌دبستانی شدند."
             },
             "neighborhood_or_residence": "Shahrak Beheshti, Minab",
             "sources": ["EVD-VIC-005", "SRC-PFP-001"]
@@ -813,7 +811,6 @@ def build_dataset():
         ("Helma Ghasemy", "حلما قاسمی", 6, "female", "r00_c03", "MOM-GHASEMY-01", "FAM-GHASEMY-01", "Pre-school"),
         ("Nazanin Zahra Behroozi", "نازنین‌زهرا بهروزی", 8, "female", "r00_c04", "MOM-BEHROOZI-01", "FAM-BEHROOZI-01", "Grade 2"),
         ("Zahra Bahrami", "زهرا بهرامی", 7, "female", "r00_c05", "MOM-BAHRAMI-01", "FAM-BAHRAMI-01", "Grade 1"),
-        ("Asma Zakeri", "اسما ذاکری", 8, "female", "r02_c07", "MOM-ZAKERI-01", "FAM-ZAKERI-01", "Grade 2"),
         ("Asra Zakeri", "اسرا ذاکری", 7, "female", "r01_c07", "MOM-ZAKERI-01", "FAM-ZAKERI-01", "Grade 1"),
         ("Samira Malahi", "سمیرا ملاحی", 9, "female", "r00_c09", "MOM-MALAHI-01", "FAM-MALAHI-01", "Grade 3"),
         ("Arina ArabKish", "آرینا عرب‌کیش", 8, "female", "r00_c10", None, None, "Grade 2"),
@@ -915,7 +912,6 @@ def build_dataset():
         "Niyayesh Salehi": "VIC-003-NIYAYESH-SALEHI",
         "Helma Ghasemy": "VIC-004-HELMA-GHASEMY",
         "Zahra Bahrami": "VIC-005-ZAHRA-BAHRAMI",
-        "Asma Zakeri": "VIC-006-ASMA-ZAKERI",
         "Asra Zakeri": "VIC-007-ASRA-ZAKERI",
         "Samira Malahi": "VIC-008-SAMIRA-MALAHI",
         "Mahna Bahrami": "VIC-010-MAHNA-BAHRAMI",

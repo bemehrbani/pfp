@@ -1,7 +1,7 @@
 /**
  * Shared application state container for the Shajareh Tayyebeh 3D Spatial Reconstruction.
  * Keeps all mutable engine, scene, media, and tour references in one inspectable place
- * without referencing browser globals (`window`, `document`, `THREE`) at module import time.
+ * without touching the DOM at module import time.
  */
 
 export const VOW_BADGE_THRESHOLD = 100;
@@ -41,7 +41,7 @@ export const appState = {
   isAnimatingCamera: false,
   animationTarget: { pos: null, lookAt: null },
   isWalkMode: false,
-  moveKeys: { forward: false, backward: false, left: false, right: false },
+  moveKeys: { forward: false, backward: false, left: false, right: false, up: false, down: false },
 
   // Casualties, educators & rubble artifacts registry
   childrenList: [],
@@ -51,6 +51,11 @@ export const appState = {
   raycaster: null,
   pointerNDC: null,
   pointerDownPos: { x: 0, y: 0 },
+
+  // Right-drag "look around"
+  lookDragPointerId: null,
+  lookDragLastX: 0,
+  lookDragLastY: 0,
 
   // Vow signatory badge state
   vowSignatoryCount: 0,

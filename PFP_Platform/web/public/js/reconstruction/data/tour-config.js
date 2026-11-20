@@ -3,24 +3,30 @@
  * Cinema Witness Interludes, bookends, and room atmosphere profiles.
  */
 
-export const MEDIA_ASSET_VERSION = '20261115a';
+export const MEDIA_ASSET_VERSION = '20261120d';
 
 export const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'courtyard_lines',
+    smoothSpline: true,
     temporal: 0.0,
     cutawayMode: 0,
-    camPos: [4.5, 2.75, 13.8],
-    lookAt: [3.2, 2.05, 4.0],
+    camPos: [9.0, 1.90, 8.25],
+    lookAt: [25.0, 1.90, 8.25],
     waypoints: [
-      { t: 0.00, camPos: [4.5, 2.75, 13.8], lookAt: [10.5, 1.30, 7.5] },
-      { t: 0.14, camPos: [5.8, 2.35, 11.4], lookAt: [12.5, 0.75, 8.0] },
-      { t: 0.28, camPos: [14.0, 2.10, 8.2], lookAt: [25.85, 1.65, 2.74] },
-      { t: 0.42, camPos: [25.85, 1.95, 6.7], lookAt: [25.85, 1.85, 2.74] },
-      { t: 0.56, camPos: [11.6, 1.62, 7.4], lookAt: [8.25, 1.36, 4.15] },
-      { t: 0.68, camPos: [10.4, 1.56, 6.8], lookAt: [7.6, 1.45, 3.6] },
-      { t: 0.78, camPos: [-3.95, 1.88, 6.55], lookAt: [-8.12, 1.75, 6.55] },
-      { t: 1.00, camPos: [-3.95, 1.88, 6.55], lookAt: [-8.12, 1.75, 6.55] }
+      // Level camera: eye height and gaze height are fixed at 1.9 m for the whole stop (no
+      // pitch, no bobbing). The stop starts at (9, 8.25), 16 m back from the east steles; the
+      // tour-start fly-in targets camPos/lookAt above, which equal this first waypoint, so
+      // there is no jump. A slow straight walk in to (16, 8.25), a hold with all four east
+      // steles in view, then one turn east -> south -> west.
+      { t: 0.00, camPos: [9.0, 1.90, 8.25], lookAt: [25.0, 1.90, 8.25] },
+      { t: 0.34, camPos: [16.0, 1.90, 8.25], lookAt: [25.0, 1.90, 8.25] },
+      { t: 0.56, camPos: [16.0, 1.90, 8.25], lookAt: [25.0, 1.90, 8.25] },
+      { t: 0.6125, camPos: [16.0, 1.90, 8.50], lookAt: [24.0, 1.90, 14.50] },
+      { t: 0.665, camPos: [16.0, 1.90, 8.90], lookAt: [17.5, 1.90, 19.50] },
+      { t: 0.7175, camPos: [15.8, 1.90, 9.30], lookAt: [9.0, 1.90, 15.00] },
+      { t: 0.77, camPos: [15.5, 1.90, 9.00], lookAt: [8.0, 1.90, 8.90] },
+      { t: 1.00, camPos: [12.5, 1.90, 9.00], lookAt: [8.0, 1.90, 8.90] }
     ],
     shortBadge: { en: "01 / 08", fi: "01 / 08", fa: "۰۱ / ۰۸" },
     badge: { en: "STOP 1 OF 8 · COURTYARD YELLOW ASSEMBLY LINES", fi: "PISTE 1/8 · KOULUPIHAN AAMURIVIT", fa: "ایستگاه ۱ از ۸ · خطوط زرد صف صبحگاهی در حیاط" }
@@ -28,16 +34,24 @@ export const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'boys_flower_arch',
     temporal: 0.0,
-    cutawayMode: 2,
-    camPos: [3.62, 1.72, -4.35],
-    lookAt: [3.62, 1.54, -8.04],
+    // Mode 1 keeps the first floor (the hall's ceiling) so no sky shows overhead; only the roof is hidden.
+    cutawayMode: 1,
+    // Station 2 now stands in the ground-floor central hall where the rainbow stairs begin:
+    // 02_A on the north wall (G-33) west of the stair mouth, 02_B on the hall face of G-20.
+    camPos: [-3.85, 1.72, -4.85],
+    lookAt: [-3.85, 1.54, -8.82],
     waypoints: [
-      { t: 0.00, camPos: [3.62, 1.66, -4.04], lookAt: [3.62, 1.54, -8.04] },
-      { t: 0.16, camPos: [3.62, 1.62, -4.55], lookAt: [3.62, 1.54, -8.04] },
-      { t: 0.28, camPos: [5.55, 1.66, -4.30], lookAt: [0.17, 1.80, -4.62] },
-      { t: 0.42, camPos: [5.55, 1.66, -6.40], lookAt: [0.22, 1.60, -6.40] },
-      { t: 0.68, camPos: [4.55, 1.64, -6.40], lookAt: [0.22, 1.60, -6.40] },
-      { t: 1.00, camPos: [4.55, 1.64, -6.40], lookAt: [0.22, 1.60, -6.40] }
+      { t: 0.00, camPos: [-3.85, 1.66, -5.00], lookAt: [-3.85, 1.54, -8.82] },
+      { t: 0.16, camPos: [-3.85, 1.62, -4.60], lookAt: [-3.85, 1.54, -8.82] },
+      // One smooth turn to a hold at (-6.5, -5.4), 3.5 m further back and west than the first version,
+      // aimed 22 deg north of east so the turn from 02_A is smaller. 02_B and both photo steles stay
+      // in view: bearings span -30..+10 deg against a gaze at -22 deg, so the worst edge is 32 deg off
+      // axis of the ~38 deg half-FOV. Camera is 0.7 m past the end of G-13 (x = -7.2) and north of G-18.
+      // Eye and gaze level at 1.62 m.
+      { t: 0.26, camPos: [-4.90, 1.62, -5.00], lookAt: [-2.60, 1.62, -7.80] },
+      { t: 0.42, camPos: [-6.50, 1.62, -5.40], lookAt: [-1.86, 1.62, -7.27] },
+      { t: 0.68, camPos: [-6.50, 1.62, -5.40], lookAt: [-1.86, 1.62, -7.27] },
+      { t: 1.00, camPos: [-6.50, 1.62, -5.40], lookAt: [-1.86, 1.62, -7.27] }
     ],
     shortBadge: { en: "02 / 08", fi: "02 / 08", fa: "۰۲ / ۰۸" },
     badge: { en: "STOP 2 OF 8 · GROUND FLOOR: BOYS' CEREMONY ROOM (ROSE ARCHES)", fi: "PISTE 2/8 · ALAKERTA: POIKIEN JUHLAHUONE", fa: "ایستگاه ۲ از ۸ · طبقه همکف: اتاق جشن پسران (طاق گل رز)" }
@@ -45,55 +59,65 @@ export const GUIDED_TOUR_STOPS = [
   {
     hotspotId: 'boys_classroom',
     temporal: 0.0,
-    cutawayMode: 2,
-    camPos: [-13.35, 2.02, -0.95],
-    lookAt: [-17.3, 1.52, 1.15],
+    // Mode 1 keeps the first floor (the classroom's ceiling); only the roof is hidden.
+    cutawayMode: 1,
+    smoothSpline: true,
+    // Level camera at 1.6 m. Room is x -18.83..-10.72, z -2.38..2.23. Slow dolly east toward 03_A on the east
+    // wall (gaze fixed on it, so no rotation), hold, then one smooth 90 deg turn (east to south, spread over
+    // 0.58..0.82 with the gaze sweeping an arc about 4.5 m out) to 03_B on the south wall, and hold.
+    camPos: [-16.6, 1.6, 0.0],
+    lookAt: [-10.8, 1.6, 0.0],
     waypoints: [
-      { t: 0.00, camPos: [-14.73, 1.66, 0.00], lookAt: [-18.73, 1.55, 0.00] },
-      { t: 0.16, camPos: [-13.95, 1.70, -1.65], lookAt: [-18.00, 1.60, 0.85] },
-      { t: 0.34, camPos: [-13.95, 1.70, -1.65], lookAt: [-18.00, 1.60, 0.85] },
-      { t: 0.44, camPos: [-14.73, 1.66, 0.00], lookAt: [-18.73, 1.58, 0.00] },
-      { t: 0.64, camPos: [-14.73, 1.66, 0.00], lookAt: [-18.73, 1.58, 0.00] },
-      { t: 0.75, camPos: [-14.70, 1.60, -0.35], lookAt: [-15.40, 1.45, -2.50] },
-      { t: 0.84, camPos: [-14.45, 1.60, -1.75], lookAt: [-14.45, 1.48, 2.15] },
-      { t: 1.00, camPos: [-14.45, 1.60, -1.75], lookAt: [-14.45, 1.48, 2.15] }
+      { t: 0.00, camPos: [-16.6, 1.6, 0.0], lookAt: [-10.8, 1.6, 0.0] },
+      { t: 0.30, camPos: [-15.2, 1.6, 0.0], lookAt: [-10.8, 1.6, 0.0] },
+      { t: 0.58, camPos: [-15.2, 1.6, 0.0], lookAt: [-10.8, 1.6, 0.0] },
+      { t: 0.65, camPos: [-14.9, 1.6, -0.40], lookAt: [-10.58, 1.6, 1.22] },
+      { t: 0.71, camPos: [-14.4, 1.6, -0.85], lookAt: [-11.15, 1.6, 2.50] },
+      { t: 0.77, camPos: [-13.9, 1.6, -1.25], lookAt: [-12.33, 1.6, 3.15] },
+      { t: 0.83, camPos: [-13.4, 1.6, -1.60], lookAt: [-13.4, 1.6, 2.20] },
+      { t: 1.00, camPos: [-13.4, 1.6, -1.60], lookAt: [-13.4, 1.6, 2.20] }
     ],
     shortBadge: { en: "03 / 08", fi: "03 / 08", fa: "۰۳ / ۰۸" },
     badge: { en: "STOP 3 OF 8 · GROUND FLOOR: BOYS' CLASSROOM (CLAPPING & SINGING)", fi: "PISTE 3/8 · ALAKERTA: POIKIEN LUOKKAHUONE", fa: "ایستگاه ۳ از ۸ · طبقه همکف: کلاس درس پسران" }
   },
   {
     hotspotId: 'rainbow_staircase',
+    smoothSpline: true,
     temporal: 0.0,
-    cutawayMode: 2,
-    camPos: [-1.65, 2.05, -2.35],
-    lookAt: [-1.55, 1.72, -9.80],
+    // Mode 0 keeps the roof, so the first-floor hall has its ceiling (mode 1 hid the roof slabs).
+    cutawayMode: 0,
+    // First-floor central hall (slab top y = 3.71). Level camera at 1.6 m (y = 5.31), gaze at the
+    // same height. Top-level camPos/lookAt equal the first waypoint, so there is no jump.
+    // Two steles (04_A, 04_B) stand in a row in front of the stairwell mouth (z = -7.9), centred
+    // on the mouth (x = -0.52). The camera starts 5 m back to the east aimed at the row centre,
+    // walks west to (-0.52, -3.8) by 40%, and holds there with both steles in view (outer edges
+    // about 36 deg off axis of the 38 deg half-FOV, 4.1 m away).
+    camPos: [2.80, 5.31, -3.80],
+    lookAt: [-0.52, 5.31, -7.90],
     waypoints: [
-      { t: 0.00, camPos: [-3.30, 1.66, -4.05], lookAt: [-4.45, 1.58, -7.35] },
-      { t: 0.14, camPos: [-3.30, 1.66, -4.05], lookAt: [-4.45, 1.58, -7.35] },
-      { t: 0.22, camPos: [-1.55, 1.92, -6.20], lookAt: [-1.50, 1.35, -10.00] },
-      { t: 0.38, camPos: [-1.55, 1.92, -6.20], lookAt: [-1.50, 1.35, -10.00] },
-      { t: 0.45, camPos: [-2.60, 1.48, -5.40], lookAt: [-2.78, 0.96, -8.02] },
-      { t: 0.53, camPos: [-2.60, 1.48, -5.40], lookAt: [-2.78, 0.96, -8.02] },
-      { t: 0.60, camPos: [-5.03, 1.64, -6.65], lookAt: [-5.03, 1.58, -3.58] },
-      { t: 1.00, camPos: [-5.03, 1.64, -6.65], lookAt: [-5.03, 1.58, -3.58] }
+      { t: 0.00, camPos: [2.80, 5.31, -3.80], lookAt: [-0.52, 5.31, -7.90] },
+      { t: 0.40, camPos: [-0.52, 5.31, -3.80], lookAt: [-0.52, 5.31, -7.90] },
+      { t: 1.00, camPos: [-0.52, 5.31, -3.80], lookAt: [-0.52, 5.31, -7.90] }
     ],
     shortBadge: { en: "04 / 08", fi: "04 / 08", fa: "۰۴ / ۰۸" },
     badge: { en: "STOP 4 OF 8 · THE RAINBOW STAIRCASE & PURPLE DOORS", fi: "PISTE 4/8 · SATEENKAARIPORTAIKKO", fa: "ایستگاه ۴ از ۸ · راه‌پله رنگین‌کمان و درهای بنفش" }
   },
   {
     hotspotId: 'girls_upper_hall',
+    smoothSpline: true,
     temporal: 0.0,
-    cutawayMode: 1,
-    camPos: [-12.45, 5.55, -1.60],
-    lookAt: [-15.55, 5.15, -9.20],
+    cutawayMode: 0,
+    // Girls' assembly hall (slab top y = 3.71, x -19..-11.5, z -13..2.4). Level camera at 1.6 m
+    // (y = 5.31), gaze at the same height. Two prayer-room steles (05_A, 05_B) stand side by side
+    // at z = -10.5 facing south, centred on the hall (x = -15.25). The camera starts 10.5 m back
+    // aimed at the pair, walks north to z = -5.0 by 40% (5.5 m from the steles) and holds there.
+    // Top-level camPos/lookAt equal the first waypoint, so there is no jump.
+    camPos: [-15.25, 5.31, 0.00],
+    lookAt: [-15.25, 5.31, -10.50],
     waypoints: [
-      { t: 0.00, camPos: [-15.25, 5.16, -6.35], lookAt: [-15.25, 4.88, -10.35] },
-      { t: 0.18, camPos: [-15.00, 5.30, -1.60], lookAt: [-15.00, 5.20, -8.60] },
-      { t: 0.32, camPos: [-15.00, 5.30, -1.60], lookAt: [-15.00, 5.20, -8.60] },
-      { t: 0.40, camPos: [-15.25, 5.16, -6.35], lookAt: [-15.25, 4.88, -10.35] },
-      { t: 0.55, camPos: [-15.25, 5.16, -6.35], lookAt: [-15.25, 4.88, -10.35] },
-      { t: 0.62, camPos: [-15.25, 5.16, -4.15], lookAt: [-15.25, 5.12, -0.15] },
-      { t: 1.00, camPos: [-15.25, 5.16, -4.15], lookAt: [-15.25, 5.12, -0.15] }
+      { t: 0.00, camPos: [-15.25, 5.31, 0.00], lookAt: [-15.25, 5.31, -10.50] },
+      { t: 0.40, camPos: [-15.25, 5.31, -5.00], lookAt: [-15.25, 5.31, -10.50] },
+      { t: 1.00, camPos: [-15.25, 5.31, -5.00], lookAt: [-15.25, 5.31, -10.50] }
     ],
     shortBadge: { en: "05 / 08", fi: "05 / 08", fa: "۰۵ / ۰۸" },
     badge: { en: "STOP 5 OF 8 · FIRST FLOOR: GIRLS' ASSEMBLY HALL & PINK/GREEN ROOMS", fi: "PISTE 5/8 · YLÄKERTA: TYTTÖJEN SALI", fa: "ایستگاه ۵ از ۸ · طبقه اول: سالن بزرگ دختران و کلاس‌های صورتی/سبز" }
@@ -106,12 +130,12 @@ export const GUIDED_TOUR_STOPS = [
     lookAt: [-1.8, 2.0, -5.2],
     waypoints: [
       { t: 0.00, camPos: [-16.5, 11.8, 9.5], lookAt: [-1.8, 2.0, -5.2] },
-      { t: 0.14, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 1.25, -4.75] },
-      { t: 0.32, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 1.25, -4.75] },
-      { t: 0.40, camPos: [-1.80, 2.25, -4.45], lookAt: [2.95, 1.95, -4.45] },
-      { t: 0.50, camPos: [-1.80, 2.25, -4.45], lookAt: [2.95, 1.95, -4.45] },
-      { t: 0.58, camPos: [-0.85, 2.15, -1.65], lookAt: [-0.85, 1.65, -6.75] },
-      { t: 1.00, camPos: [-0.85, 2.15, -1.65], lookAt: [-0.85, 1.65, -6.75] }
+      { t: 0.14, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 3.05, -4.75] },
+      { t: 0.32, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 3.05, -4.75] },
+      { t: 0.40, camPos: [-1.80, 2.50, -4.45], lookAt: [2.95, 2.50, -4.45] },
+      { t: 0.50, camPos: [-1.80, 2.50, -4.45], lookAt: [2.95, 2.50, -4.45] },
+      { t: 0.58, camPos: [-0.85, 2.50, -1.65], lookAt: [-0.85, 2.50, -6.75] },
+      { t: 1.00, camPos: [-0.85, 2.50, -1.65], lookAt: [-0.85, 2.50, -6.75] }
     ],
     shortBadge: { en: "06 / 08", fi: "06 / 08", fa: "۰۶ / ۰۸" },
     badge: { en: "STOP 6 OF 8 · 11:22 AM STRIKE: 5M CRATER & EXTENT OF COLLAPSE", fi: "PISTE 6/8 · KLO 11.22 ISKU: 5M KRAATTERI", fa: "ایستگاه ۶ از ۸ · ساعت ۱۱:۲۲: گودال ۵ متری و محدوده تخریب" }
@@ -124,8 +148,8 @@ export const GUIDED_TOUR_STOPS = [
     lookAt: [13.5, 2.5, 2.6],
     waypoints: [
       { t: 0.00, camPos: [25.5, 5.1, 13.8], lookAt: [13.5, 2.5, 2.6] },
-      { t: 0.12, camPos: [21.5, 2.12, 8.75], lookAt: [22.75, 1.98, 3.10] },
-      { t: 0.30, camPos: [21.2, 2.06, 8.30], lookAt: [22.75, 1.98, 3.10] },
+      { t: 0.12, camPos: [19.2, 2.10, 10.60], lookAt: [19.0, 1.98, 5.55] },
+      { t: 0.30, camPos: [19.0, 2.04, 10.20], lookAt: [19.0, 1.98, 5.55] },
       { t: 0.42, camPos: [13.65, 1.84, 10.75], lookAt: [13.50, 1.72, 5.55] },
       { t: 0.64, camPos: [13.55, 1.78, 10.20], lookAt: [13.50, 1.74, 5.55] },
       { t: 1.00, camPos: [13.55, 1.78, 10.20], lookAt: [13.50, 1.74, 5.55] }
@@ -137,18 +161,12 @@ export const GUIDED_TOUR_STOPS = [
     hotspotId: 'vow_shrine',
     temporal: 0.0,
     cutawayMode: 0,
-    camPos: [-1.5, 2.35, 23.2],
-    lookAt: [-1.5, 2.05, 9.5],
+    camPos: [-1.5, 1.9, 27.0],
+    lookAt: [-1.5, 1.9, 9.65],
     waypoints: [
-      { t: 0.00, camPos: [-1.5, 2.35, 23.2], lookAt: [-1.5, 1.85, 11.0] },
-      { t: 0.18, camPos: [-2.40, 1.85, 16.0], lookAt: [-5.20, 1.40, 15.0] },
-      { t: 0.32, camPos: [-0.60, 1.85, 16.0], lookAt: [2.20, 1.40, 15.0] },
-      { t: 0.44, camPos: [-2.95, 1.90, 13.65], lookAt: [-4.45, 1.88, 9.65] },
-      { t: 0.60, camPos: [-2.95, 1.90, 13.65], lookAt: [-4.45, 1.88, 9.65] },
-      { t: 0.68, camPos: [-0.05, 1.90, 13.65], lookAt: [1.45, 1.88, 9.65] },
-      { t: 0.82, camPos: [-0.05, 1.90, 13.65], lookAt: [1.45, 1.88, 9.65] },
-      { t: 0.90, camPos: [-1.5, 2.48, 18.8], lookAt: [-1.5, 1.88, 9.5] },
-      { t: 1.00, camPos: [-1.5, 2.48, 18.8], lookAt: [-1.5, 1.88, 9.5] }
+      { t: 0.00, camPos: [-1.5, 1.90, 27.0], lookAt: [-1.5, 1.90, 9.65] },
+      { t: 0.40, camPos: [-1.5, 1.90, 19.5], lookAt: [-1.5, 1.90, 9.65] },
+      { t: 1.00, camPos: [-1.5, 1.90, 19.5], lookAt: [-1.5, 1.90, 9.65] }
     ],
     shortBadge: { en: "08 / 08", fi: "08 / 08", fa: "۰۸ / ۰۸" },
     badge: { en: "STOP 8 OF 8 · THE ACCOUNTABILITY VOW SHRINE", fi: "PISTE 8/8 · VASTUULUPAUKSEN MUISTOMERKKI", fa: "ایستگاه ۸ از ۸ · یادمان میثاق دادخواهی — ثبت پیمان جهانی" }
@@ -157,176 +175,178 @@ export const GUIDED_TOUR_STOPS = [
 
 export const HOTSPOT_CONFIGS = [
   { id: 'courtyard_lines', icon: '1', pos: [15.5, 1.2, 8.25], presetCam: [5.5, 2.8, 12.0], target: [22.0, 1.6, 6.5], cutaway: 0 },
-  { id: 'boys_flower_arch', icon: '2', pos: [3.8, 2.1, -6.0], presetCam: [2.2, 4.4, -0.5], target: [4.0, 1.8, -6.5], cutaway: 2 },
+  { id: 'boys_flower_arch', icon: '2', pos: [-1.0, 2.1, -7.0], presetCam: [-2.4, 3.6, -2.0], target: [-1.0, 1.7, -6.5], cutaway: 1 },
   { id: 'boys_classroom', icon: '3', pos: [-15.8, 2.1, -0.2], presetCam: [-11.8, 4.3, 3.8], target: [-16.2, 1.6, -1.0], cutaway: 2 },
-  { id: 'rainbow_staircase', icon: '4', pos: [-1.8, 2.3, -8.4], presetCam: [-1.8, 2.25, -3.2], target: [-1.8, 2.0, -9.8], cutaway: 2 },
+  { id: 'rainbow_staircase', icon: '4', pos: [-1.4, 5.8, -8.4], presetCam: [-1.4, 5.3, -4.2], target: [-1.4, 4.7, -9.8], cutaway: 1 },
   { id: 'girls_upper_hall', icon: '5', pos: [-15.2, 5.6, -5.5], presetCam: [-9.5, 8.6, 3.5], target: [-15.2, 5.2, -5.5], cutaway: 1 },
   { id: 'crater_damage', icon: '6', pos: [-2.5, 3.2, -5.5], presetCam: [-18.0, 13.5, 12.0], target: [-1.5, 2.2, -5.5], cutaway: 0 },
   { id: 'second_wave', icon: '7', pos: [18.0, 2.5, 11.5], presetCam: [26.0, 9.5, 22.0], target: [6.0, 2.2, 1.0], cutaway: 0 },
-  { id: 'vow_shrine', icon: '✍️', pos: [-1.5, 3.8, 10.5], presetCam: [-1.5, 2.4, 18.0], target: [-1.5, 2.0, 10.5], isVow: true, cutaway: 1 }
+  { id: 'vow_shrine', icon: '8', pos: [-1.5, 1.48, 11.65], presetCam: [-1.5, 1.95, 14.5], target: [-1.5, 1.02, 11.65], isVow: true, cutaway: 1 }
 ];
 
 export const IN_WORLD_SCREEN_SPECS = [
   // Station 1: Courtyard Morning Lines (mounted in preStrikeModelGroup so post-strike yard stays clean)
+  // Yard steles, all facing the yard. They copy the Courtyard Memorial Avenue steles (dark
+  // slab, gold rim, on the ground): style 'stele', no plaque, no poster. The media area is
+  // letterboxed inside the slab, never stretched. Media lives in media/walkthrough_pip/yard/.
+  // EAST: three steles in a row at x = 25.0 facing west over the lines (A, C, D), with the
+  // 16:9 video stele (E) stacked on top of the middle one. The row starts south of the pastel
+  // dividing wall (Z = 2.4) and stays clear of the yard portrait steles (Z = 13.8, X <= 22.8).
+  // WEST: the schoolyard still-photo stele (01_B) with Ms. Shahriyari's stele beside it,
+  // in one line at x = 8.0 facing east (the teacher's is built in memorial-gallery.js).
   {
     id: '01_A', hotspotId: 'courtyard_lines', slot: 'A', groupKey: 'preStrike',
-    file: '01_sync_morning_queue', durationSec: 27.4, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
-    pos: [25.85, 1.90, 2.74], rotY: 0, w: 4.10, h: 2.31, hasLegs: false,
-    badge: {
-      en: 'MORNING QUEUE · SIX YELLOW LINES & SCHOOLBAGS',
-      fi: 'AAMUJONO · KUUSI KELTAISTA VIIVAA JA KOULUREPUT',
-      fa: 'صف صبحگاهی · شش خط زرد و کیف‌های مدرسه'
-    },
-    caption: {
-      en: 'Six bright yellow morning assembly lines with their standing circles, and the children\'s schoolbags resting beside them.',
-      fi: 'Kuusi kirkkaankeltaista aamunavausviivaa seisontaympyröineen sekä lasten koulureput niiden vieressä.',
-      fa: 'شش خط زرد صف صبحگاهی با دایره‌های ایستادن و کیف‌های مدرسه کودکان در کنار آن‌ها.'
-    }
+    file: 'yard/yard_video_01', poster: 'images/posters/poster_01_a.jpg', style: 'stele', noPlaque: true,
+    durationSec: 30, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
+    pos: [25.00, 1.54, 4.45], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
+    id: '01_C', hotspotId: 'courtyard_lines', slot: 'C', groupKey: 'preStrike',
+    file: 'yard/yard_video_02', poster: 'images/posters/poster_01_c.jpg', style: 'stele', noPlaque: true,
+    durationSec: 30, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
+    pos: [25.00, 1.54, 8.25], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
+    id: '01_D', hotspotId: 'courtyard_lines', slot: 'D', groupKey: 'preStrike',
+    images: Array.from({ length: 14 }, (_, i) => `media/walkthrough_pip/yard/yard_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    poster: 'images/posters/poster_01_d.jpg',
+    slideSec: 3.5, style: 'stele', noPlaque: true,
+    durationSec: 28, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
+    pos: [25.00, 1.54, 12.05], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
+    id: '01_E', hotspotId: 'courtyard_lines', slot: 'E', groupKey: 'preStrike',
+    file: 'yard/yard_video_03', poster: 'images/posters/poster_01_e.jpg', style: 'stele', noPlaque: true,
+    durationSec: 30, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
+    pos: [25.00, 3.93, 8.25], rotY: -Math.PI / 2, w: 3.00, h: 1.69, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '01_B', hotspotId: 'courtyard_lines', slot: 'B', groupKey: 'preStrike',
-    file: '01_sync_porch_still', durationSec: 23.0, cueStartP: 0.539, cueEndP: 0.991, cueStartPFa: 0.587, cueEndPFa: 0.975, cueStartPFi: 0.513, cueEndPFi: 0.987,
-    pos: [-8.12, 1.84, 6.55], rotY: Math.PI / 2, w: 3.80, h: 2.14, hasLegs: false,
-    badge: {
-      en: 'SCHOOLYARD ON FEB 28 · GATE, CLASSROOMS & FIRST STRIKE SMOKE',
-      fi: 'KOULUPIHA 28.2. · PORTTI, LUOKAT JA ENSIMMÄISEN ISKUN SAVU',
-      fa: 'حیاط دبستان در ۹ اسفند · سردر، کلاس‌ها و دود نخستین اصابت'
-    },
-    caption: {
-      en: 'The schoolyard and painted gate on the morning of February 28, where Ms. Zohreh Shahriari ran toward the classrooms as the strikes hit.',
-      fi: 'Koulupiha ja maalattu portti 28. helmikuuta aamulla, kun opettaja Zohreh Shahriari juoksi kohti luokkia iskujen osuessa.',
-      fa: 'حیاط و سردر مدرسه در صبح ۹ اسفند، جایی که خانم زهره شهریاری هنگام اصابت موشک‌ها به سوی کلاس‌ها دوید.'
-    }
+    file: 'yard/yard_video_04', poster: 'images/posters/poster_01_b.jpg', loop: true, style: 'stele', noPlaque: true, durationSec: 30.0, cueStartP: 0.539, cueEndP: 0.991, cueStartPFa: 0.587, cueEndPFa: 0.975, cueStartPFi: 0.513, cueEndPFi: 0.987,
+    pos: [8.00, 1.49, 9.50], rotY: Math.PI / 2, w: 1.40, h: 2.50, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 2: Ground-Floor Boys' Ceremony Room & Colorful Playroom
   {
     id: '02_A', hotspotId: 'boys_flower_arch', slot: 'A', groupKey: 'groundFloor',
-    file: '02_sync_playroom_memories', durationSec: 24.0, cueStartP: 0.0, cueEndP: 0.403, cueStartPFa: 0.0, cueEndPFa: 0.407, cueStartPFi: 0.0, cueEndPFi: 0.430,
-    pos: [3.62, 1.54, -8.04], rotY: 0, w: 1.90, h: 1.07, hasLegs: false,
-    badge: {
-      en: 'GROUND FLOOR · PLAYROOM & CHILDHOOD MEMORIES',
-      fi: 'ALAKERTA · LEIKKIHUONE JA LAPSUUDEN MUISTOT',
-      fa: 'طبقه همکف · خانه بازی و خاطرات کودکی'
-    },
-    caption: {
-      en: 'Pre-school children laughing inside the mural-painted playroom and ball-pit, and the room\'s Mother\'s Day and book fair memories.',
-      fi: 'Esikoululaiset nauramassa kuvitetussa leikkihuoneessa ja pallomeressä sekä huoneen äitienpäivä- ja kirjamessumuistot.',
-      fa: 'خنده نوآموزان در «خانه بازی» رنگارنگ و خاطرات جشن روز مادر و نمایشگاه کتاب همین اتاق.'
-    }
+    file: '02_sync_playroom_memories', loop: true, noPlaque: true,
+    durationSec: 24.0, cueStartP: 0.0, cueEndP: 0.403, cueStartPFa: 0.0, cueEndPFa: 0.407, cueStartPFi: 0.0, cueEndPFi: 0.430,
+    // Wall-mounted on the hall's north wall (G-33), between the door (x -6.53..-5.47) and the stair mouth (x -2.24)
+    pos: [-3.85, 1.54, -8.82], rotY: 0, w: 2.70, h: 1.52, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '02_B', hotspotId: 'boys_flower_arch', slot: 'B', groupKey: 'groundFloor',
-    file: '02_sync_rose_arch_photo', durationSec: 32.0, cueStartP: 0.403, cueEndP: 0.989, cueStartPFa: 0.407, cueEndPFa: 0.972, cueStartPFi: 0.430, cueEndPFi: 0.980,
-    pos: [0.22, 1.60, -6.40], rotY: Math.PI / 2, w: 2.24, h: 1.26, hasLegs: false,
-    badge: {
-      en: 'ROSE ARCH PHOTO · TWELVE BOYS IN ROYAL-BLUE UNIFORMS',
-      fi: 'RUUSUKAARIVALOKUVA · KAKSITOISTA POIKAA SINISISSÄ KOULUPUVUISSA',
-      fa: 'عکس طاق گل رز · دوازده پسر با لباس فرم آبی'
-    },
-    caption: {
-      en: 'The teacher\'s photograph of twelve little boys in royal-blue uniforms standing proudly beneath two arches of red roses.',
-      fi: 'Opettajan valokuva kahdestatoista pienestä pojasta sinisissä koulupuvuissaan seisomassa kahden punaisen ruusukaaren alla.',
-      fa: 'عکس معلم از دوازده پسر کوچک با لباس فرم آبی که با غرور زیر دو طاق گل سرخ ایستاده‌اند.'
-    }
+    // Still photo (2538x1633, aspect 1.554) in media/walkthrough_pip/hall/; one image, so it just holds.
+    images: ['media/walkthrough_pip/hall/hall_photo_window.png'], poster: 'images/posters/poster_02_b.jpg', slideSec: 30, noPlaque: true,
+    durationSec: 32.0, cueStartP: 0.403, cueEndP: 0.989, cueStartPFa: 0.407, cueEndPFa: 0.972, cueStartPFi: 0.430, cueEndPFi: 0.980,
+    // Wall-mounted on the central-hall (west) face of G-20, facing west into the hall. Fits between the
+    // inner window (z -7.69..-6.51) and the boys' portrait frames (from z -3.92).
+    pos: [1.06, 1.60, -5.20], rotY: -Math.PI / 2, w: 2.40, h: 1.545, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  // Two photo steles standing on the hall floor just south of the stair mouth (x -2.24..1.2), in
+  // one straight row: both turned 0.5 rad toward the viewer, with their centres on the slabs' own long
+  // axis (direction (0.878, 0.479) in x/z), 1.95 m apart, so the slabs are collinear end to end. The row
+  // runs from the stair-mouth corner toward the window wall. Stele style, no legs, no plaque. 26 photos in media/walkthrough_pip/hall/, 13 per
+  // stele, letterboxed. Slab is w + 0.12 by h + 0.2 and stands on the 0.2 m floor:
+  // y = 0.2 + 0.14 + (h + 0.2) / 2 = 1.49. They run for the whole stop.
+  {
+    id: '02_C', hotspotId: 'boys_flower_arch', slot: 'C', groupKey: 'groundFloor',
+    images: Array.from({ length: 13 }, (_, i) => `media/walkthrough_pip/hall/hall_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    poster: 'images/posters/poster_02_c.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
+    durationSec: 39.0, cueStartP: 0.0, cueEndP: 0.989, cueStartPFa: 0.0, cueEndPFa: 0.972, cueStartPFi: 0.0, cueEndPFi: 0.980,
+    pos: [-1.64, 1.49, -8.17], rotY: -0.50, w: 1.60, h: 2.10, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
+    id: '02_D', hotspotId: 'boys_flower_arch', slot: 'D', groupKey: 'groundFloor',
+    images: Array.from({ length: 14 }, (_, i) => `media/walkthrough_pip/hall/hall_photo_${String(i + 14).padStart(2, '0')}.jpg`),
+    poster: 'images/posters/poster_02_d.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
+    durationSec: 39.0, cueStartP: 0.0, cueEndP: 0.989, cueStartPFa: 0.0, cueEndPFa: 0.972, cueStartPFi: 0.0, cueEndPFi: 0.980,
+    pos: [0.08, 1.49, -7.23], rotY: -0.50, w: 1.60, h: 2.10, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 3: Ground-Floor West Boys' Classroom (Sky-Blue Walls & Green Carpet)
   {
     id: '03_A', hotspotId: 'boys_classroom', slot: 'A', groupKey: 'groundFloor',
-    file: '03_sync_boys_carpet_clapping', durationSec: 27.6, cueStartP: 0.0, cueEndP: 0.754, cueStartPFa: 0.0, cueEndPFa: 0.721, cueStartPFi: 0.0, cueEndPFi: 0.738,
-    pos: [-18.73, 1.58, 0.00], rotY: Math.PI / 2, w: 2.68, h: 1.51, hasLegs: false,
-    badge: {
-      en: 'SKY-BLUE CLASSROOM · 35+ BOYS CLAPPING ON CARPETS',
-      fi: 'TAIVAANSININEN LUOKKA · YLI 35 POIKAA TAPUTTAMASSA',
-      fa: 'کلاس آبی‌آسمانی · دست‌زدن بیش از ۳۵ پسر بر موکت سبز'
-    },
-    caption: {
-      en: 'More than thirty-five boys sitting side by side on the green carpets, clapping their hands joyfully and singing together.',
-      fi: 'Yli kolmekymmentäviisi poikaa istumassa vierekkäin vihreillä matoilla, taputtaen ja laulaen yhdessä.',
-      fa: 'بیش از سی‌وپنج دانش‌آموز پسر کنار هم بر موکت سبز نشسته و با شادی دست می‌زنند و هم‌خوانی می‌کنند.'
-    }
+    images: Array.from({ length: 13 }, (_, i) => `media/walkthrough_pip/classroom/classroom_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    poster: 'images/posters/poster_03_a.jpg',
+    slideSec: 3.0, noPlaque: true,
+    durationSec: 37.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-10.84, 1.60, 0.00], rotY: -Math.PI / 2, w: 2.60, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '03_B', hotspotId: 'boys_classroom', slot: 'B', groupKey: 'groundFloor',
-    file: '03_sync_faces_and_drawings', durationSec: 23.8, cueStartP: 0.754, cueEndP: 0.991, cueStartPFa: 0.721, cueEndPFa: 0.968, cueStartPFi: 0.738, cueEndPFi: 0.985,
-    pos: [-14.45, 1.48, 2.15], rotY: Math.PI, w: 2.48, h: 1.40, hasLegs: false,
-    badge: {
-      en: 'THEIR FACES & THE DRAWINGS THEY LEFT BEHIND',
-      fi: 'HEIDÄN KASVONSA JA SEINILLE JÄÄNEET PIIRUSTUKSET',
-      fa: 'چهره‌هایشان و نقاشی‌های به‌جامانده بر دیوار'
-    },
-    caption: {
-      en: 'A quiet moment to look at the boys\' faces and the drawings they left behind on these classroom walls.',
-      fi: 'Hiljainen hetki katsoa poikien kasvoja ja piirustuksia, jotka jäivät näiden luokkahuoneiden seinille.',
-      fa: 'لحظه‌ای آرام برای نگاه به چهره پسران و نقاشی‌های به‌جامانده بر دیوار همین کلاس.'
-    }
+    images: Array.from({ length: 10 }, (_, i) => `media/walkthrough_pip/classroom/classroom_photo_${String(i + 14).padStart(2, '0')}.jpg`),
+    poster: 'images/posters/poster_03_b.jpg',
+    slideSec: 3.0, noPlaque: true,
+    durationSec: 37.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-13.40, 1.60, 2.15], rotY: Math.PI, w: 2.60, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 4: Central Hall & Enclosed Rainbow Staircase
+  // Two photo-slideshow steles (no plaque text) side by side in front of the stairwell mouth,
+  // facing south into the hall. Media lives in media/walkthrough_pip/stairs/ (30 photos: 01-17
+  // on 04_A, 18-30 on 04_B). The slab stands on the first-floor slab (top y = 3.71): pos y =
+  // 3.74 + (h + 0.2) / 2. Centres are 1.75 m either side of the mouth centre (x = -0.52).
   {
-    id: '04_A', hotspotId: 'rainbow_staircase', slot: 'A', groupKey: 'groundFloor',
-    file: '04_sync_stairs_welcome', durationSec: 26.4, cueStartP: 0.0, cueEndP: 0.572, cueStartPFa: 0.0, cueEndPFa: 0.576, cueStartPFi: 0.0, cueEndPFi: 0.613,
-    pos: [-4.45, 1.58, -7.35], rotY: 0.35, w: 2.46, h: 1.38, hasLegs: true, legFloorY: 0.20,
-    badge: {
-      en: 'RAINBOW STAIRS · TEACHERS WELCOME WITH TRAYS OF SWEETS',
-      fi: 'SATEENKAARIPORTAAT · OPETTAJAT VASTAASSA MAKEISIN',
-      fa: 'پله‌های رنگین‌کمان · استقبال معلمان با سینی شیرینی'
-    },
-    caption: {
-      en: 'Teachers standing at the foot of the rainbow stairs with trays of sweets, beside the purple classroom doors and paper flowers.',
-      fi: 'Opettajat seisomassa sateenkaariportaiden juurella makeistarjottimineen purppuraovien ja paperikukkien vieressä.',
-      fa: 'معلمان در پای پله‌های رنگین‌کمان با سینی‌های شیرینی، کنار درهای بنفش کلاس‌ها و گل‌های کاغذی.'
-    }
+    id: '04_A', hotspotId: 'rainbow_staircase', slot: 'A', groupKey: 'firstFloor',
+    images: Array.from({ length: 17 }, (_, i) => `media/walkthrough_pip/stairs/stairs_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    poster: 'images/posters/poster_04_a.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
+    durationSec: 26.4, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-2.27, 4.94, -7.90], rotY: 0, w: 2.20, h: 2.20, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
-    id: '04_B', hotspotId: 'rainbow_staircase', slot: 'B', groupKey: 'groundFloor',
-    file: '04_sync_stairwell_collapse', durationSec: 27.4, cueStartP: 0.572, cueEndP: 0.968, cueStartPFa: 0.576, cueEndPFa: 0.968, cueStartPFi: 0.613, cueEndPFi: 0.989,
-    pos: [-5.03, 1.60, -3.58], rotY: Math.PI, w: 2.50, h: 1.41, hasLegs: false,
-    badge: {
-      en: 'THE COLLAPSE · PRINCIPAL SANGARZADEH FELL DOWN THESE STAIRS',
-      fi: 'ROMAHDUS · REHTORI SANGARZADEH PUTOSI PORTAISSA',
-      fa: 'لحظه فروریختن · خانم سنگرزاده از همین پله‌ها افتاد'
-    },
-    caption: {
-      en: 'The stairwell where the blast threw principal Ms. Sangarzadeh down the stairs, and the roof collapsed above the children.',
-      fi: 'Portaikko, jossa räjähdys paiskasi rehtori Sangarzadehin alas portaita ja katto romahti lasten päälle.',
-      fa: 'راه‌پله‌ای که موج انفجار خانم سنگرزاده را از آن پایین انداخت و سقف بر سر کودکان فروریخت.'
-    }
+    id: '04_B', hotspotId: 'rainbow_staircase', slot: 'B', groupKey: 'firstFloor',
+    images: [
+      ...Array.from({ length: 11 }, (_, i) => `media/walkthrough_pip/stairs/stairs_photo_${String(i + 18).padStart(2, '0')}.jpg`),
+      'media/walkthrough_pip/stairs/stairs_photo_29.png',
+      'media/walkthrough_pip/stairs/stairs_photo_30.jpg'
+    ],
+    poster: 'images/posters/poster_04_b.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
+    durationSec: 30.4, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [1.23, 4.94, -7.90], rotY: 0, w: 2.20, h: 2.20, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
-  // Station 5: First-Floor Girls' Primary School Assembly Hall
+  // Station 5: First-Floor Girls' Assembly Hall (prayer room photos)
+  // Two photo-slideshow steles (2.6 x 2.6, no plaque text) side by side, facing south, centred on the
+  // hall (x = -15.25), 3.4 m apart (gap 0.68 m, 0.64 m clear of each side wall). Media lives in
+  // media/walkthrough_pip/girls_prayer_room/ (39 photos: 01-19 on 05_A, 20-39 on 05_B). Slab stands on
+  // the first-floor slab (top y = 3.71): pos y = 3.74 + (h + 0.2) / 2.
   {
     id: '05_A', hotspotId: 'girls_upper_hall', slot: 'A', groupKey: 'firstFloor',
-    file: '05_sync_80_girls_hall', durationSec: 30.0, cueStartP: 0.0, cueEndP: 0.588, cueStartPFa: 0.0, cueEndPFa: 0.635, cueStartPFi: 0.0, cueEndPFi: 0.594,
-    pos: [-15.25, 5.06, -10.35], rotY: 0, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 3.71,
-    badge: {
-      en: '80+ SCHOOLGIRLS IN THE UPPER ASSEMBLY HALL',
-      fi: 'YLI 80 KOULUTYTTÖÄ YLÄKERRAN SALISSA',
-      fa: 'بیش از ۸۰ دانش‌آموز دختر در سالن بزرگ طبقه بالا'
-    },
-    caption: {
-      en: 'A teacher\'s photograph of more than eighty schoolgirls in white headscarves sitting shoulder to shoulder on the green carpet.',
-      fi: 'Opettajan valokuva yli kahdeksastakymmenestä valkohuivisesta koulutytöstä istumassa vierekkäin vihreällä matolla.',
-      fa: 'عکس معلم از بیش از هشتاد دانش‌آموز دختر با مقنعه سفید که شانه‌به‌شانه بر فرش سبز نشسته‌اند.'
-    }
+    images: Array.from({ length: 19 }, (_, i) => `media/walkthrough_pip/girls_prayer_room/prayer_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    poster: 'images/posters/poster_05_a.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
+    durationSec: 57.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-16.95, 5.14, -10.50], rotY: 0, w: 2.60, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '05_B', hotspotId: 'girls_upper_hall', slot: 'B', groupKey: 'firstFloor',
-    file: '05_sync_desks_and_notebooks', durationSec: 26.1, cueStartP: 0.588, cueEndP: 0.975, cueStartPFa: 0.635, cueEndPFa: 0.973, cueStartPFi: 0.594, cueEndPFi: 0.985,
-    pos: [-15.25, 5.12, -0.15], rotY: Math.PI, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 3.71,
-    badge: {
-      en: 'HOMEWORK NOTEBOOKS & COLORED PENCILS',
-      fi: 'KOTITEHTÄVÄVIHKOT JA VÄRIKYNÄT',
-      fa: 'دفترهای مشق باز و مدادهای رنگی'
-    },
-    caption: {
-      en: 'Seven-, eight- and nine-year-old girls sitting beside their closest friends with open homework notebooks and colored pencils.',
-      fi: 'Seitsemän-, kahdeksan- ja yhdeksänvuotiaat tytöt istumassa ystäviensä vieressä vihkot auki ja värikynät kädessään.',
-      fa: 'دختران هفت، هشت و نه ساله کنار نزدیک‌ترین دوستانشان با دفترهای مشق باز و مدادهای رنگی.'
-    }
+    images: Array.from({ length: 20 }, (_, i) => `media/walkthrough_pip/girls_prayer_room/prayer_photo_${String(i + 20).padStart(2, '0')}.jpg`),
+    poster: 'images/posters/poster_05_b.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
+    durationSec: 57.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
+    pos: [-13.55, 5.14, -10.50], rotY: 0, w: 2.60, h: 2.60, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   // Station 6: 11:22 AM Direct Cruise Missile Impact & 5m Crater
   {
     id: '06_A', hotspotId: 'crater_damage', slot: 'A', groupKey: 'postStrike',
     file: '06_sync_crater_comparison', durationSec: 28.2, cueStartP: 0.0, cueEndP: 0.514, cueStartPFa: 0.0, cueEndPFa: 0.532, cueStartPFi: 0.0, cueEndPFi: 0.475,
-    pos: [2.95, 1.98, -4.45], rotY: -Math.PI / 2, w: 3.60, h: 2.02, hasLegs: true, legFloorY: 0.15,
+    pos: [2.95, 2.53, -4.45], rotY: -Math.PI / 2, w: 3.60, h: 2.02, hasLegs: false,
     badge: {
       en: '5-METER CRATER · BEFORE & AFTER COMPARISON',
       fi: '5 METRIN KRAATTERI · ENNEN JA JÄLKEEN -VERTAILU',
@@ -341,7 +361,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '06_B', hotspotId: 'crater_damage', slot: 'B', groupKey: 'postStrike',
     file: '06_sync_mothers_bags_and_drawings', durationSec: 32.2, cueStartP: 0.514, cueEndP: 0.977, cueStartPFa: 0.532, cueEndPFa: 0.957, cueStartPFi: 0.475, cueEndPFi: 0.984,
-    pos: [-0.85, 1.96, -6.75], rotY: 0, w: 3.55, h: 2.00, hasLegs: true, legFloorY: 0.15,
+    pos: [-0.85, 2.51, -6.75], rotY: 0, w: 3.55, h: 2.00, hasLegs: false,
     badge: {
       en: 'MOTHERS, SCHOOLBAGS & 28 SHRAPNEL-PIERCED DRAWINGS',
       fi: 'ÄIDIT, KOULUREPUT JA 28 SIRPALEIDEN LÄVISTÄMÄÄ PIIRUSTUSTA',
@@ -356,8 +376,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 7: 2:30 PM Second Wave & Recovered US Tomahawk Munitions Evidence
   {
     id: '07_A', hotspotId: 'second_wave', slot: 'A', groupKey: 'postStrike',
-    file: '07_sync_barehands_rescue', durationSec: 24.5, cueStartP: 0.0, cueEndP: 0.400, cueStartPFa: 0.0, cueEndPFa: 0.401, cueStartPFi: 0.0, cueEndPFi: 0.411,
-    pos: [22.75, 2.04, 3.10], rotY: -0.18, w: 4.15, h: 2.33, hasLegs: true, legFloorY: 0.02,
+    file: '07_sync_barehands_rescue', noPlaque: true, durationSec: 24.5, cueStartP: 0.0, cueEndP: 0.400, cueStartPFa: 0.0, cueEndPFa: 0.401, cueStartPFi: 0.0, cueEndPFi: 0.411,
+    pos: [19.00, 2.04, 5.55], rotY: 0, w: 4.15, h: 2.33, hasLegs: true, legFloorY: 0.02,
     badge: {
       en: 'MOTHERS & RESCUERS DIGGING WITH BARE HANDS',
       fi: 'ÄIDIT JA PELASTAJAT KAIVAMASSA PALJAIN KÄSIN',
@@ -371,7 +391,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '07_B', hotspotId: 'second_wave', slot: 'B', groupKey: 'postStrike',
-    file: '07_sync_tomahawk_then_smoke', durationSec: 35.6, cueStartP: 0.400, cueEndP: 0.984, cueStartPFa: 0.401, cueEndPFa: 0.969, cueStartPFi: 0.411, cueEndPFi: 0.984,
+    file: '07_sync_tomahawk_then_smoke', noPlaque: true, durationSec: 35.6, cueStartP: 0.400, cueEndP: 0.984, cueStartPFa: 0.401, cueEndPFa: 0.969, cueStartPFi: 0.411, cueEndPFi: 0.984,
     pos: [13.50, 2.16, 5.55], rotY: 0, w: 3.75, h: 2.05, hasLegs: true, legFloorY: 0.02,
     badge: {
       en: '2:30 PM SECOND WAVE · TOMAHAWK & BLACK SMOKE',
@@ -387,8 +407,12 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 8: Accountability Vow Shrine & Tribute Boards
   {
     id: '08_A', hotspotId: 'vow_shrine', slot: 'A', groupKey: 'memorial',
-    file: '08_sync_echo_of_rooms', durationSec: 34.4, cueStartP: 0.435, cueEndP: 0.665, cueStartPFa: 0.465, cueEndPFa: 0.724, cueStartPFi: 0.427, cueEndPFi: 0.715,
-    pos: [-4.45, 1.92, 9.65], rotY: 0.30, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 0.02,
+    images: Array.from({ length: 10 }, (_, i) => `media/walkthrough_pip/shrine/shrine_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    poster: 'images/shrine/poster_08_a.jpg',
+    slideSec: 3.4, style: 'stele', noPlaque: true,
+    // Slideshow runs from the start of the station to its end (wraps after the last photo).
+    durationSec: 34.4, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
+    pos: [-4.62, 1.79, 9.65], rotY: 0.30, w: 3.10, h: 3.10, hasLegs: false,
     badge: {
       en: 'WALK THROUGH THEIR CLASSROOMS · HEAR THEIR VOICES',
       fi: 'KULJE HEIDÄN LUOKKIENSA LÄPI · KUULE HEIDÄN ÄÄNENSÄ',
@@ -401,9 +425,23 @@ export const IN_WORLD_SCREEN_SPECS = [
     }
   },
   {
+    id: '08_C', hotspotId: 'vow_shrine', slot: 'C', groupKey: 'memorial',
+    file: 'shrine/shrine_video_01', poster: 'images/shrine/poster_08_c.jpg', loop: true, style: 'stele', noPlaque: true,
+    // Plays on repeat from the start of the station to its end.
+    durationSec: 52.7, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
+    // Midway between the two big frames (x -1.5), set 0.5 m behind their row (z 9.65), facing south.
+    // 720x1280 portrait, so 9:16. Stele: pos y = 0.14 + (h + 0.2) / 2.
+    pos: [-1.50, 1.565, 9.10], rotY: 0, w: 1.49, h: 2.65, hasLegs: false,
+    badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
+  },
+  {
     id: '08_B', hotspotId: 'vow_shrine', slot: 'B', groupKey: 'memorial',
-    file: '08_sync_justice_vow', durationSec: 26.3, cueStartP: 0.665, cueEndP: 0.988, cueStartPFa: 0.724, cueEndPFa: 0.992, cueStartPFi: 0.715, cueEndPFi: 0.991,
-    pos: [1.45, 1.92, 9.65], rotY: -0.30, w: 3.35, h: 1.88, hasLegs: true, legFloorY: 0.02,
+    images: Array.from({ length: 36 }, (_, i) => `media/walkthrough_pip/shrine/shrine_vow_photo_${String(i + 1).padStart(2, '0')}.jpg`),
+    poster: 'images/shrine/poster_08_b.jpg',
+    slideSec: 3.5, style: 'stele', noPlaque: true,
+    // Slideshow runs from the start of the station to its end (wraps after the last photo).
+    durationSec: 26.3, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
+    pos: [2.03, 1.555, 9.65], rotY: -0.30, w: 3.95, h: 2.63, hasLegs: false,
     badge: {
       en: 'SIGN THE MINAB ACCOUNTABILITY VOW',
       fi: 'ALLEKIRJOITA MINABIN VASTUULUPAUS',
@@ -653,9 +691,27 @@ export const WALKTHROUGH_BOOKENDS = {
 };
 
 export const WALKTHROUGH_INTERLUDES = {
+  // Between station 1 and 2 (keyed by the stop it follows). 164 s, so maxSec raises the 48 s watchdog.
+  courtyard_lines: {
+    id: 'interlude_01',
+    src: 'media/walkthrough_interludes/interlude_01_intro.mp4',
+    maxSec: 180,
+    aspect: 'landscape',
+    tone: 'pre',
+    kicker: { en: '', fa: '', fi: '' },
+    context: { en: '', fa: '', fi: '' },
+    cues: []
+  },
   boys_flower_arch: {
     id: 'interlude_02',
-    src: 'media/walkthrough_interludes/interlude_02_rose_arch_and_mahan.mp4',
+    src: 'media/walkthrough_interludes/interlude_02_boys_hall.mp4',
+    // Two clips played back to back: the boys' hall clip, then Mahan's Mother's Day message
+    // (the old combined interlude_02_rose_arch_and_mahan.mp4 was rose-arch singing + Mahan).
+    // Each clip sets its own stage aspect (16:9 hall clip, 3:4 portrait Mahan clip).
+    playlist: [
+      { src: 'media/walkthrough_interludes/interlude_02_boys_hall.mp4', aspect: 'landscape' },
+      { src: 'media/walkthrough_interludes/interlude_02_mahan_mothers_day.mp4', aspect: 'portrait34' }
+    ],
     aspect: 'classic',
     tone: 'pre',
     kicker: {
@@ -663,126 +719,40 @@ export const WALKTHROUGH_INTERLUDES = {
       fa: 'طبقه همکف · هم‌خوانی زیر طاق گل رز و پیام روز مادر ماهان',
       fi: 'ALAKERTA · RUUSUKAARILAULU JA PIKKU MAHANIN ÄITIENPÄIVÄVIESTI'
     },
-    context: {
-      en: 'Schoolboys in royal-blue uniforms singing beneath the red rose arches, then young Mahan speaking into his teacher\'s phone for Mother\'s Day',
-      fa: 'هم‌خوانی پسران با لباس فرم آبی زیر طاق گل سرخ، سپس پیام کودکانه ماهان رو به دوربین معلم برای روز مادر',
-      fi: 'Koulupojat sinisissä koulupuvuissaan laulamassa punaisten ruusukaarien alla sekä pikku Mahan puhumassa opettajan kameralle äidilleen'
-    },
-    cues: [
-      {
-        s: 0.2, e: 4.3,
-        en: '♪ "I am happy, joyful, and smiling..."',
-        fa: '♪ «خوشحال و شاد و خندانم...»',
-        fi: '♪ "Olen iloinen, onnellinen ja hymyilevä..."'
-      },
-      {
-        s: 4.3, e: 7.4,
-        en: '♪ "...I know the precious worth of life..."',
-        fa: '♪ «...قدر دنیا رو می‌دانم...»',
-        fi: '♪ "...tiedän elämän kallisarvoisuuden..."'
-      },
-      {
-        s: 7.4, e: 11.3,
-        en: '♪ "...laughter rises upon my lips."',
-        fa: '♪ «...خنده سر می‌دهد لب‌های من.»',
-        fi: '♪ "...nauru kohoaa huulilleni."'
-      },
-      {
-        s: 11.6, e: 15.6,
-        en: '"Hello, my beautiful mother — happy Mother\'s Day to you today, mother."',
-        fa: '«سلام مادر قشنگم؛ امروز روزت رو بهت تبریک می‌گم مادر.»',
-        fi: '"Hei kaunis äitini — hyvää äitienpäivää sinulle tänään, äiti."'
-      },
-      {
-        s: 15.6, e: 19.8,
-        en: '"I love you, my beautiful mother — from your son, Mahan."',
-        fa: '«دوستت دارم مادر قشنگم... از طرف پسرت، ماهان.»',
-        fi: '"Rakastan sinua, kaunis äitini — pojaltasi Mahanilta."'
-      },
-      {
-        s: 19.8, e: 22.4,
-        en: 'Holding handmade pomegranate crafts for the Persian letter "Ā"',
-        fa: 'همراه با کاردستی‌های کودکانه انار برای یادگیری نشانه «آ»',
-        fi: 'Oppilaiden askartelemat granaattiomenat kirjaimen "Ā" oppitunnilla'
-      }
-    ]
+    context: { en: '', fa: '', fi: '' },
+    // Subtitles intentionally removed: the previous cues did not match the footage.
+    cues: []
   },
   boys_classroom: {
     id: 'interlude_03',
     src: 'media/walkthrough_interludes/interlude_03_boys_classroom_laughter.mp4',
     aspect: 'classic',
     tone: 'pre',
-    kicker: {
-      en: 'UNEDITED CLASSROOM AUDIO · CHILDHOOD LAUGHTER AT GREEN DESKS',
-      fa: 'صدای کاملاً طبیعی و بدون ویرایش · خنده‌های کودکانه پشت نیمکت‌های سبز',
-      fi: 'ALKUPERÄINEN LUOKKAÄÄNI · POIKIEN NAURU VIHREILLÄ PULPETEILLA'
-    },
-    context: {
-      en: 'Raw classroom recording inside Shajareh Tayyebeh Boys\' School — unedited laughter during a playful science activity',
-      fa: 'فیلم خام کلاسی از شوخی و خنده‌های بی‌وقفه دانش‌آموزان پسر با آموزگارشان در دبستان شجره طیبه',
-      fi: 'Muokkaamaton luokkahuonetallenne poikien ilosta ja naurusta opettajansa kanssa'
-    },
-    cues: [
-      {
-        s: 0.4, e: 15.1,
-        en: '[Unedited classroom audio: young boys laughing and cheering together at their green desks]',
-        fa: '[صدای واقعی کلاس: خنده‌ها و شادی کودکانه دانش‌آموزان پسر پشت نیمکت‌های سبز]',
-        fi: '[Alkuperäinen luokkaääni: pienten koulupoikien iloinen nauru luokkahuoneessa]'
-      }
-    ]
+    kicker: { en: '', fa: '', fi: '' },
+    context: { en: '', fa: '', fi: '' },
+    cues: []
   },
+  // Between station 5 and 6. 15 s, no text. (The old interlude_04_the_hinge_1045am.mp4 with its
+  // "FIRST STRIKE" card is no longer referenced.)
   girls_upper_hall: {
     id: 'interlude_04',
-    src: 'media/walkthrough_interludes/interlude_04_the_hinge_1045am.mp4',
-    aspect: 'portrait',
-    tone: 'strike',
-    ruptureWindow: {
-      s: 8.2, e: 10.7,
-      time: {
-        en: 'SATURDAY · FEBRUARY 28, 2026 · FIRST STRIKE',
-        fa: 'شنبه ۹ اسفند ۱۴۰۴ · لحظه اصابت نخستین موشک',
-        fi: 'LAUANTAI · 28. HELMIKUUTA 2026 · ENSIMMÄINEN ISKU'
-      },
-      title: {
-        en: 'Direct Cruise Missile Impact on Shajareh Tayyebeh Primary School',
-        fa: 'اصابت مستقیم موشک کروز به دبستان شجره طیبه میناب',
-        fi: 'Risteilyohjuksen suora osuma Shajareh Tayyebehin alakouluun'
-      }
-    },
-    kicker: {
-      en: 'FINAL MINUTES IN 1ST GRADE → FIRST MINUTES IN THE COURTYARD',
-      fa: 'آخرین عکس کلاس اول پیش از انفجار ← دقایق نخست در حیاط پر از دود',
-      fi: 'EKALUOKAN VIIMEISET HETKET → ENSIMMÄISET MINUUTIT KOULUPIHALLA'
-    },
-    context: {
-      en: 'Photos sent by the 1st-grade teacher to the mothers\' group minutes before impact, followed by raw citizen courtyard video',
-      fa: 'تصاویر ارسالی معلم شهید کلاس اول در گروه مادران دقایقی پیش از حمله، و فیلم خام حیاط مدرسه بلافاصله پس از اصابت',
-      fi: 'Ekaluokan opettajan äideille lähettämät viimeiset kuvat juuri ennen iskua sekä silminnäkijävideo pihalta iskun jälkeen'
-    },
-    cues: [
-      {
-        s: 0.2, e: 8.0,
-        en: 'Final photographs sent by the first-grade teacher to the mothers\' chat group — minutes before the strike',
-        fa: 'آخرین عکس‌های دانش‌آموزان کلاس اول که معلم شهید دقایقی پیش از اصابت موشک در گروه مادران فرستاد',
-        fi: 'Ekaluokan opettajan äitien ryhmään lähettämät viimeiset valokuvat — minuutteja ennen ohjusiskua'
-      },
-      {
-        s: 11.0, e: 16.5,
-        en: '[Raw courtyard audio — torn homework sheets cover the dust as families rush toward the smoking classrooms]',
-        fa: '[صدای خام صحنه — برگه‌های پراکنده دفتر مشق روی خاک حیاط و دویدن خانواده‌ها به سوی دود سیاه کلاس‌ها]',
-        fi: '[Alkuperäinen pihaääni — repeytyneitä koulutehtäviä maassa perheiden ryntäillessä savuaville luokille]'
-      },
-      {
-        s: 16.5, e: 22.8,
-        en: 'Voice crying out in the courtyard: "Mohaddeseh!..."',
-        fa: 'فریاد مضطرب در حیاط مدرسه: «محدثه!...»',
-        fi: 'Hätääntynyt huuto koulupihalla: "Mohaddeseh!..."'
-      }
-    ]
+    src: 'media/walkthrough_interludes/interlude_01_girls_prayer_room.mp4',
+    aspect: 'landscape',
+    tone: 'pre',
+    kicker: { en: '', fa: '', fi: '' },
+    context: { en: '', fa: '', fi: '' },
+    cues: []
   },
   crater_damage: {
     id: 'interlude_05',
     src: 'media/walkthrough_interludes/interlude_05_staircase_witness_and_shoes.mp4',
+    // Two clips back to back: the staircase testimony (tall, subtitled), then the 16:9 sky clip.
+    // The sky clip is ~688 s, so maxSec raises the 48 s watchdog. Cues belong to clip 0 only.
+    playlist: [
+      { src: 'media/walkthrough_interludes/interlude_05_staircase_witness_and_shoes.mp4', aspect: 'tall' },
+      { src: 'media/walkthrough_interludes/interlude_05_sky_hq.mp4', aspect: 'landscape', noPreload: true }
+    ],
+    maxSec: 800,
     aspect: 'tall',
     tone: 'strike',
     kicker: {
@@ -790,11 +760,7 @@ export const WALKTHROUGH_INTERLUDES = {
       fa: 'شهادت میدانی در برابر راه‌پله منهدم‌شده و ردیف کفش‌های کوچک کودکان',
       fi: 'PAIKAN PÄÄLLÄ KUVATTU TODISTUS · SORTUNUT PORTAIKKO JA LASTEN KENGÄT'
     },
-    context: {
-      en: 'Unedited field narration before the sheared central stairwell, followed by recovered children\'s shoes laid out on carpets',
-      fa: 'گزارش میدانی بدون ویرایش از مقابل راه‌پله فروریخته مرکزی، و ردیف کفش‌ها و کیف‌های به‌جامانده دانش‌آموزان',
-      fi: 'Muokkaamaton kenttätodistus sortuneen keskusportaikon edessä sekä matolle järjestetyt lasten kengät ja reput'
-    },
+    context: { en: '', fa: '', fi: '' },
     cues: [
       {
         s: 0.3, e: 6.8,
@@ -825,6 +791,13 @@ export const WALKTHROUGH_INTERLUDES = {
   second_wave: {
     id: 'interlude_06',
     src: 'media/walkthrough_interludes/interlude_06_survivors_and_150_graves.mp4',
+    // Two clips back to back: survivors and graves (portrait, subtitled), then the 16:9 Minab bombing
+    // clip (~106 s). maxSec raises the 48 s watchdog. Cues belong to clip 0 only.
+    playlist: [
+      { src: 'media/walkthrough_interludes/interlude_06_survivors_and_150_graves.mp4', aspect: 'portrait' },
+      { src: 'media/walkthrough_interludes/interlude_06_minab_bombing.mp4', aspect: 'landscape' }
+    ],
+    maxSec: 180,
     aspect: 'portrait',
     tone: 'strike',
     kicker: {
@@ -832,31 +805,20 @@ export const WALKTHROUGH_INTERLUDES = {
       fa: 'ابعاد انسانی فاجعه · کودکان بازمانده، کفش زیر آوار و ردیف مزارهای کوچک',
       fi: 'INHIMILLINEN HINTA · SELVIYTYNEET LAPSET, PIENI KENKÄ JA YLI 150 HAUTAA'
     },
-    context: {
-      en: 'Surviving sisters Reyhaneh & Mastaneh, a child\'s sneaker lifted from concrete, and aerial view of the cemetery in Minab',
-      fa: 'نگاه بهت‌زده ریحانه و مستانه، کفش کوچک بیرون‌آمده از زیر بتن، و نمای هوایی مزارهای کودکان میناب',
-      fi: 'Selviytyneet sisarukset Reyhaneh ja Mastaneh, raunioista nostettu lapsen kenkä sekä ilmakuva Minabin hautausmaalta'
-    },
-    cues: [
-      {
-        s: 0.2, e: 5.4,
-        en: 'Young surviving sisters Reyhaneh and Mastaneh, covered in blast dust, looking back toward their burning school',
-        fa: '«ریحانه» و «مستانه»، دو دانش‌آموز خردسال بازمانده، در میان گردوغبار به ویرانه مدرسه‌شان نگاه می‌کنند',
-        fi: 'Pienet selviytyneet sisarukset Reyhaneh ja Mastaneh katsovat pölyn peittäminä palavaa kouluaan'
-      },
-      {
-        s: 5.5, e: 11.9,
-        en: 'A rescuer\'s gloved hand gently lifts a child\'s dust-covered sneaker from the shattered classroom concrete',
-        fa: 'دستان امدادگر، کفش کوچک خاک‌گرفته یکی از کودکان را از میان سنگ و بتن کلاس بیرون می‌آورد',
-        fi: 'Pelastajan käsi nostaa varovasti lapsen pölyisen kengän murskaantuneen luokkahuoneen betonin keskeltä'
-      },
-      {
-        s: 12.0, e: 21.3,
-        en: 'Over one hundred small graves excavated side by side in Minab as thousands gather to lay the children to rest',
-        fa: 'بیش از صد مزار کوچک حفرشده در کنار یکدیگر در میناب و حضور هزاران سوگوار برای بدرقه کودکان شجره طیبه',
-        fi: 'Yli sata vierekkäin kaivettua pientä hautaa Minabissa tuhansien saattajien kokoontuessa hyvästelemään lapset'
-      }
-    ]
+    context: { en: '', fa: '', fi: '' },
+    // No subtitles on this interlude.
+    cues: []
+  },
+  // After the last station (vow_shrine), before the epilogue card and the vow. ~98 s, no text.
+  vow_shrine: {
+    id: 'interlude_07',
+    src: 'media/walkthrough_interludes/interlude_07_still_minab.mp4',
+    maxSec: 150,
+    aspect: 'landscape',
+    tone: 'pre',
+    kicker: { en: '', fa: '', fi: '' },
+    context: { en: '', fa: '', fi: '' },
+    cues: []
   }
 };
 

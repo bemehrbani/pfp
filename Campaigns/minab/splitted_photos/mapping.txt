@@ -26,7 +26,6 @@ Child	Border	Filename	Name
 35	38	2ezZa_Habashia_38.jpg	2ezZa Habashia
 36	39	li_Zareie_ghola_39.jpg	li Zareie ghola
 37	40	لطنظ_طعمطعغأة_40.jpg	لطنظ طعمطعغأة
-38	41	Asma_Zakeri_41.jpg	‘Asma Zakeri
 39	42	ayesh_Alihosse_42.jpg	ayesh Alihosse
 40	43	اعكات7_دمطاأتك_43.jpg	اعكات7 دمطاأتك
 41	44	ا_تمطةتط_جمع6م_44.jpg	ا تمطةتط جمع6م
