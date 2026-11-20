@@ -159,8 +159,14 @@ export function drawPosterToInWorldScreen(screen) {
   if (screen.posterLoaded && screen.posterTex) {
     if (screen.screenCtx && screen.posterTex.image) {
       try {
-        screen.screenCtx.drawImage(
-          screen.posterTex.image, 0, 0, screen.screenCanvas.width, screen.screenCanvas.height
+        const img = screen.posterTex.image;
+        drawContained(
+          screen.screenCtx,
+          img,
+          img.naturalWidth || img.width,
+          img.naturalHeight || img.height,
+          screen.screenCanvas.width,
+          screen.screenCanvas.height
         );
         if (screen.canvasTex) screen.canvasTex.needsUpdate = true;
       } catch (_) {}
@@ -400,7 +406,11 @@ export function buildAllInWorldWalkthroughScreens() {
       plaqueTex,
       accentBarMat,
       innerTrimMat,
-      posterUrl: spec.noPoster ? null : `media/walkthrough_pip/posters/${spec.file}.jpg?v=${MEDIA_ASSET_VERSION}`,
+      posterUrl: spec.poster
+        ? `${spec.poster}?v=${MEDIA_ASSET_VERSION}`
+        : spec.noPoster
+          ? null
+          : `media/walkthrough_pip/posters/${spec.file}.jpg?v=${MEDIA_ASSET_VERSION}`,
       videoUrl: spec.images ? null : `media/walkthrough_pip/${spec.file}.mp4?v=${MEDIA_ASSET_VERSION}`,
       slideImages: null,
       slideElapsed: 0,
@@ -419,6 +429,9 @@ export function buildAllInWorldWalkthroughScreens() {
     if (screenRecord.posterUrl) {
       posterLoader.load(screenRecord.posterUrl, (tex) => {
         tex.colorSpace = THREE.SRGBColorSpace;
+        if (appState.renderer && typeof appState.renderer.getMaxAnisotropy === 'function') {
+          tex.anisotropy = appState.renderer.getMaxAnisotropy();
+        }
         screenRecord.posterTex = tex;
         screenRecord.posterLoaded = true;
         if (!screenRecord.usingCanvasTex) {

@@ -715,6 +715,15 @@ function createCourtyardStele(parentGroup, loader, child, { x, z, rotY, wingLabe
 export function populate3DSchoolPortraitsAndDrawings() {
   const loader = new THREE.TextureLoader();
   appState.clickable3DArtifacts = [];
+
+  const vowBookRoot = appState.scene && appState.scene.getObjectByName('Vow_Shrine_3D');
+  if (vowBookRoot) {
+    vowBookRoot.traverse((obj) => {
+      if (obj.isMesh && obj.userData && obj.userData.isVowMemorialBook) {
+        appState.clickable3DArtifacts.push(obj);
+      }
+    });
+  }
   const {
     childrenList,
     teachersList,
@@ -1234,7 +1243,9 @@ export function init3DPortraitRaycaster() {
     const hits = raycaster.intersectObjects(appState.clickable3DArtifacts, false);
     if (hits.length > 0) {
       const hitObj = hits[0].object;
-      if (hitObj.userData && hitObj.userData.item) {
+      if (hitObj.userData && hitObj.userData.isVowMemorialBook) {
+        appState.callbacks.openVowModal?.();
+      } else if (hitObj.userData && hitObj.userData.item) {
         appState.callbacks.openArtifactInspector?.(hitObj.userData);
       }
     }

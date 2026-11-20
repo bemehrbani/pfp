@@ -465,79 +465,378 @@ export function buildEnvironmentAndTerrain() {
   }
 
   // ==========================================
-  // CENTRAL ACCOUNTABILITY VOW SHRINE / OBELISK (Aligned on Central Portico & Gate Axis X = -1.5)
+  // CENTRAL ACCOUNTABILITY VOW MEMORIAL BOOK & PEN LECTERN (Aligned on Central Axis X = -1.5)
   // ==========================================
   const shrineX = -1.5;
-  const shrineZ = 10.5;
-  // Named group so clean-capture mode (main.js) can hide the whole shrine at runtime.
+  const shrineZ = 11.65;
   const vowShrineGroup = new THREE.Group();
   vowShrineGroup.name = 'Vow_Shrine_3D';
+  vowShrineGroup.position.set(shrineX, 0, shrineZ);
   memorialBoardsGroup.add(vowShrineGroup);
-  const shrinePedestal = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.85, 2.25, 0.42, 24),
-    new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, metalness: 0.5 })
-  );
-  shrinePedestal.position.set(shrineX, 0.21, shrineZ);
-  vowShrineGroup.add(shrinePedestal);
 
-  const goldRing = new THREE.Mesh(
-    new THREE.RingGeometry(1.95, 2.20, 32),
-    new THREE.MeshBasicMaterial({ color: 0xd4a853, side: THREE.DoubleSide })
-  );
-  goldRing.rotation.x = -Math.PI / 2;
-  goldRing.position.set(shrineX, 0.05, shrineZ);
-  vowShrineGroup.add(goldRing);
+  const slateMat = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.46, metalness: 0.32 });
+  const pillarMat = new THREE.MeshStandardMaterial({ color: 0x182234, roughness: 0.44, metalness: 0.36 });
+  const deskWoodMat = new THREE.MeshStandardMaterial({ color: 0x1e1916, roughness: 0.42, metalness: 0.16 });
+  const brassMat = new THREE.MeshStandardMaterial({ color: 0xd4a853, roughness: 0.28, metalness: 0.82 });
+  const coverClothMat = new THREE.MeshStandardMaterial({ color: 0x172554, roughness: 0.66, metalness: 0.08 });
+  const pageBlockMat = new THREE.MeshStandardMaterial({ color: 0xede5d2, roughness: 0.78, metalness: 0.02 });
+  const ribbonMat = new THREE.MeshStandardMaterial({ color: 0x9f1239, roughness: 0.58, metalness: 0.08 });
+  const penLacquerMat = new THREE.MeshStandardMaterial({ color: 0x0b0f19, roughness: 0.18, metalness: 0.65 });
 
-  const obelisk = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.30, 0.58, 3.4, 8),
+  // 1. Low stepped dark-slate plinth with brushed-brass trim
+  const baseStepLower = new THREE.Mesh(new THREE.BoxGeometry(1.52, 0.08, 1.12), slateMat);
+  baseStepLower.position.set(0, 0.04, 0);
+  baseStepLower.castShadow = true;
+  baseStepLower.receiveShadow = true;
+  vowShrineGroup.add(baseStepLower);
+
+  const baseBrassTrim = new THREE.Mesh(new THREE.BoxGeometry(1.36, 0.022, 0.96), brassMat);
+  baseBrassTrim.position.set(0, 0.091, 0);
+  vowShrineGroup.add(baseBrassTrim);
+
+  const baseStepUpper = new THREE.Mesh(new THREE.BoxGeometry(1.30, 0.06, 0.90), slateMat);
+  baseStepUpper.position.set(0, 0.132, 0);
+  baseStepUpper.castShadow = true;
+  baseStepUpper.receiveShadow = true;
+  vowShrineGroup.add(baseStepUpper);
+
+  // 2. Lectern pedestal column with vertical brass inlay
+  const lecternPillar = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.78, 0.34), pillarMat);
+  lecternPillar.position.set(0, 0.55, -0.04);
+  lecternPillar.castShadow = true;
+  lecternPillar.receiveShadow = true;
+  vowShrineGroup.add(lecternPillar);
+
+  const pillarFillet = new THREE.Mesh(new THREE.BoxGeometry(0.052, 0.60, 0.014), brassMat);
+  pillarFillet.position.set(0, 0.55, 0.135);
+  vowShrineGroup.add(pillarFillet);
+
+  // 3. Angled reading desk tilted toward incoming courtyard visitors (+Z)
+  const deskPivot = new THREE.Group();
+  deskPivot.position.set(0, 0.95, 0.02);
+  deskPivot.rotation.x = 0.48;
+  vowShrineGroup.add(deskPivot);
+
+  const deskBoard = new THREE.Mesh(new THREE.BoxGeometry(1.26, 0.046, 0.84), deskWoodMat);
+  deskBoard.castShadow = true;
+  deskBoard.receiveShadow = true;
+  deskPivot.add(deskBoard);
+
+  const deskBrassLedge = new THREE.Mesh(new THREE.BoxGeometry(1.26, 0.042, 0.028), brassMat);
+  deskBrassLedge.position.set(0, 0.036, 0.41);
+  deskBrassLedge.castShadow = true;
+  deskPivot.add(deskBrassLedge);
+
+  // Turned-brass inkwell / pen stand on upper-right desk corner
+  const inkwellBase = new THREE.Mesh(new THREE.CylinderGeometry(0.038, 0.046, 0.048, 20), brassMat);
+  inkwellBase.position.set(0.54, 0.046, -0.30);
+  inkwellBase.castShadow = true;
+  deskPivot.add(inkwellBase);
+
+  // 4. Painted high-DPI textures for left & right open folio pages (zero emojis, bilingual typography)
+  const paintVowBookPage = (canvas, side) => {
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    const grad = ctx.createLinearGradient(0, 0, w, 0);
+    if (side === 'left') {
+      grad.addColorStop(0.0, '#f5efe2');
+      grad.addColorStop(0.86, '#efe6d5');
+      grad.addColorStop(1.0, '#d6cab0');
+    } else {
+      grad.addColorStop(0.0, '#d6cab0');
+      grad.addColorStop(0.14, '#efe6d5');
+      grad.addColorStop(1.0, '#f5efe2');
+    }
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // Subtle double gold folio border
+    ctx.strokeStyle = '#9a7328';
+    ctx.lineWidth = 4.5;
+    ctx.strokeRect(44, 48, w - 88, h - 96);
+    ctx.strokeStyle = 'rgba(154, 115, 40, 0.55)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(56, 60, w - 112, h - 120);
+
+    ctx.textAlign = 'center';
+    if (side === 'left') {
+      // Emblematic circular seal ring (pure geometry)
+      ctx.strokeStyle = '#9a7328';
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      ctx.arc(w / 2, 148, 36, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(w / 2, 148, 26, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.direction = 'ltr';
+      ctx.fillStyle = '#0f172a';
+      ctx.font = `700 35px ${EN_CANVAS_FONT}`;
+      ctx.fillText('MINAB ACCOUNTABILITY VOW', w / 2, 244);
+
+      ctx.direction = 'rtl';
+      ctx.fillStyle = '#1e293b';
+      ctx.font = `700 38px ${FA_CANVAS_FONT}`;
+      ctx.fillText('میثاق جهانی دادخواهی میناب', w / 2, 306);
+
+      ctx.direction = 'ltr';
+      ctx.fillStyle = '#334155';
+      ctx.font = `600 23px ${EN_CANVAS_FONT}`;
+      ctx.fillText('Shajareh Tayyebeh Primary School · Feb 28, 2026', w / 2, 358);
+      ctx.fillText('120 Schoolchildren & 26 Educators', w / 2, 392);
+
+      // Divider rule
+      ctx.strokeStyle = '#9a7328';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(140, 430);
+      ctx.lineTo(w - 140, 430);
+      ctx.stroke();
+
+      // Dedication prose lines & witness signatures
+      ctx.fillStyle = '#1e293b';
+      ctx.font = `600 24px ${EN_CANVAS_FONT}`;
+      const vowLines = [
+        'We bear witness to the children and teachers',
+        'whose classrooms were struck on Saturday morning,',
+        'and pledge to stand beside their families until',
+        'every responsible official answers before justice.',
+      ];
+      vowLines.forEach((ln, idx) => {
+        ctx.fillText(ln, w / 2, 488 + idx * 38);
+      });
+
+      // Recorded witness signature rules & stylized ink strokes
+      for (let r = 0; r < 5; r++) {
+        const ry = 720 + r * 92;
+        ctx.strokeStyle = 'rgba(71, 85, 105, 0.52)';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.moveTo(110, ry);
+        ctx.lineTo(w - 110, ry);
+        ctx.stroke();
+
+        // Stylized fountain-pen signature flourish
+        ctx.strokeStyle = 'rgba(15, 23, 42, 0.88)';
+        ctx.lineWidth = 3.8;
+        ctx.beginPath();
+        const sx = 145 + (r % 2) * 35;
+        ctx.moveTo(sx, ry - 14);
+        ctx.bezierCurveTo(sx + 55, ry - 48, sx + 95, ry + 6, sx + 160, ry - 24);
+        ctx.bezierCurveTo(sx + 205, ry - 42, sx + 235, ry - 6, sx + 310, ry - 18);
+        ctx.stroke();
+      }
+    } else {
+      ctx.direction = 'ltr';
+      ctx.fillStyle = '#0f172a';
+      ctx.font = `700 34px ${EN_CANVAS_FONT}`;
+      ctx.fillText('GLOBAL WITNESS REGISTRY', w / 2, 152);
+
+      ctx.direction = 'rtl';
+      ctx.fillStyle = '#1e293b';
+      ctx.font = `700 36px ${FA_CANVAS_FONT}`;
+      ctx.fillText('دفتر ثبت امضا و تعهد جهانی', w / 2, 212);
+
+      ctx.strokeStyle = '#9a7328';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(140, 248);
+      ctx.lineTo(w - 140, 248);
+      ctx.stroke();
+
+      for (let r = 0; r < 8; r++) {
+        const ry = 352 + r * 102;
+        const isActiveLine = r === 3;
+        if (isActiveLine) {
+          ctx.fillStyle = 'rgba(212, 168, 83, 0.28)';
+          ctx.fillRect(96, ry - 54, w - 192, 68);
+        }
+        ctx.strokeStyle = isActiveLine ? '#9a7328' : 'rgba(71, 85, 105, 0.50)';
+        ctx.lineWidth = isActiveLine ? 3.5 : 2.2;
+        ctx.beginPath();
+        ctx.moveTo(108, ry);
+        ctx.lineTo(w - 108, ry);
+        ctx.stroke();
+
+        if (r < 3) {
+          ctx.strokeStyle = 'rgba(15, 23, 42, 0.88)';
+          ctx.lineWidth = 3.8;
+          ctx.beginPath();
+          const sx = 135 + r * 28;
+          ctx.moveTo(sx, ry - 14);
+          ctx.bezierCurveTo(sx + 65, ry - 46, sx + 110, ry + 4, sx + 185, ry - 22);
+          ctx.bezierCurveTo(sx + 230, ry - 38, sx + 260, ry - 8, sx + 340, ry - 16);
+          ctx.stroke();
+        } else if (isActiveLine) {
+          ctx.direction = 'ltr';
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#78350f';
+          ctx.font = `700 25px ${EN_CANVAS_FONT}`;
+          ctx.fillText('Sign the Accountability Vow  ›', 120, ry - 16);
+          ctx.textAlign = 'center';
+        }
+      }
+    }
+  };
+
+  const leftPageCanvas = document.createElement('canvas');
+  leftPageCanvas.width = 960;
+  leftPageCanvas.height = 1240;
+  const rightPageCanvas = document.createElement('canvas');
+  rightPageCanvas.width = 960;
+  rightPageCanvas.height = 1240;
+  paintVowBookPage(leftPageCanvas, 'left');
+  paintVowBookPage(rightPageCanvas, 'right');
+
+  const leftPageTex = canvasColorTexture(leftPageCanvas);
+  const rightPageTex = canvasColorTexture(rightPageCanvas);
+  if (appState.renderer && typeof appState.renderer.getMaxAnisotropy === 'function') {
+    const maxAniso = appState.renderer.getMaxAnisotropy();
+    leftPageTex.anisotropy = maxAniso;
+    rightPageTex.anisotropy = maxAniso;
+  }
+  repaintCanvasWhenFontsReady(
+    [
+      { font: `700 34px ${EN_CANVAS_FONT}`, text: 'MINAB' },
+      { font: `700 36px ${FA_CANVAS_FONT}`, text: 'میثاق' },
+    ],
+    () => {
+      paintVowBookPage(leftPageCanvas, 'left');
+      paintVowBookPage(rightPageCanvas, 'right');
+      leftPageTex.needsUpdate = true;
+      rightPageTex.needsUpdate = true;
+    }
+  );
+
+  // 5. Open Hardcover Book Geometry (spine + gently cradled left/right wings + thick page stacks)
+  const bookSpine = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.032, 0.68, 16), coverClothMat);
+  bookSpine.rotation.x = Math.PI / 2;
+  bookSpine.position.set(0, 0.038, -0.01);
+  bookSpine.castShadow = true;
+  deskPivot.add(bookSpine);
+
+  [-0.335, 0.315].forEach((hz) => {
+    const headband = new THREE.Mesh(new THREE.CylinderGeometry(0.034, 0.034, 0.016, 16), brassMat);
+    headband.rotation.x = Math.PI / 2;
+    headband.position.set(0, 0.038, hz);
+    deskPivot.add(headband);
+  });
+
+  const leftWing = new THREE.Group();
+  leftWing.position.set(-0.018, 0.040, -0.01);
+  leftWing.rotation.z = -0.085;
+  deskPivot.add(leftWing);
+
+  const leftCover = new THREE.Mesh(new THREE.BoxGeometry(0.53, 0.016, 0.68), coverClothMat);
+  leftCover.position.set(-0.265, 0, 0);
+  leftCover.castShadow = true;
+  leftWing.add(leftCover);
+
+  const leftPages = new THREE.Mesh(new THREE.BoxGeometry(0.495, 0.038, 0.64), pageBlockMat);
+  leftPages.position.set(-0.252, 0.027, 0);
+  leftPages.castShadow = true;
+  leftPages.receiveShadow = true;
+  leftWing.add(leftPages);
+
+  const leftPageSheet = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.488, 0.632),
     new THREE.MeshStandardMaterial({
-      color: 0xd4a853,
-      emissive: 0xd4a853,
-      emissiveIntensity: 0.28,
-      metalness: 0.75,
-      roughness: 0.25
+      map: leftPageTex,
+      roughness: 0.72,
+      metalness: 0.02,
+      polygonOffset: true,
+      polygonOffsetFactor: -1,
+      polygonOffsetUnits: -2,
     })
   );
-  obelisk.position.set(shrineX, 2.1, shrineZ);
-  obelisk.castShadow = true;
-  vowShrineGroup.add(obelisk);
+  leftPageSheet.rotation.x = -Math.PI / 2;
+  leftPageSheet.position.set(-0.252, 0.0475, 0);
+  leftPageSheet.receiveShadow = true;
+  leftWing.add(leftPageSheet);
 
-  // Makan Nasiri's Small Red-Soled Sneaker Resting on Red Roses at Base of Vow Shrine (Station 8 Tribute)
-  const roseCaseGroup = new THREE.Group();
-  roseCaseGroup.position.set(shrineX, 0.42, shrineZ + 1.55);
-  const plinthBox = new THREE.Mesh(
-    new THREE.BoxGeometry(0.76, 0.28, 0.54),
-    new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.45, metalness: 0.35 })
+  const rightWing = new THREE.Group();
+  rightWing.position.set(0.018, 0.040, -0.01);
+  rightWing.rotation.z = 0.085;
+  deskPivot.add(rightWing);
+
+  const rightCover = new THREE.Mesh(new THREE.BoxGeometry(0.53, 0.016, 0.68), coverClothMat);
+  rightCover.position.set(0.265, 0, 0);
+  rightCover.castShadow = true;
+  rightWing.add(rightCover);
+
+  const rightPages = new THREE.Mesh(new THREE.BoxGeometry(0.495, 0.038, 0.64), pageBlockMat);
+  rightPages.position.set(0.252, 0.027, 0);
+  rightPages.castShadow = true;
+  rightPages.receiveShadow = true;
+  rightWing.add(rightPages);
+
+  const rightPageSheet = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.488, 0.632),
+    new THREE.MeshStandardMaterial({
+      map: rightPageTex,
+      roughness: 0.72,
+      metalness: 0.02,
+      polygonOffset: true,
+      polygonOffsetFactor: -1,
+      polygonOffsetUnits: -2,
+    })
   );
-  plinthBox.position.y = -0.14;
-  roseCaseGroup.add(plinthBox);
-  const roseMat = new THREE.MeshStandardMaterial({ color: 0xbe123c, roughness: 0.65 });
-  for (let rx = -0.24; rx <= 0.25; rx += 0.12) {
-    for (let rz = -0.14; rz <= 0.15; rz += 0.14) {
-      const rose = new THREE.Mesh(new THREE.DodecahedronGeometry(0.055, 0), roseMat);
-      rose.position.set(rx, 0.04, rz);
-      roseCaseGroup.add(rose);
+  rightPageSheet.rotation.x = -Math.PI / 2;
+  rightPageSheet.position.set(0.252, 0.0475, 0);
+  rightPageSheet.receiveShadow = true;
+  rightWing.add(rightPageSheet);
+
+  // Woven bookmark ribbon along the gutter draping over the lower edge
+  const bookmarkRibbon = new THREE.Mesh(new THREE.BoxGeometry(0.022, 0.006, 0.74), ribbonMat);
+  bookmarkRibbon.position.set(0.01, 0.056, 0.045);
+  deskPivot.add(bookmarkRibbon);
+
+  // 6. Sculpted Fountain Signing Pen resting diagonally across the right open page
+  const penGroup = new THREE.Group();
+  penGroup.position.set(0.29, 0.068, 0.09);
+  penGroup.rotation.y = 0.62; // Angled so the gold nib points toward the active signing line
+  rightWing.add(penGroup);
+
+  const penBarrel = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.014, 0.25, 18), penLacquerMat);
+  penBarrel.rotation.z = Math.PI / 2;
+  penBarrel.castShadow = true;
+  penGroup.add(penBarrel);
+
+  const penCenterBand = new THREE.Mesh(new THREE.CylinderGeometry(0.0152, 0.0152, 0.020, 18), brassMat);
+  penCenterBand.rotation.z = Math.PI / 2;
+  penCenterBand.position.set(0.02, 0, 0);
+  penGroup.add(penCenterBand);
+
+  const penEndCap = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.009, 0.018, 16), brassMat);
+  penEndCap.rotation.z = Math.PI / 2;
+  penEndCap.position.set(0.132, 0, 0);
+  penGroup.add(penEndCap);
+
+  const penClip = new THREE.Mesh(new THREE.BoxGeometry(0.10, 0.005, 0.007), brassMat);
+  penClip.position.set(0.075, 0.016, 0);
+  penClip.castShadow = true;
+  penGroup.add(penClip);
+
+  const penGrip = new THREE.Mesh(new THREE.CylinderGeometry(0.0075, 0.0115, 0.048, 16), penLacquerMat);
+  penGrip.rotation.z = Math.PI / 2;
+  penGrip.position.set(-0.148, 0, 0);
+  penGroup.add(penGrip);
+
+  const penNib = new THREE.Mesh(new THREE.ConeGeometry(0.0085, 0.044, 12), brassMat);
+  penNib.rotation.z = Math.PI / 2;
+  penNib.scale.set(0.32, 1, 1);
+  penNib.position.set(-0.188, 0, 0);
+  penNib.castShadow = true;
+  penGroup.add(penNib);
+
+  vowShrineGroup.traverse((child) => {
+    if (child.isMesh) {
+      child.userData = { isVowMemorialBook: true, feature: 'vow_memorial_book' };
     }
-  }
-  const sneakerSole = new THREE.Mesh(
-    new THREE.BoxGeometry(0.22, 0.035, 0.095),
-    new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.6 })
-  );
-  sneakerSole.position.set(0, 0.09, 0);
-  sneakerSole.rotation.y = 0.25;
-  const sneakerUpper = new THREE.Mesh(
-    new THREE.BoxGeometry(0.19, 0.075, 0.088),
-    new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.72 })
-  );
-  sneakerUpper.position.set(-0.01, 0.135, 0);
-  sneakerUpper.rotation.y = 0.25;
-  const glassVitrine = new THREE.Mesh(
-    new THREE.BoxGeometry(0.68, 0.26, 0.46),
-    new THREE.MeshStandardMaterial({ color: 0xe0f2fe, transparent: true, opacity: 0.22, roughness: 0.15 })
-  );
-  glassVitrine.position.y = 0.13;
-  roseCaseGroup.add(sneakerSole, sneakerUpper, glassVitrine);
-  vowShrineGroup.add(roseCaseGroup);
+  });
 }
 
 export function buildProceduralSchoolModels() {

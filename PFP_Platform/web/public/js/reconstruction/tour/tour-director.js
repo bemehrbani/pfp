@@ -369,17 +369,14 @@ export async function hideStoryBanner() {
 }
 
 /**
- * Station 8 puts a video frame on the vow shrine's own spot (between the two big frames), so the
- * obelisk, its base and the roses are hidden while that stop plays and restored on any other stop
- * or when the tour ends. Clean-capture mode (H key) keeps the shrine hidden either way.
+ * Keeps the low open Memorial Book & Pen lectern visible during normal viewing and Stop 8,
+ * hiding it only when clean-capture mode (?clean=1 / H key) is active.
  */
-function syncShrineVisibilityForStop(stopIdx) {
+function syncShrineVisibilityForStop() {
   const shrine = appState.scene && appState.scene.getObjectByName('Vow_Shrine_3D');
   if (!shrine) return;
-  const stop = typeof stopIdx === 'number' ? GUIDED_TOUR_STOPS[stopIdx] : null;
-  const hideForStop = Boolean(appState.isGuidedTour && stop && stop.hotspotId === 'vow_shrine');
   const clean = typeof document !== 'undefined' && document.body.classList.contains('clean-capture');
-  shrine.visible = !hideForStop && !clean;
+  shrine.visible = !clean;
 }
 
 function applyWalkthroughStationOverlays(stopIdx) {

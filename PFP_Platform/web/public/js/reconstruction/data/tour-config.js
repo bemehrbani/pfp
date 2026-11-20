@@ -3,7 +3,7 @@
  * Cinema Witness Interludes, bookends, and room atmosphere profiles.
  */
 
-export const MEDIA_ASSET_VERSION = '20261120a';
+export const MEDIA_ASSET_VERSION = '20261120b';
 
 export const GUIDED_TOUR_STOPS = [
   {
@@ -181,7 +181,7 @@ export const HOTSPOT_CONFIGS = [
   { id: 'girls_upper_hall', icon: '5', pos: [-15.2, 5.6, -5.5], presetCam: [-9.5, 8.6, 3.5], target: [-15.2, 5.2, -5.5], cutaway: 1 },
   { id: 'crater_damage', icon: '6', pos: [-2.5, 3.2, -5.5], presetCam: [-18.0, 13.5, 12.0], target: [-1.5, 2.2, -5.5], cutaway: 0 },
   { id: 'second_wave', icon: '7', pos: [18.0, 2.5, 11.5], presetCam: [26.0, 9.5, 22.0], target: [6.0, 2.2, 1.0], cutaway: 0 },
-  { id: 'vow_shrine', icon: '✍️', pos: [-1.5, 3.8, 10.5], presetCam: [-1.5, 2.4, 18.0], target: [-1.5, 2.0, 10.5], isVow: true, cutaway: 1 }
+  { id: 'vow_shrine', icon: '8', pos: [-1.5, 1.48, 11.65], presetCam: [-1.5, 1.95, 14.5], target: [-1.5, 1.02, 11.65], isVow: true, cutaway: 1 }
 ];
 
 export const IN_WORLD_SCREEN_SPECS = [
@@ -399,7 +399,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '08_A', hotspotId: 'vow_shrine', slot: 'A', groupKey: 'memorial',
     images: Array.from({ length: 10 }, (_, i) => `media/walkthrough_pip/shrine/shrine_photo_${String(i + 1).padStart(2, '0')}.jpg`),
-    slideSec: 3.4, style: 'stele', noPoster: true, noPlaque: true,
+    poster: 'images/shrine/poster_08_a.jpg',
+    slideSec: 3.4, style: 'stele', noPlaque: true,
     // Slideshow runs from the start of the station to its end (wraps after the last photo).
     durationSec: 34.4, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
     pos: [-4.62, 1.79, 9.65], rotY: 0.30, w: 3.10, h: 3.10, hasLegs: false,
@@ -416,11 +417,10 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '08_C', hotspotId: 'vow_shrine', slot: 'C', groupKey: 'memorial',
-    file: 'shrine/shrine_video_01', loop: true, style: 'stele', noPoster: true, noPlaque: true,
+    file: 'shrine/shrine_video_01', poster: 'images/shrine/poster_08_c.jpg', loop: true, style: 'stele', noPlaque: true,
     // Plays on repeat from the start of the station to its end.
     durationSec: 52.7, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
-    // Midway between the two big frames (x -1.5), set 0.5 m behind their row (z 9.65), facing south. This is the
-    // vow shrine's spot, so the shrine is hidden while stop 8 plays (tour-director.js).
+    // Midway between the two big frames (x -1.5), set 0.5 m behind their row (z 9.65), facing south.
     // 720x1280 portrait, so 9:16. Stele: pos y = 0.14 + (h + 0.2) / 2.
     pos: [-1.50, 1.565, 9.10], rotY: 0, w: 1.49, h: 2.65, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
@@ -428,7 +428,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '08_B', hotspotId: 'vow_shrine', slot: 'B', groupKey: 'memorial',
     images: Array.from({ length: 36 }, (_, i) => `media/walkthrough_pip/shrine/shrine_vow_photo_${String(i + 1).padStart(2, '0')}.jpg`),
-    slideSec: 3.5, style: 'stele', noPoster: true, noPlaque: true,
+    poster: 'images/shrine/poster_08_b.jpg',
+    slideSec: 3.5, style: 'stele', noPlaque: true,
     // Slideshow runs from the start of the station to its end (wraps after the last photo).
     durationSec: 26.3, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
     pos: [2.03, 1.555, 9.65], rotY: -0.30, w: 3.95, h: 2.63, hasLegs: false,
