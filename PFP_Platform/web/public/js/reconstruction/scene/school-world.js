@@ -669,11 +669,12 @@ export function buildProceduralSchoolModels() {
     const dGroup = new THREE.Group();
     dGroup.position.set(x, yBase, z);
     dGroup.rotation.y = rotY;
-    // The leaf is 2 cm wider than the hole cut for it, so its edges sit inside the jambs.
+    // The leaf is 1 cm wider than the hole cut for it (5 mm into each jamb), so its edges stay tucked
+    // in without visibly sinking into the walls.
     // The bottom is sunk 2 cm below yBase so it is buried in the wall strip / floor underneath
     // instead of sharing a coplanar face with it (that caused z-fighting along the door bottoms).
     const DOOR_SINK = 0.02;
-    const door = new THREE.Mesh(doorBoxGeometry(width + 0.04, 2.08 + DOOR_SINK, depth), doorLeafMat);
+    const door = new THREE.Mesh(doorBoxGeometry(width + 0.01, 2.08 + DOOR_SINK, depth), doorLeafMat);
     door.position.set(0, (2.08 - DOOR_SINK) / 2, 0);
     dGroup.add(door);
     // Doors in cut walls (see buildWalls) leave the transom as an open hole; doors set into
@@ -1412,7 +1413,8 @@ export function buildProceduralSchoolModels() {
   // on a leader line; the line is gone because the banner no longer sits above the crater.
   scaleBadge.position.set(2.93, 4.0, -4.45);
   scaleBadge.rotation.y = -Math.PI / 2;
-  postStrikeModelGroup.add(scaleBadge);
+  // Banner hidden: not added to the scene.
+  // postStrikeModelGroup.add(scaleBadge);
 
   // E) Deterministic Layered Concrete Rubble Slabs in Collapsed West Wing & Central Zone (Zero Math.random jitter!)
   const rubbleSpecs = [

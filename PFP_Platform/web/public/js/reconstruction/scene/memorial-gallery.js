@@ -964,18 +964,19 @@ export function populate3DSchoolPortraitsAndDrawings() {
   // top of the rainbow stairs. Slab top is y = 3.71, so the frame heights below are measured from
   // the first-floor group origin exactly like the Girls' Hall frames further down (y1 = 3.6).
   const yStairHall = 3.6;
-  createWingBannerIn3D(
-    firstFloorGroup,
-    `CENTRAL HALL & RAINBOW STAIRCASE: THE 26 MARTYRED FEMALE EDUCATORS`,
-    `سالن مرکزی و راه‌پله رنگین‌کمان: ۲۶ معلم و مدیر شهیده دبستان شجره طیبه`,
-    -5.02,
-    yStairHall + 3.3,
-    -8.43,
-    0,
-    5.2,
-    '#1f122b',
-    '#f472b6'
-  );
+  // Banner hidden for Station 4 (it hung above the stele row at the top of the rainbow stairs).
+  // createWingBannerIn3D(
+  //   firstFloorGroup,
+  //   `CENTRAL HALL & RAINBOW STAIRCASE: THE 26 MARTYRED FEMALE EDUCATORS`,
+  //   `سالن مرکزی و راه‌پله رنگین‌کمان: ۲۶ معلم و مدیر شهیده دبستان شجره طیبه`,
+  //   -5.02,
+  //   yStairHall + 3.3,
+  //   -8.43,
+  //   0,
+  //   5.2,
+  //   '#1f122b',
+  //   '#f472b6'
+  // );
 
   // Wall columns for the educators, each a stack of two frames (rows at +1.22 m and +2.34 m).
   // Only wall stretches clear of doors are used (doors are 1.06 m wide: F-10 at x = -4.75 / 0.15 / 5.05,

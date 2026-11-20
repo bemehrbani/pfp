@@ -215,7 +215,7 @@ export function buildWalls(defs, ctx) {
       if (op.type === 'window') {
         ctx.addWindow(group, x, (op.sill || 0) + op.h / 2, 0, outRot, op.w, op.h, op.mullions ?? 2, !!op.sunshade, op.depth ?? T + 0.01);
       } else if (op.type === 'door') {
-        // A thin panel centred in the wall, 2 cm wider than the hole so its edges are tucked into the jambs.
+        // A thin panel centred in the wall, 1 cm wider than the hole so its edges just tuck into the jambs.
         ctx.addDoor(group, x, op.base ?? DOOR_BASE, 0, 0, DOOR_THICKNESS, op.w ?? DOOR_W);
         // Pink frame lining the inside of the hole (threshold to above the transom): two jambs and a
         // head, all within the cut rectangle and as deep as the wall, so nothing sticks out of it.

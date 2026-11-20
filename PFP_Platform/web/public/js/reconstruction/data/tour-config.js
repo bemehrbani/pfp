@@ -3,7 +3,7 @@
  * Cinema Witness Interludes, bookends, and room atmosphere profiles.
  */
 
-export const MEDIA_ASSET_VERSION = '20261115a';
+export const MEDIA_ASSET_VERSION = '20261120a';
 
 export const GUIDED_TOUR_STOPS = [
   {
@@ -130,8 +130,8 @@ export const GUIDED_TOUR_STOPS = [
     lookAt: [-1.8, 2.0, -5.2],
     waypoints: [
       { t: 0.00, camPos: [-16.5, 11.8, 9.5], lookAt: [-1.8, 2.0, -5.2] },
-      { t: 0.14, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 1.25, -4.75] },
-      { t: 0.32, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 1.25, -4.75] },
+      { t: 0.14, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 3.05, -4.75] },
+      { t: 0.32, camPos: [-5.85, 3.05, -4.85], lookAt: [-0.20, 3.05, -4.75] },
       { t: 0.40, camPos: [-1.80, 2.50, -4.45], lookAt: [2.95, 2.50, -4.45] },
       { t: 0.50, camPos: [-1.80, 2.50, -4.45], lookAt: [2.95, 2.50, -4.45] },
       { t: 0.58, camPos: [-0.85, 2.50, -1.65], lookAt: [-0.85, 2.50, -6.75] },
@@ -165,8 +165,8 @@ export const GUIDED_TOUR_STOPS = [
     lookAt: [-1.5, 1.9, 9.65],
     waypoints: [
       { t: 0.00, camPos: [-1.5, 1.90, 27.0], lookAt: [-1.5, 1.90, 9.65] },
-      { t: 0.40, camPos: [-1.5, 1.90, 18.2], lookAt: [-1.5, 1.90, 9.65] },
-      { t: 1.00, camPos: [-1.5, 1.90, 18.2], lookAt: [-1.5, 1.90, 9.65] }
+      { t: 0.40, camPos: [-1.5, 1.90, 19.5], lookAt: [-1.5, 1.90, 9.65] },
+      { t: 1.00, camPos: [-1.5, 1.90, 19.5], lookAt: [-1.5, 1.90, 9.65] }
     ],
     shortBadge: { en: "08 / 08", fi: "08 / 08", fa: "۰۸ / ۰۸" },
     badge: { en: "STOP 8 OF 8 · THE ACCOUNTABILITY VOW SHRINE", fi: "PISTE 8/8 · VASTUULUPAUKSEN MUISTOMERKKI", fa: "ایستگاه ۸ از ۸ · یادمان میثاق دادخواهی — ثبت پیمان جهانی" }
@@ -367,7 +367,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   // Station 7: 2:30 PM Second Wave & Recovered US Tomahawk Munitions Evidence
   {
     id: '07_A', hotspotId: 'second_wave', slot: 'A', groupKey: 'postStrike',
-    file: '07_sync_barehands_rescue', durationSec: 24.5, cueStartP: 0.0, cueEndP: 0.400, cueStartPFa: 0.0, cueEndPFa: 0.401, cueStartPFi: 0.0, cueEndPFi: 0.411,
+    file: '07_sync_barehands_rescue', noPlaque: true, durationSec: 24.5, cueStartP: 0.0, cueEndP: 0.400, cueStartPFa: 0.0, cueEndPFa: 0.401, cueStartPFi: 0.0, cueEndPFi: 0.411,
     pos: [19.00, 2.04, 5.55], rotY: 0, w: 4.15, h: 2.33, hasLegs: true, legFloorY: 0.02,
     badge: {
       en: 'MOTHERS & RESCUERS DIGGING WITH BARE HANDS',
@@ -382,7 +382,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   },
   {
     id: '07_B', hotspotId: 'second_wave', slot: 'B', groupKey: 'postStrike',
-    file: '07_sync_tomahawk_then_smoke', durationSec: 35.6, cueStartP: 0.400, cueEndP: 0.984, cueStartPFa: 0.401, cueEndPFa: 0.969, cueStartPFi: 0.411, cueEndPFi: 0.984,
+    file: '07_sync_tomahawk_then_smoke', noPlaque: true, durationSec: 35.6, cueStartP: 0.400, cueEndP: 0.984, cueStartPFa: 0.401, cueEndPFa: 0.969, cueStartPFi: 0.411, cueEndPFi: 0.984,
     pos: [13.50, 2.16, 5.55], rotY: 0, w: 3.75, h: 2.05, hasLegs: true, legFloorY: 0.02,
     badge: {
       en: '2:30 PM SECOND WAVE · TOMAHAWK & BLACK SMOKE',
@@ -402,7 +402,7 @@ export const IN_WORLD_SCREEN_SPECS = [
     slideSec: 3.4, style: 'stele', noPoster: true, noPlaque: true,
     // Slideshow runs from the start of the station to its end (wraps after the last photo).
     durationSec: 34.4, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
-    pos: [-4.60, 1.79, 9.65], rotY: 0.30, w: 3.10, h: 3.10, hasLegs: false,
+    pos: [-4.62, 1.79, 9.65], rotY: 0.30, w: 3.10, h: 3.10, hasLegs: false,
     badge: {
       en: 'WALK THROUGH THEIR CLASSROOMS · HEAR THEIR VOICES',
       fi: 'KULJE HEIDÄN LUOKKIENSA LÄPI · KUULE HEIDÄN ÄÄNENSÄ',
@@ -422,7 +422,7 @@ export const IN_WORLD_SCREEN_SPECS = [
     // Midway between the two big frames (x -1.5), set 0.5 m behind their row (z 9.65), facing south. This is the
     // vow shrine's spot, so the shrine is hidden while stop 8 plays (tour-director.js).
     // 720x1280 portrait, so 9:16. Stele: pos y = 0.14 + (h + 0.2) / 2.
-    pos: [-1.50, 1.565, 9.15], rotY: 0, w: 1.49, h: 2.65, hasLegs: false,
+    pos: [-1.50, 1.565, 9.10], rotY: 0, w: 1.49, h: 2.65, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
@@ -431,7 +431,7 @@ export const IN_WORLD_SCREEN_SPECS = [
     slideSec: 3.5, style: 'stele', noPoster: true, noPlaque: true,
     // Slideshow runs from the start of the station to its end (wraps after the last photo).
     durationSec: 26.3, cueStartP: 0.0, cueEndP: 0.988, cueStartPFa: 0.0, cueEndPFa: 0.992, cueStartPFi: 0.0, cueEndPFi: 0.991,
-    pos: [1.60, 1.555, 9.65], rotY: -0.30, w: 3.95, h: 2.63, hasLegs: false,
+    pos: [2.03, 1.555, 9.65], rotY: -0.30, w: 3.95, h: 2.63, hasLegs: false,
     badge: {
       en: 'SIGN THE MINAB ACCOUNTABILITY VOW',
       fi: 'ALLEKIRJOITA MINABIN VASTUULUPAUS',
@@ -796,26 +796,8 @@ export const WALKTHROUGH_INTERLUDES = {
       fi: 'INHIMILLINEN HINTA · SELVIYTYNEET LAPSET, PIENI KENKÄ JA YLI 150 HAUTAA'
     },
     context: { en: '', fa: '', fi: '' },
-    cues: [
-      {
-        s: 0.2, e: 5.4,
-        en: 'Young surviving sisters Reyhaneh and Mastaneh, covered in blast dust, looking back toward their burning school',
-        fa: '«ریحانه» و «مستانه»، دو دانش‌آموز خردسال بازمانده، در میان گردوغبار به ویرانه مدرسه‌شان نگاه می‌کنند',
-        fi: 'Pienet selviytyneet sisarukset Reyhaneh ja Mastaneh katsovat pölyn peittäminä palavaa kouluaan'
-      },
-      {
-        s: 5.5, e: 11.9,
-        en: 'A rescuer\'s gloved hand gently lifts a child\'s dust-covered sneaker from the shattered classroom concrete',
-        fa: 'دستان امدادگر، کفش کوچک خاک‌گرفته یکی از کودکان را از میان سنگ و بتن کلاس بیرون می‌آورد',
-        fi: 'Pelastajan käsi nostaa varovasti lapsen pölyisen kengän murskaantuneen luokkahuoneen betonin keskeltä'
-      },
-      {
-        s: 12.0, e: 21.3,
-        en: 'Over one hundred small graves excavated side by side in Minab as thousands gather to lay the children to rest',
-        fa: 'بیش از صد مزار کوچک حفرشده در کنار یکدیگر در میناب و حضور هزاران سوگوار برای بدرقه کودکان شجره طیبه',
-        fi: 'Yli sata vierekkäin kaivettua pientä hautaa Minabissa tuhansien saattajien kokoontuessa hyvästelemään lapset'
-      }
-    ]
+    // No subtitles on this interlude.
+    cues: []
   },
   // After the last station (vow_shrine), before the epilogue card and the vow. ~98 s, no text.
   vow_shrine: {

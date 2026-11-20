@@ -189,6 +189,13 @@ export async function startReconstructionApp() {
     if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
     setCleanCapture(!document.body.classList.contains('clean-capture'));
   });
+  // P starts the guided tour (does nothing while it is already running).
+  window.addEventListener('keydown', (e) => {
+    if ((e.key !== 'p' && e.key !== 'P') || e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+    const t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if (!appState.isGuidedTour) startGuidedTour();
+  });
   if (bootParams.get('autostart') === '1') {
     document.body.classList.add('walkthrough-mode');
     setTimeout(() => {
