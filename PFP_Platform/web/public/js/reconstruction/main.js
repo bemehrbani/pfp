@@ -14,7 +14,13 @@ import {
   selectNarratorByActor,
   setNarratorProfile,
 } from './data/i18n.js';
-import { initThreeEngine, setTemporalCondition } from './engine/core.js';
+import {
+  initAmbientOcclusion,
+  initThreeEngine,
+  renderFrame,
+  setTemporalCondition,
+  useFrontFaceShadowCasters,
+} from './engine/core.js';
 import {
   sampleGuidedTourCamera,
   sampleGuidedTourCameraCoords,
@@ -124,7 +130,11 @@ export function animate() {
     clampCameraAboveGround();
   }
   updateHotspotPositions();
-  appState.renderer.render(appState.scene, appState.camera);
+  if (appState.shadowWarmupFrames > 0 && appState.sunLight) {
+    appState.shadowWarmupFrames -= 1;
+    appState.sunLight.shadow.needsUpdate = true;
+  }
+  renderFrame();
 }
 
 export async function startReconstructionApp() {
@@ -150,6 +160,8 @@ export async function startReconstructionApp() {
   }
   buildEnvironmentAndTerrain();
   buildProceduralSchoolModels();
+  useFrontFaceShadowCasters(appState.scene);
+  await initAmbientOcclusion();
   loadChildrenAndBuildInWorldMemorial();
   init3DPortraitRaycaster();
   initHotspots();
@@ -161,6 +173,29 @@ export async function startReconstructionApp() {
   if (appState.recordingMode) {
     document.body.classList.add('recording-mode');
   }
+  // Clean-capture: hides every tour overlay that is not part of the film
+  // (bottom pill, top-left stamp, skip button) for screen recording.
+  // ?recording=1 or ?clean=1 starts with it on; press H to toggle at any time.
+  // The 3D vow shrine is scene geometry (not DOM), so it needs a visibility sync.
+  const setCleanCapture = (on) => {
+    document.body.classList.toggle('clean-capture', on);
+    const shrine = appState.scene.getObjectByName('Vow_Shrine_3D');
+    if (shrine) shrine.visible = !on;
+  };
+  setCleanCapture(appState.recordingMode || bootParams.get('clean') === '1');
+  window.addEventListener('keydown', (e) => {
+    if ((e.key !== 'h' && e.key !== 'H') || e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+    const t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    setCleanCapture(!document.body.classList.contains('clean-capture'));
+  });
+  // P starts the guided tour (does nothing while it is already running).
+  window.addEventListener('keydown', (e) => {
+    if ((e.key !== 'p' && e.key !== 'P') || e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+    const t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if (!appState.isGuidedTour) startGuidedTour();
+  });
   if (bootParams.get('autostart') === '1') {
     document.body.classList.add('walkthrough-mode');
     setTimeout(() => {

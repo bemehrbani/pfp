@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/reconstruction.css?v=20261115" />
+  <link rel="stylesheet" href="css/reconstruction.css?v=20261119b" />
 </head>
 <body>
 
@@ -87,14 +87,10 @@
     <div class="hud-bottom">
       <div class="timeline-card">
         <div class="timeline-header">
-          <button class="state-toggle-btn active" id="btnStatePre"  data-i18n="preStrikeBtn">☀ Before Strike (School Full of Life)</button>
-          <span style="color:var(--text-muted); font-size:0.74rem;" data-i18n="hotspotsCount">8 Camera-Aligned Interior &amp; Courtyard Stations Active</span>
-          <button class="state-toggle-btn red" id="btnStatePost"  data-i18n="postStrikeBtn">💥 After Strike (Extent of Damage &amp; 5m Crater)</button>
+          <button class="state-toggle-btn active" id="btnStatePre"  data-i18n="preStrikeBtn">Before Strike</button>
+          <button class="state-toggle-btn red" id="btnStatePost"  data-i18n="postStrikeBtn">After Strike</button>
         </div>
 
-        <div class="slider-container">
-          <input type="range" min="0" max="1" step="0.01" value="0" class="timeline-slider" id="timelineSlider" aria-label="Before/After Timeline Slider" />
-        </div>
       </div>
 
       <div class="help-hint" id="controlsHintText" data-i18n="controlsHelp">
@@ -133,16 +129,12 @@
     <h2 class="bookend-title" id="prologueTitle">Shajareh Tayyebeh Primary School</h2>
     <div class="bookend-coords" id="prologueCoords">27°08′43″N 57°05′02″E · Minab, Hormozgan · February 28, 2026</div>
     <div class="bookend-divider" aria-hidden="true"></div>
-    <p class="bookend-note" id="prologueNote">Every photograph, child's voice, and eyewitness video inside these rooms was recorded in this school before and on the day of the strike.</p>
+    <p class="bookend-note" id="prologueNote" hidden>Every photograph, child's voice, and eyewitness video inside these rooms was recorded in this school before and on the day of the strike.</p>
   </div>
 
   <!-- Between-Narrations Cinema Witness Interlude Player (Full Video + Authentic Sound) -->
   <div class="cinema-interlude-overlay" id="cinemaInterludeOverlay" data-aspect="portrait" data-tone="pre" hidden>
     <div class="interlude-topbar">
-      <div class="interlude-meta">
-        <span class="interlude-dot" aria-hidden="true"></span>
-        <span class="interlude-kicker" id="interludeKicker">LIVING SCHOOL ARCHIVE · ORIGINAL SOUND</span>
-      </div>
       <button type="button" class="interlude-skip-btn" id="btnSkipInterlude">Skip Interlude ›</button>
     </div>
     <div class="interlude-stage">
@@ -386,7 +378,14 @@
     {
       "imports": {
         "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.webgpu.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+        "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.webgpu.js",
+        "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.tsl.js",
+        "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/",
+        "./js/reconstruction/scene/school-world.js":"./js/reconstruction/scene/school-world.js?v=20261119t",
+        "./js/reconstruction/scene/ground-floor-walls.js": "./js/reconstruction/scene/ground-floor-walls.js?v=20261118r",
+        "./js/reconstruction/scene/first-floor-walls.js": "./js/reconstruction/scene/first-floor-walls.js?v=20261118o",
+        "./js/reconstruction/scene/wall-builder.js": "./js/reconstruction/scene/wall-builder.js?v=20261119r",
+        "./js/reconstruction/scene/wall-joints.js": "./js/reconstruction/scene/wall-joints.js?v=20261118o"
       }
     }
   </script>
@@ -396,6 +395,6 @@
   <!-- Master Casualty & Rubble Drawings Registry (Dataset v3.0.0) -->
   <script src="memorial-data.js"></script>
   <!-- Application Logic -->
-  <script type="module" src="js/reconstruction/main.js?v=20261116b"></script>
+  <script type="module" src="js/reconstruction/main.js?v=20261119l"></script>
 </body>
 </html>

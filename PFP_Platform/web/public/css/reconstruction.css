@@ -833,10 +833,10 @@ body[dir="rtl"] .bookend-note {
   pointer-events: none;
 }
 .interlude-topbar {
-  width: min(980px, calc(100vw - 48px));
+  width: calc(100vw - 48px);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 14px;
   margin-bottom: 12px;
 }
@@ -895,6 +895,22 @@ body[dir="rtl"] .interlude-kicker {
 body.recording-mode .interlude-skip-btn {
   display: none !important;
 }
+
+/* Quote callouts (the notification-style text at the top left) are never shown. */
+.walkthrough-quote-callout {
+  display: none !important;
+}
+
+/* CLEAN CAPTURE (?recording=1 / ?clean=1, toggle with H): film-only screen.
+   Subtitles, interlude video, PiP and quote callout are intentionally kept. */
+body.clean-capture .interlude-skip-btn,
+body.clean-capture .interlude-progress-track,
+body.clean-capture .hotspot-pin,
+body.clean-capture.walkthrough-mode .story-banner,
+body.clean-capture.walkthrough-mode .walkthrough-context-stamp,
+body.clean-capture.walkthrough-mode .hud-layer {
+  display: none !important;
+}
 .interlude-stage {
   position: relative;
   display: flex;
@@ -902,38 +918,67 @@ body.recording-mode .interlude-skip-btn {
   justify-content: center;
   background: #04060b;
   border-radius: 14px;
-  border: 1px solid rgba(212, 168, 83, 0.34);
-  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.82), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  /* No frame around the interlude video. */
+  border: 0;
+  box-shadow: none;
   overflow: hidden;
 }
-.cinema-interlude-overlay[data-tone="strike"] .interlude-stage {
-  border-color: rgba(239, 68, 68, 0.38);
-}
-/* True-aspect museum frames — zero blurred pillarboxes */
+/* True-aspect museum frames, nearly full screen. 130px reserves the top bar, the subtitle strip and padding. */
 .cinema-interlude-overlay[data-aspect="landscape"] .interlude-stage {
-  width: min(960px, 84vw);
+  width: min(calc(100vw - 48px), calc((100vh - 130px) * 16 / 9));
   aspect-ratio: 16 / 9;
-  max-height: 68vh;
 }
 .cinema-interlude-overlay[data-aspect="classic"] .interlude-stage {
-  height: min(68vh, 640px);
+  height: calc(100vh - 130px);
   aspect-ratio: 4 / 3;
-  max-width: 88vw;
+  max-width: calc(100vw - 48px);
 }
 .cinema-interlude-overlay[data-aspect="portrait"] .interlude-stage {
-  height: min(72vh, 690px);
+  height: calc(100vh - 130px);
   aspect-ratio: 4 / 5;
-  max-width: 88vw;
+  max-width: calc(100vw - 48px);
 }
 .cinema-interlude-overlay[data-aspect="portrait34"] .interlude-stage {
-  height: min(72vh, 690px);
+  height: calc(100vh - 130px);
   aspect-ratio: 3 / 4;
-  max-width: 88vw;
+  max-width: calc(100vw - 48px);
 }
 .cinema-interlude-overlay[data-aspect="tall"] .interlude-stage {
-  height: min(74vh, 710px);
+  height: calc(100vh - 130px);
   aspect-ratio: 9 / 14.5;
-  max-width: 88vw;
+  max-width: calc(100vw - 48px);
+}
+/* Interlude with no subtitles or text under it: video fills the entire screen (overrides data-aspect sizing). */
+.cinema-interlude-overlay.is-fullscreen {
+  padding: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: #04060b;
+}
+.cinema-interlude-overlay.is-fullscreen .interlude-topbar {
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  right: 24px;
+  width: auto;
+  margin: 0;
+  z-index: 6;
+}
+.cinema-interlude-overlay.is-fullscreen .interlude-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+.cinema-interlude-overlay.is-fullscreen .interlude-subtitle-wrap {
+  display: none;
+}
+/* Show the whole frame: scale to fit the screen, never crop or zoom (letterbox/pillarbox instead). */
+.cinema-interlude-overlay.is-fullscreen .interlude-stage video {
+  object-fit: contain;
 }
 .interlude-stage video {
   width: 100%;
@@ -1062,69 +1107,43 @@ body[dir="rtl"] .interlude-rupture-title {
   width: 100%;
 }
 .timeline-card {
-  width: 100%;
+  width: auto;
   background: var(--bg-panel);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 13px 22px;
+  border-radius: 999px;
+  padding: 4px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
+/* Before / After is a two-way switch: one segmented control with the active side filled. */
 .timeline-header {
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
   align-items: center;
-  margin-bottom: 8px;
+  gap: 2px;
   font-size: 0.84rem;
   font-weight: 600;
 }
 .state-toggle-btn {
-  background: none;
+  background: transparent;
   border: none;
+  border-radius: 999px;
   font-size: 0.84rem;
   font-weight: 700;
   cursor: pointer;
   color: var(--text-muted);
-  transition: color var(--transition);
-  padding: 2px 6px;
+  transition: color var(--transition), background var(--transition);
+  padding: 8px 22px;
+}
+.state-toggle-btn:hover {
+  color: #e2e8f0;
 }
 .state-toggle-btn.active {
+  background: rgba(212, 168, 83, 0.22);
   color: var(--gold);
 }
 .state-toggle-btn.active.red {
+  background: rgba(248, 113, 113, 0.22);
   color: #f87171;
-}
-
-.slider-container {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-.timeline-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 8px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #4a90d9 0%, #d4a853 50%, #c4564a 100%);
-  outline: none;
-  cursor: pointer;
-}
-.timeline-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 3px solid var(--gold);
-  box-shadow: 0 0 10px rgba(212, 168, 83, 0.8);
-  cursor: grab;
-  transition: transform 0.15s;
-}
-.timeline-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
 }
 
 .help-hint {

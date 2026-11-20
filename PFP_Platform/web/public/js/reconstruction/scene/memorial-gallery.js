@@ -630,6 +630,88 @@ export function createClassroomDeskWithDrawing(parentGroup, loader, drw, x, yBas
   parentGroup.add(deskGroup);
 }
 
+/**
+ * Courtyard stele: dark slate slab with a gold rim, a portrait and a nameplate on both faces.
+ * Used by the Memorial Avenue and by the schoolyard row beside the assembly lines.
+ * Decals ride FRAME_DECAL_GAP off the slab's +/-0.05 faces, one stack step apart.
+ */
+function createCourtyardStele(parentGroup, loader, child, { x, z, rotY, wingLabel, focusCam, lookAt }) {
+  const isTeacher = child.category === 'teacher';
+  const STELE_FACE_Z = 0.05;
+  const STELE_LABEL_Z = STELE_FACE_Z + FRAME_DECAL_GAP;
+  const STELE_PORTRAIT_Z = STELE_LABEL_Z + FRAME_STACK_STEP;
+  const imgUrl =
+    child.photoPath || child.photo_path || (child.photoGrid ? `images/children/child_${child.photoGrid}.jpg` : null);
+
+  const post = new THREE.Mesh(
+    getSharedBoxGeo(0.96, 1.88, 0.1),
+    new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 })
+  );
+  post.position.set(x, 1.08, z);
+  post.rotation.y = rotY;
+  post.castShadow = true;
+  parentGroup.add(post);
+
+  const border = new THREE.Mesh(
+    getSharedBoxGeo(1.02, 1.94, 0.07),
+    new THREE.MeshBasicMaterial({ color: 0xd4a853 })
+  );
+  post.add(border);
+
+  const labelTex = createNameplateTexture(
+    child.nameFa || child.full_name_fa,
+    child.name || child.full_name_en,
+    isTeacher ? child.role || 'Educator' : `Grade ${child.grade || '?'} · Age ${child.age || '?'}`,
+    '#d4a853',
+    0.88,
+    0.3
+  );
+  const frontLabel = new THREE.Mesh(
+    getSharedPlaneGeo(0.88, 0.3),
+    makeDecalMaterial({ map: labelTex, toneMapped: false })
+  );
+  frontLabel.position.set(0, -0.68, STELE_LABEL_Z);
+  post.add(frontLabel);
+
+  const backLabel = frontLabel.clone();
+  backLabel.position.set(0, -0.68, -STELE_LABEL_Z);
+  backLabel.rotation.y = Math.PI;
+  post.add(backLabel);
+
+  const steleArtifact = {
+    artifactType: 'victim',
+    item: child,
+    wingLabel,
+    focusCam,
+    lookAt,
+    cutawayMode: 0,
+  };
+  post.userData = steleArtifact;
+  appState.clickable3DArtifacts.push(post);
+
+  if (imgUrl) {
+    loader.load(imgUrl, (tex) => {
+      prepareDecalTexture(tex);
+      const portraitMesh = new THREE.Mesh(
+        getSharedPlaneGeo(0.88, 1.32),
+        makeDecalMaterial({ map: tex })
+      );
+      coverDecalTexture(tex, 0.88 / 1.32, 0);
+      portraitMesh.position.set(0, 0.18, STELE_PORTRAIT_Z);
+      portraitMesh.userData = steleArtifact;
+      post.add(portraitMesh);
+      appState.clickable3DArtifacts.push(portraitMesh);
+
+      const backMesh = portraitMesh.clone();
+      backMesh.position.set(0, 0.18, -STELE_PORTRAIT_Z);
+      backMesh.rotation.y = Math.PI;
+      backMesh.userData = steleArtifact;
+      post.add(backMesh);
+      appState.clickable3DArtifacts.push(backMesh);
+    });
+  }
+}
+
 export function populate3DSchoolPortraitsAndDrawings() {
   const loader = new THREE.TextureLoader();
   appState.clickable3DArtifacts = [];
@@ -644,113 +726,38 @@ export function populate3DSchoolPortraitsAndDrawings() {
   } = appState;
 
   // 1. COURTYARD MEMORIAL AVENUE (24 Double-Sided Steles flanking the Central Vow Shrine Walk at X = -5.2 & X = +2.2)
-  // Decals ride FRAME_DECAL_GAP off the post's +/-0.05 faces, one stack step apart.
-  const STELE_FACE_Z = 0.05;
-  const STELE_LABEL_Z = STELE_FACE_Z + FRAME_DECAL_GAP;
-  const STELE_PORTRAIT_Z = STELE_LABEL_Z + FRAME_STACK_STEP;
   const portraitSample = childrenList.filter((c) => c.photoPath).slice(0, 24);
   portraitSample.forEach((child, idx) => {
     const isLeft = idx < 12;
     const slot = isLeft ? idx : idx - 12;
     const x = isLeft ? -5.2 : 2.2;
     const z = 13.0 + slot * 1.2;
-    const rotY = isLeft ? Math.PI / 2 : -Math.PI / 2;
-    const imgUrl = child.photoPath;
-
-    const post = new THREE.Mesh(
-      getSharedBoxGeo(0.96, 1.88, 0.1),
-      new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.5 })
-    );
-    post.position.set(x, 1.08, z);
-    post.rotation.y = rotY;
-    post.castShadow = true;
-    memorialBoardsGroup.add(post);
-
-    const border = new THREE.Mesh(
-      getSharedBoxGeo(1.02, 1.94, 0.07),
-      new THREE.MeshBasicMaterial({ color: 0xd4a853 })
-    );
-    post.add(border);
-
-    const labelTex = createNameplateTexture(
-      child.nameFa,
-      child.name,
-      `Grade ${child.grade || '?'} · Age ${child.age || '?'}`,
-      '#d4a853',
-      0.88,
-      0.3
-    );
-    const frontLabel = new THREE.Mesh(
-      getSharedPlaneGeo(0.88, 0.3),
-      makeDecalMaterial({ map: labelTex, toneMapped: false })
-    );
-    frontLabel.position.set(0, -0.68, STELE_LABEL_Z);
-    post.add(frontLabel);
-
-    const backLabel = frontLabel.clone();
-    backLabel.position.set(0, -0.68, -STELE_LABEL_Z);
-    backLabel.rotation.y = Math.PI;
-    post.add(backLabel);
-
-    const steleArtifact = {
-      artifactType: 'victim',
-      item: child,
+    createCourtyardStele(memorialBoardsGroup, loader, child, {
+      x,
+      z,
+      rotY: isLeft ? Math.PI / 2 : -Math.PI / 2,
       wingLabel: 'Courtyard 100 Faces Memorial Walk',
       focusCam: new THREE.Vector3(-1.5, 1.45, z),
       lookAt: new THREE.Vector3(x, 1.15, z),
-      cutawayMode: 0,
-    };
-    post.userData = steleArtifact;
-    appState.clickable3DArtifacts.push(post);
-
-    if (imgUrl) {
-      loader.load(imgUrl, (tex) => {
-        prepareDecalTexture(tex);
-        const portraitMesh = new THREE.Mesh(
-          getSharedPlaneGeo(0.88, 1.32),
-          makeDecalMaterial({ map: tex })
-        );
-        coverDecalTexture(tex, 0.88 / 1.32, 0);
-        portraitMesh.position.set(0, 0.18, STELE_PORTRAIT_Z);
-        portraitMesh.userData = steleArtifact;
-        post.add(portraitMesh);
-        appState.clickable3DArtifacts.push(portraitMesh);
-
-        const backMesh = portraitMesh.clone();
-        backMesh.position.set(0, 0.18, -STELE_PORTRAIT_Z);
-        backMesh.rotation.y = Math.PI;
-        backMesh.userData = steleArtifact;
-        post.add(backMesh);
-        appState.clickable3DArtifacts.push(backMesh);
-      });
-    }
+    });
   });
 
   // Devoted 2nd-Grade Teacher Ms. Zohreh Shahriyari Courtyard Stand (Station 1)
   const zohrehTeacher = teachersList.find((t) => t.id === 'zohreh-shahriyari');
   if (zohrehTeacher) {
-    const standLegsMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.48, metalness: 0.42 });
-    [-0.36, 0.36].forEach((lx) => {
-      const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.026, 0.032, 1.25, 10), standLegsMat);
-      leg.position.set(8.25 + lx * Math.cos(0.35), 0.625, 4.15 - lx * Math.sin(0.35));
-      leg.castShadow = true;
-      preStrikeModelGroup.add(leg);
+    // Same stele as the Memorial Avenue, standing in line with the 01_B screen stele
+    // (x = 8.0, z = 9.5, tour-config.js) and facing east over the assembly lines.
+    const tx = 8.0;
+    const tz = 7.9;
+    const tRot = Math.PI / 2;
+    createCourtyardStele(preStrikeModelGroup, loader, zohrehTeacher, {
+      x: tx,
+      z: tz,
+      rotY: tRot,
+      wingLabel: 'Morning Schoolyard · Martyred 2nd-Grade Teacher Zohreh Shahriyari & Unborn Son',
+      focusCam: new THREE.Vector3(tx + 2.25, 1.45, tz),
+      lookAt: new THREE.Vector3(tx, 1.15, tz),
     });
-    create3DFramedPortraitOnWall(
-      preStrikeModelGroup,
-      loader,
-      zohrehTeacher,
-      8.25,
-      1.38,
-      4.15,
-      0.35,
-      1.02,
-      1.24,
-      0xd4a853,
-      0,
-      'Morning Schoolyard · Martyred 2nd-Grade Teacher Zohreh Shahriyari & Unborn Son',
-      2.25
-    );
   }
 
   if (!groundFloorGroup || !firstFloorGroup) return;
@@ -868,7 +875,7 @@ export function populate3DSchoolPortraitsAndDrawings() {
         groundFloorGroup,
         loader,
         boysGrades1to3[bIdx++],
-        -6.72,
+        -7.42,
         py,
         pz,
         -Math.PI / 2,
@@ -891,148 +898,140 @@ export function populate3DSchoolPortraitsAndDrawings() {
 
   // 3. GROUND FLOOR EAST WING: BOYS OF GRADES 4, 5 & 6
   const boysGrades4to6 = childrenList.filter((c) => c.gender === 'boy' && (c.grade || 1) >= 4 && c.photoPath);
-  createWingBannerIn3D(
-    groundFloorGroup,
-    `GROUND FLOOR EAST WING: BOYS GRADES 4–6 & CEREMONY ROOM (${boysGrades4to6.length} STUDENTS)`,
-    `طبقه همکف (بال شرقی): دانش‌آموزان پسر پایه‌های چهارم تا ششم و اتاق جشن`,
-    3.75,
-    3.25,
-    -8.18,
-    0,
-    6.4,
-    '#0d1b2a',
-    '#d4a853'
-  );
+  // Banner hidden for now. Station 2 lives in the ground-floor central hall (where the rainbow stairs
+  // start); it ran along the hall face of G-20 (x = 1.09), above the frames, facing west.
+  // createWingBannerIn3D(
+  //   groundFloorGroup,
+  //   `GROUND FLOOR EAST WING: BOYS GRADES 4–6 & CEREMONY ROOM (${boysGrades4to6.length} STUDENTS)`,
+  //   `طبقه همکف (بال شرقی): دانش‌آموزان پسر پایه‌های چهارم تا ششم و اتاق جشن`,
+  //   1.07,
+  //   3.25,
+  //   -4.9,
+  //   -Math.PI / 2,
+  //   6.4,
+  //   '#0d1b2a',
+  //   '#d4a853'
+  // );
 
+  // Two columns of frames facing each other across the hall: G-20's west face (x = 1.09, facing west)
+  // and G-17's east face (x = -3.45, facing east).
   let b4Idx = 0;
-  for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 6; col++) {
-      if (b4Idx >= boysGrades4to6.length) break;
-      const px = 0.95 + col * 1.05;
-      const py = 1.22 + row * 1.12;
-      create3DFramedPortraitOnWall(
-        groundFloorGroup,
-        loader,
-        boysGrades4to6[b4Idx++],
-        px,
-        py,
-        -3.82,
-        Math.PI,
-        0.84,
-        1.02,
-        0xd4a853,
-        2,
-        'Ground Floor East Wing · Boys Grades 4–6 & Ceremony Room',
-        1.75
-      );
+  const boysHallWalls = [
+    // G-20: between the 02_B frame (z -6.42..-4.18) and the door near the entrance (z -0.83..0.23)
+    { x: 1.06, rotY: -Math.PI / 2, zs: [-3.5, -2.5, -1.5] },
+    { x: -3.42, rotY: Math.PI / 2, zs: [-2.3, -1.3, -0.3] },
+  ];
+  for (const wall of boysHallWalls) {
+    for (let col = 0; col < 3; col++) {
+      for (let row = 0; row < 2; row++) {
+        if (b4Idx >= boysGrades4to6.length) break;
+        create3DFramedPortraitOnWall(
+          groundFloorGroup,
+          loader,
+          boysGrades4to6[b4Idx++],
+          wall.x,
+          1.22 + row * 1.12,
+          wall.zs[col],
+          wall.rotY,
+          0.84,
+          1.02,
+          0xd4a853,
+          2,
+          'Ground Floor Central Hall · Boys Grades 4–6',
+          1.75
+        );
+      }
     }
   }
-  for (let row = 0; row < 2; row++) {
-    for (let col = 0; col < 5; col++) {
-      if (b4Idx >= boysGrades4to6.length) break;
-      const px = 12.2 + col * 1.25;
-      const py = 1.22 + row * 1.12;
-      create3DFramedPortraitOnWall(
-        groundFloorGroup,
-        loader,
-        boysGrades4to6[b4Idx++],
-        px,
-        py,
-        -2.98,
-        0,
-        0.84,
-        1.02,
-        0xd4a853,
-        2,
-        'Ground Floor East Wing · Boys Grades 4–6 Classroom',
-        1.75
-      );
-    }
-  }
+  // Remaining grade 4-6 boys stand in the schoolyard as steles, in one row just south of the
+  // morning assembly lines (the lines' green border ends at Z = 12.55), facing north.
+  const yardFrames = boysGrades4to6.slice(b4Idx, b4Idx + 10);
+  yardFrames.forEach((child, i) => {
+    const fx = 16.5 + (i - (yardFrames.length - 1) / 2) * 1.3;
+    const fz = 13.8;
+    createCourtyardStele(preStrikeModelGroup, loader, child, {
+      x: fx,
+      z: fz,
+      rotY: Math.PI,
+      wingLabel: 'Schoolyard · Boys Grades 4–6',
+      focusCam: new THREE.Vector3(fx, 1.45, fz - 2.25),
+      lookAt: new THREE.Vector3(fx, 1.15, fz),
+    });
+  });
 
   // 4. CENTRAL HALL & RAINBOW STAIRCASE: ALL 26 MARTYRED FEMALE EDUCATORS
-  createWingBannerIn3D(
-    groundFloorGroup,
-    `CENTRAL HALL & RAINBOW STAIRCASE: THE 26 MARTYRED FEMALE EDUCATORS`,
-    `سالن مرکزی و راه‌پله رنگین‌کمان: ۲۶ معلم و مدیر شهیده دبستان شجره طیبه`,
-    -3.2,
-    3.3,
-    -8.02,
-    0,
-    5.6,
-    '#1f122b',
-    '#f472b6'
-  );
+  // The staircase station lives in the FIRST-FLOOR central hall (x -7.8..7.5, z -8.6..-3.3), at the
+  // top of the rainbow stairs. Slab top is y = 3.71, so the frame heights below are measured from
+  // the first-floor group origin exactly like the Girls' Hall frames further down (y1 = 3.6).
+  const yStairHall = 3.6;
+  // Banner hidden for Station 4 (it hung above the stele row at the top of the rainbow stairs).
+  // createWingBannerIn3D(
+  //   firstFloorGroup,
+  //   `CENTRAL HALL & RAINBOW STAIRCASE: THE 26 MARTYRED FEMALE EDUCATORS`,
+  //   `سالن مرکزی و راه‌پله رنگین‌کمان: ۲۶ معلم و مدیر شهیده دبستان شجره طیبه`,
+  //   -5.02,
+  //   yStairHall + 3.3,
+  //   -8.43,
+  //   0,
+  //   5.2,
+  //   '#1f122b',
+  //   '#f472b6'
+  // );
 
-  const leftHallSlots = [
-    [-3.38, -0.5],
-    [-3.38, -1.5],
-    [-3.38, -2.5],
-    [-6.28, -4.1],
-    [-6.28, -5.1],
-    [-6.28, -6.1],
-    [-6.28, -7.2],
+  // Wall columns for the educators, each a stack of two frames (rows at +1.22 m and +2.34 m).
+  // Only wall stretches clear of doors are used (doors are 1.06 m wide: F-10 at x = -4.75 / 0.15 / 5.05,
+  // F-11 at x = -5.5, F-12 at x = 2.1). The south-wall gap x -4.22..-0.38 is left free for the
+  // wall-mounted video 04_B. Filled in this order, so the educators nearest the stairs come first.
+  //   north wall (F-12, east of stairwell) faces south: z = -8.6 + 0.12 wall half + 0.03
+  //   south wall (F-10) faces north:                    z = -3.3 - 0.12 - 0.03
+  const NORTH_Z = -8.45;
+  const SOUTH_Z = -3.45;
+  const teacherCols = [
+    ...[3.2, 4.3, 5.4, 6.5, 7.6].map((x) => ({ x, z: NORTH_Z, rotY: 0 })), // F-12, east of the stairs
+    ...[1.5, 2.6, 3.7].map((x) => ({ x, z: SOUTH_Z, rotY: Math.PI })), // F-10, between the middle and east doors
+    { x: 6.54, z: SOUTH_Z, rotY: Math.PI }, // F-10, east of the east door
+    { x: -6.24, z: SOUTH_Z, rotY: Math.PI }, // F-10, west of the west door
+    { x: -3.43, z: NORTH_Z, rotY: 0 }, // F-11, between the NW-room door and the stairwell
+    { x: -7.19, z: NORTH_Z, rotY: 0 }, // F-11, west of the NW-room door
+    { x: -4.45, z: NORTH_Z, rotY: 0 }, // F-11, right beside the -3.43 column (door edge is x = -4.97)
   ];
-  const rightHallZ = [-0.4, -1.45, -2.5, -4.4, -5.45, -6.5, -7.45];
 
   teachersList.forEach((teacher, idx) => {
-    const isLeft = idx < 13;
-    const localIdx = isLeft ? idx : idx - 13;
-    const row = Math.floor(localIdx / 7);
-    const col = localIdx % 7;
-    const py = 1.22 + row * 1.12;
-    if (isLeft) {
-      const [lx, lz] = leftHallSlots[col] || [-6.28, -4.5];
-      create3DFramedPortraitOnWall(
-        groundFloorGroup,
-        loader,
-        teacher,
-        lx,
-        py,
-        lz,
-        Math.PI / 2,
-        0.82,
-        0.98,
-        0xf472b6,
-        2,
-        'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators',
-        1.55
-      );
-    } else {
-      const rz = rightHallZ[col] || -4.5;
-      create3DFramedPortraitOnWall(
-        groundFloorGroup,
-        loader,
-        teacher,
-        -0.18,
-        py,
-        rz,
-        -Math.PI / 2,
-        0.82,
-        0.98,
-        0xf472b6,
-        2,
-        'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators',
-        1.55
-      );
-    }
+    const slot = teacherCols[Math.floor(idx / 2)] || teacherCols[teacherCols.length - 1];
+    const row = idx % 2;
+    create3DFramedPortraitOnWall(
+      firstFloorGroup,
+      loader,
+      teacher,
+      slot.x,
+      yStairHall + 1.22 + row * 1.12,
+      slot.z,
+      slot.rotY,
+      0.82,
+      0.98,
+      0xf472b6,
+      1,
+      'Central Assembly Hall & Rainbow Staircase · 26 Martyred Female Educators',
+      1.75
+    );
   });
 
   // 5. FIRST FLOOR WEST GIRLS' ASSEMBLY HALL: ALL 47 MARTYRED SCHOOLGIRLS
   const y1 = 3.6;
   const girlsAll = childrenList.filter((c) => c.gender === 'girl' && c.photoPath);
-  createWingBannerIn3D(
-    firstFloorGroup,
-    `FIRST FLOOR GIRLS' ASSEMBLY HALL: ALL 47 MARTYRED SCHOOLGIRLS (GRADES 1–6)`,
-    `طبقه اول (سالن بزرگ دختران): ۴۷ دانش‌آموز دختر شهیده در پایه‌های اول تا ششم`,
-    -15.25,
-    y1 + 3.48,
-    -12.7,
-    0,
-    6.8,
-    '#2b1222',
-    '#f472b6'
-  );
+  // Banner hidden for Station 5 (it hung on the north wall at z = -12.7, above the prayer-room steles).
+  // createWingBannerIn3D(
+  //   firstFloorGroup,
+  //   `FIRST FLOOR GIRLS' ASSEMBLY HALL: ALL 47 MARTYRED SCHOOLGIRLS (GRADES 1–6)`,
+  //   `طبقه اول (سالن بزرگ دختران): ۴۷ دانش‌آموز دختر شهیده در پایه‌های اول تا ششم`,
+  //   -15.25,
+  //   y1 + 3.48,
+  //   -12.7,
+  //   0,
+  //   6.8,
+  //   '#2b1222',
+  //   '#f472b6'
+  // );
 
   let gIdx = 0;
   const girlsEastZ = [-12.0, -10.9, -9.8, -8.7, -7.6, -3.9, -2.8, -1.7, -0.6, 0.6, 1.6];

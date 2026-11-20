@@ -17,7 +17,7 @@ import {
   ROOM_ATMOSPHERE_PROFILES,
 } from '../data/tour-config.js';
 import { I18N_DATA, NARRATOR_PROFILES } from '../data/i18n.js';
-import { setTemporalCondition } from '../engine/core.js';
+import { renderFrame, setTemporalCondition } from '../engine/core.js';
 import { sampleGuidedTourCamera, triggerCameraAnimation } from '../engine/camera-rig.js';
 import { setCutawayMode } from '../scene/school-world.js';
 import {
@@ -209,8 +209,13 @@ export async function preloadAllWalkthroughPipBlobs() {
   const pipUrls = Object.values(WALKTHROUGH_VISUAL_CONFIG)
     .map((c) => withMediaVersion(c.pipReel))
     .filter(Boolean);
-  const screenUrls = IN_WORLD_SCREEN_SPECS.map((s) => `media/walkthrough_pip/${s.file}.mp4?v=${MEDIA_ASSET_VERSION}`);
-  const interludeUrls = Object.values(WALKTHROUGH_INTERLUDES).map((c) => withMediaVersion(c.src));
+  const screenUrls = IN_WORLD_SCREEN_SPECS.filter((s) => !s.images).map(
+    (s) => `media/walkthrough_pip/${s.file}.mp4?v=${MEDIA_ASSET_VERSION}`
+  );
+  const interludeUrls = Object.values(WALKTHROUGH_INTERLUDES)
+    // Clips flagged noPreload (very large files) stream on demand instead of being held in memory as blobs.
+    .flatMap((c) => (Array.isArray(c.playlist) ? c.playlist.filter((p) => !p.noPreload).map((p) => p.src) : [c.src]))
+    .map((src) => withMediaVersion(src));
   const all = Array.from(new Set([...pipUrls, ...screenUrls, ...interludeUrls]));
   const prevMode = appState.recordingMode;
   appState.recordingMode = true;
@@ -361,6 +366,20 @@ export function showStoryBanner() {
 export async function hideStoryBanner() {
   if (typeof document === 'undefined') return;
   await hideAnimatedOverlay(document.getElementById('storyBanner'));
+}
+
+/**
+ * Station 8 puts a video frame on the vow shrine's own spot (between the two big frames), so the
+ * obelisk, its base and the roses are hidden while that stop plays and restored on any other stop
+ * or when the tour ends. Clean-capture mode (H key) keeps the shrine hidden either way.
+ */
+function syncShrineVisibilityForStop(stopIdx) {
+  const shrine = appState.scene && appState.scene.getObjectByName('Vow_Shrine_3D');
+  if (!shrine) return;
+  const stop = typeof stopIdx === 'number' ? GUIDED_TOUR_STOPS[stopIdx] : null;
+  const hideForStop = Boolean(appState.isGuidedTour && stop && stop.hotspotId === 'vow_shrine');
+  const clean = typeof document !== 'undefined' && document.body.classList.contains('clean-capture');
+  shrine.visible = !hideForStop && !clean;
 }
 
 function applyWalkthroughStationOverlays(stopIdx) {
@@ -555,7 +574,7 @@ export async function syncWalkthroughVisualsAtProgress(stopIdx, progress, totalS
   await seekInWorldScreensDeterministic(stop.hotspotId, progress, totalStationSec || 60.0);
   appState.callbacks.updateHotspotPositions?.();
   if (appState.renderer && appState.scene && appState.camera) {
-    appState.renderer.render(appState.scene, appState.camera);
+    renderFrame();
   }
 }
 
@@ -647,6 +666,21 @@ function triggerMemorialBellHarmonic() {
   } catch (_) {}
 }
 
+/**
+ * Ramp an AudioParam from its *current* value to `target`.
+ * Plain cancelScheduledValues(now) + rampToValueAtTime has no anchor event: if the param's
+ * initial setValueAtTime was queued in the same tick (ctx.currentTime hasn't advanced), it gets
+ * cancelled and the ramp starts from the param default (gain = 1.0), causing a loud sweep on
+ * first tour entry. Holding the current value as an explicit event avoids that.
+ */
+function anchoredRamp(param, target, now, endTime, exponential = false) {
+  const current = param.value;
+  param.cancelScheduledValues(now);
+  param.setValueAtTime(current, now);
+  if (exponential) param.exponentialRampToValueAtTime(target, endTime);
+  else param.linearRampToValueAtTime(target, endTime);
+}
+
 export function startMemorialAmbientPad(hotspotId) {
   if (typeof window === 'undefined') return;
   try {
@@ -658,20 +692,22 @@ export function startMemorialAmbientPad(hotspotId) {
       appState.ambientAudioCtx = ctx;
 
       const gainNode = ctx.createGain();
-      gainNode.gain.setValueAtTime(0.0001, ctx.currentTime);
+      // Set the intrinsic value (not a scheduled event): a scheduled event can be cancelled before
+      // the audio thread applies it, leaving the default gain of 1.0 (loud first-entry burst).
+      gainNode.gain.value = 0.0001;
       appState.ambientGainNode = gainNode;
 
       const padFilter = ctx.createBiquadFilter();
       padFilter.type = 'lowpass';
-      padFilter.frequency.setValueAtTime(profile.padCutoff, ctx.currentTime);
+      padFilter.frequency.value = profile.padCutoff;
       appState.ambientPadFilter = padFilter;
 
       appState.ambientOscillators = profile.freqs.map((f, idx) => {
         const osc = ctx.createOscillator();
         osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
-        osc.frequency.setValueAtTime(f, ctx.currentTime);
+        osc.frequency.value = f;
         const oscGain = ctx.createGain();
-        oscGain.gain.setValueAtTime(idx === 0 ? 0.34 : 0.17, ctx.currentTime);
+        oscGain.gain.value = idx === 0 ? 0.34 : 0.17;
         osc.connect(oscGain);
         oscGain.connect(padFilter);
         osc.start();
@@ -707,12 +743,12 @@ export function startMemorialAmbientPad(hotspotId) {
 
       const breezeFilter = ctx.createBiquadFilter();
       breezeFilter.type = 'bandpass';
-      breezeFilter.frequency.setValueAtTime(profile.breezeFreq, ctx.currentTime);
-      breezeFilter.Q.setValueAtTime(profile.breezeQ, ctx.currentTime);
+      breezeFilter.frequency.value = profile.breezeFreq;
+      breezeFilter.Q.value = profile.breezeQ;
       appState.ambientBreezeFilter = breezeFilter;
 
       const breezeGain = ctx.createGain();
-      breezeGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      breezeGain.gain.value = 0.0001;
       appState.ambientBreezeGain = breezeGain;
 
       noiseSrc.connect(breezeFilter);
@@ -729,23 +765,18 @@ export function startMemorialAmbientPad(hotspotId) {
     const now = ctx.currentTime;
     appState.ambientOscillators.forEach((osc, idx) => {
       const targetFreq = profile.freqs[idx] || profile.freqs[0];
-      osc.frequency.cancelScheduledValues(now);
-      osc.frequency.exponentialRampToValueAtTime(Math.max(40, targetFreq), now + 1.2);
+      anchoredRamp(osc.frequency, Math.max(40, targetFreq), now, now + 1.2, true);
     });
     if (appState.ambientPadFilter) {
-      appState.ambientPadFilter.frequency.cancelScheduledValues(now);
-      appState.ambientPadFilter.frequency.linearRampToValueAtTime(profile.padCutoff, now + 1.2);
+      anchoredRamp(appState.ambientPadFilter.frequency, profile.padCutoff, now, now + 1.2);
     }
     if (appState.ambientGainNode) {
-      appState.ambientGainNode.gain.cancelScheduledValues(now);
-      appState.ambientGainNode.gain.linearRampToValueAtTime(profile.padGain, now + 1.6);
+      anchoredRamp(appState.ambientGainNode.gain, profile.padGain, now, now + 1.6);
     }
     if (appState.ambientBreezeFilter && appState.ambientBreezeGain) {
-      appState.ambientBreezeFilter.frequency.cancelScheduledValues(now);
-      appState.ambientBreezeFilter.frequency.linearRampToValueAtTime(profile.breezeFreq, now + 1.2);
+      anchoredRamp(appState.ambientBreezeFilter.frequency, profile.breezeFreq, now, now + 1.2);
       appState.ambientBreezeFilter.Q.setValueAtTime(profile.breezeQ, now);
-      appState.ambientBreezeGain.gain.cancelScheduledValues(now);
-      appState.ambientBreezeGain.gain.linearRampToValueAtTime(profile.breezeGain, now + 1.6);
+      anchoredRamp(appState.ambientBreezeGain.gain, profile.breezeGain, now, now + 1.6);
     }
 
     scheduleMorningBirdsong(profile.birdGain);
@@ -765,12 +796,10 @@ export function stopMemorialAmbientPad() {
     if (ctx) {
       const now = ctx.currentTime;
       if (appState.ambientGainNode) {
-        appState.ambientGainNode.gain.cancelScheduledValues(now);
-        appState.ambientGainNode.gain.linearRampToValueAtTime(0.0001, now + 1.0);
+        anchoredRamp(appState.ambientGainNode.gain, 0.0001, now, now + 1.0);
       }
       if (appState.ambientBreezeGain) {
-        appState.ambientBreezeGain.gain.cancelScheduledValues(now);
-        appState.ambientBreezeGain.gain.linearRampToValueAtTime(0.0001, now + 1.0);
+        anchoredRamp(appState.ambientBreezeGain.gain, 0.0001, now, now + 1.0);
       }
     }
   } catch (_) {}
@@ -980,6 +1009,14 @@ export function hideAllBookendsAndInterludes() {
   appState.activeInterludeState = null;
 }
 
+/** Skip button: on a multi-clip interlude still on an earlier clip, jump to the next clip; otherwise end it. */
+export function skipInterludeClip() {
+  const st = appState.activeInterludeState;
+  if (!st) return;
+  if (typeof st.skipClip === 'function' && st.skipClip()) return;
+  finishActiveInterlude();
+}
+
 export function finishActiveInterlude() {
   if (!appState.activeInterludeState) return;
   const { onDone, timer, run } = appState.activeInterludeState;
@@ -1054,17 +1091,30 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
   if (subEl) subEl.textContent = '';
   if (progEl) progEl.style.width = '0%';
   if (rupEl) rupEl.hidden = true;
+  // A clip with no subtitles (and no context line) has nothing under it, so it fills the whole screen.
+  // Decided per clip: cues carry a clip index (default 0), so clip 2 can be bare while clip 1 has subtitles.
+  const hasContext = Boolean(ctxEl && ctxEl.textContent.trim());
+  const applyClipLayout = (idx) => {
+    const clipHasCues = Array.isArray(cfg.cues) && cfg.cues.some((c) => (c.clip || 0) === idx);
+    ov.classList.toggle('is-fullscreen', !clipHasCues && !hasContext);
+  };
+  applyClipLayout(0);
 
-  const versionedSrc = withMediaVersion(cfg.src);
-  const resolvedUrl = await resolvePipVideoSrc(versionedSrc);
+  // An interlude is one clip (cfg.src) or a playlist of clips played back to back (cfg.playlist).
+  const clips = Array.isArray(cfg.playlist) && cfg.playlist.length
+    ? cfg.playlist
+    : [{ src: cfg.src, aspect: cfg.aspect }];
+  const firstUrl = withMediaVersion(clips[0].src);
+  const firstResolved = await resolvePipVideoSrc(firstUrl);
   if (!appState.isGuidedTour || (run && !isTourRunActive(run))) return;
 
-  vid.src = resolvedUrl || versionedSrc;
+  vid.src = firstResolved || firstUrl;
+  if (clips[0].aspect) ov.setAttribute('data-aspect', clips[0].aspect);
   vid.muted = false;
   vid.volume = appState.voiceNarrationEnabled ? 1.0 : 0.0;
   vid.currentTime = 0;
 
-  appState.activeInterludeState = { cfg, onDone, timer: null, run };
+  appState.activeInterludeState = { cfg, onDone, timer: null, run, skipClip: null };
   ov.classList.remove('is-fading');
   ov.hidden = false;
 
@@ -1088,17 +1138,42 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
       }
     }
     if (subEl && Array.isArray(cfg.cues)) {
-      const cue = cfg.cues.find((c) => cur >= c.s && cur <= c.e);
+      // A cue belongs to one playlist clip (cue.clip, default 0) so clip 2 does not replay clip 1 subtitles.
+      const cue = cfg.cues.find((c) => (c.clip || 0) === clipIdx && cur >= c.s && cur <= c.e);
       subEl.textContent = cue ? cue[lang] || cue.en || '' : '';
     }
   };
 
-  vid.onended = () => finishActiveInterlude();
+  let clipIdx = 0;
+  const playNextClip = async () => {
+    clipIdx += 1;
+    if (clipIdx >= clips.length) {
+      finishActiveInterlude();
+      return;
+    }
+    const url = withMediaVersion(clips[clipIdx].src);
+    const resolved = await resolvePipVideoSrc(url);
+    if (!appState.activeInterludeState || appState.activeInterludeState.cfg !== cfg) return;
+    if (clips[clipIdx].aspect) ov.setAttribute('data-aspect', clips[clipIdx].aspect);
+    applyClipLayout(clipIdx);
+    if (subEl) subEl.textContent = '';
+    if (progEl) progEl.style.width = '0%';
+    vid.src = resolved || url;
+    vid.currentTime = 0;
+    vid.play().catch(() => finishActiveInterlude());
+  };
+  vid.onended = () => { playNextClip(); };
+  // Skip button hook: while clips remain, skip only the current one (see skipInterludeClip).
+  appState.activeInterludeState.skipClip = () => {
+    if (clipIdx >= clips.length - 1) return false;
+    playNextClip();
+    return true;
+  };
   vid.onerror = () => finishActiveInterlude();
 
   appState.activeInterludeState.timer = run
-    ? scheduleTourTimer(run, 48000, () => finishActiveInterlude())
-    : setTimeout(() => finishActiveInterlude(), 48000);
+    ? scheduleTourTimer(run, (cfg.maxSec || 48) * 1000, () => finishActiveInterlude())
+    : setTimeout(() => finishActiveInterlude(), (cfg.maxSec || 48) * 1000);
 
   vid
     .play()
@@ -1208,10 +1283,13 @@ export function playSpotNarration(hotspotId) {
           }
         });
       } else {
-        ensureBackgroundScorePlaying('transition');
-        rampBackgroundScoreVolume(0.38);
         appState.guidedTourAutoAdvanceTimer = scheduleScoped(900, () => {
           if (!appState.isGuidedTour) return;
+          // Last station: optional closing interlude video first, then the epilogue card and the vow.
+          const showEpilogue = () => {
+          if (!appState.isGuidedTour) return;
+          ensureBackgroundScorePlaying('transition');
+          rampBackgroundScoreVolume(0.38);
           applyBookendTexts();
           const epi = document.getElementById('walkthroughEpilogueOverlay');
           hideStoryBanner();
@@ -1231,6 +1309,12 @@ export function playSpotNarration(hotspotId) {
               appState.callbacks.openVowModal?.();
             });
           });
+          };
+          if (hasInterlude) {
+            playCinemaInterlude(hotspotId, showEpilogue);
+          } else {
+            showEpilogue();
+          }
         });
       }
     } else {
@@ -1358,6 +1442,7 @@ export function stopGuidedTour() {
   appState.deterministicWalkthroughRender = false;
   appState.tourManualCameraOverride = false;
   appState.activeInWorldRunKey = '';
+  syncShrineVisibilityForStop(null);
   hideAllBookendsAndInterludes();
 
   if (appState.walkthroughIdleTimer) {
@@ -1389,6 +1474,27 @@ export function jumpGuidedTourStep(nextIdx) {
   renderGuidedTourStep(nextIdx, true);
 }
 
+/**
+ * "Next station" button: like jumpGuidedTourStep, but when moving forward one stop from a stop that
+ * has a cinema interlude, play the interlude first (as the automatic advance does).
+ */
+export function advanceGuidedTourStep(nextIdx) {
+  const cur = GUIDED_TOUR_STOPS[appState.currentTourIndex];
+  const hasInterlude = Boolean(cur && WALKTHROUGH_INTERLUDES[cur.hotspotId]);
+  if (!hasInterlude || nextIdx !== appState.currentTourIndex + 1) {
+    jumpGuidedTourStep(nextIdx);
+    return;
+  }
+  beginNewTourRun();
+  appState.isGuidedTour = true;
+  stopSpotNarration({ keepBackground: true });
+  playCinemaInterlude(cur.hotspotId, () => {
+    if (!appState.isGuidedTour) return;
+    appState.currentTourIndex = nextIdx;
+    renderGuidedTourStep(nextIdx, true);
+  });
+}
+
 export function renderGuidedTourStep(idx, speakNow) {
   const stop = GUIDED_TOUR_STOPS[idx];
   if (!stop) return;
@@ -1399,6 +1505,7 @@ export function renderGuidedTourStep(idx, speakNow) {
   appState.tourManualCameraOverride = false;
   appState.tourStepStartTime = typeof performance !== 'undefined' ? performance.now() : Date.now();
   setWalkthroughProgress(0);
+  syncShrineVisibilityForStop(idx);
   applyWalkthroughStationOverlays(idx);
 
   if (!appState.deterministicWalkthroughRender && typeof document !== 'undefined') {

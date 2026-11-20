@@ -27,9 +27,11 @@ import {
   playSpotNarration,
   resetWalkthroughIdleTimer,
   finishActiveInterlude,
+  skipInterludeClip,
   startGuidedTour,
   stopGuidedTour,
   jumpGuidedTourStep,
+  advanceGuidedTourStep,
 } from '../tour/tour-director.js';
 
 function createInspectorMetaPill(label, value, opts = {}) {
@@ -205,8 +207,6 @@ export function openArtifactInspector(artifactData) {
         closeArtifactInspector();
         closeModal();
         setTemporalCondition(0.0);
-        const slider = document.getElementById('timelineSlider');
-        if (slider) slider.value = 0.0;
         if (typeof artifactData.cutawayMode === 'number') {
           setCutawayMode(artifactData.cutawayMode);
         }
@@ -356,13 +356,10 @@ export function selectHotspot(id) {
   const cfg = HOTSPOT_CONFIGS.find((c) => c.id === id);
   if (!cfg) return;
 
-  const slider = document.getElementById('timelineSlider');
   if (id === 'crater_damage' || id === 'second_wave') {
     setTemporalCondition(1.0);
-    if (slider) slider.value = 1.0;
   } else {
     setTemporalCondition(0.0);
-    if (slider) slider.value = 0.0;
     if (typeof cfg.cutaway === 'number') {
       setCutawayMode(cfg.cutaway);
     }
@@ -859,18 +856,10 @@ export async function exportSceneToGLB() {
 }
 
 export function initUIControls() {
-  const slider = document.getElementById('timelineSlider');
-  if (slider) {
-    slider.addEventListener('input', (e) => {
-      setTemporalCondition(parseFloat(e.target.value));
-    });
-  }
-
   const btnStatePre = document.getElementById('btnStatePre');
   if (btnStatePre) {
     btnStatePre.addEventListener('click', () => {
       setTemporalCondition(0.0);
-      if (slider) slider.value = 0;
     });
   }
 
@@ -878,7 +867,6 @@ export function initUIControls() {
   if (btnStatePost) {
     btnStatePost.addEventListener('click', () => {
       setTemporalCondition(1.0);
-      if (slider) slider.value = 1;
     });
   }
 
@@ -924,7 +912,6 @@ export function initUIControls() {
   if (btnCutaway) {
     btnCutaway.addEventListener('click', () => {
       setTemporalCondition(0.0);
-      if (slider) slider.value = 0.0;
       setCutawayMode(appState.cutawayState + 1);
       if (appState.cutawayState !== 0) {
         triggerCameraAnimation(new THREE.Vector3(-18, 22, 18), new THREE.Vector3(0, 2.5, -5));
@@ -935,7 +922,7 @@ export function initUIControls() {
   const btnSkipInterlude = document.getElementById('btnSkipInterlude');
   if (btnSkipInterlude) {
     btnSkipInterlude.addEventListener('click', () => {
-      finishActiveInterlude();
+      skipInterludeClip();
     });
   }
 
@@ -959,7 +946,7 @@ export function initUIControls() {
         stopGuidedTour();
         openVowModal();
       } else {
-        jumpGuidedTourStep(appState.currentTourIndex + 1);
+        advanceGuidedTourStep(appState.currentTourIndex + 1);
       }
     });
   }
@@ -1064,7 +1051,6 @@ export function initUIControls() {
     presetClassGalleryBtn.addEventListener('click', () => {
       closeModal();
       setTemporalCondition(0.0);
-      if (slider) slider.value = 0.0;
       galleryViewStep = (galleryViewStep + 1) % 4;
       if (galleryViewStep === 1) {
         setCutawayMode(2);
