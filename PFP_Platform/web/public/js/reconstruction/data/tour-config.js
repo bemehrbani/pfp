@@ -3,7 +3,7 @@
  * Cinema Witness Interludes, bookends, and room atmosphere profiles.
  */
 
-export const MEDIA_ASSET_VERSION = '20261120b';
+export const MEDIA_ASSET_VERSION = '20261120d';
 
 export const GUIDED_TOUR_STOPS = [
   {
@@ -196,14 +196,14 @@ export const IN_WORLD_SCREEN_SPECS = [
   // in one line at x = 8.0 facing east (the teacher's is built in memorial-gallery.js).
   {
     id: '01_A', hotspotId: 'courtyard_lines', slot: 'A', groupKey: 'preStrike',
-    file: 'yard/yard_video_01', style: 'stele', noPoster: true, noPlaque: true,
+    file: 'yard/yard_video_01', poster: 'images/posters/poster_01_a.jpg', style: 'stele', noPlaque: true,
     durationSec: 30, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
     pos: [25.00, 1.54, 4.45], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '01_C', hotspotId: 'courtyard_lines', slot: 'C', groupKey: 'preStrike',
-    file: 'yard/yard_video_02', style: 'stele', noPoster: true, noPlaque: true,
+    file: 'yard/yard_video_02', poster: 'images/posters/poster_01_c.jpg', style: 'stele', noPlaque: true,
     durationSec: 30, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
     pos: [25.00, 1.54, 8.25], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
@@ -211,21 +211,22 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '01_D', hotspotId: 'courtyard_lines', slot: 'D', groupKey: 'preStrike',
     images: Array.from({ length: 14 }, (_, i) => `media/walkthrough_pip/yard/yard_photo_${String(i + 1).padStart(2, '0')}.jpg`),
-    slideSec: 3.5, style: 'stele', noPoster: true, noPlaque: true,
+    poster: 'images/posters/poster_01_d.jpg',
+    slideSec: 3.5, style: 'stele', noPlaque: true,
     durationSec: 28, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
     pos: [25.00, 1.54, 12.05], rotY: -Math.PI / 2, w: 3.00, h: 2.60, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '01_E', hotspotId: 'courtyard_lines', slot: 'E', groupKey: 'preStrike',
-    file: 'yard/yard_video_03', style: 'stele', noPoster: true, noPlaque: true,
+    file: 'yard/yard_video_03', poster: 'images/posters/poster_01_e.jpg', style: 'stele', noPlaque: true,
     durationSec: 30, cueStartP: 0.0, cueEndP: 0.539, cueStartPFa: 0.0, cueEndPFa: 0.587, cueStartPFi: 0.0, cueEndPFi: 0.513,
     pos: [25.00, 3.93, 8.25], rotY: -Math.PI / 2, w: 3.00, h: 1.69, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
   {
     id: '01_B', hotspotId: 'courtyard_lines', slot: 'B', groupKey: 'preStrike',
-    file: 'yard/yard_video_04', loop: true, style: 'stele', noPoster: true, noPlaque: true, durationSec: 30.0, cueStartP: 0.539, cueEndP: 0.991, cueStartPFa: 0.587, cueEndPFa: 0.975, cueStartPFi: 0.513, cueEndPFi: 0.987,
+    file: 'yard/yard_video_04', poster: 'images/posters/poster_01_b.jpg', loop: true, style: 'stele', noPlaque: true, durationSec: 30.0, cueStartP: 0.539, cueEndP: 0.991, cueStartPFa: 0.587, cueEndPFa: 0.975, cueStartPFi: 0.513, cueEndPFi: 0.987,
     pos: [8.00, 1.49, 9.50], rotY: Math.PI / 2, w: 1.40, h: 2.50, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
   },
@@ -241,7 +242,7 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '02_B', hotspotId: 'boys_flower_arch', slot: 'B', groupKey: 'groundFloor',
     // Still photo (2538x1633, aspect 1.554) in media/walkthrough_pip/hall/; one image, so it just holds.
-    images: ['media/walkthrough_pip/hall/hall_photo_window.png'], slideSec: 30, noPoster: true, noPlaque: true,
+    images: ['media/walkthrough_pip/hall/hall_photo_window.png'], poster: 'images/posters/poster_02_b.jpg', slideSec: 30, noPlaque: true,
     durationSec: 32.0, cueStartP: 0.403, cueEndP: 0.989, cueStartPFa: 0.407, cueEndPFa: 0.972, cueStartPFi: 0.430, cueEndPFi: 0.980,
     // Wall-mounted on the central-hall (west) face of G-20, facing west into the hall. Fits between the
     // inner window (z -7.69..-6.51) and the boys' portrait frames (from z -3.92).
@@ -257,7 +258,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '02_C', hotspotId: 'boys_flower_arch', slot: 'C', groupKey: 'groundFloor',
     images: Array.from({ length: 13 }, (_, i) => `media/walkthrough_pip/hall/hall_photo_${String(i + 1).padStart(2, '0')}.jpg`),
-    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    poster: 'images/posters/poster_02_c.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
     durationSec: 39.0, cueStartP: 0.0, cueEndP: 0.989, cueStartPFa: 0.0, cueEndPFa: 0.972, cueStartPFi: 0.0, cueEndPFi: 0.980,
     pos: [-1.64, 1.49, -8.17], rotY: -0.50, w: 1.60, h: 2.10, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
@@ -265,7 +267,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '02_D', hotspotId: 'boys_flower_arch', slot: 'D', groupKey: 'groundFloor',
     images: Array.from({ length: 14 }, (_, i) => `media/walkthrough_pip/hall/hall_photo_${String(i + 14).padStart(2, '0')}.jpg`),
-    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    poster: 'images/posters/poster_02_d.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
     durationSec: 39.0, cueStartP: 0.0, cueEndP: 0.989, cueStartPFa: 0.0, cueEndPFa: 0.972, cueStartPFi: 0.0, cueEndPFi: 0.980,
     pos: [0.08, 1.49, -7.23], rotY: -0.50, w: 1.60, h: 2.10, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
@@ -274,7 +277,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '03_A', hotspotId: 'boys_classroom', slot: 'A', groupKey: 'groundFloor',
     images: Array.from({ length: 13 }, (_, i) => `media/walkthrough_pip/classroom/classroom_photo_${String(i + 1).padStart(2, '0')}.jpg`),
-    slideSec: 3.0, noPoster: true, noPlaque: true,
+    poster: 'images/posters/poster_03_a.jpg',
+    slideSec: 3.0, noPlaque: true,
     durationSec: 37.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
     pos: [-10.84, 1.60, 0.00], rotY: -Math.PI / 2, w: 2.60, h: 2.60, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
@@ -282,7 +286,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '03_B', hotspotId: 'boys_classroom', slot: 'B', groupKey: 'groundFloor',
     images: Array.from({ length: 10 }, (_, i) => `media/walkthrough_pip/classroom/classroom_photo_${String(i + 14).padStart(2, '0')}.jpg`),
-    slideSec: 3.0, noPoster: true, noPlaque: true,
+    poster: 'images/posters/poster_03_b.jpg',
+    slideSec: 3.0, noPlaque: true,
     durationSec: 37.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
     pos: [-13.40, 1.60, 2.15], rotY: Math.PI, w: 2.60, h: 2.60, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
@@ -295,7 +300,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '04_A', hotspotId: 'rainbow_staircase', slot: 'A', groupKey: 'firstFloor',
     images: Array.from({ length: 17 }, (_, i) => `media/walkthrough_pip/stairs/stairs_photo_${String(i + 1).padStart(2, '0')}.jpg`),
-    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    poster: 'images/posters/poster_04_a.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
     durationSec: 26.4, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
     pos: [-2.27, 4.94, -7.90], rotY: 0, w: 2.20, h: 2.20, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
@@ -307,7 +313,8 @@ export const IN_WORLD_SCREEN_SPECS = [
       'media/walkthrough_pip/stairs/stairs_photo_29.png',
       'media/walkthrough_pip/stairs/stairs_photo_30.jpg'
     ],
-    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    poster: 'images/posters/poster_04_b.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
     durationSec: 30.4, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
     pos: [1.23, 4.94, -7.90], rotY: 0, w: 2.20, h: 2.20, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
@@ -320,7 +327,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '05_A', hotspotId: 'girls_upper_hall', slot: 'A', groupKey: 'firstFloor',
     images: Array.from({ length: 19 }, (_, i) => `media/walkthrough_pip/girls_prayer_room/prayer_photo_${String(i + 1).padStart(2, '0')}.jpg`),
-    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    poster: 'images/posters/poster_05_a.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
     durationSec: 57.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
     pos: [-16.95, 5.14, -10.50], rotY: 0, w: 2.60, h: 2.60, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
@@ -328,7 +336,8 @@ export const IN_WORLD_SCREEN_SPECS = [
   {
     id: '05_B', hotspotId: 'girls_upper_hall', slot: 'B', groupKey: 'firstFloor',
     images: Array.from({ length: 20 }, (_, i) => `media/walkthrough_pip/girls_prayer_room/prayer_photo_${String(i + 20).padStart(2, '0')}.jpg`),
-    slideSec: 3.0, style: 'stele', noPoster: true, noPlaque: true,
+    poster: 'images/posters/poster_05_b.jpg',
+    slideSec: 3.0, style: 'stele', noPlaque: true,
     durationSec: 57.0, cueStartP: 0.0, cueEndP: 0.991, cueStartPFa: 0.0, cueEndPFa: 0.968, cueStartPFi: 0.0, cueEndPFi: 0.985,
     pos: [-13.55, 5.14, -10.50], rotY: 0, w: 2.60, h: 2.60, hasLegs: false,
     badge: { en: '', fi: '', fa: '' }, caption: { en: '', fi: '', fa: '' }
