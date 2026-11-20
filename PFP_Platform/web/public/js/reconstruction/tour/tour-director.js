@@ -1091,6 +1091,14 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
   if (subEl) subEl.textContent = '';
   if (progEl) progEl.style.width = '0%';
   if (rupEl) rupEl.hidden = true;
+  // A clip with no subtitles (and no context line) has nothing under it, so it fills the whole screen.
+  // Decided per clip: cues carry a clip index (default 0), so clip 2 can be bare while clip 1 has subtitles.
+  const hasContext = Boolean(ctxEl && ctxEl.textContent.trim());
+  const applyClipLayout = (idx) => {
+    const clipHasCues = Array.isArray(cfg.cues) && cfg.cues.some((c) => (c.clip || 0) === idx);
+    ov.classList.toggle('is-fullscreen', !clipHasCues && !hasContext);
+  };
+  applyClipLayout(0);
 
   // An interlude is one clip (cfg.src) or a playlist of clips played back to back (cfg.playlist).
   const clips = Array.isArray(cfg.playlist) && cfg.playlist.length
@@ -1147,6 +1155,8 @@ export async function playCinemaInterlude(afterHotspotId, onDone) {
     const resolved = await resolvePipVideoSrc(url);
     if (!appState.activeInterludeState || appState.activeInterludeState.cfg !== cfg) return;
     if (clips[clipIdx].aspect) ov.setAttribute('data-aspect', clips[clipIdx].aspect);
+    applyClipLayout(clipIdx);
+    if (subEl) subEl.textContent = '';
     if (progEl) progEl.style.width = '0%';
     vid.src = resolved || url;
     vid.currentTime = 0;
