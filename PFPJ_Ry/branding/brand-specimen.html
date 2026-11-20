@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" type="image/svg+xml" href="./svg/pfpj-favicon.svg" />
+  <title>Brand Identity Specimen — People for Peace &amp; Justice ry</title>
+  <style>
+    :root {
+      --bg-light: #F7F5F0;
+      --bg-dark: #080B11;
+      --surface-light: #FFFFFF;
+      --surface-dark: #0F1523;
+      --text-light: #0B1220;
+      --text-dark: #F5F3EF;
+      --muted-light: #526075;
+      --muted-dark: #94A3B8;
+      --gold-light: #A6761E;
+      --gold-dark: #E5B95F;
+      --border-light: rgba(11, 18, 32, 0.12);
+      --border-dark: rgba(229, 185, 95, 0.22);
+
+      --bg: var(--bg-light);
+      --surface: var(--surface-light);
+      --text: var(--text-light);
+      --muted: var(--muted-light);
+      --gold: var(--gold-light);
+      --border: var(--border-light);
+
+      @media (prefers-color-scheme: dark) {
+        --bg: var(--bg-dark);
+        --surface: var(--surface-dark);
+        --text: var(--text-dark);
+        --muted: var(--muted-dark);
+        --gold: var(--gold-dark);
+        --border: var(--border-dark);
+      }
+
+      @supports (color: light-dark(white, black)) {
+        --bg: light-dark(var(--bg-light), var(--bg-dark));
+        --surface: light-dark(var(--surface-light), var(--surface-dark));
+        --text: light-dark(var(--text-light), var(--text-dark));
+        --muted: light-dark(var(--muted-light), var(--muted-dark));
+        --gold: light-dark(var(--gold-light), var(--gold-dark));
+        --border: light-dark(var(--border-light), var(--border-dark));
+      }
+
+      color-scheme: light dark;
+      accent-color: var(--gold);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      padding: 40px 28px 64px;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+
+    .kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-family: 'Optima', 'Palatino', Georgia, serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .intro {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 15px;
+      margin-top: 8px;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 8px;
+      background: #0B1220;
+      color: #F5F3EF;
+      border: 1px solid #E5B95F;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    h2 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 34px 0 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 20px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .specimen-dark {
+      background: #0B1220;
+      color: #F5F3EF;
+      border: 1px solid rgba(229, 185, 95, 0.28);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 190px;
+    }
+
+    .specimen-light {
+      background: #FAF8F4;
+      color: #0B1220;
+      border: 1px solid rgba(11, 18, 32, 0.14);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 190px;
+    }
+
+    .tag {
+      font-size: 11.5px;
+      font-weight: 600;
+      opacity: 0.72;
+      letter-spacing: 0.03em;
+      text-align: center;
+    }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .swatch {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .swatch-chip {
+      height: 76px;
+    }
+
+    .swatch-meta {
+      padding: 14px 16px;
+      font-size: 13px;
+    }
+
+    .swatch-meta strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <div class="kicker">Official Brand Identity Kit · PRH ID 3616815-5</div>
+      <h1>People for Peace &amp; Justice ry</h1>
+      <p class="intro">
+        Canonical vector logo marks, lockups, institutional seals, and print correspondence stationery for PFPJ ry (Helsinki, Finland). Every SVG is self-contained with outlined typography so it renders identically across web, print, and legal dossiers.
+      </p>
+    </div>
+    <a class="cta-link" href="./letterhead/pfpj-official-letterhead-a4.html">Open Official A4 Letterhead →</a>
+  </header>
+
+  <h2>1. Primary Horizontal Institutional Lockups</h2>
+  <div class="grid-2">
+    <div class="specimen-dark">
+      <img src="./svg/pfpj-lockup-horizontal-dark.svg" alt="PFPJ ry Horizontal Lockup Dark" style="max-height:96px;width:100%;object-fit:contain;" />
+      <div class="tag">svg/pfpj-lockup-horizontal-dark.svg · Web Headers &amp; Dark Slides</div>
+    </div>
+    <div class="specimen-light">
+      <img src="./svg/pfpj-lockup-horizontal-light.svg" alt="PFPJ ry Horizontal Lockup Light" style="max-height:96px;width:100%;object-fit:contain;" />
+      <div class="tag">svg/pfpj-lockup-horizontal-light.svg · Print, Letterhead &amp; Press</div>
+    </div>
+  </div>
+
+  <h2>2. Compact Navbar Lockups &amp; Centered Stacked Lockups</h2>
+  <div class="grid-4">
+    <div class="specimen-dark">
+      <img src="./svg/pfpj-lockup-compact-dark.svg" alt="PFPJ ry Compact Dark" style="height:74px;" />
+      <div class="tag">svg/pfpj-lockup-compact-dark.svg</div>
+    </div>
+    <div class="specimen-light">
+      <img src="./svg/pfpj-lockup-compact-light.svg" alt="PFPJ ry Compact Light" style="height:74px;" />
+      <div class="tag">svg/pfpj-lockup-compact-light.svg</div>
+    </div>
+    <div class="specimen-dark">
+      <img src="./svg/pfpj-lockup-stacked-dark.svg" alt="PFPJ ry Stacked Dark" style="height:155px;" />
+      <div class="tag">svg/pfpj-lockup-stacked-dark.svg</div>
+    </div>
+    <div class="specimen-light">
+      <img src="./svg/pfpj-lockup-stacked-light.svg" alt="PFPJ ry Stacked Light" style="height:155px;" />
+      <div class="tag">svg/pfpj-lockup-stacked-light.svg</div>
+    </div>
+  </div>
+
+  <h2>3. Official Circular Institutional Seals, Shield Badge &amp; Ink Stamps</h2>
+  <div class="grid-4">
+    <div class="specimen-dark">
+      <img src="./svg/pfpj-seal-official-dark.svg" alt="Official Seal Dark" style="width:180px;height:180px;" />
+      <div class="tag">svg/pfpj-seal-official-dark.svg</div>
+    </div>
+    <div class="specimen-light">
+      <img src="./svg/pfpj-seal-official-light.svg" alt="Official Seal Light" style="width:180px;height:180px;" />
+      <div class="tag">svg/pfpj-seal-official-light.svg</div>
+    </div>
+    <div class="specimen-dark">
+      <div style="display:flex;align-items:center;gap:18px;">
+        <img src="./svg/pfpj-mark-crest-dark.svg" alt="Crest Mark" style="width:104px;height:104px;" />
+        <img src="./svg/pfpj-badge-shield.svg" alt="Shield Badge" style="width:72px;height:72px;" />
+        <img src="./svg/pfpj-favicon.svg" alt="Favicon 24px" style="width:24px;height:24px;" />
+      </div>
+      <div class="tag">Crest (≥48px) · Shield Badge (16–40px) · Favicon</div>
+    </div>
+    <div class="specimen-light">
+      <div style="display:flex;align-items:center;gap:18px;">
+        <img src="./svg/pfpj-mark-crest-mono-black.svg" alt="Mono Black Crest" style="width:98px;height:98px;" />
+        <div style="background:#0B1220;padding:12px;border-radius:10px;">
+          <img src="./svg/pfpj-mark-crest-mono-white.svg" alt="Mono White Crest" style="width:74px;height:74px;display:block;" />
+        </div>
+      </div>
+      <div class="tag">1-Color Legal Stamp &amp; Knockout White</div>
+    </div>
+  </div>
+
+  <h2>4. Institutional Color Palette</h2>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-chip" style="background:#0B1220;"></div>
+      <div class="swatch-meta">
+        <strong>Obsidian Navy</strong>
+        <code>#0B1220</code> · RGB(11, 18, 32)<br />Primary institutional dark surface &amp; light-mode mark ink
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background:#E5B95F;"></div>
+      <div class="swatch-meta">
+        <strong>Nordic Brass Gold (Dark UI)</strong>
+        <code>#E5B95F</code> · RGB(229, 185, 95)<br />Laurel wreath, olive branch &amp; equilibrium bar on dark surfaces
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background:#A6761E;"></div>
+      <div class="swatch-meta">
+        <strong>Archival Bronze Gold (Light Print)</strong>
+        <code>#A6761E</code> · RGB(166, 118, 30)<br />High-contrast (≥3.8:1) metallic accent on white paper
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background:#F5F3EF;border-bottom:1px solid rgba(11,18,32,0.1);"></div>
+      <div class="swatch-meta">
+        <strong>Archival Parchment</strong>
+        <code>#F5F3EF</code> · RGB(245, 243, 239)<br />Dove silhouette on dark surfaces &amp; warm editorial paper
+      </div>
+    </div>
+  </div>
+</body>
+</html>

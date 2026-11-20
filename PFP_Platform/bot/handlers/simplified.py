@@ -567,7 +567,7 @@ async def handle_user_submission(update: Update, context: ContextTypes.DEFAULT_T
             c = Campaign.objects.filter(status='active').first()
             if c and getattr(c, 'telegram_group_id', None):
                 return c.telegram_group_id
-            return '-1003589505086' # Fallback to P4P Internal
+            return '-1003589505086' # Fallback to PFPJ Internal
             
         group_id = await _get_active_group_id()
         

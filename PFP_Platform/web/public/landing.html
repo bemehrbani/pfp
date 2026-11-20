@@ -172,14 +172,20 @@
             width: 38px;
             height: 38px;
             border-radius: var(--radius-sm);
-            background: linear-gradient(135deg, rgba(229, 185, 95, 0.2), rgba(229, 185, 95, 0.05));
+            background: rgba(11, 18, 32, 0.92);
             border: 1px solid var(--accent-gold-border);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent-gold);
-            font-size: 1.25rem;
+            padding: 3px;
             transition: all var(--transition);
+        }
+
+        .brand-emblem img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
 
         .brand-logo:hover .brand-emblem {
@@ -1611,6 +1617,30 @@
             }
         }
     </style>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "People for Peace & Justice ry",
+  "alternateName": "PFPJ ry",
+  "legalName": "People for Peace & Justice ry",
+  "taxID": "3616815-5",
+  "identifier": "3616815-5",
+  "url": "https://peopleforpeace.live",
+  "logo": "https://peopleforpeace.live/images/logo/pfpj-seal-light-card.png",
+  "image": "https://peopleforpeace.live/images/og-landing.png",
+  "email": "info@peopleforpeace.live",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Helsinki",
+    "addressCountry": "FI"
+  }
+}
+  </script>
 </head>
 
 <body>
@@ -1620,7 +1650,9 @@
         <div class="nav-container">
             <!-- Brand -->
             <a href="landing.html" class="brand-logo">
-                <div class="brand-emblem">☮</div>
+                <div class="brand-emblem" aria-hidden="true">
+                    <img src="images/logo/pfpj-crest-dark.svg" alt="" width="32" height="32" />
+                </div>
                 <div class="brand-text">
                     <span class="brand-title">PFPJ ry</span>
                     <span class="brand-subtitle" data-i18n="logo_sub">Legal Accountability</span>
@@ -2133,11 +2165,7 @@
                 <!-- Col 1: Brand & Mission -->
                 <div class="footer-brand">
                     <a href="landing.html" class="brand-logo">
-                        <div class="brand-emblem">☮</div>
-                        <div class="brand-text">
-                            <span class="brand-title">PFPJ ry</span>
-                            <span class="brand-subtitle" data-i18n="logo_sub">Legal Accountability</span>
-                        </div>
+                        <img src="images/logo/pfpj-horizontal-dark.svg" alt="People for Peace &amp; Justice ry" width="252" height="54" style="height: 50px; width: auto; display: block;" />
                     </a>
                     <p class="footer-mission" data-i18n="footer_mission">
                         People for Peace & Justice ry is a registered non-governmental association dedicated to international humanitarian law, war crimes documentation, and victim advocacy.

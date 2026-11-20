@@ -43,9 +43,12 @@ const Navigation: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-full"></div>
-              <span className="text-xl font-bold text-gray-800">People for Peace</span>
+            <Link to="/" className="flex items-center">
+              <img
+                src="/images/logo/pfpj-horizontal-light.svg"
+                alt="People for Peace & Justice ry"
+                className="h-10 w-auto"
+              />
             </Link>
           </div>
 
